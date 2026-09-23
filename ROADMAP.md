@@ -132,3 +132,11 @@ Primary source anchors (review pinned source, not just current web documentation
 - [OpenTitan pinmux fileset selection](https://github.com/lowRISC/opentitan/blob/a78922f14a8cc20c7ee569f322a04626f2ac6127/hw/ip/pinmux/pinmux_reg.core).
 - [OpenTitan lifecycle architecture](https://github.com/lowRISC/opentitan/tree/7a3ad34b6d483f4d1d69ac670ddb1c45f1172e19/hw/ip/lc_ctrl/doc).
 - [OpenTitan TL DV agent](https://github.com/lowRISC/opentitan/tree/7a3ad34b6d483f4d1d69ac670ddb1c45f1172e19/hw/dv/sv/tl_agent).
+
+## Delivered response-backpressure increment
+
+The single-beat manager and Caliptra adapter now support fixed response READY
+delay, reset cancellation and stalled response stability checks. See
+[the reproducible evidence](RESPONSE_BACKPRESSURE_EVIDENCE.md). Actual axi_sub
+has been exercised with response stalls; the assertion-enabled configuration
+remains UNKNOWN. This does not complete the burst/ordering/VIP/UVM stages above.

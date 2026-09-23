@@ -2,7 +2,8 @@
 // Caliptra v2.1.2 axi_if adapter. Call driver.write_one / driver.read_one.
 // Both interfaces and the BFM must share clk/rst_n and identical AW/DW/IW.
 module qd_caliptra_axi_single_master #(
-  parameter AW=32, DW=32, IW=8, TIMEOUT=16
+  parameter AW=32, DW=32, IW=8, TIMEOUT=16,
+  parameter integer RESPONSE_DELAY=0
 ) (
   input logic clk, rst_n,
   axi_if.w_mgr wr,
@@ -21,7 +22,7 @@ module qd_caliptra_axi_single_master #(
   assign rd.aruser='0;
   assign rd.arlock=1'b0;
   // Response user metadata is deliberately not interpreted by this API.
-  qd_axi4_single_master #(.AW(AW),.DW(DW),.IW(IW),.TIMEOUT(TIMEOUT)) driver (
+  qd_axi4_single_master #(.AW(AW),.DW(DW),.IW(IW),.TIMEOUT(TIMEOUT),.RESPONSE_DELAY(RESPONSE_DELAY)) driver (
     .clk(clk),.rst_n(rst_n),
     .araddr(rd.araddr),.arlen(rd.arlen),.arsize(rd.arsize),.arburst(rd.arburst),
     .arid(rd.arid),.arvalid(rd.arvalid),.arready(rd.arready),

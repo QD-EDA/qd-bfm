@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-module tb_axi4;
+module tb_axi4 #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0;
   always #5 clk=~clk;
   logic [31:0] araddr, awaddr, wdata, rdata;
@@ -12,12 +12,12 @@ module tb_axi4;
   logic [3:0] wstrb;
   logic [31:0] mem [0:15];
   integer wait_cycles=0;
-  integer aw_stalls=0, w_stalls=0, ar_stalls=0;
+  integer aw_stalls=0, w_stalls=0, ar_stalls=0, r_stalls=0, b_stalls=0;
   logic timeout_read=0, inject_error=0;
   logic inject_bad_rid=0, inject_bad_rlast=0;
   logic [31:0] held_write_addr;
 
-  qd_axi4_single_master #(.AW(32), .DW(32), .IW(8), .TIMEOUT(5)) bfm (.*);
+  qd_axi4_single_master #(.AW(32), .DW(32), .IW(8), .TIMEOUT(5), .RESPONSE_DELAY(RESPONSE_DELAY)) bfm (.*);
 
   // One outstanding single-beat target with programmable request latency.
   assign awready = rst_n && wait_cycles == 0;
@@ -55,6 +55,8 @@ module tb_axi4;
   end
 
   always @(posedge clk) if (rst_n) begin
+    if (rvalid && !rready) r_stalls <= r_stalls + 1;
+    if (bvalid && !bready) b_stalls <= b_stalls + 1;
     if (awvalid && !awready) aw_stalls <= aw_stalls + 1;
     if (wvalid && !wready) w_stalls <= w_stalls + 1;
     if (arvalid && !arready) ar_stalls <= ar_stalls + 1;
@@ -95,6 +97,7 @@ module tb_axi4;
     timeout_read=1;
     bfm.read_one(32'h10, 8'h34, ok, data, resp);
     check(!ok, "read timeout not reported");
+    check(r_stalls==2*RESPONSE_DELAY && b_stalls==2*RESPONSE_DELAY, "response stall coverage mismatch");
     $display("PASS: write/read, request stalls, error response, timeout");
     $finish;
   end

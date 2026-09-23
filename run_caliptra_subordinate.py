@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Collect two distinct Caliptra configurations; assertion failures never become PASS."""
+import argparse
 import hashlib
 import json
 import os
@@ -12,10 +13,14 @@ PIN = '49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e'
 
 
 def main():
-    if len(sys.argv) != 3:
-        print('usage: run_caliptra_subordinate.py CALIPTRA_ROOT EVIDENCE_DIR', file=sys.stderr)
-        return 1
-    root, out = (Path(p).resolve() for p in sys.argv[1:])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('caliptra_root', type=Path)
+    parser.add_argument('evidence_dir', type=Path)
+    parser.add_argument('--response-delay', type=int, default=0)
+    args = parser.parse_args()
+    if not 0 <= args.response_delay <= 2147483647:
+        parser.error('--response-delay must be a nonnegative signed 32-bit integer')
+    root, out = args.caliptra_root.resolve(), args.evidence_dir.resolve()
     repo = Path(__file__).resolve().parent
     records = []
     try:
@@ -53,7 +58,7 @@ def main():
             obj = out/('obj-'+mode)
             # -Wno-fatal permits evidence collection only; warnings set overall UNKNOWN.
             argv = ['verilator', '--binary', '--timing', '--assert', '-Wno-fatal',
-                    '--top-module', 'tb_caliptra_axi_sub', '--timescale', '1ns/1ps',
+                    '--top-module', 'tb_caliptra_axi_sub', '-GRESPONSE_DELAY='+str(args.response_delay), '--timescale', '1ns/1ps',
                     '--Mdir', str(obj), '-I'+str(root/'src/caliptra_prim/rtl')]
             if mode == 'assertions': argv.append('-DCLP_ASSERT_ON')
             argv += ['-f', str(filelist)] + [str(p) for p in inputs[1:4]]
