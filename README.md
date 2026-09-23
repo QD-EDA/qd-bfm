@@ -61,8 +61,8 @@ An X/Z READY during a request wait or VALID during a response wait is fatal.
 Accepted responses must have a known response code and matching ID; reads must
 also assert RLAST, and an OKAY read must contain known data. Idle response
 payloads and error-response read data may be unknown. These checks cover signals
-sampled by active tasks; they do not check all interface activity or validate
-all request arguments. Do not use an unknown `ok` as success in a testbench:
+sampled by active tasks; they do not check all interface activity. Task-entry validation is described
+below and does not make this a full passive monitor. Do not use an unknown `ok` as success in a testbench:
 require `ok === 1'b1`.
 
 `./run.sh` adds 22 X/Z pin injections, two payload boundaries and two negative
@@ -115,3 +115,12 @@ only the default configuration simulates. Three upstream width warnings also rem
 Overall exit is 2 (UNKNOWN), never a fallback clean pass. Build/test/input failures
 in the default lane exit 1. No upstream assertions or diagnostics are edited.
 See [target evidence](CALIPTRA_SUBORDINATE_EVIDENCE.md) for precise coverage limits.
+
+## Request argument checks
+
+Before driving a request, both tasks reject X/Z addresses and IDs. Writes also
+reject X/Z strobes and unknown bits in enabled data bytes. Disabled write bytes
+may contain X/Z; zero-strobe writes may use wholly unknown data. Invalid fields
+are fatal before any request is launched. Existing reset/alignment and timeout
+contracts still apply. See [request argument evidence](REQUEST_ARGUMENT_EVIDENCE.md)
+for the 12 negative cases, boundary tests and unchanged Caliptra pilot limits.

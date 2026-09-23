@@ -50,3 +50,11 @@ compile failures as a separate lane from upstream-default observational behavior
 neither a default-lane pass nor -Wno-fatal may conceal diagnostics or unavailable
 assertions. Archive commands, input hashes, statuses and timing. No general AXI,
 full-chip or UVM qualification is implied by this pilot.
+
+## Four-state task input boundary
+
+Reject unknown read/write address and ID, unknown write strobes, and unknown
+bits of enabled write-data bytes before any request is driven. Preserve masked
+byte and zero-strobe don't-care behavior. Require exact fatal diagnostics and an
+independent monitor proving invalid arguments never reach request pins. Preserve
+all prior transaction/reset/response tests and the real Caliptra pilot outcomes.

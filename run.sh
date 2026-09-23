@@ -93,3 +93,34 @@ for state in X Z; do
   if grep -q '^PASS:' "$log"; then exit 1; fi
 done
 printf 'PASS: 22 active X/Z injections rejected; idle/error payload boundaries preserved\n'
+
+iverilog -g2012 -s tb_request_args -o "$out" qd_axi4_single_master.sv tb_request_args.sv
+for state in X Z; do
+  for field in ADDR ID STRB DATA; do
+    case "$field" in
+      ADDR) message='AXI write address argument is unknown' ;;
+      ID) message='AXI write ID argument is unknown' ;;
+      STRB) message='AXI write strobe argument is unknown' ;;
+      DATA) message='AXI write enabled data byte is unknown' ;;
+    esac
+    if vvp "$out" "+FIELD=$field" "+$state" > "$log" 2>&1; then exit 1; fi
+    grep -q "$message" "$log"
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+  done
+  for field in ADDR ID; do
+    case "$field" in
+      ADDR) message='AXI read address argument is unknown' ;;
+      ID) message='AXI read ID argument is unknown' ;;
+    esac
+    if vvp "$out" "+FIELD=$field" "+$state" +READ > "$log" 2>&1; then exit 1; fi
+    grep -q "$message" "$log"
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+  done
+  for field in MASKED ZERO_STRB KNOWN; do
+    vvp "$out" "+FIELD=$field" "+$state" > "$log" 2>&1
+    grep -q '^PASS: request argument boundary' "$log"
+  done
+done
+vvp "$out" +FIELD=KNOWN +READ > "$log" 2>&1
+grep -q '^PASS: request argument boundary' "$log"
+printf 'PASS: 12 unknown request arguments rejected before launch; masked/zero-strobe data accepted\n'
