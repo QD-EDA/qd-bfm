@@ -92,8 +92,8 @@ compiler diagnostics, and tests wiring against the actual interface declaration
 with an independent local target. It returns 2 (`UNKNOWN`) on compiler warnings,
 1 on build/test/input failure, and 0 only on a clean interface pilot. Verilator
 5.050 currently produces three upstream width warnings; behavioral tests pass
-but the pilot is **not clean**. Default CI still runs only `./run.sh`; its green
-status does not cover this optional pilot. [Evidence and blockers](CALIPTRA_INTERFACE_EVIDENCE.md)
+but the pilot is **not clean**. The original smoke CI runs `./run.sh`. The pinned pilot CI below exercises the
+actual subordinate separately; neither job qualifies full Caliptra DV. [Evidence and blockers](CALIPTRA_INTERFACE_EVIDENCE.md)
 distinguish interface tests from actual Caliptra RTL/DV qualification.
 
 ## Actual Caliptra subordinate pilot
@@ -150,3 +150,19 @@ python3 run_caliptra_subordinate.py /path/to/clean/caliptra-rtl /tmp/qd-axi-dela
 
 [Response-backpressure evidence](RESPONSE_BACKPRESSURE_EVIDENCE.md) records the
 bounded proof and remaining UNKNOWN assertion-enabled Caliptra configuration.
+
+## Pinned Linux CI
+
+The `Pinned Caliptra AXI pilot` workflow builds Icarus 13.0 and Verilator 5.050
+from immutable commits and runs both the complete standalone suite and actual
+Caliptra axi_sub configurations with response delays 0 and 7. It preserves the
+original packaged-Icarus smoke job. On Ubuntu 24.04 with the build dependencies
+listed in the workflow, reproduce with:
+
+```sh
+bash ci/run_caliptra_pilot.sh /tmp/new-qd-bfm-build
+```
+
+See [the CI scope and version matrix](PINNED_CI.md). A green evidence-check job
+means the bounded observations and known limitations were reproduced. It does
+not remove the explicit UNKNOWN status of either Caliptra pilot.

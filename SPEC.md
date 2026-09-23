@@ -70,3 +70,12 @@ delay; preserve stable unknown error-read data. Keep all previous regressions.
 Use independent target stall counters, seeded violations and reset/recovery
 checks. Exercise default and delayed configurations on unchanged pinned Caliptra
 axi_sub, retaining warnings and unavailable assertions as UNKNOWN.
+
+## Reproducible Linux evidence lane
+
+Build immutable Icarus/Verilator commits, preserve the existing smoke job, and
+run the full standalone suite plus clean pinned Caliptra axi_sub at response
+delays 0/7. Archive raw failures and UNKNOWN status. Require the exact reviewed
+diagnostic set and behavioral/fault evidence; unexpected drift fails CI. Record
+source/tool/input hashes and host/package versions. Exercise evidence-check
+failures by corrupting copies of artifacts, never application RTL/DV.
