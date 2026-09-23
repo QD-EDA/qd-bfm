@@ -1,5 +1,18 @@
 # QD-BFM: reusable protocol verification IP
 
+## Full product destination
+
+QD-BFM is intended to become a reusable library of many BFMs and protocol
+verification components, with plain SystemVerilog and UVM integration. The
+single-beat AXI helper and Caliptra adapter are the first delivery slices, not
+the permanent scope. Expand AXI4 functionality and add independent manager and
+subordinate agents, monitors, scoreboards, assertions and coverage. Add further
+protocol families as named integration flows require them: Caliptra AHB-Lite
+and OpenTitan TL-UL are concrete candidates; reuse existing open verification
+components before writing replacements. Publish per-protocol role/version/
+feature/width/simulator matrices. A qualified AXI slice does not complete the
+multi-BFM library goal. Do not add unsupported protocol names as empty stubs.
+
 ## Current capability
 
 Baseline `d761ee8cc6594656e95582a28f471c473ebd1afc`: standalone single-beat
