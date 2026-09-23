@@ -27,7 +27,7 @@ dpkg-query -W > "$work/evidence/packages.txt"
 git rev-parse HEAD > "$work/evidence/qd-bfm-revision.txt"
 (
   cd "$work/iverilog"
-  sh autoconf.sh
+  # The pinned Icarus release includes its generated configure script.
   ./configure --prefix="$work/prefix"
   make -j2
   make install
