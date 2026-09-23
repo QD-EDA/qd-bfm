@@ -39,3 +39,14 @@ seeded bad-ID/width failures. Compile real sources from a clean pinned checkout;
 preserve every diagnostic and return UNKNOWN for warning-bearing configurations.
 Do not count this local target as actual Caliptra subordinate verification or
 claim that Verilator's upstream dummy assertion selection enables checkers.
+
+## Actual AXI subordinate integration slice
+
+Exercise the unchanged pinned Caliptra axi_sub and its native filelist with the
+existing QD adapter. Put only the component model and independent expected-data
+scoreboard in QD-owned code. Test strobes, IDs, backpressure, component errors,
+quiescent reset/recovery and a fault in the QD model. Preserve assertion-enabled
+compile failures as a separate lane from upstream-default observational behavior;
+neither a default-lane pass nor -Wno-fatal may conceal diagnostics or unavailable
+assertions. Archive commands, input hashes, statuses and timing. No general AXI,
+full-chip or UVM qualification is implied by this pilot.

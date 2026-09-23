@@ -95,3 +95,23 @@ with an independent local target. It returns 2 (`UNKNOWN`) on compiler warnings,
 but the pilot is **not clean**. Default CI still runs only `./run.sh`; its green
 status does not cover this optional pilot. [Evidence and blockers](CALIPTRA_INTERFACE_EVIDENCE.md)
 distinguish interface tests from actual Caliptra RTL/DV qualification.
+
+## Actual Caliptra subordinate pilot
+
+```sh
+python3 run_caliptra_subordinate.py /path/to/clean/caliptra-rtl /tmp/qd-axi-sub-evidence
+```
+
+This compiles the pinned upstream `axi_sub.vf` and drives the real `axi_sub`
+through the existing adapter. The QD component memory and scoreboard exercise
+12 accepted transfers, two held component cycles per transfer, full/partial/zero
+strobes, ID extremes, SLVERR reads/writes, quiescent reset/recovery, and a read-data
+fault injection. Scope is AW/DW/UW=32, IW=8, EX_EN=0, C_LAT=0, one outstanding
+aligned full-width single-beat access. It does not run soc_ifc or full-chip DV.
+
+The runner archives separate assertion-enabled and upstream-default configurations.
+On Verilator 5.050 the assertion-enabled build rejects five `eventually` properties;
+only the default configuration simulates. Three upstream width warnings also remain.
+Overall exit is 2 (UNKNOWN), never a fallback clean pass. Build/test/input failures
+in the default lane exit 1. No upstream assertions or diagnostics are edited.
+See [target evidence](CALIPTRA_SUBORDINATE_EVIDENCE.md) for precise coverage limits.
