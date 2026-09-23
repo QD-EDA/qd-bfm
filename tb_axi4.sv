@@ -61,7 +61,7 @@ module tb_axi4;
   end
 
   task automatic check(input logic condition, input string message);
-    if (!condition) $fatal(1, "%s", message);
+    if (condition !== 1'b1) $fatal(1, "%s", message);
   endtask
 
   logic ok;

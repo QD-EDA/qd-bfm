@@ -57,3 +57,39 @@ for width in 0 7 24 2048; do
   grep -q 'DW must be 8..1024 bits in power-of-two bytes' "$log"
 done
 printf 'PASS: invalid AXI size widths rejected\n'
+
+# Four-state checks require Icarus/vvp; a two-state simulation is not an oracle.
+iverilog -g2012 -s tb_four_state -o "$out" qd_axi4_single_master.sv tb_axi4.sv tb_four_state.sv
+for boundary in IDLE_PAYLOAD ERROR_RDATA; do
+  vvp "$out" "+SIGNAL=$boundary" > "$log" 2>&1
+  grep -q "INJECTED: $boundary" "$log"
+  grep -q '^PASS:' "$log"
+done
+for signal_name in AWREADY WREADY ARREADY BVALID RVALID BRESP RRESP BID RID RLAST RDATA; do
+  for state in X Z; do
+    if vvp "$out" "+SIGNAL=$signal_name" "+$state" > "$log" 2>&1; then
+      printf '%s=%s unexpectedly passed\n' "$signal_name" "$state" >&2
+      exit 1
+    fi
+    if grep -q '^PASS:' "$log"; then
+      printf '%s=%s emitted a pass banner\n' "$signal_name" "$state" >&2
+      exit 1
+    fi
+    grep -q "INJECTED: $signal_name" "$log"
+    case "$signal_name" in
+      BID) grep -q 'AXI B ID mismatch' "$log" ;;
+      RID) grep -q 'AXI R ID mismatch' "$log" ;;
+      RLAST) grep -q 'AXI single-beat read missing RLAST' "$log" ;;
+      *) grep -q "AXI $signal_name is unknown" "$log" ;;
+    esac
+  done
+done
+for state in X Z; do
+  if vvp "$out" +SIGNAL=CHECK "+$state" > "$log" 2>&1; then
+    printf 'Unknown test condition unexpectedly passed\n' >&2
+    exit 1
+  fi
+  grep -q 'unknown test condition rejected' "$log"
+  if grep -q '^PASS:' "$log"; then exit 1; fi
+done
+printf 'PASS: 22 active X/Z injections rejected; idle/error payload boundaries preserved\n'

@@ -51,6 +51,20 @@ DW=8/1024 are parameter-acceptance checks only. Other widths fail at initializat
 including stopped clocks and accepted-handshake cleanup windows; reset after an
 address timeout; and successful read/write recovery. Held-VALID and early-VALID
 injections must fail without a pass banner. [Reset evidence](RESET_EVIDENCE.md)
-records cross-simulator results and limits. Four-state protocol controls, concurrent
+records cross-simulator results and limits. Full four-state protocol monitoring, concurrent
 transactions, response-backpressure coverage and Caliptra integration remain
 unqualified; this change does not establish full AXI compliance.
+
+## Unknown values during a transaction
+
+An X/Z READY during a request wait or VALID during a response wait is fatal.
+Accepted responses must have a known response code and matching ID; reads must
+also assert RLAST, and an OKAY read must contain known data. Idle response
+payloads and error-response read data may be unknown. These checks cover signals
+sampled by active tasks; they do not check all interface activity or validate
+all request arguments. Do not use an unknown `ok` as success in a testbench:
+require `ok === 1'b1`.
+
+`./run.sh` adds 22 X/Z pin injections, two payload boundaries and two negative
+checks of the testbench's own assertion helper. See
+[four-state evidence](FOUR_STATE_EVIDENCE.md) for scope, commands and remaining gaps.

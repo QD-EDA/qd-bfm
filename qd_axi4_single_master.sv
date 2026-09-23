@@ -80,6 +80,8 @@ module qd_axi4_single_master #(
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
         if (rst_n !== 1'b1) disable write_body;
+        if (awready !== 1'b0 && awready !== 1'b1)
+          $fatal(1, "AXI AWREADY is unknown while waiting");
         if (awready) accepted=1;
       end
       if (!accepted) disable write_body; // Hold VALID until handshake or external reset.
@@ -92,6 +94,8 @@ module qd_axi4_single_master #(
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
         if (rst_n !== 1'b1) disable write_body;
+        if (wready !== 1'b0 && wready !== 1'b1)
+          $fatal(1, "AXI WREADY is unknown while waiting");
         if (wready) accepted=1;
       end
       if (!accepted) disable write_body; // Hold VALID until handshake or external reset.
@@ -104,6 +108,8 @@ module qd_axi4_single_master #(
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
         if (rst_n !== 1'b1) disable write_body;
+        if (bvalid !== 1'b0 && bvalid !== 1'b1)
+          $fatal(1, "AXI BVALID is unknown while waiting");
         if (bvalid) accepted=1;
       end
       if (!accepted) begin
@@ -113,6 +119,7 @@ module qd_axi4_single_master #(
         disable write_body;
       end
       if (bid !== id) $fatal(1, "AXI B ID mismatch: got %0h expected %0h", bid, id);
+      if ((^bresp) === 1'bx) $fatal(1, "AXI BRESP is unknown on response");
       resp=bresp;
       @(negedge clk or negedge rst_n);
       if (rst_n !== 1'b1) disable write_body;
@@ -144,6 +151,8 @@ module qd_axi4_single_master #(
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
         if (rst_n !== 1'b1) disable read_body;
+        if (arready !== 1'b0 && arready !== 1'b1)
+          $fatal(1, "AXI ARREADY is unknown while waiting");
         if (arready) accepted=1;
       end
       if (!accepted) disable read_body; // Hold VALID until handshake or external reset.
@@ -156,6 +165,8 @@ module qd_axi4_single_master #(
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
         if (rst_n !== 1'b1) disable read_body;
+        if (rvalid !== 1'b0 && rvalid !== 1'b1)
+          $fatal(1, "AXI RVALID is unknown while waiting");
         if (rvalid) accepted=1;
       end
       if (!accepted) begin
@@ -166,6 +177,9 @@ module qd_axi4_single_master #(
       end
       if (rid !== id) $fatal(1, "AXI R ID mismatch: got %0h expected %0h", rid, id);
       if (rlast !== 1'b1) $fatal(1, "AXI single-beat read missing RLAST");
+      if ((^rresp) === 1'bx) $fatal(1, "AXI RRESP is unknown on response");
+      if (rresp == 2'b00 && (^rdata) === 1'bx)
+        $fatal(1, "AXI RDATA is unknown on successful response");
       data=rdata; resp=rresp;
       @(negedge clk or negedge rst_n);
       if (rst_n !== 1'b1) disable read_body;

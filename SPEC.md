@@ -16,3 +16,15 @@ and request-timeout VALID retention; reset the target before reuse after timeout
 Independent target/monitor tests must reject held/early VALID and prove successful
 post-reset recovery. Qualify only the documented directed configuration; four-state
 controls and real application integration remain separate roadmap work.
+
+## Active four-state response policy
+
+Reject X/Z on READY while waiting for a request handshake and VALID while
+waiting for a response. At an accepted response, require known response code,
+matching known ID and (on reads) asserted RLAST. Require known read data only
+on an OKAY response; error-response data is not a usable result. Idle response
+payloads may be unknown. Fatal diagnostics must identify the affected signal;
+unknowns must not silently become timeouts or an unknown task success value.
+Exercise X and Z independently on Icarus, preserve reset/timeout behavior, and
+require the testbench's own checks to reject unknown conditions. This is an
+active-task check, not a complete passive AXI or four-state monitor.
