@@ -58,11 +58,11 @@ module qd_axi4_single_master #(
                          output logic [1:0] resp);
     integer n;
     logic accepted;
-    begin
+    begin : write_body
       ok = 0; resp = 0;
       if (!rst_n || addr % BYTES != 0) begin
         $error("AXI single-beat write requires reset released and aligned address");
-        return;
+        disable write_body;
       end
       awaddr=addr; awlen=0; awsize=$clog2(BYTES); awburst=2'b00; awid=id; awvalid=1;
       accepted=0;
@@ -70,7 +70,7 @@ module qd_axi4_single_master #(
         @(posedge clk);
         if (awready) accepted=1;
       end
-      if (!accepted) return; // Hold VALID until handshake or external reset.
+      if (!accepted) disable write_body; // Hold VALID until handshake or external reset.
       @(negedge clk); awvalid=0;
 
       wdata=data; wstrb=strb; wlast=1; wvalid=1;
@@ -79,7 +79,7 @@ module qd_axi4_single_master #(
         @(posedge clk);
         if (wready) accepted=1;
       end
-      if (!accepted) return; // Hold VALID until handshake or external reset.
+      if (!accepted) disable write_body; // Hold VALID until handshake or external reset.
       @(negedge clk); wvalid=0;
 
       bready=1;
@@ -88,7 +88,7 @@ module qd_axi4_single_master #(
         @(posedge clk);
         if (bvalid) accepted=1;
       end
-      if (!accepted) begin @(negedge clk); bready=0; return; end
+      if (!accepted) begin @(negedge clk); bready=0; disable write_body; end
       if (bid !== id) $fatal(1, "AXI B ID mismatch: got %0h expected %0h", bid, id);
       resp=bresp;
       @(negedge clk); bready=0;
@@ -103,11 +103,11 @@ module qd_axi4_single_master #(
                         output logic [1:0] resp);
     integer n;
     logic accepted;
-    begin
+    begin : read_body
       ok=0; data='0; resp=0;
       if (!rst_n || addr % BYTES != 0) begin
         $error("AXI single-beat read requires reset released and aligned address");
-        return;
+        disable read_body;
       end
       araddr=addr; arlen=0; arsize=$clog2(BYTES); arburst=2'b00; arid=id; arvalid=1;
       accepted=0;
@@ -115,7 +115,7 @@ module qd_axi4_single_master #(
         @(posedge clk);
         if (arready) accepted=1;
       end
-      if (!accepted) return; // Hold VALID until handshake or external reset.
+      if (!accepted) disable read_body; // Hold VALID until handshake or external reset.
       @(negedge clk); arvalid=0;
 
       rready=1;
@@ -124,7 +124,7 @@ module qd_axi4_single_master #(
         @(posedge clk);
         if (rvalid) accepted=1;
       end
-      if (!accepted) begin @(negedge clk); rready=0; return; end
+      if (!accepted) begin @(negedge clk); rready=0; disable read_body; end
       if (rid !== id) $fatal(1, "AXI R ID mismatch: got %0h expected %0h", rid, id);
       if (rlast !== 1'b1) $fatal(1, "AXI single-beat read missing RLAST");
       data=rdata; resp=rresp;
