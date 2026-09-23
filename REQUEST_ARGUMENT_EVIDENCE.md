@@ -53,3 +53,9 @@ versions, full regression log and Caliptra evidence are retained locally in
 `../evidence/bfm-request-arguments/`; these are not release artifacts. Bursts,
 outstanding transactions, full passive monitoring and production DV qualification
 remain roadmap work.
+
+A fresh local clone of `662955b` repeated the full Icarus regression and the
+actual Caliptra pilot with the same outcomes, including all retained warnings
+and assertion-lane failures. This repeats the workspace on the same host/tools;
+it does not establish a reproducible compiler build. The isolated argument runs
+complete in milliseconds; peak RSS and large-workload throughput were not measured.
