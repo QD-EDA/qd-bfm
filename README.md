@@ -2,7 +2,7 @@
 
 `qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
 
-It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement bursts, multiple outstanding transactions, user/lock signaling, coverage, or a Caliptra adapter. The local test uses an independent tiny memory target and does not compile or modify Caliptra.
+It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement bursts, multiple outstanding transactions, configurable user/lock signaling, or coverage. The default local test uses an independent tiny memory target and does not compile or modify Caliptra. An optional real-interface adapter pilot is described below.
 
 ## Requirements and quick start
 
@@ -68,3 +68,30 @@ require `ok === 1'b1`.
 `./run.sh` adds 22 X/Z pin injections, two payload boundaries and two negative
 checks of the testbench's own assertion helper. See
 [four-state evidence](FOUR_STATE_EVIDENCE.md) for scope, commands and remaining gaps.
+
+## Caliptra interface adapter (pilot remains UNKNOWN)
+
+`qd_caliptra_axi_single_master.sv` connects `axi_if.w_mgr` and `axi_if.r_mgr`
+from pinned Caliptra v2.1.2 to the existing BFM. Pass matching `AW/DW/IW`
+parameters; both interfaces and the adapter must share clock and reset.
+Call `adapter.driver.write_one(...)` / `adapter.driver.read_one(...)` with the
+same arguments and reset/timeout contract as the standalone BFM. The `driver`
+instance name is part of this task API. Width mismatches are fatal.
+
+The adapter ties request user/lock fields to zero and ignores response user
+metadata. It cannot express privileged/nonzero-user or exclusive accesses.
+Do not call Caliptra's built-in manager tasks on the same interfaces or attach
+another manager driver. Concurrent tasks remain unsupported.
+
+```sh
+./run_caliptra_interface.sh /path/to/clean/caliptra-rtl /tmp/qd-caliptra-evidence
+```
+
+The script requires SHA `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, archives
+compiler diagnostics, and tests wiring against the actual interface declaration
+with an independent local target. It returns 2 (`UNKNOWN`) on compiler warnings,
+1 on build/test/input failure, and 0 only on a clean interface pilot. Verilator
+5.050 currently produces three upstream width warnings; behavioral tests pass
+but the pilot is **not clean**. Default CI still runs only `./run.sh`; its green
+status does not cover this optional pilot. [Evidence and blockers](CALIPTRA_INTERFACE_EVIDENCE.md)
+distinguish interface tests from actual Caliptra RTL/DV qualification.

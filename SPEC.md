@@ -28,3 +28,14 @@ unknowns must not silently become timeouts or an unknown task success value.
 Exercise X and Z independently on Icarus, preserve reset/timeout behavior, and
 require the testbench's own checks to reject unknown conditions. This is an
 active-task check, not a complete passive AXI or four-state monitor.
+
+## Pinned Caliptra interface pilot
+
+Connect the existing BFM to unmodified v2.1.2 `axi_if.w_mgr/r_mgr`. Preserve the
+task API at `adapter.driver`, reject mismatched widths, tie request user/lock
+to zero and document ignored response metadata. Verify pin mapping, strobes,
+response codes, ID extremes and stalls with an independent local target and
+seeded bad-ID/width failures. Compile real sources from a clean pinned checkout;
+preserve every diagnostic and return UNKNOWN for warning-bearing configurations.
+Do not count this local target as actual Caliptra subordinate verification or
+claim that Verilator's upstream dummy assertion selection enables checkers.
