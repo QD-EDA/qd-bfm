@@ -21,3 +21,39 @@ for case_name in BAD_RID BAD_RLAST; do
   esac
 done
 printf 'PASS: bad response ID and missing RLAST rejected\n'
+
+iverilog -g2012 -s tb_reset -o "$out" qd_axi4_single_master.sv tb_reset.sv
+vvp "$out"
+for case_name in BAD_RESET_VALID BAD_EARLY_VALID; do
+  if vvp "$out" "+$case_name" > "$log" 2>&1; then
+    printf '%s unexpectedly passed\n' "$case_name" >&2
+    exit 1
+  fi
+  if grep -q '^PASS:' "$log"; then
+    printf '%s emitted a pass banner\n' "$case_name" >&2
+    exit 1
+  fi
+  case "$case_name" in
+    BAD_RESET_VALID) grep -q 'reset did not clear manager outputs' "$log" ;;
+    BAD_EARLY_VALID) grep -q 'request before released-reset rising edge' "$log" ;;
+  esac
+done
+printf 'PASS: independent reset monitors rejected held/early VALID\n'
+
+for width in 8 1024; do
+  iverilog -g2012 -s tb_parameters -Ptb_parameters.WIDTH="$width" -o "$out" qd_axi4_single_master.sv tb_parameters.sv
+  vvp "$out"
+done
+for width in 0 7 24 2048; do
+  iverilog -g2012 -s tb_parameters -Ptb_parameters.WIDTH="$width" -o "$out" qd_axi4_single_master.sv tb_parameters.sv
+  if vvp "$out" > "$log" 2>&1; then
+    printf 'Unsupported width %s unexpectedly passed\n' "$width" >&2
+    exit 1
+  fi
+  if grep -q '^PASS:' "$log"; then
+    printf 'Unsupported width emitted a pass banner\n' >&2
+    exit 1
+  fi
+  grep -q 'DW must be 8..1024 bits in power-of-two bytes' "$log"
+done
+printf 'PASS: invalid AXI size widths rejected\n'
