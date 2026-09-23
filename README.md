@@ -24,3 +24,33 @@ Licensed under Apache-2.0; see [LICENSE](LICENSE).
 
 See [the staged qualification roadmap](ROADMAP.md) for named pilots, unsupported
 cases, independent oracles, performance targets and release gates.
+
+## Reset cancellation
+
+Drive reset to both the BFM and target. Asynchronous reset assertion clears
+`AWVALID`, `WVALID`, `ARVALID`, `BREADY` and `RREADY`, including requests left
+asserted after timeout. A task interrupted at any blocking wait returns `ok=0`
+without requiring another clock edge. A reset after task completion does not
+retroactively cancel the completed transaction. Discard response/data outputs
+when `ok` is not exactly 1. Reset does not undo a write already accepted by the
+target; the target's own reset semantics govern committed state.
+
+A new task waits for a rising edge with reset released and then launches on a
+falling edge, away from target sampling. Deassert reset synchronously using the
+harness's scheduled clocking convention (the regression uses a nonblocking
+assignment at a rising edge). Do not invoke overlapping tasks or reuse the BFM
+after any timeout until **both endpoints** have been reset. Task start now has
+up to one and a half clock periods of setup latency; `TIMEOUT` still counts each channel's
+handshake wait separately. This is a simulation BFM, not synthesizable RTL.
+
+The supported data-width parameter is 8 through 1024 bits in power-of-two bytes,
+matching the three-bit AXI size field. The read/write regression exercises DW=32;
+DW=8/1024 are parameter-acceptance checks only. Other widths fail at initialization.
+
+`./run.sh` now also runs an independent reset target/monitor: 30 reset cases,
+including stopped clocks and accepted-handshake cleanup windows; reset after an
+address timeout; and successful read/write recovery. Held-VALID and early-VALID
+injections must fail without a pass banner. [Reset evidence](RESET_EVIDENCE.md)
+records cross-simulator results and limits. Four-state protocol controls, concurrent
+transactions, response-backpressure coverage and Caliptra integration remain
+unqualified; this change does not establish full AXI compliance.
