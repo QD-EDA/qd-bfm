@@ -66,6 +66,12 @@ module qd_axi4_single_master #(
     logic accepted;
     begin : write_body
       ok = 0; resp = 0;
+      if ((^addr) === 1'bx) $fatal(1, "AXI write address argument is unknown");
+      if ((^id) === 1'bx) $fatal(1, "AXI write ID argument is unknown");
+      if ((^strb) === 1'bx) $fatal(1, "AXI write strobe argument is unknown");
+      for (n=0; n<BYTES; n=n+1)
+        if (strb[n] && (^data[n*8 +: 8]) === 1'bx)
+          $fatal(1, "AXI write enabled data byte is unknown");
       if (rst_n !== 1'b1 || addr % BYTES != 0) begin
         $error("AXI single-beat write requires reset released and aligned address");
         disable write_body;
@@ -137,6 +143,8 @@ module qd_axi4_single_master #(
     logic accepted;
     begin : read_body
       ok=0; data='0; resp=0;
+      if ((^addr) === 1'bx) $fatal(1, "AXI read address argument is unknown");
+      if ((^id) === 1'bx) $fatal(1, "AXI read ID argument is unknown");
       if (rst_n !== 1'b1 || addr % BYTES != 0) begin
         $error("AXI single-beat read requires reset released and aligned address");
         disable read_body;
