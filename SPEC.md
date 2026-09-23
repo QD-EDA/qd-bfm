@@ -58,3 +58,15 @@ bits of enabled write-data bytes before any request is driven. Preserve masked
 byte and zero-strobe don't-care behavior. Require exact fatal diagnostics and an
 independent monitor proving invalid arguments never reach request pins. Preserve
 all prior transaction/reset/response tests and the real Caliptra pilot outcomes.
+
+## Directed response-backpressure slice
+
+Add a nonnegative known integer RESPONSE_DELAY, default zero, to both manager
+modules. Keep response READY low for that many cycles after request cleanup,
+then start the existing TIMEOUT wait. Cancel at either edge on reset. Check
+stalled response VALID and payload stability through the accepting edge, with
+case equality for four-state transitions. Reject unknown VALID during the active
+delay; preserve stable unknown error-read data. Keep all previous regressions.
+Use independent target stall counters, seeded violations and reset/recovery
+checks. Exercise default and delayed configurations on unchanged pinned Caliptra
+axi_sub, retaining warnings and unavailable assertions as UNKNOWN.

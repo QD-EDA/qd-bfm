@@ -16,7 +16,7 @@ The script compiles the BFM and local testbench, then runs the passing write/rea
 
 ## Using the BFM
 
-Instantiate the module and connect its request/response pins to the manager side of the target interface (for Caliptra's inbound interface, to `s_axi_*_if`). Drive `clk` and active-low `rst_n`; tie unused interface user/lock fields low and ignore response user fields. Call `write_one(addr, data, strb, id, ok, resp)` or `read_one(addr, id, ok, data, resp)` from a testbench process. The address must be aligned to `DW/8` bytes and reset must be released. `ok` is true only for a successful response; `resp` carries the two-bit AXI response. `TIMEOUT` bounds each wait in clock cycles.
+Instantiate the module and connect its request/response pins to the manager side of the target interface (for Caliptra's inbound interface, to `s_axi_*_if`). Drive `clk` and active-low `rst_n`; tie unused interface user/lock fields low and ignore response user fields. Call `write_one(addr, data, strb, id, ok, resp)` or `read_one(addr, id, ok, data, resp)` from a testbench process. The address must be aligned to `DW/8` bytes and reset must be released. `ok` is true only for a successful response; `resp` carries the two-bit AXI response. `TIMEOUT` bounds each channel handshake wait in clock cycles; deliberate response delay is additional.
 
 Requests remain asserted through ready stalls, with payload-stability checks. Response ID mismatch or a read without `RLAST` calls `$fatal`; AXI error responses return `ok=0`. On request-channel timeout, VALID remains asserted to preserve AXI handshake rules: reset both BFM and target before another transfer. Response timeout returns `ok=0` and deasserts response ready.
 
@@ -124,3 +124,29 @@ may contain X/Z; zero-strobe writes may use wholly unknown data. Invalid fields
 are fatal before any request is launched. Existing reset/alignment and timeout
 contracts still apply. See [request argument evidence](REQUEST_ARGUMENT_EVIDENCE.md)
 for the 12 negative cases, boundary tests and unchanged Caliptra pilot limits.
+
+## Response backpressure
+
+Set `RESPONSE_DELAY` on the BFM or Caliptra adapter (default 0, preserving
+previous timing). After request cleanup, READY stays low for this many full
+clock cycles, then the normal response timeout starts. This is a fixed delay
+from the request phase, not from the first response VALID. The signed 32-bit
+parameter must be known and nonnegative. Reset cancels the delay immediately,
+even with a stopped clock.
+
+Once a response is sampled with VALID=1 and READY=0, its VALID and payload must
+remain stable through acceptance. The checker covers RDATA/RRESP/RID/RLAST and
+BRESP/BID; it ignores response user metadata. X/Z VALID during the active delay
+is fatal. Stable unknown error-read data remains allowed, but changing it while
+stalled is fatal. This is not a complete passive monitor.
+
+`./run.sh` retains previous tests and adds delays 1/3/8, reset during both response
+delays, 20 response-stability violations, four early X/Z VALID cases and parameter
+rejection. To exercise actual Caliptra response stalls:
+
+```sh
+python3 run_caliptra_subordinate.py /path/to/clean/caliptra-rtl /tmp/qd-axi-delay7 --response-delay 7
+```
+
+[Response-backpressure evidence](RESPONSE_BACKPRESSURE_EVIDENCE.md) records the
+bounded proof and remaining UNKNOWN assertion-enabled Caliptra configuration.

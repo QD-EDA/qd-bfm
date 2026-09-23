@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
-module tb_caliptra_axi_sub;
+module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0;
   always #5 clk=~clk;
   axi_if #(.AW(32),.DW(32),.IW(8),.UW(32)) wr(clk,rst_n), rd(clk,rst_n);
-  qd_caliptra_axi_single_master #(.AW(32),.DW(32),.IW(8),.TIMEOUT(32)) adapter(
+  qd_caliptra_axi_single_master #(.AW(32),.DW(32),.IW(8),.TIMEOUT(32),.RESPONSE_DELAY(RESPONSE_DELAY)) adapter(
     .clk(clk),.rst_n(rst_n),.wr(wr),.rd(rd));
   logic dv, write, last, hld=1;
   logic [31:0] addr, user, wdata, rdata, memory=0;
@@ -23,7 +23,7 @@ module tb_caliptra_axi_sub;
   assign rd_err = addr == 32'h84;
   assign wr_err = addr == 32'h84;
   assign rdata = memory ^ ($test$plusargs("BAD_DATA") ? 32'b1 : 32'b0);
-  integer hold_cycles=0, transfers=0, stalled=0;
+  integer hold_cycles=0, transfers=0, stalled=0, r_stalled=0, b_stalled=0;
   logic expected_write;
   logic [31:0] expected_addr, expected_data;
   logic [3:0] expected_strb;
@@ -34,6 +34,8 @@ module tb_caliptra_axi_sub;
     else hld=0;
   end
   always @(posedge clk) begin
+    if (rst_n && rd.rvalid && !rd.rready) r_stalled++;
+    if (rst_n && wr.bvalid && !wr.bready) b_stalled++;
     if (rst_n && dv && hld) stalled++;
     if (rst_n && dv && !hld) begin
       if ({addr,write,id,user,size,last} !==
@@ -86,6 +88,8 @@ module tb_caliptra_axi_sub;
     repeat(3) @(negedge clk); rst_n=1;
     transfer_pair(32'h80,32'hfedcba98,4'b0110,8'h00,0);
     if (transfers != 12 || stalled < 24) $fatal(1,"coverage count mismatch");
+    if (RESPONSE_DELAY>0 && (r_stalled==0 || b_stalled==0)) $fatal(1,"response stalls not exercised");
+    $display("COVERAGE: response stalls R=%0d B=%0d",r_stalled,b_stalled);
     $display("PASS: real Caliptra axi_sub transfers=%0d stalled=%0d",transfers,stalled);
     $finish;
   end

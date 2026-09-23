@@ -124,3 +124,46 @@ done
 vvp "$out" +FIELD=KNOWN +READ > "$log" 2>&1
 grep -q '^PASS: request argument boundary' "$log"
 printf 'PASS: 12 unknown request arguments rejected before launch; masked/zero-strobe data accepted\n'
+
+for delay in 1 3 8; do
+  iverilog -g2012 -s tb_axi4 -Ptb_axi4.RESPONSE_DELAY="$delay" -o "$out" qd_axi4_single_master.sv tb_axi4.sv
+  vvp "$out"
+done
+iverilog -g2012 -s tb_axi4 -Ptb_axi4.RESPONSE_DELAY=-1 -o "$out" qd_axi4_single_master.sv tb_axi4.sv
+if vvp "$out" > "$log" 2>&1; then exit 1; fi
+grep -q 'RESPONSE_DELAY must be a known nonnegative integer' "$log"
+iverilog -g2012 -s tb_reset -Ptb_reset.RESPONSE_DELAY=3 -o "$out" qd_axi4_single_master.sv tb_reset.sv
+vvp "$out"
+iverilog -g2012 -s tb_response_stalls -o "$out" qd_axi4_single_master.sv tb_axi4.sv tb_response_stalls.sv
+vvp "$out" +FIELD=ERROR_RDATA > "$log" 2>&1
+grep -q '^PASS:' "$log"
+for field in RDATA RID RRESP RLAST RVALID BID BRESP BVALID; do
+  for state in X Z; do
+    if vvp "$out" "+FIELD=$field" "+$state" > "$log" 2>&1; then exit 1; fi
+    grep -q "INJECTED: $field" "$log"
+    grep -q 'response changed while stalled' "$log"
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+  done
+done
+for field in RVALID BVALID RDATA BRESP; do
+  case "$field" in RVALID|BVALID) mode=DROP ;; *) mode=HANDSHAKE ;; esac
+  if vvp "$out" "+FIELD=$field" "+$mode" > "$log" 2>&1; then exit 1; fi
+  grep -q "INJECTED: $field" "$log"
+  grep -q 'response changed while stalled' "$log"
+  if grep -q '^PASS:' "$log"; then exit 1; fi
+done
+printf 'PASS: response delays 1/3/8, reset cancellation, and 20 stalled-response violations\n'
+
+for field in RVALID BVALID; do
+  for state in X Z; do
+    if vvp "$out" "+FIELD=$field" "+$state" +EARLY > "$log" 2>&1; then exit 1; fi
+    grep -q "AXI $field is unknown while delaying READY" "$log"
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+  done
+done
+printf 'PASS: four unknown VALID cases rejected before READY assertion\n'
+
+iverilog -g2012 -DUNKNOWN_DELAY -s tb_parameters -o "$out" qd_axi4_single_master.sv tb_parameters.sv
+if vvp "$out" > "$log" 2>&1; then exit 1; fi
+grep -q 'RESPONSE_DELAY must be a known nonnegative integer' "$log"
+if grep -q '^PASS:' "$log"; then exit 1; fi

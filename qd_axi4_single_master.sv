@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 module qd_axi4_single_master #(
-  parameter AW = 32, DW = 32, IW = 8, TIMEOUT = 16
+  parameter AW = 32, DW = 32, IW = 8, TIMEOUT = 16,
+  parameter integer RESPONSE_DELAY = 0
 ) (
   input logic clk, rst_n,
   output logic [AW-1:0] araddr, output logic [7:0] arlen,
@@ -20,7 +21,9 @@ module qd_axi4_single_master #(
   output logic bready
 );
   localparam BYTES = DW / 8;
-  logic ar_stalled, aw_stalled, w_stalled;
+  logic ar_stalled, aw_stalled, w_stalled, r_stalled, b_stalled;
+  logic [DW+IW+2:0] r_hold;
+  logic [IW+1:0] b_hold;
   logic [AW+8+3+2+IW-1:0] ar_hold, aw_hold;
   logic [DW+DW/8:0] w_hold;
 
@@ -35,6 +38,7 @@ module qd_axi4_single_master #(
     if (!rst_n) begin
       ar_stalled <= 0; aw_stalled <= 0; w_stalled <= 0;
       ar_hold <= '0; aw_hold <= '0; w_hold <= '0;
+      r_stalled <= 0; b_stalled <= 0; r_hold <= '0; b_hold <= '0;
     end else begin
       if (ar_stalled && (!arvalid || {araddr,arlen,arsize,arburst,arid} !== ar_hold))
         $fatal(1, "AXI AR payload changed while stalled");
@@ -42,6 +46,14 @@ module qd_axi4_single_master #(
         $fatal(1, "AXI AW payload changed while stalled");
       if (w_stalled && (!wvalid || {wdata,wstrb,wlast} !== w_hold))
         $fatal(1, "AXI W payload changed while stalled");
+      if (r_stalled && (rvalid !== 1'b1 || {rdata,rresp,rid,rlast} !== r_hold))
+        $fatal(1, "AXI R response changed while stalled");
+      if (b_stalled && (bvalid !== 1'b1 || {bresp,bid} !== b_hold))
+        $fatal(1, "AXI B response changed while stalled");
+      r_stalled <= (rvalid === 1'b1 && rready === 1'b0);
+      b_stalled <= (bvalid === 1'b1 && bready === 1'b0);
+      r_hold <= {rdata,rresp,rid,rlast};
+      b_hold <= {bresp,bid};
       ar_stalled <= arvalid && !arready;
       aw_stalled <= awvalid && !awready;
       w_stalled <= wvalid && !wready;
@@ -52,6 +64,8 @@ module qd_axi4_single_master #(
   end
 
   initial begin
+    if (RESPONSE_DELAY < 0 || (^RESPONSE_DELAY) === 1'bx)
+      $fatal(1, "RESPONSE_DELAY must be a known nonnegative integer");
     if (DW < 8 || DW > 1024 || DW % 8 != 0 || (BYTES & (BYTES - 1)) != 0)
       $fatal(1, "DW must be 8..1024 bits in power-of-two bytes");
   end
@@ -109,6 +123,15 @@ module qd_axi4_single_master #(
       if (rst_n !== 1'b1) disable write_body;
       wvalid=0;
 
+      for (n=0; n<RESPONSE_DELAY; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_body;
+        // An already-stalled response is checked by the stability monitor.
+        if (!b_stalled && bvalid !== 1'b0 && bvalid !== 1'b1)
+          $fatal(1, "AXI BVALID is unknown while delaying READY");
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_body;
+      end
       bready=1;
       accepted=0;
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
@@ -168,6 +191,15 @@ module qd_axi4_single_master #(
       if (rst_n !== 1'b1) disable read_body;
       arvalid=0;
 
+      for (n=0; n<RESPONSE_DELAY; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable read_body;
+        // An already-stalled response is checked by the stability monitor.
+        if (!r_stalled && rvalid !== 1'b0 && rvalid !== 1'b1)
+          $fatal(1, "AXI RVALID is unknown while delaying READY");
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable read_body;
+      end
       rready=1;
       accepted=0;
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
-module tb_reset;
+module tb_reset #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0, clock_enabled=1;
   always #5 if (clock_enabled) clk=~clk;
   logic [31:0] araddr, awaddr, wdata, rdata;
@@ -26,7 +26,7 @@ module tb_reset;
     if (rst_n === 1'b1 && !released_sampled)
       $fatal(1,"request before released-reset rising edge");
 
-  qd_axi4_single_master #(.TIMEOUT(5)) bfm (.*);
+  qd_axi4_single_master #(.TIMEOUT(5),.RESPONSE_DELAY(RESPONSE_DELAY)) bfm (.*);
   assign awready = rst_n && !stall_aw && !aw_seen;
   assign wready = rst_n && !stall_w && aw_seen && !w_seen;
   assign bvalid = rst_n && !stall_b && w_seen;
@@ -83,7 +83,7 @@ module tb_reset;
     stall_ar=(phase==4); stall_r=(phase==6 || phase==14);
     fork
       begin
-        if ((phase>=4 && phase<=7) || phase==11 || phase==12 || phase==14) bfm.read_one(32'h10,8'h32,ok,data,resp);
+        if ((phase>=4 && phase<=7) || phase==11 || phase==12 || phase==14 || phase==16) bfm.read_one(32'h10,8'h32,ok,data,resp);
         else bfm.write_one(32'h10,32'h12345678,4'hf,8'h21,ok,resp);
         finished=1;
       end
@@ -102,6 +102,8 @@ module tb_reset;
           10,12: @(posedge clk);
           13: begin wait(bready); repeat (5) @(posedge clk); end
           14: begin wait(rready); repeat (5) @(posedge clk); end
+          15: begin wait(bvalid && !bready); @(posedge clk); end
+          16: begin wait(rvalid && !rready); @(posedge clk); end
         endcase
         #1;
         if (stop_clock) clock_enabled=0;
@@ -121,7 +123,7 @@ module tb_reset;
   endtask
 
   initial begin
-    #5000; $fatal(1,"reset regression watchdog expired");
+    #(5000+1000*RESPONSE_DELAY); $fatal(1,"reset regression watchdog expired");
   end
   initial begin
     #1; quiet();
@@ -131,14 +133,18 @@ module tb_reset;
       reset_case(phase,0);
       reset_case(phase,1);
     end
+    if (RESPONSE_DELAY>0) begin
+      reset_case(15,0); reset_case(15,1);
+      reset_case(16,0); reset_case(16,1);
+    end
     // A completed address timeout leaves VALID high until an external reset.
     stall_ar=1;
     bfm.read_one(32'h10,8'h32,ok,data,resp);
     if (ok !== 1'b0 || arvalid !== 1'b1) $fatal(1,"timeout contract changed");
     #1; rst_n=0; #1; quiet();
     release_reset(); recovery();
-    if (completed_cases!=30) $fatal(1,"reset cases not all exercised");
-    $display("PASS: 30 reset phases, stopped clocks, timeout reset and recovery");
+    if (completed_cases!=(RESPONSE_DELAY>0 ? 34 : 30)) $fatal(1,"reset cases not all exercised");
+    $display("PASS: %0d reset phases, stopped clocks, timeout reset and recovery",completed_cases);
     $finish;
   end
 endmodule
