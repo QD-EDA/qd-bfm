@@ -21,3 +21,6 @@ Instantiate the module and connect its request/response pins to the manager side
 Requests remain asserted through ready stalls, with payload-stability checks. Response ID mismatch or a read without `RLAST` calls `$fatal`; AXI error responses return `ok=0`. On request-channel timeout, VALID remains asserted to preserve AXI handshake rules: reset both BFM and target before another transfer. Response timeout returns `ok=0` and deasserts response ready.
 
 Licensed under Apache-2.0; see [LICENSE](LICENSE).
+
+See [the staged qualification roadmap](ROADMAP.md) for named pilots, unsupported
+cases, independent oracles, performance targets and release gates.
