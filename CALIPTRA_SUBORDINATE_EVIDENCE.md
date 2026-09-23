@@ -76,3 +76,8 @@ The separate Icarus four-state suite covers the standalone BFM only. No licensed
 VIP or independent AXI protocol checker was used here. This is progress toward
 replacing a missing proprietary dependency, not equivalence to that dependency.
 Default CI still runs the standalone suite and does not run this optional pilot.
+
+A fresh QD-BFM checkout reran the standalone suite, independently rebuilt both
+pilot configurations, and reproduced their statuses and the data-fault detection.
+The application checkout remained the same clean pinned input. This is a second
+tool workspace, not a second host or independent application checkout.
