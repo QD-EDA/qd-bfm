@@ -40,9 +40,20 @@ component USER mismatch with no PASS in the negative run. This remains an
 UNKNOWN pilot because the same width warnings and unavailable assertion-enabled
 build remain.
 
+The FIXED-burst lane runs `tb_fixed_burst.sv` in the Icarus suite, then compiles
+`tb_caliptra_axi_fixed_burst.sv` through the pinned native `axi_sub.vf`. It
+checks strict 16-beat and explicitly nonconforming 256-beat compatibility
+write/read pairs, 544 component beats, USER pins, and W/R/B stalls. Injected
+read-data and address-USER faults must fail. Reproduce locally with
+`bash ci/run_fixed_burst_pilot.sh CLEAN_PINNED_CALIPTRA NEW_EVIDENCE_DIR` using
+Verilator 5.050. Exit 2 is the expected **UNKNOWN** status: three exact upstream
+width warnings are archived and required, and the assertion-enabled lane
+remains unavailable. The compatibility observation is not AXI4 compliance or
+released L0 bench execution; response USER and outbound DMA are not covered.
+
 The original packaged-Icarus smoke job remains. No RTL/DV changes, diagnostic
 suppression or assertion removal are introduced. Verilator behavior is two-state;
-X/Z claims come only from the Icarus suite. Neither full-chip DV, bursts, UVM,
+X/Z claims come only from the Icarus suite. Neither full-chip DV, INCR/WRAP bursts, UVM,
 nor general AXI compliance are established. Two independent Linux runs and
 comparison of input hashes, statuses and behavioral coverage are required before
 claiming repeatability of this bounded configuration; CI alone is not production

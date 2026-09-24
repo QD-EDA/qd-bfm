@@ -36,8 +36,8 @@ explicit qualification; initial pin values alone are not reset behavior.
    real interface first, then run a named reset/register smoke on unmodified RTL
    if firmware and simulator dependencies permit. This does not replace licensed
    Avery/QVIP API compatibility. Preserve unavailable-checker status explicitly.
-3. **AXI4 verification IP:** full-width INCR bursts first, then FIXED/WRAP and
-   narrow/unaligned transfers with protocol-specific constraints. Add IDs,
+3. **AXI4 verification IP:** after the bounded FIXED mailbox slice, add
+   full-width INCR, then WRAP and narrow/unaligned transfers with protocol-specific constraints. Add IDs,
    multiple outstanding requests, per-ID ordering, independent AW/W scheduling,
    request/response backpressure and mid-burst reset. Provide monitors, assertions,
    byte-enable scoreboards, reproducible seeds and functional coverage. Use
@@ -140,3 +140,13 @@ delay, reset cancellation and stalled response stability checks. See
 [the reproducible evidence](RESPONSE_BACKPRESSURE_EVIDENCE.md). Actual axi_sub
 has been exercised with response stalls; the assertion-enabled configuration
 remains UNKNOWN. This does not complete the burst/ordering/VIP/UVM stages above.
+
+## Delivered FIXED mailbox increment
+
+The directed manager has one-outstanding, full-width FIXED write/read tasks
+with request USER metadata and per-beat response checks. Strict mode accepts
+1–16 beats. An explicit compatibility flag permits the released Caliptra L0
+256-beat FIXED firmware request while marking it nonconforming; the Arm AXI4
+FIXED limit is 16 beats. This is not a full L0 replacement: response USER,
+the internal/outbound DMA interfaces, broader AXI traffic and production
+qualification remain outside the slice.

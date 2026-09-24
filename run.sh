@@ -184,3 +184,34 @@ if vvp "$out" +WRONG_USER > "$log" 2>&1; then exit 1; fi
 grep -q 'AWUSER target mismatch' "$log"
 if grep -q '^PASS:' "$log"; then exit 1; fi
 printf 'PASS: AXI USER fields, stalled stability and wrong-user oracle\n'
+
+iverilog -g2012 -s tb_fixed_burst -o "$out" qd_axi4_single_master.sv tb_fixed_burst.sv
+vvp "$out"
+vvp "$out" +RESET_READ > "$log" 2>&1
+grep -q '^PASS: reset cancels partial FIXED read without returning data' "$log"
+for case_name in BAD_RLAST BAD_RID BAD_USER; do
+  if vvp "$out" "+$case_name" > "$log" 2>&1; then
+    printf '%s unexpectedly passed\n' "$case_name" >&2
+    exit 1
+  fi
+  if grep -q '^PASS:' "$log"; then exit 1; fi
+  case "$case_name" in
+    BAD_RLAST) grep -q 'AXI RLAST mismatch at beat 0' "$log" ;;
+    BAD_RID) grep -q 'AXI R ID mismatch at beat 0' "$log" ;;
+    BAD_USER) grep -q 'AXI WUSER argument is unknown at beat 0' "$log" ;;
+  esac
+done
+for length in 0 17 257; do
+  for channel in BAD_LENGTH BAD_READ_LENGTH; do
+    if vvp "$out" "+$channel=$length" > "$log" 2>&1; then
+      printf '%s=%s unexpectedly passed\n' "$channel" "$length" >&2
+      exit 1
+    fi
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+    case "$channel" in
+      BAD_LENGTH) grep -q "AXI FIXED write burst length unsupported: $length beats" "$log" ;;
+      BAD_READ_LENGTH) grep -q "AXI FIXED read burst length unsupported: $length beats" "$log" ;;
+    esac
+  done
+done
+printf 'PASS: FIXED burst faults and strict/compatibility length boundaries rejected\n'

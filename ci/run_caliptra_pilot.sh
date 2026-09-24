@@ -63,5 +63,10 @@ for delay in 0 7; do
   python3 ci/check_caliptra_evidence.py "$work/evidence/delay$delay" "$work/caliptra" "$delay" \
     | tee "$work/evidence/delay$delay-status.json"
 done
+burst_status=0
+bash ci/run_fixed_burst_pilot.sh "$work/caliptra" "$work/evidence/fixed-burst" \
+  > "$work/evidence/fixed-burst.log" 2>&1 || burst_status=$?
+test "$burst_status" = 2
+grep -q 'UNKNOWN: fixed-burst behavior observed' "$work/evidence/fixed-burst.log"
 python3 ci/test_evidence_check.py "$work/evidence/delay7" "$work/caliptra" \
   > "$work/evidence/evidence-check-tests.log" 2>&1

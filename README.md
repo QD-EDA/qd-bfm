@@ -1,8 +1,8 @@
 # QD-BFM
 
-`qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
+`qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat and FIXED-burst reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
 
-It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement bursts, multiple outstanding transactions, configurable user/lock signaling, or coverage. The default local test uses an independent tiny memory target and does not compile or modify Caliptra. An optional real-interface adapter pilot is described below.
+It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement INCR/WRAP bursts, multiple outstanding transactions, lock signaling, or coverage. The default local test uses an independent tiny memory target and does not compile or modify Caliptra. An optional real-interface adapter pilot is described below.
 
 ## Requirements and quick start
 
@@ -78,8 +78,9 @@ Call `adapter.driver.write_one(...)` / `adapter.driver.read_one(...)` with the
 same arguments and reset/timeout contract as the standalone BFM. The `driver`
 instance name is part of this task API. Width mismatches are fatal.
 
-The adapter ties request user/lock fields to zero and ignores response user
-metadata. It cannot express privileged/nonzero-user or exclusive accesses.
+The adapter ties request lock fields low. Legacy tasks drive request USER zero;
+`*_user` tasks can drive nonzero request USER. Response USER metadata remains
+unavailable, and exclusive accesses remain unsupported.
 Do not call Caliptra's built-in manager tasks on the same interfaces or attach
 another manager driver. Concurrent tasks remain unsupported.
 
@@ -184,3 +185,34 @@ monitor observes AWUSER/ARUSER propagation and a separate pin monitor observes
 WUSER. See [the bounded evidence](AXI_USER_EVIDENCE.md). This does not establish
 Caliptra SHA access policy, because the named `soc_ifc` test has only been linted,
 not run with this BFM.
+
+## FIXED mailbox bursts and the L0 compatibility exception
+
+`write_fixed_user(addr, data[], strb[], id, awuser, wuser[], caliptra_compat, ok, resp)`
+and `read_fixed_user(addr, beats, id, aruser, caliptra_compat, ok, data[], resp[])`
+drive one outstanding, aligned, full-width FIXED burst. `data`, `strb`, and
+`wuser` are dynamic arrays of equal length. All request values are checked
+before launch; AWUSER and ARUSER apply to the address channel, and each write
+beat has its own WUSER. A successful write returns one BRESP. A read returns
+one data word and RRESP per accepted beat, checks the response ID on every beat,
+and requires RLAST on exactly the final beat. `ok` is true only if every
+response is OKAY. Completed error bursts still return all response arrays;
+reset or timeout leaves them empty. The existing single-beat task signatures and behavior remain
+unchanged. These tasks do not return BUSER or RUSER.
+
+Set `caliptra_compat=0` for AXI4 FIXED bursts of **1–16 beats**. The
+[Arm AXI specification, Issue H, A3](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/IHI0022H_amba_axi_protocol_spec.pdf)
+limits FIXED bursts to 16 beats, as does pinned Caliptra
+[`axi_pkg.sv`](https://github.com/chipsalliance/caliptra-rtl/blob/49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e/src/axi/rtl/axi_pkg.sv#L20).
+The released L0 SoC stimulus nevertheless issues one 256-beat FIXED firmware
+write (`AWLEN=255`). Set `caliptra_compat=1` only to reproduce that named
+nonconforming stimulus; it permits up to 256 beats and logs the exception for
+every burst longer than 16. Zero beats, 17 beats in strict mode, and more than
+256 beats in compatibility mode fail before any request pin is asserted.
+
+The released L0 read code can calculate more than 256 beats for a 4 KiB chunk;
+such a request cannot be represented by its 8-bit ARLEN without splitting it.
+This BFM is not a drop-in replacement for the released `axi_if` task API or
+full L0 bench. It drives only Caliptra's inbound `s_axi_*` ports. Caliptra's
+outbound `m_axi_*` DMA interface and internal `axi_dma_req_if` compiler errors
+remain separate. No application RTL or DV file is changed for this slice.
