@@ -4,6 +4,7 @@ module tb_reset #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0, clock_enabled=1;
   always #5 if (clock_enabled) clk=~clk;
   logic [31:0] araddr, awaddr, wdata, rdata;
+  logic [31:0] aruser, awuser, wuser;
   logic [7:0] arlen, awlen, arid, awid, rid, bid;
   logic [2:0] arsize, awsize;
   logic [1:0] arburst, awburst, rresp, bresp;

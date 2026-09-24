@@ -167,3 +167,20 @@ iverilog -g2012 -DUNKNOWN_DELAY -s tb_parameters -o "$out" qd_axi4_single_master
 if vvp "$out" > "$log" 2>&1; then exit 1; fi
 grep -q 'RESPONSE_DELAY must be a known nonnegative integer' "$log"
 if grep -q '^PASS:' "$log"; then exit 1; fi
+
+iverilog -g2012 -s tb_axi_user -o "$out" qd_axi4_single_master.sv tb_axi_user.sv
+vvp "$out"
+for channel in AW W AR; do
+  for state in X Z; do
+    if vvp "$out" "+BAD_${channel}_${state}" > "$log" 2>&1; then exit 1; fi
+    grep -q "AXI ${channel}USER argument is unknown" "$log"
+    if grep -q '^PASS:' "$log"; then exit 1; fi
+  done
+  if vvp "$out" "+MUTATE_${channel}" > "$log" 2>&1; then exit 1; fi
+  grep -q "AXI ${channel} payload changed while stalled" "$log"
+  if grep -q '^PASS:' "$log"; then exit 1; fi
+done
+if vvp "$out" +WRONG_USER > "$log" 2>&1; then exit 1; fi
+grep -q 'AWUSER target mismatch' "$log"
+if grep -q '^PASS:' "$log"; then exit 1; fi
+printf 'PASS: AXI USER fields, stalled stability and wrong-user oracle\n'

@@ -166,3 +166,21 @@ bash ci/run_caliptra_pilot.sh /tmp/new-qd-bfm-build
 See [the CI scope and version matrix](PINNED_CI.md). A green evidence-check job
 means the bounded observations and known limitations were reproduced. It does
 not remove the explicit UNKNOWN status of either Caliptra pilot.
+
+## Single-beat Caliptra USER metadata
+
+For the pinned Caliptra interface, set matching `UW` (default 32) and call
+`adapter.driver.write_one_user(addr, data, strb, id, awuser, wuser, ok, resp)`
+or `adapter.driver.read_one_user(addr, id, aruser, ok, data, resp)`.
+`AWUSER`, `WUSER`, and `ARUSER` are separate inputs; each must be fully known.
+The original `write_one` and `read_one` signatures still drive all three USER
+fields to zero. The adapter still ties `AWLOCK`/`ARLOCK` low and ignores response
+USER metadata. USER values remain stable with their stalled AXI channel.
+
+`./run.sh` checks zero, nonzero, and all-ones USER values, X/Z arguments, stalled
+payload changes, and a deliberately wrong expected USER at an independent target.
+The optional actual `axi_sub` test can also run with `+USER`, where its component
+monitor observes AWUSER/ARUSER propagation and a separate pin monitor observes
+WUSER. See [the bounded evidence](AXI_USER_EVIDENCE.md). This does not establish
+Caliptra SHA access policy, because the named `soc_ifc` test has only been linted,
+not run with this BFM.

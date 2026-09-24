@@ -3,6 +3,7 @@ module tb_axi4 #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0;
   always #5 clk=~clk;
   logic [31:0] araddr, awaddr, wdata, rdata;
+  logic [31:0] aruser, awuser, wuser;
   logic [7:0] arlen, awlen;
   logic [2:0] arsize, awsize;
   logic [1:0] arburst, awburst, rresp, bresp;
@@ -17,7 +18,8 @@ module tb_axi4 #(parameter RESPONSE_DELAY=0);
   logic inject_bad_rid=0, inject_bad_rlast=0;
   logic [31:0] held_write_addr;
 
-  qd_axi4_single_master #(.AW(32), .DW(32), .IW(8), .TIMEOUT(5), .RESPONSE_DELAY(RESPONSE_DELAY)) bfm (.*);
+  // Positional parameters preserve the pre-USER public API order.
+  qd_axi4_single_master #(32,32,8,5,RESPONSE_DELAY) bfm (.*);
 
   // One outstanding single-beat target with programmable request latency.
   assign awready = rst_n && wait_cycles == 0;

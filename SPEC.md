@@ -79,3 +79,14 @@ delays 0/7. Archive raw failures and UNKNOWN status. Require the exact reviewed
 diagnostic set and behavioral/fault evidence; unexpected drift fails CI. Record
 source/tool/input hashes and host/package versions. Exercise evidence-check
 failures by corrupting copies of artifacts, never application RTL/DV.
+
+## Single-beat USER metadata slice
+
+Add explicit AWUSER/WUSER and ARUSER task variants without changing existing
+zero-user call signatures or response semantics. Reject unknown USER arguments
+before launch. Keep each USER stable while its channel is stalled. Verify pins
+against an independent local target and component USER on the unchanged pinned
+Caliptra `axi_sub`; inject a QD-owned wrong-user expectation. Preserve the
+assertion-enabled failure and width warnings as UNKNOWN. Lint the named
+`soc_ifc_axi_sha_acc_dis_tb` fileset without claiming runtime access-policy
+verification.
