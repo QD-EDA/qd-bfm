@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 module qd_axi4_single_master #(
   parameter AW = 32, DW = 32, IW = 8, TIMEOUT = 16,
-  parameter integer RESPONSE_DELAY = 0
+  parameter integer RESPONSE_DELAY = 0, parameter UW = 32
 ) (
   input logic clk, rst_n,
   output logic [AW-1:0] araddr, output logic [7:0] arlen,
@@ -18,14 +18,15 @@ module qd_axi4_single_master #(
   output logic [DW-1:0] wdata, output logic [DW/8-1:0] wstrb,
   output logic wlast, wvalid, input logic wready,
   input logic [1:0] bresp, input logic [IW-1:0] bid, input logic bvalid,
-  output logic bready
+  output logic bready,
+  output logic [UW-1:0] aruser, awuser, wuser
 );
   localparam BYTES = DW / 8;
   logic ar_stalled, aw_stalled, w_stalled, r_stalled, b_stalled;
   logic [DW+IW+2:0] r_hold;
   logic [IW+1:0] b_hold;
-  logic [AW+8+3+2+IW-1:0] ar_hold, aw_hold;
-  logic [DW+DW/8:0] w_hold;
+  logic [AW+8+3+2+IW+UW-1:0] ar_hold, aw_hold;
+  logic [DW+DW/8+UW:0] w_hold;
 
   // Simulation driver: asynchronous assertion cancels all active handshakes.
   // Payloads are don't-care during reset; keep the request and ready pins idle.
@@ -40,11 +41,11 @@ module qd_axi4_single_master #(
       ar_hold <= '0; aw_hold <= '0; w_hold <= '0;
       r_stalled <= 0; b_stalled <= 0; r_hold <= '0; b_hold <= '0;
     end else begin
-      if (ar_stalled && (!arvalid || {araddr,arlen,arsize,arburst,arid} !== ar_hold))
+      if (ar_stalled && (!arvalid || {araddr,arlen,arsize,arburst,arid,aruser} !== ar_hold))
         $fatal(1, "AXI AR payload changed while stalled");
-      if (aw_stalled && (!awvalid || {awaddr,awlen,awsize,awburst,awid} !== aw_hold))
+      if (aw_stalled && (!awvalid || {awaddr,awlen,awsize,awburst,awid,awuser} !== aw_hold))
         $fatal(1, "AXI AW payload changed while stalled");
-      if (w_stalled && (!wvalid || {wdata,wstrb,wlast} !== w_hold))
+      if (w_stalled && (!wvalid || {wdata,wstrb,wlast,wuser} !== w_hold))
         $fatal(1, "AXI W payload changed while stalled");
       if (r_stalled && (rvalid !== 1'b1 || {rdata,rresp,rid,rlast} !== r_hold))
         $fatal(1, "AXI R response changed while stalled");
@@ -57,9 +58,9 @@ module qd_axi4_single_master #(
       ar_stalled <= arvalid && !arready;
       aw_stalled <= awvalid && !awready;
       w_stalled <= wvalid && !wready;
-      ar_hold <= {araddr,arlen,arsize,arburst,arid};
-      aw_hold <= {awaddr,awlen,awsize,awburst,awid};
-      w_hold <= {wdata,wstrb,wlast};
+      ar_hold <= {araddr,arlen,arsize,arburst,arid,aruser};
+      aw_hold <= {awaddr,awlen,awsize,awburst,awid,awuser};
+      w_hold <= {wdata,wstrb,wlast,wuser};
     end
   end
 
@@ -70,10 +71,11 @@ module qd_axi4_single_master #(
       $fatal(1, "DW must be 8..1024 bits in power-of-two bytes");
   end
 
-  task automatic write_one(input logic [AW-1:0] addr,
+  task automatic write_one_user(input logic [AW-1:0] addr,
                          input logic [DW-1:0] data,
                          input logic [BYTES-1:0] strb,
                          input logic [IW-1:0] id,
+                         input logic [UW-1:0] addr_user, data_user,
                          output logic ok,
                          output logic [1:0] resp);
     integer n;
@@ -82,6 +84,8 @@ module qd_axi4_single_master #(
       ok = 0; resp = 0;
       if ((^addr) === 1'bx) $fatal(1, "AXI write address argument is unknown");
       if ((^id) === 1'bx) $fatal(1, "AXI write ID argument is unknown");
+      if ((^addr_user) === 1'bx) $fatal(1, "AXI AWUSER argument is unknown");
+      if ((^data_user) === 1'bx) $fatal(1, "AXI WUSER argument is unknown");
       if ((^strb) === 1'bx) $fatal(1, "AXI write strobe argument is unknown");
       for (n=0; n<BYTES; n=n+1)
         if (strb[n] && (^data[n*8 +: 8]) === 1'bx)
@@ -95,7 +99,7 @@ module qd_axi4_single_master #(
       if (rst_n !== 1'b1) disable write_body;
       @(negedge clk or negedge rst_n);
       if (rst_n !== 1'b1) disable write_body;
-      awaddr=addr; awlen=0; awsize=3'($clog2(BYTES)); awburst=2'b00; awid=id; awvalid=1;
+      awaddr=addr; awlen=0; awsize=3'($clog2(BYTES)); awburst=2'b00; awid=id; awuser=addr_user; awvalid=1;
       accepted=0;
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
@@ -109,7 +113,7 @@ module qd_axi4_single_master #(
       if (rst_n !== 1'b1) disable write_body;
       awvalid=0;
 
-      wdata=data; wstrb=strb; wlast=1; wvalid=1;
+      wdata=data; wstrb=strb; wlast=1; wuser=data_user; wvalid=1;
       accepted=0;
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
@@ -157,8 +161,9 @@ module qd_axi4_single_master #(
     end
   endtask
 
-  task automatic read_one(input logic [AW-1:0] addr,
+  task automatic read_one_user(input logic [AW-1:0] addr,
                         input logic [IW-1:0] id,
+                        input logic [UW-1:0] addr_user,
                         output logic ok,
                         output logic [DW-1:0] data,
                         output logic [1:0] resp);
@@ -168,6 +173,7 @@ module qd_axi4_single_master #(
       ok=0; data='0; resp=0;
       if ((^addr) === 1'bx) $fatal(1, "AXI read address argument is unknown");
       if ((^id) === 1'bx) $fatal(1, "AXI read ID argument is unknown");
+      if ((^addr_user) === 1'bx) $fatal(1, "AXI ARUSER argument is unknown");
       if (rst_n !== 1'b1 || addr % BYTES != 0) begin
         $error("AXI single-beat read requires reset released and aligned address");
         disable read_body;
@@ -177,7 +183,7 @@ module qd_axi4_single_master #(
       if (rst_n !== 1'b1) disable read_body;
       @(negedge clk or negedge rst_n);
       if (rst_n !== 1'b1) disable read_body;
-      araddr=addr; arlen=0; arsize=3'($clog2(BYTES)); arburst=2'b00; arid=id; arvalid=1;
+      araddr=addr; arlen=0; arsize=3'($clog2(BYTES)); arburst=2'b00; arid=id; aruser=addr_user; arvalid=1;
       accepted=0;
       for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
         @(posedge clk or negedge rst_n);
@@ -228,9 +234,24 @@ module qd_axi4_single_master #(
     end
   endtask
 
+  task automatic write_one(input logic [AW-1:0] addr,
+                           input logic [DW-1:0] data,
+                           input logic [BYTES-1:0] strb,
+                           input logic [IW-1:0] id,
+                           output logic ok, output logic [1:0] resp);
+    write_one_user(addr, data, strb, id, UW'(0), UW'(0), ok, resp);
+  endtask
+
+  task automatic read_one(input logic [AW-1:0] addr,
+                          input logic [IW-1:0] id,
+                          output logic ok, output logic [DW-1:0] data,
+                          output logic [1:0] resp);
+    read_one_user(addr, id, UW'(0), ok, data, resp);
+  endtask
+
   initial begin
-    araddr='0; arlen=0; arsize=0; arburst=0; arid=0; arvalid=0; rready=0;
-    awaddr='0; awlen=0; awsize=0; awburst=0; awid=0; awvalid=0;
-    wdata='0; wstrb='0; wlast=0; wvalid=0; bready=0;
+    araddr='0; arlen=0; arsize=0; arburst=0; arid=0; aruser=0; arvalid=0; rready=0;
+    awaddr='0; awlen=0; awsize=0; awburst=0; awid=0; awuser=0; awvalid=0;
+    wdata='0; wstrb='0; wuser=0; wlast=0; wvalid=0; bready=0;
   end
 endmodule

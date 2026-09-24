@@ -30,8 +30,15 @@ delay parameter, three exact width diagnostics, five exact unavailable assertion
 sites, transfer/stall coverage and detected data fault. Diagnostic drift fails CI
 for review, even if a future tool removes a warning. This is evidence checking,
 not a waiver or a clean simulation result: status JSON remains UNKNOWN.
-Eight corruptions of copied real evidence must be rejected. The checker does
+Eleven corruptions of copied real evidence must be rejected. The checker does
 not prove compiler diagnostics complete or validate all possible artifacts.
+
+The USER lane additionally runs `+USER` and `+USER +BAD_USER` against the real
+`axi_sub` default configuration at delays 0 and 7. The evidence checker requires
+18 total transfers and 36 component hold cycles in the positive run and a
+component USER mismatch with no PASS in the negative run. This remains an
+UNKNOWN pilot because the same width warnings and unavailable assertion-enabled
+build remain.
 
 The original packaged-Icarus smoke job remains. No RTL/DV changes, diagnostic
 suppression or assertion removal are introduced. Verilator behavior is two-state;

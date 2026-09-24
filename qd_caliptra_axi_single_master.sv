@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // Caliptra v2.1.2 axi_if adapter. Call driver.write_one / driver.read_one.
-// Both interfaces and the BFM must share clk/rst_n and identical AW/DW/IW.
+// Both interfaces and the BFM must share clk/rst_n and identical AW/DW/IW/UW.
 module qd_caliptra_axi_single_master #(
   parameter AW=32, DW=32, IW=8, TIMEOUT=16,
-  parameter integer RESPONSE_DELAY=0
+  parameter integer RESPONSE_DELAY=0, parameter UW=32
 ) (
   input logic clk, rst_n,
   axi_if.w_mgr wr,
@@ -13,24 +13,22 @@ module qd_caliptra_axi_single_master #(
     if ($bits(wr.awaddr)!=AW || $bits(rd.araddr)!=AW ||
         $bits(wr.wdata)!=DW || $bits(rd.rdata)!=DW ||
         $bits(wr.awid)!=IW || $bits(wr.bid)!=IW ||
-        $bits(rd.arid)!=IW || $bits(rd.rid)!=IW)
+        $bits(rd.arid)!=IW || $bits(rd.rid)!=IW ||
+        $bits(wr.awuser)!=UW || $bits(wr.wuser)!=UW || $bits(rd.aruser)!=UW)
       $fatal(1,"Caliptra adapter/interface width mismatch");
   end
-  assign wr.awuser='0;
-  assign wr.wuser='0;
   assign wr.awlock=1'b0;
-  assign rd.aruser='0;
   assign rd.arlock=1'b0;
   // Response user metadata is deliberately not interpreted by this API.
-  qd_axi4_single_master #(.AW(AW),.DW(DW),.IW(IW),.TIMEOUT(TIMEOUT),.RESPONSE_DELAY(RESPONSE_DELAY)) driver (
+  qd_axi4_single_master #(.AW(AW),.DW(DW),.IW(IW),.UW(UW),.TIMEOUT(TIMEOUT),.RESPONSE_DELAY(RESPONSE_DELAY)) driver (
     .clk(clk),.rst_n(rst_n),
     .araddr(rd.araddr),.arlen(rd.arlen),.arsize(rd.arsize),.arburst(rd.arburst),
-    .arid(rd.arid),.arvalid(rd.arvalid),.arready(rd.arready),
+    .arid(rd.arid),.aruser(rd.aruser),.arvalid(rd.arvalid),.arready(rd.arready),
     .rdata(rd.rdata),.rresp(rd.rresp),.rid(rd.rid),.rlast(rd.rlast),
     .rvalid(rd.rvalid),.rready(rd.rready),
     .awaddr(wr.awaddr),.awlen(wr.awlen),.awsize(wr.awsize),.awburst(wr.awburst),
-    .awid(wr.awid),.awvalid(wr.awvalid),.awready(wr.awready),
-    .wdata(wr.wdata),.wstrb(wr.wstrb),.wlast(wr.wlast),.wvalid(wr.wvalid),.wready(wr.wready),
+    .awid(wr.awid),.awuser(wr.awuser),.awvalid(wr.awvalid),.awready(wr.awready),
+    .wdata(wr.wdata),.wstrb(wr.wstrb),.wuser(wr.wuser),.wlast(wr.wlast),.wvalid(wr.wvalid),.wready(wr.wready),
     .bresp(wr.bresp),.bid(wr.bid),.bvalid(wr.bvalid),.bready(wr.bready)
   );
 endmodule

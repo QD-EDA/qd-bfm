@@ -58,6 +58,8 @@ for delay in 0 7; do
     --response-delay "$delay" > "$work/evidence/delay$delay.log" 2>&1 || status=$?
   # Exit 2 is a visible, verified UNKNOWN, never a clean qualification result.
   test "$status" = 2
+  # The runner also requires +USER success and +USER +BAD_USER failure.
+  grep -q 'six USER transfers and wrong-USER fault detected' "$work/evidence/delay$delay.log"
   python3 ci/check_caliptra_evidence.py "$work/evidence/delay$delay" "$work/caliptra" "$delay" \
     | tee "$work/evidence/delay$delay-status.json"
 done

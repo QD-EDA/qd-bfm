@@ -26,6 +26,7 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
   integer hold_cycles=0, transfers=0, stalled=0, r_stalled=0, b_stalled=0;
   logic expected_write;
   logic [31:0] expected_addr, expected_data;
+  logic [31:0] expected_aw_user=0, expected_ar_user=0, expected_w_user=0;
   logic [3:0] expected_strb;
   logic [7:0] expected_id;
   always @(negedge clk) begin
@@ -39,7 +40,8 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
     if (rst_n && dv && hld) stalled++;
     if (rst_n && dv && !hld) begin
       if ({addr,write,id,user,size,last} !==
-          {expected_addr,expected_write,expected_id,32'b0,3'd2,1'b1})
+          {expected_addr,expected_write,expected_id,
+           (expected_write ? expected_aw_user : expected_ar_user),3'd2,1'b1})
         $fatal(1,"component address/control scoreboard mismatch");
       if (write) begin
         if ({wdata,wstrb} !== {expected_data,expected_strb})
@@ -50,6 +52,8 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
       transfers++;
     end
   end
+  always @(posedge clk) if (rst_n && wr.wvalid && wr.wready)
+    if (wr.wuser !== expected_w_user) $fatal(1,"WUSER pin monitor mismatch");
 
   logic ok;
   logic [1:0] resp;
@@ -76,6 +80,26 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
       if (transfers != before_count+2) $fatal(1,"read transfer count mismatch");
     end
   endtask
+  task automatic user_pair(input logic [31:0] address_user, data_user, read_user);
+    integer before_count;
+    begin
+      before_count=transfers;
+      expected_addr=32'h80; expected_write=1; expected_data=32'h89abcdef;
+      expected_strb=4'hf; expected_id=8'h5a;
+      expected_aw_user=address_user; expected_w_user=data_user;
+      if ($test$plusargs("BAD_USER") && address_user==32'ha5a5a5a5)
+        expected_aw_user=32'hdeadbeef;
+      adapter.driver.write_one_user(32'h80,expected_data,4'hf,expected_id,
+                                    address_user,data_user,ok,resp);
+      if (ok !== 1'b1 || resp !== 0 || transfers != before_count+1)
+        $fatal(1,"USER write response mismatch");
+      golden=expected_data;
+      expected_write=0; expected_ar_user=read_user;
+      adapter.driver.read_one_user(32'h80,expected_id,read_user,ok,data,resp);
+      if (ok !== 1'b1 || resp !== 0 || data !== golden || transfers != before_count+2)
+        $fatal(1,"USER read response mismatch");
+    end
+  endtask
   initial begin
     repeat(3) @(negedge clk); rst_n=1;
     transfer_pair(32'h80,32'h12345678,4'b1111,8'h00,0);
@@ -87,7 +111,15 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
     @(negedge clk); rst_n=0;
     repeat(3) @(negedge clk); rst_n=1;
     transfer_pair(32'h80,32'hfedcba98,4'b0110,8'h00,0);
-    if (transfers != 12 || stalled < 24) $fatal(1,"coverage count mismatch");
+    if ($test$plusargs("USER")) begin
+      user_pair(0,0,0);
+      user_pair(32'ha5a5a5a5,32'h5a5a5a5a,32'h80000000);
+      user_pair('1,'1,'1);
+      if (transfers != 18) $fatal(1,"USER transfer count mismatch");
+      $display("PASS: real Caliptra axi_sub USER transfers=6");
+    end
+    if (transfers != ($test$plusargs("USER") ? 18 : 12) || stalled < 24)
+      $fatal(1,"coverage count mismatch");
     if (RESPONSE_DELAY>0 && (r_stalled==0 || b_stalled==0)) $fatal(1,"response stalls not exercised");
     $display("COVERAGE: response stalls R=%0d B=%0d",r_stalled,b_stalled);
     $display("PASS: real Caliptra axi_sub transfers=%0d stalled=%0d",transfers,stalled);

@@ -81,6 +81,16 @@ def main():
                     'PASS:' in bad.stdout+bad.stderr):
                 raise ValueError(mode+': injected data error was not detected correctly')
             print(mode+': 12 transfers, 24 held cycles, data fault detected')
+            if mode == 'upstream-default':
+                user = run('user-'+mode, [sim, '+USER'])
+                if (user.returncode or 'PASS: real Caliptra axi_sub USER transfers=6' not in user.stdout or
+                        'PASS: real Caliptra axi_sub transfers=18 stalled=36' not in user.stdout):
+                    raise ValueError('USER component pilot failed')
+                wrong = run('bad-user-'+mode, [sim, '+USER', '+BAD_USER'])
+                if (not wrong.returncode or 'component address/control scoreboard mismatch' not in
+                        wrong.stdout+wrong.stderr or 'PASS:' in wrong.stdout+wrong.stderr):
+                    raise ValueError('wrong-USER fault was not detected correctly')
+                print(mode+': six USER transfers and wrong-USER fault detected')
         if subprocess.check_output(['git', 'status', '--porcelain'], cwd=root, text=True):
             raise ValueError('application working tree changed during pilot')
         print('UNKNOWN: diagnostics or unavailable assertions' if unknown else 'PASS: bounded target pilot only')

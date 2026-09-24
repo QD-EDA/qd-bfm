@@ -6,7 +6,8 @@ module tb_caliptra_axi_if;
   logic clk=0, rst_n=0;
   always #5 clk=~clk;
   axi_if #(.AW(AW),.DW(DW),.IW(IF_IW),.UW(32)) wr(clk,rst_n), rd(clk,rst_n);
-  qd_caliptra_axi_single_master #(.AW(AW),.DW(DW),.IW(IW)) adapter(
+  // Positional parameters preserve the pre-USER public API order.
+  qd_caliptra_axi_single_master #(AW,DW,IW,16,0) adapter(
     .clk(clk),.rst_n(rst_n),.wr(wr),.rd(rd));
   logic ok;
   logic [1:0] resp;

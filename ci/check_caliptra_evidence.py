@@ -8,12 +8,12 @@ import sys
 def check(directory, caliptra, delay):
     directory, caliptra = Path(directory), Path(caliptra).resolve()
     records = json.loads((directory/'commands.json').read_text())
-    expected = [('version', 0), ('build-assertions', 1),
-                ('build-upstream-default', 0), ('run-upstream-default', 0),
-                ('bad-data-upstream-default', 1)]
-    if ([(r['name'], r['exit_status']) for r in records[:-1]] != expected[:-1] or
-            len(records) != 5 or records[-1]['name'] != 'bad-data-upstream-default' or
-            records[-1]['exit_status'] == 0):
+    expected = ['version', 'build-assertions', 'build-upstream-default',
+                'run-upstream-default', 'bad-data-upstream-default',
+                'user-upstream-default', 'bad-user-upstream-default']
+    if ([r['name'] for r in records] != expected or
+            [r['exit_status'] == 0 for r in records] !=
+            [True, False, True, True, False, True, False]):
         raise ValueError('pilot command/status matrix changed; review required')
     for record in records[1:3]:
         if '-GRESPONSE_DELAY='+str(delay) not in record['argv']:
@@ -44,8 +44,16 @@ def check(directory, caliptra, delay):
         raise ValueError('behavior/coverage evidence missing')
     if 'read data scoreboard mismatch' not in bad or 'PASS:' in bad:
         raise ValueError('data-fault evidence missing or contradictory')
+    user, wrong = log('user-upstream-default'), log('bad-user-upstream-default')
+    if ('PASS: real Caliptra axi_sub USER transfers=6' not in user or
+            'PASS: real Caliptra axi_sub transfers=18 stalled=36' not in user or
+            f'COVERAGE: response stalls R={stalls + (15 if delay else 0)} B={stalls + (15 if delay else 0)}' not in user):
+        raise ValueError('USER behavior/coverage evidence missing')
+    if ('component address/control scoreboard mismatch' not in wrong or 'PASS:' in wrong):
+        raise ValueError('wrong-USER evidence missing or contradictory')
     return {'qualification': 'UNKNOWN', 'response_delay': delay,
             'transfers': 12, 'component_stall_cycles': 24,
+            'user_transfers': 6,
             'r_stall_cycles': stalls, 'b_stall_cycles': stalls,
             'assertion_build_errors': errors, 'default_build_warnings': warnings}
 
