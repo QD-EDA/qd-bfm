@@ -26,5 +26,6 @@ jobs:
           path: |
             ${{ runner.temp }}/qd-bfm-build/evidence/
             !${{ runner.temp }}/qd-bfm-build/evidence/delay*/obj-*/**
+            !${{ runner.temp }}/qd-bfm-build/evidence/fixed-burst/obj/**
           if-no-files-found: error
           retention-days: 30

@@ -234,6 +234,200 @@ module qd_axi4_single_master #(
     end
   endtask
 
+  // One outstanding, full-width FIXED burst. Caliptra's released L0 stimulus
+  // requests 256 FIXED beats; that exceeds AXI4's 16-beat FIXED limit and is
+  // permitted only when the caller explicitly selects compatibility mode.
+  task automatic write_fixed_user(input logic [AW-1:0] addr,
+                         input logic [DW-1:0] data[],
+                         input logic [BYTES-1:0] strb[],
+                         input logic [IW-1:0] id,
+                         input logic [UW-1:0] addr_user,
+                         input logic [UW-1:0] data_user[],
+                         input logic caliptra_compat,
+                         output logic ok,
+                         output logic [1:0] resp);
+    integer beat, n, beats;
+    logic accepted;
+    logic [BYTES-1:0] beat_strb;
+    logic [DW-1:0] beat_data;
+    begin : write_fixed_body
+      ok=0; resp=0; beats=$size(data);
+      if (caliptra_compat !== 1'b0 && caliptra_compat !== 1'b1)
+        $fatal(1, "AXI FIXED compatibility mode is unknown");
+      if (beats < 1 || beats > (caliptra_compat ? 256 : 16))
+        $fatal(1, "AXI FIXED write burst length unsupported: %0d beats", beats);
+      if ($size(strb) != beats || $size(data_user) != beats)
+        $fatal(1, "AXI FIXED write arrays must have equal lengths");
+      if ((^addr) === 1'bx) $fatal(1, "AXI write address argument is unknown");
+      if ((^id) === 1'bx) $fatal(1, "AXI write ID argument is unknown");
+      if ((^addr_user) === 1'bx) $fatal(1, "AXI AWUSER argument is unknown");
+      for (beat=0; beat<beats; beat=beat+1) begin
+        if ((^data_user[beat]) === 1'bx) $fatal(1, "AXI WUSER argument is unknown at beat %0d", beat);
+        if ((^strb[beat]) === 1'bx) $fatal(1, "AXI write strobe argument is unknown at beat %0d", beat);
+        beat_strb=strb[beat]; beat_data=data[beat];
+        for (n=0; n<BYTES; n=n+1)
+          if (beat_strb[n] && (^beat_data[n*8 +: 8]) === 1'bx)
+            $fatal(1, "AXI write enabled data byte is unknown at beat %0d", beat);
+      end
+      if (rst_n !== 1'b1 || addr % BYTES != 0) begin
+        $error("AXI FIXED write requires reset released and aligned address");
+        disable write_fixed_body;
+      end
+      if (beats > 16)
+        $display("QD-BFM CALIPTRA_COMPAT: nonconforming %0d-beat FIXED write", beats);
+      @(posedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable write_fixed_body;
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable write_fixed_body;
+      awaddr=addr; awlen=8'(beats-1); awsize=3'($clog2(BYTES));
+      awburst=2'b00; awid=id; awuser=addr_user; awvalid=1;
+      accepted=0;
+      for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+        if (awready !== 1'b0 && awready !== 1'b1)
+          $fatal(1, "AXI AWREADY is unknown while waiting");
+        if (awready) accepted=1;
+      end
+      if (!accepted) disable write_fixed_body;
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable write_fixed_body;
+      awvalid=0;
+
+      for (beat=0; beat<beats; beat=beat+1) begin
+        wdata=data[beat]; wstrb=strb[beat]; wuser=data_user[beat];
+        wlast=(beat==beats-1); wvalid=1; accepted=0;
+        for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
+          @(posedge clk or negedge rst_n);
+          if (rst_n !== 1'b1) disable write_fixed_body;
+          if (wready !== 1'b0 && wready !== 1'b1)
+            $fatal(1, "AXI WREADY is unknown while waiting");
+          if (wready) accepted=1;
+        end
+        if (!accepted) disable write_fixed_body;
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+      end
+      wvalid=0;
+
+      for (n=0; n<RESPONSE_DELAY; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+        if (!b_stalled && bvalid !== 1'b0 && bvalid !== 1'b1)
+          $fatal(1, "AXI BVALID is unknown while delaying READY");
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+      end
+      bready=1; accepted=0;
+      for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+        if (bvalid !== 1'b0 && bvalid !== 1'b1)
+          $fatal(1, "AXI BVALID is unknown while waiting");
+        if (bvalid) accepted=1;
+      end
+      if (!accepted) begin
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable write_fixed_body;
+        bready=0;
+        disable write_fixed_body;
+      end
+      if (bid !== id) $fatal(1, "AXI B ID mismatch: got %0h expected %0h", bid, id);
+      if ((^bresp) === 1'bx) $fatal(1, "AXI BRESP is unknown on response");
+      resp=bresp;
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable write_fixed_body;
+      bready=0; ok=(resp == 2'b00);
+    end
+  endtask
+
+  task automatic read_fixed_user(input logic [AW-1:0] addr,
+                        input integer beats,
+                        input logic [IW-1:0] id,
+                        input logic [UW-1:0] addr_user,
+                        input logic caliptra_compat,
+                        output logic ok,
+                        output logic [DW-1:0] data[],
+                        output logic [1:0] resp[]);
+    integer beat, n;
+    logic accepted, all_ok;
+    logic [DW-1:0] beat_data[];
+    logic [1:0] beat_resp[];
+    begin : read_fixed_body
+      ok=0; data=new[0]; resp=new[0];
+      if (caliptra_compat !== 1'b0 && caliptra_compat !== 1'b1)
+        $fatal(1, "AXI FIXED compatibility mode is unknown");
+      if ((^beats) === 1'bx)
+        $fatal(1, "AXI FIXED read burst length is unknown");
+      if (beats < 1 || beats > (caliptra_compat ? 256 : 16))
+        $fatal(1, "AXI FIXED read burst length unsupported: %0d beats", beats);
+      if ((^addr) === 1'bx) $fatal(1, "AXI read address argument is unknown");
+      if ((^id) === 1'bx) $fatal(1, "AXI read ID argument is unknown");
+      if ((^addr_user) === 1'bx) $fatal(1, "AXI ARUSER argument is unknown");
+      if (rst_n !== 1'b1 || addr % BYTES != 0) begin
+        $error("AXI FIXED read requires reset released and aligned address");
+        disable read_fixed_body;
+      end
+      if (beats > 16)
+        $display("QD-BFM CALIPTRA_COMPAT: nonconforming %0d-beat FIXED read", beats);
+      @(posedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable read_fixed_body;
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable read_fixed_body;
+      araddr=addr; arlen=8'(beats-1); arsize=3'($clog2(BYTES));
+      arburst=2'b00; arid=id; aruser=addr_user; arvalid=1;
+      accepted=0;
+      for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable read_fixed_body;
+        if (arready !== 1'b0 && arready !== 1'b1)
+          $fatal(1, "AXI ARREADY is unknown while waiting");
+        if (arready) accepted=1;
+      end
+      if (!accepted) disable read_fixed_body;
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable read_fixed_body;
+      arvalid=0;
+
+      for (n=0; n<RESPONSE_DELAY; n=n+1) begin
+        @(posedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable read_fixed_body;
+        if (!r_stalled && rvalid !== 1'b0 && rvalid !== 1'b1)
+          $fatal(1, "AXI RVALID is unknown while delaying READY");
+        @(negedge clk or negedge rst_n);
+        if (rst_n !== 1'b1) disable read_fixed_body;
+      end
+      beat_data=new[beats]; beat_resp=new[beats]; all_ok=1; rready=1;
+      for (beat=0; beat<beats; beat=beat+1) begin
+        accepted=0;
+        for (n=0; n<TIMEOUT && !accepted; n=n+1) begin
+          @(posedge clk or negedge rst_n);
+          if (rst_n !== 1'b1) disable read_fixed_body;
+          if (rvalid !== 1'b0 && rvalid !== 1'b1)
+            $fatal(1, "AXI RVALID is unknown while waiting");
+          if (rvalid) accepted=1;
+        end
+        if (!accepted) begin
+          @(negedge clk or negedge rst_n);
+          if (rst_n !== 1'b1) disable read_fixed_body;
+          rready=0; ok=0;
+          disable read_fixed_body;
+        end
+        if (rid !== id) $fatal(1, "AXI R ID mismatch at beat %0d", beat);
+        if (rlast !== (beat==beats-1))
+          $fatal(1, "AXI RLAST mismatch at beat %0d", beat);
+        if ((^rresp) === 1'bx) $fatal(1, "AXI RRESP is unknown on response");
+        if (rresp == 2'b00 && (^rdata) === 1'bx)
+          $fatal(1, "AXI RDATA is unknown on successful response");
+        beat_data[beat]=rdata; beat_resp[beat]=rresp;
+        if (rresp != 2'b00) all_ok=0;
+      end
+      @(negedge clk or negedge rst_n);
+      if (rst_n !== 1'b1) disable read_fixed_body;
+      rready=0; data=beat_data; resp=beat_resp; ok=all_ok;
+    end
+  endtask
+
   task automatic write_one(input logic [AW-1:0] addr,
                            input logic [DW-1:0] data,
                            input logic [BYTES-1:0] strb,

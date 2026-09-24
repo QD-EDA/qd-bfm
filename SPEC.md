@@ -90,3 +90,17 @@ Caliptra `axi_sub`; inject a QD-owned wrong-user expectation. Preserve the
 assertion-enabled failure and width warnings as UNKNOWN. Lint the named
 `soc_ifc_axi_sha_acc_dis_tb` fileset without claiming runtime access-policy
 verification.
+
+## FIXED mailbox-burst slice
+
+Add one-outstanding, full-width FIXED bursts to the existing inbound manager
+and Caliptra adapter. Preserve the single-beat API. The strict API accepts
+1–16 beats; only an explicit Caliptra L0 compatibility flag may reproduce the
+released 256-beat FIXED request, which exceeds AXI4's FIXED limit. Validate
+lengths, array shapes, enabled data bytes, strobes and request USER values
+before launch. Check each accepted beat, response ID, response code and RLAST;
+preserve reset, stalls and timeout semantics. Test 1, 16 and 256 beats against
+an independent target, with negative and out-of-range cases. Pilot on the
+unchanged pinned `axi_sub` if it compiles; preserve warnings and unavailable
+assertions as UNKNOWN. Do not claim released full L0 simulation, response USER
+coverage, DMA compiler repair or AXI4 compliance from this slice.
