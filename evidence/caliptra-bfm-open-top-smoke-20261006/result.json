@@ -78,5 +78,49 @@
     "Not a qualification pass: JTAG server reports two bind errors under this sandbox and the existing L0 runner rejects these.",
     "smoke_test_veer contains no DMA traffic, so this verifies top elaboration and firmware startup with the replacement, not AXI DMA transactions.",
     "Compile/runtime use the nonstandard -gcommercial-unsafe lane and temporary diagnostic overlays."
-  ]
+  ],
+  "dma_firmware_follow_up": {
+    "status": "TIMEOUT_BEFORE_FIRMWARE_MARKER",
+    "runs": [
+      {
+        "test": "smoke_test_dma",
+        "trng_duty_cycle": 500,
+        "timeout_seconds": 1800,
+        "exit": 124,
+        "last_visible_marker": "CLP: ROM Flow in progress...",
+        "pass_fail_error_fatal_jtag_markers": 0,
+        "minimum_free_memory_percent": 77,
+        "sim_log_sha256": "0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99"
+      },
+      {
+        "test": "smoke_test_dma_aes_gcm_short_1_dword",
+        "trng_duty_cycle": 500,
+        "timeout_seconds": 600,
+        "exit": 124,
+        "last_visible_marker": "CLP: ROM Flow in progress...",
+        "pass_fail_error_fatal_jtag_markers": 0,
+        "minimum_free_memory_percent": 77,
+        "sim_log_sha256": "0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99"
+      },
+      {
+        "test": "smoke_test_dma_aes_gcm_short_1_dword",
+        "trng_duty_cycle": 50,
+        "diagnostic_trng_override": true,
+        "timeout_seconds": 1800,
+        "exit": 124,
+        "last_visible_marker": "CLP: ROM Flow in progress...",
+        "pass_fail_error_fatal_jtag_markers": 0,
+        "minimum_free_memory_percent": 72,
+        "sim_log_sha256": "0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99"
+      }
+    ],
+    "fast_trng_cpu_probe": {
+      "cycles": 1000,
+      "instruction_commits": 265,
+      "simulation_time_ps": 9995000,
+      "minimum_free_memory_percent": 78,
+      "log_sha256": "72f34229b158613162a6f1934de90566789537a3e5b9d2bae6067e7173af8f76",
+      "interpretation": "CPU execution continues after BootGo; the probe does not establish DMA request or completion."
+    }
+  }
 }

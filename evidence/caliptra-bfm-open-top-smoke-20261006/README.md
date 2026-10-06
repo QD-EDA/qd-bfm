@@ -40,3 +40,30 @@ The remaining top-level step is a firmware DMA scenario that supplies
 `+CPTRA_RAND_TEST_DMA` and exercises the open AXI target through the actual
 Caliptra top. It needs a JTAG-capable runner environment to satisfy the current
 L0 result gate.
+
+## DMA firmware follow-up
+
+Three bounded top runs were attempted with the open AXI target. Each reached
+`CLP: ROM Flow in progress...` but stopped at its wall-clock guard before any
+test pass/fail, simulator error/fatal, or JTAG error marker:
+
+| Firmware case | Physical RNG cadence | Guard | Minimum free memory | Result |
+| --- | ---: | ---: | ---: | --- |
+| `smoke_test_dma` | 500 cycles | 1,800 s | 77% | Timeout (exit 124) |
+| `smoke_test_dma_aes_gcm_short_1_dword` | 500 cycles | 600 s | 77% | Timeout (exit 124) |
+| `smoke_test_dma_aes_gcm_short_1_dword` | 50 cycles, diagnostic override | 1,800 s | 72% | Timeout (exit 124) |
+
+All three simulation logs have SHA-256
+`0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99`.
+The raw logs remain in the local diagnostic output, not in this branch. After
+checkpointing the code, nine redundant compiled images were removed to reclaim
+space; the latest full-DMA and fast-RNG images remain. A 1,000-cycle VPI probe
+on the fast-RNG image observed 265 CPU
+instruction commits by simulated time 9,995,000 ps; the CPU is advancing after
+BootGo, but this short probe does not establish when the full firmware reaches
+the DMA request. The probe log SHA-256 is
+`72f34229b158613162a6f1934de90566789537a3e5b9d2bae6067e7173af8f76`.
+
+These runs are timeout diagnostics, not a firmware DMA pass. The full-top DMA
+runtime remains unqualified; faster RNG cadence alone did not reach a later
+visible checkpoint within 30 minutes.
