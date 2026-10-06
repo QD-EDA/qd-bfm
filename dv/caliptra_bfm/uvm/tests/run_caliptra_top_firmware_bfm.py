@@ -422,7 +422,7 @@ def main():
 
     staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
     sim_command = [str(vvp), "-d", str(jtagdpi), "-n", str(binary),
-                   "+CLP_REGRESSION", "+CLP_BUS_LOGS", *plusargs]
+                   "+CLP_REGRESSION", *plusargs]
     sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
     log_scan = scan_sim_log(test_output / "sim.log")
     passed = (sim_exit == 0 and log_scan["passed"] == 1 and log_scan["failed"] == 0 and
