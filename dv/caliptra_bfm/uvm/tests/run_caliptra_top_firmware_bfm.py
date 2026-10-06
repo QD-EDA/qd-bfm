@@ -605,11 +605,16 @@ def main():
                         help="diagnostic only: preload .data and skip its CRT0 copy for the short AES DMA case")
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
                         help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
+    parser.add_argument("--skip-pq-vector-generation", action="store_true",
+                        help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
     if args.first_aes_case_diagnostic and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--first-aes-case-diagnostic is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.skip_pq_vector_generation and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
+        raise ValueError("--skip-pq-vector-generation is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    skip_pq_vectors = args.first_aes_case_diagnostic or args.skip_pq_vector_generation
 
     rtl = required_env("CALIPTRA_RTL")
     base_profile = required_env("CALIPTRA_BFM_PROFILE")
@@ -645,9 +650,10 @@ def main():
         ], check=True)
     pq_vector_overlay = None
     first_aes_case = None
-    if args.first_aes_case_diagnostic:
+    if skip_pq_vectors:
         pq_vector_overlay = args.output / "caliptra_top_tb_services_skip_pq_vectors.sv"
         prepare_pq_vector_overlay(rtl, pq_vector_overlay)
+    if args.first_aes_case_diagnostic:
         first_aes_case = prepare_first_aes_case_source(rtl, args.output / "first_aes_case_source")
     prepare_iverilog_profile(base_profile, profile, REPO, rtl, checker_overlay,
                              reset_overlay, jtag_overlay, generator_overlay, pq_vector_overlay)
@@ -702,7 +708,7 @@ def main():
     staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
     sim_command = [str(vvp), "-d", str(jtagdpi), "-n", str(binary),
                    "+CLP_REGRESSION", *plusargs]
-    if args.first_aes_case_diagnostic:
+    if skip_pq_vectors:
         sim_command.append("+CLP_SKIP_PQ_VECTOR_GENERATION")
     sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
     log_scan = scan_sim_log(test_output / "sim.log")
@@ -736,7 +742,7 @@ def main():
         "diagnostic_modes": {"fast_trng": args.fast_trng,
                              "fast_boot_data_preload": args.fast_boot_data_preload or args.first_aes_case_diagnostic,
                              "first_aes_case": args.first_aes_case_diagnostic,
-                             "skip_pq_vector_generation": args.first_aes_case_diagnostic},
+                             "skip_pq_vector_generation": skip_pq_vectors},
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,

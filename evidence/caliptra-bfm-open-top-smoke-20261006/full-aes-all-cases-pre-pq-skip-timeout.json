@@ -1,0 +1,41 @@
+{
+  "status": "TIMEOUT_IN_ROM_FLOW_BEFORE_AES_CASE_RESULT",
+  "diagnostic_only": true,
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "firmware_case_count": 12,
+  "runner_commit": "1f816c6e117235e314a5e5d4e3baecb3636494e1",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "runner_options": [
+    "--fast-trng",
+    "--fast-boot-data-preload"
+  ],
+  "pq_vector_generation_skipped": false,
+  "memory_guard": {
+    "free_floor_percent": 60,
+    "preflight_percent": 76,
+    "minimum_observed_percent": 75,
+    "timeout_seconds": 900,
+    "exit_code": 124
+  },
+  "build": {
+    "compile_exit": 0,
+    "firmware_build_exit": 0,
+    "image_bytes": 324205526,
+    "image_sha256": "93e28f62c643899f9af864b08c4dc4d3fc454f575049919840be05271bcb1ea4",
+    "profile_sha256": "b1258aef05321fdc14b642a25909369db43bacb4cb349887ed30746ac57755e0",
+    "compile_log_sha256": "e23fea64350255e13ae7f55ab771af15ef0e734a5026f9063087d4be27c7554b"
+  },
+  "simulation": {
+    "outer_guard_exit": 124,
+    "log_bytes": 49658,
+    "log_sha256": "7ba953081ee8b1068b40de48a600971623937417891c70353ef833e4e7fe2ee2",
+    "reset_deasserted": true,
+    "fuses_ready": true,
+    "rom_flow_marker": true,
+    "testcase_pass_markers": 0,
+    "testcase_fail_markers": 0,
+    "normal_finish": false,
+    "axi_trace_available": false
+  },
+  "qualification": "No full-case result established. The 900-second run reached ROM flow but produced no testcase result or normal finish. It does not establish whether the BFM serviced DMA in this run; the log had no AXI instrumentation. The later single-case diagnostic with PQ vector generation skipped does pass."
+}

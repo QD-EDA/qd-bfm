@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -238,6 +239,24 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             )
             self.assertEqual(digest, RUNNER.sha256(output_dir / original.name))
             self.assertTrue((output_dir / "caliptra_isr.h").is_file())
+
+    def test_cli_exposes_pq_skip_without_limiting_firmware_to_one_case(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--help"],
+            capture_output=True, text=True, check=True,
+        )
+        self.assertIn("--skip-pq-vector-generation", result.stdout)
+        self.assertIn("keep all AES DMA cases", result.stdout)
+
+    def test_pq_skip_is_limited_to_the_short_aes_case(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--case", "smoke_test_dma",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output"),
+             "--skip-pq-vector-generation"],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("limited to smoke_test_dma_aes_gcm_short_1_dword", result.stderr)
 
     def test_skips_only_unrelated_pq_vector_calls_when_requested(self):
         source = (

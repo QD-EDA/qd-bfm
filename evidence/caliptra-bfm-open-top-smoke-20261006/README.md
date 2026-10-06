@@ -43,15 +43,16 @@ status; stock L0 qualification is still open.
 
 ## DMA firmware follow-up
 
-Three bounded top runs were attempted with the open AXI target. Each reached
-`CLP: ROM Flow in progress...` but stopped at its wall-clock guard before any
-test pass/fail, simulator error/fatal, or JTAG error marker:
+Four bounded top runs with the open AXI target timed out before a firmware
+test result. The first three reached `CLP: ROM Flow in progress...`; their
+historical run details are:
 
 | Firmware case | Physical RNG cadence | Guard | Minimum free memory | Result |
 | --- | ---: | ---: | ---: | --- |
 | `smoke_test_dma` | 500 cycles | 1,800 s | 77% | Timeout (exit 124) |
 | `smoke_test_dma_aes_gcm_short_1_dword` | 500 cycles | 600 s | 77% | Timeout (exit 124) |
 | `smoke_test_dma_aes_gcm_short_1_dword` | 50 cycles, diagnostic override | 1,800 s | 72% | Timeout (exit 124) |
+| `smoke_test_dma_aes_gcm_short_1_dword` (all 12 cases) | 50 cycles, fast boot preload; PQ generators active | 900 s | 75% | ROM-flow timeout (exit 124) |
 
 All three simulation logs have SHA-256
 `0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99`.
@@ -64,9 +65,15 @@ BootGo, but this short probe does not establish when the full firmware reaches
 the DMA request. The probe log SHA-256 is
 `72f34229b158613162a6f1934de90566789537a3e5b9d2bae6067e7173af8f76`.
 
-These runs are timeout diagnostics, not a firmware DMA pass. The full-top DMA
-runtime remains unqualified; faster RNG cadence alone did not reach a later
-visible checkpoint within 30 minutes.
+The fourth-run compile, firmware build, image/profile hashes, and simulation
+markers are recorded in
+[`full-aes-all-cases-pre-pq-skip-timeout.json`](full-aes-all-cases-pre-pq-skip-timeout.json);
+its large simulator image and raw log were removed after hashing. That run kept
+the full 12-case firmware but left unrelated MLDSA/MLKEM testbench vector
+generation enabled. The runner now has `--skip-pq-vector-generation` to omit
+that unrelated startup work while retaining all 12 AES/DMA firmware cases.
+The full all-case runtime remains unqualified; the separate first-case
+transaction pass below establishes only that diagnostic case.
 
 ## Fast CRT0 startup diagnostic
 

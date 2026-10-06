@@ -179,11 +179,12 @@ one-shot error range, FIFO controls, recovery signal, and random stalls. This
 module smoke also checks the production non-DMA case: the recovery sequence is
 armed only when `+CPTRA_RAND_TEST_DMA` is present, because the pinned generator
 leaves its block-size array unknown otherwise. The test fails on that X array
-without the gate and passes with it. A full-top firmware boot diagnostic using
-the replacement is recorded in
-[`open-top smoke evidence`](../../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md);
-its JTAG socket restriction and lack of DMA traffic mean it is not full-top
-BFM qualification.
+without the gate and passes with it. Full-top runs using the replacement are
+recorded in
+[`open-top smoke evidence`](../../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
+The earlier boot case had no DMA traffic; a later first-case AES/DMA diagnostic
+passes through the real top and is traced. That modified-firmware run is
+integration evidence, not stock-firmware or full-suite qualification.
 
 ## Passive handshake monitor
 
