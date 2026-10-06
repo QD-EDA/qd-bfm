@@ -178,7 +178,9 @@ not a full UVMF replacement. See
 
 `uvm/tests/run_caliptra_top_firmware_bfm.sh --case smoke_test_dma --output <new-dir>`
 attaches the open AXI complex replacement to the full Caliptra testbench top
-and runs the real DMA firmware. It requires `CALIPTRA_RTL`, an Icarus-ready
+and runs the real DMA firmware. The runner also accepts Caliptra's
+`smoke_test_dma_aes_gcm_short_1_dword` case for a smaller full-top DMA firmware
+scenario. It requires `CALIPTRA_RTL`, an Icarus-ready
 `CALIPTRA_BFM_PROFILE` containing the original AXI-complex source exactly once,
 `CALIPTRA_GCC_PREFIX`, and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires

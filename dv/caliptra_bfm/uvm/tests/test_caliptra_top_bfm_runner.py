@@ -13,6 +13,9 @@ SPEC.loader.exec_module(RUNNER)
 
 
 class ProfileOverlayTest(unittest.TestCase):
+    def test_lists_short_dma_aes_gcm_firmware_case(self):
+        self.assertIn("smoke_test_dma_aes_gcm_short_1_dword", RUNNER.CASE_NAMES)
+
     def test_rewrites_only_aes_mul2_partial_result_writes(self):
         source = (
             "function automatic logic [7:0] aes_mul2(logic [7:0] in);\n"
