@@ -182,9 +182,16 @@ leaves its block-size array unknown otherwise. The test fails on that X array
 without the gate and passes with it. Full-top runs using the replacement are
 recorded in
 [`open-top smoke evidence`](../../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
-The earlier boot case had no DMA traffic; a later first-case AES/DMA diagnostic
-passes through the real top and is traced. That modified-firmware run is
-integration evidence, not stock-firmware or full-suite qualification.
+The guarded 900-second first-case AES/DMA diagnostic passes through the
+real top and records source write/read plus AES destination write/readback.
+The [passing record](../../../evidence/caliptra-bfm-open-top-smoke-20261006/first-aes-axi-trace.json)
+contains the channel events and hashes. A separate 600-second retry with the
+new `--trace-axi` runner stopped at cycle 4463 before a testcase marker; its
+[timeout record](../../../evidence/caliptra-bfm-open-top-smoke-20261006/short-aes-one-case-axi-trace-timeout.json)
+is a shorter-bound attempt and does not supersede that pass. The earlier boot
+case had no DMA traffic. The passing run uses a diagnostic firmware copy, fast
+TRNG, and PQ-vector suppression, so it does not qualify stock firmware or the
+full suite.
 
 ## Passive handshake monitor
 

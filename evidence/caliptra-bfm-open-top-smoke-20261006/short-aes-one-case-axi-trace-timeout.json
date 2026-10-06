@@ -42,7 +42,8 @@
       "first_w_cycle": 3005,
       "first_b_cycle": 3007
     },
-    "interpretation": "Inconclusive for testcase completion. The trace proves CPU progress into aes_flow and one AXI write handshake; it does not show an AXI read or testcase completion, so it does not establish that the AES DMA request ran."
+    "interpretation": "This 600-second retry is inconclusive by itself and ended before testcase completion. A separate 900-second first-case diagnostic passed the same named AES/DMA testcase through source write/read and destination write/readback; see first-aes-axi-trace.json. This shorter-bound retry does not supersede that passing evidence.",
+    "superseded_by_passing_run": "first-aes-axi-trace.json"
   },
   "artifacts": {
     "sim_log_bytes": 9890,

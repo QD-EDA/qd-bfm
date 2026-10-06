@@ -136,9 +136,13 @@ sample conversion. The generated status wildcard transition bins pass in
 2012/2017/2023. The cptra-status package/interface/agent compiles and its
 passive monitor publishes all 17 transaction fields in a startup sample and
 two event samples under 2017/2023, using the named hash-guarded overlay for
-three trailing-empty `$psprintf` arguments. Status coverage, DUT integration,
-and the generated SoC-IFC environment remain open. The separate
-`soc_ifc_ctrl_pkg` trailing-empty-argument issue is not overlaid. The repeatable
+three trailing-empty `$psprintf` arguments. Selected generated SoC-IFC runtime
+paths now pass with actual RTL: reset/power-on, stock 12-write AAXI USER-init,
+and mailbox/AHB RAL traffic. Broader status coverage, other generated
+sequences, and complete environment qualification remain open; see the
+[`generated SoC-IFC runtime evidence`](../../../evidence/caliptra-bfm-soc-ifc-generated-env-runtime-20261005/README.md).
+The separate `soc_ifc_ctrl_pkg` trailing-empty-argument issue is not overlaid.
+The repeatable
 ECC probe is `tests/run_generated_ecc_env_probe.sh`; set
 `CALIPTRA_ROOT` and `IVERILOG_BIN` to select the pinned Caliptra source tree and
 local Icarus fork. The

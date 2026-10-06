@@ -994,17 +994,20 @@ tracing was not enabled, so the timeout does not establish whether DMA traffic
 occurred. The [compact run record](../../evidence/caliptra-bfm-open-top-smoke-20261006/full-aes-all-cases-pqskip-quiet-timeout.json)
 preserves log hashes; temporary simulator output was removed after the run.
 
-## Traced single AES/DMA top run — 2026-10-06
+## Traced single AES/DMA top runs — 2026-10-06
 
-The guarded 600-second diagnostic ran only
-`smoke_test_dma_aes_gcm_short_1_dword` with the same fast TRNG, verified
-`.data` preload, skipped PQ vector generation, and quiet firmware options,
-plus `--trace-axi`. The VPI trace bound and recorded 4,463 cycles and 1,519
-retired CPU instructions, reaching `aes_flow` at PC `0x41dc`. It observed one
-AXI AW/W/B handshake at cycles 3004/3005/3007, with no AR or R handshake.
-The run timed out with 67% minimum free memory against the 60% floor; there
-was no testcase pass/fail marker or simulator finish. This narrows startup
-progress and confirms one top-level AXI write, but does not establish that the
-AES DMA request ran. The [compact record](../../evidence/caliptra-bfm-open-top-smoke-20261006/short-aes-one-case-axi-trace-timeout.json)
-contains hashes for the simulation log, VPI plugin, and compile logs; temporary
-simulator output was removed after recording them.
+The guarded 900-second first-case diagnostic completed the real Caliptra top
+with `TESTCASE PASSED` and normal `$finish` at cycle 5230 (1,857 retired
+instructions). The open AXI target completed source write/read and AES
+destination write/readback: two handshakes on each AXI channel. The guard
+recorded 75% minimum free memory against a 60% floor. The
+[passing record](../../evidence/caliptra-bfm-open-top-smoke-20261006/first-aes-axi-trace.json)
+contains per-channel cycles, addresses, and source/image hashes.
+
+A separate 600-second retry using the new `--trace-axi` runner timed out at
+cycle 4463, before the testcase marker, after one AXI write and before any AXI
+read. The [short-timeout record](../../evidence/caliptra-bfm-open-top-smoke-20261006/short-aes-one-case-axi-trace-timeout.json)
+preserves that attempt; it does not supersede the longer passing run. The pass
+uses a diagnostic firmware copy, fast TRNG, and PQ-vector suppression. Stock
+firmware, the full 12-case suite, entropy timing, and general AXI signoff
+remain unqualified.

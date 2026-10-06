@@ -136,3 +136,11 @@ run/image/source hashes and markers are in
 [`first-aes-axi-trace.json`](first-aes-axi-trace.json); the compact log and VPI
 trace source are [`first-aes-axi-trace.log`](first-aes-axi-trace.log) and
 [`sim-axi-trace-vpi.c`](sim-axi-trace-vpi.c).
+
+
+A subsequent 600-second retry with the runner's `--trace-axi` option ended at
+cycle 4463 before a testcase marker. It saw one write handshake but no read,
+then hit its time bound. The exact log/plugin hashes are in
+[`short-aes-one-case-axi-trace-timeout.json`](short-aes-one-case-axi-trace-timeout.json).
+This shorter attempt does not replace the 900-second passing first-case run
+above.
