@@ -195,6 +195,13 @@ checks five fixed FIFO reads, five incrementing SRAM writes, and end-to-end
 payload equality. Icarus rejected this recovery tuple under the pinned class
 constraints, so this one tuple is directed rather than randomized. This
 is focused DMA-block integration, not a full Caliptra top or firmware test.
+The same runner's `+RESET_ABORT` profile asserts reset after the real DMA DUT
+accepts AW and before it can send W; it checks that no write completes, target
+queues clear, destination memory stays unchanged, and all AXI VALID signals
+remain low after reset release. This block-level reset test does not run
+Caliptra's firmware-triggered warm-reset service.
+The full guarded run is recorded in
+[`DMA reset-abort evidence`](../../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
 The current generated-DUT run instantiates Caliptra's actual testcase
 generator, selects each of 27 DCCM records in a separate simulation, checks the
 staged metadata and payload ECC, and replays each profile through the DUT and

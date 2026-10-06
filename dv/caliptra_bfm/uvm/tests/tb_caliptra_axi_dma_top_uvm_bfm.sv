@@ -108,6 +108,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   logic recovery_emulation = 1'b0;
   logic [99:0][11:0] dma_gen_block_size_bytes = '0;
   logic testcase_preload_done = 1'b0;
+  logic reset_abort_done = 1'b0;
   logic testcase_generator_done;
   logic [99:0][11:0] testcase_generator_block_sizes;
   localparam logic [31:0] DCCM_BASE_ADDR = 32'h5000_0000;
@@ -495,6 +496,23 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       int expected_read_prefix;
       int expected_write_prefix;
       phase.raise_objection(this);
+      if ($test$plusargs("RESET_ABORT")) begin
+        fork
+          begin
+            wait (reset_abort_done);
+          end
+          begin
+            #100000;
+            `uvm_fatal("DMA_TOP_RESET_TIMEOUT", "Timed out waiting for reset-abort replay")
+          end
+        join_any
+        disable fork;
+        if (env.scoreboard.write_count != 0)
+          `uvm_fatal("DMA_TOP_RESET_RECORD", "Reset-aborted write was published as a completed transaction")
+        $display("PASS: actual Caliptra axi_dma_top aborted an accepted AXI write on reset and the target cleared its pending state");
+        phase.drop_objection(this);
+        return;
+      end
       fork
         begin
           if (expect_dma_error) begin
@@ -645,7 +663,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     run_test("axi_dma_top_uvm_bfm_test");
   end
 
-  initial begin
+  initial begin : run_dma_profile
     dma_transfer_randomizer#(16384) scenario;
     logic [31:0] status;
     logic [31:0] generated_case_count;
@@ -980,6 +998,32 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       recovery_emulation = 1'b1;
       wait (recovery_data_avail === 1'b1);
     end
+    if ($test$plusargs("RESET_ABORT")) begin
+      fork
+        begin
+          wait (m_axi_if.awvalid && m_axi_if.awready);
+          @(negedge clk); rst_n = 1'b0;
+          repeat (2) @(posedge clk);
+          @(negedge clk); rst_n = 1'b1;
+          repeat (4) @(posedge clk);
+          if (m_axi_if.awvalid !== 1'b0 || m_axi_if.wvalid !== 1'b0 ||
+              m_axi_if.arvalid !== 1'b0 || m_axi_if.bvalid !== 1'b0 ||
+              m_axi_if.rvalid !== 1'b0)
+            $fatal(1, "DMA AXI manager resumed traffic after reset: AW/W/AR/BVALID/RVALID=%b",
+                   {m_axi_if.awvalid, m_axi_if.wvalid, m_axi_if.arvalid,
+                    m_axi_if.bvalid, m_axi_if.rvalid});
+          if (dma_target.bfm.wr_route_count != 0 ||
+              dma_target.bfm.i_sram.wr_count != 0 ||
+              dma_target.bfm.i_sram.b_count != 0 ||
+              dma_target.bfm.i_sram.rd_count != 0)
+            $fatal(1, "DMA target retained queue state after reset");
+          for (int word = 0; word < active_word_count; word++)
+            if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== 32'b0)
+              $fatal(1, "Reset-aborted DMA wrote destination word %0d", word);
+          reset_abort_done = 1'b1;
+        end
+      join_none
+    end
     write_reg(12'h008, mailbox_case ? 32'h0001_0001 :
               mailbox_read_case ? 32'h0100_0001 :
               ahb2axi_case ? 32'h0200_0001 :
@@ -987,6 +1031,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (32'h0303_0001 |
                (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
                (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)));
+
+    if ($test$plusargs("RESET_ABORT")) begin
+      wait (reset_abort_done);
+      disable run_dma_profile;
+    end
 
     if (ahb2axi_case)
       for (word_index = 0; word_index < active_word_count; word_index++)

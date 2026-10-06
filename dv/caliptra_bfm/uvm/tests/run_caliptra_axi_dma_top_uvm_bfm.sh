@@ -80,6 +80,11 @@ run_case() {
 }
 
 run_case success
+run_case reset-abort +RESET_ABORT
+if ! grep -Fq 'PASS: actual Caliptra axi_dma_top aborted an accepted AXI write on reset and the target cleared its pending state' "$log"; then
+  echo "Caliptra AXI DMA top did not complete the reset-abort profile" >&2
+  exit 1
+fi
 run_case injected-error +INJECT_ERROR
 run_case fifo-recovery +FIFO_RECOVERY
 run_case axi2mbox +AXI2MBOX_CASE
