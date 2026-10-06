@@ -409,11 +409,12 @@ errors. It supports one outstanding read and write and now defaults to a
 payloads, and analysis records were widened to preserve all 256 beats, and
 WSTRB packing is four bits per beat for Caliptra's 32-bit bus. The updated
 short- and full-burst UVM smokes were rerun after the width change and pass.
-It emits flattened procedural records, not a UVM analysis item.
-No full top-level Caliptra DUT integration or official UVM regression has run;
-the separate ECC unit-level AHB counterparty smoke is recorded below. The
-actual `axi_dma_top` block integration smoke is recorded in the later DMA
-section.
+It emits flattened procedural records, not a UVM analysis item. Later
+work added a diagnostic full-top first AES/DMA pass; stock firmware, the full
+suite, and official UVM regression remain unqualified (see the dated result at
+the end of this note). The ECC unit-level AHB counterparty smoke is recorded
+below, and the actual `axi_dma_top` block integration smoke is in the later
+DMA section.
 
 ## Official AXI analysis consumer boundary
 
@@ -927,10 +928,12 @@ access but makes no claim that the lock rejects a PV client write.
    PV, and KeyVault evidence do not yet establish complete coverage of every
    Caliptra unit environment.
 
-No full top-level Caliptra DUT or official UVM DV environment run has been
-executed. The ECC unit-level and `axi_dma_top` block-level counterparty smokes
-are the current runs against Caliptra DUT RTL. Pinned Caliptra/Adams Bridge
-sources were not modified.
+A diagnostic full-top run now passes the first 1-dword AES/DMA case through
+source write/read and destination write/readback, using a modified one-case
+firmware image. Stock-firmware qualification, all 12 AES/DMA cases, and the
+official UVM DV environment remain unqualified. The ECC unit-level and
+`axi_dma_top` block-level counterparty smokes provide additional DUT evidence.
+Pinned Caliptra/Adams Bridge sources were not modified.
 
 ## Generated HMAC environment integration probe — 2026-10-05
 
