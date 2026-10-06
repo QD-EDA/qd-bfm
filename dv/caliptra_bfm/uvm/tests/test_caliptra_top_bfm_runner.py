@@ -266,6 +266,15 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         self.assertIn("--quiet-firmware", result.stdout)
         self.assertIn("keep all AES DMA cases", result.stdout)
 
+    def test_cli_exposes_axi_trace(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--help"],
+            capture_output=True, text=True, check=True,
+        )
+        self.assertIn("--trace-axi", result.stdout)
+        self.assertIn("trace CPU progress", result.stdout)
+        self.assertIn("handshakes with VPI", result.stdout)
+
     def test_quiet_mode_is_limited_to_the_short_aes_case(self):
         result = subprocess.run(
             ["python3", str(RUNNER_PATH), "--case", "smoke_test_dma",

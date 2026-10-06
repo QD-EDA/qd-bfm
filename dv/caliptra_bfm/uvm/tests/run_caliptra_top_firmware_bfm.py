@@ -609,6 +609,8 @@ def main():
                         help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
                         help="diagnostic only: suppress low-priority firmware prints; keep all AES DMA cases")
+    parser.add_argument("--trace-axi", action="store_true",
+                        help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
@@ -683,6 +685,25 @@ def main():
     if compile_exit:
         raise RuntimeError(f"top compile failed ({compile_exit}); see {args.output / 'compile.log'}")
 
+    trace_source = None
+    trace_plugin = None
+    trace_compile_command = None
+    trace_compile_exit = None
+    if args.trace_axi:
+        trace_source = REPO / "evidence/caliptra-bfm-open-top-smoke-20261006/sim-axi-trace-vpi.c"
+        trace_compiler = shutil.which(os.environ.get(
+            "IVERILOG_VPI_BIN", str(Path(iverilog).with_name("iverilog-vpi"))))
+        if not trace_compiler:
+            raise ValueError("--trace-axi requires IVERILOG_VPI_BIN or sibling iverilog-vpi")
+        trace_dir = args.output / "trace_vpi"
+        trace_dir.mkdir()
+        trace_compile_command = [trace_compiler, str(trace_source)]
+        trace_compile_exit = run_logged(
+            trace_compile_command, trace_dir, env, trace_dir / "compile.log")
+        trace_plugin = trace_dir / f"{trace_source.stem}.vpi"
+        if trace_compile_exit or not trace_plugin.is_file():
+            raise RuntimeError(f"AXI trace VPI build failed ({trace_compile_exit}); see {trace_dir / 'compile.log'}")
+
     test_output = args.output / args.case
     test_output.mkdir()
     build_flags = "-std=gnu11 -O2"
@@ -711,8 +732,10 @@ def main():
         )
     simulation_image_sha256 = {name: sha256(test_output / name) for name in images}
     staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
-    sim_command = [str(vvp), "-d", str(jtagdpi), "-n", str(binary),
-                   "+CLP_REGRESSION", *plusargs]
+    sim_command = [str(vvp), "-d", str(jtagdpi), "-n"]
+    if trace_plugin:
+        sim_command.extend(["-m", str(trace_plugin)])
+    sim_command.extend([str(binary), "+CLP_REGRESSION", *plusargs])
     if skip_pq_vectors:
         sim_command.append("+CLP_SKIP_PQ_VECTOR_GENERATION")
     sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
@@ -752,6 +775,10 @@ def main():
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,
+        "axi_trace_source_sha256": sha256(trace_source) if trace_source else None,
+        "axi_trace_plugin_sha256": sha256(trace_plugin) if trace_plugin else None,
+        "axi_trace_compile_command": trace_compile_command,
+        "axi_trace_compile_exit": trace_compile_exit,
         "sim_command": sim_command,
         "sim_exit": sim_exit,
         "testcase_pass_markers": log_scan["passed"],
