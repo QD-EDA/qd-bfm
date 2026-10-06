@@ -195,15 +195,17 @@ checks five fixed FIFO reads, five incrementing SRAM writes, and end-to-end
 payload equality. Icarus rejected this recovery tuple under the pinned class
 constraints, so this one tuple is directed rather than randomized. This
 is focused DMA-block integration, not a full Caliptra top or firmware test.
-The fourth run instantiates Caliptra's actual testcase generator, selects each
-of its 25 DCCM records in a separate simulation, checks the staged metadata
-and payload ECC, and replays each payload through the DUT and UVM monitor.
-The hash-guarded profile covers all five generated DMA route types, eight short
-sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), and one maximum 65,536-word
-fixed-read FIFO-to-SRAM stream. The short records preserve payloads, offsets,
-and Caliptra's randomized delay flag; the maximum stream checks source-to-target
-data, all destination words, and an empty FIFO at completion. Other generated
-FIFO, reset, and block-size modes remain unqualified. Directed
+The current generated-DUT run instantiates Caliptra's actual testcase
+generator, selects each of 27 DCCM records in a separate simulation, checks the
+staged metadata and payload ECC, and replays each profile through the DUT and
+UVM monitor. The hash-guarded profile covers all five generated DMA route
+types, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
+65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO
+case with randomized delays, and a 65-word FIFO recovery case with a generated
+64-byte block. The maximum stream checks all destination words and drains the
+FIFO; recovery checks five fixed reads, five SRAM writes, and end-to-end data.
+Other generated FIFO modes, reset injection, and remaining block sizes remain
+unqualified. Directed
 65-word cases now cover all five
 DMA routes through the real DUT. AXI2MBOX and MBOX2AXI apply one-cycle mailbox
 backpressure and check request addresses and payload data. AHB2AXI enters words
@@ -216,18 +218,22 @@ Earlier source/tool hashes are in
 [`evidence/caliptra-bfm-caliptra-dma-top-20261004`](../../../evidence/caliptra-bfm-caliptra-dma-top-20261004/README.md);
 the recovery run is recorded in
 [`evidence/caliptra-bfm-dma-recovery-top-20261006`](../../../evidence/caliptra-bfm-dma-recovery-top-20261006/README.md).
-The DCCM replay case is recorded in
+The earlier DCCM replay is recorded in
 [`evidence/caliptra-bfm-dma-generator-dut-replay-20261006`](../../../evidence/caliptra-bfm-dma-generator-dut-replay-20261006/README.md).
 The latest all-route run is recorded in
 [`evidence/caliptra-bfm-dma-all-routes-20261006`](../../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
+The generated FIFO destination and recovery block are recorded in
+[`FIFO-destination evidence`](../../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md)
+and [`recovery-block evidence`](../../../evidence/caliptra-bfm-dma-generated-recovery-block-20261006/README.md).
 
 `tests/run_caliptra_dma_testcase_generator_bfm.sh` separately runs Caliptra's
 actual `dma_testcase_generator` for 25 iterations, captures its DCCM writes in
 a bounded shadow, validates ECC and metadata across the complete 25-case
 record stream, and checks that the real recovery sequencer consumes nonzero
-generated entries. The DUT runner replays all 25 records across the five
-constrained route types, including the maximum 65,536-word FIFO-source stream;
-other default size and flag combinations remain open.
+generated entries. The current DUT runner replays all 27 records across the
+five constrained route types, including the maximum 65,536-word FIFO-source
+stream, a generated FIFO-destination profile, and a generated 64-byte recovery
+block profile. Other default size and flag combinations remain open.
 Hashes are in
 [`evidence/caliptra-bfm-dma-generator-20261006`](../../../evidence/caliptra-bfm-dma-generator-20261006/README.md).
 

@@ -277,12 +277,14 @@ SRAM through the real fixed-burst recovery path. The test uses one seeded case
 from Caliptra's
 `dma_transfer_randomizer`. Separately, the actual generator's multi-case DCCM
 records feed the BFM recovery sequencer. The actual-DUT bench now ECC-checks
-and replays all 25 DCCM records through `axi_dma_top` under a hash-guarded
+and replays all 27 DCCM records through `axi_dma_top` under a hash-guarded
 profile covering all five named DMA routes, eight short sizes, and a 65,536-word
-fixed-read FIFO-to-SRAM stream. Payloads and route-valid offsets remain
-per-record randomized, as does Caliptra's delay flag; the maximum stream drains
-the FIFO and checks all destination words. Other generated FIFO, reset, and
-block-size modes, plus firmware remain open.
+fixed-read FIFO-to-SRAM stream. It also replays a 65-word fixed-write SRAM-to-
+FIFO case with randomized delays and a 65-word FIFO recovery case with a
+generated 64-byte block. Payloads and route-valid offsets remain per-record
+randomized, as does Caliptra's delay flag; the maximum stream drains the FIFO
+and checks all destination words. Other generated FIFO modes, reset injection,
+remaining block sizes, and firmware remain open.
 That focused
 block integration includes the register
 block, DMA control FSM, and real AXI managers. It is not a full Caliptra top,
@@ -290,7 +292,9 @@ firmware, or generated UVMF run. Tool and source hashes are recorded in
 [`evidence/caliptra-bfm-caliptra-dma-top-20261004`](../../evidence/caliptra-bfm-caliptra-dma-top-20261004/README.md)
 and [`evidence/caliptra-bfm-dma-recovery-top-20261006`](../../evidence/caliptra-bfm-dma-recovery-top-20261006/README.md).
 The DCCM-to-DUT replay is recorded in
-[`evidence/caliptra-bfm-dma-all-routes-20261006`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
+[`evidence/caliptra-bfm-dma-all-routes-20261006`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md),
+with follow-up evidence for the [FIFO destination](../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md)
+and [generated recovery block](../../evidence/caliptra-bfm-dma-generated-recovery-block-20261006/README.md).
 `axi/tests/run_caliptra_axi_complex_bfm.sh` compiles against Caliptra's actual
 `caliptra_top_tb_pkg.sv`, `soc_ifc_pkg`, `axi_pkg`, and `axi_if`, then
 smoke-tests the replacement with Caliptra's `axi_complex_ctrl_t` and pinned
