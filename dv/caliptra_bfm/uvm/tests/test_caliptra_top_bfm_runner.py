@@ -2,6 +2,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 REPO = Path(__file__).resolve().parents[4]
@@ -13,6 +14,7 @@ SPEC.loader.exec_module(RUNNER)
 
 class ProfileOverlayTest(unittest.TestCase):
     def test_replaces_only_original_axi_complex_and_adds_open_sources(self):
+        original_axi_if = "${CALIPTRA_ROOT}/src/axi/rtl/axi_if.sv"
         original = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_axi_complex.sv"
         sram_export = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_veer_sram_export.sv"
         top_sva = "${CALIPTRA_ROOT}/src/integration/asserts/caliptra_top_sva.sv"
@@ -42,15 +44,21 @@ class ProfileOverlayTest(unittest.TestCase):
             jtag_overlay = temp / "jtag.sv"
             jtag_overlay.write_text("module jtag_overlay; endmodule\n")
             baseline.write_text(
-                f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original}\n{sram_export}\n"
+                f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original_axi_if}\n{original}\n{sram_export}\n"
                 f"{top_sva}\n{soc_bfm}\n{top_tb}\n{generator}\n"
             )
 
-            RUNNER.prepare_iverilog_profile(
-                baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay
-            )
+            def fake_axi_if_overlay(_rtl, path):
+                Path(path).write_text("module axi_if_overlay; endmodule\n")
+
+            with patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
+                RUNNER.prepare_iverilog_profile(
+                    baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay
+                )
 
             content = generated.read_text()
+            self.assertNotIn(original_axi_if, content)
+            self.assertIn(str(temp / "axi_if_icarus.sv"), content)
             self.assertNotIn(original, content)
             self.assertIn(str(REPO / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"), content)
             self.assertIn(str(REPO / "dv/caliptra_bfm/axi/axi4_caliptra_dma_subordinate.sv"), content)
@@ -77,6 +85,14 @@ class ProfileOverlayTest(unittest.TestCase):
                     baseline, temp / "open.vf", REPO, temp / "rtl", checker_overlay,
                     temp / "reset.sv", temp / "jtag.sv"
                 )
+
+    def test_allocates_response_user_array_before_read_beat_writes(self):
+        source = "            data = new[len+1];\n            resp = new[len+1];\n"
+        patched = RUNNER.allocate_axi_read_resp_user(source)
+        self.assertIn("            resp_user = new[len+1];\n", patched)
+        self.assertEqual(patched.count("resp_user = new[len+1];"), 1)
+        with self.assertRaisesRegex(ValueError, "response-array allocation"):
+            RUNNER.allocate_axi_read_resp_user("no allocation sequence\n")
 
     def test_removes_checker_print_without_removing_failure_result(self):
         source = ('if (bad) begin\n  $display("SVA ERROR: KV[%0d][%0d] debug flush failed. Expected: %h, Got: %h, SelValue: %0d", actual, expected);\n'

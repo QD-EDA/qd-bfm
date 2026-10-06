@@ -14,6 +14,7 @@ import sys
 
 
 REPO = Path(__file__).resolve().parents[4]
+ORIGINAL_AXI_IF = "${CALIPTRA_ROOT}/src/axi/rtl/axi_if.sv"
 ORIGINAL_AXI_COMPLEX = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_axi_complex.sv"
 ORIGINAL_SRAM_EXPORT = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_veer_sram_export.sv"
 ORIGINAL_TOP_SVA = "${CALIPTRA_ROOT}/src/integration/asserts/caliptra_top_sva.sv"
@@ -21,6 +22,8 @@ ORIGINAL_SOC_BFM = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_soc_bfm.
 ORIGINAL_TOP_TB = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
 ORIGINAL_DMA_GENERATOR = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
 CASE_NAMES = ("smoke_test_dma", "rand_test_dma")
+AXI_IF_SHA256 = "e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c"
+AXI_IF_OVERLAY_SHA256 = "d9173b5d3ecf2bff70412016f752e902f3f6ccf4fdb68ffd58764fb33e34f834"
 VECTOR_OUTPUTS = {
     "ecc_secp384r1.exe": "ecc_secp384r1.exe",
     "test_dilithium5": "test_dilithium5",
@@ -101,6 +104,23 @@ def prepare_sram_export_overlay(rtl_root, output_path):
     return {"dccm_q_ports": dccm_replaced, "iccm_q_ports": iccm_replaced}
 
 
+def allocate_axi_read_resp_user(text):
+    before = "            data = new[len+1];\n            resp = new[len+1];"
+    after = "            data = new[len+1];\n            resp_user = new[len+1];\n            resp = new[len+1];"
+    if text.count(before) != 1:
+        raise ValueError("expected one AXI read response-array allocation sequence")
+    return text.replace(before, after, 1)
+
+
+def prepare_axi_if_overlay(rtl_root, output_path):
+    source = Path(rtl_root) / "src/axi/rtl/axi_if.sv"
+    if sha256(source) != AXI_IF_SHA256:
+        raise ValueError(f"Caliptra AXI interface source hash mismatch: {source}")
+    Path(output_path).write_text(allocate_axi_read_resp_user(source.read_text()))
+    if sha256(output_path) != AXI_IF_OVERLAY_SHA256:
+        raise ValueError("Icarus AXI interface overlay did not match its recorded hash")
+
+
 def remove_sva_debug_print(text, message):
     pattern = re.compile(
         r'(?ms)^[ \t]*\$display\("' + re.escape(message) +
@@ -163,13 +183,15 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
                              generator_overlay=None):
     text = Path(base_profile).read_text()
     lines = text.splitlines()
-    for source in (ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
+    for source in (ORIGINAL_AXI_IF, ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
                    ORIGINAL_SOC_BFM, ORIGINAL_TOP_TB, ORIGINAL_DMA_GENERATOR):
         if lines.count(source) != 1:
             raise ValueError(f"Icarus profile must contain exactly one {source}")
 
     sram_overlay = Path(output_profile).parent / "caliptra_veer_sram_export_icarus.sv"
     prepare_sram_export_overlay(rtl_root, sram_overlay)
+    axi_if_overlay = Path(output_profile).parent / "axi_if_icarus.sv"
+    prepare_axi_if_overlay(rtl_root, axi_if_overlay)
 
     bfm_sources = []
     for line in (Path(repo_root) / "dv/caliptra_bfm/caliptra_bfm.f").read_text().splitlines():
@@ -184,7 +206,7 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     replacement = Path(repo_root) / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"
     checker_overlay = Path(checker_overlay)
     sources = [replacement, *bfm_sources]
-    overlays = [sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
+    overlays = [axi_if_overlay, sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
     if generator_overlay:
         overlays.append(generator_overlay)
     for source in [*overlays, *sources]:
@@ -192,6 +214,7 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
             raise ValueError(f"Icarus filelists cannot safely represent a source path with whitespace: {source}")
     lines = [line for line in lines if line != ORIGINAL_AXI_COMPLEX]
     replacements = {
+        ORIGINAL_AXI_IF: str(axi_if_overlay),
         ORIGINAL_SRAM_EXPORT: str(sram_overlay),
         ORIGINAL_TOP_SVA: str(checker_overlay),
         ORIGINAL_SOC_BFM: str(reset_overlay),
@@ -433,6 +456,7 @@ def main():
         "caliptra_commit": source_commit,
         "case_yaml_sha256": sha256(case_yaml),
         "bfm_wrapper_sha256": sha256(REPO / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"),
+        "axi_if_overlay_sha256": sha256(args.output / "axi_if_icarus.sv"),
         "checker_overlay_sha256": sha256(checker_overlay),
         "reset_overlay_sha256": sha256(reset_overlay),
         "jtag_overlay_sha256": sha256(jtag_overlay),

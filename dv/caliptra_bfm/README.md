@@ -183,6 +183,9 @@ and runs the real DMA firmware. It requires `CALIPTRA_RTL`, an Icarus-ready
 `CALIPTRA_GCC_PREFIX`, and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires
 macOS ARM64, Homebrew OpenSSL 3 and mbedTLS 3, Clang, Make, and Python 3.12.
+Hash-checked disposable Icarus overlays also allocate Caliptra's missing AXI
+read response-user array and work around the pinned SRAM, reset, JTAG-port, and
+debug-print compatibility issues; the original RTL checkout is left untouched.
 Compile, firmware, vector, and simulation logs plus hashes are retained in the
 requested output directory. The runner uses the 60%-free-memory guard and also
 accepts `rand_test_dma`. Count the run as passed only when the firmware pass
