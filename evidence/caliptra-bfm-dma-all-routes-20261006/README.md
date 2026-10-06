@@ -27,14 +27,15 @@ against its 60% floor (80% at preflight).
 | AXI2AHB | 65 randomized SRAM words are read through the component `READ_DATA` register (`0x030`); the test polls FIFO depth and checks every word. |
 
 The component input/output lanes use the DMA's register-side `soc_ifc_req_t`
-interface; they do not instantiate an AHB bus. Generated replay covers the
-five named route types, the eight short sizes, and the 65,536-word maximum
-FIFO-source/SRAM-destination stream. Other generated FIFO, reset, and
-block-size modes remain constrained off. The separate directed SRAM-to-FIFO
-profile covers a fixed-burst destination with weighted stalls. Other generated
-sizes/flags, firmware, the full Caliptra top, and the generated UVMF environment
-remain unqualified. The mailbox model is bounded to these DUT tests rather than
-implementing the full mailbox SRAM.
+interface; they do not instantiate an AHB bus. This run's generated replay
+covers the five named route types, the eight short sizes, and the 65,536-word
+maximum FIFO-source/SRAM-destination stream. A later generated FIFO-destination
+follow-up adds a 65-word fixed-write SRAM-to-FIFO record with 160 observed stall
+cycles; see the [follow-up evidence](../caliptra-bfm-dma-generated-fifo-destination-20261006/README.md).
+Other generated FIFO, reset, and block-size modes remain constrained off.
+Other generated sizes/flags, firmware, the full Caliptra top, and the generated
+UVMF environment remain unqualified. The mailbox model is bounded to these DUT
+tests rather than implementing the full mailbox SRAM.
 
 ## Reproduction
 

@@ -113,15 +113,19 @@ generated_routes="$tmpdir/generated-routes"
 generated_sizes="$tmpdir/generated-sizes"
 : >"$generated_routes"
 : >"$generated_sizes"
-while [ "$case_index" -lt 25 ]; do
+while [ "$case_index" -lt 26 ]; do
   if [ "$case_index" -eq 0 ]; then
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
+  elif [ "$case_index" -eq 25 ]; then
+    run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
   else
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
   fi
   if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
     echo "Generated DCCM record $case_index was not selected for DUT replay" >&2
@@ -141,9 +145,16 @@ while [ "$case_index" -lt 25 ]; do
   printf '%s\n' "$word_count" >>"$generated_sizes"
   if [ "$case_index" -eq 0 ]; then
     if [ "$word_count" -ne 65536 ] ||
-       ! grep -Fq 'src_fifo=1 fixed_read=1' "$log" ||
+       ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1' "$log" ||
        ! grep -Fq 'INFO: FIFO source stream supplied 65536 words; FIFO drained' "$log"; then
       echo "Maximum generated FIFO source stream was not replayed and drained" >&2
+      exit 1
+    fi
+  elif [ "$case_index" -eq 25 ]; then
+    if ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rand_delays=1' "$log" ||
+       ! grep -Fq 'PASS: generated DCCM record index=25 route=2 replayed through axi_dma_top' "$log" ||
+       ! grep -Fq 'INFO: randomized AXI target stalls observed' "$log"; then
+      echo "Generated SRAM-to-FIFO profile did not exercise fixed writes and randomized stalls" >&2
       exit 1
     fi
   fi
@@ -155,7 +166,8 @@ for route_type in 0 1 2 3 4; do
     exit 1
   fi
 done
-echo "INFO: generated DCCM replay covered all five DMA routes across 25 records"
+echo "INFO: generated DCCM replay covered all five DMA routes across 26 records"
+echo "INFO: generated DCCM replay covered a 65-word fixed-write SRAM-to-FIFO profile"
 for word_count in 1 4 5 16 64 65 255 256 65536; do
   if ! grep -Fxq "$word_count" "$generated_sizes"; then
     echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2

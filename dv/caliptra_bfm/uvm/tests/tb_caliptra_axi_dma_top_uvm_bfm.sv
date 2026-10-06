@@ -718,6 +718,15 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               record_type.test_block_size || (record_type.block_size != 0) ||
               (record_src_offset != 0) || (record_dst_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported large FIFO stream profile", record_index);
+        end else if (record_type.dst_is_fifo) begin
+          if ((generated_case_count != 26) || (record_index != 25) ||
+              (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
+              record_type.src_is_fifo || !record_type.use_wr_fixed ||
+              record_type.use_rd_fixed || record_type.inject_rst ||
+              !record_type.inject_rand_delays || record_type.test_block_size ||
+              (record_type.block_size != 0) || (record_dst_offset != 0) ||
+              (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
+            $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -763,6 +772,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.inject_rand_delays = generated_type.inject_rand_delays;
       scenario.test_block_size = generated_type.test_block_size;
       scenario.block_size = generated_type.block_size;
+      if (generated_type.dst_is_fifo)
+        sram2fifo_case = 1'b1;
       generated_dma_xfer_type = generated_type.dma_xfer_type;
       mailbox_case = (generated_dma_xfer_type == AXI2MBOX);
       mailbox_read_case = (generated_dma_xfer_type == MBOX2AXI);
@@ -915,9 +926,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     source_word_index = scenario.src_offset / 4;
     destination_word_index = scenario.dst_offset / 4;
     if ($test$plusargs("GENERATED_CASE"))
-      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b fixed_read=%0b inject_rand_delays=%0b",
+      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b inject_rand_delays=%0b",
                scenario.dma_xfer_type, scenario.xfer_size, scenario.src_offset,
-               scenario.dst_offset, scenario.src_is_fifo, scenario.use_rd_fixed,
+               scenario.dst_offset, scenario.src_is_fifo, scenario.dst_is_fifo,
+               scenario.use_rd_fixed, scenario.use_wr_fixed,
                scenario.inject_rand_delays);
     else if (fifo_recovery_case)
       $display("INFO: directed Caliptra DMA recovery tuple words=%0d block_bytes=%0d src=%012h dst=%012h",

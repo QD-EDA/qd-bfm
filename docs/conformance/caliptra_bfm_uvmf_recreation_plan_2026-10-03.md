@@ -32,17 +32,19 @@ input and one packed generated block-size entry. This recovery tuple is
 directed because Icarus rejected it under the pinned class constraints. These
 are unit/block-level DUT checks, not
 full-top or generated-UVMF qualification. Separately, the real
-`dma_testcase_generator` stages 25 testcase records into a bounded DCCM
-shadow and drives multiple generated block-size entries through the open
+`dma_testcase_generator` defaults to 25 testcase records, which are staged into
+a bounded DCCM shadow; the DUT replay requests 26 to add the FIFO-destination
+profile. It also drives multiple generated block-size entries through the open
 recovery sequencer under Icarus. The actual-DUT runner now selects and replays
-all 25 records through `axi_dma_top`, checking stored payload ECC and the full
+all 26 records through `axi_dma_top`, checking stored payload ECC and the full
 read/write data path. For this DUT lane, a hash-guarded overlay selects among
 all five named DMA routes, eight short sizes (1, 4, 5, 16, 64, 65, 255, and
-256 words), and a maximum 65,536-word fixed-read FIFO-to-SRAM stream. Short
-records retain per-record randomized payloads, route-valid offsets, and
-Caliptra's randomized delay flag. One record selected weighted stalls and
-observed five target-stall cycles. Other generated FIFO, reset, and block-size
-modes remain unqualified. Directed DUT runs
+256 words), a maximum 65,536-word fixed-read FIFO-to-SRAM stream, and a
+65-word fixed-write SRAM-to-FIFO record. Short records retain per-record
+randomized payloads, route-valid offsets, and Caliptra's randomized delay flag.
+One record observed five target-stall cycles; the generated FIFO-destination
+record observed 160. Remaining generated FIFO, reset, and block-size modes
+remain unqualified. Directed DUT runs
 cover all five named DMA routes in a directed/constrained 65-word profile:
 AXI2MBOX and MBOX2AXI with one-cycle mailbox backpressure, AHB2AXI through the
 component `WRITE_DATA` register, and AXI2AHB through `READ_DATA`. The AHB lanes
@@ -52,6 +54,8 @@ under weighted channel stalls and checks the observed backpressure and queued
 payload. Other transfer sizes/flags, firmware, and full-top execution remain
 open. See the
 [`25-record DMA DUT replay evidence`](../../evidence/caliptra-bfm-dma-generator-dut-replay-20261006/README.md).
+The generated FIFO-destination follow-up is recorded in
+[`generated FIFO-destination evidence`](../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md).
 The directed routes are recorded in
 [`all-route DUT evidence`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
 Full-suite qualification across generated UVMF environments and licensed
@@ -640,20 +644,24 @@ threshold for each nonzero block, and advances after emulation ends. Focused
 standalone tests cover this interface shape and the FIFO/DMA/recovery sources.
 The actual generator runs into a bounded DCCM shadow and drives multiple
 entries through this sequencer. The actual-DUT runner now selects every one of
-the 25 generated records in a separate simulation, validates the staged
+the 26 generated records in a separate simulation, validates the staged
 metadata and payload ECC, and checks each generated transfer through
 `axi_dma_top`. A hash-guarded replay profile spans all five named route types,
-eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), and a maximum
-65,536-word fixed-read FIFO-to-SRAM stream. Short records retain per-record
-payloads, route-valid offsets, and the generated delay flag. The maximum stream
-validates every destination word and drains the FIFO. Other generated FIFO,
-reset, and block-size modes remain unqualified.
+eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
+65,536-word fixed-read FIFO-to-SRAM stream, and a 65-word fixed-write
+SRAM-to-FIFO profile with randomized target delays. Short records retain
+per-record payloads, route-valid offsets, and the generated delay flag. The
+maximum stream validates every destination word and drains the FIFO; the FIFO
+destination validates its queued words and observed stalls. Other generated
+FIFO, reset, and block-size modes remain unqualified.
 The AHB routes use component `WRITE_DATA`
 and `READ_DATA` registers, not an AHB bus. A separate SRAM-to-FIFO profile
 checks fixed write bursts, weighted channel stalls, and queued words. Default
 mixed DMA profiles and firmware remain open.
 See the
 [`25-record DMA DUT replay evidence`](../../evidence/caliptra-bfm-dma-generator-dut-replay-20261006/README.md).
+The additional generated FIFO-destination case is recorded in
+[`generated FIFO-destination evidence`](../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md).
 The directed route profiles are recorded in
 [`all-route DUT evidence`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
 
@@ -1052,14 +1060,15 @@ through its own blocker, not this list.
    now completes a native write/readback against Caliptra's ECC unit RTL.
    UVMF consumer/API integration and full profile qualification remain open.
    The DUT smoke runs one seeded class-generated AXI2AXI scenario, directed
-   65-word AXI2MBOX and MBOX2AXI scenarios, and replays all 25 ECC-checked
+   65-word AXI2MBOX and MBOX2AXI scenarios, and replays all 26 ECC-checked
    DCCM records through the real generator across all five named DMA routes
    and eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), plus a
-   maximum 65,536-word FIFO-source stream. Directed DUT
+   maximum 65,536-word FIFO-source stream and one generated fixed-write
+   SRAM-to-FIFO profile. Directed DUT
    cases cover all five routes at 65 words, plus an AXI2AXI SRAM-to-FIFO profile using fixed
    write bursts and weighted channel stalls. The generated replay preserves
-   and exercises its delay flag; one record observed five target-stall cycles.
-   Other default size/flag
+   and exercises its delay flag; one record observed five target-stall cycles
+   and the generated FIFO destination observed 160. Other default size/flag
    profiles, other FIFO modes, reset, and block-size modes remain unqualified.
    The generator also stages its default mixed profiles and drives the recovery
    sequencer, but the default size and flag combinations are not replayed through the DUT. AHB2AXI and

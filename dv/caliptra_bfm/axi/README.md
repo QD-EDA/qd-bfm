@@ -150,20 +150,24 @@ Apache-2.0 DMA testcase generator. `tests/run_dma_subordinate.sh` now covers
 mixed SRAM/FIFO request routing and response arbitration. The UVM
 `run_caliptra_axi_dma_top_uvm_bfm.sh` also connects this target to the pinned
 DMA DUT and checks a 65-word FIFO-to-SRAM recovery transfer using one
-64-byte generated-block entry. The actual-DUT runner now replays all 25
+64-byte generated-block entry. The actual-DUT runner now replays all 26
 ECC-checked records from generator DCCM staging through the DMA DUT under a
 hash-guarded profile spanning all five named DMA routes, eight short sizes, and
 a maximum 65,536-word fixed-read FIFO-to-SRAM stream. Short records retain
 per-record randomized payloads, route-valid offsets, and Caliptra's delay flag;
 the maximum stream checks every destination word and drains the source FIFO.
+The added 65-word generated SRAM-to-FIFO record checks the FIFO destination
+using fixed writes and randomized target delays.
 The same DUT bench also checks directed
 65-word AXI2MBOX and MBOX2AXI transfers with one-cycle mailbox backpressure and
 per-request address, metadata, and payload checks. AHB2AXI transfers 65 words
 through the component `WRITE_DATA` register; AXI2AHB drains 65 words through
-`READ_DATA`. Neither lane instantiates an AHB bus. Other generated sizes and
-other generated FIFO, reset, and block-size modes remain unqualified. A directed
-SRAM-to-FIFO test checks 65 payload words across five fixed write bursts while
-the target applies weighted random channel stalls.
+`READ_DATA`. Neither lane instantiates an AHB bus. One generated 65-word
+SRAM-to-FIFO record also checks five fixed write bursts with randomized target
+stalls; other generated sizes, FIFO modes, reset, and block-size modes remain
+unqualified. The separate directed SRAM-to-FIFO test continues to check 65
+payload words across five fixed write bursts while the target applies weighted
+random channel stalls.
 The standalone
 generator-to-recovery-sequencer test is recorded in
 [`evidence/caliptra-bfm-dma-generator-20261006`](../../../evidence/caliptra-bfm-dma-generator-20261006/README.md),
@@ -171,6 +175,8 @@ and the DUT replay in
 [`evidence/caliptra-bfm-dma-generator-dut-replay-20261006`](../../../evidence/caliptra-bfm-dma-generator-dut-replay-20261006/README.md).
 All five directed routes are recorded in
 [`evidence/caliptra-bfm-dma-all-routes-20261006`](../../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
+The generated FIFO-destination replay is recorded in
+[`evidence/caliptra-bfm-dma-generated-fifo-destination-20261006`](../../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md).
 
 ## Caliptra top-testbench replacement
 
