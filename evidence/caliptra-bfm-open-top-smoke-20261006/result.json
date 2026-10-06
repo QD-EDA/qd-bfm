@@ -121,6 +121,59 @@
       "minimum_free_memory_percent": 78,
       "log_sha256": "72f34229b158613162a6f1934de90566789537a3e5b9d2bae6067e7173af8f76",
       "interpretation": "CPU execution continues after BootGo; the probe does not establish DMA request or completion."
+    },
+    "fast_boot_data_preload_probe": {
+      "status": "TIMEOUT_DURING_FIRMWARE_BANNER",
+      "diagnostic_only": true,
+      "case": "smoke_test_dma_aes_gcm_short_1_dword",
+      "physical_rng_duty_cycle": 50,
+      "plusargs": [
+        "+CLP_REGRESSION",
+        "+CLP_DMA_TB_MODE_NOT_EMPTY",
+        "+CLP_BUS_LOGS"
+      ],
+      "guard": {
+        "timeout_seconds": 180,
+        "minimum_free_percent": 60,
+        "minimum_observed_free_percent": 77,
+        "exit_code": 124
+      },
+      "simulation": {
+        "pass_markers": 0,
+        "fail_markers": 0,
+        "bad_diagnostics": 0,
+        "jtag_server_errors": 2,
+        "finish": null
+      },
+      "last_retired_instruction": {
+        "count": 340,
+        "pc": "0x000030d2",
+        "context": "stdout byte loop for the firmware banner; stores to 0x300300cc while reading the message from DCCM"
+      },
+      "preload": {
+        "diagnostic_only": true,
+        "source_lma_start": "0xfd58",
+        "source_lma_end": "0x13f3c",
+        "destination_vma_start": "0x50020000",
+        "destination_offset": "0x20000",
+        "data_bytes": 16868,
+        "data_sha256": "555f8f64258e323dae45cba1dd975ea24a81245282639d617a0de313a35a20eb",
+        "branch_pc": "0x46",
+        "original_branch": "63fa6200",
+        "replacement_branch": "6f004001"
+      },
+      "firmware_image_sha256": {
+        "program.hex": "adc4c5d6b9c363142d15002815e80866e92d13893a66406e97b023d0b6375e03",
+        "dccm.hex": "6bee22edc635a70c6ba0fb00587fe2da02e82ebdbd4834c78e336703b6397314"
+      },
+      "simulation_image_sha256": {
+        "program.hex": "45a785fcd315729e6e20770e88f30eca1dbdb9d6b66932b4e8b8f17c6e9af0f1",
+        "dccm.hex": "0f1367c4385202414c9cdb422c082d114f22ebf8edc62e8d137120c778e1b480"
+      },
+      "sim_log_sha256": "e2a5fd3ef26728e76c717cbfdd5880156a63466a2221b2a442b2226f3830b3b7",
+      "exec_log_sha256": "bea8bc2d72e51c421a928c1dba1948719b7c4a0aa0de2f60bc43455a18194b3f",
+      "trace_port_sha256": "b2b0fe261d3865dabacbc5d37ee7ae45928c8d54c6476a74e40ef7eaa55f03ef",
+      "qualification": "Not established: no testcase pass/fail marker or simulation finish; two sandbox JTAG socket bind errors."
     }
   }
 }

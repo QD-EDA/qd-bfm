@@ -67,3 +67,17 @@ the DMA request. The probe log SHA-256 is
 These runs are timeout diagnostics, not a firmware DMA pass. The full-top DMA
 runtime remains unqualified; faster RNG cadence alone did not reach a later
 visible checkpoint within 30 minutes.
+
+## Fast CRT0 startup diagnostic
+
+The opt-in `--fast-boot-data-preload` path verified the short AES firmware's
+linker/disassembly layout, copied its 16,868 `.data` bytes from LMA `0xfd58`
+to DCCM VMA `0x50020000`, and replaced only the verified startup branch at
+`0x46` with a jump to the existing BSS-clear setup at `0x5a`. A 180-second
+`+CLP_BUS_LOGS` probe reached the BSS loop and then the firmware banner-output
+routine (340 retired instructions). It ended at the time guard with no testcase
+pass/fail marker or simulation finish. The minimum free-memory reading was 77%;
+two JTAG socket bind errors remain sandbox-related. This demonstrates startup
+progress with the diagnostic image, not a DMA completion or stock-firmware
+qualification. Hashes and the exact preload/branch metadata are in
+[`fast-boot-probe.json`](fast-boot-probe.json).
