@@ -1,0 +1,35 @@
+{
+  "result": "pass",
+  "runner": "dv/caliptra_bfm/uvm/tests/run_aaxi_compat.sh",
+  "iverilog": "/private/tmp/bfm-work-install/bin/iverilog",
+  "vvp": "/private/tmp/bfm-work-install/bin/vvp",
+  "exit_code": 0,
+  "memory_guard": {
+    "preflight_free_percent": 81,
+    "minimum_observed_free_percent": 80,
+    "stop_threshold_percent": 70,
+    "timeout_seconds": 300,
+    "stop_reason": null,
+    "method": "macOS memory_pressure -Q sampled every 0.5 seconds; process group stopped below threshold"
+  },
+  "checks": [
+    "active AAXI manager writes and reads the DMA SRAM target",
+    "active compatibility driver receives the configured ports virtual interface and waits for bus reset deassertion",
+    "active monitor publishes one write and one read record",
+    "passive monitor publishes the same completed write and read records",
+    "passive agent has no sequencer or active pin driver and reports passive_mode",
+    "zero UVM_ERROR and UVM_FATAL reports"
+  ],
+  "files": {
+    "test_sha256": "0008ab324445f34594fd367b76d140e7f89a6bda40977691115d3ba70c67e484",
+    "compat_pkg_sha256": "615f98b80bc725440acaf63db9aca69b4976868cdb3955aa361e33b616c128c1",
+    "driver_pkg_sha256": "3342a37b652813fd5b6bd3c3d0787154cda4d3a85eae604222d98d071d86843c",
+    "monitor_wrapper_sha256": "51f7c1d825cbbc08ffc4b0858fd06dd08174fa8f527a30fa61104a53e062a6a1",
+    "runner_sha256": "7fcb9bfce6f5836c141220cdcb386bcb0eef97299e4056b4708ab43d2fe4d905",
+    "log": "run-with-ports-vif-guard.log",
+    "log_sha256": "f991d64782422c2201d8971b3172cef8351480bda796c49daca27e66050945d4",
+    "memory_guard_log": "memory-guard-ports-vif.log",
+    "memory_guard_log_sha256": "b5d26b3a15a4ac1f16c179ee73a98fa78dda9192e1daba5244f265202a3ebddf"
+  },
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e"
+}

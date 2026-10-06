@@ -1,0 +1,35 @@
+# UVM adapters for the standalone Caliptra BFM; invoke from the repository root
+# with -uvm and append a testbench/top as needed.
+dv/caliptra_bfm/uvm/axi4_caliptra_record_if.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_record_if.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_pin_monitor_adapter.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_master_cmd_if.sv
+dv/caliptra_bfm/uvm/caliptra_ahb_mvc_compat_pkg.sv
+dv/caliptra_bfm/uvm/aaxi_pkg_compat.sv
+dv/caliptra_bfm/uvm/aaxi_intf_compat.sv
+dv/caliptra_bfm/uvm/aaxi_generated_namespace_compat.sv
+dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+dv/caliptra_bfm/uvm/caliptra_aaxi_uvmf_compat_pkg.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv
+dv/caliptra_bfm/uvm/pv_caliptra_master_cmd_if.sv
+dv/caliptra_bfm/uvm/pv_caliptra_uvm_pkg.sv
+dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv
+dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv
+dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv
+dv/caliptra_bfm/axi/axi4_caliptra_master.sv
+dv/caliptra_bfm/axi/axi4_caliptra_memory_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_fifo_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_recovery_sequence.sv
+dv/caliptra_bfm/axi/axi4_caliptra_recovery_avail.sv
+dv/caliptra_bfm/axi/axi4_caliptra_dma_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_transaction_monitor.sv
+dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_master.sv
+dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_memory_subordinate.sv
+dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_monitor.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_uvm_master_proxy.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_master_proxy.sv
+dv/caliptra_bfm/uvm/ahb_lite_caliptra_qvip_hdl.sv
+dv/caliptra_bfm/axi/axi4_caliptra_checker.sv
+dv/caliptra_bfm/uvm/aaxi_monitor_wrapper_compat.sv

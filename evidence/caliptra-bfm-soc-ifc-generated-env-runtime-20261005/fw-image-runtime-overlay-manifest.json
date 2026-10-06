@@ -1,0 +1,30 @@
+{
+  "excluded_behavior": "FMC, RT, and ROM firmware image loading; invoking one terminates with $fatal.",
+  "purpose": "Compile a generated-environment AAXI smoke without claiming firmware-update support.",
+  "source_checkout_modified": false,
+  "sources": [
+    {
+      "copied_from_pinned_source": false,
+      "guarded_sequences": [
+        "FMC",
+        "RT"
+      ],
+      "overlay": "/private/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-soc-ifc-env-dfvxlrey/env/sequences/mbox/soc_ifc/soc_ifc_env_mbox_real_fw_sequence.svh",
+      "overlay_input_sha256": "e537e1850fdd1879dc7085d4aa5af43a08934e59d5cfe7da36bd4d525eaaa1e0",
+      "overlay_sha256": "dc01d9bfb69263438e333ff12f5618096111a622932356b07e64bea70144f814",
+      "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/verification_ip/environment_packages/soc_ifc_env_pkg/sequences/mbox/soc_ifc/soc_ifc_env_mbox_real_fw_sequence.svh",
+      "source_sha256": "479544e6fc941b54865fb0dd21ec1e3b7b2fe2782c96c6e080af85c771a3378d"
+    },
+    {
+      "copied_from_pinned_source": true,
+      "guarded_sequences": [
+        "ROM"
+      ],
+      "overlay": "/private/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-soc-ifc-env-dfvxlrey/env/sequences/mbox/soc_ifc/soc_ifc_env_mbox_rom_fw_sequence.svh",
+      "overlay_input_sha256": "cf9b4bb5ef6c222b18fd489c5f4a6d860e9dcd26340e63533f49798ddb017c3d",
+      "overlay_sha256": "c6463069c6a471c147a1323cf37e3d512ee863348e7df0aee73129a88bebad19",
+      "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/verification_ip/environment_packages/soc_ifc_env_pkg/sequences/mbox/soc_ifc/soc_ifc_env_mbox_rom_fw_sequence.svh",
+      "source_sha256": "cf9b4bb5ef6c222b18fd489c5f4a6d860e9dcd26340e63533f49798ddb017c3d"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "source_revisions": {
+    "iverilog_uvm_head": "246c58e4580f38a130ec08e5a7e6d93f110a5084",
+    "caliptra_rtl": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "adams_bridge": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0"
+  },
+  "compile": {
+    "top": "caliptra_top_tb",
+    "flags": [
+      "-g2017",
+      "-gassertions",
+      "-gcommercial-unsafe",
+      "-D RV_OPENSOURCE",
+      "-D CLP_ASSERT_ON",
+      "-D CALIPTRA_INTERNAL_TRNG"
+    ],
+    "exit": 0,
+    "guard": {
+      "free_floor_percent": 60,
+      "preflight_percent": 79,
+      "minimum_percent": 79,
+      "timeout_seconds": 300
+    },
+    "log_sha256": "11e874efe9afe0caed29c1720e41b61544416eca33c2cb97df0027032441242d",
+    "executable_bytes": 324209594
+  },
+  "simulation": {
+    "test": "smoke_test_veer",
+    "exit": 0,
+    "timed_out": false,
+    "pass_markers": 1,
+    "fail_markers": 0,
+    "finish": [
+      1033,
+      7355
+    ],
+    "trace_commit_lines": 1034,
+    "error_lines": 0,
+    "fatal_lines": 0,
+    "sva_error_lines": 0,
+    "jtag_server_errors": 2,
+    "guard": {
+      "free_floor_percent": 60,
+      "preflight_percent": 79,
+      "minimum_percent": 77,
+      "timeout_seconds": 900
+    },
+    "log_sha256": "34e3ad08942a91ad17c22a6d627c9f7ee299159a6f6238cc751eee53d736624f"
+  },
+  "firmware_sha256": {
+    "program.hex": "87c35ddfd7da3aecaefcfede18ca09cdd196668a3887f84b2378775093650657",
+    "dccm.hex": "b73e91a51835232d301b0c07fd17510d862819e4809c0ff1e558d8cdecd73b98",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "firmware_expected_sha256": {
+    "program.hex": "87c35ddfd7da3aecaefcfede18ca09cdd196668a3887f84b2378775093650657",
+    "dccm.hex": "b73e91a51835232d301b0c07fd17510d862819e4809c0ff1e558d8cdecd73b98",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sha256": {
+    "open_axi_complex": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+    "open_recovery_sequence": "49e9c8b74b1b74ffa41237ba180ff518971eb2799a693d816074b4d7d1250adf",
+    "iverilog_driver": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+    "vvp_runtime": "a78ea8a8dfdaaef20402733cf26870f71b18f3fd6971655ae5e94103ebf8a749",
+    "jtagdpi_plugin": "68b59e38735895563d94e8d750cbfee107cf0f1873c452b54521b989160380f2"
+  },
+  "diagnostic_overlays": [
+    "SRAM exporter: copy uses local packed readback vectors so Icarus can drive whole packed interface fields.",
+    "DMA class/generator: numeric $fatal finish-code compatibility; pinned files unchanged.",
+    "Reset startup: existing hash-guarded #0 BFM overlay.",
+    "Checker source: existing hash-guarded diagnostic removes inner KV/MLDSA print calls while retaining outer assertions.",
+    "JTAG ListenPort 63224 changed to 0; socket bind still denied by the sandbox."
+  ],
+  "limits": [
+    "Not a qualification pass: JTAG server reports two bind errors under this sandbox and the existing L0 runner rejects these.",
+    "smoke_test_veer contains no DMA traffic, so this verifies top elaboration and firmware startup with the replacement, not AXI DMA transactions.",
+    "Compile/runtime use the nonstandard -gcommercial-unsafe lane and temporary diagnostic overlays."
+  ]
+}

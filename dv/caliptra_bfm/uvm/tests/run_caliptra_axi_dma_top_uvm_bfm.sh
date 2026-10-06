@@ -1,0 +1,165 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+set -eu
+
+. "$(dirname "$0")/../../../../scripts/caliptra_bfm_memory_guard.sh"
+
+repo_root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
+CALIPTRA_RTL=${CALIPTRA_RTL:-"$repo_root/../caliptra-rtl"}
+IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
+VVP_BIN=${VVP_BIN:-vvp}
+tmpdir=$(mktemp -d)
+out="$tmpdir/caliptra_axi_dma_top_uvm_bfm.vvp"
+log="$tmpdir/caliptra_axi_dma_top_uvm_bfm.log"
+trap 'rm -rf "$tmpdir"' EXIT
+cd "$repo_root"
+
+# Icarus requires the numeric finish argument for this otherwise unchanged
+# Apache-2.0 Caliptra randomizer class.
+sed 's/\$fatal("/\$fatal(1, "/' \
+  "$CALIPTRA_RTL/src/integration/tb/dma_transfer_randomizer.sv" \
+  >"$tmpdir/dma_transfer_randomizer.sv"
+python3 docs/conformance/release_overlays/caliptra/dma_testcase_generator_overlay.py \
+  --caliptra-root "$CALIPTRA_RTL" \
+  --output "$tmpdir/dma_testcase_generator.sv" \
+  --manifest "$tmpdir/dma_testcase_generator_overlay.json" \
+  --top tb_caliptra_axi_dma_top_uvm_bfm \
+  --dut-replay
+
+"$IVERILOG_BIN" -uvm -g2012 -DXCELIUM \
+  -I"$tmpdir" \
+  -I"$CALIPTRA_RTL/src/caliptra_prim/rtl" \
+  -I"$CALIPTRA_RTL/src/libs/rtl" \
+  -I"$CALIPTRA_RTL/src/axi/rtl" \
+  -I"$CALIPTRA_RTL/src/soc_ifc/rtl" \
+  -I"$CALIPTRA_RTL/src/keyvault/rtl" \
+  -I"$CALIPTRA_RTL/src/integration/rtl" \
+  -I"$CALIPTRA_RTL/src/integration/rtl/caliptra_reg" \
+  -I"$CALIPTRA_RTL/src/integration/tb" \
+  -s tb_caliptra_axi_dma_top_uvm_bfm -o "$out" \
+  -f dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f \
+  "$CALIPTRA_RTL/src/caliptra_prim/rtl/caliptra_prim_util_pkg.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_pkg.sv" \
+  "$CALIPTRA_RTL/src/soc_ifc/rtl/soc_ifc_pkg.sv" \
+  "$CALIPTRA_RTL/src/integration/tb/caliptra_top_tb_pkg.sv" \
+  "$CALIPTRA_RTL/src/riscv_core/veer_el2/rtl/common_defines.sv" \
+  "$CALIPTRA_RTL/src/keyvault/rtl/kv_defines_pkg.sv" \
+  "$tmpdir/dma_testcase_generator.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_dma_reg_pkg.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_if.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_dma_req_if.sv" \
+  "$CALIPTRA_RTL/src/libs/rtl/skidbuffer.v" \
+  "$CALIPTRA_RTL/src/caliptra_prim/rtl/caliptra_prim_fifo_sync_cnt.sv" \
+  "$CALIPTRA_RTL/src/caliptra_prim/rtl/caliptra_prim_fifo_sync.sv" \
+  "$CALIPTRA_RTL/src/keyvault/rtl/kv_fsm.sv" \
+  "$CALIPTRA_RTL/src/keyvault/rtl/kv_read_rule_check.sv" \
+  "$CALIPTRA_RTL/src/keyvault/rtl/kv_read_client.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_dma_reg.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_mgr_rd.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_mgr_wr.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_dma_ctrl.sv" \
+  "$CALIPTRA_RTL/src/axi/rtl/axi_dma_top.sv" \
+  dv/caliptra_bfm/axi/axi4_caliptra_random_stalls.sv \
+  dv/caliptra_bfm/axi/axi4_caliptra_dma_if_subordinate.sv \
+  dv/caliptra_bfm/uvm/axi4_caliptra_dma_if_monitor.sv \
+  dv/caliptra_bfm/uvm/tests/tb_caliptra_axi_dma_top_uvm_bfm.sv
+
+run_case() {
+  label=$1
+  shift
+  if ! "$VVP_BIN" "$out" "$@" >"$log" 2>&1; then
+    cat "$log"
+    echo "Caliptra AXI DMA top UVM BFM $label case failed" >&2
+    exit 1
+  fi
+  cat "$log"
+  if grep -Eq '^UVM_(ERROR|FATAL) :[[:space:]]*[1-9]' "$log"; then
+    echo "Caliptra AXI DMA top UVM BFM $label case reported errors or fatals" >&2
+    exit 1
+  fi
+}
+
+run_case success
+run_case injected-error +INJECT_ERROR
+run_case fifo-recovery +FIFO_RECOVERY
+run_case axi2mbox +AXI2MBOX_CASE
+if ! grep -Fq "PASS: actual Caliptra axi_dma_top read 65 SRAM words and wrote them through the mailbox request interface" "$log"; then
+  echo "Caliptra AXI DMA top did not complete its AXI2MBOX mailbox writes" >&2
+  exit 1
+fi
+run_case mbox2axi +MBOX2AXI_CASE
+if ! grep -Fq "PASS: actual Caliptra axi_dma_top read 65 mailbox words and wrote them to SRAM" "$log"; then
+  echo "Caliptra AXI DMA top did not complete its MBOX2AXI mailbox reads" >&2
+  exit 1
+fi
+run_case ahb2axi +AHB2AXI_CASE
+if ! grep -Fq "PASS: actual Caliptra axi_dma_top sent 65 component-register words to SRAM" "$log"; then
+  echo "Caliptra AXI DMA top did not complete its AHB2AXI component writes" >&2
+  exit 1
+fi
+run_case axi2ahb +AXI2AHB_CASE
+if ! grep -Fq "PASS: actual Caliptra axi_dma_top sent 65 SRAM words through the component data register" "$log"; then
+  echo "Caliptra AXI DMA top did not complete its AXI2AHB component reads" >&2
+  exit 1
+fi
+run_case sram2fifo +SRAM2FIFO_CASE
+if ! grep -Fq "PASS: actual Caliptra axi_dma_top moved 65 SRAM words to the FIFO through randomized stalls and fixed write bursts" "$log"; then
+  echo "Caliptra AXI DMA top did not complete its fixed-burst SRAM-to-FIFO transfer" >&2
+  exit 1
+fi
+
+case_index=0
+generated_routes="$tmpdir/generated-routes"
+generated_sizes="$tmpdir/generated-sizes"
+: >"$generated_routes"
+: >"$generated_sizes"
+while [ "$case_index" -lt 25 ]; do
+  if [ "$case_index" -eq 0 ]; then
+    run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
+  else
+    run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
+  fi
+  if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
+    echo "Generated DCCM record $case_index was not selected for DUT replay" >&2
+    exit 1
+  fi
+  route_type=$(sed -n 's/^PASS: generated DCCM record index=[0-9][0-9]* route=\([0-4]\) replayed through axi_dma_top$/\1/p' "$log")
+  if [ -z "$route_type" ]; then
+    echo "Generated DCCM record $case_index reported an invalid route" >&2
+    exit 1
+  fi
+  printf '%s\n' "$route_type" >>"$generated_routes"
+  word_count=$(sed -n 's/^INFO: Caliptra DCCM case type=[0-4] words=\([0-9][0-9]*\) .*/\1/p' "$log")
+  if [ -z "$word_count" ]; then
+    echo "Generated DCCM record $case_index did not report its transfer size" >&2
+    exit 1
+  fi
+  printf '%s\n' "$word_count" >>"$generated_sizes"
+  if [ "$case_index" -eq 0 ]; then
+    if [ "$word_count" -ne 65536 ] ||
+       ! grep -Fq 'src_fifo=1 fixed_read=1' "$log" ||
+       ! grep -Fq 'INFO: FIFO source stream supplied 65536 words; FIFO drained' "$log"; then
+      echo "Maximum generated FIFO source stream was not replayed and drained" >&2
+      exit 1
+    fi
+  fi
+  case_index=$((case_index + 1))
+done
+for route_type in 0 1 2 3 4; do
+  if ! grep -Fxq "$route_type" "$generated_routes"; then
+    echo "Generated DCCM DUT replay did not cover DMA route $route_type" >&2
+    exit 1
+  fi
+done
+echo "INFO: generated DCCM replay covered all five DMA routes across 25 records"
+for word_count in 1 4 5 16 64 65 255 256 65536; do
+  if ! grep -Fxq "$word_count" "$generated_sizes"; then
+    echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2
+    exit 1
+  fi
+done
+echo "INFO: generated DCCM replay covered transfer sizes 1, 4, 5, 16, 64, 65, 255, 256, and 65536 words"

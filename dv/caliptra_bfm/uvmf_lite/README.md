@@ -1,0 +1,152 @@
+# Clean-room UVMF base layer
+
+This directory starts the clean-room base layer required by Caliptra's
+generated UVMF environments. It is an incremental implementation, not a full
+UVMF replacement.
+
+`uvmf_base_pkg_hdl.sv` provides the shared active/passive and
+initiator/responder enums used by generated HDL-side BFM interfaces;
+`uvmf_base_pkg.sv` imports and re-exports the same enum types for HVL classes,
+including named re-exports of the generator-facing `INITIATOR` and `RESPONDER`
+enum literals.
+It currently provides a transaction base with the generated
+`start_time`, `end_time`, and `transaction_view_h` fields plus copy/compare/
+print hooks; the `uvmf_sim_level_t` enum; typed
+environment and parameterized-agent configuration bases, including the
+generated `initiator_responder` setting; `set_config`-based environment and
+agent bases; virtual sequencer, typed sequence (`REQ`/`RSP`), virtual-sequence,
+and test bases; generic driver and monitor bases matching the generated
+`configure`, proxy, `access`, and `analyze` hooks; and
+`uvmf_parameterized_agent`, which creates the monitor and, when active, the
+sequencer and driver, publishes the sequencer, connects analysis/sequence
+ports, and can add coverage. It also provides
+`uvmf_in_order_scoreboard #(T)`, the scoreboard instantiated by Caliptra ECC,
+HMAC, and SHA-512 generated environments. The scoreboard accepts expected and
+actual analysis streams, clones each item on arrival, compares in FIFO order,
+reports mismatches, reports unmatched items during `check_phase`, and
+publishes a count summary. The separate
+`uvmf_out_of_order_scoreboard #(T)` pairs exact transaction matches regardless
+of arrival order; remaining pairs are reported as mismatches and unpaired items
+as leftovers in `check_phase`. Its focused smoke tests reordered matches and an
+end-of-test mismatch, but Caliptra traffic is not yet qualified. `uvmf_lite.f` is the package filelist to use from
+the repository root. Both package source files are guarded by
+`CALIPTRA_BFM_EXTERNAL_UVMF` so a provider-specific filelist can supply the
+licensed or separately pinned UVMF packages instead.
+
+Run `tests/run_uvmf_scoreboard.sh` and `tests/run_uvmf_agent.sh` with the local
+Icarus `-uvm` fork selected through `IVERILOG_BIN` and `VVP_BIN`. Both runners
+compile and execute with `-g2017` and `-g2023`, using bundled Accellera UVM
+2020.3.1. The scoreboard smoke includes a normal match with a publisher-side
+mutation after write, one compare mismatch, one expected-only leftover, and one
+actual-only leftover.
+The runner requires exactly four UVM_ERROR reports and zero UVM_FATAL reports:
+one in-order mismatch, one out-of-order mismatch, and two leftover controls.
+It also checks that the out-of-order scoreboard matches reordered items. The
+negative controls are part of the pass condition. The agent smoke
+follows a generated-style test → environment → active/passive agent hierarchy,
+initializes typed virtual BFMs, exercises the active sequencer/driver path,
+verifies the type override creates both agents, checks driver and monitor
+proxy installation, starts a virtual sequence on a configured virtual sequencer,
+and carries monitor data
+through `monitored_ap` to an observer and coverage sink. A second passive agent
+observes the response from a one-cycle combinational toy DUT. A predictor
+receives the active agent's request, predicts the response, and feeds the
+in-order scoreboard. The matching run records one match; a second run injects
+an incorrect prediction and requires exactly one scoreboard mismatch, while
+both runs terminate with no UVM_FATAL. Both sinks use explicit
+`uvm_analysis_imp` connections. The smoke
+transaction implements copy, compare, and print hooks so cloned values are
+preserved and checked.
+The passive output agent is initialized with only its monitor BFM registered;
+the configuration base requires and fetches a driver BFM only for `ACTIVE`
+agents. This matches generated ECC's passive output agent, whose HDL top
+instantiates a monitor but no output driver.
+The smoke item derives from `uvmf_transaction_base`: it checks that timestamps
+and the transaction-view handle copy, that differing timestamps do not cause a
+compare mismatch, and that changing the item's value does. Generated ECC
+predictors leave expected timestamps unset while monitors stamp observed items,
+so those base timestamps are recording metadata rather than equality fields.
+
+The typed config/VIF handoff and component bases are exercised with a
+self-authored active/passive environment. Generated Caliptra ECC `test_top`
+and agent construction now reach the actual ECC DUT for an interrupt-enable
+register write/read through the generated driver's BFM tasks; the generated
+reset scoreboard matches in both IEEE editions. Generated status-agent
+monitoring also has a focused runtime probe. Cryptographic ECC operation
+results, broader generated-environment traffic, and full generated
+`hdl_top`/`hvl_top` qualification remain open.
+The generated SHA-512 `SHA512_random_test` also runs against actual
+`sha512_ctrl` RTL through the clean-room base. The stock generated output
+monitor publishes a reset-only zero sample that shifts the expected/actual
+streams; a hash-guarded disposable overlay removes that sample without
+changing digest sampling. The scoreboard matched 13 expected and 13 observed
+items with zero pending transactions. This is one test path, not full UVMF or
+top-level qualification. See
+[`generated SHA-512 runtime evidence`](../../../evidence/caliptra-bfm-generated-sha512-runtime-20261005/README.md).
+An intermediate probe using `uvm_subscriber #(agent_item)` received a null
+transaction handle in this local Icarus run, while explicit analysis imps
+preserved the transaction fields. The existing native AXI subscriber smoke
+passes, but the generated Caliptra coverage subscriber path needs its own
+qualification. HDL-side registration order, late registration, and generated
+derived configuration publication also remain unverified. The package still
+lacks reset/clock wait helpers, generated BFM macros and utility packages,
+transaction recording, HDL/HVL proxy startup, and generated top scaffolding.
+Do not treat it as a drop-in UVMF package yet.
+
+The focused compile probe follows the ECC entries in Caliptra's pinned
+`config/compile.yml` order. It compiles the actual generated input/output
+packages, all four driver/monitor BFMs, both bus interfaces, the environment,
+parameter, sequence, and test packages under `-g2017` and `-g2023`. Both modes
+have zero elaboration errors and 34 Icarus coverage-stub warnings for generated
+`set_inst_name` calls. This clears the earlier source-order diagnosis: the
+package/interface declarations compile when ordered as Caliptra configures
+them.
+
+The probe instantiates all four actual BFM interfaces with both actual bus
+interfaces in a temporary elaboration top. That top connects full interface
+handles directly. It does not compile Caliptra's generated `hdl_top`/`hvl_top`,
+instantiate `test_top`, call `run_test`, or drive the ECC DUT. It establishes
+compile and module-instance compatibility for the actual ECC BFM and class
+sources, not generated UVMF runtime or DUT qualification. The clean-room base
+package named-exports the generated `ACTIVE`/`PASSIVE` and
+`INITIATOR`/`RESPONDER` enum literals.
+
+A separate saved runtime probe builds the actual generated ECC `test_top`,
+environment, and agents through `run_test` in both editions. It checks exact
+identity for the generated input-driver proxy and both input/output monitor
+proxies; the generated setter path now passes after the local DD-105 compiler
+fix. A structural VVP check verifies the proxy uses an object-typed property
+and object-property store. See
+[`generated ECC runtime evidence`](../../../evidence/caliptra-bfm-generated-ecc-runtime-20261004/README.md)
+and discovery DD-105 in `docs/conformance/DISCOVERED_DEBT.md`.
+
+The generated `hdl_top.sv` modport wiring remains blocked in this Icarus run:
+the input BFM writes `hrdata` and `hreadyout` through `initiator_port`, and the
+output BFM writes `test` and `op` through `responder_port`. Icarus rejects those
+assignments as writes through modport inputs in both editions. The compile probe
+uses full interface handles in its temporary top, so it does not claim that
+generated top wiring works.
+The 384-bit ECC automatic bins are represented as exact leading-bit prefixes;
+the focused regression also covers 512-bit explicit ranges, a 65-bit
+non-power-of-two partition, and prefixes that cross a 64-bit word boundary.
+All four enum literals resolve through the named base-package exports; generated
+coverage-stub warnings remain, so this is not runtime qualification. The
+wide-range regression checks endpoints, overlapping bins, and X/Z-to-zero
+sample conversion. The generated status wildcard transition bins pass in
+2012/2017/2023. The cptra-status package/interface/agent compiles and its
+passive monitor publishes all 17 transaction fields in a startup sample and
+two event samples under 2017/2023, using the named hash-guarded overlay for
+three trailing-empty `$psprintf` arguments. Status coverage, DUT integration,
+and the generated SoC-IFC environment remain open. The separate
+`soc_ifc_ctrl_pkg` trailing-empty-argument issue is not overlaid. The repeatable
+ECC probe is `tests/run_generated_ecc_env_probe.sh`; set
+`CALIPTRA_ROOT` and `IVERILOG_BIN` to select the pinned Caliptra source tree and
+local Icarus fork. The
+`maps[j].get_full_name` shape is covered by the no-parentheses regression,
+including an inherited method on a selected queue element. Slang's separate
+virtual-interface type diagnostic on a generated BFM interface remains
+unqualified. See
+[`caliptra_bfm_research_2026-10-03.md`](../../../docs/conformance/caliptra_bfm_research_2026-10-03.md#generated-ecc-compile-probe).
+
+The full status-field sampling result and its reproducible runner are in
+[`generated status full-snapshot evidence`](../../../evidence/caliptra-bfm-generated-status-full-snapshot-20261004/README.md).

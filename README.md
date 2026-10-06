@@ -21,3 +21,9 @@ Instantiate the module and connect its request/response pins to the manager side
 Requests remain asserted through ready stalls, with payload-stability checks. Response ID mismatch or a read without `RLAST` calls `$fatal`; AXI error responses return `ok=0`. On request-channel timeout, VALID remains asserted to preserve AXI handshake rules: reset both BFM and target before another transfer. Response timeout returns `ok=0` and deasserts response ready.
 
 Licensed under Apache-2.0; see [LICENSE](LICENSE).
+
+## Caliptra BFM stack
+
+The root-level qd_axi4_single_master.sv remains the small directed manager described above. The broader open Caliptra stack is in [dv/caliptra_bfm](dv/caliptra_bfm/README.md): AXI4 and AHB-Lite managers, checkers, monitors, bounded SRAM/FIFO/DMA targets, recovery handling, mailbox SRAM and PV paths, plus focused native UVM and clean-room UVMF compatibility layers. It is a source-compatible recreation with documented boundaries, not Avery/QVIP/ARM VIP or full Caliptra DV qualification.
+
+Set CALIPTRA_RTL to a clean Caliptra v2.1.2 checkout to run Caliptra-dependent regressions. Set IVERILOG_BIN and VVP_BIN to the compiler and runtime to use. The evidence/caliptra-bfm-* directories in this branch retain report and JSON summaries; large generated logs and build products remain in the local BFM development checkout.

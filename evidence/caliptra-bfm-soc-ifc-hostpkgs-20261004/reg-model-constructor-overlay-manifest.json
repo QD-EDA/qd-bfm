@@ -1,0 +1,183 @@
+{
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "pinned_register_source_tree_sha256": "0669b3e035845fb835403edffa4918a4c9f41cd2bfe3cf28c87e092c72a6fa5f",
+  "overlay_helper": "docs/conformance/release_overlays/caliptra/soc_ifc_generated_case_selector_overlay.py",
+  "overlay_helper_sha256": "e03d20e8c5ea162df6b2775868f28d76d198e75aabc3bf643141c6bf0b0778c7",
+  "overlay_register_tree_sha256": "015e761e822f9df931a718af61dbfefcf5a17b5b0fccab35ec1e45d60c9543f1",
+  "registered_classes_with_added_constructors": 47,
+  "overlay_files": [
+    {
+      "path": "registers/soc_ifc_reg_cbs_intr_block_rf_ext_error_intr_trig_r_base.svh",
+      "sha256": "5321ed842451fcf5742b9deb0338e6f87ef8665c1c373f863708c62ff2d0f5bc"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_intr_block_rf_ext_global_intr_en_r_base.svh",
+      "sha256": "e44812f3c7b5a08c4e5511f390e9032f6d053c9c4b77068c54a289db876a4a06"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_intr_block_rf_ext_notif_intr_trig_r_base.svh",
+      "sha256": "874fdc5a38830f2f2199854a3206b839f6399aaa05c8c3e027627031d4dd5b66"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_cmd_command.svh",
+      "sha256": "958f38b38b5f093fecdf987af6f424f77a15b329c47e68c35713eb0603a48b76"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_datain_datain.svh",
+      "sha256": "e0680649404a198ebd00d861e27651cc0fe6f184b9f8d6f5f731963f02e29dc6"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_dataout_dataout.svh",
+      "sha256": "479fb475fd8506e582cc5878746ec32f1790cd82154cd4f3f8259602a76c712a"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_dlen_length.svh",
+      "sha256": "7c4b24f94bede34afb0cf7eace18439e33d757861c43ea729d912c40c294fdeb"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_execute_execute.svh",
+      "sha256": "8275d590c9106c097050529f5ed5414294cf8f7e448041be5e609173d83128bf"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_lock_lock.svh",
+      "sha256": "ee52a7c2eeb6702c3e7e5f8604029ea4b6c9b3c519619d7bd8ebdf6162599e35"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_status_mbox_fsm_ps.svh",
+      "sha256": "56a92ecc0e0d9c6c021280219f1f7f2418db599f474cd6af0da758b3f6efa8b5"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_status_status.svh",
+      "sha256": "4d5d5ff9c172277bebde609ee89b80a2da10c677638d4e1224ac18d1988d1856"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_mbox_unlock_unlock.svh",
+      "sha256": "be074f7cfd7eb2e84c9489aa8a5e0e270fdd748006e57aa2649b1d069256a557"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_mbox_csr_tap_mode_enabled.svh",
+      "sha256": "d9a81ecf370eafc52bd2702c4d9c1704ef7c0612134870a76dd3fded4e6cb07f"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_sample.svh",
+      "sha256": "3a50fcb2ceef4ac012eb8fbe11d628bd0a0f632272c78322665dad621d61f2e1"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_sha512_acc_csr_EXECUTE_EXECUTE.svh",
+      "sha256": "5dc24572ed4f8ab58eed7fcb798165a08794afe20cf7271982c988eb14f044f2"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_sha512_acc_csr_LOCK_LOCK.svh",
+      "sha256": "9536d635de1fc0c305c564b0e05241459cf9bc9d4b80a0b97740527b9b2c5241"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_CAP_LOCK_LOCK.svh",
+      "sha256": "36e488ec7f65cf2c03dd4a056a2d10e5beed83b060052bbf1e360d40d1533cd1"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_FW_CAPABILITIES_CAP.svh",
+      "sha256": "7e9771b2d35d1fdd791ff30d07c6aa010397c2eea764141c50ce81f861b34121"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_HW_CAPABILITIES_CAP.svh",
+      "sha256": "d990d1df87b1d227c0594b7e6be56be90f5b66e84db48adbb46bb47cb1d725fa"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_HW_ERROR_FATAL.svh",
+      "sha256": "ab9a9df8487ec95b754947075fe405f2e00aeb02e3a6da9388a2e85ddba25b7d"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_HW_ERROR_NON_FATAL.svh",
+      "sha256": "4afdbe77ab0b3158fb279fdd3b113c456490c75224379506bf8b88c39e451b93"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_OWNER_PK_HASH_HASH.svh",
+      "sha256": "1553950c4733830470b05c2403c7cd05b70c98ffea7886daf3d5c6eb8eeaa600"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_OWNER_PK_HASH_LOCK_LOCK.svh",
+      "sha256": "50835317dceb32cbe742612dda57600d29719379a6e6381e29afbe6c597aa592"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_AXI_USER_LOCK_LOCK.svh",
+      "sha256": "82fb9a8c3bed750b1a06705e21137cdf73b31a99e802578e1ac21d1719e538ec"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_CTRL_CLEAR.svh",
+      "sha256": "12a7d4637a277dcaafcb516d132bb3bf9c7f73aa469a9c2bb7ad065bb7318d39"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_DATA_DATA.svh",
+      "sha256": "13e7d29a3ca7b0f515dca771c77457af3265273f24ed0998e9d29ab633fcf5e2"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_STATUS_DATA_REQ.svh",
+      "sha256": "ae1404f301bddd03fe05cfd6de78fb340fc11e8da047320d7a28d6695da7e295"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_STATUS_DATA_WR_DONE.svh",
+      "sha256": "6154038ff6e5bd578736043d8c2983f8fc791b154506f53f9608f64c16411498"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_TRNG_VALID_AXI_USER_AXI_USER.svh",
+      "sha256": "009a9e46ad9f239490e3cf2877e9c1de4e2fb794e53405c69b8f4d740d7b7d64"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_WDT_TIMER1_CTRL_TIMER1_RESTART.svh",
+      "sha256": "4e3da4cb4a5d67f3fee96012db0546cbf63facf2714bb98972b2837aaf293d67"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_CPTRA_WDT_TIMER2_CTRL_TIMER2_RESTART.svh",
+      "sha256": "b74e87b99eec0a87b6f0e48337cf608b7b076c19582db78e78ea05dc12039e41"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_SS_OCP_LOCK_CTRL_LOCK_IN_PROGRESS.svh",
+      "sha256": "55d2b335002a461f38393c6e9df08a3a47c875cc189b0c0b5b5c8a2189da49ea"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_fuse.svh",
+      "sha256": "43f5e3e8bd8e5ba089930ee1ddecdd855da3bb17c1c760387c0e74182b6b9221"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_internal_fw_update_reset.svh",
+      "sha256": "ccfe3f8d5b3663abb491e857960bbd047bc7e108f031021a28f0e0dab9669135"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_key.svh",
+      "sha256": "d22003b5a043b25453991343b9af8670fc5b9c2484c18065f497022d6dc891cf"
+    },
+    {
+      "path": "registers/soc_ifc_reg_cbs_soc_ifc_reg_secret.svh",
+      "sha256": "804ababf6f6da44013e6f6c239c9a3af42223c8fa9955e246991ebdab9d6e448"
+    },
+    {
+      "path": "registers/soc_ifc_reg_delay_job.svh",
+      "sha256": "fd3d8c0b3e0c17379ccbd2da3ef06a3853181512d1659abb938a96244723ba77"
+    },
+    {
+      "path": "registers/soc_ifc_reg_delay_job_intr_block_rf_ext.svh",
+      "sha256": "6ee8f76541659b95a3aeca9f63ac573b0132630db316eac5d4ee3bef139df431"
+    },
+    {
+      "path": "registers/soc_ifc_reg_delay_job_mbox_csr_mbox_prot_error.svh",
+      "sha256": "6ca1ac9185afa2a64dc47e193a96881b7361f928472dacab6c16a27d7d965820"
+    },
+    {
+      "path": "registers/soc_ifc_reg_model_top_pkg.sv",
+      "sha256": "194ce0892d96b1d02cdaddc36c28e0cc41833a444cd39f88558c09590b521573"
+    }
+  ],
+  "compile": {
+    "scope": "soc_ifc_reg_model_top_pkg with Caliptra RAL packages and open BFM UVM compatibility packages; generated agent/interface package copies excluded",
+    "command": "iverilog -g2012 -uvm -s hostpkg_compile_top -o <temporary image> -f reg-model-constructor-overlay.captured.f",
+    "exit_code": 0,
+    "hard_or_sorry_diagnostics": 0,
+    "memory_free_percent_before_compile": 80,
+    "captured_filelist_sha256": "41d3c60bf737bda7640f31020a90aca210295f627d6a72b52389030f984481fd",
+    "captured_log_sha256": "1f4fff1c6f743ce1ab8dfae4ef05a54c22f769a1439a79a47a545bb0f91060b2",
+    "warning_count": 48,
+    "elapsed_seconds": 2.8,
+    "replayability": "captured filelist names temporary package overlays under /private/tmp and is for audit; full generated UVMF package environment is not reproduced",
+    "qualification": "package compile only; no UVM runtime, covergroup runtime, or generated UVMF agent/environment qualification"
+  }
+}
