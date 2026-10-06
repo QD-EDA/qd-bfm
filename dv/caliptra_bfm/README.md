@@ -176,6 +176,18 @@ unqualified. These probes are documented in the research note. The layer is
 not a full UVMF replacement. See
 [`uvmf_lite/README.md`](uvmf_lite/README.md).
 
+`uvm/tests/run_caliptra_top_firmware_bfm.sh --case smoke_test_dma --output <new-dir>`
+attaches the open AXI complex replacement to the full Caliptra testbench top
+and runs the real DMA firmware. It requires `CALIPTRA_RTL`, an Icarus-ready
+`CALIPTRA_BFM_PROFILE` containing the original AXI-complex source exactly once,
+`CALIPTRA_GCC_PREFIX`, and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
+open native crypto-vector helpers in `native_vectors/`; this currently requires
+macOS ARM64, Homebrew OpenSSL 3 and mbedTLS 3, Clang, Make, and Python 3.12.
+Compile, firmware, vector, and simulation logs plus hashes are retained in the
+requested output directory. The runner uses the 60%-free-memory guard and also
+accepts `rand_test_dma`. Count the run as passed only when the firmware pass
+marker appears and no simulator, SVA, or JTAG errors are reported.
+
 ## Connecting to the Caliptra DMA port
 
 In the pinned Caliptra testbench, `m_axi_if` is the DMA AXI interface. The DUT
