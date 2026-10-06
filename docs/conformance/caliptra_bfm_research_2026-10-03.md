@@ -118,13 +118,16 @@ The autonomous controls use a portable weighted draw for the pinned 0..255-cycle
 delay distribution and model asynchronous reset plus a first-cycle FIFO
 ready/valid hold. Random sequences are not cycle-for-cycle identical.
 
-The [public Caliptra README](https://github.com/chipsalliance/caliptra-rtl/blob/main/README.md)
-names UVMF, Mentor QVIP, Avery AXI VIP 2025.1, and ARM Axi4PC among the
-official verification inputs. The linked UVMF mirror claims open source in its
-README, but a recursive current-main tree scan found no framework license;
-the only `LICENSE`/`COPYING` files are for bundled Python dependencies. Do not
-copy or vendor it until the framework's license is established. Caliptra's
-Axi4PC placeholder is also not an implementation of ARM's checker.
+The current [public Caliptra README](https://github.com/chipsalliance/caliptra-rtl/blob/main/README.md)
+lists Avery AXI VIP 2025.1, Mentor QVIP 2021.2.1 AHB models, UVM 1.1d, and
+UVMF 2022.3 as verification inputs. It also requires ARM Axi4PC
+`BP063-BU-01000-r0p1-00rel0` and says its copyrighted source must be acquired
+from ARM rather than the repository. The linked UVMF mirror claims open source
+in its README, but a recursive current-main tree scan found no framework
+license; the only `LICENSE`/`COPYING` files are for bundled Python
+dependencies. Do not copy or vendor it until the framework's license is
+established. Caliptra's Axi4PC placeholder is not an implementation of ARM's
+checker.
 
 ## Reuse decision
 
