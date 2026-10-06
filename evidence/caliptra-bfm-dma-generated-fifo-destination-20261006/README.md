@@ -12,7 +12,9 @@ endpoint. Caliptra's generator marked the destination as FIFO, selected fixed
 write bursts, and enabled randomized delays. The AXI monitor and scoreboard
 checked the transfer; the FIFO endpoint contained all 65 expected words, and
 the BFM observed 160 target-stall cycles. This is block-level DUT evidence; it
-does not qualify the full Caliptra top or untested reset/block-size profiles.
+Full-top, reset, and other block-size qualification remains open.
+The later generated recovery block-size run adds one 64-byte profile; see the
+[follow-up evidence](../caliptra-bfm-dma-generated-recovery-block-20261006/README.md).
 
 The Icarus inline-constraint profile for this tuple did not randomize when
 expressed with the generic conditional implications. The overlay uses an

@@ -113,28 +113,40 @@ generated_routes="$tmpdir/generated-routes"
 generated_sizes="$tmpdir/generated-sizes"
 : >"$generated_routes"
 : >"$generated_sizes"
-while [ "$case_index" -lt 26 ]; do
+while [ "$case_index" -lt 27 ]; do
   if [ "$case_index" -eq 0 ]; then
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
   elif [ "$case_index" -eq 25 ]; then
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
+      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+  elif [ "$case_index" -eq 26 ]; then
+    run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +FIFO_RECOVERY +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
   else
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=26 +CPTRA_VERBOSITY=0
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
   fi
-  if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
-    echo "Generated DCCM record $case_index was not selected for DUT replay" >&2
-    exit 1
-  fi
-  route_type=$(sed -n 's/^PASS: generated DCCM record index=[0-9][0-9]* route=\([0-4]\) replayed through axi_dma_top$/\1/p' "$log")
-  if [ -z "$route_type" ]; then
-    echo "Generated DCCM record $case_index reported an invalid route" >&2
-    exit 1
+  if [ "$case_index" -eq 26 ]; then
+    if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through five recovery-sized fixed reads and SRAM writes' "$log"; then
+      echo "Generated FIFO block-size case did not complete through the recovery sequencer" >&2
+      exit 1
+    fi
+    route_type=2
+  else
+    if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
+      echo "Generated DCCM record $case_index was not selected for DUT replay" >&2
+      exit 1
+    fi
+    route_type=$(sed -n 's/^PASS: generated DCCM record index=[0-9][0-9]* route=\([0-4]\) replayed through axi_dma_top$/\1/p' "$log")
+    if [ -z "$route_type" ]; then
+      echo "Generated DCCM record $case_index reported an invalid route" >&2
+      exit 1
+    fi
   fi
   printf '%s\n' "$route_type" >>"$generated_routes"
   word_count=$(sed -n 's/^INFO: Caliptra DCCM case type=[0-4] words=\([0-9][0-9]*\) .*/\1/p' "$log")
@@ -157,6 +169,12 @@ while [ "$case_index" -lt 26 ]; do
       echo "Generated SRAM-to-FIFO profile did not exercise fixed writes and randomized stalls" >&2
       exit 1
     fi
+  elif [ "$case_index" -eq 26 ]; then
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=64' "$log" ||
+       ! grep -Fq 'INFO: Caliptra DCCM case type=2 words=65' "$log"; then
+      echo "Generated FIFO recovery record did not supply its 64-byte block-size profile" >&2
+      exit 1
+    fi
   fi
   case_index=$((case_index + 1))
 done
@@ -166,8 +184,9 @@ for route_type in 0 1 2 3 4; do
     exit 1
   fi
 done
-echo "INFO: generated DCCM replay covered all five DMA routes across 26 records"
+echo "INFO: generated DCCM replay covered all five DMA routes across 27 records"
 echo "INFO: generated DCCM replay covered a 65-word fixed-write SRAM-to-FIFO profile"
+echo "INFO: generated DCCM replay covered the 65-word FIFO recovery profile with a 64-byte generated block"
 for word_count in 1 4 5 16 64 65 255 256 65536; do
   if ! grep -Fxq "$word_count" "$generated_sizes"; then
     echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2

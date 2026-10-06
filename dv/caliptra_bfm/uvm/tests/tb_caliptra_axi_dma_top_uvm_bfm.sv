@@ -719,7 +719,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset != 0) || (record_dst_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported large FIFO stream profile", record_index);
         end else if (record_type.dst_is_fifo) begin
-          if ((generated_case_count != 26) || (record_index != 25) ||
+          if ((generated_case_count != 27) || (record_index != 25) ||
               (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
@@ -727,6 +727,15 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_type.block_size != 0) || (record_dst_offset != 0) ||
               (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
+        end else if (record_type.test_block_size) begin
+          if ((generated_case_count != 27) || (record_index != 26) ||
+              (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
+              !record_type.src_is_fifo || record_type.dst_is_fifo ||
+              !record_type.use_rd_fixed || record_type.use_wr_fixed ||
+              record_type.inject_rand_delays || record_type.inject_rst ||
+              (record_type.block_size != 12'd64) ||
+              (record_src_offset != 0) || (record_dst_offset != 32'h0000_4000))
+            $fatal(1, "Generated testcase %0d has an unsupported FIFO block-size profile", record_index);
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -782,8 +791,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.payload_data = new[generated_payload_word_count];
       for (word_index = 0; word_index < generated_payload_word_count; word_index++)
         scenario.payload_data[word_index] = dccm_shadow[generated_record_word-4-word_index][31:0];
-      if (scenario.src_is_fifo && !auto_fifo_source_case)
-        $fatal(1, "Generated FIFO source replay requires +FIFO_SOURCE_STREAM");
+      if (scenario.src_is_fifo && !auto_fifo_source_case && !fifo_recovery_case)
+        $fatal(1, "Generated FIFO source replay requires +FIFO_SOURCE_STREAM or +FIFO_RECOVERY");
       if (auto_fifo_source_case &&
           (scenario.dma_xfer_type != AXI2AXI || !scenario.src_is_fifo ||
            scenario.dst_is_fifo || !scenario.use_rd_fixed ||
@@ -880,7 +889,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         dst_offset inside {[32'h600:32'h6ff]};
       }) $fatal(1, "Pinned Caliptra DMA randomizer did not produce the constrained AXI2AXI case");
     end
-    if (fifo_recovery_case) begin
+    if (fifo_recovery_case && $test$plusargs("GENERATED_CASE")) begin
+      if (!scenario.test_block_size || !scenario.src_is_fifo)
+        $fatal(1, "Generated FIFO recovery replay requires a FIFO block-size record");
+      dma_gen_block_size_bytes = testcase_generator_block_sizes;
+      SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
+      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
+    end else if (fifo_recovery_case) begin
       // Icarus rejects the pinned class constraints for this recovery tuple.
       scenario.src_is_fifo = 1'b1;
       scenario.use_rd_fixed = 1'b1;
@@ -926,11 +941,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     source_word_index = scenario.src_offset / 4;
     destination_word_index = scenario.dst_offset / 4;
     if ($test$plusargs("GENERATED_CASE"))
-      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b inject_rand_delays=%0b",
+      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b inject_rand_delays=%0b block_bytes=%0d",
                scenario.dma_xfer_type, scenario.xfer_size, scenario.src_offset,
                scenario.dst_offset, scenario.src_is_fifo, scenario.dst_is_fifo,
                scenario.use_rd_fixed, scenario.use_wr_fixed,
-               scenario.inject_rand_delays);
+               scenario.inject_rand_delays, scenario.block_size);
     else if (fifo_recovery_case)
       $display("INFO: directed Caliptra DMA recovery tuple words=%0d block_bytes=%0d src=%012h dst=%012h",
                scenario.xfer_size, scenario.block_size, SRC_ADDR, DST_ADDR);

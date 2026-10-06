@@ -55,13 +55,17 @@ def main() -> int:
             """        int unsigned replay_size;
         bit large_fifo_case;
         bit fifo_destination_case;
+        bit fifo_block_size_case;
         bit randomize_success;
         if ($test$plusargs("CALIPTRA_BFM_DUT_REPLAY")) begin
           large_fifo_case = (i == 0);
           fifo_destination_case = (i == 25);
+          fifo_block_size_case = (i == 26);
           if (large_fifo_case)
             replay_size = 65536;
           else if (fifo_destination_case)
+            replay_size = 65;
+          else if (fifo_block_size_case)
             replay_size = 65;
           else begin
             case ((i - 1) % 8)
@@ -91,6 +95,26 @@ def main() -> int:
               src_offset inside {[32'h0000_1000:32'h0000_1ffc]};
               dst_offset == 0;
             };
+          end else if (fifo_block_size_case) begin
+            randomize_success = dma_gen.randomize() with {
+              dma_xfer_type == AXI2AXI;
+              src_is_fifo;
+              !dst_is_fifo;
+              use_rd_fixed;
+              !use_wr_fixed;
+              !inject_rst;
+              !inject_rand_delays;
+              !test_block_size;
+              block_size == 0;
+              xfer_size == replay_size;
+              src_offset == 0;
+              dst_offset == 32'h0000_4000;
+            };
+            if (randomize_success) begin
+              // Icarus cannot solve this pinned class constraint tuple.
+              dma_gen.test_block_size = 1'b1;
+              dma_gen.block_size = 12'd64;
+            end
           end else begin
             randomize_success = dma_gen.randomize() with {
               dma_xfer_type inside {AHB2AXI, MBOX2AXI, AXI2AXI, AXI2MBOX, AXI2AHB};
@@ -139,7 +163,7 @@ def main() -> int:
                         "Qualify slam_dccm_ram and riscv_ecc32 against the harness top.",
                         "Add the Icarus-required numeric $fatal finish code.",
                         *(
-                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), plus a maximum 65,536-word fixed-read FIFO-to-SRAM stream and a 65-word fixed-write SRAM-to-FIFO case; preserve Caliptra's randomized delay flag."]
+                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), plus a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO case, and a 65-word FIFO recovery case with a generated 64-byte block size."]
                             if args.dut_replay
                             else []
                         ),
