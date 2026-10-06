@@ -285,6 +285,10 @@ generated 64-byte block. Payloads and route-valid offsets remain per-record
 randomized, as does Caliptra's delay flag; the maximum stream drains the FIFO
 and checks all destination words. Other generated FIFO modes, reset injection,
 remaining block sizes, and firmware remain open.
+Caliptra's `inject_rst` metadata is consumed by `rand_test_dma.c`, which sends
+stdout-control request `0xEE`; `caliptra_top_tb_services.sv` turns that request
+into a delayed warm reset. The focused DMA replay does not run that firmware or
+testbench service, so generated metadata alone does not qualify reset injection.
 That focused
 block integration includes the register
 block, DMA control FSM, and real AXI managers. It is not a full Caliptra top,
