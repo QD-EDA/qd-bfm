@@ -70,6 +70,7 @@ class ProfileOverlayTest(unittest.TestCase):
         top_sva = "${CALIPTRA_ROOT}/src/integration/asserts/caliptra_top_sva.sv"
         soc_bfm = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_soc_bfm.sv"
         top_tb = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
+        top_services = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_services.sv"
         generator = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
         with tempfile.TemporaryDirectory() as temp:
             temp = Path(temp)
@@ -93,9 +94,11 @@ class ProfileOverlayTest(unittest.TestCase):
             reset_overlay.write_text("module reset_overlay; endmodule\n")
             jtag_overlay = temp / "jtag.sv"
             jtag_overlay.write_text("module jtag_overlay; endmodule\n")
+            services_overlay = temp / "services.sv"
+            services_overlay.write_text("module services_overlay; endmodule\n")
             baseline.write_text(
                 f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original_aes_pkg}\n{original_axi_if}\n{original}\n{sram_export}\n"
-                f"{top_sva}\n{soc_bfm}\n{top_tb}\n{generator}\n"
+                f"{top_sva}\n{soc_bfm}\n{top_tb}\n{generator}\n{top_services}\n"
             )
 
             def fake_aes_pkg_overlay(_rtl, path):
@@ -107,7 +110,8 @@ class ProfileOverlayTest(unittest.TestCase):
             with patch.object(RUNNER, "prepare_aes_pkg_overlay", side_effect=fake_aes_pkg_overlay), \
                     patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
                 RUNNER.prepare_iverilog_profile(
-                    baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay
+                    baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay,
+                    pq_vector_overlay=services_overlay,
                 )
 
             content = generated.read_text()
@@ -124,6 +128,8 @@ class ProfileOverlayTest(unittest.TestCase):
             self.assertNotIn(soc_bfm, content)
             self.assertNotIn(top_tb, content)
             self.assertIn(generator, content)
+            self.assertNotIn(top_services, content)
+            self.assertIn(str(services_overlay), content)
             self.assertIn("+incdir+${CALIPTRA_ROOT}/src/integration/tb", content)
             overlay = (temp / "caliptra_veer_sram_export_icarus.sv").read_text()
             self.assertIn("dccm_bank_ecc_icarus[i]", overlay)
@@ -208,6 +214,46 @@ class FastBootDataPreloadTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "startup branch"):
                 RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
             self.assertEqual((program.read_text(), dccm.read_text()), originals)
+
+
+class FirstAesCaseDiagnosticTest(unittest.TestCase):
+    def test_limits_temporary_firmware_copy_to_first_dma_case(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp) / "rtl"
+            source = rtl / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
+            source.mkdir(parents=True)
+            original = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
+            original.write_text(
+                "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
+                "/* first test uses one dword */\n"
+            )
+            (source / "caliptra_isr.h").write_text("/* ISR declarations */\n")
+            output_dir, digest = RUNNER.prepare_first_aes_case_source(rtl, Path(temp) / "diagnostic")
+            patched = (output_dir / original.name).read_text()
+            self.assertIn("int num_tests = 1; /* first-DMA diagnostic */", patched)
+            self.assertEqual(
+                original.read_text(),
+                "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
+                "/* first test uses one dword */\n",
+            )
+            self.assertEqual(digest, RUNNER.sha256(output_dir / original.name))
+            self.assertTrue((output_dir / "caliptra_isr.h").is_file())
+
+    def test_skips_only_unrelated_pq_vector_calls_when_requested(self):
+        source = (
+            "            ecc_testvector_generator();\n"
+            "            mldsa_input_hex_gen();\n"
+            "            mlkem_testvector_generator();\n"
+            "            doe_testvector_generator();\n"
+        )
+        patched = RUNNER.skip_pq_vector_generators(source)
+        self.assertIn('if (!$test$plusargs("CLP_SKIP_PQ_VECTOR_GENERATION")) begin', patched)
+        self.assertIn("ecc_testvector_generator();", patched)
+        self.assertIn("doe_testvector_generator();", patched)
+        self.assertEqual(patched.count("mldsa_input_hex_gen();"), 1)
+        self.assertEqual(patched.count("mlkem_testvector_generator();"), 1)
+        with self.assertRaisesRegex(ValueError, "MLDSA/MLKEM"):
+            RUNNER.skip_pq_vector_generators("no generator calls\n")
 
 
 if __name__ == "__main__":

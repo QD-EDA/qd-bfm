@@ -81,3 +81,18 @@ two JTAG socket bind errors remain sandbox-related. This demonstrates startup
 progress with the diagnostic image, not a DMA completion or stock-firmware
 qualification. Hashes and the exact preload/branch metadata are in
 [`fast-boot-probe.json`](fast-boot-probe.json).
+
+## First AES/DMA case diagnostic
+
+The runner's opt-in `--first-aes-case-diagnostic` builds a temporary firmware
+copy that runs only the first 1-dword AES/DMA case, preloads `.data`, suppresses
+low-priority firmware prints, and gates the unrelated MLDSA/MLKEM testbench
+vector generators behind a plusarg. The pinned Caliptra tree and default
+firmware flow are unchanged. The full-top image compiled successfully and its
+JTAG server bound an ephemeral port. A guarded 300-second run completed reset
+and fuse setup and reached `CLP: ROM Flow in progress`, but did not reach the
+AES test banner or emit a DMA request. AHB traces grew to 5,047 lines; no
+testcase result or normal finish appeared. Free memory stayed at 76% against a
+60% floor. This remains diagnostic, not top-level DMA qualification. Exact
+hashes and guard metrics are in
+[`first-aes-case-diagnostic.json`](first-aes-case-diagnostic.json).

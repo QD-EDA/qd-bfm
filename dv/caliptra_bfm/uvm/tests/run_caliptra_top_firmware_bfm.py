@@ -21,6 +21,7 @@ ORIGINAL_SRAM_EXPORT = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_veer_sram_e
 ORIGINAL_TOP_SVA = "${CALIPTRA_ROOT}/src/integration/asserts/caliptra_top_sva.sv"
 ORIGINAL_SOC_BFM = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_soc_bfm.sv"
 ORIGINAL_TOP_TB = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
+ORIGINAL_TOP_SERVICES = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_services.sv"
 ORIGINAL_DMA_GENERATOR = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
 CASE_NAMES = ("smoke_test_dma", "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma")
 AES_PKG_SHA256 = "19a0096ffb731c99778d68a7baa81d0aa33c8b86a665231005d50251087a710f"
@@ -54,6 +55,7 @@ TOP_TB_SHA256 = "c212c32da99e90cd3991da65e653998cac3e945d7479abfd640b9d82f47659f
 PHYSICAL_RNG_SHA256 = "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c38abf01f"
 TOP_TB_JTAG_OVERLAY_SHA256 = "df8d51cc7ad84000288f5d7c19641f433d59ae213314fa81b9d9e5f8a6b76c6e"
 FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "808ed4625254bf4f6d2d36d000d28a094e890fc51429f32327f2d02744b6407b"
+TOP_SERVICES_SHA256 = "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
 BAD = re.compile(
     r"\b(?:UVM_)?(?:ERROR|FATAL)\b|\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
@@ -222,9 +224,44 @@ def prepare_jtag_port_overlay(rtl_root, output_path, fast_trng=False):
         raise ValueError("Caliptra top testbench overlay did not match its recorded hash")
 
 
+def skip_pq_vector_generators(text):
+    before = "            mldsa_input_hex_gen();\n            mlkem_testvector_generator();"
+    after = (
+        '            if (!$test$plusargs("CLP_SKIP_PQ_VECTOR_GENERATION")) begin\n'
+        "                mldsa_input_hex_gen();\n"
+        "                mlkem_testvector_generator();\n"
+        "            end"
+    )
+    if text.count(before) != 1:
+        raise ValueError("expected one MLDSA/MLKEM vector-generation call block")
+    return text.replace(before, after, 1)
+
+
+def prepare_pq_vector_overlay(rtl_root, output_path):
+    source = Path(rtl_root) / "src/integration/tb/caliptra_top_tb_services.sv"
+    if sha256(source) != TOP_SERVICES_SHA256:
+        raise ValueError(f"Caliptra top services source hash mismatch: {source}")
+    Path(output_path).write_text(skip_pq_vector_generators(source.read_text()))
+
+
+def prepare_first_aes_case_source(rtl_root, output_dir):
+    source = Path(rtl_root) / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
+    source_file = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
+    text = source_file.read_text()
+    before = "int num_tests = sizeof(test_cases) / sizeof(test_config_t);"
+    if text.count(before) != 1:
+        raise ValueError(f"unexpected first AES DMA firmware loop: {source_file}")
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True)
+    patched_source = output_dir / source_file.name
+    patched_source.write_text(text.replace(before, "int num_tests = 1; /* first-DMA diagnostic */", 1))
+    shutil.copy2(source / "caliptra_isr.h", output_dir / "caliptra_isr.h")
+    return output_dir, sha256(patched_source)
+
+
 def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
                              checker_overlay, reset_overlay, jtag_overlay,
-                             generator_overlay=None):
+                             generator_overlay=None, pq_vector_overlay=None):
     text = Path(base_profile).read_text()
     lines = text.splitlines()
     for source in (ORIGINAL_AES_PKG, ORIGINAL_AXI_IF, ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
@@ -255,6 +292,8 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     overlays = [aes_overlay, axi_if_overlay, sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
     if generator_overlay:
         overlays.append(generator_overlay)
+    if pq_vector_overlay:
+        overlays.append(pq_vector_overlay)
     for source in [*overlays, *sources]:
         if any(char.isspace() for char in str(source)):
             raise ValueError(f"Icarus filelists cannot safely represent a source path with whitespace: {source}")
@@ -269,6 +308,10 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     }
     if generator_overlay:
         replacements[ORIGINAL_DMA_GENERATOR] = str(generator_overlay)
+    if pq_vector_overlay:
+        if lines.count(ORIGINAL_TOP_SERVICES) != 1:
+            raise ValueError(f"Icarus profile must contain exactly one {ORIGINAL_TOP_SERVICES}")
+        replacements[ORIGINAL_TOP_SERVICES] = str(pq_vector_overlay)
     lines = [replacements.get(line, line) for line in lines]
     lines.extend(str(source) for source in sources)
     Path(output_profile).write_text("\n".join(lines) + "\n")
@@ -560,9 +603,13 @@ def main():
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
     parser.add_argument("--fast-boot-data-preload", action="store_true",
                         help="diagnostic only: preload .data and skip its CRT0 copy for the short AES DMA case")
+    parser.add_argument("--first-aes-case-diagnostic", action="store_true",
+                        help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.first_aes_case_diagnostic and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
+        raise ValueError("--first-aes-case-diagnostic is limited to smoke_test_dma_aes_gcm_short_1_dword")
 
     rtl = required_env("CALIPTRA_RTL")
     base_profile = required_env("CALIPTRA_BFM_PROFILE")
@@ -596,8 +643,14 @@ def main():
             sys.executable, str(generator_script), "--caliptra-root", str(rtl),
             "--output", str(generator_overlay), "--top", "caliptra_top_tb",
         ], check=True)
+    pq_vector_overlay = None
+    first_aes_case = None
+    if args.first_aes_case_diagnostic:
+        pq_vector_overlay = args.output / "caliptra_top_tb_services_skip_pq_vectors.sv"
+        prepare_pq_vector_overlay(rtl, pq_vector_overlay)
+        first_aes_case = prepare_first_aes_case_source(rtl, args.output / "first_aes_case_source")
     prepare_iverilog_profile(base_profile, profile, REPO, rtl, checker_overlay,
-                             reset_overlay, jtag_overlay, generator_overlay)
+                             reset_overlay, jtag_overlay, generator_overlay, pq_vector_overlay)
 
     env = os.environ.copy()
     env.update(
@@ -621,11 +674,17 @@ def main():
 
     test_output = args.output / args.case
     test_output.mkdir()
+    build_flags = "-std=gnu11 -O2"
+    if args.first_aes_case_diagnostic:
+        build_flags += " -DCPT_VERBOSITY=ERROR"
     firmware_command = [
         "make", "-f", str(rtl / "tools/scripts/Makefile"), f"TESTNAME={args.case}",
         f"GCC_PREFIX={gcc_prefix}", "CALIPTRA_INTERNAL_TRNG=1", f"PLAYBOOK_RANDOM_SEED={seed}",
-        "BUILD_CFLAGS=-std=gnu11 -O2", "program.hex",
+        f"BUILD_CFLAGS={build_flags}",
     ]
+    if first_aes_case:
+        firmware_command.append(f"TEST_DIR={first_aes_case[0]}")
+    firmware_command.append("program.hex")
     firmware_exit = run_logged(firmware_command, test_output, env, test_output / "firmware.log")
     images = ["program.hex", "dccm.hex", "iccm.hex", "mailbox.hex"]
     missing_images = [name for name in images if not (test_output / name).is_file()]
@@ -634,7 +693,7 @@ def main():
 
     stock_firmware_image_sha256 = {name: sha256(test_output / name) for name in images}
     fast_boot_data_preload = None
-    if args.fast_boot_data_preload:
+    if args.fast_boot_data_preload or args.first_aes_case_diagnostic:
         fast_boot_data_preload = prepare_fast_boot_data_preload(
             test_output / "program.hex", test_output / "dccm.hex",
             test_output / f"{args.case}.map", test_output / f"{args.case}.dis",
@@ -643,6 +702,8 @@ def main():
     staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
     sim_command = [str(vvp), "-d", str(jtagdpi), "-n", str(binary),
                    "+CLP_REGRESSION", *plusargs]
+    if args.first_aes_case_diagnostic:
+        sim_command.append("+CLP_SKIP_PQ_VECTOR_GENERATION")
     sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
     log_scan = scan_sim_log(test_output / "sim.log")
     passed = (sim_exit == 0 and log_scan["passed"] == 1 and log_scan["failed"] == 0 and
@@ -660,17 +721,22 @@ def main():
         "checker_overlay_sha256": sha256(checker_overlay),
         "reset_overlay_sha256": sha256(reset_overlay),
         "jtag_overlay_sha256": sha256(jtag_overlay),
+        "pq_vector_source_sha256": TOP_SERVICES_SHA256 if pq_vector_overlay else None,
+        "pq_vector_overlay_sha256": sha256(pq_vector_overlay) if pq_vector_overlay else None,
         "dma_generator_overlay_sha256": sha256(generator_overlay) if generator_overlay else None,
         "profile_sha256": sha256(profile),
         "compile_command": compile_command,
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
         "firmware_exit": firmware_exit,
+        "first_aes_case_source_sha256": first_aes_case[1] if first_aes_case else None,
         "firmware_image_sha256": stock_firmware_image_sha256,
         "simulation_image_sha256": simulation_image_sha256,
         "fast_boot_data_preload": fast_boot_data_preload,
         "diagnostic_modes": {"fast_trng": args.fast_trng,
-                             "fast_boot_data_preload": args.fast_boot_data_preload},
+                             "fast_boot_data_preload": args.fast_boot_data_preload or args.first_aes_case_diagnostic,
+                             "first_aes_case": args.first_aes_case_diagnostic,
+                             "skip_pq_vector_generation": args.first_aes_case_diagnostic},
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,
@@ -685,7 +751,9 @@ def main():
     }
     (args.output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     label = "PASS" if passed else "FAIL"
-    if args.fast_boot_data_preload:
+    if args.first_aes_case_diagnostic:
+        label += " (first AES DMA diagnostic; not stock firmware qualification)"
+    elif args.fast_boot_data_preload:
         label += " (diagnostic fast boot; not stock firmware qualification)"
     print(f"{label} {args.case}: {args.output / 'result.json'}")
     return 0 if passed else 1
