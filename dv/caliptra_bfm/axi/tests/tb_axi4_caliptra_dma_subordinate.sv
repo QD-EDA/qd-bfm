@@ -45,6 +45,8 @@ module tb_axi4_caliptra_dma_subordinate;
   reg RREADY = 1;
   reg auto_fifo_push = 0;
   reg auto_fifo_pop = 0;
+  reg stall_sram_b = 0;
+  reg stall_sram_r = 0;
   reg use_dma_gen_sequence = 0;
   reg dma_gen_done = 0;
   reg [99:0][11:0] dma_gen_block_size = '0;
@@ -85,7 +87,7 @@ module tb_axi4_caliptra_dma_subordinate;
     .recovery_threshold_words(32'd4), .recovery_block_words(32'd99),
     .inject_error(z_control),
     .stall_sram_aw(z_control), .stall_sram_w(z_control),
-    .stall_sram_b(z_control), .stall_sram_ar(z_control), .stall_sram_r(z_control),
+    .stall_sram_b(stall_sram_b), .stall_sram_ar(z_control), .stall_sram_r(stall_sram_r),
     .stall_fifo_aw(z_control), .stall_fifo_w(z_control),
     .stall_fifo_b(z_control), .stall_fifo_ar(z_control), .stall_fifo_r(z_control),
     .fifo_level(fifo_level), .fifo_push_event(fifo_push_event),
@@ -215,8 +217,50 @@ module tb_axi4_caliptra_dma_subordinate;
     if (read_data != 32'hcafe_babe)
       $fatal(1, "DMA SRAM write/read mismatch data=%h", read_data);
 
-    // Interleave write destinations. The W channel must follow AW order while
-    // B responses from SRAM and FIFO are independently queued and arbitrated.
+    // A later FIFO response with the same ID must wait for an earlier SRAM B.
+    stall_sram_b = 1;
+    BREADY = 0;
+    send_aw(8'h44, SRAM_BASE + 48'd16, 0, 2'b01, 32'h4400_0001);
+    send_aw(8'h44, FIFO_BASE, 0, 2'b00, 32'h4400_0002);
+    send_w(32'h4444_0001, 1);
+    send_w(32'h4444_0002, 1);
+    timeout = 0;
+    while (!dut.i_fifo.BVALID && timeout < 100) begin
+      @(posedge ACLK);
+      timeout = timeout + 1;
+    end
+    #1;
+    if (!dut.i_fifo.BVALID || BVALID)
+      $fatal(1, "Same-ID FIFO B overtook the stalled earlier SRAM B");
+
+    @(negedge ACLK); stall_sram_b = 0;
+    timeout = 0;
+    while (!BVALID && timeout < 100) begin
+      @(posedge ACLK);
+      timeout = timeout + 1;
+    end
+    #1;
+    if (!BVALID || BID != 8'h44 || BRESP != 0 || BUSER != 32'h4400_0001)
+      $fatal(1, "Same-ID SRAM B was not returned before FIFO B");
+    @(negedge ACLK); BREADY = 1;
+    @(posedge ACLK);
+    if (!BVALID || BID != 8'h44 || BRESP != 0 || BUSER != 32'h4400_0001)
+      $fatal(1, "Same-ID SRAM B handshake mismatch");
+    @(negedge ACLK); BREADY = 0;
+    #1;
+    if (!BVALID || BID != 8'h44 || BRESP != 0 || BUSER != 32'h4400_0002)
+      $fatal(1, "Same-ID FIFO B did not follow SRAM B");
+    @(negedge ACLK); BREADY = 1;
+    @(posedge ACLK);
+    if (!BVALID || BID != 8'h44 || BRESP != 0 || BUSER != 32'h4400_0002)
+      $fatal(1, "Same-ID FIFO B handshake mismatch");
+    @(negedge ACLK); BREADY = 0;
+    read_one(FIFO_BASE, read_data);
+    if (read_data != 32'h4444_0002)
+      $fatal(1, "Same-ID B-order setup FIFO data mismatch");
+
+    // Interleave write destinations. W follows AW order; target responses may
+    // become ready independently while AXI ID ordering remains intact.
     @(negedge ACLK);
     BREADY = 0;
     send_aw(8'h51, SRAM_BASE + 48'd4, 1, 2'b01, 32'h5100_0001);
@@ -325,6 +369,50 @@ module tb_axi4_caliptra_dma_subordinate;
         fifo_level != 0)
       $fatal(1, "Mixed-target read arbitration did not complete all beats");
     @(negedge ACLK); RREADY = 1;
+
+    // A later FIFO read with the same ID must wait for the earlier SRAM RLAST.
+    write_one(FIFO_BASE, 32'h4545_4545);
+    stall_sram_r = 1;
+    RREADY = 0;
+    send_ar(8'h5a, SRAM_BASE + 48'd4, 0, 2'b01, 32'h5a00_0001);
+    send_ar(8'h5a, FIFO_BASE, 0, 2'b00, 32'h5a00_0002);
+    timeout = 0;
+    while (!dut.i_fifo.RVALID && timeout < 100) begin
+      @(posedge ACLK);
+      timeout = timeout + 1;
+    end
+    #1;
+    if (!dut.i_fifo.RVALID || RVALID)
+      $fatal(1, "Same-ID FIFO R overtook the stalled earlier SRAM R");
+
+    @(negedge ACLK); stall_sram_r = 0;
+    timeout = 0;
+    while (!RVALID && timeout < 100) begin
+      @(posedge ACLK);
+      timeout = timeout + 1;
+    end
+    #1;
+    if (!RVALID || RID != 8'h5a || RDATA != 32'h1111_5151 || RRESP != 0 ||
+        RUSER != 32'h5a00_0001 || !RLAST)
+      $fatal(1, "Same-ID SRAM R was not returned before FIFO R");
+    @(negedge ACLK); RREADY = 1;
+    @(posedge ACLK);
+    if (!RVALID || RID != 8'h5a || RDATA != 32'h1111_5151 || RRESP != 0 ||
+        RUSER != 32'h5a00_0001 || !RLAST)
+      $fatal(1, "Same-ID SRAM R handshake mismatch");
+    @(negedge ACLK); RREADY = 0;
+    #1;
+    if (!RVALID || RID != 8'h5a || RDATA != 32'h4545_4545 || RRESP != 0 ||
+        RUSER != 32'h5a00_0002 || !RLAST)
+      $fatal(1, "Same-ID FIFO R did not follow SRAM R");
+    @(negedge ACLK); RREADY = 1;
+    @(posedge ACLK);
+    if (!RVALID || RID != 8'h5a || RDATA != 32'h4545_4545 || RRESP != 0 ||
+        RUSER != 32'h5a00_0002 || !RLAST)
+      $fatal(1, "Same-ID FIFO R handshake mismatch");
+    @(negedge ACLK); RREADY = 1;
+    if (fifo_level != 0)
+      $fatal(1, "Same-ID read-order test left FIFO data behind");
 
     @(negedge ACLK);
     auto_fifo_push = 1;

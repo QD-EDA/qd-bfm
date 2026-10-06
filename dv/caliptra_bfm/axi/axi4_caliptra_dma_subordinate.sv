@@ -108,19 +108,23 @@ module axi4_caliptra_dma_subordinate #(
 
   reg wr_route_fifo_q [0:MAX_OUTSTANDING-1];
   integer wr_route_head, wr_route_tail, wr_route_count;
-  reg b_active, b_route_fifo, b_prefer_fifo;
-  reg r_active, r_route_fifo, r_prefer_fifo;
-  wire b_choose_fifo = b_active ? b_route_fifo :
-                       (fifo_bvalid && (b_prefer_fifo || !sram_bvalid));
-  wire b_any_valid = sram_bvalid || fifo_bvalid;
-  wire b_selected_valid = b_choose_fifo ? fifo_bvalid : sram_bvalid;
+  reg wr_b_route_fifo_q [0:MAX_OUTSTANDING-1];
+  integer b_route_head, b_route_tail, b_route_count;
+  reg rd_route_fifo_q [0:MAX_OUTSTANDING-1];
+  integer r_route_head, r_route_tail, r_route_count;
+  wire b_choose_fifo = (b_route_count != 0) ?
+                       wr_b_route_fifo_q[b_route_head] : 1'b0;
+  wire b_selected_valid = (b_route_count != 0) &&
+                          (b_choose_fifo ? fifo_bvalid : sram_bvalid);
   wire b_fire = b_selected_valid && BREADY;
-  wire r_choose_fifo = r_active ? r_route_fifo :
-                       (fifo_rvalid && (r_prefer_fifo || !sram_rvalid));
-  wire r_any_valid = sram_rvalid || fifo_rvalid;
-  wire r_selected_valid = r_choose_fifo ? fifo_rvalid : sram_rvalid;
+  wire r_choose_fifo = (r_route_count != 0) ?
+                       rd_route_fifo_q[r_route_head] : 1'b0;
+  wire r_selected_valid = (r_route_count != 0) &&
+                          (r_choose_fifo ? fifo_rvalid : sram_rvalid);
   wire r_fire = r_selected_valid && RREADY;
+  wire r_last_fire = r_fire && RLAST;
   wire aw_fire = AWVALID && AWREADY;
+  wire ar_fire = ARVALID && ARREADY;
   wire w_last_fire = WVALID && WREADY && WLAST;
 
   function automatic is_fifo_address(input [ADDR_WIDTH-1:0] addr);
@@ -139,6 +143,7 @@ module axi4_caliptra_dma_subordinate #(
   assign ar_to_fifo = is_fifo_address(ARADDR);
 
   assign AWREADY = ARESETn && (wr_route_count < MAX_OUTSTANDING) &&
+                   (b_route_count < MAX_OUTSTANDING) &&
                    (aw_to_fifo ? fifo_awready : sram_awready);
   assign WREADY = (wr_route_count != 0) ?
                   (wr_route_fifo_q[wr_route_head] ? fifo_wready : sram_wready) : 1'b0;
@@ -147,7 +152,7 @@ module axi4_caliptra_dma_subordinate #(
   assign BUSER = b_choose_fifo ? fifo_buser : sram_buser;
   assign BVALID = b_selected_valid;
 
-  assign ARREADY = ARESETn &&
+  assign ARREADY = ARESETn && (r_route_count < MAX_OUTSTANDING) &&
                    (ar_to_fifo ? fifo_arready : sram_arready);
   assign RID = r_choose_fifo ? fifo_rid : sram_rid;
   assign RDATA = r_choose_fifo ? fifo_rdata : sram_rdata;
@@ -164,22 +169,27 @@ module axi4_caliptra_dma_subordinate #(
                                      (recovery_sequence_ready ? sequenced_threshold_words : 32'd1) :
                                      recovery_threshold_words;
 
+  // ponytail: globally order responses across targets; per-ID reordering is
+  // unnecessary for Caliptra's one-outstanding profile and can be added if needed.
   always @(posedge ACLK) begin
     if (!ARESETn) begin
       wr_route_head <= 0;
       wr_route_tail <= 0;
       wr_route_count <= 0;
-      b_active <= 0;
-      b_route_fifo <= 0;
-      b_prefer_fifo <= 0;
-      r_active <= 0;
-      r_route_fifo <= 0;
-      r_prefer_fifo <= 0;
+      b_route_head <= 0;
+      b_route_tail <= 0;
+      b_route_count <= 0;
+      r_route_head <= 0;
+      r_route_tail <= 0;
+      r_route_count <= 0;
     end else begin
       if (aw_fire) begin
         wr_route_fifo_q[wr_route_tail] <= aw_to_fifo;
         wr_route_tail <= (wr_route_tail == MAX_OUTSTANDING - 1) ?
                          0 : wr_route_tail + 1;
+        wr_b_route_fifo_q[b_route_tail] <= aw_to_fifo;
+        b_route_tail <= (b_route_tail == MAX_OUTSTANDING - 1) ?
+                        0 : b_route_tail + 1;
       end
       if (w_last_fire)
         wr_route_head <= (wr_route_head == MAX_OUTSTANDING - 1) ?
@@ -187,31 +197,22 @@ module axi4_caliptra_dma_subordinate #(
       if (aw_fire && !w_last_fire) wr_route_count <= wr_route_count + 1;
       else if (!aw_fire && w_last_fire) wr_route_count <= wr_route_count - 1;
 
-      if (b_active) begin
-        if (b_fire) begin
-          b_active <= 0;
-          b_prefer_fifo <= !b_route_fifo;
-        end
-      end else if (b_any_valid) begin
-        if (b_fire) b_prefer_fifo <= !b_choose_fifo;
-        else begin
-          b_active <= 1;
-          b_route_fifo <= b_choose_fifo;
-        end
-      end
+      if (b_fire)
+        b_route_head <= (b_route_head == MAX_OUTSTANDING - 1) ?
+                        0 : b_route_head + 1;
+      if (aw_fire && !b_fire) b_route_count <= b_route_count + 1;
+      else if (!aw_fire && b_fire) b_route_count <= b_route_count - 1;
 
-      if (r_active) begin
-        if (r_fire && RLAST) begin
-          r_active <= 0;
-          r_prefer_fifo <= !r_route_fifo;
-        end
-      end else if (r_any_valid) begin
-        if (r_fire && RLAST) r_prefer_fifo <= !r_choose_fifo;
-        else begin
-          r_active <= 1;
-          r_route_fifo <= r_choose_fifo;
-        end
+      if (ar_fire) begin
+        rd_route_fifo_q[r_route_tail] <= ar_to_fifo;
+        r_route_tail <= (r_route_tail == MAX_OUTSTANDING - 1) ?
+                        0 : r_route_tail + 1;
       end
+      if (r_last_fire)
+        r_route_head <= (r_route_head == MAX_OUTSTANDING - 1) ?
+                        0 : r_route_head + 1;
+      if (ar_fire && !r_last_fire) r_route_count <= r_route_count + 1;
+      else if (!ar_fire && r_last_fire) r_route_count <= r_route_count - 1;
     end
   end
 
@@ -229,7 +230,8 @@ module axi4_caliptra_dma_subordinate #(
     .stall_ar(stall_sram_ar), .stall_r(stall_sram_r), .inject_error(inject_error),
     .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
     .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
-    .AWVALID(AWVALID && (wr_route_count < MAX_OUTSTANDING) && !aw_to_fifo),
+    .AWVALID(AWVALID && (wr_route_count < MAX_OUTSTANDING) &&
+             (b_route_count < MAX_OUTSTANDING) && !aw_to_fifo),
     .AWREADY(sram_awready),
     .WDATA(WDATA), .WSTRB(WSTRB), .WUSER(WUSER), .WLAST(WLAST),
     .WVALID(WVALID && (wr_route_count != 0) &&
@@ -238,7 +240,8 @@ module axi4_caliptra_dma_subordinate #(
     .BREADY(BREADY && b_selected_valid && !b_choose_fifo),
     .ARID(ARID), .ARADDR(ARADDR), .ARLEN(ARLEN), .ARSIZE(ARSIZE),
     .ARBURST(ARBURST), .ARLOCK(ARLOCK), .ARUSER(ARUSER),
-    .ARVALID(ARVALID && !ar_to_fifo), .ARREADY(sram_arready),
+    .ARVALID(ARVALID && (r_route_count < MAX_OUTSTANDING) && !ar_to_fifo),
+    .ARREADY(sram_arready),
     .RID(sram_rid), .RDATA(sram_rdata), .RRESP(sram_rresp), .RUSER(sram_ruser),
     .RLAST(sram_rlast), .RVALID(sram_rvalid),
     .RREADY(RREADY && r_selected_valid && !r_choose_fifo)
@@ -261,7 +264,8 @@ module axi4_caliptra_dma_subordinate #(
     .fifo_pop_event(fifo_pop_event_internal),
     .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
     .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
-    .AWVALID(AWVALID && (wr_route_count < MAX_OUTSTANDING) && aw_to_fifo),
+    .AWVALID(AWVALID && (wr_route_count < MAX_OUTSTANDING) &&
+             (b_route_count < MAX_OUTSTANDING) && aw_to_fifo),
     .AWREADY(fifo_awready),
     .WDATA(WDATA), .WSTRB(WSTRB), .WUSER(WUSER), .WLAST(WLAST),
     .WVALID(WVALID && (wr_route_count != 0) &&
@@ -270,7 +274,8 @@ module axi4_caliptra_dma_subordinate #(
     .BREADY(BREADY && b_selected_valid && b_choose_fifo),
     .ARID(ARID), .ARADDR(ARADDR), .ARLEN(ARLEN), .ARSIZE(ARSIZE),
     .ARBURST(ARBURST), .ARLOCK(ARLOCK), .ARUSER(ARUSER),
-    .ARVALID(ARVALID && ar_to_fifo), .ARREADY(fifo_arready),
+    .ARVALID(ARVALID && (r_route_count < MAX_OUTSTANDING) && ar_to_fifo),
+    .ARREADY(fifo_arready),
     .RID(fifo_rid), .RDATA(fifo_rdata), .RRESP(fifo_rresp), .RUSER(fifo_ruser),
     .RLAST(fifo_rlast), .RVALID(fifo_rvalid),
     .RREADY(RREADY && r_selected_valid && r_choose_fifo)

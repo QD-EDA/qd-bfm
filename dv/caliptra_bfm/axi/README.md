@@ -135,12 +135,16 @@ zero-entry skipping, random threshold bounds, reset retry, and end-of-list;
 routes the 48-bit DMA bus to the 256 KiB SRAM model or the FIFO endpoint using
 the pinned top's 18-bit low-address prefix decode. Non-FIFO traffic is passed
 to the bounded queued SRAM target, which returns DECERR for addresses outside
-its range. The wrapper tracks up to `MAX_OUTSTANDING` accepted write addresses,
-routs W beats in AW order, and arbitrates queued B responses from SRAM and
-FIFO. It accepts multiple SRAM reads and holds the selected R source through
-RLAST; the FIFO endpoint itself remains single-outstanding per direction. The
-wrapper supports simultaneous read and write traffic and includes the recovery
-availability policy plus optional autonomous FIFO traffic. Its optional
+its range. The wrapper tracks up to `MAX_OUTSTANDING` accepted requests per
+direction, routes W beats in AW order, and records each request's backing
+target through response completion. B and R responses are released in accepted
+AW/AR order across SRAM and FIFO, preserving AXI same-ID ordering even when a
+later target becomes ready first. This intentionally serializes responses
+across different IDs; per-ID reordering is unnecessary for Caliptra's current
+one-outstanding-per-direction manager profile. The FIFO endpoint itself remains
+single-outstanding per direction. The wrapper supports simultaneous read and
+write traffic and includes the recovery availability policy plus optional
+autonomous FIFO traffic. Its optional
 recovery sequencer consumes the packed block-size list from Caliptra's existing
 Apache-2.0 DMA testcase generator. `tests/run_dma_subordinate.sh` now covers
 mixed SRAM/FIFO request routing and response arbitration. The UVM
