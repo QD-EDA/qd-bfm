@@ -68,6 +68,11 @@ def main() -> int:
         help="also run Caliptra's stock 12-write AXI USER RAL sequence (runtime mode only)",
     )
     parser.add_argument(
+        "--generated-axi-user-reject-probe",
+        action="store_true",
+        help="check an invalid mailbox AXI USER read is rejected before the generated AHB mailbox claim",
+    )
+    parser.add_argument(
         "--generated-ahb-ral-read",
         action="store_true",
         help="read the unlocked mailbox lock through the generated AHB RAL map (runtime mode only)",
@@ -102,6 +107,10 @@ def main() -> int:
         parser.error("--trace-predictor-reset requires --generated-environment-runtime")
     if args.generated_axi_user_init and not args.generated_environment_runtime:
         parser.error("--generated-axi-user-init requires --generated-environment-runtime")
+    if args.generated_axi_user_reject_probe and not args.generated_axi_user_init:
+        parser.error("--generated-axi-user-reject-probe requires --generated-axi-user-init")
+    if args.generated_axi_user_reject_probe and not args.generated_ahb_mbox_payload:
+        parser.error("--generated-axi-user-reject-probe requires --generated-ahb-mbox-payload")
     if args.generated_ahb_ral_read and not args.generated_environment_runtime:
         parser.error("--generated-ahb-ral-read requires --generated-environment-runtime")
     if args.generated_ahb_ral_dlen_write_readback and not args.generated_environment_runtime:
@@ -690,6 +699,7 @@ def main() -> int:
         if args.open_mbox_ecc_injection:
             ecc_args = [f"+CALIPTRA_MBOX_ECC_{args.open_mbox_ecc_injection.upper()}"]
         axi_user_init_args = ["+CALIPTRA_GENERATED_AXI_USER_INIT"] if args.generated_axi_user_init else []
+        axi_user_reject_args = ["+CALIPTRA_GENERATED_AXI_USER_REJECT"] if args.generated_axi_user_reject_probe else []
         ahb_ral_read_args = ["+CALIPTRA_GENERATED_AHB_RAL_READ"] if args.generated_ahb_ral_read else []
         ahb_ral_dlen_args = ["+CALIPTRA_GENERATED_AHB_RAL_DLEN_WRITE_READBACK"] if args.generated_ahb_ral_dlen_write_readback else []
         ahb_mbox_payload_args = ["+CALIPTRA_GENERATED_AHB_MBOX_PAYLOAD"] if args.generated_ahb_mbox_payload else []
@@ -706,6 +716,7 @@ def main() -> int:
                     *progress_args,
                     *ecc_args,
                     *axi_user_init_args,
+                    *axi_user_reject_args,
                     *ahb_ral_read_args,
                     *ahb_ral_dlen_args,
                     *ahb_mbox_payload_args,

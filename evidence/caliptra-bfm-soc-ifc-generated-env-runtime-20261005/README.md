@@ -32,6 +32,30 @@ Full log: `generated-env-runtime-axi-user-init-pass-20261005.log` (raw artifact 
 This qualifies the exercised stock RAL sequence and USER extension path, not
 all generated SoC-IFC sequences.
 
+The opt-in `--generated-axi-user-reject-probe` requires both the stock AXI USER
+initialization and the generated AHB mailbox payload. It reads `MBOX_LOCK`
+with an unlisted AXI USER, requires the actual AXI response to be SLVERR, then
+lets the following AHB mailbox claim read verify that the rejected request did
+not claim the mailbox.
+
+The combined guarded run passed this probe with `ARUSER=0xbad0bad0`; the
+subsequent AHB mailbox claim still read the initial unlocked value. The full
+AXI USER plus four-word AHB/AAXI mailbox handshake reported 39/39 scoreboard
+matches, zero mismatches/no-comparison/missed transactions, and zero UVM
+errors/fatals. The run emitted three existing warnings: one QVIP coverage shim
+notice and two whole-register RAL field-access fallbacks. Minimum free memory
+was 74% against the 60% floor. The raw log was kept outside this checkpoint.
+
+Replay from the BFM worktree:
+
+```sh
+IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
+  python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py \
+  --generated-environment-runtime --trace-predictor-reset \
+  --generated-axi-user-init --generated-ahb-mbox-payload \
+  --generated-axi-user-reject-probe
+```
+
 ## Generated AHB RAL read
 
 The optional `--generated-ahb-ral-read` lane starts after generated power-on

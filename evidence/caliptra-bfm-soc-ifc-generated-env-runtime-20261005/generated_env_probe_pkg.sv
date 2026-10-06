@@ -52,11 +52,13 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
     int data_in_write_count;
     bit axi_user_init_active;
     bit mailbox_response_active;
+    bit mailbox_user_rejection_active;
     bit [31:0] axi_user_init_expected_user;
     bit [47:0] axi_user_init_expected_address [12];
     int axi_user_init_write_count;
     int mailbox_response_read_count;
     int mailbox_response_write_count;
+    int mailbox_user_rejection_count;
     bit [31:0] mailbox_response_axi_user;
     event completed;
 
@@ -68,8 +70,18 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
     endfunction
 
     function void write(aaxi_master_tr item);
-      if ((!axi_user_init_active && item.id != 8'h5a) || item.resp != 2'b00 || !item.transport_success)
+      if (!axi_user_init_active && item.id != 8'h5a)
         `uvm_fatal("SOC_IFC_ENV_AAXI", $sformatf("Unexpected host AXI record: %s", item.convert2string()))
+      if (mailbox_user_rejection_active) begin
+        if (item.is_write() || item.addr != 48'h2_0000 || item.aruser != 32'hbad0_bad0 ||
+            item.resp != 2'b10)
+          `uvm_fatal("SOC_IFC_ENV_AXI_USER_REJECT", $sformatf("Invalid mailbox USER read was not rejected with SLVERR: %s", item.convert2string()))
+        mailbox_user_rejection_count++;
+        -> completed;
+        return;
+      end
+      if (item.resp != 2'b00 || !item.transport_success)
+        `uvm_fatal("SOC_IFC_ENV_AAXI", $sformatf("Unexpected host AXI response: %s", item.convert2string()))
       if (item.is_write()) begin
         if (item.beatQ.size() != 1 || item.strbQ.size() != 1 || item.strbQ[0] != 4'hf)
           `uvm_fatal("SOC_IFC_ENV_AAXI_WRITE", "Generated environment monitor lost single-beat write data")
@@ -165,6 +177,7 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
 
   class caliptra_soc_ifc_aaxi_rw_sequence extends uvm_sequence #(aaxi_master_tr);
     bit mailbox_response_only;
+    bit mailbox_user_rejection_probe;
     bit [31:0] mailbox_response_axi_user;
 `ifdef CALIPTRA_BFM_OPEN_MBOX_TARGET
     mbox_sram_configuration mbox_sram_agent_config;
@@ -211,6 +224,22 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
       data = req.beatQ[0];
     endtask
 
+    task read_word_expect_slverr(input logic [47:0] address, input logic [31:0] user);
+      aaxi_master_tr req;
+      req = aaxi_master_tr::type_id::create($sformatf("read_denied_%h", address));
+      start_item(req);
+      req.kind = AAXI_READ;
+      req.addr = address;
+      req.id = 8'h5a;
+      req.len = 0;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.aruser = user;
+      finish_item(req);
+      if (req.resp != 2'b10)
+        `uvm_fatal("SOC_IFC_ENV_AXI_USER_REJECT", $sformatf("Invalid mailbox USER read did not return SLVERR: %s", req.convert2string()))
+    endtask
+
     task body();
       logic [31:0] read_data;
       int i;
@@ -228,7 +257,9 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
       generated_env_probe_ecc_mode = ecc_mode;
 `endif
 
-      if (mailbox_response_only) begin
+      if (mailbox_user_rejection_probe) begin
+        read_word_expect_slverr(48'h2_0000, 32'hbad0_bad0);
+      end else if (mailbox_response_only) begin
         read_word(48'h2_0008, mailbox_response_axi_user, read_data);
         if (read_data != 32'hcafe_0001)
           `uvm_fatal("SOC_IFC_ENV_MBOX_RESPONSE_CMD", "SoC AXI mailbox command readback mismatch")
@@ -462,6 +493,36 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
         $display("PASS: stock generated AXI USER RAL sequence completed 12 pin-checked writes");
       end
 
+      if ($test$plusargs("CALIPTRA_GENERATED_AXI_USER_REJECT")) begin
+        if (!$test$plusargs("CALIPTRA_GENERATED_AXI_USER_INIT") ||
+            !$test$plusargs("CALIPTRA_GENERATED_AHB_MBOX_PAYLOAD"))
+          `uvm_fatal("SOC_IFC_ENV_AXI_USER_REJECT_CONFIG", "USER rejection probe requires stock AXI USER initialization and generated AHB mailbox payload")
+        observer.mailbox_user_rejection_active = 1;
+        observer.mailbox_user_rejection_count = 0;
+        sequence_done = 0;
+        aaxi_sequence = caliptra_soc_ifc_aaxi_rw_sequence::type_id::create("aaxi_invalid_user_probe");
+        aaxi_sequence.mailbox_user_rejection_probe = 1;
+        aaxi_sequence.mbox_sram_agent_config = top_level_sequence.mbox_sram_agent_config;
+        fork
+          begin
+            aaxi_sequence.start(top_level_sequence.uvm_test_top_environment_aaxi_tb_env0_master_0_sqr);
+            sequence_done = 1;
+          end
+          begin
+            wait (sequence_done && observer.mailbox_user_rejection_count == 1);
+          end
+          begin
+            #100000ns;
+            if (!sequence_done)
+              `uvm_fatal("SOC_IFC_ENV_AXI_USER_REJECT_TIMEOUT", "Invalid mailbox USER AXI read timed out")
+          end
+        join_any
+        observer.mailbox_user_rejection_active = 0;
+        if (observer.mailbox_user_rejection_count != 1)
+          `uvm_fatal("SOC_IFC_ENV_AXI_USER_REJECT_OBSERVE", "Did not observe the rejected mailbox USER AXI read")
+        $display("PASS: invalid mailbox AXI USER read returned SLVERR");
+      end
+
       if ($test$plusargs("CALIPTRA_GENERATED_AHB_MBOX_PAYLOAD")) begin
         sequence_done = 0;
         fork
@@ -471,6 +532,8 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
                 top_level_sequence.reg_model.soc_ifc_AHB_map);
             if (ahb_ral_status != UVM_IS_OK || ahb_ral_value != 0)
               `uvm_fatal("SOC_IFC_ENV_AHB_MBOX_LOCK", $sformatf("Mailbox claim failed: status=%0d value=0x%0h", ahb_ral_status, ahb_ral_value))
+            if ($test$plusargs("CALIPTRA_GENERATED_AXI_USER_REJECT"))
+              $display("PASS: denied AXI USER read left mailbox available for the following AHB claim");
             top_level_sequence.reg_model.mbox_csr_rm.mbox_cmd.write(
                 ahb_ral_status, 32'hcafe_0001, UVM_FRONTDOOR,
                 top_level_sequence.reg_model.soc_ifc_AHB_map);
