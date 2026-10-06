@@ -43,9 +43,9 @@ status; stock L0 qualification is still open.
 
 ## DMA firmware follow-up
 
-Five bounded top runs with the open AXI target timed out before a firmware
-test result. The first three reached `CLP: ROM Flow in progress...`; their
-historical run details are:
+Six bounded top runs with the open AXI target timed out before a firmware
+test result. They reached `CLP: ROM Flow in progress...`; historical run
+details are:
 
 | Firmware case | Physical RNG cadence | Guard | Minimum free memory | Result |
 | --- | ---: | ---: | ---: | --- |
@@ -54,6 +54,7 @@ historical run details are:
 | `smoke_test_dma_aes_gcm_short_1_dword` | 50 cycles, diagnostic override | 1,800 s | 72% | Timeout (exit 124) |
 | `smoke_test_dma_aes_gcm_short_1_dword` (all 12 cases) | 50 cycles, fast boot preload; PQ generators active | 900 s | 75% | ROM-flow timeout (exit 124) |
 | `smoke_test_dma_aes_gcm_short_1_dword` (all 12 cases) | 50 cycles, fast boot preload; PQ generators skipped | 1,800 s | 70% | ROM-flow timeout (exit 124) |
+| `smoke_test_dma_aes_gcm_short_1_dword` (all 12 cases) | 50 cycles, fast boot preload; PQ generators skipped; quiet firmware | 1,800 s | 68% | ROM-flow timeout (exit 124) |
 
 All three simulation logs have SHA-256
 `0dca66c812631aa21ebbe07094e7d0db9d55ebbba309c7bb12b28268ea44ef99`.
@@ -73,11 +74,12 @@ Their large simulator images and raw logs were removed after hashing. Both kept
 the full 12-case firmware. Skipping unrelated MLDSA/MLKEM testbench vectors
 reduced the simulator log from 49,658 to 4,512 bytes, but the run still reached
 ROM flow only within 1,800 seconds. Neither run had AXI instrumentation, so
-neither establishes DMA traffic or an AXI response failure. The runner also
-has an opt-in `--quiet-firmware` mode to suppress low-priority firmware prints
-without changing the 12-case list; that mode is being used to isolate this
-remaining startup delay. The all-case runtime remains unqualified; the separate
-first-case transaction pass below establishes only that diagnostic case.
+neither establishes DMA traffic or an AXI response failure. The sixth run also
+used `--quiet-firmware` and timed out in ROM flow; its result and simulator-log
+hash are in
+[`full-aes-all-cases-pqskip-quiet-timeout.json`](full-aes-all-cases-pqskip-quiet-timeout.json).
+The all-case runtime remains unqualified; the separate first-case transaction
+pass below establishes only that diagnostic case.
 
 ## Fast CRT0 startup diagnostic
 
