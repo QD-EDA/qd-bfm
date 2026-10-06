@@ -19,13 +19,15 @@ may overlap across directions: one read task and one write task can be active
 at once, while a second same-direction call is rejected until the active call
 finishes. This is one outstanding operation per direction, not same-channel
 AXI pipelining. A protocol mismatch or timeout poisons the manager; assert
-reset low and call `reset_master` before reuse.
+reset low and call `reset_master` before reuse. Reset also aborts an in-flight
+task, returns it unsuccessful, and clears its channel outputs; call
+`reset_master` after that task exits.
 The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
 `RRESP` preserve the target's response code. Invalid aligned/burst/4KB profile
 requests are rejected before VALID is asserted.
 
 Run the two-beat USER/LOCK/stall test, response errors, timeout/reset recovery,
-and bad BID/RLAST fail-stop tests with:
+read/write reset aborts, and bad BID/RLAST fail-stop tests with:
 
 ```sh
 ./tests/run_master.sh

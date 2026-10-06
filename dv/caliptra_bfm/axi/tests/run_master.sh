@@ -14,6 +14,7 @@ trap 'rm -f "$out" "$out_no_checker"' EXIT
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv
 "$VVP_BIN" "$out"
 "$VVP_BIN" "$out" +CASE=CONCURRENT
+"$VVP_BIN" "$out" +CASE=RESET_ABORT
 "$IVERILOG_BIN" -g2012 -Ptb_axi4_caliptra_master.CHECKER_ENABLED=0 \
   -s tb_axi4_caliptra_master -o "$out_no_checker" \
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv

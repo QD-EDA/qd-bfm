@@ -73,6 +73,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg inject_bad_bid = 0;
   reg inject_bad_rlast = 0;
   reg suppress_read = 0;
+  reg suppress_write_response = 0;
   integer aw_stalls = 0;
   integer w_stalls = 0;
   integer ar_stalls = 0;
@@ -134,7 +135,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           BID <= inject_bad_bid ? write_id + 1'b1 : write_id;
           BRESP <= inject_error ? 2'b10 : 2'b00;
           BUSER <= 32'hb000_0001;
-          BVALID <= 1;
+          if (!suppress_write_response) BVALID <= 1;
         end else write_count <= write_count + 1'b1;
       end
       if (BVALID && BREADY) BVALID <= 0;
@@ -182,6 +183,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   endtask
 
   reg success;
+  reg abort_read_success, abort_write_success;
   reg [1:0] response;
   reg [31:0] response_user;
   reg [511:0] write_data;
@@ -207,6 +209,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
       write_data = {480'b0, 32'hdead_beef};
       write_strb = {60'b0, 4'hf};
       write_user = {480'b0, 32'hd000_0000};
+      bfm.read_burst(19'h4c, 0, 2, 2'b01, 8'h35, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "exclusive read before concurrent write failed");
       fork
         bfm.write_burst(19'h4c, 0, 2, 2'b01, 8'h35, 32'hca11_ab1e, 1'b1,
           write_data, write_strb, write_user, write_success_concurrent,
@@ -229,6 +234,54 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         "AXI manager serialized the read and write task calls");
       if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
       $display("PASS: AXI manager overlaps independent read and write tasks");
+      $finish;
+    end else if (test_case == "RESET_ABORT") begin
+      suppress_read = 1;
+      fork
+        bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h51, 32'hcafe_0001, 1'b1,
+          abort_read_success, read_data, read_user, read_response, response_user);
+        begin
+          wait(read_pending);
+          @(posedge ACLK);
+          @(negedge ACLK); ARESETn = 0;
+          repeat (2) @(posedge ACLK);
+          @(negedge ACLK); bfm.reset_master(); suppress_read = 0; ARESETn = 1;
+        end
+      join
+      check(!abort_read_success && !bfm.read_busy && !ARVALID && !RREADY,
+        "reset did not abort and clear an in-flight read");
+      bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h52, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "read manager did not recover after reset abort");
+
+      write_data = {480'b0, 32'h5678_1234};
+      write_strb = {60'b0, 4'hf};
+      write_user = {480'b0, 32'hd000_0000};
+      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h61, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "exclusive read before reset-aborted write failed");
+      suppress_write_response = 1;
+      fork
+        bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h61, 32'hca11_ab1e, 1'b1,
+          write_data, write_strb, write_user, abort_write_success, response, response_user);
+        begin
+          wait(BREADY);
+          @(posedge ACLK);
+          @(negedge ACLK); ARESETn = 0;
+          repeat (2) @(posedge ACLK);
+          @(negedge ACLK); bfm.reset_master(); suppress_write_response = 0; ARESETn = 1;
+        end
+      join
+      check(!abort_write_success && !bfm.write_busy && !AWVALID && !WVALID && !BREADY,
+        "reset did not abort and clear an in-flight write");
+      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h62, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "exclusive read before recovery write failed");
+      bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h62, 32'hca11_ab1e, 1'b1,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success, "write manager did not recover after reset abort");
+      if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
+      $display("PASS: AXI manager aborts in-flight reads and writes on reset, then recovers");
       $finish;
     end else if (test_case == "BAD_BID") begin
       write_data = {480'b0, 32'hfeed_1234};
@@ -274,6 +327,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
     write_data = {448'b0, 32'h2222_2222, 32'h1111_1111};
     write_strb = {56'b0, 4'hf, 4'h3};
     write_user = {448'b0, 32'hd000_0001, 32'hd000_0000};
+    bfm.read_burst(19'h40, 1, 2, 2'b01, 8'h11, 32'hcafe_0001, 1'b1,
+      success, read_data, read_user, read_response, response_user);
+    check(success, "exclusive read before manager write failed");
     bfm.write_burst(19'h40, 1, 2, 2'b01, 8'h11, 32'hca11_ab1e, 1'b1,
       write_data, write_strb, write_user, success, response, response_user);
     check(success && response == 0 && response_user == 32'hb000_0001,
@@ -303,6 +359,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
       "read error response was not returned as a failed transaction");
     inject_read_error = 0;
 
+    bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h31, 32'hcafe_0001, 1'b1,
+      success, read_data, read_user, read_response, response_user);
+    check(success, "exclusive read before SLVERR write failed");
     inject_error = 1;
     write_data = {480'b0, 32'hfeed_1234};
     write_strb = {60'b0, 4'hf};
