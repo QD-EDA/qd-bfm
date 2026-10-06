@@ -50,6 +50,7 @@ module axi4_caliptra_checker #(
 );
   localparam integer DATA_BYTES = DATA_WIDTH / 8;
   localparam integer ID_COUNT = 1 << ID_WIDTH;
+  localparam [1:0] EXCL_NONE = 2'd0, EXCL_PENDING = 2'd1, EXCL_COMPLETE = 2'd2;
 
   reg aw_stalled, w_stalled, b_stalled, ar_stalled, r_stalled;
   reg [ID_WIDTH+ADDR_WIDTH+8+3+2+1+USER_WIDTH-1:0] aw_hold;
@@ -62,6 +63,10 @@ module axi4_caliptra_checker #(
   reg wr_data_done [0:ID_COUNT-1];
   reg rd_active [0:ID_COUNT-1];
   reg [8:0] rd_beats_left [0:ID_COUNT-1];
+  // Arm IHI0022L A7.3: match the exposed ID/address/length/size/burst fields;
+  // the pinned Caliptra interface omits AXI's CACHE, PROT, and REGION fields.
+  reg [1:0] exclusive_read_state [0:ID_COUNT-1];
+  reg [ADDR_WIDTH+8+3+2-1:0] exclusive_read_shape [0:ID_COUNT-1];
 
   reg [8:0] expected_beats [0:QUEUE_DEPTH-1];
   reg [ID_WIDTH-1:0] expected_id [0:QUEUE_DEPTH-1];
@@ -198,6 +203,7 @@ module axi4_caliptra_checker #(
         wr_data_done[i] = 0;
         rd_active[i] = 0;
         rd_beats_left[i] = 0;
+        exclusive_read_state[i] = EXCL_NONE;
       end
     end else begin
       if (aw_stalled && (!AWVALID ||
@@ -227,6 +233,15 @@ module axi4_caliptra_checker #(
       if (AWVALID && AWREADY) begin
         check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
         if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
+        if (AWLOCK) begin
+          if (exclusive_read_state[AWID] == EXCL_NONE)
+            $fatal(1, "AXI exclusive write has no completed exclusive read");
+          if (exclusive_read_state[AWID] == EXCL_PENDING)
+            $fatal(1, "AXI exclusive write issued before the read completes");
+          if (exclusive_read_shape[AWID] !== {AWADDR, AWLEN, AWSIZE, AWBURST})
+            $fatal(1, "AXI exclusive read/write request fields differ");
+          exclusive_read_state[AWID] = EXCL_NONE;
+        end
         if (wr_active[AWID]) $fatal(1, "AXI Caliptra profile allows one outstanding write per ID");
         if (expected_count == QUEUE_DEPTH) $fatal(1, "AXI checker AW queue overflow");
         wr_active[AWID] = 1;
@@ -272,6 +287,10 @@ module axi4_caliptra_checker #(
         if (ARLOCK) check_exclusive_burst(ARADDR, ARLEN, ARSIZE, "AR");
         if (rd_active[ARID]) $fatal(1, "AXI Caliptra profile allows one outstanding read per ID");
         rd_active[ARID] = 1;
+        if (ARLOCK) begin
+          exclusive_read_state[ARID] = EXCL_PENDING;
+          exclusive_read_shape[ARID] = {ARADDR, ARLEN, ARSIZE, ARBURST};
+        end
         rd_beats_left[ARID] = {1'b0, ARLEN} + 1'b1;
       end
 
@@ -282,6 +301,8 @@ module axi4_caliptra_checker #(
         if (rd_beats_left[RID] == 1) begin
           rd_beats_left[RID] = 0;
           rd_active[RID] = 0;
+          if (exclusive_read_state[RID] == EXCL_PENDING)
+            exclusive_read_state[RID] = EXCL_COMPLETE;
         end else begin
           rd_beats_left[RID] = rd_beats_left[RID] - 1'b1;
         end

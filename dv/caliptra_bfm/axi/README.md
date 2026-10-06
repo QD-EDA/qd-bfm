@@ -270,10 +270,13 @@ that allows multiple outstanding transactions per ID.
 
 Caliptra's interface does not expose CACHE, PROT, QOS, or REGION; the checker
 cannot observe or validate those signals. It applies the Caliptra profile's
-aligned-transfer requirement but does not check exclusive read/write pairing,
-mailbox USER policy, or ARM Axi4PC's complete assertion set. It is a real
-protocol-checking component, not an Axi4PC drop-in. Exclusive-size rules follow
-[Arm IHI0022L §A6.3.3](https://documentation-service.arm.com/static/68b03beb01ae952d9559f9eb).
+aligned-transfer requirement and requires an exclusive write to follow a
+completed exclusive read with matching ID, address, length, size, and burst.
+This does not model exclusive-monitor success/failure due to intervening writes.
+Mailbox USER policy and ARM Axi4PC's complete assertion set are also outside
+the checker. It is a real protocol-checking component, not an Axi4PC drop-in.
+Exclusive-size and pair rules follow
+[Arm IHI0022L A6.3.3/A7.3](https://documentation-service.arm.com/static/68b03beb01ae952d9559f9eb).
 
 Call `check_idle` from the testbench's drain/end-of-test check so outstanding
 responses or incomplete write data cannot be left behind silently. The checker
@@ -281,7 +284,7 @@ does not impose a wall-clock response timeout; that policy belongs to the
 testbench or active BFM.
 
 Run the stalled multi-beat case, legal W-before-AW and cross-ID response
-reordering, legal exclusive traffic, and fifteen negative controls with:
+reordering, a matched exclusive sequence, and twenty-one negative controls with:
 
 ```sh
 ./tests/run_checker.sh

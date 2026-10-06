@@ -31,7 +31,13 @@ for entry in \
   'BAD_DUP_RID:one outstanding read per ID' \
   'BAD_LOCK_ALIGNMENT:exclusive AXI address is not aligned to its transaction size' \
   'BAD_LOCK_TOO_LONG:exclusive burst exceeds 16 transfers' \
-  'BAD_LOCK_NON_POWER2:exclusive byte count is not a power of 2'; do
+  'BAD_LOCK_NON_POWER2:exclusive byte count is not a power of 2' \
+  'BAD_LOCK_NO_READ:exclusive write has no completed exclusive read' \
+  'BAD_LOCK_EARLY_WRITE:exclusive write issued before the read completes' \
+  'BAD_LOCK_MISMATCH:exclusive read/write request fields differ' \
+  'BAD_LOCK_LEN_MISMATCH:exclusive read/write request fields differ' \
+  'BAD_LOCK_SIZE_MISMATCH:exclusive read/write request fields differ' \
+  'BAD_LOCK_BURST_MISMATCH:exclusive read/write request fields differ'; do
   case_name=${entry%%:*}
   expected=${entry#*:}
   if "$VVP_BIN" "$out" "+CASE=$case_name" >"$log" 2>&1; then
@@ -44,4 +50,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted W-before-AW, cross-ID reordering, and legal exclusives; rejected fifteen injected protocol violations\n'
+printf 'PASS: AXI checker accepted W-before-AW, cross-ID reordering, and legal exclusives; rejected twenty-one injected protocol violations\n'

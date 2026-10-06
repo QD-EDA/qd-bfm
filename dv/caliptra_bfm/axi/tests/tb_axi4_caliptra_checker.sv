@@ -114,6 +114,14 @@ module tb_axi4_caliptra_checker;
     end
   endtask
 
+  task automatic complete_locked_read(input [7:0] id);
+    integer beat;
+    begin
+      for (beat = 0; beat < 4; beat = beat + 1)
+        send_r(id, beat == 3, 1);
+    end
+  endtask
+
   initial begin
     if ($value$plusargs("CASE=%s", test_case)) begin end
     repeat (2) step();
@@ -166,18 +174,38 @@ module tb_axi4_caliptra_checker;
       send_locked_ar(8'hd, 19'h100, 16);
     end else if (test_case == "BAD_LOCK_NON_POWER2") begin
       send_locked_aw(8'he, 19'h100, 2);
+    end else if (test_case == "BAD_LOCK_NO_READ") begin
+      send_locked_aw(8'h30, 19'h110, 3);
+    end else if (test_case == "BAD_LOCK_EARLY_WRITE") begin
+      send_locked_ar(8'h30, 19'h110, 3);
+      send_locked_aw(8'h30, 19'h110, 3);
+    end else if (test_case == "BAD_LOCK_MISMATCH") begin
+      send_locked_ar(8'h30, 19'h110, 3);
+      complete_locked_read(8'h30);
+      send_locked_aw(8'h30, 19'h120, 3);
+    end else if (test_case == "BAD_LOCK_LEN_MISMATCH") begin
+      send_locked_ar(8'h30, 19'h110, 3);
+      complete_locked_read(8'h30);
+      send_locked_aw(8'h30, 19'h110, 0);
+    end else if (test_case == "BAD_LOCK_SIZE_MISMATCH") begin
+      send_locked_ar(8'h30, 19'h110, 3);
+      complete_locked_read(8'h30);
+      AWSIZE = 1;
+      send_locked_aw(8'h30, 19'h110, 3);
+    end else if (test_case == "BAD_LOCK_BURST_MISMATCH") begin
+      send_locked_ar(8'h30, 19'h110, 3);
+      complete_locked_read(8'h30);
+      AWBURST = 0;
+      send_locked_aw(8'h30, 19'h110, 3);
     end else if (test_case == "GOOD_EXCLUSIVE") begin
       send_locked_ar(8'h31, 19'h110, 3);
-      send_r(8'h31, 0, 1);
-      send_r(8'h31, 0, 1);
-      send_r(8'h31, 0, 1);
-      send_r(8'h31, 1, 1);
-      send_locked_aw(8'h32, 19'h120, 3);
+      complete_locked_read(8'h31);
+      send_locked_aw(8'h31, 19'h110, 3);
       send_w(32'h3210, 0);
       send_w(32'h3211, 0);
       send_w(32'h3212, 0);
       send_w(32'h3213, 1);
-      send_b(8'h32);
+      send_b(8'h31);
     end else if (test_case == "GOOD_REORDER") begin
       // AXI4 permits W to precede its address and responses to complete out
       // of order across IDs. It still requires a single ordered W stream.
