@@ -13,7 +13,29 @@ SPEC.loader.exec_module(RUNNER)
 
 
 class ProfileOverlayTest(unittest.TestCase):
+    def test_rewrites_only_aes_mul2_partial_result_writes(self):
+        source = (
+            "function automatic logic [7:0] aes_mul2(logic [7:0] in);\n"
+            "  logic [7:0] out;\n"
+            "  out[7] = in[6];\n"
+            "  out[6] = in[5];\n"
+            "  out[5] = in[4];\n"
+            "  out[4] = in[3] ^ in[7];\n"
+            "  out[3] = in[2] ^ in[7];\n"
+            "  out[2] = in[1];\n"
+            "  out[1] = in[0] ^ in[7];\n"
+            "  out[0] = in[7];\n"
+            "  return out;\n"
+            "endfunction\n"
+        )
+        patched = RUNNER.replace_aes_mul2_partial_writes(source)
+        self.assertIn("out = {in[6:0], 1'b0} ^ (in[7] ? 8'h1b : 8'h00);", patched)
+        self.assertNotIn("out[7] =", patched)
+        with self.assertRaisesRegex(ValueError, "AES mul2 partial-write block"):
+            RUNNER.replace_aes_mul2_partial_writes("function automatic logic [7:0] other(); endfunction\n")
+
     def test_replaces_only_original_axi_complex_and_adds_open_sources(self):
+        original_aes_pkg = "${CALIPTRA_ROOT}/src/aes/rtl/aes_pkg.sv"
         original_axi_if = "${CALIPTRA_ROOT}/src/axi/rtl/axi_if.sv"
         original = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_axi_complex.sv"
         sram_export = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_veer_sram_export.sv"
@@ -44,19 +66,25 @@ class ProfileOverlayTest(unittest.TestCase):
             jtag_overlay = temp / "jtag.sv"
             jtag_overlay.write_text("module jtag_overlay; endmodule\n")
             baseline.write_text(
-                f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original_axi_if}\n{original}\n{sram_export}\n"
+                f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original_aes_pkg}\n{original_axi_if}\n{original}\n{sram_export}\n"
                 f"{top_sva}\n{soc_bfm}\n{top_tb}\n{generator}\n"
             )
+
+            def fake_aes_pkg_overlay(_rtl, path):
+                Path(path).write_text("package aes_pkg_overlay; endpackage\n")
 
             def fake_axi_if_overlay(_rtl, path):
                 Path(path).write_text("module axi_if_overlay; endmodule\n")
 
-            with patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
+            with patch.object(RUNNER, "prepare_aes_pkg_overlay", side_effect=fake_aes_pkg_overlay), \
+                    patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
                 RUNNER.prepare_iverilog_profile(
                     baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay
                 )
 
             content = generated.read_text()
+            self.assertNotIn(original_aes_pkg, content)
+            self.assertIn(str(temp / "aes_pkg_icarus.sv"), content)
             self.assertNotIn(original_axi_if, content)
             self.assertIn(str(temp / "axi_if_icarus.sv"), content)
             self.assertNotIn(original, content)

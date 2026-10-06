@@ -14,6 +14,7 @@ import sys
 
 
 REPO = Path(__file__).resolve().parents[4]
+ORIGINAL_AES_PKG = "${CALIPTRA_ROOT}/src/aes/rtl/aes_pkg.sv"
 ORIGINAL_AXI_IF = "${CALIPTRA_ROOT}/src/axi/rtl/axi_if.sv"
 ORIGINAL_AXI_COMPLEX = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_axi_complex.sv"
 ORIGINAL_SRAM_EXPORT = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_veer_sram_export.sv"
@@ -22,6 +23,8 @@ ORIGINAL_SOC_BFM = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_soc_bfm.
 ORIGINAL_TOP_TB = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
 ORIGINAL_DMA_GENERATOR = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
 CASE_NAMES = ("smoke_test_dma", "rand_test_dma")
+AES_PKG_SHA256 = "19a0096ffb731c99778d68a7baa81d0aa33c8b86a665231005d50251087a710f"
+AES_PKG_OVERLAY_SHA256 = "d29c80cd5e51629b25a924e5249f85032c0b42f0f4006c3944906395e98ec158"
 AXI_IF_SHA256 = "e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c"
 AXI_IF_OVERLAY_SHA256 = "d9173b5d3ecf2bff70412016f752e902f3f6ccf4fdb68ffd58764fb33e34f834"
 VECTOR_OUTPUTS = {
@@ -112,6 +115,32 @@ def allocate_axi_read_resp_user(text):
     return text.replace(before, after, 1)
 
 
+def replace_aes_mul2_partial_writes(text):
+    before = (
+        "  out[7] = in[6];\n"
+        "  out[6] = in[5];\n"
+        "  out[5] = in[4];\n"
+        "  out[4] = in[3] ^ in[7];\n"
+        "  out[3] = in[2] ^ in[7];\n"
+        "  out[2] = in[1];\n"
+        "  out[1] = in[0] ^ in[7];\n"
+        "  out[0] = in[7];"
+    )
+    after = "  out = {in[6:0], 1'b0} ^ (in[7] ? 8'h1b : 8'h00);"
+    if text.count(before) != 1:
+        raise ValueError("expected one AES mul2 partial-write block")
+    return text.replace(before, after, 1)
+
+
+def prepare_aes_pkg_overlay(rtl_root, output_path):
+    source = Path(rtl_root) / "src/aes/rtl/aes_pkg.sv"
+    if sha256(source) != AES_PKG_SHA256:
+        raise ValueError(f"Caliptra AES package source hash mismatch: {source}")
+    Path(output_path).write_text(replace_aes_mul2_partial_writes(source.read_text()))
+    if sha256(output_path) != AES_PKG_OVERLAY_SHA256:
+        raise ValueError("Icarus AES package overlay did not match its recorded hash")
+
+
 def prepare_axi_if_overlay(rtl_root, output_path):
     source = Path(rtl_root) / "src/axi/rtl/axi_if.sv"
     if sha256(source) != AXI_IF_SHA256:
@@ -183,13 +212,15 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
                              generator_overlay=None):
     text = Path(base_profile).read_text()
     lines = text.splitlines()
-    for source in (ORIGINAL_AXI_IF, ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
+    for source in (ORIGINAL_AES_PKG, ORIGINAL_AXI_IF, ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
                    ORIGINAL_SOC_BFM, ORIGINAL_TOP_TB, ORIGINAL_DMA_GENERATOR):
         if lines.count(source) != 1:
             raise ValueError(f"Icarus profile must contain exactly one {source}")
 
     sram_overlay = Path(output_profile).parent / "caliptra_veer_sram_export_icarus.sv"
     prepare_sram_export_overlay(rtl_root, sram_overlay)
+    aes_overlay = Path(output_profile).parent / "aes_pkg_icarus.sv"
+    prepare_aes_pkg_overlay(rtl_root, aes_overlay)
     axi_if_overlay = Path(output_profile).parent / "axi_if_icarus.sv"
     prepare_axi_if_overlay(rtl_root, axi_if_overlay)
 
@@ -206,7 +237,7 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     replacement = Path(repo_root) / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"
     checker_overlay = Path(checker_overlay)
     sources = [replacement, *bfm_sources]
-    overlays = [axi_if_overlay, sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
+    overlays = [aes_overlay, axi_if_overlay, sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
     if generator_overlay:
         overlays.append(generator_overlay)
     for source in [*overlays, *sources]:
@@ -214,6 +245,7 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
             raise ValueError(f"Icarus filelists cannot safely represent a source path with whitespace: {source}")
     lines = [line for line in lines if line != ORIGINAL_AXI_COMPLEX]
     replacements = {
+        ORIGINAL_AES_PKG: str(aes_overlay),
         ORIGINAL_AXI_IF: str(axi_if_overlay),
         ORIGINAL_SRAM_EXPORT: str(sram_overlay),
         ORIGINAL_TOP_SVA: str(checker_overlay),
@@ -456,6 +488,7 @@ def main():
         "caliptra_commit": source_commit,
         "case_yaml_sha256": sha256(case_yaml),
         "bfm_wrapper_sha256": sha256(REPO / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"),
+        "aes_pkg_overlay_sha256": sha256(args.output / "aes_pkg_icarus.sv"),
         "axi_if_overlay_sha256": sha256(args.output / "axi_if_icarus.sv"),
         "checker_overlay_sha256": sha256(checker_overlay),
         "reset_overlay_sha256": sha256(reset_overlay),
