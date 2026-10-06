@@ -51,7 +51,9 @@ SVA_DIAGNOSTICS_TO_REMOVE = (
 )
 SOC_BFM_SHA256 = "e0c60be6ad48681458ca38093a494ae263304997e658c5eefa006881da10ae06"
 TOP_TB_SHA256 = "c212c32da99e90cd3991da65e653998cac3e945d7479abfd640b9d82f47659f9"
+PHYSICAL_RNG_SHA256 = "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c38abf01f"
 TOP_TB_JTAG_OVERLAY_SHA256 = "df8d51cc7ad84000288f5d7c19641f433d59ae213314fa81b9d9e5f8a6b76c6e"
+FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "808ed4625254bf4f6d2d36d000d28a094e890fc51429f32327f2d02744b6407b"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
 BAD = re.compile(
     r"\b(?:UVM_)?(?:ERROR|FATAL)\b|\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
@@ -193,18 +195,31 @@ def prepare_reset_overlay(rtl_root, output_path):
     Path(output_path).write_text(text.replace(before, after, 1))
 
 
-def prepare_jtag_port_overlay(rtl_root, output_path):
+def accelerate_physical_rng_for_diagnostic(text):
+    before = "physical_rng physical_rng ("
+    if text.count(before) != 1:
+        raise ValueError("expected exactly one physical_rng instance")
+    return text.replace(before, "physical_rng #(.DutyCycle(50)) physical_rng (", 1)
+
+
+def prepare_jtag_port_overlay(rtl_root, output_path, fast_trng=False):
     source = Path(rtl_root) / "src/integration/tb/caliptra_top_tb.sv"
     if sha256(source) != TOP_TB_SHA256:
         raise ValueError(f"Caliptra top testbench source hash mismatch: {source}")
+    rng_model = Path(rtl_root) / "src/entropy_src/tb/physical_rng.sv"
+    if sha256(rng_model) != PHYSICAL_RNG_SHA256:
+        raise ValueError(f"Caliptra physical RNG model hash mismatch: {rng_model}")
     text = source.read_text()
     before = ".ListenPort     (63224)"
     if text.count(before) != 1:
         raise ValueError("expected exactly one JTAG DPI listen port")
     overlay = text.replace(before, ".ListenPort     (0)", 1)
+    if fast_trng:
+        overlay = accelerate_physical_rng_for_diagnostic(overlay)
     Path(output_path).write_text(overlay)
-    if sha256(output_path) != TOP_TB_JTAG_OVERLAY_SHA256:
-        raise ValueError("ephemeral JTAG port overlay did not match its recorded hash")
+    expected = FAST_TRNG_TOP_TB_OVERLAY_SHA256 if fast_trng else TOP_TB_JTAG_OVERLAY_SHA256
+    if sha256(output_path) != expected:
+        raise ValueError("Caliptra top testbench overlay did not match its recorded hash")
 
 
 def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
@@ -405,6 +420,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case", choices=CASE_NAMES, default="smoke_test_dma")
     parser.add_argument("--output", required=True, type=Path, help="new directory outside the source checkouts")
+    parser.add_argument("--fast-trng", action="store_true",
+                        help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
     args = parser.parse_args()
 
     rtl = required_env("CALIPTRA_RTL")
@@ -430,7 +447,7 @@ def main():
     reset_overlay = args.output / "caliptra_top_tb_soc_bfm_icarus.sv"
     prepare_reset_overlay(rtl, reset_overlay)
     jtag_overlay = args.output / "caliptra_top_tb_ephemeral_jtag.sv"
-    prepare_jtag_port_overlay(rtl, jtag_overlay)
+    prepare_jtag_port_overlay(rtl, jtag_overlay, args.fast_trng)
     generator_overlay = None
     if args.case == "rand_test_dma":
         generator_overlay = args.output / "dma_testcase_generator_icarus.sv"
@@ -489,6 +506,8 @@ def main():
         "case_yaml_sha256": sha256(case_yaml),
         "bfm_wrapper_sha256": sha256(REPO / "dv/caliptra_bfm/axi/caliptra_top_tb_axi_complex_bfm.sv"),
         "aes_pkg_overlay_sha256": sha256(args.output / "aes_pkg_icarus.sv"),
+        "trng_duty_cycle": 50 if args.fast_trng else 500,
+        "physical_rng_source_sha256": sha256(rtl / "src/entropy_src/tb/physical_rng.sv"),
         "axi_if_overlay_sha256": sha256(args.output / "axi_if_icarus.sv"),
         "checker_overlay_sha256": sha256(checker_overlay),
         "reset_overlay_sha256": sha256(reset_overlay),

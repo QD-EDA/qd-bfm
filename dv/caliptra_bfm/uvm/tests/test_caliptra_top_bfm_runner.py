@@ -13,6 +13,31 @@ SPEC.loader.exec_module(RUNNER)
 
 
 class ProfileOverlayTest(unittest.TestCase):
+    def test_fast_trng_profile_hash_checks_combined_top_overlay(self):
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp) / "rtl/src/integration/tb/caliptra_top_tb.sv"
+            source.parent.mkdir(parents=True)
+            source.write_text(".ListenPort     (63224)\nphysical_rng physical_rng (\n")
+            rng_model = Path(temp) / "rtl/src/entropy_src/tb/physical_rng.sv"
+            rng_model.parent.mkdir(parents=True)
+            rng_model.write_text("module physical_rng; endmodule\n")
+            output = Path(temp) / "top.sv"
+            with patch.object(RUNNER, "sha256", side_effect=(
+                    RUNNER.TOP_TB_SHA256, RUNNER.PHYSICAL_RNG_SHA256,
+                    RUNNER.FAST_TRNG_TOP_TB_OVERLAY_SHA256)):
+                RUNNER.prepare_jtag_port_overlay(Path(temp) / "rtl", output, fast_trng=True)
+            overlay = output.read_text()
+            self.assertIn(".ListenPort     (0)", overlay)
+            self.assertIn("physical_rng #(.DutyCycle(50)) physical_rng (", overlay)
+
+    def test_accelerated_rng_override_changes_only_physical_rng_instance(self):
+        source = "module caliptra_top_tb;\nphysical_rng physical_rng (\n  .clk(core_clk)\n);\nendmodule\n"
+        patched = RUNNER.accelerate_physical_rng_for_diagnostic(source)
+        self.assertIn("physical_rng #(.DutyCycle(50)) physical_rng (", patched)
+        self.assertEqual(patched.count("physical_rng #(.DutyCycle(50))"), 1)
+        with self.assertRaisesRegex(ValueError, "physical_rng instance"):
+            RUNNER.accelerate_physical_rng_for_diagnostic("module other; endmodule\n")
+
     def test_lists_short_dma_aes_gcm_firmware_case(self):
         self.assertIn("smoke_test_dma_aes_gcm_short_1_dword", RUNNER.CASE_NAMES)
 

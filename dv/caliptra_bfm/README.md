@@ -180,7 +180,10 @@ not a full UVMF replacement. See
 attaches the open AXI complex replacement to the full Caliptra testbench top
 and runs the real DMA firmware. The runner also accepts Caliptra's
 `smoke_test_dma_aes_gcm_short_1_dword` case for a smaller full-top DMA firmware
-scenario. It requires `CALIPTRA_RTL`, an Icarus-ready
+scenario. Add `--fast-trng` for a diagnostic copied-top override that changes
+the physical RNG model cadence from 500 to 50 cycles; the default retains
+the pinned cadence. Fast-TRNG results do not qualify entropy timing. It
+requires `CALIPTRA_RTL`, an Icarus-ready
 `CALIPTRA_BFM_PROFILE` containing the original AXI-complex source exactly once,
 `CALIPTRA_GCC_PREFIX`, and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires
