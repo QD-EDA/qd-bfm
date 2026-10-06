@@ -190,10 +190,11 @@ this modified-image run is not stock firmware qualification. Its result records
 stock and simulated image hashes plus the preload range. The
 `--skip-pq-vector-generation` option skips unrelated MLDSA/MLKEM testbench
 vector generation for the short AES case while retaining all 12 firmware
-AES/DMA cases. `--first-aes-case-diagnostic` further limits that firmware to
-its first 1-dword AES/DMA case and suppresses low-priority firmware prints.
-Both use disposable overlays, can be combined with `--fast-trng`, and are
-diagnostic; they do not qualify stock firmware. The runner requires `CALIPTRA_RTL`, an Icarus-ready
+AES/DMA cases. `--quiet-firmware` also retains all 12 cases and compiles with
+`CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints.
+`--first-aes-case-diagnostic` further limits the firmware to its first 1-dword
+AES/DMA case. These modes are diagnostic, can be combined with `--fast-trng`,
+and do not qualify stock firmware. The runner requires `CALIPTRA_RTL`, an Icarus-ready
 `CALIPTRA_BFM_PROFILE` containing the original AXI-complex source exactly once,
 `CALIPTRA_GCC_PREFIX`, and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires

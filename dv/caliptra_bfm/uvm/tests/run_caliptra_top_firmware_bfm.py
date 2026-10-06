@@ -607,6 +607,8 @@ def main():
                         help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
                         help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
+    parser.add_argument("--quiet-firmware", action="store_true",
+                        help="diagnostic only: suppress low-priority firmware prints; keep all AES DMA cases")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
@@ -614,7 +616,10 @@ def main():
         raise ValueError("--first-aes-case-diagnostic is limited to smoke_test_dma_aes_gcm_short_1_dword")
     if args.skip_pq_vector_generation and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--skip-pq-vector-generation is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.quiet_firmware and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
+        raise ValueError("--quiet-firmware is limited to smoke_test_dma_aes_gcm_short_1_dword")
     skip_pq_vectors = args.first_aes_case_diagnostic or args.skip_pq_vector_generation
+    quiet_firmware = args.first_aes_case_diagnostic or args.quiet_firmware
 
     rtl = required_env("CALIPTRA_RTL")
     base_profile = required_env("CALIPTRA_BFM_PROFILE")
@@ -681,7 +686,7 @@ def main():
     test_output = args.output / args.case
     test_output.mkdir()
     build_flags = "-std=gnu11 -O2"
-    if args.first_aes_case_diagnostic:
+    if quiet_firmware:
         build_flags += " -DCPT_VERBOSITY=ERROR"
     firmware_command = [
         "make", "-f", str(rtl / "tools/scripts/Makefile"), f"TESTNAME={args.case}",
@@ -742,7 +747,8 @@ def main():
         "diagnostic_modes": {"fast_trng": args.fast_trng,
                              "fast_boot_data_preload": args.fast_boot_data_preload or args.first_aes_case_diagnostic,
                              "first_aes_case": args.first_aes_case_diagnostic,
-                             "skip_pq_vector_generation": skip_pq_vectors},
+                             "skip_pq_vector_generation": skip_pq_vectors,
+                             "quiet_firmware": quiet_firmware},
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,
@@ -761,6 +767,8 @@ def main():
         label += " (first AES DMA diagnostic; not stock firmware qualification)"
     elif args.fast_boot_data_preload:
         label += " (diagnostic fast boot; not stock firmware qualification)"
+    elif quiet_firmware:
+        label += " (diagnostic firmware verbosity; not stock firmware qualification)"
     print(f"{label} {args.case}: {args.output / 'result.json'}")
     return 0 if passed else 1
 
