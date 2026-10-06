@@ -290,6 +290,142 @@ def load_case(rtl_root, name):
     return case_yaml, seed, plusargs
 
 
+DCCM_BASE = 0x50000000
+DCCM_SIZE = 0x40000
+DATA_COPY_BRANCH_PC = 0x46
+DATA_COPY_BRANCH = bytes.fromhex("63 fa 62 00")
+FAST_BRANCH = bytes.fromhex("6f 00 40 01")
+
+
+def readmemh_image(text):
+    # Caliptra's program and DCCM hex files are byte-addressed and fit in 256 KiB.
+    image = bytearray(DCCM_SIZE)
+    present = bytearray(DCCM_SIZE)
+    address = None
+    for line_number, line in enumerate(text.splitlines(), 1):
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("@"):
+            if not re.fullmatch(r"@[0-9a-fA-F]+", line):
+                raise ValueError(f"invalid readmemh address on line {line_number}")
+            address = int(line[1:], 16)
+            if address >= DCCM_SIZE:
+                raise ValueError(f"readmemh address exceeds the 256 KiB image on line {line_number}")
+            continue
+        tokens = line.split()
+        if address is None or any(not re.fullmatch(r"[0-9a-fA-F]{2}", token) for token in tokens):
+            raise ValueError(f"invalid byte data on readmemh line {line_number}")
+        for token in tokens:
+            if address >= DCCM_SIZE or present[address]:
+                raise ValueError(f"duplicate or out-of-range readmemh byte on line {line_number}")
+            image[address] = int(token, 16)
+            present[address] = 1
+            address += 1
+    return image, present
+
+
+def read_hex_range(text, start, end):
+    if start < 0 or end <= start or end > DCCM_SIZE:
+        raise ValueError("invalid Caliptra readmemh byte range")
+    image, present = readmemh_image(text)
+    if not all(present[start:end]):
+        raise ValueError(f"readmemh image does not cover 0x{start:x}-0x{end:x}")
+    return bytes(image[start:end])
+
+
+def replace_hex_range(text, start, replacement):
+    read_hex_range(text, start, start + len(replacement))
+    end = start + len(replacement)
+    output = []
+    address = None
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            output.append(line)
+        elif stripped.startswith("@"):
+            address = int(stripped[1:], 16)
+            output.append(line)
+        else:
+            tokens = stripped.split()
+            changed = False
+            for index in range(len(tokens)):
+                if start <= address < end:
+                    tokens[index] = f"{replacement[address - start]:02X}"
+                    changed = True
+                address += 1
+            output.append(" ".join(tokens) if changed else line)
+    return "\n".join(output) + ("\n" if text.endswith("\n") else "")
+
+
+def format_readmemh_segment(start, data):
+    lines = [f"@{start:08X}"]
+    lines.extend(" ".join(f"{byte:02X}" for byte in data[offset:offset + 16])
+                  for offset in range(0, len(data), 16))
+    return "\n".join(lines) + "\n"
+
+
+def prepare_fast_boot_data_preload(program_path, dccm_path, map_path, dis_path):
+    symbols = {}
+    map_text = Path(map_path).read_text()
+    for name in ("_data_lma_start", "_bss_lma_start", "_data_vma_start"):
+        matches = re.findall(rf"(?m)^\s*0x([0-9a-fA-F]+)\s+{name}\s*=", map_text)
+        if len(matches) != 1:
+            raise ValueError(f"firmware map must define {name} exactly once")
+        symbols[name] = int(matches[0], 16)
+
+    disassembly = Path(dis_path).read_text()
+    if (not re.search(r"(?m)^\s*46:\s+0062fa63\s+bgeu\s+t0,t1,5a\s+<bss_cp_setup>\s*$", disassembly) or
+            any(not re.search(rf"(?m)^000000{address} <{label}>:$", disassembly)
+                for address, label in (("4a", "data_cp_loop"), ("5a", "bss_cp_setup"),
+                                       ("76", "bss_cp_loop"), ("86", "post_cp_loops")))):
+        raise ValueError("firmware CRT0 startup branch or data/BSS loops are not the verified layout")
+
+    data_start = symbols["_data_lma_start"]
+    data_end = symbols["_bss_lma_start"]
+    data_vma = symbols["_data_vma_start"]
+    if (data_end <= data_start or (data_start | data_end | data_vma) & 3 or
+            data_end > DCCM_SIZE or data_end - data_start > DCCM_SIZE):
+        raise ValueError("firmware .data range is empty, unaligned, or outside the image")
+    if not DCCM_BASE <= data_vma < DCCM_BASE + DCCM_SIZE:
+        raise ValueError("firmware .data destination is outside DCCM")
+    destination = data_vma - DCCM_BASE
+    destination_end = destination + data_end - data_start
+    if destination_end > DCCM_SIZE:
+        raise ValueError("firmware .data destination exceeds DCCM")
+
+    program_path = Path(program_path)
+    dccm_path = Path(dccm_path)
+    program_text = program_path.read_text()
+    dccm_text = dccm_path.read_text()
+    program, program_present = readmemh_image(program_text)
+    dccm, dccm_present = readmemh_image(dccm_text)
+    if (not all(program_present[DATA_COPY_BRANCH_PC:DATA_COPY_BRANCH_PC + 4]) or
+            bytes(program[DATA_COPY_BRANCH_PC:DATA_COPY_BRANCH_PC + 4]) != DATA_COPY_BRANCH):
+        raise ValueError("firmware startup branch bytes do not match the verified data-copy branch")
+    if not all(program_present[data_start:data_end]):
+        raise ValueError("firmware program image does not cover its .data load range")
+    if any(dccm_present[destination:destination_end]):
+        raise ValueError("firmware .data destination overlaps existing DCCM image data")
+
+    data = bytes(program[data_start:data_end])
+    patched_program = replace_hex_range(program_text, DATA_COPY_BRANCH_PC, FAST_BRANCH)
+    preloaded_dccm = format_readmemh_segment(destination, data) + dccm_text
+    program_path.write_text(patched_program)
+    dccm_path.write_text(preloaded_dccm)
+    return {
+        "diagnostic_only": True,
+        "source_lma_start": f"0x{data_start:x}",
+        "source_lma_end": f"0x{data_end:x}",
+        "destination_vma_start": f"0x{data_vma:x}",
+        "destination_offset": f"0x{destination:x}",
+        "data_bytes": len(data),
+        "data_sha256": hashlib.sha256(data).hexdigest(),
+        "branch_pc": f"0x{DATA_COPY_BRANCH_PC:x}",
+        "original_branch": DATA_COPY_BRANCH.hex(),
+        "replacement_branch": FAST_BRANCH.hex(),
+    }
+
 def required_env(name):
     value = os.environ.get(name)
     if not value:
@@ -422,7 +558,11 @@ def main():
     parser.add_argument("--output", required=True, type=Path, help="new directory outside the source checkouts")
     parser.add_argument("--fast-trng", action="store_true",
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
+    parser.add_argument("--fast-boot-data-preload", action="store_true",
+                        help="diagnostic only: preload .data and skip its CRT0 copy for the short AES DMA case")
     args = parser.parse_args()
+    if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
+        raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
 
     rtl = required_env("CALIPTRA_RTL")
     base_profile = required_env("CALIPTRA_BFM_PROFILE")
@@ -492,6 +632,14 @@ def main():
     if firmware_exit or missing_images or (test_output / "program.hex").stat().st_size == 0:
         raise RuntimeError(f"firmware build failed ({firmware_exit}); missing/empty images: {missing_images}")
 
+    stock_firmware_image_sha256 = {name: sha256(test_output / name) for name in images}
+    fast_boot_data_preload = None
+    if args.fast_boot_data_preload:
+        fast_boot_data_preload = prepare_fast_boot_data_preload(
+            test_output / "program.hex", test_output / "dccm.hex",
+            test_output / f"{args.case}.map", test_output / f"{args.case}.dis",
+        )
+    simulation_image_sha256 = {name: sha256(test_output / name) for name in images}
     staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
     sim_command = [str(vvp), "-d", str(jtagdpi), "-n", str(binary),
                    "+CLP_REGRESSION", *plusargs]
@@ -518,7 +666,11 @@ def main():
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
         "firmware_exit": firmware_exit,
-        "firmware_image_sha256": {name: sha256(test_output / name) for name in images},
+        "firmware_image_sha256": stock_firmware_image_sha256,
+        "simulation_image_sha256": simulation_image_sha256,
+        "fast_boot_data_preload": fast_boot_data_preload,
+        "diagnostic_modes": {"fast_trng": args.fast_trng,
+                             "fast_boot_data_preload": args.fast_boot_data_preload},
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,
@@ -532,7 +684,10 @@ def main():
         "sim_log_sha256": sha256(test_output / "sim.log"),
     }
     (args.output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
-    print(f"{'PASS' if passed else 'FAIL'} {args.case}: {args.output / 'result.json'}")
+    label = "PASS" if passed else "FAIL"
+    if args.fast_boot_data_preload:
+        label += " (diagnostic fast boot; not stock firmware qualification)"
+    print(f"{label} {args.case}: {args.output / 'result.json'}")
     return 0 if passed else 1
 
 

@@ -161,5 +161,54 @@ class ProfileOverlayTest(unittest.TestCase):
         self.assertIn("return 1'b0;", overlay)
 
 
+class FastBootDataPreloadTest(unittest.TestCase):
+    def make_images(self, temp, branch="63 FA 62 00"):
+        temp = Path(temp)
+        program = temp / "program.hex"
+        dccm = temp / "dccm.hex"
+        map_file = temp / "firmware.map"
+        dis_file = temp / "firmware.dis"
+        program.write_text(
+            "@00000040\n00 00 00 00 00 00 " + branch + "\n"
+            "@00000100\n11 22 33 44\n"
+        )
+        dccm.write_text("@00000050\nAA BB\n")
+        map_file.write_text(
+            "  0x00000100 _data_lma_start = ALIGN (0x4)\n"
+            "  0x00000104 _bss_lma_start = _data_lma_end\n"
+            "  0x50000040 _data_vma_start = 0x50000040\n"
+        )
+        dis_file.write_text(
+            "       46: 0062fa63 bgeu t0,t1,5a <bss_cp_setup>\n"
+            "0000004a <data_cp_loop>:\n"
+            "0000005a <bss_cp_setup>:\n"
+            "00000076 <bss_cp_loop>:\n"
+            "00000086 <post_cp_loops>:\n"
+        )
+        return program, dccm, map_file, dis_file
+
+    def test_preloads_data_and_patches_only_verified_startup_branch(self):
+        with tempfile.TemporaryDirectory() as temp:
+            program, dccm, map_file, dis_file = self.make_images(temp)
+            result = RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
+            self.assertEqual(RUNNER.read_hex_range(program.read_text(), 0x46, 0x4A),
+                             bytes.fromhex("6f 00 40 01"))
+            dccm_text = dccm.read_text()
+            self.assertEqual(RUNNER.read_hex_range(dccm_text, 0x40, 0x44),
+                             bytes.fromhex("11 22 33 44"))
+            self.assertEqual(RUNNER.read_hex_range(dccm_text, 0x50, 0x52),
+                             bytes.fromhex("aa bb"))
+            self.assertEqual(result["data_bytes"], 4)
+            self.assertEqual(result["destination_offset"], "0x40")
+
+    def test_rejects_unrecognized_startup_without_mutating_images(self):
+        with tempfile.TemporaryDirectory() as temp:
+            program, dccm, map_file, dis_file = self.make_images(temp, "63 00 00 00")
+            originals = (program.read_text(), dccm.read_text())
+            with self.assertRaisesRegex(ValueError, "startup branch"):
+                RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
+            self.assertEqual((program.read_text(), dccm.read_text()), originals)
+
+
 if __name__ == "__main__":
     unittest.main()
