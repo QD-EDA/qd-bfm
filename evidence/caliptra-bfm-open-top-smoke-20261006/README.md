@@ -1,4 +1,4 @@
-> Checkpoint copy: concise reports and JSON summaries are preserved here; raw simulation logs and generated binaries are kept out of this feature branch.
+> Checkpoint copy: concise reports, the compact AXI trace, and its VPI source are preserved here; large simulation logs and generated binaries stay out of this feature branch.
 
 # Open Caliptra AXI complex top smoke — 2026-10-06
 
@@ -36,10 +36,10 @@ Files:
 - `strict-diagnostic-compile.log` (raw artifact omitted from this checkpoint)
 - `sim-diagnostic.log` (raw artifact omitted from this checkpoint)
 
-The remaining top-level step is a firmware DMA scenario that supplies
-`+CPTRA_RAND_TEST_DMA` and exercises the open AXI target through the actual
-Caliptra top. It needs a JTAG-capable runner environment to satisfy the current
-L0 result gate.
+At that point, the remaining top-level step was a firmware DMA scenario that
+supplies `+CPTRA_RAND_TEST_DMA` and exercises the open AXI target through the
+actual Caliptra top. The later diagnostic DMA result below supersedes that
+status; stock L0 qualification is still open.
 
 ## DMA firmware follow-up
 
@@ -96,3 +96,30 @@ testcase result or normal finish appeared. Free memory stayed at 76% against a
 60% floor. This remains diagnostic, not top-level DMA qualification. Exact
 hashes and guard metrics are in
 [`first-aes-case-diagnostic.json`](first-aes-case-diagnostic.json).
+
+
+## Full-top first AES/DMA transaction trace — later run
+
+A later 900-second guarded replay of the same first-case diagnostic completed
+with `TESTCASE PASSED` and normal `$finish` at cycle 5,230 (1,857 retired
+instructions). The open AXI target completed the actual Caliptra DMA path:
+
+| Cycle | Handshake | Address |
+| ---: | --- | --- |
+| 2,905–2,908 | AW, W, B | `0x123440000` (payload write) |
+| 4,359–4,361 | AR, R | `0x123440000` (payload read) |
+| 4,447–4,450 | AW, W, B | `0x123460000` (AES destination write) |
+| 4,594–4,596 | AR, R | `0x123460000` (readback) |
+
+Write data handshook one cycle after AW; B followed AW by three cycles, and R
+followed AR by two cycles. The memory guard's 60% free-memory floor was respected, with
+75% minimum observed and exit 0. This extends the earlier timeout observations
+above; those records remain as historical runs.
+
+This is full-top integration evidence for the diagnostic first AES/DMA case.
+It still uses `--fast-trng`, a one-case firmware copy, and PQ-vector suppression,
+so it is not a stock-firmware qualification or general AXI signoff. Exact
+run/image/source hashes and markers are in
+[`first-aes-axi-trace.json`](first-aes-axi-trace.json); the compact log and VPI
+trace source are [`first-aes-axi-trace.log`](first-aes-axi-trace.log) and
+[`sim-axi-trace-vpi.c`](sim-axi-trace-vpi.c).
