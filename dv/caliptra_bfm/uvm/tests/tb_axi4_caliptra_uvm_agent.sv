@@ -24,7 +24,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   wire stall_w = 0;
   wire stall_b = 0;
   wire stall_ar = 0;
-  wire stall_r = 0;
+  logic stall_r = 0;
   wire inject_error;
 
   axi4_caliptra_master_cmd_if cmd_if(ACLK);
@@ -687,6 +687,43 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     endfunction
   endclass
 
+  class axi4_caliptra_uvm_reset_abort_sequence extends uvm_sequence #(axi4_caliptra_uvm_transfer);
+    `uvm_object_utils(axi4_caliptra_uvm_reset_abort_sequence)
+
+    function new(string name = "axi4_caliptra_uvm_reset_abort_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      axi4_caliptra_uvm_transfer req;
+      bit completed;
+
+      req = axi4_caliptra_uvm_transfer::type_id::create("reset_abort_read");
+      start_item(req);
+      req.write = 0;
+      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h80;
+      req.len = 0;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.id = 8'h7e;
+      completed = 0;
+      fork
+        begin
+          finish_item(req);
+          completed = 1;
+        end
+        begin
+          #2000;
+          if (!completed)
+            `uvm_fatal("AXI_RESET_ABORT_TIMEOUT", "Reset-aborted item did not complete within 200 cycles")
+        end
+      join_any
+      disable fork;
+      if (req.success)
+        `uvm_fatal("AXI_RESET_ABORT", "Read unexpectedly succeeded across reset")
+    endtask
+  endclass
+
   class axi4_caliptra_uvm_agent_test extends uvm_test;
     axi4_caliptra_uvm_env env;
     bit use_dma_target;
@@ -874,6 +911,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
 
     task run_phase(uvm_phase phase);
       axi4_caliptra_uvm_smoke_sequence smoke_seq;
+      axi4_caliptra_uvm_reset_abort_sequence reset_abort_seq;
       axi4_caliptra_uvm_exclusive_sequence exclusive_seq;
       axi4_caliptra_uvm_error_sequence error_seq;
       axi4_caliptra_fifo_uvm_sequence fifo_seq;
@@ -885,6 +923,17 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
       phase.raise_objection(this);
+      if ($test$plusargs("RESET_ABORT")) begin
+        reset_abort_seq = axi4_caliptra_uvm_reset_abort_sequence::type_id::create("reset_abort_seq");
+        reset_abort_seq.start(env.agent.sequencer);
+        if (env.sub.read_count != 0)
+          `uvm_fatal("AXI_RESET_ABORT_MON", "Aborted read was published as a completed transaction")
+        smoke_seq = axi4_caliptra_uvm_smoke_sequence::type_id::create("post_reset_smoke_seq");
+        smoke_seq.start(env.agent.sequencer);
+        $display("PASS: native UVM AXI agent aborts an accepted read on reset and recovers for a burst");
+        phase.drop_objection(this);
+        return;
+      end
       ral_user = axi4_caliptra_uvm_user_extension::type_id::create("ral_user");
       ral_user.set_addr_user(32'hcafe_0123);
       ral_model.csr.write(ral_status, 32'h7654_3210, UVM_FRONTDOOR,
@@ -1004,8 +1053,29 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   end
 
   initial begin
-    repeat (2) @(posedge ACLK);
-    @(negedge ACLK);
-    ARESETn = 1;
+    if ($test$plusargs("RESET_ABORT")) begin
+      integer cycles;
+      reg ar_accepted;
+      stall_r = 1;
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      ARESETn = 1;
+      ar_accepted = 0;
+      for (cycles = 0; cycles < 128 && !ar_accepted; cycles = cycles + 1) begin
+        @(posedge ACLK);
+        if (ARVALID && ARREADY) ar_accepted = 1;
+      end
+      if (!ar_accepted) $fatal(1, "Timed out waiting for reset-abort read address handshake");
+      @(negedge ACLK);
+      ARESETn = 0;
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      ARESETn = 1;
+      stall_r = 0;
+    end else begin
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      ARESETn = 1;
+    end
   end
 endmodule

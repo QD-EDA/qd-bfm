@@ -15,7 +15,7 @@ cd "$repo_root"
 "$IVERILOG_BIN" -uvm -g2012 -s tb_axi4_caliptra_uvm_agent -o "$out" \
   -f dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f \
   dv/caliptra_bfm/uvm/tests/tb_axi4_caliptra_uvm_agent.sv
-"$VVP_BIN" "$out" >"$log" 2>&1 || { cat "$log"; exit 1; }
+"$VVP_BIN" "$out" "$@" >"$log" 2>&1 || { cat "$log"; exit 1; }
 cat "$log"
 if grep -Eq '^UVM_(ERROR|FATAL) :[[:space:]]*[1-9]' "$log"; then
   echo "UVM agent test reported errors or fatals" >&2
