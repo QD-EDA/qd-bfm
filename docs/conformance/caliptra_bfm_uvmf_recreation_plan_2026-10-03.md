@@ -125,8 +125,11 @@ The complete roundtrip also passes with the stock AXI USER initialization
 sequence enabled. The generated host uses MBOX valid-user slot 0 for the
 response reads and status write; no-ECC and single-bit ECC score 38/38, and
 double-bit ECC scores 39/39, with zero UVM errors or fatals. This verifies the
-configured-user path, not invalid-user rejection. The earlier invalid-user
-attempt is retained in the runtime evidence as a diagnostic. Explicit responder
+configured-user path. A new combined probe also sends a mailbox-lock read with
+an unlisted `ARUSER`, observes SLVERR, then confirms the following AHB mailbox
+claim still reads the initial unlocked value. Its complete four-word
+AHB/AAXI handshake reports 39/39 scoreboard matches, zero errors/fatals, and
+74% minimum free memory against the 60% guard floor. Explicit responder
 shutdown removes the four `SEQPRTZMB` teardown warnings in each current run;
 three coverage/RAL warnings remain.
 The AAXI compatibility comparator uses `beatQ` for read response data and
@@ -135,9 +138,11 @@ See the
 [`SoC-IFC generated-runtime evidence`](../../evidence/caliptra-bfm-soc-ifc-generated-env-runtime-20261005/README.md).
 
 A bounded pin-level mailbox SRAM subordinate is now in the open BFM set. Its
-16-word focused run against Caliptra's actual `soc_ifc_pkg` passes registered
-reads/writes, reset retention, bounds checks, deterministic XOR masks, and
-single-/double-bit ECC injection. A hash-guarded opt-in generated `hdl_top`
+focused run against Caliptra's actual `soc_ifc_pkg` checks a 16-word instance
+for registered reads/writes, reset retention, bounds, deterministic XOR masks,
+and single-/double-bit ECC injection, then checks first/last-word access on a
+second instance at the full 65,536-word Caliptra depth. The guarded run observed
+74% minimum free memory against the 60% floor. A hash-guarded opt-in generated `hdl_top`
 overlay connects the target to the real mailbox SRAM request/response pins and
 mirrors live ECC injection settings from the generated driver. The target now
 lazily supplies zero for unwritten words using a packed initialized-word

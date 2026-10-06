@@ -10,6 +10,11 @@ module tb_caliptra_mbox_sram_subordinate;
   logic [1:0] inject_ecc_error = '0;
   logic access_error;
   localparam integer TEST_DEPTH = 16;
+  cptra_mbox_sram_req_t full_req = '0;
+  cptra_mbox_sram_resp_t full_resp;
+  cptra_mbox_sram_data_t full_write_xor_mask = '0;
+  logic [1:0] full_inject_ecc_error = '0;
+  logic full_access_error;
 
   always #5 clk = ~clk;
 
@@ -21,6 +26,12 @@ module tb_caliptra_mbox_sram_subordinate;
     .clk_i(clk), .rst_b(rst_b), .req(req), .resp(resp),
     .write_xor_mask(write_xor_mask), .inject_ecc_error(inject_ecc_error),
     .access_error(access_error)
+  );
+
+  caliptra_mbox_sram_subordinate full_depth_dut (
+    .clk_i(clk), .rst_b(rst_b), .req(full_req), .resp(full_resp),
+    .write_xor_mask(full_write_xor_mask), .inject_ecc_error(full_inject_ecc_error),
+    .access_error(full_access_error)
   );
 
   task automatic issue(
@@ -54,6 +65,36 @@ module tb_caliptra_mbox_sram_subordinate;
     end
   endtask
 
+  task automatic issue_full(
+    input bit write_enable,
+    input logic [CPTRA_MBOX_ADDR_W-1:0] address,
+    input cptra_mbox_sram_data_t data
+  );
+    begin
+      @(negedge clk);
+      full_req.cs = 1'b1;
+      full_req.we = write_enable;
+      full_req.addr = address;
+      full_req.wdata = data;
+      @(posedge clk);
+      #1;
+      full_req.cs = 1'b0;
+      full_req.we = 1'b0;
+    end
+  endtask
+
+  task automatic expect_full_read(
+    input logic [CPTRA_MBOX_ADDR_W-1:0] address,
+    input cptra_mbox_sram_data_t expected
+  );
+    begin
+      issue_full(1'b0, address, '0);
+      if (full_access_error || full_resp.rdata !== expected)
+        $fatal(1, "full-depth mailbox read 0x%0h got %0h expected %0h error=%b",
+               address, full_resp.rdata, expected, full_access_error);
+    end
+  endtask
+
   initial begin
     cptra_mbox_sram_data_t first_word;
     cptra_mbox_sram_data_t last_word;
@@ -77,6 +118,13 @@ module tb_caliptra_mbox_sram_subordinate;
     expect_read(0, '0);
     issue(1'b1, 0, first_word);
     expect_read(0, first_word);
+
+    expect_full_read(0, '0);
+    expect_full_read(CPTRA_MBOX_DEPTH-1, '0);
+    issue_full(1'b1, 0, first_word);
+    issue_full(1'b1, CPTRA_MBOX_DEPTH-1, last_word);
+    expect_full_read(0, first_word);
+    expect_full_read(CPTRA_MBOX_DEPTH-1, last_word);
 
     issue(1'b1, TEST_DEPTH-1, last_word);
     expect_read(TEST_DEPTH-1, last_word);
@@ -120,6 +168,7 @@ module tb_caliptra_mbox_sram_subordinate;
     @(negedge clk);
     rst_b = 1'b1;
     expect_read(TEST_DEPTH-1, last_word);
+    expect_full_read(CPTRA_MBOX_DEPTH-1, last_word);
 
     issue(1'b1, TEST_DEPTH, first_word);
     if (!access_error)
@@ -131,7 +180,7 @@ module tb_caliptra_mbox_sram_subordinate;
       $fatal(1, "out-of-range mailbox read did not report an unknown response");
 
     expect_read(3, first_word ^ {7'h04, 32'h0000_0001});
-    $display("PASS: Caliptra mailbox SRAM model covers sync read/write, XOR fault mask, ECC injection, reset retention, and bounds");
+    $display("PASS: Caliptra mailbox SRAM model covers full depth (%0d words), sync read/write, XOR fault mask, ECC injection, reset retention, and bounds", CPTRA_MBOX_DEPTH);
     $finish;
   end
 endmodule
