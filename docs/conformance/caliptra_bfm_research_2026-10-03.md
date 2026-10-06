@@ -990,3 +990,18 @@ observed. The minimum free-memory reading was 68% against the 60% floor. AXI
 tracing was not enabled, so the timeout does not establish whether DMA traffic
 occurred. The [compact run record](../../evidence/caliptra-bfm-open-top-smoke-20261006/full-aes-all-cases-pqskip-quiet-timeout.json)
 preserves log hashes; temporary simulator output was removed after the run.
+
+## Traced single AES/DMA top run — 2026-10-06
+
+The guarded 600-second diagnostic ran only
+`smoke_test_dma_aes_gcm_short_1_dword` with the same fast TRNG, verified
+`.data` preload, skipped PQ vector generation, and quiet firmware options,
+plus `--trace-axi`. The VPI trace bound and recorded 4,463 cycles and 1,519
+retired CPU instructions, reaching `aes_flow` at PC `0x41dc`. It observed one
+AXI AW/W/B handshake at cycles 3004/3005/3007, with no AR or R handshake.
+The run timed out with 67% minimum free memory against the 60% floor; there
+was no testcase pass/fail marker or simulator finish. This narrows startup
+progress and confirms one top-level AXI write, but does not establish that the
+AES DMA request ran. The [compact record](../../evidence/caliptra-bfm-open-top-smoke-20261006/short-aes-one-case-axi-trace-timeout.json)
+contains hashes for the simulation log, VPI plugin, and compile logs; temporary
+simulator output was removed after recording them.

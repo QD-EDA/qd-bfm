@@ -1,0 +1,57 @@
+{
+  "commit": "91234a4",
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "firmware_cases": 1,
+  "options": [
+    "--fast-trng",
+    "--fast-boot-data-preload",
+    "--skip-pq-vector-generation",
+    "--quiet-firmware",
+    "--trace-axi"
+  ],
+  "guard": {
+    "timeout_seconds": 600,
+    "preflight_free_percent": 76,
+    "minimum_free_memory_percent": 67,
+    "floor_percent": 60
+  },
+  "result": {
+    "exit_code": 124,
+    "classification": "timeout",
+    "testcase_pass_marker_seen": false,
+    "testcase_fail_marker_seen": false,
+    "simulation_finish_seen": false,
+    "trace_bound": true,
+    "last_firmware_marker": "CLP: ROM Flow in progress...",
+    "cpu_trace_end": {
+      "cycles": 4463,
+      "retired_instructions": 1519,
+      "pc": "0x000041dc",
+      "pc_function": "aes_flow",
+      "ready_mb": 0,
+      "reset_n": 1,
+      "fatal": 0
+    },
+    "axi_handshakes": {
+      "ar": 0,
+      "aw": 1,
+      "w": 1,
+      "b": 1,
+      "r": 0,
+      "first_aw_cycle": 3004,
+      "first_w_cycle": 3005,
+      "first_b_cycle": 3007
+    },
+    "interpretation": "Inconclusive for testcase completion. The trace proves CPU progress into aes_flow and one AXI write handshake; it does not show an AXI read or testcase completion, so it does not establish that the AES DMA request ran."
+  },
+  "artifacts": {
+    "sim_log_bytes": 9890,
+    "sim_log_sha256": "6cd311f731be27baa8ef9ec2bd6adf5aca94482489dda2403e55eb41c8728848",
+    "trace_vpi_sha256": "730b0ccee7fbe91c0cab32575c22c01c88b9b9b40037c7d64eea1002521626f8",
+    "trace_source_sha256": "bd4205500aab6aca7833cd67006b6b7ffdacc5f28beacc2f02ea768597a2145b",
+    "compile_log_bytes": 3438,
+    "compile_log_sha256": "01305f5d503ff624f0d872e9f49e9ff82ec59edb5cbb797b57487d4f4b1b6f9b",
+    "trace_vpi_compile_log_bytes": 180,
+    "trace_vpi_compile_log_sha256": "b79f391aff02742cf5244ab1c3065eba30bf0cbd5813cdac2c268bc881fd07bb"
+  }
+}
