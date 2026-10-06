@@ -436,10 +436,14 @@ subscriber, while `write_done_export` and `read_done_export` feed the actual
 AXI scoreboard. The lower-bound BFM now exposes all four separately named,
 direction-filtered analysis ports. The write request port publishes after AW
 and all W beats are accepted, before B; write completion publishes after B.
-Read request and done publish the assembled read on final R. Focused fallback
-tests check write request precedes completion. The available pinned sources do
-not reveal Avery's object reuse, partial snapshots, read granularity, or exact
-event ordering, so equivalent timing remains unverified.
+Read request and done publish the assembled read on final R. The active/passive
+generated-path smoke checks the write request precedes `write_done_export`.
+It also consumes `ms_rx_rvalid_export`, checks the assembled read payload and
+AxUSER, verifies its timestamp matches `read_done_export`, and mutates that
+event's data to prove the done export received an independent copy. The
+available pinned sources still do not reveal Avery's object reuse, partial
+snapshots, read granularity, or exact event ordering, so equivalence remains
+unverified.
 
 The clean-room fallback now includes `aaxi_uvm_pkg::aaxi_master_tr`,
 `aaxi_uvm_mem_adapter`, `aaxi_uvm_reg_predictor`, `aaxi_uvm_sequencer`, a
@@ -660,12 +664,14 @@ handoff for that test, not the exact Avery event lifecycle or full generated
 sequence coverage. The [runtime evidence](../../evidence/caliptra-bfm-soc-ifc-generated-env-runtime-20261005/README.md)
 contains the pass log and source/runner details.
 
-Attempts to add generated-environment AHB RAL and direct MVC traffic stalled
-at simulation time zero before power-on. Two later variants were stopped by
-the 180-second and 150-second RAM guards with free-memory minima of 67% and
-68%. The nonworking active-AHB additions were removed. The separate actual-RTL
-SoC-IFC harness still exercises active AHB mailbox and DMA traffic; AHB RAL in
-the full generated environment remains unqualified.
+Initial generated-environment AHB RAL/MVC attempts stalled at simulation time
+zero before power-on; the failing additions were removed. Later isolated,
+hash-guarded runtime lanes succeeded: generated AHB RAL read of the mailbox
+lock, lock-claim plus `MBOX_DLEN` write/readback, and a four-word mailbox
+payload transfer through generated AHB RAL. The payload lane also passed its
+single-bit SRAM injection check. These qualify selected generated active-AHB
+paths, not the remaining generated AHB sequences, full coverage, or licensed
+QVIP behavior. Details are in the [runtime evidence](../../evidence/caliptra-bfm-soc-ifc-generated-env-runtime-20261005/README.md).
 
 ## Pinned AXI complex BFM package check — 2026-10-04
 
@@ -875,10 +881,11 @@ access but makes no claim that the lock rejects a PV client write.
 
 1. Keep the observed `aaxi_master_tr` member census as the structural gate,
    then establish the Avery event contract and license boundary for the four
-   configured manager exports. The clean-room lower-bound path publishes
-   write requests before B, write completion after B, and read-valid/read-done
-   on final R; the pin-level regression checks write request ordering. Avery's
-   partial-item lifecycle, read granularity, and exact ordering remain open.
+   configured manager exports. The clean-room path publishes write requests
+   before B and write completion after B; read-valid/read-done publish
+   independent assembled records on final R. The generated-path regression
+   checks both event ordering and read snapshot isolation. Avery's partial-item
+   lifecycle, read granularity, and exact ordering remain open.
    Separately verify the pinned Caliptra DMA testcase generator's output in a
    full DUT integration.
 2. Add a multi-region AHB address map if the consumer inventory requires it;
@@ -892,8 +899,9 @@ access but makes no claim that the lock rejects a PV client write.
    hash-guarded event-order overlay. These are block-level results; neither
    establishes licensed UVMF/QVIP compatibility. The generated SoC-IFC host
    packages now compile and the selected reset/power-on plus AAXI runtime
-   passes; generated active AHB, other sequences, and full coverage remain
-   unqualified. Without a source overlay,
+   passes; selected generated active-AHB RAL/mailbox lanes also pass through
+   the open manager and actual SoC-IFC RTL. Other sequences and full coverage
+   remain unqualified. Without a source overlay,
    the retained control-package replay reports eight explicit unsupported
    full-domain coverage filters. The exact hash-guarded wildcard overlay
    compiles the generated control-package reducer and its mask semantics pass
@@ -959,3 +967,26 @@ The guarded actual-`axi_dma_top` UVM regression also passes all directed cases
 and 25 generated DCCM replays across all five DMA routes, including the
 65,536-word case; each simulation reports zero UVM warnings, errors, or
 fatals, and the guard records a 70% minimum free-memory watermark.
+
+## AAXI read-valid event snapshot — 2026-10-06
+
+The guarded `run_aaxi_compat.sh` generated-path smoke now connects all four
+observed manager event exports. It checks that the assembled write request is
+published before B completion and that `ms_rx_rvalid_export` publishes the
+assembled read on the same final-R cycle as `read_done_export`. The read
+observer verifies address, ID, ARUSER, data, and response, then mutates its
+copy; the read-done observer still receives the original data. The run passes
+with zero UVM errors/fatals, 76% free memory at preflight, and 75% minimum
+against the 60% guard floor. This strengthens the clean-room event contract;
+it does not establish Avery's hidden partial-item lifecycle or exact timing.
+
+## Quiet full AES/DMA top run — 2026-10-06
+
+The guarded 1,800-second run retained all 12 AES/DMA firmware cases and used
+fast TRNG, verified `.data` preload, skipped unrelated PQ vector generation,
+and suppressed low-priority firmware prints. It timed out with
+`CLP: ROM Flow in progress...`; no testcase pass/fail marker or `$finish` was
+observed. The minimum free-memory reading was 68% against the 60% floor. AXI
+tracing was not enabled, so the timeout does not establish whether DMA traffic
+occurred. The [compact run record](../../evidence/caliptra-bfm-open-top-smoke-20261006/full-aes-all-cases-pqskip-quiet-timeout.json)
+preserves log hashes; temporary simulator output was removed after the run.

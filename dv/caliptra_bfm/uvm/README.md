@@ -128,8 +128,11 @@ do not implement the corresponding library APIs. The manager-event monitor
 publishes the assembled write request after AW and all W beats are accepted,
 before B, then publishes write completion after B. Read request and done
 events publish the assembled record on the final R beat. Focused smoke checks
-cover this fallback ordering; Avery's partial-item lifecycle, read granularity,
-and exact timing remain unverified.
+cover this fallback ordering: the read-valid export carries the complete read
+on final R, its timestamp matches read-done, and mutating its record does not
+affect the independently cloned read-done record. The same smoke checks write
+request precedes write completion. Avery's partial-item lifecycle, read
+granularity, and exact timing remain unverified.
 
 `axi4_caliptra_record_if.sv` carries completed records into the class monitor.
 Its fixed record storage can represent the full AXI4 ID field (8 bits) and
@@ -344,9 +347,10 @@ This preserves the generated module/hierarchy contract and exercises it in a
 standalone harness. Since that smoke was added, the replacement has also been
 compiled in generated PCRVault, KeyVault, and SoC-IFC environments. The
 generated PCRVault and KeyVault block tests exercise scalar AHB RAL traffic
-against their actual RTL; the SoC-IFC generated runtime qualifies reset and
-AAXI traffic, while generated active AHB traffic there remains unqualified.
-The full Caliptra top and Adams Bridge top remain unqualified. See the
+against their actual RTL. The SoC-IFC generated runtime qualifies reset, AAXI,
+and selected active-AHB RAL/mailbox lanes against actual RTL; other generated
+AHB sequences and full coverage remain unqualified. The full Caliptra top and
+Adams Bridge top remain unqualified. See the
 [PCRVault](../../../evidence/caliptra-bfm-pv-generated-uvmf-20261004/README.md),
 [KeyVault](../../../evidence/caliptra-bfm-keyvault-generated-hdl-20261004/README.md),
 and [SoC-IFC](../../../evidence/caliptra-bfm-soc-ifc-generated-env-runtime-20261005/README.md)

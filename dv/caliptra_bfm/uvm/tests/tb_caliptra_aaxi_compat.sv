@@ -94,6 +94,7 @@ module tb_caliptra_aaxi_compat;
     int write_count;
     int read_count;
     time write_done_time;
+    time read_done_time;
     event completed;
 
     `uvm_component_utils(aaxi_compat_observer)
@@ -115,9 +116,11 @@ module tb_caliptra_aaxi_compat;
         write_done_time = $time;
       end else begin
         if (item.beatQ.size() != 1 || item.beatQ[0] != 32'ha55a_c33c ||
-            item.respQ.size() != 1 || item.respQ[0] != 2'b00)
+            item.respQ.size() != 1 || item.respQ[0] != 2'b00 ||
+            item.aruser != 32'h5566_7788)
           `uvm_fatal("AAXI_READ", "Monitor lost the completed read payload")
         read_count++;
+        read_done_time = $time;
       end
       -> completed;
     endfunction
@@ -143,6 +146,31 @@ module tb_caliptra_aaxi_compat;
         `uvm_fatal("AAXI_REQUEST", $sformatf("Unexpected write request: %s", item.convert2string()))
       write_count++;
       write_request_time = $time;
+    endfunction
+  endclass
+
+  class aaxi_read_valid_observer extends uvm_component;
+    uvm_analysis_imp #(aaxi_master_tr, aaxi_read_valid_observer) analysis_export;
+    int read_count;
+    time read_valid_time;
+
+    `uvm_component_utils(aaxi_read_valid_observer)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+      analysis_export = new("analysis_export", this);
+    endfunction
+
+    function void write(aaxi_master_tr item);
+      if (!item.is_read() || item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
+          item.id != 8'h31 || item.aruser != 32'h5566_7788 ||
+          item.beatQ.size() != 1 || item.beatQ[0] != 32'ha55a_c33c ||
+          item.respQ.size() != 1 || item.respQ[0] != 2'b00)
+        `uvm_fatal("AAXI_READ_VALID", $sformatf("Unexpected read-valid item: %s", item.convert2string()))
+      read_count++;
+      read_valid_time = $time;
+      // Other exports must receive independent transaction snapshots.
+      item.beatQ[0] = '0;
     endfunction
   endclass
 
@@ -192,6 +220,7 @@ module tb_caliptra_aaxi_compat;
     aaxi_compat_observer observer;
     aaxi_compat_observer passive_observer;
     aaxi_write_request_observer request_observer;
+    aaxi_read_valid_observer read_valid_observer;
 
     `uvm_component_utils(aaxi_compat_test)
 
@@ -205,6 +234,7 @@ module tb_caliptra_aaxi_compat;
       observer = aaxi_compat_observer::type_id::create("observer", this);
       passive_observer = aaxi_compat_observer::type_id::create("passive_observer", this);
       request_observer = aaxi_write_request_observer::type_id::create("request_observer", this);
+      read_valid_observer = aaxi_read_valid_observer::type_id::create("read_valid_observer", this);
     endfunction
 
     function void connect_phase(uvm_phase phase);
@@ -212,6 +242,7 @@ module tb_caliptra_aaxi_compat;
       aaxi_tb.env0.master[0].write_done_export.connect(observer.completed_export);
       aaxi_tb.env0.master[0].read_done_export.connect(observer.completed_export);
       aaxi_tb.env0.master[0].ms_tx_AW_W_export.connect(request_observer.analysis_export);
+      aaxi_tb.env0.master[0].ms_rx_rvalid_export.connect(read_valid_observer.analysis_export);
       aaxi_tb.env0.psv_master[0].write_done_export.connect(passive_observer.completed_export);
       aaxi_tb.env0.psv_master[0].read_done_export.connect(passive_observer.completed_export);
     endfunction
@@ -231,6 +262,9 @@ module tb_caliptra_aaxi_compat;
       if (request_observer.write_count != 1 || observer.write_count != 1 ||
           request_observer.write_request_time >= observer.write_done_time)
         `uvm_fatal("AAXI_EVENT_ORDER", "Write request export must precede write_done_export")
+      if (read_valid_observer.read_count != 1 ||
+          read_valid_observer.read_valid_time != observer.read_done_time)
+        `uvm_fatal("AAXI_EVENT_ORDER", "Read-valid export must publish the completed read independently with read_done_export")
 
       fork
         begin
