@@ -30,12 +30,19 @@ Generator SHA-256: `26a1a84ea0f27f8877c2958bf65287904baaeda5ca592696410801885dea
 The 44-filelist denominator is sourced entry-by-entry from the frozen Icarus
 census. It includes Caliptra's caliptra_top_tb.vf and excludes Adams Bridge's
 ntt_utb.vf; a filename glob would produce the wrong 16/28 split. Counts do not
-mean the tests pass or that all filelists are usable on Icarus. A prior frozen report
-records 293 test definitions and 33 regression lists. Those totals count a
-different inventory and are not reconciled by the directory-level file
-filters above; the manifest retains the individual test, suite, filelist, and
-suite-path references so that discrepancy can be traced before using those
-larger totals as a requirement denominator.
+mean the tests pass or that all filelists are usable on Icarus. A fresh scan of
+active YAML <code>testname:</code> keys under the pinned <code>src</code> trees
+finds 219 Caliptra occurrences (35 authored stimulus tests, 22 generated UVMF
+tests, and 162 integration test-suite YAMLs) and 52 Adams Bridge occurrences
+(22 authored and 30 generated UVMF tests). The scan excludes commented keys.
+The manifest separately records 27/2 files under <code>stimulus/testsuites</code>
+and 29/3 YAML filenames containing <code>regress</code>. The older 293-test /
+33-list figures cited by the recreation plan are not reproduced by these
+scopes; their referenced evidence directory is absent from this QD checkout.
+The <code>testname:</code> totals are reproducible with
+<code>rg -N '^[[:space:]]*testname:' &lt;root&gt;/src -g '*.yaml' -g '*.yml' | wc -l</code>.
+Do not use 293/33 as the BFM coverage denominator until its counting source is
+identified.
 
 Manifest schema v3 records the literal <code>testname</code>, active
 <code>seed</code>, and <code>plusargs</code> values in each authored or
@@ -186,8 +193,9 @@ QVIP, Avery, and Axi4PC inputs explicitly. [UVMF mirror](https://github.com/mune
 
 ## Still open in Phase 0
 
-- Reconcile the legacy 293-test / 33-regression counts against the frozen
-  inventory and this enumerated source tree.
+- Trace the source behind the legacy 293-test / 33-list totals, or retire them
+  in favor of the pinned source-defined counts above before setting a BFM
+  coverage denominator.
 - Complete the 44-unit dependency map: resolve symbolic/provider paths and
   absent references, inspect nested filelists, expand test-YAML variables and
   inherited launch arguments, and connect visible package/DPI use and tests to

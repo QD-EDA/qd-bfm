@@ -488,11 +488,17 @@ the licensed ARM `Axi4PC.sv`, whose placeholder is intentionally invalid at
 
 ### Track B — Official DV: UVMF unit/block and top environments
 
-The pinned inventory counts 293 YAML test definitions (Caliptra 241, Adams
-Bridge 52), 33 regression group lists, and 44 unit `.vf` entry points. The
-official regressions need VCS plus inputs that are **absent**: UVMF 2022.3,
-Questa QVIP 2021.2.1, Avery AXI VIP 2025.1, licensed ARM Axi4PC.
-`[repo: evidence/caliptra-l0-52-and-full-dv-gap-20260923/README.md]`
+The pinned-source scan finds 219 active YAML <code>testname:</code> fields in
+Caliptra and 52 in Adams Bridge, 27/2 files under
+<code>stimulus/testsuites</code>, and 29/3 regression-named YAML candidates.
+The 44 unit <code>.vf</code> entry points come from the frozen compile-only
+census. The earlier 293-test (241/52) and 33-list totals are not reproduced
+from these roots; their cited evidence directory is absent from this QD
+checkout, so they are not a verified coverage denominator. The earlier note
+cited `evidence/caliptra-l0-52-and-full-dv-gap-20260923/README.md`; that file
+is not tracked in this QD checkout. The official regressions need VCS plus
+inputs that are **absent**: UVMF 2022.3, Questa QVIP 2021.2.1, Avery AXI VIP
+2025.1, licensed ARM Axi4PC.
 
 Recorded unit census (44 entries, compile-only, not a runtime result)
 `[repo: evidence/caliptra-icarus-dv-baseline-20260923]`: 20 compile pass, 6
@@ -761,9 +767,10 @@ ML-DSA, and top-level check/monitor use. It also found a dummy Avery AXI schema
 with only a one-bit placeholder port; this is not evidence of a real Avery
 pin-level producer. The frozen 44-filelist census was mapped exactly to 17
 Caliptra and 27 Adams Bridge entries; a filename glob gave the wrong split.
-The legacy 293-test / 33-group totals
-use a wider or different inventory and still need reconciliation. UVMF license
-terms are not visible in the user-linked mirror, so no source is copied.
+The legacy 293-test / 33-group totals remain unverified and are not used as the
+coverage denominator. The pinned source-defined inventory is recorded above.
+UVMF license terms are not visible in the user-linked mirror, so no source is
+copied.
 
 Deliverables (scripted and re-runnable, hash-recorded):
 - License determination for UVMF, QVIP, Avery, Axi4PC; redistribution decision.
@@ -772,12 +779,15 @@ Deliverables (scripted and re-runnable, hash-recorded):
   override points), macros used, plusargs and `+define`s, filelist provider
   variables, and DPI imports. Counts per symbol; which of the 44 units and
   which UVMF top/block envs need each.
-- Required-versus-present matrix over the 293 tests / 44 units / 33 groups.
+- Required-versus-present matrix over the manifest's source-defined test/config
+  records, 44 units, and listed test suites; do not use the unverified 293/33
+  totals as the denominator.
 - Decision record: vendor vs. recreate for UVMF; protocol set and order for L3.
 
-Gate: the source inventory regenerates byte-identically; the 293 / 33 count
-discrepancy is explained; every `[unverified]` row in §3 is resolved to
-confirmed, refuted, or unused; required license terms are recorded.
+Gate: the source inventory regenerates byte-identically; the old 293/33 source
+is found or replaced with the pinned source-defined denominator; every
+`[unverified]` row in §3 is resolved to confirmed, refuted, or unused; required
+license terms are recorded.
 
 ### Phase 1 — Idiom reducers (compiler readiness)
 
