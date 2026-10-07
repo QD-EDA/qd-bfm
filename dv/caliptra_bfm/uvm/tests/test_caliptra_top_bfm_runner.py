@@ -360,12 +360,61 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "between 1 and 3"):
                 RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "too-many", 4)
 
+    def test_limits_aes_copy_to_requested_case_window(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp) / "rtl"
+            source = rtl / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
+            source.mkdir(parents=True)
+            original = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
+            original.write_text(
+                "test_config_t test_cases[] = {\n"
+                "    {AES_ENC, AES_GCM, AES_256},\n"
+                "    {AES_DEC, AES_GCM, AES_256},\n"
+                "    {AES_ENC, AES_CBC, AES_256},\n"
+                "};\n"
+                "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
+            )
+            (source / "caliptra_isr.h").write_text("/* ISR declarations */\n")
+            output_dir, _ = RUNNER.prepare_limited_aes_case_source(
+                rtl, Path(temp) / "diagnostic", 1, case_start=1
+            )
+            patched = (output_dir / original.name).read_text()
+            self.assertIn("int num_tests = 1; /* bounded AES DMA diagnostic */", patched)
+            entries = [line.strip() for line in patched.splitlines()
+                       if line.strip().startswith(("{AES_ENC,", "{AES_DEC,"))]
+            self.assertEqual(entries, ["{AES_DEC, AES_GCM, AES_256},"])
+            with self.assertRaisesRegex(ValueError, "case window starting at 2"):
+                RUNNER.prepare_limited_aes_case_source(
+                    rtl, Path(temp) / "out-of-range", 2, case_start=2
+                )
+
     def test_cli_exposes_multi_case_limit(self):
         result = subprocess.run(
             ["python3", str(RUNNER_PATH), "--help"],
             capture_output=True, text=True, check=True,
         )
         self.assertIn("--limit-aes-cases N", result.stdout)
+        self.assertIn("--start-aes-case INDEX", result.stdout)
+        self.assertIn("zero-based start index", result.stdout)
+
+    def test_aes_case_start_requires_a_limit(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--start-aes-case", "1",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output")],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("--start-aes-case requires --limit-aes-cases", result.stderr)
+
+    def test_aes_case_start_must_be_nonnegative(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--start-aes-case", "-1",
+             "--limit-aes-cases", "1", "--case", "smoke_test_dma_aes_gcm_short_1_dword",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output")],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("--start-aes-case must be nonnegative", result.stderr)
 
     def test_case_limit_is_short_aes_only(self):
         result = subprocess.run(

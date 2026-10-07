@@ -208,10 +208,11 @@ generation for the short AES case while retaining all 12 firmware AES/DMA cases.
 `--quiet-firmware` compiles supported DMA cases with
 `CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints; for the short
 AES case it retains all 12 cases.
-`--limit-aes-cases N` builds a disposable firmware copy for the first N of the
-12 AES/DMA cases, with the same data preload, PQ-vector skip, and quiet mode as
-the one-case diagnostic. This provides an incremental path from one case to
-the complete suite. `--first-aes-case-diagnostic` remains the one-case alias.
+`--limit-aes-cases N` builds a disposable firmware copy for N AES/DMA cases.
+Use `--start-aes-case INDEX` to select a zero-based starting index; the default
+is 0. This supports disjoint slices of the 12-case suite, with the same data
+preload, PQ-vector skip, and quiet mode as the one-case diagnostic.
+`--first-aes-case-diagnostic` remains the one-case alias.
 These modes are diagnostic, can be combined with `--fast-trng` and `--trace-axi`,
 and do not qualify stock firmware. `CALIPTRA_BFM_PROFILE` can use Caliptra's
 pinned `src/integration/config/caliptra_top_tb.vf`; the generated Icarus profile

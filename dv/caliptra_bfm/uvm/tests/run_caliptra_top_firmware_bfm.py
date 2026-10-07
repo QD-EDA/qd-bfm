@@ -278,7 +278,7 @@ def prepare_dma_generator_overlay(rtl_root, output_path, force_first_reset=False
     subprocess.run(command, check=True)
 
 
-def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
+def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit, case_start=0):
     source = Path(rtl_root) / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
     source_file = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
     text = source_file.read_text()
@@ -293,10 +293,15 @@ def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
     case_count = len(table_lines)
     if not 1 <= case_limit <= case_count:
         raise ValueError(f"AES DMA case limit must be between 1 and {case_count}")
+    if not 0 <= case_start < case_count or case_start + case_limit > case_count:
+        raise ValueError(
+            f"AES DMA case window starting at {case_start} with limit {case_limit} "
+            f"exceeds {case_count} cases"
+        )
     before = "int num_tests = sizeof(test_cases) / sizeof(test_config_t);"
     if text.count(before) != 1:
         raise ValueError(f"unexpected AES DMA firmware loop: {source_file}")
-    selected_cases = "\n".join(table_lines[:case_limit])
+    selected_cases = "\n".join(table_lines[case_start:case_start + case_limit])
     text = text[:table.start(1)] + "\n" + selected_cases + text[table.end(1):]
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True)
@@ -745,7 +750,9 @@ def main():
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
                         help="diagnostic only: run one AES/DMA case and skip MLDSA/MLKEM helper vectors")
     parser.add_argument("--limit-aes-cases", type=int, metavar="N",
-                        help="diagnostic only: run the first N cases of the short AES/DMA firmware suite")
+                        help="diagnostic only: run N cases from the short AES/DMA firmware suite")
+    parser.add_argument("--start-aes-case", type=int, metavar="INDEX",
+                        help="zero-based start index for --limit-aes-cases")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
                         help="diagnostic only: skip native and testbench MLDSA/MLKEM vector generation; keep all AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
@@ -766,7 +773,14 @@ def main():
         raise ValueError("--fast-boot-data-preload requires a supported DMA firmware case")
     if args.first_aes_case_diagnostic and args.limit_aes_cases is not None:
         raise ValueError("use only one of --first-aes-case-diagnostic and --limit-aes-cases")
+    if args.start_aes_case is not None and args.limit_aes_cases is None and not args.first_aes_case_diagnostic:
+        raise ValueError("--start-aes-case requires --limit-aes-cases")
+    if args.start_aes_case is not None and args.start_aes_case < 0:
+        raise ValueError("--start-aes-case must be nonnegative")
+    if args.first_aes_case_diagnostic and args.start_aes_case not in (None, 0):
+        raise ValueError("--first-aes-case-diagnostic starts at case 0")
     aes_case_limit = 1 if args.first_aes_case_diagnostic else args.limit_aes_cases
+    aes_case_start = args.start_aes_case or 0
     if aes_case_limit is not None and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("AES case limits are available only for smoke_test_dma_aes_gcm_short_1_dword")
     if aes_case_limit is not None and aes_case_limit < 1:
@@ -832,7 +846,7 @@ def main():
         )
     if aes_case_limit is not None:
         case_limit_source = prepare_limited_aes_case_source(
-            rtl, args.output / "limited_aes_case_source", aes_case_limit
+            rtl, args.output / "limited_aes_case_source", aes_case_limit, aes_case_start
         )
     env = os.environ.copy()
     gcc_prefix = normalize_gcc_prefix(gcc_prefix, env)
@@ -941,6 +955,7 @@ def main():
         "firmware_command": firmware_command,
         "firmware_exit": firmware_exit,
         "aes_case_limit": aes_case_limit,
+        "aes_case_start": aes_case_start if aes_case_limit is not None else None,
         "aes_case_limit_source_sha256": case_limit_source[1] if case_limit_source else None,
         "rand_dma_iterations": args.rand_dma_iterations,
         "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
@@ -952,6 +967,7 @@ def main():
                              "fast_boot_data_preload": args.fast_boot_data_preload or aes_case_limit is not None,
                              "first_aes_case": args.first_aes_case_diagnostic,
                              "aes_case_limit": aes_case_limit,
+                             "aes_case_start": aes_case_start if aes_case_limit is not None else None,
                              "rand_dma_iterations": args.rand_dma_iterations,
                              "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
                              "rand_dma_reset_delay_cycles": args.rand_dma_reset_delay_cycles,
@@ -977,7 +993,8 @@ def main():
     (args.output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     label = "PASS" if passed else "FAIL"
     if aes_case_limit is not None:
-        label += f" (first {aes_case_limit} AES DMA case(s); not stock firmware qualification)"
+        label += (f" (AES DMA cases {aes_case_start + 1}..{aes_case_start + aes_case_limit}; "
+                  "not stock firmware qualification)")
     elif args.rand_dma_iterations is not None:
         reset_note = ", forced first reset" if args.force_first_rand_dma_reset else ""
         if args.rand_dma_reset_delay_cycles is not None:
