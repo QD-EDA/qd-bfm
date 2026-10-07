@@ -196,8 +196,11 @@ stock and simulated image hashes plus the preload range. The
 vector generation for the short AES case while retaining all 12 firmware
 AES/DMA cases. `--quiet-firmware` also retains all 12 cases and compiles with
 `CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints.
-`--first-aes-case-diagnostic` further limits the firmware to its first 1-dword
-AES/DMA case. These modes are diagnostic, can be combined with `--fast-trng`,
+`--limit-aes-cases N` builds a disposable firmware copy for the first N of the
+12 AES/DMA cases, with the same data preload, PQ-vector skip, and quiet mode as
+the one-case diagnostic. This provides an incremental path from one case to
+the complete suite. `--first-aes-case-diagnostic` remains the one-case alias.
+These modes are diagnostic, can be combined with `--fast-trng` and `--trace-axi`,
 and do not qualify stock firmware. `CALIPTRA_BFM_PROFILE` can use Caliptra's
 pinned `src/integration/config/caliptra_top_tb.vf`; the generated Icarus profile
 omits its unavailable ARM `Axi4PC.sv` placeholder. No stub is compiled in its

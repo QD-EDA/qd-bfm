@@ -256,20 +256,68 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             source.mkdir(parents=True)
             original = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
             original.write_text(
+                "test_config_t test_cases[] = {\n"
+                "    {AES_ENC, AES_GCM, AES_256},\n"
+                "    {AES_DEC, AES_GCM, AES_256},\n"
+                "    {AES_ENC, AES_CBC, AES_256},\n"
+                "};\n"
                 "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
                 "/* first test uses one dword */\n"
             )
             (source / "caliptra_isr.h").write_text("/* ISR declarations */\n")
-            output_dir, digest = RUNNER.prepare_first_aes_case_source(rtl, Path(temp) / "diagnostic")
+            output_dir, digest = RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "diagnostic", 1)
             patched = (output_dir / original.name).read_text()
-            self.assertIn("int num_tests = 1; /* first-DMA diagnostic */", patched)
+            self.assertIn("int num_tests = 1; /* bounded AES DMA diagnostic */", patched)
             self.assertEqual(
                 original.read_text(),
+                "test_config_t test_cases[] = {\n"
+                "    {AES_ENC, AES_GCM, AES_256},\n"
+                "    {AES_DEC, AES_GCM, AES_256},\n"
+                "    {AES_ENC, AES_CBC, AES_256},\n"
+                "};\n"
                 "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
                 "/* first test uses one dword */\n",
             )
             self.assertEqual(digest, RUNNER.sha256(output_dir / original.name))
             self.assertTrue((output_dir / "caliptra_isr.h").is_file())
+
+    def test_limits_aes_copy_to_requested_prefix_and_checks_table_bound(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp) / "rtl"
+            source = rtl / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
+            source.mkdir(parents=True)
+            original = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
+            original.write_text(
+                "test_config_t test_cases[] = {\n"
+                "    {AES_ENC, AES_GCM, AES_256},\n"
+                "    {AES_DEC, AES_GCM, AES_256},\n"
+                "    {AES_ENC, AES_CBC, AES_256},\n"
+                "};\n"
+                "int num_tests = sizeof(test_cases) / sizeof(test_config_t);\n"
+            )
+            (source / "caliptra_isr.h").write_text("/* ISR declarations */\n")
+            output_dir, _ = RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "diagnostic", 2)
+            self.assertIn("int num_tests = 2; /* bounded AES DMA diagnostic */",
+                          (output_dir / original.name).read_text())
+            with self.assertRaisesRegex(ValueError, "between 1 and 3"):
+                RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "too-many", 4)
+
+    def test_cli_exposes_multi_case_limit(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--help"],
+            capture_output=True, text=True, check=True,
+        )
+        self.assertIn("--limit-aes-cases N", result.stdout)
+
+    def test_case_limit_is_short_aes_only(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--case", "smoke_test_dma",
+             "--limit-aes-cases", "2",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output")],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("AES case limits are available only for", result.stderr)
 
     def test_cli_exposes_pq_skip_without_limiting_firmware_to_one_case(self):
         result = subprocess.run(

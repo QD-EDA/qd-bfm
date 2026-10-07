@@ -254,17 +254,25 @@ def prepare_dma_generator_overlay(rtl_root, output_path):
     ], check=True)
 
 
-def prepare_first_aes_case_source(rtl_root, output_dir):
+def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
     source = Path(rtl_root) / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
     source_file = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
     text = source_file.read_text()
+    table = re.search(r"test_config_t\s+test_cases\[\]\s*=\s*\{(.*?)\n\s*\};", text, re.S)
+    if not table:
+        raise ValueError(f"unexpected AES DMA test-case table: {source_file}")
+    case_count = len(re.findall(r"(?m)^\s*\{AES_(?:ENC|DEC),", table.group(1)))
+    if not 1 <= case_limit <= case_count:
+        raise ValueError(f"AES DMA case limit must be between 1 and {case_count}")
     before = "int num_tests = sizeof(test_cases) / sizeof(test_config_t);"
     if text.count(before) != 1:
-        raise ValueError(f"unexpected first AES DMA firmware loop: {source_file}")
+        raise ValueError(f"unexpected AES DMA firmware loop: {source_file}")
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True)
     patched_source = output_dir / source_file.name
-    patched_source.write_text(text.replace(before, "int num_tests = 1; /* first-DMA diagnostic */", 1))
+    patched_source.write_text(
+        text.replace(before, f"int num_tests = {case_limit}; /* bounded AES DMA diagnostic */", 1)
+    )
     shutil.copy2(source / "caliptra_isr.h", output_dir / "caliptra_isr.h")
     return output_dir, sha256(patched_source)
 
@@ -627,6 +635,8 @@ def main():
                         help="diagnostic only: preload .data and skip its CRT0 copy for the short AES DMA case")
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
                         help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
+    parser.add_argument("--limit-aes-cases", type=int, metavar="N",
+                        help="diagnostic only: run the first N cases of the short AES/DMA firmware suite")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
                         help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
@@ -636,14 +646,19 @@ def main():
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
-    if args.first_aes_case_diagnostic and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
-        raise ValueError("--first-aes-case-diagnostic is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.first_aes_case_diagnostic and args.limit_aes_cases is not None:
+        raise ValueError("use only one of --first-aes-case-diagnostic and --limit-aes-cases")
+    aes_case_limit = 1 if args.first_aes_case_diagnostic else args.limit_aes_cases
+    if aes_case_limit is not None and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
+        raise ValueError("AES case limits are available only for smoke_test_dma_aes_gcm_short_1_dword")
+    if aes_case_limit is not None and aes_case_limit < 1:
+        raise ValueError("--limit-aes-cases must be positive")
     if args.skip_pq_vector_generation and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--skip-pq-vector-generation is limited to smoke_test_dma_aes_gcm_short_1_dword")
     if args.quiet_firmware and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--quiet-firmware is limited to smoke_test_dma_aes_gcm_short_1_dword")
-    skip_pq_vectors = args.first_aes_case_diagnostic or args.skip_pq_vector_generation
-    quiet_firmware = args.first_aes_case_diagnostic or args.quiet_firmware
+    skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
+    quiet_firmware = aes_case_limit is not None or args.quiet_firmware
 
     rtl = required_env("CALIPTRA_RTL")
     base_profile = required_env("CALIPTRA_BFM_PROFILE")
@@ -674,12 +689,14 @@ def main():
         generator_overlay = args.output / "dma_testcase_generator_icarus.sv"
         prepare_dma_generator_overlay(rtl, generator_overlay)
     pq_vector_overlay = None
-    first_aes_case = None
+    case_limit_source = None
     if skip_pq_vectors:
         pq_vector_overlay = args.output / "caliptra_top_tb_services_skip_pq_vectors.sv"
         prepare_pq_vector_overlay(rtl, pq_vector_overlay)
-    if args.first_aes_case_diagnostic:
-        first_aes_case = prepare_first_aes_case_source(rtl, args.output / "first_aes_case_source")
+    if aes_case_limit is not None:
+        case_limit_source = prepare_limited_aes_case_source(
+            rtl, args.output / "limited_aes_case_source", aes_case_limit
+        )
     env = os.environ.copy()
     gcc_prefix = normalize_gcc_prefix(gcc_prefix, env)
     env.update(
@@ -733,8 +750,8 @@ def main():
         f"GCC_PREFIX={gcc_prefix}", "CALIPTRA_INTERNAL_TRNG=1", f"PLAYBOOK_RANDOM_SEED={seed}",
         f"BUILD_CFLAGS={build_flags}",
     ]
-    if first_aes_case:
-        firmware_command.append(f"TEST_DIR={first_aes_case[0]}")
+    if case_limit_source:
+        firmware_command.append(f"TEST_DIR={case_limit_source[0]}")
     firmware_command.append("program.hex")
     firmware_exit = run_logged(firmware_command, test_output, env, test_output / "firmware.log")
     images = ["program.hex", "dccm.hex", "iccm.hex", "mailbox.hex"]
@@ -744,7 +761,7 @@ def main():
 
     stock_firmware_image_sha256 = {name: sha256(test_output / name) for name in images}
     fast_boot_data_preload = None
-    if args.fast_boot_data_preload or args.first_aes_case_diagnostic:
+    if args.fast_boot_data_preload or aes_case_limit is not None:
         fast_boot_data_preload = prepare_fast_boot_data_preload(
             test_output / "program.hex", test_output / "dccm.hex",
             test_output / f"{args.case}.map", test_output / f"{args.case}.dis",
@@ -783,13 +800,15 @@ def main():
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
         "firmware_exit": firmware_exit,
-        "first_aes_case_source_sha256": first_aes_case[1] if first_aes_case else None,
+        "aes_case_limit": aes_case_limit,
+        "aes_case_limit_source_sha256": case_limit_source[1] if case_limit_source else None,
         "firmware_image_sha256": stock_firmware_image_sha256,
         "simulation_image_sha256": simulation_image_sha256,
         "fast_boot_data_preload": fast_boot_data_preload,
         "diagnostic_modes": {"fast_trng": args.fast_trng,
-                             "fast_boot_data_preload": args.fast_boot_data_preload or args.first_aes_case_diagnostic,
+                             "fast_boot_data_preload": args.fast_boot_data_preload or aes_case_limit is not None,
                              "first_aes_case": args.first_aes_case_diagnostic,
+                             "aes_case_limit": aes_case_limit,
                              "skip_pq_vector_generation": skip_pq_vectors,
                              "quiet_firmware": quiet_firmware},
         "native_vector_build_commands": vector_commands,
@@ -810,8 +829,8 @@ def main():
     }
     (args.output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     label = "PASS" if passed else "FAIL"
-    if args.first_aes_case_diagnostic:
-        label += " (first AES DMA diagnostic; not stock firmware qualification)"
+    if aes_case_limit is not None:
+        label += f" (first {aes_case_limit} AES DMA case(s); not stock firmware qualification)"
     elif args.fast_boot_data_preload:
         label += " (diagnostic fast boot; not stock firmware qualification)"
     elif quiet_firmware:
