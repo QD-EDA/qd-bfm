@@ -95,7 +95,12 @@ floor. Temporary sequence tracing localized the stall to the generated
 `reg_model.reset()` call; bypassing that call for diagnosis reached the first
 clock edge, then stalled in predictor reset. Diagnostic edits and generated
 run files were removed. The 2026-10-05 passing log remains historical evidence
-and is not reproduced on this installed toolchain.
+and is not reproduced on this installed toolchain. Two other host toolchains
+could not reach simulation: Homebrew Icarus 13.0 and the local Icarus 14.0-dev
+build both fail while parsing unchanged Caliptra AXI/primitive sources
+(`axi_sub_rd.sv`, `axi_sub_wr.sv`, and `caliptra_prim_alert_pkg.sv`); 14.0-dev
+also reports unsupported default lifetime overrides in `axi_if.sv`. Those
+compile failures are separate from the time-zero stall.
 
 ## Generated AHB RAL read
 
