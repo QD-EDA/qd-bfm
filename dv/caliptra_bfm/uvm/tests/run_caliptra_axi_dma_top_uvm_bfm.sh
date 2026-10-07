@@ -20,11 +20,12 @@ max_sram_dut_replay_only=0
 fixed_sram_modes_only=0
 fifo_source_routes_only=0
 fifo_source_size_sweep_only=0
+fifo_destination_size_sweep_only=0
 recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
 component_fixed_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -36,11 +37,12 @@ if [ "$#" -eq 1 ]; then
     --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
     --fifo-source-routes-only) fifo_source_routes_only=1 ;;
     --fifo-source-size-sweep-only) fifo_source_size_sweep_only=1 ;;
+    --fifo-destination-size-sweep-only) fifo_destination_size_sweep_only=1 ;;
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -287,6 +289,35 @@ if [ "$fifo_source_size_sweep_only" -eq 1 ]; then
     case_index=$((case_index + 1))
   done
   echo "INFO: generated FIFO-source replay passed eight sizes on AXI2AXI, AXI2MBOX, and AXI2AHB"
+  exit 0
+fi
+if [ "$fifo_destination_size_sweep_only" -eq 1 ]; then
+  case_index=59
+  while [ "$case_index" -le 66 ]; do
+    case "$((case_index - 59))" in
+      0) word_count=1 ;;
+      1) word_count=4 ;;
+      2) word_count=5 ;;
+      3) word_count=16 ;;
+      4) word_count=64 ;;
+      5) word_count=65 ;;
+      6) word_count=255 ;;
+      7) word_count=256 ;;
+    esac
+    run_case "generated-fifo-destination-${word_count}-words" \
+      +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=67 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "INFO: Caliptra DCCM case type=2 words=$word_count" "$log" ||
+       ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rand_delays=1' "$log" ||
+       ! grep -Fq "PASS: generated DCCM record index=$case_index route=2 replayed through axi_dma_top" "$log" ||
+       ! grep -Fq 'INFO: randomized AXI target stalls observed' "$log"; then
+      echo "Generated SRAM-to-FIFO transfer of $word_count words did not complete with stalls" >&2
+      exit 1
+    fi
+    case_index=$((case_index + 1))
+  done
+  echo "INFO: generated SRAM-to-FIFO replay passed sizes 1, 4, 5, 16, 64, 65, 255, and 256"
   exit 0
 fi
 if [ "$mailbox_fixed_modes_only" -eq 1 ]; then

@@ -253,7 +253,10 @@ The AXI2AXI, AXI2MBOX, and AXI2AHB FIFO-source lanes now each pass generated
 transfers of 1, 4, 5, 16, 64, 65, 255, and 256 words through the real DUT. Each
 run checks FIFO drain, route payload, and randomized target stalls; see the
 [`FIFO-source size-sweep evidence`](../../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
-Other generated FIFO modes and firmware-triggered reset injection remain
+Generated SRAM-to-FIFO transfers also pass at all eight sizes. The runner
+checks fixed-write transactions, randomized stalls, and every queued FIFO word;
+see the [`FIFO-destination size-sweep evidence`](../../../evidence/caliptra-bfm-dma-fifo-destination-size-sweep-20261007/README.md).
+Other generated FIFO mode/flag combinations and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five
 DMA routes through the real DUT. AXI2MBOX and MBOX2AXI apply one-cycle mailbox

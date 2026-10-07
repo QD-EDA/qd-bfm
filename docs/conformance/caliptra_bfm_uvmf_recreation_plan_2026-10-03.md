@@ -41,14 +41,14 @@ The actual-DUT runner now selects and replays all 29 records through
 For this DUT lane, a hash-guarded overlay selects among
 all five named DMA routes, eight short sizes (1, 4, 5, 16, 64, 65, 255, and
 256 words), a 16,384-word maximum checked SRAM payload on AXI2AXI, a maximum
-65,536-word fixed-read FIFO-to-SRAM stream, a 65-word
-fixed-write SRAM-to-FIFO record, and 65-word FIFO recovery records for AXI2AXI,
+65,536-word fixed-read FIFO-to-SRAM stream, generated fixed-write SRAM-to-FIFO
+records at eight sizes, and 65-word FIFO recovery records for AXI2AXI,
 AXI2MBOX, and AXI2AHB. Generated recovery sweeps cover every legal one-hot
 block size for each route: 4–64 bytes on AXI2AXI and 4–2048 bytes on AXI2MBOX
 and AXI2AHB. Short records retain per-record randomized payloads, route-valid
 offsets, and Caliptra's randomized delay flag. One record observed five
-target-stall cycles; the generated FIFO-destination record observed 160. Other
-generated FIFO modes and firmware-triggered reset injection remain
+target-stall cycles; the generated 65-word FIFO-destination record observed
+160. Other generated FIFO mode/flag combinations and firmware-triggered reset injection remain
 unqualified. Three non-recovery FIFO-source records also complete 65-word
 AXI2AXI-to-SRAM, AXI2MBOX, and AXI2AHB transfers through the actual DMA DUT;
 the UVM bench checks FIFO drain, route payload, and randomized stalls. See the
@@ -57,6 +57,9 @@ Generated FIFO-source AXI2AXI, AXI2MBOX, and AXI2AHB transfers now pass at 1,
 4, 5, 16, 64, 65, 255, and 256 words through the actual DUT, checking FIFO
 drain, route payload, and randomized stalls; see the
 [`FIFO-source size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
+Generated SRAM-to-FIFO AXI2AXI transfers now also pass at all eight sizes,
+checking every queued payload word and randomized backpressure; see the
+[`FIFO-destination size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-destination-size-sweep-20261007/README.md).
 The actual generated AXI2AXI recovery record also passes through
 the real DMA DUT with not-empty, threshold, and pulse `recovery_data_avail`
 policies. A separate 32-record generated replay adds 65-word SRAM FIXED-read,
@@ -682,12 +685,16 @@ route-valid offsets, and the generated delay flag. The maximum stream
 validates every destination word and drains the FIFO; FIFO destination checks
 all queued words and stalls; recovery checks all route outputs. Three 65-word
 non-recovery FIFO-source records also validate AXI2AXI-to-SRAM, AXI2MBOX, and
-AXI2AHB routes under randomized target stalls. Other generated FIFO modes and
-firmware-triggered reset injection remain unqualified. Generated FIFO-source
+AXI2AHB routes under randomized target stalls. Other generated FIFO mode/flag
+combinations and firmware-triggered reset injection remain unqualified. Generated FIFO-source
 AXI2AXI, AXI2MBOX, and AXI2AHB transfers now each pass 1, 4, 5, 16, 64, 65,
 255, and 256-word profiles; the runner checks FIFO drain, route payload, and
 randomized stalls.
 See the [`FIFO-source size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
+Generated SRAM-to-FIFO AXI2AXI transfers also pass 1, 4, 5, 16, 64, 65, 255,
+and 256-word profiles, checking fixed-write bursts, randomized stalls, and
+every queued payload word. See the
+[`FIFO-destination size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-destination-size-sweep-20261007/README.md).
 A focused route replay also covers the legal FIXED-read AXI2MBOX and
 FIXED-write MBOX2AXI modes through the actual DMA DUT, checking sequential
 mailbox requests and repeated SRAM destination addressing. A second replay

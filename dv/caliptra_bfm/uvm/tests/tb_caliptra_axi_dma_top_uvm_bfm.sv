@@ -645,7 +645,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             wait (run_done && env.scoreboard.read_count == active_read_burst_count &&
                   env.scoreboard.read_word_offset == WORD_COUNT &&
                   env.scoreboard.write_count == 0);
-          end else if ($test$plusargs("SRAM2FIFO_CASE")) begin
+          end else if ($test$plusargs("SRAM2FIFO_CASE") &&
+                       !$test$plusargs("GENERATED_CASE")) begin
             wait (run_done && env.scoreboard.read_count == 2 &&
                   env.scoreboard.read_word_offset == WORD_COUNT &&
                   env.scoreboard.write_count == 5 &&
@@ -849,7 +850,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             (generated_case_count == 32 && generated_case_index < 32) ||
             (generated_case_count == 35 && generated_case_index < 35) ||
             (generated_case_count == 43 && generated_case_index < 43) ||
-            (generated_case_count == 59 && generated_case_index < 59)))
+            (generated_case_count == 59 && generated_case_index < 59) ||
+            (generated_case_count == 67 && generated_case_index < 67)))
         $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
                generated_case_index, generated_case_count);
 
@@ -883,14 +885,32 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset != 0) || (record_dst_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported large FIFO stream profile", record_index);
         end else if (record_type.dst_is_fifo) begin
-          if ((generated_case_count < 29) || (record_index != 25) ||
-              (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
+          if ((generated_case_count < 29) ||
+              !((record_index == 25) ||
+                (generated_case_count == 67 && record_index >= 59 && record_index <= 66)) ||
+              (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
               !record_type.inject_rand_delays || record_type.test_block_size ||
               (record_type.block_size != 0) || (record_dst_offset != 0) ||
               (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
+          if (record_index == 25) begin
+            if (record_size != WORD_COUNT)
+              $fatal(1, "Generated testcase 25 is not the 65-word FIFO-destination profile");
+          end else begin
+            case (record_index - 59)
+              0: if (record_size != 1)   $fatal(1, "FIFO-destination sweep record is not 1 word");
+              1: if (record_size != 4)   $fatal(1, "FIFO-destination sweep record is not 4 words");
+              2: if (record_size != 5)   $fatal(1, "FIFO-destination sweep record is not 5 words");
+              3: if (record_size != 16)  $fatal(1, "FIFO-destination sweep record is not 16 words");
+              4: if (record_size != 64)  $fatal(1, "FIFO-destination sweep record is not 64 words");
+              5: if (record_size != 65)  $fatal(1, "FIFO-destination sweep record is not 65 words");
+              6: if (record_size != 255) $fatal(1, "FIFO-destination sweep record is not 255 words");
+              7: if (record_size != 256) $fatal(1, "FIFO-destination sweep record is not 256 words");
+              default: $fatal(1, "Unexpected FIFO-destination sweep record %0d", record_index);
+            endcase
+          end
         end else if (record_type.test_block_size) begin
           if ((generated_case_count < 29) ||
               ((record_index < 26) || (record_index > 28)) ||
@@ -916,7 +936,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           endcase
         end else if ((record_index >= 29) && (record_index <= 31)) begin
           if ((generated_case_count != 32 && generated_case_count != 35 &&
-               generated_case_count != 43 && generated_case_count != 59) ||
+               generated_case_count != 43 && generated_case_count != 59 &&
+               generated_case_count != 67) ||
               (record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
               record_type.dst_is_fifo || record_type.inject_rst ||
@@ -935,7 +956,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           endcase
         end else if ((record_index >= 32) && (record_index <= 34)) begin
           if ((generated_case_count != 35 && generated_case_count != 43 &&
-               generated_case_count != 59) ||
+               generated_case_count != 59 && generated_case_count != 67) ||
               (record_size != WORD_COUNT) ||
               !record_type.src_is_fifo || record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -955,7 +976,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               $fatal(1, "Generated testcase 34 is not FIFO-to-component");
           endcase
         end else if ((record_index >= 35) && (record_index <= 58)) begin
-          if ((generated_case_count != 59) || !record_type.src_is_fifo ||
+          if ((generated_case_count != 59 && generated_case_count != 67) ||
+              !record_type.src_is_fifo ||
               record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
               record_type.inject_rst || !record_type.inject_rand_delays ||
