@@ -84,3 +84,16 @@ recovery.
   `cd66e92cebd0454e76e9447fea346814d0b05c257b22355e8d404b4661e4f671`
 - Trace: `sim-fixed-reset-delay-partial.log`
 - The temporary simulator build tree was removed after preserving this log.
+
+## No-trace comparison
+
+The same one-transfer, fixed-512-cycle diagnostic was rerun without
+`--trace-axi` to avoid trace-VPI overhead. The simulator log showed the
+generated transfer with `inject_rst=1` and entry into Caliptra ROM flow. The
+60% memory guard stopped the run when free memory reached 59%; no warm-reset
+assertion, resume, or testcase completion marker was observed. This run adds
+no reset-recovery qualification.
+
+- Memory guard: 69% free before run; 59% minimum observed; 60% floor
+- No result JSON was emitted because the guard stopped the runner
+- The temporary simulator build tree was removed after inspection
