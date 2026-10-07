@@ -502,7 +502,9 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
         sequence_done = 0;
         aaxi_sequence = caliptra_soc_ifc_aaxi_rw_sequence::type_id::create("aaxi_invalid_user_probe");
         aaxi_sequence.mailbox_user_rejection_probe = 1;
+`ifdef CALIPTRA_BFM_OPEN_MBOX_TARGET
         aaxi_sequence.mbox_sram_agent_config = top_level_sequence.mbox_sram_agent_config;
+`endif
         fork
           begin
             aaxi_sequence.start(top_level_sequence.uvm_test_top_environment_aaxi_tb_env0_master_0_sqr);
@@ -594,7 +596,9 @@ package caliptra_soc_ifc_generated_env_probe_pkg;
         aaxi_sequence = caliptra_soc_ifc_aaxi_rw_sequence::type_id::create("aaxi_mbox_response_sequence");
         aaxi_sequence.mailbox_response_only = 1;
         aaxi_sequence.mailbox_response_axi_user = observer.mailbox_response_axi_user;
+`ifdef CALIPTRA_BFM_OPEN_MBOX_TARGET
         aaxi_sequence.mbox_sram_agent_config = top_level_sequence.mbox_sram_agent_config;
+`endif
         fork
           begin
             aaxi_sequence.start(top_level_sequence.uvm_test_top_environment_aaxi_tb_env0_master_0_sqr);
