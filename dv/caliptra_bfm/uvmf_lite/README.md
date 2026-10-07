@@ -128,9 +128,10 @@ config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
 `wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs.
-Generated BFM macros and utility packages, structured per-field recording of
-derived payloads, HDL/HVL proxy startup, and remaining top scaffolding are
-still open.
+Generated BFM macros and utility packages, and structured per-field recording
+of derived payloads, are still open. The ECC `hdl_top`/`hvl_top` pair runs with
+a hash-guarded modport/timescale overlay; compatibility with unmodified and
+other generated tops remains open.
 Do not treat it as a drop-in UVMF package yet.
 
 The focused compile probe follows the ECC entries in Caliptra's pinned
