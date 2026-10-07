@@ -5,6 +5,7 @@ import argparse
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -111,7 +112,10 @@ def run_under_memory_guard(repo: Path) -> int | None:
         "--min-free-percent",
         os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", "60"),
         "--timeout-seconds",
-        os.environ.get("CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS", "300"),
+        os.environ.get(
+            "CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS",
+            "600" if "--actual-keygen-smoke" in sys.argv else "300",
+        ),
         "--",
         sys.executable,
         str(Path(__file__).resolve()),
@@ -142,7 +146,13 @@ def main() -> int:
         action="store_true",
         help="run a generated-environment version read against the pinned abr_top RTL",
     )
+    parser.add_argument(
+        "--actual-keygen-smoke",
+        action="store_true",
+        help="run generated-RAL MLDSA keygen and score PK/SK readback against abr_top",
+    )
     args = parser.parse_args()
+    actual_rtl = args.actual_rtl_smoke or args.actual_keygen_smoke
 
     adams = args.adamsbridge_root.resolve()
     if subprocess.check_output(["git", "-C", str(adams), "rev-parse", "HEAD"], text=True).strip() != COMMIT:
@@ -156,10 +166,92 @@ def main() -> int:
         overlay = temp / "overlay"
         top = temp / "compile_top.sv"
         top_name = "adams_mldsa_env_compile_top"
-        if args.actual_rtl_smoke:
+        runtime = temp / "runtime"
+        runtime.mkdir()
+        expected_pass = "PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB"
+        if args.actual_keygen_smoke:
+            ref_source = adams / "src/abr_top/uvmf/Dilithium_ref/dilithium/ref"
+            ref_copy = temp / "dilithium-ref"
+            shutil.copytree(ref_source, ref_copy)
+            helper = ref_copy / "test/test_dilithium5"
+            helper.unlink(missing_ok=True)
+            compiler = shutil.which("clang") or shutil.which("cc")
+            if compiler is None or shutil.which("make") is None:
+                raise SystemExit("actual MLDSA keygen requires make and clang or cc")
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(repo / "dv/caliptra_bfm/native_vectors/stage_mldsa.py"),
+                    str(ref_source / "test/test_dilithium.c"),
+                    str(ref_copy / "test/test_dilithium.c"),
+                ],
+                check=True,
+            )
+            subprocess.run(
+                ["make", "-C", str(ref_copy), f"CC={compiler}", "test/test_dilithium5"],
+                check=True,
+            )
+            shutil.copy2(helper, runtime / "test_dilithium5")
+            expected_pass = (
+                "PASS: generated MLDSA keygen completed on abr_top; "
+                "public/private key readbacks matched the generated predictor"
+            )
+        if actual_rtl:
             top_name = "adams_mldsa_runtime_top"
-            top.write_text(
+            keygen_body = (
+                "      uvm_reg_data_t hw_status, public_word, private_word; int keygen_done;\n"
+                "      bit saw_busy;\n"
+                "      uvm_reg_data_t seed_words[8] = '{32'h03020100, 32'h07060504, 32'h0b0a0908, 32'h0f0e0d0c, "
+                "32'h13121110, 32'h17161514, 32'h1b1a1918, 32'h1f1e1d1c};\n"
+                "      if (!uvm_config_db#(virtual adams_mldsa_busy_if)::get(this, \"\", \"busy_if\", busy_if))\n"
+                "        `uvm_fatal(\"MLDSA_BUSY_IF\", \"missing abr_top busy signal interface\")\n"
+                "      phase.raise_objection(this);\n"
+                "      foreach (seed_words[i]) begin\n"
+                "        configuration.mldsa_rm.MLDSA_SEED[i].write(status, seed_words[i], UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "        if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_SEED\", \"generated RAL seed write failed\")\n"
+                "      end\n"
+                "      configuration.mldsa_rm.MLDSA_CTRL.write(status, 32'h1, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_CTRL\", \"generated RAL keygen command failed\")\n"
+                "      keygen_done = 0;\n"
+                "      saw_busy = 0;\n"
+                "      // ponytail: 500000-cycle watchdog; measure and tune if this RTL profile changes.\n"
+                "      for (int cycle = 0; cycle < 500000; cycle++) begin\n"
+                "        #10ns;\n"
+                "        if (busy_if.busy) saw_busy = 1;\n"
+                "        if (saw_busy && !busy_if.busy) begin keygen_done = 1; break; end\n"
+                "      end\n"
+                "      if (!keygen_done) `uvm_fatal(\"MLDSA_KEYGEN\", \"abr_top keygen exceeded the 500000-cycle limit\")\n"
+                "      configuration.mldsa_rm.MLDSA_STATUS.read(status, hw_status, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK || !hw_status[0] || !hw_status[1] || hw_status[3])\n"
+                "        `uvm_fatal(\"MLDSA_STATUS\", \"abr_top keygen status is not ready/valid or reports an error\")\n"
+                "      configuration.mldsa_rm.MLDSA_PUBKEY.m_mem.read(status, 0, public_word, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_PUBKEY\", \"generated RAL public-key read failed\")\n"
+                "      configuration.mldsa_rm.MLDSA_PRIVKEY_OUT.m_mem.read(status, 0, private_word, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_PRIVKEY\", \"generated RAL private-key read failed\")\n"
+                "      #1;\n"
+                "      if (environment.mldsa_sb.mismatch_count != 0 || environment.mldsa_sb.match_count != 2)\n"
+                "        `uvm_fatal(\"MLDSA_SCOREBOARD\", \"generated predictor did not match both key readbacks\")\n"
+                f"      $display(\"{expected_pass}\");\n"
+                "      phase.drop_objection(this);\n"
+            )
+            smoke_body = (
+                keygen_body
+                if args.actual_keygen_smoke
+                else "      phase.raise_objection(this);\n"
+                "      configuration.mldsa_rm.MLDSA_SEED[0].write(status, 32'h1a2b3c4d, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_RAL_WRITE\", \"generated RAL seed write failed\")\n"
+                "      configuration.mldsa_rm.MLDSA_VERSION[0].read(status, version, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
+                "      if (status != UVM_IS_OK || version[31:0] != 32'h302e322e)\n"
+                "        `uvm_fatal(\"MLDSA_RAL_READ\", \"generated RAL version read failed\")\n"
+                "      #1;\n"
+                "      if (environment.mldsa_sb.mismatch_count != 0)\n"
+                "        `uvm_fatal(\"MLDSA_SCOREBOARD\", \"generated scoreboard reported a mismatch\")\n"
+                f"      $display(\"{expected_pass}\");\n"
+                "      phase.drop_objection(this);\n"
+            )
+            runtime_source = (
                 "`timescale 1ns/1ps\n"
+                "interface adams_mldsa_busy_if; logic busy; endinterface\n"
                 "package adams_mldsa_runtime_smoke_pkg;\n"
                 "  import uvm_pkg::*;\n"
                 "  import uvmf_base_pkg::*;\n"
@@ -169,6 +261,7 @@ def main() -> int:
                 "    `uvm_component_utils(adams_mldsa_runtime_smoke_test)\n"
                 "    mldsa_env_configuration configuration;\n"
                 "    mldsa_environment environment;\n"
+                "    virtual adams_mldsa_busy_if busy_if;\n"
                 "    function new(string name, uvm_component parent); super.new(name, parent); endfunction\n"
                 "    function void build_phase(uvm_phase phase);\n"
                 "      string interface_names[1]; uvmf_active_passive_t activity[1];\n"
@@ -182,17 +275,7 @@ def main() -> int:
                 "    endfunction\n"
                 "    task run_phase(uvm_phase phase);\n"
                 "      uvm_status_e status; uvm_reg_data_t version;\n"
-                "      phase.raise_objection(this);\n"
-                "      configuration.mldsa_rm.MLDSA_SEED[0].write(status, 32'h1a2b3c4d, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
-                "      if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_RAL_WRITE\", \"generated RAL seed write failed\")\n"
-                "      configuration.mldsa_rm.MLDSA_VERSION[0].read(status, version, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
-                "      if (status != UVM_IS_OK || version[31:0] != 32'h302e322e)\n"
-                "        `uvm_fatal(\"MLDSA_RAL_READ\", \"generated RAL version read failed\")\n"
-                "      #1;\n"
-                "      if (environment.mldsa_sb.mismatch_count != 0)\n"
-                "        `uvm_fatal(\"MLDSA_SCOREBOARD\", \"generated scoreboard reported a mismatch\")\n"
-                "      $display(\"PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB\");\n"
-                "      phase.drop_objection(this);\n"
+            ) + smoke_body + (
                 "    endtask\n"
                 "  endclass\n"
                 "endpackage\n"
@@ -200,9 +283,15 @@ def main() -> int:
                 "  import uvm_pkg::*;\n"
                 "  import adams_mldsa_runtime_smoke_pkg::*;\n"
                 "  hdl_top generated_hdl_top();\n"
-                "  initial begin #1; run_test(\"adams_mldsa_runtime_smoke_test\"); end\n"
+                "  adams_mldsa_busy_if mldsa_busy_if();\n"
+                "  assign mldsa_busy_if.busy = generated_hdl_top.dut.busy_o;\n"
+                "  initial begin\n"
+                "    uvm_config_db#(virtual adams_mldsa_busy_if)::set(null, \"uvm_test_top\", \"busy_if\", mldsa_busy_if);\n"
+                "    #1; run_test(\"adams_mldsa_runtime_smoke_test\");\n"
+                "  end\n"
                 "endmodule\n"
             )
+            top.write_text(runtime_source)
         else:
             top.write_text(
                 "module adams_mldsa_env_compile_top;\n"
@@ -212,7 +301,7 @@ def main() -> int:
                 "endmodule\n"
             )
         make_iverilog_overlay(env_root, overlay)
-        if args.actual_rtl_smoke:
+        if actual_rtl:
             abr_reg_source = adams / "src/abr_top/rtl/abr_reg_uvm.sv"
             abr_reg_text = abr_reg_source.read_text()
             if abr_reg_text.count("UVM_NO_ENDIAN") != 10:
@@ -221,7 +310,7 @@ def main() -> int:
                 abr_reg_text.replace("UVM_NO_ENDIAN", "UVM_LITTLE_ENDIAN")
             )
         binary = temp / "adams_mldsa_runtime.vvp"
-        output_option = ["-o", str(binary)] if args.actual_rtl_smoke else ["-tnull"]
+        output_option = ["-o", str(binary)] if actual_rtl else ["-tnull"]
         command = [
             args.iverilog,
             "-uvm",
@@ -241,7 +330,7 @@ def main() -> int:
         ]
         environment = os.environ.copy()
         environment["ADAMSBRIDGE_ROOT"] = str(adams)
-        if args.actual_rtl_smoke:
+        if actual_rtl:
             command.extend(
                 [
                     "-f",
@@ -250,12 +339,12 @@ def main() -> int:
             )
         command.extend(
             [
-                str(overlay / "abr_reg_uvm.sv") if args.actual_rtl_smoke else str(adams / "src/abr_top/rtl/abr_reg_uvm.sv"),
+                str(overlay / "abr_reg_uvm.sv") if actual_rtl else str(adams / "src/abr_top/rtl/abr_reg_uvm.sv"),
                 str(env_root / "registers/mldsa_reg_model_top_pkg.sv"),
                 str(env_root / "mldsa_env_pkg.sv"),
             ]
         )
-        if args.actual_rtl_smoke:
+        if actual_rtl:
             command.extend(
                 [
                     str(adams / "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/parameters/mldsa_parameters_pkg.sv"),
@@ -268,10 +357,10 @@ def main() -> int:
         else:
             command.append(str(top))
         subprocess.run(command, cwd=repo, env=environment, check=True)
-        if args.actual_rtl_smoke:
+        if actual_rtl:
             result = subprocess.run(
                 [args.vvp, str(binary)],
-                cwd=repo,
+                cwd=runtime,
                 capture_output=True,
                 text=True,
             )
@@ -279,11 +368,13 @@ def main() -> int:
             print(result.stderr, end="", file=sys.stderr)
             if (
                 result.returncode != 0
-                or "PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB" not in result.stdout
+                or expected_pass not in result.stdout
                 or re.search(r"UVM_(ERROR|FATAL) :\s*[1-9]", result.stdout)
             ):
                 return result.returncode or 1
-    if not args.actual_rtl_smoke:
+            if args.actual_keygen_smoke and not (runtime / "keygen.log").is_file():
+                raise SystemExit("MLDSA predictor did not invoke the native keygen helper")
+    if not actual_rtl:
         print("PASS: pinned Adams Bridge MLDSA environment, predictor, scoreboard, and RAL package compile")
     return 0
 

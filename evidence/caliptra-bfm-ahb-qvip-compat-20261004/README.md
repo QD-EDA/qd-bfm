@@ -183,17 +183,31 @@ generated-item alias, and constructs the predictor's parameterized output item
 directly. These Icarus compatibility edits leave the pinned Adams Bridge
 checkout unchanged.
 
+The runner also includes `--actual-keygen-smoke`: it builds the pinned native
+MLDSA helper in its disposable directory, writes a full 32-byte seed through
+RAL, observes actual `abr_top.busy_o` with a 500,000-cycle watchdog, checks
+READY/VALID, and reads one word each from the public and private key memories.
+This path is **not qualified yet**. A 600-second RTL attempt produced the
+predictor's keygen files but timed out while polling status through AHB; minimum
+free memory was 63%. The revised busy-signal version was stopped by the
+unchanged 60% guard when free memory reached 59%, before elaboration completed.
+No keygen scoreboard result is claimed. The earlier `--actual-rtl-smoke` run
+remains the passing generated RAL seed/version probe.
+
 ```sh
 python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
   --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN"
 python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
   --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN" \
   --vvp "$VVP_BIN" --actual-rtl-smoke
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN" \
+  --vvp "$VVP_BIN" --actual-keygen-smoke
 ```
 
 The run used Icarus 13.0 development build `9bd5082b8` with UVM support.
 SHA-256 for the runner:
 
 ```text
-1e51199822796841763648cf96aaccdcab59afa710eacfb34872536114012216  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
+c8a7691f18bfbb73eb0934083e7130f9decfae34f3eb1356ba58166ad3bad94f  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```

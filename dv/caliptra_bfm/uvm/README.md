@@ -409,6 +409,18 @@ The generated MLDSA filelists already name the current `abr_*` RTL paths; the
 five stale paths elsewhere in Adams Bridge belong to separate unit-test
 filelists and are not this environment's blocker.
 
+The same runner now has an opt-in `--actual-keygen-smoke` path. It builds the
+pinned native reference helper in a temporary directory, writes all eight seed
+words through generated RAL, observes `abr_top` busy/ready around keygen, then
+reads one public-key and one private-key word through RAL for predictor
+scoreboard comparison. This path remains unqualified: the first simulation
+reached the reference helper but timed out during repeated status-register
+polling; a follow-up attempt after replacing those reads with a bounded busy
+signal wait was stopped by the 60% memory guard at 59% free. The normal
+`--actual-rtl-smoke` passed in the previous checkpoint; the updated shared
+runner has not been rerun in that mode. The keygen option uses a 600-second
+default timeout while retaining the 60% free-memory floor.
+
 `caliptra_ahb_mvc_compat_pkg.sv` supplies fallback definitions for only these
 visible types, including `ahb_rnw_e` with `AHB_READ`/`AHB_WRITE`, and the
 transfer-size/response constants. This is clean-room
