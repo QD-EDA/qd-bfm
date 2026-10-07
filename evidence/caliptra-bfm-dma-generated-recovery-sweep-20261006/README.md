@@ -45,3 +45,18 @@ Icarus Verilog: `13.0 (devel) (246c58e4-dirty)`.
 | Recovery sweep runner | `f47c16530138053127e8b42bc42b270ee03bec0d90d9bfa61c94d483ac4886a9` |
 | Icarus compiler | `235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392` |
 | Icarus runtime | `ca8b19d01187c9bc30387becba5d81b4cc7241c3a708b8c32ccf37aef663e574` |
+
+## Multi-request follow-up
+
+An exploratory 128-byte profile with a 64-word transfer did not complete: the
+DMA remained in `DMA_WAIT_DATA` with 16 internal FIFO words buffered while
+`recovery_data_avail` remained asserted. The standard sweep stays at 4–64
+bytes; 128-byte and larger recovery blocks remain unqualified.
+
+```text
+INFO: Caliptra DCCM case type=2 words=64 ... block_bytes=128
+FATAL: Caliptra DMA did not return idle without error: status0=000d0101
+```
+
+The pinned register definition decodes this status as busy, `DMA_WAIT_DATA`,
+16 internal FIFO words, and payload availability asserted.

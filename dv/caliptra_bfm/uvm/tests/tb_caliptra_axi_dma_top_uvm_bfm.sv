@@ -267,7 +267,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     .mb_rdata(mb_rdata), .notif_intr(notif_intr), .error_intr(error_intr)
   );
 
-  axi4_caliptra_dma_if_subordinate #(.ID_WIDTH(ID_WIDTH), .RECOVERY_MODE(2)) dma_target (
+  axi4_caliptra_dma_if_subordinate #(.ID_WIDTH(ID_WIDTH), .RECOVERY_MODE(0)) dma_target (
     .ACLK(clk), .ARESETn(rst_n),
     .m_axi_w_if(m_axi_if.w_sub), .m_axi_r_if(m_axi_if.r_sub),
     .fifo_clear(1'b0),
@@ -358,6 +358,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     bit expect_fifo_source;
     bit expect_fifo_write;
     int recovery_block_words;
+    int recovery_burst_words;
 
     `uvm_component_utils(axi_dma_top_bfm_scoreboard)
 
@@ -377,6 +378,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         expect_fifo_write = 1'b0;
       if (!uvm_config_db#(int)::get(this, "", "recovery_block_words", recovery_block_words))
         recovery_block_words = 16;
+      recovery_burst_words = (recovery_block_words > MAX_FIXED_BURST_WORDS) ?
+                             MAX_FIXED_BURST_WORDS : recovery_block_words;
     endfunction
 
     function logic [31:0] source_word(input int index);
@@ -400,8 +403,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         expected_beats = active_word_count - read_word_offset;
         if (expect_fifo_recovery || expect_fifo_source) begin
           if (expect_fifo_recovery) begin
-            if (expected_beats > recovery_block_words)
-              expected_beats = recovery_block_words;
+            if (expected_beats > recovery_burst_words)
+              expected_beats = recovery_burst_words;
           end else if (expected_beats > MAX_FIXED_BURST_WORDS) begin
             expected_beats = MAX_FIXED_BURST_WORDS;
           end
@@ -448,8 +451,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             `uvm_fatal("DMA_TOP_WRITE_PROFILE", $sformatf("DMA SRAM write address/burst mismatch: %s", item.convert2string()))
         end
         if (expect_fifo_recovery) begin
-          if (expected_beats > recovery_block_words)
-            expected_beats = recovery_block_words;
+          if (expected_beats > recovery_burst_words)
+            expected_beats = recovery_burst_words;
         end
         if (item.awuser != AXUSER ||
             item.buser != AXUSER || item.resp != expected_resp ||
@@ -581,12 +584,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   env.scoreboard.write_word_offset == WORD_COUNT);
           end else if (env.scoreboard.expect_fifo_recovery) begin
             expected_recovery_bursts =
-                (active_word_count + env.scoreboard.recovery_block_words - 1) /
-                env.scoreboard.recovery_block_words;
+                (active_word_count + env.scoreboard.recovery_burst_words - 1) /
+                env.scoreboard.recovery_burst_words;
             wait (run_done && env.scoreboard.write_count == expected_recovery_bursts &&
                   env.scoreboard.read_count == expected_recovery_bursts &&
-                  env.scoreboard.write_word_offset == WORD_COUNT &&
-                  env.scoreboard.read_word_offset == WORD_COUNT);
+                  env.scoreboard.write_word_offset == active_word_count &&
+                  env.scoreboard.read_word_offset == active_word_count);
           end else if ($test$plusargs("GENERATED_CASE")) begin
             wait (generated_route_ready);
             case (generated_dma_xfer_type)
@@ -644,7 +647,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (expect_dma_error)
         $display("PASS: actual Caliptra axi_dma_top propagated injected AXI SLVERR to DMA_ERROR after the aligned partial write");
       else if (env.scoreboard.expect_fifo_recovery)
-        $display("PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of %0d bytes", recovery_block_bytes);
+        $display("PASS: actual Caliptra axi_dma_top moved %0d auto-generated FIFO words through recovery blocks of %0d bytes", active_word_count, recovery_block_bytes);
       else if ($test$plusargs("GENERATED_CASE"))
         $display("PASS: generated DCCM record index=%0d route=%0d replayed through axi_dma_top",
                  generated_case_index, generated_dma_xfer_type);
@@ -1137,8 +1140,17 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       for (poll = 0; poll < dma_poll_limit &&
            ((status[0] !== 1'b0) || (status[1] !== 1'b0) || (status[17:16] !== 2'b00)); poll++)
         read_status(status);
-      if (status[0] !== 1'b0 || status[1] !== 1'b0 || status[17:16] !== 2'b00)
+      if (status[0] !== 1'b0 || status[1] !== 1'b0 || status[17:16] !== 2'b00) begin
+        if (fifo_recovery_case)
+          $display("INFO: recovery timeout detail read=%0d write=%0d pending_reads=%0d read_stall=%0b credits=%0d internal_fifo=%0d target_fifo=%0d avail=%0b",
+                   dma.i_axi_dma_ctrl.rd_bytes_requested,
+                   dma.i_axi_dma_ctrl.wr_bytes_requested,
+                   dma.i_axi_dma_ctrl.rd_req_count_for_payload,
+                   dma.i_axi_dma_ctrl.rd_req_stall,
+                   dma.i_axi_dma_ctrl.rd_credits,
+                   dma.i_axi_dma_ctrl.fifo_depth, fifo_level, recovery_data_avail);
         $fatal(1, "Caliptra DMA did not return idle without error: status0=%08h", status);
+      end
     end
     if ((mailbox_case || mailbox_read_case) && mailbox_word_index != active_word_count)
       $fatal(1, "Mailbox route completed %0d of %0d requests", mailbox_word_index, active_word_count);

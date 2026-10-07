@@ -107,6 +107,7 @@ run_generated_recovery_sweep() {
   for block_bytes in 4 8 16 32 64; do
     run_case "generated-recovery-${block_bytes}B" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       +FIFO_RECOVERY +CALIPTRA_BFM_DUT_REPLAY_INDEX=26 \
+      +CLP_DMA_TB_MODE_THRESH \
       "+RECOVERY_BLOCK_BYTES=$block_bytes" \
       +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
     if ! grep -Fq "PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of $block_bytes bytes" "$log"; then
@@ -129,7 +130,7 @@ fi
 run_case success
 run_reset_abort_case
 run_case injected-error +INJECT_ERROR
-run_case fifo-recovery +FIFO_RECOVERY
+run_case fifo-recovery +FIFO_RECOVERY +CLP_DMA_TB_MODE_THRESH
 run_case axi2mbox +AXI2MBOX_CASE
 if ! grep -Fq "PASS: actual Caliptra axi_dma_top read 65 SRAM words and wrote them through the mailbox request interface" "$log"; then
   echo "Caliptra AXI DMA top did not complete its AXI2MBOX mailbox writes" >&2
