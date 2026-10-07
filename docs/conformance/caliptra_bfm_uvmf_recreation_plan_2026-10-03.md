@@ -814,9 +814,12 @@ and monitor BFMs from the observed `UVMF_VIRTUAL_INTERFACES` config-DB scope
 and interface-name key during driver/monitor connect, after agent build and
 configuration initialization. The focused toy-agent test publishes those
 handles from a later build-phase component that asserts both agents have
-completed build. Its isolated IEEE 2017 positive and mismatch-control cases
-passed. IEEE 2023 and generated ECC integration after this phase change remain
-unverified. See the
+completed build. Driver and monitor `configure()` hooks now run only after
+their typed handles are resolved and assigned. The positive and
+mismatch-control cases pass under IEEE 2017 and 2023, including response-clone
+isolation. The generated ECC reset scoreboard and IRQ_EN AHB write/readback
+also pass under IEEE 2017 after this phase change; IEEE 2023 generated ECC
+integration remains open. See the
 [`late-registration smoke evidence`](../../evidence/caliptra-bfm-uvmf-late-vif-20261007/README.md).
 The generated derived configuration performs the agent/configuration
 publication itself.

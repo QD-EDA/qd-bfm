@@ -1,42 +1,53 @@
-# UVMF late BFM registration smoke — 2026-10-07
+# UVMF late BFM registration and generated ECC smoke — 2026-10-07
 
 ## Result
 
-The active/passive toy-agent smoke initializes the environment and agent
-configurations, then publishes the canonical `UVMF_VIRTUAL_INTERFACES` keys
-from a later build-phase component. That component checks that both agents
-have completed build. The driver and monitor bases resolve their typed BFMs
-and install proxies during connect.
+The toy-agent smoke registers typed BFMs from a later build-phase component,
+after both agents complete build. Driver and monitor bases now resolve and
+assign their handles in `connect_phase`, then call the generated
+`configure()` hook before installing the proxy.
 
-The isolated IEEE 1800-2017 run passed its positive case and mismatch control:
+The agent smoke passed in IEEE 1800-2017 and 1800-2023:
 
-- Positive: one expected and one actual transaction matched; zero UVM errors
-  or fatals.
-- Negative control: one intentional `UVMF_SB_MISMATCH`; exactly one UVM error
+- Positive case: one expected/actual transaction matched; zero UVM errors or
+  fatals.
+- Negative control: exactly one intentional `UVMF_SB_MISMATCH`; one UVM error
   and zero fatals.
-- Both cases reached the agent smoke `PASS` checkpoint.
+- Driver response cloning returned value 42; mutating the response clone did
+  not change the request.
 
-The IEEE 1800-2023 attempt and generated ECC reset/IRQ regression did not reach
-their test checkpoints; those paths remain unverified after this phase change.
+The generated ECC reset/IRQ probe passed in IEEE 1800-2017. The reset
+scoreboard matched and the generated AHB driver wrote and read back
+`ECC_IRQ_EN`; UVM reported zero errors and fatals. The generated ECC 2023 path
+remains unverified.
 
 ## Reproduction
 
-From the QD-EDA/qd-bfm repository root:
+From the QD-EDA/qd-bfm repository root, run the agent cases:
 
 ```sh
-UVMF_IEEE_EDITION=2017 \
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
-./dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_agent.sh
+for edition in 2017 2023; do
+  UVMF_IEEE_EDITION="$edition" \
+  IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
+  VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+  ./dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_agent.sh || exit
+done
 ```
 
-The compiler reported a mixed-timescale warning and seven `eval_object_select`
-null-fallback warnings in `uvmf_base_pkg.sv`; the smoke still reached its
-positive and negative control checkpoints.
+Run the generated ECC 2017 case with the pinned clean Caliptra checkout:
+
+```sh
+ECC_IEEE_EDITION=2017 \
+CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
+VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+./dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh
+```
 
 ## Tool and source fingerprints
 
-- QD-EDA/qd-bfm commit: `7d8e419261820ce967a7c6ddec7ff409fa16762d`
+- QD-EDA/qd-bfm source commit: `675f8012152b0e0c88c615b6f412466d6dc546fe`
+- Caliptra source checkout: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
 - Icarus source checkout: `ac4532fab037e91df2f903e67fb40f59baedccca`
 - Merged Icarus `origin/main`: `fc9d8b86ca21b6c4852e09c605555f0c1631d544`
 - `iverilog -V`: `13.0 (devel) (ac4532fa-dirty)`
@@ -50,6 +61,6 @@ positive and negative control checkpoints.
 | `lib/ivl/ivl` | `e532e050c126b0c1db8287ffdcd8afe22188e1585610b77f0ca625b5a1bc20c1` |
 | `lib/ivl/ivlpp` | `edbeb86a150a12926e31a898902c087bab615cdf0c61af88eb961f0a5bac7771` |
 | `lib/ivl/vvp.tgt` | `d00ca9e58ef269a7d112c7230816386dc195cae5a56c564ff084610db3190141` |
-| `dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv` | `aa87b7315e1ae6eff65cbfb603a788cd213088bf2012d816352d3489e4523257` |
-| `dv/caliptra_bfm/uvmf_lite/tests/tb_uvmf_agent.sv` | `df58ae55894f0258936b4809b74e8e81cbb9d21ce1a5fd94e4c266f288a4562a` |
+| `dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv` | `b933ec5380706ddebe168d9f839a5aa5a6596a951cfaa053d53471a19c272b17` |
+| `dv/caliptra_bfm/uvmf_lite/tests/tb_uvmf_agent.sv` | `721d4b8c197a8ec7562c25cb1cb0a2e28aa0cde63b74880d3c61061790f0110b` |
 | `dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_agent.sh` | `efa7e131492d694d36e4a0e0195070dffdd4550564b3fc081837b85789446f0d` |
