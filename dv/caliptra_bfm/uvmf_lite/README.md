@@ -104,10 +104,11 @@ sampling calls only; Icarus still compiles covergroups as stubs, so bin hits
 and coverage percentages are not measured. Other generated coverage paths
 still need qualification. The agent smoke now registers typed BFM handles
 after environment/agent configuration initialization and resolves them during
-agent build. Its IEEE 2017 positive case passed; the full 2017/2023 run and
-mismatch controls did not complete. Registration after agent build remains
-unverified. Generated derived configuration publication is covered by the
-smoke's config-DB identity checks. The
+agent build. Its isolated IEEE 2017 positive and mismatch-control cases passed;
+the 2023 run and registration after agent build remain unverified. See the
+[late-registration evidence](../../../evidence/caliptra-bfm-uvmf-late-vif-20261007/README.md).
+Generated derived configuration publication is covered by the smoke's
+config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
 `wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros

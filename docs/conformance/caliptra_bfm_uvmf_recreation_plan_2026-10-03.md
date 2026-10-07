@@ -813,10 +813,12 @@ Caliptra tops. A parameterized agent configuration base resolves typed driver
 and monitor BFMs from the observed `UVMF_VIRTUAL_INTERFACES` config-DB scope
 and interface-name key during agent build, after configuration initialization.
 The focused toy-agent test registers those handles after environment and agent
-configuration initialization; its IEEE 2017 positive case passed. The full
-2017/2023 and mismatch-control runner did not complete, so those cases remain
-unverified. This does not cover registration after agent build. The generated
-derived configuration performs the agent/configuration publication itself.
+configuration initialization; its isolated IEEE 2017 positive and
+mismatch-control cases passed. IEEE 2023 and registration after agent build
+remain unverified. See the
+[`late-registration smoke evidence`](../../evidence/caliptra-bfm-uvmf-late-vif-20261007/README.md).
+The generated derived configuration performs the agent/configuration
+publication itself.
 Generic driver
 and monitor bases now provide the hooks used by generated agents: typed BFM
 handles, `configure`, proxy installation, driver `access`, and monitor
