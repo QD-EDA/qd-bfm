@@ -115,3 +115,9 @@ runtime output remain unverified.
 
 - Trace VPI SHA-256:
   `ff50cdb88665dc3fd227e7a6369dc05ecb29700cb5a0f3cfd7d9584c0736d851`
+
+A disposable synthetic hierarchy smoke then loaded the VPI module and verified
+the expected hierarchy names, `0xEE` request marker, and both reset-edge
+callbacks. This confirms the tracer callback path against a small Icarus
+fixture only; binding and reset behavior in the actual Caliptra full-top remain
+unverified until the guarded full-top run reaches simulation.
