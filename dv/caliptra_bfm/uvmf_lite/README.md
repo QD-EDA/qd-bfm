@@ -102,10 +102,11 @@ three expected records in the [full-snapshot probe](../../../evidence/caliptra-b
 including on the merged Icarus build. This verifies subscriber delivery and
 sampling calls only; Icarus still compiles covergroups as stubs, so bin hits
 and coverage percentages are not measured. Other generated coverage paths
-still need qualification. The agent smoke now registers typed BFM handles
-after environment/agent configuration initialization and resolves them during
-agent build. Its isolated IEEE 2017 positive and mismatch-control cases passed;
-the 2023 run and registration after agent build remain unverified. See the
+still need qualification. The agent smoke now publishes typed BFM handles
+after both agents complete build and resolves them during driver/monitor
+connect. Its isolated IEEE 2017 positive and mismatch-control cases passed;
+the 2023 run and generated ECC integration after this phase change remain
+unverified. See the
 [late-registration evidence](../../../evidence/caliptra-bfm-uvmf-late-vif-20261007/README.md).
 Generated derived configuration publication is covered by the smoke's
 config-DB identity checks. The
