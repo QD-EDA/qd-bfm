@@ -34,8 +34,8 @@ and 39/39 with zero UVM errors/fatals. The larger Caliptra firmware and full
 top remain unqualified.
 
 The AXI files provide a USER/LOCK-capable manager that allows up to
-`MAX_OUTSTANDING` reads (default four) and one write to proceed concurrently,
-a profile checker,
+`MAX_OUTSTANDING` reads and writes per direction (default four) to remain
+outstanding, with out-of-order response routing across IDs, a profile checker,
 bounded SRAM and FIFO subordinates, combined DMA map,
 channel monitor, and bounded completed-transaction records. The AHB-Lite files provide a directed
 manager, passive monitor, profile checker, and bounded SRAM subordinate.

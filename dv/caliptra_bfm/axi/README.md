@@ -15,11 +15,12 @@ repository root with the consuming testbench appended.
 channels, including address/data USER and LOCK, independent AW/W handshakes,
 bursts up to `MAX_BEATS`, and B/R response USER. `write_burst` and `read_burst`
 accept packed beat arrays with beat zero in the least-significant slice. Up to
-`MAX_OUTSTANDING` read tasks may be active concurrently (default 4); responses
-are routed by RID, including out-of-order responses for different IDs and
-in-order responses for repeated IDs. One write task can run alongside those
-reads, while a second write call is rejected until it finishes. A protocol
-mismatch or timeout poisons the manager; assert reset low and call
+Up to `MAX_OUTSTANDING` reads and writes may be outstanding independently
+(default 4 per direction). Read and write responses are routed by RID/BID,
+including out-of-order responses for different IDs and in-order responses for
+repeated IDs. AW and W retain independent handshakes; write data transactions
+are issued in order because AXI4 has no WID. Reads and writes can run
+concurrently. A protocol mismatch or timeout poisons the manager; assert reset low and call
 `reset_master` before reuse. Reset also aborts in-flight tasks, returns them
 unsuccessful, and clears their channel outputs; call `reset_master` after they
 exit.
@@ -28,7 +29,8 @@ The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
 requests are rejected before VALID is asserted.
 
 Run the two-beat USER/LOCK/stall test, response errors, timeout/reset recovery,
-read/write reset aborts, and bad BID/RLAST fail-stop tests with:
+read/write reset aborts, bad BID/RLAST fail-stop tests, and five-deep read/write
+queue tests with out-of-order responses using:
 
 ```sh
 ./tests/run_master.sh
