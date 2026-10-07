@@ -28,6 +28,160 @@ API_PATTERNS = {
     "axi4pc": re.compile(r"\b(?:Axi4PC|CALIPTRA_AXI4PC_DIR)\b"),
     "uvmf_provider": re.compile(r"\b(?:UVMF_HOME|UVMF_VIP_LIBRARY_HOME|uvmf_base_pkg)\b"),
 }
+UVMF_CLASS = re.compile(r"\bclass\s+([A-Za-z_]\w*)\b([^;]*);")
+UVMF_BASE = re.compile(r"\bextends\s+(uvmf_[A-Za-z_]\w*)\b")
+METHOD_DECLARATION = re.compile(r"\b(function|task)\b")
+SUPER_CALL = re.compile(r"\bsuper\s*\.\s*([A-Za-z_]\w*)\s*\(")
+
+
+def uncomment(text: str) -> str:
+    return re.sub(
+        r"/\*.*?\*/|//[^\n]*",
+        lambda match: "".join("\n" if char == "\n" else " " for char in match.group()),
+        text,
+        flags=re.S,
+    )
+
+
+def argument_count(text: str, opening: int) -> int:
+    depth = 0
+    braces = brackets = 0
+    quoted = escaped = False
+    commas = 0
+    for index in range(opening, len(text)):
+        char = text[index]
+        if quoted:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                quoted = False
+            continue
+        if char == '"':
+            quoted = True
+        elif char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth == 0:
+                arguments = text[opening + 1:index].strip()
+                return 0 if not arguments else commas + 1
+        elif depth == 1 and char == "{":
+            braces += 1
+        elif depth == 1 and char == "}":
+            braces -= 1
+        elif depth == 1 and char == "[":
+            brackets += 1
+        elif depth == 1 and char == "]":
+            brackets -= 1
+        elif depth == 1 and braces == 0 and brackets == 0 and char == ",":
+            commas += 1
+    return -1
+
+
+def method_declarations(body: str, body_line: int) -> list[dict[str, object]]:
+    methods = []
+    for match in METHOD_DECLARATION.finditer(body):
+        opening = body.find("(", match.end())
+        semicolon = body.find(";", match.end())
+        if opening < 0 or (semicolon >= 0 and semicolon < opening):
+            continue
+        prefix = body[match.end():opening].strip()
+        name_match = re.search(r"([A-Za-z_]\w*)\s*$", prefix)
+        if not name_match:
+            continue
+        arity = argument_count(body, opening)
+        if arity < 0:
+            continue
+        methods.append(
+            {
+                "name": name_match.group(1),
+                "kind": match.group(1),
+                "arity": arity,
+                "line": body_line + body.count("\n", 0, match.start()),
+            }
+        )
+    return methods
+
+
+def uvmf_api_inventory(root: Path, files: list[Path]) -> dict[str, object]:
+    classes = []
+    macros = {}
+    plusargs = []
+    for path in files:
+        if path.suffix.lower() not in HDL_SUFFIXES:
+            continue
+        raw = path.read_text(errors="replace")
+        code = uncomment(raw)
+        relative = path.relative_to(root).as_posix()
+        digest = sha256(path)
+        for match in UVMF_CLASS.finditer(code):
+            base = UVMF_BASE.search(match.group(2))
+            if not base:
+                continue
+            end = re.search(r"\bendclass\b", code[match.end():])
+            if not end:
+                continue
+            body_start = match.end()
+            body = code[body_start:body_start + end.start()]
+            class_line = code.count("\n", 0, match.start()) + 1
+            body_line = code.count("\n", 0, body_start) + 1
+            super_calls = []
+            for call in SUPER_CALL.finditer(body):
+                arity = argument_count(body, call.end() - 1)
+                if arity >= 0:
+                    super_calls.append(
+                        {
+                            "name": call.group(1),
+                            "arity": arity,
+                            "line": body_line + body.count("\n", 0, call.start()),
+                        }
+                    )
+            classes.append(
+                {
+                    "source": relative,
+                    "source_sha256": digest,
+                    "line": class_line,
+                    "class": match.group(1),
+                    "base_class": base.group(1),
+                    "methods": method_declarations(body, body_line),
+                    "super_calls": super_calls,
+                }
+            )
+        macro_counts = {}
+        for match in re.finditer(r"`(uvm(?:f)?_[A-Za-z_]\w*)", code):
+            name = match.group(1)
+            macro_counts[name] = macro_counts.get(name, 0) + 1
+        for name, count in sorted(macro_counts.items()):
+            macros[(relative, name)] = {
+                "source": relative,
+                "source_sha256": digest,
+                "name": name,
+                "count": count,
+            }
+        for match in re.finditer(
+            r"\$(test|value)\$plusargs\s*\(\s*\"([^\"]+)\"", code
+        ):
+            plusargs.append(
+                {
+                    "source": relative,
+                    "source_sha256": digest,
+                    "line": code.count("\n", 0, match.start()) + 1,
+                    "kind": match.group(1),
+                    "format": match.group(2),
+                }
+            )
+    return {
+        "class_extensions": classes,
+        "uvm_macros": list(macros.values()),
+        "runtime_plusargs": plusargs,
+        "limitations": [
+            "Method arity is a source-text count; macro-expanded declarations and compiler-resolved override relationships are not inferred.",
+            "Class records include checked-in HDL under src; nested filelist expansion and per-unit transitive attribution are not performed.",
+            "Runtime plusarg literals are source declarations; inherited simulator launch arguments are not included.",
+        ],
+    }
 
 
 def sha256(path: Path) -> str:
@@ -327,6 +481,7 @@ def consumer_inventory(
             name: sorted(paths) for name, paths in sorted(provider_variables.items())
         },
         "api_evidence": api_evidence,
+        "uvmf_api_inventory": uvmf_api_inventory(root, files),
     }
 
 
@@ -358,7 +513,7 @@ def main() -> None:
             census_artifact_sha256 = sha256(census_path)
 
     manifest = {
-        "schema_version": 2,
+        "schema_version": 3,
         "purpose": "Phase 0 source/API/license inventory for a clean-room Caliptra BFM replacement",
         "inputs": [
             consumer_inventory(

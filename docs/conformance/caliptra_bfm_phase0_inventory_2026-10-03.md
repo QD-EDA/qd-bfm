@@ -19,7 +19,7 @@ The standard-library-only generator is included in this QD-BFM checkout. It
 records Git revisions and file hashes, and reads sources without modifying
 either checkout. A 2026-10-07 replay regenerated the tracked manifest from the
 pinned Caliptra/Adams Bridge roots and its embedded frozen unit census.
-Generator SHA-256: `a4558e765208aa76e4df7950746511962d9c7553c4fb7307410ea0616f54e898`.
+Generator SHA-256: `26a1a84ea0f27f8877c2958bf65287904baaeda5ca592696410801885dea1b2f`.
 
 | Pinned tree | Test YAML under stimulus/tests | Generated UVMF test YAML | stimulus/testsuites files | Frozen census filelists |
 | --- | ---: | ---: | ---: | ---: |
@@ -37,13 +37,23 @@ filters above; the manifest retains the individual test, suite, filelist, and
 suite-path references so that discrepancy can be traced before using those
 larger totals as a requirement denominator.
 
-Manifest schema v2 records the literal <code>testname</code>, active
+Manifest schema v3 records the literal <code>testname</code>, active
 <code>seed</code>, and <code>plusargs</code> values in each authored or
 generated test YAML, with source line numbers. The 109 YAML definitions contain
 88 explicit plusarg values across 78 definitions, 57 from Caliptra and 31 from
 Adams Bridge. These are source declarations: variable expansion, simulator
 command inheritance, and linkage to all legacy regression definitions remain
 open.
+
+Schema v3 also records the checked-in HDL's observable UVMF consumer surface:
+161 classes extending <code>uvmf_*</code> bases (153 Caliptra, 8 Adams Bridge),
+681 declared methods, and 319 explicit <code>super</code> calls. It groups
+standard <code>uvm_*</code> macro counts by source (13 macro names in Caliptra,
+14 in Adams Bridge) and records 88 runtime plusarg literals. Class and plusarg
+records retain source lines and SHA-256; macro counts retain source hashes.
+These are consumer-side text observations, not the unavailable framework's
+method bodies or compiler-confirmed override resolution. Macro-generated
+declarations and generated startup order remain outside this inventory.
 
 For each of the 44 filelists, the manifest records provider variables, raw
 include roots and defines, other compile options, direct HDL-reference count,
@@ -182,8 +192,10 @@ QVIP, Avery, and Axi4PC inputs explicitly. [UVMF mirror](https://github.com/mune
   absent references, inspect nested filelists, expand test-YAML variables and
   inherited launch arguments, and connect visible package/DPI use and tests to
   providers and runtime results.
-- Complete a method/arity/override-point inventory of the consumed UVMF base
-  API, plusargs, macros, and generated start-up order.
+- Match this consumer-side class/method inventory to an authorized UVMF API
+  source or documentation; exact base method signatures and override points
+  remain unverified. Record generated start-up order and expand the runtime
+  plusarg inventory to inherited simulator arguments.
 - Establish permissible UVMF redistribution/read terms or finish the
   clean-room minimum base-layer boundary.
 - Resolve QVIP <code>burst_transfer</code> item lifecycle/configuration semantics and the
