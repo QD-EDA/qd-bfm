@@ -184,6 +184,7 @@ PASS: actual ECC RTL and generated UVMF hdl_top elaborate with three modport sel
 REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors under IEEE 2017.
 PASS: actual ECC RTL and generated UVMF hdl_top elaborate with three modport selectors removed and a 1ns/1ps timescale under IEEE 2023 (35 compile-progress warnings).
 REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors under IEEE 2023.
+PASS: generated reset scoreboard and ECC IRQ_EN AHB readback matched under IEEE 2017; UVM_ERROR=0; UVM_FATAL=0.
 ```
 
 ## Inputs and hashes
@@ -206,7 +207,7 @@ REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors u
 | `reset_monitor_blocker.log` | `d01f7deab69315a182c68e55774333ba1f52b638a1b99a56bc9ae7a7abe0b14f` |
 | `apply_monitor_overlay.py` used for captured runs (64-clock poll interval) | `f47b91a6648c24286acd16bd85e6e10fc60371bec1c3803535f51eb3157e29fc` |
 | `dv/caliptra_bfm/uvmf_lite/tests/generated_ecc_monitor_overlay.py` (512-clock poll interval) | `3bc2a45314bbcf2cebe0bbeec612bfa78436782bd96229aa67ff2e962cf20885` |
-| `dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh` | `23a94504b74a747ad8935092f0c8dffe01856c1d28163b5f94f4ee8f4494755e` |
+| `dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh` | `c35a451405550aa5a1329e0be37ecc3f38b10b2a17241254e0f6f70b3b4780b7` |
 | `dv/caliptra_bfm/uvmf_lite/tests/tb_generated_ecc_reset_probe_pkg.sv` | `0fe0097116672c200b092df891d2e77ce45d9392e50d2e5c7589deb9c634be20` |
 | `dv/caliptra_bfm/uvmf_lite/tests/tb_generated_ecc_full_probe.sv` | `b5ffee36e14275339589d85998bffaa1d9465b966ba246e49259d0a9a6c98ecc` |
 | `reset_monitor_overlay_2017.log` / `_2023.log` | `fef64b931a192492cc86cfd4e869554e0a3ac1c16025c7ec4603193c9067ea78` |

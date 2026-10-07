@@ -2,6 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 set -eu
 
+edition_filter=${ECC_IEEE_EDITION:-both}
+case "$edition_filter" in
+  both|2017|2023) ;;
+  *) echo "ECC_IEEE_EDITION must be both, 2017, or 2023" >&2; exit 2 ;;
+esac
+
 repo_root=$(CDPATH= cd -- "$(dirname "$0")/../../../../" && pwd)
 . "$repo_root/scripts/caliptra_bfm_memory_guard.sh"
 test_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
@@ -47,6 +53,9 @@ python3 "$test_dir/generated_ecc_monitor_overlay.py" "$caliptra_root" "$tmpdir/m
 } > "$tmpdir/hdl_top_icarus.sv"
 
 for edition in 2017 2023; do
+  if [ "$edition_filter" != both ] && [ "$edition_filter" != "$edition" ]; then
+    continue
+  fi
   compile_log="$tmpdir/compile-$edition.log"
   run_log_dir=${ECC_RESET_MONITOR_LOG_DIR:-"$tmpdir/logs"}
   mkdir -p "$run_log_dir"

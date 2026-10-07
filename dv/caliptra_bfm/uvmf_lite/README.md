@@ -146,7 +146,9 @@ claiming that the generated source compiles unchanged. The companion
 `tests/run_generated_ecc_reset_monitor.sh` runs the actual generated ECC
 environment against `ecc_top` under both IEEE editions. It checks a matched
 reset transaction and an `ECC_IRQ_EN` AHB write/readback with zero UVM errors
-or fatals; set `ECC_RESET_MONITOR_LOG_DIR` to retain the run logs.
+or fatals. It runs both editions by default; set `ECC_IEEE_EDITION=2017` or
+`ECC_IEEE_EDITION=2023` to run one edition independently. Set
+`ECC_RESET_MONITOR_LOG_DIR` to retain the run logs.
 
 The 384-bit ECC automatic bins are represented as exact leading-bit prefixes;
 the focused regression also covers 512-bit explicit ranges, a 65-bit
