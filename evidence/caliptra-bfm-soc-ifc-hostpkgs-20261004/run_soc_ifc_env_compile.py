@@ -5,6 +5,7 @@ import argparse
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -24,14 +25,19 @@ def run_under_memory_guard(repo: Path) -> int | None:
     guard = repo / "scripts/run_with_memory_pressure_guard.py"
     default_timeout = "300" if any(
         option in sys.argv
-        for option in ("--include-project-bench-packages", "--generated-environment-runtime")
+        for option in (
+            "--include-project-bench-packages",
+            "--generated-environment-runtime",
+            "--caliptra-top-env-probe",
+        )
     ) else "90"
     timeout = os.environ.get("CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS", default_timeout)
+    default_min_free = "40" if "--caliptra-top-env-probe" in sys.argv else "60"
     command = [
         sys.executable,
         str(guard),
         "--min-free-percent",
-        os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", "60"),
+        os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", default_min_free),
         "--timeout-seconds",
         timeout,
         "--",
@@ -61,6 +67,11 @@ def main() -> int:
         "--generated-environment-runtime",
         action="store_true",
         help="run generated SoC-IFC UVMF runtime probes against the actual soc_ifc_top RTL",
+    )
+    parser.add_argument(
+        "--caliptra-top-env-probe",
+        action="store_true",
+        help="also run the generated Caliptra top environment wrapper around soc_ifc (runtime mode only)",
     )
     parser.add_argument(
         "--generated-axi-user-init",
@@ -103,6 +114,8 @@ def main() -> int:
         help="add flushed checkpoints to the disposable predictor copy for runtime diagnosis",
     )
     args = parser.parse_args()
+    if args.caliptra_top_env_probe:
+        args.generated_environment_runtime = True
     if args.trace_predictor_reset and not args.generated_environment_runtime:
         parser.error("--trace-predictor-reset requires --generated-environment-runtime")
     if args.generated_axi_user_init and not args.generated_environment_runtime:
@@ -136,6 +149,7 @@ def main() -> int:
     overlay_tools = repo / "docs/conformance/release_overlays/caliptra"
     package_root = caliptra / "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/verification_ip/interface_packages"
     env_root = caliptra / "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/verification_ip/environment_packages/soc_ifc_env_pkg"
+    top_env_root = caliptra / "src/integration/uvmf_caliptra_top/uvmf_template_output/verification_ip/environment_packages/caliptra_top_env_pkg"
     with tempfile.TemporaryDirectory(prefix="caliptra-soc-ifc-env-") as temp_name:
         temp = Path(temp_name)
         packages, rtl, env = temp / "packages", temp / "rtl", temp / "env"
@@ -143,6 +157,65 @@ def main() -> int:
         run("python3", str(overlay_tools / "soc_ifc_host_coverage_wildcard_overlay.py"), "--caliptra-root", str(caliptra), "--packages", str(packages), "--rtl-output", str(rtl))
         run("python3", str(overlay_tools / "soc_ifc_generated_responder_modport_overlay.py"), "--packages", str(packages))
         run("python3", str(overlay_tools / "soc_ifc_generated_case_selector_overlay.py"), "--caliptra-root", str(caliptra), "--output", str(env))
+        top_env_overlay = temp / "caliptra_top_env_pkg"
+        if args.caliptra_top_env_probe:
+            shutil.copytree(top_env_root, top_env_overlay)
+            top_environment = top_env_overlay / "src/caliptra_top_environment.svh"
+            top_environment_source = top_environment.read_text()
+            reset_handler_anchor = 'task caliptra_top_environment::handle_reset(string kind = "HARD");\n    // Reset soc_ifc_environment'
+            if top_environment_source.count(reset_handler_anchor) != 1:
+                raise SystemExit("Caliptra top reset-handler probe refused an unexpected generated source")
+            top_environment.write_text(
+                top_environment_source.replace(
+                    reset_handler_anchor,
+                    reset_handler_anchor.replace(
+                        "    // Reset soc_ifc_environment",
+                        '    $display("CALIPTRA_TOP_ENV_RESET_HANDLER kind=%s", kind);\n'
+                        "    // Reset soc_ifc_environment",
+                    ),
+                    1,
+                )
+            )
+            top_configuration = top_env_overlay / "src/caliptra_top_env_configuration.svh"
+            top_configuration_source = top_configuration.read_text()
+            top_configuration_source, interface_slice_count = re.subn(
+                r"(?m)^    soc_ifc_subenv_interface_names\s+= interface_names\[0:8\];\n"
+                r"    soc_ifc_subenv_interface_activity\s+= interface_activity\[0:8\];$",
+                "    for (int interface_index = 0; interface_index < 9; interface_index++) begin\n"
+                "      soc_ifc_subenv_interface_names[interface_index] = interface_names[interface_index];\n"
+                "      soc_ifc_subenv_interface_activity[interface_index] = interface_activity[interface_index];\n"
+                "    end",
+                top_configuration_source,
+            )
+            if interface_slice_count != 1:
+                raise SystemExit("Caliptra top config overlay refused unexpected interface-array source")
+            top_configuration.write_text(top_configuration_source)
+            child_environment = env / "src/soc_ifc_environment.svh"
+            child_environment.parent.mkdir(parents=True, exist_ok=True)
+            child_environment_source = (env_root / "src/soc_ifc_environment.svh").read_text()
+            reset_task_start = 'task soc_ifc_environment::handle_reset(string kind = "HARD");'
+            reset_task_end = "\nendtask\n\ntask soc_ifc_environment::run_phase"
+            if child_environment_source.count(reset_task_start) != 1 or child_environment_source.count(reset_task_end) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC reset-handler source")
+            predictor_connection = (
+                "    soc_ifc_ctrl_agent.monitored_ap.connect(soc_ifc_pred.soc_ifc_ctrl_agent_ae);\n"
+            )
+            if child_environment_source.count(predictor_connection) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC control-analysis connection")
+            child_environment_source = child_environment_source.replace(
+                predictor_connection,
+                "    // control-analysis prediction is outside this top-wrapper dispatch probe\n",
+                1,
+            )
+            task_body_start = child_environment_source.index(reset_task_start)
+            task_body_end = child_environment_source.index(reset_task_end, task_body_start)
+            child_environment.write_text(
+                child_environment_source[:task_body_start]
+                + reset_task_start
+                + '\n    $display("CALIPTRA_TOP_ENV_CHILD_RESET_HANDLER kind=%s", kind);\n'
+                + "endtask"
+                + child_environment_source[task_body_end + len("\nendtask"):]
+            )
         if args.generated_environment_runtime:
             ahb_transfer_type = re.compile(
                 r"ahb_master_burst_transfer\s*#\s*\(\s*"
@@ -214,6 +287,23 @@ def main() -> int:
                     1,
                 )
             )
+            if args.caliptra_top_env_probe:
+                scoreboard_text = scoreboard.read_text()
+                empty_scoreboard_check = (
+                    '     if (transaction_count == 0) `uvm_error("SCBD","No Transactions Scoreboarded")'
+                )
+                if scoreboard_text.count(empty_scoreboard_check) != 1:
+                    raise SystemExit("Caliptra top probe refused an unexpected empty-scoreboard check")
+                scoreboard.write_text(
+                    scoreboard_text.replace(
+                        empty_scoreboard_check,
+                        '     if (transaction_count == 0) begin\n'
+                        '       `uvm_info("SCBD", "No traffic expected in the top-wrapper dispatch probe", UVM_LOW)\n'
+                        "       testcase_passed = 1'b1;\n"
+                        "     end",
+                        1,
+                    )
+                )
             print(
                 "normalized generated AHB transfer references to the clean-room compatibility typedef "
                 f"({ahb_type_replacements} replacements), direct construction, and protocol-field comparison"
@@ -469,7 +559,7 @@ def main() -> int:
         project_bench_overlay = temp / "project_bench"
         hdl_top_source = None
         hvl_top_source = None
-        if args.include_project_bench_packages:
+        if args.include_project_bench_packages and not args.caliptra_top_env_probe:
             run(
                 "python3",
                 str(overlay_tools / "soc_ifc_generated_cmdline_test_overlay.py"),
@@ -496,6 +586,8 @@ def main() -> int:
         include_dirs = [packages / name for name in sorted(p.name for p in packages.iterdir())]
         include_dirs += [package_root / p.name for p in package_root.iterdir() if p.is_dir()]
         include_dirs += [env, env_root, env / "registers", env_root / "registers", rtl]
+        if args.caliptra_top_env_probe:
+            include_dirs += [top_env_overlay, top_env_overlay / "src"]
         include_dirs += [caliptra / "src/axi/rtl", caliptra / "src/soc_ifc/rtl", caliptra / "src/integration/rtl", caliptra / "src/integration/rtl/caliptra_reg", caliptra / "src/libs/rtl", caliptra / "src/libs/aaxi_uvm", caliptra / "src/keyvault/rtl", repo / "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/include"]
         if args.include_project_bench_packages:
             if len(config_docs) < 2 or "files:" not in config_docs[1]:
@@ -521,6 +613,8 @@ def main() -> int:
                     hdl_top_source = original
                 elif original.name == "hvl_top.sv":
                     hvl_top_source = original
+                elif args.caliptra_top_env_probe and original.name != "soc_ifc_parameters_pkg.sv":
+                    continue
                 else:
                     overlay_candidate = project_bench_overlay / original.relative_to(project_bench_root)
                     sources.append(overlay_candidate if overlay_candidate.is_file() else original)
@@ -541,6 +635,37 @@ def main() -> int:
             if args.open_mbox_target:
                 prepare_overlay_args.append("--open-mbox-target")
             run(*prepare_overlay_args)
+            if args.caliptra_top_env_probe:
+                hdl_top_source = hdl_top_overlay.read_text()
+                clock_start_anchor = "    #0ns;\n    forever begin\n      clk = ~clk;"
+                if hdl_top_source.count(clock_start_anchor) != 1:
+                    raise SystemExit("Caliptra top runtime refused an unexpected generated clock block")
+                hdl_top_overlay.write_text(
+                    hdl_top_source.replace(
+                        clock_start_anchor,
+                        "    #1ns; // allow the control BFM's reset edge to settle before clocking\n"
+                        "    forever begin\n      clk = ~clk;",
+                        1,
+                    )
+                )
+                hdl_top_source = hdl_top_overlay.read_text()
+                reset_state_anchor = "  bit dummy, dummy_n;"
+                if hdl_top_source.count(reset_state_anchor) != 1:
+                    raise SystemExit("Caliptra top runtime refused an unexpected generated reset declaration")
+                hdl_top_overlay.write_text(
+                    hdl_top_source.replace(reset_state_anchor, "  logic dummy, dummy_n;", 1)
+                )
+                hdl_top_source = hdl_top_overlay.read_text()
+                axi_reset_anchor = ".ARESETn(cptra_rst_b_dly_assert_simult_deassert),"
+                if hdl_top_source.count(axi_reset_anchor) != 1:
+                    raise SystemExit("Caliptra top runtime refused an unexpected generated AXI reset connection")
+                hdl_top_overlay.write_text(
+                    hdl_top_source.replace(
+                        axi_reset_anchor,
+                        ".ARESETn(1'b0), // hold AXI idle during wrapper-dispatch probe",
+                        1,
+                    )
+                )
             if " " in str(caliptra):
                 raise SystemExit("Caliptra path cannot contain spaces in an Icarus filelist")
             sha512_ral_overlay = temp / "sha512_acc_csr_uvm.sv"
@@ -600,11 +725,22 @@ def main() -> int:
                 repo / "dv/caliptra_bfm/axi/axi4_caliptra_dma_if_subordinate.sv",
                 hdl_top_overlay,
                 repo / "evidence/caliptra-bfm-soc-ifc-generated-hdl-20261004/hdl_stubs.sv",
-                generated_env_dir / "generated_env_probe_pkg.sv",
-                generated_env_dir / "generated_env_probe_top.sv",
             ]
-            top = generated_env_dir / "generated_env_probe_top.sv"
-            top_name = "caliptra_soc_ifc_generated_env_top"
+            if args.caliptra_top_env_probe:
+                runtime_sources += [
+                    top_env_overlay / "caliptra_top_env_pkg.sv",
+                    generated_env_dir / "caliptra_top_env_probe_pkg.sv",
+                    generated_env_dir / "caliptra_top_env_probe_top.sv",
+                ]
+                top = generated_env_dir / "caliptra_top_env_probe_top.sv"
+                top_name = "caliptra_top_env_probe_top"
+            else:
+                runtime_sources += [
+                    generated_env_dir / "generated_env_probe_pkg.sv",
+                    generated_env_dir / "generated_env_probe_top.sv",
+                ]
+                top = generated_env_dir / "generated_env_probe_top.sv"
+                top_name = "caliptra_soc_ifc_generated_env_top"
             image = temp / "soc_ifc_generated_env_runtime.vvp"
             if args.open_mbox_target:
                 runtime_sources.insert(
@@ -665,7 +801,7 @@ def main() -> int:
         else:
             command += [str(path) for path in support]
         command += [str(path) for path in bfm_sources]
-        if args.include_project_bench_packages:
+        if args.include_project_bench_packages and not args.caliptra_top_env_probe:
             command += [str(repo / "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/generated_test_dependency_stubs.sv")]
         command += [str(path) for path in sources]
         if runtime:
@@ -703,6 +839,11 @@ def main() -> int:
         ahb_ral_read_args = ["+CALIPTRA_GENERATED_AHB_RAL_READ"] if args.generated_ahb_ral_read else []
         ahb_ral_dlen_args = ["+CALIPTRA_GENERATED_AHB_RAL_DLEN_WRITE_READBACK"] if args.generated_ahb_ral_dlen_write_readback else []
         ahb_mbox_payload_args = ["+CALIPTRA_GENERATED_AHB_MBOX_PAYLOAD"] if args.generated_ahb_mbox_payload else []
+        test_name = (
+            "caliptra_top_env_probe_test"
+            if args.caliptra_top_env_probe
+            else "caliptra_soc_ifc_generated_env_probe_test"
+        )
         simulation_log.parent.mkdir(parents=True, exist_ok=True)
         with simulation_log.open("w") as log:
             simulation = subprocess.run(
@@ -710,7 +851,7 @@ def main() -> int:
                     vvp,
                     "-i",
                     str(image),
-                    "+UVM_TESTNAME=caliptra_soc_ifc_generated_env_probe_test",
+                    f"+UVM_TESTNAME={test_name}",
                     "+uvm_set_action=*,UVM/FLD/GET_MIRRORED_VAL/VOL,UVM_WARNING,UVM_NO_ACTION",
                     *( ["+TRACE_CPTRA_KEY"] if args.trace_predictor_reset else [] ),
                     *progress_args,
@@ -726,12 +867,20 @@ def main() -> int:
                 stderr=subprocess.STDOUT,
             )
         saw_pass = False
+        saw_top_reset_handler = False
+        saw_child_reset_handler = False
         saw_uvm_error = False
         scoreboard_result = None
         with simulation_log.open() as log:
             for line in log:
                 sys.stdout.write(line)
-                saw_pass |= "PASS: generated SoC-IFC bench sequence" in line
+                saw_pass |= (
+                    "PASS: generated Caliptra top environment dispatched reset" in line
+                    if args.caliptra_top_env_probe
+                    else "PASS: generated SoC-IFC bench sequence" in line
+                )
+                saw_top_reset_handler |= "CALIPTRA_TOP_ENV_RESET_HANDLER kind=" in line
+                saw_child_reset_handler |= "CALIPTRA_TOP_ENV_CHILD_RESET_HANDLER kind=" in line
                 saw_uvm_error |= bool(re.match(r"^UVM_(?:ERROR|FATAL)\s*:\s*[1-9]", line))
                 match = re.search(
                     r"SCOREBOARD_RESULTS:\s+PREDICTED_TRANSACTIONS=(\d+)\s+MATCHES=(\d+)\s+"
@@ -745,6 +894,11 @@ def main() -> int:
             return simulation.returncode or 1
         if saw_uvm_error:
             return 1
+        if args.caliptra_top_env_probe:
+            if not saw_top_reset_handler or not saw_child_reset_handler:
+                print("ERROR: generated Caliptra top reset handler did not dispatch to soc_ifc", file=sys.stderr)
+                return 1
+            return 0
         if scoreboard_result is None:
             print("ERROR: generated runtime did not report SoC-IFC scoreboard results", file=sys.stderr)
             return 1

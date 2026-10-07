@@ -22,6 +22,28 @@ reports five matches, zero mismatches, and no UVM errors or fatals. This
 qualifies the clean-room binding under this Icarus setup, not Avery's exact
 driver lifecycle or event timing.
 
+## Caliptra top environment wrapper
+
+The opt-in `--caliptra-top-env-probe` compiles Caliptra's generated
+`caliptra_top_env_pkg` around the generated SoC-IFC environment, verifies its
+child environment and virtual sequencer, and checks that the top reset handler
+dispatches to the child. The guarded run passed with both dispatch markers,
+zero UVM errors/fatals, and 50% minimum free memory against a 40% floor.
+
+This is a wrapper-dispatch check, not full Caliptra reset qualification. Its
+disposable Icarus copy short-circuits the child reset body, disconnects control
+analysis from the predictor, holds AXI reset low, and treats an empty
+scoreboard as expected because this probe sends no bus traffic. The full
+SoC-IFC reset/predictor path and complete Caliptra top remain separate work.
+
+Replay:
+
+```sh
+IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
+  python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py \
+  --caliptra-root /path/to/caliptra-rtl --caliptra-top-env-probe
+```
+
 The latest guarded run also starts Caliptra's stock
 `soc_ifc_env_axi_user_init_sequence` through the generated virtual sequencer
 and AXI RAL map. It checks the 12 completed AAXI writes against each mapped
