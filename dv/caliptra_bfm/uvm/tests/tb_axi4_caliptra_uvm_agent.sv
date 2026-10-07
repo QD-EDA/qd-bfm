@@ -45,7 +45,23 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   wire [31:0] ar_stall_cycles, r_stall_cycles;
   axi4_caliptra_monitor #(
     .ADDR_WIDTH(48), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32)
-  ) channel_monitor (.*);
+  ) channel_monitor (
+    .*,
+    .aw_valid_cycles(), .w_valid_cycles(), .b_valid_cycles(),
+    .ar_valid_cycles(), .r_valid_cycles(),
+    .aw_burst_fixed_count(), .aw_burst_incr_count(), .aw_burst_wrap_count(),
+    .aw_burst_reserved_count(), .aw_burst_unknown_count(),
+    .aw_lock_clear_count(), .aw_lock_set_count(), .aw_lock_unknown_count(),
+    .ar_burst_fixed_count(), .ar_burst_incr_count(), .ar_burst_wrap_count(),
+    .ar_burst_reserved_count(), .ar_burst_unknown_count(),
+    .ar_lock_clear_count(), .ar_lock_set_count(), .ar_lock_unknown_count(),
+    .b_resp_okay_count(), .b_resp_exokay_count(), .b_resp_slverr_count(),
+    .b_resp_decerr_count(), .b_resp_unknown_count(),
+    .r_resp_okay_count(), .r_resp_exokay_count(), .r_resp_slverr_count(),
+    .r_resp_decerr_count(), .r_resp_unknown_count(),
+    .w_strb_full_count(), .w_strb_partial_count(), .w_strb_zero_count(),
+    .w_strb_unknown_count(), .w_last_count(), .r_last_count()
+  );
   assign record_if.aw_fire = aw_fire;
   assign record_if.aw_record = aw_record;
   assign record_if.w_fire = w_fire;
