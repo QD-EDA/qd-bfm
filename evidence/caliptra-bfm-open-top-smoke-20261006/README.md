@@ -15,6 +15,21 @@ those errors as a failure, so this is not counted as a qualified L0 pass. The
 test also issues no DMA traffic; the AXI target behavior remains covered by
 the separate block-level DMA/DUT evidence.
 
+## Open profile-checker checkpoint — 2026-10-07
+
+The full-top runner now defines `CALIPTRA_BFM_CHECKER`, connecting the native
+Caliptra-profile protocol checker to the replacement's DMA AXI pins. The
+full-top traces above predate this change and do not qualify DMA traffic with
+the checker enabled. The guarded `axi/tests/run_caliptra_axi_complex_bfm.sh`
+regression passed with its checker enabled: AXI error injection, SRAM/FIFO
+traffic, FIFO controls, recovery availability, and randomized stalls passed;
+minimum free RAM was 56% against a 40% floor. A full-top DMA replay with the
+checker enabled is still needed to qualify the complete path. The current
+full-top source profile separately elaborated under IEEE 2017 with the checker
+enabled (`iverilog -tnull`): 17 compiler warnings, zero errors, and 58% minimum
+free RAM against the same 40% floor. This is compile evidence only; it did not
+run Caliptra firmware.
+
 The integration uncovered and fixed an open-BFM control bug: Caliptra
 initializes `dma_gen_block_size` only when `+CPTRA_RAND_TEST_DMA` is supplied.
 The replacement now enables its generated recovery sequence only with that

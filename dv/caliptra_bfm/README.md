@@ -48,14 +48,15 @@ channel stalls for `rand_delays`, and implements the one-shot
 forwards target data and USER while changing each response to `SLVERR`; a FIFO
 read still consumes its words. An error write is consumed without changing
 SRAM/FIFO. Reset rearms error injection. Compile the replacement instead of
-Caliptra's original module; do not connect both models to `m_axi_if`. Define
-`CALIPTRA_BFM_CHECKER` to connect the native Caliptra-profile checker to the
-bus. It also preserves Caliptra's firmware preload path through
-`i_axi_sram.i_sram.ram[addr][byte_idx]`, exercised by
-`axi/tests/run_caliptra_axi_complex_bfm.sh`. This checker covers the documented
-BFM profile and is not a full ARM Axi4PC replacement. Its generated recovery
-sequence is enabled only with Caliptra's `+CPTRA_RAND_TEST_DMA` plusarg, which
-is also required for the pinned testbench to initialize the block-size array.
+Caliptra's original module; do not connect both models to `m_axi_if`. The
+full-top runner defines `CALIPTRA_BFM_CHECKER`, connecting the native
+Caliptra-profile checker to every DMA AXI channel. This checker covers the
+documented profile; it is not the full ARM Axi4PC API or an all-configurations
+AXI checker. The replacement preserves Caliptra's firmware preload path
+(`i_axi_sram.i_sram.ram[addr][byte_idx]`), exercised by
+`axi/tests/run_caliptra_axi_complex_bfm.sh`. Its generated recovery sequence
+is enabled only with Caliptra's `+CPTRA_RAND_TEST_DMA` plusarg, which is also
+required for the pinned testbench to initialize the block-size array.
 The top-level firmware smoke and its diagnostic limits are recorded in
 [`open-top smoke evidence`](../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
 For a bounded random-DMA recovery diagnostic, `--rand-dma-iterations N`
@@ -210,10 +211,11 @@ These modes are diagnostic, can be combined with `--fast-trng` and `--trace-axi`
 and do not qualify stock firmware. `CALIPTRA_BFM_PROFILE` can use Caliptra's
 pinned `src/integration/config/caliptra_top_tb.vf`; the generated Icarus profile
 omits its unavailable ARM `Axi4PC.sv` placeholder. No stub is compiled in its
-place, and this run does not claim Axi4PC-equivalent checking. The runner also
-requires `CALIPTRA_RTL`, a profile containing the original AXI-complex source
-exactly once, `CALIPTRA_GCC_PREFIX` (toolchain name or path, with or without a
-trailing hyphen), and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
+place; the open Caliptra-profile checker is enabled instead, without claiming
+Axi4PC equivalence. The runner also requires `CALIPTRA_RTL`, a profile
+containing the original AXI-complex source exactly once,
+`CALIPTRA_GCC_PREFIX` (toolchain name or path, with or without a trailing
+hyphen), and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires
 macOS ARM64, Homebrew OpenSSL 3 and mbedTLS 3, Clang, Make, and Python 3.12.
 Hash-checked disposable Icarus overlays also allocate Caliptra's missing AXI

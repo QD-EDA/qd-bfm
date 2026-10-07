@@ -765,6 +765,7 @@ def main():
     compile_command = [
         iverilog, "-g2017", "-gassertions", "-gcommercial-unsafe", "-s", "caliptra_top_tb",
         "-D", "RV_OPENSOURCE", "-D", "CLP_ASSERT_ON", "-D", "CALIPTRA_INTERNAL_TRNG",
+        "-D", "CALIPTRA_BFM_CHECKER",
         "-f", str(profile), "-o", str(binary),
     ]
     compile_exit = run_logged(compile_command, args.output, env, args.output / "compile.log")
