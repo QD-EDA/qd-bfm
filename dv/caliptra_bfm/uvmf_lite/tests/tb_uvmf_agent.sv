@@ -253,6 +253,32 @@ package uvmf_lite_agent_test_pkg;
     endfunction
   endclass
 
+  class agent_late_vif_publisher extends uvm_component;
+    virtual uvmf_lite_driver_bfm_if driver_bfm;
+    virtual uvmf_lite_monitor_bfm_if input_monitor_bfm;
+    virtual uvmf_lite_monitor_bfm_if output_monitor_bfm;
+    bit published;
+
+    `uvm_component_utils(agent_late_vif_publisher)
+
+    function new(string name, uvm_component parent); super.new(name, parent); endfunction
+
+    virtual function void build_phase(uvm_phase phase);
+      super.build_phase(phase);
+      if (agent_override::build_count != 2)
+        `uvm_fatal("UVMF_LATE_VIF", "VIF publisher ran before both agents built")
+      if (driver_bfm == null || input_monitor_bfm == null || output_monitor_bfm == null)
+        `uvm_fatal("UVMF_LATE_VIF", "Late VIF publisher has a null handle")
+      uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "input_if", driver_bfm);
+      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "input_if", input_monitor_bfm);
+      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "output_if", output_monitor_bfm);
+      published = 1;
+    endfunction
+  endclass
+
   class agent_environment extends uvmf_environment_base #(agent_environment_configuration);
     agent active_agent;
     agent passive_agent;
@@ -349,6 +375,7 @@ package uvmf_lite_agent_test_pkg;
     agent_environment_configuration, agent_environment, agent_bench_sequence
   );
     agent_observer observer;
+    agent_late_vif_publisher late_vif_publisher;
     uvm_sequencer #(agent_item) published_sequencer;
     virtual uvmf_lite_driver_bfm_if driver_bfm;
     virtual uvmf_lite_monitor_bfm_if input_monitor_bfm;
@@ -381,13 +408,12 @@ package uvmf_lite_agent_test_pkg;
             null, "LATE_BFM_HANDLES", "output_monitor", output_monitor_bfm))
         `uvm_fatal("UVMF_TEST_CONFIG", "Test bench did not provide late BFM handles")
 
-      uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::set(
-        null, UVMF_VIRTUAL_INTERFACES, "input_if", driver_bfm);
-      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
-        null, UVMF_VIRTUAL_INTERFACES, "input_if", input_monitor_bfm);
-      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
-        null, UVMF_VIRTUAL_INTERFACES, "output_if", output_monitor_bfm);
       observer = agent_observer::type_id::create("observer", this);
+      late_vif_publisher = agent_late_vif_publisher::type_id::create(
+        "zz_late_vif_publisher", this);
+      late_vif_publisher.driver_bfm = driver_bfm;
+      late_vif_publisher.input_monitor_bfm = input_monitor_bfm;
+      late_vif_publisher.output_monitor_bfm = output_monitor_bfm;
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);
@@ -425,6 +451,7 @@ package uvmf_lite_agent_test_pkg;
         `uvm_fatal("UVMF_AGENT_TEST", "Agent sequencer was not published")
       if (driver_bfm.access_count != 1 || input_monitor_bfm.start_count != 1 ||
           output_monitor_bfm.start_count != 1 ||
+          !late_vif_publisher.published ||
           agent_override::build_count != 2 ||
           published_sequencer != configuration.active_agent_configuration.sequencer ||
           environment.passive_agent.sequencer != null ||

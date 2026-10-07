@@ -238,8 +238,13 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Driver cannot find its agent configuration")
-      bfm = configuration.driver_bfm;
       configure(configuration);
+    endfunction
+
+    virtual function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
+      configuration.resolve_bfm_handles();
+      bfm = configuration.driver_bfm;
       set_bfm_proxy_handle();
     endfunction
 
@@ -291,8 +296,13 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Monitor cannot find its agent configuration")
-      bfm = configuration.monitor_bfm;
       configure(configuration);
+    endfunction
+
+    virtual function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
+      configuration.resolve_bfm_handles();
+      bfm = configuration.monitor_bfm;
       set_bfm_proxy_handle();
     endfunction
 
@@ -332,7 +342,6 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Agent cannot find its configuration")
-      configuration.resolve_bfm_handles();
       if (!uvm_config_db #(MONITOR_T)::get(this, "", "monitor", monitor) ||
           monitor == null) begin
         uvm_config_db #(CONFIG_T)::set(this, "monitor", UVMF_AGENT_CONFIG, configuration);
