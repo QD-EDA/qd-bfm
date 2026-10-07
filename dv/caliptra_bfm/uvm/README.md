@@ -381,10 +381,17 @@ runner is `tests/run_ahb_qvip_compat_env.sh`; it has passed under Icarus
 SystemVerilog editions 2012, 2017, and 2023. Evidence and hashes are recorded
 in `evidence/caliptra-bfm-ahb-qvip-compat-20261004/README.md`.
 
-The Adams Bridge ML-DSA template additionally names `ap["trans_ap"]` in YAML
-commented as a placeholder. That key is not implemented or treated as a
-confirmed BFM requirement, so this shim does not claim ML-DSA environment
-compatibility.
+The Adams Bridge ML-DSA YAML includes `ap_key: "trans_ap"` with a placeholder
+comment, but its checked-in generated `mldsa_environment.svh` omits that
+connection. The generated environment instead connects `ap["burst_transfer"]`
+to the predictor and `ap["burst_transfer_sb"]` to the scoreboard; no generated
+source references `trans_ap`. Those real keys are provided here, so no fake
+`trans_ap` stream is needed. The Adams Bridge generated environment remains
+unqualified: its exact QVIP parameter specialization and end-to-end runtime
+have not been checked with this replacement. The generated predictor and
+scoreboard cast items to the parameterized `ahb_master_burst_transfer` type;
+they use `RnW`, `address`, `data[0][31:0]`, `resp[0]` (for mismatch reporting),
+and `convert2string()`. The clean-room item exposes those fields and method.
 
 `caliptra_ahb_mvc_compat_pkg.sv` supplies fallback definitions for only these
 visible types, including `ahb_rnw_e` with `AHB_READ`/`AHB_WRITE`, and the
