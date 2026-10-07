@@ -753,6 +753,25 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     run_test("axi_dma_top_uvm_bfm_test");
   end
 
+  initial begin : check_recovery_mode_selection
+    #1;
+    if ($test$plusargs("CLP_DMA_TB_MODE_NOT_EMPTY")) begin
+      if (dma_target.bfm.i_recovery_avail.selected_mode !== 2'd1)
+        $fatal(1, "Recovery availability did not select not-empty mode");
+    end else if ($test$plusargs("CLP_DMA_TB_MODE_THRESH")) begin
+      if (dma_target.bfm.i_recovery_avail.selected_mode !== 2'd2)
+        $fatal(1, "Recovery availability did not select threshold mode");
+    end else if ($test$plusargs("CLP_DMA_TB_MODE_PULSE")) begin
+      if (dma_target.bfm.i_recovery_avail.selected_mode !== 2'd3)
+        $fatal(1, "Recovery availability did not select pulse mode");
+    end
+    if ($test$plusargs("CLP_DMA_TB_MODE_NOT_EMPTY") ||
+        $test$plusargs("CLP_DMA_TB_MODE_THRESH") ||
+        $test$plusargs("CLP_DMA_TB_MODE_PULSE"))
+      $display("INFO: selected recovery availability mode=%0d",
+               dma_target.bfm.i_recovery_avail.selected_mode);
+  end
+
   initial begin : run_dma_profile
     dma_transfer_randomizer#(16384) scenario;
     logic [31:0] status;

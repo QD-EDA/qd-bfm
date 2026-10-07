@@ -239,6 +239,10 @@ Generated recovery records sweep every legal one-hot block size: 4–64 bytes
 for AXI2AXI and 4–2048 bytes for AXI2MBOX and AXI2AHB. Recovery checks the
 generated FIFO reads and end-to-end route output; see the
 [`generated recovery route evidence`](../../../evidence/caliptra-bfm-dma-routed-recovery-sweep-20261006/README.md).
+The generated AXI2AXI recovery record also passes through the real DMA DUT in
+not-empty, threshold, and pulse availability modes, with the bench checking the
+selected policy; see the
+[`recovery availability mode evidence`](../../../evidence/caliptra-bfm-dma-recovery-availability-modes-20261007/README.md).
 Other generated FIFO modes and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five

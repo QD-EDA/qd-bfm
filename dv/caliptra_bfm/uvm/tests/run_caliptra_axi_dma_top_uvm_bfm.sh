@@ -18,8 +18,9 @@ recovery_block_sweep_only=0
 recovery_route_sweep_only=0
 max_sram_dut_replay_only=0
 fixed_sram_modes_only=0
+recovery_availability_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -29,8 +30,9 @@ if [ "$#" -eq 1 ]; then
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
     --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
     --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
+    --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -175,6 +177,26 @@ fi
 if [ "$recovery_route_sweep_only" -eq 1 ]; then
   run_recovery_route_sweep
   echo "INFO: AXI2MBOX and AXI2AHB FIFO recovery passed block sizes 4 through 2048 bytes"
+  exit 0
+fi
+if [ "$recovery_availability_modes_only" -eq 1 ]; then
+  for recovery_mode in NOT_EMPTY THRESH PULSE; do
+    case "$recovery_mode" in
+      NOT_EMPTY) recovery_mode_id=1 ;;
+      THRESH) recovery_mode_id=2 ;;
+      PULSE) recovery_mode_id=3 ;;
+    esac
+    run_case "recovery-availability-${recovery_mode}" \
+      +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY +CALIPTRA_BFM_DUT_REPLAY_INDEX=26 \
+      +FIFO_RECOVERY "+CLP_DMA_TB_MODE_${recovery_mode}" \
+      +RECOVERY_BLOCK_BYTES=64 +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "INFO: selected recovery availability mode=$recovery_mode_id" "$log" ||
+       ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of 64 bytes' "$log"; then
+      echo "Generated AXI2AXI recovery failed in $recovery_mode availability mode" >&2
+      exit 1
+    fi
+  done
+  echo "INFO: actual Caliptra axi_dma_top passed not-empty, threshold, and pulse recovery modes"
   exit 0
 fi
 if [ "$max_sram_dut_replay_only" -eq 1 ]; then

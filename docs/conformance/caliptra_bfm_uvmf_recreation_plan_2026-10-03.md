@@ -49,7 +49,9 @@ and AXI2AHB. Short records retain per-record randomized payloads, route-valid
 offsets, and Caliptra's randomized delay flag. One record observed five
 target-stall cycles; the generated FIFO-destination record observed 160. Other
 generated FIFO modes and firmware-triggered reset injection remain
-unqualified. A separate 32-record generated replay adds 65-word SRAM FIXED-read,
+unqualified. The actual generated AXI2AXI recovery record also passes through
+the real DMA DUT with not-empty, threshold, and pulse `recovery_data_avail`
+policies. A separate 32-record generated replay adds 65-word SRAM FIXED-read,
 FIXED-write, and both-FIXED AXI2AXI profiles, with the scoreboard checking the
 repeated address behavior and final SRAM contents. Directed DUT runs
 cover all five named DMA routes in a directed/constrained 65-word profile:
