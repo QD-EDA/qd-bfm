@@ -86,44 +86,34 @@ package ecc_reset_probe_pkg;
     endtask
   endclass
 
-  class ecc_key_sign_bench_sequence extends ECC_bench_sequence_base;
-    `uvm_object_utils(ecc_key_sign_bench_sequence)
-    function new(string name = "ecc_key_sign_bench_sequence");
-      super.new(name);
-    endfunction
-    virtual task body();
-      ecc_reset_only_input_sequence reset_sequence;
-      ecc_key_sign_input_sequence input_sequence;
-      reset_sequence = ecc_reset_only_input_sequence::type_id::create("reset_sequence");
-      input_sequence = ecc_key_sign_input_sequence::type_id::create("input_sequence");
-      fork
-        ECC_in_agent_config.wait_for_reset();
-        ECC_out_agent_config.wait_for_reset();
-      join
-      // Match the startup reset sample before comparing the sign result.
-      reset_sequence.start(ECC_in_agent_sequencer);
-      fork
-        ECC_in_agent_config.wait_for_num_clocks(250);
-        ECC_out_agent_config.wait_for_num_clocks(250);
-      join
-      input_sequence.start(ECC_in_agent_sequencer);
-      fork
-        ECC_in_agent_config.wait_for_num_clocks(5);
-        ECC_out_agent_config.wait_for_num_clocks(5);
-      join
-    endtask
-  endclass
-
   class ecc_key_sign_only_test extends test_top;
     `uvm_component_utils(ecc_key_sign_only_test)
     function new(string name, uvm_component parent);
       super.new(name, parent);
     endfunction
     virtual task run_phase(uvm_phase phase);
-      ecc_key_sign_bench_sequence sign_seq;
+      ecc_reset_only_input_sequence reset_seq;
+      ecc_key_sign_input_sequence sign_seq;
+      uvm_sequencer #(ECC_in_transaction #(32, 32)) input_sequencer;
       phase.raise_objection(this);
-      sign_seq = ecc_key_sign_bench_sequence::type_id::create("sign_seq");
-      sign_seq.start(null);
+      input_sequencer = environment.configuration.ECC_in_agent_config.get_sequencer();
+      fork
+        environment.configuration.ECC_in_agent_config.wait_for_reset();
+        environment.configuration.ECC_out_agent_config.wait_for_reset();
+      join
+      reset_seq = ecc_reset_only_input_sequence::type_id::create("reset_seq");
+      reset_seq.start(input_sequencer);
+      wait (environment.ECC_sb.expected_received_count >= 1 &&
+            environment.ECC_sb.actual_received_count >= 1);
+      if (environment.ECC_sb.expected_received_count != 1 ||
+          environment.ECC_sb.actual_received_count != 1 ||
+          environment.ECC_sb.mismatch_count != 0 ||
+          environment.ECC_sb.matched_count != 1)
+        `uvm_fatal("ECC_PROBE", "startup reset sample did not match")
+      sign_seq = ecc_key_sign_input_sequence::type_id::create("sign_seq");
+      sign_seq.start(input_sequencer);
+      wait (environment.ECC_sb.expected_received_count >= 2 &&
+            environment.ECC_sb.actual_received_count >= 2);
       if (environment.ECC_sb.expected_received_count != 2 ||
           environment.ECC_sb.actual_received_count != 2 ||
           environment.ECC_sb.mismatch_count != 0 ||
