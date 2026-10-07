@@ -26,8 +26,10 @@ traffic, FIFO controls, recovery availability, and randomized stalls passed;
 minimum free RAM was 56% against a 40% floor. A checker-enabled first-AES
 replay timed out in ROM flow before DMA; see the
 [2026-10-07 result](../caliptra-bfm-fulltop-checker-dma-20261007/README.md).
-A completed full-top DMA pass with the checker enabled is still needed to
-qualify the complete path. The current full-top source profile separately
+A later current-runner first AES/DMA diagnostic passed with the checker both
+on and off; see the paired results in that report. This covers only the
+diagnostic one-case firmware configuration. Stock/full-suite qualification
+remains open. The current full-top source profile separately
 elaborated under IEEE 2017 with the checker enabled (`iverilog -tnull`): 17
 compiler warnings, zero errors, and 58% minimum
 free RAM against the same 40% floor. This is compile evidence only; it did not

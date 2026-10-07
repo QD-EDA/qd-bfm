@@ -23,7 +23,11 @@
   },
   "compile": {
     "exit": 0,
-    "defines": ["RV_OPENSOURCE", "CLP_ASSERT_ON", "CALIPTRA_INTERNAL_TRNG"],
+    "defines": [
+      "RV_OPENSOURCE",
+      "CLP_ASSERT_ON",
+      "CALIPTRA_INTERNAL_TRNG"
+    ],
     "iverilog_version": "13.0 (devel) (246c58e4-dirty)",
     "binary_bytes": 323989395,
     "binary_sha256": "4e3f465418ee2458b628d8fe22ea858da9be138d99186be947962964f91cc896",
@@ -46,7 +50,10 @@
     "testcase_fail_markers": 0,
     "bad_diagnostics": 0,
     "jtag_errors": 0,
-    "finish": {"minstret": 1426, "mcycle": 3572},
+    "finish": {
+      "minstret": 1426,
+      "mcycle": 3572
+    },
     "jtag_port_bound": true,
     "axi_vpi_trace_enabled": false
   },
@@ -57,5 +64,6 @@
     "timeout_seconds": 900,
     "exit_code": 0
   },
-  "qualification": "The checker-disabled full-top path completes the single diagnostic AES/DMA firmware case. This does not qualify checker behavior or provide an AXI transaction trace. The checker-enabled comparison used an older runner commit; a same-commit checker-enabled replay is required to isolate checker overhead."
+  "qualification": "The checker-disabled full-top path completes the single diagnostic AES/DMA firmware case. This does not qualify checker behavior or provide an AXI transaction trace. The checker-enabled comparison used an older runner commit; a same-commit checker-enabled replay is required to isolate checker overhead.",
+  "simulation_launch": "Manual guarded replay of the runner-built image after the sandboxed VVP launch was stopped on JTAG socket EPERM; PATH included a temporary python alias to python3 for testbench generators."
 }

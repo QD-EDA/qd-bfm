@@ -8,8 +8,9 @@ limit. It emitted no AES/DMA testcase result or normal finish.
 
 The JTAG DPI listener bound successfully. The memory guard recorded 58% minimum
 free RAM against a 40% floor. This run does not establish a checker failure: it
-ended before a DMA request, and AXI VPI tracing was disabled. The full-top DMA
-path with the checker enabled remains unqualified.
+ended before a DMA request, and AXI VPI tracing was disabled. A later
+checker-enabled first-case diagnostic passes below; stock and full-suite
+qualification remain open.
 
 `result.json` records source, image, profile, checker-overlay and log hashes.
 The 309 MB simulator image and raw log were kept outside the repository and
@@ -38,20 +39,34 @@ the 40% floor. Its 1.5 MB compile output was hashed
 removed. This does not qualify stock Icarus 13 as a replacement for the
 development compiler needed by the full-top flow.
 
-## Checker-disabled first AES/DMA counterpart — 2026-10-07
+## Current-runner first AES/DMA A/B — 2026-10-07
 
-The current runner was rebuilt with `--disable-bfm-checker` and the same
-diagnostic settings: `--fast-trng` and `--first-aes-case-diagnostic`. The
-one-case firmware reached `* TESTCASE PASSED` and normal `$finish` at
-`mcycle=3572` (`minstret=1426`). The log scan found one pass marker, no fail or
-error markers, and no JTAG errors. The 40% free-memory floor held; the guard
-reported a 48% minimum.
+The checker-disabled build used runner commit `a6cd3d1`; the checker-enabled
+replay used `6005e423`. Both commits contain identical runner-script content
+(SHA-256 recorded in each result), the same Caliptra revision, diagnostic
+settings and firmware image hashes. The checker-disabled image was launched
+manually after the sandboxed runner attempt could not bind its JTAG socket; a
+temporary `python` to `python3` alias supplied the testbench's generator path.
+The checker-enabled case ran through the guarded runner. Each reached
+`* TESTCASE PASSED` and normal `$finish` at `mcycle=3572` (`minstret=1426`);
+each log had zero fail, error, or JTAG-error markers.
 
-This shows the checker-disabled top can complete the diagnostic firmware case.
-It does not qualify the protocol checker or establish transaction-level AXI
-coverage: AXI tracing was off. The checker-enabled timeout above used an older
-runner commit, so these runs do not isolate checker overhead as the cause. A
-checker-enabled replay with the current runner is still needed for a controlled
-A/B result. The compact raw log, exact hashes and limits are in
-[`checker-disabled-first-aes-result.json`](checker-disabled-first-aes-result.json)
-and [`checker-disabled-first-aes-sim.log`](checker-disabled-first-aes-sim.log).
+| Checker | Compile/simulation | Minimum free RAM | Result |
+| --- | --- | ---: | --- |
+| Disabled | 0 / 0 | 48% | Pass, one testcase marker |
+| Enabled | 0 / 0 | 45% | Pass, one testcase marker |
+
+The earlier checker-enabled ROM timeout was not reproduced. The checker was
+enabled on the actual Caliptra top and emitted no error for this case. These
+runs use a one-case firmware copy, fast TRNG, fast boot preload, skipped
+MLDSA/MLKEM vector generation, and suppressed low-priority firmware prints.
+AXI VPI tracing was off, so this is not transaction-trace evidence or stock
+firmware qualification. Full-suite, random-DMA reset, and stock-configuration
+coverage remain open.
+
+The exact result JSON and compact log for each variant are preserved here:
+
+- Checker disabled: [`result`](checker-disabled-first-aes-result.json),
+  [`log`](checker-disabled-first-aes-sim.log).
+- Checker enabled: [`result`](checker-enabled-first-aes-result.json),
+  [`log`](checker-enabled-first-aes-sim.log).
