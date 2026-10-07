@@ -240,6 +240,8 @@ def main() -> int:
                 "        `uvm_fatal(\"MLDSA_STATUS\", \"abr_top keygen status is not ready/valid or reports an error\")\n"
                 "      public_word_count = configuration.mldsa_rm.MLDSA_PUBKEY.m_mem.get_size();\n"
                 "      private_word_count = configuration.mldsa_rm.MLDSA_PRIVKEY_OUT.m_mem.get_size();\n"
+                "      if (public_word_count != 648 || private_word_count != 1224)\n"
+                "        `uvm_fatal(\"MLDSA_KEY_SIZE\", \"generated RAL key memory dimensions differ from the pinned MLDSA profile\")\n"
                 "      for (word_index = 0; word_index < public_word_count; word_index++) begin\n"
                 "        configuration.mldsa_rm.MLDSA_PUBKEY.m_mem.read(status, word_index, key_word, UVM_FRONTDOOR, configuration.mldsa_rm.default_map);\n"
                 "        if (status != UVM_IS_OK) `uvm_fatal(\"MLDSA_PUBKEY\", \"generated RAL public-key read failed\")\n"
