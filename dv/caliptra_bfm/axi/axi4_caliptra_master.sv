@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
-// A task-based AXI4 manager allowing one outstanding operation per direction.
+// A task-based AXI4 manager with bounded concurrent reads and one write at a time.
 module axi4_caliptra_master #(
   parameter integer ADDR_WIDTH = 19,
   parameter integer DATA_WIDTH = 32,
   parameter integer ID_WIDTH = 8,
   parameter integer USER_WIDTH = 32,
   parameter integer MAX_BEATS = 256,
+  parameter integer MAX_OUTSTANDING = 4,
   parameter integer TIMEOUT_CYCLES = 1024
 ) (
   input wire ACLK,
@@ -53,6 +54,78 @@ module axi4_caliptra_master #(
   reg read_busy = 0;
   wire busy = write_busy || read_busy;
   reg poisoned = 0;
+  reg [MAX_OUTSTANDING-1:0] rd_slot_valid = '0;
+  reg [MAX_OUTSTANDING-1:0] rd_slot_issued = '0;
+  reg [MAX_OUTSTANDING-1:0] rd_slot_done = '0;
+  reg [MAX_OUTSTANDING-1:0] rd_slot_success = '0;
+  reg [7:0] rd_len_q [0:MAX_OUTSTANDING-1];
+  reg [ID_WIDTH-1:0] rd_id_q [0:MAX_OUTSTANDING-1];
+  reg [DATA_WIDTH*MAX_BEATS-1:0] rd_data_q [0:MAX_OUTSTANDING-1];
+  reg [USER_WIDTH*MAX_BEATS-1:0] rd_user_data_q [0:MAX_OUTSTANDING-1];
+  reg [2*MAX_BEATS-1:0] rd_response_q [0:MAX_OUTSTANDING-1];
+  integer rd_order_q [0:MAX_OUTSTANDING-1];
+  integer rd_received_q [0:MAX_OUTSTANDING-1];
+  integer rd_alloc_ticket = 0;
+  integer rd_reserve_ticket = 0;
+  integer rd_issue_ticket = 0;
+  integer rd_active_count = 0;
+  integer rready_index;
+  integer rscan_index;
+  integer rchosen_slot;
+  integer rchosen_order;
+  integer rbeat_index;
+
+  always @* begin
+    RREADY = 1'b0;
+    if (ARESETn && !poisoned)
+      for (rready_index = 0; rready_index < MAX_OUTSTANDING; rready_index = rready_index + 1)
+        if (rd_slot_valid[rready_index] && rd_slot_issued[rready_index] && !rd_slot_done[rready_index])
+          RREADY = 1'b1;
+  end
+
+  // ponytail: linear RID lookup is simple at bounded depth; index by ID if depth grows.
+  always @(posedge ACLK) begin
+    if (ARESETn && RVALID && RREADY) begin
+      rchosen_slot = -1;
+      rchosen_order = 32'h7fffffff;
+      for (rscan_index = 0; rscan_index < MAX_OUTSTANDING; rscan_index = rscan_index + 1) begin
+        if (rd_slot_valid[rscan_index] && rd_slot_issued[rscan_index] && !rd_slot_done[rscan_index] &&
+            rd_id_q[rscan_index] == RID && rd_order_q[rscan_index] < rchosen_order) begin
+          rchosen_slot = rscan_index;
+          rchosen_order = rd_order_q[rscan_index];
+        end
+      end
+      read_response_id = RID;
+      if (rchosen_slot < 0) begin
+        poisoned = 1'b1;
+        $display("AXI master read response has no outstanding RID");
+      end else begin
+        rbeat_index = rd_received_q[rchosen_slot];
+        if (rbeat_index > rd_len_q[rchosen_slot]) begin
+          rd_slot_done[rchosen_slot] = 1'b1;
+          rd_slot_success[rchosen_slot] = 1'b0;
+          poisoned = 1'b1;
+          $display("AXI master received too many read beats");
+        end else begin
+          rd_data_q[rchosen_slot][rbeat_index*DATA_WIDTH +: DATA_WIDTH] = RDATA;
+          rd_user_data_q[rchosen_slot][rbeat_index*USER_WIDTH +: USER_WIDTH] = RUSER;
+          rd_response_q[rchosen_slot][rbeat_index*2 +: 2] = RRESP;
+          if (RRESP !== 2'b00 && RRESP !== 2'b01)
+            rd_slot_success[rchosen_slot] = 1'b0;
+          if (RLAST !== (rbeat_index == rd_len_q[rchosen_slot])) begin
+            rd_slot_done[rchosen_slot] = 1'b1;
+            rd_slot_success[rchosen_slot] = 1'b0;
+            poisoned = 1'b1;
+            $display("AXI master read response ID or RLAST mismatch");
+          end else if (rbeat_index == rd_len_q[rchosen_slot]) begin
+            rd_slot_done[rchosen_slot] = 1'b1;
+          end else begin
+            rd_received_q[rchosen_slot] = rbeat_index + 1;
+          end
+        end
+      end
+    end
+  end
 
   function automatic burst_is_valid(
     input [ADDR_WIDTH-1:0] addr,
@@ -92,9 +165,9 @@ module axi4_caliptra_master #(
     AWID = 0; AWADDR = 0; AWLEN = 0; AWSIZE = 0; AWBURST = 0; AWLOCK = 0;
     AWUSER = 0; AWVALID = 0; WDATA = 0; WSTRB = 0; WUSER = 0; WLAST = 0;
     WVALID = 0; BREADY = 0; ARID = 0; ARADDR = 0; ARLEN = 0; ARSIZE = 0;
-    ARBURST = 0; ARLOCK = 0; ARUSER = 0; ARVALID = 0; RREADY = 0;
+    ARBURST = 0; ARLOCK = 0; ARUSER = 0; ARVALID = 0;
     write_response_id = 0; read_response_id = 0;
-    if (ADDR_WIDTH < 12 || MAX_BEATS < 1 || MAX_BEATS > 256 || TIMEOUT_CYCLES < 1 ||
+    if (ADDR_WIDTH < 12 || MAX_BEATS < 1 || MAX_BEATS > 256 || MAX_OUTSTANDING < 1 || TIMEOUT_CYCLES < 1 ||
         DATA_WIDTH < 8 || (DATA_WIDTH % 8) != 0 ||
         (((DATA_WIDTH/8) & ((DATA_WIDTH/8)-1)) != 0))
       $fatal(1, "Invalid Caliptra AXI master parameters");
@@ -111,7 +184,6 @@ module axi4_caliptra_master #(
   task automatic clear_read_outputs;
     begin
       ARVALID = 0;
-      RREADY = 0;
     end
   endtask
 
@@ -130,6 +202,15 @@ module axi4_caliptra_master #(
       if (busy) $fatal(1, "AXI master cannot be reset while a task is active");
       clear_outputs();
       poisoned = 0;
+      rd_alloc_ticket = 0;
+      rd_reserve_ticket = 0;
+      rd_issue_ticket = 0;
+      rd_active_count = 0;
+      rd_slot_valid = '0;
+      rd_slot_issued = '0;
+      rd_slot_done = '0;
+      rd_slot_success = '0;
+      read_busy = 0;
     end
   endtask
 
@@ -273,84 +354,147 @@ module axi4_caliptra_master #(
   );
     integer beat;
     integer cycles;
-    reg taken, aborted, timed_out, got_beat, beat_ok, all_responses_ok;
+    integer ticket;
+    integer slot;
+    reg taken, aborted, timed_out, owns_ar, allocated;
     begin
       success = 0;
       read_data = 0;
       read_user = 0;
       read_response = 0;
       response_user = 0;
-      read_response_id = 0;
       aborted = 0;
       timed_out = 0;
-      all_responses_ok = 1;
-      if (poisoned || read_busy || (({1'b0, len} + 1) > MAX_BEATS) ||
+      owns_ar = 0;
+      allocated = 0;
+      ticket = -1;
+      slot = -1;
+      if (poisoned || (({1'b0, len} + 1) > MAX_BEATS) ||
           !burst_is_valid(addr, len, size, burst)) begin
         if (({1'b0, len} + 1) > MAX_BEATS)
           $display("AXI master burst length exceeds MAX_BEATS");
         else if (!burst_is_valid(addr, len, size, burst))
           $display("AXI master rejected burst outside the Caliptra profile");
       end else begin
-        read_busy = 1;
+        ticket = rd_alloc_ticket;
+        rd_alloc_ticket = rd_alloc_ticket + 1;
+        slot = ticket % MAX_OUTSTANDING;
         cycles = 0;
-        @(negedge ACLK);
-        if (!ARESETn) begin clear_read_outputs(); poisoned = 0; aborted = 1; end
-        else begin
-          ARID = id; ARADDR = addr; ARLEN = len; ARSIZE = size;
-          ARBURST = burst; ARLOCK = lock; ARUSER = addr_user; ARVALID = 1;
-          RREADY = 0;
-        end
-
-        taken = 0;
-        while (!taken && !aborted && !timed_out) begin
+        while (((rd_reserve_ticket != ticket) || rd_slot_valid[slot]) &&
+               !aborted && !timed_out && !poisoned) begin
           @(posedge ACLK);
           if (!ARESETn) aborted = 1;
-          else if (ARVALID && ARREADY) taken = 1;
+          else if (poisoned) aborted = 1;
           cycles = cycles + 1;
-          @(negedge ACLK);
-          if (aborted || !ARESETn) begin
-            clear_read_outputs(); poisoned = 0; aborted = 1;
-          end else if (taken) begin ARVALID = 0; RREADY = 1; end
-          else if (cycles >= TIMEOUT_CYCLES) begin
-            timed_out = 1; poisoned = 1;
-            $display("AXI master read address timeout; reset required before reuse");
+          if (cycles >= TIMEOUT_CYCLES && !aborted && !poisoned) begin
+            timed_out = 1;
+            poisoned = 1;
+            $display("AXI master read slot timeout; reset required before reuse");
           end
         end
 
-        for (beat = 0; beat <= len && !aborted && !timed_out; beat = beat + 1) begin
+        if (!aborted && !timed_out && !poisoned) begin
+          allocated = 1;
+          rd_slot_valid[slot] = 1;
+          rd_reserve_ticket = rd_reserve_ticket + 1;
+          rd_slot_issued[slot] = 0;
+          rd_slot_done[slot] = 0;
+          rd_slot_success[slot] = 1;
+          rd_len_q[slot] = len;
+          rd_id_q[slot] = id;
+          rd_data_q[slot] = '0;
+          rd_user_data_q[slot] = '0;
+          rd_response_q[slot] = '0;
+          rd_order_q[slot] = ticket;
+          rd_received_q[slot] = 0;
+          rd_active_count = rd_active_count + 1;
+          read_busy = 1;
+
           cycles = 0;
-          got_beat = 0;
-          beat_ok = 1;
-          while (!got_beat && !aborted && !timed_out) begin
+          while ((rd_issue_ticket != ticket) && !aborted && !timed_out && !poisoned) begin
             @(posedge ACLK);
             if (!ARESETn) aborted = 1;
-            else if (RVALID && RREADY) begin
-              got_beat = 1;
-              read_response_id = RID;
-              read_data[beat*DATA_WIDTH +: DATA_WIDTH] = RDATA;
-              read_user[beat*USER_WIDTH +: USER_WIDTH] = RUSER;
-              read_response[beat*2 +: 2] = RRESP;
-              if (RRESP !== 2'b00 && RRESP !== 2'b01) all_responses_ok = 0;
-              if ((RID !== id) || (RLAST !== (beat == len))) beat_ok = 0;
+            else if (poisoned) aborted = 1;
+            cycles = cycles + 1;
+            if (cycles >= TIMEOUT_CYCLES && !aborted && !poisoned) begin
+              timed_out = 1;
+              poisoned = 1;
+              $display("AXI master read issue queue timeout; reset required before reuse");
             end
+          end
+
+          if (!aborted && !timed_out && !poisoned) begin
+            @(negedge ACLK);
+            if (!ARESETn) aborted = 1;
+            else if (poisoned) aborted = 1;
+            else begin
+              ARID = id; ARADDR = addr; ARLEN = len; ARSIZE = size;
+              ARBURST = burst; ARLOCK = lock; ARUSER = addr_user; ARVALID = 1;
+              rd_slot_issued[slot] = 1;
+              owns_ar = 1;
+            end
+          end
+
+          taken = 0;
+          cycles = 0;
+          while (owns_ar && !taken && !aborted && !timed_out && !poisoned) begin
+            @(posedge ACLK);
+            if (!ARESETn) aborted = 1;
+            else if (poisoned) aborted = 1;
+            else if (ARVALID && ARREADY) taken = 1;
             cycles = cycles + 1;
             @(negedge ACLK);
-            if (aborted || !ARESETn) begin
-              clear_read_outputs(); poisoned = 0; aborted = 1;
-            end else if (got_beat && !beat_ok) begin
-              RREADY = 0; poisoned = 1; aborted = 1;
-              $display("AXI master read response ID or RLAST mismatch");
-            end else if (got_beat && beat == len) begin
-              RREADY = 0;
-              success = all_responses_ok;
-            end else if (cycles >= TIMEOUT_CYCLES && !got_beat) begin
-              RREADY = 0; timed_out = 1; poisoned = 1;
-              $display("AXI master read data timeout; reset required before reuse");
+            if (aborted || !ARESETn || poisoned) begin
+              ARVALID = 0;
+              owns_ar = 0;
+              if (!ARESETn) begin poisoned = 0; aborted = 1; end
+              else aborted = 1;
+            end else if (taken) begin
+              ARVALID = 0;
+              owns_ar = 0;
+              rd_issue_ticket = rd_issue_ticket + 1;
+            end else if (cycles >= TIMEOUT_CYCLES) begin
+              ARVALID = 0;
+              owns_ar = 0;
+              timed_out = 1;
+              poisoned = 1;
+              $display("AXI master read address timeout; reset required before reuse");
+            end
+          end
+
+          cycles = 0;
+          while (allocated && !rd_slot_done[slot] && !aborted && !timed_out && !poisoned) begin
+            @(negedge ACLK);
+            if (!ARESETn) begin
+              aborted = 1;
+              poisoned = 0;
+            end else if (poisoned) aborted = 1;
+            else begin
+              cycles = cycles + 1;
+              if (cycles >= TIMEOUT_CYCLES) begin
+                timed_out = 1;
+                poisoned = 1;
+                $display("AXI master read data timeout; reset required before reuse");
+              end
             end
           end
         end
-        if (success) response_user = read_user[0 +: USER_WIDTH];
-        read_busy = 0;
+
+        if (allocated) begin
+          read_data = rd_data_q[slot];
+          read_user = rd_user_data_q[slot];
+          read_response = rd_response_q[slot];
+          response_user = rd_user_data_q[slot][0 +: USER_WIDTH];
+          success = rd_slot_done[slot] && rd_slot_success[slot] &&
+                    !aborted && !timed_out && !poisoned;
+          rd_slot_valid[slot] = 0;
+          rd_slot_issued[slot] = 0;
+          rd_slot_done[slot] = 0;
+          rd_slot_success[slot] = 0;
+          rd_active_count = rd_active_count - 1;
+          read_busy = (rd_active_count != 0);
+        end
+        if (!ARESETn) poisoned = 0;
       end
     end
   endtask

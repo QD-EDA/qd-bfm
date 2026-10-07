@@ -9,7 +9,8 @@ IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
 VVP_BIN=${VVP_BIN:-vvp}
 out=$(mktemp)
 out_no_checker=$(mktemp)
-trap 'rm -f "$out" "$out_no_checker"' EXIT
+out_outstanding=$(mktemp)
+trap 'rm -f "$out" "$out_no_checker" "$out_outstanding"' EXIT
 "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master -o "$out" \
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv
 "$VVP_BIN" "$out"
@@ -20,3 +21,6 @@ trap 'rm -f "$out" "$out_no_checker"' EXIT
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv
 "$VVP_BIN" "$out_no_checker" +CASE=BAD_BID
 "$VVP_BIN" "$out_no_checker" +CASE=BAD_RLAST
+"$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master_outstanding -o "$out_outstanding" \
+  ../axi4_caliptra_master.sv tb_axi4_caliptra_master_outstanding.sv
+"$VVP_BIN" "$out_outstanding"

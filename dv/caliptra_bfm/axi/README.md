@@ -14,14 +14,15 @@ repository root with the consuming testbench appended.
 [`axi4_caliptra_master.sv`](axi4_caliptra_master.sv) drives all AXI4 manager
 channels, including address/data USER and LOCK, independent AW/W handshakes,
 bursts up to `MAX_BEATS`, and B/R response USER. `write_burst` and `read_burst`
-accept packed beat arrays with beat zero in the least-significant slice. Calls
-may overlap across directions: one read task and one write task can be active
-at once, while a second same-direction call is rejected until the active call
-finishes. This is one outstanding operation per direction, not same-channel
-AXI pipelining. A protocol mismatch or timeout poisons the manager; assert
-reset low and call `reset_master` before reuse. Reset also aborts an in-flight
-task, returns it unsuccessful, and clears its channel outputs; call
-`reset_master` after that task exits.
+accept packed beat arrays with beat zero in the least-significant slice. Up to
+`MAX_OUTSTANDING` read tasks may be active concurrently (default 4); responses
+are routed by RID, including out-of-order responses for different IDs and
+in-order responses for repeated IDs. One write task can run alongside those
+reads, while a second write call is rejected until it finishes. A protocol
+mismatch or timeout poisons the manager; assert reset low and call
+`reset_master` before reuse. Reset also aborts in-flight tasks, returns them
+unsuccessful, and clears their channel outputs; call `reset_master` after they
+exit.
 The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
 `RRESP` preserve the target's response code. Invalid aligned/burst/4KB profile
 requests are rejected before VALID is asserted.
