@@ -413,6 +413,13 @@ package uvmf_base_pkg;
       printer.print_time("end_time", end_time);
     endfunction
 
+    virtual function void do_record(uvm_recorder recorder);
+      super.do_record(recorder);
+      recorder.record_field("start_time", start_time, $bits(start_time), UVM_TIME);
+      recorder.record_field("end_time", end_time, $bits(end_time), UVM_TIME);
+      // Do not serialize convert2string(); generated output may contain secrets.
+    endfunction
+
     virtual function void add_to_wave(int transaction_viewing_stream_h);
       // Waveform transaction APIs are simulator-specific and optional.
     endfunction

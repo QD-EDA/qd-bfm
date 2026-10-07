@@ -19,7 +19,11 @@ module. Run `tests/run_default_reset_gen.sh` for the bounded reset check.
 
 It currently provides a transaction base with the generated
 `start_time`, `end_time`, and `transaction_view_h` fields plus copy/compare/
-print hooks; the `uvmf_sim_level_t` enum; typed
+print hooks. It records the base timestamps through the UVM transaction
+recorder. Derived classes can record selected fields in `do_record()`; it does
+not serialize `convert2string()` automatically because generated transaction
+strings may include sensitive payloads. The
+package also provides the `uvmf_sim_level_t` enum; typed
 environment and parameterized-agent configuration bases, including the
 generated `initiator_responder` setting; `set_config`-based environment and
 agent bases; virtual sequencer, typed sequence (`REQ`/`RSP`), virtual-sequence,
@@ -45,9 +49,12 @@ Run `tests/run_uvmf_scoreboard.sh` and `tests/run_uvmf_agent.sh` with the local
 Icarus `-uvm` fork selected through `IVERILOG_BIN` and `VVP_BIN`. Both runners
 compile and execute with `-g2017` and `-g2023`, using bundled Accellera UVM
 2020.3.1. Set `UVMF_IEEE_EDITION=2017` or `2023` to run one agent-smoke
-edition, including its negative control. The scoreboard smoke includes a
-normal match with a publisher-side mutation after write, one compare mismatch,
-one expected-only leftover, and one actual-only leftover.
+edition, including its negative control. `tests/run_uvmf_transaction_key.sh`
+checks transaction-key copying and records base timestamps plus an explicitly
+selected derived payload field through the UVM transaction database; it also
+checks that `convert2string()` output is not recorded. The scoreboard smoke
+includes a normal match with a publisher-side mutation after write, one compare
+mismatch, one expected-only leftover, and one actual-only leftover.
 The runner requires exactly four UVM_ERROR reports and zero UVM_FATAL reports:
 one in-order mismatch, one out-of-order mismatch, and two leftover controls.
 It also checks that the out-of-order scoreboard matches reordered items. The
@@ -120,9 +127,10 @@ Generated derived configuration publication is covered by the smoke's
 config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
-`wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros
-and utility packages, transaction recording, HDL/HVL proxy startup, and
-remaining top scaffolding are still open.
+`wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs.
+Generated BFM macros and utility packages, structured per-field recording of
+derived payloads, HDL/HVL proxy startup, and remaining top scaffolding are
+still open.
 Do not treat it as a drop-in UVMF package yet.
 
 The focused compile probe follows the ECC entries in Caliptra's pinned
