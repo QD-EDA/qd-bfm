@@ -35,6 +35,9 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
   wire [31:0] transfer_count;
   wire protocol_error;
   wire [31:0] protocol_error_count;
+  wire checker_error;
+  wire [3:0] checker_error_code;
+  wire [31:0] checker_error_count;
 
   assign record_if.HRESETn = HRESETn;
   assign record_if.address_phase_fire = address_phase_fire;
@@ -55,6 +58,9 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
   assign record_if.transfer_count = transfer_count;
   assign record_if.protocol_error = protocol_error;
   assign record_if.protocol_error_count = protocol_error_count;
+  assign record_if.checker_error = checker_error;
+  assign record_if.checker_error_code = checker_error_code;
+  assign record_if.checker_error_count = checker_error_count;
 
   always @(posedge HCLK or negedge HRESETn) begin
     if (!HRESETn)
@@ -95,5 +101,24 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
     .transfer_count(transfer_count),
     .protocol_error(protocol_error),
     .protocol_error_count(protocol_error_count)
+  );
+
+  ahb_lite_caliptra_checker #(
+    .ADDR_WIDTH(ADDR_WIDTH),
+    .DATA_WIDTH(DATA_WIDTH)
+  ) protocol_checker (
+    .HCLK(HCLK),
+    .HRESETn(HRESETn),
+    .HADDR(HADDR),
+    .HWDATA(HWDATA),
+    .HSEL(HSEL),
+    .HWRITE(HWRITE),
+    .HTRANS(HTRANS),
+    .HSIZE(HSIZE),
+    .HREADY(HREADY),
+    .HRESP(HRESP),
+    .error(checker_error),
+    .error_code(checker_error_code),
+    .error_count(checker_error_count)
   );
 endmodule

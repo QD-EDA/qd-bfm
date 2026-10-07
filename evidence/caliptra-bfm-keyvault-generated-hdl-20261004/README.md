@@ -179,7 +179,7 @@ raw simulator transcripts are omitted.
 | Probe input | SHA-256 |
 | --- | --- |
 | `run.sh` | `f13cf25e8eb98d4df8ea50c4b215132344fbdd7b3ea86f2a1510992be3fd934d` |
-| `run.py` | `521bb83255cda6659b4d08971d07db2696df0c065494a560353ae229f788b0bb` |
+| `run.py` | `64e53b53c7f2d7af2d04846e01a9fa1f8acc0150c770d2359be368dcadb4435d` |
 | `verify.log` | `7e013d9f725f46abfee4df2ccdf798919b4991f82bd1b9671bfd64cb6346859d` |
 | current QD `verify-runtime.log` (IEEE 2017) | `181baa0b286812ae4c4f51d0804049f633801698af4daf80915d2ebb9da96cd8` |
 | current QD `verify-runtime-2023.log` (IEEE 2023) | `4589541a83609ab9ee65f7189b872718bfbc47bf6997045cb98831cbde3218e7` |
@@ -209,3 +209,4 @@ raw simulator transcripts are omitted.
 | Current QD AHB pin adapter (2026-10-07 attempt) | `3ed7ab5c13e591a07ee121297a26a68d6932fd406cc9fbfe34648c3f0c146df5` |
 | AHB manager proxy before completed-lane packing | `735e256eb86e23d94f0588605cad5de85212ef6c6b7dc38be340ebd2c5333708` |
 | Current QD AHB manager proxy (2026-10-07) | `a91be6b29501ce960b7a394f5bcd6b1da2d54c99818007e5c33632a53c8474d3` |
+| Current QD AHB protocol checker (2026-10-07) | `ee3a6f9313dad251568011ac126f30f418de0f2ce15828d0e40dc0f42ffc2c05` |

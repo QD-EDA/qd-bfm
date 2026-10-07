@@ -20,4 +20,7 @@ interface ahb_lite_caliptra_record_if(input wire HCLK);
   wire [31:0] transfer_count;
   wire protocol_error;
   wire [31:0] protocol_error_count;
+  wire checker_error;
+  wire [3:0] checker_error_code;
+  wire [31:0] checker_error_count;
 endinterface

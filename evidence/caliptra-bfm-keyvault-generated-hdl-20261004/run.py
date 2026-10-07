@@ -206,6 +206,7 @@ endpackage
             bfm / "uvm/ahb_lite_caliptra_record_if.sv",
             bfm / "uvm/ahb_lite_caliptra_master_cmd_if.sv",
             bfm / "ahb_lite/ahb_lite_caliptra_master.sv",
+            bfm / "ahb_lite/ahb_lite_caliptra_checker.sv",
             bfm / "ahb_lite/ahb_lite_caliptra_monitor.sv",
             bfm / "uvm/ahb_lite_caliptra_qvip_hdl.sv",
             bfm / "uvm/ahb_lite_caliptra_pin_monitor_adapter.sv",

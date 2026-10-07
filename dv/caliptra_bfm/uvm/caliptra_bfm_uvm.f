@@ -3,6 +3,7 @@
 dv/caliptra_bfm/uvm/axi4_caliptra_record_if.sv
 dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
 dv/caliptra_bfm/uvm/ahb_lite_caliptra_record_if.sv
+dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_checker.sv
 dv/caliptra_bfm/uvm/ahb_lite_caliptra_pin_monitor_adapter.sv
 dv/caliptra_bfm/uvm/ahb_lite_caliptra_master_cmd_if.sv
 dv/caliptra_bfm/uvm/caliptra_ahb_mvc_compat_pkg.sv

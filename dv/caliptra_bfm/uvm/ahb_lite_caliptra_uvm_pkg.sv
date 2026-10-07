@@ -357,6 +357,29 @@ package ahb_lite_caliptra_uvm_pkg;
     endfunction
 
     task run_phase(uvm_phase phase);
+      fork
+        monitor_checker_errors();
+        capture_transfers();
+      join
+    endtask
+
+    task monitor_checker_errors();
+      int unsigned last_error_count;
+      last_error_count = 0;
+      forever begin
+        @(negedge vif.HCLK);
+        if (vif.HRESETn !== 1'b1)
+          last_error_count = 0;
+        else if (vif.checker_error_count !== last_error_count) begin
+          if (vif.checker_error_count > last_error_count)
+            `uvm_error("AHB_PROTOCOL", $sformatf("AHB checker error code %0d (count %0d)",
+              vif.checker_error_code, vif.checker_error_count))
+          last_error_count = vif.checker_error_count;
+        end
+      end
+    endtask
+
+    task capture_transfers();
       ahb_lite_caliptra_transaction item;
       ahb_lite_caliptra_mvc_transfer group_item;
       bit flush_group;

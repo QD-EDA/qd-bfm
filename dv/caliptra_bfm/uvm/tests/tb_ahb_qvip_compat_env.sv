@@ -247,6 +247,9 @@ module tb_ahb_qvip_compat_env;
       if (passive_sink.write_count != 2 || passive_sink.read_count != 2 ||
           passive_sink.burst_write_count != 1 || passive_sink.burst_read_count != 1)
         `uvm_fatal("AHB_QVIP_PASSIVE", "Passive generated-name monitor missed the bus traffic")
+      if (configuration.ahb_lite_slave_0_cfg.m_bfm.checker_error_count != 0 ||
+          passive_configuration.ahb_lite_slave_0_cfg.m_bfm.checker_error_count != 0)
+        `uvm_fatal("AHB_QVIP_CHECKER", "Protocol checker rejected the legal active/passive AHB traffic")
       if (qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer == null)
         `uvm_fatal("AHB_QVIP_SEQUENCER", "Generated-name environment did not create m_sequencer")
       if (passive_qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer != null)
