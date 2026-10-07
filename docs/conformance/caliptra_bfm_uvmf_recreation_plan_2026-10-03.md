@@ -818,8 +818,7 @@ completed build. Driver and monitor `configure()` hooks now run only after
 their typed handles are resolved and assigned. The positive and
 mismatch-control cases pass under IEEE 2017 and 2023, including response-clone
 isolation. The generated ECC reset scoreboard and IRQ_EN AHB write/readback
-also pass under IEEE 2017 after this phase change; IEEE 2023 generated ECC
-integration remains open. See the
+also pass under IEEE 2017 and 2023 after this phase change. See the
 [`late-registration smoke evidence`](../../evidence/caliptra-bfm-uvmf-late-vif-20261007/README.md).
 The generated derived configuration performs the agent/configuration
 publication itself.

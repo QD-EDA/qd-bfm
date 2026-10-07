@@ -16,10 +16,9 @@ The agent smoke passed in IEEE 1800-2017 and 1800-2023:
 - Driver response cloning returned value 42; mutating the response clone did
   not change the request.
 
-The generated ECC reset/IRQ probe passed in IEEE 1800-2017. The reset
-scoreboard matched and the generated AHB driver wrote and read back
-`ECC_IRQ_EN`; UVM reported zero errors and fatals. The generated ECC 2023 path
-remains unverified.
+The generated ECC reset/IRQ probe passed in IEEE 1800-2017 and 1800-2023. In
+both editions the reset scoreboard matched, the generated AHB driver wrote
+and read back `ECC_IRQ_EN`, and UVM reported zero errors and fatals.
 
 ## Reproduction
 
@@ -34,10 +33,10 @@ for edition in 2017 2023; do
 done
 ```
 
-Run the generated ECC 2017 case with the pinned clean Caliptra checkout:
+Run both generated ECC editions with the pinned clean Caliptra checkout:
 
 ```sh
-ECC_IEEE_EDITION=2017 \
+ECC_IEEE_EDITION=both \
 CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
 IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
 VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
