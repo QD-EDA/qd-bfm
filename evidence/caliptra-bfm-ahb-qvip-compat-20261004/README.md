@@ -155,6 +155,38 @@ SHA-256 for the updated profile smoke:
 edc96b1e2271bca273ad7b4a2dc41c8e9d9007a377ba369cde63eba304b8a1e0  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
 ```
 
+## Partial-error burst RAL predictor follow-up (2026-10-07)
+
+The generated-name compatibility smoke now also writes a two-beat burst at
+the end of the synthetic target's mapped window. It checks that all three
+active analysis streams and the passive monitor publish `AHB_OKAY` for the
+first beat followed by `AHB_ERROR` for the out-of-range beat. The register
+predictor updates the first mirror and leaves the error-beat mirror unchanged.
+
+Guarded runs passed for both supported data widths under IEEE 2012:
+
+```sh
+AHB_PROFILE=32 SV_EDITION=2012 \
+IVERILOG_BIN=/path/to/merged/iverilog VVP_BIN=/path/to/merged/vvp \
+  dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
+
+AHB_PROFILE=64 SV_EDITION=2012 \
+IVERILOG_BIN=/path/to/merged/iverilog VVP_BIN=/path/to/merged/vvp \
+  dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
+```
+
+Both runs printed `PASS: generated-name AHB QVIP streams and full/partial-error
+RAL burst prediction`, with zero UVM errors or fatals and one expected
+`AHB_QVIP_CVG` warning. The regression uses a synthetic target; it does not run
+the generated Caliptra UVM top.
+
+The locally installed Icarus binary reported `13.0 (devel) (ac4532fa-dirty)`.
+SHA-256: `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114`
+for `iverilog`, and
+`4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` for
+`vvp`. The captured run therefore identifies the merged working binary, not a
+clean-source simulator build.
+
 ## Generated Adams Bridge MLDSA environment compile and RTL smoke (2026-10-06)
 
 `tests/run_adams_mldsa_env_compile.py` compiles the pinned generated MLDSA
