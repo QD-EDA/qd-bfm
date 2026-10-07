@@ -419,9 +419,12 @@ The Phase 0 source census is in
 [`caliptra_bfm_phase0_inventory_2026-10-03.md`](caliptra_bfm_phase0_inventory_2026-10-03.md),
 with its hash-recorded output at
 [`caliptra_bfm_consumer_manifest_2026-10-03.json`](caliptra_bfm_consumer_manifest_2026-10-03.json).
-Phase 0 is partially complete: the consumer sources are indexed, but the
-per-unit dependency matrix, full API/method inventory, and redistribution
-decisions remain open. Rows still tagged `[unverified]` are not requirements.
+Phase 0 is partially complete: the consumer sources and all 44 unit-filelist
+surfaces/outcomes are indexed, including provider variables, include roots,
+visible package/DPI references, and five absent Adams Bridge source paths.
+Resolving providers and runtime plusargs, completing the API/method inventory,
+and recording redistribution decisions remain open. Rows still tagged
+`[unverified]` are not requirements.
 
 Pinned sources `[repo: release_overlays/README.md]`: Caliptra `v2.1.2`
 `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`; Adams Bridge `v2.0.3`

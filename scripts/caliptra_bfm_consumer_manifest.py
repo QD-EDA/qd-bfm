@@ -17,6 +17,7 @@ from pathlib import Path
 
 SOURCE_SUFFIXES = {".sv", ".svh", ".v", ".vh", ".yaml", ".yml", ".vf", ".f"}
 TEXT_SUFFIXES = {".yaml", ".yml", ".vf", ".f"}
+HDL_SUFFIXES = {".sv", ".svh", ".v", ".vh"}
 API_PATTERNS = {
     "avery_axi_types_and_agents": re.compile(
         r"\b(?:aaxi_master_tr|aaxi_uvm_[A-Za-z0-9_]*|aaxi_intf|AVERY_AXI|AVERY_SIM)\b"
@@ -51,6 +52,76 @@ def source_files(root: Path) -> list[Path]:
 
 def entry(root: Path, path: Path) -> dict[str, str]:
     return {"path": path.relative_to(root).as_posix(), "sha256": sha256(path)}
+
+
+def filelist_evidence(
+    root: Path,
+    path: Path,
+    provider_roots: dict[str, Path],
+) -> dict[str, object]:
+    provider_variables: set[str] = set()
+    include_roots: set[str] = set()
+    defines: set[str] = set()
+    compile_options: set[str] = set()
+    source_references = []
+    symbolic_sources: set[str] = set()
+    absent_sources: set[str] = set()
+    imported_packages: set[str] = set()
+    dpi_imports: set[str] = set()
+    conditional_macros: set[str] = set()
+
+    for raw in path.read_text(errors="replace").splitlines():
+        line = raw.strip()
+        if not line or line.startswith(("#", "//", "/*")):
+            continue
+        provider_variables.update(re.findall(r"\$\{?([A-Z][A-Z0-9_]*)\}?", line))
+        if line.startswith("+incdir+"):
+            include_roots.update(value for value in line[8:].split("+") if value)
+        elif line.startswith("+define+"):
+            defines.update(value for value in line[8:].split("+") if value)
+        elif line.startswith("+") or line.startswith(("-f", "-F")):
+            compile_options.add(line)
+        elif Path(line).suffix.lower() in HDL_SUFFIXES:
+            source_references.append(line)
+            resolved = line
+            for name, provider_root in provider_roots.items():
+                resolved = resolved.replace(f"${{{name}}}", str(provider_root))
+                resolved = re.sub(rf"\${name}\b", str(provider_root), resolved)
+            if re.search(r"\$\{?[A-Z][A-Z0-9_]*\}?", resolved):
+                symbolic_sources.add(line)
+                continue
+            source = Path(resolved)
+            if not source.is_absolute():
+                source = root / source
+            if not source.is_file():
+                absent_sources.add(line)
+                continue
+            text = source.read_text(errors="replace")
+            code = re.sub(r"/\*.*?\*/|//[^\n]*", "", text, flags=re.S)
+            imported_packages.update(re.findall(r"\bimport\s+([A-Za-z_]\w*)\s*::", code))
+            for declaration in re.findall(
+                r'\bimport\s+"DPI-C"\s+(?:context\s+)?function\s+([^;]+);', code
+            ):
+                match = re.search(r"\b([A-Za-z_]\w*)\s*\(", declaration)
+                if match:
+                    dpi_imports.add(match.group(1))
+            conditional_macros.update(
+                re.findall(r"(?m)^\s*`(?:ifdef|ifndef|elsif)\s+([A-Za-z_]\w*)", code)
+            )
+
+    return {
+        "provider_variables": sorted(provider_variables),
+        "include_roots": sorted(include_roots),
+        "defines": sorted(defines),
+        "other_compile_options": sorted(compile_options),
+        "hdl_file_reference_count": len(source_references),
+        "imported_packages": sorted(imported_packages),
+        "dpi_imports": sorted(dpi_imports),
+        "conditional_macros": sorted(conditional_macros),
+        "symbolic_source_references": sorted(symbolic_sources),
+        "absent_source_references": sorted(absent_sources),
+        "runtime_plusargs_status": "not captured by compile-only census",
+    }
 
 
 def consumer_inventory(
@@ -96,6 +167,16 @@ def consumer_inventory(
         missing_filelists = [path for path in unit_filelists if not path.is_file()]
         if missing_filelists:
             raise FileNotFoundError(f"census filelist missing from {label}: {missing_filelists[0]}")
+    provider_roots = {"CALIPTRA_ROOT": root} if label == "caliptra-rtl" else {}
+    if label == "caliptra-rtl":
+        provider_roots.update(
+            {
+                "ADAMSBRIDGE_ROOT": root / "submodules/adams-bridge",
+                "CALIPTRA_PRIM_ROOT": root / "src/caliptra_prim",
+            }
+        )
+    else:
+        provider_roots["ADAMSBRIDGE_ROOT"] = root
     regression_candidates = [
         path
         for path in files
@@ -154,7 +235,17 @@ def consumer_inventory(
             ],
             "authored_stimulus_test_yaml": [entry(root, path) for path in authored_tests],
             "generated_uvmf_test_yaml": [entry(root, path) for path in generated_tests],
-            "unit_rtl_filelists": [entry(root, path) for path in unit_filelists],
+            "unit_rtl_filelists": [
+                {
+                    **entry(root, path),
+                    **(
+                        filelist_evidence(root, path, provider_roots)
+                        if census_entries is not None
+                        else {}
+                    ),
+                }
+                for path in unit_filelists
+            ],
             "regression_path_references": regression_references,
         },
         "provider_variables": {
@@ -193,6 +284,8 @@ def main() -> None:
             "Source references prove declarations, filelist inclusion, or visible connections only; they do not prove runtime behavior.",
             "External Avery, QVIP, UVMF, and ARM implementation details are absent from these pinned source checkouts.",
             "Counts are scoped by the named path filters; they are not regression-pass counts or a license grant.",
+            "Per-unit filelist details scan direct HDL references only; nested response files and runtime plusargs are not expanded.",
+            "Package imports, DPI imports, and conditional macros are textual source matches, not compiler-resolved dependencies.",
         ],
     }
     if census:

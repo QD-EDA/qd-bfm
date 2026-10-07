@@ -15,12 +15,11 @@ regenerate it with:
       --unit-census-json /path/to/unit-census-results.json \
       --output docs/conformance/caliptra_bfm_consumer_manifest_2026-10-03.json
 
-The script is standard-library-only, records Git revisions and file hashes,
-and reads sources without modifying either checkout. Its filters are explicit:
-The generator is included in this QD-BFM checkout. A 2026-10-06 replay using
-the pinned Caliptra/Adams Bridge roots and frozen unit census reproduced the
-tracked manifest byte-for-byte; generator SHA-256 is
-`f7e599feece038b64b6194768bc34550650108bc5916179dbeca3bf82a025e88`.
+The standard-library-only generator is included in this QD-BFM checkout. It
+records Git revisions and file hashes, and reads sources without modifying
+either checkout. A 2026-10-06 replay regenerated the tracked manifest from the
+pinned Caliptra/Adams Bridge roots and frozen unit census. Generator
+SHA-256: `ee8af1ab8ae47b71ce25e36d1ff3fc21cd352d5a1d716a29e38f51f8c483f248`.
 
 | Pinned tree | Test YAML under stimulus/tests | Generated UVMF test YAML | stimulus/testsuites files | Frozen census filelists |
 | --- | ---: | ---: | ---: | ---: |
@@ -38,11 +37,25 @@ filters above; the manifest retains the individual test, suite, filelist, and
 suite-path references so that discrepancy can be traced before using those
 larger totals as a requirement denominator.
 
-The manifest also carries the frozen compile-only outcome for each of the 44
-filelists: 20 pass, 6 fail, 17 setup, and 1 unsupported. Its source inventory
-hash and census artifact hash are retained. This evidence is a prior
-classification, not a fresh compile under the current BFM branch or a runtime
-qualification.
+For each of the 44 filelists, the manifest records provider variables, raw
+include roots and defines, other compile options, direct HDL-reference count,
+visible package imports, DPI imports, conditional macros, and symbolic or
+absent source references. Caliptra's 17 filelists contain 3,697 direct HDL
+references and 398 include-root entries; Adams Bridge's 27 contain 1,420 HDL
+references and 150 include-root entries. Neither set contains a `+define+`
+directive. The Adams Bridge scan found five source paths absent from the
+pinned checkout, repeated in five unit filelists: `abr_piso_4.sv`,
+`mldsa_sampler_pkg.sv`, `mldsa_config_defines.svh`, `mldsa_params_pkg.sv`, and
+`mldsa_reg_pkg.sv`. These are source-path findings, not proof that every
+listed unit requires each file. Runtime plusargs are not captured by the
+compile-only census; the manifest marks that gap instead of treating it as an
+empty set. Package/DPI/macro matches are textual evidence, not compiler
+resolution.
+
+The manifest carries the frozen compile-only outcome for each filelist: 20
+pass, 6 fail, 17 setup, and 1 unsupported. Its source inventory hash and
+census artifact hash are retained. This evidence is a prior classification,
+not a fresh compile under the current BFM branch or a runtime qualification.
 
 ## Direct consumer findings
 
@@ -130,8 +143,9 @@ QVIP, Avery, and Axi4PC inputs explicitly. [UVMF mirror](https://github.com/mune
 
 - Reconcile the legacy 293-test / 33-regression counts against the frozen
   inventory and this enumerated source tree.
-- Map each of the 44 unit filelists to required external packages, plusargs,
-  defines, include roots, DPI, and the exact compile/runtime census outcome.
+- Complete the 44-unit dependency map: resolve symbolic/provider paths and
+  absent references, inspect nested filelists and test-level plusargs, and
+  connect visible package/DPI use to the exact providers and runtime results.
 - Complete a method/arity/override-point inventory of the consumed UVMF base
   API, plusargs, macros, and generated start-up order.
 - Establish permissible UVMF redistribution/read terms or finish the
