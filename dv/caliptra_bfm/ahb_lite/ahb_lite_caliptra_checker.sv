@@ -22,6 +22,7 @@ module ahb_lite_caliptra_checker #(
   localparam integer DATA_BYTES = DATA_WIDTH / 8;
 
   reg stall_active;
+  reg stall_locked;
   reg [ADDR_WIDTH+1+1+2+3-1:0] stalled_address;
   reg stalled_write_data_active;
   reg [DATA_WIDTH-1:0] stalled_write_data;
@@ -38,6 +39,7 @@ module ahb_lite_caliptra_checker #(
       error_code <= 4'd0;
       error_count <= 32'd0;
       stall_active <= 1'b0;
+      stall_locked <= 1'b0;
       stalled_address <= '0;
       stalled_write_data_active <= 1'b0;
       stalled_write_data <= '0;
@@ -68,26 +70,28 @@ module ahb_lite_caliptra_checker #(
       end
 
       if ((current_error == 0) && !HREADY) begin
-        if (stall_active &&
+        if (stall_active && stall_locked && !expect_error_second_cycle &&
             (stalled_address !== {HADDR, HSEL, HWRITE, HTRANS, HSIZE}))
           current_error = 4'd5;
         if (pending_write &&
             stalled_write_data_active && (stalled_write_data !== HWDATA))
           current_error = 4'd6;
         stall_active <= 1'b1;
+        if (HTRANS[1]) stall_locked <= 1'b1;
         stalled_address <= {HADDR, HSEL, HWRITE, HTRANS, HSIZE};
         if (pending_write) begin
           stalled_write_data_active <= 1'b1;
           stalled_write_data <= HWDATA;
         end
       end else if (HREADY) begin
-        if (stall_active &&
+        if (stall_active && stall_locked && !expect_error_second_cycle &&
             (stalled_address !== {HADDR, HSEL, HWRITE, HTRANS, HSIZE}))
           current_error = 4'd5;
         if (pending_write && stalled_write_data_active &&
             (stalled_write_data !== HWDATA))
           current_error = 4'd6;
         stall_active <= 1'b0;
+        stall_locked <= 1'b0;
         stalled_write_data_active <= 1'b0;
       end
 

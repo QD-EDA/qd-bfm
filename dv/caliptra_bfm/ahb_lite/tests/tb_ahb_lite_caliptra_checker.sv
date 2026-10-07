@@ -78,6 +78,27 @@ module tb_ahb_lite_caliptra_checker;
       $finish;
     end
 
+    if (test_case == "GOOD_IDLE_TO_NONSEQ") begin
+      accept_transfer(1'b0);
+      @(negedge HCLK);
+      HADDR = 32'h1000_0008;
+      HSEL = 0;
+      HTRANS = 2'b00;
+      HREADY = 0;
+      step();
+      @(negedge HCLK);
+      HSEL = 1;
+      HTRANS = 2'b10;
+      step();
+      @(negedge HCLK);
+      HREADY = 1;
+      step();
+      if (error !== 1'b0 || error_count != 0)
+        $fatal(1, "AHB checker rejected a legal IDLE-to-NONSEQ waited transition");
+      $display("PASS: AHB checker accepts IDLE-to-NONSEQ while a transfer is waited");
+      $finish;
+    end
+
     case (test_case)
       "BAD_X": begin
         HREADY = 1'bx;

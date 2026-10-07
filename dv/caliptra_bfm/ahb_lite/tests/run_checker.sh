@@ -14,6 +14,7 @@ trap 'rm -f "$out" "$log"' EXIT
 "$IVERILOG_BIN" -g2012 -s tb_ahb_lite_caliptra_checker -o "$out" \
   ../ahb_lite_caliptra_checker.sv tb_ahb_lite_caliptra_checker.sv
 "$VVP_BIN" "$out" +CASE=GOOD
+"$VVP_BIN" "$out" +CASE=GOOD_IDLE_TO_NONSEQ
 
 for entry in \
   'BAD_X:1' \

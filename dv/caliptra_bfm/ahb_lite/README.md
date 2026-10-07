@@ -93,10 +93,14 @@ are recorded in
 [`evidence/caliptra-bfm-ecc-ahb-uvm-20261004`](../../../evidence/caliptra-bfm-ecc-ahb-uvm-20261004/README.md).
 
 [`ahb_lite_caliptra_checker.sv`](ahb_lite_caliptra_checker.sv) checks control
-and write-data stability through wait states, transfer size/alignment, X-valued
-control signals, the Caliptra no-BUSY profile, SEQ context, and the two-cycle
-ERROR response shape. HBURST is absent from Caliptra's reduced interface, so the
-checker can reject a leading SEQ but cannot check a burst's declared length.
+and write-data stability through wait states, including the final HREADY-high
+sample. It permits IDLE address changes before a valid transfer is presented
+and master cancellation after an ERROR response. It also checks transfer
+size/alignment, X-valued control signals, the Caliptra no-BUSY profile, SEQ
+context, and the two-cycle ERROR response shape. These wait-state exceptions
+follow [Arm IHI 0033B section 3.6.2](https://documentation-service.arm.com/static/5f91607cf86e16515cdc2a27).
+HBURST is absent from Caliptra's reduced interface, so the checker can reject a
+leading SEQ but cannot check a burst's declared length.
 The monitor also marks malformed response sequences on its transaction record
 and raises a sticky protocol-error indicator. These are subset checks, not a
 QVIP or complete AMBA assertion-suite replacement.
