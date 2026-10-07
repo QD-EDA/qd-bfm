@@ -64,3 +64,23 @@ not a passing DMA test.
   `15463252dea25fa6af5c4f427052058e8a6073991711f73bad237b802d4495dd`
 - Trace: `sim-forced-first-reset-partial.log`
 - Raw output directory: `/private/tmp/qd-bfm-rand-dma-first-reset-20261007`
+
+## Fixed reset-delay follow-up
+
+A follow-up exercised the deterministic `--rand-dma-reset-delay-cycles 512`
+overlay with one generated transfer. Top compilation and firmware build passed.
+Simulation reached real AXI writes, then the 900-second guard timeout stopped
+it before the testbench asserted warm reset. This does not qualify reset
+recovery.
+
+- Caliptra RTL commit: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
+- Profile: `rand_test_dma`, one iteration, forced first reset, fixed 512-cycle
+  delay, fast TRNG, verified `.data` preload, quiet firmware, AXI VPI trace
+- Services overlay SHA-256: `fcdd6675d1dd24aab9bd30b51f25352e44e1eeffcb1bcadcdf461e34b5a15675`
+- Memory guard: 73% free before run; 64% minimum observed; 60% floor
+- Endpoint: 10,800 cycles, 11 AW, 176 W, 11 B, zero AR/R, `reset_n=1`,
+  `fatal=0`
+- Simulation log SHA-256:
+  `cd66e92cebd0454e76e9447fea346814d0b05c257b22355e8d404b4661e4f671`
+- Trace: `sim-fixed-reset-delay-partial.log`
+- The temporary simulator build tree was removed after preserving this log.
