@@ -232,6 +232,10 @@ Compile, firmware, vector, and simulation logs plus hashes are retained in the
 requested output directory. The runner uses the 60%-free-memory guard and also
 accepts `rand_test_dma`. Count the run as passed only when the firmware pass
 marker appears and no simulator, SVA, or JTAG errors are reported.
+The first short AES/DMA case has a checker-on/off full-top diagnostic in
+[`the recorded evidence`](../../evidence/caliptra-bfm-fulltop-checker-dma-20261007/README.md).
+It uses a modified one-case firmware image and does not qualify stock firmware
+or the complete 12-case suite.
 
 ## Connecting to the Caliptra DMA port
 
