@@ -1,4 +1,4 @@
-> Checkpoint copy: concise reports and JSON summaries are preserved here; raw simulation logs and generated binaries are kept out of this feature branch.
+> QD checkpoint: concise evidence and runnable probes are retained; raw simulator logs and generated binaries are kept out of this branch.
 
 # Generated KeyVault integration with open AHB replacement — 2026-10-04
 
@@ -57,10 +57,10 @@ UVM subscribers. This preserves the sampled values and simulation timestamp
 while allowing same-edge write-monitor callbacks to update the predictor first.
 The unchanged generated `kv_rand_wr_rd_test` then passes its zero-error runtime
 gate. The historical pre-overlay failure is retained in
-`diagnose-runtime-before-delta.log` (raw artifact omitted from this checkpoint). The
-generated write monitor can still emit a deassertion record and the adapter
-does not check `write_en`; that remains a separate cleanup risk, but it did
-not cause errors in the passing replay.
+`diagnose-runtime-before-delta.log` (raw artifact omitted from this checkpoint).
+The generated write monitor emits a low-`write_en` sample after a write. The
+predictor consumes that event to clear derived-state bookkeeping, so the open
+BFM path preserves it rather than filtering it as an idle record.
 
 ## Compiler overlays and external imports
 
@@ -96,35 +96,46 @@ generated BFM clock-wait task. Temporary empty `rw_txn_pkg`, `QUESTA_MVC`, and
 source is copied or represented by these placeholders. The pinned Caliptra
 checkout is never edited.
 
+The checked-in `run.sh` and `run.py` make this probe reproducible from the QD
+checkout. Set `CALIPTRA_ROOT` to the pinned clean Caliptra tree and set
+`IVERILOG_BIN` and `VVP_BIN` to the UVM-enabled Icarus build. The memory floor
+defaults to 60% and can be adjusted with `CALIPTRA_BFM_MIN_FREE_PERCENT`.
+
 ## Reproduce
 
-From the `BFM WORK` clone root:
+From the QD checkout root:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
   sh evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.sh
 ```
 
 The runtime attempt is reproducible with:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
   sh evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.sh --runtime
 ```
+
+`CALIPTRA_BFM_RUNTIME_TIMEOUT_SECONDS` changes the VVP wall-clock cap from its
+180-second default. The outer memory guard allows up to 600 seconds total.
 
 Run the same generated test under IEEE 2023 with:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
   sh evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.sh --runtime-2023
 ```
 
-The checked-in `verify-runtime.log` and `verify-runtime-2023.log` record both
-edition-specific commands passing with zero UVM errors/fatals. Before the
-read-monitor delta shim was added, the same gate
-failed with seven scoreboard errors; that baseline is retained in
+The earlier successful IEEE 2017 and IEEE 2023 reports are identified by their
+SHA-256 values below. The current QD AHB source set compiled, but its 2026-10-07
+IEEE 2017 runtime attempt exceeded the 180-second simulation timeout. The
+runner accepts `CALIPTRA_BFM_RUNTIME_TIMEOUT_SECONDS` for a longer bounded
+retry. Before the read-monitor delta shim was added, the runtime gate failed
+with seven scoreboard errors; that baseline is retained in
 `diagnose-runtime-before-delta.log` and `pin_model_event_trace.log`.
 
 For a bounded diagnostic replay, use `run.sh --diagnose`; it enables the
@@ -132,13 +143,24 @@ edge/model trace and writes selected events to `diagnose-runtime.log`. To retain
 full simulator stdout, set `CALIPTRA_UVM_TRACE_LOG` to a chosen raw-log path.
 `CALIPTRA_UVM_VERBOSITY` selects UVM verbosity and
 `CALIPTRA_UVM_PLUSARGS` accepts additional space-separated VVP/UVM arguments.
-The runtime invocation has a 180-second process timeout. The checked-in
+The runtime invocation defaults to a 180-second process timeout. The checked-in
 pin/model excerpt is from the failing pre-shim replay; its full raw stdout
 SHA-256 is recorded in `pin_model_event_trace.log`.
 
 The runner requires a clean Caliptra source/include tree at v2.1.2 commit
 `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. It rejects changed relevant
 sources before creating the overlay.
+
+## QD runner checkpoint — 2026-10-07
+
+The QD checkout now contains the small `run.sh`/`run.py` harness instead of
+depending on the separate development checkout. Its memory floor defaults to
+60% and is configurable with `CALIPTRA_BFM_MIN_FREE_PERCENT`. The runner keeps
+the same generated write-monitor event stream and uses the hash-guarded
+Icarus overlays described above. The current run compiled the generated image,
+then hit its 180-second VVP timeout; it did not produce a UVM runtime summary.
+The memory guard stayed at 54% free RAM against a 40% floor. The successful
+runtime summary recorded earlier used an older AHB compatibility source set.
 
 ## Source pins
 
@@ -150,10 +172,10 @@ sources before creating the overlay.
 | Probe input | SHA-256 |
 | --- | --- |
 | `run.sh` | `f13cf25e8eb98d4df8ea50c4b215132344fbdd7b3ea86f2a1510992be3fd934d` |
-| `run.py` | `6fc1436045f73c3a0b2035982c4e320d1d8036101d319c96198afa0fd971bdd3` |
+| `run.py` | `521bb83255cda6659b4d08971d07db2696df0c065494a560353ae229f788b0bb` |
 | `verify.log` | `7e013d9f725f46abfee4df2ccdf798919b4991f82bd1b9671bfd64cb6346859d` |
-| `verify-runtime.log` | `49451247128b3d66bacf625cd0516b98a2aee915ddade562b10cc1d2d2d810f9` |
-| `verify-runtime-2023.log` | `3a1bdca4bdf3c11449d187b4c2152559d529ba17289a53ae67648466efeb30d6` |
+| historical `verify-runtime.log` | `49451247128b3d66bacf625cd0516b98a2aee915ddade562b10cc1d2d2d810f9` |
+| historical `verify-runtime-2023.log` | `3a1bdca4bdf3c11449d187b4c2152559d529ba17289a53ae67648466efeb30d6` |
 | `diagnose-runtime-before-delta.log` | `21bc72850d59b5c80bc89a37d8a384950f3aa9b7c5799a39f4d92e4cb351b27f` |
 | `mismatch-debug.log` | `937461ce589b44e565fb492f2411205fc4dca79661a2f228f4209a20188c07e5` |
 | `same_entry_event_trace.log` | `95392abda8f15a58d02070b9ff90bfe67a745f825c0d40cd35e5df7e104f1650` |
@@ -162,13 +184,18 @@ sources before creating the overlay.
 | `kv_read_monitor_bfm.sv` Caliptra source | `bd85776012a7e35affdb0842824b57d8ca0fd86690cbc8afa4439e3f349143bf` |
 | `uvmf_base_pkg_hdl.sv` | `ba86f1323cfc88298665154a4176f7d094c8f12af1971089ece859adcefc98bc` |
 | `uvmf_base_pkg.sv` | `d02d446bad86e8ac8515df9b975bd0d0c98023de6a7c9e32d1eedabfd4f7e0b5` |
-| `caliptra_ahb_mvc_compat_pkg.sv` | `08ef7a3160afb379e48b114cc0e074eb33a032a4c024099b1b8c739d782fd59c` |
-| `ahb_lite_caliptra_uvm_pkg.sv` | `b928bf29277747371fda9e499575be3808f1edc7b93c566b27c290ea7add236b` |
-| `caliptra_ahb_qvip_compat_pkg.sv` | `9bb98c47df47242dbe52b6fbbb6cca30bacf58488de3d0c429e9bd581218bba2` |
+| historical `caliptra_ahb_mvc_compat_pkg.sv` | `08ef7a3160afb379e48b114cc0e074eb33a032a4c024099b1b8c739d782fd59c` |
+| historical `ahb_lite_caliptra_uvm_pkg.sv` | `b928bf29277747371fda9e499575be3808f1edc7b93c566b27c290ea7add236b` |
+| historical `caliptra_ahb_qvip_compat_pkg.sv` | `9bb98c47df47242dbe52b6fbbb6cca30bacf58488de3d0c429e9bd581218bba2` |
 | AHB record interface | `052cdc33275f846c1b6916e5fd00ca78cef8eeb25954fe80d8af2b37d14976a2` |
 | AHB command interface | `7e2dd67252117bc7deb4ef1210dd25365f2004b6669cf7a60116bbd1008adb1f` |
 | AHB manager | `ac140ad952bb14c04c9679b9f2c0a915d2d5ad8f52596f08d14369a89dcfce20` |
 | AHB monitor | `ea35cdc4efc1acc54f0118368b3875e56c8010e6715ebc101472ce85d194cb76` |
 | QVIP HDL shell | `53a0661f6e0d76349ab93ebe2806f93e45da9ac111a881333e0326b3b601d50e` |
-| AHB pin adapter | `49d32573326b8b978f1935c7c2a0d7fd33f70e00f3ebe04c1e4e55fbaf28733f` |
-| AHB UVM manager proxy | `a93c0ec83e912a88fbaf276b3440eb6e87599d35eae02312d356e071db2febca` |
+| historical AHB pin adapter | `49d32573326b8b978f1935c7c2a0d7fd33f70e00f3ebe04c1e4e55fbaf28733f` |
+| historical AHB UVM manager proxy | `a93c0ec83e912a88fbaf276b3440eb6e87599d35eae02312d356e071db2febca` |
+| Current QD AHB MVC compatibility package (2026-10-07 attempt) | `00a8177347b55f69842ddaa34d3dc281bc14b3b0cbba1ed142f32a7b9716c01b` |
+| Current QD AHB UVM package (2026-10-07 attempt) | `78b30970d93cb1c3984fbb67868d0c548b07c7c44d5f9eb84bb329c036be5fe4` |
+| Current QD AHB QVIP adapter (2026-10-07 attempt) | `8a740134c23bc5632c820e5c20f8502cd01d02d38ae56ef742e5addf6c6c3e9b` |
+| Current QD AHB pin adapter (2026-10-07 attempt) | `3ed7ab5c13e591a07ee121297a26a68d6932fd406cc9fbfe34648c3f0c146df5` |
+| Current QD AHB manager proxy (2026-10-07 attempt) | `735e256eb86e23d94f0588605cad5de85212ef6c6b7dc38be340ebd2c5333708` |
