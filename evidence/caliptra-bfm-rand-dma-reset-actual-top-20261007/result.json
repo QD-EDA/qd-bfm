@@ -66,5 +66,19 @@
   "trace_log_sha256": "4d765956888cadfcf5ca164eccff59efd079c8133dc1a2622894f53157a59abf",
   "compile_log_sha256_not_copied": "19c966f9fdb9186a066adc706c98892502290151a586b46c646856ec548a6c0a",
   "compiled_top_image_sha256": "ecf97721d5263c9b2f9718e0cfb475272f979d25fd257267526920703880e401",
-  "raw_sim_log_note": "Not checked in: firmware output contains generated seed and secret-key material; saved trace is filtered to control, reset, and AXI events."
+  "raw_sim_log_note": "Not checked in: firmware output contains generated seed and secret-key material; saved trace is filtered to control, reset, and AXI events.",
+  "post_run_simulator_build": {
+    "status": "success",
+    "merged_source_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "origin_main": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "bison": "GNU Bison 3.8.2",
+    "command": "make -j2 install (after make version; explicit YACC path)",
+    "memory_floor_percent": 40,
+    "minimum_free_memory_percent": 55,
+    "iverilog_banner": "13.0 (devel) (ac4532fa-dirty)",
+    "vvp_banner": "13.0 (devel) (ac4532fa-dirty)",
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867",
+    "regression_tests_run": false
+  }
 }

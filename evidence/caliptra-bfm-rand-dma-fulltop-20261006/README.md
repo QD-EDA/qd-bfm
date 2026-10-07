@@ -154,3 +154,4 @@ and post-reset write traffic, but not full DMA recovery or testcase completion.
 - Trace: [sanitized simulation trace](../caliptra-bfm-rand-dma-reset-actual-top-20261007/sim-trace-sanitized.log); [structured result](../caliptra-bfm-rand-dma-reset-actual-top-20261007/result.json)
 - The raw simulation log is not checked in because it includes generated seed and secret-key output; the committed trace keeps only test configuration, reset, AXI, and cycle-counter records.
 - This run began before the Icarus `origin/main` merge to `BFM WORK`; it does not verify the merged simulator revision.
+- After the run, `BFM WORK` merged `origin/main` at `197f9ba` (merge commit `ac4532f`) and built/installed successfully with GNU Bison 3.8.2. The guarded build had a 40% floor and 55% minimum free memory. The regression suite was not run; the binaries report `ac4532fa-dirty`.
