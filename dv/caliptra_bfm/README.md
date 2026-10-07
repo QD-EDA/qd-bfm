@@ -187,15 +187,16 @@ and runs the real DMA firmware. The runner also accepts Caliptra's
 scenario. Add `--fast-trng` for a diagnostic copied-top override that changes
 the physical RNG model cadence from 500 to 50 cycles; the default retains
 the pinned cadence. Fast-TRNG results do not qualify entropy timing. For a
-startup diagnostic, `--fast-boot-data-preload` is limited to the short AES DMA
-case; it validates CRT0 layout, preloads the firmware's `.data` bytes into
-DCCM, and skips the copy loop. The BSS clear and firmware remain active, but
-this modified-image run is not stock firmware qualification. Its result records
-stock and simulated image hashes plus the preload range. The
+startup diagnostic, `--fast-boot-data-preload` supports the short AES DMA and
+`rand_test_dma` cases; it validates CRT0 layout, preloads the firmware's `.data`
+bytes into DCCM, and skips the copy loop. The BSS clear and firmware remain
+active, but this modified-image run is not stock firmware qualification. Its
+result records stock and simulated image hashes plus the preload range. The
 `--skip-pq-vector-generation` option skips unrelated MLDSA/MLKEM testbench
 vector generation for the short AES case while retaining all 12 firmware
-AES/DMA cases. `--quiet-firmware` also retains all 12 cases and compiles with
-`CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints.
+AES/DMA cases. `--quiet-firmware` compiles supported DMA cases with
+`CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints; for the short
+AES case it retains all 12 cases.
 `--limit-aes-cases N` builds a disposable firmware copy for the first N of the
 12 AES/DMA cases, with the same data preload, PQ-vector skip, and quiet mode as
 the one-case diagnostic. This provides an incremental path from one case to

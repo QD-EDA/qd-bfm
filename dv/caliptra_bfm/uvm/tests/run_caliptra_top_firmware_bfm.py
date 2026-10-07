@@ -632,7 +632,7 @@ def main():
     parser.add_argument("--fast-trng", action="store_true",
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
     parser.add_argument("--fast-boot-data-preload", action="store_true",
-                        help="diagnostic only: preload .data and skip its CRT0 copy for the short AES DMA case")
+                        help="diagnostic only: preload .data and skip its CRT0 copy for a supported DMA firmware case")
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
                         help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
     parser.add_argument("--limit-aes-cases", type=int, metavar="N",
@@ -640,12 +640,13 @@ def main():
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
                         help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
-                        help="diagnostic only: suppress low-priority firmware prints; keep all AES DMA cases")
+                        help="diagnostic only: suppress low-priority firmware prints for supported DMA cases")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     args = parser.parse_args()
-    if args.fast_boot_data_preload and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
-        raise ValueError("--fast-boot-data-preload is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.fast_boot_data_preload and args.case not in (
+            "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
+        raise ValueError("--fast-boot-data-preload requires a supported DMA firmware case")
     if args.first_aes_case_diagnostic and args.limit_aes_cases is not None:
         raise ValueError("use only one of --first-aes-case-diagnostic and --limit-aes-cases")
     aes_case_limit = 1 if args.first_aes_case_diagnostic else args.limit_aes_cases
@@ -655,8 +656,9 @@ def main():
         raise ValueError("--limit-aes-cases must be positive")
     if args.skip_pq_vector_generation and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
         raise ValueError("--skip-pq-vector-generation is limited to smoke_test_dma_aes_gcm_short_1_dword")
-    if args.quiet_firmware and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
-        raise ValueError("--quiet-firmware is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.quiet_firmware and args.case not in (
+            "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
+        raise ValueError("--quiet-firmware requires a supported DMA firmware case")
     skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
     quiet_firmware = aes_case_limit is not None or args.quiet_firmware
 
