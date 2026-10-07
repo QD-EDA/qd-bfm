@@ -1,8 +1,8 @@
 # QD-BFM
 
-`qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
+`qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat and FIXED-burst reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
 
-It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement bursts, multiple outstanding transactions, user/lock signaling, coverage, or a Caliptra adapter. The local test uses an independent tiny memory target and does not compile or modify Caliptra.
+It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement INCR/WRAP bursts, multiple outstanding transactions, lock signaling, or coverage. The default local test uses an independent tiny memory target and does not compile or modify Caliptra. An optional real-interface adapter pilot is described below.
 
 ## Requirements and quick start
 
@@ -16,11 +16,206 @@ The script compiles the BFM and local testbench, then runs the passing write/rea
 
 ## Using the BFM
 
-Instantiate the module and connect its request/response pins to the manager side of the target interface (for Caliptra's inbound interface, to `s_axi_*_if`). Drive `clk` and active-low `rst_n`; tie unused interface user/lock fields low and ignore response user fields. Call `write_one(addr, data, strb, id, ok, resp)` or `read_one(addr, id, ok, data, resp)` from a testbench process. The address must be aligned to `DW/8` bytes and reset must be released. `ok` is true only for a successful response; `resp` carries the two-bit AXI response. `TIMEOUT` bounds each wait in clock cycles.
+Instantiate the module and connect its request/response pins to the manager side of the target interface (for Caliptra's inbound interface, to `s_axi_*_if`). Drive `clk` and active-low `rst_n`; tie unused interface user/lock fields low and ignore response user fields. Call `write_one(addr, data, strb, id, ok, resp)` or `read_one(addr, id, ok, data, resp)` from a testbench process. The address must be aligned to `DW/8` bytes and reset must be released. `ok` is true only for a successful response; `resp` carries the two-bit AXI response. `TIMEOUT` bounds each channel handshake wait in clock cycles; deliberate response delay is additional.
 
 Requests remain asserted through ready stalls, with payload-stability checks. Response ID mismatch or a read without `RLAST` calls `$fatal`; AXI error responses return `ok=0`. On request-channel timeout, VALID remains asserted to preserve AXI handshake rules: reset both BFM and target before another transfer. Response timeout returns `ok=0` and deasserts response ready.
 
 Licensed under Apache-2.0; see [LICENSE](LICENSE).
+
+See [the staged qualification roadmap](ROADMAP.md) for named pilots, unsupported
+cases, independent oracles, performance targets and release gates.
+
+## Reset cancellation
+
+Drive reset to both the BFM and target. Asynchronous reset assertion clears
+`AWVALID`, `WVALID`, `ARVALID`, `BREADY` and `RREADY`, including requests left
+asserted after timeout. A task interrupted at any blocking wait returns `ok=0`
+without requiring another clock edge. A reset after task completion does not
+retroactively cancel the completed transaction. Discard response/data outputs
+when `ok` is not exactly 1. Reset does not undo a write already accepted by the
+target; the target's own reset semantics govern committed state.
+
+A new task waits for a rising edge with reset released and then launches on a
+falling edge, away from target sampling. Deassert reset synchronously using the
+harness's scheduled clocking convention (the regression uses a nonblocking
+assignment at a rising edge). Do not invoke overlapping tasks or reuse the BFM
+after any timeout until **both endpoints** have been reset. Task start now has
+up to one and a half clock periods of setup latency; `TIMEOUT` still counts each channel's
+handshake wait separately. This is a simulation BFM, not synthesizable RTL.
+
+The supported data-width parameter is 8 through 1024 bits in power-of-two bytes,
+matching the three-bit AXI size field. The read/write regression exercises DW=32;
+DW=8/1024 are parameter-acceptance checks only. Other widths fail at initialization.
+
+`./run.sh` now also runs an independent reset target/monitor: 30 reset cases,
+including stopped clocks and accepted-handshake cleanup windows; reset after an
+address timeout; and successful read/write recovery. Held-VALID and early-VALID
+injections must fail without a pass banner. [Reset evidence](RESET_EVIDENCE.md)
+records cross-simulator results and limits. Full four-state protocol monitoring, concurrent
+transactions, response-backpressure coverage and Caliptra integration remain
+unqualified; this change does not establish full AXI compliance.
+
+## Unknown values during a transaction
+
+An X/Z READY during a request wait or VALID during a response wait is fatal.
+Accepted responses must have a known response code and matching ID; reads must
+also assert RLAST, and an OKAY read must contain known data. Idle response
+payloads and error-response read data may be unknown. These checks cover signals
+sampled by active tasks; they do not check all interface activity. Task-entry validation is described
+below and does not make this a full passive monitor. Do not use an unknown `ok` as success in a testbench:
+require `ok === 1'b1`.
+
+`./run.sh` adds 22 X/Z pin injections, two payload boundaries and two negative
+checks of the testbench's own assertion helper. See
+[four-state evidence](FOUR_STATE_EVIDENCE.md) for scope, commands and remaining gaps.
+
+## Caliptra interface adapter (pilot remains UNKNOWN)
+
+`qd_caliptra_axi_single_master.sv` connects `axi_if.w_mgr` and `axi_if.r_mgr`
+from pinned Caliptra v2.1.2 to the existing BFM. Pass matching `AW/DW/IW`
+parameters; both interfaces and the adapter must share clock and reset.
+Call `adapter.driver.write_one(...)` / `adapter.driver.read_one(...)` with the
+same arguments and reset/timeout contract as the standalone BFM. The `driver`
+instance name is part of this task API. Width mismatches are fatal.
+
+The adapter ties request lock fields low. Legacy tasks drive request USER zero;
+`*_user` tasks can drive nonzero request USER. Response USER metadata remains
+unavailable, and exclusive accesses remain unsupported.
+Do not call Caliptra's built-in manager tasks on the same interfaces or attach
+another manager driver. Concurrent tasks remain unsupported.
+
+```sh
+./run_caliptra_interface.sh /path/to/clean/caliptra-rtl /tmp/qd-caliptra-evidence
+```
+
+The script requires SHA `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, archives
+compiler diagnostics, and tests wiring against the actual interface declaration
+with an independent local target. It returns 2 (`UNKNOWN`) on compiler warnings,
+1 on build/test/input failure, and 0 only on a clean interface pilot. Verilator
+5.050 currently produces three upstream width warnings; behavioral tests pass
+but the pilot is **not clean**. The original smoke CI runs `./run.sh`. The pinned pilot CI below exercises the
+actual subordinate separately; neither job qualifies full Caliptra DV. [Evidence and blockers](CALIPTRA_INTERFACE_EVIDENCE.md)
+distinguish interface tests from actual Caliptra RTL/DV qualification.
+
+## Actual Caliptra subordinate pilot
+
+```sh
+python3 run_caliptra_subordinate.py /path/to/clean/caliptra-rtl /tmp/qd-axi-sub-evidence
+```
+
+This compiles the pinned upstream `axi_sub.vf` and drives the real `axi_sub`
+through the existing adapter. The QD component memory and scoreboard exercise
+12 accepted transfers, two held component cycles per transfer, full/partial/zero
+strobes, ID extremes, SLVERR reads/writes, quiescent reset/recovery, and a read-data
+fault injection. Scope is AW/DW/UW=32, IW=8, EX_EN=0, C_LAT=0, one outstanding
+aligned full-width single-beat access. It does not run soc_ifc or full-chip DV.
+
+The runner archives separate assertion-enabled and upstream-default configurations.
+On Verilator 5.050 the assertion-enabled build rejects five `eventually` properties;
+only the default configuration simulates. Three upstream width warnings also remain.
+Overall exit is 2 (UNKNOWN), never a fallback clean pass. Build/test/input failures
+in the default lane exit 1. No upstream assertions or diagnostics are edited.
+See [target evidence](CALIPTRA_SUBORDINATE_EVIDENCE.md) for precise coverage limits.
+
+## Request argument checks
+
+Before driving a request, both tasks reject X/Z addresses and IDs. Writes also
+reject X/Z strobes and unknown bits in enabled data bytes. Disabled write bytes
+may contain X/Z; zero-strobe writes may use wholly unknown data. Invalid fields
+are fatal before any request is launched. Existing reset/alignment and timeout
+contracts still apply. See [request argument evidence](REQUEST_ARGUMENT_EVIDENCE.md)
+for the 12 negative cases, boundary tests and unchanged Caliptra pilot limits.
+
+## Response backpressure
+
+Set `RESPONSE_DELAY` on the BFM or Caliptra adapter (default 0, preserving
+previous timing). After request cleanup, READY stays low for this many full
+clock cycles, then the normal response timeout starts. This is a fixed delay
+from the request phase, not from the first response VALID. The signed 32-bit
+parameter must be known and nonnegative. Reset cancels the delay immediately,
+even with a stopped clock.
+
+Once a response is sampled with VALID=1 and READY=0, its VALID and payload must
+remain stable through acceptance. The checker covers RDATA/RRESP/RID/RLAST and
+BRESP/BID; it ignores response user metadata. X/Z VALID during the active delay
+is fatal. Stable unknown error-read data remains allowed, but changing it while
+stalled is fatal. This is not a complete passive monitor.
+
+`./run.sh` retains previous tests and adds delays 1/3/8, reset during both response
+delays, 20 response-stability violations, four early X/Z VALID cases and parameter
+rejection. To exercise actual Caliptra response stalls:
+
+```sh
+python3 run_caliptra_subordinate.py /path/to/clean/caliptra-rtl /tmp/qd-axi-delay7 --response-delay 7
+```
+
+[Response-backpressure evidence](RESPONSE_BACKPRESSURE_EVIDENCE.md) records the
+bounded proof and remaining UNKNOWN assertion-enabled Caliptra configuration.
+
+## Pinned Linux CI
+
+The `Pinned Caliptra AXI pilot` workflow builds Icarus 13.0 and Verilator 5.050
+from immutable commits and runs both the complete standalone suite and actual
+Caliptra axi_sub configurations with response delays 0 and 7. It preserves the
+original packaged-Icarus smoke job. On Ubuntu 24.04 with the build dependencies
+listed in the workflow, reproduce with:
+
+```sh
+bash ci/run_caliptra_pilot.sh /tmp/new-qd-bfm-build
+```
+
+See [the CI scope and version matrix](PINNED_CI.md). A green evidence-check job
+means the bounded observations and known limitations were reproduced. It does
+not remove the explicit UNKNOWN status of either Caliptra pilot.
+
+## Single-beat Caliptra USER metadata
+
+For the pinned Caliptra interface, set matching `UW` (default 32) and call
+`adapter.driver.write_one_user(addr, data, strb, id, awuser, wuser, ok, resp)`
+or `adapter.driver.read_one_user(addr, id, aruser, ok, data, resp)`.
+`AWUSER`, `WUSER`, and `ARUSER` are separate inputs; each must be fully known.
+The original `write_one` and `read_one` signatures still drive all three USER
+fields to zero. The adapter still ties `AWLOCK`/`ARLOCK` low and ignores response
+USER metadata. USER values remain stable with their stalled AXI channel.
+
+`./run.sh` checks zero, nonzero, and all-ones USER values, X/Z arguments, stalled
+payload changes, and a deliberately wrong expected USER at an independent target.
+The optional actual `axi_sub` test can also run with `+USER`, where its component
+monitor observes AWUSER/ARUSER propagation and a separate pin monitor observes
+WUSER. See [the bounded evidence](AXI_USER_EVIDENCE.md). This does not establish
+Caliptra SHA access policy, because the named `soc_ifc` test has only been linted,
+not run with this BFM.
+
+## FIXED mailbox bursts and the L0 compatibility exception
+
+`write_fixed_user(addr, data[], strb[], id, awuser, wuser[], caliptra_compat, ok, resp)`
+and `read_fixed_user(addr, beats, id, aruser, caliptra_compat, ok, data[], resp[])`
+drive one outstanding, aligned, full-width FIXED burst. `data`, `strb`, and
+`wuser` are dynamic arrays of equal length. All request values are checked
+before launch; AWUSER and ARUSER apply to the address channel, and each write
+beat has its own WUSER. A successful write returns one BRESP. A read returns
+one data word and RRESP per accepted beat, checks the response ID on every beat,
+and requires RLAST on exactly the final beat. `ok` is true only if every
+response is OKAY. Completed error bursts still return all response arrays;
+reset or timeout leaves them empty. The existing single-beat task signatures and behavior remain
+unchanged. These tasks do not return BUSER or RUSER.
+
+Set `caliptra_compat=0` for AXI4 FIXED bursts of **1–16 beats**. The
+[Arm AXI specification, Issue H, A3](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/IHI0022H_amba_axi_protocol_spec.pdf)
+limits FIXED bursts to 16 beats, as does pinned Caliptra
+[`axi_pkg.sv`](https://github.com/chipsalliance/caliptra-rtl/blob/49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e/src/axi/rtl/axi_pkg.sv#L20).
+The released L0 SoC stimulus nevertheless issues one 256-beat FIXED firmware
+write (`AWLEN=255`). Set `caliptra_compat=1` only to reproduce that named
+nonconforming stimulus; it permits up to 256 beats and logs the exception for
+every burst longer than 16. Zero beats, 17 beats in strict mode, and more than
+256 beats in compatibility mode fail before any request pin is asserted.
+
+The released L0 read code can calculate more than 256 beats for a 4 KiB chunk;
+such a request cannot be represented by its 8-bit ARLEN without splitting it.
+This BFM is not a drop-in replacement for the released `axi_if` task API or
+full L0 bench. It drives only Caliptra's inbound `s_axi_*` ports. Caliptra's
+outbound `m_axi_*` DMA interface and internal `axi_dma_req_if` compiler errors
+remain separate. No application RTL or DV file is changed for this slice.
 
 ## Caliptra BFM stack
 
