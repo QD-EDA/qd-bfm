@@ -10,6 +10,88 @@ package axi4_caliptra_uvm_pkg;
   localparam bit [47:0] CALIPTRA_DMA_SRAM_BASE = 48'h0001_2344_0000;
   localparam bit [47:0] CALIPTRA_DMA_FIFO_BASE = 48'h0000_fa57_0000;
 
+  typedef enum bit [2:0] {
+    AXI4_CHANNEL_AW, AXI4_CHANNEL_W, AXI4_CHANNEL_B,
+    AXI4_CHANNEL_AR, AXI4_CHANNEL_R
+  } axi4_caliptra_channel_e;
+
+  class axi4_caliptra_channel_transaction extends uvm_sequence_item;
+    axi4_caliptra_channel_e channel;
+    bit [63:0] cycle;
+    bit [7:0] id;
+    bit [47:0] addr;
+    bit [7:0] len;
+    bit [2:0] size;
+    bit [1:0] burst;
+    bit lock;
+    bit [31:0] user;
+    bit [31:0] data;
+    bit [3:0] strb;
+    bit last;
+    bit [1:0] response;
+
+    `uvm_object_utils(axi4_caliptra_channel_transaction)
+
+    function new(string name = "axi4_caliptra_channel_transaction");
+      super.new(name);
+    endfunction
+
+    function void do_copy(uvm_object rhs);
+      axi4_caliptra_channel_transaction source;
+      if (!$cast(source, rhs)) begin
+        `uvm_error("AXI_CHANNEL_COPY", "Cannot copy a non-Caliptra AXI channel item")
+        return;
+      end
+      super.do_copy(rhs);
+      channel = source.channel;
+      cycle = source.cycle;
+      id = source.id;
+      addr = source.addr;
+      len = source.len;
+      size = source.size;
+      burst = source.burst;
+      lock = source.lock;
+      user = source.user;
+      data = source.data;
+      strb = source.strb;
+      last = source.last;
+      response = source.response;
+    endfunction
+
+    function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+      axi4_caliptra_channel_transaction other;
+      if (!$cast(other, rhs)) return 0;
+      return super.do_compare(rhs, comparer) && channel == other.channel &&
+             cycle == other.cycle &&
+             id == other.id && addr == other.addr && len == other.len &&
+             size == other.size && burst == other.burst && lock == other.lock &&
+             user == other.user && data == other.data && strb == other.strb &&
+             last == other.last && response == other.response;
+    endfunction
+
+    function void do_print(uvm_printer printer);
+      super.do_print(printer);
+      printer.print_field_int("channel", channel, 3, UVM_DEC);
+      printer.print_field_int("cycle", cycle, 64, UVM_DEC);
+      printer.print_field_int("id", id, 8, UVM_HEX);
+      printer.print_field_int("addr", addr, 48, UVM_HEX);
+      printer.print_field_int("len", len, 8, UVM_DEC);
+      printer.print_field_int("size", size, 3, UVM_DEC);
+      printer.print_field_int("burst", burst, 2, UVM_HEX);
+      printer.print_field_int("lock", lock, 1, UVM_BIN);
+      printer.print_field_int("user", user, 32, UVM_HEX);
+      printer.print_field_int("data", data, 32, UVM_HEX);
+      printer.print_field_int("strb", strb, 4, UVM_HEX);
+      printer.print_field_int("last", last, 1, UVM_BIN);
+      printer.print_field_int("response", response, 2, UVM_HEX);
+    endfunction
+
+    function string convert2string();
+      return $sformatf("cycle=%0d channel=%0d id=%02h addr=%012h data=%08h resp=%0h",
+                       cycle, channel, id, addr, data, response);
+    endfunction
+  endclass
+
   class axi4_caliptra_transaction extends uvm_sequence_item;
     localparam int unsigned AXI_READ = 0;
     localparam int unsigned AXI_WRITE = 1;
@@ -135,6 +217,7 @@ package axi4_caliptra_uvm_pkg;
   class axi4_caliptra_uvm_monitor extends uvm_monitor;
     virtual axi4_caliptra_record_if vif;
     uvm_analysis_port #(axi4_caliptra_transaction) ap;
+    uvm_analysis_port #(axi4_caliptra_channel_transaction) channel_ap;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
     uvm_analysis_port #(aaxi_master_tr) aaxi_ap;
     uvm_analysis_port #(aaxi_master_tr) ms_tx_AW_W_export;
@@ -148,6 +231,7 @@ package axi4_caliptra_uvm_pkg;
     function new(string name, uvm_component parent);
       super.new(name, parent);
       ap = new("ap", this);
+      channel_ap = new("channel_ap", this);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_ap = new("aaxi_ap", this);
       ms_tx_AW_W_export = new("ms_tx_AW_W_export", this);
@@ -203,11 +287,63 @@ package axi4_caliptra_uvm_pkg;
         if (vif.read_error)
           `uvm_error("AXI_PROTOCOL", $sformatf("AXI read protocol error code %0d",
             vif.read_error_code))
+        if (vif.aw_fire === 1'b1) publish_channel(AXI4_CHANNEL_AW);
+        if (vif.w_fire === 1'b1) publish_channel(AXI4_CHANNEL_W);
+        if (vif.b_fire === 1'b1) publish_channel(AXI4_CHANNEL_B);
+        if (vif.ar_fire === 1'b1) publish_channel(AXI4_CHANNEL_AR);
+        if (vif.r_fire === 1'b1) publish_channel(AXI4_CHANNEL_R);
         if (vif.write_request_complete) publish_write_request();
         if (vif.write_complete) publish_write();
         if (vif.read_complete) publish_read();
       end
     endtask
+
+    function void publish_channel(axi4_caliptra_channel_e channel);
+      axi4_caliptra_channel_transaction item;
+      item = axi4_caliptra_channel_transaction::type_id::create("channel_item");
+      item.channel = channel;
+      item.cycle = vif.channel_cycle;
+      case (channel)
+        AXI4_CHANNEL_AW: begin
+          item.id = vif.aw_record[101:94];
+          item.addr = vif.aw_record[93:46];
+          item.len = vif.aw_record[45:38];
+          item.size = vif.aw_record[37:35];
+          item.burst = vif.aw_record[34:33];
+          item.lock = vif.aw_record[32];
+          item.user = vif.aw_record[31:0];
+        end
+        AXI4_CHANNEL_W: begin
+          item.data = vif.w_record[68:37];
+          item.strb = vif.w_record[36:33];
+          item.user = vif.w_record[32:1];
+          item.last = vif.w_record[0];
+        end
+        AXI4_CHANNEL_B: begin
+          item.id = vif.b_record[41:34];
+          item.response = vif.b_record[33:32];
+          item.user = vif.b_record[31:0];
+        end
+        AXI4_CHANNEL_AR: begin
+          item.id = vif.ar_record[101:94];
+          item.addr = vif.ar_record[93:46];
+          item.len = vif.ar_record[45:38];
+          item.size = vif.ar_record[37:35];
+          item.burst = vif.ar_record[34:33];
+          item.lock = vif.ar_record[32];
+          item.user = vif.ar_record[31:0];
+        end
+        AXI4_CHANNEL_R: begin
+          item.id = vif.r_record[74:67];
+          item.data = vif.r_record[66:35];
+          item.response = vif.r_record[34:33];
+          item.user = vif.r_record[32:1];
+          item.last = vif.r_record[0];
+        end
+        default: `uvm_error("AXI_CHANNEL_KIND", $sformatf("Unknown channel %0d", channel))
+      endcase
+      channel_ap.write(item);
+    endfunction
 
     function void publish_write_request();
       axi4_caliptra_transaction item;
@@ -550,6 +686,7 @@ package axi4_caliptra_uvm_pkg;
     axi4_caliptra_uvm_driver driver;
     axi4_caliptra_uvm_monitor monitor;
     uvm_analysis_port #(axi4_caliptra_transaction) ap;
+    uvm_analysis_port #(axi4_caliptra_channel_transaction) channel_ap;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
     uvm_analysis_port #(aaxi_master_tr) aaxi_ap;
     uvm_analysis_port #(aaxi_master_tr) ms_tx_AW_W_export;
@@ -563,6 +700,7 @@ package axi4_caliptra_uvm_pkg;
     function new(string name, uvm_component parent);
       super.new(name, parent);
       ap = new("ap", this);
+      channel_ap = new("channel_ap", this);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_ap = new("aaxi_ap", this);
       ms_tx_AW_W_export = new("ms_tx_AW_W_export", this);
@@ -584,6 +722,7 @@ package axi4_caliptra_uvm_pkg;
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       monitor.ap.connect(ap);
+      monitor.channel_ap.connect(channel_ap);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       monitor.aaxi_ap.connect(aaxi_ap);
       monitor.ms_tx_AW_W_export.connect(ms_tx_AW_W_export);
@@ -685,6 +824,7 @@ package axi4_caliptra_uvm_pkg;
     aaxi_uvm_sequencer sequencer;
     axi4_caliptra_aaxi_driver driver;
     uvm_analysis_port #(axi4_caliptra_transaction) ap;
+    uvm_analysis_port #(axi4_caliptra_channel_transaction) channel_ap;
     uvm_analysis_port #(aaxi_master_tr) aaxi_ap;
     uvm_analysis_port #(aaxi_master_tr) ms_tx_AW_W_export;
     uvm_analysis_port #(aaxi_master_tr) ms_rx_rvalid_export;
@@ -696,6 +836,7 @@ package axi4_caliptra_uvm_pkg;
     function new(string name, uvm_component parent);
       super.new(name, parent);
       ap = new("ap", this);
+      channel_ap = new("channel_ap", this);
       aaxi_ap = new("aaxi_ap", this);
       ms_tx_AW_W_export = new("ms_tx_AW_W_export", this);
       ms_rx_rvalid_export = new("ms_rx_rvalid_export", this);
@@ -715,6 +856,7 @@ package axi4_caliptra_uvm_pkg;
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       monitor.ap.connect(ap);
+      monitor.channel_ap.connect(channel_ap);
       monitor.aaxi_ap.connect(aaxi_ap);
       monitor.ms_tx_AW_W_export.connect(ms_tx_AW_W_export);
       monitor.ms_rx_rvalid_export.connect(ms_rx_rvalid_export);

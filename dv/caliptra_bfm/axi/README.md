@@ -220,10 +220,10 @@ samples with VALID high, and `*_stall_cycles` is the subset with READY low.
 Accepted transfer cycles plus stall cycles equal valid cycles.
 Unknown-value bins are included for burst, LOCK, response, and strobe fields.
 `tests/run_subordinate.sh` checks these denominators and bins, including full,
-partial, and zero WSTRB, and prints a compact coverage summary. The module is a
-procedural analysis seam for a later UVM adapter; it does not yet publish UVM
-analysis transactions or group channel beats into complete higher-level
-transactions. The recorded run is in
+partial, and zero WSTRB, and prints a compact coverage summary. The UVM pin
+wrappers publish one `axi4_caliptra_channel_transaction` on `channel_ap` for
+each accepted channel beat. The separate completed-transaction adapter groups
+the same handshakes into read and write transactions. The recorded run is in
 [`AXI coverage evidence`](../../../evidence/caliptra-bfm-axi-coverage-20261007/README.md).
 
 ## Completed transaction monitor

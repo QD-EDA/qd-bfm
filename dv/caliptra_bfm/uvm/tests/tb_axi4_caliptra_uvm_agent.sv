@@ -34,6 +34,27 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   assign record_if.ARESETn = ARESETn;
   always #5 ACLK = ~ACLK;
 
+  wire aw_fire, w_fire, b_fire, ar_fire, r_fire;
+  wire [101:0] aw_record, ar_record;
+  wire [68:0] w_record;
+  wire [41:0] b_record;
+  wire [74:0] r_record;
+  wire [63:0] cycle_count;
+  axi4_caliptra_monitor #(
+    .ADDR_WIDTH(48), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32)
+  ) channel_monitor (.*);
+  assign record_if.aw_fire = aw_fire;
+  assign record_if.aw_record = aw_record;
+  assign record_if.w_fire = w_fire;
+  assign record_if.w_record = w_record;
+  assign record_if.b_fire = b_fire;
+  assign record_if.b_record = b_record;
+  assign record_if.ar_fire = ar_fire;
+  assign record_if.ar_record = ar_record;
+  assign record_if.r_fire = r_fire;
+  assign record_if.r_record = r_record;
+  assign record_if.channel_cycle = cycle_count;
+
   axi4_caliptra_uvm_master_proxy proxy (
     .cmd_if(cmd_if), .ACLK(ACLK), .ARESETn(ARESETn),
     .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),

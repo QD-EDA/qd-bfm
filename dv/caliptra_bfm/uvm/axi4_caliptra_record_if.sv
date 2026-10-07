@@ -6,6 +6,19 @@ interface axi4_caliptra_record_if(input wire ACLK);
   // Icarus requires procedural monitor outputs to drive interface variables.
   logic ARESETn;
 
+  // Packed channel records use 8-bit IDs, 48-bit addresses, and 32-bit payloads.
+  logic [63:0] channel_cycle;
+  logic aw_fire;
+  logic [101:0] aw_record;
+  logic w_fire;
+  logic [68:0] w_record;
+  logic b_fire;
+  logic [41:0] b_record;
+  logic ar_fire;
+  logic [101:0] ar_record;
+  logic r_fire;
+  logic [74:0] r_record;
+
   logic write_complete;
   logic write_request_complete;
   logic write_request_error;

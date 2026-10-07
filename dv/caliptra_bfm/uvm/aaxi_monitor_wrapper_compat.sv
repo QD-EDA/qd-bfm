@@ -36,6 +36,34 @@ module aaxi_monitor_wrapper #(
     .RREADY(bus.RREADY)
   );
 
+  axi4_caliptra_monitor #(
+    .ADDR_WIDTH(48), .DATA_WIDTH(BUS_DATA_WIDTH),
+    .ID_WIDTH(ID_WIDTH), .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
+  ) channel_monitor (
+    .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
+    .AWID(bus.AWID), .AWADDR(bus.AWADDR[47:0]),
+    .AWLEN(bus.AWLEN), .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST),
+    .AWLOCK(bus.AWLOCK), .AWUSER(bus.AWUSER),
+    .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
+    .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
+    .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
+    .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
+    .BVALID(bus.BVALID), .BREADY(bus.BREADY),
+    .ARID(bus.ARID), .ARADDR(bus.ARADDR[47:0]),
+    .ARLEN(bus.ARLEN), .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST),
+    .ARLOCK(bus.ARLOCK), .ARUSER(bus.ARUSER),
+    .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
+    .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
+    .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
+    .RREADY(bus.RREADY),
+    .aw_fire(record_if.aw_fire), .aw_record(record_if.aw_record),
+    .w_fire(record_if.w_fire), .w_record(record_if.w_record),
+    .b_fire(record_if.b_fire), .b_record(record_if.b_record),
+    .ar_fire(record_if.ar_fire), .ar_record(record_if.ar_record),
+    .r_fire(record_if.r_fire), .r_record(record_if.r_record),
+    .cycle_count(record_if.channel_cycle)
+  );
+
   assign record_if.ARESETn = bus.ARESETn;
   axi4_caliptra_transaction_monitor #(
     .ADDR_WIDTH(48),

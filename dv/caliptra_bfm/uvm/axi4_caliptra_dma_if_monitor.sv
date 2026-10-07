@@ -36,6 +36,39 @@ module axi4_caliptra_dma_if_monitor (
     .RVALID(m_axi_r_if.rvalid), .RREADY(m_axi_r_if.rready)
   );
 
+  axi4_caliptra_monitor #(
+    .ADDR_WIDTH($bits(m_axi_w_if.awaddr)),
+    .DATA_WIDTH($bits(m_axi_w_if.wdata)),
+    .ID_WIDTH($bits(m_axi_w_if.awid)),
+    .USER_WIDTH($bits(m_axi_w_if.awuser))
+  ) channel_monitor (
+    .ACLK(ACLK), .ARESETn(ARESETn),
+    .AWID(m_axi_w_if.awid), .AWADDR(m_axi_w_if.awaddr),
+    .AWLEN(m_axi_w_if.awlen), .AWSIZE(m_axi_w_if.awsize),
+    .AWBURST(m_axi_w_if.awburst), .AWLOCK(m_axi_w_if.awlock),
+    .AWUSER(m_axi_w_if.awuser), .AWVALID(m_axi_w_if.awvalid),
+    .AWREADY(m_axi_w_if.awready), .WDATA(m_axi_w_if.wdata),
+    .WSTRB(m_axi_w_if.wstrb), .WUSER(m_axi_w_if.wuser),
+    .WLAST(m_axi_w_if.wlast), .WVALID(m_axi_w_if.wvalid),
+    .WREADY(m_axi_w_if.wready), .BID(m_axi_w_if.bid),
+    .BRESP(m_axi_w_if.bresp), .BUSER(m_axi_w_if.buser),
+    .BVALID(m_axi_w_if.bvalid), .BREADY(m_axi_w_if.bready),
+    .ARID(m_axi_r_if.arid), .ARADDR(m_axi_r_if.araddr),
+    .ARLEN(m_axi_r_if.arlen), .ARSIZE(m_axi_r_if.arsize),
+    .ARBURST(m_axi_r_if.arburst), .ARLOCK(m_axi_r_if.arlock),
+    .ARUSER(m_axi_r_if.aruser), .ARVALID(m_axi_r_if.arvalid),
+    .ARREADY(m_axi_r_if.arready), .RID(m_axi_r_if.rid),
+    .RDATA(m_axi_r_if.rdata), .RRESP(m_axi_r_if.rresp),
+    .RUSER(m_axi_r_if.ruser), .RLAST(m_axi_r_if.rlast),
+    .RVALID(m_axi_r_if.rvalid), .RREADY(m_axi_r_if.rready),
+    .aw_fire(record_if.aw_fire), .aw_record(record_if.aw_record),
+    .w_fire(record_if.w_fire), .w_record(record_if.w_record),
+    .b_fire(record_if.b_fire), .b_record(record_if.b_record),
+    .ar_fire(record_if.ar_fire), .ar_record(record_if.ar_record),
+    .r_fire(record_if.r_fire), .r_record(record_if.r_record),
+    .cycle_count(record_if.channel_cycle)
+  );
+
   axi4_caliptra_transaction_monitor monitor (
     .ACLK(ACLK),
     .ARESETn(ARESETn),
