@@ -166,6 +166,15 @@ module tb_axi4_caliptra_checker;
     end else if (test_case == "BAD_X_WSTRB") begin
       WSTRB = 4'bx001;
       send_w(32'haaaa, 1);
+    end else if (test_case == "BAD_X_HANDSHAKE") begin
+      @(negedge ACLK); AWVALID = 1'bx;
+      step();
+    end else if (test_case == "BAD_X_RESET") begin
+      @(negedge ACLK); ARESETn = 1'bx;
+      step();
+    end else if (test_case == "BAD_X_WDATA") begin
+      @(negedge ACLK); WDATA = 'x; WVALID = 1; WREADY = 1; WLAST = 1;
+      step();
     end else if (test_case == "BAD_AW_STABILITY") begin
       AWVALID = 1; AWREADY = 0; AWADDR = 19'h100; AWUSER = 32'h1;
       step();

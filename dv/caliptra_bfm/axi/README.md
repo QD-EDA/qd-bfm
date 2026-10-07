@@ -268,7 +268,8 @@ context capacity. The current direct-monitor result is recorded in
 
 [`axi4_caliptra_checker.sv`](axi4_caliptra_checker.sv) is a passive flattened
 pin checker for Caliptra's native AXI interface. It checks all five channel
-payloads remain stable while VALID is held against READY backpressure, validates
+payloads remain stable while VALID is held against READY backpressure, rejects
+unknown VALID/READY controls and active-channel payloads, validates
 FIXED/INCR/WRAP burst shape and the 4KB rule, tracks AW/W beat pairing across
 independent channel timing, checks WLAST against AWLEN, validates WSTRB against
 the active lanes for narrow FIXED/INCR/WRAP transfers, and matches B/R
@@ -302,7 +303,7 @@ does not impose a wall-clock response timeout; that policy belongs to the
 testbench or active BFM.
 
 Run the stalled multi-beat case, legal W-before-AW and cross-ID response
-reordering, exclusive and narrow transfers, and thirty negative controls with:
+reordering, exclusive and narrow transfers, and thirty-three negative controls with:
 
 ```sh
 ./tests/run_checker.sh

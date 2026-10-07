@@ -26,16 +26,19 @@ for entry in \
   'BAD_NO_WLAST:WLAST missing on final' \
   'BAD_RLAST:AXI RLAST does not match' \
   'BAD_WSTRB:WSTRB enables bytes outside' \
-  'BAD_X_WSTRB:WSTRB is unknown' \
+  'BAD_X_WSTRB:W payload is unknown' \
+  'BAD_X_HANDSHAKE:VALID/READY control is unknown' \
+  'BAD_X_RESET:ARESETn is unknown' \
+  'BAD_X_WDATA:W payload is unknown' \
   'BAD_4KB:crosses a 4KB boundary' \
   'BAD_BID:B response ID has no completed' \
   'BAD_RID:R response ID has no active' \
   'BAD_EXOKAY_B:EXOKAY for a non-exclusive write' \
   'BAD_EXOKAY_R:EXOKAY for a non-exclusive read' \
-  'BAD_X_AWLOCK:AWLOCK is unknown' \
-  'BAD_X_ARLOCK:ARLOCK is unknown' \
-  'BAD_X_BRESP:BRESP is unknown' \
-  'BAD_X_RRESP:RRESP is unknown' \
+  'BAD_X_AWLOCK:AW payload is unknown' \
+  'BAD_X_ARLOCK:AR payload is unknown' \
+  'BAD_X_BRESP:B payload is unknown' \
+  'BAD_X_RRESP:R payload is unknown' \
   'BAD_LOCK_MIXED_R:exclusive read mixes EXOKAY and non-EXOKAY' \
   'BAD_MISSING_R:incomplete read response' \
   'BAD_EARLY_B:B response ID has no completed write transaction' \
@@ -62,4 +65,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted reordered, exclusive, and narrow transfers; rejected thirty injected protocol violations\n'
+printf 'PASS: AXI checker accepted reordered, exclusive, and narrow transfers; rejected thirty-three injected protocol violations\n'

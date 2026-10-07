@@ -224,7 +224,9 @@ module axi4_caliptra_checker #(
   end
 
   always @(posedge ACLK) begin
-    if (!ARESETn) begin
+    if (ARESETn !== 1'b0 && ARESETn !== 1'b1)
+      $fatal(1, "AXI ARESETn is unknown");
+    else if (!ARESETn) begin
       aw_stalled = 0;
       w_stalled = 0;
       b_stalled = 0;
@@ -249,6 +251,19 @@ module axi4_caliptra_checker #(
         exclusive_read_state[i] = EXCL_NONE;
       end
     end else begin
+      if ((^{AWVALID, AWREADY, WVALID, WREADY, BVALID, BREADY,
+             ARVALID, ARREADY, RVALID, RREADY}) === 1'bx)
+        $fatal(1, "AXI VALID/READY control is unknown");
+      if ((AWVALID === 1'b1) && ((^{AWID, AWADDR, AWLEN, AWSIZE, AWBURST, AWLOCK, AWUSER}) === 1'bx))
+        $fatal(1, "AXI AW payload is unknown");
+      if ((WVALID === 1'b1) && ((^{WDATA, WSTRB, WUSER, WLAST}) === 1'bx))
+        $fatal(1, "AXI W payload is unknown");
+      if ((BVALID === 1'b1) && ((^{BID, BRESP, BUSER}) === 1'bx))
+        $fatal(1, "AXI B payload is unknown");
+      if ((ARVALID === 1'b1) && ((^{ARID, ARADDR, ARLEN, ARSIZE, ARBURST, ARLOCK, ARUSER}) === 1'bx))
+        $fatal(1, "AXI AR payload is unknown");
+      if ((RVALID === 1'b1) && ((^{RID, RDATA, RRESP, RUSER, RLAST}) === 1'bx))
+        $fatal(1, "AXI R payload is unknown");
       if (aw_stalled && (!AWVALID ||
           {AWID, AWADDR, AWLEN, AWSIZE, AWBURST, AWLOCK, AWUSER} !== aw_hold))
         $fatal(1, "AXI AW payload changed or VALID dropped while stalled");
@@ -274,8 +289,6 @@ module axi4_caliptra_checker #(
       if (r_stalled) r_hold = {RID, RDATA, RRESP, RUSER, RLAST};
 
       if (AWVALID && AWREADY) begin
-        if (AWLOCK !== 1'b0 && AWLOCK !== 1'b1)
-          $fatal(1, "AXI AWLOCK is unknown");
         check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
         if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
         if (AWLOCK) begin
@@ -306,8 +319,6 @@ module axi4_caliptra_checker #(
       end
 
       if (WVALID && WREADY) begin
-        if (WLAST !== 1'b0 && WLAST !== 1'b1) $fatal(1, "AXI WLAST is unknown");
-        if ((^WSTRB) === 1'bx) $fatal(1, "AXI WSTRB is unknown");
         if (write_beats_in_progress >= 256)
           $fatal(1, "AXI W burst exceeds 256 beats");
         if ((write_beats_in_progress == 0) && (observed_count == QUEUE_DEPTH))
@@ -333,7 +344,6 @@ module axi4_caliptra_checker #(
       if (BVALID && BREADY) begin
         if (!wr_active[BID] || !wr_data_done[BID])
           $fatal(1, "AXI B response ID has no completed write transaction");
-        if ((^BRESP) === 1'bx) $fatal(1, "AXI BRESP is unknown");
         if ((BRESP == 2'b01) && !wr_exclusive[BID])
           $fatal(1, "AXI B response is EXOKAY for a non-exclusive write");
         wr_active[BID] = 0;
@@ -342,8 +352,6 @@ module axi4_caliptra_checker #(
       end
 
       if (ARVALID && ARREADY) begin
-        if (ARLOCK !== 1'b0 && ARLOCK !== 1'b1)
-          $fatal(1, "AXI ARLOCK is unknown");
         check_burst(ARADDR, ARLEN, ARSIZE, ARBURST, "AR");
         if (ARLOCK) check_exclusive_burst(ARADDR, ARLEN, ARSIZE, "AR");
         if (rd_active[ARID]) $fatal(1, "AXI Caliptra profile allows one outstanding read per ID");
@@ -359,7 +367,6 @@ module axi4_caliptra_checker #(
 
       if (RVALID && RREADY) begin
         if (!rd_active[RID]) $fatal(1, "AXI R response ID has no active read transaction");
-        if ((^RRESP) === 1'bx) $fatal(1, "AXI RRESP is unknown");
         if (!rd_exclusive[RID] && (RRESP == 2'b01))
           $fatal(1, "AXI R response is EXOKAY for a non-exclusive read");
         // Arm IHI0022L A7.3.4 requires all beats of one exclusive read to
