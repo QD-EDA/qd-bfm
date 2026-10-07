@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "date": "2026-10-07",
+  "test": "dv/caliptra_bfm/uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --reset-abort-only",
+  "caliptra_rtl": {
+    "commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "axi_dma_top_sha256": "caf763bd878eb4d03df01d528bf30da45280ae5df986384a0554a101adf9c0b1",
+    "axi_dma_ctrl_sha256": "a7a1b7038b53505d85982bb03206b2729910ec56ef501d7326094bd976204fad"
+  },
+  "simulator": {
+    "name": "Icarus Verilog",
+    "version": "13.0 (devel) (ac4532fa-dirty)",
+    "source_merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "merged_origin_main": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867",
+    "uvm": "Accellera 2020.3.1"
+  },
+  "scenario": {
+    "seed": "00c0ffee",
+    "dma_words_after_reset": 65,
+    "result": "held B during accepted write; reset aborted completion; replay completed 65-word transfer",
+    "uvm_warning_count": 0,
+    "uvm_error_count": 0,
+    "uvm_fatal_count": 0
+  },
+  "memory_guard": {
+    "free_percent_floor": 40,
+    "preflight_free_percent": 53,
+    "minimum_observed_free_percent": 53,
+    "timeout_seconds": 300,
+    "exit_code": 0
+  },
+  "sha256": {
+    "dv/caliptra_bfm/uvm/tests/tb_caliptra_axi_dma_top_uvm_bfm.sv": "a07f28783a9e6f6c7760a2e8e22be52096339e0a332ac3aeaaa0ffbcdc1bf214",
+    "dv/caliptra_bfm/uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh": "1d01caefe894793246f6b982eba12daa97506be5b7c320646055b4230f76cbbf",
+    "dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f": "4e097b2f504c956084f91e94c8e7d8b3c64b55965fcddc929e94e39aee09f1f4",
+    "dv/caliptra_bfm/axi/axi4_caliptra_dma_if_subordinate.sv": "3ef2180e298d7798c3b2caa5ac31587f623a817983075ef7556a5071f1f5b029",
+    "dv/caliptra_bfm/uvm/axi4_caliptra_dma_if_monitor.sv": "e7be7f8aa94aa261fcc3658da6c560aa985162ca50e727062bb5a302175234cf",
+    "dv/caliptra_bfm/axi/axi4_caliptra_random_stalls.sv": "6c828f9112d2895ea9f67d2132c157545bd2ac22a49acd2ad7736dd4b24f1924",
+    "scripts/caliptra_bfm_memory_guard.sh": "91be0c2b2c01b1923770c556c19436bf6cab235399faee188a3953bd5b785c2d",
+    "scripts/run_with_memory_pressure_guard.py": "047c731af3985a14cd48ed9df5b56447d589bca505059c591b686b268a9590da",
+    "docs/conformance/release_overlays/caliptra/dma_testcase_generator_overlay.py": "23f5ee39f42ceeabd9c90ea9ef3b1877b03b03b38aef450bd41d8cea1ab8dbcc",
+    "evidence/caliptra-bfm-dma-reset-abort-merged-iverilog-20261007/verify.log": "209cb1bad67cf49ef7d9b7b6fa9c6ce611f233818195c2e62f031da47e13069e"
+  }
+}
