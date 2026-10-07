@@ -13,6 +13,15 @@ RUNNER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(RUNNER)
 
 
+class CheckerCompileCommandTest(unittest.TestCase):
+    def test_enabled_mode_adds_checker_define_but_keeps_assertions_when_disabled(self):
+        enabled = RUNNER.fulltop_compile_command("iverilog", "profile.f", "sim.vvp", True)
+        disabled = RUNNER.fulltop_compile_command("iverilog", "profile.f", "sim.vvp", False)
+        self.assertIn("CALIPTRA_BFM_CHECKER", enabled)
+        self.assertNotIn("CALIPTRA_BFM_CHECKER", disabled)
+        self.assertIn("-gassertions", disabled)
+
+
 class ToolchainPrefixTest(unittest.TestCase):
     def test_accepts_absolute_prefix_with_trailing_dash(self):
         env = {"PATH": "/usr/bin"}

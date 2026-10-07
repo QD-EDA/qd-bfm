@@ -49,10 +49,13 @@ forwards target data and USER while changing each response to `SLVERR`; a FIFO
 read still consumes its words. An error write is consumed without changing
 SRAM/FIFO. Reset rearms error injection. Compile the replacement instead of
 Caliptra's original module; do not connect both models to `m_axi_if`. The
-full-top runner defines `CALIPTRA_BFM_CHECKER`, connecting the native
+full-top runner enables `CALIPTRA_BFM_CHECKER` by default, connecting the native
 Caliptra-profile checker to every DMA AXI channel. This checker covers the
 documented profile; it is not the full ARM Axi4PC API or an all-configurations
-AXI checker. The replacement preserves Caliptra's firmware preload path
+AXI checker. The diagnostic-only `--disable-bfm-checker` option supports A/B
+runs to isolate checker overhead; the result records whether checking was
+enabled, and disabled runs do not qualify the checker. The replacement
+preserves Caliptra's firmware preload path
 (`i_axi_sram.i_sram.ram[addr][byte_idx]`), exercised by
 `axi/tests/run_caliptra_axi_complex_bfm.sh`. Its generated recovery sequence
 is enabled only with Caliptra's `+CPTRA_RAND_TEST_DMA` plusarg, which is also

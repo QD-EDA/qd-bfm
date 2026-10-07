@@ -686,6 +686,17 @@ def stage_native_vectors(test_output, files, hashes, tools, env):
     return {relative: hashes[name] for relative, name in VECTOR_OUTPUTS.items()}
 
 
+def fulltop_compile_command(iverilog, profile, binary, checker_enabled):
+    command = [
+        iverilog, "-g2017", "-gassertions", "-gcommercial-unsafe", "-s", "caliptra_top_tb",
+        "-D", "RV_OPENSOURCE", "-D", "CLP_ASSERT_ON", "-D", "CALIPTRA_INTERNAL_TRNG",
+    ]
+    if checker_enabled:
+        command.extend(["-D", "CALIPTRA_BFM_CHECKER"])
+    command.extend(["-f", str(profile), "-o", str(binary)])
+    return command
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case", choices=CASE_NAMES, default="smoke_test_dma")
@@ -704,6 +715,8 @@ def main():
                         help="diagnostic only: suppress low-priority firmware prints for supported DMA cases")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
+    parser.add_argument("--disable-bfm-checker", action="store_true",
+                        help="diagnostic only: omit the native AXI checker for A/B comparison")
     parser.add_argument("--rand-dma-iterations", type=int, metavar="N",
                         help="diagnostic only: run the first N generated rand_test_dma transfers (1..100)")
     parser.add_argument("--force-first-rand-dma-reset", action="store_true",
@@ -799,12 +812,9 @@ def main():
         rtl, args.output, env
     )
     binary = args.output / "caliptra_top_tb.vvp"
-    compile_command = [
-        iverilog, "-g2017", "-gassertions", "-gcommercial-unsafe", "-s", "caliptra_top_tb",
-        "-D", "RV_OPENSOURCE", "-D", "CLP_ASSERT_ON", "-D", "CALIPTRA_INTERNAL_TRNG",
-        "-D", "CALIPTRA_BFM_CHECKER",
-        "-f", str(profile), "-o", str(binary),
-    ]
+    compile_command = fulltop_compile_command(
+        iverilog, profile, binary, checker_enabled=not args.disable_bfm_checker
+    )
     compile_exit = run_logged(compile_command, args.output, env, args.output / "compile.log")
     if compile_exit:
         raise RuntimeError(f"top compile failed ({compile_exit}); see {args.output / 'compile.log'}")
@@ -886,6 +896,7 @@ def main():
         "dma_generator_overlay_sha256": sha256(generator_overlay) if generator_overlay else None,
         "profile_sha256": sha256(profile),
         "profile_excluded_sources": profile_excluded_sources,
+        "caliptra_bfm_checker_enabled": not args.disable_bfm_checker,
         "compile_command": compile_command,
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
@@ -905,6 +916,7 @@ def main():
                              "rand_dma_iterations": args.rand_dma_iterations,
                              "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
                              "rand_dma_reset_delay_cycles": args.rand_dma_reset_delay_cycles,
+                             "caliptra_bfm_checker": not args.disable_bfm_checker,
                              "skip_pq_vector_generation": skip_pq_vectors,
                              "quiet_firmware": quiet_firmware},
         "native_vector_build_commands": vector_commands,
