@@ -345,6 +345,9 @@ contiguous accepted SEQ beats with matching direction and size, ending an item
 at an accepted IDLE/NONSEQ boundary or after 256 beats. HBURST is absent, so
 item boundaries are inferred from accepted address phases. Each output is a
 separate object because Caliptra predictors copy and mutate queue data.
+The pin proxy zero-fills its fixed 256-lane response vector and copies only
+completed beats into it, keeping scalar register access proportional to the
+actual transfer count while preserving partial-ERROR lane contents.
 `tests/run_ahb_lite_uvm_agent.sh` exercises four-beat MVC write/read traffic, a
 first-beat ERROR abort, and a partial burst with one successful beat followed
 by ERROR; unissued beats remain unchanged. The focused Icarus 2012 run passes

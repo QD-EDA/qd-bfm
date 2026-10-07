@@ -99,7 +99,8 @@ module ahb_lite_caliptra_uvm_master_proxy #(
       cmd_if.response_completed_beats = completed_beats;
       cmd_if.response_beat_error = burst_beat_error;
       cmd_if.response_burst_read_data = '0;
-      for (beat = 0; beat < MAX_BURST_BEATS; beat = beat + 1)
+      // Only completed lanes are observable; avoid scanning all 256 slots for scalar accesses.
+      for (beat = 0; beat < completed_beats; beat = beat + 1)
         cmd_if.response_burst_read_data[beat*64 +: DATA_WIDTH] =
           burst_read_data[beat*DATA_WIDTH +: DATA_WIDTH];
       cmd_if.response_valid = 1;

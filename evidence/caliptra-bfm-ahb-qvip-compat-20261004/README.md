@@ -222,3 +222,19 @@ SHA-256 for the runner:
 ```text
 9f2517ae91c0db06d4b19907ec3ee94e12198c3eadd706154f17d20f959c96ba  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```
+
+## Completed-beat response packing (2026-10-07)
+
+The AHB pin proxy still zero-fills the fixed 256-lane response vector, then
+copies only the lanes reported by `completed_beats`. The AHB agent smoke passed
+scalar traffic, full and partial bursts, and ERROR handling. The generated-name
+compatibility smoke passed under IEEE 2012 for both `AHB_PROFILE=64` and
+`AHB_PROFILE=32`; each reported the expected `AHB_QVIP_CVG` warning and zero
+UVM errors/fatals. The KeyVault generated block test also passed under IEEE
+2017 with the current AHB sources. All runs used the 40% free-memory floor.
+
+Updated proxy SHA-256:
+
+```text
+a91be6b29501ce960b7a394f5bcd6b1da2d54c99818007e5c33632a53c8474d3  dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_master_proxy.sv
+```

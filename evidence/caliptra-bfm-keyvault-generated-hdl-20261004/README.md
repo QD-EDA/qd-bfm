@@ -130,12 +130,11 @@ IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
   sh evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.sh --runtime-2023
 ```
 
-The earlier successful IEEE 2017 and IEEE 2023 reports are identified by their
-SHA-256 values below. The current QD AHB source set compiled, but its 2026-10-07
-IEEE 2017 runtime attempt exceeded the 180-second simulation timeout. The
-runner accepts `CALIPTRA_BFM_RUNTIME_TIMEOUT_SECONDS` for a longer bounded
-retry. Before the read-monitor delta shim was added, the runtime gate failed
-with seven scoreboard errors; that baseline is retained in
+The current QD AHB source set passes under IEEE 2017 and IEEE 2023 after the
+completed-beat packing optimization described below. Earlier successful
+reports used an older AHB compatibility source set and are identified by
+their SHA-256 values below. Before the read-monitor delta shim was added, the
+runtime gate failed with seven scoreboard errors; that baseline is retained in
 `diagnose-runtime-before-delta.log` and `pin_model_event_trace.log`.
 
 For a bounded diagnostic replay, use `run.sh --diagnose`; it enables the
@@ -153,14 +152,20 @@ sources before creating the overlay.
 
 ## QD runner checkpoint — 2026-10-07
 
-The QD checkout now contains the small `run.sh`/`run.py` harness instead of
-depending on the separate development checkout. Its memory floor defaults to
-60% and is configurable with `CALIPTRA_BFM_MIN_FREE_PERCENT`. The runner keeps
-the same generated write-monitor event stream and uses the hash-guarded
-Icarus overlays described above. The current run compiled the generated image,
-then hit its 180-second VVP timeout; it did not produce a UVM runtime summary.
-The memory guard stayed at 54% free RAM against a 40% floor. The successful
-runtime summary recorded earlier used an older AHB compatibility source set.
+The AHB MVC proxy now packs only the completed response lanes into the
+fixed-width command interface. The output vector is still zeroed first, so
+unused and unissued lanes retain their previous deterministic value; scalar
+register accesses no longer scan all 256 burst slots.
+
+The focused AHB UVM agent test passed scalar, full/partial burst, and ERROR
+checks. Generated-name QVIP environment tests passed for both 64-bit and
+32-bit profiles with zero UVM errors/fatals and the expected covergroup warning.
+The current QD KeyVault runs passed under IEEE 2017 and IEEE 2023: each had 76
+compile warnings, 69,633 runtime warnings, zero UVM errors/fatals, and normal
+`$finish` at 410.175 us. The runner used a 300-second VVP cap and a 40% memory
+floor; the guard observed 55% minimum free RAM for 2017 and 58% for 2023.
+`verify-runtime.log` and `verify-runtime-2023.log` retain concise summaries;
+raw simulator transcripts are omitted.
 
 ## Source pins
 
@@ -174,6 +179,8 @@ runtime summary recorded earlier used an older AHB compatibility source set.
 | `run.sh` | `f13cf25e8eb98d4df8ea50c4b215132344fbdd7b3ea86f2a1510992be3fd934d` |
 | `run.py` | `521bb83255cda6659b4d08971d07db2696df0c065494a560353ae229f788b0bb` |
 | `verify.log` | `7e013d9f725f46abfee4df2ccdf798919b4991f82bd1b9671bfd64cb6346859d` |
+| current QD `verify-runtime.log` (IEEE 2017) | `181baa0b286812ae4c4f51d0804049f633801698af4daf80915d2ebb9da96cd8` |
+| current QD `verify-runtime-2023.log` (IEEE 2023) | `4589541a83609ab9ee65f7189b872718bfbc47bf6997045cb98831cbde3218e7` |
 | historical `verify-runtime.log` | `49451247128b3d66bacf625cd0516b98a2aee915ddade562b10cc1d2d2d810f9` |
 | historical `verify-runtime-2023.log` | `3a1bdca4bdf3c11449d187b4c2152559d529ba17289a53ae67648466efeb30d6` |
 | `diagnose-runtime-before-delta.log` | `21bc72850d59b5c80bc89a37d8a384950f3aa9b7c5799a39f4d92e4cb351b27f` |
@@ -198,4 +205,5 @@ runtime summary recorded earlier used an older AHB compatibility source set.
 | Current QD AHB UVM package (2026-10-07 attempt) | `78b30970d93cb1c3984fbb67868d0c548b07c7c44d5f9eb84bb329c036be5fe4` |
 | Current QD AHB QVIP adapter (2026-10-07 attempt) | `8a740134c23bc5632c820e5c20f8502cd01d02d38ae56ef742e5addf6c6c3e9b` |
 | Current QD AHB pin adapter (2026-10-07 attempt) | `3ed7ab5c13e591a07ee121297a26a68d6932fd406cc9fbfe34648c3f0c146df5` |
-| Current QD AHB manager proxy (2026-10-07 attempt) | `735e256eb86e23d94f0588605cad5de85212ef6c6b7dc38be340ebd2c5333708` |
+| AHB manager proxy before completed-lane packing | `735e256eb86e23d94f0588605cad5de85212ef6c6b7dc38be340ebd2c5333708` |
+| Current QD AHB manager proxy (2026-10-07) | `a91be6b29501ce960b7a394f5bcd6b1da2d54c99818007e5c33632a53c8474d3` |
