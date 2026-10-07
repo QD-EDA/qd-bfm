@@ -116,8 +116,13 @@ module ahb_lite_caliptra_uvm_master_proxy #(
 
   // A reset terminates the active task. Clear the manager's poison only after
   // that task has returned and while the target reset is still asserted.
-  always @(negedge HRESETn) begin
-    wait (busy === 1'b0);
-    pin_manager.reset_master();
+  initial begin
+    wait (HRESETn === 1'b1);
+    forever begin
+      @(negedge HRESETn);
+      wait (busy === 1'b0);
+      if (HRESETn === 1'b0)
+        pin_manager.reset_master();
+    end
   end
 endmodule

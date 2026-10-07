@@ -348,80 +348,81 @@ module tb_ahb_lite_caliptra_uvm_agent;
           `uvm_fatal("AHB_RESET_RECOVERY", "AHB monitor did not recover for post-reset scalar and burst traffic")
         $display("PASS: AHB reset abort returned an error and recovered for follow-up traffic");
         phase.drop_objection(this);
-        return;
       end
 
-      env.agent.mvc_driver.cmd_vif.target_wait_cycles = 2;
-      smoke_seq = ahb_lite_caliptra_smoke_sequence::type_id::create("smoke_seq");
-      smoke_seq.start(env.agent.m_sequencer);
-      env.agent.mvc_driver.cmd_vif.inject_target_error = 1;
-      error_seq = ahb_lite_caliptra_error_sequence::type_id::create("error_seq");
-      error_seq.start(env.agent.m_sequencer);
-      env.agent.mvc_driver.cmd_vif.inject_target_error = 0;
-      partial_burst_seq = ahb_lite_caliptra_partial_burst_error_sequence::type_id::create("partial_burst_seq");
-      partial_burst_seq.start(env.agent.m_sequencer);
-      ral_model.csr.write(ral_status, 32'h89ab_cdef, UVM_FRONTDOOR,
-                          ral_model.default_map);
-      if (ral_status != UVM_IS_OK)
-        `uvm_fatal("AHB_RAL_WRITE", "AHB RAL frontdoor write failed")
-      ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
-                         ral_model.default_map);
-      if (ral_status != UVM_IS_OK || ral_read_value != 32'h89ab_cdef)
-        `uvm_fatal("AHB_RAL_READ", $sformatf("AHB RAL frontdoor read failed status=%s value=%08h",
-                                             ral_status.name(), ral_read_value))
-      env.agent.mvc_driver.cmd_vif.inject_target_error = 1;
-      ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
-                         ral_model.default_map);
-      env.agent.mvc_driver.cmd_vif.inject_target_error = 0;
-      if (ral_status != UVM_NOT_OK)
-        `uvm_fatal("AHB_RAL_ERROR", "AHB RAL frontdoor did not report injected ERROR")
-      fork
-        begin
-          wait (env.subscriber.write_count > 0 && env.subscriber.read_count > 0 &&
-                env.subscriber.error_count > 0 &&
-                env.predictor_subscriber.item_count >= 6 &&
-                env.scoreboard_subscriber.item_count >= 6 &&
-                env.coverage_subscriber.item_count >= 6 &&
-                env.predictor_subscriber.burst_write_count > 0 &&
-                env.predictor_subscriber.burst_read_count > 0 &&
-                env.predictor_subscriber.error_burst_count > 0 &&
-                env.predictor_subscriber.partial_burst_count > 0 &&
-                env.subscriber.burst_write_beats >= 4 &&
-                env.subscriber.burst_read_beats >= 4 &&
-                env.subscriber.error_burst_beats >= 2 &&
-                env.subscriber.partial_burst_write_beats == 1);
-        end
-        begin
-          #2000;
-          `uvm_fatal("AHB_TIMEOUT", "Timed out waiting for monitored AHB-Lite records")
-        end
-      join_any
-      disable fork;
-      if (env.agent.agent.monitor.vif.wait_cycle_count < 4)
-        `uvm_fatal("AHB_WAIT", "AHB-Lite UVM smoke did not exercise configured wait cycles")
-      if (env.predictor_subscriber.error_count != 4 ||
-          env.scoreboard_subscriber.error_count != 4 ||
-          env.coverage_subscriber.error_count != 4)
-        `uvm_fatal("AHB_MVC_ERROR", "Keyed AHB streams did not preserve the ERROR response")
-      if (env.predictor_subscriber.burst_write_count != 1 ||
-          env.predictor_subscriber.burst_read_count != 1 ||
-          env.predictor_subscriber.error_burst_count != 2 ||
-          env.predictor_subscriber.partial_burst_count != 1 ||
-          env.scoreboard_subscriber.burst_write_count != 1 ||
-          env.scoreboard_subscriber.burst_read_count != 1 ||
-          env.scoreboard_subscriber.error_burst_count != 2 ||
-          env.scoreboard_subscriber.partial_burst_count != 1 ||
-          env.coverage_subscriber.burst_write_count != 1 ||
-          env.coverage_subscriber.burst_read_count != 1 ||
-          env.coverage_subscriber.error_burst_count != 2 ||
-          env.coverage_subscriber.partial_burst_count != 1)
-        `uvm_fatal("AHB_MVC_BURST_COUNTS", "Keyed AHB streams lost or split a burst item")
-      if (env.predictor_subscriber.last_item == env.scoreboard_subscriber.last_item ||
-          env.predictor_subscriber.last_item == env.coverage_subscriber.last_item ||
-          env.scoreboard_subscriber.last_item == env.coverage_subscriber.last_item)
-        `uvm_fatal("AHB_MVC_ALIAS", "Predictor, scoreboard, and coverage streams shared a mutable item")
-      $display("PASS: keyed AHB streams preserved scalar, full/partial bursts, and ERROR responses");
-      phase.drop_objection(this);
+      if (!$test$plusargs("AHB_RESET_ABORT_ONLY")) begin
+        env.agent.mvc_driver.cmd_vif.target_wait_cycles = 2;
+        smoke_seq = ahb_lite_caliptra_smoke_sequence::type_id::create("smoke_seq");
+        smoke_seq.start(env.agent.m_sequencer);
+        env.agent.mvc_driver.cmd_vif.inject_target_error = 1;
+        error_seq = ahb_lite_caliptra_error_sequence::type_id::create("error_seq");
+        error_seq.start(env.agent.m_sequencer);
+        env.agent.mvc_driver.cmd_vif.inject_target_error = 0;
+        partial_burst_seq = ahb_lite_caliptra_partial_burst_error_sequence::type_id::create("partial_burst_seq");
+        partial_burst_seq.start(env.agent.m_sequencer);
+        ral_model.csr.write(ral_status, 32'h89ab_cdef, UVM_FRONTDOOR,
+                            ral_model.default_map);
+        if (ral_status != UVM_IS_OK)
+          `uvm_fatal("AHB_RAL_WRITE", "AHB RAL frontdoor write failed")
+        ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
+                           ral_model.default_map);
+        if (ral_status != UVM_IS_OK || ral_read_value != 32'h89ab_cdef)
+          `uvm_fatal("AHB_RAL_READ", $sformatf("AHB RAL frontdoor read failed status=%s value=%08h",
+                                               ral_status.name(), ral_read_value))
+        env.agent.mvc_driver.cmd_vif.inject_target_error = 1;
+        ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
+                           ral_model.default_map);
+        env.agent.mvc_driver.cmd_vif.inject_target_error = 0;
+        if (ral_status != UVM_NOT_OK)
+          `uvm_fatal("AHB_RAL_ERROR", "AHB RAL frontdoor did not report injected ERROR")
+        fork
+          begin
+            wait (env.subscriber.write_count > 0 && env.subscriber.read_count > 0 &&
+                  env.subscriber.error_count > 0 &&
+                  env.predictor_subscriber.item_count >= 6 &&
+                  env.scoreboard_subscriber.item_count >= 6 &&
+                  env.coverage_subscriber.item_count >= 6 &&
+                  env.predictor_subscriber.burst_write_count > 0 &&
+                  env.predictor_subscriber.burst_read_count > 0 &&
+                  env.predictor_subscriber.error_burst_count > 0 &&
+                  env.predictor_subscriber.partial_burst_count > 0 &&
+                  env.subscriber.burst_write_beats >= 4 &&
+                  env.subscriber.burst_read_beats >= 4 &&
+                  env.subscriber.error_burst_beats >= 2 &&
+                  env.subscriber.partial_burst_write_beats == 1);
+          end
+          begin
+            #2000;
+            `uvm_fatal("AHB_TIMEOUT", "Timed out waiting for monitored AHB-Lite records")
+          end
+        join_any
+        disable fork;
+        if (env.agent.agent.monitor.vif.wait_cycle_count < 4)
+          `uvm_fatal("AHB_WAIT", "AHB-Lite UVM smoke did not exercise configured wait cycles")
+        if (env.predictor_subscriber.error_count != 4 ||
+            env.scoreboard_subscriber.error_count != 4 ||
+            env.coverage_subscriber.error_count != 4)
+          `uvm_fatal("AHB_MVC_ERROR", "Keyed AHB streams did not preserve the ERROR response")
+        if (env.predictor_subscriber.burst_write_count != 1 ||
+            env.predictor_subscriber.burst_read_count != 1 ||
+            env.predictor_subscriber.error_burst_count != 2 ||
+            env.predictor_subscriber.partial_burst_count != 1 ||
+            env.scoreboard_subscriber.burst_write_count != 1 ||
+            env.scoreboard_subscriber.burst_read_count != 1 ||
+            env.scoreboard_subscriber.error_burst_count != 2 ||
+            env.scoreboard_subscriber.partial_burst_count != 1 ||
+            env.coverage_subscriber.burst_write_count != 1 ||
+            env.coverage_subscriber.burst_read_count != 1 ||
+            env.coverage_subscriber.error_burst_count != 2 ||
+            env.coverage_subscriber.partial_burst_count != 1)
+          `uvm_fatal("AHB_MVC_BURST_COUNTS", "Keyed AHB streams lost or split a burst item")
+        if (env.predictor_subscriber.last_item == env.scoreboard_subscriber.last_item ||
+            env.predictor_subscriber.last_item == env.coverage_subscriber.last_item ||
+            env.scoreboard_subscriber.last_item == env.coverage_subscriber.last_item)
+          `uvm_fatal("AHB_MVC_ALIAS", "Predictor, scoreboard, and coverage streams shared a mutable item")
+        $display("PASS: keyed AHB streams preserved scalar, full/partial bursts, and ERROR responses");
+        phase.drop_objection(this);
+      end
     endtask
   endclass
 

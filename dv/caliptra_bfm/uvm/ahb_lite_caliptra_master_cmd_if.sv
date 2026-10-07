@@ -20,6 +20,7 @@ interface ahb_lite_caliptra_master_cmd_if(input wire HCLK);
   logic response_request_ok = 0;
   logic response_success = 0;
   logic response_error = 0;
+  // Manager stopped before an AHB completion (reset, timeout, or bus fault).
   logic response_aborted = 0;
   logic [63:0] response_read_data = 0;
   logic [8:0] response_completed_beats = 0;
