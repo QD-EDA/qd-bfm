@@ -108,8 +108,10 @@ did log a reset pulse; the difference remains unresolved.
 - The temporary simulator build tree was removed after inspection
 
 The AXI trace VPI now also records `0xEE` mailbox writes, delayed-reset state,
-and reset edges. It compiles with the local `iverilog-vpi`; signal binding and
-runtime output still need a full-top run.
+and reset edges. It compiles with the local `iverilog-vpi`. The instrumented
+full-top rerun stopped during vector preparation: preflight was 60% free and
+the guard stopped it at 59%, before top compilation. Hierarchical binding and
+runtime output remain unverified.
 
 - Trace VPI SHA-256:
   `ff50cdb88665dc3fd227e7a6369dc05ecb29700cb5a0f3cfd7d9584c0736d851`
