@@ -88,6 +88,7 @@ package ahb_lite_caliptra_uvm_pkg;
     bit request_ok;
     bit success;
     bit response_error;
+    bit aborted;
     bit [63:0] read_data;
 
     `uvm_object_utils(ahb_lite_caliptra_transfer)
@@ -135,6 +136,7 @@ package ahb_lite_caliptra_uvm_pkg;
         req.request_ok = cmd_vif.response_request_ok;
         req.success = cmd_vif.response_success;
         req.response_error = cmd_vif.response_error;
+        req.aborted = cmd_vif.response_aborted;
         req.read_data = cmd_vif.response_read_data;
         cmd_vif.request_valid = 0;
         wait (cmd_vif.response_valid === 1'b0);
@@ -193,9 +195,14 @@ package ahb_lite_caliptra_uvm_pkg;
               !cmd_vif.response_beat_error[beat])
             req.data[beat] = cmd_vif.response_burst_read_data[beat*64 +: 64];
         end
-        if (cmd_vif.response_completed_beats == 0 &&
-            !cmd_vif.response_request_ok)
+        if (cmd_vif.response_aborted) begin
+          if (req.resp.size() >= req.data.size())
+            `uvm_fatal("AHB_MVC_ABORT", "Aborted transfer has no uncompleted beat to report")
           req.resp.push_back(AHB_ERROR);
+        end else if (cmd_vif.response_completed_beats == 0 &&
+                     !cmd_vif.response_request_ok) begin
+          req.resp.push_back(AHB_ERROR);
+        end
         cmd_vif.request_valid = 0;
         wait (cmd_vif.response_valid === 1'b0);
         seq_item_port.item_done();

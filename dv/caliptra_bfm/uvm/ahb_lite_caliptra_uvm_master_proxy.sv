@@ -24,6 +24,7 @@ module ahb_lite_caliptra_uvm_master_proxy #(
   reg request_ok;
   reg success;
   reg response_error;
+  reg response_aborted;
   reg [DATA_WIDTH-1:0] read_data;
   reg [MAX_BURST_BEATS*DATA_WIDTH-1:0] burst_write_data;
   reg [MAX_BURST_BEATS*DATA_WIDTH-1:0] burst_read_data;
@@ -47,6 +48,7 @@ module ahb_lite_caliptra_uvm_master_proxy #(
     cmd_if.response_request_ok = 0;
     cmd_if.response_success = 0;
     cmd_if.response_error = 0;
+    cmd_if.response_aborted = 0;
     cmd_if.response_read_data = 0;
     cmd_if.response_completed_beats = 0;
     cmd_if.response_beat_error = '0;
@@ -58,6 +60,7 @@ module ahb_lite_caliptra_uvm_master_proxy #(
       burst_read_data = '0;
       burst_beat_error = '0;
       completed_beats = 0;
+      response_aborted = 0;
       if ((cmd_if.request_burst_count >= 1) &&
           (cmd_if.request_burst_count <= MAX_BURST_BEATS)) begin
         if (cmd_if.request_burst_count == 1) begin
@@ -92,9 +95,11 @@ module ahb_lite_caliptra_uvm_master_proxy #(
         success = 0;
         response_error = 1;
       end
+      response_aborted = request_ok && !success && !response_error;
       cmd_if.response_request_ok = request_ok;
       cmd_if.response_success = success;
       cmd_if.response_error = response_error;
+      cmd_if.response_aborted = response_aborted;
       cmd_if.response_read_data = read_data;
       cmd_if.response_completed_beats = completed_beats;
       cmd_if.response_beat_error = burst_beat_error;
@@ -107,5 +112,12 @@ module ahb_lite_caliptra_uvm_master_proxy #(
       wait (cmd_if.request_valid === 1'b0);
       cmd_if.response_valid = 0;
     end
+  end
+
+  // A reset terminates the active task. Clear the manager's poison only after
+  // that task has returned and while the target reset is still asserted.
+  always @(negedge HRESETn) begin
+    wait (busy === 1'b0);
+    pin_manager.reset_master();
   end
 endmodule

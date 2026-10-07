@@ -275,6 +275,28 @@ module tb_ahb_lite_caliptra_uvm_agent;
     endfunction
   endclass
 
+  class ahb_lite_caliptra_reset_abort_sequence extends uvm_sequence #(mvc_sequence_item_base);
+    `uvm_object_utils(ahb_lite_caliptra_reset_abort_sequence)
+
+    function new(string name = "ahb_lite_caliptra_reset_abort_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      ahb_lite_caliptra_mvc_transfer req;
+      req = new("reset_abort_burst");
+      start_item(req);
+      req.RnW = AHB_WRITE;
+      req.address = 32'h20;
+      req.size = AHB_MVC_WORD_SIZE;
+      repeat (4) req.data.push_back(64'hdead_beef_cafe_0001);
+      finish_item(req);
+      if (req.resp.size() != 1 || req.resp[0] != AHB_ERROR ||
+          req.data.size() != 4)
+        `uvm_fatal("AHB_RESET_ABORT", "Reset-aborted burst did not return one error for the first uncompleted beat")
+    endtask
+  endclass
+
   class ahb_lite_caliptra_agent_test extends uvm_test;
     ahb_lite_caliptra_env env;
     ahb_lite_caliptra_ral_smoke_block ral_model;
@@ -305,6 +327,30 @@ module tb_ahb_lite_caliptra_uvm_agent;
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
       phase.raise_objection(this);
+
+      if ($test$plusargs("AHB_RESET_ABORT_ONLY")) begin
+        ahb_lite_caliptra_reset_abort_sequence reset_abort_seq;
+        reset_abort_seq = ahb_lite_caliptra_reset_abort_sequence::type_id::create("reset_abort_seq");
+        env.agent.mvc_driver.cmd_vif.target_wait_cycles = 20;
+        reset_abort_seq.start(env.agent.m_sequencer);
+        if (!env.agent.mvc_driver.cmd_vif.response_aborted)
+          `uvm_fatal("AHB_RESET_STATUS", "Command bridge did not identify the reset-aborted transfer")
+        if (env.predictor_subscriber.item_count != 0 ||
+            env.scoreboard_subscriber.item_count != 0 ||
+            env.coverage_subscriber.item_count != 0)
+          `uvm_fatal("AHB_RESET_MONITOR", "Reset-aborted address was published as a completed transfer")
+        env.agent.mvc_driver.cmd_vif.target_wait_cycles = 2;
+        smoke_seq = ahb_lite_caliptra_smoke_sequence::type_id::create("post_reset_smoke_seq");
+        smoke_seq.start(env.agent.m_sequencer);
+        if (env.predictor_subscriber.item_count != 4 ||
+            env.scoreboard_subscriber.item_count != 4 ||
+            env.coverage_subscriber.item_count != 4)
+          `uvm_fatal("AHB_RESET_RECOVERY", "AHB monitor did not recover for post-reset scalar and burst traffic")
+        $display("PASS: AHB reset abort returned an error and recovered for follow-up traffic");
+        phase.drop_objection(this);
+        return;
+      end
+
       env.agent.mvc_driver.cmd_vif.target_wait_cycles = 2;
       smoke_seq = ahb_lite_caliptra_smoke_sequence::type_id::create("smoke_seq");
       smoke_seq.start(env.agent.m_sequencer);
@@ -391,5 +437,16 @@ module tb_ahb_lite_caliptra_uvm_agent;
     repeat (2) @(posedge HCLK);
     @(negedge HCLK);
     HRESETn = 1;
+  end
+
+  initial begin
+    if ($test$plusargs("AHB_RESET_ABORT_ONLY")) begin
+      wait (HRESETn === 1'b1);
+      wait (HSEL === 1'b1 && HTRANS[1] === 1'b1);
+      @(posedge HCLK);
+      #1 HRESETn = 1'b0;
+      repeat (2) @(negedge HCLK);
+      HRESETn = 1'b1;
+    end
   end
 endmodule
