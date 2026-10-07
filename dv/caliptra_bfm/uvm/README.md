@@ -94,8 +94,9 @@ The active UVM smoke checks projected SRAM and SLVERR
 items through `copy`, `compare`, and `sprint`, including USER and LOCK fields;
 the DMA smoke also checks FIFO and 256-beat items. The test also checks
 `type_id::create`, UVM cloning, and that a kind mismatch fails comparison
-without changing the source. These tests validate the fallback's observed
-lower-bound surface, not full Avery behavior.
+without changing the source. Native and AAXI agent smokes also require accepted
+AW/W/B/AR/R items on their channel analysis ports. These tests validate the
+fallback's observed lower-bound surface, not full Avery behavior.
 The two-beat readback uses an ordinary write. The active native UVM agent also
 checks successful and invalidated exclusive accesses through the SRAM target;
 both UVM register adapters map `EXOKAY` to success. Standalone AXI target tests
@@ -157,7 +158,8 @@ affect the independently cloned read-done record. The same smoke checks write
 request precedes write completion. Avery's partial-item lifecycle, read
 granularity, and exact timing remain unverified.
 
-`axi4_caliptra_record_if.sv` carries completed records into the class monitor.
+`axi4_caliptra_record_if.sv` carries accepted channel records and completed
+transactions into the class monitor.
 Its fixed record storage can represent the full AXI4 ID field (8 bits) and
 256-beat `LEN` range; this is storage capacity, not the width of every
 connection. WSTRB is packed with four bits per beat, matching the 32-bit data

@@ -396,6 +396,25 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     endfunction
   endclass
 
+  class axi4_caliptra_channel_subscriber extends uvm_subscriber #(axi4_caliptra_channel_transaction);
+    int channel_count[0:4];
+
+    `uvm_component_utils(axi4_caliptra_channel_subscriber)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+      foreach (channel_count[i]) channel_count[i] = 0;
+    endfunction
+
+    function void write(axi4_caliptra_channel_transaction item);
+      if (item.channel inside {AXI4_CHANNEL_AW, AXI4_CHANNEL_W, AXI4_CHANNEL_B,
+                               AXI4_CHANNEL_AR, AXI4_CHANNEL_R})
+        channel_count[item.channel]++;
+      else
+        `uvm_fatal("AXI_CHANNEL_KIND", "Unknown AXI channel item")
+    endfunction
+  endclass
+
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
   class axi4_caliptra_aaxi_subscriber extends uvm_subscriber #(aaxi_master_tr);
     int write_count;
@@ -604,9 +623,11 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   class axi4_caliptra_uvm_env extends uvm_env;
     axi4_caliptra_uvm_agent agent;
     axi4_caliptra_uvm_subscriber sub;
+    axi4_caliptra_channel_subscriber channel_sub;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
     axi4_caliptra_aaxi_uvm_agent aaxi_agent;
     axi4_caliptra_aaxi_subscriber aaxi_sub;
+    axi4_caliptra_channel_subscriber aaxi_channel_sub;
 `endif
 
     `uvm_component_utils(axi4_caliptra_uvm_env)
@@ -619,17 +640,21 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       super.build_phase(phase);
       agent = axi4_caliptra_uvm_agent::type_id::create("agent", this);
       sub = axi4_caliptra_uvm_subscriber::type_id::create("sub", this);
+      channel_sub = axi4_caliptra_channel_subscriber::type_id::create("channel_sub", this);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_agent = axi4_caliptra_aaxi_uvm_agent::type_id::create("aaxi_agent", this);
       aaxi_sub = axi4_caliptra_aaxi_subscriber::type_id::create("aaxi_sub", this);
+      aaxi_channel_sub = axi4_caliptra_channel_subscriber::type_id::create("aaxi_channel_sub", this);
 `endif
     endfunction
 
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       agent.ap.connect(sub.analysis_export);
+      agent.channel_ap.connect(channel_sub.analysis_export);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       agent.aaxi_ap.connect(aaxi_sub.analysis_export);
+      aaxi_agent.channel_ap.connect(aaxi_channel_sub.analysis_export);
 `endif
     endfunction
   endclass
@@ -1071,6 +1096,11 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
                  env.sub.invalidated_exclusive_readback_count == 0 ||
                  env.sub.ral_write_count == 0 || env.sub.ral_read_count < 2 ||
                  env.sub.ral_error_read_count == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_AW] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_W] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_B] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_AR] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_R] == 0 ||
                  (use_dma_target &&
                   (env.sub.fifo_write_count == 0 || env.sub.fifo_read_count == 0 ||
                    env.sub.full_range_write_count == 0 || env.sub.full_range_read_count == 0)))
@@ -1082,6 +1112,11 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
                  env.aaxi_sub.error_read_count == 0 ||
                  env.aaxi_sub.ral_write_count == 0 || env.aaxi_sub.ral_read_count < 2 ||
                  env.aaxi_sub.ral_error_read_count == 0 ||
+                 env.aaxi_channel_sub.channel_count[AXI4_CHANNEL_AW] == 0 ||
+                 env.aaxi_channel_sub.channel_count[AXI4_CHANNEL_W] == 0 ||
+                 env.aaxi_channel_sub.channel_count[AXI4_CHANNEL_B] == 0 ||
+                 env.aaxi_channel_sub.channel_count[AXI4_CHANNEL_AR] == 0 ||
+                 env.aaxi_channel_sub.channel_count[AXI4_CHANNEL_R] == 0 ||
                  (use_dma_target &&
                   (env.aaxi_sub.fifo_write_count == 0 || env.aaxi_sub.fifo_read_count == 0 ||
                    env.aaxi_sub.full_range_write_count == 0 || env.aaxi_sub.full_range_read_count == 0)))
@@ -1108,6 +1143,18 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
 `endif
       phase.drop_objection(this);
     endtask
+
+    function void report_phase(uvm_phase phase);
+      super.report_phase(phase);
+      for (int channel = 0; channel < 5; channel++) begin
+        if (env.channel_sub.channel_count[channel] == 0)
+          `uvm_error("AXI_CHANNEL", $sformatf("Native agent missed channel %0d", channel))
+`ifndef CALIPTRA_BFM_EXTERNAL_AVERY
+        if (env.aaxi_channel_sub.channel_count[channel] == 0)
+          `uvm_error("AAXI_CHANNEL", $sformatf("AAXI agent missed channel %0d", channel))
+`endif
+      end
+    endfunction
   endclass
 
   initial begin
