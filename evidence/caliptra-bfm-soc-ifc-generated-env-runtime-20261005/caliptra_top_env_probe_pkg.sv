@@ -4,7 +4,35 @@ package caliptra_top_env_probe_pkg;
   import uvm_pkg::*;
   import uvmf_base_pkg::*;
   import caliptra_top_env_pkg::*;
+  import soc_ifc_ctrl_pkg::*;
   `include "uvm_macros.svh"
+
+  class caliptra_top_env_reset_sequence extends uvm_sequence #(soc_ifc_ctrl_transaction);
+    `uvm_object_utils(caliptra_top_env_reset_sequence)
+    bit release_initial_reset_only;
+
+    function new(string name = "caliptra_top_env_reset_sequence");
+      super.new(name);
+    endfunction
+
+    task automatic drive(bit set_pwrgood, bit assert_rst, int unsigned wait_cycles);
+      soc_ifc_ctrl_transaction req;
+      req = soc_ifc_ctrl_transaction::type_id::create("req");
+      start_item(req);
+      req.set_pwrgood = set_pwrgood;
+      req.assert_rst = assert_rst;
+      req.security_state = 3'b111;
+      req.wait_cycles = wait_cycles;
+      finish_item(req);
+    endtask
+
+    task body();
+      if (!release_initial_reset_only)
+        drive(1'b0, 1'b1, 10);
+      drive(1'b1, 1'b1, 10);
+      drive(1'b1, 1'b0, 0);
+    endtask
+  endclass
 
   class caliptra_top_env_probe_test extends uvm_test;
     caliptra_top_env_configuration top_configuration;
@@ -49,14 +77,27 @@ package caliptra_top_env_probe_pkg;
     endfunction
 
     task run_phase(uvm_phase phase);
+      caliptra_top_env_reset_sequence reset_sequence;
       phase.raise_objection(this);
       if (top_environment.soc_ifc_subenv == null || top_environment.vsqr == null ||
           top_configuration.vsqr != top_environment.vsqr)
         `uvm_fatal("CALIPTRA_TOP_ENV", "Generated top environment did not publish its subenvironment and virtual sequencer")
 
-      top_environment.handle_reset("HARD");
+      top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.wait_for_num_clocks(2);
+      reset_sequence = caliptra_top_env_reset_sequence::type_id::create("power_on_sequence");
+      reset_sequence.release_initial_reset_only = 1;
+      reset_sequence.start(top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.sequencer);
       top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.wait_for_num_clocks(20);
-      $display("PASS: generated Caliptra top environment dispatched reset to soc_ifc");
+
+      top_environment.set_can_handle_reset(1);
+      fork
+        forever top_environment.detect_reset();
+      join_none
+      top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.wait_for_num_clocks(1);
+      reset_sequence = caliptra_top_env_reset_sequence::type_id::create("hard_reset_sequence");
+      reset_sequence.start(top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.sequencer);
+      top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.wait_for_num_clocks(20);
+      $display("PASS: generated Caliptra top environment completed real reset");
       phase.drop_objection(this);
     endtask
   endclass

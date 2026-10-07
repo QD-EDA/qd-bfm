@@ -22,19 +22,26 @@ reports five matches, zero mismatches, and no UVM errors or fatals. This
 qualifies the clean-room binding under this Icarus setup, not Avery's exact
 driver lifecycle or event timing.
 
-## Caliptra top environment wrapper
+## Caliptra top environment reset
 
 The opt-in `--caliptra-top-env-probe` compiles Caliptra's generated
 `caliptra_top_env_pkg` around the generated SoC-IFC environment, verifies its
-child environment and virtual sequencer, and checks that the top reset handler
-dispatches to the child. The guarded run passed with both dispatch markers,
-zero UVM errors/fatals, and 50% minimum free memory against a 40% floor.
+`caliptra_top_environment.detect_reset()` path, and drives an initial power-on
+release followed by a hard reset through the generated control sequencer. The
+child reset handler and control-analysis predictor connection remain active.
+The guarded run reports three SoC-IFC status matches, zero mismatches,
+no-comparison or missed transactions, zero UVM errors/fatals, and 58% minimum
+free memory against a 40% floor.
 
-This is a wrapper-dispatch check, not full Caliptra reset qualification. Its
-disposable Icarus copy short-circuits the child reset body, disconnects control
-analysis from the predictor, holds AXI reset low, and treats an empty
-scoreboard as expected because this probe sends no bus traffic. The full
-SoC-IFC reset/predictor path and complete Caliptra top remain separate work.
+This checks the generated environment wrapper and the reset/predictor path for
+the real `soc_ifc_top`; it does not compile the full Caliptra core/top. Because
+the harness has no Caliptra-core status outputs, its disposable environment
+copy retains CPTRA expected-reset events for reset synchronization, but omits
+CPTRA status queue matching and the unavailable CPTRA actual-status path. The
+probe also adds the falling edge needed to initialize the generated control
+BFM, detects reset assertion asynchronously for Icarus, and defers SoC-IFC
+status analysis by one delta cycle. Full Caliptra-core status/reset behavior
+remains unqualified.
 
 Replay:
 

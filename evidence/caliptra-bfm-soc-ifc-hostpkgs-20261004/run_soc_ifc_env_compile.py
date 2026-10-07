@@ -194,28 +194,88 @@ def main() -> int:
             child_environment.parent.mkdir(parents=True, exist_ok=True)
             child_environment_source = (env_root / "src/soc_ifc_environment.svh").read_text()
             reset_task_start = 'task soc_ifc_environment::handle_reset(string kind = "HARD");'
-            reset_task_end = "\nendtask\n\ntask soc_ifc_environment::run_phase"
-            if child_environment_source.count(reset_task_start) != 1 or child_environment_source.count(reset_task_end) != 1:
-                raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC reset-handler source")
             predictor_connection = (
                 "    soc_ifc_ctrl_agent.monitored_ap.connect(soc_ifc_pred.soc_ifc_ctrl_agent_ae);\n"
             )
+            cptra_actual_connection = (
+                "    cptra_status_agent.monitored_ap.connect(soc_ifc_sb.actual_cptra_analysis_export);\n"
+            )
+            if child_environment_source.count(reset_task_start) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC reset-handler source")
             if child_environment_source.count(predictor_connection) != 1:
                 raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC control-analysis connection")
-            child_environment_source = child_environment_source.replace(
-                predictor_connection,
-                "    // control-analysis prediction is outside this top-wrapper dispatch probe\n",
+            if child_environment_source.count(cptra_actual_connection) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected CPTRA actual-status scoreboard connection")
+            child_environment_source = child_environment_source.replace(cptra_actual_connection, "", 1)
+            child_environment.write_text(
+                child_environment_source.replace(
+                    reset_task_start,
+                    reset_task_start
+                    + '\n    $display("CALIPTRA_TOP_ENV_CHILD_RESET_HANDLER kind=%s", kind);',
+                    1,
+                )
+            )
+            scoreboard = env / "src/soc_ifc_scoreboard.svh"
+            scoreboard_source = (env_root / "src/soc_ifc_scoreboard.svh").read_text()
+            cptra_expected_enqueue = "    cptra_expected_hash[t.get_key()] = t;"
+            if scoreboard_source.count(cptra_expected_enqueue) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected CPTRA status scoreboard")
+            scoreboard_source = scoreboard_source.replace(
+                cptra_expected_enqueue,
+                "    // The SoC-IFC-only harness lacks Caliptra-core status outputs.\n"
+                "    // Keep the reset-handled handshake below, without queueing an uncheckable item.",
                 1,
             )
-            task_body_start = child_environment_source.index(reset_task_start)
-            task_body_end = child_environment_source.index(reset_task_end, task_body_start)
-            child_environment.write_text(
-                child_environment_source[:task_body_start]
-                + reset_task_start
-                + '\n    $display("CALIPTRA_TOP_ENV_CHILD_RESET_HANDLER kind=%s", kind);\n'
-                + "endtask"
-                + child_environment_source[task_body_end + len("\nendtask"):]
+            cptra_expected_start = "virtual function void write_expected_cptra_analysis_export(cptra_status_transaction t);"
+            if scoreboard_source.count(cptra_expected_start) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected CPTRA expected-status handler")
+            cptra_expected_begin = scoreboard_source.index(cptra_expected_start)
+            cptra_expected_end = scoreboard_source.index("endfunction", cptra_expected_begin) + len("endfunction")
+            cptra_expected_source = scoreboard_source[cptra_expected_begin:cptra_expected_end]
+            cptra_expected_count = "    transaction_count++;"
+            if cptra_expected_source.count(cptra_expected_count) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected CPTRA expected-status count")
+            scoreboard_source = (
+                scoreboard_source[:cptra_expected_begin]
+                + cptra_expected_source.replace(cptra_expected_count, "", 1)
+                + scoreboard_source[cptra_expected_end:]
             )
+            scoreboard.write_text(scoreboard_source)
+            print("kept CPTRA reset synchronization and omitted core-status matching from the SoC-IFC-only harness")
+            control_monitor = packages / "soc_ifc_ctrl_pkg/src/soc_ifc_ctrl_monitor_bfm.sv"
+            control_monitor_source = control_monitor.read_text()
+            for reset_task in ("do_wait_for_hard_reset_assertion", "do_wait_for_soft_reset_assertion"):
+                task_start = f"task {reset_task}();"
+                task_end = "endtask"
+                if control_monitor_source.count(task_start) != 1:
+                    raise SystemExit("Caliptra top probe refused an unexpected control reset monitor")
+                task_begin = control_monitor_source.index(task_start)
+                task_finish = control_monitor_source.index(task_end, task_begin) + len(task_end)
+                task_source = control_monitor_source[task_begin:task_finish]
+                clock_wait = "@(posedge clk_i) ;"
+                if task_source.count(clock_wait) != 1:
+                    raise SystemExit("Caliptra top probe refused unexpected reset-edge synchronization")
+                control_monitor_source = (
+                    control_monitor_source[:task_begin]
+                    + task_source.replace(clock_wait, "", 1)
+                    + control_monitor_source[task_finish:]
+                )
+            control_monitor.write_text(control_monitor_source)
+            print("moved disposable Icarus reset detection to the asynchronous assertion edge")
+            status_monitor = packages / "soc_ifc_status_pkg/src/soc_ifc_status_monitor_bfm.sv"
+            status_monitor_source = status_monitor.read_text()
+            status_notify = "      proxy.notify_transaction( soc_ifc_status_monitor_struct );"
+            if status_monitor_source.count(status_notify) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected SoC-IFC status monitor")
+            status_monitor.write_text(
+                status_monitor_source.replace(
+                    status_notify,
+                    "      #0; // let same-edge reset prediction reach the scoreboard first\n"
+                    + status_notify,
+                    1,
+                )
+            )
+            print("deferred disposable SoC-IFC status analysis by one delta cycle")
         if args.generated_environment_runtime:
             ahb_transfer_type = re.compile(
                 r"ahb_master_burst_transfer\s*#\s*\(\s*"
@@ -653,16 +713,9 @@ def main() -> int:
                 if hdl_top_source.count(reset_state_anchor) != 1:
                     raise SystemExit("Caliptra top runtime refused an unexpected generated reset declaration")
                 hdl_top_overlay.write_text(
-                    hdl_top_source.replace(reset_state_anchor, "  logic dummy, dummy_n;", 1)
-                )
-                hdl_top_source = hdl_top_overlay.read_text()
-                axi_reset_anchor = ".ARESETn(cptra_rst_b_dly_assert_simult_deassert),"
-                if hdl_top_source.count(axi_reset_anchor) != 1:
-                    raise SystemExit("Caliptra top runtime refused an unexpected generated AXI reset connection")
-                hdl_top_overlay.write_text(
                     hdl_top_source.replace(
-                        axi_reset_anchor,
-                        ".ARESETn(1'b0), // hold AXI idle during wrapper-dispatch probe",
+                        reset_state_anchor,
+                        "  logic dummy, dummy_n;",
                         1,
                     )
                 )
@@ -791,6 +844,40 @@ def main() -> int:
         ]
         bfm_filelist = repo / "dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f"
         bfm_sources = [repo / line.strip() for line in bfm_filelist.read_text().splitlines() if line.strip() and not line.lstrip().startswith("#")]
+        if args.caliptra_top_env_probe:
+            reset_gen_indices = [
+                i for i, source in enumerate(bfm_sources)
+                if source.name == "default_reset_gen.sv"
+            ]
+            if len(reset_gen_indices) != 1:
+                raise SystemExit("Caliptra top probe could not identify the default reset generator")
+            reset_gen_source = bfm_sources[reset_gen_indices[0]].read_text()
+            reset_gen_anchor = (
+                "  initial begin\n"
+                "    RESET = 1'b0;\n"
+                "    repeat (2) @(posedge CLK_IN);\n"
+                "    RESET = 1'b1;\n"
+                "  end"
+            )
+            if reset_gen_source.count(reset_gen_anchor) != 1:
+                raise SystemExit("Caliptra top probe refused an unexpected default reset generator")
+            reset_gen_overlay = temp / "default_reset_gen.sv"
+            reset_gen_overlay.write_text(
+                "`timescale 1ns/1ps\n"
+                + reset_gen_source.replace(
+                    reset_gen_anchor,
+                    "  initial begin\n"
+                    "    RESET = 1'b1;\n"
+                    "    #1ps;\n"
+                    "    RESET = 1'b0;\n"
+                    "    repeat (2) @(posedge CLK_IN);\n"
+                    "    RESET = 1'b1;\n"
+                    "  end",
+                    1,
+                )
+            )
+            bfm_sources[reset_gen_indices[0]] = reset_gen_overlay
+            print("added a startup falling edge to the disposable active-low BFM reset pulse")
         command = [args.iverilog, "-g2012", "-uvm", "-DXCELIUM", "-DCLP_OBF_KEY_DWORDS=8", "-DCLP_OBF_FE_DWORDS=8", "-DCLP_OBF_UDS_DWORDS=16", "-s", top_name, "-o", str(image)]
         if runtime and args.open_mbox_target:
             command.append("-DCALIPTRA_BFM_OPEN_MBOX_TARGET")
@@ -875,7 +962,7 @@ def main() -> int:
             for line in log:
                 sys.stdout.write(line)
                 saw_pass |= (
-                    "PASS: generated Caliptra top environment dispatched reset" in line
+                    "PASS: generated Caliptra top environment completed real reset" in line
                     if args.caliptra_top_env_probe
                     else "PASS: generated SoC-IFC bench sequence" in line
                 )
@@ -898,7 +985,6 @@ def main() -> int:
             if not saw_top_reset_handler or not saw_child_reset_handler:
                 print("ERROR: generated Caliptra top reset handler did not dispatch to soc_ifc", file=sys.stderr)
                 return 1
-            return 0
         if scoreboard_result is None:
             print("ERROR: generated runtime did not report SoC-IFC scoreboard results", file=sys.stderr)
             return 1
