@@ -1,0 +1,65 @@
+{
+  "status": "TIMEOUT_IN_ROM_FLOW_BEFORE_AES_DMA",
+  "diagnostic_only": true,
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "runner_commit": "5378d5c37509c11429b162748e4293d19e419356",
+  "runner_script_sha256": "29ea099be0ff65473331230708736a688dc60301fe105ebf9538da69f0494ac5",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "caliptra_worktree_clean": true,
+  "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+  "runner_options": [
+    "--case",
+    "smoke_test_dma_aes_gcm_short_1_dword",
+    "--first-aes-case-diagnostic",
+    "--fast-trng"
+  ],
+  "diagnostic_modes": {
+    "one_aes_case_firmware_copy": true,
+    "fast_trng_cycles": 50,
+    "fast_boot_data_preload": true,
+    "pq_vector_generation_skipped": true,
+    "low_priority_firmware_prints_suppressed": true
+  },
+  "compile": {
+    "exit": 0,
+    "defines": [
+      "RV_OPENSOURCE",
+      "CLP_ASSERT_ON",
+      "CALIPTRA_INTERNAL_TRNG",
+      "CALIPTRA_BFM_CHECKER"
+    ],
+    "iverilog_version": "13.0 (devel) (246c58e4-dirty)",
+    "binary_bytes": 324096947,
+    "binary_sha256": "95170cb5afcce62149a9b0a2e3c9a252c4d2a4578b5f85d928b9942da9e6c2dd",
+    "compile_log_sha256": "3f222580184a1f718fc878a9c4346121e3815f425e304d2c7da99f67f3d27421",
+    "profile_sha256": "e8d9aea9a19157936f953a23ce302009acec02de60efd462a6168d5c2b7296f6",
+    "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654"
+  },
+  "simulation": {
+    "exit": 124,
+    "log_bytes": 3622,
+    "log_sha256": "373cea3c57982461b087a08f3720c6a61a299f460698c0f2a9eb2b4dcc6a9540",
+    "jtag_port_bound": true,
+    "jtag_errors": 0,
+    "rom_flow_reached": true,
+    "aes_test_banner": false,
+    "testcase_pass_markers": 0,
+    "testcase_fail_markers": 0,
+    "normal_finish": false,
+    "axi_vpi_trace_enabled": false
+  },
+  "memory_guard": {
+    "free_floor_percent": 40,
+    "minimum_observed_percent": 58,
+    "timeout_seconds": 900,
+    "exit_code": 124
+  },
+  "qualification": "Not established: reset, fuse setup and BootGo complete, then simulation remains in ROM flow through the 900-second bound. No AES DMA request, testcase result or normal finish is recorded. This does not establish a checker failure; the full-top DMA path remains unqualified with the checker enabled.",
+  "simulation_firmware_image_sha256": {
+    "program.hex": "cd49d90a097d228bb80205cd83acb99328bc647ecb7a4241b9f86787d64ba6f9",
+    "dccm.hex": "87bbad8babf1d52044a768e02b5e3be05020144cc123fba96bd90339d67acff1",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "riscv_compiler_version": "xPack GNU RISC-V Embedded GCC 13.4.0 (arm64)"
+}

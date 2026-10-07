@@ -23,10 +23,13 @@ full-top traces above predate this change and do not qualify DMA traffic with
 the checker enabled. The guarded `axi/tests/run_caliptra_axi_complex_bfm.sh`
 regression passed with its checker enabled: AXI error injection, SRAM/FIFO
 traffic, FIFO controls, recovery availability, and randomized stalls passed;
-minimum free RAM was 56% against a 40% floor. A full-top DMA replay with the
-checker enabled is still needed to qualify the complete path. The current
-full-top source profile separately elaborated under IEEE 2017 with the checker
-enabled (`iverilog -tnull`): 17 compiler warnings, zero errors, and 58% minimum
+minimum free RAM was 56% against a 40% floor. A checker-enabled first-AES
+replay timed out in ROM flow before DMA; see the
+[2026-10-07 result](../caliptra-bfm-fulltop-checker-dma-20261007/README.md).
+A completed full-top DMA pass with the checker enabled is still needed to
+qualify the complete path. The current full-top source profile separately
+elaborated under IEEE 2017 with the checker enabled (`iverilog -tnull`): 17
+compiler warnings, zero errors, and 58% minimum
 free RAM against the same 40% floor. This is compile evidence only; it did not
 run Caliptra firmware.
 
