@@ -78,12 +78,14 @@ so those base timestamps are recording metadata rather than equality fields.
 
 The typed config/VIF handoff and component bases are exercised with a
 self-authored active/passive environment. Generated Caliptra ECC `test_top`
-and agent construction now reach the actual ECC DUT for an interrupt-enable
-register write/read through the generated driver's BFM tasks; the generated
-reset scoreboard matches in both IEEE editions. Generated status-agent
-monitoring also has a focused runtime probe. Cryptographic ECC operation
-results, broader generated-environment traffic, and full generated
-`hdl_top`/`hvl_top` qualification remain open.
+and agent construction reach the actual ECC DUT for an interrupt-enable
+register write/read through the generated driver's BFM tasks. The generated
+reset scoreboard matches in both IEEE editions, and the generated keygen
+sequence matches its predicted result in both editions. Key signing,
+verification, ECDH shared-key operations, broader generated-environment
+traffic, and full generated `hdl_top`/`hvl_top` qualification remain open; see
+the [generated ECC runtime evidence](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md).
+Generated status-agent monitoring also has a focused runtime probe.
 The generated SHA-512 `SHA512_random_test` also runs against actual
 `sha512_ctrl` RTL through the clean-room base. The stock generated output
 monitor publishes a reset-only zero sample that shifts the expected/actual
