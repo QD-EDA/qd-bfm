@@ -389,6 +389,9 @@ name active/passive smoke also carries four-beat items through all three keyed
 streams; Icarus reports the expected warning that proprietary internal QVIP
 covergroups are not recreated. See
 [`AHB QVIP compatibility evidence`](../../../evidence/caliptra-bfm-ahb-qvip-compat-20261004/README.md).
+Run `tests/run_ahb_lite_uvm_agent.sh +AHB_RESET_ABORT_ONLY` to reset during a
+stalled four-beat request and check the aborted-beat response, monitor discard,
+and post-reset traffic path.
 
 `caliptra_ahb_qvip_compat_pkg.sv` adds the consumer-facing names
 `qvip_ahb_lite_slave_params_pkg`, `qvip_ahb_lite_slave_pkg`,
