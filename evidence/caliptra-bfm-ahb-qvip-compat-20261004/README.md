@@ -189,10 +189,15 @@ RAL, observes actual `abr_top.busy_o` with a 500,000-cycle watchdog, checks
 READY/VALID, and reads one word each from the public and private key memories.
 This path is **not qualified yet**. A 600-second RTL attempt produced the
 predictor's keygen files but timed out while polling status through AHB; minimum
-free memory was 63%. The revised busy-signal version was stopped by the
-unchanged 60% guard when free memory reached 59%, before elaboration completed.
-No keygen scoreboard result is claimed. The earlier `--actual-rtl-smoke` run
-remains the passing generated RAL seed/version probe.
+free memory was 63%. The revised busy-signal harness passes `--compile-only`
+against the actual-RTL file list at 69% minimum free memory. Its VVP runtime
+timed out at the 600-second default with 69% minimum free memory. A direct
+guarded rerun of that compiled VVP started the generated test, issued the
+seed/CTRL operations, and logged the predictor keygen launch at 465,000 ns.
+The unchanged 60% guard then stopped it at 59% free memory before key
+readback; no keygen scoreboard result is claimed. The earlier
+`--actual-rtl-smoke` run remains the passing generated RAL seed/version probe;
+the updated shared runner has not been rerun in that mode.
 
 ```sh
 python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
@@ -203,11 +208,14 @@ python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
 python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
   --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN" \
   --vvp "$VVP_BIN" --actual-keygen-smoke
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN" \
+  --actual-keygen-smoke --compile-only
 ```
 
 The run used Icarus 13.0 development build `9bd5082b8` with UVM support.
 SHA-256 for the runner:
 
 ```text
-c8a7691f18bfbb73eb0934083e7130f9decfae34f3eb1356ba58166ad3bad94f  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
+4b05b3daea2d9444a38e9e01888ffa8fd90c9714f51e95f089c376ad187859ac  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```

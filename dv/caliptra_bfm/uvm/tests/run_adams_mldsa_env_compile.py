@@ -151,8 +151,15 @@ def main() -> int:
         action="store_true",
         help="run generated-RAL MLDSA keygen and score PK/SK readback against abr_top",
     )
+    parser.add_argument(
+        "--compile-only",
+        action="store_true",
+        help="compile the selected actual-RTL harness without starting VVP",
+    )
     args = parser.parse_args()
     actual_rtl = args.actual_rtl_smoke or args.actual_keygen_smoke
+    if args.compile_only and not actual_rtl:
+        parser.error("--compile-only requires --actual-rtl-smoke or --actual-keygen-smoke")
 
     adams = args.adamsbridge_root.resolve()
     if subprocess.check_output(["git", "-C", str(adams), "rev-parse", "HEAD"], text=True).strip() != COMMIT:
@@ -169,7 +176,7 @@ def main() -> int:
         runtime = temp / "runtime"
         runtime.mkdir()
         expected_pass = "PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB"
-        if args.actual_keygen_smoke:
+        if args.actual_keygen_smoke and not args.compile_only:
             ref_source = adams / "src/abr_top/uvmf/Dilithium_ref/dilithium/ref"
             ref_copy = temp / "dilithium-ref"
             shutil.copytree(ref_source, ref_copy)
@@ -310,7 +317,7 @@ def main() -> int:
                 abr_reg_text.replace("UVM_NO_ENDIAN", "UVM_LITTLE_ENDIAN")
             )
         binary = temp / "adams_mldsa_runtime.vvp"
-        output_option = ["-o", str(binary)] if actual_rtl else ["-tnull"]
+        output_option = ["-tnull"] if args.compile_only or not actual_rtl else ["-o", str(binary)]
         command = [
             args.iverilog,
             "-uvm",
@@ -357,7 +364,7 @@ def main() -> int:
         else:
             command.append(str(top))
         subprocess.run(command, cwd=repo, env=environment, check=True)
-        if actual_rtl:
+        if actual_rtl and not args.compile_only:
             result = subprocess.run(
                 [args.vvp, str(binary)],
                 cwd=runtime,
@@ -374,7 +381,9 @@ def main() -> int:
                 return result.returncode or 1
             if args.actual_keygen_smoke and not (runtime / "keygen.log").is_file():
                 raise SystemExit("MLDSA predictor did not invoke the native keygen helper")
-    if not actual_rtl:
+    if args.compile_only:
+        print("PASS: generated Adams Bridge actual-RTL harness compiles")
+    elif not actual_rtl:
         print("PASS: pinned Adams Bridge MLDSA environment, predictor, scoreboard, and RAL package compile")
     return 0
 
