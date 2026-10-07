@@ -383,9 +383,10 @@ The generated-name `ahb_reg_predictor` expands a grouped item into fresh
 single-beat records at incrementing addresses before calling the stock UVM
 predictor; successful beats update their individual RAL mirrors, while ERROR
 beats are skipped. Single-beat records retain the stock predictor path. The
-agent smoke checks four-beat read/write mirror updates and a partial burst
-whose successful beat predicts while its ERROR beat leaves the next mirror
-unchanged.
+64-bit agent smoke checks four-beat read/write mirror updates and a partial
+burst whose successful beat predicts while its ERROR beat leaves the next
+mirror unchanged. The generated-name QVIP smoke exercises the same predictor
+through the 32-bit MVC profile and checks all four mirrors.
 The pin proxy zero-fills its fixed 256-lane response vector and copies only
 completed beats into it, keeping scalar register access proportional to the
 actual transfer count while preserving partial-ERROR lane contents.

@@ -115,11 +115,51 @@ module tb_ahb_qvip_compat_env;
     endfunction
   endclass
 
+  class ahb_qvip_ral_reg extends uvm_reg;
+    uvm_reg_field value;
+    `uvm_object_utils(ahb_qvip_ral_reg)
+
+    function new(string name = "ahb_qvip_ral_reg");
+      super.new(name, AHB_MVC_DATA_WIDTH, UVM_NO_COVERAGE);
+    endfunction
+
+    virtual function void build();
+      value = uvm_reg_field::type_id::create("value");
+      value.configure(this, AHB_MVC_DATA_WIDTH, 0, "RW", 0, 0, 1, 0, 0);
+    endfunction
+  endclass
+
+  class ahb_qvip_ral_block extends uvm_reg_block;
+    ahb_qvip_ral_reg burst_csr[4];
+    `uvm_object_utils(ahb_qvip_ral_block)
+
+    function new(string name = "ahb_qvip_ral_block");
+      super.new(name, UVM_NO_COVERAGE);
+    endfunction
+
+    virtual function void build();
+      default_map = create_map("default_map", 0, AHB_MVC_DATA_WIDTH / 8,
+                               UVM_LITTLE_ENDIAN, 1);
+      foreach (burst_csr[i]) begin
+        burst_csr[i] = ahb_qvip_ral_reg::type_id::create(
+          $sformatf("burst_csr_%0d", i));
+        burst_csr[i].configure(this);
+        burst_csr[i].build();
+        default_map.add_reg(burst_csr[i],
+          32'h80 + (i * (AHB_MVC_DATA_WIDTH / 8)), "RW");
+      end
+      lock_model();
+    endfunction
+  endclass
+
   class ahb_qvip_compat_test extends uvm_test;
     qvip_ahb_lite_slave_env_configuration configuration;
     qvip_ahb_lite_slave_env_configuration passive_configuration;
     qvip_ahb_lite_slave_environment#() qvip_ahb_lite_slave_subenv;
     qvip_ahb_lite_slave_environment#() passive_qvip_ahb_lite_slave_subenv;
+    ahb_qvip_ral_block ral_model;
+    ahb_lite_caliptra_reg_adapter ral_adapter;
+    ahb_reg_predictor #(ahb_lite_slave_0_transfer_t) burst_predictor;
     ahb_qvip_stream_sink predictor_sink;
     ahb_qvip_stream_sink scoreboard_sink;
     ahb_qvip_stream_sink coverage_sink;
@@ -200,6 +240,12 @@ module tb_ahb_qvip_compat_env;
       passive_qvip_ahb_lite_slave_subenv = qvip_ahb_lite_slave_environment#()::type_id::create(
         "passive_qvip_ahb_lite_slave_subenv", this);
       passive_qvip_ahb_lite_slave_subenv.set_config(passive_configuration);
+      ral_model = ahb_qvip_ral_block::type_id::create("ral_model");
+      ral_model.build();
+      ral_adapter = ahb_lite_caliptra_reg_adapter::type_id::create("ral_adapter");
+      ral_adapter.set_bus_data_width(AHB_MVC_DATA_WIDTH);
+      burst_predictor = ahb_reg_predictor #(ahb_lite_slave_0_transfer_t)::type_id::create(
+        "burst_predictor", this);
       predictor_sink = ahb_qvip_stream_sink::type_id::create("predictor_sink", this);
       scoreboard_sink = ahb_qvip_stream_sink::type_id::create("scoreboard_sink", this);
       coverage_sink = ahb_qvip_stream_sink::type_id::create("coverage_sink", this);
@@ -216,6 +262,10 @@ module tb_ahb_qvip_compat_env;
         coverage_sink.analysis_export);
       passive_qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.ap["burst_transfer"].connect(
         passive_sink.analysis_export);
+      qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.ap["burst_transfer"].connect(
+        burst_predictor.bus_item_export);
+      burst_predictor.map = ral_model.default_map;
+      burst_predictor.adapter = ral_adapter;
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -240,6 +290,15 @@ module tb_ahb_qvip_compat_env;
           coverage_sink.write_count != 2 || coverage_sink.read_count != 2 ||
           coverage_sink.burst_write_count != 1 || coverage_sink.burst_read_count != 1)
         `uvm_fatal("AHB_QVIP_COUNTS", "Generated-name analysis streams missed AHB read/write items")
+      if (ral_model.burst_csr[0].get_mirrored_value() !==
+            (64'h0102_0304_0506_0708 & AHB_MVC_DATA_MASK) ||
+          ral_model.burst_csr[1].get_mirrored_value() !==
+            (64'h1112_1314_1516_1718 & AHB_MVC_DATA_MASK) ||
+          ral_model.burst_csr[2].get_mirrored_value() !==
+            (64'h2122_2324_2526_2728 & AHB_MVC_DATA_MASK) ||
+          ral_model.burst_csr[3].get_mirrored_value() !==
+            (64'h3132_3334_3536_3738 & AHB_MVC_DATA_MASK))
+        `uvm_fatal("AHB_QVIP_RAL_BURST", "Generated-name predictor did not update every burst register mirror")
       if (predictor_sink.last_item == scoreboard_sink.last_item ||
           predictor_sink.last_item == coverage_sink.last_item ||
           scoreboard_sink.last_item == coverage_sink.last_item)
