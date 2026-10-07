@@ -41,13 +41,22 @@ IVERILOG_BIN="$PWD/driver/iverilog" VVP_BIN="$PWD/vvp/vvp" \
 The other captured runner commands are the corresponding scripts under
 `dv/caliptra_bfm/axi/tests/` with the same environment variables.
 
+## All-channel backpressure checks — 2026-10-07
+
+The focused checker regression now injects payload changes while AW, W, B, AR,
+and R are each stalled. All five stability checks reject the corrupted
+payloads; the complete suite accepts its valid reorder/exclusive/narrow cases
+and rejects all forty injected protocol violations. The 2026-10-07 run used a
+40% free-memory floor and observed 59% minimum free RAM.
+
 ## SHA-256
 
 | File | SHA-256 |
 | --- | --- |
 | `dv/caliptra_bfm/axi/axi4_caliptra_checker.sv` | `e5be951cb9a2600e8d743d6d36d828463de3c581366d547a359b3d4a4d5cf4fe` |
-| `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_checker.sv` | `9657ab4ff8dae53c3295dddd9d4218197429c6d881f852618095459d4c0029f9` |
-| `dv/caliptra_bfm/axi/tests/run_checker.sh` | `f889cb6b7c6d4fc9ad36553c51d71b754e3a75b798e10781d14698edf23a15b1` |
+| `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_checker.sv` | `078b071239816a52dcb90768058298bd229d53d375ea678f3ac8ea6396b16b9a` |
+| `dv/caliptra_bfm/axi/tests/run_checker.sh` | `79171f6a65a13866eacd368139dacce026524c495fc4a29aa884e7bf65b39809` |
+| historical `dv/caliptra_bfm/axi/tests/run_checker.sh` | `f889cb6b7c6d4fc9ad36553c51d71b754e3a75b798e10781d14698edf23a15b1` |
 | `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_memory_subordinate.sv` | `5e3d4777a9c54940f38bf3455999bf10caefb8bb164b78c267ec6cb947d5a225` |
 | `docs/conformance/caliptra_bfm_research_2026-10-03.md` | `b70861f68a6e8cf4f5477f8c56275504095ebbad88474e5bbaf1301ba2b48c84` |
 | `run-checker.log` | `4751bbc31a808c8c5c7334c1682bd83333222e100cd8a119c542351a53836bf1` |

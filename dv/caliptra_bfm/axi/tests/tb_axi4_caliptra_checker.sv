@@ -189,6 +189,21 @@ module tb_axi4_caliptra_checker;
       step();
       @(negedge ACLK); AWADDR = 19'h104;
       step();
+    end else if (test_case == "BAD_W_STABILITY") begin
+      @(negedge ACLK); WVALID = 1; WREADY = 0; WDATA = 32'h1; WLAST = 1;
+      step();
+      @(negedge ACLK); WDATA = 32'h2;
+      step();
+    end else if (test_case == "BAD_B_STABILITY") begin
+      @(negedge ACLK); BVALID = 1; BREADY = 0; BID = 8'h14; BRESP = 2'b00;
+      step();
+      @(negedge ACLK); BRESP = 2'b10;
+      step();
+    end else if (test_case == "BAD_AR_STABILITY") begin
+      ARVALID = 1; ARREADY = 0; ARADDR = 19'h100; ARUSER = 32'h1;
+      step();
+      @(negedge ACLK); ARADDR = 19'h104;
+      step();
     end else if (test_case == "BAD_R_STABILITY") begin
       send_ar(8'h2, 19'h100, 0);
       @(negedge ACLK); RID = 8'h2; RDATA = 32'h1; RLAST = 1; RVALID = 1; RREADY = 0;

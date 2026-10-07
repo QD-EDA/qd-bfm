@@ -26,6 +26,9 @@ trap 'rm -f "$out" "$log"' EXIT
 
 for entry in \
   'BAD_AW_STABILITY:AW payload changed' \
+  'BAD_W_STABILITY:W payload changed' \
+  'BAD_B_STABILITY:B payload changed' \
+  'BAD_AR_STABILITY:AR payload changed' \
   'BAD_R_STABILITY:R payload changed' \
   'BAD_WLAST:AXI W burst has' \
   'BAD_NO_WLAST:WLAST missing on final' \
@@ -74,4 +77,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected thirty-seven injected protocol violations\n'
+printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected forty injected protocol violations\n'
