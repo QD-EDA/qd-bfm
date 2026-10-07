@@ -285,11 +285,15 @@ Caliptra's interface does not expose CACHE, PROT, QOS, or REGION; the checker
 cannot observe or validate those signals. It applies the Caliptra profile's
 aligned-transfer requirement and requires an exclusive write to follow a
 completed exclusive read with matching ID, address, length, size, and burst.
-This does not model exclusive-monitor success/failure due to intervening writes.
-It rejects EXOKAY on ordinary reads/writes and rejects mixed
+The checker tracks that per-ID monitor through the strobed W bytes: an
+overlapping write before the exclusive AW invalidates it. It permits the
+resulting failed exclusive write to return OKAY and rejects EXOKAY after
+invalidation. This byte-level tracking matches the open memory subordinate and
+follows [Arm IHI0022L A7.3.4](https://documentation-service.arm.com/static/68b03beb01ae952d9559f9eb).
+The checker also rejects EXOKAY on ordinary reads/writes and mixed
 EXOKAY/non-EXOKAY beats within one exclusive read; a failed exclusive read may
-consistently return a non-EXOKAY status. The rule follows
-[Arm IHI0022L A7.3.4](https://documentation-service.arm.com/static/68b03beb01ae952d9559f9eb).
+consistently return a non-EXOKAY status, after which a matching exclusive write
+can only return OKAY.
 The WSTRB lane check follows
 [Arm IHI0022L A4.2.1/A4.2.2](https://documentation-service.arm.com/static/68b03beb01ae952d9559f9eb).
 Mailbox USER policy and ARM Axi4PC's complete assertion set are also outside
@@ -303,7 +307,8 @@ does not impose a wall-clock response timeout; that policy belongs to the
 testbench or active BFM.
 
 Run the stalled multi-beat case, legal W-before-AW and cross-ID response
-reordering, exclusive and narrow transfers, and thirty-three negative controls with:
+reordering, exclusive-monitor invalidation, narrow transfers, and thirty-seven
+negative controls with:
 
 ```sh
 ./tests/run_checker.sh

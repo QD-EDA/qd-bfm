@@ -123,6 +123,15 @@ module tb_axi4_caliptra_checker;
     end
   endtask
 
+  task automatic complete_locked_read_failed(input [7:0] id);
+    integer beat;
+    begin
+      RRESP = 2'b00;
+      for (beat = 0; beat < 4; beat = beat + 1)
+        send_r(id, beat == 3, 1);
+    end
+  endtask
+
   initial begin
     if ($value$plusargs("CASE=%s", test_case)) begin end
     repeat (2) step();
@@ -275,6 +284,123 @@ module tb_axi4_caliptra_checker;
       complete_locked_read(8'h30);
       AWBURST = 0;
       send_locked_aw(8'h30, 19'h110, 3);
+    end else if (test_case == "GOOD_LOCK_INVALIDATED_OKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read(8'h31);
+      send_aw(8'h32, 19'h114, 0);
+      send_w(32'h1, 1);
+      send_b(8'h32);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      send_b(8'h31);
+    end else if (test_case == "GOOD_LOCK_NONOVERLAP_EXOKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read(8'h31);
+      send_aw(8'h32, 19'h120, 0);
+      send_w(32'h1, 1);
+      send_b(8'h32);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "GOOD_LOCK_ZERO_STROBE_EXOKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read(8'h31);
+      send_aw(8'h32, 19'h110, 0);
+      WSTRB = 4'b0000;
+      send_w(32'h1, 1);
+      send_b(8'h32);
+      WSTRB = 4'hf;
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "BAD_LOCK_INVALIDATED_EXOKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read(8'h31);
+      send_aw(8'h32, 19'h114, 0);
+      send_w(32'h1, 1);
+      send_b(8'h32);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "GOOD_LOCK_ACTIVE_EXOKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read(8'h31);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      send_aw(8'h32, 19'h114, 0);
+      send_w(32'h1, 1);
+      send_b(8'h32);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "GOOD_LOCK_READ_FAIL_OKAY") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read_failed(8'h31);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      send_b(8'h31);
+    end else if (test_case == "BAD_LOCK_READ_FAIL_EXOK") begin
+      send_locked_ar(8'h31, 19'h110, 3);
+      complete_locked_read_failed(8'h31);
+      send_locked_aw(8'h31, 19'h110, 3);
+      send_w(32'h3210, 0);
+      send_w(32'h3211, 0);
+      send_w(32'h3212, 0);
+      send_w(32'h3213, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "BAD_LOCK_PARTIAL_OVERLAP_EXOKAY") begin
+      ARSIZE = 0; AWSIZE = 0;
+      send_locked_ar(8'h31, 19'h10f, 0);
+      RRESP = 2'b01;
+      send_r(8'h31, 1, 1);
+      send_aw(8'h32, 19'h10f, 1);
+      WSTRB = 4'b1000;
+      send_w(32'h1, 0);
+      send_locked_aw(8'h31, 19'h10f, 0);
+      WSTRB = 4'b0001;
+      send_w(32'h2, 1);
+      send_b(8'h32);
+      WSTRB = 4'b1000;
+      send_w(32'h3, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
+    end else if (test_case == "BAD_LOCK_W_BEFORE_AW_EXOKAY") begin
+      ARSIZE = 0; AWSIZE = 0;
+      send_locked_ar(8'h31, 19'h110, 0);
+      RRESP = 2'b01;
+      send_r(8'h31, 1, 1);
+      WSTRB = 4'b0001;
+      send_w(32'h1, 0);
+      send_aw(8'h32, 19'h110, 1);
+      send_locked_aw(8'h31, 19'h110, 0);
+      WSTRB = 4'b0010;
+      send_w(32'h2, 1);
+      send_b(8'h32);
+      WSTRB = 4'b0001;
+      send_w(32'h3, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h31);
     end else if (test_case == "GOOD_EXCLUSIVE") begin
       send_locked_ar(8'h31, 19'h110, 3);
       complete_locked_read(8'h31);
@@ -329,6 +455,11 @@ module tb_axi4_caliptra_checker;
     end
 
     if (test_case != "GOOD" && test_case != "GOOD_REORDER" && test_case != "GOOD_EXCLUSIVE" &&
+        test_case != "GOOD_LOCK_INVALIDATED_OKAY" &&
+        test_case != "GOOD_LOCK_NONOVERLAP_EXOKAY" &&
+        test_case != "GOOD_LOCK_ZERO_STROBE_EXOKAY" &&
+        test_case != "GOOD_LOCK_ACTIVE_EXOKAY" &&
+        test_case != "GOOD_LOCK_READ_FAIL_OKAY" &&
         test_case != "GOOD_NARROW_INCR" && test_case != "GOOD_NARROW_FIXED" &&
         test_case != "GOOD_NARROW_WRAP")
       $fatal(1, "Expected injected checker failure for %0s", test_case);

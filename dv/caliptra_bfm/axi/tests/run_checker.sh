@@ -15,6 +15,11 @@ trap 'rm -f "$out" "$log"' EXIT
 "$VVP_BIN" "$out"
 "$VVP_BIN" "$out" +CASE=GOOD_REORDER
 "$VVP_BIN" "$out" +CASE=GOOD_EXCLUSIVE
+"$VVP_BIN" "$out" +CASE=GOOD_LOCK_INVALIDATED_OKAY
+"$VVP_BIN" "$out" +CASE=GOOD_LOCK_NONOVERLAP_EXOKAY
+"$VVP_BIN" "$out" +CASE=GOOD_LOCK_ZERO_STROBE_EXOKAY
+"$VVP_BIN" "$out" +CASE=GOOD_LOCK_ACTIVE_EXOKAY
+"$VVP_BIN" "$out" +CASE=GOOD_LOCK_READ_FAIL_OKAY
 "$VVP_BIN" "$out" +CASE=GOOD_NARROW_INCR
 "$VVP_BIN" "$out" +CASE=GOOD_NARROW_FIXED
 "$VVP_BIN" "$out" +CASE=GOOD_NARROW_WRAP
@@ -52,7 +57,11 @@ for entry in \
   'BAD_LOCK_MISMATCH:exclusive read/write request fields differ' \
   'BAD_LOCK_LEN_MISMATCH:exclusive read/write request fields differ' \
   'BAD_LOCK_SIZE_MISMATCH:exclusive read/write request fields differ' \
-  'BAD_LOCK_BURST_MISMATCH:exclusive read/write request fields differ'; do
+  'BAD_LOCK_BURST_MISMATCH:exclusive read/write request fields differ' \
+  'BAD_LOCK_INVALIDATED_EXOKAY:exclusive write returned EXOKAY after monitor invalidation' \
+  'BAD_LOCK_READ_FAIL_EXOK:exclusive write returned EXOKAY after monitor invalidation' \
+  'BAD_LOCK_PARTIAL_OVERLAP_EXOKAY:exclusive write returned EXOKAY after monitor invalidation' \
+  'BAD_LOCK_W_BEFORE_AW_EXOKAY:exclusive write returned EXOKAY after monitor invalidation'; do
   case_name=${entry%%:*}
   expected=${entry#*:}
   if "$VVP_BIN" "$out" "+CASE=$case_name" >"$log" 2>&1; then
@@ -65,4 +74,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted reordered, exclusive, and narrow transfers; rejected thirty-three injected protocol violations\n'
+printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected thirty-seven injected protocol violations\n'

@@ -50,7 +50,8 @@ module axi4_caliptra_checker #(
 );
   localparam integer DATA_BYTES = DATA_WIDTH / 8;
   localparam integer ID_COUNT = 1 << ID_WIDTH;
-  localparam [1:0] EXCL_NONE = 2'd0, EXCL_PENDING = 2'd1, EXCL_COMPLETE = 2'd2;
+  localparam [1:0] EXCL_NONE = 2'd0, EXCL_PENDING = 2'd1,
+                   EXCL_COMPLETE = 2'd2, EXCL_INVALIDATED = 2'd3;
 
   reg aw_stalled, w_stalled, b_stalled, ar_stalled, r_stalled;
   reg [ID_WIDTH+ADDR_WIDTH+8+3+2+1+USER_WIDTH-1:0] aw_hold;
@@ -71,6 +72,9 @@ module axi4_caliptra_checker #(
   // the pinned Caliptra interface omits AXI's CACHE, PROT, and REGION fields.
   reg [1:0] exclusive_read_state [0:ID_COUNT-1];
   reg [ADDR_WIDTH+8+3+2-1:0] exclusive_read_shape [0:ID_COUNT-1];
+  reg [63:0] exclusive_read_start [0:ID_COUNT-1];
+  reg [63:0] exclusive_read_end [0:ID_COUNT-1];
+  reg write_exclusive_success_possible [0:ID_COUNT-1];
 
   reg [8:0] expected_beats [0:QUEUE_DEPTH-1];
   reg [ID_WIDTH-1:0] expected_id [0:QUEUE_DEPTH-1];
@@ -82,6 +86,7 @@ module axi4_caliptra_checker #(
   integer expected_read, expected_write, expected_count;
   integer observed_read, observed_write, observed_count;
   reg [8:0] write_beats_in_progress;
+  reg [63:0] burst_start, burst_end;
 
   integer i;
 
@@ -153,6 +158,79 @@ module axi4_caliptra_checker #(
     end
   endtask
 
+  task automatic get_burst_range(
+    input [ADDR_WIDTH-1:0] addr,
+    input [7:0] len,
+    input [2:0] size,
+    input [1:0] burst,
+    output reg [63:0] range_start,
+    output reg [63:0] range_end
+  );
+    reg [63:0] bytes_per_beat;
+    reg [63:0] span;
+    reg [63:0] wrap_base;
+    begin
+      bytes_per_beat = 64'd1 << size;
+      span = ({56'd0, len} + 1) * bytes_per_beat;
+      case (burst)
+        2'b00: begin
+          range_start = addr;
+          range_end = range_start + bytes_per_beat;
+        end
+        2'b10: begin
+          wrap_base = (addr / span) * span;
+          range_start = wrap_base;
+          range_end = wrap_base + span;
+        end
+        default: begin
+          range_start = addr;
+          range_end = range_start + span;
+        end
+      endcase
+    end
+  endtask
+
+  task automatic invalidate_exclusive_byte(input [63:0] byte_address);
+    integer monitor_id;
+    begin
+      for (monitor_id = 0; monitor_id < ID_COUNT; monitor_id = monitor_id + 1) begin
+        if (exclusive_read_state[monitor_id] != EXCL_NONE &&
+            byte_address >= exclusive_read_start[monitor_id] &&
+            byte_address < exclusive_read_end[monitor_id])
+          exclusive_read_state[monitor_id] = EXCL_INVALIDATED;
+      end
+    end
+  endtask
+
+  task automatic invalidate_for_write_beat(
+    input [ADDR_WIDTH-1:0] addr,
+    input [7:0] len,
+    input [2:0] size,
+    input [1:0] burst,
+    input [DATA_BYTES-1:0] strobes,
+    input integer beat_index
+  );
+    reg [63:0] beat_bytes;
+    reg [63:0] span;
+    reg [63:0] wrap_base;
+    reg [63:0] beat_address;
+    integer lane;
+    begin
+      beat_bytes = 64'd1 << size;
+      span = ({56'd0, len} + 1) * beat_bytes;
+      beat_address = addr + beat_index * beat_bytes;
+      if (burst == 2'b10) begin
+        wrap_base = (addr / span) * span;
+        if (beat_address >= wrap_base + span)
+          beat_address = wrap_base + ((beat_address - wrap_base) % span);
+      end
+      for (lane = 0; lane < DATA_BYTES; lane = lane + 1) begin
+        if (strobes[lane])
+          invalidate_exclusive_byte((beat_address / DATA_BYTES) * DATA_BYTES + lane);
+      end
+    end
+  endtask
+
   task automatic pair_write_data;
     reg [ID_WIDTH-1:0] id;
     reg [DATA_BYTES-1:0] allowed_strobe;
@@ -183,6 +261,11 @@ module axi4_caliptra_checker #(
           end
           if ((observed_strobes[observed_read][beat_index] & ~allowed_strobe) !== {DATA_BYTES{1'b0}})
             $fatal(1, "AXI WSTRB enables bytes outside the AW address/AWSIZE lanes");
+          for (byte_index = 0; byte_index < DATA_BYTES; byte_index = byte_index + 1) begin
+            if (observed_strobes[observed_read][beat_index][byte_index] &&
+                (!wr_exclusive[id] || write_exclusive_success_possible[id]))
+              invalidate_exclusive_byte((beat_address / DATA_BYTES) * DATA_BYTES + byte_index);
+          end
           case (expected_burst[expected_read])
             2'b01: beat_address = beat_address + beat_bytes;
             2'b10: begin
@@ -249,6 +332,9 @@ module axi4_caliptra_checker #(
         rd_response_seen[i] = 0;
         rd_response_exokay[i] = 0;
         exclusive_read_state[i] = EXCL_NONE;
+        exclusive_read_start[i] = 0;
+        exclusive_read_end[i] = 0;
+        write_exclusive_success_possible[i] = 0;
       end
     end else begin
       if ((^{AWVALID, AWREADY, WVALID, WREADY, BVALID, BREADY,
@@ -291,6 +377,14 @@ module axi4_caliptra_checker #(
       if (AWVALID && AWREADY) begin
         check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
         if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
+        if (expected_count == 0 && observed_count == 0 && write_beats_in_progress != 0) begin
+          for (i = 0; i < write_beats_in_progress; i = i + 1) begin
+            if (!AWLOCK)
+              invalidate_for_write_beat(AWADDR, AWLEN, AWSIZE, AWBURST,
+                                        observed_strobes[observed_write][i], i);
+          end
+        end
+        write_exclusive_success_possible[AWID] = 0;
         if (AWLOCK) begin
           if (exclusive_read_state[AWID] == EXCL_NONE)
             $fatal(1, "AXI exclusive write has no completed exclusive read");
@@ -298,6 +392,8 @@ module axi4_caliptra_checker #(
             $fatal(1, "AXI exclusive write issued before the read completes");
           if (exclusive_read_shape[AWID] !== {AWADDR, AWLEN, AWSIZE, AWBURST})
             $fatal(1, "AXI exclusive read/write request fields differ");
+          write_exclusive_success_possible[AWID] =
+            (exclusive_read_state[AWID] == EXCL_COMPLETE);
           exclusive_read_state[AWID] = EXCL_NONE;
         end
         if (wr_active[AWID]) $fatal(1, "AXI Caliptra profile allows one outstanding write per ID");
@@ -331,6 +427,13 @@ module axi4_caliptra_checker #(
         if ((expected_count > 0) &&
             (write_beats_in_progress == expected_beats[expected_read]) && !WLAST)
           $fatal(1, "AXI WLAST missing on final AWLEN beat");
+        if (expected_count > 0 &&
+            (!wr_exclusive[expected_id[expected_read]] ||
+             write_exclusive_success_possible[expected_id[expected_read]]))
+          invalidate_for_write_beat(
+            expected_addr[expected_read], expected_beats[expected_read] - 1'b1,
+            expected_size[expected_read], expected_burst[expected_read], WSTRB,
+            write_beats_in_progress - 1'b1);
         if (WLAST) begin
           if (observed_count == QUEUE_DEPTH) $fatal(1, "AXI checker W queue overflow");
           observed_beats[observed_write] = write_beats_in_progress;
@@ -346,9 +449,13 @@ module axi4_caliptra_checker #(
           $fatal(1, "AXI B response ID has no completed write transaction");
         if ((BRESP == 2'b01) && !wr_exclusive[BID])
           $fatal(1, "AXI B response is EXOKAY for a non-exclusive write");
+        if (wr_exclusive[BID] && (BRESP == 2'b01) &&
+            !write_exclusive_success_possible[BID])
+          $fatal(1, "AXI exclusive write returned EXOKAY after monitor invalidation");
         wr_active[BID] = 0;
         wr_data_done[BID] = 0;
         wr_exclusive[BID] = 0;
+        write_exclusive_success_possible[BID] = 0;
       end
 
       if (ARVALID && ARREADY) begin
@@ -361,6 +468,10 @@ module axi4_caliptra_checker #(
         if (ARLOCK) begin
           exclusive_read_state[ARID] = EXCL_PENDING;
           exclusive_read_shape[ARID] = {ARADDR, ARLEN, ARSIZE, ARBURST};
+          get_burst_range(ARADDR, ARLEN, ARSIZE, ARBURST,
+                          burst_start, burst_end);
+          exclusive_read_start[ARID] = burst_start;
+          exclusive_read_end[ARID] = burst_end;
         end
         rd_beats_left[ARID] = {1'b0, ARLEN} + 1'b1;
       end
@@ -385,7 +496,7 @@ module axi4_caliptra_checker #(
           rd_beats_left[RID] = 0;
           rd_active[RID] = 0;
           if (exclusive_read_state[RID] == EXCL_PENDING)
-            exclusive_read_state[RID] = EXCL_COMPLETE;
+            exclusive_read_state[RID] = rd_response_exokay[RID] ? EXCL_COMPLETE : EXCL_INVALIDATED;
         end else begin
           rd_beats_left[RID] = rd_beats_left[RID] - 1'b1;
         end
