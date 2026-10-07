@@ -27,3 +27,13 @@ in a vector context). The memory guard observed 56% minimum free RAM against
 the 40% floor. The 245 MB compile log was hashed
 (`01f0dcacb067343bed23e816ecf15e55416e678c402be02cfd3f90b432b0e776`) and
 removed. This retry provides no checker or DMA result.
+
+A second bounded attempt used Homebrew Icarus 13 with a temporary command
+adapter translating `-g2017` to `-g2012` and dropping the unsupported
+`-gcommercial-unsafe` option. Compilation stopped on unsupported Caliptra RTL
+syntax (`caliptra_sram.sv`, `ahb_slv_sif.sv`, `pv_gen_hash.sv`, and other
+files), before simulation. The guard observed 60% minimum free RAM against
+the 40% floor. Its 1.5 MB compile output was hashed
+(`2d4cbbfaedbbc5bf2be8b63709914c08911664767e32836f342b1b13b92c485f`) and
+removed. This does not qualify stock Icarus 13 as a replacement for the
+development compiler needed by the full-top flow.
