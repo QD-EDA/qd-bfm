@@ -84,6 +84,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   integer generated_case_index = 0;
   integer auto_fifo_source_push_count = 0;
   integer auto_fifo_source_pop_count = 0;
+  integer recovery_fifo_push_count = 0;
   dma_transfer_type_e generated_dma_xfer_type;
   bit generated_route_ready = 0;
   bit mailbox_case = 0;
@@ -139,7 +140,15 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     if (!rst_n) begin
       auto_fifo_source_push_count <= 0;
       auto_fifo_source_pop_count <= 0;
+      recovery_fifo_push_count <= 0;
     end else begin
+      if (fifo_recovery_case && fifo_push_event &&
+          recovery_fifo_push_count < active_word_count) begin
+        // Record each generated word before a route can consume it; a complete
+        // AXI monitor item may be published after the first mailbox write.
+        expected_payload[recovery_fifo_push_count] <= dma_target.bfm.i_fifo.auto_wdata;
+        recovery_fifo_push_count <= recovery_fifo_push_count + 1;
+      end
       if (auto_fifo_source_case && fifo_push_event) begin
         if (auto_fifo_source_push_count >= active_word_count)
           $fatal(1, "FIFO source producer exceeded %0d words", active_word_count);
@@ -560,6 +569,28 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                 `uvm_fatal("DMA_TOP_ERROR_TAIL", $sformatf("Unexpected destination write after error at word %0d", word))
               end
             end
+          end else if (env.scoreboard.expect_fifo_recovery) begin
+            expected_recovery_read_bursts =
+                (active_word_count + env.scoreboard.recovery_burst_words - 1) /
+                env.scoreboard.recovery_burst_words;
+            expected_recovery_write_bursts =
+                (active_word_count + env.scoreboard.recovery_write_burst_words - 1) /
+                env.scoreboard.recovery_write_burst_words;
+            if ($test$plusargs("AXI2MBOX_CASE")) begin
+              wait (run_done && env.scoreboard.write_count == 0 &&
+                    env.scoreboard.read_count == expected_recovery_read_bursts &&
+                    env.scoreboard.read_word_offset == active_word_count &&
+                    mailbox_word_index == active_word_count);
+            end else if ($test$plusargs("AXI2AHB_CASE")) begin
+              wait (run_done && env.scoreboard.write_count == 0 &&
+                    env.scoreboard.read_count == expected_recovery_read_bursts &&
+                    env.scoreboard.read_word_offset == active_word_count);
+            end else begin
+              wait (run_done && env.scoreboard.write_count == expected_recovery_write_bursts &&
+                    env.scoreboard.read_count == expected_recovery_read_bursts &&
+                    env.scoreboard.write_word_offset == active_word_count &&
+                    env.scoreboard.read_word_offset == active_word_count);
+            end
           end else if ($test$plusargs("AXI2MBOX_CASE") || $test$plusargs("MBOX2AXI_CASE")) begin
             if ($test$plusargs("AXI2MBOX_CASE")) begin
               wait (run_done && env.scoreboard.read_count == 2 &&
@@ -586,17 +617,6 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   env.scoreboard.read_word_offset == WORD_COUNT &&
                   env.scoreboard.write_count == 5 &&
                   env.scoreboard.write_word_offset == WORD_COUNT);
-          end else if (env.scoreboard.expect_fifo_recovery) begin
-            expected_recovery_read_bursts =
-                (active_word_count + env.scoreboard.recovery_burst_words - 1) /
-                env.scoreboard.recovery_burst_words;
-            expected_recovery_write_bursts =
-                (active_word_count + env.scoreboard.recovery_write_burst_words - 1) /
-                env.scoreboard.recovery_write_burst_words;
-            wait (run_done && env.scoreboard.write_count == expected_recovery_write_bursts &&
-                  env.scoreboard.read_count == expected_recovery_read_bursts &&
-                  env.scoreboard.write_word_offset == active_word_count &&
-                  env.scoreboard.read_word_offset == active_word_count);
           end else if ($test$plusargs("GENERATED_CASE")) begin
             wait (generated_route_ready);
             case (generated_dma_xfer_type)
@@ -653,6 +673,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       disable fork;
       if (expect_dma_error)
         $display("PASS: actual Caliptra axi_dma_top propagated injected AXI SLVERR to DMA_ERROR after the aligned partial write");
+      else if (env.scoreboard.expect_fifo_recovery && mailbox_case)
+        $display("PASS: actual Caliptra axi_dma_top moved %0d FIFO words through %0d-byte recovery blocks into the mailbox", active_word_count, recovery_block_bytes);
+      else if (env.scoreboard.expect_fifo_recovery && axi2ahb_case)
+        $display("PASS: actual Caliptra axi_dma_top moved %0d FIFO words through %0d-byte recovery blocks into the component data register", active_word_count, recovery_block_bytes);
       else if (env.scoreboard.expect_fifo_recovery)
         $display("PASS: actual Caliptra axi_dma_top moved %0d auto-generated FIFO words through recovery blocks of %0d bytes", active_word_count, recovery_block_bytes);
       else if ($test$plusargs("GENERATED_CASE"))
@@ -679,9 +703,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     kv_rd_resp = '0;
     if (!$value$plusargs("RECOVERY_BLOCK_BYTES=%d", recovery_block_bytes))
       recovery_block_bytes = 64;
-    if ((recovery_block_bytes < 4) || (recovery_block_bytes > 64) ||
+    if ((recovery_block_bytes < 4) || (recovery_block_bytes > 2048) ||
         ((recovery_block_bytes & (recovery_block_bytes - 1)) != 0))
-      $fatal(1, "RECOVERY_BLOCK_BYTES must be a power of two from 4 through 64");
+      $fatal(1, "RECOVERY_BLOCK_BYTES must be a power of two from 4 through 2048");
     recovery_block_words = recovery_block_bytes / (DATA_WIDTH / 8);
     uvm_config_db#(uvm_active_passive_enum)::set(
       null, "uvm_test_top.env.agent", "is_active", UVM_PASSIVE);
@@ -954,6 +978,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     if (fifo_recovery_case && $test$plusargs("GENERATED_CASE")) begin
       if (!scenario.test_block_size || !scenario.src_is_fifo)
         $fatal(1, "Generated FIFO recovery replay requires a FIFO block-size record");
+      if ((scenario.dma_xfer_type == AXI2AXI) && (recovery_block_bytes > 64))
+        $fatal(1, "Caliptra AXI2AXI recovery blocks are limited to 64 bytes");
       dma_gen_block_size_bytes = testcase_generator_block_sizes;
       scenario.block_size = 12'(recovery_block_bytes);
       dma_gen_block_size_bytes[generated_case_index] = 12'(recovery_block_bytes);
@@ -961,13 +987,25 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
     end else if (fifo_recovery_case) begin
       // Icarus rejects the pinned class constraints for this recovery tuple.
+      if ((scenario.dma_xfer_type != AXI2AXI) &&
+          (scenario.dma_xfer_type != AXI2MBOX) &&
+          (scenario.dma_xfer_type != AXI2AHB))
+        $fatal(1, "FIFO recovery is unsupported on DMA route %0d", scenario.dma_xfer_type);
+      if ((scenario.dma_xfer_type == AXI2AXI) && (recovery_block_bytes > 64))
+        $fatal(1, "Caliptra AXI2AXI recovery blocks are limited to 64 bytes");
       scenario.src_is_fifo = 1'b1;
       scenario.use_rd_fixed = 1'b1;
       scenario.test_block_size = 1'b1;
       scenario.block_size = 12'(recovery_block_bytes);
-      scenario.dst_offset = 32'h640;
       SRC_ADDR = FIFO_BASE_ADDR;
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
+      if (scenario.dma_xfer_type == AXI2MBOX)
+        DST_ADDR = 48'(scenario.dst_offset);
+      else if (scenario.dma_xfer_type == AXI2AHB)
+        DST_ADDR = '0;
+      else begin
+        scenario.dst_offset = 32'h640;
+        DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
+      end
       dma_gen_block_size_bytes[0] = 12'(scenario.block_size);
     end else if (scenario.src_is_fifo) begin
       SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
@@ -1044,10 +1082,16 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       recovery_emulation = 1'b1;
       wait (recovery_data_avail === 1'b1);
     end
-    start_control = mailbox_case ? 32'h0001_0001 :
+    start_control = mailbox_case ?
+                    (32'h0001_0001 |
+                     (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
+                     (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)) :
                     mailbox_read_case ? 32'h0100_0001 :
                     ahb2axi_case ? 32'h0200_0001 :
-                    axi2ahb_case ? 32'h0002_0001 :
+                    axi2ahb_case ?
+                    (32'h0002_0001 |
+                     (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
+                     (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)) :
                     (32'h0303_0001 |
                      (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
                      (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0));

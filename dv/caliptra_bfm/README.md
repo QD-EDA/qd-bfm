@@ -300,15 +300,21 @@ actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
 [`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
-Other generated FIFO modes, firmware-triggered reset injection, and firmware
-remain open. This sweep covers one AXI FIXED request per block through the
-64-byte maximum at Caliptra's 32-bit DMA data width. An exploratory 128-byte
-override remained in Caliptra's `DMA_WAIT_DATA` state with 16 internal FIFO
-words buffered and `recovery_data_avail` asserted. That override is outside the
-pinned AXI2AXI randomizer constraint, which caps recovery blocks at 64 bytes;
-larger blocks on AXI2MBOX and AXI2AHB recovery routes remain unqualified.
+Other generated FIFO modes, firmware-triggered reset injection, and full
+firmware remain open. The generated AXI2AXI sweep covers one AXI FIXED request
+per recovery block through the 64-byte maximum at Caliptra's 32-bit DMA data
+width. An exploratory 128-byte AXI2AXI override remained in Caliptra's
+`DMA_WAIT_DATA` state with 16 internal FIFO words buffered and
+`recovery_data_avail` asserted; it is outside the pinned AXI2AXI constraint.
+Separate route-directed sweeps now pass 65 FIFO words through AXI2MBOX and
+AXI2AHB for every legal one-hot recovery block size from 4 through 2048 bytes.
+Those runs set the legal block metadata in the testbench rather than replaying
+generated DCCM records. See the
+[`AXI2MBOX/AXI2AHB recovery evidence`](../../evidence/caliptra-bfm-dma-routed-recovery-sweep-20261006/README.md).
 Run only the generated recovery-size sweep with
 `uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --recovery-block-sweep-only`.
+Run only the route sweep with
+`uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --recovery-route-sweep-only`.
 Caliptra's `inject_rst` metadata is consumed by `rand_test_dma.c`, which sends
 stdout-control request `0xEE`; `caliptra_top_tb_services.sv` turns that request
 into a delayed warm reset. The focused DMA replay does not run that firmware or

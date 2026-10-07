@@ -15,16 +15,18 @@ trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 reset_abort_only=0
 recovery_block_sweep_only=0
+recovery_route_sweep_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
   case "$1" in
     --reset-abort-only) reset_abort_only=1 ;;
     --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
+    --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only]" >&2
       exit 2
       ;;
   esac
@@ -117,6 +119,32 @@ run_generated_recovery_sweep() {
   done
 }
 
+run_recovery_route_sweep() {
+  for route_case in AXI2MBOX_CASE AXI2AHB_CASE; do
+    case "$route_case" in
+      AXI2MBOX_CASE) route_name=axi2mbox ;;
+      AXI2AHB_CASE) route_name=axi2ahb ;;
+    esac
+    for block_bytes in 4 8 16 32 64 128 256 512 1024 2048; do
+      run_case "$route_name-recovery-${block_bytes}B" "+$route_case" \
+        +FIFO_RECOVERY +CLP_DMA_TB_MODE_THRESH \
+        "+RECOVERY_BLOCK_BYTES=$block_bytes"
+      case "$route_case" in
+        AXI2MBOX_CASE)
+          pass_marker="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through ${block_bytes}-byte recovery blocks into the mailbox"
+          ;;
+        AXI2AHB_CASE)
+          pass_marker="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through ${block_bytes}-byte recovery blocks into the component data register"
+          ;;
+      esac
+      if ! grep -Fq "$pass_marker" "$log"; then
+        echo "Caliptra $route_name recovery case did not complete with a ${block_bytes}-byte block" >&2
+        exit 1
+      fi
+    done
+  done
+}
+
 if [ "$reset_abort_only" -eq 1 ]; then
   run_reset_abort_case
   exit 0
@@ -124,6 +152,11 @@ fi
 if [ "$recovery_block_sweep_only" -eq 1 ]; then
   run_generated_recovery_sweep
   echo "INFO: generated DCCM record 26 passed testbench block-size overrides of 4, 8, 16, 32, and 64 bytes"
+  exit 0
+fi
+if [ "$recovery_route_sweep_only" -eq 1 ]; then
+  run_recovery_route_sweep
+  echo "INFO: AXI2MBOX and AXI2AHB FIFO recovery passed block sizes 4 through 2048 bytes"
   exit 0
 fi
 
