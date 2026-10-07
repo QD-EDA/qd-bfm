@@ -498,8 +498,12 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         )
         patched = RUNNER.replace_random_reset_delay(source, 512)
         self.assertIn("            wait_time_to_rst = 512;\n", patched)
+        late_patched = RUNNER.replace_random_reset_delay(source, 4096)
+        self.assertIn("            wait_time_to_rst = 4096;\n", late_patched)
         self.assertNotIn("std::randomize(wait_time_to_rst)", patched)
         self.assertIn("            prandom_warm_rst <= 'b1;\n", patched)
+        with self.assertRaisesRegex(ValueError, "between 5 and 8191 cycles"):
+            RUNNER.replace_random_reset_delay(source, 8192)
         with self.assertRaisesRegex(ValueError, "random warm-reset delay block"):
             RUNNER.replace_random_reset_delay("no reset block\n", 512)
 
@@ -532,7 +536,7 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertIn("--rand-dma-reset-delay-cycles", result.stdout)
-        self.assertIn("fixed 5..1023-cycle delay", result.stdout)
+        self.assertIn("fixed 5..8191-cycle delay", result.stdout)
 
     def test_fixed_reset_delay_requires_the_forced_first_reset(self):
         result = subprocess.run(

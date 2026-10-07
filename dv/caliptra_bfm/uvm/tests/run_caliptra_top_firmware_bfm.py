@@ -240,8 +240,8 @@ def skip_pq_vector_generators(text):
 
 
 def replace_random_reset_delay(text, delay_cycles):
-    if not 5 <= delay_cycles <= 1023:
-        raise ValueError("diagnostic random-reset delay must be between 5 and 1023 cycles")
+    if not 5 <= delay_cycles <= 8191:
+        raise ValueError("diagnostic random-reset delay must be between 5 and 8191 cycles")
     before = (
         "            `ifndef VERILATOR\n"
         "                std::randomize(wait_time_to_rst) with {wait_time_to_rst dist {[5:24] :/ 3, [25:99] :/ 5, [100:255] :/ 8, [256:511] :/ 5, [512:1023] :/ 1};};\n"
@@ -766,7 +766,7 @@ def main():
     parser.add_argument("--force-first-rand-dma-reset", action="store_true",
                         help="diagnostic only: set inject_rst on the first generated rand_test_dma transfer")
     parser.add_argument("--rand-dma-reset-delay-cycles", type=int, metavar="N",
-                        help="diagnostic only: use a fixed 5..1023-cycle delay before the forced first warm reset")
+                        help="diagnostic only: use a fixed 5..8191-cycle delay before the forced first warm reset")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case not in (
             "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
@@ -803,8 +803,8 @@ def main():
     if args.rand_dma_reset_delay_cycles is not None:
         if not args.force_first_rand_dma_reset:
             raise ValueError("--rand-dma-reset-delay-cycles requires --force-first-rand-dma-reset")
-        if not 5 <= args.rand_dma_reset_delay_cycles <= 1023:
-            raise ValueError("--rand-dma-reset-delay-cycles must be between 5 and 1023")
+        if not 5 <= args.rand_dma_reset_delay_cycles <= 8191:
+            raise ValueError("--rand-dma-reset-delay-cycles must be between 5 and 8191")
     skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
     quiet_firmware = aes_case_limit is not None or args.quiet_firmware
 
