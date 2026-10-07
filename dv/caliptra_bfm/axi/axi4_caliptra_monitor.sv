@@ -104,6 +104,11 @@ module axi4_caliptra_monitor #(
   output reg [31:0] r_last_count
 );
   localparam integer STRB_WIDTH = DATA_WIDTH / 8;
+  wire aw_handshake = (AWVALID === 1'b1) && (AWREADY === 1'b1);
+  wire w_handshake = (WVALID === 1'b1) && (WREADY === 1'b1);
+  wire b_handshake = (BVALID === 1'b1) && (BREADY === 1'b1);
+  wire ar_handshake = (ARVALID === 1'b1) && (ARREADY === 1'b1);
+  wire r_handshake = (RVALID === 1'b1) && (RREADY === 1'b1);
 
   always @(posedge ACLK) begin
     if (!ARESETn) begin
@@ -137,11 +142,11 @@ module axi4_caliptra_monitor #(
       w_last_count <= 0; r_last_count <= 0;
     end else begin
       cycle_count <= cycle_count + 1'b1;
-      aw_fire <= AWVALID && AWREADY;
-      w_fire <= WVALID && WREADY;
-      b_fire <= BVALID && BREADY;
-      ar_fire <= ARVALID && ARREADY;
-      r_fire <= RVALID && RREADY;
+      aw_fire <= aw_handshake;
+      w_fire <= w_handshake;
+      b_fire <= b_handshake;
+      ar_fire <= ar_handshake;
+      r_fire <= r_handshake;
       if (AWVALID === 1'b1) begin
         aw_valid_cycles <= aw_valid_cycles + 1'b1;
         if (AWREADY === 1'b0)
@@ -167,7 +172,7 @@ module axi4_caliptra_monitor #(
         if (RREADY === 1'b0)
           r_stall_cycles <= r_stall_cycles + 1'b1;
       end
-      if (AWVALID && AWREADY) begin
+      if (aw_handshake) begin
         aw_count <= aw_count + 1'b1;
         aw_record <= {AWID, AWADDR, AWLEN, AWSIZE, AWBURST, AWLOCK, AWUSER};
         case (AWBURST)
@@ -183,7 +188,7 @@ module axi4_caliptra_monitor #(
           default: aw_lock_unknown_count <= aw_lock_unknown_count + 1'b1;
         endcase
       end
-      if (WVALID && WREADY) begin
+      if (w_handshake) begin
         w_count <= w_count + 1'b1;
         w_record <= {WDATA, WSTRB, WUSER, WLAST};
         if ((^WSTRB) === 1'bx)
@@ -197,7 +202,7 @@ module axi4_caliptra_monitor #(
         if (WLAST === 1'b1)
           w_last_count <= w_last_count + 1'b1;
       end
-      if (BVALID && BREADY) begin
+      if (b_handshake) begin
         b_count <= b_count + 1'b1;
         b_record <= {BID, BRESP, BUSER};
         case (BRESP)
@@ -208,7 +213,7 @@ module axi4_caliptra_monitor #(
           default: b_resp_unknown_count <= b_resp_unknown_count + 1'b1;
         endcase
       end
-      if (ARVALID && ARREADY) begin
+      if (ar_handshake) begin
         ar_count <= ar_count + 1'b1;
         ar_record <= {ARID, ARADDR, ARLEN, ARSIZE, ARBURST, ARLOCK, ARUSER};
         case (ARBURST)
@@ -224,7 +229,7 @@ module axi4_caliptra_monitor #(
           default: ar_lock_unknown_count <= ar_lock_unknown_count + 1'b1;
         endcase
       end
-      if (RVALID && RREADY) begin
+      if (r_handshake) begin
         r_count <= r_count + 1'b1;
         r_record <= {RID, RDATA, RRESP, RUSER, RLAST};
         case (RRESP)
