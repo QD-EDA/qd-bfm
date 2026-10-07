@@ -39,8 +39,8 @@ The generated-filelist compatibility inputs are deliberately narrow:
   handles, monitor callback, and mailbox ECC fields that the generated HDL
   BFMs reference. It does not replace generated UVMF transaction or agent
   classes.
-- [`hdl_stubs.sv`](hdl_stubs.sv) supplies a minimal reset generator and empty
-  coverage-bind module for static elaboration.
+- [`hdl_stubs.sv`](hdl_stubs.sv) supplies the empty coverage-bind module for
+  static elaboration; the open BFM file list supplies the reset generator.
 - `avery_defines.svh` is an empty include shim for the licensed Avery macro
   header. The open AAXI interface/container compatibility sources come from
   the local BFM filelist.
