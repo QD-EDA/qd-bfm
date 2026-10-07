@@ -45,7 +45,7 @@ module tb_ahb_qvip_compat_env;
   always #5 HCLK = ~HCLK;
 
   ahb_lite_caliptra_memory_subordinate #(
-    .ADDR_WIDTH(32), .DATA_WIDTH(64), .MEMORY_BYTES(65536)
+    .ADDR_WIDTH(32), .DATA_WIDTH(AHB_MVC_DATA_WIDTH), .MEMORY_BYTES(65536)
   ) memory (
     .HCLK(HCLK), .HRESETn(HRESETn),
     .HADDR(qvip_hdl.ahb_lite_slave_0_HADDR),
@@ -81,26 +81,26 @@ module tb_ahb_qvip_compat_env;
           last_item.resp.size() != last_item.data.size())
         `uvm_fatal("AHB_QVIP_SINK_ITEM", $sformatf("Unexpected AHB stream item: %s", last_item.convert2string()))
       if (last_item.address == 32'h20) begin
-        if (last_item.data.size() != 1 || last_item.size != 3 ||
+        if (last_item.data.size() != 1 || last_item.size != AHB_MVC_WORD_SIZE ||
             last_item.resp[0] != AHB_OKAY)
           `uvm_fatal("AHB_QVIP_SINK_ITEM", "Unexpected scalar AHB item")
         if (last_item.RnW == AHB_WRITE) begin
           write_count++;
-          if (last_item.data[0] != 64'h1122_3344_5566_7788)
+          if (last_item.data[0] != (64'h1122_3344_5566_7788 & AHB_MVC_DATA_MASK))
             `uvm_fatal("AHB_QVIP_SINK_WRITE", "Generated-name stream lost AHB write data")
         end else begin
           read_count++;
-          if (last_item.data[0] != 64'h1122_3344_5566_7788)
+          if (last_item.data[0] != (64'h1122_3344_5566_7788 & AHB_MVC_DATA_MASK))
             `uvm_fatal("AHB_QVIP_SINK_READ", "Generated-name stream lost AHB read data")
         end
       end else if (last_item.address == 32'h80) begin
-        if (last_item.data.size() != 4 || last_item.size != 3 ||
+        if (last_item.data.size() != 4 || last_item.size != AHB_MVC_WORD_SIZE ||
             last_item.resp[0] != AHB_OKAY || last_item.resp[1] != AHB_OKAY ||
             last_item.resp[2] != AHB_OKAY || last_item.resp[3] != AHB_OKAY ||
-            last_item.data[0] != 64'h0102_0304_0506_0708 ||
-            last_item.data[1] != 64'h1112_1314_1516_1718 ||
-            last_item.data[2] != 64'h2122_2324_2526_2728 ||
-            last_item.data[3] != 64'h3132_3334_3536_3738)
+            last_item.data[0] != (64'h0102_0304_0506_0708 & AHB_MVC_DATA_MASK) ||
+            last_item.data[1] != (64'h1112_1314_1516_1718 & AHB_MVC_DATA_MASK) ||
+            last_item.data[2] != (64'h2122_2324_2526_2728 & AHB_MVC_DATA_MASK) ||
+            last_item.data[3] != (64'h3132_3334_3536_3738 & AHB_MVC_DATA_MASK))
           `uvm_fatal("AHB_QVIP_SINK_BURST", "Generated-name stream lost the four-beat AHB burst")
         if (last_item.RnW == AHB_WRITE) begin
           write_count++;

@@ -391,7 +391,9 @@ unqualified until compiled and run with this replacement. Its checked-in
 `qvip_ahb_lite_slave_params_pkg.sv` sets one master, one slave, 32-bit address,
 and 32-bit write/read data. Compile the clean-room provider with
 `+define+CALIPTRA_BFM_AHB_32BIT` for this environment; the default Caliptra
-profile remains 64-bit. The generated predictor and
+profile remains 64-bit. Set `AHB_PROFILE=32` when invoking
+`tests/run_ahb_qvip_compat_env.sh` to exercise the 32-bit MVC item and packed-
+beat path. The generated predictor and
 scoreboard cast items to the parameterized `ahb_master_burst_transfer` type;
 they use `RnW`, `address`, `data[0][31:0]`, `resp[0]` (for mismatch reporting),
 and `convert2string()`. The clean-room item exposes those fields and method.

@@ -132,3 +132,25 @@ d0ea58340867aad8e1662e660d700d6bbe3320caaa2ee2cb98e6acd505dbbe73  dv/caliptra_bf
 f1c8eb54a5bfc8ae939122abe7c251f4024ab35fef2f832d3a9a1115423b89ba  dv/caliptra_bfm/uvm/tests/tb_ahb_lite_caliptra_uvm_agent.sv
 bf204a8dc230e0354c70564be0c27dac054341bc428afdebbf585c89bbee1e96  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
 ```
+
+## Adams Bridge 32-bit profile follow-up (2026-10-06)
+
+The generated-name smoke now accepts `AHB_PROFILE=32` and instantiates its
+synthetic target at the selected AHB width. Guarded 32-bit and default 64-bit
+runs both exited 0 with the expected `AHB_QVIP_CVG` warning, zero UVM errors,
+and zero fatals. The 32-bit run checks word-sized four-beat writes and reads
+through the UVM MVC driver and analysis streams. Both runs used Icarus 13.0
+development build `9bd5082b8` with UVM support; the memory guard observed 70%
+minimum free memory against its 60% floor.
+
+```sh
+AHB_PROFILE=32 dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
+AHB_PROFILE=64 dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
+```
+
+SHA-256 for the updated profile smoke:
+
+```text
+23fdf5b5aca936e33a5b6f2283d4678b4a45e602294838ebab21127ea9a2aa16  dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
+edc96b1e2271bca273ad7b4a2dc41c8e9d9007a377ba369cde63eba304b8a1e0  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
+```
