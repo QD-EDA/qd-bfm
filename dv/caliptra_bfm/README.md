@@ -306,7 +306,9 @@ sizes from 4 through 2048 bytes on AXI2MBOX and AXI2AHB. Each sweep overrides
 the selected generated DCCM block-size entry. Payloads and
 route-valid offsets remain per-record randomized, as does Caliptra's delay
 flag; the maximum stream drains the FIFO and checks all destination words. The
-actual DMA DUT reset-abort profile now
+separate `--fixed-sram-modes-only` replay adds generated AXI2AXI SRAM cases for
+FIXED reads, FIXED writes, and both channels FIXED; it checks address behavior,
+transfer beats, and resulting SRAM contents. The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
 [`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).

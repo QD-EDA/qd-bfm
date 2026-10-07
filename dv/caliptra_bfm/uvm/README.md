@@ -231,6 +231,10 @@ payload on AXI2AXI, a 65-word fixed-write SRAM-to-FIFO case with randomized
 delays, and a 65-word FIFO recovery case with a generated block. Both maximum
 payload streams check all destination words; the FIFO stream also drains its
 source. The max-size SRAM profile uses disjoint source/destination ranges.
+The opt-in `--fixed-sram-modes-only` runner extends the generated record set to
+32 and replays 65-word AXI2AXI SRAM transfers with FIXED reads, FIXED writes,
+and both channels FIXED. Its scoreboard checks repeated burst addresses, beat
+payloads, and final SRAM locations.
 Generated recovery records sweep every legal one-hot block size: 4–64 bytes
 for AXI2AXI and 4–2048 bytes for AXI2MBOX and AXI2AHB. Recovery checks the
 generated FIFO reads and end-to-end route output; see the

@@ -17,8 +17,9 @@ reset_abort_only=0
 recovery_block_sweep_only=0
 recovery_route_sweep_only=0
 max_sram_dut_replay_only=0
+fixed_sram_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -27,8 +28,9 @@ if [ "$#" -eq 1 ]; then
     --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
     --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
+    --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -184,6 +186,25 @@ if [ "$max_sram_dut_replay_only" -eq 1 ]; then
     echo "Maximum DCCM-sized AXI2AXI profile did not complete through the DMA DUT" >&2
     exit 1
   fi
+  exit 0
+fi
+if [ "$fixed_sram_modes_only" -eq 1 ]; then
+  for case_index in 29 30 31; do
+    case "$case_index" in
+      29) fixed_read=1; fixed_write=0 ;;
+      30) fixed_read=0; fixed_write=1 ;;
+      31) fixed_read=1; fixed_write=1 ;;
+    esac
+    run_case "fixed-sram-mode-${case_index}" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=32 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "fixed_read=$fixed_read fixed_write=$fixed_write inject_rand_delays=0" "$log" ||
+       ! grep -Fq "PASS: generated DCCM record index=$case_index route=2 replayed through axi_dma_top" "$log"; then
+      echo "Generated SRAM fixed-burst profile $case_index did not complete through the DMA DUT" >&2
+      exit 1
+    fi
+  done
+  echo "INFO: generated DCCM SRAM replay covered FIXED-read, FIXED-write, and both-FIXED profiles"
   exit 0
 fi
 

@@ -39,6 +39,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   integer active_word_count = WORD_COUNT;
   integer active_read_burst_count = 2;
   integer active_write_burst_count = 2;
+  bit active_src_is_fifo = 0;
+  bit active_use_rd_fixed = 0;
+  bit active_use_wr_fixed = 0;
   logic [47:0] SRC_ADDR;
   logic [47:0] DST_ADDR;
   logic [31:0] expected_payload [0:MAX_REPLAY_WORD_COUNT-1];
@@ -403,6 +406,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       int beat;
       int expected_beats;
       int boundary_beats;
+      int expected_word_index;
       logic [1:0] expected_resp;
       expected_resp = expect_error ? AXI_RESP_SLVERR : AXI_RESP_OKAY;
       if (item.id != 0 || item.size != 2 || item.lock || item.protocol_error)
@@ -422,6 +426,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           end
           if (item.burst != AXI_BURST_FIXED || item.addr != SRC_ADDR)
             `uvm_fatal("DMA_TOP_FIFO_READ_PROFILE", $sformatf("DMA FIFO read was not a fixed stream burst: %s", item.convert2string()))
+        end else if (active_use_rd_fixed) begin
+          if (expected_beats > MAX_FIXED_BURST_WORDS)
+            expected_beats = MAX_FIXED_BURST_WORDS;
+          if (item.burst != AXI_BURST_FIXED || item.addr != SRC_ADDR)
+            `uvm_fatal("DMA_TOP_FIXED_READ_PROFILE", $sformatf("DMA fixed SRAM read profile mismatch: %s", item.convert2string()))
         end else begin
           boundary_beats = MAX_BURST_WORDS - int'(item.addr[7:2]);
           if (expected_beats > boundary_beats) expected_beats = boundary_beats;
@@ -437,15 +446,17 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         if (expect_fifo_source && auto_fifo_source_pop_count < read_word_offset + beats)
           `uvm_fatal("DMA_TOP_FIFO_SOURCE_ORDER", "FIFO target popped data before source capture completed")
         for (beat = 0; beat < beats; beat++) begin
+          expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
+                                0 : read_word_offset + beat;
           if ((expect_fifo_source && (^item.beatQ[beat] === 1'bx)) ||
               (!expect_fifo_recovery &&
-               item.beatQ[beat] != source_word(read_word_offset + beat)) ||
+               item.beatQ[beat] != source_word(expected_word_index)) ||
               item.beat_userQ[beat] != AXUSER || item.respQ[beat] != expected_resp ||
               item.lastQ[beat] != (beat == beats - 1))
             `uvm_fatal("DMA_TOP_READ_BEAT", $sformatf(
               "DMA read beat %0d mismatch in burst %0d addr=%012h word=%0d expected=%08h got=%08h user=%08h resp=%b last=%b",
               beat, read_count, item.addr, read_word_offset + beat,
-              source_word(read_word_offset + beat), item.beatQ[beat],
+              source_word(expected_word_index), item.beatQ[beat],
               item.beat_userQ[beat], item.respQ[beat], item.lastQ[beat]))
           if (expect_fifo_recovery)
             expected_payload[read_word_offset + beat] = item.beatQ[beat];
@@ -455,11 +466,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       end else if (item.is_write()) begin
         boundary_beats = MAX_BURST_WORDS - int'(item.addr[7:2]);
         expected_beats = active_word_count - write_word_offset;
-        if (expect_fifo_write) begin
+        if (expect_fifo_write || active_use_wr_fixed) begin
           if (expected_beats > MAX_FIXED_BURST_WORDS)
             expected_beats = MAX_FIXED_BURST_WORDS;
           if (item.addr != DST_ADDR || item.burst != AXI_BURST_FIXED)
-            `uvm_fatal("DMA_TOP_FIFO_WRITE_PROFILE", $sformatf("DMA FIFO write was not a fixed stream burst: %s", item.convert2string()))
+            `uvm_fatal("DMA_TOP_FIXED_WRITE_PROFILE", $sformatf("DMA fixed write profile mismatch: %s", item.convert2string()))
         end else begin
           if (expected_beats > boundary_beats) expected_beats = boundary_beats;
           if (item.addr != DST_ADDR + 48'(write_word_offset * 4) ||
@@ -477,7 +488,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             item.beat_userQ.size() != beats || item.lastQ.size() != beats)
           `uvm_fatal("DMA_TOP_WRITE", $sformatf("DMA destination write mismatch: %s", item.convert2string()))
         for (beat = 0; beat < beats; beat++) begin
-          if (item.beatQ[beat] != source_word(write_word_offset + beat) ||
+          expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
+                                0 : write_word_offset + beat;
+          if (item.beatQ[beat] != source_word(expected_word_index) ||
               item.strbQ[beat] != 4'hf || item.beat_userQ[beat] != AXUSER ||
               item.lastQ[beat] != (beat == beats - 1))
             `uvm_fatal("DMA_TOP_WRITE_BEAT", $sformatf("DMA write beat %0d mismatch in burst %0d", beat, write_count))
@@ -762,6 +775,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     integer poll;
     integer dma_poll_limit;
     integer word_index;
+    integer expected_word_index;
     #1;
     mailbox_case = $test$plusargs("AXI2MBOX_CASE");
     mailbox_read_case = $test$plusargs("MBOX2AXI_CASE");
@@ -784,6 +798,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if ((generated_case_index < 0) || (generated_case_index >= generated_case_count))
         $fatal(1, "Generated DCCM testcase index %0d is outside count %0d",
                generated_case_index, generated_case_count);
+      if ((generated_case_index >= 29 && generated_case_count != 32) ||
+          (generated_case_index < 29 && generated_case_count != 29))
+        $fatal(1, "Generated DCCM replay index %0d requires %0d records, found %0d",
+               generated_case_index, generated_case_index >= 29 ? 32 : 29,
+               generated_case_count);
 
       record_cursor = DCCM_WORDS - 2;
       generated_record_word = -1;
@@ -815,7 +834,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset != 0) || (record_dst_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported large FIFO stream profile", record_index);
         end else if (record_type.dst_is_fifo) begin
-          if ((generated_case_count != 29) || (record_index != 25) ||
+          if ((generated_case_count < 29) || (record_index != 25) ||
               (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
@@ -824,7 +843,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
         end else if (record_type.test_block_size) begin
-          if ((generated_case_count != 29) ||
+          if ((generated_case_count < 29) ||
               ((record_index < 26) || (record_index > 28)) ||
               (record_size != WORD_COUNT) || !record_type.src_is_fifo ||
               record_type.dst_is_fifo || !record_type.use_rd_fixed ||
@@ -845,6 +864,23 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                     (record_dst_offset != 32'h0000_4000))
               $fatal(1, "Generated testcase 28 has an unsupported AXI2AHB recovery profile");
             default: $fatal(1, "Unexpected generated recovery testcase index %0d", record_index);
+          endcase
+        end else if ((record_index >= 29) && (record_index <= 31)) begin
+          if ((generated_case_count != 32) || (record_size != WORD_COUNT) ||
+              (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
+              record_type.dst_is_fifo || record_type.inject_rst ||
+              record_type.inject_rand_delays || record_type.test_block_size ||
+              (record_type.block_size != 0) ||
+              (record_src_offset != 32'h0000_1000) ||
+              (record_dst_offset != 32'h0000_4000))
+            $fatal(1, "Generated testcase %0d is outside the fixed SRAM transfer profiles", record_index);
+          case (record_index)
+            29: if (!record_type.use_rd_fixed || record_type.use_wr_fixed)
+                  $fatal(1, "Generated testcase 29 is not FIXED-read/INCR-write");
+            30: if (record_type.use_rd_fixed || !record_type.use_wr_fixed)
+                  $fatal(1, "Generated testcase 30 is not INCR-read/FIXED-write");
+            31: if (!record_type.use_rd_fixed || !record_type.use_wr_fixed)
+                  $fatal(1, "Generated testcase 31 is not FIXED-read/FIXED-write");
           endcase
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
@@ -1065,6 +1101,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
       DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
     end
+    active_src_is_fifo = scenario.src_is_fifo;
+    active_use_rd_fixed = scenario.use_rd_fixed;
+    active_use_wr_fixed = scenario.use_wr_fixed;
     if ($test$plusargs("GENERATED_CASE")) begin
       active_read_burst_count = scenario.use_rd_fixed ?
           ((active_word_count + MAX_FIXED_BURST_WORDS - 1) / MAX_FIXED_BURST_WORDS) :
@@ -1242,11 +1281,26 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       $fatal(1, "Mailbox route completed %0d of %0d requests", mailbox_word_index, active_word_count);
     if (!expect_dma_error && !mailbox_case && !axi2ahb_case && !sram2fifo_case &&
         !auto_fifo_source_case) begin
-      for (word_index = 0; word_index < active_word_count; word_index++)
-        if (dma_target.bfm.i_sram.word_at(destination_word_index + word_index) !== expected_payload[word_index]) begin
-          $fatal(1, "DMA destination SRAM word %0d mismatch: %08h",
-                 word_index, dma_target.bfm.i_sram.word_at(destination_word_index + word_index));
+      if (active_use_wr_fixed) begin
+        expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
+                              0 : active_word_count - 1;
+        if (dma_target.bfm.i_sram.word_at(destination_word_index) !==
+            expected_payload[expected_word_index])
+          $fatal(1, "DMA fixed destination SRAM word mismatch: %08h",
+                 dma_target.bfm.i_sram.word_at(destination_word_index));
+        for (word_index = 1; word_index < active_word_count; word_index++)
+          if (dma_target.bfm.i_sram.word_at(destination_word_index + word_index) !== 32'b0)
+            $fatal(1, "DMA fixed write changed destination tail word %0d", word_index);
+      end else begin
+        for (word_index = 0; word_index < active_word_count; word_index++) begin
+          expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
+                                0 : word_index;
+          if (dma_target.bfm.i_sram.word_at(destination_word_index + word_index) !==
+              expected_payload[expected_word_index])
+            $fatal(1, "DMA destination SRAM word %0d mismatch: %08h",
+                   word_index, dma_target.bfm.i_sram.word_at(destination_word_index + word_index));
         end
+      end
     end
     if (sram2fifo_case) begin
       if (randomized_stall_cycles == 0)
