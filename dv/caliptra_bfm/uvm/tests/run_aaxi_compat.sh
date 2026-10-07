@@ -15,11 +15,9 @@ trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 
 "$IVERILOG_BIN" -uvm -g2012 -DXCELIUM -s tb_caliptra_aaxi_compat -o "$out" \
-  -f dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f \
+  -f dv/caliptra_bfm/uvm/caliptra_bfm_aaxi_compat.f \
   "$caliptra_root/src/axi/rtl/axi_pkg.sv" \
   "$caliptra_root/src/axi/rtl/axi_if.sv" \
-  dv/caliptra_bfm/axi/axi4_caliptra_dma_if_subordinate.sv \
-  dv/caliptra_bfm/uvm/axi4_caliptra_dma_if_monitor.sv \
   dv/caliptra_bfm/uvm/tests/tb_caliptra_aaxi_compat.sv
 "$VVP_BIN" "$out" >"$log" 2>&1 || { cat "$log"; exit 1; }
 cat "$log"

@@ -1,0 +1,20 @@
+# Focused source set for the generated AAXI compatibility smoke.
+dv/caliptra_bfm/uvm/axi4_caliptra_record_if.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
+dv/caliptra_bfm/uvm/aaxi_pkg_compat.sv
+dv/caliptra_bfm/uvm/aaxi_intf_compat.sv
+dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+dv/caliptra_bfm/uvm/caliptra_aaxi_uvmf_compat_pkg.sv
+dv/caliptra_bfm/axi/axi4_caliptra_master.sv
+dv/caliptra_bfm/axi/axi4_caliptra_memory_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_fifo_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_recovery_sequence.sv
+dv/caliptra_bfm/axi/axi4_caliptra_recovery_avail.sv
+dv/caliptra_bfm/axi/axi4_caliptra_dma_subordinate.sv
+dv/caliptra_bfm/axi/axi4_caliptra_monitor.sv
+dv/caliptra_bfm/axi/axi4_caliptra_transaction_monitor.sv
+dv/caliptra_bfm/uvm/axi4_caliptra_uvm_master_proxy.sv
+dv/caliptra_bfm/axi/axi4_caliptra_checker.sv
+dv/caliptra_bfm/uvm/aaxi_monitor_wrapper_compat.sv
+dv/caliptra_bfm/axi/axi4_caliptra_dma_if_subordinate.sv
