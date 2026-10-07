@@ -17,6 +17,10 @@ regenerate it with:
 
 The script is standard-library-only, records Git revisions and file hashes,
 and reads sources without modifying either checkout. Its filters are explicit:
+The generator is included in this QD-BFM checkout. A 2026-10-06 replay using
+the pinned Caliptra/Adams Bridge roots and frozen unit census reproduced the
+tracked manifest byte-for-byte; generator SHA-256 is
+`f7e599feece038b64b6194768bc34550650108bc5916179dbeca3bf82a025e88`.
 
 | Pinned tree | Test YAML under stimulus/tests | Generated UVMF test YAML | stimulus/testsuites files | Frozen census filelists |
 | --- | ---: | ---: | ---: | ---: |
