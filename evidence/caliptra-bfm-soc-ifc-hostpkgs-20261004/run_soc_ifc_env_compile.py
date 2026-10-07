@@ -695,19 +695,27 @@ def main() -> int:
             if args.open_mbox_target:
                 prepare_overlay_args.append("--open-mbox-target")
             run(*prepare_overlay_args)
-            if args.caliptra_top_env_probe:
-                hdl_top_source = hdl_top_overlay.read_text()
-                clock_start_anchor = "    #0ns;\n    forever begin\n      clk = ~clk;"
-                if hdl_top_source.count(clock_start_anchor) != 1:
-                    raise SystemExit("Caliptra top runtime refused an unexpected generated clock block")
-                hdl_top_overlay.write_text(
-                    hdl_top_source.replace(
-                        clock_start_anchor,
-                        "    #1ns; // allow the control BFM's reset edge to settle before clocking\n"
-                        "    forever begin\n      clk = ~clk;",
-                        1,
-                    )
+            hdl_top_source = hdl_top_overlay.read_text()
+            module_anchor = "module hdl_top;\n"
+            if hdl_top_source.count(module_anchor) != 1:
+                raise SystemExit("generated SoC-IFC runtime refused an unexpected hdl_top module")
+            hdl_top_source = hdl_top_source.replace(
+                module_anchor,
+                module_anchor + "  timeunit 1ns;\n  timeprecision 1ps;\n",
+                1,
+            )
+            clock_start_anchor = "    #0ns;\n    forever begin\n      clk = ~clk;"
+            if hdl_top_source.count(clock_start_anchor) != 1:
+                raise SystemExit("generated SoC-IFC runtime refused an unexpected clock block")
+            hdl_top_overlay.write_text(
+                hdl_top_source.replace(
+                    clock_start_anchor,
+                    "    #1ns; // let generated BFM reset outputs settle before the first clock\n"
+                    "    forever begin\n      clk = ~clk;",
+                    1,
                 )
+            )
+            if args.caliptra_top_env_probe:
                 hdl_top_source = hdl_top_overlay.read_text()
                 reset_state_anchor = "  bit dummy, dummy_n;"
                 if hdl_top_source.count(reset_state_anchor) != 1:
