@@ -239,11 +239,32 @@ def skip_pq_vector_generators(text):
     return text.replace(before, after, 1)
 
 
-def prepare_pq_vector_overlay(rtl_root, output_path):
+def replace_random_reset_delay(text, delay_cycles):
+    if not 5 <= delay_cycles <= 1023:
+        raise ValueError("diagnostic random-reset delay must be between 5 and 1023 cycles")
+    before = (
+        "            `ifndef VERILATOR\n"
+        "                std::randomize(wait_time_to_rst) with {wait_time_to_rst dist {[5:24] :/ 3, [25:99] :/ 5, [100:255] :/ 8, [256:511] :/ 5, [512:1023] :/ 1};};\n"
+        "            `else\n"
+        "                wait_time_to_rst = $urandom_range(5,150);\n"
+        "            `endif"
+    )
+    if text.count(before) != 1:
+        raise ValueError("expected one Caliptra random warm-reset delay block")
+    return text.replace(before, f"            wait_time_to_rst = {delay_cycles};", 1)
+
+
+def prepare_services_overlay(rtl_root, output_path, skip_pq_vectors=False,
+                             rand_dma_reset_delay_cycles=None):
     source = Path(rtl_root) / "src/integration/tb/caliptra_top_tb_services.sv"
     if sha256(source) != TOP_SERVICES_SHA256:
         raise ValueError(f"Caliptra top services source hash mismatch: {source}")
-    Path(output_path).write_text(skip_pq_vector_generators(source.read_text()))
+    text = source.read_text()
+    if skip_pq_vectors:
+        text = skip_pq_vector_generators(text)
+    if rand_dma_reset_delay_cycles is not None:
+        text = replace_random_reset_delay(text, rand_dma_reset_delay_cycles)
+    Path(output_path).write_text(text)
 
 
 def prepare_dma_generator_overlay(rtl_root, output_path, force_first_reset=False):
@@ -282,7 +303,7 @@ def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
 
 def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
                              checker_overlay, reset_overlay, jtag_overlay,
-                             generator_overlay=None, pq_vector_overlay=None):
+                             generator_overlay=None, services_overlay=None):
     text = Path(base_profile).read_text()
     lines = text.splitlines()
     if lines.count(ORIGINAL_AXI4PC) > 1:
@@ -317,8 +338,8 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     overlays = [aes_overlay, axi_if_overlay, sram_overlay, checker_overlay, reset_overlay, jtag_overlay]
     if generator_overlay:
         overlays.append(generator_overlay)
-    if pq_vector_overlay:
-        overlays.append(pq_vector_overlay)
+    if services_overlay:
+        overlays.append(services_overlay)
     for source in [*overlays, *sources]:
         if any(char.isspace() for char in str(source)):
             raise ValueError(f"Icarus filelists cannot safely represent a source path with whitespace: {source}")
@@ -333,10 +354,10 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     }
     if generator_overlay:
         replacements[ORIGINAL_DMA_GENERATOR] = str(generator_overlay)
-    if pq_vector_overlay:
+    if services_overlay:
         if lines.count(ORIGINAL_TOP_SERVICES) != 1:
             raise ValueError(f"Icarus profile must contain exactly one {ORIGINAL_TOP_SERVICES}")
-        replacements[ORIGINAL_TOP_SERVICES] = str(pq_vector_overlay)
+        replacements[ORIGINAL_TOP_SERVICES] = str(services_overlay)
     lines = [replacements.get(line, line) for line in lines]
     lines.extend(str(source) for source in sources)
     Path(output_profile).write_text("\n".join(lines) + "\n")
@@ -650,6 +671,8 @@ def main():
                         help="diagnostic only: run the first N generated rand_test_dma transfers (1..100)")
     parser.add_argument("--force-first-rand-dma-reset", action="store_true",
                         help="diagnostic only: set inject_rst on the first generated rand_test_dma transfer")
+    parser.add_argument("--rand-dma-reset-delay-cycles", type=int, metavar="N",
+                        help="diagnostic only: use a fixed 5..1023-cycle delay before the forced first warm reset")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case not in (
             "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
@@ -676,6 +699,11 @@ def main():
             raise ValueError("--force-first-rand-dma-reset is limited to rand_test_dma")
         if args.rand_dma_iterations is None:
             raise ValueError("--force-first-rand-dma-reset requires --rand-dma-iterations")
+    if args.rand_dma_reset_delay_cycles is not None:
+        if not args.force_first_rand_dma_reset:
+            raise ValueError("--rand-dma-reset-delay-cycles requires --force-first-rand-dma-reset")
+        if not 5 <= args.rand_dma_reset_delay_cycles <= 1023:
+            raise ValueError("--rand-dma-reset-delay-cycles must be between 5 and 1023")
     skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
     quiet_firmware = aes_case_limit is not None or args.quiet_firmware
 
@@ -707,11 +735,14 @@ def main():
     if args.case == "rand_test_dma":
         generator_overlay = args.output / "dma_testcase_generator_icarus.sv"
         prepare_dma_generator_overlay(rtl, generator_overlay, args.force_first_rand_dma_reset)
-    pq_vector_overlay = None
+    services_overlay = None
     case_limit_source = None
-    if skip_pq_vectors:
-        pq_vector_overlay = args.output / "caliptra_top_tb_services_skip_pq_vectors.sv"
-        prepare_pq_vector_overlay(rtl, pq_vector_overlay)
+    if skip_pq_vectors or args.rand_dma_reset_delay_cycles is not None:
+        services_overlay = args.output / "caliptra_top_tb_services_icarus.sv"
+        prepare_services_overlay(
+            rtl, services_overlay, skip_pq_vectors,
+            args.rand_dma_reset_delay_cycles,
+        )
     if aes_case_limit is not None:
         case_limit_source = prepare_limited_aes_case_source(
             rtl, args.output / "limited_aes_case_source", aes_case_limit
@@ -726,7 +757,7 @@ def main():
     )
     profile_excluded_sources = prepare_iverilog_profile(
         base_profile, profile, REPO, rtl, checker_overlay,
-        reset_overlay, jtag_overlay, generator_overlay, pq_vector_overlay)
+        reset_overlay, jtag_overlay, generator_overlay, services_overlay)
     vector_files, vector_hashes, vector_commands, vector_tools = prepare_native_vectors(
         rtl, args.output, env
     )
@@ -812,8 +843,8 @@ def main():
         "checker_overlay_sha256": sha256(checker_overlay),
         "reset_overlay_sha256": sha256(reset_overlay),
         "jtag_overlay_sha256": sha256(jtag_overlay),
-        "pq_vector_source_sha256": TOP_SERVICES_SHA256 if pq_vector_overlay else None,
-        "pq_vector_overlay_sha256": sha256(pq_vector_overlay) if pq_vector_overlay else None,
+        "pq_vector_source_sha256": TOP_SERVICES_SHA256 if skip_pq_vectors else None,
+        "services_overlay_sha256": sha256(services_overlay) if services_overlay else None,
         "dma_generator_overlay_sha256": sha256(generator_overlay) if generator_overlay else None,
         "profile_sha256": sha256(profile),
         "profile_excluded_sources": profile_excluded_sources,
@@ -825,6 +856,7 @@ def main():
         "aes_case_limit_source_sha256": case_limit_source[1] if case_limit_source else None,
         "rand_dma_iterations": args.rand_dma_iterations,
         "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
+        "rand_dma_reset_delay_cycles": args.rand_dma_reset_delay_cycles,
         "firmware_image_sha256": stock_firmware_image_sha256,
         "simulation_image_sha256": simulation_image_sha256,
         "fast_boot_data_preload": fast_boot_data_preload,
@@ -834,6 +866,7 @@ def main():
                              "aes_case_limit": aes_case_limit,
                              "rand_dma_iterations": args.rand_dma_iterations,
                              "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
+                             "rand_dma_reset_delay_cycles": args.rand_dma_reset_delay_cycles,
                              "skip_pq_vector_generation": skip_pq_vectors,
                              "quiet_firmware": quiet_firmware},
         "native_vector_build_commands": vector_commands,
@@ -858,6 +891,8 @@ def main():
         label += f" (first {aes_case_limit} AES DMA case(s); not stock firmware qualification)"
     elif args.rand_dma_iterations is not None:
         reset_note = ", forced first reset" if args.force_first_rand_dma_reset else ""
+        if args.rand_dma_reset_delay_cycles is not None:
+            reset_note += f" after {args.rand_dma_reset_delay_cycles} cycles"
         label += f" (first {args.rand_dma_iterations} random DMA transfer(s){reset_note}; not full-suite qualification)"
     elif args.fast_boot_data_preload:
         label += " (diagnostic fast boot; not stock firmware qualification)"

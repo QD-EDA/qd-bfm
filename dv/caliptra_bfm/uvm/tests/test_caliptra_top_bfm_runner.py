@@ -123,14 +123,14 @@ class ProfileOverlayTest(unittest.TestCase):
                     patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
                 excluded_sources = RUNNER.prepare_iverilog_profile(
                     baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay,
-                    pq_vector_overlay=services_overlay,
+                    services_overlay=services_overlay,
                 )
                 self.assertEqual(excluded_sources, [axi4pc])
                 baseline.write_text(baseline.read_text().replace(f"{axi4pc}\n", ""))
                 excluded_sources = RUNNER.prepare_iverilog_profile(
                     baseline, temp / "without_axi4pc.vf", REPO, rtl,
                     checker_overlay, reset_overlay, jtag_overlay,
-                    pq_vector_overlay=services_overlay,
+                    services_overlay=services_overlay,
                 )
                 self.assertEqual(excluded_sources, [])
 
@@ -362,7 +362,7 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             capture_output=True, text=True,
         )
         self.assertEqual(result.returncode, 1)
-        self.assertIn("limited to smoke_test_dma_aes_gcm_short_1_dword", result.stderr)
+        self.assertIn("requires a supported DMA firmware case", result.stderr)
 
     def test_skips_only_unrelated_pq_vector_calls_when_requested(self):
         source = (
@@ -379,6 +379,63 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         self.assertEqual(patched.count("mlkem_testvector_generator();"), 1)
         with self.assertRaisesRegex(ValueError, "MLDSA/MLKEM"):
             RUNNER.skip_pq_vector_generators("no generator calls\n")
+
+    def test_replaces_only_the_random_reset_delay_block(self):
+        source = (
+            "            `ifndef VERILATOR\n"
+            "                std::randomize(wait_time_to_rst) with {wait_time_to_rst dist {[5:24] :/ 3, [25:99] :/ 5, [100:255] :/ 8, [256:511] :/ 5, [512:1023] :/ 1};};\n"
+            "            `else\n"
+            "                wait_time_to_rst = $urandom_range(5,150);\n"
+            "            `endif\n"
+            "            prandom_warm_rst <= 'b1;\n"
+        )
+        patched = RUNNER.replace_random_reset_delay(source, 512)
+        self.assertIn("            wait_time_to_rst = 512;\n", patched)
+        self.assertNotIn("std::randomize(wait_time_to_rst)", patched)
+        self.assertIn("            prandom_warm_rst <= 'b1;\n", patched)
+        with self.assertRaisesRegex(ValueError, "random warm-reset delay block"):
+            RUNNER.replace_random_reset_delay("no reset block\n", 512)
+
+    def test_services_overlay_combines_reset_delay_and_pq_skip(self):
+        source = (
+            "            mldsa_input_hex_gen();\n"
+            "            mlkem_testvector_generator();\n"
+            "            `ifndef VERILATOR\n"
+            "                std::randomize(wait_time_to_rst) with {wait_time_to_rst dist {[5:24] :/ 3, [25:99] :/ 5, [100:255] :/ 8, [256:511] :/ 5, [512:1023] :/ 1};};\n"
+            "            `else\n"
+            "                wait_time_to_rst = $urandom_range(5,150);\n"
+            "            `endif\n"
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp) / "rtl"
+            source_path = rtl / "src/integration/tb/caliptra_top_tb_services.sv"
+            source_path.parent.mkdir(parents=True)
+            source_path.write_text(source)
+            output = Path(temp) / "services.sv"
+            with patch.object(RUNNER, "sha256", return_value=RUNNER.TOP_SERVICES_SHA256):
+                RUNNER.prepare_services_overlay(rtl, output, True, 512)
+            overlay = output.read_text()
+        self.assertIn('if (!$test$plusargs("CLP_SKIP_PQ_VECTOR_GENERATION")) begin', overlay)
+        self.assertIn("            wait_time_to_rst = 512;\n", overlay)
+        self.assertNotIn("std::randomize(wait_time_to_rst)", overlay)
+
+    def test_cli_exposes_fixed_random_reset_delay(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--help"],
+            capture_output=True, text=True, check=True,
+        )
+        self.assertIn("--rand-dma-reset-delay-cycles", result.stdout)
+        self.assertIn("fixed 5..1023-cycle delay", result.stdout)
+
+    def test_fixed_reset_delay_requires_the_forced_first_reset(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--case", "rand_test_dma",
+             "--rand-dma-iterations", "1", "--rand-dma-reset-delay-cycles", "512",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output")],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("requires --force-first-rand-dma-reset", result.stderr)
 
 
 if __name__ == "__main__":

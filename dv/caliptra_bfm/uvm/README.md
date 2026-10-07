@@ -22,6 +22,22 @@ required by each run script. This is a system pressure guard, not a per-process
 RAM limit; the runner reports its preflight and lowest observed free-memory
 percentage.
 
+For a bounded full-top `rand_test_dma` reset diagnostic, use
+`--rand-dma-iterations 1 --force-first-rand-dma-reset`. The optional
+`--rand-dma-reset-delay-cycles N` fixes the testbench warm-reset wait to 5–1023
+cycles in a hash-checked temporary overlay; without it, Caliptra's weighted
+random delay is unchanged. For example:
+
+```sh
+sh dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.sh \
+  --case rand_test_dma --rand-dma-iterations 1 \
+  --force-first-rand-dma-reset --rand-dma-reset-delay-cycles 512 \
+  --output /private/tmp/caliptra-rand-dma-reset-probe
+```
+
+The diagnostic remains subject to the same 60% memory floor. It does not
+qualify warm-reset recovery until the firmware resumes and the run finishes.
+
 ## PCRVault client agent
 
 `pv_caliptra_uvm_pkg.sv` adds a native UVM transaction, sequencer, active
