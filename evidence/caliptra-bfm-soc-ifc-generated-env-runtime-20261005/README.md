@@ -85,6 +85,18 @@ IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
   --generated-axi-user-reject-probe
 ```
 
+### Replay status on 2026-10-07
+
+The documented combined replay compiled with Icarus 13.0 dev
+(`246c58e4-dirty`) but did not reproduce the captured pass: simulation stayed
+at time zero for the 180-second guard and produced no heartbeat. The guard
+terminated it with status 124. Minimum free memory was 59% against a 40%
+floor. Temporary sequence tracing localized the stall to the generated
+`reg_model.reset()` call; bypassing that call for diagnosis reached the first
+clock edge, then stalled in predictor reset. Diagnostic edits and generated
+run files were removed. The 2026-10-05 passing log remains historical evidence
+and is not reproduced on this installed toolchain.
+
 ## Generated AHB RAL read
 
 The optional `--generated-ahb-ral-read` lane starts after generated power-on
