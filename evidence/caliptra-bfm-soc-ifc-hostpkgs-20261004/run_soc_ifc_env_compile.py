@@ -32,12 +32,9 @@ def run_under_memory_guard(repo: Path) -> int | None:
         )
     ) else "90"
     timeout = os.environ.get("CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS", default_timeout)
-    default_min_free = "40" if "--caliptra-top-env-probe" in sys.argv else "60"
     command = [
         sys.executable,
         str(guard),
-        "--min-free-percent",
-        os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", default_min_free),
         "--timeout-seconds",
         timeout,
         "--",

@@ -29,7 +29,8 @@ The captured runtime used:
   -o /private/tmp/hmac-generated-full.vvp
 
 python3 scripts/run_with_memory_pressure_guard.py \
-  --min-free-percent 65 --timeout-seconds 300 -- \
+  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --timeout-seconds 300 -- \
   env PATH=/private/tmp/hmac-generated-run-clean/bin:/opt/homebrew/bin:/usr/bin:/bin \
   /private/tmp/bfm-work-install/bin/vvp /private/tmp/hmac-generated-full.vvp \
   +UVM_TESTNAME=HMAC_random_test +UVM_VERBOSITY=UVM_NONE +UVM_NO_RELNOTES

@@ -368,8 +368,6 @@ def run_under_memory_guard() -> int | None:
     command = [
         sys.executable,
         str(guard),
-        "--min-free-percent",
-        os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", "60"),
         "--timeout-seconds",
         "600",
         "--",

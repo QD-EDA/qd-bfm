@@ -34,7 +34,8 @@ Icarus fork:
 ```sh
 IVERILOG_BIN=/path/to/iverilog VVP_BIN=/path/to/vvp \
 python3 scripts/run_with_memory_pressure_guard.py \
-  --min-free-percent 70 --timeout-seconds 300 \
+  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --timeout-seconds 300 \
   --log /tmp/caliptra-aaxi.log -- \
   sh dv/caliptra_bfm/uvm/tests/run_aaxi_compat.sh
 ```

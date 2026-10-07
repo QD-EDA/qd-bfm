@@ -98,8 +98,10 @@ checkout is never edited.
 
 The checked-in `run.sh` and `run.py` make this probe reproducible from the QD
 checkout. Set `CALIPTRA_ROOT` to the pinned clean Caliptra tree and set
-`IVERILOG_BIN` and `VVP_BIN` to the UVM-enabled Icarus build. The memory floor
-defaults to 60% and can be adjusted with `CALIPTRA_BFM_MIN_FREE_PERCENT`.
+`IVERILOG_BIN` and `VVP_BIN` to the UVM-enabled Icarus build. The current guard
+caps the process group at 6 GiB and preserves 6 GiB system-available memory;
+set `CALIPTRA_BFM_MAX_PROCESS_BYTES` or
+`CALIPTRA_BFM_MIN_AVAILABLE_BYTES` to adjust those limits.
 
 ## Reproduce
 

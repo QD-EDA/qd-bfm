@@ -49,7 +49,8 @@ python3 docs/conformance/release_overlays/caliptra/sha512_out_monitor_reset_even
   > "$EVIDENCE_DIR/compile.log" 2>&1
 
 (cd "$RUN_DIR" && python3 "$REPO_ROOT/scripts/run_with_memory_pressure_guard.py" \
-  --min-free-percent 50 --timeout-seconds 600 \
+  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --timeout-seconds 600 \
   --log "$EVIDENCE_DIR/run.log" -- \
   env PATH=/opt/homebrew/bin:/usr/bin:/bin \
   /private/tmp/bfm-work-install/bin/vvp "$RUN_DIR/sha512_generated_overlay.vvp" \

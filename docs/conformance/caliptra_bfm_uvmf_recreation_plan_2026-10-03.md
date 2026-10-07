@@ -1140,17 +1140,19 @@ through its own blocker, not this list.
 ## 10. RAM safety for replay runners
 
 Every retained Caliptra BFM evidence runner that compiles or executes Icarus
-now enters `scripts/run_with_memory_pressure_guard.py` before starting the
-work. The guard samples every 0.5 seconds and stops the complete child process
-group if free memory falls below its floor. Most runners require at least 60%
-free system memory; the long generated ECC keygen runner defaults to 50% and
-can be configured independently. It fails closed if macOS cannot report
-memory pressure.
-`CALIPTRA_BFM_MIN_FREE_PERCENT` overrides the floor. The 26 direct test runners
-under `dv/caliptra_bfm/*/tests` source `scripts/caliptra_bfm_memory_guard.sh`,
-which applies the same floor with a 300-second default bound. The generated SoC-IFC runtime streams VVP output to a
+enters `scripts/run_with_memory_pressure_guard.py` before starting the work.
+The guard samples every 0.25 seconds and stops the complete child process group
+when its resident memory exceeds 6 GiB or system-available memory falls below
+6 GiB. System availability is counted conservatively from free plus inactive
+pages. It fails closed if macOS memory or process telemetry is unavailable.
+`CALIPTRA_BFM_MAX_PROCESS_BYTES` and `CALIPTRA_BFM_MIN_AVAILABLE_BYTES` can
+override the byte limits. The 26 direct test runners under
+`dv/caliptra_bfm/*/tests` source `scripts/caliptra_bfm_memory_guard.sh`, which
+applies the same limits with a 300-second default bound. The generated SoC-IFC runtime streams VVP output to a
 retained evidence log and suppresses only the repetitive volatile-register
 mirror warning; scoreboard errors remain visible and fail the probe.
+Percentage settings in dated evidence command snapshots record the earlier
+guard behavior; current runners ignore `CALIPTRA_BFM_MIN_FREE_PERCENT`.
 The SoC-IFC generated-environment/package lanes use a 300-second bound; the
 other BFM replay lanes use a 600-second bound. Direct ad hoc compiler commands
 should use the same guard explicitly. The wrappers do not change compiler

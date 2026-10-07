@@ -9,10 +9,12 @@ source overlays. The pinned Caliptra checkout remained unchanged.
 
 The retained [`run_soc_ifc_env_compile.py`](run_soc_ifc_env_compile.py) runner
 automatically applies the macOS memory guard before rebuilding overlays or
-starting Icarus. The default free-memory floor is 60%; set
-`CALIPTRA_BFM_MIN_FREE_PERCENT` to adjust it. The bound is 90 seconds for the
-host-package compile and 300 seconds for the larger generated-package/runtime
-modes. The guard fails closed when macOS memory telemetry is unavailable. Run
+starting Icarus. The current guard caps the process group at 6 GiB and preserves
+6 GiB system-available memory; set `CALIPTRA_BFM_MAX_PROCESS_BYTES` or
+`CALIPTRA_BFM_MIN_AVAILABLE_BYTES` to adjust those limits. The bound is 90
+seconds for the host-package compile and 300 seconds for the larger
+generated-package/runtime modes. The guard fails closed when macOS memory or
+process telemetry is unavailable. Run
 it from the `BFM WORK` root with
 `IVERILOG_BIN=/path/to/iverilog python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py`.
 Wrap any other large build or compile explicitly with
@@ -49,8 +51,9 @@ IVERILOG_BIN=/path/to/iverilog \
     --include-project-bench-packages
 ```
 
-This mode uses the 60% default floor and a five-minute timeout unless
-`CALIPTRA_BFM_MIN_FREE_PERCENT` overrides it. It compiles the generated project-bench packages with the host
+This mode uses the 6 GiB process-group cap, 6 GiB system reserve, and a
+five-minute timeout unless the byte-limit environment variables override them.
+It compiles the generated project-bench packages with the host
 packages, excluding only the generated command-line test and sequence because
 they call `factory.create_object_by_name`, unavailable in this UVM
 implementation. [`soc_ifc_generated_cmdline_test_overlay.py`](../../docs/conformance/release_overlays/caliptra/soc_ifc_generated_cmdline_test_overlay.py)

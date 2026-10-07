@@ -3,10 +3,9 @@ set -eu
 
 repo_root=$(CDPATH= cd -- "$(dirname "$0")/../.." && pwd)
 if [ "${CALIPTRA_BFM_MEMORY_GUARD_CHILD:-0}" != 1 ]; then
-  min_free=${CALIPTRA_BFM_MIN_FREE_PERCENT:-40}
   timeout=${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-300}
   exec python3 "$repo_root/scripts/run_with_memory_pressure_guard.py" \
-    --min-free-percent "$min_free" --timeout-seconds "$timeout" -- \
+    --timeout-seconds "$timeout" -- \
     env CALIPTRA_BFM_MEMORY_GUARD_CHILD=1 sh "$0" "$@"
 fi
 caliptra_root=${CALIPTRA_ROOT:-"$repo_root/../caliptra-rtl"}

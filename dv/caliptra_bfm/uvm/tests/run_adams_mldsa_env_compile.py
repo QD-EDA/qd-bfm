@@ -109,8 +109,6 @@ def run_under_memory_guard(repo: Path) -> int | None:
     command = [
         sys.executable,
         str(repo / "scripts/run_with_memory_pressure_guard.py"),
-        "--min-free-percent",
-        os.environ.get("CALIPTRA_BFM_MIN_FREE_PERCENT", "60"),
         "--timeout-seconds",
         os.environ.get(
             "CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS",

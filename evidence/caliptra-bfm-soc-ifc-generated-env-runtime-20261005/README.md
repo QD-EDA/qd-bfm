@@ -280,8 +280,10 @@ IVERILOG_BIN=/path/to/iverilog VVP_BIN=vvp/vvp \
   --generated-ahb-ral-dlen-write-readback
 ```
 
-The runner applies one 60% free-memory floor with a 300-second bound by
-default. Set `CALIPTRA_BFM_MIN_FREE_PERCENT` to adjust the floor. Set
+The current runner applies a 6 GiB process-group cap and 6 GiB
+system-available reserve with a 300-second bound by default. Set
+`CALIPTRA_BFM_MAX_PROCESS_BYTES` and `CALIPTRA_BFM_MIN_AVAILABLE_BYTES` to
+adjust the limits. Set
 `CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS` to bound a diagnostic retry. Set
 `CALIPTRA_BFM_RUNTIME_LOG` to retain a new run without replacing the default
 runtime log.

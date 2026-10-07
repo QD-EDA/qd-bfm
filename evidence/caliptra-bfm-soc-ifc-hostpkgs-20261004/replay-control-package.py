@@ -185,8 +185,6 @@ def run_under_memory_guard() -> int | None:
     command = [
         sys.executable,
         str(guard),
-        "--min-free-percent",
-        "70",
         "--timeout-seconds",
         "600",
         "--",

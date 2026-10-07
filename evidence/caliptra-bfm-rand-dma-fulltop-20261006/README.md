@@ -132,7 +132,8 @@ Re-run the fixture from the repository root with the normal Icarus tools on
 
 ```sh
 python3 scripts/run_with_memory_pressure_guard.py \
-  --min-free-percent 45 --timeout-seconds 60 \
+  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --timeout-seconds 60 \
   --log /tmp/caliptra-trace-vpi.log -- \
   evidence/caliptra-bfm-open-top-smoke-20261006/run_trace_vpi_smoke.sh
 ```

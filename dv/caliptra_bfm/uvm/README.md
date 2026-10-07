@@ -3,24 +3,26 @@
 ## RAM guard for large simulator runs
 
 All Caliptra BFM test runners under `dv/caliptra_bfm/*/tests` use
-`scripts/run_with_memory_pressure_guard.py`. It checks macOS system-wide free
-memory before launch, samples every 0.5 seconds, and stops the command's process
-group if free memory falls below 60% or the 300-second default timeout expires.
-It fails closed when the host telemetry is unavailable. Set
-`CALIPTRA_BFM_MIN_FREE_PERCENT` or `CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS`
-to adjust the floor or timeout. For standalone heavy commands, use:
+`scripts/run_with_memory_pressure_guard.py`. On macOS it samples every 0.25
+seconds and stops a command if its process group exceeds 6 GiB resident memory,
+or system-available memory falls below a 6 GiB reserve. Available memory is
+measured conservatively as free plus inactive pages. It fails closed when host
+memory or process telemetry is unavailable. Set
+`CALIPTRA_BFM_MAX_PROCESS_BYTES`, `CALIPTRA_BFM_MIN_AVAILABLE_BYTES`, or
+`CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS` to adjust the byte limits or
+timeout. For standalone heavy commands, use:
 
 ```sh
 python3 scripts/run_with_memory_pressure_guard.py \
-  --min-free-percent 60 --timeout-seconds 300 \
+  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --timeout-seconds 300 \
   --log /tmp/caliptra-bfm.log -- \
   sh dv/caliptra_bfm/uvm/tests/run_aaxi_compat.sh
 ```
 
 Set `IVERILOG_BIN` and `VVP_BIN` for the local UVM-enabled Icarus fork as
-required by each run script. This is a system pressure guard, not a per-process
-RAM limit; the runner reports its preflight and lowest observed free-memory
-percentage.
+required by each run script. The runner reports the minimum observed available
+memory and maximum observed resident memory for the process group.
 
 For a bounded full-top `rand_test_dma` reset diagnostic, use
 `--rand-dma-iterations 1 --force-first-rand-dma-reset`. The optional
