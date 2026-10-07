@@ -165,22 +165,17 @@ The runner checks the pinned Caliptra revision, clean checkout, and generated
 disposable overlay under both IEEE editions. Compiler output and binaries
 are removed on exit.
 
-To reproduce the reset-monitor regression with the actual ECC RTL and generated
-`hdl_top`/`hvl_top`, run:
+To reproduce the generated reset-monitor and ECC AHB readback runtime from the qd-bfm repository root:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
-ECC_RESET_MONITOR_LOG_PREFIX=generated_ecc_ahb_probe \
-  evidence/caliptra-bfm-generated-ecc-hdl-20261004/verify_reset_monitor.sh
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+IVERILOG_BIN=/path/to/iverilog \
+VVP_BIN=/path/to/vvp \
+ECC_RESET_MONITOR_LOG_DIR=/path/to/retained/logs \
+  dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh
 ```
 
-The runner verifies the pinned Caliptra revision and clean checkout, checks
-the input and output monitor source hashes before creating disposable copies,
-then requires exactly one reset transaction on each scoreboard stream, one
-match, zero pending transactions after 250 clocks, then writes and reads back
-`ECC_IRQ_EN` through the generated driver BFM. Both IEEE editions must report
-the exact readback and no UVM errors or fatals.
+The runner validates source revisions and hashes, applies hash-guarded monitor changes only to temporary copies, then requires one matched reset transaction and an ECC_IRQ_EN readback in both IEEE editions. Set ECC_RESET_MONITOR_LOG_DIR to retain run logs; build files and overlays are removed on exit.
 
 Observed output:
 
@@ -210,10 +205,10 @@ REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors u
 | `runtime_blocker.log` | `15782f5324fbb32405c345e928a5e8e07c4b7b4b5a61848f29d1a2179f341fac` |
 | `reset_monitor_blocker.log` | `d01f7deab69315a182c68e55774333ba1f52b638a1b99a56bc9ae7a7abe0b14f` |
 | `apply_monitor_overlay.py` used for captured runs (64-clock poll interval) | `f47b91a6648c24286acd16bd85e6e10fc60371bec1c3803535f51eb3157e29fc` |
-| `apply_monitor_overlay.py` current replay (512-clock poll interval; IEEE 2017/2023 keygen passed) | `3005a916bb27e6b01d48d976eacef65cb373af3091104efecfb4f054e4c3815a` |
-| `verify_reset_monitor.sh` with generated ECC AHB readback | `bf482d82c8b94542b6022b4626c7169ca323cdf01b89e4548efc39f56f1b4ed6` |
-| `reset_monitor_probe_pkg.sv` with generated ECC AHB readback | `e9cf02cf116b6b80d7ce3cb570a8273b2c8ec58d6368814cf58067d506cadaf5` |
-| `top_reset_monitor_probe.sv` | `de540c7ee0fecb1221db42896e746ff9925a76a2106ed477519e90c7ca12805d` |
+| `dv/caliptra_bfm/uvmf_lite/tests/generated_ecc_monitor_overlay.py` (512-clock poll interval) | `3bc2a45314bbcf2cebe0bbeec612bfa78436782bd96229aa67ff2e962cf20885` |
+| `dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh` | `23a94504b74a747ad8935092f0c8dffe01856c1d28163b5f94f4ee8f4494755e` |
+| `dv/caliptra_bfm/uvmf_lite/tests/tb_generated_ecc_reset_probe_pkg.sv` | `0fe0097116672c200b092df891d2e77ce45d9392e50d2e5c7589deb9c634be20` |
+| `dv/caliptra_bfm/uvmf_lite/tests/tb_generated_ecc_full_probe.sv` | `b5ffee36e14275339589d85998bffaa1d9465b966ba246e49259d0a9a6c98ecc` |
 | `reset_monitor_overlay_2017.log` / `_2023.log` | `fef64b931a192492cc86cfd4e869554e0a3ac1c16025c7ec4603193c9067ea78` |
 | `generated_ecc_ahb_probe_2017.log` / `_2023.log` | `36695ddecaeb49ccaa9691bf8ce5ca6ce9e17991409cc7ad5ab4afcd25c16f47` |
 | `verify_keygen_runtime.sh` (single-edition selector) | `4728efc608e53fd6710887ac87b0959f6580ee76aed4279d62965f445e73723f` |

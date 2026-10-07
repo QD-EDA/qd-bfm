@@ -142,7 +142,11 @@ source, then elaborates the actual ECC RTL and generated UVMF packages from a
 temporary copy with the three generated modport selectors removed and an
 explicit `1ns/1ps` timescale. Both IEEE editions pass; the pinned checkout is
 unchanged. This makes the generated top compile path repeatable without
-claiming that the generated source compiles unchanged.
+claiming that the generated source compiles unchanged. The companion
+`tests/run_generated_ecc_reset_monitor.sh` runs the actual generated ECC
+environment against `ecc_top` under both IEEE editions. It checks a matched
+reset transaction and an `ECC_IRQ_EN` AHB write/readback with zero UVM errors
+or fatals; set `ECC_RESET_MONITOR_LOG_DIR` to retain the run logs.
 
 The 384-bit ECC automatic bins are represented as exact leading-bit prefixes;
 the focused regression also covers 512-bit explicit ranges, a 65-bit
