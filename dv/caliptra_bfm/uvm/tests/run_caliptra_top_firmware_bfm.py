@@ -246,12 +246,15 @@ def prepare_pq_vector_overlay(rtl_root, output_path):
     Path(output_path).write_text(skip_pq_vector_generators(source.read_text()))
 
 
-def prepare_dma_generator_overlay(rtl_root, output_path):
+def prepare_dma_generator_overlay(rtl_root, output_path, force_first_reset=False):
     generator_script = REPO / "docs/conformance/release_overlays/caliptra/dma_testcase_generator_overlay.py"
-    subprocess.run([
+    command = [
         sys.executable, str(generator_script), "--caliptra-root", str(rtl_root),
         "--output", str(output_path), "--top", DMA_GENERATOR_HELPER_SCOPE,
-    ], check=True)
+    ]
+    if force_first_reset:
+        command.append("--force-first-reset")
+    subprocess.run(command, check=True)
 
 
 def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
@@ -643,6 +646,10 @@ def main():
                         help="diagnostic only: suppress low-priority firmware prints for supported DMA cases")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
+    parser.add_argument("--rand-dma-iterations", type=int, metavar="N",
+                        help="diagnostic only: run the first N generated rand_test_dma transfers (1..100)")
+    parser.add_argument("--force-first-rand-dma-reset", action="store_true",
+                        help="diagnostic only: set inject_rst on the first generated rand_test_dma transfer")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case not in (
             "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
@@ -659,6 +666,16 @@ def main():
     if args.quiet_firmware and args.case not in (
             "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
         raise ValueError("--quiet-firmware requires a supported DMA firmware case")
+    if args.rand_dma_iterations is not None:
+        if args.case != "rand_test_dma":
+            raise ValueError("--rand-dma-iterations is limited to rand_test_dma")
+        if not 1 <= args.rand_dma_iterations <= 100:
+            raise ValueError("--rand-dma-iterations must be between 1 and 100")
+    if args.force_first_rand_dma_reset:
+        if args.case != "rand_test_dma":
+            raise ValueError("--force-first-rand-dma-reset is limited to rand_test_dma")
+        if args.rand_dma_iterations is None:
+            raise ValueError("--force-first-rand-dma-reset requires --rand-dma-iterations")
     skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
     quiet_firmware = aes_case_limit is not None or args.quiet_firmware
 
@@ -689,7 +706,7 @@ def main():
     generator_overlay = None
     if args.case == "rand_test_dma":
         generator_overlay = args.output / "dma_testcase_generator_icarus.sv"
-        prepare_dma_generator_overlay(rtl, generator_overlay)
+        prepare_dma_generator_overlay(rtl, generator_overlay, args.force_first_rand_dma_reset)
     pq_vector_overlay = None
     case_limit_source = None
     if skip_pq_vectors:
@@ -774,6 +791,8 @@ def main():
     if trace_plugin:
         sim_command.extend(["-m", str(trace_plugin)])
     sim_command.extend([str(binary), "+CLP_REGRESSION", *plusargs])
+    if args.rand_dma_iterations is not None:
+        sim_command.append(f"+NUM_ITERATIONS={args.rand_dma_iterations}")
     if skip_pq_vectors:
         sim_command.append("+CLP_SKIP_PQ_VECTOR_GENERATION")
     sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
@@ -804,6 +823,8 @@ def main():
         "firmware_exit": firmware_exit,
         "aes_case_limit": aes_case_limit,
         "aes_case_limit_source_sha256": case_limit_source[1] if case_limit_source else None,
+        "rand_dma_iterations": args.rand_dma_iterations,
+        "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
         "firmware_image_sha256": stock_firmware_image_sha256,
         "simulation_image_sha256": simulation_image_sha256,
         "fast_boot_data_preload": fast_boot_data_preload,
@@ -811,6 +832,8 @@ def main():
                              "fast_boot_data_preload": args.fast_boot_data_preload or aes_case_limit is not None,
                              "first_aes_case": args.first_aes_case_diagnostic,
                              "aes_case_limit": aes_case_limit,
+                             "rand_dma_iterations": args.rand_dma_iterations,
+                             "force_first_rand_dma_reset": args.force_first_rand_dma_reset,
                              "skip_pq_vector_generation": skip_pq_vectors,
                              "quiet_firmware": quiet_firmware},
         "native_vector_build_commands": vector_commands,
@@ -833,6 +856,9 @@ def main():
     label = "PASS" if passed else "FAIL"
     if aes_case_limit is not None:
         label += f" (first {aes_case_limit} AES DMA case(s); not stock firmware qualification)"
+    elif args.rand_dma_iterations is not None:
+        reset_note = ", forced first reset" if args.force_first_rand_dma_reset else ""
+        label += f" (first {args.rand_dma_iterations} random DMA transfer(s){reset_note}; not full-suite qualification)"
     elif args.fast_boot_data_preload:
         label += " (diagnostic fast boot; not stock firmware qualification)"
     elif quiet_firmware:

@@ -24,8 +24,11 @@ def main() -> int:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--dut-replay", action="store_true")
+    parser.add_argument("--force-first-reset", action="store_true")
     parser.add_argument("--top", default=TOP)
     args = parser.parse_args()
+    if args.dut_replay and args.force_first_reset:
+        parser.error("--force-first-reset cannot be combined with --dut-replay")
 
     root = args.caliptra_root.resolve()
     source_path = root / SOURCE
@@ -42,6 +45,22 @@ def main() -> int:
         if actual != count:
             raise SystemExit(f"Expected {count} instances of {call!r}, found {actual}")
         text = text.replace(call, replacement)
+
+    if args.force_first_reset:
+        randomize_branch = '''        if (!dma_gen.randomize()) begin
+          $error("Randomization failed for dma_transfer_generator %d", i);
+        end
+        else begin
+          dma_xfers[i] = dma_gen;'''
+        forced_reset_branch = '''        if (!dma_gen.randomize()) begin
+          $error("Randomization failed for dma_transfer_generator %d", i);
+        end
+        else begin
+          if (i == 0) dma_gen.inject_rst = 1'b1;
+          dma_xfers[i] = dma_gen;'''
+        if text.count(randomize_branch) != 1:
+            raise SystemExit("Expected one randomize branch to force the first reset")
+        text = text.replace(randomize_branch, forced_reset_branch, 1)
 
     if args.dut_replay:
         randomize_branch = '''        if (!dma_gen.randomize()) begin
