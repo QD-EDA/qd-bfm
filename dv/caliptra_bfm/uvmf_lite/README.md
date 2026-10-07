@@ -44,6 +44,10 @@ end-of-test mismatch, but Caliptra traffic is not yet qualified. `uvmf_lite.f` i
 the repository root. Both package source files are guarded by
 `CALIPTRA_BFM_EXTERNAL_UVMF` so a provider-specific filelist can supply the
 licensed or separately pinned UVMF packages instead.
+The pinned Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` consumer
+supplies its generated per-agent macro headers and imports only these two
+UVMF packages; broader UVMF macro and utility APIs are outside this layer's
+current compatibility surface.
 
 Run `tests/run_uvmf_scoreboard.sh` and `tests/run_uvmf_agent.sh` with the local
 Icarus `-uvm` fork selected through `IVERILOG_BIN` and `VVP_BIN`. Both runners
@@ -128,10 +132,9 @@ config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
 `wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs.
-Generated BFM macros and utility packages, and structured per-field recording
-of derived payloads, are still open. The ECC `hdl_top`/`hvl_top` pair runs with
-a hash-guarded modport/timescale overlay; compatibility with unmodified and
-other generated tops remains open.
+Structured per-field recording of derived payloads remains open. The ECC
+`hdl_top`/`hvl_top` pair runs with a hash-guarded modport/timescale overlay;
+compatibility with unmodified and other generated tops remains open.
 Do not treat it as a drop-in UVMF package yet.
 
 The focused compile probe follows the ECC entries in Caliptra's pinned
