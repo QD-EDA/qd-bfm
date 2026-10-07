@@ -298,6 +298,16 @@ package axi4_caliptra_uvm_pkg;
       end
     endtask
 
+    function void report_phase(uvm_phase phase);
+      super.report_phase(phase);
+      // ponytail: report handshake/stall totals; expose finer native bins if UVM consumers need them.
+      `uvm_info("AXI_COVERAGE", $sformatf(
+        "accepted AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d; stalled AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d",
+        vif.aw_count, vif.w_count, vif.b_count, vif.ar_count, vif.r_count,
+        vif.aw_stall_cycles, vif.w_stall_cycles, vif.b_stall_cycles,
+        vif.ar_stall_cycles, vif.r_stall_cycles), UVM_LOW)
+    endfunction
+
     function void publish_channel(axi4_caliptra_channel_e channel);
       axi4_caliptra_channel_transaction item;
       item = axi4_caliptra_channel_transaction::type_id::create("channel_item");

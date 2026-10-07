@@ -8,6 +8,9 @@ interface axi4_caliptra_record_if(input wire ACLK);
 
   // Packed channel records use 8-bit IDs, 48-bit addresses, and 32-bit payloads.
   logic [63:0] channel_cycle;
+  logic [31:0] aw_count, w_count, b_count, ar_count, r_count;
+  logic [31:0] aw_stall_cycles, w_stall_cycles, b_stall_cycles;
+  logic [31:0] ar_stall_cycles, r_stall_cycles;
   logic aw_fire;
   logic [101:0] aw_record;
   logic w_fire;

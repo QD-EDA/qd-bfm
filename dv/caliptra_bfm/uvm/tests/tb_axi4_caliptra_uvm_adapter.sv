@@ -55,6 +55,9 @@ module tb_axi4_caliptra_uvm_adapter;
   wire [41:0] b_record;
   wire [74:0] r_record;
   wire [63:0] cycle_count;
+  wire [31:0] aw_count, w_count, b_count, ar_count, r_count;
+  wire [31:0] aw_stall_cycles, w_stall_cycles, b_stall_cycles;
+  wire [31:0] ar_stall_cycles, r_stall_cycles;
   axi4_caliptra_monitor #(
     .ADDR_WIDTH(48), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32)
   ) channel_monitor (.*);
@@ -69,6 +72,16 @@ module tb_axi4_caliptra_uvm_adapter;
   assign record_if.r_fire = r_fire;
   assign record_if.r_record = r_record;
   assign record_if.channel_cycle = cycle_count;
+  assign record_if.aw_count = aw_count;
+  assign record_if.w_count = w_count;
+  assign record_if.b_count = b_count;
+  assign record_if.ar_count = ar_count;
+  assign record_if.r_count = r_count;
+  assign record_if.aw_stall_cycles = aw_stall_cycles;
+  assign record_if.w_stall_cycles = w_stall_cycles;
+  assign record_if.b_stall_cycles = b_stall_cycles;
+  assign record_if.ar_stall_cycles = ar_stall_cycles;
+  assign record_if.r_stall_cycles = r_stall_cycles;
 
   axi4_caliptra_transaction_monitor monitor_dut (
     .ACLK(ACLK), .ARESETn(ARESETn),

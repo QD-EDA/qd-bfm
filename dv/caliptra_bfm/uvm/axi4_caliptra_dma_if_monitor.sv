@@ -66,7 +66,15 @@ module axi4_caliptra_dma_if_monitor (
     .b_fire(record_if.b_fire), .b_record(record_if.b_record),
     .ar_fire(record_if.ar_fire), .ar_record(record_if.ar_record),
     .r_fire(record_if.r_fire), .r_record(record_if.r_record),
-    .cycle_count(record_if.channel_cycle)
+    .cycle_count(record_if.channel_cycle),
+    .aw_count(record_if.aw_count), .w_count(record_if.w_count),
+    .b_count(record_if.b_count), .ar_count(record_if.ar_count),
+    .r_count(record_if.r_count),
+    .aw_stall_cycles(record_if.aw_stall_cycles),
+    .w_stall_cycles(record_if.w_stall_cycles),
+    .b_stall_cycles(record_if.b_stall_cycles),
+    .ar_stall_cycles(record_if.ar_stall_cycles),
+    .r_stall_cycles(record_if.r_stall_cycles)
   );
 
   axi4_caliptra_transaction_monitor monitor (

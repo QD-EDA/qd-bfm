@@ -225,6 +225,8 @@ wrappers publish one `axi4_caliptra_channel_transaction` on `channel_ap` for
 each accepted channel beat. The separate completed-transaction adapter groups
 the same handshakes into read and write transactions. The recorded run is in
 [`AXI coverage evidence`](../../../evidence/caliptra-bfm-axi-coverage-20261007/README.md).
+UVM monitor reports also print accepted beats and READY-low stall cycles per
+channel from these native counters.
 
 ## Completed transaction monitor
 
