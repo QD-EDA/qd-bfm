@@ -29,3 +29,17 @@ RISC-V GCC 13.2 x86_64 binary required the unavailable Intel Homebrew library
 - Earlier firmware build: failed before producing images; see `firmware.log`
 - Earlier run memory guard: 73% minimum free, with a 60% floor
 - Earlier raw output directory: `/private/tmp/qd-bfm-rand-test-dma-20261006-retry3`
+
+## One-case AES follow-up
+
+A separate `smoke_test_dma_aes_gcm_short_1_dword` run used only the first AES
+case, fast TRNG, verified `.data` preload, quiet firmware, and AXI tracing.
+JTAG DPI bound successfully. The run reached one AXI write address, data beat,
+and response at cycles 3149, 3150, and 3152. The memory guard then stopped the
+run at cycle 3584 after free memory fell to 59% against the 60% floor (58% on
+the post-run sample). No testcase completion marker was reached, so this is
+partial integration evidence only.
+
+- Raw trace SHA-256: `58bf76083a22373f1802655b1fcfd279ca72177a501bde89e5e9eb0841dbb737`
+- Trace: `sim-one-aes-partial.log`
+- Raw output directory: `/private/tmp/qd-bfm-top-short-aes-first-quiet-escalated-20261006`
