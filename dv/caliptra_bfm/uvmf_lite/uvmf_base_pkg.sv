@@ -191,8 +191,11 @@ package uvmf_base_pkg;
       this.agent_path = agent_path;
       this.interface_name = interface_name;
       this.return_transaction_response = 0;
-      // Passive agents consume a monitor BFM but have no driver component.
-      if (activity == ACTIVE &&
+    endfunction
+
+    virtual function void resolve_bfm_handles();
+      // Resolve at agent build so HDL-top registrations may follow config setup.
+      if (active_passive == ACTIVE &&
           !uvm_config_db #(DRIVER_BFM_BIND_T)::get(
             null, UVMF_VIRTUAL_INTERFACES, interface_name, driver_bfm))
         `uvm_fatal("UVMF_CONFIG",
@@ -329,6 +332,7 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Agent cannot find its configuration")
+      configuration.resolve_bfm_handles();
       if (!uvm_config_db #(MONITOR_T)::get(this, "", "monitor", monitor) ||
           monitor == null) begin
         uvm_config_db #(CONFIG_T)::set(this, "monitor", UVMF_AGENT_CONFIG, configuration);

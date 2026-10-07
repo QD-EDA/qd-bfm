@@ -101,8 +101,12 @@ three expected records in the [full-snapshot probe](../../../evidence/caliptra-b
 including on the merged Icarus build. This verifies subscriber delivery and
 sampling calls only; Icarus still compiles covergroups as stubs, so bin hits
 and coverage percentages are not measured. Other generated coverage paths
-still need qualification. HDL-side registration order, late registration, and
-generated derived configuration publication also remain unverified. The
+still need qualification. The agent smoke now registers typed BFM handles
+after environment/agent configuration initialization and resolves them during
+agent build. Its IEEE 2017 positive case passed; the full 2017/2023 run and
+mismatch controls did not complete. Registration after agent build remains
+unverified. Generated derived configuration publication is covered by the
+smoke's config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
 `wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros

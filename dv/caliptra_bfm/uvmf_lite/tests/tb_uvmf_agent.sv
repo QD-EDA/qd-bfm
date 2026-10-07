@@ -371,16 +371,22 @@ package uvmf_lite_agent_test_pkg;
     virtual function void build_phase(uvm_phase phase);
       super.build_phase(phase);
       expect_scoreboard_mismatch = $test$plusargs("BFM_LITE_EXPECT_MISMATCH");
-      if (!uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::get(
-            null, UVMF_VIRTUAL_INTERFACES, "input_if", driver_bfm) ||
-          !uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::get(
-            null, UVMF_VIRTUAL_INTERFACES, "input_if", input_monitor_bfm) ||
-          !uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::get(
-            null, UVMF_VIRTUAL_INTERFACES, "output_if", output_monitor_bfm))
-        `uvm_fatal("UVMF_TEST_CONFIG", "Top did not register the active and passive BFMs")
-
       configuration.initialize(NA, "uvm_test_top.environment", interface_names,
                                null, interface_activity);
+      if (!uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::get(
+            null, "LATE_BFM_HANDLES", "input_driver", driver_bfm) ||
+          !uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::get(
+            null, "LATE_BFM_HANDLES", "input_monitor", input_monitor_bfm) ||
+          !uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::get(
+            null, "LATE_BFM_HANDLES", "output_monitor", output_monitor_bfm))
+        `uvm_fatal("UVMF_TEST_CONFIG", "Test bench did not provide late BFM handles")
+
+      uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "input_if", driver_bfm);
+      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "input_if", input_monitor_bfm);
+      uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
+        null, UVMF_VIRTUAL_INTERFACES, "output_if", output_monitor_bfm);
       observer = agent_observer::type_id::create("observer", this);
     endfunction
 
@@ -428,6 +434,9 @@ package uvmf_lite_agent_test_pkg;
             INITIATOR ||
           configuration.passive_agent_configuration.initiator_responder !=
             RESPONDER ||
+          configuration.active_agent_configuration.driver_bfm != driver_bfm ||
+          configuration.active_agent_configuration.monitor_bfm != input_monitor_bfm ||
+          configuration.passive_agent_configuration.monitor_bfm != output_monitor_bfm ||
           agent_sequence::completed_value != 42 ||
           agent_observer::item_count != 1 || agent_observer::last_value != 42 ||
           agent_coverage::sample_count != 1 || agent_coverage::sampled_value != 42 ||
@@ -480,11 +489,11 @@ module tb_uvmf_agent;
   initial begin
     agent::type_id::set_type_override(agent_override::get_type());
     uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::set(
-      null, UVMF_VIRTUAL_INTERFACES, "input_if", input_driver_bfm);
+      null, "LATE_BFM_HANDLES", "input_driver", input_driver_bfm);
     uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
-      null, UVMF_VIRTUAL_INTERFACES, "input_if", input_monitor_bfm);
+      null, "LATE_BFM_HANDLES", "input_monitor", input_monitor_bfm);
     uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::set(
-      null, UVMF_VIRTUAL_INTERFACES, "output_if", output_monitor_bfm);
+      null, "LATE_BFM_HANDLES", "output_monitor", output_monitor_bfm);
     run_test("agent_test");
   end
 endmodule

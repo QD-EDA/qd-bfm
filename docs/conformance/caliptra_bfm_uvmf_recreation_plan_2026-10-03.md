@@ -809,11 +809,15 @@ the source-observed `uvmf_sim_level_t` type and an HDL package for the shared
 `uvmf_active_passive_t` and `uvmf_initiator_responder_t` enums. The host-side
 package re-exports those exact enum types for generated configuration code.
 It has an environment configuration base that stores the arguments passed by generated
-Caliptra tops. A parameterized agent configuration base now retrieves typed
-driver and monitor BFMs from the observed `UVMF_VIRTUAL_INTERFACES` config-DB
-scope and interface-name key. The generated derived configuration performs
-the agent/configuration publication itself; this base does not reproduce
-HDL-top registration ordering or late-registration behavior. Generic driver
+Caliptra tops. A parameterized agent configuration base resolves typed driver
+and monitor BFMs from the observed `UVMF_VIRTUAL_INTERFACES` config-DB scope
+and interface-name key during agent build, after configuration initialization.
+The focused toy-agent test registers those handles after environment and agent
+configuration initialization; its IEEE 2017 positive case passed. The full
+2017/2023 and mismatch-control runner did not complete, so those cases remain
+unverified. This does not cover registration after agent build. The generated
+derived configuration performs the agent/configuration publication itself.
+Generic driver
 and monitor bases now provide the hooks used by generated agents: typed BFM
 handles, `configure`, proxy installation, driver `access`, and monitor
 analysis publication. Environment and agent bases provide the generated
@@ -847,8 +851,8 @@ selected component-base slices are exercised against generated ECC and
 SoC-IFC environments below. The self-authored toy-DUT reference now reaches the
 end-to-end portion of the Phase 2 gate in the current local UVM/Icarus mode.
 The out-of-order scoreboard now passes a focused reordered-match and mismatch
-smoke under IEEE 2017 and 2023; actual Caliptra traffic and late VIF registration
-remain unqualified. The gate also remains open because only one UVM release has
+smoke under IEEE 2017 and 2023; actual Caliptra traffic remains unqualified.
+The gate also remains open because only one UVM release has
 been exercised. The
 generated ECC packages compile and elaborate in the focused source-order
 probe. The generated ECC runtime proxy blocker (DD-105) is now fixed locally:
