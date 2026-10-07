@@ -85,8 +85,10 @@ reset scoreboard matches in both IEEE editions, and the generated keygen
 sequence matches its predicted result in both editions. The reset-monitor
 runner also supports a deterministic `key_sign` transaction with a generated
 scoreboard check (`ECC_RUNTIME_PROBE=key_sign`); it builds the native vector
-helper in its temporary run directory using Homebrew `mbedtls@3`. Key signing
-is not qualified until that mode passes. Verification, ECDH shared-key
+helper in its temporary run directory using Homebrew `mbedtls@3`, submits the
+startup reset sample expected by the generated output monitor, and ties the
+otherwise-unconnected `cptra_pwrgood` high in its temporary top. Key signing is
+not qualified until that mode passes. Verification, ECDH shared-key
 operations, broader generated-environment
 traffic, and full generated `hdl_top`/`hvl_top` qualification remain open; see
 the [generated ECC runtime evidence](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md).

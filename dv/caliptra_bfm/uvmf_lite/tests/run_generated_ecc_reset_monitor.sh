@@ -60,6 +60,11 @@ if [ "$hdl_sha" != "$expected_hdl_top_sha" ]; then
   echo "Generated hdl_top.sv hash changed: $hdl_sha" >&2
   exit 2
 fi
+if [ "$probe" = key_sign ] &&
+   [ "$(grep -Fc '.cptra_pwrgood    (),' "$hdl_src")" -ne 1 ]; then
+  echo "Expected the pinned ECC hdl_top to leave cptra_pwrgood unconnected." >&2
+  exit 2
+fi
 
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
@@ -87,6 +92,11 @@ fi
     -e 's/ECC_in_agent_bus\.initiator_port/ECC_in_agent_bus/g' \
     "$hdl_src"
 } > "$tmpdir/hdl_top_icarus.sv"
+if [ "$probe" = key_sign ]; then
+  sed "s/\.cptra_pwrgood    (),/.cptra_pwrgood    (1'b1),/" \
+    "$tmpdir/hdl_top_icarus.sv" > "$tmpdir/hdl_top_key_sign.sv"
+  mv "$tmpdir/hdl_top_key_sign.sv" "$tmpdir/hdl_top_icarus.sv"
+fi
 
 for edition in 2017 2023; do
   if [ "$edition_filter" != both ] && [ "$edition_filter" != "$edition" ]; then

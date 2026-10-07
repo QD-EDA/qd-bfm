@@ -92,11 +92,19 @@ package ecc_reset_probe_pkg;
       super.new(name);
     endfunction
     virtual task body();
+      ecc_reset_only_input_sequence reset_sequence;
       ecc_key_sign_input_sequence input_sequence;
+      reset_sequence = ecc_reset_only_input_sequence::type_id::create("reset_sequence");
       input_sequence = ecc_key_sign_input_sequence::type_id::create("input_sequence");
       fork
         ECC_in_agent_config.wait_for_reset();
         ECC_out_agent_config.wait_for_reset();
+      join
+      // Match the startup reset sample before comparing the sign result.
+      reset_sequence.start(ECC_in_agent_sequencer);
+      fork
+        ECC_in_agent_config.wait_for_num_clocks(250);
+        ECC_out_agent_config.wait_for_num_clocks(250);
       join
       input_sequence.start(ECC_in_agent_sequencer);
       fork
@@ -116,12 +124,12 @@ package ecc_reset_probe_pkg;
       phase.raise_objection(this);
       sign_seq = ecc_key_sign_bench_sequence::type_id::create("sign_seq");
       sign_seq.start(null);
-      if (environment.ECC_sb.expected_received_count != 1 ||
-          environment.ECC_sb.actual_received_count != 1 ||
+      if (environment.ECC_sb.expected_received_count != 2 ||
+          environment.ECC_sb.actual_received_count != 2 ||
           environment.ECC_sb.mismatch_count != 0 ||
           environment.ECC_sb.pending_expected_count != 0 ||
           environment.ECC_sb.pending_actual_count != 0 ||
-          environment.ECC_sb.matched_count != 1)
+          environment.ECC_sb.matched_count != 2)
         `uvm_fatal("ECC_PROBE", $sformatf(
           "key-sign scoreboard counts expected=%0d actual=%0d matched=%0d mismatched=%0d pending_expected=%0d pending_actual=%0d",
           environment.ECC_sb.expected_received_count,
