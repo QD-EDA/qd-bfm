@@ -81,6 +81,9 @@ module ahb_lite_caliptra_checker #(
           stalled_write_data <= HWDATA;
         end
       end else if (HREADY) begin
+        if (stall_active &&
+            (stalled_address !== {HADDR, HSEL, HWRITE, HTRANS, HSIZE}))
+          current_error = 4'd5;
         if (pending_write && stalled_write_data_active &&
             (stalled_write_data !== HWDATA))
           current_error = 4'd6;

@@ -21,6 +21,7 @@ for entry in \
   'BAD_SIZE:3' \
   'BAD_ALIGN:4' \
   'BAD_ADDR_STABILITY:5' \
+  'BAD_ADDR_COMPLETION:5' \
   'BAD_WDATA_STABILITY:6' \
   'BAD_ERROR_SECOND:7' \
   'BAD_ERROR_SINGLE:8' \
@@ -39,4 +40,4 @@ for entry in \
   fi
 done
 
-printf 'PASS: AHB checker rejected all ten injected protocol violations\n'
+printf 'PASS: AHB checker rejected all eleven injected protocol violations\n'

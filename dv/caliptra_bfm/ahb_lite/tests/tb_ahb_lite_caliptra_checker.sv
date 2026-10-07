@@ -112,6 +112,18 @@ module tb_ahb_lite_caliptra_checker;
         HADDR = 32'h1000_0008;
         expected_code = 5;
       end
+      "BAD_ADDR_COMPLETION": begin
+        @(negedge HCLK);
+        HSEL = 1;
+        HTRANS = 2'b10;
+        HADDR = 32'h1000_0000;
+        HREADY = 0;
+        step();
+        @(negedge HCLK);
+        HREADY = 1;
+        HADDR = 32'h1000_0008;
+        expected_code = 5;
+      end
       "BAD_WDATA_STABILITY": begin
         accept_transfer(1'b1);
         @(negedge HCLK);

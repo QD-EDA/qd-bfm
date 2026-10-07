@@ -11,7 +11,7 @@ pass focused standalone Icarus tests, including autonomous FIFO push/pop. The
 native AHB-Lite slice has a serialized manager, passive transfer monitor,
 profile checker, and bounded memory subordinate; its directed read/write,
 wait, and ERROR response test
-passes, and ten injected protocol violations are rejected with the expected
+passes, and eleven injected protocol violations are rejected with the expected
 checker codes while a legal two-cycle ERROR response is accepted. A separate
 four-beat INCR extension drives NONSEQ/SEQ through the MVC command path; its
 monitor groups bounded queue items, preserves native per-beat records, and
