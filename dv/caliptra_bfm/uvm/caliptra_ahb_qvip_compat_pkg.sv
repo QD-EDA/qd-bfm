@@ -97,6 +97,7 @@ endpackage
 package qvip_ahb_lite_slave_pkg;
   import uvm_pkg::*;
   import mvc_pkg::*;
+  import mgc_ahb_v2_0_pkg::*;
   import qvip_ahb_lite_slave_params_pkg::*;
   import ahb_lite_caliptra_uvm_pkg::*;
   import uvmf_base_pkg::*;
@@ -168,7 +169,6 @@ package qvip_ahb_lite_slave_pkg;
     virtual function void write(mvc_sequence_item_base tr);
       T transfer;
       T beat;
-      uvm_object beat_obj;
 
       if (!$cast(transfer, tr)) begin
         super.write(tr);
@@ -190,11 +190,9 @@ package qvip_ahb_lite_slave_pkg;
         return;
       end
 
-      beat_obj = transfer.clone();
-      if (!$cast(beat, beat_obj)) begin
-        `uvm_error("AHB_RAL_BURST", "Could not clone AHB transfer for per-beat prediction")
-        return;
-      end
+      beat = new("predictor_beat");
+      beat.RnW = transfer.RnW;
+      beat.size = transfer.size;
       for (int unsigned i = 0; i < transfer.data.size(); i++) begin
         if (transfer.resp[i] == AHB_ERROR) continue;
         if (transfer.resp[i] != AHB_OKAY) begin

@@ -379,7 +379,7 @@ contiguous accepted SEQ beats with matching direction and size, ending an item
 at an accepted IDLE/NONSEQ boundary or after 256 beats. HBURST is absent, so
 item boundaries are inferred from accepted address phases. Each output is a
 separate object because Caliptra predictors copy and mutate queue data.
-The generated-name `ahb_reg_predictor` expands a grouped item into cloned
+The generated-name `ahb_reg_predictor` expands a grouped item into fresh
 single-beat records at incrementing addresses before calling the stock UVM
 predictor; successful beats update their individual RAL mirrors, while ERROR
 beats are skipped. Single-beat records retain the stock predictor path. The

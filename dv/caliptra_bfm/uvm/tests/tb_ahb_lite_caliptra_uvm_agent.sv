@@ -460,11 +460,20 @@ module tb_ahb_lite_caliptra_uvm_agent;
             env.agent.agent.monitor.vif.transfer_count != 17 ||
             env.agent.agent.monitor.vif.read_address_count != 9 ||
             env.agent.agent.monitor.vif.write_address_count != 8 ||
-            env.agent.agent.monitor.vif.size_2byte_count != 3 ||
+            env.agent.agent.monitor.vif.size_4byte_count != 3 ||
             env.agent.agent.monitor.vif.size_8byte_count != 14 ||
             env.agent.agent.monitor.vif.pending_wait_cycle_count == 0 ||
             env.agent.agent.monitor.vif.error_transfer_count != 4)
-          `uvm_fatal("AHB_COVERAGE", "Pin-monitor coverage counts did not match the directed AHB traffic")
+          `uvm_fatal("AHB_COVERAGE",
+            $sformatf("Pin-monitor counts addr=%0d xfer=%0d read=%0d write=%0d size4=%0d size8=%0d waits=%0d errors=%0d",
+              env.agent.agent.monitor.vif.address_count,
+              env.agent.agent.monitor.vif.transfer_count,
+              env.agent.agent.monitor.vif.read_address_count,
+              env.agent.agent.monitor.vif.write_address_count,
+              env.agent.agent.monitor.vif.size_4byte_count,
+              env.agent.agent.monitor.vif.size_8byte_count,
+              env.agent.agent.monitor.vif.pending_wait_cycle_count,
+              env.agent.agent.monitor.vif.error_transfer_count))
         if (env.predictor_subscriber.error_count != 4 ||
             env.scoreboard_subscriber.error_count != 4 ||
             env.coverage_subscriber.error_count != 4)
