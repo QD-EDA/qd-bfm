@@ -1017,3 +1017,15 @@ preserves that attempt; it does not supersede the longer passing run. The pass
 uses a diagnostic firmware copy, fast TRNG, and PQ-vector suppression. Stock
 firmware, the full 12-case suite, entropy timing, and general AXI signoff
 remain unqualified.
+
+## Full-top random DMA progress — 2026-10-06
+
+The pinned `rand_test_dma` top compiled and its firmware built with the arm64
+xPack RISC-V GCC 13.4 toolchain. A 900-second run using fast TRNG, verified
+`.data` preload, quiet firmware, and AXI tracing reached cycle 9,040 before the
+memory-guard timeout. It recorded 13 AW, 208 W, 13 B, 8 AR, and 128 R
+handshakes, with no fatal. No reset assertion, resume, or testcase completion
+marker was observed. The minimum free-memory sample was 66% against the 60%
+floor. This demonstrates live full-top random-DMA traffic; it does not qualify
+the firmware test or reset recovery. The [run record and retained logs](../../evidence/caliptra-bfm-rand-dma-fulltop-20261006/README.md)
+preserve the trace hashes and earlier toolchain failure.
