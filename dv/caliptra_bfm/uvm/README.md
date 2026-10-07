@@ -142,8 +142,9 @@ The filelist also provides a 64-bit-address/32-bit-data/8-bit-ID
 configuration, and maps `aaxi_monitor_wrapper` to the open Caliptra AXI
 protocol checker and completed-transaction monitor. The wrapper installs the
 monitor's record interface in UVM config DB, so the active compatibility agent
-publishes transactions sampled from those pins. The smoke exercises this path
-for completed writes and reads. The generated-only `aaxi_pkg_xactor`,
+publishes transactions sampled from those pins, including accepted per-channel
+items on `channel_ap`. The smoke checks completed writes/reads and AW/W/B/AR/R
+items through both active and passive agents. The generated-only `aaxi_pkg_xactor`,
 `aaxi_pll`, and `rw_txn_pkg` namespaces are empty import shims;
 `aaxi_pkg_test` defines only the observed constructor-only `aaxi_log`. These
 do not implement the corresponding library APIs. The manager-event monitor

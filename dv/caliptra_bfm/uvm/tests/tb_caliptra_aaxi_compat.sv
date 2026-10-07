@@ -174,6 +174,51 @@ module tb_caliptra_aaxi_compat;
     endfunction
   endclass
 
+  class aaxi_channel_observer extends uvm_subscriber #(axi4_caliptra_channel_transaction);
+    int channel_count[0:4];
+
+    `uvm_component_utils(aaxi_channel_observer)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+      foreach (channel_count[i]) channel_count[i] = 0;
+    endfunction
+
+    function void write(axi4_caliptra_channel_transaction item);
+      if (item.cycle == 0)
+        `uvm_fatal("AAXI_CHANNEL", "Channel item has no cycle stamp")
+      case (item.channel)
+        AXI4_CHANNEL_AW: begin
+          if (item.id != 8'h31 || item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
+              item.user != 32'h1122_3344 || item.len != 0 || item.size != 2 ||
+              item.burst != 1)
+            `uvm_fatal("AAXI_AW", $sformatf("Unexpected AW item: %s", item.convert2string()))
+        end
+        AXI4_CHANNEL_W: begin
+          if (item.data != 32'ha55a_c33c || item.strb != 4'hf || !item.last)
+            `uvm_fatal("AAXI_W", $sformatf("Unexpected W item: %s", item.convert2string()))
+        end
+        AXI4_CHANNEL_B: begin
+          if (item.id != 8'h31 || item.response != 0)
+            `uvm_fatal("AAXI_B", $sformatf("Unexpected B item: %s", item.convert2string()))
+        end
+        AXI4_CHANNEL_AR: begin
+          if (item.id != 8'h31 || item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
+              item.user != 32'h5566_7788 || item.len != 0 || item.size != 2 ||
+              item.burst != 1)
+            `uvm_fatal("AAXI_AR", $sformatf("Unexpected AR item: %s", item.convert2string()))
+        end
+        AXI4_CHANNEL_R: begin
+          if (item.id != 8'h31 || item.data != 32'ha55a_c33c || item.response != 0 ||
+              !item.last)
+            `uvm_fatal("AAXI_R", $sformatf("Unexpected R item: %s", item.convert2string()))
+        end
+        default: `uvm_fatal("AAXI_CHANNEL", "Unknown AXI channel item")
+      endcase
+      channel_count[item.channel]++;
+    endfunction
+  endclass
+
   class aaxi_compat_sequence extends uvm_sequence #(aaxi_master_tr);
     `uvm_object_utils(aaxi_compat_sequence)
 
@@ -221,6 +266,8 @@ module tb_caliptra_aaxi_compat;
     aaxi_compat_observer passive_observer;
     aaxi_write_request_observer request_observer;
     aaxi_read_valid_observer read_valid_observer;
+    aaxi_channel_observer channel_observer;
+    aaxi_channel_observer passive_channel_observer;
 
     `uvm_component_utils(aaxi_compat_test)
 
@@ -235,6 +282,8 @@ module tb_caliptra_aaxi_compat;
       passive_observer = aaxi_compat_observer::type_id::create("passive_observer", this);
       request_observer = aaxi_write_request_observer::type_id::create("request_observer", this);
       read_valid_observer = aaxi_read_valid_observer::type_id::create("read_valid_observer", this);
+      channel_observer = aaxi_channel_observer::type_id::create("channel_observer", this);
+      passive_channel_observer = aaxi_channel_observer::type_id::create("passive_channel_observer", this);
     endfunction
 
     function void connect_phase(uvm_phase phase);
@@ -243,8 +292,10 @@ module tb_caliptra_aaxi_compat;
       aaxi_tb.env0.master[0].read_done_export.connect(observer.completed_export);
       aaxi_tb.env0.master[0].ms_tx_AW_W_export.connect(request_observer.analysis_export);
       aaxi_tb.env0.master[0].ms_rx_rvalid_export.connect(read_valid_observer.analysis_export);
+      aaxi_tb.env0.master[0].channel_ap.connect(channel_observer.analysis_export);
       aaxi_tb.env0.psv_master[0].write_done_export.connect(passive_observer.completed_export);
       aaxi_tb.env0.psv_master[0].read_done_export.connect(passive_observer.completed_export);
+      aaxi_tb.env0.psv_master[0].channel_ap.connect(passive_channel_observer.analysis_export);
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -268,9 +319,19 @@ module tb_caliptra_aaxi_compat;
 
       fork
         begin
-          while (observer.write_count != 1 || observer.read_count != 1)
+          while (observer.write_count != 1 || observer.read_count != 1 ||
+                 channel_observer.channel_count[AXI4_CHANNEL_AW] != 1 ||
+                 channel_observer.channel_count[AXI4_CHANNEL_W] != 1 ||
+                 channel_observer.channel_count[AXI4_CHANNEL_B] != 1 ||
+                 channel_observer.channel_count[AXI4_CHANNEL_AR] != 1 ||
+                 channel_observer.channel_count[AXI4_CHANNEL_R] != 1)
             @observer.completed;
-          while (passive_observer.write_count != 1 || passive_observer.read_count != 1)
+          while (passive_observer.write_count != 1 || passive_observer.read_count != 1 ||
+                 passive_channel_observer.channel_count[AXI4_CHANNEL_AW] != 1 ||
+                 passive_channel_observer.channel_count[AXI4_CHANNEL_W] != 1 ||
+                 passive_channel_observer.channel_count[AXI4_CHANNEL_B] != 1 ||
+                 passive_channel_observer.channel_count[AXI4_CHANNEL_AR] != 1 ||
+                 passive_channel_observer.channel_count[AXI4_CHANNEL_R] != 1)
             @passive_observer.completed;
         end
         begin
@@ -282,7 +343,7 @@ module tb_caliptra_aaxi_compat;
 
       if (aaxi_tb.env0.master[0].driver.cfg_info.data_bus_bytes != 4)
         `uvm_fatal("AAXI_CONFIG", "Generated-path driver configuration was not retained")
-      $display("PASS: SoC-IFC-compatible AAXI hierarchy drove SRAM write/read; active and passive monitors observed both transactions");
+      $display("PASS: SoC-IFC-compatible AAXI hierarchy drove SRAM write/read; active and passive monitors observed all AXI channels");
       phase.drop_objection(this);
     endtask
   endclass
