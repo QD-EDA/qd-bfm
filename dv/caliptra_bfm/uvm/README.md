@@ -386,8 +386,10 @@ comment, but its checked-in generated `mldsa_environment.svh` omits that
 connection. The generated environment instead connects `ap["burst_transfer"]`
 to the predictor and `ap["burst_transfer_sb"]` to the scoreboard; no generated
 source references `trans_ap`. Those real keys are provided here, so no fake
-`trans_ap` stream is needed. The Adams Bridge generated environment remains
-unqualified until compiled and run with this replacement. Its checked-in
+`trans_ap` stream is needed. The checked-in Adams Bridge environment package,
+predictor, scoreboard, and RAL package now compile with the clean-room provider
+through `tests/run_adams_mldsa_env_compile.py`. Its actual generated HDL top
+and runtime against `abr_top` remain unqualified. Its checked-in
 `qvip_ahb_lite_slave_params_pkg.sv` sets one master, one slave, 32-bit address,
 and 32-bit write/read data. Compile the clean-room provider with
 `+define+CALIPTRA_BFM_AHB_32BIT` for this environment; the default Caliptra

@@ -13,8 +13,8 @@ QVIP-named environment, stores `AHB_READ` and `AHB_WRITE` in the `ahb_rnw_e`
 type, performs AHB write/read traffic against a synthetic memory target, and
 checks the predictor, scoreboard, coverage, and passive monitor streams. It
 verifies the locally implemented generated-name surface;
-it does not compile or run the pinned generated Caliptra/Adams HDL top or
-UVMF environment.
+the initial smoke did not compile or run the pinned generated Caliptra/Adams
+HDL top or UVMF environment. A later package-compile check is recorded below.
 
 The smoke reports one intentional `AHB_QVIP_CVG` warning in each generated-
 style run: proprietary internal QVIP covergroups are not recreated. Icarus
@@ -153,4 +153,27 @@ SHA-256 for the updated profile smoke:
 ```text
 23fdf5b5aca936e33a5b6f2283d4678b4a45e602294838ebab21127ea9a2aa16  dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh
 edc96b1e2271bca273ad7b4a2dc41c8e9d9007a377ba369cde63eba304b8a1e0  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
+```
+
+## Generated Adams Bridge MLDSA environment package compile (2026-10-06)
+
+`tests/run_adams_mldsa_env_compile.py` compiles the pinned generated MLDSA
+configuration, predictor, scoreboard, environment, and RAL package against the
+clean-room provider at Adams Bridge commit
+`b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. It makes Icarus-specific source
+adjustments only in a disposable include overlay. It does not compile the
+generated HDL top or run the predictor/scoreboard against `abr_top`, so that
+runtime remains unqualified. The guarded run exited 0 with one existing
+covergroup-stub warning and 69% minimum free memory against the 60% floor.
+
+```sh
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN"
+```
+
+The run used Icarus 13.0 development build `9bd5082b8` with UVM support.
+SHA-256 for the runner:
+
+```text
+188efa2ebe0fbccac2e4b4ee2cb37961a65816fe4777d65fe3e4baed48063bda  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```
