@@ -226,9 +226,11 @@ generator, selects each of 29 DCCM records in a separate simulation, checks the
 staged metadata and payload ECC, and replays each profile through the DUT and
 UVM monitor. The hash-guarded profile covers all five generated DMA route
 types, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
-65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO
-case with randomized delays, and a 65-word FIFO recovery case with a generated
-block. The maximum stream checks all destination words and drains the FIFO.
+65,536-word fixed-read FIFO-to-SRAM stream, a 16,384-word maximum checked SRAM
+payload on AXI2AXI, a 65-word fixed-write SRAM-to-FIFO case with randomized
+delays, and a 65-word FIFO recovery case with a generated block. Both maximum
+payload streams check all destination words; the FIFO stream also drains its
+source. The max-size SRAM profile uses disjoint source/destination ranges.
 Generated recovery records sweep every legal one-hot block size: 4–64 bytes
 for AXI2AXI and 4–2048 bytes for AXI2MBOX and AXI2AHB. Recovery checks the
 generated FIFO reads and end-to-end route output; see the

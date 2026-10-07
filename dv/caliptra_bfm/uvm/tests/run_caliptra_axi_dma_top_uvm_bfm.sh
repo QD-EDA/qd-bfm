@@ -16,8 +16,9 @@ cd "$repo_root"
 reset_abort_only=0
 recovery_block_sweep_only=0
 recovery_route_sweep_only=0
+max_sram_dut_replay_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -25,8 +26,9 @@ if [ "$#" -eq 1 ]; then
     --reset-abort-only) reset_abort_only=1 ;;
     --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
+    --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only]" >&2
       exit 2
       ;;
   esac
@@ -173,6 +175,17 @@ if [ "$recovery_route_sweep_only" -eq 1 ]; then
   echo "INFO: AXI2MBOX and AXI2AHB FIFO recovery passed block sizes 4 through 2048 bytes"
   exit 0
 fi
+if [ "$max_sram_dut_replay_only" -eq 1 ]; then
+  run_case max-sram-dut-replay +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+    +CALIPTRA_BFM_DUT_REPLAY_INDEX=24 \
+    +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
+  if ! grep -Fq 'INFO: Caliptra DCCM case type=2 words=16384' "$log" ||
+     ! grep -Fq 'PASS: generated DCCM record index=24 route=2 replayed through axi_dma_top' "$log"; then
+    echo "Maximum DCCM-sized AXI2AXI profile did not complete through the DMA DUT" >&2
+    exit 1
+  fi
+  exit 0
+fi
 
 run_case success
 run_reset_abort_case
@@ -308,10 +321,10 @@ echo "INFO: generated DCCM replay covered all five DMA routes across 29 records"
 echo "INFO: generated DCCM replay covered a 65-word fixed-write SRAM-to-FIFO profile"
 echo "INFO: generated DCCM replay covered the 65-word FIFO recovery profile with testbench block-size overrides of 4, 8, 16, 32, and 64 bytes"
 echo "INFO: generated DCCM replay covered 65-word FIFO recovery on AXI2MBOX and AXI2AHB with block-size overrides from 4 through 2048 bytes"
-for word_count in 1 4 5 16 64 65 255 256 65536; do
+for word_count in 1 4 5 16 64 65 255 256 16384 65536; do
   if ! grep -Fxq "$word_count" "$generated_sizes"; then
     echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2
     exit 1
   fi
 done
-echo "INFO: generated DCCM replay covered transfer sizes 1, 4, 5, 16, 64, 65, 255, 256, and 65536 words"
+echo "INFO: generated DCCM replay covered transfer sizes 1, 4, 5, 16, 64, 65, 255, 256, 16384, and 65536 words"

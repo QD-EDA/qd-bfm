@@ -298,8 +298,9 @@ from Caliptra's
 records feed the BFM recovery sequencer. The actual-DUT bench now ECC-checks
 and replays all 29 DCCM records through `axi_dma_top` under a hash-guarded
 profile covering all five named DMA routes, eight short sizes, and a 65,536-word
-fixed-read FIFO-to-SRAM stream. It also replays a 65-word fixed-write SRAM-to-
-FIFO case with randomized delays. Recovery record 26 sweeps 4-, 8-, 16-, 32-,
+fixed-read FIFO-to-SRAM stream. It also checks a 16,384-word maximum payload
+AXI2AXI copy using disjoint SRAM ranges, and replays a 65-word fixed-write
+SRAM-to-FIFO case with randomized delays. Recovery record 26 sweeps 4-, 8-, 16-, 32-,
 and 64-byte AXI2AXI blocks; records 27 and 28 sweep all legal one-hot block
 sizes from 4 through 2048 bytes on AXI2MBOX and AXI2AHB. Each sweep overrides
 the selected generated DCCM block-size entry. Payloads and

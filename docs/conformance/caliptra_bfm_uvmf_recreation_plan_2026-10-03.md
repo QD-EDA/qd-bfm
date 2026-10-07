@@ -40,7 +40,8 @@ The actual-DUT runner now selects and replays all 29 records through
 `axi_dma_top`, checking stored payload ECC and the full read/write data path.
 For this DUT lane, a hash-guarded overlay selects among
 all five named DMA routes, eight short sizes (1, 4, 5, 16, 64, 65, 255, and
-256 words), a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word
+256 words), a 16,384-word maximum checked SRAM payload on AXI2AXI, a maximum
+65,536-word fixed-read FIFO-to-SRAM stream, a 65-word
 fixed-write SRAM-to-FIFO record, and 65-word FIFO recovery records for AXI2AXI,
 AXI2MBOX, and AXI2AHB. Generated recovery sweeps cover every legal one-hot
 block size for each route: 4–64 bytes on AXI2AXI and 4–2048 bytes on AXI2MBOX

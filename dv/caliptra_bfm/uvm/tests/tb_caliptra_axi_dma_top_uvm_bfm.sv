@@ -442,7 +442,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                item.beatQ[beat] != source_word(read_word_offset + beat)) ||
               item.beat_userQ[beat] != AXUSER || item.respQ[beat] != expected_resp ||
               item.lastQ[beat] != (beat == beats - 1))
-            `uvm_fatal("DMA_TOP_READ_BEAT", $sformatf("DMA read beat %0d mismatch in burst %0d", beat, read_count))
+            `uvm_fatal("DMA_TOP_READ_BEAT", $sformatf(
+              "DMA read beat %0d mismatch in burst %0d addr=%012h word=%0d expected=%08h got=%08h user=%08h resp=%b last=%b",
+              beat, read_count, item.addr, read_word_offset + beat,
+              source_word(read_word_offset + beat), item.beatQ[beat],
+              item.beat_userQ[beat], item.respQ[beat], item.lastQ[beat]))
           if (expect_fifo_recovery)
             expected_payload[read_word_offset + beat] = item.beatQ[beat];
         end
@@ -847,8 +851,14 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
               record_type.inject_rst || record_type.test_block_size ||
               (record_type.block_size != 0))
-            $fatal(1, "Generated testcase %0d is outside the supported short non-FIFO profile", record_index);
-          if ((record_type.dma_xfer_type == MBOX2AXI &&
+            $fatal(1, "Generated testcase %0d is outside the supported non-FIFO profile", record_index);
+          if (record_index == 24) begin
+            if (record_size != MAX_DCCM_PAYLOAD_WORDS ||
+                record_type.dma_xfer_type != AXI2AXI ||
+                record_src_offset != 32'h0000_1000 ||
+                record_dst_offset != 32'h0002_0000)
+              $fatal(1, "Generated testcase 24 is outside the max-size non-overlapping AXI2AXI profile");
+          end else if ((record_type.dma_xfer_type == MBOX2AXI &&
                (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1efc)) ||
               (record_type.dma_xfer_type != MBOX2AXI &&
                (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc)) ||
