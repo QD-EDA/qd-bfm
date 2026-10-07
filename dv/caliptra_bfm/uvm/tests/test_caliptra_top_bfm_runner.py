@@ -22,6 +22,44 @@ class CheckerCompileCommandTest(unittest.TestCase):
         self.assertIn("-gassertions", disabled)
 
 
+class ResetInFlightTraceTest(unittest.TestCase):
+    def scan(self, lines):
+        with tempfile.TemporaryDirectory() as temp:
+            log = Path(temp) / "sim.log"
+            log.write_text("\n".join(lines) + "\n")
+            return RUNNER.scan_sim_log(log)
+
+    def test_reset_after_aw_before_b_is_in_flight(self):
+        result = self.scan([
+            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
+            "CALIPTRA_AXI AW count=1 addr=0 cycle=6239 pc=0000dd1a",
+            "CALIPTRA_RESET_EDGE state=assert cycle=6254 pending=1 wait=3870 start=2382",
+        ])
+        self.assertTrue(result["reset_in_flight"])
+        self.assertEqual(result["reset_assert_cycles"], [6254])
+        self.assertEqual(result["outstanding_writes_at_reset"], [1])
+
+    def test_reset_before_first_aw_is_not_in_flight(self):
+        result = self.scan([
+            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
+            "CALIPTRA_RESET_EDGE state=assert cycle=2896 pending=1 wait=512 start=2382",
+            "CALIPTRA_AXI AW count=1 addr=0 cycle=5785 pc=0000dd1a",
+        ])
+        self.assertFalse(result["reset_in_flight"])
+        self.assertEqual(result["reset_assert_cycles"], [2896])
+        self.assertEqual(result["outstanding_writes_at_reset"], [0])
+
+    def test_write_response_closes_the_outstanding_transfer(self):
+        result = self.scan([
+            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
+            "CALIPTRA_AXI AW count=1 addr=0 cycle=5785 pc=0000dd1a",
+            "CALIPTRA_AXI B count=1 cycle=5817 pc=0000dd1a",
+            "CALIPTRA_RESET_EDGE state=assert cycle=6000 pending=1 wait=3870 start=2382",
+        ])
+        self.assertFalse(result["reset_in_flight"])
+        self.assertEqual(result["outstanding_writes_at_reset"], [0])
+
+
 class ToolchainPrefixTest(unittest.TestCase):
     def test_accepts_absolute_prefix_with_trailing_dash(self):
         env = {"PATH": "/usr/bin"}
@@ -547,6 +585,17 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 1)
         self.assertIn("requires --force-first-rand-dma-reset", result.stderr)
+
+    def test_fixed_reset_delay_requires_axi_trace(self):
+        result = subprocess.run(
+            ["python3", str(RUNNER_PATH), "--case", "rand_test_dma",
+             "--rand-dma-iterations", "1", "--force-first-rand-dma-reset",
+             "--rand-dma-reset-delay-cycles", "3870",
+             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output")],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("requires --trace-axi", result.stderr)
 
 
 if __name__ == "__main__":

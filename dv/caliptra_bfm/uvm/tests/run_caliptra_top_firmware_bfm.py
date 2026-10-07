@@ -59,6 +59,10 @@ FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "c4dbd3f75055982a5b31d05d8ba66039027b48b056e76
 TOP_SERVICES_SHA256 = "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343"
 DMA_GENERATOR_HELPER_SCOPE = "caliptra_top_tb.tb_services_i"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
+RESET_REQUEST = re.compile(r"CALIPTRA_RESET_REQUEST cycle=(\d+)")
+RESET_ASSERT = re.compile(r"CALIPTRA_RESET_EDGE state=assert cycle=(\d+)")
+AXI_AW = re.compile(r"CALIPTRA_AXI AW .* cycle=(\d+)")
+AXI_B = re.compile(r"CALIPTRA_AXI B .* cycle=(\d+)")
 BAD = re.compile(
     r"\b(?:UVM_)?(?:ERROR|FATAL)\b|\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
     re.IGNORECASE,
@@ -583,17 +587,34 @@ def run_logged(command, cwd, env, logfile):
 def scan_sim_log(path):
     passed = failed = bad = jtag_errors = 0
     finish = None
+    reset_requested = False
+    reset_assert_cycles = []
+    outstanding_writes = 0
+    outstanding_writes_at_reset = []
     with Path(path).open(errors="replace") as log:
         for line in log:
             passed += line.count("* TESTCASE PASSED")
             failed += line.count("TESTCASE FAILED")
             bad += bool(BAD.search(line))
             jtag_errors += bool(JTAG_ERROR.match(line))
+            if RESET_REQUEST.search(line):
+                reset_requested = True
+            if reset_requested and AXI_AW.search(line):
+                outstanding_writes += 1
+            if reset_requested and AXI_B.search(line):
+                outstanding_writes = max(0, outstanding_writes - 1)
+            reset_assert = RESET_ASSERT.search(line)
+            if reset_assert:
+                reset_assert_cycles.append(int(reset_assert[1]))
+                outstanding_writes_at_reset.append(outstanding_writes)
             match = FINISH.search(line)
             if match:
                 finish = [int(match.group(1)), int(match.group(2))]
     return {"passed": passed, "failed": failed, "bad": bad,
-            "jtag_errors": jtag_errors, "finish": finish}
+            "jtag_errors": jtag_errors, "finish": finish,
+            "reset_assert_cycles": reset_assert_cycles,
+            "outstanding_writes_at_reset": outstanding_writes_at_reset,
+            "reset_in_flight": any(count > 0 for count in outstanding_writes_at_reset)}
 
 
 def native_vector_outputs(skip_pq_vectors=False):
@@ -803,6 +824,8 @@ def main():
     if args.rand_dma_reset_delay_cycles is not None:
         if not args.force_first_rand_dma_reset:
             raise ValueError("--rand-dma-reset-delay-cycles requires --force-first-rand-dma-reset")
+        if not args.trace_axi:
+            raise ValueError("--rand-dma-reset-delay-cycles requires --trace-axi to verify an in-flight reset")
         if not 5 <= args.rand_dma_reset_delay_cycles <= 8191:
             raise ValueError("--rand-dma-reset-delay-cycles must be between 5 and 8191")
     skip_pq_vectors = aes_case_limit is not None or args.skip_pq_vector_generation
@@ -931,6 +954,8 @@ def main():
     log_scan = scan_sim_log(test_output / "sim.log")
     passed = (sim_exit == 0 and log_scan["passed"] == 1 and log_scan["failed"] == 0 and
               log_scan["bad"] == 0 and log_scan["jtag_errors"] == 0 and log_scan["finish"] is not None)
+    if args.rand_dma_reset_delay_cycles is not None:
+        passed = passed and log_scan["reset_in_flight"]
     result = {
         "test": args.case,
         "passed": passed,
@@ -986,6 +1011,9 @@ def main():
         "testcase_pass_markers": log_scan["passed"],
         "testcase_fail_markers": log_scan["failed"],
         "jtag_server_errors": log_scan["jtag_errors"],
+        "reset_assert_cycles": log_scan["reset_assert_cycles"],
+        "outstanding_writes_at_reset": log_scan["outstanding_writes_at_reset"],
+        "reset_in_flight": log_scan["reset_in_flight"],
         "bad_diagnostics": log_scan["bad"],
         "finish": log_scan["finish"],
         "sim_log_sha256": sha256(test_output / "sim.log"),
