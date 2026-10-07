@@ -2,6 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 set -eu
 
+edition_filter=${UVMF_IEEE_EDITION:-both}
+case "$edition_filter" in
+  both|2017|2023) ;;
+  *) echo "UVMF_IEEE_EDITION must be both, 2017, or 2023" >&2; exit 2 ;;
+esac
+
 . "$(dirname "$0")/../../../../scripts/caliptra_bfm_memory_guard.sh"
 
 repo_root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
@@ -11,6 +17,9 @@ tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 for edition in 2017 2023; do
+  if [ "$edition_filter" != both ] && [ "$edition_filter" != "$edition" ]; then
+    continue
+  fi
   out="$tmpdir/uvmf_agent_$edition.vvp"
   log="$tmpdir/uvmf_agent_$edition.log"
   negative_log="$tmpdir/uvmf_agent_mismatch_$edition.log"

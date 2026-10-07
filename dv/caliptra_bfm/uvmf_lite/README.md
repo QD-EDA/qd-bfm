@@ -44,9 +44,10 @@ licensed or separately pinned UVMF packages instead.
 Run `tests/run_uvmf_scoreboard.sh` and `tests/run_uvmf_agent.sh` with the local
 Icarus `-uvm` fork selected through `IVERILOG_BIN` and `VVP_BIN`. Both runners
 compile and execute with `-g2017` and `-g2023`, using bundled Accellera UVM
-2020.3.1. The scoreboard smoke includes a normal match with a publisher-side
-mutation after write, one compare mismatch, one expected-only leftover, and one
-actual-only leftover.
+2020.3.1. Set `UVMF_IEEE_EDITION=2017` or `2023` to run one agent-smoke
+edition, including its negative control. The scoreboard smoke includes a
+normal match with a publisher-side mutation after write, one compare mismatch,
+one expected-only leftover, and one actual-only leftover.
 The runner requires exactly four UVM_ERROR reports and zero UVM_FATAL reports:
 one in-order mismatch, one out-of-order mismatch, and two leftover controls.
 It also checks that the out-of-order scoreboard matches reordered items. The
