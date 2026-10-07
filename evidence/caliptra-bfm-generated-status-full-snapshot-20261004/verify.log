@@ -1,0 +1,17 @@
+memory guard: preflight 50% free; floor 40%
+src/cptra_status_configuration.svh: f0a0f16c52be3b799afa0b5252e833420d3a64a8ebeba759b40541afdda8bd2b -> 8cf93c07590f8984ba312e05cb817e574a689b78cc14dd537bb69bd7066f50f4
+src/cptra_status_driver_bfm.sv: 70c47e2737dacda24a56c99076be75f919b9d75d95a2174710c39007d6f16311 -> 25979b890c6f488077961593006545ce668fc3ce46994e994ff8c28b9c1b0600
+src/cptra_status_monitor_bfm.sv: be1b334b043906de3f8b5747ca83cda470498b7aba85397330db9987f59d240a -> 54e50da3b305106085844dab33eb1a114e077595e030df57fa0495a98d98484a
+PASS: generated status monitor preserved all 17 fields and delivered all three snapshots to its coverage subscriber under IEEE 2017 (7 compile warnings).
+UVM_INFO /private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/evidence/caliptra-bfm-generated-status-full-snapshot-20261004/full_snapshot_probe.sv(184) @ 55: uvm_test_top [STATUS_SNAPSHOT] PASS: generated passive monitor preserved all status fields and the generated coverage subscriber received all three snapshots
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+[STATUS_SNAPSHOT]     1
+PASS: generated status monitor preserved all 17 fields and delivered all three snapshots to its coverage subscriber under IEEE 2023 (7 compile warnings).
+UVM_INFO /private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/evidence/caliptra-bfm-generated-status-full-snapshot-20261004/full_snapshot_probe.sv(184) @ 55: uvm_test_top [STATUS_SNAPSHOT] PASS: generated passive monitor preserved all status fields and the generated coverage subscriber received all three snapshots
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+[STATUS_SNAPSHOT]     1
+memory guard: command exited 0; minimum observed free memory 47%

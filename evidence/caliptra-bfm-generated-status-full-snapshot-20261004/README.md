@@ -1,4 +1,4 @@
-> Checkpoint copy: concise reports and JSON summaries are preserved here; raw simulation logs and generated binaries are kept out of this feature branch.
+> Checkpoint copy: reports and JSON summaries are preserved here. The compact verification output for the merged-simulator replay is retained; generated binaries and verbose simulator logs are not.
 
 # Generated Caliptra status monitor full-snapshot probe — 2026-10-04
 
@@ -38,13 +38,27 @@ implementation.
 
 ## Reproduce
 
-From the `BFM WORK` repository root:
+From the QD-BFM repository root:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+CALIPTRA_BFM_MIN_FREE_PERCENT=40 \
+CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=300 \
+IVERILOG_BIN=/path/to/merged-iverilog/bin/iverilog \
+VVP_BIN=/path/to/merged-iverilog/bin/vvp \
   sh evidence/caliptra-bfm-generated-status-full-snapshot-20261004/run.sh
 ```
+
+The runner, probe, and `verify.log` are now checked in together. A replay on
+2026-10-07 used the current QD-BFM source and Icarus merge commit
+`ac4532fab037e91df2f903e67fb40f59baedccca`, containing fetched
+`origin/main` tip `197f9baece79e66d25524906fb7b54c9faa8f4e2`. Both IEEE 2017 and
+2023 runs passed: all 17 status fields matched in all three snapshots, the
+generated coverage subscriber received all three, and UVM warning/error/fatal
+counts were zero. The memory guard measured 50% free at preflight and 47% at
+minimum against its 40% floor. Seven compile warnings per edition are the
+expected generated covergroup stubs; this still does not measure functional
+coverage bin hits.
 
 ## Inputs and hashes
 
@@ -54,8 +68,11 @@ VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
 - Overlay helper and the three modified source hashes are recorded in
   [`status runtime evidence`](../caliptra-bfm-generated-status-runtime-20261004/README.md).
 
-| Probe input | SHA-256 |
+| Original `BFM WORK` capture input | SHA-256 |
 | --- | --- |
 | `full_snapshot_probe.sv` | `732beedaa07ae9bad32fd4a925b0f394222ab44501afcb282fe9a1dceffa574d` |
 | `run.sh` | `239fdcb9835e65689feea664c0a84cc128c02632533903c3dd16ab8d223f2bcc` |
 | `verify.log` | `25445338c1b8b42bd675dd67adaaf834ce3a27651757cf3b8be07c10829c619e` |
+
+The 2026-10-07 replay hashes and simulator binary identities are in
+[`result.json`](result.json); its captured output is [`verify.log`](verify.log).

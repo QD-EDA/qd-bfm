@@ -91,15 +91,18 @@ changing digest sampling. The scoreboard matched 13 expected and 13 observed
 items with zero pending transactions. This is one test path, not full UVMF or
 top-level qualification. See
 [`generated SHA-512 runtime evidence`](../../../evidence/caliptra-bfm-generated-sha512-runtime-20261005/README.md).
-An intermediate probe using `uvm_subscriber #(agent_item)` received a null
-transaction handle in this local Icarus run, while explicit analysis imps
-preserved the transaction fields. The existing native AXI subscriber smoke
-passes, but the generated Caliptra coverage subscriber path needs its own
-qualification. HDL-side registration order, late registration, and generated
-derived configuration publication also remain unverified. The clean-room base
-does not provide generic reset/clock wait helpers; the inspected generated
-Caliptra configuration classes implement `wait_for_reset` and
-`wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros
+An earlier `uvm_subscriber #(agent_item)` probe received a null handle, but
+that result was probe-specific: the actual generated Caliptra
+`cptra_status_transaction_coverage` subscriber now receives and samples all
+three expected records in the [full-snapshot probe](../../../evidence/caliptra-bfm-generated-status-full-snapshot-20261004/README.md),
+including on the merged Icarus build. This verifies subscriber delivery and
+sampling calls only; Icarus still compiles covergroups as stubs, so bin hits
+and coverage percentages are not measured. Other generated coverage paths
+still need qualification. HDL-side registration order, late registration, and
+generated derived configuration publication also remain unverified. The
+clean-room base does not provide generic reset/clock wait helpers; the
+inspected generated Caliptra configuration classes implement
+`wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros
 and utility packages, transaction recording, HDL/HVL proxy startup, and
 remaining top scaffolding are still open.
 Do not treat it as a drop-in UVMF package yet.

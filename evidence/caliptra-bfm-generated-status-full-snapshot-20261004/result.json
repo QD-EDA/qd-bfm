@@ -1,0 +1,69 @@
+{
+  "classification": "generated Caliptra status monitor field/sampling pass on merged Icarus; covergroup bin hits unmeasured",
+  "qd_bfm_source_commit_before_replay": "dba4c449d6aa2d6e9f4dfe78ee667b4dd2ed18ea",
+  "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "simulator": {
+    "merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "upstream_main_tip": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "working_tree_dirty": true,
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+  },
+  "runner": {
+    "script": "evidence/caliptra-bfm-generated-status-full-snapshot-20261004/run.sh",
+    "source_probe_sha256": "732beedaa07ae9bad32fd4a925b0f394222ab44501afcb282fe9a1dceffa574d",
+    "runner_sha256": "0a96da92b827d4375557cee4b4c5e94dbb9e038d6432e4a23e728976a7645068",
+    "captured_output_sha256": "a9acde751cbb1489b165d3ee1d5e653fb0373fc97f214fb592cb11bed7854a92"
+  },
+  "disposable_overlay_hashes": [
+    {
+      "source": "src/cptra_status_configuration.svh",
+      "source_sha256": "f0a0f16c52be3b799afa0b5252e833420d3a64a8ebeba759b40541afdda8bd2b",
+      "overlay_sha256": "8cf93c07590f8984ba312e05cb817e574a689b78cc14dd537bb69bd7066f50f4"
+    },
+    {
+      "source": "src/cptra_status_driver_bfm.sv",
+      "source_sha256": "70c47e2737dacda24a56c99076be75f919b9d75d95a2174710c39007d6f16311",
+      "overlay_sha256": "25979b890c6f488077961593006545ce668fc3ce46994e994ff8c28b9c1b0600"
+    },
+    {
+      "source": "src/cptra_status_monitor_bfm.sv",
+      "source_sha256": "be1b334b043906de3f8b5747ca83cda470498b7aba85397330db9987f59d240a",
+      "overlay_sha256": "54e50da3b305106085844dab33eb1a114e077595e030df57fa0495a98d98484a"
+    }
+  ],
+  "memory_guard": {
+    "preflight_free_percent": 50,
+    "minimum_free_percent": 47,
+    "floor_percent": 40,
+    "exit_code": 0
+  },
+  "editions": [
+    {
+      "edition": "2017",
+      "status_fields_checked": 17,
+      "snapshots_checked": 3,
+      "coverage_subscriber_received": 3,
+      "compile_warnings": 7,
+      "uvm_warning": 0,
+      "uvm_error": 0,
+      "uvm_fatal": 0,
+      "exit_code": 0
+    },
+    {
+      "edition": "2023",
+      "status_fields_checked": 17,
+      "snapshots_checked": 3,
+      "coverage_subscriber_received": 3,
+      "compile_warnings": 7,
+      "uvm_warning": 0,
+      "uvm_error": 0,
+      "uvm_fatal": 0,
+      "exit_code": 0
+    }
+  ],
+  "limitations": [
+    "Icarus covergroups are stubs in this build; functional bin hits and percentages are not measured.",
+    "The probe is a generated passive-agent component check, not a Caliptra DUT test."
+  ]
+}
