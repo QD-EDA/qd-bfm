@@ -673,10 +673,13 @@ route-valid offsets, and the generated delay flag. The maximum stream
 validates every destination word and drains the FIFO; FIFO destination checks
 all queued words and stalls; recovery checks all route outputs. Other generated
 FIFO modes and firmware-triggered reset injection remain unqualified.
+A focused route replay also covers the legal FIXED-read AXI2MBOX and
+FIXED-write MBOX2AXI modes through the actual DMA DUT, checking sequential
+mailbox requests and repeated SRAM destination addressing. Default mixed DMA
+profiles and firmware remain open.
 The AHB routes use component `WRITE_DATA`
 and `READ_DATA` registers, not an AHB bus. A separate SRAM-to-FIFO profile
-checks fixed write bursts, weighted channel stalls, and queued words. Default
-mixed DMA profiles and firmware remain open.
+checks fixed write bursts, weighted channel stalls, and queued words.
 See the
 [`Earlier 25-record DMA DUT replay evidence`](../../evidence/caliptra-bfm-dma-generator-dut-replay-20261006/README.md).
 The additional generated FIFO-destination case is recorded in
@@ -1092,7 +1095,8 @@ through its own blocker, not this list.
    write bursts and weighted channel stalls. The generated replay preserves
    and exercises its delay flag; one record observed five target-stall cycles
    and the generated FIFO destination observed 160. Other default size/flag
-   profiles, other FIFO modes, and firmware reset remain unqualified.
+   profiles beyond the two directed mailbox FIXED modes, other FIFO modes, and
+   firmware reset remain unqualified.
    The generator also stages its default mixed profiles and drives the recovery
    sequencer, but the default size and flag combinations are not replayed through the DUT. AHB2AXI and
    AXI2AHB use component registers and do not exercise an AHB bus. Evidence is in

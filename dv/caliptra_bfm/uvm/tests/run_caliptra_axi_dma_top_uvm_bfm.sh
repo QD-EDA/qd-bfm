@@ -19,8 +19,9 @@ recovery_route_sweep_only=0
 max_sram_dut_replay_only=0
 fixed_sram_modes_only=0
 recovery_availability_modes_only=0
+mailbox_fixed_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -31,8 +32,9 @@ if [ "$#" -eq 1 ]; then
     --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
     --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
+    --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -227,6 +229,20 @@ if [ "$fixed_sram_modes_only" -eq 1 ]; then
     fi
   done
   echo "INFO: generated DCCM SRAM replay covered FIXED-read, FIXED-write, and both-FIXED profiles"
+  exit 0
+fi
+if [ "$mailbox_fixed_modes_only" -eq 1 ]; then
+  run_case axi2mbox-fixed-read +AXI2MBOX_FIXED_READ_CASE
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top sent 65 FIXED-read SRAM words through the mailbox request interface' "$log"; then
+    echo "AXI2MBOX FIXED-read profile did not complete through the mailbox request interface" >&2
+    exit 1
+  fi
+  run_case mbox2axi-fixed-write +MBOX2AXI_FIXED_WRITE_CASE
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top read 65 mailbox words and wrote them to one FIXED SRAM address' "$log"; then
+    echo "MBOX2AXI FIXED-write profile did not complete to SRAM" >&2
+    exit 1
+  fi
+  echo "INFO: actual Caliptra axi_dma_top passed FIXED-read AXI2MBOX and FIXED-write MBOX2AXI profiles"
   exit 0
 fi
 

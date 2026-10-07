@@ -308,7 +308,12 @@ route-valid offsets remain per-record randomized, as does Caliptra's delay
 flag; the maximum stream drains the FIFO and checks all destination words. The
 separate `--fixed-sram-modes-only` replay adds generated AXI2AXI SRAM cases for
 FIXED reads, FIXED writes, and both channels FIXED; it checks address behavior,
-transfer beats, and resulting SRAM contents. The actual DMA DUT reset-abort profile now
+transfer beats, and resulting SRAM contents. The focused
+`--mailbox-fixed-modes-only` replay covers the legal FIXED-read AXI2MBOX and
+FIXED-write MBOX2AXI profiles through the actual DMA DUT, including their
+repeated-address data semantics. See
+[`mailbox FIXED-mode evidence`](../../evidence/caliptra-bfm-dma-mailbox-fixed-modes-20261007/README.md).
+The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
 [`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).

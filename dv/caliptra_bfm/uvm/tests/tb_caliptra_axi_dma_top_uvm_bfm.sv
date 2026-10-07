@@ -92,6 +92,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   bit generated_route_ready = 0;
   bit mailbox_case = 0;
   bit mailbox_read_case = 0;
+  bit mailbox_fixed_read_case = 0;
+  bit mailbox_fixed_write_case = 0;
   bit ahb2axi_case = 0;
   bit axi2ahb_case = 0;
   bit sram2fifo_case = 0;
@@ -191,7 +193,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (mailbox_case) begin
         if (!mb_data.write ||
             mb_data.addr !== SOC_IFC_ADDR_W'(DST_ADDR + 48'(mailbox_word_index * 4)) ||
-            mb_data.wdata !== expected_payload[mailbox_word_index])
+            mb_data.wdata !== expected_payload[
+              (active_use_rd_fixed && !active_src_is_fifo) ? 0 : mailbox_word_index])
           $fatal(1, "AXI2MBOX word %0d mismatch: addr=%08h data=%08h",
                  mailbox_word_index, mb_data.addr, mb_data.wdata);
         mailbox_mem[mailbox_word_index] <= mb_data.wdata;
@@ -614,16 +617,19 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                     env.scoreboard.write_word_offset == active_word_count &&
                     env.scoreboard.read_word_offset == active_word_count);
             end
-          end else if ($test$plusargs("AXI2MBOX_CASE") || $test$plusargs("MBOX2AXI_CASE")) begin
-            if ($test$plusargs("AXI2MBOX_CASE")) begin
-              wait (run_done && env.scoreboard.read_count == 2 &&
+          end else if ($test$plusargs("AXI2MBOX_CASE") || $test$plusargs("MBOX2AXI_CASE") ||
+                       $test$plusargs("AXI2MBOX_FIXED_READ_CASE") ||
+                       $test$plusargs("MBOX2AXI_FIXED_WRITE_CASE")) begin
+            if ($test$plusargs("AXI2MBOX_CASE") ||
+                $test$plusargs("AXI2MBOX_FIXED_READ_CASE")) begin
+              wait (run_done && env.scoreboard.read_count == active_read_burst_count &&
                     env.scoreboard.read_word_offset == WORD_COUNT &&
                     mailbox_word_index == WORD_COUNT);
               if (env.scoreboard.write_count != 0)
                 `uvm_fatal("DMA_TOP_MBOX_AXI_WRITE", "AXI2MBOX unexpectedly issued an AXI write")
             end else begin
               wait (run_done && env.scoreboard.read_count == 0 &&
-                    env.scoreboard.write_count == 2 &&
+                    env.scoreboard.write_count == active_write_burst_count &&
                     env.scoreboard.write_word_offset == WORD_COUNT &&
                     mailbox_word_index == WORD_COUNT);
             end
@@ -705,10 +711,17 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       else if ($test$plusargs("GENERATED_CASE"))
         $display("PASS: generated DCCM record index=%0d route=%0d replayed through axi_dma_top",
                  generated_case_index, generated_dma_xfer_type);
-      else if (mailbox_case)
-        $display("PASS: actual Caliptra axi_dma_top read 65 SRAM words and wrote them through the mailbox request interface");
-      else if (mailbox_read_case)
-        $display("PASS: actual Caliptra axi_dma_top read 65 mailbox words and wrote them to SRAM");
+      else if (mailbox_case) begin
+        if (active_use_rd_fixed)
+          $display("PASS: actual Caliptra axi_dma_top sent 65 FIXED-read SRAM words through the mailbox request interface");
+        else
+          $display("PASS: actual Caliptra axi_dma_top read 65 SRAM words and wrote them through the mailbox request interface");
+      end else if (mailbox_read_case) begin
+        if (active_use_wr_fixed)
+          $display("PASS: actual Caliptra axi_dma_top read 65 mailbox words and wrote them to one FIXED SRAM address");
+        else
+          $display("PASS: actual Caliptra axi_dma_top read 65 mailbox words and wrote them to SRAM");
+      end
       else if (ahb2axi_case)
         $display("PASS: actual Caliptra axi_dma_top sent 65 component-register words to SRAM");
       else if (axi2ahb_case)
@@ -796,8 +809,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     integer word_index;
     integer expected_word_index;
     #1;
-    mailbox_case = $test$plusargs("AXI2MBOX_CASE");
-    mailbox_read_case = $test$plusargs("MBOX2AXI_CASE");
+    mailbox_fixed_read_case = $test$plusargs("AXI2MBOX_FIXED_READ_CASE");
+    mailbox_fixed_write_case = $test$plusargs("MBOX2AXI_FIXED_WRITE_CASE");
+    mailbox_case = $test$plusargs("AXI2MBOX_CASE") || mailbox_fixed_read_case;
+    mailbox_read_case = $test$plusargs("MBOX2AXI_CASE") || mailbox_fixed_write_case;
     ahb2axi_case = $test$plusargs("AHB2AXI_CASE");
     axi2ahb_case = $test$plusargs("AXI2AHB_CASE");
     sram2fifo_case = $test$plusargs("SRAM2FIFO_CASE");
@@ -977,7 +992,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         dma_xfer_type == AXI2MBOX;
         src_is_fifo == 0;
         dst_is_fifo == 0;
-        use_rd_fixed == 0;
+        use_rd_fixed == mailbox_fixed_read_case;
         use_wr_fixed == 0;
         test_block_size == 0;
         inject_rst == 0;
@@ -993,7 +1008,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         src_is_fifo == 0;
         dst_is_fifo == 0;
         use_rd_fixed == 0;
-        use_wr_fixed == 0;
+        use_wr_fixed == mailbox_fixed_write_case;
         test_block_size == 0;
         inject_rst == 0;
         inject_rand_delays == 0;
@@ -1123,13 +1138,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     active_src_is_fifo = scenario.src_is_fifo;
     active_use_rd_fixed = scenario.use_rd_fixed;
     active_use_wr_fixed = scenario.use_wr_fixed;
+    active_read_burst_count = scenario.use_rd_fixed ?
+        ((active_word_count + MAX_FIXED_BURST_WORDS - 1) / MAX_FIXED_BURST_WORDS) :
+        axi_incr_burst_count(SRC_ADDR, active_word_count);
+    active_write_burst_count = scenario.use_wr_fixed ?
+        ((active_word_count + MAX_FIXED_BURST_WORDS - 1) / MAX_FIXED_BURST_WORDS) :
+        axi_incr_burst_count(DST_ADDR, active_word_count);
     if ($test$plusargs("GENERATED_CASE")) begin
-      active_read_burst_count = scenario.use_rd_fixed ?
-          ((active_word_count + MAX_FIXED_BURST_WORDS - 1) / MAX_FIXED_BURST_WORDS) :
-          axi_incr_burst_count(SRC_ADDR, active_word_count);
-      active_write_burst_count = scenario.use_wr_fixed ?
-          ((active_word_count + MAX_FIXED_BURST_WORDS - 1) / MAX_FIXED_BURST_WORDS) :
-          axi_incr_burst_count(DST_ADDR, active_word_count);
       generated_route_ready = 1'b1;
     end
     enable_random_stalls = scenario.inject_rand_delays;
@@ -1179,7 +1194,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                     (32'h0001_0001 |
                      (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
                      (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)) :
-                    mailbox_read_case ? 32'h0100_0001 :
+                    mailbox_read_case ?
+                    (32'h0100_0001 |
+                     (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)) :
                     ahb2axi_case ? 32'h0200_0001 :
                     axi2ahb_case ?
                     (32'h0002_0001 |
