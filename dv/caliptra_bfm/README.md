@@ -321,6 +321,9 @@ The `--component-fixed-modes-only` replay similarly covers FIXED-read
 AXI2AHB and FIXED-write AHB2AXI; the component data path checks repeated
 source data and final fixed-address SRAM contents. See
 [`component FIXED-mode evidence`](../../evidence/caliptra-bfm-dma-component-fixed-modes-20261007/README.md).
+The same profiles pass on the Icarus build merged from upstream `origin/main`
+at `197f9ba`; see the
+[`merged-simulator DMA evidence`](../../evidence/caliptra-bfm-merged-iverilog-dma-fixed-modes-20261007/README.md).
 The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
