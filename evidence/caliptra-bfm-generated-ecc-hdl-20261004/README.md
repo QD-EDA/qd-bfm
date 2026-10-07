@@ -152,19 +152,18 @@ generated agent proxy identity runtime check is recorded in
 
 ## Reproduce
 
-From the `BFM WORK` clone root:
+From the qd-bfm repository root:
 
 ```sh
-IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
-  evidence/caliptra-bfm-generated-ecc-hdl-20261004/verify_hdl_elaboration.sh
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+IVERILOG_BIN=/path/to/iverilog \
+  dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_hdl_top.sh
 ```
 
-The runner requires a clean Caliptra v2.1.2 checkout at commit
-`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and verifies the generated
-`hdl_top.sv` SHA-256 before applying the temporary overlay. For each edition,
-it first confirms the pristine two-error failure and then compiles the
-temporary copy with Caliptra's actual ECC filelist. All compiler outputs are
-kept in a disposable directory and removed on exit.
+The runner checks the pinned Caliptra revision, clean checkout, and generated
+`hdl_top.sv` hash. It confirms the stock two-error failure, then compiles a
+disposable overlay under both IEEE editions. Compiler output and binaries
+are removed on exit.
 
 To reproduce the reset-monitor regression with the actual ECC RTL and generated
 `hdl_top`/`hvl_top`, run:
@@ -206,8 +205,8 @@ REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors u
 | `dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv` | `ba86f1323cfc88298665154a4176f7d094c8f12af1971089ece859adcefc98bc` |
 | `dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv` | `56f9768145c5e7c9477dfa3d019e6a0fbd2b58e9d1948520a3e096004bfa7e6d` |
 | `dv/caliptra_bfm/uvmf_lite/tests/tb_uvmf_agent.sv` | `ebc0bccdc5384d92048c09716b2ddec3272b756a7d17d3132ea9c24b145186f3` |
-| `verify_hdl_elaboration.sh` | `8c746f779120d06703a60f439db8f9ef73ab4f19dd56a723e43846b3fab552d1` |
-| `hdl_elaboration_probe.sv` | `de586d065213ccbd037410d6ef275b66491773ef1291476d993ed2ef69b7f2f3` |
+| `dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_hdl_top.sh` | `36632fa945c40a6649b962ca9b952eafa03dd3f62e034fb19622eb8819041a71` |
+| `dv/caliptra_bfm/uvmf_lite/tests/tb_generated_ecc_hdl_top.sv` | `2c6f13a3fdcfb7dfea59a100cccce0d683c20fdb40dff5e4aa2236d168e267a4` |
 | `runtime_blocker.log` | `15782f5324fbb32405c345e928a5e8e07c4b7b4b5a61848f29d1a2179f341fac` |
 | `reset_monitor_blocker.log` | `d01f7deab69315a182c68e55774333ba1f52b638a1b99a56bc9ae7a7abe0b14f` |
 | `apply_monitor_overlay.py` used for captured runs (64-clock poll interval) | `f47b91a6648c24286acd16bd85e6e10fc60371bec1c3803535f51eb3157e29fc` |

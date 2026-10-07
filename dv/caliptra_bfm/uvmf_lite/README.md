@@ -134,12 +134,16 @@ and object-property store. See
 [`generated ECC runtime evidence`](../../../evidence/caliptra-bfm-generated-ecc-runtime-20261004/README.md)
 and discovery DD-105 in `docs/conformance/DISCOVERED_DEBT.md`.
 
-The generated `hdl_top.sv` modport wiring remains blocked in this Icarus run:
-the input BFM writes `hrdata` and `hreadyout` through `initiator_port`, and the
-output BFM writes `test` and `op` through `responder_port`. Icarus rejects those
-assignments as writes through modport inputs in both editions. The compile probe
-uses full interface handles in its temporary top, so it does not claim that
-generated top wiring works.
+The stock generated `hdl_top.sv` has two Icarus direction errors: its input
+BFM writes `hrdata` and `hreadyout` through inputs of
+`ECC_in_if.initiator_port`. The hash-checked
+`tests/run_generated_ecc_hdl_top.sh` confirms those errors on the untouched
+source, then elaborates the actual ECC RTL and generated UVMF packages from a
+temporary copy with the three generated modport selectors removed and an
+explicit `1ns/1ps` timescale. Both IEEE editions pass; the pinned checkout is
+unchanged. This makes the generated top compile path repeatable without
+claiming that the generated source compiles unchanged.
+
 The 384-bit ECC automatic bins are represented as exact leading-bit prefixes;
 the focused regression also covers 512-bit explicit ranges, a 65-bit
 non-power-of-two partition, and prefixes that cross a 64-bit word boundary.
