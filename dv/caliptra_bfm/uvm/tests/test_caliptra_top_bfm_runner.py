@@ -197,13 +197,16 @@ class FastBootDataPreloadTest(unittest.TestCase):
         dis_file = temp / "firmware.dis"
         program.write_text(
             "@00000040\n00 00 00 00 00 00 " + branch + "\n"
-            "@00000100\n11 22 33 44\n"
+            "@00000100\n11 22 33 44 00 00 00 00\n"
         )
         dccm.write_text("@00000050\nAA BB\n")
         map_file.write_text(
             "  0x00000100 _data_lma_start = ALIGN (0x4)\n"
             "  0x00000104 _bss_lma_start = _data_lma_end\n"
             "  0x50000040 _data_vma_start = 0x50000040\n"
+            "  0x00000108 _bss_lma_end = _bss_lma_start + SIZEOF (.bss)\n"
+            "  0x50000044 _bss_vma_start = .\n"
+            "  0x50000048 _bss_vma_end = _bss_vma_start + SIZEOF (.bss)\n"
         )
         dis_file.write_text(
             "       46: 0062fa63 bgeu t0,t1,5a <bss_cp_setup>\n"
@@ -219,14 +222,39 @@ class FastBootDataPreloadTest(unittest.TestCase):
             program, dccm, map_file, dis_file = self.make_images(temp)
             result = RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
             self.assertEqual(RUNNER.read_hex_range(program.read_text(), 0x46, 0x4A),
-                             bytes.fromhex("6f 00 40 01"))
+                             bytes.fromhex("6f 00 00 04"))
             dccm_text = dccm.read_text()
             self.assertEqual(RUNNER.read_hex_range(dccm_text, 0x40, 0x44),
                              bytes.fromhex("11 22 33 44"))
+            self.assertEqual(RUNNER.read_hex_range(dccm_text, 0x44, 0x48),
+                             bytes.fromhex("00 00 00 00"))
             self.assertEqual(RUNNER.read_hex_range(dccm_text, 0x50, 0x52),
                              bytes.fromhex("aa bb"))
             self.assertEqual(result["data_bytes"], 4)
+            self.assertEqual(result["bss_bytes"], 4)
             self.assertEqual(result["destination_offset"], "0x40")
+
+    def test_rejects_nonzero_bss_image_without_mutating_images(self):
+        with tempfile.TemporaryDirectory() as temp:
+            program, dccm, map_file, dis_file = self.make_images(temp)
+            program.write_text(program.read_text().replace("00 00 00 00\n", "00 00 00 01\n"))
+            originals = (program.read_text(), dccm.read_text())
+            with self.assertRaisesRegex(ValueError, "BSS load range is not zero-filled"):
+                RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
+            self.assertEqual((program.read_text(), dccm.read_text()), originals)
+
+    def test_accepts_empty_bss_without_emitting_an_empty_segment(self):
+        with tempfile.TemporaryDirectory() as temp:
+            program, dccm, map_file, dis_file = self.make_images(temp)
+            program.write_text("@00000040\n00 00 00 00 00 00 63 FA 62 00\n@00000100\n11 22 33 44\n")
+            map_file.write_text(map_file.read_text().replace(
+                "0x00000108 _bss_lma_end", "0x00000104 _bss_lma_end"
+            ).replace(
+                "0x50000048 _bss_vma_end", "0x50000044 _bss_vma_end"
+            ))
+            result = RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
+            self.assertEqual(result["bss_bytes"], 0)
+            self.assertNotIn("@00000044", dccm.read_text())
 
     def test_rejects_unrecognized_startup_without_mutating_images(self):
         with tempfile.TemporaryDirectory() as temp:

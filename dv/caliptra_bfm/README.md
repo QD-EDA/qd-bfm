@@ -194,10 +194,11 @@ scenario. Add `--fast-trng` for a diagnostic copied-top override that changes
 the physical RNG model cadence from 500 to 50 cycles; the default retains
 the pinned cadence. Fast-TRNG results do not qualify entropy timing. For a
 startup diagnostic, `--fast-boot-data-preload` supports the short AES DMA and
-`rand_test_dma` cases; it validates CRT0 layout, preloads the firmware's `.data`
-bytes into DCCM, and skips the copy loop. The BSS clear and firmware remain
-active, but this modified-image run is not stock firmware qualification. Its
-result records stock and simulated image hashes plus the preload range. The
+`rand_test_dma` cases; it validates CRT0 and linker layout, preloads the
+firmware's `.data` bytes and verified zero-filled `.bss` bytes into DCCM, and
+skips both startup loops. Firmware remains active, but this modified-image run
+is not stock firmware qualification. Its result records stock and simulated
+image hashes plus both preload ranges. The
 `--skip-pq-vector-generation` option skips unrelated MLDSA/MLKEM testbench
 vector generation for the short AES case while retaining all 12 firmware
 AES/DMA cases. `--quiet-firmware` compiles supported DMA cases with

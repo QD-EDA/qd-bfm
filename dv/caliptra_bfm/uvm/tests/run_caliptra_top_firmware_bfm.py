@@ -391,7 +391,7 @@ DCCM_BASE = 0x50000000
 DCCM_SIZE = 0x40000
 DATA_COPY_BRANCH_PC = 0x46
 DATA_COPY_BRANCH = bytes.fromhex("63 fa 62 00")
-FAST_BRANCH = bytes.fromhex("6f 00 40 01")
+POST_COPY_BRANCH = bytes.fromhex("6f 00 00 04")
 
 
 def readmemh_image(text):
@@ -465,7 +465,8 @@ def format_readmemh_segment(start, data):
 def prepare_fast_boot_data_preload(program_path, dccm_path, map_path, dis_path):
     symbols = {}
     map_text = Path(map_path).read_text()
-    for name in ("_data_lma_start", "_bss_lma_start", "_data_vma_start"):
+    for name in ("_data_lma_start", "_bss_lma_start", "_data_vma_start",
+                 "_bss_lma_end", "_bss_vma_start", "_bss_vma_end"):
         matches = re.findall(rf"(?m)^\s*0x([0-9a-fA-F]+)\s+{name}\s*=", map_text)
         if len(matches) != 1:
             raise ValueError(f"firmware map must define {name} exactly once")
@@ -481,15 +482,30 @@ def prepare_fast_boot_data_preload(program_path, dccm_path, map_path, dis_path):
     data_start = symbols["_data_lma_start"]
     data_end = symbols["_bss_lma_start"]
     data_vma = symbols["_data_vma_start"]
+    bss_start = symbols["_bss_lma_start"]
+    bss_end = symbols["_bss_lma_end"]
+    bss_vma = symbols["_bss_vma_start"]
+    bss_vma_end = symbols["_bss_vma_end"]
     if (data_end <= data_start or (data_start | data_end | data_vma) & 3 or
             data_end > DCCM_SIZE or data_end - data_start > DCCM_SIZE):
         raise ValueError("firmware .data range is empty, unaligned, or outside the image")
+    if (bss_end < bss_start or bss_vma_end < bss_vma or
+            (bss_start | bss_end | bss_vma | bss_vma_end) & 3 or
+            bss_end > DCCM_SIZE or bss_end - bss_start > DCCM_SIZE or
+            bss_end - bss_start != bss_vma_end - bss_vma):
+        raise ValueError("firmware .bss range is reversed, unaligned, or has mismatched LMA/VMA lengths")
     if not DCCM_BASE <= data_vma < DCCM_BASE + DCCM_SIZE:
         raise ValueError("firmware .data destination is outside DCCM")
+    if not DCCM_BASE <= bss_vma <= bss_vma_end <= DCCM_BASE + DCCM_SIZE:
+        raise ValueError("firmware .bss destination is outside DCCM")
     destination = data_vma - DCCM_BASE
     destination_end = destination + data_end - data_start
+    bss_destination = bss_vma - DCCM_BASE
+    bss_destination_end = bss_vma_end - DCCM_BASE
     if destination_end > DCCM_SIZE:
         raise ValueError("firmware .data destination exceeds DCCM")
+    if destination < bss_destination_end and bss_destination < destination_end:
+        raise ValueError("firmware .data and .bss destinations overlap")
 
     program_path = Path(program_path)
     dccm_path = Path(dccm_path)
@@ -502,12 +518,21 @@ def prepare_fast_boot_data_preload(program_path, dccm_path, map_path, dis_path):
         raise ValueError("firmware startup branch bytes do not match the verified data-copy branch")
     if not all(program_present[data_start:data_end]):
         raise ValueError("firmware program image does not cover its .data load range")
-    if any(dccm_present[destination:destination_end]):
-        raise ValueError("firmware .data destination overlaps existing DCCM image data")
+    if not all(program_present[bss_start:bss_end]):
+        raise ValueError("firmware program image does not cover its .bss load range")
+    if any(program[bss_start:bss_end]):
+        raise ValueError("firmware BSS load range is not zero-filled")
+    if (any(dccm_present[destination:destination_end]) or
+            any(dccm_present[bss_destination:bss_destination_end])):
+        raise ValueError("firmware .data or .bss destination overlaps existing DCCM image data")
 
     data = bytes(program[data_start:data_end])
-    patched_program = replace_hex_range(program_text, DATA_COPY_BRANCH_PC, FAST_BRANCH)
-    preloaded_dccm = format_readmemh_segment(destination, data) + dccm_text
+    bss = bytes(program[bss_start:bss_end])
+    patched_program = replace_hex_range(program_text, DATA_COPY_BRANCH_PC, POST_COPY_BRANCH)
+    preloaded_dccm = format_readmemh_segment(destination, data)
+    if bss:
+        preloaded_dccm += format_readmemh_segment(bss_destination, bss)
+    preloaded_dccm += dccm_text
     program_path.write_text(patched_program)
     dccm_path.write_text(preloaded_dccm)
     return {
@@ -518,9 +543,14 @@ def prepare_fast_boot_data_preload(program_path, dccm_path, map_path, dis_path):
         "destination_offset": f"0x{destination:x}",
         "data_bytes": len(data),
         "data_sha256": hashlib.sha256(data).hexdigest(),
+        "bss_lma_start": f"0x{bss_start:x}",
+        "bss_lma_end": f"0x{bss_end:x}",
+        "bss_vma_start": f"0x{bss_vma:x}",
+        "bss_bytes": len(bss),
+        "bss_sha256": hashlib.sha256(bss).hexdigest(),
         "branch_pc": f"0x{DATA_COPY_BRANCH_PC:x}",
         "original_branch": DATA_COPY_BRANCH.hex(),
-        "replacement_branch": FAST_BRANCH.hex(),
+        "replacement_branch": POST_COPY_BRANCH.hex(),
     }
 
 def required_env(name):
@@ -663,7 +693,7 @@ def main():
     parser.add_argument("--fast-trng", action="store_true",
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
     parser.add_argument("--fast-boot-data-preload", action="store_true",
-                        help="diagnostic only: preload .data and skip its CRT0 copy for a supported DMA firmware case")
+                        help="diagnostic only: preload verified .data/.bss and skip CRT0 copy/clear loops")
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
                         help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
     parser.add_argument("--limit-aes-cases", type=int, metavar="N",
