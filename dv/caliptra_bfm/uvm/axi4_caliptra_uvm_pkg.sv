@@ -300,12 +300,36 @@ package axi4_caliptra_uvm_pkg;
 
     function void report_phase(uvm_phase phase);
       super.report_phase(phase);
-      // ponytail: report handshake/stall totals; expose finer native bins if UVM consumers need them.
       `uvm_info("AXI_COVERAGE", $sformatf(
-        "accepted AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d; stalled AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d",
+        "accepted AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d; VALID=%0d/%0d/%0d/%0d/%0d; stalled AW/W/B/AR/R=%0d/%0d/%0d/%0d/%0d",
         vif.aw_count, vif.w_count, vif.b_count, vif.ar_count, vif.r_count,
+        vif.aw_valid_cycles, vif.w_valid_cycles, vif.b_valid_cycles,
+        vif.ar_valid_cycles, vif.r_valid_cycles,
         vif.aw_stall_cycles, vif.w_stall_cycles, vif.b_stall_cycles,
         vif.ar_stall_cycles, vif.r_stall_cycles), UVM_LOW)
+      `uvm_info("AXI_AW_COVERAGE", $sformatf(
+        "burst FIXED/INCR/WRAP/RESERVED/X=%0d/%0d/%0d/%0d/%0d of AW=%0d; lock clear/set/X=%0d/%0d/%0d of AW=%0d",
+        vif.aw_burst_fixed_count, vif.aw_burst_incr_count, vif.aw_burst_wrap_count,
+        vif.aw_burst_reserved_count, vif.aw_burst_unknown_count, vif.aw_count,
+        vif.aw_lock_clear_count, vif.aw_lock_set_count, vif.aw_lock_unknown_count,
+        vif.aw_count), UVM_LOW)
+      `uvm_info("AXI_AR_COVERAGE", $sformatf(
+        "burst FIXED/INCR/WRAP/RESERVED/X=%0d/%0d/%0d/%0d/%0d of AR=%0d; lock clear/set/X=%0d/%0d/%0d of AR=%0d",
+        vif.ar_burst_fixed_count, vif.ar_burst_incr_count, vif.ar_burst_wrap_count,
+        vif.ar_burst_reserved_count, vif.ar_burst_unknown_count, vif.ar_count,
+        vif.ar_lock_clear_count, vif.ar_lock_set_count, vif.ar_lock_unknown_count,
+        vif.ar_count), UVM_LOW)
+      `uvm_info("AXI_RESP_COVERAGE", $sformatf(
+        "B OKAY/EXOKAY/SLVERR/DECERR/X=%0d/%0d/%0d/%0d/%0d of B=%0d; R=%0d/%0d/%0d/%0d/%0d of R=%0d",
+        vif.b_resp_okay_count, vif.b_resp_exokay_count, vif.b_resp_slverr_count,
+        vif.b_resp_decerr_count, vif.b_resp_unknown_count, vif.b_count,
+        vif.r_resp_okay_count, vif.r_resp_exokay_count, vif.r_resp_slverr_count,
+        vif.r_resp_decerr_count, vif.r_resp_unknown_count, vif.r_count), UVM_LOW)
+      `uvm_info("AXI_W_COVERAGE", $sformatf(
+        "WSTRB full/partial/zero/X=%0d/%0d/%0d/%0d of W=%0d; LAST W=%0d of W=%0d; R=%0d of R=%0d",
+        vif.w_strb_full_count, vif.w_strb_partial_count, vif.w_strb_zero_count,
+        vif.w_strb_unknown_count, vif.w_count, vif.w_last_count, vif.w_count,
+        vif.r_last_count, vif.r_count), UVM_LOW)
     endfunction
 
     function void publish_channel(axi4_caliptra_channel_e channel);
