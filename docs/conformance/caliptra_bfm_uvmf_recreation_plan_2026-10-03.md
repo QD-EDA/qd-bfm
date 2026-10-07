@@ -675,8 +675,9 @@ all queued words and stalls; recovery checks all route outputs. Other generated
 FIFO modes and firmware-triggered reset injection remain unqualified.
 A focused route replay also covers the legal FIXED-read AXI2MBOX and
 FIXED-write MBOX2AXI modes through the actual DMA DUT, checking sequential
-mailbox requests and repeated SRAM destination addressing. Default mixed DMA
-profiles and firmware remain open.
+mailbox requests and repeated SRAM destination addressing. A second replay
+covers FIXED-read AXI2AHB and FIXED-write AHB2AXI through the component data
+path. Default mixed DMA profiles and firmware remain open.
 The AHB routes use component `WRITE_DATA`
 and `READ_DATA` registers, not an AHB bus. A separate SRAM-to-FIFO profile
 checks fixed write bursts, weighted channel stalls, and queued words.
@@ -1095,7 +1096,7 @@ through its own blocker, not this list.
    write bursts and weighted channel stalls. The generated replay preserves
    and exercises its delay flag; one record observed five target-stall cycles
    and the generated FIFO destination observed 160. Other default size/flag
-   profiles beyond the two directed mailbox FIXED modes, other FIFO modes, and
+   profiles beyond the four directed route FIXED modes, other FIFO modes, and
    firmware reset remain unqualified.
    The generator also stages its default mixed profiles and drives the recovery
    sequencer, but the default size and flag combinations are not replayed through the DUT. AHB2AXI and

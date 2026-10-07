@@ -20,8 +20,9 @@ max_sram_dut_replay_only=0
 fixed_sram_modes_only=0
 recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
+component_fixed_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -33,8 +34,9 @@ if [ "$#" -eq 1 ]; then
     --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
+    --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -243,6 +245,20 @@ if [ "$mailbox_fixed_modes_only" -eq 1 ]; then
     exit 1
   fi
   echo "INFO: actual Caliptra axi_dma_top passed FIXED-read AXI2MBOX and FIXED-write MBOX2AXI profiles"
+  exit 0
+fi
+if [ "$component_fixed_modes_only" -eq 1 ]; then
+  run_case axi2ahb-fixed-read +AXI2AHB_FIXED_READ_CASE
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top read 65 FIXED-address SRAM words through the component data register' "$log"; then
+    echo "AXI2AHB FIXED-read profile did not complete through the component data register" >&2
+    exit 1
+  fi
+  run_case ahb2axi-fixed-write +AHB2AXI_FIXED_WRITE_CASE
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top sent 65 component-register words to one FIXED SRAM address' "$log"; then
+    echo "AHB2AXI FIXED-write profile did not complete to SRAM" >&2
+    exit 1
+  fi
+  echo "INFO: actual Caliptra axi_dma_top passed FIXED-read AXI2AHB and FIXED-write AHB2AXI profiles"
   exit 0
 fi
 

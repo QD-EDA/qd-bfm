@@ -313,6 +313,10 @@ transfer beats, and resulting SRAM contents. The focused
 FIXED-write MBOX2AXI profiles through the actual DMA DUT, including their
 repeated-address data semantics. See
 [`mailbox FIXED-mode evidence`](../../evidence/caliptra-bfm-dma-mailbox-fixed-modes-20261007/README.md).
+The `--component-fixed-modes-only` replay similarly covers FIXED-read
+AXI2AHB and FIXED-write AHB2AXI; the component data path checks repeated
+source data and final fixed-address SRAM contents. See
+[`component FIXED-mode evidence`](../../evidence/caliptra-bfm-dma-component-fixed-modes-20261007/README.md).
 The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
