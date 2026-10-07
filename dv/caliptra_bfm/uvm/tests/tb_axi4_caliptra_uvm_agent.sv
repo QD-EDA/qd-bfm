@@ -22,7 +22,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   wire [3:0] WSTRB;
   wire stall_aw = 0;
   wire stall_w = 0;
-  wire stall_b = 0;
+  logic stall_b = 0;
   wire stall_ar = 0;
   logic stall_r = 0;
   wire inject_error;
@@ -724,6 +724,45 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     endtask
   endclass
 
+  class axi4_caliptra_uvm_reset_abort_write_sequence extends uvm_sequence #(axi4_caliptra_uvm_transfer);
+    `uvm_object_utils(axi4_caliptra_uvm_reset_abort_write_sequence)
+
+    function new(string name = "axi4_caliptra_uvm_reset_abort_write_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      axi4_caliptra_uvm_transfer req;
+      bit completed;
+
+      req = axi4_caliptra_uvm_transfer::type_id::create("reset_abort_write");
+      start_item(req);
+      req.write = 1;
+      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h90;
+      req.len = 0;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.id = 8'h7d;
+      req.write_data[0 +: 32] = 32'hbad0_0001;
+      req.write_strb[0 +: 4] = 4'hf;
+      completed = 0;
+      fork
+        begin
+          finish_item(req);
+          completed = 1;
+        end
+        begin
+          #2000;
+          if (!completed)
+            `uvm_fatal("AXI_RESET_ABORT_WRITE_TIMEOUT", "Reset-aborted write did not complete within 200 cycles")
+        end
+      join_any
+      disable fork;
+      if (req.success)
+        `uvm_fatal("AXI_RESET_ABORT_WRITE", "Write unexpectedly succeeded across reset")
+    endtask
+  endclass
+
   class axi4_caliptra_uvm_agent_test extends uvm_test;
     axi4_caliptra_uvm_env env;
     bit use_dma_target;
@@ -912,6 +951,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     task run_phase(uvm_phase phase);
       axi4_caliptra_uvm_smoke_sequence smoke_seq;
       axi4_caliptra_uvm_reset_abort_sequence reset_abort_seq;
+      axi4_caliptra_uvm_reset_abort_write_sequence reset_abort_write_seq;
       axi4_caliptra_uvm_exclusive_sequence exclusive_seq;
       axi4_caliptra_uvm_error_sequence error_seq;
       axi4_caliptra_fifo_uvm_sequence fifo_seq;
@@ -923,6 +963,17 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
       phase.raise_objection(this);
+      if ($test$plusargs("RESET_ABORT_WRITE")) begin
+        reset_abort_write_seq = axi4_caliptra_uvm_reset_abort_write_sequence::type_id::create("reset_abort_write_seq");
+        reset_abort_write_seq.start(env.agent.sequencer);
+        if (env.sub.write_count != 0)
+          `uvm_fatal("AXI_RESET_ABORT_WRITE_MON", "Aborted write was published as a completed transaction")
+        smoke_seq = axi4_caliptra_uvm_smoke_sequence::type_id::create("post_reset_smoke_seq");
+        smoke_seq.start(env.agent.sequencer);
+        $display("PASS: native UVM AXI agent aborts an accepted write before B and recovers for a burst");
+        phase.drop_objection(this);
+        return;
+      end
       if ($test$plusargs("RESET_ABORT")) begin
         reset_abort_seq = axi4_caliptra_uvm_reset_abort_sequence::type_id::create("reset_abort_seq");
         reset_abort_seq.start(env.agent.sequencer);
@@ -1053,7 +1104,31 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   end
 
   initial begin
-    if ($test$plusargs("RESET_ABORT")) begin
+    if ($test$plusargs("RESET_ABORT_WRITE")) begin
+      integer cycles;
+      reg aw_accepted;
+      reg w_accepted;
+      stall_b = 1;
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      ARESETn = 1;
+      aw_accepted = 0;
+      w_accepted = 0;
+      for (cycles = 0; cycles < 128 && (!aw_accepted || !w_accepted); cycles = cycles + 1) begin
+        @(posedge ACLK);
+        if (AWVALID && AWREADY) aw_accepted = 1;
+        if (WVALID && WREADY && WLAST) w_accepted = 1;
+      end
+      if (!aw_accepted || !w_accepted)
+        $fatal(1, "Timed out waiting for reset-abort write address/data handshakes");
+      @(negedge ACLK);
+      if (BVALID) $fatal(1, "B response became valid while reset-abort write was stalled");
+      ARESETn = 0;
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      ARESETn = 1;
+      stall_b = 0;
+    end else if ($test$plusargs("RESET_ABORT")) begin
       integer cycles;
       reg ar_accepted;
       stall_r = 1;

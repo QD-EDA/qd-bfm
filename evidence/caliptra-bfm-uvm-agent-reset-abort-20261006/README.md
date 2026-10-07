@@ -2,18 +2,21 @@
 
 # Caliptra AXI UVM agent reset-abort — 2026-10-06
 
-The native UVM AXI driver now has a directed `+RESET_ABORT` regression. The
-test accepts an AXI read address while R is stalled, asserts reset, checks that
-the UVM item returns unsuccessful within 200 cycles and that no completed-read
-record was published, then runs the existing burst read/write smoke to prove
-the agent recovers. The address handshake has a 128-cycle bound.
+The native UVM AXI driver has directed read and write reset-abort regressions.
+`+RESET_ABORT` accepts an AXI read address while R is stalled; reset must return
+the UVM item unsuccessfully within 200 cycles without publishing a completed
+read. `+RESET_ABORT_WRITE` accepts AW and W, stalls B, then asserts reset; the
+item must return unsuccessfully within 200 cycles without publishing a
+completed write. Both paths then run the existing burst read/write smoke to
+prove recovery. Address and data handshakes have a 128-cycle bound.
 
-Both memory and DMA subordinate targets passed the reset-abort case with zero
-UVM warnings, errors, or fatals. The guard observed 75% minimum free memory
-against its 60% floor. Existing default memory and DMA agent regressions also
-passed; each reported two `PREDICT_NOK` warnings from its injected-error RAL
-reads and zero UVM errors or fatals. Their minimum free-memory readings were
-74% and 73%, respectively.
+Both memory and DMA subordinate targets passed the read and write reset-abort
+cases with zero UVM warnings, errors, or fatals. The read runs observed 75%
+minimum free memory; the write runs observed 70%, all against a 60% floor.
+Existing default memory and DMA agent regressions also passed; each reported
+two `PREDICT_NOK` warnings from its injected-error RAL reads and zero UVM
+errors or fatals. Their minimum free-memory readings were 74% and 73%,
+respectively.
 
 ## Reproduction
 
@@ -24,10 +27,16 @@ CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=300 \
 IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
 VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
   ./dv/caliptra_bfm/uvm/tests/run_uvm_agent.sh +RESET_ABORT
+
+CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=300 \
+IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  ./dv/caliptra_bfm/uvm/tests/run_uvm_agent.sh +RESET_ABORT_WRITE
 ```
 
 Use `run_uvm_dma_agent.sh +RESET_ABORT` for the DMA subordinate. The runners
-also pass simulator arguments through for the ordinary profiles:
+also accept `run_uvm_dma_agent.sh +RESET_ABORT_WRITE`. They pass simulator
+arguments through for the ordinary profiles:
 
 ```sh
 ./dv/caliptra_bfm/uvm/tests/run_uvm_agent.sh
