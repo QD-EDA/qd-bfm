@@ -23,6 +23,7 @@ interface axi4_caliptra_record_if(input wire ACLK);
   logic [8191:0] write_request_wuser;
   logic [255:0] write_request_last_mask;
   logic write_error;
+  logic [3:0] write_error_code;
   logic [3:0] write_status;
   logic [7:0] write_id;
   logic [47:0] write_addr;
@@ -42,6 +43,7 @@ interface axi4_caliptra_record_if(input wire ACLK);
 
   logic read_complete;
   logic read_error;
+  logic [3:0] read_error_code;
   logic [3:0] read_status;
   logic [7:0] read_id;
   logic [47:0] read_addr;

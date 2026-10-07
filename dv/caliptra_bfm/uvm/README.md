@@ -66,7 +66,9 @@ active sequencer/driver path, and a passive monitor adapter. The passive monitor
 samples completed records produced by `axi4_caliptra_transaction_monitor.sv` on
 the falling clock edge, then publishes read and write objects through
 its native `ap` analysis port. In standalone mode it also publishes a second
-`aaxi_master_tr` stream on `aaxi_ap`.
+`aaxi_master_tr` stream on `aaxi_ap`. The adapter reports transaction-monitor
+protocol violations through UVM errors, including unmatched responses that
+cannot be attached to a completed transaction.
 
 The transaction class exposes direction (`kind`, `is_read()`, `is_write()`),
 address/control, ID and response, USER, first-beat `data`, full `beatQ`, write

@@ -197,6 +197,12 @@ package axi4_caliptra_uvm_pkg;
       forever begin
         @(negedge vif.ACLK);
         if (vif.ARESETn !== 1'b1) continue;
+        if (vif.write_error)
+          `uvm_error("AXI_PROTOCOL", $sformatf("AXI write protocol error code %0d",
+            vif.write_error_code))
+        if (vif.read_error)
+          `uvm_error("AXI_PROTOCOL", $sformatf("AXI read protocol error code %0d",
+            vif.read_error_code))
         if (vif.write_request_complete) publish_write_request();
         if (vif.write_complete) publish_write();
         if (vif.read_complete) publish_read();
