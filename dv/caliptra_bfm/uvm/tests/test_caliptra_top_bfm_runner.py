@@ -498,8 +498,8 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         )
         patched = RUNNER.replace_random_reset_delay(source, 512)
         self.assertIn("            wait_time_to_rst = 512;\n", patched)
-        late_patched = RUNNER.replace_random_reset_delay(source, 4096)
-        self.assertIn("            wait_time_to_rst = 4096;\n", late_patched)
+        late_patched = RUNNER.replace_random_reset_delay(source, 3870)
+        self.assertIn("            wait_time_to_rst = 3870;\n", late_patched)
         self.assertNotIn("std::randomize(wait_time_to_rst)", patched)
         self.assertIn("            prandom_warm_rst <= 'b1;\n", patched)
         with self.assertRaisesRegex(ValueError, "between 5 and 8191 cycles"):

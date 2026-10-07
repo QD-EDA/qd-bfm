@@ -29,12 +29,14 @@ For a bounded full-top `rand_test_dma` reset diagnostic, use
 `--rand-dma-iterations 1 --force-first-rand-dma-reset`. The optional
 `--rand-dma-reset-delay-cycles N` fixes the testbench warm-reset wait to 5–8191
 cycles in a hash-checked temporary overlay; without it, Caliptra's weighted
-random delay is unchanged. For example:
+random delay is unchanged. The recorded seed-1 trace makes 3,870 cycles a
+trace-derived starting point for an in-flight reset; confirm with `--trace-axi`
+when changing the profile. For example:
 
 ```sh
 sh dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.sh \
   --case rand_test_dma --rand-dma-iterations 1 \
-  --force-first-rand-dma-reset --rand-dma-reset-delay-cycles 512 \
+  --force-first-rand-dma-reset --rand-dma-reset-delay-cycles 3870 \
   --output /private/tmp/caliptra-rand-dma-reset-probe
 ```
 
