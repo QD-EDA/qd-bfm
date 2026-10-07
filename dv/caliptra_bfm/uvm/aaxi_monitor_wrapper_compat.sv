@@ -152,6 +152,12 @@ module aaxi_monitor_wrapper #(
         .RREADY(bus.RREADY)
       );
 
+      // Keep AAXI's upper address bits known for the 48-bit Caliptra command bridge.
+      if (aaxi_pkg::AAXI_ADDR_WIDTH > 48) begin : address_extension
+        assign bus.AWADDR[aaxi_pkg::AAXI_ADDR_WIDTH-1:48] = '0;
+        assign bus.ARADDR[aaxi_pkg::AAXI_ADDR_WIDTH-1:48] = '0;
+      end
+
     end
   endgenerate
 

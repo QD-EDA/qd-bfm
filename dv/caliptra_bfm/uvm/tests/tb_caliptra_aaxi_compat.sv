@@ -29,6 +29,15 @@ module tb_caliptra_aaxi_compat;
 
   always #5 ACLK = ~ACLK;
 
+  always @(posedge ACLK) begin
+    if (ARESETn && generated_ports.AWVALID === 1'b1 &&
+        generated_ports.AWADDR[63:48] !== 16'b0)
+      $fatal(1, "Caliptra AXI manager must zero-extend AWADDR above bit 47");
+    if (ARESETn && generated_ports.ARVALID === 1'b1 &&
+        generated_ports.ARADDR[63:48] !== 16'b0)
+      $fatal(1, "Caliptra AXI manager must zero-extend ARADDR above bit 47");
+  end
+
   // Connect the generated AAXI signal interface to Caliptra's actual AXI pins.
   always_comb begin
     generated_ports.CACTIVE_m = 1'b0;
