@@ -30,6 +30,18 @@ class ToolchainPrefixTest(unittest.TestCase):
         self.assertEqual(env["PATH"], f"/opt/riscv/bin{RUNNER.os.pathsep}/usr/bin")
 
 
+class NativeVectorSelectionTest(unittest.TestCase):
+    def test_pq_skip_keeps_only_non_pq_runtime_assets(self):
+        selected = RUNNER.native_vector_outputs(skip_pq_vectors=True)
+        self.assertEqual(set(selected.values()), {
+            "ecc_secp384r1.exe", "doe_test_gen.py", "sha256_wntz_test_gen.py",
+        })
+
+    def test_default_keeps_all_runtime_assets(self):
+        self.assertEqual(RUNNER.native_vector_outputs(skip_pq_vectors=False),
+                         RUNNER.VECTOR_OUTPUTS)
+
+
 class ProfileOverlayTest(unittest.TestCase):
     def test_fast_trng_profile_hash_checks_combined_top_overlay(self):
         with tempfile.TemporaryDirectory() as temp:

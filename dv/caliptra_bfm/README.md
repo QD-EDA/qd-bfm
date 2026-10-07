@@ -201,10 +201,10 @@ startup diagnostic, `--fast-boot-data-preload` supports the short AES DMA and
 firmware's `.data` bytes and verified zero-filled `.bss` bytes into DCCM, and
 skips both startup loops. Firmware remains active, but this modified-image run
 is not stock firmware qualification. Its result records stock and simulated
-image hashes plus both preload ranges. The
-`--skip-pq-vector-generation` option skips unrelated MLDSA/MLKEM testbench
-vector generation for the short AES case while retaining all 12 firmware
-AES/DMA cases. `--quiet-firmware` compiles supported DMA cases with
+image hashes plus both preload ranges. The `--skip-pq-vector-generation` option skips native
+MLDSA/ML-KEM helper builds and unrelated MLDSA/MLKEM testbench vector
+generation for the short AES case while retaining all 12 firmware AES/DMA cases.
+`--quiet-firmware` compiles supported DMA cases with
 `CPT_VERBOSITY=ERROR` to suppress low-priority firmware prints; for the short
 AES case it retains all 12 cases.
 `--limit-aes-cases N` builds a disposable firmware copy for the first N of the

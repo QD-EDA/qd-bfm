@@ -591,88 +591,125 @@ def scan_sim_log(path):
             "jtag_errors": jtag_errors, "finish": finish}
 
 
-def prepare_native_vectors(rtl_root, output, env):
+def native_vector_outputs(skip_pq_vectors=False):
+    pq_outputs = {"test_dilithium5", "smoke_test_mldsa_vector.hex",
+                  "native_mlkem", "random_test_ml_kem.py"}
+    return {
+        relative: name for relative, name in VECTOR_OUTPUTS.items()
+        if not skip_pq_vectors or name not in pq_outputs
+    }
+
+
+def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
     if sys.platform != "darwin" or platform.machine() != "arm64":
         raise RuntimeError("native Caliptra vector preparation currently requires macOS ARM64")
-    tools = {name: shutil.which(name) for name in ("brew", "clang", "make", "openssl", "xxd", "python3.12")}
+    tool_names = ("brew", "clang", "make", "openssl", "xxd", "python3.12")
+    tools = {name: shutil.which(name) for name in tool_names}
     missing = [name for name, path in tools.items() if path is None]
     if missing:
         raise RuntimeError(f"missing native vector tools: {missing}")
+    packages = ["mbedtls@3"] + ([] if skip_pq_vectors else ["openssl@3"])
     roots = {
         package: Path(subprocess.check_output([tools["brew"], "--prefix", package], text=True).strip())
-        for package in ("openssl@3", "mbedtls@3")
+        for package in packages
     }
     adams = Path(rtl_root) / "submodules/adams-bridge"
     ref_source = adams / "src/abr_top/uvmf/Dilithium_ref/dilithium/ref"
     vectors = REPO / "dv/caliptra_bfm/native_vectors"
+    mbedtls = roots["mbedtls@3"]
     inputs = {
-        "native_mlkem.c": vectors / "native_mlkem.c",
-        "random_test_ml_kem.py": vectors / "random_test_ml_kem.py",
-        "stage_mldsa.py": vectors / "stage_mldsa.py",
-        "stage_sha256_wntz.py": vectors / "stage_sha256_wntz.py",
-        "check_native_mlkem.py": vectors / "check_native_mlkem.py",
-        "check_native_mldsa.py": vectors / "check_native_mldsa.py",
         "ecc_secp384r1.c": Path(rtl_root) / "src/ecc/tb/ecc_secp384r1.c",
         "doe_test_gen.py": Path(rtl_root) / "src/doe/tb/doe_test_gen.py",
         "sha256_wntz_test_gen.py": Path(rtl_root) / "src/sha256/tb/sha256_wntz_test_gen.py",
-        "test_dilithium.c": ref_source / "test/test_dilithium.c",
-        "smoke_test_mldsa_vector.hex": Path(rtl_root) / "src/mldsa/tb/smoke_test_mldsa_vector.hex",
-        "openssl_libcrypto": roots["openssl@3"] / "lib/libcrypto.dylib",
-        "mbedtls_libcrypto": roots["mbedtls@3"] / "lib/libmbedcrypto.dylib",
-        "mbedtls_libx509": roots["mbedtls@3"] / "lib/libmbedx509.dylib",
-        "mbedtls_libtls": roots["mbedtls@3"] / "lib/libmbedtls.dylib",
+        "stage_sha256_wntz.py": vectors / "stage_sha256_wntz.py",
+        "mbedtls_libcrypto": mbedtls / "lib/libmbedcrypto.dylib",
+        "mbedtls_libx509": mbedtls / "lib/libmbedx509.dylib",
+        "mbedtls_libtls": mbedtls / "lib/libmbedtls.dylib",
     }
+    if not skip_pq_vectors:
+        openssl = roots["openssl@3"]
+        inputs.update({
+            "native_mlkem.c": vectors / "native_mlkem.c",
+            "random_test_ml_kem.py": vectors / "random_test_ml_kem.py",
+            "stage_mldsa.py": vectors / "stage_mldsa.py",
+            "check_native_mlkem.py": vectors / "check_native_mlkem.py",
+            "check_native_mldsa.py": vectors / "check_native_mldsa.py",
+            "test_dilithium.c": ref_source / "test/test_dilithium.c",
+            "smoke_test_mldsa_vector.hex": Path(rtl_root) / "src/mldsa/tb/smoke_test_mldsa_vector.hex",
+            "openssl_libcrypto": openssl / "lib/libcrypto.dylib",
+        })
+        if not ref_source.is_dir():
+            raise RuntimeError(f"missing native vector input directory: {ref_source}")
     missing = [name for name, path in inputs.items() if not path.is_file()]
     if missing:
         raise RuntimeError(f"missing native vector inputs: {missing}")
 
     native = Path(output) / "native_vectors"
     native.mkdir()
-    openssl = roots["openssl@3"]
-    mbedtls = roots["mbedtls@3"]
-    ref = native / "dilithium-ref"
-    shutil.copytree(ref_source, ref)
-    (ref / "test/test_dilithium5").unlink(missing_ok=True)
     generated = {
         "ecc_secp384r1.exe": native / "ecc_secp384r1.exe",
-        "test_dilithium5": ref / "test/test_dilithium5",
         "sha256_wntz_test_gen.py": native / "sha256_wntz_test_gen.py",
-        "native_mlkem": native / "native_mlkem",
     }
-    commands = [
-        [tools["clang"], "-Wall", "-Wextra", "-Werror", "-O2", f"-I{openssl / 'include'}",
-         str(vectors / "native_mlkem.c"), f"-L{openssl / 'lib'}", "-lcrypto", "-o", str(generated["native_mlkem"])],
-        [tools["clang"], "-O2", f"-I{mbedtls / 'include'}", str(inputs["ecc_secp384r1.c"]),
-         f"-L{mbedtls / 'lib'}", "-lmbedtls", "-lmbedx509", "-lmbedcrypto", "-o", str(generated["ecc_secp384r1.exe"])],
-        [sys.executable, str(vectors / "stage_mldsa.py"), str(inputs["test_dilithium.c"]),
-         str(ref / "test/test_dilithium.c")],
-        [tools["make"], "-C", str(ref), f"CC={tools['clang']}", "test/test_dilithium5"],
-        [sys.executable, str(vectors / "stage_sha256_wntz.py"), str(inputs["sha256_wntz_test_gen.py"]),
-         str(generated["sha256_wntz_test_gen.py"])],
-        [sys.executable, str(vectors / "check_native_mlkem.py"), str(adams), str(generated["native_mlkem"])],
-        [sys.executable, str(vectors / "check_native_mldsa.py"), str(adams), str(generated["test_dilithium5"])],
-    ]
+    commands = []
+    if not skip_pq_vectors:
+        ref = native / "dilithium-ref"
+        shutil.copytree(ref_source, ref)
+        (ref / "test/test_dilithium5").unlink(missing_ok=True)
+        generated.update({
+            "test_dilithium5": ref / "test/test_dilithium5",
+            "native_mlkem": native / "native_mlkem",
+        })
+        commands.append([
+            tools["clang"], "-Wall", "-Wextra", "-Werror", "-O2",
+            f"-I{roots['openssl@3'] / 'include'}", str(inputs["native_mlkem.c"]),
+            f"-L{roots['openssl@3'] / 'lib'}", "-lcrypto", "-o", str(generated["native_mlkem"]),
+        ])
+    commands.append([
+        tools["clang"], "-O2", f"-I{mbedtls / 'include'}", str(inputs["ecc_secp384r1.c"]),
+        f"-L{mbedtls / 'lib'}", "-lmbedtls", "-lmbedx509", "-lmbedcrypto",
+        "-o", str(generated["ecc_secp384r1.exe"]),
+    ])
+    if not skip_pq_vectors:
+        commands.extend([
+            [sys.executable, str(vectors / "stage_mldsa.py"), str(inputs["test_dilithium.c"]),
+             str(ref / "test/test_dilithium.c")],
+            [tools["make"], "-C", str(ref), f"CC={tools['clang']}", "test/test_dilithium5"],
+        ])
+    commands.append([
+        sys.executable, str(vectors / "stage_sha256_wntz.py"),
+        str(inputs["sha256_wntz_test_gen.py"]), str(generated["sha256_wntz_test_gen.py"]),
+    ])
+    if not skip_pq_vectors:
+        commands.extend([
+            [sys.executable, str(vectors / "check_native_mlkem.py"), str(adams), str(generated["native_mlkem"])],
+            [sys.executable, str(vectors / "check_native_mldsa.py"), str(adams), str(generated["test_dilithium5"])],
+        ])
     for index, command in enumerate(commands):
         log = native / f"step_{index}.log"
         if run_logged(command, native, env, log):
             raise RuntimeError(f"native vector preparation failed at step {index}; see {log}")
     files = {
         "ecc_secp384r1.exe": generated["ecc_secp384r1.exe"],
-        "test_dilithium5": generated["test_dilithium5"],
         "doe_test_gen.py": inputs["doe_test_gen.py"],
         "sha256_wntz_test_gen.py": generated["sha256_wntz_test_gen.py"],
-        "smoke_test_mldsa_vector.hex": inputs["smoke_test_mldsa_vector.hex"],
-        "native_mlkem": generated["native_mlkem"],
-        "random_test_ml_kem.py": vectors / "random_test_ml_kem.py",
     }
+    if not skip_pq_vectors:
+        files.update({
+            "test_dilithium5": generated["test_dilithium5"],
+            "smoke_test_mldsa_vector.hex": inputs["smoke_test_mldsa_vector.hex"],
+            "native_mlkem": generated["native_mlkem"],
+            "random_test_ml_kem.py": inputs["random_test_ml_kem.py"],
+        })
     return files, {name: sha256(path) for name, path in files.items()}, commands, tools
 
 
-def stage_native_vectors(test_output, files, hashes, tools, env):
-    (test_output / "ml-kem/tv").mkdir(parents=True)
+def stage_native_vectors(test_output, files, hashes, tools, env, skip_pq_vectors=False):
+    outputs = native_vector_outputs(skip_pq_vectors)
+    if "ml-kem/native_mlkem" in outputs:
+        (test_output / "ml-kem/tv").mkdir(parents=True)
     bin_dir = test_output / ".bin"
     bin_dir.mkdir()
-    for relative, name in VECTOR_OUTPUTS.items():
+    for relative, name in outputs.items():
         target = test_output / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(files[name], target)
@@ -683,7 +720,7 @@ def stage_native_vectors(test_output, files, hashes, tools, env):
     for alias in ("openssl", "xxd"):
         (bin_dir / alias).symlink_to(tools[alias])
     env["PATH"] = f"{bin_dir}{os.pathsep}{env['PATH']}"
-    return {relative: hashes[name] for relative, name in VECTOR_OUTPUTS.items()}
+    return {relative: hashes[name] for relative, name in outputs.items()}
 
 
 def fulltop_compile_command(iverilog, profile, binary, checker_enabled):
@@ -706,13 +743,13 @@ def main():
     parser.add_argument("--fast-boot-data-preload", action="store_true",
                         help="diagnostic only: preload verified .data/.bss and skip CRT0 copy/clear loops")
     parser.add_argument("--first-aes-case-diagnostic", action="store_true",
-                        help="diagnostic only: run one AES/DMA case and skip unrelated MLDSA/MLKEM vector generation")
+                        help="diagnostic only: run one AES/DMA case and skip MLDSA/MLKEM helper vectors")
     parser.add_argument("--limit-aes-cases", type=int, metavar="N",
                         help="diagnostic only: run the first N cases of the short AES/DMA firmware suite")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
-                        help="diagnostic only: skip unrelated MLDSA/MLKEM vector generation; keep all AES DMA cases")
+                        help="diagnostic only: skip native and testbench MLDSA/MLKEM vector generation; keep all AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
-                        help="diagnostic only: suppress low-priority firmware prints for supported DMA cases")
+                        help="diagnostic only: suppress low-priority prints; keep all AES DMA cases")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     parser.add_argument("--disable-bfm-checker", action="store_true",
@@ -809,7 +846,7 @@ def main():
         base_profile, profile, REPO, rtl, checker_overlay,
         reset_overlay, jtag_overlay, generator_overlay, services_overlay)
     vector_files, vector_hashes, vector_commands, vector_tools = prepare_native_vectors(
-        rtl, args.output, env
+        rtl, args.output, env, skip_pq_vectors
     )
     binary = args.output / "caliptra_top_tb.vvp"
     compile_command = fulltop_compile_command(
@@ -865,7 +902,9 @@ def main():
             test_output / f"{args.case}.map", test_output / f"{args.case}.dis",
         )
     simulation_image_sha256 = {name: sha256(test_output / name) for name in images}
-    staged_vector_hashes = stage_native_vectors(test_output, vector_files, vector_hashes, vector_tools, env)
+    staged_vector_hashes = stage_native_vectors(
+        test_output, vector_files, vector_hashes, vector_tools, env, skip_pq_vectors
+    )
     sim_command = [str(vvp), "-d", str(jtagdpi), "-n"]
     if trace_plugin:
         sim_command.extend(["-m", str(trace_plugin)])
