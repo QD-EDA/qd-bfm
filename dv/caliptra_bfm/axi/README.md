@@ -28,9 +28,9 @@ The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
 `RRESP` preserve the target's response code. Invalid aligned/burst/4KB profile
 requests are rejected before VALID is asserted.
 
-Run the two-beat USER/LOCK/stall test, response errors, timeout/reset recovery,
-read/write reset aborts, bad BID/RLAST fail-stop tests, and five-deep read/write
-queue tests with out-of-order responses using:
+Run the two-beat USER/LOCK/stall test, W-before-AW write completion, response
+errors, timeout/reset recovery, read/write reset aborts, bad BID/RLAST fail-stop
+tests, and five-deep read/write queue tests with out-of-order responses using:
 
 ```sh
 ./tests/run_master.sh

@@ -55,6 +55,13 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg [2:0] aw_delay = 2;
   reg [2:0] ar_delay = 2;
   reg write_pending = 0;
+  reg w_before_aw_mode = 0;
+  reg early_w_pending = 0;
+  reg [31:0] early_wdata;
+  reg [3:0] early_wstrb;
+  reg [31:0] early_wuser;
+  reg early_wlast;
+  reg w_before_aw_seen = 0;
   reg read_pending = 0;
   reg [18:0] write_addr = 0;
   reg [18:0] read_addr = 0;
@@ -83,7 +90,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg [1:0] next_resp;
 
   assign AWREADY = ARESETn && (aw_delay == 0);
-  assign WREADY = ARESETn && write_pending && (cycle_mod[0] == 1'b1);
+  assign WREADY = ARESETn &&
+    (w_before_aw_mode ? !early_w_pending : write_pending) &&
+    (cycle_mod[0] == 1'b1);
   assign ARREADY = ARESETn && (ar_delay == 0);
 
   always @(posedge ACLK)
@@ -96,6 +105,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
       aw_delay <= 2;
       ar_delay <= 2;
       write_pending <= 0; read_pending <= 0;
+      early_w_pending <= 0; w_before_aw_seen <= 0;
       BVALID <= 0; BUSER <= 0; BID <= 0; BRESP <= 0;
       RVALID <= 0; RUSER <= 0; RID <= 0; RDATA <= 0; RRESP <= 0; RLAST <= 0;
       write_count <= 0; read_count <= 0;
@@ -109,7 +119,6 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
 
       if (AWVALID && AWREADY) begin
         if (write_pending) $fatal(1, "test target received overlapping AW");
-        write_pending <= 1;
         write_addr <= AWADDR;
         write_len <= AWLEN;
         write_size <= AWSIZE;
@@ -118,25 +127,48 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         write_count <= 0;
         if (AWUSER !== 32'hca11_ab1e || AWLOCK !== 1'b1)
           $fatal(1, "master lost AWUSER or AWLOCK");
+        if (w_before_aw_mode && early_w_pending) begin
+          if (AWLEN !== 0 || !early_wlast)
+            $fatal(1, "W-before-AW probe expected one final data beat");
+          if (early_wuser !== 32'hd000_0000)
+            $fatal(1, "master lost early WUSER");
+          for (lane = 0; lane < 4; lane = lane + 1)
+            if (early_wstrb[lane]) mem[AWADDR[7:2]][8*lane +: 8] <= early_wdata[8*lane +: 8];
+          early_w_pending <= 0;
+          write_pending <= 0;
+          BID <= AWID;
+          BRESP <= 2'b00;
+          BUSER <= 32'hb000_0001;
+          BVALID <= 1;
+        end else write_pending <= 1;
       end
 
       if (WVALID && WREADY) begin
-        if (WLAST !== (write_count == write_len))
-          $fatal(1, "master WLAST disagrees with AWLEN");
-        if (write_burst == 2'b01)
-          beat_addr = write_addr + (write_count << write_size);
-        else beat_addr = write_addr;
-        for (lane = 0; lane < 4; lane = lane + 1)
-          if (WSTRB[lane]) mem[beat_addr[7:2]][8*lane +: 8] <= WDATA[8*lane +: 8];
-        if (WUSER !== (32'hd000_0000 + write_count))
-          $fatal(1, "master lost per-beat WUSER");
-        if (WLAST) begin
-          write_pending <= 0;
-          BID <= inject_bad_bid ? write_id + 1'b1 : write_id;
-          BRESP <= inject_error ? 2'b10 : 2'b00;
-          BUSER <= 32'hb000_0001;
-          if (!suppress_write_response) BVALID <= 1;
-        end else write_count <= write_count + 1'b1;
+        if (AWVALID && !AWREADY) w_before_aw_seen <= 1;
+        if (w_before_aw_mode && !write_pending) begin
+          early_w_pending <= 1;
+          early_wdata <= WDATA;
+          early_wstrb <= WSTRB;
+          early_wuser <= WUSER;
+          early_wlast <= WLAST;
+        end else begin
+          if (WLAST !== (write_count == write_len))
+            $fatal(1, "master WLAST disagrees with AWLEN");
+          if (write_burst == 2'b01)
+            beat_addr = write_addr + (write_count << write_size);
+          else beat_addr = write_addr;
+          for (lane = 0; lane < 4; lane = lane + 1)
+            if (WSTRB[lane]) mem[beat_addr[7:2]][8*lane +: 8] <= WDATA[8*lane +: 8];
+          if (WUSER !== (32'hd000_0000 + write_count))
+            $fatal(1, "master lost per-beat WUSER");
+          if (WLAST) begin
+            write_pending <= 0;
+            BID <= inject_bad_bid ? write_id + 1'b1 : write_id;
+            BRESP <= inject_error ? 2'b10 : 2'b00;
+            BUSER <= 32'hb000_0001;
+            if (!suppress_write_response) BVALID <= 1;
+          end else write_count <= write_count + 1'b1;
+        end
       end
       if (BVALID && BREADY) BVALID <= 0;
 
@@ -204,7 +236,24 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
     repeat (2) @(posedge ACLK);
     @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
 
-    if (test_case == "CONCURRENT") begin
+    if (test_case == "W_BEFORE_AW") begin
+      w_before_aw_mode = 1;
+      write_data = {480'b0, 32'h0123_4567};
+      write_strb = {60'b0, 4'hf};
+      write_user = {480'b0, 32'hd000_0000};
+      bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h2a, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "exclusive read before W-before-AW write failed");
+      bfm.write_burst(19'h40, 0, 2, 2'b01, 8'h2a, 32'hca11_ab1e, 1'b1,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && response == 0 && response_user == 32'hb000_0001,
+        "W-before-AW write did not complete successfully");
+      check(w_before_aw_seen, "target did not accept W before AW");
+      check(mem[16] == 32'h0123_4567, "W-before-AW payload was not written");
+      if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
+      $display("PASS: AXI manager completes a write when W is accepted before AW");
+      $finish;
+    end else if (test_case == "CONCURRENT") begin
       mem[18] = 32'h8765_4321;
       write_data = {480'b0, 32'hdead_beef};
       write_strb = {60'b0, 4'hf};
