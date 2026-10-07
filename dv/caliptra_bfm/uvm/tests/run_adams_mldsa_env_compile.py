@@ -168,11 +168,16 @@ def main() -> int:
                 "  import ahb_lite_caliptra_uvm_pkg::*;\n"
                 "  import mldsa_env_pkg::*;\n"
                 "  `include \"uvm_macros.svh\"\n"
-                "  class adams_mldsa_version_read_sequence extends uvm_sequence #(mvc_sequence_item_base);\n"
-                "    `uvm_object_utils(adams_mldsa_version_read_sequence)\n"
-                "    function new(string name = \"adams_mldsa_version_read_sequence\"); super.new(name); endfunction\n"
+                "  class adams_mldsa_seed_write_version_read_sequence extends uvm_sequence #(mvc_sequence_item_base);\n"
+                "    `uvm_object_utils(adams_mldsa_seed_write_version_read_sequence)\n"
+                "    function new(string name = \"adams_mldsa_seed_write_version_read_sequence\"); super.new(name); endfunction\n"
                 "    task body();\n"
-                "      ahb_lite_caliptra_mvc_transfer req = new(\"read_mldsa_version\");\n"
+                "      ahb_lite_caliptra_mvc_transfer req = new(\"write_mldsa_seed\");\n"
+                "      start_item(req); req.RnW = AHB_WRITE; req.address = 32'h58;\n"
+                "      req.size = AHB_MVC_WORD_SIZE; req.data.push_back(32'h1a2b3c4d); finish_item(req);\n"
+                "      if (req.resp.size() != 1 || req.resp[0] != AHB_OKAY)\n"
+                "        `uvm_fatal(\"MLDSA_AHB_WRITE\", \"generated 32-bit AHB seed write failed\")\n"
+                "      req = new(\"read_mldsa_version\");\n"
                 "      start_item(req); req.RnW = AHB_READ; req.address = 32'h8;\n"
                 "      req.size = AHB_MVC_WORD_SIZE; req.data.push_back(0); finish_item(req);\n"
                 "      if (req.resp.size() != 1 || req.resp[0] != AHB_OKAY || req.data[0] != 32'h302e322e)\n"
@@ -196,13 +201,13 @@ def main() -> int:
                 "      environment.set_config(configuration);\n"
                 "    endfunction\n"
                 "    task run_phase(uvm_phase phase);\n"
-                "      adams_mldsa_version_read_sequence read_seq;\n"
-                "      phase.raise_objection(this); read_seq = adams_mldsa_version_read_sequence::type_id::create(\"read_seq\");\n"
+                "      adams_mldsa_seed_write_version_read_sequence read_seq;\n"
+                "      phase.raise_objection(this); read_seq = adams_mldsa_seed_write_version_read_sequence::type_id::create(\"read_seq\");\n"
                 "      read_seq.start(environment.qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer);\n"
                 "      #1;\n"
                 "      if (environment.mldsa_sb.mismatch_count != 0)\n"
                 "        `uvm_fatal(\"MLDSA_SCOREBOARD\", \"generated scoreboard reported a mismatch\")\n"
-                "      $display(\"PASS: generated MLDSA environment read abr_top version through 32-bit AHB\");\n"
+                "      $display(\"PASS: generated MLDSA environment wrote seed and read abr_top version through 32-bit AHB\");\n"
                 "      phase.drop_objection(this);\n"
                 "    endtask\n"
                 "  endclass\n"
@@ -290,7 +295,7 @@ def main() -> int:
             print(result.stderr, end="", file=sys.stderr)
             if (
                 result.returncode != 0
-                or "PASS: generated MLDSA environment read abr_top version through 32-bit AHB" not in result.stdout
+                or "PASS: generated MLDSA environment wrote seed and read abr_top version through 32-bit AHB" not in result.stdout
                 or re.search(r"UVM_(ERROR|FATAL) :\s*[1-9]", result.stdout)
             ):
                 return result.returncode or 1

@@ -166,14 +166,15 @@ adjustments only in a disposable overlay. The package-only guarded run exited
 against the 60% floor.
 
 With `--actual-rtl-smoke`, the runner also compiles the generated `hdl_top` and
-pinned `abr_top` RTL, starts the real generated environment, and reads
-`MLDSA_VERSION` at address `0x8` over 32-bit AHB. It returned `0x302e322e`,
-matching `MLDSA_CORE_VERSION[31:0]`, with zero UVM errors, fatals, or scoreboard
+pinned `abr_top` RTL, starts the real generated environment, writes one seed
+word at `0x58`, then reads `MLDSA_VERSION` at address `0x8` over 32-bit AHB.
+Both transfers returned `AHB_OKAY`; the read returned `0x302e322e`, matching
+`MLDSA_CORE_VERSION[31:0]`. UVM reported zero errors, fatals, or scoreboard
 mismatches. The generated predictor and scoreboard skip version-register
-comparisons, so this proves the read path and a clean scoreboard run; it does
-not qualify MLDSA signing/KATs, write/error cases, or full generated-top DV.
+comparisons, so this proves the AHB write/read path and a clean scoreboard run;
+it does not qualify MLDSA signing/KATs, error cases, or full generated-top DV.
 The guarded runtime exited 0 with one expected QVIP covergroup warning and
-74% minimum free memory against the 60% floor.
+75% minimum free memory against the 60% floor.
 
 The disposable runtime overlay sets the ten generated RAL maps to little
 endian, binds predictor/scoreboard transaction declarations to the clean-room
@@ -193,5 +194,5 @@ The run used Icarus 13.0 development build `9bd5082b8` with UVM support.
 SHA-256 for the runner:
 
 ```text
-4f2e77178e469d108c0a568f01c9aa1d5af59c0ce878bb3c156c8cb77635f3ad  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
+e4a2ba46c21b2204bb33c1c71f421018c3afb8d0b70dc1f714fa3a471645401b  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```

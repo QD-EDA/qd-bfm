@@ -389,12 +389,13 @@ source references `trans_ap`. Those real keys are provided here, so no fake
 `trans_ap` stream is needed. The checked-in Adams Bridge environment package,
 predictor, scoreboard, and RAL package now compile with the clean-room provider
 through `tests/run_adams_mldsa_env_compile.py`. Its actual generated HDL top
-also passes a focused runtime against `abr_top`: the generated environment reads
-`MLDSA_VERSION` at address `0x8` and receives `0x302e322e` over 32-bit AHB with
-zero UVM errors, fatals, or scoreboard mismatches. The generated predictor and
-scoreboard intentionally skip version-register comparisons, so this probe
-checks the RTL response and absence of unexpected mismatches; it does not
-qualify MLDSA signing, KAT, error-path, or full-top behavior. Its checked-in
+also passes a focused runtime against `abr_top`: the generated environment
+writes one seed word at `0x58`, then reads `MLDSA_VERSION` at `0x8` and receives
+`0x302e322e` over 32-bit AHB with zero UVM errors, fatals, or scoreboard
+mismatches. The generated predictor and scoreboard intentionally skip
+version-register comparisons, so this probe checks both AHB responses and the
+absence of unexpected mismatches; it does not qualify MLDSA signing, KAT,
+error-path, or full-top behavior. Its checked-in
 `qvip_ahb_lite_slave_params_pkg.sv` sets one master, one slave, 32-bit address,
 and 32-bit write/read data. Compile the clean-room provider with
 `+define+CALIPTRA_BFM_AHB_32BIT` for this environment; the default Caliptra
