@@ -155,25 +155,43 @@ SHA-256 for the updated profile smoke:
 edc96b1e2271bca273ad7b4a2dc41c8e9d9007a377ba369cde63eba304b8a1e0  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
 ```
 
-## Generated Adams Bridge MLDSA environment package compile (2026-10-06)
+## Generated Adams Bridge MLDSA environment compile and RTL smoke (2026-10-06)
 
 `tests/run_adams_mldsa_env_compile.py` compiles the pinned generated MLDSA
 configuration, predictor, scoreboard, environment, and RAL package against the
 clean-room provider at Adams Bridge commit
 `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. It makes Icarus-specific source
-adjustments only in a disposable include overlay. It does not compile the
-generated HDL top or run the predictor/scoreboard against `abr_top`, so that
-runtime remains unqualified. The guarded run exited 0 with one existing
-covergroup-stub warning and 69% minimum free memory against the 60% floor.
+adjustments only in a disposable overlay. The package-only guarded run exited
+0 with one existing covergroup-stub warning and 74% minimum free memory
+against the 60% floor.
+
+With `--actual-rtl-smoke`, the runner also compiles the generated `hdl_top` and
+pinned `abr_top` RTL, starts the real generated environment, and reads
+`MLDSA_VERSION` at address `0x8` over 32-bit AHB. It returned `0x302e322e`,
+matching `MLDSA_CORE_VERSION[31:0]`, with zero UVM errors, fatals, or scoreboard
+mismatches. The generated predictor and scoreboard skip version-register
+comparisons, so this proves the read path and a clean scoreboard run; it does
+not qualify MLDSA signing/KATs, write/error cases, or full generated-top DV.
+The guarded runtime exited 0 with one expected QVIP covergroup warning and
+74% minimum free memory against the 60% floor.
+
+The disposable runtime overlay sets the ten generated RAL maps to little
+endian, binds predictor/scoreboard transaction declarations to the clean-room
+generated-item alias, and constructs the predictor's parameterized output item
+directly. These Icarus compatibility edits leave the pinned Adams Bridge
+checkout unchanged.
 
 ```sh
 python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
   --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN"
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root "$ADAMSBRIDGE_ROOT" --iverilog "$IVERILOG_BIN" \
+  --vvp "$VVP_BIN" --actual-rtl-smoke
 ```
 
 The run used Icarus 13.0 development build `9bd5082b8` with UVM support.
 SHA-256 for the runner:
 
 ```text
-188efa2ebe0fbccac2e4b4ee2cb37961a65816fe4777d65fe3e4baed48063bda  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
+4f2e77178e469d108c0a568f01c9aa1d5af59c0ce878bb3c156c8cb77635f3ad  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
 ```
