@@ -249,6 +249,10 @@ consumer counts must match, and output data is checked in SRAM, the mailbox
 request stream, or the component data register. Each route observed randomized
 target stalls; see the
 [`generated FIFO-source route evidence`](../../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md).
+The AXI2AXI FIFO-source lane also passes generated transfers of 1, 4, 5, 16,
+64, 65, 255, and 256 words through the real DUT. Each run checks FIFO drain,
+destination SRAM data, and randomized target stalls; see the
+[`FIFO-source size-sweep evidence`](../../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
 Other generated FIFO modes and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five

@@ -84,6 +84,7 @@ def main() -> int:
         bit fifo_source_axi2axi_case;
         bit fifo_source_axi2mbox_case;
         bit fifo_source_axi2ahb_case;
+        bit fifo_source_size_sweep_case;
         bit randomize_success;
         if ($test$plusargs("CALIPTRA_BFM_DUT_REPLAY")) begin
           large_fifo_case = (i == 0);
@@ -98,10 +99,23 @@ def main() -> int:
           fifo_source_axi2axi_case = (i == 32);
           fifo_source_axi2mbox_case = (i == 33);
           fifo_source_axi2ahb_case = (i == 34);
+          fifo_source_size_sweep_case = (i >= 35 && i <= 42);
           if (large_fifo_case)
             replay_size = 65536;
           else if (max_sram_case)
             replay_size = 16384;
+          else if (fifo_source_size_sweep_case) begin
+            case (i - 35)
+              0: replay_size = 1;
+              1: replay_size = 4;
+              2: replay_size = 5;
+              3: replay_size = 16;
+              4: replay_size = 64;
+              5: replay_size = 65;
+              6: replay_size = 255;
+              default: replay_size = 256;
+            endcase
+          end
           else if (sram_fixed_read_case || sram_fixed_write_case ||
                    sram_fixed_both_case || fifo_destination_case || fifo_block_size_case ||
                    axi2mbox_recovery_case || axi2ahb_recovery_case ||
@@ -244,6 +258,21 @@ def main() -> int:
               dst_offset == (fifo_source_axi2mbox_case ? 32'h0000_1000 :
                              32'h0000_4000);
             };
+          end else if (fifo_source_size_sweep_case) begin
+            randomize_success = dma_gen.randomize() with {
+              dma_xfer_type == AXI2AXI;
+              src_is_fifo;
+              !dst_is_fifo;
+              use_rd_fixed;
+              !use_wr_fixed;
+              !inject_rst;
+              inject_rand_delays;
+              !test_block_size;
+              block_size == 0;
+              xfer_size == replay_size;
+              src_offset == 0;
+              dst_offset == 32'h0000_4000;
+            };
           end else begin
             randomize_success = dma_gen.randomize() with {
               dma_xfer_type inside {AHB2AXI, MBOX2AXI, AXI2AXI, AXI2MBOX, AXI2AHB};
@@ -292,7 +321,7 @@ def main() -> int:
                         "Qualify slam_dccm_ram and riscv_ecc32 against the harness top.",
                         "Add the Icarus-required numeric $fatal finish code.",
                         *(
-                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), the 16,384-word maximum checked SRAM payload, 65-word SRAM FIXED-read/FIXED-write/both-FIXED profiles, FIFO-source AXI2AXI/AXI2MBOX/AXI2AHB transfers, a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO case, and 65-word FIFO recovery cases on AXI2AXI (64 bytes), AXI2MBOX (128 bytes), and AXI2AHB (128 bytes)."]
+                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), the 16,384-word maximum checked SRAM payload, 65-word SRAM FIXED-read/FIXED-write/both-FIXED profiles, FIFO-source AXI2AXI/AXI2MBOX/AXI2AHB transfers and an AXI2AXI FIFO-source size sweep, a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO case, and 65-word FIFO recovery cases on AXI2AXI (64 bytes), AXI2MBOX (128 bytes), and AXI2AHB (128 bytes)."]
                             if args.dut_replay
                             else []
                         ),
