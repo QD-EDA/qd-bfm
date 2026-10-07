@@ -213,10 +213,18 @@ full suite.
 [`axi4_caliptra_monitor.sv`](axi4_caliptra_monitor.sv) emits a one-cycle pulse
 for every accepted AW, W, B, AR, and R beat. Each pulse accompanies a packed
 channel record holding ID, address/control, data/strobes, USER, response, and
-LAST fields where present. The module also exposes cumulative handshake
-counters and a cycle counter. It is a procedural analysis seam for a later
-UVM adapter; it does not yet publish UVM analysis transactions or group channel
-beats into complete higher-level transactions.
+LAST fields where present. Cumulative accepted counts are the denominators for
+burst and LOCK bins on AW/AR, response bins on B/R, and WSTRB bins on W; LAST
+counts are accepted asserted-LAST beats. `*_valid_cycles` counts rising-edge
+samples with VALID high, and `*_stall_cycles` is the subset with READY low.
+Accepted transfer cycles plus stall cycles equal valid cycles.
+Unknown-value bins are included for burst, LOCK, response, and strobe fields.
+`tests/run_subordinate.sh` checks these denominators and bins, including full,
+partial, and zero WSTRB, and prints a compact coverage summary. The module is a
+procedural analysis seam for a later UVM adapter; it does not yet publish UVM
+analysis transactions or group channel beats into complete higher-level
+transactions. The recorded run is in
+[`AXI coverage evidence`](../../../evidence/caliptra-bfm-axi-coverage-20261007/README.md).
 
 ## Completed transaction monitor
 

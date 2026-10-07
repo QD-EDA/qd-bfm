@@ -35,6 +35,26 @@ module tb_axi4_caliptra_memory_subordinate;
   wire [74:0] r_record;
   wire [63:0] cycle_count;
   wire [31:0] aw_count, w_count, b_count, ar_count, r_count;
+  wire [31:0] aw_valid_cycles, aw_stall_cycles;
+  wire [31:0] w_valid_cycles, w_stall_cycles;
+  wire [31:0] b_valid_cycles, b_stall_cycles;
+  wire [31:0] ar_valid_cycles, ar_stall_cycles;
+  wire [31:0] r_valid_cycles, r_stall_cycles;
+  wire [31:0] aw_burst_fixed_count, aw_burst_incr_count;
+  wire [31:0] aw_burst_wrap_count, aw_burst_reserved_count;
+  wire [31:0] aw_burst_unknown_count;
+  wire [31:0] aw_lock_clear_count, aw_lock_set_count, aw_lock_unknown_count;
+  wire [31:0] ar_burst_fixed_count, ar_burst_incr_count;
+  wire [31:0] ar_burst_wrap_count, ar_burst_reserved_count;
+  wire [31:0] ar_burst_unknown_count;
+  wire [31:0] ar_lock_clear_count, ar_lock_set_count, ar_lock_unknown_count;
+  wire [31:0] b_resp_okay_count, b_resp_exokay_count;
+  wire [31:0] b_resp_slverr_count, b_resp_decerr_count, b_resp_unknown_count;
+  wire [31:0] r_resp_okay_count, r_resp_exokay_count;
+  wire [31:0] r_resp_slverr_count, r_resp_decerr_count, r_resp_unknown_count;
+  wire [31:0] w_strb_full_count, w_strb_partial_count;
+  wire [31:0] w_strb_zero_count, w_strb_unknown_count;
+  wire [31:0] w_last_count, r_last_count;
   axi4_caliptra_monitor #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
     .USER_WIDTH(32)) monitor_inst (.*);
 
@@ -46,7 +66,7 @@ module tb_axi4_caliptra_memory_subordinate;
   reg [7:0] read_response;
 
   task automatic check(input condition, input [8*80-1:0] message);
-    if (!condition) $fatal(1, "%0s", message);
+    if (condition !== 1'b1) $fatal(1, "%0s", message);
   endtask
 
   initial begin
@@ -141,6 +161,98 @@ module tb_axi4_caliptra_memory_subordinate;
     check(success && response == 2'b01 && memory.word_at(4) == 32'h8888_7777 &&
       memory.word_at(5) == 32'h9999_aaaa,
       "multi-beat exclusive write did not return EXOKAY and update memory");
+
+    write_data = 0; write_data[31:0] = 32'h1122_3344;
+    write_strb = 0; write_strb[3:0] = 4'hf;
+    write_user = 0; write_user[31:0] = 32'hd000_0063;
+    manager.write_burst(19'h118, 0, 2, 2'b01, 8'h63, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && memory.word_at(6) == 32'h1122_3344,
+      "full-strobe write did not initialize the partial-strobe check word");
+    write_data[31:0] = 32'haabb_ccdd;
+    write_strb[3:0] = 4'b0011;
+    manager.write_burst(19'h118, 0, 2, 2'b01, 8'h64, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && memory.word_at(6) == 32'h1122_ccdd,
+      "partial-strobe write did not preserve inactive memory lanes");
+    write_data[31:0] = 32'hffff_ffff;
+    write_strb[3:0] = 4'b0000;
+    manager.write_burst(19'h118, 0, 2, 2'b01, 8'h65, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && memory.word_at(6) == 32'h1122_ccdd,
+      "zero-strobe write unexpectedly changed memory");
+
+    check(aw_burst_fixed_count + aw_burst_incr_count + aw_burst_wrap_count +
+      aw_burst_reserved_count + aw_burst_unknown_count == aw_count &&
+      aw_burst_fixed_count == 0 && aw_burst_incr_count == aw_count &&
+      aw_burst_wrap_count == 0 && aw_burst_reserved_count == 0 &&
+      aw_burst_unknown_count == 0 &&
+      aw_lock_clear_count + aw_lock_set_count + aw_lock_unknown_count == aw_count &&
+      aw_lock_clear_count == 5 && aw_lock_set_count == 3 &&
+      aw_lock_unknown_count == 0,
+      "write address coverage did not account for burst and exclusive bins");
+    check(ar_burst_fixed_count + ar_burst_incr_count + ar_burst_wrap_count +
+      ar_burst_reserved_count + ar_burst_unknown_count == ar_count &&
+      ar_burst_fixed_count == 0 && ar_burst_incr_count == ar_count &&
+      ar_burst_wrap_count == 0 && ar_burst_reserved_count == 0 &&
+      ar_burst_unknown_count == 0 &&
+      ar_lock_clear_count + ar_lock_set_count + ar_lock_unknown_count == ar_count &&
+      ar_lock_clear_count == 3 && ar_lock_set_count == 3 &&
+      ar_lock_unknown_count == 0,
+      "read address coverage did not account for burst and exclusive bins");
+    check(b_resp_okay_count + b_resp_exokay_count + b_resp_slverr_count +
+      b_resp_decerr_count + b_resp_unknown_count == b_count &&
+      b_resp_okay_count == 6 && b_resp_exokay_count == 2 &&
+      b_resp_slverr_count == 0 && b_resp_decerr_count == 0 &&
+      b_resp_unknown_count == 0,
+      "write response coverage did not match response denominator");
+    check(r_resp_okay_count + r_resp_exokay_count + r_resp_slverr_count +
+      r_resp_decerr_count + r_resp_unknown_count == r_count &&
+      r_resp_okay_count == 2 && r_resp_exokay_count == 4 &&
+      r_resp_slverr_count == 1 && r_resp_decerr_count == 1 &&
+      r_resp_unknown_count == 0,
+      "read response coverage did not match response-beat denominator");
+    check(w_strb_full_count + w_strb_partial_count + w_strb_zero_count +
+      w_strb_unknown_count == w_count && w_strb_full_count == 8 &&
+      w_strb_partial_count == 1 && w_strb_zero_count == 1 &&
+      w_strb_unknown_count == 0 && w_last_count == 8,
+      "write strobe coverage did not match beat denominator");
+    check(aw_valid_cycles == aw_count + aw_stall_cycles,
+      "AW VALID cycles do not equal accepted transfers plus stalls");
+    check(w_valid_cycles == w_count + w_stall_cycles,
+      "W VALID cycles do not equal accepted transfers plus stalls");
+    check(b_valid_cycles == b_count + b_stall_cycles,
+      "B VALID cycles do not equal accepted transfers plus stalls");
+    check(ar_valid_cycles == ar_count + ar_stall_cycles,
+      "AR VALID cycles do not equal accepted transfers plus stalls");
+    check(r_valid_cycles == r_count + r_stall_cycles,
+      "R VALID cycles do not equal accepted transfers plus stalls");
+    check(aw_stall_cycles != 0 && w_stall_cycles != 0 &&
+      ar_stall_cycles != 0,
+      "the directed backpressure profile missed a channel stall bin");
+    check(r_last_count == 6,
+      "read LAST coverage did not match the six completed read transactions");
+
+    $display("COVERAGE AXI address AW=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d AR=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d",
+      aw_count, aw_burst_fixed_count, aw_burst_incr_count, aw_burst_wrap_count,
+      aw_burst_reserved_count, aw_burst_unknown_count, aw_lock_clear_count,
+      aw_lock_set_count, aw_lock_unknown_count, ar_count, ar_burst_fixed_count,
+      ar_burst_incr_count, ar_burst_wrap_count, ar_burst_reserved_count,
+      ar_burst_unknown_count, ar_lock_clear_count, ar_lock_set_count,
+      ar_lock_unknown_count);
+    $display("COVERAGE AXI responses B=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d R=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d",
+      b_count, b_resp_okay_count, b_resp_exokay_count, b_resp_slverr_count,
+      b_resp_decerr_count, b_resp_unknown_count, r_count, r_resp_okay_count,
+      r_resp_exokay_count, r_resp_slverr_count, r_resp_decerr_count,
+      r_resp_unknown_count);
+    $display("COVERAGE AXI W beats=%0d WSTRB full/partial/zero/unknown=%0d/%0d/%0d/%0d WLAST=%0d",
+      w_count, w_strb_full_count, w_strb_partial_count, w_strb_zero_count,
+      w_strb_unknown_count, w_last_count);
+    $display("COVERAGE AXI VALID/stall cycles AW=%0d/%0d W=%0d/%0d B=%0d/%0d AR=%0d/%0d R=%0d/%0d",
+      aw_valid_cycles, aw_stall_cycles, w_valid_cycles, w_stall_cycles,
+      b_valid_cycles, b_stall_cycles, ar_valid_cycles, ar_stall_cycles,
+      r_valid_cycles, r_stall_cycles);
+    $display("COVERAGE AXI R beats=%0d RLAST=%0d", r_count, r_last_count);
 
     $display("PASS: AXI memory subordinate bursts, stalls, USER, errors, and exclusive access");
     $finish;
