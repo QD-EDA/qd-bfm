@@ -1,4 +1,11 @@
-# QD-BFM v0 scope
+# QD-BFM scope
+
+The initial one-protocol v0 plan below is historical. The active Caliptra goal
+is an open BFM stack for the AXI4, AHB-Lite, PV, mailbox, and generated-agent
+paths needed to move Caliptra forward on Icarus UVM. Do not stop at the v0
+protocol selection; keep the Caliptra and standalone simulator checks in scope.
+
+## Initial v0 plan
 
 Build one executable, protocol-aware open-source bus functional model useful to replace a missing Caliptra proprietary VIP dependency for bounded directed tests. It does not replace UVMF/QVIP/Avery verification or prove full DV qualification.
 
