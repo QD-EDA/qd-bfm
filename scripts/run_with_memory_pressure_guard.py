@@ -52,7 +52,7 @@ def libproc() -> ctypes.CDLL:
     return library
 
 
-def process_group_resident_bytes(group_id: int) -> int | None:
+def process_group_pids(group_id: int) -> list[int]:
     if sys.platform != "darwin":
         raise RuntimeError("process-group memory guard currently requires macOS")
     api = libproc()
@@ -69,13 +69,19 @@ def process_group_resident_bytes(group_id: int) -> int | None:
         if capacity >= MAX_GROUP_PROCESSES:
             raise RuntimeError(f"process group {group_id} exceeds the guard's PID limit")
         capacity = min(capacity * 2, MAX_GROUP_PROCESSES)
-    if count == 0:
+    return list(pids[:count])
+
+
+def process_group_resident_bytes(group_id: int) -> int | None:
+    api = libproc()
+    pids = process_group_pids(group_id)
+    if not pids:
         return None  # The group may exit between proc.poll() and this sample.
 
     # ponytail: summed RSS overcounts shared pages; use per-process footprints if this trips early.
     total = 0
     info = ctypes.create_string_buffer(256)
-    for pid in pids[:count]:
+    for pid in pids:
         ctypes.set_errno(0)
         size = api.proc_pidinfo(pid, PROC_PIDTASKINFO, 0, info, len(info))
         if size == 0:
@@ -94,21 +100,29 @@ def gibibytes(value: int) -> str:
     return f"{value / GIB:.2f} GiB"
 
 
+def signal_process_group(proc: subprocess.Popen, signum: int) -> None:
+    try:
+        os.killpg(proc.pid, signum)
+    except ProcessLookupError:
+        return
+    except PermissionError:
+        # The sandbox can deny killpg while allowing signals to these child PIDs.
+        for pid in process_group_pids(proc.pid):
+            try:
+                os.kill(pid, signum)
+            except ProcessLookupError:
+                pass
+
+
 def stop_process_group(proc: subprocess.Popen, reason: str) -> None:
     print(f"memory guard: stopping command ({reason})", file=sys.stderr)
-    try:
-        os.killpg(proc.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        pass
+    signal_process_group(proc, signal.SIGTERM)
     try:
         proc.wait(timeout=3)
     except subprocess.TimeoutExpired:
         pass
     # Ensure surviving grandchildren do not keep using memory after the leader exits.
-    try:
-        os.killpg(proc.pid, signal.SIGKILL)
-    except ProcessLookupError:
-        pass
+    signal_process_group(proc, signal.SIGKILL)
     if proc.poll() is None:
         proc.wait()
 
