@@ -131,32 +131,26 @@ module aaxi_monitor_wrapper #(
   generate
     if (INTERNAL_MASTER) begin : open_master
       axi4_caliptra_uvm_master_proxy #(
-        .ADDR_WIDTH(48),
+        .ADDR_WIDTH(aaxi_pkg::AAXI_ADDR_WIDTH),
         .DATA_WIDTH(BUS_DATA_WIDTH),
         .ID_WIDTH(ID_WIDTH),
         .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
       ) manager (
         .cmd_if(cmd_if), .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
-        .AWID(bus.AWID), .AWADDR(bus.AWADDR[47:0]), .AWLEN(bus.AWLEN),
+        .AWID(bus.AWID), .AWADDR(bus.AWADDR), .AWLEN(bus.AWLEN),
         .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST), .AWLOCK(bus.AWLOCK),
         .AWUSER(bus.AWUSER), .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
         .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
         .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
         .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
         .BVALID(bus.BVALID), .BREADY(bus.BREADY),
-        .ARID(bus.ARID), .ARADDR(bus.ARADDR[47:0]), .ARLEN(bus.ARLEN),
+        .ARID(bus.ARID), .ARADDR(bus.ARADDR), .ARLEN(bus.ARLEN),
         .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST), .ARLOCK(bus.ARLOCK),
         .ARUSER(bus.ARUSER), .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
         .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
         .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
         .RREADY(bus.RREADY)
       );
-
-      // Keep AAXI's upper address bits known for the 48-bit Caliptra command bridge.
-      if (aaxi_pkg::AAXI_ADDR_WIDTH > 48) begin : address_extension
-        assign bus.AWADDR[aaxi_pkg::AAXI_ADDR_WIDTH-1:48] = '0;
-        assign bus.ARADDR[aaxi_pkg::AAXI_ADDR_WIDTH-1:48] = '0;
-      end
 
     end
   endgenerate
