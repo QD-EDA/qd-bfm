@@ -74,7 +74,11 @@ module axi4_caliptra_checker #(
 
   reg [8:0] expected_beats [0:QUEUE_DEPTH-1];
   reg [ID_WIDTH-1:0] expected_id [0:QUEUE_DEPTH-1];
+  reg [ADDR_WIDTH-1:0] expected_addr [0:QUEUE_DEPTH-1];
+  reg [2:0] expected_size [0:QUEUE_DEPTH-1];
+  reg [1:0] expected_burst [0:QUEUE_DEPTH-1];
   reg [8:0] observed_beats [0:QUEUE_DEPTH-1];
+  reg [DATA_BYTES-1:0] observed_strobes [0:QUEUE_DEPTH-1][0:255];
   integer expected_read, expected_write, expected_count;
   integer observed_read, observed_write, observed_count;
   reg [8:0] write_beats_in_progress;
@@ -151,6 +155,13 @@ module axi4_caliptra_checker #(
 
   task automatic pair_write_data;
     reg [ID_WIDTH-1:0] id;
+    reg [DATA_BYTES-1:0] allowed_strobe;
+    reg [63:0] beat_address;
+    reg [63:0] beat_bytes;
+    reg [63:0] burst_span;
+    reg [63:0] wrap_base;
+    integer beat_index;
+    integer byte_index;
     begin
       while ((expected_count > 0) && (observed_count > 0)) begin
         if (expected_beats[expected_read] != observed_beats[observed_read])
@@ -159,6 +170,30 @@ module axi4_caliptra_checker #(
         id = expected_id[expected_read];
         if (!wr_active[id])
           $fatal(1, "AXI W burst has no active AW transaction");
+        beat_address = expected_addr[expected_read];
+        beat_bytes = 64'd1 << expected_size[expected_read];
+        burst_span = expected_beats[expected_read] * beat_bytes;
+        wrap_base = (beat_address / burst_span) * burst_span;
+        for (beat_index = 0; beat_index < expected_beats[expected_read]; beat_index = beat_index + 1) begin
+          allowed_strobe = '0;
+          for (byte_index = 0; byte_index < DATA_BYTES; byte_index = byte_index + 1) begin
+            if ((byte_index >= (beat_address % DATA_BYTES)) &&
+                (byte_index < ((beat_address % DATA_BYTES) + beat_bytes)))
+              allowed_strobe[byte_index] = 1'b1;
+          end
+          if ((observed_strobes[observed_read][beat_index] & ~allowed_strobe) !== {DATA_BYTES{1'b0}})
+            $fatal(1, "AXI WSTRB enables bytes outside the AW address/AWSIZE lanes");
+          case (expected_burst[expected_read])
+            2'b01: beat_address = beat_address + beat_bytes;
+            2'b10: begin
+              if ((beat_address + beat_bytes) >= (wrap_base + burst_span))
+                beat_address = wrap_base;
+              else
+                beat_address = beat_address + beat_bytes;
+            end
+            default: begin end
+          endcase
+        end
         wr_data_done[id] = 1'b1;
         expected_read = (expected_read + 1) % QUEUE_DEPTH;
         expected_count = expected_count - 1;
@@ -259,6 +294,9 @@ module axi4_caliptra_checker #(
         wr_exclusive[AWID] = AWLOCK;
         expected_beats[expected_write] = {1'b0, AWLEN} + 1'b1;
         expected_id[expected_write] = AWID;
+        expected_addr[expected_write] = AWADDR;
+        expected_size[expected_write] = AWSIZE;
+        expected_burst[expected_write] = AWBURST;
         expected_write = (expected_write + 1) % QUEUE_DEPTH;
         expected_count = expected_count + 1;
         if ((write_beats_in_progress >= expected_beats[expected_read]) &&
@@ -269,6 +307,12 @@ module axi4_caliptra_checker #(
 
       if (WVALID && WREADY) begin
         if (WLAST !== 1'b0 && WLAST !== 1'b1) $fatal(1, "AXI WLAST is unknown");
+        if ((^WSTRB) === 1'bx) $fatal(1, "AXI WSTRB is unknown");
+        if (write_beats_in_progress >= 256)
+          $fatal(1, "AXI W burst exceeds 256 beats");
+        if ((write_beats_in_progress == 0) && (observed_count == QUEUE_DEPTH))
+          $fatal(1, "AXI checker W queue overflow");
+        observed_strobes[observed_write][write_beats_in_progress] = WSTRB;
         write_beats_in_progress = write_beats_in_progress + 1'b1;
         if ((expected_count > 0) &&
             (write_beats_in_progress > expected_beats[expected_read]))

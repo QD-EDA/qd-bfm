@@ -15,6 +15,9 @@ trap 'rm -f "$out" "$log"' EXIT
 "$VVP_BIN" "$out"
 "$VVP_BIN" "$out" +CASE=GOOD_REORDER
 "$VVP_BIN" "$out" +CASE=GOOD_EXCLUSIVE
+"$VVP_BIN" "$out" +CASE=GOOD_NARROW_INCR
+"$VVP_BIN" "$out" +CASE=GOOD_NARROW_FIXED
+"$VVP_BIN" "$out" +CASE=GOOD_NARROW_WRAP
 
 for entry in \
   'BAD_AW_STABILITY:AW payload changed' \
@@ -22,6 +25,8 @@ for entry in \
   'BAD_WLAST:AXI W burst has' \
   'BAD_NO_WLAST:WLAST missing on final' \
   'BAD_RLAST:AXI RLAST does not match' \
+  'BAD_WSTRB:WSTRB enables bytes outside' \
+  'BAD_X_WSTRB:WSTRB is unknown' \
   'BAD_4KB:crosses a 4KB boundary' \
   'BAD_BID:B response ID has no completed' \
   'BAD_RID:R response ID has no active' \
@@ -57,4 +62,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted W-before-AW, cross-ID reordering, and legal exclusives; rejected twenty-eight injected protocol violations\n'
+printf 'PASS: AXI checker accepted reordered, exclusive, and narrow transfers; rejected thirty injected protocol violations\n'

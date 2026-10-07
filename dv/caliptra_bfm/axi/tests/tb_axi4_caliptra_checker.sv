@@ -128,7 +128,45 @@ module tb_axi4_caliptra_checker;
     repeat (2) step();
     @(negedge ACLK); ARESETn = 1;
 
-    if (test_case == "BAD_AW_STABILITY") begin
+    if (test_case == "GOOD_NARROW_INCR") begin
+      AWSIZE = 1;
+      AWBURST = 2'b01;
+      send_aw(8'h21, 19'h102, 1);
+      WSTRB = 4'b1100;
+      send_w(32'h1111, 0);
+      WSTRB = 4'b0011;
+      send_w(32'h2222, 1);
+      send_b(8'h21);
+    end else if (test_case == "GOOD_NARROW_FIXED") begin
+      AWSIZE = 1;
+      AWBURST = 2'b00;
+      send_aw(8'h22, 19'h102, 1);
+      WSTRB = 4'b1100;
+      send_w(32'h3333, 0);
+      send_w(32'h4444, 1);
+      send_b(8'h22);
+    end else if (test_case == "GOOD_NARROW_WRAP") begin
+      AWSIZE = 1;
+      AWBURST = 2'b10;
+      send_aw(8'h23, 19'h102, 3);
+      WSTRB = 4'b1100;
+      send_w(32'h5555, 0);
+      WSTRB = 4'b0011;
+      send_w(32'h6666, 0);
+      WSTRB = 4'b1100;
+      send_w(32'h7777, 0);
+      WSTRB = 4'b0011;
+      send_w(32'h8888, 1);
+      send_b(8'h23);
+    end else if (test_case == "BAD_WSTRB") begin
+      AWSIZE = 1;
+      WSTRB = 4'b0100;
+      send_aw(8'h24, 19'h100, 0);
+      send_w(32'h9999, 1);
+    end else if (test_case == "BAD_X_WSTRB") begin
+      WSTRB = 4'bx001;
+      send_w(32'haaaa, 1);
+    end else if (test_case == "BAD_AW_STABILITY") begin
       AWVALID = 1; AWREADY = 0; AWADDR = 19'h100; AWUSER = 32'h1;
       step();
       @(negedge ACLK); AWADDR = 19'h104;
@@ -281,7 +319,9 @@ module tb_axi4_caliptra_checker;
       send_r(8'h22, 1, 1);
     end
 
-    if (test_case != "GOOD" && test_case != "GOOD_REORDER" && test_case != "GOOD_EXCLUSIVE")
+    if (test_case != "GOOD" && test_case != "GOOD_REORDER" && test_case != "GOOD_EXCLUSIVE" &&
+        test_case != "GOOD_NARROW_INCR" && test_case != "GOOD_NARROW_FIXED" &&
+        test_case != "GOOD_NARROW_WRAP")
       $fatal(1, "Expected injected checker failure for %0s", test_case);
     dut.check_idle();
     $display("PASS: Caliptra AXI checker accepts valid traffic case=%0s", test_case);
