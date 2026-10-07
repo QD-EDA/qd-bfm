@@ -47,6 +47,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
 
   logic clk = 0;
   logic rst_n = 0;
+  logic reset_abort_stall_b = 0;
+  bit reset_abort_aw_accepted;
+  bit reset_abort_wlast_accepted;
+  integer reset_abort_cycles;
+  integer reset_abort_write_words;
   logic enable_random_stalls = 0;
   wire [9:0] random_stall;
   integer randomized_stall_cycles = 0;
@@ -277,7 +282,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     .recovery_threshold_words(32'd2), .recovery_block_words(32'd8),
     .inject_error(inject_error),
     .stall_sram_aw(random_stall[0]), .stall_sram_w(random_stall[1]),
-    .stall_sram_b(random_stall[2]), .stall_sram_ar(random_stall[3]),
+    .stall_sram_b(reset_abort_stall_b || random_stall[2]), .stall_sram_ar(random_stall[3]),
     .stall_sram_r(random_stall[4]), .stall_fifo_aw(random_stall[5]),
     .stall_fifo_w(random_stall[6]), .stall_fifo_b(random_stall[7]),
     .stall_fifo_ar(random_stall[8]), .stall_fifo_r(random_stall[9]),
@@ -500,16 +505,23 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         fork
           begin
             wait (reset_abort_done);
+            if (env.scoreboard.write_count != 0)
+              `uvm_fatal("DMA_TOP_RESET_RECORD", "Reset-aborted write was published as a completed transaction")
+            env.scoreboard.read_count = 0;
+            env.scoreboard.read_word_offset = 0;
+            env.scoreboard.write_word_offset = 0;
+            wait (run_done && env.scoreboard.read_count == 2 &&
+                  env.scoreboard.write_count == 2 &&
+                  env.scoreboard.read_word_offset == WORD_COUNT &&
+                  env.scoreboard.write_word_offset == WORD_COUNT);
           end
           begin
             #100000;
-            `uvm_fatal("DMA_TOP_RESET_TIMEOUT", "Timed out waiting for reset-abort replay")
+            `uvm_fatal("DMA_TOP_RESET_TIMEOUT", "Timed out waiting for reset-abort recovery transfer")
           end
         join_any
         disable fork;
-        if (env.scoreboard.write_count != 0)
-          `uvm_fatal("DMA_TOP_RESET_RECORD", "Reset-aborted write was published as a completed transaction")
-        $display("PASS: actual Caliptra axi_dma_top aborted an accepted AXI write on reset and the target cleared its pending state");
+        $display("PASS: actual Caliptra axi_dma_top reset an accepted write held before B and recovered for a post-reset DMA burst");
         phase.drop_objection(this);
         return;
       end
@@ -681,6 +693,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     integer record_payload_word_count;
     integer record_cursor;
     integer record_index;
+    logic [31:0] start_control;
     integer poll;
     integer dma_poll_limit;
     integer word_index;
@@ -998,10 +1011,37 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       recovery_emulation = 1'b1;
       wait (recovery_data_avail === 1'b1);
     end
+    start_control = mailbox_case ? 32'h0001_0001 :
+                    mailbox_read_case ? 32'h0100_0001 :
+                    ahb2axi_case ? 32'h0200_0001 :
+                    axi2ahb_case ? 32'h0002_0001 :
+                    (32'h0303_0001 |
+                     (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
+                     (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0));
     if ($test$plusargs("RESET_ABORT")) begin
+      reset_abort_stall_b = 1'b1;
+      reset_abort_aw_accepted = 1'b0;
+      reset_abort_wlast_accepted = 1'b0;
+      reset_abort_write_words = 0;
       fork
         begin
-          wait (m_axi_if.awvalid && m_axi_if.awready);
+          for (reset_abort_cycles = 0;
+               reset_abort_cycles < 2048 &&
+               (!reset_abort_aw_accepted || !reset_abort_wlast_accepted);
+               reset_abort_cycles = reset_abort_cycles + 1) begin
+            @(posedge clk);
+            if (m_axi_if.awvalid && m_axi_if.awready && !reset_abort_aw_accepted) begin
+              reset_abort_aw_accepted = 1'b1;
+              reset_abort_write_words = int'(m_axi_if.awlen) + 1;
+            end
+            if (m_axi_if.wvalid && m_axi_if.wready && m_axi_if.wlast)
+              reset_abort_wlast_accepted = 1'b1;
+          end
+          if (!reset_abort_aw_accepted || !reset_abort_wlast_accepted)
+            $fatal(1, "Timed out waiting for an accepted AW and final W beat before reset");
+          @(negedge clk);
+          if (m_axi_if.bvalid !== 1'b0 || dma_target.bfm.i_sram.b_count == 0)
+            $fatal(1, "Reset-abort did not hold a pending B response before reset");
           @(negedge clk); rst_n = 1'b0;
           repeat (2) @(posedge clk);
           @(negedge clk); rst_n = 1'b1;
@@ -1017,24 +1057,30 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               dma_target.bfm.i_sram.b_count != 0 ||
               dma_target.bfm.i_sram.rd_count != 0)
             $fatal(1, "DMA target retained queue state after reset");
-          for (int word = 0; word < active_word_count; word++)
-            if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== 32'b0)
-              $fatal(1, "Reset-aborted DMA wrote destination word %0d", word);
+          for (int word = 0; word < active_word_count; word++) begin
+            if (word < reset_abort_write_words) begin
+              if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== expected_payload[word])
+                $fatal(1, "Accepted reset-abort write lost destination word %0d", word);
+            end else if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== 32'b0) begin
+              $fatal(1, "Reset-aborted DMA wrote beyond its accepted first burst at word %0d", word);
+            end
+          end
+          reset_abort_stall_b = 1'b0;
           reset_abort_done = 1'b1;
         end
       join_none
     end
-    write_reg(12'h008, mailbox_case ? 32'h0001_0001 :
-              mailbox_read_case ? 32'h0100_0001 :
-              ahb2axi_case ? 32'h0200_0001 :
-              axi2ahb_case ? 32'h0002_0001 :
-              (32'h0303_0001 |
-               (scenario.use_rd_fixed ? 32'h0010_0000 : 32'b0) |
-               (scenario.use_wr_fixed ? 32'h1000_0000 : 32'b0)));
+    write_reg(12'h008, start_control);
 
     if ($test$plusargs("RESET_ABORT")) begin
       wait (reset_abort_done);
-      disable run_dma_profile;
+      write_reg(12'h014, SRC_ADDR[31:0]);
+      write_reg(12'h018, {24'b0, SRC_ADDR[39:32]});
+      write_reg(12'h01c, DST_ADDR[31:0]);
+      write_reg(12'h020, {24'b0, DST_ADDR[39:32]});
+      write_reg(12'h028, 32'(scenario.block_size));
+      write_reg(12'h024, 32'(active_word_count * 4));
+      write_reg(12'h008, start_control);
     end
 
     if (ahb2axi_case)

@@ -167,10 +167,10 @@ per-request address, metadata, and payload checks. AHB2AXI transfers 65 words
 through the component `WRITE_DATA` register; AXI2AHB drains 65 words through
 `READ_DATA`. Neither lane instantiates an AHB bus. One generated 65-word
 SRAM-to-FIFO record also checks five fixed write bursts with randomized target
-stalls; other generated sizes, FIFO modes, reset injection, and block-size
-values remain unqualified. The separate directed SRAM-to-FIFO test continues to check 65
-payload words across five fixed write bursts while the target applies weighted
-random channel stalls.
+stalls; other generated sizes, FIFO modes, firmware-triggered reset injection,
+and block-size values remain unqualified. The separate directed SRAM-to-FIFO
+test continues to check 65 payload words across five fixed write bursts while
+the target applies weighted random channel stalls.
 The standalone
 generator-to-recovery-sequencer test is recorded in
 [`evidence/caliptra-bfm-dma-generator-20261006`](../../../evidence/caliptra-bfm-dma-generator-20261006/README.md),

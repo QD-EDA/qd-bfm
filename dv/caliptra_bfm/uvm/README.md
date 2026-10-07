@@ -195,12 +195,15 @@ checks five fixed FIFO reads, five incrementing SRAM writes, and end-to-end
 payload equality. Icarus rejected this recovery tuple under the pinned class
 constraints, so this one tuple is directed rather than randomized. This
 is focused DMA-block integration, not a full Caliptra top or firmware test.
-The same runner's `+RESET_ABORT` profile asserts reset after the real DMA DUT
-accepts AW and before it can send W; it checks that no write completes, target
-queues clear, destination memory stays unchanged, and all AXI VALID signals
-remain low after reset release. This block-level reset test does not run
-Caliptra's firmware-triggered warm-reset service.
-The full guarded run is recorded in
+The runner's `+RESET_ABORT` profile holds B and waits until the real DMA DUT
+accepts AW and the final W beat before reset. It checks the pending B is
+discarded, target queues clear, only the accepted first-burst data remains in
+SRAM, and the UVM monitor publishes no aborted write. It then reprograms the
+DUT and checks a complete 65-word transfer after reset. Run this focused case
+with `tests/run_caliptra_axi_dma_top_uvm_bfm.sh --reset-abort-only`. This
+block-level reset test does not run Caliptra's firmware-triggered warm-reset
+service.
+The reset run is recorded in
 [`DMA reset-abort evidence`](../../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
 The current generated-DUT run instantiates Caliptra's actual testcase
 generator, selects each of 27 DCCM records in a separate simulation, checks the
@@ -211,8 +214,8 @@ types, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
 case with randomized delays, and a 65-word FIFO recovery case with a generated
 64-byte block. The maximum stream checks all destination words and drains the
 FIFO; recovery checks five fixed reads, five SRAM writes, and end-to-end data.
-Other generated FIFO modes, reset injection, and remaining block sizes remain
-unqualified. Directed
+Other generated FIFO modes, firmware-triggered reset injection, and remaining
+block sizes remain unqualified. Directed
 65-word cases now cover all five
 DMA routes through the real DUT. AXI2MBOX and MBOX2AXI apply one-cycle mailbox
 backpressure and check request addresses and payload data. AHB2AXI enters words

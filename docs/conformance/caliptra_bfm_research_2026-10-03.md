@@ -824,8 +824,8 @@ flag. For the maximum case, the BFM supplies FIFO data, and the UVM scoreboard
 checks the complete destination stream. Replay distribution: AHB2AXI (2),
 MBOX2AXI (6), AXI2AXI (5), AXI2MBOX (5), and AXI2AHB (7). One short record
 applied the generated delay flag and observed five target-stall cycles. Other
-generated FIFO, reset, and block-size modes, firmware, and full-top execution
-remain unqualified.
+generated FIFO, firmware-triggered reset, and block-size modes, firmware, and
+full-top execution remain unqualified.
 Separate directed AXI2MBOX and MBOX2AXI cases now
 transfer 65 words through the same DUT. The mailbox endpoint applies one-cycle
 backpressure and checks request addresses, metadata, and data; the SRAM target

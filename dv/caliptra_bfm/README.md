@@ -291,8 +291,12 @@ fixed-read FIFO-to-SRAM stream. It also replays a 65-word fixed-write SRAM-to-
 FIFO case with randomized delays and a 65-word FIFO recovery case with a
 generated 64-byte block. Payloads and route-valid offsets remain per-record
 randomized, as does Caliptra's delay flag; the maximum stream drains the FIFO
-and checks all destination words. Other generated FIFO modes, reset injection,
-remaining block sizes, and firmware remain open.
+and checks all destination words. The actual DMA DUT reset-abort profile now
+holds B after AW and the final W beat, resets the DUT and target, then verifies
+a complete post-reset 65-word transfer. See
+[`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
+Other generated FIFO modes, firmware-triggered reset injection, remaining
+block sizes, and firmware remain open.
 Caliptra's `inject_rst` metadata is consumed by `rand_test_dma.c`, which sends
 stdout-control request `0xEE`; `caliptra_top_tb_services.sv` turns that request
 into a delayed warm reset. The focused DMA replay does not run that firmware or

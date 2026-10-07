@@ -44,8 +44,8 @@ fixed-write SRAM-to-FIFO record, and a 65-word FIFO recovery record with a
 64-byte generated block. Short records retain per-record randomized payloads,
 route-valid offsets, and Caliptra's randomized delay flag. One record observed
 five target-stall cycles; the generated FIFO-destination record observed 160.
-Other generated FIFO modes, reset injection, and other block sizes remain
-unqualified. Directed DUT runs
+Other generated FIFO modes, firmware-triggered reset injection, and other
+block sizes remain unqualified. Directed DUT runs
 cover all five named DMA routes in a directed/constrained 65-word profile:
 AXI2MBOX and MBOX2AXI with one-cycle mailbox backpressure, AHB2AXI through the
 component `WRITE_DATA` register, and AXI2AHB through `READ_DATA`. The AHB lanes
@@ -657,8 +657,8 @@ with a 64-byte generated block. Short records retain per-record payloads,
 route-valid offsets, and the generated delay flag. The maximum stream
 validates every destination word and drains the FIFO; FIFO destination checks
 all queued words and stalls; recovery validates five generated block-sized
-chunks. Other generated FIFO modes, reset injection, and other block sizes
-remain unqualified.
+chunks. Other generated FIFO modes, firmware-triggered reset injection, and
+other block sizes remain unqualified.
 The AHB routes use component `WRITE_DATA`
 and `READ_DATA` registers, not an AHB bus. A separate SRAM-to-FIFO profile
 checks fixed write bursts, weighted channel stalls, and queued words. Default

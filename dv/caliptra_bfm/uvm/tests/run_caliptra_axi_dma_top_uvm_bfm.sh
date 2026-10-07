@@ -13,6 +13,18 @@ out="$tmpdir/caliptra_axi_dma_top_uvm_bfm.vvp"
 log="$tmpdir/caliptra_axi_dma_top_uvm_bfm.log"
 trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
+reset_abort_only=0
+if [ "$#" -gt 1 ]; then
+  echo "usage: $0 [--reset-abort-only]" >&2
+  exit 2
+fi
+if [ "$#" -eq 1 ]; then
+  if [ "$1" != "--reset-abort-only" ]; then
+    echo "usage: $0 [--reset-abort-only]" >&2
+    exit 2
+  fi
+  reset_abort_only=1
+fi
 
 # Icarus requires the numeric finish argument for this otherwise unchanged
 # Apache-2.0 Caliptra randomizer class.
@@ -79,12 +91,21 @@ run_case() {
   fi
 }
 
-run_case success
-run_case reset-abort +RESET_ABORT
-if ! grep -Fq 'PASS: actual Caliptra axi_dma_top aborted an accepted AXI write on reset and the target cleared its pending state' "$log"; then
-  echo "Caliptra AXI DMA top did not complete the reset-abort profile" >&2
-  exit 1
+run_reset_abort_case() {
+  run_case reset-abort +RESET_ABORT
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top reset an accepted write held before B and recovered for a post-reset DMA burst' "$log"; then
+    echo "Caliptra AXI DMA top did not complete the reset-abort profile" >&2
+    exit 1
+  fi
+}
+
+if [ "$reset_abort_only" -eq 1 ]; then
+  run_reset_abort_case
+  exit 0
 fi
+
+run_case success
+run_reset_abort_case
 run_case injected-error +INJECT_ERROR
 run_case fifo-recovery +FIFO_RECOVERY
 run_case axi2mbox +AXI2MBOX_CASE
