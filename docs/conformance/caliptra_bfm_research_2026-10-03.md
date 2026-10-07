@@ -812,20 +812,22 @@ remains untouched. That UVM report also had zero warnings, errors, and fatals.
 
 This is the first run here through the real `axi_dma_top` control FSM and
 register block. It uses one seeded constrained case from Caliptra's
-`dma_transfer_randomizer` class. Separately, the actual
-`dma_testcase_generator` has been run for 25 cases into a bounded DCCM shadow,
-and multiple generated recovery entries pass through the open BFM sequencer.
-The actual-DUT runner now selects and replays all 25 records through
-`axi_dma_top` in separate simulation runs. A hash-guarded overlay spans all
-five named route types, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256
-words), and one maximum 65,536-word fixed-read FIFO-to-SRAM stream. Short
-records retain per-record seeds, payloads, valid offsets, and Caliptra's delay
-flag. For the maximum case, the BFM supplies FIFO data, and the UVM scoreboard
-checks the complete destination stream. Replay distribution: AHB2AXI (2),
-MBOX2AXI (6), AXI2AXI (5), AXI2MBOX (5), and AXI2AHB (7). One short record
-applied the generated delay flag and observed five target-stall cycles. Other
-generated FIFO, firmware-triggered reset, and block-size modes, firmware, and
-full-top execution remain unqualified.
+`dma_transfer_randomizer` class. Separately, the hash-guarded DCCM replay
+profile requests 29 records from the actual `dma_testcase_generator` and
+selects each record through the real `axi_dma_top`. It covers all five named
+routes, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
+65,536-word fixed-read FIFO-to-SRAM stream, a fixed-write SRAM-to-FIFO record,
+and FIFO recovery records for AXI2AXI, AXI2MBOX, and AXI2AHB. The three recovery
+records sweep every legal one-hot block size for their route: 4–64 bytes on
+AXI2AXI and 4–2048 bytes on AXI2MBOX and AXI2AHB. Short records retain
+per-record seeds, payloads, valid offsets, and Caliptra's delay flag. For the
+maximum case, the BFM supplies FIFO data and the UVM scoreboard checks the
+complete destination stream. The first 25 records retain the recorded route
+distribution: AHB2AXI (2), MBOX2AXI (6), AXI2AXI (5), AXI2MBOX (5), and
+AXI2AHB (7); added records 25–28 cover FIFO destination and all three recovery
+routes. One short record applied the generated delay flag and observed five
+target-stall cycles. Other generated FIFO modes, firmware-triggered reset,
+firmware, and full-top execution remain unqualified.
 Separate directed AXI2MBOX and MBOX2AXI cases now
 transfer 65 words through the same DUT. The mailbox endpoint applies one-cycle
 backpressure and checks request addresses, metadata, and data; the SRAM target
@@ -833,8 +835,9 @@ and AXI scoreboard check the MBOX2AXI writes. AHB2AXI also transfers 65 words
 through the component `WRITE_DATA` register; AXI2AHB drains through `READ_DATA`.
 Both are component-register checks without an AHB bus instance. All five named
 routes now have generated-route coverage plus directed 65-word DUT coverage;
-other sizes/flags, firmware, full SoC/top, and generated UVMF execution remain
-open.
+other transfer sizes/flags, firmware, full SoC/top, and generated UVMF execution
+remain open. The routed generated recovery sweep is recorded in
+[`AXI2MBOX/AXI2AHB recovery evidence`](../../evidence/caliptra-bfm-dma-routed-recovery-sweep-20261006/README.md).
 The same DUT runner now checks a 65-word SRAM-to-FIFO AXI2AXI case through five
 fixed write bursts under weighted AXI-channel stalls, validating that
 backpressure occurred, plus FIFO depth and each queued payload word.

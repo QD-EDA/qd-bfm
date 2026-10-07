@@ -111,7 +111,7 @@ run_generated_recovery_sweep() {
       +FIFO_RECOVERY +CALIPTRA_BFM_DUT_REPLAY_INDEX=26 \
       +CLP_DMA_TB_MODE_THRESH \
       "+RECOVERY_BLOCK_BYTES=$block_bytes" \
-      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
     if ! grep -Fq "PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of $block_bytes bytes" "$log"; then
       echo "Generated FIFO recovery case did not complete with a $block_bytes-byte block" >&2
       exit 1
@@ -119,28 +119,42 @@ run_generated_recovery_sweep() {
   done
 }
 
+run_generated_recovery_route_case() {
+  case_index=$1
+  block_bytes=$2
+  case "$case_index" in
+      27)
+        route_name=axi2mbox
+        pass_marker_prefix="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through"
+        pass_marker_suffix="into the mailbox"
+        ;;
+      28)
+        route_name=axi2ahb
+        pass_marker_prefix="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through"
+        pass_marker_suffix="into the component data register"
+        ;;
+    *)
+      echo "Unsupported generated recovery route record $case_index" >&2
+      exit 2
+      ;;
+  esac
+  run_case "generated-${route_name}-recovery-${block_bytes}B" \
+    +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+    "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+    +FIFO_RECOVERY +CLP_DMA_TB_MODE_THRESH \
+    "+RECOVERY_BLOCK_BYTES=$block_bytes" \
+    +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
+  pass_marker="$pass_marker_prefix ${block_bytes}-byte recovery blocks $pass_marker_suffix"
+  if ! grep -Fq "$pass_marker" "$log"; then
+    echo "Caliptra $route_name recovery case did not complete with a ${block_bytes}-byte block" >&2
+    exit 1
+  fi
+}
+
 run_recovery_route_sweep() {
-  for route_case in AXI2MBOX_CASE AXI2AHB_CASE; do
-    case "$route_case" in
-      AXI2MBOX_CASE) route_name=axi2mbox ;;
-      AXI2AHB_CASE) route_name=axi2ahb ;;
-    esac
+  for route_index in 27 28; do
     for block_bytes in 4 8 16 32 64 128 256 512 1024 2048; do
-      run_case "$route_name-recovery-${block_bytes}B" "+$route_case" \
-        +FIFO_RECOVERY +CLP_DMA_TB_MODE_THRESH \
-        "+RECOVERY_BLOCK_BYTES=$block_bytes"
-      case "$route_case" in
-        AXI2MBOX_CASE)
-          pass_marker="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through ${block_bytes}-byte recovery blocks into the mailbox"
-          ;;
-        AXI2AHB_CASE)
-          pass_marker="PASS: actual Caliptra axi_dma_top moved 65 FIFO words through ${block_bytes}-byte recovery blocks into the component data register"
-          ;;
-      esac
-      if ! grep -Fq "$pass_marker" "$log"; then
-        echo "Caliptra $route_name recovery case did not complete with a ${block_bytes}-byte block" >&2
-        exit 1
-      fi
+      run_generated_recovery_route_case "$route_index" "$block_bytes"
     done
   done
 }
@@ -195,21 +209,23 @@ generated_routes="$tmpdir/generated-routes"
 generated_sizes="$tmpdir/generated-sizes"
 : >"$generated_routes"
 : >"$generated_sizes"
-while [ "$case_index" -lt 27 ]; do
+while [ "$case_index" -lt 29 ]; do
   if [ "$case_index" -eq 0 ]; then
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
   elif [ "$case_index" -eq 25 ]; then
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+      +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
   elif [ "$case_index" -eq 26 ]; then
     run_generated_recovery_sweep
+  elif [ "$case_index" -eq 27 ] || [ "$case_index" -eq 28 ]; then
+    run_generated_recovery_route_case "$case_index" 128
   else
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=29 +CPTRA_VERBOSITY=0
   fi
   if [ "$case_index" -eq 26 ]; then
     if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of 64 bytes' "$log"; then
@@ -217,6 +233,18 @@ while [ "$case_index" -lt 27 ]; do
       exit 1
     fi
     route_type=2
+  elif [ "$case_index" -eq 27 ]; then
+    if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 FIFO words through 128-byte recovery blocks into the mailbox' "$log"; then
+      echo "Generated AXI2MBOX recovery record did not complete through the recovery sequencer" >&2
+      exit 1
+    fi
+    route_type=3
+  elif [ "$case_index" -eq 28 ]; then
+    if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 FIFO words through 128-byte recovery blocks into the component data register' "$log"; then
+      echo "Generated AXI2AHB recovery record did not complete through the recovery sequencer" >&2
+      exit 1
+    fi
+    route_type=4
   else
     if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
       echo "Generated DCCM record $case_index was not selected for DUT replay" >&2
@@ -255,6 +283,18 @@ while [ "$case_index" -lt 27 ]; do
       echo "Generated FIFO recovery record did not supply a supported block-size profile" >&2
       exit 1
     fi
+  elif [ "$case_index" -eq 27 ]; then
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=128' "$log" ||
+       ! grep -Fq 'INFO: Caliptra DCCM case type=3 words=65' "$log"; then
+      echo "Generated AXI2MBOX recovery record did not supply the expected profile" >&2
+      exit 1
+    fi
+  elif [ "$case_index" -eq 28 ]; then
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=128' "$log" ||
+       ! grep -Fq 'INFO: Caliptra DCCM case type=4 words=65' "$log"; then
+      echo "Generated AXI2AHB recovery record did not supply the expected profile" >&2
+      exit 1
+    fi
   fi
   case_index=$((case_index + 1))
 done
@@ -264,9 +304,10 @@ for route_type in 0 1 2 3 4; do
     exit 1
   fi
 done
-echo "INFO: generated DCCM replay covered all five DMA routes across 27 records"
+echo "INFO: generated DCCM replay covered all five DMA routes across 29 records"
 echo "INFO: generated DCCM replay covered a 65-word fixed-write SRAM-to-FIFO profile"
 echo "INFO: generated DCCM replay covered the 65-word FIFO recovery profile with testbench block-size overrides of 4, 8, 16, 32, and 64 bytes"
+echo "INFO: generated DCCM replay covered 65-word FIFO recovery on AXI2MBOX and AXI2AHB with block-size overrides from 4 through 2048 bytes"
 for word_count in 1 4 5 16 64 65 255 256 65536; do
   if ! grep -Fxq "$word_count" "$generated_sizes"; then
     echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2

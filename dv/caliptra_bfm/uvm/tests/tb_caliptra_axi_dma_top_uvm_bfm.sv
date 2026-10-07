@@ -570,18 +570,24 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               end
             end
           end else if (env.scoreboard.expect_fifo_recovery) begin
+            if ($test$plusargs("GENERATED_CASE"))
+              wait (generated_route_ready);
             expected_recovery_read_bursts =
                 (active_word_count + env.scoreboard.recovery_burst_words - 1) /
                 env.scoreboard.recovery_burst_words;
             expected_recovery_write_bursts =
                 (active_word_count + env.scoreboard.recovery_write_burst_words - 1) /
                 env.scoreboard.recovery_write_burst_words;
-            if ($test$plusargs("AXI2MBOX_CASE")) begin
+            if ($test$plusargs("AXI2MBOX_CASE") ||
+                ($test$plusargs("GENERATED_CASE") &&
+                 (generated_dma_xfer_type == AXI2MBOX))) begin
               wait (run_done && env.scoreboard.write_count == 0 &&
                     env.scoreboard.read_count == expected_recovery_read_bursts &&
                     env.scoreboard.read_word_offset == active_word_count &&
                     mailbox_word_index == active_word_count);
-            end else if ($test$plusargs("AXI2AHB_CASE")) begin
+            end else if ($test$plusargs("AXI2AHB_CASE") ||
+                         ($test$plusargs("GENERATED_CASE") &&
+                          (generated_dma_xfer_type == AXI2AHB))) begin
               wait (run_done && env.scoreboard.write_count == 0 &&
                     env.scoreboard.read_count == expected_recovery_read_bursts &&
                     env.scoreboard.read_word_offset == active_word_count);
@@ -805,7 +811,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset != 0) || (record_dst_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported large FIFO stream profile", record_index);
         end else if (record_type.dst_is_fifo) begin
-          if ((generated_case_count != 27) || (record_index != 25) ||
+          if ((generated_case_count != 29) || (record_index != 25) ||
               (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
@@ -814,14 +820,28 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
         end else if (record_type.test_block_size) begin
-          if ((generated_case_count != 27) || (record_index != 26) ||
-              (record_size != WORD_COUNT) || (record_type.dma_xfer_type != AXI2AXI) ||
-              !record_type.src_is_fifo || record_type.dst_is_fifo ||
-              !record_type.use_rd_fixed || record_type.use_wr_fixed ||
-              record_type.inject_rand_delays || record_type.inject_rst ||
-              (record_type.block_size != 12'd64) ||
-              (record_src_offset != 0) || (record_dst_offset != 32'h0000_4000))
+          if ((generated_case_count != 29) ||
+              ((record_index < 26) || (record_index > 28)) ||
+              (record_size != WORD_COUNT) || !record_type.src_is_fifo ||
+              record_type.dst_is_fifo || !record_type.use_rd_fixed ||
+              record_type.use_wr_fixed || record_type.inject_rand_delays ||
+              record_type.inject_rst || (record_src_offset != 0))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO block-size profile", record_index);
+          case (record_index)
+            26: if ((record_type.dma_xfer_type != AXI2AXI) ||
+                    (record_type.block_size != 12'd64) ||
+                    (record_dst_offset != 32'h0000_4000))
+              $fatal(1, "Generated testcase 26 has an unsupported AXI2AXI recovery profile");
+            27: if ((record_type.dma_xfer_type != AXI2MBOX) ||
+                    (record_type.block_size != 12'd128) ||
+                    (record_dst_offset != 32'h0000_1000))
+              $fatal(1, "Generated testcase 27 has an unsupported AXI2MBOX recovery profile");
+            28: if ((record_type.dma_xfer_type != AXI2AHB) ||
+                    (record_type.block_size != 12'd128) ||
+                    (record_dst_offset != 32'h0000_4000))
+              $fatal(1, "Generated testcase 28 has an unsupported AXI2AHB recovery profile");
+            default: $fatal(1, "Unexpected generated recovery testcase index %0d", record_index);
+          endcase
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -984,7 +1004,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.block_size = 12'(recovery_block_bytes);
       dma_gen_block_size_bytes[generated_case_index] = 12'(recovery_block_bytes);
       SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
+      if (scenario.dma_xfer_type == AXI2MBOX)
+        DST_ADDR = 48'(scenario.dst_offset);
+      else if (scenario.dma_xfer_type == AXI2AHB)
+        DST_ADDR = '0;
+      else
+        DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
     end else if (fifo_recovery_case) begin
       // Icarus rejects the pinned class constraints for this recovery tuple.
       if ((scenario.dma_xfer_type != AXI2AXI) &&

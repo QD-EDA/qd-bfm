@@ -288,12 +288,13 @@ SRAM through the real fixed-burst recovery path. The test uses one seeded case
 from Caliptra's
 `dma_transfer_randomizer`. Separately, the actual generator's multi-case DCCM
 records feed the BFM recovery sequencer. The actual-DUT bench now ECC-checks
-and replays all 27 DCCM records through `axi_dma_top` under a hash-guarded
+and replays all 29 DCCM records through `axi_dma_top` under a hash-guarded
 profile covering all five named DMA routes, eight short sizes, and a 65,536-word
 fixed-read FIFO-to-SRAM stream. It also replays a 65-word fixed-write SRAM-to-
-FIFO case with randomized delays and a 65-word FIFO recovery sweep over
-4-, 8-, 16-, 32-, and 64-byte testbench block-size overrides on the generated
-DCCM record. Payloads and
+FIFO case with randomized delays. Recovery record 26 sweeps 4-, 8-, 16-, 32-,
+and 64-byte AXI2AXI blocks; records 27 and 28 sweep all legal one-hot block
+sizes from 4 through 2048 bytes on AXI2MBOX and AXI2AHB. Each sweep overrides
+the selected generated DCCM block-size entry. Payloads and
 route-valid offsets remain per-record randomized, as does Caliptra's delay
 flag; the maximum stream drains the FIFO and checks all destination words. The
 actual DMA DUT reset-abort profile now
@@ -306,10 +307,11 @@ per recovery block through the 64-byte maximum at Caliptra's 32-bit DMA data
 width. An exploratory 128-byte AXI2AXI override remained in Caliptra's
 `DMA_WAIT_DATA` state with 16 internal FIFO words buffered and
 `recovery_data_avail` asserted; it is outside the pinned AXI2AXI constraint.
-Separate route-directed sweeps now pass 65 FIFO words through AXI2MBOX and
+Generated DCCM records 27 and 28 pass 65 FIFO words through AXI2MBOX and
 AXI2AHB for every legal one-hot recovery block size from 4 through 2048 bytes.
-Those runs set the legal block metadata in the testbench rather than replaying
-generated DCCM records. See the
+The hash-guarded Icarus generator overlay sets each route's legal block
+metadata, then the runner overrides the selected generated block-size entry.
+See the
 [`AXI2MBOX/AXI2AHB recovery evidence`](../../evidence/caliptra-bfm-dma-routed-recovery-sweep-20261006/README.md).
 Run only the generated recovery-size sweep with
 `uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --recovery-block-sweep-only`.
