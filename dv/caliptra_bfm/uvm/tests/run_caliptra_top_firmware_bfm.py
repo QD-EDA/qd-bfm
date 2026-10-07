@@ -59,7 +59,6 @@ FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "c4dbd3f75055982a5b31d05d8ba66039027b48b056e76
 TOP_SERVICES_SHA256 = "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343"
 DMA_GENERATOR_HELPER_SCOPE = "caliptra_top_tb.tb_services_i"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
-RESET_REQUEST = re.compile(r"CALIPTRA_RESET_REQUEST cycle=(\d+)")
 RESET_ASSERT = re.compile(r"CALIPTRA_RESET_EDGE state=assert cycle=(\d+)")
 AXI_AW = re.compile(r"CALIPTRA_AXI AW .* cycle=(\d+)")
 AXI_B = re.compile(r"CALIPTRA_AXI B .* cycle=(\d+)")
@@ -587,7 +586,6 @@ def run_logged(command, cwd, env, logfile):
 def scan_sim_log(path):
     passed = failed = bad = jtag_errors = 0
     finish = None
-    reset_requested = False
     reset_assert_cycles = []
     outstanding_writes = 0
     outstanding_writes_at_reset = []
@@ -597,11 +595,9 @@ def scan_sim_log(path):
             failed += line.count("TESTCASE FAILED")
             bad += bool(BAD.search(line))
             jtag_errors += bool(JTAG_ERROR.match(line))
-            if RESET_REQUEST.search(line):
-                reset_requested = True
-            if reset_requested and AXI_AW.search(line):
+            if AXI_AW.search(line):
                 outstanding_writes += 1
-            if reset_requested and AXI_B.search(line):
+            if AXI_B.search(line):
                 outstanding_writes = max(0, outstanding_writes - 1)
             reset_assert = RESET_ASSERT.search(line)
             if reset_assert:

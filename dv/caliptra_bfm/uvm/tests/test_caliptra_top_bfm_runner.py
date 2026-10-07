@@ -31,7 +31,6 @@ class ResetInFlightTraceTest(unittest.TestCase):
 
     def test_reset_after_aw_before_b_is_in_flight(self):
         result = self.scan([
-            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
             "CALIPTRA_AXI AW count=1 addr=0 cycle=6239 pc=0000dd1a",
             "CALIPTRA_RESET_EDGE state=assert cycle=6254 pending=1 wait=3870 start=2382",
         ])
@@ -41,7 +40,6 @@ class ResetInFlightTraceTest(unittest.TestCase):
 
     def test_reset_before_first_aw_is_not_in_flight(self):
         result = self.scan([
-            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
             "CALIPTRA_RESET_EDGE state=assert cycle=2896 pending=1 wait=512 start=2382",
             "CALIPTRA_AXI AW count=1 addr=0 cycle=5785 pc=0000dd1a",
         ])
@@ -51,7 +49,6 @@ class ResetInFlightTraceTest(unittest.TestCase):
 
     def test_write_response_closes_the_outstanding_transfer(self):
         result = self.scan([
-            "CALIPTRA_RESET_REQUEST cycle=2382 code=ee pending=0 wait=0 start=0",
             "CALIPTRA_AXI AW count=1 addr=0 cycle=5785 pc=0000dd1a",
             "CALIPTRA_AXI B count=1 cycle=5817 pc=0000dd1a",
             "CALIPTRA_RESET_EDGE state=assert cycle=6000 pending=1 wait=3870 start=2382",
