@@ -194,7 +194,7 @@ package uvmf_base_pkg;
     endfunction
 
     virtual function void resolve_bfm_handles();
-      // Resolve at agent build so HDL-top registrations may follow config setup.
+      // Resolve in connect so later build-phase registrations are visible.
       if (active_passive == ACTIVE &&
           !uvm_config_db #(DRIVER_BFM_BIND_T)::get(
             null, UVMF_VIRTUAL_INTERFACES, interface_name, driver_bfm))
@@ -238,13 +238,13 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Driver cannot find its agent configuration")
-      configure(configuration);
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       configuration.resolve_bfm_handles();
       bfm = configuration.driver_bfm;
+      configure(configuration);
       set_bfm_proxy_handle();
     endfunction
 
@@ -296,13 +296,13 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Monitor cannot find its agent configuration")
-      configure(configuration);
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       configuration.resolve_bfm_handles();
       bfm = configuration.monitor_bfm;
+      configure(configuration);
       set_bfm_proxy_handle();
     endfunction
 
