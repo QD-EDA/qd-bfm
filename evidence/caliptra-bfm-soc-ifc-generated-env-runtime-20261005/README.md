@@ -280,7 +280,7 @@ IVERILOG_BIN=/path/to/iverilog VVP_BIN=vvp/vvp \
   --generated-ahb-ral-dlen-write-readback
 ```
 
-The current runner applies a 6 GiB process-group cap and 6 GiB
+The current runner applies a 4 GB process-group cap and 6 GB
 system-available reserve with a 300-second bound by default. Set
 `CALIPTRA_BFM_MAX_PROCESS_BYTES` and `CALIPTRA_BFM_MIN_AVAILABLE_BYTES` to
 adjust the limits. Set
