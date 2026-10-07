@@ -420,7 +420,8 @@ file list. Its runtime launched generated keygen, then the 60% memory guard
 stopped it at 59% free before key readback. The normal `--actual-rtl-smoke`
 passed in the previous checkpoint; the updated shared runner has not been
 rerun in that mode. Keygen uses a 600-second default timeout and the same 60%
-free-memory floor.
+free-memory floor. The current harness flushes `keygen_progress.log` every
+10,000 observed cycles so a guard stop records whether the DUT stayed busy.
 
 `caliptra_ahb_mvc_compat_pkg.sv` supplies fallback definitions for only these
 visible types, including `ahb_rnw_e` with `AHB_READ`/`AHB_WRITE`, and the
