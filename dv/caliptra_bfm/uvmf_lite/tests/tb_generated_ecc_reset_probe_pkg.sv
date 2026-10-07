@@ -72,4 +72,66 @@ package ecc_reset_probe_pkg;
       phase.drop_objection(this);
     endtask
   endclass
+
+  class ecc_key_sign_input_sequence extends ECC_in_sequence_base #(32, 32);
+    `uvm_object_utils(ecc_key_sign_input_sequence)
+    function new(string name = "ecc_key_sign_input_sequence");
+      super.new(name);
+    endfunction
+    virtual task body();
+      start_item(req);
+      req.test = ecc_normal_test;
+      req.op = key_sign;
+      finish_item(req);
+    endtask
+  endclass
+
+  class ecc_key_sign_bench_sequence extends ECC_bench_sequence_base;
+    `uvm_object_utils(ecc_key_sign_bench_sequence)
+    function new(string name = "ecc_key_sign_bench_sequence");
+      super.new(name);
+    endfunction
+    virtual task body();
+      ecc_key_sign_input_sequence input_sequence;
+      input_sequence = ecc_key_sign_input_sequence::type_id::create("input_sequence");
+      fork
+        ECC_in_agent_config.wait_for_reset();
+        ECC_out_agent_config.wait_for_reset();
+      join
+      input_sequence.start(ECC_in_agent_sequencer);
+      fork
+        ECC_in_agent_config.wait_for_num_clocks(5);
+        ECC_out_agent_config.wait_for_num_clocks(5);
+      join
+    endtask
+  endclass
+
+  class ecc_key_sign_only_test extends test_top;
+    `uvm_component_utils(ecc_key_sign_only_test)
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+    endfunction
+    virtual task run_phase(uvm_phase phase);
+      ecc_key_sign_bench_sequence sign_seq;
+      phase.raise_objection(this);
+      sign_seq = ecc_key_sign_bench_sequence::type_id::create("sign_seq");
+      sign_seq.start(null);
+      if (environment.ECC_sb.expected_received_count != 1 ||
+          environment.ECC_sb.actual_received_count != 1 ||
+          environment.ECC_sb.mismatch_count != 0 ||
+          environment.ECC_sb.pending_expected_count != 0 ||
+          environment.ECC_sb.pending_actual_count != 0 ||
+          environment.ECC_sb.matched_count != 1)
+        `uvm_fatal("ECC_PROBE", $sformatf(
+          "key-sign scoreboard counts expected=%0d actual=%0d matched=%0d mismatched=%0d pending_expected=%0d pending_actual=%0d",
+          environment.ECC_sb.expected_received_count,
+          environment.ECC_sb.actual_received_count,
+          environment.ECC_sb.matched_count,
+          environment.ECC_sb.mismatch_count,
+          environment.ECC_sb.pending_expected_count,
+          environment.ECC_sb.pending_actual_count))
+      `uvm_info("ECC_PROBE", "PASS: generated ECC key-sign transaction matched", UVM_NONE)
+      phase.drop_objection(this);
+    endtask
+  endclass
 endpackage

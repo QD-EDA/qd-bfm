@@ -8,6 +8,16 @@ case "$edition_filter" in
   *) echo "ECC_IEEE_EDITION must be both, 2017, or 2023" >&2; exit 2 ;;
 esac
 
+probe=${ECC_RUNTIME_PROBE:-reset}
+case "$probe" in
+  reset|key_sign) ;;
+  *) echo "ECC_RUNTIME_PROBE must be reset or key_sign" >&2; exit 2 ;;
+esac
+if [ "$probe" = key_sign ] && [ -z "${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-}" ]; then
+  CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=1800
+  export CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS
+fi
+
 repo_root=$(CDPATH= cd -- "$(dirname "$0")/../../../../" && pwd)
 . "$repo_root/scripts/caliptra_bfm_memory_guard.sh"
 test_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
@@ -16,7 +26,18 @@ iverilog_bin=${IVERILOG_BIN:-iverilog}
 vvp_bin=${VVP_BIN:-vvp}
 expected_caliptra_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
 expected_hdl_top_sha=23e3f134c7403c4604f6067096809c8a154881b1fbc1f37502dd7b29d7833827
-log_prefix=${ECC_RESET_MONITOR_LOG_PREFIX:-reset_monitor_overlay}
+case "$probe" in
+  reset)
+    test_name=ecc_reset_only_test
+    pass_marker='PASS: generated reset scoreboard and ECC IRQ_EN AHB readback matched'
+    log_prefix=${ECC_RESET_MONITOR_LOG_PREFIX:-reset_monitor_overlay}
+    ;;
+  key_sign)
+    test_name=ecc_key_sign_only_test
+    pass_marker='PASS: generated ECC key-sign transaction matched'
+    log_prefix=${ECC_KEY_SIGN_LOG_PREFIX:-key_sign_overlay}
+    ;;
+esac
 
 if [ "$(git -C "$caliptra_root" rev-parse HEAD)" != "$expected_caliptra_commit" ]; then
   echo "Caliptra checkout is not the pinned v2.1.2 commit $expected_caliptra_commit" >&2
@@ -43,6 +64,21 @@ fi
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
 python3 "$test_dir/generated_ecc_monitor_overlay.py" "$caliptra_root" "$tmpdir/monitors"
+if [ "$probe" = key_sign ]; then
+  brew_bin=${BREW:-brew}
+  cc_bin=${CC:-clang}
+  if ! mbedtls_root=$("$brew_bin" --prefix mbedtls@3); then
+    echo "The key-sign probe needs the Homebrew mbedtls@3 package." >&2
+    exit 2
+  fi
+  if ! "$cc_bin" -O2 -I"$mbedtls_root/include" \
+       "$caliptra_root/src/ecc/tb/ecc_secp384r1.c" \
+       -L"$mbedtls_root/lib" -lmbedtls -lmbedx509 -lmbedcrypto \
+       -o "$tmpdir/ecc_secp384r1.exe"; then
+    echo "Could not build the generated ECC native-vector helper." >&2
+    exit 1
+  fi
+fi
 {
   printf '`timescale 1ns/1ps\n'
   sed \
@@ -89,18 +125,19 @@ for edition in 2017 2023; do
     exit 1
   fi
 
-  if ! "$vvp_bin" "$image" +UVM_TESTNAME=ecc_reset_only_test > "$run_log" 2>&1; then
+  if ! (cd "$tmpdir" && "$vvp_bin" "$image" "+UVM_TESTNAME=$test_name") > "$run_log" 2>&1; then
     cat "$run_log" >&2
-    echo "Generated ECC reset-monitor probe failed under IEEE $edition." >&2
+    echo "Generated ECC $probe probe failed under IEEE $edition." >&2
     exit 1
   fi
-  if ! grep -Fq 'PASS: generated reset scoreboard and ECC IRQ_EN AHB readback matched' "$run_log" \
+  if ! grep -Fq "$pass_marker" "$run_log" \
     || ! grep -Fq 'UVM_ERROR :    0' "$run_log" \
     || ! grep -Fq 'UVM_FATAL :    0' "$run_log"; then
     cat "$run_log" >&2
-    echo "Generated ECC reset-monitor scoreboard did not pass under IEEE $edition." >&2
+    echo "Generated ECC $probe scoreboard did not pass under IEEE $edition." >&2
     exit 1
   fi
-  grep -E 'PASS: generated reset scoreboard and ECC IRQ_EN AHB readback matched|UVM_ERROR :|UVM_FATAL :' "$run_log"
-  echo "PASS: generated ECC monitor and AHB transaction probe under IEEE $edition."
+  grep -F "$pass_marker" "$run_log"
+  grep -E 'UVM_ERROR :|UVM_FATAL :' "$run_log"
+  echo "PASS: generated ECC $probe probe under IEEE $edition."
 done

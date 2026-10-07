@@ -82,8 +82,12 @@ self-authored active/passive environment. Generated Caliptra ECC `test_top`
 and agent construction reach the actual ECC DUT for an interrupt-enable
 register write/read through the generated driver's BFM tasks. The generated
 reset scoreboard matches in both IEEE editions, and the generated keygen
-sequence matches its predicted result in both editions. Key signing,
-verification, ECDH shared-key operations, broader generated-environment
+sequence matches its predicted result in both editions. The reset-monitor
+runner also supports a deterministic `key_sign` transaction with a generated
+scoreboard check (`ECC_RUNTIME_PROBE=key_sign`); it builds the native vector
+helper in its temporary run directory using Homebrew `mbedtls@3`. Key signing
+is not qualified until that mode passes. Verification, ECDH shared-key
+operations, broader generated-environment
 traffic, and full generated `hdl_top`/`hvl_top` qualification remain open; see
 the [generated ECC runtime evidence](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md).
 Generated status-agent monitoring also has a focused runtime probe.
