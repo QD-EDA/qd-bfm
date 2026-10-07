@@ -14,16 +14,20 @@ log="$tmpdir/caliptra_axi_dma_top_uvm_bfm.log"
 trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 reset_abort_only=0
+recovery_block_sweep_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
-  if [ "$1" != "--reset-abort-only" ]; then
-    echo "usage: $0 [--reset-abort-only]" >&2
-    exit 2
-  fi
-  reset_abort_only=1
+  case "$1" in
+    --reset-abort-only) reset_abort_only=1 ;;
+    --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
+    *)
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only]" >&2
+      exit 2
+      ;;
+  esac
 fi
 
 # Icarus requires the numeric finish argument for this otherwise unchanged
@@ -99,8 +103,26 @@ run_reset_abort_case() {
   fi
 }
 
+run_generated_recovery_sweep() {
+  for block_bytes in 4 8 16 32 64; do
+    run_case "generated-recovery-${block_bytes}B" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      +FIFO_RECOVERY +CALIPTRA_BFM_DUT_REPLAY_INDEX=26 \
+      "+RECOVERY_BLOCK_BYTES=$block_bytes" \
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of $block_bytes bytes" "$log"; then
+      echo "Generated FIFO recovery case did not complete with a $block_bytes-byte block" >&2
+      exit 1
+    fi
+  done
+}
+
 if [ "$reset_abort_only" -eq 1 ]; then
   run_reset_abort_case
+  exit 0
+fi
+if [ "$recovery_block_sweep_only" -eq 1 ]; then
+  run_generated_recovery_sweep
+  echo "INFO: generated DCCM record 26 passed testbench block-size overrides of 4, 8, 16, 32, and 64 bytes"
   exit 0
 fi
 
@@ -149,16 +171,14 @@ while [ "$case_index" -lt 27 ]; do
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
       +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
   elif [ "$case_index" -eq 26 ]; then
-    run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
-      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +FIFO_RECOVERY +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
+    run_generated_recovery_sweep
   else
     run_case "generated-dccm-replay-$case_index" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
       +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=27 +CPTRA_VERBOSITY=0
   fi
   if [ "$case_index" -eq 26 ]; then
-    if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through five recovery-sized fixed reads and SRAM writes' "$log"; then
+    if ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of 64 bytes' "$log"; then
       echo "Generated FIFO block-size case did not complete through the recovery sequencer" >&2
       exit 1
     fi
@@ -198,7 +218,7 @@ while [ "$case_index" -lt 27 ]; do
   elif [ "$case_index" -eq 26 ]; then
     if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=64' "$log" ||
        ! grep -Fq 'INFO: Caliptra DCCM case type=2 words=65' "$log"; then
-      echo "Generated FIFO recovery record did not supply its 64-byte block-size profile" >&2
+      echo "Generated FIFO recovery record did not supply a supported block-size profile" >&2
       exit 1
     fi
   fi
@@ -212,7 +232,7 @@ for route_type in 0 1 2 3 4; do
 done
 echo "INFO: generated DCCM replay covered all five DMA routes across 27 records"
 echo "INFO: generated DCCM replay covered a 65-word fixed-write SRAM-to-FIFO profile"
-echo "INFO: generated DCCM replay covered the 65-word FIFO recovery profile with a 64-byte generated block"
+echo "INFO: generated DCCM replay covered the 65-word FIFO recovery profile with testbench block-size overrides of 4, 8, 16, 32, and 64 bytes"
 for word_count in 1 4 5 16 64 65 255 256 65536; do
   if ! grep -Fxq "$word_count" "$generated_sizes"; then
     echo "Generated DCCM DUT replay did not cover transfer size $word_count words" >&2

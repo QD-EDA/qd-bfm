@@ -32,9 +32,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   localparam integer MAX_FIXED_BURST_WORDS = 16;
   localparam logic [47:0] SRAM_BASE_ADDR = 48'h0001_2344_0000;
   localparam logic [47:0] FIFO_BASE_ADDR = 48'h0000_fa57_0000;
-  localparam integer RECOVERY_BLOCK_WORDS = 16;
   localparam logic [31:0] AXUSER = 32'hcafe_1248;
   localparam logic [31:0] DMA_RANDOM_SEED = 32'h00c0_ffee;
+  integer recovery_block_bytes = 64;
+  integer recovery_block_words = 16;
   integer active_word_count = WORD_COUNT;
   integer active_read_burst_count = 2;
   integer active_write_burst_count = 2;
@@ -356,6 +357,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     bit expect_fifo_recovery;
     bit expect_fifo_source;
     bit expect_fifo_write;
+    int recovery_block_words;
 
     `uvm_component_utils(axi_dma_top_bfm_scoreboard)
 
@@ -373,6 +375,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         expect_fifo_source = 1'b0;
       if (!uvm_config_db#(bit)::get(this, "", "expect_fifo_write", expect_fifo_write))
         expect_fifo_write = 1'b0;
+      if (!uvm_config_db#(int)::get(this, "", "recovery_block_words", recovery_block_words))
+        recovery_block_words = 16;
     endfunction
 
     function logic [31:0] source_word(input int index);
@@ -395,10 +399,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (item.is_read()) begin
         expected_beats = active_word_count - read_word_offset;
         if (expect_fifo_recovery || expect_fifo_source) begin
-          if (expect_fifo_recovery && expected_beats > RECOVERY_BLOCK_WORDS)
-            expected_beats = RECOVERY_BLOCK_WORDS;
-          else if (expect_fifo_source && expected_beats > MAX_FIXED_BURST_WORDS)
+          if (expect_fifo_recovery) begin
+            if (expected_beats > recovery_block_words)
+              expected_beats = recovery_block_words;
+          end else if (expected_beats > MAX_FIXED_BURST_WORDS) begin
             expected_beats = MAX_FIXED_BURST_WORDS;
+          end
           if (item.burst != AXI_BURST_FIXED || item.addr != SRC_ADDR)
             `uvm_fatal("DMA_TOP_FIFO_READ_PROFILE", $sformatf("DMA FIFO read was not a fixed stream burst: %s", item.convert2string()))
         end else begin
@@ -431,8 +437,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         boundary_beats = MAX_BURST_WORDS - int'(item.addr[7:2]);
         expected_beats = active_word_count - write_word_offset;
         if (expect_fifo_write) begin
-          if (expected_beats > RECOVERY_BLOCK_WORDS)
-            expected_beats = RECOVERY_BLOCK_WORDS;
+          if (expected_beats > MAX_FIXED_BURST_WORDS)
+            expected_beats = MAX_FIXED_BURST_WORDS;
           if (item.addr != DST_ADDR || item.burst != AXI_BURST_FIXED)
             `uvm_fatal("DMA_TOP_FIFO_WRITE_PROFILE", $sformatf("DMA FIFO write was not a fixed stream burst: %s", item.convert2string()))
         end else begin
@@ -441,8 +447,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               item.burst != AXI_BURST_INCR)
             `uvm_fatal("DMA_TOP_WRITE_PROFILE", $sformatf("DMA SRAM write address/burst mismatch: %s", item.convert2string()))
         end
-        if (expect_fifo_recovery && expected_beats > RECOVERY_BLOCK_WORDS)
-          expected_beats = RECOVERY_BLOCK_WORDS;
+        if (expect_fifo_recovery) begin
+          if (expected_beats > recovery_block_words)
+            expected_beats = recovery_block_words;
+        end
         if (item.awuser != AXUSER ||
             item.buser != AXUSER || item.resp != expected_resp ||
             beats != expected_beats ||
@@ -500,6 +508,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     task run_phase(uvm_phase phase);
       int expected_read_prefix;
       int expected_write_prefix;
+      int expected_recovery_bursts;
       phase.raise_objection(this);
       if ($test$plusargs("RESET_ABORT")) begin
         fork
@@ -571,7 +580,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   env.scoreboard.write_count == 5 &&
                   env.scoreboard.write_word_offset == WORD_COUNT);
           end else if (env.scoreboard.expect_fifo_recovery) begin
-            wait (run_done && env.scoreboard.write_count == 5 && env.scoreboard.read_count == 5 &&
+            expected_recovery_bursts =
+                (active_word_count + env.scoreboard.recovery_block_words - 1) /
+                env.scoreboard.recovery_block_words;
+            wait (run_done && env.scoreboard.write_count == expected_recovery_bursts &&
+                  env.scoreboard.read_count == expected_recovery_bursts &&
                   env.scoreboard.write_word_offset == WORD_COUNT &&
                   env.scoreboard.read_word_offset == WORD_COUNT);
           end else if ($test$plusargs("GENERATED_CASE")) begin
@@ -631,7 +644,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (expect_dma_error)
         $display("PASS: actual Caliptra axi_dma_top propagated injected AXI SLVERR to DMA_ERROR after the aligned partial write");
       else if (env.scoreboard.expect_fifo_recovery)
-        $display("PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through five recovery-sized fixed reads and SRAM writes");
+        $display("PASS: actual Caliptra axi_dma_top moved 65 auto-generated FIFO words through recovery blocks of %0d bytes", recovery_block_bytes);
       else if ($test$plusargs("GENERATED_CASE"))
         $display("PASS: generated DCCM record index=%0d route=%0d replayed through axi_dma_top",
                  generated_case_index, generated_dma_xfer_type);
@@ -654,6 +667,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   initial begin
     req_data = '0;
     kv_rd_resp = '0;
+    if (!$value$plusargs("RECOVERY_BLOCK_BYTES=%d", recovery_block_bytes))
+      recovery_block_bytes = 64;
+    if ((recovery_block_bytes < 4) || (recovery_block_bytes > 64) ||
+        ((recovery_block_bytes & (recovery_block_bytes - 1)) != 0))
+      $fatal(1, "RECOVERY_BLOCK_BYTES must be a power of two from 4 through 64");
+    recovery_block_words = recovery_block_bytes / (DATA_WIDTH / 8);
     uvm_config_db#(uvm_active_passive_enum)::set(
       null, "uvm_test_top.env.agent", "is_active", UVM_PASSIVE);
     uvm_config_db#(virtual axi4_caliptra_record_if)::set(
@@ -672,6 +691,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       $test$plusargs("FIFO_SOURCE_STREAM"));
     uvm_config_db#(bit)::set(
       null, "uvm_test_top.env.scoreboard", "expect_fifo_write", $test$plusargs("SRAM2FIFO_CASE"));
+    uvm_config_db#(int)::set(
+      null, "uvm_test_top.env.scoreboard", "recovery_block_words", recovery_block_words);
     run_test("axi_dma_top_uvm_bfm_test");
   end
 
@@ -924,6 +945,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (!scenario.test_block_size || !scenario.src_is_fifo)
         $fatal(1, "Generated FIFO recovery replay requires a FIFO block-size record");
       dma_gen_block_size_bytes = testcase_generator_block_sizes;
+      scenario.block_size = 12'(recovery_block_bytes);
+      dma_gen_block_size_bytes[generated_case_index] = 12'(recovery_block_bytes);
       SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
       DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
     end else if (fifo_recovery_case) begin
@@ -931,7 +954,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.src_is_fifo = 1'b1;
       scenario.use_rd_fixed = 1'b1;
       scenario.test_block_size = 1'b1;
-      scenario.block_size = 12'd64;
+      scenario.block_size = 12'(recovery_block_bytes);
       scenario.dst_offset = 32'h640;
       SRC_ADDR = FIFO_BASE_ADDR;
       DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);

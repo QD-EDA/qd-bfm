@@ -291,15 +291,21 @@ records feed the BFM recovery sequencer. The actual-DUT bench now ECC-checks
 and replays all 27 DCCM records through `axi_dma_top` under a hash-guarded
 profile covering all five named DMA routes, eight short sizes, and a 65,536-word
 fixed-read FIFO-to-SRAM stream. It also replays a 65-word fixed-write SRAM-to-
-FIFO case with randomized delays and a 65-word FIFO recovery case with a
-generated 64-byte block. Payloads and route-valid offsets remain per-record
-randomized, as does Caliptra's delay flag; the maximum stream drains the FIFO
-and checks all destination words. The actual DMA DUT reset-abort profile now
+FIFO case with randomized delays and a 65-word FIFO recovery sweep over
+4-, 8-, 16-, 32-, and 64-byte testbench block-size overrides on the generated
+DCCM record. Payloads and
+route-valid offsets remain per-record randomized, as does Caliptra's delay
+flag; the maximum stream drains the FIFO and checks all destination words. The
+actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
 [`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
-Other generated FIFO modes, firmware-triggered reset injection, remaining
-block sizes, and firmware remain open.
+Other generated FIFO modes, firmware-triggered reset injection, and firmware
+remain open. This sweep covers one AXI FIXED request per block through the
+64-byte maximum at Caliptra's 32-bit DMA data width; larger multi-request
+blocks remain unqualified.
+Run only the generated recovery-size sweep with
+`uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --recovery-block-sweep-only`.
 Caliptra's `inject_rst` metadata is consumed by `rand_test_dma.c`, which sends
 stdout-control request `0xEE`; `caliptra_top_tb_services.sv` turns that request
 into a delayed warm reset. The focused DMA replay does not run that firmware or
@@ -314,6 +320,8 @@ The DCCM-to-DUT replay is recorded in
 [`evidence/caliptra-bfm-dma-all-routes-20261006`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md),
 with follow-up evidence for the [FIFO destination](../../evidence/caliptra-bfm-dma-generated-fifo-destination-20261006/README.md)
 and [generated recovery block](../../evidence/caliptra-bfm-dma-generated-recovery-block-20261006/README.md).
+The [generated recovery block-size sweep](../../evidence/caliptra-bfm-dma-generated-recovery-sweep-20261006/README.md)
+covers the supported 4–64-byte range for AXI2AXI recovery blocks.
 `axi/tests/run_caliptra_axi_complex_bfm.sh` compiles against Caliptra's actual
 `caliptra_top_tb_pkg.sv`, `soc_ifc_pkg`, `axi_pkg`, and `axi_if`, then
 smoke-tests the replacement with Caliptra's `axi_complex_ctrl_t` and pinned
