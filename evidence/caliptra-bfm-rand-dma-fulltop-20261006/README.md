@@ -136,3 +136,21 @@ python3 scripts/run_with_memory_pressure_guard.py \
   --log /tmp/caliptra-trace-vpi.log -- \
   evidence/caliptra-bfm-open-top-smoke-20261006/run_trace_vpi_smoke.sh
 ```
+
+## Actual-top forced-reset follow-up (2026-10-07)
+
+The enhanced VPI bound to the real Caliptra top and observed the configured
+512-cycle reset delay: reset asserted at cycle 2,896 and deasserted at 2,906.
+The CPU resumed and the DMA produced 12 AXI write responses; a 13th write was
+in progress when the runner reached its 1,800-second timeout. There were no AXI
+reads, testcase pass marker, or fatal. This confirms actual-top reset signaling
+and post-reset write traffic, but not full DMA recovery or testcase completion.
+
+- Caliptra RTL commit: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
+- Profile: one `rand_test_dma` iteration, forced reset, 512-cycle delay, fast
+  TRNG, verified `.data` preload, quiet firmware, checker enabled, AXI/reset VPI
+- Memory guard: 40% floor; 48% minimum observed; timeout at 1,800 seconds
+- Endpoint: cycle 11,200; 13 AW, 197 W, 12 B, zero AR/R; `reset_n=1`, `fatal=0`
+- Trace: [sanitized simulation trace](../caliptra-bfm-rand-dma-reset-actual-top-20261007/sim-trace-sanitized.log); [structured result](../caliptra-bfm-rand-dma-reset-actual-top-20261007/result.json)
+- The raw simulation log is not checked in because it includes generated seed and secret-key output; the committed trace keeps only test configuration, reset, AXI, and cycle-counter records.
+- This run began before the Icarus `origin/main` merge to `BFM WORK`; it does not verify the merged simulator revision.

@@ -1,0 +1,70 @@
+{
+  "case": "rand_test_dma",
+  "classification": "partial reset/AXI traffic evidence; not a passing DMA test",
+  "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "iterations": 1,
+  "checker_enabled": true,
+  "diagnostic_profile": {
+    "fast_trng": true,
+    "fast_boot_data_preload_verified": true,
+    "quiet_firmware": true,
+    "axi_vpi_trace": true,
+    "forced_reset": true,
+    "reset_delay_cycles": 512,
+    "free_memory_floor_percent": 40,
+    "timeout_seconds": 1800
+  },
+  "compile_and_firmware_build": "completed",
+  "simulator_source_at_launch": {
+    "repository": "BFM WORK clone",
+    "head": "246c58e4580f38a130ec08e5a7e6d93f110a5084",
+    "working_tree_dirty": true,
+    "note": "Run started before merge commit ac4532fab037e91df2f903e67fb40f59baedccca; it does not exercise merged origin/main 197f9ba."
+  },
+  "simulator_merge_after_launch": {
+    "merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "origin_main": "197f9baece79e66d25524906fb7b54c9faa8f4e2"
+  },
+  "stop": {
+    "reason": "memory-guard timeout",
+    "runner_exit_code": 124,
+    "minimum_free_memory_percent": 48,
+    "memory_floor_hit": false
+  },
+  "trace_endpoint": {
+    "cycle": 11200,
+    "retired_instructions": 3597,
+    "pc": "0x0000dd32",
+    "ready_mb": 0,
+    "reset_n": 1,
+    "fatal": 0,
+    "axi_ar": 0,
+    "axi_aw": 13,
+    "axi_w": 197,
+    "axi_b": 12,
+    "axi_r": 0
+  },
+  "reset_edges": [
+    {
+      "state": "assert",
+      "cycle": 2896,
+      "pending": 1,
+      "wait_cycles": 512,
+      "start_cycle": 2382
+    },
+    {
+      "state": "deassert",
+      "cycle": 2906,
+      "pending": 0,
+      "wait_cycles": 512,
+      "start_cycle": 2382
+    }
+  ],
+  "testcase_pass_marker_seen": false,
+  "failure_marker_seen": false,
+  "trace_log": "sim-trace-sanitized.log",
+  "trace_log_sha256": "4d765956888cadfcf5ca164eccff59efd079c8133dc1a2622894f53157a59abf",
+  "compile_log_sha256_not_copied": "19c966f9fdb9186a066adc706c98892502290151a586b46c646856ec548a6c0a",
+  "compiled_top_image_sha256": "ecf97721d5263c9b2f9718e0cfb475272f979d25fd257267526920703880e401",
+  "raw_sim_log_note": "Not checked in: firmware output contains generated seed and secret-key material; saved trace is filtered to control, reset, and AXI events."
+}
