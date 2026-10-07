@@ -13,6 +13,14 @@ RUNNER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(RUNNER)
 
 
+class ToolchainPrefixTest(unittest.TestCase):
+    def test_accepts_absolute_prefix_with_trailing_dash(self):
+        env = {"PATH": "/usr/bin"}
+        prefix = RUNNER.normalize_gcc_prefix("/opt/riscv/bin/riscv64-unknown-elf-", env)
+        self.assertEqual(prefix, "riscv64-unknown-elf")
+        self.assertEqual(env["PATH"], f"/opt/riscv/bin{RUNNER.os.pathsep}/usr/bin")
+
+
 class ProfileOverlayTest(unittest.TestCase):
     def test_fast_trng_profile_hash_checks_combined_top_overlay(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -28,6 +36,7 @@ class ProfileOverlayTest(unittest.TestCase):
                     RUNNER.FAST_TRNG_TOP_TB_OVERLAY_SHA256)):
                 RUNNER.prepare_jtag_port_overlay(Path(temp) / "rtl", output, fast_trng=True)
             overlay = output.read_text()
+            self.assertTrue(overlay.startswith("`timescale 1ns/1ps\n"))
             self.assertIn(".ListenPort     (0)", overlay)
             self.assertIn("physical_rng #(.DutyCycle(50)) physical_rng (", overlay)
 
@@ -73,6 +82,7 @@ class ProfileOverlayTest(unittest.TestCase):
         top_tb = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
         top_services = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_services.sv"
         generator = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
+        axi4pc = "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv"
         with tempfile.TemporaryDirectory() as temp:
             temp = Path(temp)
             baseline = temp / "base.vf"
@@ -100,6 +110,7 @@ class ProfileOverlayTest(unittest.TestCase):
             baseline.write_text(
                 f"+incdir+${{CALIPTRA_ROOT}}/src/integration/tb\n{original_aes_pkg}\n{original_axi_if}\n{original}\n{sram_export}\n"
                 f"{top_sva}\n{soc_bfm}\n{top_tb}\n{generator}\n{top_services}\n"
+                f"{axi4pc}\n"
             )
 
             def fake_aes_pkg_overlay(_rtl, path):
@@ -110,10 +121,18 @@ class ProfileOverlayTest(unittest.TestCase):
 
             with patch.object(RUNNER, "prepare_aes_pkg_overlay", side_effect=fake_aes_pkg_overlay), \
                     patch.object(RUNNER, "prepare_axi_if_overlay", side_effect=fake_axi_if_overlay):
-                RUNNER.prepare_iverilog_profile(
+                excluded_sources = RUNNER.prepare_iverilog_profile(
                     baseline, generated, REPO, rtl, checker_overlay, reset_overlay, jtag_overlay,
                     pq_vector_overlay=services_overlay,
                 )
+                self.assertEqual(excluded_sources, [axi4pc])
+                baseline.write_text(baseline.read_text().replace(f"{axi4pc}\n", ""))
+                excluded_sources = RUNNER.prepare_iverilog_profile(
+                    baseline, temp / "without_axi4pc.vf", REPO, rtl,
+                    checker_overlay, reset_overlay, jtag_overlay,
+                    pq_vector_overlay=services_overlay,
+                )
+                self.assertEqual(excluded_sources, [])
 
             content = generated.read_text()
             self.assertNotIn(original_aes_pkg, content)
@@ -125,6 +144,7 @@ class ProfileOverlayTest(unittest.TestCase):
             self.assertIn(str(REPO / "dv/caliptra_bfm/axi/axi4_caliptra_dma_subordinate.sv"), content)
             self.assertNotIn(sram_export, content)
             self.assertNotIn(top_sva, content)
+            self.assertNotIn(axi4pc, content)
             self.assertIn(str(checker_overlay), content)
             self.assertNotIn(soc_bfm, content)
             self.assertNotIn(top_tb, content)
@@ -215,6 +235,17 @@ class FastBootDataPreloadTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "startup branch"):
                 RUNNER.prepare_fast_boot_data_preload(program, dccm, map_file, dis_file)
             self.assertEqual((program.read_text(), dccm.read_text()), originals)
+
+
+class DmaGeneratorOverlayTest(unittest.TestCase):
+    def test_full_top_generator_uses_services_helper_scope(self):
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "dma_testcase_generator_icarus.sv"
+            with patch.object(RUNNER.subprocess, "run") as run:
+                RUNNER.prepare_dma_generator_overlay(Path(temp) / "rtl", output)
+            command = run.call_args.args[0]
+            self.assertEqual(command[command.index("--top") + 1],
+                             "caliptra_top_tb.tb_services_i")
 
 
 class FirstAesCaseDiagnosticTest(unittest.TestCase):

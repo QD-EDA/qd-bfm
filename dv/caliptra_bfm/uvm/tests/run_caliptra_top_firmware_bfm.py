@@ -23,6 +23,7 @@ ORIGINAL_SOC_BFM = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_soc_bfm.
 ORIGINAL_TOP_TB = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb.sv"
 ORIGINAL_TOP_SERVICES = "${CALIPTRA_ROOT}/src/integration/tb/caliptra_top_tb_services.sv"
 ORIGINAL_DMA_GENERATOR = "${CALIPTRA_ROOT}/src/integration/tb/dma_testcase_generator.sv"
+ORIGINAL_AXI4PC = "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv"
 CASE_NAMES = ("smoke_test_dma", "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma")
 AES_PKG_SHA256 = "19a0096ffb731c99778d68a7baa81d0aa33c8b86a665231005d50251087a710f"
 AES_PKG_OVERLAY_SHA256 = "d29c80cd5e51629b25a924e5249f85032c0b42f0f4006c3944906395e98ec158"
@@ -53,9 +54,10 @@ SVA_DIAGNOSTICS_TO_REMOVE = (
 SOC_BFM_SHA256 = "e0c60be6ad48681458ca38093a494ae263304997e658c5eefa006881da10ae06"
 TOP_TB_SHA256 = "c212c32da99e90cd3991da65e653998cac3e945d7479abfd640b9d82f47659f9"
 PHYSICAL_RNG_SHA256 = "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c38abf01f"
-TOP_TB_JTAG_OVERLAY_SHA256 = "df8d51cc7ad84000288f5d7c19641f433d59ae213314fa81b9d9e5f8a6b76c6e"
-FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "808ed4625254bf4f6d2d36d000d28a094e890fc51429f32327f2d02744b6407b"
+TOP_TB_JTAG_OVERLAY_SHA256 = "6b3d6eeb6bbb3acddcc6045b86c9cc6c6ca3934164f29564485a9a3d2fc4d02a"
+FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "c4dbd3f75055982a5b31d05d8ba66039027b48b056e769985722a4db4b02dea6"
 TOP_SERVICES_SHA256 = "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343"
+DMA_GENERATOR_HELPER_SCOPE = "caliptra_top_tb.tb_services_i"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
 BAD = re.compile(
     r"\b(?:UVM_)?(?:ERROR|FATAL)\b|\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
@@ -215,7 +217,7 @@ def prepare_jtag_port_overlay(rtl_root, output_path, fast_trng=False):
     before = ".ListenPort     (63224)"
     if text.count(before) != 1:
         raise ValueError("expected exactly one JTAG DPI listen port")
-    overlay = text.replace(before, ".ListenPort     (0)", 1)
+    overlay = "`timescale 1ns/1ps\n" + text.replace(before, ".ListenPort     (0)", 1)
     if fast_trng:
         overlay = accelerate_physical_rng_for_diagnostic(overlay)
     Path(output_path).write_text(overlay)
@@ -244,6 +246,14 @@ def prepare_pq_vector_overlay(rtl_root, output_path):
     Path(output_path).write_text(skip_pq_vector_generators(source.read_text()))
 
 
+def prepare_dma_generator_overlay(rtl_root, output_path):
+    generator_script = REPO / "docs/conformance/release_overlays/caliptra/dma_testcase_generator_overlay.py"
+    subprocess.run([
+        sys.executable, str(generator_script), "--caliptra-root", str(rtl_root),
+        "--output", str(output_path), "--top", DMA_GENERATOR_HELPER_SCOPE,
+    ], check=True)
+
+
 def prepare_first_aes_case_source(rtl_root, output_dir):
     source = Path(rtl_root) / "src/integration/test_suites/smoke_test_dma_aes_gcm_short_1_dword"
     source_file = source / "smoke_test_dma_aes_gcm_short_1_dword.c"
@@ -264,6 +274,10 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
                              generator_overlay=None, pq_vector_overlay=None):
     text = Path(base_profile).read_text()
     lines = text.splitlines()
+    if lines.count(ORIGINAL_AXI4PC) > 1:
+        raise ValueError(f"Icarus profile contains duplicate licensed checker entries: {ORIGINAL_AXI4PC}")
+    excluded_sources = [ORIGINAL_AXI4PC] if ORIGINAL_AXI4PC in lines else []
+    lines = [line for line in lines if line != ORIGINAL_AXI4PC]
     for source in (ORIGINAL_AES_PKG, ORIGINAL_AXI_IF, ORIGINAL_AXI_COMPLEX, ORIGINAL_SRAM_EXPORT, ORIGINAL_TOP_SVA,
                    ORIGINAL_SOC_BFM, ORIGINAL_TOP_TB, ORIGINAL_DMA_GENERATOR):
         if lines.count(source) != 1:
@@ -315,6 +329,7 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     lines = [replacements.get(line, line) for line in lines]
     lines.extend(str(source) for source in sources)
     Path(output_profile).write_text("\n".join(lines) + "\n")
+    return excluded_sources
 
 
 def load_case(rtl_root, name):
@@ -477,6 +492,13 @@ def required_env(name):
     if not path.exists():
         raise ValueError(f"{name} does not exist: {path}")
     return path
+
+
+def normalize_gcc_prefix(prefix, env):
+    prefix_path = Path(prefix.removesuffix("-"))
+    if prefix_path.parent != Path("."):
+        env["PATH"] = f"{prefix_path.parent}{os.pathsep}{env.get('PATH', '')}"
+    return prefix_path.name
 
 
 def run_logged(command, cwd, env, logfile):
@@ -650,11 +672,7 @@ def main():
     generator_overlay = None
     if args.case == "rand_test_dma":
         generator_overlay = args.output / "dma_testcase_generator_icarus.sv"
-        generator_script = REPO / "docs/conformance/release_overlays/caliptra/dma_testcase_generator_overlay.py"
-        subprocess.run([
-            sys.executable, str(generator_script), "--caliptra-root", str(rtl),
-            "--output", str(generator_overlay), "--top", "caliptra_top_tb",
-        ], check=True)
+        prepare_dma_generator_overlay(rtl, generator_overlay)
     pq_vector_overlay = None
     first_aes_case = None
     if skip_pq_vectors:
@@ -662,16 +680,17 @@ def main():
         prepare_pq_vector_overlay(rtl, pq_vector_overlay)
     if args.first_aes_case_diagnostic:
         first_aes_case = prepare_first_aes_case_source(rtl, args.output / "first_aes_case_source")
-    prepare_iverilog_profile(base_profile, profile, REPO, rtl, checker_overlay,
-                             reset_overlay, jtag_overlay, generator_overlay, pq_vector_overlay)
-
     env = os.environ.copy()
+    gcc_prefix = normalize_gcc_prefix(gcc_prefix, env)
     env.update(
         CALIPTRA_ROOT=str(rtl),
         CALIPTRA_PRIM_ROOT=str(rtl / "src/caliptra_prim_generic"),
         CALIPTRA_PRIM_MODULE_PREFIX="caliptra_prim_generic",
         CALIPTRA_AXI4PC_DIR=str(rtl / "src/integration/tb"),
     )
+    profile_excluded_sources = prepare_iverilog_profile(
+        base_profile, profile, REPO, rtl, checker_overlay,
+        reset_overlay, jtag_overlay, generator_overlay, pq_vector_overlay)
     vector_files, vector_hashes, vector_commands, vector_tools = prepare_native_vectors(
         rtl, args.output, env
     )
@@ -759,6 +778,7 @@ def main():
         "pq_vector_overlay_sha256": sha256(pq_vector_overlay) if pq_vector_overlay else None,
         "dma_generator_overlay_sha256": sha256(generator_overlay) if generator_overlay else None,
         "profile_sha256": sha256(profile),
+        "profile_excluded_sources": profile_excluded_sources,
         "compile_command": compile_command,
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
