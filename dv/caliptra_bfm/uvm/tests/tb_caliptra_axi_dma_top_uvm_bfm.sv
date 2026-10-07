@@ -359,6 +359,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     bit expect_fifo_write;
     int recovery_block_words;
     int recovery_burst_words;
+    int recovery_write_burst_words;
 
     `uvm_component_utils(axi_dma_top_bfm_scoreboard)
 
@@ -380,6 +381,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         recovery_block_words = 16;
       recovery_burst_words = (recovery_block_words > MAX_FIXED_BURST_WORDS) ?
                              MAX_FIXED_BURST_WORDS : recovery_block_words;
+      recovery_write_burst_words = (recovery_block_words > MAX_BURST_WORDS) ?
+                                   MAX_BURST_WORDS : recovery_block_words;
     endfunction
 
     function logic [31:0] source_word(input int index);
@@ -451,8 +454,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             `uvm_fatal("DMA_TOP_WRITE_PROFILE", $sformatf("DMA SRAM write address/burst mismatch: %s", item.convert2string()))
         end
         if (expect_fifo_recovery) begin
-          if (expected_beats > recovery_burst_words)
-            expected_beats = recovery_burst_words;
+          if (expected_beats > recovery_write_burst_words)
+            expected_beats = recovery_write_burst_words;
         end
         if (item.awuser != AXUSER ||
             item.buser != AXUSER || item.resp != expected_resp ||
@@ -511,7 +514,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     task run_phase(uvm_phase phase);
       int expected_read_prefix;
       int expected_write_prefix;
-      int expected_recovery_bursts;
+      int expected_recovery_read_bursts;
+      int expected_recovery_write_bursts;
       phase.raise_objection(this);
       if ($test$plusargs("RESET_ABORT")) begin
         fork
@@ -583,11 +587,14 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   env.scoreboard.write_count == 5 &&
                   env.scoreboard.write_word_offset == WORD_COUNT);
           end else if (env.scoreboard.expect_fifo_recovery) begin
-            expected_recovery_bursts =
+            expected_recovery_read_bursts =
                 (active_word_count + env.scoreboard.recovery_burst_words - 1) /
                 env.scoreboard.recovery_burst_words;
-            wait (run_done && env.scoreboard.write_count == expected_recovery_bursts &&
-                  env.scoreboard.read_count == expected_recovery_bursts &&
+            expected_recovery_write_bursts =
+                (active_word_count + env.scoreboard.recovery_write_burst_words - 1) /
+                env.scoreboard.recovery_write_burst_words;
+            wait (run_done && env.scoreboard.write_count == expected_recovery_write_bursts &&
+                  env.scoreboard.read_count == expected_recovery_read_bursts &&
                   env.scoreboard.write_word_offset == active_word_count &&
                   env.scoreboard.read_word_offset == active_word_count);
           end else if ($test$plusargs("GENERATED_CASE")) begin

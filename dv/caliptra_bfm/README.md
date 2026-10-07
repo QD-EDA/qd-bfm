@@ -303,9 +303,10 @@ a complete post-reset 65-word transfer. See
 Other generated FIFO modes, firmware-triggered reset injection, and firmware
 remain open. This sweep covers one AXI FIXED request per block through the
 64-byte maximum at Caliptra's 32-bit DMA data width. An exploratory 128-byte
-block transfer remained in Caliptra's `DMA_WAIT_DATA` state with 16 internal
-FIFO words buffered and `recovery_data_avail` asserted; larger multi-request
-blocks remain unqualified pending investigation of this interaction.
+override remained in Caliptra's `DMA_WAIT_DATA` state with 16 internal FIFO
+words buffered and `recovery_data_avail` asserted. That override is outside the
+pinned AXI2AXI randomizer constraint, which caps recovery blocks at 64 bytes;
+larger blocks on AXI2MBOX and AXI2AHB recovery routes remain unqualified.
 Run only the generated recovery-size sweep with
 `uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --recovery-block-sweep-only`.
 Caliptra's `inject_rst` metadata is consumed by `rand_test_dma.c`, which sends
