@@ -390,12 +390,12 @@ source references `trans_ap`. Those real keys are provided here, so no fake
 predictor, scoreboard, and RAL package now compile with the clean-room provider
 through `tests/run_adams_mldsa_env_compile.py`. Its actual generated HDL top
 also passes a focused runtime against `abr_top`: the generated RAL frontdoor
-writes one seed word at `0x58`, then an MVC sequence reads `MLDSA_VERSION` at
-`0x8` and receives `0x302e322e` over 32-bit AHB with zero UVM errors, fatals,
-or scoreboard mismatches. The generated predictor and scoreboard
-intentionally skip version-register comparisons, so this probe checks the RAL
-write path, MVC read response, and absence of unexpected mismatches; it does
-not qualify MLDSA signing, KAT, error-path, or full-top behavior. Its checked-in
+writes one seed word at `0x58` and reads `MLDSA_VERSION` at `0x8`, receiving
+`0x302e322e` over 32-bit AHB with zero UVM errors, fatals, or scoreboard
+mismatches. The generated predictor and scoreboard intentionally skip
+version-register comparisons, so this probe checks both RAL frontdoor paths
+and the absence of unexpected mismatches; it does not qualify MLDSA signing,
+KAT, error-path, or full-top behavior. Its checked-in
 `qvip_ahb_lite_slave_params_pkg.sv` sets one master, one slave, 32-bit address,
 and 32-bit write/read data. Compile the clean-room provider with
 `+define+CALIPTRA_BFM_AHB_32BIT` for this environment; the default Caliptra
