@@ -7280,6 +7280,910 @@
             "source": "src/soc_ifc/stimulus/testsuites/uvmf_soc_ifc_promote_regression.yml"
           }
         ],
+        "test_yaml_configuration": [
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/csrng/stimulus/tests/directed/csrng_test.yml",
+            "testname": "csrng_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/doe/stimulus/tests/directed/doe_cbc_nist_test.yml",
+            "testname": "doe_cbc_nist_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+ECC_TEST_VECTOR_FILE='${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex'"
+              },
+              {
+                "line": 18,
+                "value": "+ECC_TEST='ECC_normal_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ecc/stimulus/tests/directed/ecc_normal_test.yml",
+            "testname": "ecc_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+ECC_TEST_VECTOR_FILE='${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex'"
+              },
+              {
+                "line": 18,
+                "value": "+ECC_TEST='ECC_otf_reset_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ecc/stimulus/tests/directed/ecc_otf_reset_test.yml",
+            "testname": "ecc_otf_reset_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+ECC_TEST_VECTOR_FILE='${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex'"
+              },
+              {
+                "line": 18,
+                "value": "+ECC_TEST='ECC_sca_config_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ecc/stimulus/tests/directed/ecc_sca_config_test.yml",
+            "testname": "ecc_sca_config_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/entropy_src/stimulus/tests/directed/entropy_src_test.yml",
+            "testname": "entropy_src_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/hmac/stimulus/tests/directed/hmac_normal_test.yml",
+            "testname": "hmac_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+HMAC_DRBG_TEST_VECTOR_FILE='${CALIPTRA_ROOT}/src/hmac_drbg/tb/test_vectors/hmac_drbg_tb.hex'"
+              },
+              {
+                "line": 18,
+                "value": "+HMAC_DRBG_TEST='HMAC_DRBG_directed_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/hmac_drbg/stimulus/tests/directed/hmac_drbg_directed_test.yml",
+            "testname": "hmac_drbg_directed_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+HMAC_DRBG_TEST='HMAC_DRBG_randomized_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/hmac_drbg/stimulus/tests/randomized/hmac_drbg_randomized_test.yml",
+            "testname": "hmac_drbg_randomized_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sha256/stimulus/tests/directed/sha256_normal_test.yml",
+            "testname": "sha256_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/sha256/stimulus/tests/random/sha256_random_test.yml",
+            "testname": "sha256_random_test",
+            "testname_line": 4
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sha512/stimulus/tests/directed/sha512_normal_test.yml",
+            "testname": "sha512_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='debug_unlock_manuf_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/debug_unlock_manuf_test.yml",
+            "testname": "debug_unlock_manuf_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='debug_unlock_prod_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/debug_unlock_prod_test.yml",
+            "testname": "debug_unlock_prod_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='fuse_cptra_cap_reg_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/fuse_cptra_cap_test.yml",
+            "testname": "fuse_cptra_cap_reg_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='fuse_reg_axi_user_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/fuse_reg_axi_user_test.yml",
+            "testname": "fuse_reg_axi_user_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='fuse_reg_lifecycle_test'"
+              },
+              {
+                "line": 18,
+                "value": "+SECURITY_STATE='RANDOM'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 24,
+            "source": "src/soc_ifc/stimulus/tests/directed/fuse_reg_lifecycle_test.yml",
+            "testname": "fuse_reg_lifecycle_test",
+            "testname_line": 23
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='fuse_reg_perm_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1692834441",
+            "seed_line": 21,
+            "source": "src/soc_ifc/stimulus/tests/directed/fuse_reg_perm_test.yml",
+            "testname": "fuse_reg_perm_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='fuse_reg_prod_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/fuse_reg_prod_test.yml",
+            "testname": "fuse_reg_prod_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='rvtime_reg_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/rvtime_reg_test.yml",
+            "testname": "rvtime_reg_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='sha_acc_intrblk_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/sha_acc_intrblk_test.yml",
+            "testname": "sha_acc_intrblk_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='single_socreg_test'"
+              },
+              {
+                "line": 19,
+                "value": "+SOCREG_METHOD_NAME='AHB.INTR_BRF_NOTIF_INTERNAL_INTR_R'"
+              },
+              {
+                "line": 20,
+                "value": "+SOCREG_WRCOUNT=20"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1687838882",
+            "seed_line": 24,
+            "source": "src/soc_ifc/stimulus/tests/directed/single_socreg_test.yml",
+            "testname": "single_socreg_test",
+            "testname_line": 22
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_ifc_axi_sha_acc_dis_tb.yml",
+            "testname": "soc_ifc_axi_sha_acc_dis_tb",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 18,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_ifc_test.yml",
+            "testname": "soc_ifc_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='soc_reg_intrblk_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_reg_intrblk_test.yml",
+            "testname": "soc_reg_intrblk_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='soc_reg_invalid_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_reg_invalid_test.yml",
+            "testname": "soc_reg_invalid_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='soc_reg_pwron_test'"
+              },
+              {
+                "line": 18,
+                "value": "+SECURITY_STATE='DEBUG_LOCKED_PRODUCTION'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 21,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_reg_pwron_test.yml",
+            "testname": "soc_reg_pwron_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='soc_reg_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_reg_test.yml",
+            "testname": "soc_reg_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='soc_reg_wrmrst_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/soc_reg_wrmrst_test.yml",
+            "testname": "soc_reg_wrmrst_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='ss_soc_dbg_unlock_level_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/ss_soc_dbg_unlock_level_test.yml",
+            "testname": "ss_soc_dbg_unlock_level_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='ss_strap_reg_lifecycle_test'"
+              },
+              {
+                "line": 18,
+                "value": "+SECURITY_STATE='RANDOM'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 24,
+            "source": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_lifecycle_test.yml",
+            "testname": "ss_strap_reg_lifecycle_test",
+            "testname_line": 23
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='ss_strap_reg_prod_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_prod_test.yml",
+            "testname": "ss_strap_reg_prod_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='ss_strap_reg_pwron_test'"
+              },
+              {
+                "line": 18,
+                "value": "+SECURITY_STATE='DEBUG_LOCKED_PRODUCTION'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 21,
+            "source": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_pwron_test.yml",
+            "testname": "ss_strap_reg_pwron_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SOC_IFC_TEST='ss_strap_reg_wrmrst_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_wrmrst_test.yml",
+            "testname": "ss_strap_reg_wrmrst_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/uart/stimulus/tests/directed/uart_test.yml",
+            "testname": "uart_test",
+            "testname_line": 16
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ECC_normal_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/tests/src/ECC_normal_test.yml",
+            "testname": "ECC_normal_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ECC_otf_reset_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/tests/src/ECC_otf_reset_test.yml",
+            "testname": "ECC_otf_reset_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=HMAC_otf_reset_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/tests/src/HMAC_otf_reset_test.yml",
+            "testname": "HMAC_otf_reset_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=HMAC_random_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/tests/src/HMAC_random_test.yml",
+            "testname": "HMAC_random_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=caliptra_top_cmdline_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_cmdline_test.yml",
+            "testname": "caliptra_top_cmdline_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=caliptra_top_rand_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_rand_test.yml",
+            "testname": "caliptra_top_rand_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=caliptra_top_rom_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_rom_test.yml",
+            "testname": "caliptra_top_rom_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=caliptra_top_wdt_independent_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_wdt_independent_test.yml",
+            "testname": "caliptra_top_wdt_independent_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=caliptra_top_wdt_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_wdt_test.yml",
+            "testname": "caliptra_top_wdt_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=example_derived_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/example_derived_test.yml",
+            "testname": "example_derived_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=kv_rand_debug_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_debug_test.yml",
+            "testname": "kv_rand_debug_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=kv_rand_lock_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_lock_test.yml",
+            "testname": "kv_rand_lock_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=kv_rand_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_test.yml",
+            "testname": "kv_rand_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=kv_rand_wr_rd_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_wr_rd_test.yml",
+            "testname": "kv_rand_wr_rd_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=pv_rand_lock_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_lock_test.yml",
+            "testname": "pv_rand_lock_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=pv_rand_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_test.yml",
+            "testname": "pv_rand_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=pv_rand_wr_rd_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_wr_rd_test.yml",
+            "testname": "pv_rand_wr_rd_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=SHA512_random_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/tests/src/SHA512_random_test.yml",
+            "testname": "SHA512_random_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=example_derived_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/tests/src/example_derived_test.yml",
+            "testname": "example_derived_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=soc_ifc_cmdline_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_cmdline_test.yml",
+            "testname": "soc_ifc_cmdline_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=soc_ifc_rand_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_rand_test.yml",
+            "testname": "soc_ifc_rand_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=soc_ifc_trng_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 3,
+            "source": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_trng_test.yml",
+            "testname": "soc_ifc_trng_test",
+            "testname_line": 6
+          }
+        ],
         "unit_rtl_filelists": [
           {
             "absent_source_references": [],
@@ -7356,7 +8260,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "78614e6aa69492f44feadd10d8f2243e88e1143bf0cb08ac9dbbc965b9236bc6",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7438,7 +8342,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "6d1f49187b8bcf3b3e9343e63fc2c35dfe1964423e8493aee62ccbbac9ee31f4",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7520,7 +8424,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "df51d9f7f341f30cb4164fe8fd0b0aa829d44f5cc9758d36a7586a359b6d7fa1",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7623,7 +8527,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "7ab43efdf5476f1bfee0bbf71cd0ea24d9e62cf696f62cb02b3357aa93e8b913",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7729,7 +8633,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "eccce574f370586a370de4cd4b35b49f12f47d8932480107f133f6f5b026fc76",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7809,7 +8713,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "6f3b18d20ec43fee4ec19db2bd04fd78944b2da60a207885c04980d55d870027",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7904,7 +8808,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "e54231cbedefd6c327e7f770fdfe60fffe8c70a788dce2ec4fa485fd10721dda",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -7998,7 +8902,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "7acc19bfa5490af3ad69fbaa7144a3f4eae352116888473532f578fca8e50b99",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -8287,7 +9191,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "583004fe4cf8363edf9219c84e2e3c00898ae754787eb4a2a4940cc1bc188a35",
             "symbolic_source_references": [
               "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv",
@@ -8576,7 +9480,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "9892643a7eb1c89a98b1aec4c3aceee17224d077263919317d5d2bf146a1ae90",
             "symbolic_source_references": [
               "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv",
@@ -8865,7 +9769,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "9892643a7eb1c89a98b1aec4c3aceee17224d077263919317d5d2bf146a1ae90",
             "symbolic_source_references": [
               "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv",
@@ -8926,7 +9830,7 @@
             "provider_variables": [
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "414bf04a9e626ca01b42d980293a7715e36ea83b15c1ced445ace2968dbc3515",
             "symbolic_source_references": []
           },
@@ -8967,7 +9871,7 @@
             "provider_variables": [
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "4adf1198fe9810abc59b3e354a48f7d6f746f8f5e4dbb94ee2993105281e858b",
             "symbolic_source_references": []
           },
@@ -9045,7 +9949,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "faf773b5e79b9f589430ac17a5117d94d86173223841f406f148a645ed23b0d0",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -9133,7 +10037,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "bae41641951dfddc30bbd63eebf7c6fe2f844d7e576d8e075c75d2dec0853b79",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -9245,7 +10149,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "b5c01040fcfb0921df2b71d9132368965bd318d8975ccfdca222f95b40ce9cc8",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -9361,7 +10265,7 @@
               "CALIPTRA_PRIM_ROOT",
               "CALIPTRA_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "3535d6a5824a8a75d12b9e44f605261f2ae34cd3d6dcc94626c49d3f6e701306",
             "symbolic_source_references": [
               "${CALIPTRA_PRIM_ROOT}/rtl/${CALIPTRA_PRIM_MODULE_PREFIX}_and2.sv",
@@ -12265,6 +13169,735 @@
             "source": "src/abr_top/stimulus/testsuites/abr_top_nightly_random_regression.yml"
           }
         ],
+        "test_yaml_configuration": [
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 16,
+            "source": "src/abr_libs/stimulus/tests/directed/masking_test.yml",
+            "testname": "masking_test",
+            "testname_line": 15
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/abr_sha3/stimulus/tests/directed/abr_sha3_rand_test.yml",
+            "testname": "abr_sha3_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 17,
+                "value": "+SHA3_TEST='five_squeeze_test'"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 20,
+            "source": "src/abr_sha3/stimulus/tests/directed/five_squeeze_test.yml",
+            "testname": "five_squeeze_test",
+            "testname_line": 19
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/cbd_sampler/stimulus/tests/directed/cbd_rand_test.yml",
+            "testname": "cbd_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 21,
+            "source": "src/compress/stimulus/tests/directed/compress_normal_test.yml",
+            "testname": "compress_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/decompose/stimulus/tests/directed/decompose_normal_test.yml",
+            "testname": "decompose_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/exp_mask/stimulus/tests/directed/exp_rand_test.yml",
+            "testname": "exp_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 18,
+            "source": "src/makehint/stimulus/tests/directed/makehint_normal_test.yml",
+            "testname": "makehint_normal_test",
+            "testname_line": 17
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/norm_check/stimulus/tests/directed/norm_check_normal_test.yml",
+            "testname": "norm_check_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ntt_top/stimulus/tests/directed/butterfly_normal_test.yml",
+            "testname": "butterfly_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ntt_top/stimulus/tests/directed/ntt_masking_normal_test.yml",
+            "testname": "ntt_masking_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 21,
+            "source": "src/ntt_top/stimulus/tests/directed/ntt_normal_test.yml",
+            "testname": "ntt_normal_test",
+            "testname_line": 20
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/pk_decode/stimulus/tests/directed/pkdecode_normal_test.yml",
+            "testname": "pkdecode_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 18,
+            "source": "src/power2round/stimulus/tests/directed/power2round_normal_test.yml",
+            "testname": "power2round_normal_test",
+            "testname_line": 17
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/rej_bounded/stimulus/tests/directed/rej_rand_test.yml",
+            "testname": "rej_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/rej_sampler/stimulus/tests/directed/rej_rand_test.yml",
+            "testname": "rej_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "${PLAYBOOK_RANDOM_SEED}",
+            "seed_line": 17,
+            "source": "src/sample_in_ball/stimulus/tests/directed/sib_rand_test.yml",
+            "testname": "sib_rand_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sig_decode_z/stimulus/tests/directed/sigdecode_z_normal_test.yml",
+            "testname": "sigdecode_z_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sig_encode_z/stimulus/tests/directed/sigencode_z_normal_test.yml",
+            "testname": "sigencode_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 18,
+            "source": "src/sigdecode_h/stimulus/tests/directed/sigdecode_h_normal_test.yml",
+            "testname": "sigdecode_h_normal_test",
+            "testname_line": 17
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sk_decode/stimulus/tests/directed/skdecode_normal_test.yml",
+            "testname": "skdecode_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "authored",
+            "parse_warnings": [],
+            "runtime_plusargs": [],
+            "runtime_plusargs_declared": false,
+            "seed": "1",
+            "seed_line": 17,
+            "source": "src/sk_encode/stimulus/tests/directed/skencode_normal_test.yml",
+            "testname": "skencode_normal_test",
+            "testname_line": 16
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_keygen_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_keygen_KATs_test.yml",
+            "testname": "ML_DSA_keygen_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_keygen_signing_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_keygen_signing_KATs_test.yml",
+            "testname": "ML_DSA_keygen_signing_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_KeySign_stream_msg_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_KeySign_stream_msg_test.yml",
+            "testname": "ML_DSA_randomized_KeySign_stream_msg_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_all_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_all_test.yml",
+            "testname": "ML_DSA_randomized_all_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_early_run_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_early_run_test.yml",
+            "testname": "ML_DSA_randomized_early_run_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_h_decode_fail_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_h_decode_fail_test.yml",
+            "testname": "ML_DSA_randomized_h_decode_fail_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_key_gen_and_sign_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_key_gen_and_sign_test.yml",
+            "testname": "ML_DSA_randomized_key_gen_and_sign_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_key_gen_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_key_gen_test.yml",
+            "testname": "ML_DSA_randomized_key_gen_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_reset_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_reset_test.yml",
+            "testname": "ML_DSA_randomized_reset_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_sign_gen_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_sign_gen_test.yml",
+            "testname": "ML_DSA_randomized_sign_gen_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_two_verif_on_fail_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_two_verif_on_fail_test.yml",
+            "testname": "ML_DSA_randomized_two_verif_on_fail_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_verif_fail_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_fail_test.yml",
+            "testname": "ML_DSA_randomized_verif_fail_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_verif_stream_msg_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_stream_msg_test.yml",
+            "testname": "ML_DSA_randomized_verif_stream_msg_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_verif_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_test.yml",
+            "testname": "ML_DSA_randomized_verif_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_zeroize_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_zeroize_test.yml",
+            "testname": "ML_DSA_randomized_zeroize_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_verif_KATs_stream_msg_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_verif_KATs_stream_msg_test.yml",
+            "testname": "ML_DSA_verif_KATs_stream_msg_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_verif_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_verif_KATs_test.yml",
+            "testname": "ML_DSA_verif_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_decaps_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_decaps_KATs_test.yml",
+            "testname": "ML_KEM_decaps_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_encaps_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_encaps_KATs_test.yml",
+            "testname": "ML_KEM_encaps_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_keygen_KATs_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_keygen_KATs_test.yml",
+            "testname": "ML_KEM_keygen_KATs_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_keygen_decaps_self_check_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_keygen_decaps_self_check_test.yml",
+            "testname": "ML_KEM_keygen_decaps_self_check_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_overwrite_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_overwrite_test.yml",
+            "testname": "ML_KEM_overwrite_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_all_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_all_test.yml",
+            "testname": "ML_KEM_randomized_all_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_decap_input_fail_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_decap_input_fail_test.yml",
+            "testname": "ML_KEM_randomized_decap_input_fail_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_decap_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_decap_test.yml",
+            "testname": "ML_KEM_randomized_decap_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_encap_input_fail_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_encap_input_fail_test.yml",
+            "testname": "ML_KEM_randomized_encap_input_fail_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_encap_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_encap_test.yml",
+            "testname": "ML_KEM_randomized_encap_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_keygen_decap_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_keygen_decap_test.yml",
+            "testname": "ML_KEM_randomized_keygen_decap_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_KEM_randomized_keygen_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": null,
+            "seed_line": null,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_keygen_test.yml",
+            "testname": "ML_KEM_randomized_keygen_test",
+            "testname_line": 6
+          },
+          {
+            "category": "generated_uvmf",
+            "parse_warnings": [],
+            "runtime_plusargs": [
+              {
+                "line": 5,
+                "value": "+UVM_TESTNAME=ML_DSA_randomized_key_gen_test"
+              }
+            ],
+            "runtime_plusargs_declared": true,
+            "seed": "1",
+            "seed_line": 3,
+            "source": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/abr_example_test.yml",
+            "testname": "ML_DSA_randomized_key_gen_test",
+            "testname_line": 6
+          }
+        ],
         "unit_rtl_filelists": [
           {
             "absent_source_references": [],
@@ -12282,7 +13915,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "4b2ed8db94f0760141616e485ab03257775cb6d28ace9b42a3546d0e4f79dbb9",
             "symbolic_source_references": []
           },
@@ -12343,7 +13976,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "170ec3c67aefa3b11bc1e6d16abb1867cd462872326c1ee744169af9820f2c53",
             "symbolic_source_references": []
           },
@@ -12450,7 +14083,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "cc63c03b107551b9317b4795e2b9b67d3d9aa64f36be64e437e017e0492f1a41",
             "symbolic_source_references": []
           },
@@ -12489,7 +14122,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "0c15107e54c0c44ab31b08785ac25ac03205d4fe65299b253034156c40c01875",
             "symbolic_source_references": []
           },
@@ -12530,7 +14163,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "220822ea8e9c03ffdf3bd01567ea6192ab8c3a3b1f6df04fa328082f8f3fa16c",
             "symbolic_source_references": []
           },
@@ -12573,7 +14206,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "f6765508bcc14e5c98d4a20d100e9d56293206410666fd8d9f3dffddef4df8dc",
             "symbolic_source_references": []
           },
@@ -12618,7 +14251,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "3c054b051f2b165483fbe2480fb789896d6911eacff3589906d67c20bc2016a7",
             "symbolic_source_references": []
           },
@@ -12659,7 +14292,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "db17da9f6a96a58772806cb485eefd5ae326841dc4d9b888abd7ab544b3100a8",
             "symbolic_source_references": []
           },
@@ -12687,7 +14320,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "ed3141e976430858402047463540e90bb7e9611ab5dd2b782de71fb931387852",
             "symbolic_source_references": []
           },
@@ -12727,7 +14360,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "7ec4c3c885c020442163498172a95034956a9ea21f3ec27b5fbc9b9b953957b5",
             "symbolic_source_references": []
           },
@@ -12767,7 +14400,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "2974baa713ccabc8af8a47d7c28855ba2d122a674ab0add6f9d10e24983284a3",
             "symbolic_source_references": []
           },
@@ -12807,7 +14440,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "07529adaf9d2e8ed4c51d42fe323d14c2e05d990354057510c47a94e996c1128",
             "symbolic_source_references": []
           },
@@ -12847,7 +14480,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "b98d8fd352930edc3169bc6b73c5e946687af1f4ae81307ef4cebc161550c3a0",
             "symbolic_source_references": []
           },
@@ -12887,7 +14520,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "6e1a5d6e193b6197b1fa38feded6f56710e2dbe36e3929603da09d3a4813a06d",
             "symbolic_source_references": []
           },
@@ -12927,7 +14560,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "bfa7b42b166abbc3f560585c028c2a1e04d228aa57fcc10920ea7f21f311b97a",
             "symbolic_source_references": []
           },
@@ -12967,7 +14600,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "78dfcb30cec74796efea8b868c04698bfda6a211ec70df0abfb2838342d46dd2",
             "symbolic_source_references": []
           },
@@ -13004,7 +14637,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "9df1a5c701cbfd0aab2946c7aa10779b204755890cbff543346c2a2e70cb7827",
             "symbolic_source_references": []
           },
@@ -13043,7 +14676,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "124f3be49833cbfa80704d37337900f013a66b6ffdf8afc2e303526fa5c50f51",
             "symbolic_source_references": []
           },
@@ -13082,7 +14715,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "00afea8fb3645e82b0ce3472c9d8ae45e214b43f4e66d68000522c1689d79753",
             "symbolic_source_references": []
           },
@@ -13127,7 +14760,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "0bf869979f1c1348bceb71256d70a0cb73abba83dac07e12708709f6894a443e",
             "symbolic_source_references": []
           },
@@ -13173,7 +14806,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "0a431d0c02adbb47f33502e185df2990904a4ec81df2a740dd894279f9508c9a",
             "symbolic_source_references": []
           },
@@ -13220,7 +14853,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "6dd2e009d763ec820c6ebbb504f4891d23526b1d60732a39a9793a8f0303024a",
             "symbolic_source_references": []
           },
@@ -13259,7 +14892,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "343542e71a3dee1407daac37f46b7f6a53a957473fde972df48188cab54fe11c",
             "symbolic_source_references": []
           },
@@ -13302,7 +14935,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "a217014fca2d780b1859bd7ec6f4be5b720d010b0a9173c3da3936a5bb5f8748",
             "symbolic_source_references": []
           },
@@ -13341,7 +14974,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "5ec16337df23efc5625af62cf466fab0d85eb4f16ae7909c3594e18b06bfa3a3",
             "symbolic_source_references": []
           },
@@ -13384,7 +15017,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "5154b326f474e58703523c250cfd997b11edb29153b1839ff9671fc7592f67b1",
             "symbolic_source_references": []
           },
@@ -13424,7 +15057,7 @@
             "provider_variables": [
               "ADAMSBRIDGE_ROOT"
             ],
-            "runtime_plusargs_status": "not captured by compile-only census",
+            "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
             "sha256": "45528b7f68f1311a84c7deb634e8d13d47a95c8c17164e123a0ffffaaabddf87",
             "symbolic_source_references": []
           }
@@ -13628,11 +15261,12 @@
     "Source references prove declarations, filelist inclusion, or visible connections only; they do not prove runtime behavior.",
     "External Avery, QVIP, UVMF, and ARM implementation details are absent from these pinned source checkouts.",
     "Counts are scoped by the named path filters; they are not regression-pass counts or a license grant.",
-    "Per-unit filelist details scan direct HDL references only; nested response files and runtime plusargs are not expanded.",
+    "Per-unit filelist details scan direct HDL references only; nested response files are not expanded.",
+    "Test YAML records literal test names, seeds, and plusargs; simulator command inheritance and variable expansion are unresolved.",
     "Package imports, DPI imports, and conditional macros are textual source matches, not compiler-resolved dependencies."
   ],
   "purpose": "Phase 0 source/API/license inventory for a clean-room Caliptra BFM replacement",
-  "schema_version": 1,
+  "schema_version": 2,
   "unit_census": {
     "artifact": "unit-census-results.json",
     "artifact_sha256": "53e9105c9bb26596c7381d782cb8c9dc317b6223cc28664514834f5774cc8ce6",

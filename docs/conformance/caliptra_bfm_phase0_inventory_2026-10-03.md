@@ -12,14 +12,14 @@ regenerate it with:
     python3 scripts/caliptra_bfm_consumer_manifest.py \
       --caliptra-root /path/to/caliptra-rtl \
       --adams-root /path/to/caliptra-rtl/submodules/adams-bridge \
-      --unit-census-json /path/to/unit-census-results.json \
+      --unit-census-json docs/conformance/caliptra_bfm_consumer_manifest_2026-10-03.json \
       --output docs/conformance/caliptra_bfm_consumer_manifest_2026-10-03.json
 
 The standard-library-only generator is included in this QD-BFM checkout. It
 records Git revisions and file hashes, and reads sources without modifying
-either checkout. A 2026-10-06 replay regenerated the tracked manifest from the
-pinned Caliptra/Adams Bridge roots and frozen unit census. Generator
-SHA-256: `ee8af1ab8ae47b71ce25e36d1ff3fc21cd352d5a1d716a29e38f51f8c483f248`.
+either checkout. A 2026-10-07 replay regenerated the tracked manifest from the
+pinned Caliptra/Adams Bridge roots and its embedded frozen unit census.
+Generator SHA-256: `a4558e765208aa76e4df7950746511962d9c7553c4fb7307410ea0616f54e898`.
 
 | Pinned tree | Test YAML under stimulus/tests | Generated UVMF test YAML | stimulus/testsuites files | Frozen census filelists |
 | --- | ---: | ---: | ---: | ---: |
@@ -37,6 +37,14 @@ filters above; the manifest retains the individual test, suite, filelist, and
 suite-path references so that discrepancy can be traced before using those
 larger totals as a requirement denominator.
 
+Manifest schema v2 records the literal <code>testname</code>, active
+<code>seed</code>, and <code>plusargs</code> values in each authored or
+generated test YAML, with source line numbers. The 109 YAML definitions contain
+88 explicit plusarg values across 78 definitions, 57 from Caliptra and 31 from
+Adams Bridge. These are source declarations: variable expansion, simulator
+command inheritance, and linkage to all legacy regression definitions remain
+open.
+
 For each of the 44 filelists, the manifest records provider variables, raw
 include roots and defines, other compile options, direct HDL-reference count,
 visible package imports, DPI imports, conditional macros, and symbolic or
@@ -47,10 +55,10 @@ directive. The Adams Bridge scan found five source paths absent from the
 pinned checkout, repeated in five unit filelists: `abr_piso_4.sv`,
 `mldsa_sampler_pkg.sv`, `mldsa_config_defines.svh`, `mldsa_params_pkg.sv`, and
 `mldsa_reg_pkg.sv`. These are source-path findings, not proof that every
-listed unit requires each file. Runtime plusargs are not captured by the
-compile-only census; the manifest marks that gap instead of treating it as an
-empty set. Package/DPI/macro matches are textual evidence, not compiler
-resolution.
+listed unit requires each file. The compile-only census remains distinct from
+the test-YAML inventory, which captures literal test settings without treating
+unlisted arguments as an empty effective runtime set. Package/DPI/macro matches
+are textual evidence, not compiler resolution.
 
 ### Adams Bridge legacy ML-DSA filelist drift
 
@@ -171,8 +179,9 @@ QVIP, Avery, and Axi4PC inputs explicitly. [UVMF mirror](https://github.com/mune
 - Reconcile the legacy 293-test / 33-regression counts against the frozen
   inventory and this enumerated source tree.
 - Complete the 44-unit dependency map: resolve symbolic/provider paths and
-  absent references, inspect nested filelists and test-level plusargs, and
-  connect visible package/DPI use to the exact providers and runtime results.
+  absent references, inspect nested filelists, expand test-YAML variables and
+  inherited launch arguments, and connect visible package/DPI use and tests to
+  providers and runtime results.
 - Complete a method/arity/override-point inventory of the consumed UVMF base
   API, plusargs, macros, and generated start-up order.
 - Establish permissible UVMF redistribution/read terms or finish the

@@ -54,6 +54,73 @@ def entry(root: Path, path: Path) -> dict[str, str]:
     return {"path": path.relative_to(root).as_posix(), "sha256": sha256(path)}
 
 
+def yaml_scalar(value: str) -> str:
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] == "'":
+        return value[1:-1].replace("''", "'")
+    if len(value) >= 2 and value[0] == value[-1] == '"':
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            pass
+    return value
+
+
+def test_yaml_configuration(root: Path, path: Path, category: str) -> dict[str, object]:
+    fields: dict[str, tuple[str, int]] = {}
+    runtime_plusargs = []
+    warnings = []
+    plusargs_declared = False
+    in_plusargs = False
+
+    for number, raw in enumerate(path.read_text(errors="replace").splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if in_plusargs:
+            item = re.match(r"^\s*-\s*(.*?)\s*$", raw)
+            if item:
+                value = yaml_scalar(item.group(1))
+                if value.startswith("+"):
+                    runtime_plusargs.append({"line": number, "value": value})
+                else:
+                    warnings.append({"line": number, "text": line})
+                continue
+            in_plusargs = False
+
+        field = re.match(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*?)\s*$", raw)
+        if not field:
+            continue
+        name, value = field.groups()
+        value = value.split(" #", 1)[0].strip()
+        if name == "plusargs":
+            plusargs_declared = True
+            if not value:
+                in_plusargs = True
+            elif value in {"[]", "null", "~"}:
+                pass
+            else:
+                scalar = yaml_scalar(value)
+                if scalar.startswith("+"):
+                    runtime_plusargs.append({"line": number, "value": scalar})
+                else:
+                    warnings.append({"line": number, "text": line})
+        elif name in {"testname", "seed"}:
+            fields[name] = (yaml_scalar(value), number)
+
+    return {
+        "source": path.relative_to(root).as_posix(),
+        "category": category,
+        "testname": fields.get("testname", (None, None))[0],
+        "testname_line": fields.get("testname", (None, None))[1],
+        "seed": fields.get("seed", (None, None))[0],
+        "seed_line": fields.get("seed", (None, None))[1],
+        "runtime_plusargs_declared": plusargs_declared,
+        "runtime_plusargs": runtime_plusargs,
+        "parse_warnings": warnings,
+    }
+
+
 def filelist_evidence(
     root: Path,
     path: Path,
@@ -120,7 +187,7 @@ def filelist_evidence(
         "conditional_macros": sorted(conditional_macros),
         "symbolic_source_references": sorted(symbolic_sources),
         "absent_source_references": sorted(absent_sources),
-        "runtime_plusargs_status": "not captured by compile-only census",
+        "runtime_plusargs_status": "listed separately from test YAML; simulator expansion is unresolved",
     }
 
 
@@ -235,6 +302,14 @@ def consumer_inventory(
             ],
             "authored_stimulus_test_yaml": [entry(root, path) for path in authored_tests],
             "generated_uvmf_test_yaml": [entry(root, path) for path in generated_tests],
+            "test_yaml_configuration": [
+                test_yaml_configuration(root, path, category)
+                for category, paths in (
+                    ("authored", authored_tests),
+                    ("generated_uvmf", generated_tests),
+                )
+                for path in paths
+            ],
             "unit_rtl_filelists": [
                 {
                     **entry(root, path),
@@ -264,12 +339,26 @@ def main() -> None:
     args = parser.parse_args()
 
     census = None
+    census_artifact = None
+    census_artifact_sha256 = None
     if args.unit_census_json:
         census_path = args.unit_census_json.resolve()
-        census = json.loads(census_path.read_text())
+        census_input = json.loads(census_path.read_text())
+        if "unit_census" in census_input:
+            embedded = census_input["unit_census"]
+            census = {
+                "source_inventory_sha256": embedded["source_inventory_sha256"],
+                "entries": embedded["entries"],
+            }
+            census_artifact = embedded["artifact"]
+            census_artifact_sha256 = embedded["artifact_sha256"]
+        else:
+            census = census_input
+            census_artifact = census_path.name
+            census_artifact_sha256 = sha256(census_path)
 
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "purpose": "Phase 0 source/API/license inventory for a clean-room Caliptra BFM replacement",
         "inputs": [
             consumer_inventory(
@@ -284,7 +373,8 @@ def main() -> None:
             "Source references prove declarations, filelist inclusion, or visible connections only; they do not prove runtime behavior.",
             "External Avery, QVIP, UVMF, and ARM implementation details are absent from these pinned source checkouts.",
             "Counts are scoped by the named path filters; they are not regression-pass counts or a license grant.",
-            "Per-unit filelist details scan direct HDL references only; nested response files and runtime plusargs are not expanded.",
+            "Per-unit filelist details scan direct HDL references only; nested response files are not expanded.",
+            "Test YAML records literal test names, seeds, and plusargs; simulator command inheritance and variable expansion are unresolved.",
             "Package imports, DPI imports, and conditional macros are textual source matches, not compiler-resolved dependencies.",
         ],
     }
@@ -301,8 +391,8 @@ def main() -> None:
             "first_diagnostic",
         )
         manifest["unit_census"] = {
-            "artifact": census_path.name,
-            "artifact_sha256": sha256(census_path),
+            "artifact": census_artifact,
+            "artifact_sha256": census_artifact_sha256,
             "source_inventory_sha256": census["source_inventory_sha256"],
             "entries": [
                 {field: item.get(field) for field in census_fields}

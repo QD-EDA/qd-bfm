@@ -431,9 +431,10 @@ with its hash-recorded output at
 [`caliptra_bfm_consumer_manifest_2026-10-03.json`](caliptra_bfm_consumer_manifest_2026-10-03.json).
 Phase 0 is partially complete: the consumer sources and all 44 unit-filelist
 surfaces/outcomes are indexed, including provider variables, include roots,
-visible package/DPI references, and five absent Adams Bridge source paths.
-Resolving providers and runtime plusargs, completing the API/method inventory,
-and recording redistribution decisions remain open. Rows still tagged
+visible package/DPI references, five absent Adams Bridge source paths, and
+literal test-YAML names, seeds, and plusargs. Resolving providers and the
+effective runtime argument flow, completing the API/method inventory, and
+recording redistribution decisions remain open. Rows still tagged
 `[unverified]` are not requirements.
 
 Pinned sources `[repo: release_overlays/README.md]`: Caliptra `v2.1.2`
