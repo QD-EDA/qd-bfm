@@ -61,8 +61,12 @@ module axi4_caliptra_checker #(
 
   reg wr_active [0:ID_COUNT-1];
   reg wr_data_done [0:ID_COUNT-1];
+  reg wr_exclusive [0:ID_COUNT-1];
   reg rd_active [0:ID_COUNT-1];
   reg [8:0] rd_beats_left [0:ID_COUNT-1];
+  reg rd_exclusive [0:ID_COUNT-1];
+  reg rd_response_seen [0:ID_COUNT-1];
+  reg rd_response_exokay [0:ID_COUNT-1];
   // Arm IHI0022L A7.3: match the exposed ID/address/length/size/burst fields;
   // the pinned Caliptra interface omits AXI's CACHE, PROT, and REGION fields.
   reg [1:0] exclusive_read_state [0:ID_COUNT-1];
@@ -201,8 +205,12 @@ module axi4_caliptra_checker #(
       for (i = 0; i < ID_COUNT; i = i + 1) begin
         wr_active[i] = 0;
         wr_data_done[i] = 0;
+        wr_exclusive[i] = 0;
         rd_active[i] = 0;
         rd_beats_left[i] = 0;
+        rd_exclusive[i] = 0;
+        rd_response_seen[i] = 0;
+        rd_response_exokay[i] = 0;
         exclusive_read_state[i] = EXCL_NONE;
       end
     end else begin
@@ -231,6 +239,8 @@ module axi4_caliptra_checker #(
       if (r_stalled) r_hold = {RID, RDATA, RRESP, RUSER, RLAST};
 
       if (AWVALID && AWREADY) begin
+        if (AWLOCK !== 1'b0 && AWLOCK !== 1'b1)
+          $fatal(1, "AXI AWLOCK is unknown");
         check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
         if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
         if (AWLOCK) begin
@@ -246,6 +256,7 @@ module axi4_caliptra_checker #(
         if (expected_count == QUEUE_DEPTH) $fatal(1, "AXI checker AW queue overflow");
         wr_active[AWID] = 1;
         wr_data_done[AWID] = 0;
+        wr_exclusive[AWID] = AWLOCK;
         expected_beats[expected_write] = {1'b0, AWLEN} + 1'b1;
         expected_id[expected_write] = AWID;
         expected_write = (expected_write + 1) % QUEUE_DEPTH;
@@ -278,15 +289,23 @@ module axi4_caliptra_checker #(
       if (BVALID && BREADY) begin
         if (!wr_active[BID] || !wr_data_done[BID])
           $fatal(1, "AXI B response ID has no completed write transaction");
+        if ((^BRESP) === 1'bx) $fatal(1, "AXI BRESP is unknown");
+        if ((BRESP == 2'b01) && !wr_exclusive[BID])
+          $fatal(1, "AXI B response is EXOKAY for a non-exclusive write");
         wr_active[BID] = 0;
         wr_data_done[BID] = 0;
+        wr_exclusive[BID] = 0;
       end
 
       if (ARVALID && ARREADY) begin
+        if (ARLOCK !== 1'b0 && ARLOCK !== 1'b1)
+          $fatal(1, "AXI ARLOCK is unknown");
         check_burst(ARADDR, ARLEN, ARSIZE, ARBURST, "AR");
         if (ARLOCK) check_exclusive_burst(ARADDR, ARLEN, ARSIZE, "AR");
         if (rd_active[ARID]) $fatal(1, "AXI Caliptra profile allows one outstanding read per ID");
         rd_active[ARID] = 1;
+        rd_exclusive[ARID] = ARLOCK;
+        rd_response_seen[ARID] = 0;
         if (ARLOCK) begin
           exclusive_read_state[ARID] = EXCL_PENDING;
           exclusive_read_shape[ARID] = {ARADDR, ARLEN, ARSIZE, ARBURST};
@@ -296,6 +315,19 @@ module axi4_caliptra_checker #(
 
       if (RVALID && RREADY) begin
         if (!rd_active[RID]) $fatal(1, "AXI R response ID has no active read transaction");
+        if ((^RRESP) === 1'bx) $fatal(1, "AXI RRESP is unknown");
+        if (!rd_exclusive[RID] && (RRESP == 2'b01))
+          $fatal(1, "AXI R response is EXOKAY for a non-exclusive read");
+        // Arm IHI0022L A7.3.4 requires all beats of one exclusive read to
+        // report EXOKAY, or all beats to report a non-EXOKAY response.
+        if (rd_exclusive[RID]) begin
+          if (!rd_response_seen[RID]) begin
+            rd_response_seen[RID] = 1;
+            rd_response_exokay[RID] = (RRESP == 2'b01);
+          end else if (rd_response_exokay[RID] != (RRESP == 2'b01)) begin
+            $fatal(1, "AXI exclusive read mixes EXOKAY and non-EXOKAY responses");
+          end
+        end
         if (RLAST !== (rd_beats_left[RID] == 1))
           $fatal(1, "AXI RLAST does not match ARLEN for RID %0h", RID);
         if (rd_beats_left[RID] == 1) begin

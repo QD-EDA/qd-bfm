@@ -25,6 +25,13 @@ for entry in \
   'BAD_4KB:crosses a 4KB boundary' \
   'BAD_BID:B response ID has no completed' \
   'BAD_RID:R response ID has no active' \
+  'BAD_EXOKAY_B:EXOKAY for a non-exclusive write' \
+  'BAD_EXOKAY_R:EXOKAY for a non-exclusive read' \
+  'BAD_X_AWLOCK:AWLOCK is unknown' \
+  'BAD_X_ARLOCK:ARLOCK is unknown' \
+  'BAD_X_BRESP:BRESP is unknown' \
+  'BAD_X_RRESP:RRESP is unknown' \
+  'BAD_LOCK_MIXED_R:exclusive read mixes EXOKAY and non-EXOKAY' \
   'BAD_MISSING_R:incomplete read response' \
   'BAD_EARLY_B:B response ID has no completed write transaction' \
   'BAD_DUP_BID:one outstanding write per ID' \
@@ -50,4 +57,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted W-before-AW, cross-ID reordering, and legal exclusives; rejected twenty-one injected protocol violations\n'
+printf 'PASS: AXI checker accepted W-before-AW, cross-ID reordering, and legal exclusives; rejected twenty-eight injected protocol violations\n'

@@ -117,6 +117,7 @@ module tb_axi4_caliptra_checker;
   task automatic complete_locked_read(input [7:0] id);
     integer beat;
     begin
+      RRESP = 2'b01;
       for (beat = 0; beat < 4; beat = beat + 1)
         send_r(id, beat == 3, 1);
     end
@@ -156,6 +157,36 @@ module tb_axi4_caliptra_checker;
     end else if (test_case == "BAD_RID") begin
       send_ar(8'h8, 19'h100, 0);
       send_r(8'h9, 1, 1);
+    end else if (test_case == "BAD_EXOKAY_B") begin
+      send_aw(8'h8, 19'h100, 0);
+      send_w(32'h1, 1);
+      @(negedge ACLK); BRESP = 2'b01;
+      send_b(8'h8);
+    end else if (test_case == "BAD_EXOKAY_R") begin
+      send_ar(8'h9, 19'h100, 0);
+      @(negedge ACLK); RRESP = 2'b01;
+      send_r(8'h9, 1, 1);
+    end else if (test_case == "BAD_X_AWLOCK") begin
+      @(negedge ACLK); AWLOCK = 1'bx;
+      send_aw(8'h10, 19'h100, 0);
+    end else if (test_case == "BAD_X_ARLOCK") begin
+      @(negedge ACLK); ARLOCK = 1'bx;
+      send_ar(8'h11, 19'h100, 0);
+    end else if (test_case == "BAD_X_BRESP") begin
+      send_aw(8'h12, 19'h100, 0);
+      send_w(32'h1, 1);
+      @(negedge ACLK); BRESP = 2'bx1;
+      send_b(8'h12);
+    end else if (test_case == "BAD_X_RRESP") begin
+      send_ar(8'h13, 19'h100, 0);
+      @(negedge ACLK); RRESP = 2'bx1;
+      send_r(8'h13, 1, 1);
+    end else if (test_case == "BAD_LOCK_MIXED_R") begin
+      send_locked_ar(8'h10, 19'h110, 1);
+      @(negedge ACLK); RRESP = 2'b01;
+      send_r(8'h10, 0, 1);
+      @(negedge ACLK); RRESP = 2'b00;
+      send_r(8'h10, 1, 1);
     end else if (test_case == "BAD_MISSING_R") begin
       send_ar(8'h8, 19'h100, 0);
       dut.check_idle();
@@ -205,6 +236,7 @@ module tb_axi4_caliptra_checker;
       send_w(32'h3211, 0);
       send_w(32'h3212, 0);
       send_w(32'h3213, 1);
+      @(negedge ACLK); BRESP = 2'b01;
       send_b(8'h31);
     end else if (test_case == "GOOD_REORDER") begin
       // AXI4 permits W to precede its address and responses to complete out
