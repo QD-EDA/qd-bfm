@@ -851,7 +851,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             (generated_case_count == 35 && generated_case_index < 35) ||
             (generated_case_count == 43 && generated_case_index < 43) ||
             (generated_case_count == 59 && generated_case_index < 59) ||
-            (generated_case_count == 67 && generated_case_index < 67)))
+            (generated_case_count == 67 && generated_case_index < 67) ||
+            (generated_case_count == 68 && generated_case_index < 68)))
         $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
                generated_case_index, generated_case_count);
 
@@ -887,7 +888,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         end else if (record_type.dst_is_fifo) begin
           if ((generated_case_count < 29) ||
               !((record_index == 25) ||
-                (generated_case_count == 67 && record_index >= 59 && record_index <= 66)) ||
+                ((generated_case_count == 67 || generated_case_count == 68) &&
+                 record_index >= 59 && record_index <= 66)) ||
               (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
@@ -937,7 +939,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         end else if ((record_index >= 29) && (record_index <= 31)) begin
           if ((generated_case_count != 32 && generated_case_count != 35 &&
                generated_case_count != 43 && generated_case_count != 59 &&
-               generated_case_count != 67) ||
+               generated_case_count != 67 && generated_case_count != 68) ||
               (record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
               record_type.dst_is_fifo || record_type.inject_rst ||
@@ -956,7 +958,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           endcase
         end else if ((record_index >= 32) && (record_index <= 34)) begin
           if ((generated_case_count != 35 && generated_case_count != 43 &&
-               generated_case_count != 59 && generated_case_count != 67) ||
+               generated_case_count != 59 && generated_case_count != 67 &&
+               generated_case_count != 68) ||
               (record_size != WORD_COUNT) ||
               !record_type.src_is_fifo || record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -976,7 +979,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               $fatal(1, "Generated testcase 34 is not FIFO-to-component");
           endcase
         end else if ((record_index >= 35) && (record_index <= 58)) begin
-          if ((generated_case_count != 59 && generated_case_count != 67) ||
+          if ((generated_case_count != 59 && generated_case_count != 67 &&
+               generated_case_count != 68) ||
               !record_type.src_is_fifo ||
               record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -1004,6 +1008,16 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             6: if (record_size != 255) $fatal(1, "FIFO-source sweep record is not 255 words");
             7: if (record_size != 256) $fatal(1, "FIFO-source sweep record is not 256 words");
           endcase
+        end else if ((record_index == 67) && (generated_case_count == 68)) begin
+          if ((record_size != WORD_COUNT) ||
+              (record_type.dma_xfer_type != AXI2AXI) ||
+              record_type.src_is_fifo || record_type.dst_is_fifo ||
+              record_type.use_rd_fixed || record_type.use_wr_fixed ||
+              !record_type.inject_rst || record_type.inject_rand_delays ||
+              record_type.test_block_size || (record_type.block_size != 0) ||
+              (record_src_offset != 32'h0000_1000) ||
+              (record_dst_offset != 32'h0000_4000))
+            $fatal(1, "Generated testcase 67 is outside the reset-abort SRAM profile");
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -1055,6 +1069,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.inject_rand_delays = generated_type.inject_rand_delays;
       scenario.test_block_size = generated_type.test_block_size;
       scenario.block_size = generated_type.block_size;
+      if (($test$plusargs("GENERATED_CASE")) &&
+          ((scenario.inject_rst && !$test$plusargs("RESET_ABORT")) ||
+           (!scenario.inject_rst && $test$plusargs("RESET_ABORT"))))
+        $fatal(1, "Generated reset metadata must match the directed +RESET_ABORT replay mode");
       if (generated_type.dst_is_fifo)
         sram2fifo_case = 1'b1;
       generated_dma_xfer_type = generated_type.dma_xfer_type;
@@ -1241,11 +1259,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     source_word_index = scenario.src_offset / 4;
     destination_word_index = scenario.dst_offset / 4;
     if ($test$plusargs("GENERATED_CASE"))
-      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b inject_rand_delays=%0b block_bytes=%0d",
+      $display("INFO: Caliptra DCCM case type=%0d words=%0d src_off=%08h dst_off=%08h src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b inject_rst=%0b inject_rand_delays=%0b block_bytes=%0d",
                scenario.dma_xfer_type, scenario.xfer_size, scenario.src_offset,
                scenario.dst_offset, scenario.src_is_fifo, scenario.dst_is_fifo,
                scenario.use_rd_fixed, scenario.use_wr_fixed,
-               scenario.inject_rand_delays, scenario.block_size);
+               scenario.inject_rst, scenario.inject_rand_delays, scenario.block_size);
     else if (fifo_recovery_case)
       $display("INFO: directed Caliptra DMA recovery tuple words=%0d block_bytes=%0d src=%012h dst=%012h",
                scenario.xfer_size, scenario.block_size, SRC_ADDR, DST_ADDR);

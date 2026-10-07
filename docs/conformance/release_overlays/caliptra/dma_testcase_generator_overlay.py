@@ -86,6 +86,7 @@ def main() -> int:
         bit fifo_source_axi2mbox_case;
         bit fifo_source_axi2ahb_case;
         bit fifo_source_size_sweep_case;
+        bit reset_abort_case;
         bit randomize_success;
         if ($test$plusargs("CALIPTRA_BFM_DUT_REPLAY")) begin
           large_fifo_case = (i == 0);
@@ -102,6 +103,7 @@ def main() -> int:
           fifo_source_axi2mbox_case = (i == 33);
           fifo_source_axi2ahb_case = (i == 34);
           fifo_source_size_sweep_case = (i >= 35 && i <= 58);
+          reset_abort_case = (i == 67);
           if (large_fifo_case)
             replay_size = 65536;
           else if (max_sram_case)
@@ -135,6 +137,8 @@ def main() -> int:
                    axi2mbox_recovery_case || axi2ahb_recovery_case ||
                    fifo_source_axi2axi_case || fifo_source_axi2mbox_case ||
                    fifo_source_axi2ahb_case)
+            replay_size = 65;
+          else if (reset_abort_case)
             replay_size = 65;
           else begin
             case ((i - 1) % 8)
@@ -289,6 +293,21 @@ def main() -> int:
               dst_offset == ((i >= 43 && i <= 50) ?
                              32'h0000_1000 : 32'h0000_4000);
             };
+          end else if (reset_abort_case) begin
+            randomize_success = dma_gen.randomize() with {
+              dma_xfer_type == AXI2AXI;
+              !src_is_fifo;
+              !dst_is_fifo;
+              !use_rd_fixed;
+              !use_wr_fixed;
+              inject_rst;
+              !inject_rand_delays;
+              !test_block_size;
+              block_size == 0;
+              xfer_size == replay_size;
+              src_offset == 32'h0000_1000;
+              dst_offset == 32'h0000_4000;
+            };
           end else begin
             randomize_success = dma_gen.randomize() with {
               dma_xfer_type inside {AHB2AXI, MBOX2AXI, AXI2AXI, AXI2MBOX, AXI2AHB};
@@ -337,7 +356,7 @@ def main() -> int:
                         "Qualify slam_dccm_ram and riscv_ecc32 against the harness top.",
                         "Add the Icarus-required numeric $fatal finish code.",
                         *(
-                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), the 16,384-word maximum checked SRAM payload, 65-word SRAM FIXED-read/FIXED-write/both-FIXED profiles, FIFO-source AXI2AXI/AXI2MBOX/AXI2AHB transfers and all eight sizes on each FIFO-source route, a maximum 65,536-word fixed-read FIFO-to-SRAM stream, generated SRAM-to-FIFO profiles at all eight sizes, and 65-word FIFO recovery cases on AXI2AXI (64 bytes), AXI2MBOX (128 bytes), and AXI2AHB (128 bytes)."]
+                            ["Use deterministic per-case seeds to cover five DMA routes, short and maximum SRAM sizes, fixed-burst modes, FIFO-source and FIFO-destination profiles and size sweeps, three FIFO recovery routes, and one 65-word SRAM record with inject_rst set for directed reset-abort replay."]
                             if args.dut_replay
                             else []
                         ),

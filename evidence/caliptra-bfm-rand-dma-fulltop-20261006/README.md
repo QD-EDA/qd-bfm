@@ -156,3 +156,12 @@ and post-reset write traffic, but not full DMA recovery or testcase completion.
 - The raw simulation log is not checked in because it includes generated seed and secret-key output; the committed trace keeps only test configuration, reset, AXI, and cycle-counter records.
 - This run began before the Icarus `origin/main` merge to `BFM WORK`; it does not verify the merged simulator revision.
 - After the run, `BFM WORK` merged `origin/main` at `197f9ba` (merge commit `ac4532f`) and built/installed successfully with GNU Bison 3.8.2. The guarded build had a 40% floor and 55% minimum free memory. The regression suite was not run; the binaries report `ac4532fa-dirty`.
+
+## Reset-delay interpretation update (2026-10-07)
+
+The 512-cycle trace places reset assertion at cycle 2,896 after the `0xEE`
+request marker at cycle 2,382. No accepted AW precedes that reset; the first
+observed AW is post-reset at cycle 5,785. The 512-cycle result therefore does
+not demonstrate reset during an accepted DMA write. The 3,870-cycle candidate
+targets cycle 6,254, between the baseline trace's AW at 6,036 and B at 6,398.
+That candidate has not been run and is not reset-in-flight evidence.
