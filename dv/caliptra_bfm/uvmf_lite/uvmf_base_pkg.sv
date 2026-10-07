@@ -329,10 +329,13 @@ package uvmf_base_pkg;
       if (!uvm_config_db #(CONFIG_T)::get(
             this, "", UVMF_AGENT_CONFIG, configuration))
         `uvm_fatal("UVMF_CONFIG", "Agent cannot find its configuration")
-      uvm_config_db #(CONFIG_T)::set(this, "monitor", UVMF_AGENT_CONFIG, configuration);
+      if (!uvm_config_db #(MONITOR_T)::get(this, "", "monitor", monitor) ||
+          monitor == null) begin
+        uvm_config_db #(CONFIG_T)::set(this, "monitor", UVMF_AGENT_CONFIG, configuration);
+        monitor = MONITOR_T::type_id::create("monitor", this);
+      end
       if (configuration.active_passive == ACTIVE)
         uvm_config_db #(CONFIG_T)::set(this, "driver", UVMF_AGENT_CONFIG, configuration);
-      monitor = MONITOR_T::type_id::create("monitor", this);
       if (configuration.active_passive == ACTIVE) begin
         sequencer = uvm_sequencer #(TRANS_T)::type_id::create("sequencer", this);
         uvm_config_db #(uvm_sequencer #(TRANS_T))::set(

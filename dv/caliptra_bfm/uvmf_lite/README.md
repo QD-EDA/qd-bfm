@@ -57,7 +57,8 @@ verifies the type override creates both agents, checks driver and monitor
 proxy installation, starts a virtual sequence on a configured virtual sequencer,
 and carries monitor data
 through `monitored_ap` to an observer and coverage sink. A second passive agent
-observes the response from a one-cycle combinational toy DUT. A predictor
+reuses a parent-created monitor provided under its `monitor` config-db key to
+observe the response from a one-cycle combinational toy DUT. A predictor
 receives the active agent's request, predicts the response, and feeds the
 in-order scoreboard. The matching run records one match; a second run injects
 an incorrect prediction and requires exactly one scoreboard mismatch, while

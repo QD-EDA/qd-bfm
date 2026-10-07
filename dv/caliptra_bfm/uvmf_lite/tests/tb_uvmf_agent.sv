@@ -256,6 +256,7 @@ package uvmf_lite_agent_test_pkg;
   class agent_environment extends uvmf_environment_base #(agent_environment_configuration);
     agent active_agent;
     agent passive_agent;
+    agent_monitor shared_passive_monitor;
     agent_environment_vsqr_t vsqr;
     agent_predictor predictor;
     uvmf_in_order_scoreboard #(agent_item) response_scoreboard;
@@ -265,6 +266,13 @@ package uvmf_lite_agent_test_pkg;
       super.build_phase(phase);
       active_agent = agent::type_id::create("active_agent", this);
       active_agent.set_config(configuration.active_agent_configuration);
+      uvm_config_db #(agent_config)::set(
+        this, "shared_passive_monitor", UVMF_AGENT_CONFIG,
+        configuration.passive_agent_configuration);
+      shared_passive_monitor = agent_monitor::type_id::create(
+        "shared_passive_monitor", this);
+      uvm_config_db #(agent_monitor)::set(
+        this, "passive_agent", "monitor", shared_passive_monitor);
       passive_agent = agent::type_id::create("passive_agent", this);
       passive_agent.set_config(configuration.passive_agent_configuration);
       vsqr = agent_environment_vsqr_t::type_id::create("vsqr", this);
@@ -415,6 +423,7 @@ package uvmf_lite_agent_test_pkg;
           published_sequencer != configuration.active_agent_configuration.sequencer ||
           environment.passive_agent.sequencer != null ||
           environment.passive_agent.driver != null ||
+          environment.passive_agent.monitor != environment.shared_passive_monitor ||
           configuration.active_agent_configuration.initiator_responder !=
             INITIATOR ||
           configuration.passive_agent_configuration.initiator_responder !=
