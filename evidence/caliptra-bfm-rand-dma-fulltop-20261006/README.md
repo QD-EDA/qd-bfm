@@ -94,6 +94,13 @@ generated transfer with `inject_rst=1` and entry into Caliptra ROM flow. The
 assertion, resume, or testcase completion marker was observed. This run adds
 no reset-recovery qualification.
 
+`inject_rst=1` in the generated DCCM record is only planned test data. The
+pinned `rand_test_dma.c` sends stdout-control `0xEE` immediately before it
+executes the selected DMA helper; `caliptra_top_tb_services.sv` starts the
+delayed warm reset only after observing that write. This run stopped during
+ROM flow, before that firmware request, so the fixed-delay block was present
+but never triggered.
+
 - Memory guard: 69% free before run; 59% minimum observed; 60% floor
 - No result JSON was emitted because the guard stopped the runner
 - The temporary simulator build tree was removed after inspection
