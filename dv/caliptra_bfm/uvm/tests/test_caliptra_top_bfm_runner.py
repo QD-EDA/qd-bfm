@@ -56,6 +56,14 @@ class ResetInFlightTraceTest(unittest.TestCase):
         self.assertFalse(result["reset_in_flight"])
         self.assertEqual(result["outstanding_writes_at_reset"], [0])
 
+    def test_trace_zero_fatal_status_is_ignored_but_errors_are_counted(self):
+        result = self.scan([
+            "CALIPTRA_TRACE cycle=100 fatal=0 pc=00000000",
+            "CALIPTRA_TRACE cycle=200 fatal=1 pc=00000000",
+            "UVM_ERROR @ 1: expected failure",
+        ])
+        self.assertEqual(result["bad"], 2)
+
 
 class ToolchainPrefixTest(unittest.TestCase):
     def test_accepts_absolute_prefix_with_trailing_dash(self):

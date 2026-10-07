@@ -63,7 +63,8 @@ RESET_ASSERT = re.compile(r"CALIPTRA_RESET_EDGE state=assert cycle=(\d+)")
 AXI_AW = re.compile(r"CALIPTRA_AXI AW .* cycle=(\d+)")
 AXI_B = re.compile(r"CALIPTRA_AXI B .* cycle=(\d+)")
 BAD = re.compile(
-    r"\b(?:UVM_)?(?:ERROR|FATAL)\b|\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
+    r"\b(?:UVM_)?(?:ERROR|FATAL)\b(?!\s*=\s*0\b)|"
+    r"\bassert(?:ion)?\b[^\n]*\b(?:fail(?:ed|ure)?|error)\b",
     re.IGNORECASE,
 )
 JTAG_ERROR = re.compile(r"(?m)^jtag0: (?:Failed to|Unable to|Socket read failed|Error while|Client disappeared)")
