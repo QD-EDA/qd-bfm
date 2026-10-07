@@ -206,16 +206,19 @@ service.
 The reset run is recorded in
 [`DMA reset-abort evidence`](../../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
 The current generated-DUT run instantiates Caliptra's actual testcase
-generator, selects each of 27 DCCM records in a separate simulation, checks the
+generator, selects each of 29 DCCM records in a separate simulation, checks the
 staged metadata and payload ECC, and replays each profile through the DUT and
 UVM monitor. The hash-guarded profile covers all five generated DMA route
 types, eight short sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), a maximum
 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO
 case with randomized delays, and a 65-word FIFO recovery case with a generated
-64-byte block. The maximum stream checks all destination words and drains the
-FIFO; recovery checks five fixed reads, five SRAM writes, and end-to-end data.
-Other generated FIFO modes, firmware-triggered reset injection, and remaining
-block sizes remain unqualified. Directed
+block. The maximum stream checks all destination words and drains the FIFO.
+Generated recovery records sweep every legal one-hot block size: 4–64 bytes
+for AXI2AXI and 4–2048 bytes for AXI2MBOX and AXI2AHB. Recovery checks the
+generated FIFO reads and end-to-end route output; see the
+[`generated recovery route evidence`](../../../evidence/caliptra-bfm-dma-routed-recovery-sweep-20261006/README.md).
+Other generated FIFO modes and firmware-triggered reset injection remain
+unqualified. Directed
 65-word cases now cover all five
 DMA routes through the real DUT. AXI2MBOX and MBOX2AXI apply one-cycle mailbox
 backpressure and check request addresses and payload data. AHB2AXI enters words
