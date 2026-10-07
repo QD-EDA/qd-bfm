@@ -18,11 +18,12 @@ recovery_block_sweep_only=0
 recovery_route_sweep_only=0
 max_sram_dut_replay_only=0
 fixed_sram_modes_only=0
+fifo_source_routes_only=0
 recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
 component_fixed_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
@@ -32,11 +33,12 @@ if [ "$#" -eq 1 ]; then
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
     --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
     --fixed-sram-modes-only) fixed_sram_modes_only=1 ;;
+    --fifo-source-routes-only) fifo_source_routes_only=1 ;;
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -231,6 +233,26 @@ if [ "$fixed_sram_modes_only" -eq 1 ]; then
     fi
   done
   echo "INFO: generated DCCM SRAM replay covered FIXED-read, FIXED-write, and both-FIXED profiles"
+  exit 0
+fi
+if [ "$fifo_source_routes_only" -eq 1 ]; then
+  for case_index in 32 33 34; do
+    case "$case_index" in
+      32) route_name=axi2axi; route_type=2 ;;
+      33) route_name=axi2mbox; route_type=3 ;;
+      34) route_name=axi2ahb; route_type=4 ;;
+    esac
+    run_case "generated-fifo-source-${route_name}" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=35 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "INFO: Caliptra DCCM case type=$route_type words=65" "$log" ||
+       ! grep -Fq 'INFO: FIFO source stream supplied 65 words; FIFO drained' "$log" ||
+       ! grep -Fq "PASS: generated DCCM record index=$case_index route=$route_type replayed through axi_dma_top" "$log"; then
+      echo "Generated FIFO-source $route_name transfer did not complete through axi_dma_top" >&2
+      exit 1
+    fi
+  done
+  echo "INFO: generated FIFO-source replay passed AXI2AXI, AXI2MBOX, and AXI2AHB routes"
   exit 0
 fi
 if [ "$mailbox_fixed_modes_only" -eq 1 ]; then

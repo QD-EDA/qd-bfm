@@ -243,6 +243,12 @@ The generated AXI2AXI recovery record also passes through the real DMA DUT in
 not-empty, threshold, and pulse availability modes, with the bench checking the
 selected policy; see the
 [`recovery availability mode evidence`](../../../evidence/caliptra-bfm-dma-recovery-availability-modes-20261007/README.md).
+The normal-size generated FIFO-source profile also now passes 65-word AXI2AXI,
+AXI2MBOX, and AXI2AHB transfers through the real DUT. The FIFO producer and
+consumer counts must match, and output data is checked in SRAM, the mailbox
+request stream, or the component data register. Each route observed randomized
+target stalls; see the
+[`generated FIFO-source route evidence`](../../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md).
 Other generated FIFO modes and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five

@@ -681,11 +681,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   "FIFO source stream pushed/popped %0d/%0d and %0d/%0d words, level %0d",
                   auto_fifo_source_push_count, active_word_count,
                   auto_fifo_source_pop_count, active_word_count, fifo_level))
-              for (int word = 0; word < active_word_count; word++)
-                if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !==
-                    expected_payload[word])
-                  `uvm_fatal("DMA_TOP_FIFO_SOURCE_DATA", $sformatf(
-                    "FIFO source stream destination word %0d mismatch", word))
+              if (generated_dma_xfer_type == AXI2AXI)
+                for (int word = 0; word < active_word_count; word++)
+                  if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !==
+                      expected_payload[word])
+                    `uvm_fatal("DMA_TOP_FIFO_SOURCE_DATA", $sformatf(
+                      "FIFO source stream destination word %0d mismatch", word))
               $display("INFO: FIFO source stream supplied %0d words; FIFO drained",
                        active_word_count);
             end
@@ -844,11 +845,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if ((generated_case_index < 0) || (generated_case_index >= generated_case_count))
         $fatal(1, "Generated DCCM testcase index %0d is outside count %0d",
                generated_case_index, generated_case_count);
-      if ((generated_case_index >= 29 && generated_case_count != 32) ||
-          (generated_case_index < 29 && generated_case_count != 29))
-        $fatal(1, "Generated DCCM replay index %0d requires %0d records, found %0d",
-               generated_case_index, generated_case_index >= 29 ? 32 : 29,
-               generated_case_count);
+      if (!((generated_case_count == 29 && generated_case_index < 29) ||
+            (generated_case_count == 32 && generated_case_index < 32) ||
+            (generated_case_count == 35 && generated_case_index < 35)))
+        $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
+               generated_case_index, generated_case_count);
 
       record_cursor = DCCM_WORDS - 2;
       generated_record_word = -1;
@@ -912,7 +913,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             default: $fatal(1, "Unexpected generated recovery testcase index %0d", record_index);
           endcase
         end else if ((record_index >= 29) && (record_index <= 31)) begin
-          if ((generated_case_count != 32) || (record_size != WORD_COUNT) ||
+          if ((generated_case_count != 32 && generated_case_count != 35) ||
+              (record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
               record_type.dst_is_fifo || record_type.inject_rst ||
               record_type.inject_rand_delays || record_type.test_block_size ||
@@ -927,6 +929,25 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   $fatal(1, "Generated testcase 30 is not INCR-read/FIXED-write");
             31: if (!record_type.use_rd_fixed || !record_type.use_wr_fixed)
                   $fatal(1, "Generated testcase 31 is not FIXED-read/FIXED-write");
+          endcase
+        end else if ((record_index >= 32) && (record_index <= 34)) begin
+          if ((generated_case_count != 35) || (record_size != WORD_COUNT) ||
+              !record_type.src_is_fifo || record_type.dst_is_fifo ||
+              !record_type.use_rd_fixed || record_type.use_wr_fixed ||
+              record_type.inject_rst || !record_type.inject_rand_delays ||
+              record_type.test_block_size || (record_type.block_size != 0) ||
+              (record_src_offset != 0))
+            $fatal(1, "Generated testcase %0d is outside the FIFO-source route profiles", record_index);
+          case (record_index)
+            32: if ((record_type.dma_xfer_type != AXI2AXI) ||
+                    (record_dst_offset != 32'h0000_4000))
+              $fatal(1, "Generated testcase 32 is not FIFO-to-SRAM");
+            33: if ((record_type.dma_xfer_type != AXI2MBOX) ||
+                    (record_dst_offset != 32'h0000_1000))
+              $fatal(1, "Generated testcase 33 is not FIFO-to-mailbox");
+            34: if ((record_type.dma_xfer_type != AXI2AHB) ||
+                    (record_dst_offset != 32'h0000_4000))
+              $fatal(1, "Generated testcase 34 is not FIFO-to-component");
           endcase
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
@@ -992,10 +1013,15 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (scenario.src_is_fifo && !auto_fifo_source_case && !fifo_recovery_case)
         $fatal(1, "Generated FIFO source replay requires +FIFO_SOURCE_STREAM or +FIFO_RECOVERY");
       if (auto_fifo_source_case &&
-          (scenario.dma_xfer_type != AXI2AXI || !scenario.src_is_fifo ||
-           scenario.dst_is_fifo || !scenario.use_rd_fixed ||
-           active_word_count != MAX_REPLAY_WORD_COUNT))
-        $fatal(1, "+FIFO_SOURCE_STREAM selected a record outside the maximum FIFO-to-SRAM profile");
+          ((scenario.dma_xfer_type != AXI2AXI &&
+            scenario.dma_xfer_type != AXI2MBOX &&
+            scenario.dma_xfer_type != AXI2AHB) ||
+           !scenario.src_is_fifo || scenario.dst_is_fifo ||
+           !scenario.use_rd_fixed || scenario.use_wr_fixed ||
+           scenario.inject_rst || scenario.test_block_size ||
+           (active_word_count != WORD_COUNT &&
+            active_word_count != MAX_REPLAY_WORD_COUNT)))
+        $fatal(1, "+FIFO_SOURCE_STREAM selected an unsupported FIFO-source route profile");
       $display("INFO: replaying generated DCCM testcase %0d of %0d cases",
                generated_case_index, generated_case_count);
     end else if (mailbox_case) begin
@@ -1124,28 +1150,25 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
       end
       dma_gen_block_size_bytes[0] = 12'(scenario.block_size);
-    end else if (scenario.src_is_fifo) begin
-      SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
-    end else if (mailbox_case) begin
-      SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
-      // The firmware helper programs the mailbox-side route with a local offset.
-      DST_ADDR = 48'(scenario.dst_offset);
-    end else if (mailbox_read_case) begin
-      SRC_ADDR = 48'(scenario.src_offset);
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
-    end else if (ahb2axi_case) begin
-      SRC_ADDR = '0;
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
-    end else if (axi2ahb_case) begin
-      SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
-      DST_ADDR = '0;
-    end else if (sram2fifo_case) begin
-      SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
-      DST_ADDR = FIFO_BASE_ADDR + 48'(scenario.dst_offset);
     end else begin
-      SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
-      DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
+      if (ahb2axi_case)
+        SRC_ADDR = '0;
+      else if (mailbox_read_case)
+        SRC_ADDR = 48'(scenario.src_offset);
+      else if (scenario.src_is_fifo)
+        SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
+      else
+        SRC_ADDR = SRAM_BASE_ADDR + 48'(scenario.src_offset);
+
+      if (mailbox_case)
+        // The firmware helper programs the mailbox-side route with a local offset.
+        DST_ADDR = 48'(scenario.dst_offset);
+      else if (axi2ahb_case)
+        DST_ADDR = '0;
+      else if (sram2fifo_case)
+        DST_ADDR = FIFO_BASE_ADDR + 48'(scenario.dst_offset);
+      else
+        DST_ADDR = SRAM_BASE_ADDR + 48'(scenario.dst_offset);
     end
     active_src_is_fifo = scenario.src_is_fifo;
     active_use_rd_fixed = scenario.use_rd_fixed;
