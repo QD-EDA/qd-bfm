@@ -52,6 +52,28 @@ compile-only census; the manifest marks that gap instead of treating it as an
 empty set. Package/DPI/macro matches are textual evidence, not compiler
 resolution.
 
+### Adams Bridge legacy ML-DSA filelist drift
+
+Git history shows these are stale filelist paths, not files omitted from the
+checkout by sparse cloning. In the pinned v2.0.3 tree, `abr_piso_4.sv` was
+renamed to `abr_piso_multi.sv` at `7b0417e`; no RTL outside filelists
+instantiates the old module. At `0a45a69`, the four ML-DSA source paths were
+renamed into the ABR tree:
+
+| Stale filelist path | Current path in v2.0.3 |
+| --- | --- |
+| `src/mldsa_sampler_top/rtl/mldsa_sampler_pkg.sv` | `src/abr_sampler_top/rtl/abr_sampler_pkg.sv` |
+| `src/mldsa_top/rtl/mldsa_config_defines.svh` | `src/abr_top/rtl/abr_config_defines.svh` |
+| `src/mldsa_top/rtl/mldsa_params_pkg.sv` | `src/abr_top/rtl/abr_params_pkg.sv` |
+| `src/mldsa_top/rtl/mldsa_reg_pkg.sv` | `src/abr_top/rtl/abr_reg_pkg.sv` |
+
+The five affected test filelists and their testbenches still refer to the old
+paths and, for package imports/includes, old ML-DSA identifiers. Replacing only
+the paths is therefore insufficient to make this lane compile against the
+pinned release. Keep it classified as stale source setup until a narrowly
+scoped, hash-guarded compatibility overlay is justified; do not count it as an
+AHB BFM failure or claim Adams Bridge ML-DSA qualification.
+
 The manifest carries the frozen compile-only outcome for each filelist: 20
 pass, 6 fail, 17 setup, and 1 unsupported. Its source inventory hash and
 census artifact hash are retained. This evidence is a prior classification,
