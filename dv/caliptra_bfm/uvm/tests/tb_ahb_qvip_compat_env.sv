@@ -109,6 +109,18 @@ module tb_ahb_qvip_compat_env;
           read_count++;
           burst_read_count++;
         end
+      end else if (last_item.address ==
+                   ((AHB_MVC_DATA_WIDTH == 32) ? 32'hfffc : 32'hfff8)) begin
+        if (last_item.RnW != AHB_WRITE || last_item.size != AHB_MVC_WORD_SIZE ||
+            last_item.data.size() != 2 || last_item.resp.size() != 2 ||
+            last_item.data[0] != (64'h4142_4344_4546_4748 & AHB_MVC_DATA_MASK) ||
+            last_item.data[1] != (64'h5152_5354_5556_5758 & AHB_MVC_DATA_MASK) ||
+            last_item.resp[0] != AHB_OKAY || last_item.resp[1] != AHB_ERROR)
+          `uvm_fatal("AHB_QVIP_PARTIAL_BURST",
+            $sformatf("Generated-name stream lost partial burst/error: %s",
+                      last_item.convert2string()))
+        write_count++;
+        burst_write_count++;
       end else begin
         `uvm_fatal("AHB_QVIP_SINK_ADDRESS", $sformatf("Unexpected AHB address %h", last_item.address))
       end
@@ -131,6 +143,7 @@ module tb_ahb_qvip_compat_env;
 
   class ahb_qvip_ral_block extends uvm_reg_block;
     ahb_qvip_ral_reg burst_csr[4];
+    ahb_qvip_ral_reg boundary_csr[2];
     `uvm_object_utils(ahb_qvip_ral_block)
 
     function new(string name = "ahb_qvip_ral_block");
@@ -147,6 +160,15 @@ module tb_ahb_qvip_compat_env;
         burst_csr[i].build();
         default_map.add_reg(burst_csr[i],
           32'h80 + (i * (AHB_MVC_DATA_WIDTH / 8)), "RW");
+      end
+      foreach (boundary_csr[i]) begin
+        boundary_csr[i] = ahb_qvip_ral_reg::type_id::create(
+          $sformatf("boundary_csr_%0d", i));
+        boundary_csr[i].configure(this);
+        boundary_csr[i].build();
+        default_map.add_reg(boundary_csr[i],
+          ((AHB_MVC_DATA_WIDTH == 32) ? 32'hfffc : 32'hfff8) +
+          (i * (AHB_MVC_DATA_WIDTH / 8)), "RW");
       end
       lock_model();
     endfunction
@@ -270,6 +292,7 @@ module tb_ahb_qvip_compat_env;
 
     task run_phase(uvm_phase phase);
       ahb_lite_caliptra_smoke_sequence smoke_seq;
+      ahb_lite_caliptra_partial_burst_error_sequence partial_burst_seq;
       ahb_rnw_e direction_probe;
       phase.raise_objection(this);
       direction_probe = AHB_READ;
@@ -282,13 +305,17 @@ module tb_ahb_qvip_compat_env;
       qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.mvc_driver.cmd_vif.target_wait_cycles = 2;
       smoke_seq = ahb_lite_caliptra_smoke_sequence::type_id::create("smoke_seq");
       smoke_seq.start(qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer);
+      partial_burst_seq = ahb_lite_caliptra_partial_burst_error_sequence::type_id::create(
+        "partial_burst_seq");
+      partial_burst_seq.start(qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer);
+      repeat (2) @(negedge HCLK);
 
-      if (predictor_sink.write_count != 2 || predictor_sink.read_count != 2 ||
-          predictor_sink.burst_write_count != 1 || predictor_sink.burst_read_count != 1 ||
-          scoreboard_sink.write_count != 2 || scoreboard_sink.read_count != 2 ||
-          scoreboard_sink.burst_write_count != 1 || scoreboard_sink.burst_read_count != 1 ||
-          coverage_sink.write_count != 2 || coverage_sink.read_count != 2 ||
-          coverage_sink.burst_write_count != 1 || coverage_sink.burst_read_count != 1)
+      if (predictor_sink.write_count != 3 || predictor_sink.read_count != 2 ||
+          predictor_sink.burst_write_count != 2 || predictor_sink.burst_read_count != 1 ||
+          scoreboard_sink.write_count != 3 || scoreboard_sink.read_count != 2 ||
+          scoreboard_sink.burst_write_count != 2 || scoreboard_sink.burst_read_count != 1 ||
+          coverage_sink.write_count != 3 || coverage_sink.read_count != 2 ||
+          coverage_sink.burst_write_count != 2 || coverage_sink.burst_read_count != 1)
         `uvm_fatal("AHB_QVIP_COUNTS", "Generated-name analysis streams missed AHB read/write items")
       if (ral_model.burst_csr[0].get_mirrored_value() !==
             (64'h0102_0304_0506_0708 & AHB_MVC_DATA_MASK) ||
@@ -297,14 +324,18 @@ module tb_ahb_qvip_compat_env;
           ral_model.burst_csr[2].get_mirrored_value() !==
             (64'h2122_2324_2526_2728 & AHB_MVC_DATA_MASK) ||
           ral_model.burst_csr[3].get_mirrored_value() !==
-            (64'h3132_3334_3536_3738 & AHB_MVC_DATA_MASK))
-        `uvm_fatal("AHB_QVIP_RAL_BURST", "Generated-name predictor did not update every burst register mirror")
+            (64'h3132_3334_3536_3738 & AHB_MVC_DATA_MASK) ||
+          ral_model.boundary_csr[0].get_mirrored_value() !==
+            (64'h4142_4344_4546_4748 & AHB_MVC_DATA_MASK) ||
+          ral_model.boundary_csr[1].get_mirrored_value() !== 0)
+        `uvm_fatal("AHB_QVIP_RAL_BURST",
+          "Generated-name predictor mishandled successful or partial-error burst mirrors")
       if (predictor_sink.last_item == scoreboard_sink.last_item ||
           predictor_sink.last_item == coverage_sink.last_item ||
           scoreboard_sink.last_item == coverage_sink.last_item)
         `uvm_fatal("AHB_QVIP_ALIAS", "QVIP-compatible analysis streams shared a mutable item")
-      if (passive_sink.write_count != 2 || passive_sink.read_count != 2 ||
-          passive_sink.burst_write_count != 1 || passive_sink.burst_read_count != 1)
+      if (passive_sink.write_count != 3 || passive_sink.read_count != 2 ||
+          passive_sink.burst_write_count != 2 || passive_sink.burst_read_count != 1)
         `uvm_fatal("AHB_QVIP_PASSIVE", "Passive generated-name monitor missed the bus traffic")
       if (configuration.ahb_lite_slave_0_cfg.m_bfm.checker_error_count != 0 ||
           passive_configuration.ahb_lite_slave_0_cfg.m_bfm.checker_error_count != 0)
@@ -313,7 +344,7 @@ module tb_ahb_qvip_compat_env;
         `uvm_fatal("AHB_QVIP_SEQUENCER", "Generated-name environment did not create m_sequencer")
       if (passive_qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.m_sequencer != null)
         `uvm_fatal("AHB_QVIP_PASSIVE", "Passive generated-name environment unexpectedly created m_sequencer")
-      $display("PASS: generated-name AHB QVIP configuration, environment, sequencer, and analysis streams");
+      $display("PASS: generated-name AHB QVIP streams and full/partial-error RAL burst prediction");
       phase.drop_objection(this);
     endtask
   endclass
