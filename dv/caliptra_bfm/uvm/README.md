@@ -270,6 +270,18 @@ run checks FIFO drain, route payload, and randomized target stalls; see the
 Generated SRAM-to-FIFO transfers also pass at all eight sizes. The runner
 checks fixed-write transactions, randomized stalls, and every queued FIFO word;
 see the [`FIFO-destination size-sweep evidence`](../../../evidence/caliptra-bfm-dma-fifo-destination-size-sweep-20261007/README.md).
+
+### Generated reset-abort replay (2026-10-07)
+
+The deterministic DCCM replay now adds record 67 with `inject_rst=1` and a
+65-word AXI2AXI SRAM profile. Run
+`tests/run_caliptra_axi_dma_top_uvm_bfm.sh --generated-reset-abort-only` to
+select it. The runner pairs that metadata with the existing directed
+`+RESET_ABORT` path, which resets after an accepted AW and final W while B is
+held, then checks a complete post-reset transfer. This does not reproduce
+Caliptra firmware's `0xEE` delayed warm-reset service. The generated reset
+profile has not yet been run through Icarus.
+
 Other generated FIFO mode/flag combinations and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five
