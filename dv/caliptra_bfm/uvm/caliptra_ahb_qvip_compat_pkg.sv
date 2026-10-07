@@ -164,6 +164,51 @@ package qvip_ahb_lite_slave_pkg;
       bus_item_export = new("bus_item_export", this);
       bus_item_export.connect(bus_in);
     endfunction
+
+    virtual function void write(mvc_sequence_item_base tr);
+      T transfer;
+      T beat;
+      uvm_object beat_obj;
+
+      if (!$cast(transfer, tr)) begin
+        super.write(tr);
+        return;
+      end
+      if (transfer.data.size() == 1 && transfer.resp.size() == 1) begin
+        super.write(tr);
+        return;
+      end
+      if (transfer.data.size() == 0 ||
+          transfer.data.size() != transfer.resp.size() ||
+          transfer.data.size() > AHB_MVC_MAX_BURST_BEATS ||
+          transfer.size > $clog2(AHB_WDATA_WIDTH / 8)) begin
+        `uvm_error("AHB_RAL_BURST", "Malformed or unsupported AHB predictor burst")
+        return;
+      end
+      if ((transfer.address % (1 << transfer.size)) != 0) begin
+        `uvm_error("AHB_RAL_BURST", "Unaligned AHB predictor burst")
+        return;
+      end
+
+      beat_obj = transfer.clone();
+      if (!$cast(beat, beat_obj)) begin
+        `uvm_error("AHB_RAL_BURST", "Could not clone AHB transfer for per-beat prediction")
+        return;
+      end
+      for (int unsigned i = 0; i < transfer.data.size(); i++) begin
+        if (transfer.resp[i] == AHB_ERROR) continue;
+        if (transfer.resp[i] != AHB_OKAY) begin
+          `uvm_error("AHB_RAL_RESPONSE", "AHB predictor burst has an invalid response code")
+          continue;
+        end
+        beat.address = transfer.address + (i * (1 << transfer.size));
+        beat.data.delete();
+        beat.data.push_back(transfer.data[i]);
+        beat.resp.delete();
+        beat.resp.push_back(transfer.resp[i]);
+        super.write(beat);
+      end
+    endfunction
   endclass
 
   class qvip_ahb_lite_slave_env_configuration

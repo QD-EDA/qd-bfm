@@ -379,6 +379,13 @@ contiguous accepted SEQ beats with matching direction and size, ending an item
 at an accepted IDLE/NONSEQ boundary or after 256 beats. HBURST is absent, so
 item boundaries are inferred from accepted address phases. Each output is a
 separate object because Caliptra predictors copy and mutate queue data.
+The generated-name `ahb_reg_predictor` expands a grouped item into cloned
+single-beat records at incrementing addresses before calling the stock UVM
+predictor; successful beats update their individual RAL mirrors, while ERROR
+beats are skipped. Single-beat records retain the stock predictor path. The
+agent smoke checks four-beat read/write mirror updates and a partial burst
+whose successful beat predicts while its ERROR beat leaves the next mirror
+unchanged.
 The pin proxy zero-fills its fixed 256-lane response vector and copies only
 completed beats into it, keeping scalar register access proportional to the
 actual transfer count while preserving partial-ERROR lane contents.

@@ -5,6 +5,7 @@
 module tb_ahb_lite_caliptra_uvm_agent;
   import uvm_pkg::*;
   import ahb_lite_caliptra_uvm_pkg::*;
+  import qvip_ahb_lite_slave_pkg::*;
   import mvc_pkg::*;
   import mgc_ahb_v2_0_pkg::*;
 
@@ -227,8 +228,25 @@ module tb_ahb_lite_caliptra_uvm_agent;
     endfunction
   endclass
 
+  class ahb_lite_caliptra_ral_burst_reg extends uvm_reg;
+    uvm_reg_field value;
+    `uvm_object_utils(ahb_lite_caliptra_ral_burst_reg)
+
+    function new(string name = "ahb_lite_caliptra_ral_burst_reg");
+      super.new(name, 64, UVM_NO_COVERAGE);
+    endfunction
+
+    virtual function void build();
+      value = uvm_reg_field::type_id::create("value");
+      value.configure(this, 64, 0, "RW", 0, 0, 1, 0, 0);
+    endfunction
+  endclass
+
   class ahb_lite_caliptra_ral_smoke_block extends uvm_reg_block;
     ahb_lite_caliptra_ral_smoke_reg csr;
+    ahb_lite_caliptra_ral_burst_reg burst_csr[4];
+    ahb_lite_caliptra_ral_burst_reg partial_ok_csr;
+    ahb_lite_caliptra_ral_burst_reg partial_error_csr;
     `uvm_object_utils(ahb_lite_caliptra_ral_smoke_block)
 
     function new(string name = "ahb_lite_caliptra_ral_smoke_block");
@@ -241,12 +259,28 @@ module tb_ahb_lite_caliptra_uvm_agent;
       csr.configure(this);
       csr.build();
       default_map.add_reg(csr, 32'h40, "RW");
+      foreach (burst_csr[i]) begin
+        burst_csr[i] = ahb_lite_caliptra_ral_burst_reg::type_id::create(
+          $sformatf("burst_csr_%0d", i));
+        burst_csr[i].configure(this);
+        burst_csr[i].build();
+        default_map.add_reg(burst_csr[i], 32'h80 + (i * 8), "RW");
+      end
+      partial_ok_csr = ahb_lite_caliptra_ral_burst_reg::type_id::create("partial_ok_csr");
+      partial_ok_csr.configure(this);
+      partial_ok_csr.build();
+      default_map.add_reg(partial_ok_csr, 32'hfff8, "RW");
+      partial_error_csr = ahb_lite_caliptra_ral_burst_reg::type_id::create("partial_error_csr");
+      partial_error_csr.configure(this);
+      partial_error_csr.build();
+      default_map.add_reg(partial_error_csr, 32'h10000, "RW");
       lock_model();
     endfunction
   endclass
 
   class ahb_lite_caliptra_env extends uvm_env;
     ahb_lite_caliptra_qvip_compat_agent agent;
+    ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer) burst_predictor;
     ahb_lite_caliptra_subscriber subscriber;
     ahb_lite_caliptra_mvc_subscriber predictor_subscriber;
     ahb_lite_caliptra_mvc_subscriber scoreboard_subscriber;
@@ -260,6 +294,8 @@ module tb_ahb_lite_caliptra_uvm_agent;
     function void build_phase(uvm_phase phase);
       super.build_phase(phase);
       agent = ahb_lite_caliptra_qvip_compat_agent::type_id::create("agent", this);
+      burst_predictor = ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer)::type_id::create(
+        "burst_predictor", this);
       subscriber = ahb_lite_caliptra_subscriber::type_id::create("subscriber", this);
       predictor_subscriber = ahb_lite_caliptra_mvc_subscriber::type_id::create("predictor_subscriber", this);
       scoreboard_subscriber = ahb_lite_caliptra_mvc_subscriber::type_id::create("scoreboard_subscriber", this);
@@ -270,6 +306,7 @@ module tb_ahb_lite_caliptra_uvm_agent;
       super.connect_phase(phase);
       agent.agent.ap.connect(subscriber.analysis_export);
       agent.ap["burst_transfer"].connect(predictor_subscriber.analysis_export);
+      agent.ap["burst_transfer"].connect(burst_predictor.bus_item_export);
       agent.ap["burst_transfer_sb"].connect(scoreboard_subscriber.analysis_export);
       agent.ap["burst_transfer_cov"].connect(coverage_subscriber.analysis_export);
     endfunction
@@ -318,6 +355,8 @@ module tb_ahb_lite_caliptra_uvm_agent;
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       ral_model.default_map.set_sequencer(env.agent.m_sequencer, ral_adapter);
+      env.burst_predictor.map = ral_model.default_map;
+      env.burst_predictor.adapter = ral_adapter;
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -326,6 +365,8 @@ module tb_ahb_lite_caliptra_uvm_agent;
       ahb_lite_caliptra_partial_burst_error_sequence partial_burst_seq;
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
+      bit [63:0] expected_burst[4];
+      int burst_index;
       phase.raise_objection(this);
 
       if ($test$plusargs("AHB_RESET_ABORT_ONLY")) begin
@@ -394,9 +435,25 @@ module tb_ahb_lite_caliptra_uvm_agent;
           begin
             #2000;
             `uvm_fatal("AHB_TIMEOUT", "Timed out waiting for monitored AHB-Lite records")
-          end
+        end
         join_any
         disable fork;
+        expected_burst[0] = 64'h0102_0304_0506_0708;
+        expected_burst[1] = 64'h1112_1314_1516_1718;
+        expected_burst[2] = 64'h2122_2324_2526_2728;
+        expected_burst[3] = 64'h3132_3334_3536_3738;
+        foreach (ral_model.burst_csr[burst_index]) begin
+          if (ral_model.burst_csr[burst_index].get_mirrored_value() !==
+              (expected_burst[burst_index] & AHB_MVC_DATA_MASK))
+            `uvm_fatal("AHB_RAL_BURST_PREDICT",
+              $sformatf("Burst beat %0d mirror mismatch: got %016h expected %016h",
+                burst_index,
+                ral_model.burst_csr[burst_index].get_mirrored_value(),
+                expected_burst[burst_index] & AHB_MVC_DATA_MASK))
+        end
+        if (ral_model.partial_ok_csr.get_mirrored_value() !== 64'h4142_4344_4546_4748 ||
+            ral_model.partial_error_csr.get_mirrored_value() !== 0)
+          `uvm_fatal("AHB_RAL_PARTIAL_PREDICT", "Partial ERROR burst predicted a failed beat or lost its successful beat")
         if (env.agent.agent.monitor.vif.wait_cycle_count < 4)
           `uvm_fatal("AHB_WAIT", "AHB-Lite UVM smoke did not exercise configured wait cycles")
         if (env.agent.agent.monitor.vif.address_count != 17 ||
