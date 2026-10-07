@@ -258,28 +258,35 @@ if [ "$fifo_source_routes_only" -eq 1 ]; then
   exit 0
 fi
 if [ "$fifo_source_size_sweep_only" -eq 1 ]; then
-  for case_index in 35 36 37 38 39 40 41 42; do
-    case "$case_index" in
-      35) word_count=1 ;;
-      36) word_count=4 ;;
-      37) word_count=5 ;;
-      38) word_count=16 ;;
-      39) word_count=64 ;;
-      40) word_count=65 ;;
-      41) word_count=255 ;;
-      42) word_count=256 ;;
+  case_index=35
+  while [ "$case_index" -le 58 ]; do
+    case "$(( (case_index - 35) % 8 ))" in
+      0) word_count=1 ;;
+      1) word_count=4 ;;
+      2) word_count=5 ;;
+      3) word_count=16 ;;
+      4) word_count=64 ;;
+      5) word_count=65 ;;
+      6) word_count=255 ;;
+      7) word_count=256 ;;
     esac
-    run_case "generated-fifo-source-${word_count}-words" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+    case "$case_index" in
+      35|36|37|38|39|40|41|42) route_name=axi2axi; route_type=2 ;;
+      43|44|45|46|47|48|49|50) route_name=axi2mbox; route_type=3 ;;
+      51|52|53|54|55|56|57|58) route_name=axi2ahb; route_type=4 ;;
+    esac
+    run_case "generated-fifo-source-${route_name}-${word_count}-words" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
-      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=43 +CPTRA_VERBOSITY=0
-    if ! grep -Fq "INFO: Caliptra DCCM case type=2 words=$word_count" "$log" ||
+      +FIFO_SOURCE_STREAM +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=59 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "INFO: Caliptra DCCM case type=$route_type words=$word_count" "$log" ||
        ! grep -Fq "INFO: FIFO source stream supplied $word_count words; FIFO drained" "$log" ||
-       ! grep -Fq "PASS: generated DCCM record index=$case_index route=2 replayed through axi_dma_top" "$log"; then
-      echo "Generated FIFO-source AXI2AXI transfer of $word_count words did not complete" >&2
+       ! grep -Fq "PASS: generated DCCM record index=$case_index route=$route_type replayed through axi_dma_top" "$log"; then
+      echo "Generated FIFO-source $route_name transfer of $word_count words did not complete" >&2
       exit 1
     fi
+    case_index=$((case_index + 1))
   done
-  echo "INFO: generated AXI2AXI FIFO-source replay passed sizes 1, 4, 5, 16, 64, 65, 255, and 256 words"
+  echo "INFO: generated FIFO-source replay passed eight sizes on AXI2AXI, AXI2MBOX, and AXI2AHB"
   exit 0
 fi
 if [ "$mailbox_fixed_modes_only" -eq 1 ]; then

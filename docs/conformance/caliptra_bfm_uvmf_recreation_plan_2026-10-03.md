@@ -53,9 +53,9 @@ unqualified. Three non-recovery FIFO-source records also complete 65-word
 AXI2AXI-to-SRAM, AXI2MBOX, and AXI2AHB transfers through the actual DMA DUT;
 the UVM bench checks FIFO drain, route payload, and randomized stalls. See the
 [`generated FIFO-source route evidence`](../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md).
-The generated AXI2AXI FIFO-source lane additionally passes 1, 4, 5, 16, 64,
-65, 255, and 256-word transfers through the actual DUT, checking FIFO drain,
-SRAM payload, and randomized stalls; see the
+Generated FIFO-source AXI2AXI, AXI2MBOX, and AXI2AHB transfers now pass at 1,
+4, 5, 16, 64, 65, 255, and 256 words through the actual DUT, checking FIFO
+drain, route payload, and randomized stalls; see the
 [`FIFO-source size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
 The actual generated AXI2AXI recovery record also passes through
 the real DMA DUT with not-empty, threshold, and pulse `recovery_data_avail`
@@ -683,9 +683,10 @@ validates every destination word and drains the FIFO; FIFO destination checks
 all queued words and stalls; recovery checks all route outputs. Three 65-word
 non-recovery FIFO-source records also validate AXI2AXI-to-SRAM, AXI2MBOX, and
 AXI2AHB routes under randomized target stalls. Other generated FIFO modes and
-firmware-triggered reset injection remain unqualified. The AXI2AXI FIFO-source
-lane now also passes 1, 4, 5, 16, 64, 65, 255, and 256-word generated transfers;
-the runner checks FIFO drain, destination SRAM contents, and randomized stalls.
+firmware-triggered reset injection remain unqualified. Generated FIFO-source
+AXI2AXI, AXI2MBOX, and AXI2AHB transfers now each pass 1, 4, 5, 16, 64, 65,
+255, and 256-word profiles; the runner checks FIFO drain, route payload, and
+randomized stalls.
 See the [`FIFO-source size-sweep evidence`](../../evidence/caliptra-bfm-dma-fifo-source-size-sweep-20261007/README.md).
 A focused route replay also covers the legal FIXED-read AXI2MBOX and
 FIXED-write MBOX2AXI modes through the actual DMA DUT, checking sequential

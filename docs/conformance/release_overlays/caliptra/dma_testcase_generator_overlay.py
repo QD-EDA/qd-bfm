@@ -99,13 +99,13 @@ def main() -> int:
           fifo_source_axi2axi_case = (i == 32);
           fifo_source_axi2mbox_case = (i == 33);
           fifo_source_axi2ahb_case = (i == 34);
-          fifo_source_size_sweep_case = (i >= 35 && i <= 42);
+          fifo_source_size_sweep_case = (i >= 35 && i <= 58);
           if (large_fifo_case)
             replay_size = 65536;
           else if (max_sram_case)
             replay_size = 16384;
           else if (fifo_source_size_sweep_case) begin
-            case (i - 35)
+            case ((i - 35) % 8)
               0: replay_size = 1;
               1: replay_size = 4;
               2: replay_size = 5;
@@ -260,7 +260,8 @@ def main() -> int:
             };
           end else if (fifo_source_size_sweep_case) begin
             randomize_success = dma_gen.randomize() with {
-              dma_xfer_type == AXI2AXI;
+              dma_xfer_type == (i <= 42 ? AXI2AXI :
+                                i <= 50 ? AXI2MBOX : AXI2AHB);
               src_is_fifo;
               !dst_is_fifo;
               use_rd_fixed;
@@ -271,7 +272,8 @@ def main() -> int:
               block_size == 0;
               xfer_size == replay_size;
               src_offset == 0;
-              dst_offset == 32'h0000_4000;
+              dst_offset == ((i >= 43 && i <= 50) ?
+                             32'h0000_1000 : 32'h0000_4000);
             };
           end else begin
             randomize_success = dma_gen.randomize() with {
@@ -321,7 +323,7 @@ def main() -> int:
                         "Qualify slam_dccm_ram and riscv_ecc32 against the harness top.",
                         "Add the Icarus-required numeric $fatal finish code.",
                         *(
-                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), the 16,384-word maximum checked SRAM payload, 65-word SRAM FIXED-read/FIXED-write/both-FIXED profiles, FIFO-source AXI2AXI/AXI2MBOX/AXI2AHB transfers and an AXI2AXI FIFO-source size sweep, a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO case, and 65-word FIFO recovery cases on AXI2AXI (64 bytes), AXI2MBOX (128 bytes), and AXI2AHB (128 bytes)."]
+                            ["Use deterministic per-case seeds to cover five named DMA routes at eight short transfer sizes (1, 4, 5, 16, 64, 65, 255, and 256 words), the 16,384-word maximum checked SRAM payload, 65-word SRAM FIXED-read/FIXED-write/both-FIXED profiles, FIFO-source AXI2AXI/AXI2MBOX/AXI2AHB transfers and all eight sizes on each FIFO-source route, a maximum 65,536-word fixed-read FIFO-to-SRAM stream, a 65-word fixed-write SRAM-to-FIFO case, and 65-word FIFO recovery cases on AXI2AXI (64 bytes), AXI2MBOX (128 bytes), and AXI2AHB (128 bytes)."]
                             if args.dut_replay
                             else []
                         ),

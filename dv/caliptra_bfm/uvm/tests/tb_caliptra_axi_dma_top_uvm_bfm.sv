@@ -848,7 +848,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if (!((generated_case_count == 29 && generated_case_index < 29) ||
             (generated_case_count == 32 && generated_case_index < 32) ||
             (generated_case_count == 35 && generated_case_index < 35) ||
-            (generated_case_count == 43 && generated_case_index < 43)))
+            (generated_case_count == 43 && generated_case_index < 43) ||
+            (generated_case_count == 59 && generated_case_index < 59)))
         $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
                generated_case_index, generated_case_count);
 
@@ -915,7 +916,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           endcase
         end else if ((record_index >= 29) && (record_index <= 31)) begin
           if ((generated_case_count != 32 && generated_case_count != 35 &&
-               generated_case_count != 43) ||
+               generated_case_count != 43 && generated_case_count != 59) ||
               (record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
               record_type.dst_is_fifo || record_type.inject_rst ||
@@ -933,7 +934,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   $fatal(1, "Generated testcase 31 is not FIXED-read/FIXED-write");
           endcase
         end else if ((record_index >= 32) && (record_index <= 34)) begin
-          if ((generated_case_count != 35 && generated_case_count != 43) ||
+          if ((generated_case_count != 35 && generated_case_count != 43 &&
+               generated_case_count != 59) ||
               (record_size != WORD_COUNT) ||
               !record_type.src_is_fifo || record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -952,23 +954,33 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                     (record_dst_offset != 32'h0000_4000))
               $fatal(1, "Generated testcase 34 is not FIFO-to-component");
           endcase
-        end else if ((record_index >= 35) && (record_index <= 42)) begin
-          if ((generated_case_count != 43) || !record_type.src_is_fifo ||
-              record_type.dst_is_fifo || (record_type.dma_xfer_type != AXI2AXI) ||
+        end else if ((record_index >= 35) && (record_index <= 58)) begin
+          if ((generated_case_count != 59) || !record_type.src_is_fifo ||
+              record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
               record_type.inject_rst || !record_type.inject_rand_delays ||
               record_type.test_block_size || (record_type.block_size != 0) ||
-              (record_src_offset != 0) || (record_dst_offset != 32'h0000_4000))
+              (record_src_offset != 0))
             $fatal(1, "Generated testcase %0d is outside the FIFO-source size sweep", record_index);
-          case (record_index)
-            35: if (record_size != 1)   $fatal(1, "Generated testcase 35 is not 1 word");
-            36: if (record_size != 4)   $fatal(1, "Generated testcase 36 is not 4 words");
-            37: if (record_size != 5)   $fatal(1, "Generated testcase 37 is not 5 words");
-            38: if (record_size != 16)  $fatal(1, "Generated testcase 38 is not 16 words");
-            39: if (record_size != 64)  $fatal(1, "Generated testcase 39 is not 64 words");
-            40: if (record_size != 65)  $fatal(1, "Generated testcase 40 is not 65 words");
-            41: if (record_size != 255) $fatal(1, "Generated testcase 41 is not 255 words");
-            42: if (record_size != 256) $fatal(1, "Generated testcase 42 is not 256 words");
+          if ((record_index <= 42 &&
+               (record_type.dma_xfer_type != AXI2AXI ||
+                record_dst_offset != 32'h0000_4000)) ||
+              (record_index >= 43 && record_index <= 50 &&
+               (record_type.dma_xfer_type != AXI2MBOX ||
+                record_dst_offset != 32'h0000_1000)) ||
+              (record_index >= 51 &&
+               (record_type.dma_xfer_type != AXI2AHB ||
+                record_dst_offset != 32'h0000_4000)))
+            $fatal(1, "Generated testcase %0d has an unsupported FIFO-source route", record_index);
+          case ((record_index - 35) % 8)
+            0: if (record_size != 1)   $fatal(1, "FIFO-source sweep record is not 1 word");
+            1: if (record_size != 4)   $fatal(1, "FIFO-source sweep record is not 4 words");
+            2: if (record_size != 5)   $fatal(1, "FIFO-source sweep record is not 5 words");
+            3: if (record_size != 16)  $fatal(1, "FIFO-source sweep record is not 16 words");
+            4: if (record_size != 64)  $fatal(1, "FIFO-source sweep record is not 64 words");
+            5: if (record_size != 65)  $fatal(1, "FIFO-source sweep record is not 65 words");
+            6: if (record_size != 255) $fatal(1, "FIFO-source sweep record is not 255 words");
+            7: if (record_size != 256) $fatal(1, "FIFO-source sweep record is not 256 words");
           endcase
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
