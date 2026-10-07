@@ -3,11 +3,14 @@
 #include "vpi_user.h"
 
 static vpiHandle clk, valid, pc, insn, ready, rst, fatal;
+static vpiHandle stdout_data, mailbox_write, reset_pending, reset_delay;
+static vpiHandle reset_start, reset_assert, reset_deassert;
 static vpiHandle arvalid, arready, araddr, rvalid, rready;
 static vpiHandle awvalid, awready, awaddr, wvalid, wready, bvalid, bready;
 static uint64_t cycles, retired, ar_count, r_count, aw_count, w_count, b_count;
 static uint32_t last_pc, last_insn;
 static char last_araddr[80], last_awaddr[80];
+static int reset_trace_bound, reset_seen, previous_reset_n, previous_reset_request;
 
 static int get_int(vpiHandle h) {
     s_vpi_value v;
@@ -25,6 +28,22 @@ static void get_bin(vpiHandle h, char *out, size_t size) {
 
 static PLI_INT32 on_clock(p_cb_data cb) {
     (void)cb;
+    if (reset_trace_bound) {
+        int reset_n = get_int(rst);
+        int reset_request = get_int(mailbox_write) && ((get_int(stdout_data) & 0xff) == 0xee);
+        if (reset_seen && reset_n != previous_reset_n)
+            vpi_printf("CALIPTRA_RESET_EDGE state=%s cycle=%" PRIu64
+                       " pending=%d wait=%d start=%d\n",
+                       reset_n ? "deassert" : "assert", cycles,
+                       get_int(reset_pending), get_int(reset_delay), get_int(reset_start));
+        if (reset_request && !previous_reset_request)
+            vpi_printf("CALIPTRA_RESET_REQUEST cycle=%" PRIu64
+                       " code=ee pending=%d wait=%d start=%d\n",
+                       cycles, get_int(reset_pending), get_int(reset_delay), get_int(reset_start));
+        previous_reset_n = reset_n;
+        previous_reset_request = reset_request;
+        reset_seen = 1;
+    }
     if (get_int(clk) != 1) return 0;
     cycles++;
     if (get_int(valid)) {
@@ -45,6 +64,11 @@ static PLI_INT32 on_clock(p_cb_data cb) {
                    " ready_mb=%d reset_n=%d fatal=%d axi_ar=%" PRIu64
                    " axi_aw=%" PRIu64 " axi_w=%" PRIu64 " axi_b=%" PRIu64 " axi_r=%" PRIu64 "\n",
                    cycles, retired, last_pc, last_insn, get_int(ready), get_int(rst), get_int(fatal), ar_count, aw_count, w_count, b_count, r_count);
+        if (reset_trace_bound && (get_int(reset_pending) || get_int(reset_assert) || get_int(reset_deassert)))
+            vpi_printf("CALIPTRA_RESET_SERVICE cycle=%" PRIu64
+                       " pending=%d wait=%d start=%d assert=%d deassert=%d\n",
+                       cycles, get_int(reset_pending), get_int(reset_delay), get_int(reset_start),
+                       get_int(reset_assert), get_int(reset_deassert));
         vpi_flush();
     }
     return 0;
@@ -72,6 +96,13 @@ static PLI_INT32 start(p_cb_data cb) {
     ready = bind("caliptra_top_tb.ready_for_mb_processing");
     rst = bind("caliptra_top_tb.cptra_rst_b");
     fatal = bind("caliptra_top_tb.cptra_error_fatal");
+    stdout_data = bind("caliptra_top_tb.tb_services_i.WriteData");
+    mailbox_write = bind("caliptra_top_tb.tb_services_i.mailbox_write");
+    reset_pending = bind("caliptra_top_tb.tb_services_i.prandom_warm_rst");
+    reset_delay = bind("caliptra_top_tb.tb_services_i.wait_time_to_rst");
+    reset_start = bind("caliptra_top_tb.tb_services_i.rst_cyclecnt");
+    reset_assert = bind("caliptra_top_tb.tb_services_i.assert_rst_flag");
+    reset_deassert = bind("caliptra_top_tb.tb_services_i.deassert_rst_flag");
     arvalid = bind("caliptra_top_tb.m_axi_if.arvalid");
     arready = bind("caliptra_top_tb.m_axi_if.arready");
     araddr = bind("caliptra_top_tb.m_axi_if.araddr");
@@ -91,6 +122,16 @@ static PLI_INT32 start(p_cb_data cb) {
                    (void *)araddr, (void *)awvalid, (void *)awready, (void *)awaddr);
         vpi_flush();
         return 0;
+    }
+    reset_trace_bound = stdout_data && mailbox_write && reset_pending && reset_delay && reset_start && reset_assert && reset_deassert;
+    if (reset_trace_bound) {
+        previous_reset_n = get_int(rst);
+        reset_seen = 1;
+        vpi_printf("CALIPTRA_RESET_TRACE_BOUND\n");
+    } else {
+        vpi_printf("CALIPTRA_RESET_TRACE_BIND_FAIL data=%p write=%p pending=%p delay=%p start=%p assert=%p deassert=%p\n",
+                   (void *)stdout_data, (void *)mailbox_write, (void *)reset_pending, (void *)reset_delay,
+                   (void *)reset_start, (void *)reset_assert, (void *)reset_deassert);
     }
     vpi_printf("CALIPTRA_TRACE_BOUND\n");
     vpi_flush();

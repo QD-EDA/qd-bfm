@@ -97,10 +97,19 @@ no reset-recovery qualification.
 `inject_rst=1` in the generated DCCM record is only planned test data. The
 pinned `rand_test_dma.c` sends stdout-control `0xEE` immediately before it
 executes the selected DMA helper; `caliptra_top_tb_services.sv` starts the
-delayed warm reset only after observing that write. This run stopped during
-ROM flow, before that firmware request, so the fixed-delay block was present
-but never triggered.
+delayed warm reset only after observing that write. The run log has no warm
+reset event, but the original VPI trace did not record the `0xEE` write or the
+service's pending-delay state, so it cannot distinguish a missing firmware
+request from a delayed-reset scheduling problem. The earlier random-delay run
+did log a reset pulse; the difference remains unresolved.
 
 - Memory guard: 69% free before run; 59% minimum observed; 60% floor
 - No result JSON was emitted because the guard stopped the runner
 - The temporary simulator build tree was removed after inspection
+
+The AXI trace VPI now also records `0xEE` mailbox writes, delayed-reset state,
+and reset edges. It compiles with the local `iverilog-vpi`; signal binding and
+runtime output still need a full-top run.
+
+- Trace VPI SHA-256:
+  `ff50cdb88665dc3fd227e7a6369dc05ecb29700cb5a0f3cfd7d9584c0736d851`
