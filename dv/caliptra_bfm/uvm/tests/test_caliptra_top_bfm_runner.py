@@ -268,6 +268,9 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             output_dir, digest = RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "diagnostic", 1)
             patched = (output_dir / original.name).read_text()
             self.assertIn("int num_tests = 1; /* bounded AES DMA diagnostic */", patched)
+            entries = [line.strip() for line in patched.splitlines()
+                       if line.strip().startswith(("{AES_ENC,", "{AES_DEC,"))]
+            self.assertEqual(entries, ["{AES_ENC, AES_GCM, AES_256},"])
             self.assertEqual(
                 original.read_text(),
                 "test_config_t test_cases[] = {\n"
@@ -297,8 +300,14 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             )
             (source / "caliptra_isr.h").write_text("/* ISR declarations */\n")
             output_dir, _ = RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "diagnostic", 2)
-            self.assertIn("int num_tests = 2; /* bounded AES DMA diagnostic */",
-                          (output_dir / original.name).read_text())
+            patched = (output_dir / original.name).read_text()
+            self.assertIn("int num_tests = 2; /* bounded AES DMA diagnostic */", patched)
+            entries = [line.strip() for line in patched.splitlines()
+                       if line.strip().startswith(("{AES_ENC,", "{AES_DEC,"))]
+            self.assertEqual(entries, [
+                "{AES_ENC, AES_GCM, AES_256},",
+                "{AES_DEC, AES_GCM, AES_256},",
+            ])
             with self.assertRaisesRegex(ValueError, "between 1 and 3"):
                 RUNNER.prepare_limited_aes_case_source(rtl, Path(temp) / "too-many", 4)
 

@@ -285,12 +285,19 @@ def prepare_limited_aes_case_source(rtl_root, output_dir, case_limit):
     table = re.search(r"test_config_t\s+test_cases\[\]\s*=\s*\{(.*?)\n\s*\};", text, re.S)
     if not table:
         raise ValueError(f"unexpected AES DMA test-case table: {source_file}")
-    case_count = len(re.findall(r"(?m)^\s*\{AES_(?:ENC|DEC),", table.group(1)))
+    table_lines = [line.rstrip() for line in table.group(1).splitlines()
+                   if line.strip() and not line.lstrip().startswith("//")]
+    if not table_lines or any(not re.match(r"\s*\{AES_(?:ENC|DEC),", line)
+                              for line in table_lines):
+        raise ValueError(f"unexpected AES DMA test-case table entries: {source_file}")
+    case_count = len(table_lines)
     if not 1 <= case_limit <= case_count:
         raise ValueError(f"AES DMA case limit must be between 1 and {case_count}")
     before = "int num_tests = sizeof(test_cases) / sizeof(test_config_t);"
     if text.count(before) != 1:
         raise ValueError(f"unexpected AES DMA firmware loop: {source_file}")
+    selected_cases = "\n".join(table_lines[:case_limit])
+    text = text[:table.start(1)] + "\n" + selected_cases + text[table.end(1):]
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True)
     patched_source = output_dir / source_file.name
