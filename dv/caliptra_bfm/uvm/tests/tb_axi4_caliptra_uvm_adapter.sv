@@ -166,9 +166,63 @@ module tb_axi4_caliptra_uvm_adapter;
     endfunction
   endclass
 
+  class axi4_caliptra_channel_subscriber extends uvm_subscriber #(axi4_caliptra_channel_transaction);
+    int channel_count[5];
+    event received;
+
+    `uvm_component_utils(axi4_caliptra_channel_subscriber)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+      foreach (channel_count[i]) channel_count[i] = 0;
+    endfunction
+
+    function void write(axi4_caliptra_channel_transaction item);
+      axi4_caliptra_channel_transaction copied;
+      copied = axi4_caliptra_channel_transaction::type_id::create("copied_channel_item");
+      copied.copy(item);
+      if (!copied.compare(item) || item.cycle == 0)
+        $fatal(1, "AXI channel copy/compare/cycle check failed: %s", item.convert2string());
+
+      case (item.channel)
+        AXI4_CHANNEL_AW: begin
+          if (item.id != 8'h31 || item.addr != 48'h1234 || item.len != 0 ||
+              item.size != 2 || item.burst != 1 || !item.lock ||
+              item.user != 32'h1122_3344)
+            $fatal(1, "AXI AW item mismatch: %s", item.convert2string());
+        end
+        AXI4_CHANNEL_W: begin
+          if (item.data != 32'ha5a5_5a5a || item.strb != 4'h5 ||
+              item.user != 32'h5566_7788 || !item.last)
+            $fatal(1, "AXI W item mismatch: %s", item.convert2string());
+        end
+        AXI4_CHANNEL_B: begin
+          if (item.id != 8'h31 || item.response != 0 ||
+              item.user != 32'hdead_beef)
+            $fatal(1, "AXI B item mismatch: %s", item.convert2string());
+        end
+        AXI4_CHANNEL_AR: begin
+          if (item.id != 8'h42 || item.addr != 48'h5678 || item.len != 0 ||
+              item.size != 2 || item.burst != 1 || item.lock ||
+              item.user != 32'h89ab_cdef)
+            $fatal(1, "AXI AR item mismatch: %s", item.convert2string());
+        end
+        AXI4_CHANNEL_R: begin
+          if (item.id != 8'h42 || item.data != 32'hface_1234 ||
+              item.response != 2'b10 || item.user != 32'h1357_9bdf || !item.last)
+            $fatal(1, "AXI R item mismatch: %s", item.convert2string());
+        end
+        default: $fatal(1, "Unknown AXI channel item: %s", item.convert2string());
+      endcase
+      channel_count[item.channel]++;
+      -> received;
+    endfunction
+  endclass
+
   class axi4_caliptra_uvm_env extends uvm_env;
     axi4_caliptra_uvm_monitor mon;
     axi4_caliptra_uvm_subscriber sub;
+    axi4_caliptra_channel_subscriber channel_sub;
     `uvm_component_utils(axi4_caliptra_uvm_env)
 
     function new(string name, uvm_component parent);
@@ -179,11 +233,13 @@ module tb_axi4_caliptra_uvm_adapter;
       super.build_phase(phase);
       mon = axi4_caliptra_uvm_monitor::type_id::create("mon", this);
       sub = axi4_caliptra_uvm_subscriber::type_id::create("sub", this);
+      channel_sub = axi4_caliptra_channel_subscriber::type_id::create("channel_sub", this);
     endfunction
 
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       mon.ap.connect(sub.analysis_export);
+      mon.channel_ap.connect(channel_sub.analysis_export);
     endfunction
   endclass
 
@@ -204,7 +260,12 @@ module tb_axi4_caliptra_uvm_adapter;
       phase.raise_objection(this);
       fork
         begin
-          while (env.sub.write_count == 0 || env.sub.read_count == 0)
+          while (env.sub.write_count == 0 || env.sub.read_count == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_AW] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_W] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_B] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_AR] == 0 ||
+                 env.channel_sub.channel_count[AXI4_CHANNEL_R] == 0)
             @env.sub.received;
         end
         begin
@@ -213,7 +274,7 @@ module tb_axi4_caliptra_uvm_adapter;
         end
       join_any
       disable fork;
-      $display("PASS: UVM AXI analysis adapter published read/write transactions");
+      $display("PASS: UVM AXI adapter published channel and completed transactions");
       phase.drop_objection(this);
     endtask
   endclass
