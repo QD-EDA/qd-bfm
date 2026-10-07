@@ -27,7 +27,7 @@ memory and maximum observed resident memory for the process group.
 
 For a bounded full-top `rand_test_dma` reset diagnostic, use
 `--rand-dma-iterations 1 --force-first-rand-dma-reset`. The optional
-`--rand-dma-reset-delay-cycles N` fixes the testbench warm-reset wait to 5–1023
+`--rand-dma-reset-delay-cycles N` fixes the testbench warm-reset wait to 5–8191
 cycles in a hash-checked temporary overlay; without it, Caliptra's weighted
 random delay is unchanged. For example:
 
