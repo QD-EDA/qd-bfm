@@ -1,0 +1,61 @@
+{
+  "status": "PASS_CHECKER_DISABLED_DIAGNOSTIC",
+  "diagnostic_only": true,
+  "test": "smoke_test_dma_aes_gcm_short_1_dword",
+  "runner_commit": "a6cd3d1cff9b14507278d0219281c61e651e6356",
+  "runner_script_sha256": "b7713e8eca3918990182eec797fb8dc7d27e311a919a0122ce740544516ea725",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+  "case_yaml_sha256": "37d25ede775580271066061df4eb0dfb3e2eecde39649e26e9220931d55c3837",
+  "runner_options": [
+    "--case smoke_test_dma_aes_gcm_short_1_dword",
+    "--first-aes-case-diagnostic",
+    "--fast-trng",
+    "--disable-bfm-checker"
+  ],
+  "diagnostic_modes": {
+    "one_aes_case_firmware_copy": true,
+    "fast_trng_cycles": 50,
+    "fast_boot_data_preload": true,
+    "pq_vector_generation_skipped": true,
+    "low_priority_firmware_prints_suppressed": true,
+    "bfm_checker_enabled": false
+  },
+  "compile": {
+    "exit": 0,
+    "defines": ["RV_OPENSOURCE", "CLP_ASSERT_ON", "CALIPTRA_INTERNAL_TRNG"],
+    "iverilog_version": "13.0 (devel) (246c58e4-dirty)",
+    "binary_bytes": 323989395,
+    "binary_sha256": "4e3f465418ee2458b628d8fe22ea858da9be138d99186be947962964f91cc896",
+    "compile_log_sha256": "65a11fd3129492ac7f6d40bf6f3e8741f6249c036dfdc6140de6da216794235b",
+    "profile_sha256": "03e8db14835cd0fc4dd6ebc32a673166025037b27c6c3c2d9a7fd42dc520e92b",
+    "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654"
+  },
+  "riscv_compiler_version": "xPack GNU RISC-V Embedded GCC 13.4.0 (arm64)",
+  "firmware_image_sha256_after_fast_boot_preload": {
+    "program.hex": "e8cf4977cb14a5727395304b6436f7c94c29855c1f1ddc7f964063b4a2f6e7fe",
+    "dccm.hex": "4d3386e40616ae8dd4508ba4e8c78ff069822b2dd804152d4e4c4bce7ce51d1c",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "simulation": {
+    "exit": 0,
+    "log_bytes": 3835,
+    "log_sha256": "e11f1c2d391fc290b3d9eb60c1449ff25e2b7c93bc8ada05e4f0266cc3bcb5ba",
+    "testcase_pass_markers": 1,
+    "testcase_fail_markers": 0,
+    "bad_diagnostics": 0,
+    "jtag_errors": 0,
+    "finish": {"minstret": 1426, "mcycle": 3572},
+    "jtag_port_bound": true,
+    "axi_vpi_trace_enabled": false
+  },
+  "memory_guard": {
+    "free_floor_percent": 40,
+    "preflight_percent": 60,
+    "minimum_observed_percent": 48,
+    "timeout_seconds": 900,
+    "exit_code": 0
+  },
+  "qualification": "The checker-disabled full-top path completes the single diagnostic AES/DMA firmware case. This does not qualify checker behavior or provide an AXI transaction trace. The checker-enabled comparison used an older runner commit; a same-commit checker-enabled replay is required to isolate checker overhead."
+}

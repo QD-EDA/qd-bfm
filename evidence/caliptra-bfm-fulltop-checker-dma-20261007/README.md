@@ -37,3 +37,21 @@ the 40% floor. Its 1.5 MB compile output was hashed
 (`2d4cbbfaedbbc5bf2be8b63709914c08911664767e32836f342b1b13b92c485f`) and
 removed. This does not qualify stock Icarus 13 as a replacement for the
 development compiler needed by the full-top flow.
+
+## Checker-disabled first AES/DMA counterpart — 2026-10-07
+
+The current runner was rebuilt with `--disable-bfm-checker` and the same
+diagnostic settings: `--fast-trng` and `--first-aes-case-diagnostic`. The
+one-case firmware reached `* TESTCASE PASSED` and normal `$finish` at
+`mcycle=3572` (`minstret=1426`). The log scan found one pass marker, no fail or
+error markers, and no JTAG errors. The 40% free-memory floor held; the guard
+reported a 48% minimum.
+
+This shows the checker-disabled top can complete the diagnostic firmware case.
+It does not qualify the protocol checker or establish transaction-level AXI
+coverage: AXI tracing was off. The checker-enabled timeout above used an older
+runner commit, so these runs do not isolate checker overhead as the cause. A
+checker-enabled replay with the current runner is still needed for a controlled
+A/B result. The compact raw log, exact hashes and limits are in
+[`checker-disabled-first-aes-result.json`](checker-disabled-first-aes-result.json)
+and [`checker-disabled-first-aes-sim.log`](checker-disabled-first-aes-sim.log).
