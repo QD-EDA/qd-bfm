@@ -14,8 +14,8 @@ package qvip_ahb_lite_slave_params_pkg;
     localparam int AHB_NUM_MASTER_BITS = 1;
     localparam int AHB_NUM_SLAVES = 1;
     localparam int AHB_ADDRESS_WIDTH = 32;
-    localparam int AHB_WDATA_WIDTH = 64;
-    localparam int AHB_RDATA_WIDTH = 64;
+    localparam int AHB_WDATA_WIDTH = AHB_MVC_DATA_WIDTH;
+    localparam int AHB_RDATA_WIDTH = AHB_MVC_DATA_WIDTH;
   endclass
 
   typedef ahb_lite_caliptra_mvc_transfer ahb_lite_slave_0_transfer_t;
@@ -111,8 +111,8 @@ package qvip_ahb_lite_slave_pkg;
     parameter int AHB_NUM_MASTER_BITS = 1,
     parameter int AHB_NUM_SLAVES = 1,
     parameter int AHB_ADDRESS_WIDTH = 32,
-    parameter int AHB_WDATA_WIDTH = 64,
-    parameter int AHB_RDATA_WIDTH = 64
+    parameter int AHB_WDATA_WIDTH = AHB_MVC_DATA_WIDTH,
+    parameter int AHB_RDATA_WIDTH = AHB_MVC_DATA_WIDTH
   ) extends ahb_lite_caliptra_reg_adapter;
     bit en_n_bits;
 
@@ -149,8 +149,8 @@ package qvip_ahb_lite_slave_pkg;
     parameter int AHB_NUM_MASTER_BITS = 1,
     parameter int AHB_NUM_SLAVES = 1,
     parameter int AHB_ADDRESS_WIDTH = 32,
-    parameter int AHB_WDATA_WIDTH = 64,
-    parameter int AHB_RDATA_WIDTH = 64
+    parameter int AHB_WDATA_WIDTH = AHB_MVC_DATA_WIDTH,
+    parameter int AHB_RDATA_WIDTH = AHB_MVC_DATA_WIDTH
   ) extends uvm_reg_predictor #(mvc_sequence_item_base);
 
     uvm_analysis_export #(mvc_sequence_item_base) bus_item_export;

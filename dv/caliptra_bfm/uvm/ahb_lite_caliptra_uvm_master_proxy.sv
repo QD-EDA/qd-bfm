@@ -25,9 +25,11 @@ module ahb_lite_caliptra_uvm_master_proxy #(
   reg success;
   reg response_error;
   reg [DATA_WIDTH-1:0] read_data;
+  reg [MAX_BURST_BEATS*DATA_WIDTH-1:0] burst_write_data;
   reg [MAX_BURST_BEATS*DATA_WIDTH-1:0] burst_read_data;
   reg [MAX_BURST_BEATS-1:0] burst_beat_error;
   integer completed_beats;
+  integer beat;
 
   ahb_lite_caliptra_master #(
     .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH),
@@ -52,6 +54,7 @@ module ahb_lite_caliptra_uvm_master_proxy #(
     forever begin
       wait (cmd_if.request_valid === 1'b1);
       read_data = 0;
+      burst_write_data = '0;
       burst_read_data = '0;
       burst_beat_error = '0;
       completed_beats = 0;
@@ -71,10 +74,15 @@ module ahb_lite_caliptra_uvm_master_proxy #(
           burst_beat_error[0] = response_error;
           completed_beats = (success || response_error) ? 1 : 0;
         end else begin
+          // The command mailbox keeps 64-bit slots for Caliptra, while the
+          // Adams Bridge profile sends packed 32-bit beats.
+          for (beat = 0; beat < cmd_if.request_burst_count; beat = beat + 1)
+            burst_write_data[beat*DATA_WIDTH +: DATA_WIDTH] =
+              cmd_if.request_burst_data[beat*64 +: DATA_WIDTH];
           pin_manager.transfer_incr_burst(
             cmd_if.request_address, cmd_if.request_write,
             cmd_if.request_size, cmd_if.request_burst_count,
-            cmd_if.request_burst_data, request_ok, success,
+            burst_write_data, request_ok, success,
             response_error, burst_read_data, burst_beat_error,
             completed_beats);
           read_data = burst_read_data[0 +: DATA_WIDTH];
@@ -90,7 +98,10 @@ module ahb_lite_caliptra_uvm_master_proxy #(
       cmd_if.response_read_data = read_data;
       cmd_if.response_completed_beats = completed_beats;
       cmd_if.response_beat_error = burst_beat_error;
-      cmd_if.response_burst_read_data = burst_read_data;
+      cmd_if.response_burst_read_data = '0;
+      for (beat = 0; beat < MAX_BURST_BEATS; beat = beat + 1)
+        cmd_if.response_burst_read_data[beat*64 +: DATA_WIDTH] =
+          burst_read_data[beat*DATA_WIDTH +: DATA_WIDTH];
       cmd_if.response_valid = 1;
       wait (cmd_if.request_valid === 1'b0);
       cmd_if.response_valid = 0;

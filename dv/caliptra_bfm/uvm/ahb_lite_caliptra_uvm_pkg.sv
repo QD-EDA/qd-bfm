@@ -7,8 +7,19 @@ package ahb_lite_caliptra_uvm_pkg;
   import mgc_ahb_v2_0_pkg::*;
 
   localparam integer AHB_MVC_MAX_BURST_BEATS = 256;
+  // Adams Bridge MLDSA's generated QVIP uses 32-bit data; Caliptra defaults to 64.
+`ifdef CALIPTRA_BFM_AHB_32BIT
+  localparam integer AHB_MVC_DATA_WIDTH = 32;
+`else
+  localparam integer AHB_MVC_DATA_WIDTH = 64;
+`endif
+  localparam integer AHB_MVC_WORD_SIZE = $clog2(AHB_MVC_DATA_WIDTH / 8);
+  localparam bit [63:0] AHB_MVC_DATA_MASK =
+    {64{1'b1}} >> (64 - AHB_MVC_DATA_WIDTH);
 
-  typedef ahb_master_burst_transfer #(1, 1, 1, 32, 64, 64)
+  typedef ahb_master_burst_transfer #(1, 1, 1, 32,
+                                      AHB_MVC_DATA_WIDTH,
+                                      AHB_MVC_DATA_WIDTH)
     ahb_lite_caliptra_mvc_transfer;
 
   class ahb_lite_caliptra_transaction extends uvm_sequence_item;
@@ -199,7 +210,7 @@ package ahb_lite_caliptra_uvm_pkg;
 
     function new(string name = "ahb_lite_caliptra_reg_adapter");
       super.new(name);
-      bus_data_width = 64;
+      bus_data_width = AHB_MVC_DATA_WIDTH;
       supports_byte_enable = 0;
       provides_responses = 0;
     endfunction
@@ -496,7 +507,7 @@ package ahb_lite_caliptra_uvm_pkg;
       start_item(req);
       req.RnW = AHB_WRITE;
       req.address = 32'h20;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(64'h1122_3344_5566_7788);
       finish_item(req);
       if (req.resp.size() != 1 || req.resp[0] != AHB_OKAY)
@@ -506,18 +517,18 @@ package ahb_lite_caliptra_uvm_pkg;
       start_item(req);
       req.RnW = AHB_READ;
       req.address = 32'h20;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(0);
       finish_item(req);
       if (req.resp.size() != 1 || req.resp[0] != AHB_OKAY ||
-          req.data[0] != 64'h1122_3344_5566_7788)
+          req.data[0] != (64'h1122_3344_5566_7788 & AHB_MVC_DATA_MASK))
         `uvm_fatal("AHB_READ", "UVM-driven AHB-Lite read did not return the stored data")
 
       req = new("write_burst_req");
       start_item(req);
       req.RnW = AHB_WRITE;
       req.address = 32'h80;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(64'h0102_0304_0506_0708);
       req.data.push_back(64'h1112_1314_1516_1718);
       req.data.push_back(64'h2122_2324_2526_2728);
@@ -532,16 +543,16 @@ package ahb_lite_caliptra_uvm_pkg;
       start_item(req);
       req.RnW = AHB_READ;
       req.address = 32'h80;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       repeat (4) req.data.push_back(0);
       finish_item(req);
       if (req.resp.size() != 4 || req.resp[0] != AHB_OKAY ||
           req.resp[1] != AHB_OKAY || req.resp[2] != AHB_OKAY ||
           req.resp[3] != AHB_OKAY ||
-          req.data[0] != 64'h0102_0304_0506_0708 ||
-          req.data[1] != 64'h1112_1314_1516_1718 ||
-          req.data[2] != 64'h2122_2324_2526_2728 ||
-          req.data[3] != 64'h3132_3334_3536_3738)
+          req.data[0] != (64'h0102_0304_0506_0708 & AHB_MVC_DATA_MASK) ||
+          req.data[1] != (64'h1112_1314_1516_1718 & AHB_MVC_DATA_MASK) ||
+          req.data[2] != (64'h2122_2324_2526_2728 & AHB_MVC_DATA_MASK) ||
+          req.data[3] != (64'h3132_3334_3536_3738 & AHB_MVC_DATA_MASK))
         `uvm_fatal("AHB_BURST_READ", "UVM-driven AHB-Lite burst read data mismatch")
     endtask
   endclass
@@ -559,7 +570,7 @@ package ahb_lite_caliptra_uvm_pkg;
       start_item(req);
       req.RnW = AHB_READ;
       req.address = 32'h20;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(0);
       finish_item(req);
       if (req.resp.size() != 1 || req.resp[0] != AHB_ERROR)
@@ -569,17 +580,17 @@ package ahb_lite_caliptra_uvm_pkg;
       start_item(req);
       req.RnW = AHB_READ;
       req.address = 32'h10000;
-      req.size = 3;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(64'hfeed_0000_0000_0000);
       req.data.push_back(64'hfeed_0000_0000_0001);
       req.data.push_back(64'hfeed_0000_0000_0002);
       req.data.push_back(64'hfeed_0000_0000_0003);
       finish_item(req);
       if (req.resp.size() != 1 || req.resp[0] != AHB_ERROR ||
-          req.data[0] != 64'hfeed_0000_0000_0000 ||
-          req.data[1] != 64'hfeed_0000_0000_0001 ||
-          req.data[2] != 64'hfeed_0000_0000_0002 ||
-          req.data[3] != 64'hfeed_0000_0000_0003)
+          req.data[0] != (64'hfeed_0000_0000_0000 & AHB_MVC_DATA_MASK) ||
+          req.data[1] != (64'hfeed_0000_0000_0001 & AHB_MVC_DATA_MASK) ||
+          req.data[2] != (64'hfeed_0000_0000_0002 & AHB_MVC_DATA_MASK) ||
+          req.data[3] != (64'hfeed_0000_0000_0003 & AHB_MVC_DATA_MASK))
         `uvm_fatal("AHB_BURST_ERROR", "Aborted burst fabricated read data or lost ERROR")
     endtask
   endclass
@@ -596,8 +607,8 @@ package ahb_lite_caliptra_uvm_pkg;
       req = new("partial_error_burst_req");
       start_item(req);
       req.RnW = AHB_WRITE;
-      req.address = 32'hfff8;
-      req.size = 3;
+      req.address = (AHB_MVC_DATA_WIDTH == 32) ? 32'hfffc : 32'hfff8;
+      req.size = AHB_MVC_WORD_SIZE;
       req.data.push_back(64'h4142_4344_4546_4748);
       req.data.push_back(64'h5152_5354_5556_5758);
       req.data.push_back(64'h6162_6364_6566_6768);
@@ -605,10 +616,10 @@ package ahb_lite_caliptra_uvm_pkg;
       finish_item(req);
       if (req.resp.size() != 2 || req.resp[0] != AHB_OKAY ||
           req.resp[1] != AHB_ERROR || req.data.size() != 4 ||
-          req.data[0] != 64'h4142_4344_4546_4748 ||
-          req.data[1] != 64'h5152_5354_5556_5758 ||
-          req.data[2] != 64'h6162_6364_6566_6768 ||
-          req.data[3] != 64'h7172_7374_7576_7778)
+          req.data[0] != (64'h4142_4344_4546_4748 & AHB_MVC_DATA_MASK) ||
+          req.data[1] != (64'h5152_5354_5556_5758 & AHB_MVC_DATA_MASK) ||
+          req.data[2] != (64'h6162_6364_6566_6768 & AHB_MVC_DATA_MASK) ||
+          req.data[3] != (64'h7172_7374_7576_7778 & AHB_MVC_DATA_MASK))
         `uvm_fatal("AHB_PARTIAL_BURST_ERROR", "Partial burst did not retain the successful/error responses and original write queue")
     endtask
   endclass

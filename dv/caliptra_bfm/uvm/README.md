@@ -387,11 +387,17 @@ connection. The generated environment instead connects `ap["burst_transfer"]`
 to the predictor and `ap["burst_transfer_sb"]` to the scoreboard; no generated
 source references `trans_ap`. Those real keys are provided here, so no fake
 `trans_ap` stream is needed. The Adams Bridge generated environment remains
-unqualified: its exact QVIP parameter specialization and end-to-end runtime
-have not been checked with this replacement. The generated predictor and
+unqualified until compiled and run with this replacement. Its checked-in
+`qvip_ahb_lite_slave_params_pkg.sv` sets one master, one slave, 32-bit address,
+and 32-bit write/read data. Compile the clean-room provider with
+`+define+CALIPTRA_BFM_AHB_32BIT` for this environment; the default Caliptra
+profile remains 64-bit. The generated predictor and
 scoreboard cast items to the parameterized `ahb_master_burst_transfer` type;
 they use `RnW`, `address`, `data[0][31:0]`, `resp[0]` (for mismatch reporting),
 and `convert2string()`. The clean-room item exposes those fields and method.
+The generated MLDSA filelists already name the current `abr_*` RTL paths; the
+five stale paths elsewhere in Adams Bridge belong to separate unit-test
+filelists and are not this environment's blocker.
 
 `caliptra_ahb_mvc_compat_pkg.sv` supplies fallback definitions for only these
 visible types, including `ahb_rnw_e` with `AHB_READ`/`AHB_WRITE`, and the
