@@ -17,6 +17,7 @@ dv/caliptra_bfm/uvm/pv_caliptra_master_cmd_if.sv
 dv/caliptra_bfm/uvm/pv_caliptra_uvm_pkg.sv
 dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv
 dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv
+dv/caliptra_bfm/uvmf_lite/default_reset_gen.sv
 dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv
 dv/caliptra_bfm/axi/axi4_caliptra_master.sv
 dv/caliptra_bfm/axi/axi4_caliptra_memory_subordinate.sv

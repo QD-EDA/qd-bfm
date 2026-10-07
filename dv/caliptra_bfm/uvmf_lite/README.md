@@ -9,6 +9,14 @@ initiator/responder enums used by generated HDL-side BFM interfaces;
 `uvmf_base_pkg.sv` imports and re-exports the same enum types for HVL classes,
 including named re-exports of the generator-facing `INITIATOR` and `RESPONDER`
 enum literals.
+
+`default_reset_gen.sv` supplies the generated HDL-top module interface
+`default_reset_gen(CLK_IN, RESET)`. It asserts active-low reset at startup and
+releases it after two rising clock edges, matching the local AHB QVIP shim's
+startup reset. The timing of the licensed UVMF implementation has not been
+verified. Define `CALIPTRA_BFM_EXTERNAL_UVMF` when a provider supplies this
+module. Run `tests/run_default_reset_gen.sh` for the bounded reset check.
+
 It currently provides a transaction base with the generated
 `start_time`, `end_time`, and `transaction_view_h` fields plus copy/compare/
 print hooks; the `uvmf_sim_level_t` enum; typed
@@ -88,9 +96,12 @@ transaction handle in this local Icarus run, while explicit analysis imps
 preserved the transaction fields. The existing native AXI subscriber smoke
 passes, but the generated Caliptra coverage subscriber path needs its own
 qualification. HDL-side registration order, late registration, and generated
-derived configuration publication also remain unverified. The package still
-lacks reset/clock wait helpers, generated BFM macros and utility packages,
-transaction recording, HDL/HVL proxy startup, and generated top scaffolding.
+derived configuration publication also remain unverified. The clean-room base
+does not provide generic reset/clock wait helpers; the inspected generated
+Caliptra configuration classes implement `wait_for_reset` and
+`wait_for_num_clocks` by delegating to their monitor BFMs. Generated BFM macros
+and utility packages, transaction recording, HDL/HVL proxy startup, and
+remaining top scaffolding are still open.
 Do not treat it as a drop-in UVMF package yet.
 
 The focused compile probe follows the ECC entries in Caliptra's pinned
