@@ -43,3 +43,24 @@ partial integration evidence only.
 - Raw trace SHA-256: `58bf76083a22373f1802655b1fcfd279ca72177a501bde89e5e9eb0841dbb737`
 - Trace: `sim-one-aes-partial.log`
 - Raw output directory: `/private/tmp/qd-bfm-top-short-aes-first-quiet-escalated-20261006`
+
+## Bounded forced-reset random DMA follow-up
+
+A diagnostic run limited `rand_test_dma` to one generated transfer and forced
+`inject_rst` on that first transfer. The testbench generated exactly one case
+and logged the reset assertion and deassertion; the CPU trace continued after
+reset with no fatal observed. The memory guard stopped simulation at cycle
+4,812 when free memory reached 59% against the 60% floor. No AXI handshakes or
+testcase completion marker were reached, so this is reset-path progress only,
+not a passing DMA test.
+
+- Caliptra RTL commit: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
+- Profile: `rand_test_dma`, one iteration, forced first reset, fast TRNG,
+  verified `.data` preload, quiet firmware, AXI VPI trace
+- Memory guard: 66% free before run; 59% minimum observed; 60% floor
+- Endpoint: 4,812 cycles, 1,754 retired instructions, zero AR/AW/W/B/R
+  handshakes, `fatal=0`
+- Simulation log SHA-256:
+  `15463252dea25fa6af5c4f427052058e8a6073991711f73bad237b802d4495dd`
+- Trace: `sim-forced-first-reset-partial.log`
+- Raw output directory: `/private/tmp/qd-bfm-rand-dma-first-reset-20261007`
