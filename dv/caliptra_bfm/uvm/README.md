@@ -68,7 +68,8 @@ the falling clock edge, then publishes read and write objects through
 its native `ap` analysis port. In standalone mode it also publishes a second
 `aaxi_master_tr` stream on `aaxi_ap`. The adapter reports transaction-monitor
 protocol violations through UVM errors, including unmatched responses that
-cannot be attached to a completed transaction.
+cannot be attached to a completed transaction. Its native DMA pin wrapper also
+runs `axi4_caliptra_checker` against the live AXI channels.
 
 The transaction class exposes direction (`kind`, `is_read()`, `is_write()`),
 address/control, ID and response, USER, first-beat `data`, full `beatQ`, write
