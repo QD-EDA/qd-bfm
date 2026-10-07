@@ -320,13 +320,22 @@ package uvmf_lite_agent_test_pkg;
     .REQ(agent_item), .RSP(agent_item)
   );
     static int completed_value;
+    static int response_value;
+    static bit response_copy_isolated;
     `uvm_object_utils(agent_sequence)
     function new(string name = "agent_sequence"); super.new(name); endfunction
     virtual task body();
       agent_item item = agent_item::type_id::create("item");
+      agent_item response_item;
       start_item(item);
       item.value = 41;
       finish_item(item);
+      get_response(response_item);
+      if (response_item == null)
+        `uvm_fatal("UVMF_DRIVER_RSP", "Driver did not return the configured response")
+      response_value = response_item.value;
+      response_item.value++;
+      response_copy_isolated = item.value == 42 && response_item.value == 43;
       completed_value = item.value;
     endtask
   endclass
@@ -400,6 +409,7 @@ package uvmf_lite_agent_test_pkg;
       expect_scoreboard_mismatch = $test$plusargs("BFM_LITE_EXPECT_MISMATCH");
       configuration.initialize(NA, "uvm_test_top.environment", interface_names,
                                null, interface_activity);
+      configuration.active_agent_configuration.return_transaction_response = 1;
       if (!uvm_config_db #(virtual uvmf_lite_driver_bfm_if)::get(
             null, "LATE_BFM_HANDLES", "input_driver", driver_bfm) ||
           !uvm_config_db #(virtual uvmf_lite_monitor_bfm_if)::get(
@@ -465,6 +475,8 @@ package uvmf_lite_agent_test_pkg;
           configuration.active_agent_configuration.monitor_bfm != input_monitor_bfm ||
           configuration.passive_agent_configuration.monitor_bfm != output_monitor_bfm ||
           agent_sequence::completed_value != 42 ||
+          agent_sequence::response_value != 42 ||
+          !agent_sequence::response_copy_isolated ||
           agent_observer::item_count != 1 || agent_observer::last_value != 42 ||
           agent_coverage::sample_count != 1 || agent_coverage::sampled_value != 42 ||
           driver_bfm.proxy != agent::active_driver ||
