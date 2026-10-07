@@ -1,4 +1,5 @@
 #include <inttypes.h>
+#include <stdio.h>
 #include <stdint.h>
 #include "vpi_user.h"
 

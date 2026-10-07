@@ -118,6 +118,21 @@ runtime output remain unverified.
 
 A disposable synthetic hierarchy smoke then loaded the VPI module and verified
 the expected hierarchy names, `0xEE` request marker, and both reset-edge
-callbacks. This confirms the tracer callback path against a small Icarus
-fixture only; binding and reset behavior in the actual Caliptra full-top remain
-unverified until the guarded full-top run reaches simulation.
+callbacks. The smoke is now reproducible with
+[`run_trace_vpi_smoke.sh`](../caliptra-bfm-open-top-smoke-20261006/run_trace_vpi_smoke.sh)
+and [`trace_vpi_smoke.sv`](../caliptra-bfm-open-top-smoke-20261006/trace_vpi_smoke.sv).
+It requires trace/reset bind markers, the firmware `0xEE` request, reset assert
+and deassert edges in order, and one AXI AW handshake after reset. A guarded
+run passed with 49% minimum free memory against a 45% floor. This validates the
+tracer's synthetic hierarchy and event ordering; binding and reset behavior in
+the actual Caliptra full-top remain unverified.
+
+Re-run the fixture from the repository root with the normal Icarus tools on
+`PATH` (or set `IVERILOG_BIN`, `VVP_BIN`, and `IVERILOG_VPI_BIN`):
+
+```sh
+python3 scripts/run_with_memory_pressure_guard.py \
+  --min-free-percent 45 --timeout-seconds 60 \
+  --log /tmp/caliptra-trace-vpi.log -- \
+  evidence/caliptra-bfm-open-top-smoke-20261006/run_trace_vpi_smoke.sh
+```
