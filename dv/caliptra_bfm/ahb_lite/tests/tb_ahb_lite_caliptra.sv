@@ -35,6 +35,14 @@ module tb_ahb_lite_caliptra;
   wire [31:0] transfer_count;
   wire protocol_error;
   wire [31:0] protocol_error_count;
+  wire [31:0] read_address_count;
+  wire [31:0] write_address_count;
+  wire [31:0] size_1byte_count;
+  wire [31:0] size_2byte_count;
+  wire [31:0] size_4byte_count;
+  wire [31:0] size_8byte_count;
+  wire [31:0] pending_wait_cycle_count;
+  wire [31:0] error_transfer_count;
 
   integer response_errors = 0;
   integer seq_address_count = 0;
@@ -88,7 +96,13 @@ module tb_ahb_lite_caliptra;
     .transfer_data(transfer_data), .transfer_error(transfer_error),
     .cycle_count(cycle_count), .address_count(address_count),
     .transfer_count(transfer_count), .protocol_error(protocol_error),
-    .protocol_error_count(protocol_error_count)
+    .protocol_error_count(protocol_error_count),
+    .read_address_count(read_address_count),
+    .write_address_count(write_address_count),
+    .size_1byte_count(size_1byte_count), .size_2byte_count(size_2byte_count),
+    .size_4byte_count(size_4byte_count), .size_8byte_count(size_8byte_count),
+    .pending_wait_cycle_count(pending_wait_cycle_count),
+    .error_transfer_count(error_transfer_count)
   );
 
   always @(posedge HCLK)
@@ -185,8 +199,16 @@ module tb_ahb_lite_caliptra;
         seq_address_count != 6)
       $fatal(1, "Unexpected AHB accounting: addresses=%0d transfers=%0d seq=%0d errors=%0d",
              address_count, transfer_count, seq_address_count, response_errors);
+    if (read_address_count != 8 || write_address_count != 6 ||
+        size_1byte_count != 0 || size_2byte_count != 1 ||
+        size_4byte_count != 0 || size_8byte_count != 13 ||
+        pending_wait_cycle_count == 0 || error_transfer_count != 2)
+      $fatal(1, "Unexpected AHB coverage counts: reads=%0d writes=%0d sizes={%0d,%0d,%0d,%0d} waits=%0d errors=%0d",
+             read_address_count, write_address_count,
+             size_1byte_count, size_2byte_count, size_4byte_count,
+             size_8byte_count, pending_wait_cycle_count, error_transfer_count);
 
-    $display("PASS: AHB-Lite lanes, INCR bursts, waits, ERROR responses, checker, and monitor");
+    $display("PASS: AHB-Lite lanes, INCR bursts, waits, ERROR responses, checker, monitor coverage counts");
     $finish;
   end
 endmodule

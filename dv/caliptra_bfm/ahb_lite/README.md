@@ -46,8 +46,11 @@ Caliptra multi-region decode, or lock behavior.
 [`ahb_lite_caliptra_monitor.sv`](ahb_lite_caliptra_monitor.sv) reconstructs a
 completed transaction from the pipelined address and data phases. It publishes
 an address-accept pulse and a completion pulse with captured address/control,
-data, and response fields, plus counters. This is a procedural pin-level seam,
-not a UVM analysis port.
+data, and response fields, plus raw coverage counters for accepted reads,
+writes, 1/2/4/8-byte transfers, pending non-ready cycles, and completed ERROR
+responses. `address_count` and `transfer_count` provide the address and
+completion denominators; these counters still work when simulator covergroups
+are stubs. This is a procedural pin-level seam, not a UVM analysis port.
 
 `../uvm/ahb_lite_caliptra_pin_monitor_adapter.sv` connects these raw pins to
 `ahb_lite_caliptra_record_if`, including reset and wait-cycle counters. It uses

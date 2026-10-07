@@ -31,7 +31,15 @@ module ahb_lite_caliptra_monitor #(
   output reg  [31:0]           address_count,
   output reg  [31:0]           transfer_count,
   output reg                   protocol_error,
-  output reg  [31:0]           protocol_error_count
+  output reg  [31:0]           protocol_error_count,
+  output reg  [31:0]           read_address_count,
+  output reg  [31:0]           write_address_count,
+  output reg  [31:0]           size_1byte_count,
+  output reg  [31:0]           size_2byte_count,
+  output reg  [31:0]           size_4byte_count,
+  output reg  [31:0]           size_8byte_count,
+  output reg  [31:0]           pending_wait_cycle_count,
+  output reg  [31:0]           error_transfer_count
 );
   reg pending;
   reg [ADDR_WIDTH-1:0] pending_addr;
@@ -60,6 +68,14 @@ module ahb_lite_caliptra_monitor #(
       transfer_count <= '0;
       protocol_error <= 1'b0;
       protocol_error_count <= '0;
+      read_address_count <= '0;
+      write_address_count <= '0;
+      size_1byte_count <= '0;
+      size_2byte_count <= '0;
+      size_4byte_count <= '0;
+      size_8byte_count <= '0;
+      pending_wait_cycle_count <= '0;
+      error_transfer_count <= '0;
       pending <= 1'b0;
       pending_addr <= '0;
       pending_write <= 1'b0;
@@ -98,6 +114,8 @@ module ahb_lite_caliptra_monitor #(
         protocol_error <= 1'b1;
         protocol_error_count <= protocol_error_count + 1'b1;
       end
+      if (pending && (HREADY === 1'b0))
+        pending_wait_cycle_count <= pending_wait_cycle_count + 1'b1;
 
       // HREADY completes the old data phase and accepts the current address
       // phase on the same edge, so publish old metadata before replacing it.
@@ -115,12 +133,26 @@ module ahb_lite_caliptra_monitor #(
           transfer_error <= HRESP;
           transfer_protocol_error <= response_bad;
           transfer_count <= transfer_count + 1'b1;
+          if (HRESP === 1'b1)
+            error_transfer_count <= error_transfer_count + 1'b1;
         end
 
         pending <= (HSEL === 1'b1) && (HTRANS[1] === 1'b1);
         if ((HSEL === 1'b1) && (HTRANS[1] === 1'b1)) begin
           address_fire <= 1'b1;
           address_count <= address_count + 1'b1;
+          if (HWRITE === 1'b1)
+            write_address_count <= write_address_count + 1'b1;
+          else if (HWRITE === 1'b0)
+            read_address_count <= read_address_count + 1'b1;
+          // ponytail: raw Caliptra-profile bins; add cross bins if a consumer needs them.
+          case (HSIZE)
+            3'd0: size_1byte_count <= size_1byte_count + 1'b1;
+            3'd1: size_2byte_count <= size_2byte_count + 1'b1;
+            3'd2: size_4byte_count <= size_4byte_count + 1'b1;
+            3'd3: size_8byte_count <= size_8byte_count + 1'b1;
+            default: ;
+          endcase
           pending_addr <= HADDR;
           pending_write <= HWRITE;
           pending_trans <= HTRANS;

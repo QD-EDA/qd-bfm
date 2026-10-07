@@ -335,6 +335,18 @@ package ahb_lite_caliptra_uvm_pkg;
         `uvm_fatal("AHB_MON_VIF", "Missing Caliptra AHB-Lite record interface")
     endfunction
 
+    function void report_phase(uvm_phase phase);
+      super.report_phase(phase);
+      `uvm_info("AHB_COVERAGE",
+        $sformatf("reads=%0d/%0d writes=%0d/%0d sizes(1/2/4/8B)=%0d/%0d/%0d/%0d of %0d addresses; pending_wait=%0d/%0d cycles; errors=%0d/%0d transfers",
+          vif.read_address_count, vif.address_count,
+          vif.write_address_count, vif.address_count,
+          vif.size_1byte_count, vif.size_2byte_count,
+          vif.size_4byte_count, vif.size_8byte_count, vif.address_count,
+          vif.pending_wait_cycle_count, vif.cycle_count,
+          vif.error_transfer_count, vif.transfer_count), UVM_LOW)
+    endfunction
+
     function void publish_group(ahb_lite_caliptra_mvc_transfer source);
       ahb_lite_caliptra_mvc_transfer predictor_item;
       ahb_lite_caliptra_mvc_transfer scoreboard_item;

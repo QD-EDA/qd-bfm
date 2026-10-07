@@ -33,6 +33,14 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
   wire [63:0] cycle_count;
   wire [31:0] address_count;
   wire [31:0] transfer_count;
+  wire [31:0] read_address_count;
+  wire [31:0] write_address_count;
+  wire [31:0] size_1byte_count;
+  wire [31:0] size_2byte_count;
+  wire [31:0] size_4byte_count;
+  wire [31:0] size_8byte_count;
+  wire [31:0] pending_wait_cycle_count;
+  wire [31:0] error_transfer_count;
   wire protocol_error;
   wire [31:0] protocol_error_count;
   wire checker_error;
@@ -56,6 +64,14 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
   assign record_if.cycle_count = cycle_count;
   assign record_if.address_count = address_count;
   assign record_if.transfer_count = transfer_count;
+  assign record_if.read_address_count = read_address_count;
+  assign record_if.write_address_count = write_address_count;
+  assign record_if.size_1byte_count = size_1byte_count;
+  assign record_if.size_2byte_count = size_2byte_count;
+  assign record_if.size_4byte_count = size_4byte_count;
+  assign record_if.size_8byte_count = size_8byte_count;
+  assign record_if.pending_wait_cycle_count = pending_wait_cycle_count;
+  assign record_if.error_transfer_count = error_transfer_count;
   assign record_if.protocol_error = protocol_error;
   assign record_if.protocol_error_count = protocol_error_count;
   assign record_if.checker_error = checker_error;
@@ -100,7 +116,15 @@ module ahb_lite_caliptra_pin_monitor_adapter #(
     .address_count(address_count),
     .transfer_count(transfer_count),
     .protocol_error(protocol_error),
-    .protocol_error_count(protocol_error_count)
+    .protocol_error_count(protocol_error_count),
+    .read_address_count(read_address_count),
+    .write_address_count(write_address_count),
+    .size_1byte_count(size_1byte_count),
+    .size_2byte_count(size_2byte_count),
+    .size_4byte_count(size_4byte_count),
+    .size_8byte_count(size_8byte_count),
+    .pending_wait_cycle_count(pending_wait_cycle_count),
+    .error_transfer_count(error_transfer_count)
   );
 
   ahb_lite_caliptra_checker #(

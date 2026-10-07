@@ -399,6 +399,15 @@ module tb_ahb_lite_caliptra_uvm_agent;
         disable fork;
         if (env.agent.agent.monitor.vif.wait_cycle_count < 4)
           `uvm_fatal("AHB_WAIT", "AHB-Lite UVM smoke did not exercise configured wait cycles")
+        if (env.agent.agent.monitor.vif.address_count != 17 ||
+            env.agent.agent.monitor.vif.transfer_count != 17 ||
+            env.agent.agent.monitor.vif.read_address_count != 9 ||
+            env.agent.agent.monitor.vif.write_address_count != 8 ||
+            env.agent.agent.monitor.vif.size_2byte_count != 3 ||
+            env.agent.agent.monitor.vif.size_8byte_count != 14 ||
+            env.agent.agent.monitor.vif.pending_wait_cycle_count == 0 ||
+            env.agent.agent.monitor.vif.error_transfer_count != 4)
+          `uvm_fatal("AHB_COVERAGE", "Pin-monitor coverage counts did not match the directed AHB traffic")
         if (env.predictor_subscriber.error_count != 4 ||
             env.scoreboard_subscriber.error_count != 4 ||
             env.coverage_subscriber.error_count != 4)
