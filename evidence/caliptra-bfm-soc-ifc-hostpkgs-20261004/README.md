@@ -9,8 +9,9 @@ source overlays. The pinned Caliptra checkout remained unchanged.
 
 The retained [`run_soc_ifc_env_compile.py`](run_soc_ifc_env_compile.py) runner
 automatically applies the macOS memory guard before rebuilding overlays or
-starting Icarus. The current guard caps the process group at 6 GiB and preserves
-6 GiB system-available memory; set `CALIPTRA_BFM_MAX_PROCESS_BYTES` or
+starting Icarus. At capture time, the guard capped the process group at 6 GiB
+and preserved 6 GiB system-available memory; the current defaults are 4 GB and
+6 GB. Set `CALIPTRA_BFM_MAX_PROCESS_BYTES` or
 `CALIPTRA_BFM_MIN_AVAILABLE_BYTES` to adjust those limits. The bound is 90
 seconds for the host-package compile and 300 seconds for the larger
 generated-package/runtime modes. The guard fails closed when macOS memory or
@@ -51,7 +52,7 @@ IVERILOG_BIN=/path/to/iverilog \
     --include-project-bench-packages
 ```
 
-This mode uses the 6 GiB process-group cap, 6 GiB system reserve, and a
+This captured run used a 6 GiB process-group cap, 6 GiB system reserve, and a
 five-minute timeout unless the byte-limit environment variables override them.
 It compiles the generated project-bench packages with the host
 packages, excluding only the generated command-line test and sequence because

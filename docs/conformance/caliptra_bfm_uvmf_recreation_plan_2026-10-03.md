@@ -1142,9 +1142,10 @@ through its own blocker, not this list.
 Every retained Caliptra BFM evidence runner that compiles or executes Icarus
 enters `scripts/run_with_memory_pressure_guard.py` before starting the work.
 The guard samples every 0.25 seconds and stops the complete child process group
-when its resident memory exceeds 6 GiB or system-available memory falls below
-6 GiB. System availability is counted conservatively from free plus inactive
-pages. It fails closed if macOS memory or process telemetry is unavailable.
+when its process group exceeds 4 GB resident memory or system-available memory
+falls below 6 GB. This budgets three concurrent agent runs and retains the
+system reserve. System availability is counted conservatively from free plus
+inactive pages. It fails closed if macOS memory or process telemetry is unavailable.
 `CALIPTRA_BFM_MAX_PROCESS_BYTES` and `CALIPTRA_BFM_MIN_AVAILABLE_BYTES` can
 override the byte limits. The 26 direct test runners under
 `dv/caliptra_bfm/*/tests` source `scripts/caliptra_bfm_memory_guard.sh`, which

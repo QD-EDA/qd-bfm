@@ -4,8 +4,9 @@
 
 All Caliptra BFM test runners under `dv/caliptra_bfm/*/tests` use
 `scripts/run_with_memory_pressure_guard.py`. On macOS it samples every 0.25
-seconds and stops a command if its process group exceeds 6 GiB resident memory,
-or system-available memory falls below a 6 GiB reserve. Available memory is
+seconds and stops a command if its process group exceeds 4 GB resident memory,
+or system-available memory falls below a 6 GB reserve. The defaults budget
+three concurrent agent runs and retain the system reserve. Available memory is
 measured conservatively as free plus inactive pages. It fails closed when host
 memory or process telemetry is unavailable. Set
 `CALIPTRA_BFM_MAX_PROCESS_BYTES`, `CALIPTRA_BFM_MIN_AVAILABLE_BYTES`, or
@@ -14,7 +15,7 @@ timeout. For standalone heavy commands, use:
 
 ```sh
 python3 scripts/run_with_memory_pressure_guard.py \
-  --max-process-bytes 6442450944 --min-available-bytes 6442450944 \
+  --max-process-bytes 4000000000 --min-available-bytes 6000000000 \
   --timeout-seconds 300 \
   --log /tmp/caliptra-bfm.log -- \
   sh dv/caliptra_bfm/uvm/tests/run_aaxi_compat.sh
