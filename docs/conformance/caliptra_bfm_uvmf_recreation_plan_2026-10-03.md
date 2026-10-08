@@ -393,6 +393,14 @@ traffic. Record this as diagnostic top integration only, not a qualified L0
 pass; see the
 [`open-top smoke evidence`](../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
 The firmware-driven DMA top path and a JTAG-capable runner remain open.
+**Track A DMA update (2026-10-08).** A one-iteration full-top
+`CPTRA_RAND_TEST_DMA` in-flight reset/replay run later emitted the firmware
+`* TESTCASE PASSED` marker and reached `$finish` inside a 5,400-second guard.
+The marker is the firmware success-mailbox write, not a ROM-flow banner. This
+demonstrates that the replay can complete, but remains diagnostic only: the
+Icarus build was dirty and unpublished, and JTAG DPI logged a socket-bind
+permission warning. Earlier 3,600-second timeout records are unchanged. See
+the [full-top replay evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-208-reset-20261008/README.md).
 The clean-room PV client master also runs against the actual PCRVault RTL. Its
 direct DUT probe covers concurrent PV read/write, client readback, AHB
 readback and control-register access, terminal `last`, invalid offsets, and
