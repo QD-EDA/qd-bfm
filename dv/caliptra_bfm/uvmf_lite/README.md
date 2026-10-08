@@ -261,3 +261,11 @@ fatals; diagnostic only). A key-sign run using this runner reached 110,000
 cycles with the Montgomery counter decreasing and no ECC error, then was
 stopped before a scoreboard verdict; the earlier full key-sign pass remains
 diagnostic-only. Re-run on a clean, published Icarus SHA before qualification.
+
+2026-10-08 later key-sign rerun: the corrected runner compiled the
+hash-guarded completion-sampling overlay and the generated IEEE 2017 key-sign
+transaction completed with expected=2, observed=2, matched=2, mismatched=0,
+pending=0, UVM_ERROR=0, and UVM_FATAL=0. This remains diagnostic-only because
+it used dirty, unpublished Icarus `ac4532fa-dirty`; clean, published-Icarus
+qualification is still open. Exact command and hashes are in the
+[`generated ECC runtime evidence`](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md#current-state-diagnostic--2026-10-08).
