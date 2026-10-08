@@ -14,6 +14,8 @@ trap 'rm -f "$out" "$log"' EXIT
 "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_checker -o "$out" ../axi4_caliptra_checker.sv tb_axi4_caliptra_checker.sv
 "$VVP_BIN" "$out"
 "$VVP_BIN" "$out" +CASE=GOOD_REORDER
+"$VVP_BIN" "$out" +CASE=GOOD_SAME_ID_READS
+"$VVP_BIN" "$out" +CASE=GOOD_SAME_ID_WRITES
 "$VVP_BIN" "$out" +CASE=GOOD_EXCLUSIVE
 "$VVP_BIN" "$out" +CASE=GOOD_LOCK_INVALIDATED_OKAY
 "$VVP_BIN" "$out" +CASE=GOOD_LOCK_NONOVERLAP_EXOKAY
@@ -50,8 +52,8 @@ for entry in \
   'BAD_LOCK_MIXED_R:exclusive read mixes EXOKAY and non-EXOKAY' \
   'BAD_MISSING_R:incomplete read response' \
   'BAD_EARLY_B:B response ID has no completed write transaction' \
-  'BAD_DUP_BID:one outstanding write per ID' \
-  'BAD_DUP_RID:one outstanding read per ID' \
+  'BAD_WRITE_QUEUE_FULL:AXI write response queue is full' \
+  'BAD_READ_QUEUE_FULL:read request queue is full' \
   'BAD_LOCK_ALIGNMENT:exclusive AXI address is not aligned to its transaction size' \
   'BAD_LOCK_TOO_LONG:exclusive burst exceeds 16 transfers' \
   'BAD_LOCK_NON_POWER2:exclusive byte count is not a power of 2' \

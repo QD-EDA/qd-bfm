@@ -282,6 +282,15 @@ held, then checks a complete post-reset transfer. This does not reproduce
 Caliptra firmware's `0xEE` delayed warm-reset service. The generated reset
 profile has not yet been run through Icarus.
 
+Update (2026-10-07): the generated reset-abort replay now passes. The run
+exposed that Caliptra can queue same-ID reads and writes while an earlier
+response is outstanding; the profile checker now tracks each ID's transactions
+in order. The reset profile also blocks the next AW after the first AW is
+accepted so its “only the first burst reached SRAM” assertion is deterministic.
+The pass used an unpublished, dirty Icarus build and is diagnostic only, not
+qualification; see the dated note in
+[`merged-Icarus reset evidence`](../../../evidence/caliptra-bfm-dma-reset-abort-merged-iverilog-20261007/README.md).
+
 Other generated FIFO mode/flag combinations and firmware-triggered reset injection remain
 unqualified. Directed
 65-word cases now cover all five

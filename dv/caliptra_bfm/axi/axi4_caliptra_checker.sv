@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-// Caliptra's AXI interface omits CACHE, PROT, QOS, and REGION. This profile
-// assumes at most one outstanding transaction per ID (as in the inspected
-// Avery manager configuration), not arbitrary same-ID AXI concurrency.
+// Caliptra's AXI interface omits CACHE, PROT, QOS, and REGION. Track queued
+// same-ID requests in response order, bounded by QUEUE_DEPTH.
 module axi4_caliptra_checker #(
   parameter integer ADDR_WIDTH = 19,
   parameter integer DATA_WIDTH = 32,
@@ -60,27 +59,27 @@ module axi4_caliptra_checker #(
   reg [ID_WIDTH+ADDR_WIDTH+8+3+2+1+USER_WIDTH-1:0] ar_hold;
   reg [ID_WIDTH+DATA_WIDTH+USER_WIDTH+2:0] r_hold;
 
-  reg wr_active [0:ID_COUNT-1];
-  reg wr_data_done [0:ID_COUNT-1];
-  reg wr_exclusive [0:ID_COUNT-1];
-  reg rd_active [0:ID_COUNT-1];
-  reg [8:0] rd_beats_left [0:ID_COUNT-1];
-  reg rd_exclusive [0:ID_COUNT-1];
-  reg rd_response_seen [0:ID_COUNT-1];
-  reg rd_response_exokay [0:ID_COUNT-1];
+  reg wr_data_done [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  reg wr_exclusive [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  reg write_exclusive_success_possible [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  integer wr_read [0:ID_COUNT-1], wr_write [0:ID_COUNT-1], wr_count [0:ID_COUNT-1];
+  reg [8:0] rd_beats_left [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  reg rd_exclusive [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  reg rd_response_seen [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  reg rd_response_exokay [0:ID_COUNT-1][0:QUEUE_DEPTH-1];
+  integer rd_read [0:ID_COUNT-1], rd_write [0:ID_COUNT-1], rd_count [0:ID_COUNT-1];
   // Arm IHI0022L A7.3: match the exposed ID/address/length/size/burst fields;
   // the pinned Caliptra interface omits AXI's CACHE, PROT, and REGION fields.
   reg [1:0] exclusive_read_state [0:ID_COUNT-1];
   reg [ADDR_WIDTH+8+3+2-1:0] exclusive_read_shape [0:ID_COUNT-1];
   reg [63:0] exclusive_read_start [0:ID_COUNT-1];
   reg [63:0] exclusive_read_end [0:ID_COUNT-1];
-  reg write_exclusive_success_possible [0:ID_COUNT-1];
-
   reg [8:0] expected_beats [0:QUEUE_DEPTH-1];
   reg [ID_WIDTH-1:0] expected_id [0:QUEUE_DEPTH-1];
   reg [ADDR_WIDTH-1:0] expected_addr [0:QUEUE_DEPTH-1];
   reg [2:0] expected_size [0:QUEUE_DEPTH-1];
   reg [1:0] expected_burst [0:QUEUE_DEPTH-1];
+  integer expected_slot [0:QUEUE_DEPTH-1];
   reg [8:0] observed_beats [0:QUEUE_DEPTH-1];
   reg [DATA_BYTES-1:0] observed_strobes [0:QUEUE_DEPTH-1][0:255];
   integer expected_read, expected_write, expected_count;
@@ -240,13 +239,15 @@ module axi4_caliptra_checker #(
     reg [63:0] wrap_base;
     integer beat_index;
     integer byte_index;
+    integer slot;
     begin
       while ((expected_count > 0) && (observed_count > 0)) begin
         if (expected_beats[expected_read] != observed_beats[observed_read])
           $fatal(1, "AXI W burst has %0d beats; AWLEN requires %0d",
                  observed_beats[observed_read], expected_beats[expected_read]);
         id = expected_id[expected_read];
-        if (!wr_active[id])
+        slot = expected_slot[expected_read];
+        if ((wr_count[id] == 0) || wr_data_done[id][slot])
           $fatal(1, "AXI W burst has no active AW transaction");
         beat_address = expected_addr[expected_read];
         beat_bytes = 64'd1 << expected_size[expected_read];
@@ -263,7 +264,8 @@ module axi4_caliptra_checker #(
             $fatal(1, "AXI WSTRB enables bytes outside the AW address/AWSIZE lanes");
           for (byte_index = 0; byte_index < DATA_BYTES; byte_index = byte_index + 1) begin
             if (observed_strobes[observed_read][beat_index][byte_index] &&
-                (!wr_exclusive[id] || write_exclusive_success_possible[id]))
+                (!wr_exclusive[id][slot] ||
+                 write_exclusive_success_possible[id][slot]))
               invalidate_exclusive_byte((beat_address / DATA_BYTES) * DATA_BYTES + byte_index);
           end
           case (expected_burst[expected_read])
@@ -277,7 +279,7 @@ module axi4_caliptra_checker #(
             default: begin end
           endcase
         end
-        wr_data_done[id] = 1'b1;
+        wr_data_done[id][slot] = 1'b1;
         expected_read = (expected_read + 1) % QUEUE_DEPTH;
         expected_count = expected_count - 1;
         observed_read = (observed_read + 1) % QUEUE_DEPTH;
@@ -294,8 +296,8 @@ module axi4_caliptra_checker #(
       if (expected_count != 0 || observed_count != 0 || write_beats_in_progress != 0)
         $fatal(1, "AXI checker has incomplete write address/data traffic");
       for (index = 0; index < ID_COUNT; index = index + 1) begin
-        if (wr_active[index]) $fatal(1, "AXI checker has an outstanding write response");
-        if (rd_active[index]) $fatal(1, "AXI checker has an incomplete read response");
+        if (wr_count[index] != 0) $fatal(1, "AXI checker has an outstanding write response");
+        if (rd_count[index] != 0) $fatal(1, "AXI checker has an incomplete read response");
       end
     end
   endtask
@@ -323,18 +325,15 @@ module axi4_caliptra_checker #(
       observed_count = 0;
       write_beats_in_progress = 0;
       for (i = 0; i < ID_COUNT; i = i + 1) begin
-        wr_active[i] = 0;
-        wr_data_done[i] = 0;
-        wr_exclusive[i] = 0;
-        rd_active[i] = 0;
-        rd_beats_left[i] = 0;
-        rd_exclusive[i] = 0;
-        rd_response_seen[i] = 0;
-        rd_response_exokay[i] = 0;
+        wr_read[i] = 0;
+        wr_write[i] = 0;
+        wr_count[i] = 0;
+        rd_read[i] = 0;
+        rd_write[i] = 0;
+        rd_count[i] = 0;
         exclusive_read_state[i] = EXCL_NONE;
         exclusive_read_start[i] = 0;
         exclusive_read_end[i] = 0;
-        write_exclusive_success_possible[i] = 0;
       end
     end else begin
       if ((^{AWVALID, AWREADY, WVALID, WREADY, BVALID, BREADY,
@@ -374,46 +373,6 @@ module axi4_caliptra_checker #(
       r_stalled = RVALID && !RREADY;
       if (r_stalled) r_hold = {RID, RDATA, RRESP, RUSER, RLAST};
 
-      if (AWVALID && AWREADY) begin
-        check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
-        if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
-        if (expected_count == 0 && observed_count == 0 && write_beats_in_progress != 0) begin
-          for (i = 0; i < write_beats_in_progress; i = i + 1) begin
-            if (!AWLOCK)
-              invalidate_for_write_beat(AWADDR, AWLEN, AWSIZE, AWBURST,
-                                        observed_strobes[observed_write][i], i);
-          end
-        end
-        write_exclusive_success_possible[AWID] = 0;
-        if (AWLOCK) begin
-          if (exclusive_read_state[AWID] == EXCL_NONE)
-            $fatal(1, "AXI exclusive write has no completed exclusive read");
-          if (exclusive_read_state[AWID] == EXCL_PENDING)
-            $fatal(1, "AXI exclusive write issued before the read completes");
-          if (exclusive_read_shape[AWID] !== {AWADDR, AWLEN, AWSIZE, AWBURST})
-            $fatal(1, "AXI exclusive read/write request fields differ");
-          write_exclusive_success_possible[AWID] =
-            (exclusive_read_state[AWID] == EXCL_COMPLETE);
-          exclusive_read_state[AWID] = EXCL_NONE;
-        end
-        if (wr_active[AWID]) $fatal(1, "AXI Caliptra profile allows one outstanding write per ID");
-        if (expected_count == QUEUE_DEPTH) $fatal(1, "AXI checker AW queue overflow");
-        wr_active[AWID] = 1;
-        wr_data_done[AWID] = 0;
-        wr_exclusive[AWID] = AWLOCK;
-        expected_beats[expected_write] = {1'b0, AWLEN} + 1'b1;
-        expected_id[expected_write] = AWID;
-        expected_addr[expected_write] = AWADDR;
-        expected_size[expected_write] = AWSIZE;
-        expected_burst[expected_write] = AWBURST;
-        expected_write = (expected_write + 1) % QUEUE_DEPTH;
-        expected_count = expected_count + 1;
-        if ((write_beats_in_progress >= expected_beats[expected_read]) &&
-            (write_beats_in_progress != 0))
-          $fatal(1, "AXI WLAST missing on final AWLEN beat");
-        pair_write_data();
-      end
-
       if (WVALID && WREADY) begin
         if (write_beats_in_progress >= 256)
           $fatal(1, "AXI W burst exceeds 256 beats");
@@ -428,8 +387,8 @@ module axi4_caliptra_checker #(
             (write_beats_in_progress == expected_beats[expected_read]) && !WLAST)
           $fatal(1, "AXI WLAST missing on final AWLEN beat");
         if (expected_count > 0 &&
-            (!wr_exclusive[expected_id[expected_read]] ||
-             write_exclusive_success_possible[expected_id[expected_read]]))
+            (!wr_exclusive[expected_id[expected_read]][expected_slot[expected_read]] ||
+             write_exclusive_success_possible[expected_id[expected_read]][expected_slot[expected_read]]))
           invalidate_for_write_beat(
             expected_addr[expected_read], expected_beats[expected_read] - 1'b1,
             expected_size[expected_read], expected_burst[expected_read], WSTRB,
@@ -445,26 +404,101 @@ module axi4_caliptra_checker #(
       end
 
       if (BVALID && BREADY) begin
-        if (!wr_active[BID] || !wr_data_done[BID])
+        if ((wr_count[BID] == 0) || !wr_data_done[BID][wr_read[BID]])
           $fatal(1, "AXI B response ID has no completed write transaction");
-        if ((BRESP == 2'b01) && !wr_exclusive[BID])
+        if ((BRESP == 2'b01) && !wr_exclusive[BID][wr_read[BID]])
           $fatal(1, "AXI B response is EXOKAY for a non-exclusive write");
-        if (wr_exclusive[BID] && (BRESP == 2'b01) &&
-            !write_exclusive_success_possible[BID])
+        if (wr_exclusive[BID][wr_read[BID]] && (BRESP == 2'b01) &&
+            !write_exclusive_success_possible[BID][wr_read[BID]])
           $fatal(1, "AXI exclusive write returned EXOKAY after monitor invalidation");
-        wr_active[BID] = 0;
-        wr_data_done[BID] = 0;
-        wr_exclusive[BID] = 0;
-        write_exclusive_success_possible[BID] = 0;
+        wr_data_done[BID][wr_read[BID]] = 0;
+        wr_read[BID] = (wr_read[BID] + 1) % QUEUE_DEPTH;
+        wr_count[BID] = wr_count[BID] - 1;
+      end
+
+      if (AWVALID && AWREADY) begin
+        check_burst(AWADDR, AWLEN, AWSIZE, AWBURST, "AW");
+        if (AWLOCK) check_exclusive_burst(AWADDR, AWLEN, AWSIZE, "AW");
+        if (wr_count[AWID] >= QUEUE_DEPTH)
+          $fatal(1, "AXI write response queue is full for AWID %0h", AWID);
+        if (expected_count == QUEUE_DEPTH) $fatal(1, "AXI checker AW queue overflow");
+        if (expected_count == 0 && observed_count == 0 && write_beats_in_progress != 0) begin
+          for (i = 0; i < write_beats_in_progress; i = i + 1) begin
+            if (!AWLOCK)
+              invalidate_for_write_beat(AWADDR, AWLEN, AWSIZE, AWBURST,
+                                        observed_strobes[observed_write][i], i);
+          end
+        end
+        wr_data_done[AWID][wr_write[AWID]] = 0;
+        wr_exclusive[AWID][wr_write[AWID]] = AWLOCK;
+        write_exclusive_success_possible[AWID][wr_write[AWID]] = 0;
+        if (AWLOCK) begin
+          if (exclusive_read_state[AWID] == EXCL_NONE)
+            $fatal(1, "AXI exclusive write has no completed exclusive read");
+          if (exclusive_read_state[AWID] == EXCL_PENDING)
+            $fatal(1, "AXI exclusive write issued before the read completes");
+          if (exclusive_read_shape[AWID] !== {AWADDR, AWLEN, AWSIZE, AWBURST})
+            $fatal(1, "AXI exclusive read/write request fields differ");
+          write_exclusive_success_possible[AWID][wr_write[AWID]] =
+            (exclusive_read_state[AWID] == EXCL_COMPLETE);
+          exclusive_read_state[AWID] = EXCL_NONE;
+        end
+        expected_beats[expected_write] = {1'b0, AWLEN} + 1'b1;
+        expected_id[expected_write] = AWID;
+        expected_addr[expected_write] = AWADDR;
+        expected_size[expected_write] = AWSIZE;
+        expected_burst[expected_write] = AWBURST;
+        expected_slot[expected_write] = wr_write[AWID];
+        expected_write = (expected_write + 1) % QUEUE_DEPTH;
+        expected_count = expected_count + 1;
+        wr_write[AWID] = (wr_write[AWID] + 1) % QUEUE_DEPTH;
+        wr_count[AWID] = wr_count[AWID] + 1;
+        if ((write_beats_in_progress >= expected_beats[expected_read]) &&
+            (write_beats_in_progress != 0))
+          $fatal(1, "AXI WLAST missing on final AWLEN beat");
+        pair_write_data();
+      end
+
+      if (RVALID && RREADY) begin
+        if (rd_count[RID] == 0) $fatal(1, "AXI R response ID has no active read transaction");
+        if (!rd_exclusive[RID][rd_read[RID]] && (RRESP == 2'b01))
+          $fatal(1, "AXI R response is EXOKAY for a non-exclusive read");
+        // Arm IHI0022L A7.3.4 requires all beats of one exclusive read to
+        // report EXOKAY, or all beats to report a non-EXOKAY response.
+        if (rd_exclusive[RID][rd_read[RID]]) begin
+          if (!rd_response_seen[RID][rd_read[RID]]) begin
+            rd_response_seen[RID][rd_read[RID]] = 1;
+            rd_response_exokay[RID][rd_read[RID]] = (RRESP == 2'b01);
+          end else if (rd_response_exokay[RID][rd_read[RID]] != (RRESP == 2'b01)) begin
+            $fatal(1, "AXI exclusive read mixes EXOKAY and non-EXOKAY responses");
+          end
+        end
+        if (RLAST !== (rd_beats_left[RID][rd_read[RID]] == 1))
+          $fatal(1, "AXI RLAST does not match ARLEN for RID %0h", RID);
+        if (rd_beats_left[RID][rd_read[RID]] == 1) begin
+          if (rd_exclusive[RID][rd_read[RID]] &&
+              (exclusive_read_state[RID] == EXCL_PENDING))
+            exclusive_read_state[RID] = rd_response_exokay[RID][rd_read[RID]] ?
+                                        EXCL_COMPLETE : EXCL_INVALIDATED;
+          rd_beats_left[RID][rd_read[RID]] = 0;
+          rd_read[RID] = (rd_read[RID] + 1) % QUEUE_DEPTH;
+          rd_count[RID] = rd_count[RID] - 1;
+        end else begin
+          rd_beats_left[RID][rd_read[RID]] = rd_beats_left[RID][rd_read[RID]] - 1'b1;
+        end
       end
 
       if (ARVALID && ARREADY) begin
         check_burst(ARADDR, ARLEN, ARSIZE, ARBURST, "AR");
         if (ARLOCK) check_exclusive_burst(ARADDR, ARLEN, ARSIZE, "AR");
-        if (rd_active[ARID]) $fatal(1, "AXI Caliptra profile allows one outstanding read per ID");
-        rd_active[ARID] = 1;
-        rd_exclusive[ARID] = ARLOCK;
-        rd_response_seen[ARID] = 0;
+        if (rd_count[ARID] >= QUEUE_DEPTH)
+          $fatal(1, "AXI read request queue is full for ARID %0h", ARID);
+        if (ARLOCK && (exclusive_read_state[ARID] == EXCL_PENDING))
+          $fatal(1, "AXI exclusive read is already outstanding for ARID %0h", ARID);
+        rd_beats_left[ARID][rd_write[ARID]] = {1'b0, ARLEN} + 1'b1;
+        rd_exclusive[ARID][rd_write[ARID]] = ARLOCK;
+        rd_response_seen[ARID][rd_write[ARID]] = 0;
+        rd_response_exokay[ARID][rd_write[ARID]] = 0;
         if (ARLOCK) begin
           exclusive_read_state[ARID] = EXCL_PENDING;
           exclusive_read_shape[ARID] = {ARADDR, ARLEN, ARSIZE, ARBURST};
@@ -473,33 +507,8 @@ module axi4_caliptra_checker #(
           exclusive_read_start[ARID] = burst_start;
           exclusive_read_end[ARID] = burst_end;
         end
-        rd_beats_left[ARID] = {1'b0, ARLEN} + 1'b1;
-      end
-
-      if (RVALID && RREADY) begin
-        if (!rd_active[RID]) $fatal(1, "AXI R response ID has no active read transaction");
-        if (!rd_exclusive[RID] && (RRESP == 2'b01))
-          $fatal(1, "AXI R response is EXOKAY for a non-exclusive read");
-        // Arm IHI0022L A7.3.4 requires all beats of one exclusive read to
-        // report EXOKAY, or all beats to report a non-EXOKAY response.
-        if (rd_exclusive[RID]) begin
-          if (!rd_response_seen[RID]) begin
-            rd_response_seen[RID] = 1;
-            rd_response_exokay[RID] = (RRESP == 2'b01);
-          end else if (rd_response_exokay[RID] != (RRESP == 2'b01)) begin
-            $fatal(1, "AXI exclusive read mixes EXOKAY and non-EXOKAY responses");
-          end
-        end
-        if (RLAST !== (rd_beats_left[RID] == 1))
-          $fatal(1, "AXI RLAST does not match ARLEN for RID %0h", RID);
-        if (rd_beats_left[RID] == 1) begin
-          rd_beats_left[RID] = 0;
-          rd_active[RID] = 0;
-          if (exclusive_read_state[RID] == EXCL_PENDING)
-            exclusive_read_state[RID] = rd_response_exokay[RID] ? EXCL_COMPLETE : EXCL_INVALIDATED;
-        end else begin
-          rd_beats_left[RID] = rd_beats_left[RID] - 1'b1;
-        end
+        rd_write[ARID] = (rd_write[ARID] + 1) % QUEUE_DEPTH;
+        rd_count[ARID] = rd_count[ARID] + 1;
       end
     end
   end

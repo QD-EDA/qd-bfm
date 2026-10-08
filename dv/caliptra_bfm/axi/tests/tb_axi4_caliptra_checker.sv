@@ -264,12 +264,12 @@ module tb_axi4_caliptra_checker;
     end else if (test_case == "BAD_EARLY_B") begin
       send_aw(8'h9, 19'h100, 0);
       send_b(8'h9);
-    end else if (test_case == "BAD_DUP_BID") begin
-      send_aw(8'ha, 19'h100, 0);
-      send_aw(8'ha, 19'h104, 0);
-    end else if (test_case == "BAD_DUP_RID") begin
-      send_ar(8'hb, 19'h100, 0);
-      send_ar(8'hb, 19'h104, 0);
+    end else if (test_case == "BAD_WRITE_QUEUE_FULL") begin
+      for (int request = 0; request < 17; request++)
+        send_aw(8'ha, 19'h100 + (request * 4), 0);
+    end else if (test_case == "BAD_READ_QUEUE_FULL") begin
+      for (int request = 0; request < 17; request++)
+        send_ar(8'hb, 19'h100 + (request * 4), 0);
     end else if (test_case == "BAD_LOCK_ALIGNMENT") begin
       send_locked_aw(8'hc, 19'h104, 1);
     end else if (test_case == "BAD_LOCK_TOO_LONG") begin
@@ -426,6 +426,19 @@ module tb_axi4_caliptra_checker;
       send_w(32'h3213, 1);
       @(negedge ACLK); BRESP = 2'b01;
       send_b(8'h31);
+    end else if (test_case == "GOOD_SAME_ID_READS") begin
+      send_ar(8'hb, 19'h100, 1);
+      send_ar(8'hb, 19'h108, 0);
+      send_r(8'hb, 0, 1);
+      send_r(8'hb, 1, 1);
+      send_r(8'hb, 1, 1);
+    end else if (test_case == "GOOD_SAME_ID_WRITES") begin
+      send_aw(8'hc, 19'h100, 0);
+      send_aw(8'hc, 19'h104, 0);
+      send_w(32'h1111, 1);
+      send_w(32'h2222, 1);
+      send_b(8'hc);
+      send_b(8'hc);
     end else if (test_case == "GOOD_REORDER") begin
       // AXI4 permits W to precede its address and responses to complete out
       // of order across IDs. It still requires a single ordered W stream.
@@ -469,7 +482,9 @@ module tb_axi4_caliptra_checker;
       send_r(8'h22, 1, 1);
     end
 
-    if (test_case != "GOOD" && test_case != "GOOD_REORDER" && test_case != "GOOD_EXCLUSIVE" &&
+    if (test_case != "GOOD" && test_case != "GOOD_REORDER" &&
+        test_case != "GOOD_SAME_ID_READS" && test_case != "GOOD_SAME_ID_WRITES" &&
+        test_case != "GOOD_EXCLUSIVE" &&
         test_case != "GOOD_LOCK_INVALIDATED_OKAY" &&
         test_case != "GOOD_LOCK_NONOVERLAP_EXOKAY" &&
         test_case != "GOOD_LOCK_ZERO_STROBE_EXOKAY" &&

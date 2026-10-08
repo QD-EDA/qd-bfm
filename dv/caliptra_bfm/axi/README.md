@@ -291,11 +291,9 @@ independent channel timing, checks WLAST against AWLEN, validates WSTRB against
 the active lanes for narrow FIXED/INCR/WRAP transfers, and matches B/R
 responses to active IDs and lengths. For exclusive reads and writes it enforces
 Arm's 16-transfer limit, power-of-two byte count up to 128 bytes, and address
-alignment to the total transfer size. It permits one outstanding transaction
-per ID, matching the inspected Avery configuration, and permits interleaving
-across different IDs. Its default queue depth is 16 for AW/W pairing. This
-same-ID limit is a Caliptra configuration profile; do not attach it to a bus
-that allows multiple outstanding transactions per ID.
+alignment to the total transfer size. It tracks up to `QUEUE_DEPTH` outstanding
+requests per ID in address order, for both read and write responses, and permits
+interleaving across IDs. The same depth bounds the global AW/W pairing queues.
 
 Caliptra's interface does not expose CACHE, PROT, QOS, or REGION; the checker
 cannot observe or validate those signals. It applies the Caliptra profile's
