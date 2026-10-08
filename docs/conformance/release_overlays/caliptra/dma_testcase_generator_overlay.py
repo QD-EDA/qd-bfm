@@ -73,7 +73,6 @@ def main() -> int:
           dma_gen.srandom(32'hb0f0_0000 + i);
           randomize_success = dma_gen.randomize() with {
             !inject_rst;
-            !test_block_size;
             xfer_size inside {[1:MAX_SIZE_TO_CHECK]};
             (dma_xfer_type == AXI2AXI && !src_is_fifo && !dst_is_fifo) ->
               ((src_offset + xfer_size * 4 <= dst_offset) ||
@@ -388,7 +387,7 @@ def main() -> int:
                             else []
                         ),
                         *(
-                            ["Seed each stock DMA randomization and constrain only reset, recovery-block mode, over-16K sizes, and overlapping AXI2AXI SRAM ranges for actual-DUT replay."]
+                            ["Seed each stock DMA randomization and constrain only reset, over-16K sizes, and overlapping AXI2AXI SRAM ranges for actual-DUT replay."]
                             if args.dut_mixed_replay
                             else []
                         ),

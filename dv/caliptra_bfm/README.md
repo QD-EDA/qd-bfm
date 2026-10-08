@@ -331,10 +331,13 @@ source data and final fixed-address SRAM contents. See
 replays the generator's 25 seeded mixed profiles through the same DUT path;
 `--default-mixed-replay-case INDEX` selects one profile. This slice keeps the
 stock route, FIFO, fixed-burst, and delay choices while excluding reset,
-recovery-block mode, transfers above 16,384 words, and overlapping AXI2AXI
-SRAM ranges, which have separate replay lanes.
-The same profiles pass on the Icarus build merged from upstream `origin/main`
-at `197f9ba`; see the
+transfers above 16,384 words, and overlapping AXI2AXI SRAM ranges, which have
+separate replay lanes. Generated recovery-block records remain in the mixed
+profile replay and use their own DCCM block-size entries.
+The older Icarus build merged from upstream `origin/main` at `197f9ba` has
+evidence for two directed FIXED modes only; it does not cover this mixed
+profile set. The current 25-profile replay is diagnostic until rerun on a clean,
+published Icarus revision; see the
 [`merged-simulator DMA evidence`](../../evidence/caliptra-bfm-merged-iverilog-dma-fixed-modes-20261007/README.md).
 The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies

@@ -583,8 +583,18 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       phase.raise_objection(this);
       if ($test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY")) begin
         wait (generated_route_ready);
+        env.scoreboard.expect_fifo_recovery = fifo_recovery_case;
         env.scoreboard.expect_fifo_source = auto_fifo_source_case;
         env.scoreboard.expect_fifo_write = sram2fifo_case;
+        if (fifo_recovery_case) begin
+          env.scoreboard.recovery_block_words = recovery_block_words;
+          env.scoreboard.recovery_burst_words =
+              (recovery_block_words > MAX_FIXED_BURST_WORDS) ?
+              MAX_FIXED_BURST_WORDS : recovery_block_words;
+          env.scoreboard.recovery_write_burst_words =
+              (recovery_block_words > MAX_BURST_WORDS) ?
+              MAX_BURST_WORDS : recovery_block_words;
+        end
       end
       if ($test$plusargs("RESET_ABORT")) begin
         fork
@@ -926,7 +936,14 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         endcase
         if (default_mixed_replay) begin
           if (record_is_large_fifo || record_type.inject_rst ||
-              record_type.test_block_size || (record_type.block_size != 0) ||
+              (!record_type.test_block_size && (record_type.block_size != 0)) ||
+              (record_type.test_block_size &&
+               (!record_type.src_is_fifo || !record_type.use_rd_fixed ||
+                (record_type.dma_xfer_type != AXI2AXI &&
+                 record_type.dma_xfer_type != AXI2MBOX &&
+                 record_type.dma_xfer_type != AXI2AHB) ||
+                (record_type.block_size < 4) || (record_type.block_size > 2048) ||
+                ((record_type.block_size & (record_type.block_size - 1)) != 0))) ||
               (record_type.src_is_fifo && record_type.dst_is_fifo) ||
               (record_type.src_is_fifo &&
                ((record_type.dma_xfer_type != AXI2AXI &&
@@ -1149,8 +1166,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
            (!scenario.inject_rst && $test$plusargs("RESET_ABORT"))))
         $fatal(1, "Generated reset metadata must match the directed +RESET_ABORT replay mode");
       if (default_mixed_replay) begin
+        fifo_recovery_case = generated_type.test_block_size;
+        if (fifo_recovery_case) begin
+          recovery_block_bytes = int'(scenario.block_size);
+          recovery_block_words = recovery_block_bytes / (DATA_WIDTH / 8);
+        end
         sram2fifo_case = generated_type.dst_is_fifo;
-        auto_fifo_source_case = generated_type.src_is_fifo;
+        auto_fifo_source_case = generated_type.src_is_fifo && !generated_type.test_block_size;
       end else if (generated_type.dst_is_fifo) begin
         sram2fifo_case = 1'b1;
       end
@@ -1276,8 +1298,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if ((scenario.dma_xfer_type == AXI2AXI) && (recovery_block_bytes > 64))
         $fatal(1, "Caliptra AXI2AXI recovery blocks are limited to 64 bytes");
       dma_gen_block_size_bytes = testcase_generator_block_sizes;
-      scenario.block_size = 12'(recovery_block_bytes);
-      dma_gen_block_size_bytes[generated_case_index] = 12'(recovery_block_bytes);
+      if (default_mixed_replay) begin
+        if (dma_gen_block_size_bytes[generated_case_index] !== scenario.block_size)
+          $fatal(1, "Generated recovery block size differs from the DCCM metadata");
+      end else begin
+        scenario.block_size = 12'(recovery_block_bytes);
+        dma_gen_block_size_bytes[generated_case_index] = 12'(recovery_block_bytes);
+      end
       SRC_ADDR = FIFO_BASE_ADDR + 48'(scenario.src_offset);
       if (scenario.dma_xfer_type == AXI2MBOX)
         DST_ADDR = 48'(scenario.dst_offset);

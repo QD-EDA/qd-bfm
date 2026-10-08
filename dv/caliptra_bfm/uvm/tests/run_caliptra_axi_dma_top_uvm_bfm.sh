@@ -159,11 +159,16 @@ if [ "$default_mixed_replay_only" -eq 1 ]; then
       +GENERATED_CASE +CALIPTRA_BFM_DUT_MIXED_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
       +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
-    if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
+    if grep -Fq 'block_bytes=0' "$log"; then
+      if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
+        echo "Default mixed DCCM record $case_index did not complete through axi_dma_top" >&2
+        exit 1
+      fi
+    elif ! grep -Fq 'PASS: actual Caliptra axi_dma_top moved' "$log"; then
       echo "Default mixed DCCM record $case_index did not complete through axi_dma_top" >&2
       exit 1
     fi
-    route_type=$(sed -n 's/^PASS: generated DCCM record index=[0-9][0-9]* route=\([0-4]\) replayed through axi_dma_top$/\1/p' "$log")
+    route_type=$(sed -n 's/^INFO: Caliptra DCCM case type=\([0-4]\) words=[0-9][0-9]* .*/\1/p' "$log")
     profile=$(sed -n 's/^INFO: Caliptra DCCM case type=[0-4] words=[0-9][0-9]* .*/&/p' "$log")
     if [ -z "$route_type" ] || [ -z "$profile" ]; then
       echo "Default mixed DCCM record $case_index omitted its route or profile report" >&2
@@ -189,7 +194,11 @@ if [ "$default_mixed_replay_only" -eq 1 ]; then
       exit 1
     fi
   done
-  echo "INFO: replayed 25 seeded default mixed DCCM records through axi_dma_top across all routes and FIFO/fixed/delay flags"
+  if ! grep -Eq 'block_bytes=(4|8|16|32|64|128|256|512|1024|2048)$' "$generated_profiles"; then
+    echo "Default mixed replay did not cover a recovery-block profile" >&2
+    exit 1
+  fi
+  echo "INFO: replayed 25 seeded default mixed DCCM records through axi_dma_top across all routes and FIFO/fixed/delay/recovery flags"
   exit 0
 fi
 
