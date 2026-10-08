@@ -342,6 +342,12 @@ read all 208 AXI beats and reached the firmware payload comparison, but timed
 out before a testcase result. The no-trace replay also reached its 3,600-second
 guard. See the
 [full-top diagnostic](../../evidence/caliptra-bfm-fulltop-rand-dma-208-reset-20261008/README.md).
+Current-state update (2026-10-08): a later uninstrumented replay with a
+5,400-second guard exited 0, emitted `* TESTCASE PASSED`, and reached `$finish`
+(`minstret=7937`, `mcycle=28414`). This updates the earlier timeout status;
+those runs remain recorded unchanged. The later run is diagnostic only because
+it used a dirty, unpublished Icarus build and logged a JTAG DPI socket-bind
+warning. See the linked evidence for its log checksum and details.
 Other generated FIFO modes, firmware-triggered reset injection, and full
 firmware remain open. The generated AXI2AXI sweep covers one AXI FIXED request
 per recovery block through the 64-byte maximum at Caliptra's 32-bit DMA data
