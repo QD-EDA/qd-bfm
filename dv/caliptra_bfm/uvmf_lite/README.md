@@ -137,6 +137,14 @@ Structured per-field recording of derived payloads remains open. The ECC
 compatibility with unmodified and other generated tops remains open.
 Do not treat it as a drop-in UVMF package yet.
 
+The repeatable generated HMAC runtime is `tests/run_generated_hmac_runtime.sh`.
+It expands the pinned HMAC RTL filelist, hash-checks the test-generator and
+output-monitor inputs before applying disposable OpenSSL-parser and reset-event
+overlays, and requires 17 predictor operations with no scoreboard errors or
+leftovers. A 2026-10-08 run passed on Icarus `ac4532fa-dirty`; that result is
+diagnostic only and needs a clean, published Icarus revision before it can
+support qualification.
+
 The focused compile probe follows the ECC entries in Caliptra's pinned
 `config/compile.yml` order. It compiles the actual generated input/output
 packages, all four driver/monitor BFMs, both bus interfaces, the environment,
