@@ -208,3 +208,13 @@ unqualified. See
 
 The full status-field sampling result and its reproducible runner are in
 [`generated status full-snapshot evidence`](../../../evidence/caliptra-bfm-generated-status-full-snapshot-20261004/README.md).
+
+2026-10-08 key-sign debugging (diagnostic only; simulator `ac4532fa-dirty`):
+the probe produced two predicted and two observed transactions, with one
+mismatch. The predictor expected signature `R/S`, while the observed
+transaction carried key-generation fields. The generated output monitor reads
+`op_i` before waiting for the completion flag, so it can decode a result using
+the previous operation. The disposable QD overlay now samples `op_i` and
+`test_i` after completion; its transform check passes. A follow-up runtime
+attempt stopped during compilation before a new transaction verdict, so no
+key-sign pass is claimed.

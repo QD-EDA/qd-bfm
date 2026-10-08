@@ -14,7 +14,7 @@ case "$probe" in
   *) echo "ECC_RUNTIME_PROBE must be reset or key_sign" >&2; exit 2 ;;
 esac
 if [ "$probe" = key_sign ] && [ -z "${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-}" ]; then
-  CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=1800
+  CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=5400
   export CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS
 fi
 

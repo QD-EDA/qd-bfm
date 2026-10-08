@@ -43,6 +43,9 @@ def patch_output(source: str) -> str:
       // Require a fresh assertion for each real operation completion.
       while (transaction_flag_out_monitor_i !== 1'b0) @(posedge clk_i);
       while (transaction_flag_out_monitor_i !== 1'b1) @(posedge clk_i);
+      // op/test may change while this monitor is waiting for the result.
+      op = op_i;
+      test = test_i;
       if (transaction_flag_out_monitor_i == 1 ) begin"""
     if source.count(old) != 1:
         raise ValueError("output monitor flag wait must occur exactly once")

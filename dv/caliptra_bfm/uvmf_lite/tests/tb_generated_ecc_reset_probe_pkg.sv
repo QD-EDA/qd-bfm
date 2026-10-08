@@ -92,24 +92,21 @@ package ecc_reset_probe_pkg;
       super.new(name, parent);
     endfunction
     virtual task run_phase(uvm_phase phase);
-      ecc_reset_only_input_sequence reset_seq;
+      ecc_reset_only_bench_sequence reset_seq;
       ecc_key_sign_input_sequence sign_seq;
       uvm_sequencer #(ECC_in_transaction #(32, 32)) input_sequencer;
       phase.raise_objection(this);
       input_sequencer = environment.configuration.ECC_in_agent_config.get_sequencer();
-      fork
-        environment.configuration.ECC_in_agent_config.wait_for_reset();
-        environment.configuration.ECC_out_agent_config.wait_for_reset();
-      join
-      reset_seq = ecc_reset_only_input_sequence::type_id::create("reset_seq");
-      reset_seq.start(input_sequencer);
-      wait (environment.ECC_sb.expected_received_count >= 1 &&
-            environment.ECC_sb.actual_received_count >= 1);
+      reset_seq = ecc_reset_only_bench_sequence::type_id::create("reset_seq");
+      reset_seq.start(null);
       if (environment.ECC_sb.expected_received_count != 1 ||
           environment.ECC_sb.actual_received_count != 1 ||
           environment.ECC_sb.mismatch_count != 0 ||
+          environment.ECC_sb.pending_expected_count != 0 ||
+          environment.ECC_sb.pending_actual_count != 0 ||
           environment.ECC_sb.matched_count != 1)
         `uvm_fatal("ECC_PROBE", "startup reset sample did not match")
+      `uvm_info("ECC_PROBE", "Startup reset matched; starting key-sign transaction", UVM_NONE)
       sign_seq = ecc_key_sign_input_sequence::type_id::create("sign_seq");
       sign_seq.start(input_sequencer);
       wait (environment.ECC_sb.expected_received_count >= 2 &&
