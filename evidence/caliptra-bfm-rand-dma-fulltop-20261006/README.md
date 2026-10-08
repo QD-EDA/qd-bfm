@@ -248,3 +248,16 @@ diagnostic firmware images, and a temporary no-random-stall generator overlay.
   `9f3c9d05c226cb07c525527d4a6f7cc369ad1f42ee47f4aae2c28fdc6466ee68`
 - Evidence: [structured diagnostic result](../caliptra-bfm-rand-dma-reset-inflight-208-nodelay-20261007/result.json), [sanitized trace](../caliptra-bfm-rand-dma-reset-inflight-208-nodelay-20261007/sim-trace-sanitized.log)
 - The raw log remains outside the repository because it contains generated key material.
+
+### Longer no-trace replay update (2026-10-07)
+
+An additional direct replay of the same compiled diagnostic binary omitted the
+optional AXI trace plugin and ran under a 2,400-second guard. It stopped with
+guard exit 124 before any firmware testcase pass/fail marker or normal finish;
+the log contained no UVM error or fatal. With tracing disabled, this run does
+not provide AXI handshake counts. It does not replace the preceding traced
+run's counters and remains diagnostic only.
+
+- Raw simulation log SHA-256:
+  `61113a3ea3ce0827fa8b0df85d7fd5ad369c86fbaa1e9002746c4a35d27b903b`
+- Raw log remains outside the repository because it contains generated key material.
