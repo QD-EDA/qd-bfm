@@ -445,3 +445,13 @@ UVM errors/fatals, and one QVIP coverage notice. This used clean Caliptra
 commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and paired Icarus/VVP
 13.0-dev `ac4532fa-dirty`. Diagnostic only: the simulator build is dirty and
 unpublished, so this does not qualify the lane.
+
+### Top-environment AXI USER readback on 2026-10-08 (diagnostic)
+
+The generated top wrapper now also performs an AXI RAL readback of the first
+mailbox valid-USER register after the stock 12-write initialization. The read
+uses the same allowed USER extension and verifies the returned value. Monitors
+recorded 12 AW/W/B handshakes and one AR/R handshake; the scoreboard reported
+16/16 matches, zero mismatches/no-comparison/missed transactions, zero UVM
+errors/fatals, and one QVIP coverage notice. This remains diagnostic on paired
+Icarus/VVP 13.0-dev `ac4532fa-dirty`; it does not qualify the lane.

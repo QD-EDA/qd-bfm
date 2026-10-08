@@ -34,6 +34,27 @@ package caliptra_top_env_probe_pkg;
     endtask
   endclass
 
+  class caliptra_top_env_axi_user_readback_sequence extends uvm_sequence;
+    soc_ifc_reg_model_top_pkg::soc_ifc_reg_model_top reg_model;
+    uvm_object axi_user_extension;
+
+    `uvm_object_utils(caliptra_top_env_axi_user_readback_sequence)
+
+    function new(string name = "caliptra_top_env_axi_user_readback_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      uvm_status_e status;
+      uvm_reg_data_t value;
+      reg_model.soc_ifc_reg_rm.CPTRA_MBOX_VALID_AXI_USER[0].read(
+          status, value, UVM_FRONTDOOR, reg_model.soc_ifc_AXI_map, this,
+          .extension(axi_user_extension));
+      if (status != UVM_IS_OK || value != 32'hc0de_0000)
+        `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER_READ", $sformatf("MBOX AXI USER readback failed: status=%0d value=0x%0h", status, value))
+    endtask
+  endclass
+
   class caliptra_top_env_probe_test extends uvm_test;
     caliptra_top_env_configuration top_configuration;
     caliptra_top_environment top_environment;
@@ -78,6 +99,7 @@ package caliptra_top_env_probe_pkg;
 
     task run_phase(uvm_phase phase);
       caliptra_top_env_reset_sequence reset_sequence;
+      caliptra_top_env_axi_user_readback_sequence readback_sequence;
       soc_ifc_env_pkg::soc_ifc_env_axi_user_init_sequence_t axi_user_init_sequence;
       phase.raise_objection(this);
       if (top_environment.soc_ifc_subenv == null || top_environment.vsqr == null ||
@@ -115,6 +137,11 @@ package caliptra_top_env_probe_pkg;
             top_configuration.soc_ifc_subenv_config.soc_ifc_rm.soc_ifc_reg_rm.CPTRA_TRNG_AXI_USER_LOCK.get_mirrored_value() != 1)
           `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER", "TRNG AXI USER RAL mirror mismatch")
         $display("PASS: generated Caliptra top environment completed AXI USER initialization");
+        readback_sequence = caliptra_top_env_axi_user_readback_sequence::type_id::create("axi_user_readback_sequence");
+        readback_sequence.reg_model = top_configuration.soc_ifc_subenv_config.soc_ifc_rm;
+        readback_sequence.axi_user_extension = axi_user_init_sequence.axi_user_obj;
+        readback_sequence.start(top_configuration.soc_ifc_subenv_config.vsqr);
+        $display("PASS: generated Caliptra top environment completed AXI USER readback");
       end
       $display("PASS: generated Caliptra top environment completed real reset");
       phase.drop_objection(this);

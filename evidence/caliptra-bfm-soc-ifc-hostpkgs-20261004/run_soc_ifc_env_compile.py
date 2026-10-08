@@ -961,7 +961,7 @@ def main() -> int:
         saw_pass = False
         saw_top_reset_handler = False
         saw_child_reset_handler = False
-        saw_top_axi_user_init = False
+        saw_top_axi_user_readback = False
         saw_uvm_error = False
         scoreboard_result = None
         with simulation_log.open() as log:
@@ -974,8 +974,8 @@ def main() -> int:
                 )
                 saw_top_reset_handler |= "CALIPTRA_TOP_ENV_RESET_HANDLER kind=" in line
                 saw_child_reset_handler |= "CALIPTRA_TOP_ENV_CHILD_RESET_HANDLER kind=" in line
-                saw_top_axi_user_init |= (
-                    "PASS: generated Caliptra top environment completed AXI USER initialization" in line
+                saw_top_axi_user_readback |= (
+                    "PASS: generated Caliptra top environment completed AXI USER readback" in line
                 )
                 saw_uvm_error |= bool(re.match(r"^UVM_(?:ERROR|FATAL)\s*:\s*[1-9]", line))
                 match = re.search(
@@ -994,8 +994,8 @@ def main() -> int:
             if not saw_top_reset_handler or not saw_child_reset_handler:
                 print("ERROR: generated Caliptra top reset handler did not dispatch to soc_ifc", file=sys.stderr)
                 return 1
-            if args.generated_axi_user_init and not saw_top_axi_user_init:
-                print("ERROR: generated Caliptra top environment did not complete AXI USER initialization", file=sys.stderr)
+            if args.generated_axi_user_init and not saw_top_axi_user_readback:
+                print("ERROR: generated Caliptra top environment did not complete AXI USER readback", file=sys.stderr)
                 return 1
         if scoreboard_result is None:
             print("ERROR: generated runtime did not report SoC-IFC scoreboard results", file=sys.stderr)
@@ -1009,10 +1009,11 @@ def main() -> int:
                 file=sys.stderr,
             )
             return 1
-        if args.caliptra_top_env_probe and args.generated_axi_user_init and matches < 15:
+        if args.caliptra_top_env_probe and args.generated_axi_user_init and matches < 16:
             print(
-                "ERROR: generated top AXI USER initialization did not produce all 12 AXI writes "
-                f"and the reset scoreboard matches: observed {matches}, expected at least 15",
+                "ERROR: generated top AXI USER initialization/readback did not produce "
+                "12 writes, one read, and reset scoreboard matches: "
+                f"observed {matches}, expected at least 16",
                 file=sys.stderr,
             )
             return 1
