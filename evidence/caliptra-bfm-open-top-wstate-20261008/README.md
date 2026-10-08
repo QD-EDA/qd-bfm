@@ -36,3 +36,25 @@ fast TRNG cadence, and PQ-vector suppression.
 - Trace VPI plugin SHA-256: `1a7c0a663ccb25e40ad76cef9d501c8b9b1d049d727ae2d4e3faded2da662dfb`.
 
 The compact simulation log and exact VPI source are kept beside this note.
+
+## Second AES/DMA vector — 2026-10-08
+
+The next firmware vector (`--limit-aes-cases 1 --start-aes-case 1`) also
+passed with the checker enabled. Unlike the first vector, it transfers two
+beats per DMA buffer. The trace shows:
+
+| Cycle | Channel | Address | Result |
+| ---: | --- | --- | --- |
+| 1,378–1,382 | AW, W, B | `0x123440000` | Two accepted W beats; `WLAST=1` on beat two; B completed |
+| 2,973–2,977 | AR, R | `0x123440000` | Two read beats; checker reported no framing error |
+| 3,063–3,067 | AW, W, B | `0x123460000` | Two accepted W beats; `WLAST=1` on beat two; B completed |
+| 3,212–3,216 | AR, R | `0x123460000` | Two read beats; checker reported no framing error |
+
+The runner reported PASS, with one testcase pass marker, no fail markers,
+unexpected diagnostics, or JTAG server errors. The sandbox bind denial was
+recorded separately. The generated result and compact simulation log are
+[`second-aes-result.json`](second-aes-result.json) and
+[`second-aes-axi-wstate.log`](second-aes-axi-wstate.log).
+
+This remains diagnostic evidence on the dirty, unpublished Icarus source SHA
+above; it does not qualify the stock firmware or the full 12-vector suite.
