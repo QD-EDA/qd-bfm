@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-07",
+  "classification": "diagnostic_only_not_qualification",
+  "qualification_reason": "Dirty, unpublished Icarus revision; reused fast-boot diagnostic firmware; temporary no-random-stall overlay; guard timeout before firmware testcase completion.",
+  "run": {
+    "test": "rand_test_dma",
+    "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "iterations": 1,
+    "transfer_type": "AHB2AXI",
+    "transfer_dwords": 208,
+    "forced_first_reset": true,
+    "reset_delay_cycles": 552,
+    "randomized_stalls_disabled_for_first_generated_record": true,
+    "fast_trng": true,
+    "fast_boot_data_preload_image_reused": true,
+    "checker_enabled": true,
+    "dma_generator_overlay_sha256": "ede0264298aeec788ed3c9f0f90f5bf0c7377304513344f1fc7eee1aaf7890d1",
+    "services_overlay_sha256": "c4ad218733d2758ee85c2d6f875f3a6ecb845639899837a65edb6b5c0f0a1a40",
+    "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654",
+    "profile_sha256": "9892643a7eb1c89a98b1aec4c3aceee17224d077263919317d5d2bf146a1ae90",
+    "firmware_images_sha256": {
+      "program.hex": "6f69e82508d89a93ad14e4a848faef581f572a8ef9d93a1753d17b34a3d12783",
+      "dccm.hex": "042c83d69d16884ee34a913632504617b7343ae15f2f5c4add216af885a90830",
+      "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "simulator": {
+    "iverilog_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "source_checkout_state": "dirty_unpublished",
+    "qualification_eligible": false
+  },
+  "termination": {
+    "memory_guard_timeout_seconds": 1800,
+    "stopped_by_guard": true,
+    "guard_exit_code": 124,
+    "simulator_exit_code": null,
+    "firmware_testcase_completion_observed": false,
+    "reason": "AXI write transfer and responses completed; the runner was stopped before a testcase pass marker and normal simulation finish."
+  },
+  "scan": {
+    "testcase_pass_markers": 0,
+    "testcase_fail_markers": 0,
+    "bad_diagnostics": 0,
+    "jtag_server_errors": 0,
+    "reset_assert_cycles": [
+      2892
+    ],
+    "outstanding_writes_at_reset": [
+      1
+    ],
+    "reset_in_flight": true,
+    "finish": null,
+    "uvm_warning_count": 0,
+    "uvm_error_count": 0,
+    "uvm_fatal_count": 0
+  },
+  "observed": {
+    "reset_requests": [
+      2338
+    ],
+    "reset_edges": [
+      {
+        "state": "deassert",
+        "cycle": 21
+      },
+      {
+        "state": "assert",
+        "cycle": 2892
+      },
+      {
+        "state": "deassert",
+        "cycle": 2902
+      }
+    ],
+    "axi_handshake_totals": {
+      "AW": 14,
+      "W": 218,
+      "B": 13,
+      "AR": 0,
+      "R": 0
+    },
+    "post_reset_axi_handshake_totals": {
+      "AW": 13,
+      "W": 208,
+      "B": 13,
+      "AR": 0,
+      "R": 0
+    },
+    "last_axi_handshake_cycles": {
+      "AW": 11113,
+      "W": 11129,
+      "B": 11131,
+      "AR": null,
+      "R": null
+    },
+    "at_reset": {
+      "cycle": 2892,
+      "accepted_aw": 1,
+      "accepted_w_beats": 10,
+      "completed_b": 0
+    },
+    "post_reset_transfer": {
+      "dwords": 208,
+      "aw": 13,
+      "w_beats": 208,
+      "b_responses": 13,
+      "complete": true
+    },
+    "last_sampled_cycle": 11300,
+    "note": "Reset aborted the first write after ten W beats. After reboot, the complete 208-dword transfer was reissued as 13 full bursts and received 13 B responses. The firmware test did not reach its pass/finish marker before the guard timeout."
+  },
+  "trace": {
+    "raw_log_sha256": "9f3c9d05c226cb07c525527d4a6f7cc369ad1f42ee47f4aae2c28fdc6466ee68",
+    "sanitized_log": "sim-trace-sanitized.log",
+    "sanitized_log_sha256": "88df71453c7f4ae6af15ea2978000fb44c377a2a881cf16c39dc11366cf84b5d",
+    "raw_log_retained": false
+  }
+}
