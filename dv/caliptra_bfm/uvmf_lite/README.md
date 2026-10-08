@@ -234,3 +234,12 @@ trace-instrumented copy of the generated input driver to expose busy polling.
 Because the simulator build is dirty/unpublished and the driver was instrumented,
 this is diagnostic-only; rerun the stock generated driver on a clean, published
 Icarus SHA before making any qualification claim.
+
+
+2026-10-08 key-verification probe (diagnostic only; simulator `ac4532fa-dirty`):
+the generated IEEE 2017 verification transaction completed with expected=2,
+observed=2, matched=2, mismatched=0, pending=0, UVM_ERROR=0, and UVM_FATAL=0.
+It used Caliptra commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and the same
+temporary trace-instrumented input-driver copy used by the ECDH probe. Treat it as
+diagnostic-only; rerun the stock generated driver on a clean, published Icarus
+SHA before making any qualification claim.

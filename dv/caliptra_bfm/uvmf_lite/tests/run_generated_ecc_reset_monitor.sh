@@ -10,8 +10,8 @@ esac
 
 probe=${ECC_RUNTIME_PROBE:-reset}
 case "$probe" in
-  reset|key_sign|ecdh) ;;
-  *) echo "ECC_RUNTIME_PROBE must be reset, key_sign, or ecdh" >&2; exit 2 ;;
+  reset|key_sign|key_verify|ecdh) ;;
+  *) echo "ECC_RUNTIME_PROBE must be reset, key_sign, key_verify, or ecdh" >&2; exit 2 ;;
 esac
 if [ "$probe" != reset ] && [ -z "${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-}" ]; then
   CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=5400
@@ -36,6 +36,11 @@ case "$probe" in
     test_name=ecc_key_sign_only_test
     pass_marker='PASS: generated ECC key-sign transaction matched'
     log_prefix=${ECC_KEY_SIGN_LOG_PREFIX:-key_sign_overlay}
+    ;;
+  key_verify)
+    test_name=ecc_key_verify_only_test
+    pass_marker='PASS: generated ECC key-verification transaction matched'
+    log_prefix=${ECC_KEY_VERIFY_LOG_PREFIX:-key_verify_overlay}
     ;;
   ecdh)
     test_name=ecc_ecdh_sharedkey_only_test

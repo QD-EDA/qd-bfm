@@ -186,4 +186,61 @@ package ecc_reset_probe_pkg;
       phase.drop_objection(this);
     endtask
   endclass
+
+  class ecc_key_verify_input_sequence extends ECC_in_sequence_base #(32, 32);
+    `uvm_object_utils(ecc_key_verify_input_sequence)
+    function new(string name = "ecc_key_verify_input_sequence");
+      super.new(name);
+    endfunction
+    virtual task body();
+      req.test = ecc_normal_test;
+      req.op = key_verify;
+      start_item(req);
+      finish_item(req);
+    endtask
+  endclass
+
+  class ecc_key_verify_only_test extends test_top;
+    `uvm_component_utils(ecc_key_verify_only_test)
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+    endfunction
+    virtual task run_phase(uvm_phase phase);
+      ecc_reset_only_bench_sequence reset_seq;
+      ecc_key_verify_input_sequence verify_seq;
+      uvm_sequencer #(ECC_in_transaction #(32, 32)) input_sequencer;
+      phase.raise_objection(this);
+      input_sequencer = environment.configuration.ECC_in_agent_config.get_sequencer();
+      reset_seq = ecc_reset_only_bench_sequence::type_id::create("reset_seq");
+      reset_seq.start(null);
+      if (environment.ECC_sb.expected_received_count != 1 ||
+          environment.ECC_sb.actual_received_count != 1 ||
+          environment.ECC_sb.mismatch_count != 0 ||
+          environment.ECC_sb.pending_expected_count != 0 ||
+          environment.ECC_sb.pending_actual_count != 0 ||
+          environment.ECC_sb.matched_count != 1)
+        `uvm_fatal("ECC_PROBE", "startup reset sample did not match")
+      `uvm_info("ECC_PROBE", "Startup reset matched; starting key-verification transaction", UVM_NONE)
+      verify_seq = ecc_key_verify_input_sequence::type_id::create("verify_seq");
+      verify_seq.start(input_sequencer);
+      wait (environment.ECC_sb.expected_received_count >= 2 &&
+            environment.ECC_sb.actual_received_count >= 2);
+      if (environment.ECC_sb.expected_received_count != 2 ||
+          environment.ECC_sb.actual_received_count != 2 ||
+          environment.ECC_sb.mismatch_count != 0 ||
+          environment.ECC_sb.pending_expected_count != 0 ||
+          environment.ECC_sb.pending_actual_count != 0 ||
+          environment.ECC_sb.matched_count != 2)
+        `uvm_fatal("ECC_PROBE", $sformatf(
+          "key-verification scoreboard counts expected=%0d actual=%0d matched=%0d mismatched=%0d pending_expected=%0d pending_actual=%0d",
+          environment.ECC_sb.expected_received_count,
+          environment.ECC_sb.actual_received_count,
+          environment.ECC_sb.matched_count,
+          environment.ECC_sb.mismatch_count,
+          environment.ECC_sb.pending_expected_count,
+          environment.ECC_sb.pending_actual_count))
+      `uvm_info("ECC_PROBE", "PASS: generated ECC key-verification transaction matched", UVM_NONE)
+      phase.drop_objection(this);
+    endtask
+  endclass
 endpackage
