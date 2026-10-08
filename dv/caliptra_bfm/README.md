@@ -337,6 +337,11 @@ a complete post-reset 65-word transfer. See
 The actual DMA-top reset path also passes a 208-word replay reset after 10 W
 beats; its dirty-Icarus run is diagnostic only, not qualification. See
 [`208-word mid-W reset diagnostic`](../../evidence/caliptra-bfm-dma-reset-mid-w-208-20261008/README.md).
+The 208-word full-top firmware reset replay remains incomplete: the traced run
+read all 208 AXI beats and reached the firmware payload comparison, but timed
+out before a testcase result. The no-trace replay also reached its 3,600-second
+guard. See the
+[full-top diagnostic](../../evidence/caliptra-bfm-fulltop-rand-dma-208-reset-20261008/README.md).
 Other generated FIFO modes, firmware-triggered reset injection, and full
 firmware remain open. The generated AXI2AXI sweep covers one AXI FIXED request
 per recovery block through the 64-byte maximum at Caliptra's 32-bit DMA data
