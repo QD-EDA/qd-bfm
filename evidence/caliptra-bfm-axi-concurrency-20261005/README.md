@@ -66,3 +66,27 @@ env IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp sh dv/
 | Icarus compiler `/opt/homebrew/bin/iverilog` | `5df81b269e1ff2c965dd00ad5a8071ca17717f416003b3661a18b2dde430e73c` |
 | Icarus runtime `/opt/homebrew/bin/vvp` | `1a9bdf1f40102f64f015514f5069f99a5dd9f9f38de343743ef4c169fb358392` |
 | Raw log `/private/tmp/caliptra-bfm-axi-concurrency-v13_0-20261008.log` | `afebfb686819919b1d4dba6830ffc0e72e03e07b4ccbb031cde53b5723cd3d31` |
+
+## 2026-10-08 bounded-queue overflow addendum
+
+A follow-up guarded run also passed the capacity boundary: the monitor accepts
+exactly `MAX_OUTSTANDING` W-before-AW frames, reports `STATUS_CAPACITY` for the
+next frame, and does not pair a later AW after losing write tracking. This
+fail-stop behavior prevents overflow from reusing a live context. The run used
+the same published Icarus 13.0 (`v13_0`, source commit
+`dfeee909ed9f20b4870dd93423156c0170c0e1ff`).
+
+Command:
+
+```sh
+env IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp sh dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh
+```
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/axi/axi4_caliptra_transaction_monitor.sv` | `5b0e3b0ff501a943b65d462466d27496a9319d011632e4f6b9e394e185e22e04` |
+| `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_transaction_monitor.sv` | `4227e2d387f488e46bfe3c3f69b61985897e150b5b40b489902668c843d55c30` |
+| `dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh` | `8e4ef6ad1f1c83b1f2057e348fe8c1be9175a172af274b8d0d0debceca9ca011` |
+| Icarus compiler `/opt/homebrew/bin/iverilog` | `5df81b269e1ff2c965dd00ad5a8071ca17717f416003b3661a18b2dde430e73c` |
+| Icarus runtime `/opt/homebrew/bin/vvp` | `1a9bdf1f40102f64f015514f5069f99a5dd9f9f38de343743ef4c169fb358392` |
+| Raw log `/private/tmp/caliptra-bfm-axi-concurrency-v13_0-20261008.log` | `e6781af98bc2422ba96cde8c2d55be102bb9842696f645beb168836a9d52bc1d` |

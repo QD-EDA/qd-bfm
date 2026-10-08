@@ -492,6 +492,22 @@ module tb_axi4_caliptra_transaction_monitor;
     if (!write_error || write_error_code != 2 || write_complete)
       $fatal(1, "Write context capacity overflow was not reported");
 
+    // W-before-AW storage is bounded too; overflow must not alias a live slot.
+    @(negedge ACLK);
+    ARESETn = 0;
+    repeat (2) @(posedge ACLK);
+    @(negedge ACLK);
+    ARESETn = 1;
+    for (context_index = 0; context_index < 8; context_index = context_index + 1)
+      send_w(32'h9000_0000 + context_index, 4'hf,
+             32'h9000_0000 + context_index, 1'b1);
+    send_w(32'h9000_0008, 4'hf, 32'h9000_0008, 1'b1);
+    if (!write_error || write_error_code != 2)
+      $fatal(1, "W-before-AW context capacity overflow was not reported");
+    send_aw(8'h90, 48'h0002_0000, 0, 32'h9000_0000);
+    if (!write_error || write_error_code != 2 || write_request_complete)
+      $fatal(1, "W-before-AW overflow did not stop write pairing");
+
     $display("PASS: AXI records, W-before-AW, concurrent reads/writes, and capacity/error checks");
     $finish;
   end
