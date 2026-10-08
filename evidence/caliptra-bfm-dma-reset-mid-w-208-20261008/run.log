@@ -1,0 +1,59 @@
+memory guard: preflight available 8.20 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.MfEqMR75xq/dma_testcase_generator.sv:49: warning: Static variable initialization requires explicit lifetime in this context.
+/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.MfEqMR75xq/dma_testcase_generator.sv:52: warning: Static variable initialization requires explicit lifetime in this context.
+/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.MfEqMR75xq/dma_testcase_generator.sv:105: warning: Static variable initialization requires explicit lifetime in this context.
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/tb/caliptra_top_tb_pkg.sv:40: warning: method function 'randomize' is being called as a task.
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367); emitting null fallback
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.MfEqMR75xq/caliptra_axi_dma_top_uvm_bfm.dpiexport.c (compile it into your DPI object).
+UVM_INFO /private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_root.svh(476) @ 0: reporter [UVM/RELNOTES]
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2:UVM:2020.3.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test axi_dma_top_uvm_bfm_test...
+INFO: Caliptra DMA randomizer seed=00c0ffee words=208 block_bytes=0 src=000123440308 dst=0001234406d0
+PASS: actual Caliptra axi_dma_top reset an accepted write after 10 W beats and recovered for a 208-word DMA transfer
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(309) @ 5590000: uvm_test_top.env.agent.monitor [AXI_COVERAGE] accepted AW/W/B/AR/R=5/208/5/4/208; VALID=5/208/5/4/208; stalled AW/W/B/AR/R=0/0/0/0/0
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(315) @ 5590000: uvm_test_top.env.agent.monitor [AXI_AW_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/5/0/0/0 of AW=5; lock clear/set/X=5/0/0 of AW=5
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(321) @ 5590000: uvm_test_top.env.agent.monitor [AXI_AR_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/4/0/0/0 of AR=4; lock clear/set/X=4/0/0 of AR=4
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(327) @ 5590000: uvm_test_top.env.agent.monitor [AXI_RESP_COVERAGE] B OKAY/EXOKAY/SLVERR/DECERR/X=5/0/0/0/0 of B=5; R=208/0/0/0/0 of R=208
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(332) @ 5590000: uvm_test_top.env.agent.monitor [AXI_W_COVERAGE] WSTRB full/partial/zero/X=208/0/0/0 of W=208; LAST W=5 of W=208; R=4 of R=208
+UVM_INFO /private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 5590000: reporter [UVM/REPORT/SERVER]
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    7
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[AXI_AR_COVERAGE]     1
+[AXI_AW_COVERAGE]     1
+[AXI_COVERAGE]     1
+[AXI_RESP_COVERAGE]     1
+[AXI_W_COVERAGE]     1
+[RNTST]     1
+[UVM/RELNOTES]     1
+
+/private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 5590000 (1ps)
+memory guard: command exited 0; minimum available 7.47 GiB; maximum process group 0.36 GiB

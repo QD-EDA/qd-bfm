@@ -53,9 +53,10 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   logic rst_n = 0;
   logic reset_abort_stall_b = 0;
   bit reset_abort_aw_accepted;
-  bit reset_abort_wlast_accepted;
+  bit reset_abort_trigger_ready;
   integer reset_abort_cycles;
   integer reset_abort_write_words;
+  integer reset_abort_expected_burst_words;
   logic enable_random_stalls = 0;
   wire [9:0] random_stall;
   integer randomized_stall_cycles = 0;
@@ -558,10 +559,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             env.scoreboard.read_count = 0;
             env.scoreboard.read_word_offset = 0;
             env.scoreboard.write_word_offset = 0;
-            wait (run_done && env.scoreboard.read_count == 2 &&
-                  env.scoreboard.write_count == 2 &&
-                  env.scoreboard.read_word_offset == WORD_COUNT &&
-                  env.scoreboard.write_word_offset == WORD_COUNT);
+            wait (run_done && env.scoreboard.read_count == active_read_burst_count &&
+                  env.scoreboard.write_count == active_write_burst_count &&
+                  env.scoreboard.read_word_offset == active_word_count &&
+                  env.scoreboard.write_word_offset == active_word_count);
+            for (int word = 0; word < active_word_count; word++)
+              if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== expected_payload[word])
+                `uvm_fatal("DMA_TOP_RESET_DATA", $sformatf("Post-reset destination word %0d mismatch", word))
           end
           begin
             #100000;
@@ -569,7 +573,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           end
         join_any
         disable fork;
-        $display("PASS: actual Caliptra axi_dma_top reset an accepted write held before B and recovered for a post-reset DMA burst");
+        if ($test$plusargs("RESET_ABORT_MID_W"))
+          $display("PASS: actual Caliptra axi_dma_top reset an accepted write after %0d W beats and recovered for a %0d-word DMA transfer",
+                   reset_abort_write_words, active_word_count);
+        else
+          $display("PASS: actual Caliptra axi_dma_top reset an accepted write held before B and recovered for a post-reset DMA burst");
         phase.drop_objection(this);
         return;
       end
@@ -1187,6 +1195,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         dst_offset inside {[32'h600:32'h6ff]};
       }) $fatal(1, "Pinned Caliptra DMA randomizer did not produce the constrained AXI2AXI case");
     end
+    if ($test$plusargs("RESET_ABORT_208")) begin
+      if (!$test$plusargs("RESET_ABORT") || !$test$plusargs("RESET_ABORT_MID_W"))
+        $fatal(1, "RESET_ABORT_208 requires RESET_ABORT and RESET_ABORT_MID_W");
+      active_word_count = 208;
+    end
     if (fifo_recovery_case && $test$plusargs("GENERATED_CASE")) begin
       if (!scenario.test_block_size || !scenario.src_is_fifo)
         $fatal(1, "Generated FIFO recovery replay requires a FIFO block-size record");
@@ -1270,7 +1283,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                scenario.xfer_size, scenario.block_size, SRC_ADDR, DST_ADDR);
     else
       $display("INFO: Caliptra DMA randomizer seed=%08h words=%0d block_bytes=%0d src=%012h dst=%012h",
-               DMA_RANDOM_SEED, scenario.xfer_size, scenario.block_size, SRC_ADDR, DST_ADDR);
+               DMA_RANDOM_SEED, active_word_count, scenario.block_size, SRC_ADDR, DST_ADDR);
     if (!fifo_recovery_case && !scenario.src_is_fifo) begin
       // Seed the open SRAM model before reset release; the DMA performs the copy.
       for (word_index = 0; word_index < active_word_count; word_index++) begin
@@ -1319,28 +1332,45 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     if ($test$plusargs("RESET_ABORT")) begin
       reset_abort_stall_b = 1'b1;
       reset_abort_aw_accepted = 1'b0;
-      reset_abort_wlast_accepted = 1'b0;
+      reset_abort_trigger_ready = 1'b0;
       reset_abort_write_words = 0;
+      reset_abort_expected_burst_words = 0;
       fork
         begin
           for (reset_abort_cycles = 0;
                reset_abort_cycles < 2048 &&
-               (!reset_abort_aw_accepted || !reset_abort_wlast_accepted);
+               (!reset_abort_aw_accepted || !reset_abort_trigger_ready);
                reset_abort_cycles = reset_abort_cycles + 1) begin
             @(posedge clk);
             if (m_axi_if.awvalid && m_axi_if.awready && !reset_abort_aw_accepted) begin
               reset_abort_aw_accepted = 1'b1;
-              reset_abort_write_words = int'(m_axi_if.awlen) + 1;
+              reset_abort_expected_burst_words = int'(m_axi_if.awlen) + 1;
+              if ($test$plusargs("RESET_ABORT_MID_W") &&
+                  reset_abort_expected_burst_words <= 10)
+                $fatal(1, "First DMA burst is too short for the mid-W reset profile");
             end
-            if (m_axi_if.wvalid && m_axi_if.wready && m_axi_if.wlast)
-              reset_abort_wlast_accepted = 1'b1;
+            if (m_axi_if.wvalid && m_axi_if.wready) begin
+              reset_abort_write_words++;
+              if (m_axi_if.wlast) begin
+                if (reset_abort_write_words != reset_abort_expected_burst_words)
+                  $fatal(1, "Accepted W beat count %0d disagrees with AWLEN %0d",
+                         reset_abort_write_words, reset_abort_expected_burst_words);
+                reset_abort_trigger_ready = 1'b1;
+              end else if ($test$plusargs("RESET_ABORT_MID_W") &&
+                           reset_abort_write_words == 10) begin
+                reset_abort_trigger_ready = 1'b1;
+              end
+            end
           end
-          if (!reset_abort_aw_accepted || !reset_abort_wlast_accepted)
-            $fatal(1, "Timed out waiting for an accepted AW and final W beat before reset");
+          if (!reset_abort_aw_accepted || !reset_abort_trigger_ready)
+            $fatal(1, "Timed out waiting for the selected accepted W beats before reset");
           @(negedge clk);
-          if (m_axi_if.bvalid !== 1'b0 || dma_target.bfm.i_sram.b_count == 0)
-            $fatal(1, "Reset-abort did not hold a pending B response before reset");
-          @(negedge clk); rst_n = 1'b0;
+          if (m_axi_if.bvalid !== 1'b0 ||
+              ($test$plusargs("RESET_ABORT_MID_W") ?
+               (dma_target.bfm.i_sram.wr_count == 0) :
+               (dma_target.bfm.i_sram.b_count == 0)))
+            $fatal(1, "Reset-abort did not hold the selected write state before reset");
+          rst_n = 1'b0;
           repeat (2) @(posedge clk);
           @(negedge clk); rst_n = 1'b1;
           repeat (4) @(posedge clk);

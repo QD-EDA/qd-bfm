@@ -334,6 +334,9 @@ The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See
 [`DMA reset-abort evidence`](../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
+The actual DMA-top reset path also passes a 208-word replay reset after 10 W
+beats; its dirty-Icarus run is diagnostic only, not qualification. See
+[`208-word mid-W reset diagnostic`](../../evidence/caliptra-bfm-dma-reset-mid-w-208-20261008/README.md).
 Other generated FIFO modes, firmware-triggered reset injection, and full
 firmware remain open. The generated AXI2AXI sweep covers one AXI FIXED request
 per recovery block through the 64-byte maximum at Caliptra's 32-bit DMA data

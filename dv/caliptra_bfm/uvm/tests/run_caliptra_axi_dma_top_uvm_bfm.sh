@@ -14,6 +14,7 @@ log="$tmpdir/caliptra_axi_dma_top_uvm_bfm.log"
 trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 reset_abort_only=0
+reset_abort_mid_w_only=0
 generated_reset_abort_only=0
 recovery_block_sweep_only=0
 recovery_route_sweep_only=0
@@ -26,12 +27,13 @@ recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
 component_fixed_modes_only=0
 if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
   exit 2
 fi
 if [ "$#" -eq 1 ]; then
   case "$1" in
     --reset-abort-only) reset_abort_only=1 ;;
+    --reset-abort-mid-w-only) reset_abort_mid_w_only=1 ;;
     --generated-reset-abort-only) generated_reset_abort_only=1 ;;
     --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
@@ -44,7 +46,7 @@ if [ "$#" -eq 1 ]; then
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
       exit 2
       ;;
   esac
@@ -123,6 +125,14 @@ run_reset_abort_case() {
   fi
 }
 
+run_reset_abort_mid_w_case() {
+  run_case reset-abort-mid-w +RESET_ABORT +RESET_ABORT_MID_W +RESET_ABORT_208
+  if ! grep -Fq 'PASS: actual Caliptra axi_dma_top reset an accepted write after 10 W beats and recovered for a 208-word DMA transfer' "$log"; then
+    echo "Caliptra AXI DMA top did not complete the 208-word mid-W reset-abort profile" >&2
+    exit 1
+  fi
+}
+
 run_generated_reset_abort_case() {
   run_case generated-reset-abort +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
     +CALIPTRA_BFM_DUT_REPLAY_INDEX=67 +RESET_ABORT \
@@ -191,6 +201,10 @@ run_recovery_route_sweep() {
 
 if [ "$reset_abort_only" -eq 1 ]; then
   run_reset_abort_case
+  exit 0
+fi
+if [ "$reset_abort_mid_w_only" -eq 1 ]; then
+  run_reset_abort_mid_w_case
   exit 0
 fi
 if [ "$generated_reset_abort_only" -eq 1 ]; then

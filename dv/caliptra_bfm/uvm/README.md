@@ -235,6 +235,12 @@ block-level reset test does not run Caliptra's firmware-triggered warm-reset
 service.
 The reset run is recorded in
 [`DMA reset-abort evidence`](../../../evidence/caliptra-bfm-dma-reset-abort-20261006/README.md).
+Update (2026-10-08): `--reset-abort-mid-w-only` adds a 208-word AXI2AXI
+replay that resets after exactly 10 accepted W beats, before WLAST. It checks
+the accepted SRAM prefix, target queue reset, and all 208 destination words
+after reprogramming the actual DMA DUT. The run passes as a diagnostic on a
+dirty, unpublished Icarus build; it is not qualification evidence. See
+[`208-word mid-W reset diagnostic`](../../../evidence/caliptra-bfm-dma-reset-mid-w-208-20261008/README.md).
 The current generated-DUT run instantiates Caliptra's actual testcase
 generator, selects each of 29 DCCM records in a separate simulation, checks the
 staged metadata and payload ECC, and replays each profile through the DUT and
