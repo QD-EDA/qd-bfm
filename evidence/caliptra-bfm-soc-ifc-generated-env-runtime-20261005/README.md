@@ -102,6 +102,22 @@ build both fail while parsing unchanged Caliptra AXI/primitive sources
 also reports unsupported default lifetime overrides in `axi_if.sv`. Those
 compile failures are separate from the time-zero stall.
 
+### Replay status on 2026-10-08 (diagnostic)
+
+Replayed the combined command above with `--trace-predictor-reset`,
+`--generated-axi-user-init`, `--generated-ahb-mbox-payload`, and
+`--generated-axi-user-reject-probe`. The paired Icarus/VVP 13.0-dev build
+identifies as `ac4532fa-dirty`; the pinned Caliptra checkout was clean at
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. The run completed: the invalid
+AXI USER read returned SLVERR, and the scoreboard reported 38/38 matches,
+zero mismatches/no-comparison/missed transactions, zero UVM errors/fatals,
+and three warnings (one QVIP coverage notice and two whole-register RAL field
+fallbacks). A focused trace found four direct RAL child blocks and the normal
+base reset walk returned. The 2026-10-07 stall recorded on
+`246c58e4-dirty` did not reproduce; this does not isolate which toolchain
+change removed it. Diagnostic only: this run used a dirty, unpublished
+simulator build and does not qualify the lane.
+
 ## Generated AHB RAL read
 
 The optional `--generated-ahb-ral-read` lane starts after generated power-on
