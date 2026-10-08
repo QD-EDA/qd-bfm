@@ -59,3 +59,15 @@ qualification. The raw log remains in `/private/tmp`.
 | Run | Guard result | SHA-256 |
 |---|---|---|
 | Uninstrumented replay, 5,400-second maximum | exit 0; testcase passed; `$finish` | e615d7e7a13090d2a249bfd5a7ef4b7cfc8c2d0f55c701912e0d63563b194ac3 |
+
+## Delay diagnosis — 2026-10-08
+
+The 3,600-second traced run was still executing `rand_test_dma`'s per-word
+readback comparison when its guard expired. PC `0x00001042` is the equality
+branch comparing each AXI-returned word against the expected DCCM value; the
+trace shows instruction retirement continuing there, with all 208 AXI R beats
+already accepted. The later 5,400-second run completed the same firmware case
+with `TESTCASE PASSED` and `$finish`. The observed delay is therefore full-top
+simulation throughput during the firmware check, not an AXI response stall.
+No BFM change is indicated by these runs. Both remain diagnostic on the dirty,
+unpublished Icarus build identified above.
