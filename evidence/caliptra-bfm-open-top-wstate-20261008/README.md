@@ -82,3 +82,27 @@ Together with the first two vectors above, this gives separate full-top
 diagnostic passes for one-, two-, three-, and four-beat DMA buffers. The runs
 use a diagnostic firmware copy, fast TRNG cadence, and PQ-vector suppression;
 all remain diagnostic on the dirty, unpublished Icarus source SHA.
+
+## Fifth AES/DMA vector — 2026-10-08
+
+The fifth short-suite vector passed in isolation with the checker enabled
+(`--limit-aes-cases 1 --start-aes-case 4`). It exercised five-beat source
+transfers and split the destination into four- and one-beat writes:
+
+| Cycle | Channel | Address | Result |
+| ---: | --- | --- | --- |
+| 1,492–1,499 | AW, W, B | `0x123440000` | Five W beats; B completed |
+| 3,073–3,083 | AR, R | `0x123440000` | Five read beats |
+| 3,215–3,221 | AW, W, B | `0x123460000` | Four W beats; B completed |
+| 3,280–3,283 | AW, W, B | `0x123460010` | One W beat; B completed |
+| 3,438–3,448 | AR, R | `0x123460000` | Five read beats |
+
+Firmware reported PASS at `mcycle=4209`; the runner recorded one pass marker,
+no fail markers, no error/fatal diagnostics, and no unexpected JTAG errors.
+The exact bind-denied sandbox message was recorded separately. The run used a
+single-vector firmware copy, fast TRNG cadence, PQ-vector suppression, and
+Icarus source `ac4532fab037e91df2f903e67fb40f59baedccca` (`ac4532fa-dirty`).
+This is diagnostic evidence, not qualification. The full suite and clean,
+published Icarus replay remain open. See
+[`fifth-aes-result.json`](fifth-aes-result.json) and
+[`fifth-aes-axi-wstate.log`](fifth-aes-axi-wstate.log).
