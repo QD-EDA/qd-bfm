@@ -194,3 +194,29 @@ attempts without either setup produced harness diagnostics.
   `28537f9abcc261c7968262d3929b698bf10ccf8bcf906ed2ecb478a57aa39653`
 - Evidence: [structured diagnostic result](../caliptra-bfm-rand-dma-reset-inflight-4word-20261007/result.json), [sanitized trace](../caliptra-bfm-rand-dma-reset-inflight-4word-20261007/sim-trace-sanitized.log)
 - The raw log remains outside the repository because it contains generated key material.
+
+## 208-dword in-flight reset diagnostic (2026-10-07)
+
+A one-iteration `rand_test_dma` run used the full generated 208-dword
+`AHB2AXI` transfer with a forced reset after 3,870 cycles. Reset asserted at
+cycle 6,270 while one write was outstanding: eight AW, 127 W, and seven B
+handshakes had occurred. It deasserted at cycle 6,280. Post-reset AXI writes
+resumed, but the 1,800-second guard stopped the run at sampled cycle 10,600
+before a testcase pass marker or normal finish. At the endpoint the trace had
+12 AW, 175 W, 10 B, and zero AR/R handshakes. No UVM, JTAG, or other scanned
+diagnostics were reported. This demonstrates reset-in-flight detection and
+post-reset write progress; it does not demonstrate full 208-dword recovery.
+
+This remains diagnostic evidence only: the simulator was the dirty,
+unpublished Icarus revision `ac4532fab037e91df2f903e67fb40f59baedccca`, and
+the firmware image was reused from the earlier fast-boot diagnostic.
+
+- Caliptra RTL commit: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
+- Profile: one 208-dword `rand_test_dma` iteration, forced first reset,
+  3,870-cycle delay, fast TRNG, AXI/reset trace, checker enabled
+- Reset scan: assertion cycle 6,270; one outstanding write; `reset_in_flight=true`
+- Timeout endpoint: cycle 10,600; 12 AW, 175 W, 10 B, zero AR/R; no pass/fail marker
+- Raw simulation log SHA-256:
+  `c57d93d77dea2e48c500fde22a395e8d6ad34e2abf0b79d2983921a0b478f3f0`
+- Evidence: [structured diagnostic result](../caliptra-bfm-rand-dma-reset-inflight-208-20261007/result.json), [sanitized trace](../caliptra-bfm-rand-dma-reset-inflight-208-20261007/sim-trace-sanitized.log)
+- Raw log remains outside the repository because it contains generated key material.
