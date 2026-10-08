@@ -165,3 +165,32 @@ observed AW is post-reset at cycle 5,785. The 512-cycle result therefore does
 not demonstrate reset during an accepted DMA write. The 3,870-cycle candidate
 targets cycle 6,254, between the baseline trace's AW at 6,036 and B at 6,398.
 That candidate has not been run and is not reset-in-flight evidence.
+
+## Four-dword in-flight reset recovery diagnostic (2026-10-07)
+
+A bounded full-top replay used one generated four-dword `AHB2AXI` transfer and
+forced the first reset after a 214-cycle delay. The reset asserted at cycle
+2,614 with one accepted write outstanding (AW at 2,607; WLAST at 2,613; the
+trace records B at 2,615), then deasserted at 2,624. After reset the firmware
+completed another four-beat write and a four-beat read. The simulator emitted
+one `TESTCASE PASSED` marker and finished with `minstret=1416`, `mcycle=3717`;
+the runner's scan criteria reported no failure, bad, or JTAG diagnostics, and
+the UVM warning, error, and fatal counts were all zero.
+
+This is diagnostic evidence only. The testcase generator used a temporary
+four-dword overlay, the firmware images were reused from the earlier fast-boot
+diagnostic, and the simulator came from dirty, unpublished Icarus revision
+`ac4532fab037e91df2f903e67fb40f59baedccca`. It does not qualify the stock
+firmware or a published Icarus revision. The replay required the staged
+`python3.9` helper path and a permitted local JTAG-DPI socket bind; sandboxed
+attempts without either setup produced harness diagnostics.
+
+- Caliptra RTL commit: `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`
+- Profile: one `rand_test_dma` iteration, four-dword generated record, forced
+  first reset, 214-cycle delay, AXI/reset trace, checker enabled
+- Reset scan: assertion cycle 2,614; one outstanding write; `reset_in_flight=true`
+- AXI totals: 2 AW, 8 W, 2 B, 1 AR, 4 R; testcase pass 1, fail 0
+- Raw simulation log SHA-256:
+  `28537f9abcc261c7968262d3929b698bf10ccf8bcf906ed2ecb478a57aa39653`
+- Evidence: [structured diagnostic result](../caliptra-bfm-rand-dma-reset-inflight-4word-20261007/result.json), [sanitized trace](../caliptra-bfm-rand-dma-reset-inflight-4word-20261007/sim-trace-sanitized.log)
+- The raw log remains outside the repository because it contains generated key material.
