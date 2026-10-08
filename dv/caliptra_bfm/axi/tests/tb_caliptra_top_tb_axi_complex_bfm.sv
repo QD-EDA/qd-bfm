@@ -15,6 +15,9 @@ module tb_caliptra_top_tb_axi_complex_bfm;
   reg [31:0] read_data;
   reg [1:0] read_resp;
   reg [1:0] write_resp;
+  integer payload_base;
+  integer payload_read_base;
+  reg verify_payload_read;
 
   always #5 core_clk = ~core_clk;
 
@@ -40,6 +43,10 @@ module tb_caliptra_top_tb_axi_complex_bfm;
     end
   endtask
 
+  function automatic [31:0] payload_word(input integer index);
+    payload_word = 32'hc0de_0000 ^ index;
+  endfunction
+
   task automatic read_one(
     input [47:0] addr,
     input [7:0] burst_len,
@@ -54,7 +61,9 @@ module tb_caliptra_top_tb_axi_complex_bfm;
     begin
       @(negedge core_clk);
       m_axi_if.araddr = addr;
+      m_axi_if.arburst = (addr[47:18] == FIFO_BASE[47:18]) ? 2'b00 : 2'b01;
       m_axi_if.arlen = burst_len;
+      m_axi_if.arsize = 2;
       m_axi_if.arid = 5'h13;
       m_axi_if.aruser = 32'h1234_5678;
       m_axi_if.arvalid = 1;
@@ -99,6 +108,10 @@ module tb_caliptra_top_tb_axi_complex_bfm;
             if (m_axi_if.rlast != (beat == burst_len) ||
                 m_axi_if.rid != 5'h13 || m_axi_if.ruser != 32'h1234_5678)
               $fatal(1, "Bad R metadata/LAST at %h beat %0d", addr, beat);
+            if (verify_payload_read &&
+                (m_axi_if.rdata !== payload_word(payload_read_base + beat) ||
+                 m_axi_if.rresp !== 2'b00))
+              $fatal(1, "Payload burst mismatch at word %0d", payload_read_base + beat);
             if (beat == 0) begin
               data = m_axi_if.rdata;
               resp = m_axi_if.rresp;
@@ -237,6 +250,8 @@ module tb_caliptra_top_tb_axi_complex_bfm;
   endtask
 
   initial begin
+    verify_payload_read = 0;
+    payload_read_base = 0;
     init_manager();
     ctrl.dma_gen_done = 1'b1;
     ctrl.dma_gen_block_size = 'x;
@@ -345,7 +360,23 @@ module tb_caliptra_top_tb_axi_complex_bfm;
       $fatal(1, "Recovery availability did not deassert after fifo_clear");
     ctrl.en_recovery_emulation = 0;
 
-    $display("PASS: Caliptra AXI complex BFM errors, SRAM/FIFO traffic, FIFO controls, recovery availability, and randomized stalls");
+    axi_error_inj_en = 0;
+    for (payload_base = 0; payload_base < 208; payload_base = payload_base + 1) begin
+      write_one(SRAM_BASE + 48'h1000 + payload_base * 4,
+                payload_word(payload_base), write_resp);
+      if (write_resp != 2'b00)
+        $fatal(1, "208-dword pattern write failed at word %0d", payload_base);
+    end
+    verify_payload_read = 1;
+    for (payload_base = 0; payload_base < 208; payload_base = payload_base + 16) begin
+      payload_read_base = payload_base;
+      read_one(SRAM_BASE + 48'h1000 + payload_base * 4, 15, read_data, read_resp);
+      if (read_resp != 2'b00)
+        $fatal(1, "208-dword pattern read failed at word %0d", payload_base);
+    end
+    verify_payload_read = 0;
+
+    $display("PASS: Caliptra AXI complex BFM errors, SRAM/FIFO traffic, FIFO controls, recovery availability, randomized stalls, and 208-dword burst readback");
     $finish;
   end
 endmodule

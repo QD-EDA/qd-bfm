@@ -202,6 +202,12 @@ leaves its block-size array unknown otherwise. The test fails on that X array
 without the gate and passes with it. Full-top runs using the replacement are
 recorded in
 [`open-top smoke evidence`](../../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
+The 2026-10-07 wrapper smoke also writes 208 deterministic SRAM words through
+AXI and reads them back in thirteen 16-beat INCR bursts, checking every data
+word, response, ID, USER, and LAST field. The guarded run passes with Icarus
+`ac4532fa-dirty`; treat it as diagnostic only until repeated with a clean,
+published simulator revision. This isolates the open target's full-payload
+burst path, not the actual DUT DMA FIFO readback that remains open.
 The guarded 900-second first-case AES/DMA diagnostic passes through the
 real top and records source write/read plus AES destination write/readback.
 The [passing record](../../../evidence/caliptra-bfm-open-top-smoke-20261006/first-aes-axi-trace.json)
