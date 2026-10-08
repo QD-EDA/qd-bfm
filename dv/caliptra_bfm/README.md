@@ -233,7 +233,10 @@ the original RTL checkout is left untouched.
 Compile, firmware, vector, and simulation logs plus hashes are retained in the
 requested output directory. The runner uses the 60%-free-memory guard and also
 accepts `rand_test_dma`. Count the run as passed only when the firmware pass
-marker appears and no simulator, SVA, or JTAG errors are reported.
+marker appears and no simulator, SVA, or JTAG errors are reported. When no
+JTAG client is used, the exact sandbox `Operation not permitted` listener-bind
+message is recorded separately and does not invalidate firmware results; other
+JTAG server errors remain fatal.
 The first short AES/DMA case has a checker-on/off full-top diagnostic in
 [`the recorded evidence`](../../evidence/caliptra-bfm-fulltop-checker-dma-20261007/README.md).
 It uses a modified one-case firmware image and does not qualify stock firmware

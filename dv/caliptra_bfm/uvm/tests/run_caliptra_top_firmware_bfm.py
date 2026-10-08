@@ -68,6 +68,9 @@ BAD = re.compile(
     re.IGNORECASE,
 )
 JTAG_ERROR = re.compile(r"(?m)^jtag0: (?:Failed to|Unable to|Socket read failed|Error while|Client disappeared)")
+JTAG_BIND_DENIED = re.compile(
+    r"(?m)^jtag0: Failed to bind socket: Operation not permitted \(1\)\s*$"
+)
 
 
 def sha256(path):
@@ -585,7 +588,7 @@ def run_logged(command, cwd, env, logfile):
 
 
 def scan_sim_log(path):
-    passed = failed = bad = jtag_errors = 0
+    passed = failed = bad = jtag_errors = jtag_bind_denials = 0
     finish = None
     reset_assert_cycles = []
     outstanding_writes = 0
@@ -595,7 +598,10 @@ def scan_sim_log(path):
             passed += line.count("* TESTCASE PASSED")
             failed += line.count("TESTCASE FAILED")
             bad += bool(BAD.search(line))
-            jtag_errors += bool(JTAG_ERROR.match(line))
+            if JTAG_BIND_DENIED.match(line):
+                jtag_bind_denials += 1
+            else:
+                jtag_errors += bool(JTAG_ERROR.match(line))
             if AXI_AW.search(line):
                 outstanding_writes += 1
             if AXI_B.search(line):
@@ -608,7 +614,8 @@ def scan_sim_log(path):
             if match:
                 finish = [int(match.group(1)), int(match.group(2))]
     return {"passed": passed, "failed": failed, "bad": bad,
-            "jtag_errors": jtag_errors, "finish": finish,
+            "jtag_errors": jtag_errors, "jtag_bind_denials": jtag_bind_denials,
+            "finish": finish,
             "reset_assert_cycles": reset_assert_cycles,
             "outstanding_writes_at_reset": outstanding_writes_at_reset,
             "reset_in_flight": any(count > 0 for count in outstanding_writes_at_reset)}
@@ -1008,6 +1015,7 @@ def main():
         "testcase_pass_markers": log_scan["passed"],
         "testcase_fail_markers": log_scan["failed"],
         "jtag_server_errors": log_scan["jtag_errors"],
+        "jtag_bind_denials": log_scan["jtag_bind_denials"],
         "reset_assert_cycles": log_scan["reset_assert_cycles"],
         "outstanding_writes_at_reset": log_scan["outstanding_writes_at_reset"],
         "reset_in_flight": log_scan["reset_in_flight"],
