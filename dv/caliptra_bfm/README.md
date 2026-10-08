@@ -66,8 +66,10 @@ The top-level firmware smoke and its diagnostic limits are recorded in
 For a bounded random-DMA recovery diagnostic, `--rand-dma-iterations N`
 controls Caliptra's existing `NUM_ITERATIONS` testbench plusarg (1–100), and
 `--force-first-rand-dma-reset` marks the first generated transfer for reset
-injection. The reset option requires an explicit iteration limit. Both options
-are diagnostic only; the default `rand_test_dma` remains unchanged.
+injection. The reset option requires an explicit iteration limit. Its shell
+wrapper uses a 5,400-second guard by default; other cases retain 1,800 seconds,
+and `CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS` overrides either default. Both
+options are diagnostic only; the default `rand_test_dma` remains unchanged.
 These are reusable module-level components; they do not include the full UVMF
 base library, a complete Avery-compatible agent/environment, or ARM Axi4PC. A
 bounded clean-room `uvmf_lite/` slice is described below.
