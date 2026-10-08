@@ -90,3 +90,24 @@ The raw log is `/private/tmp/caliptra-bfm-axi-subordinate-v13_0.log`.
 | `tb_axi4_caliptra_memory_queue.sv` | `b4b715786767206ca151a975a7003748e47eaebad6ed3f0eb18a47a926a482dd` |
 | `run_subordinate.sh` | `011a0d1f16e75313f2e0e68d24c7d8b56e199bf65aa5021f6c8a263f3e762a1f` |
 | Raw run log | `0d7ed813706c334a4aba162c910baf11ca3cf6e78d14f07321915887fec486aa` |
+
+## Checker follow-up — 2026-10-08
+
+`run_checker.sh` also passed on the same published Icarus 13.0 source commit
+and compiler/runtime binaries identified above. It accepted the valid reordered,
+same-ID, exclusive, and narrow-transfer cases and rejected all 40 injected
+protocol violations with the expected diagnostics. Reproduce with:
+
+```sh
+IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp \
+  sh dv/caliptra_bfm/axi/tests/run_checker.sh
+```
+
+This exercises the open Caliptra AXI profile checker; it does not establish
+full ARM Axi4PC or full-top qualification.
+
+| Input | SHA-256 |
+|---|---|
+| `tb_axi4_caliptra_checker.sv` | `031d85710a4533e93d4a4a6e987885828f520a7cb45d1b3f6e65761c43fc95b1` |
+| `run_checker.sh` | `6b37b811b2437288d9e3cd98ab4845e6f53923a5cb88a30ffa6df0e8f90f847f` |
+| Raw run log | `7d039701d066513fa68e6ea026db558acbb193568e172c7fe48d04a045285719` |
