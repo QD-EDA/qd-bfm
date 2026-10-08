@@ -129,7 +129,7 @@ for edition in 2017 2023; do
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv" \
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv" \
          "$in_pkg/ECC_in_pkg_hdl.sv" "$in_pkg/ECC_in_pkg.sv" \
-         "$in_pkg/src/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
+         "$tmpdir/monitors/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
          "$tmpdir/monitors/ECC_in_monitor_bfm.sv" \
          "$out_pkg/ECC_out_pkg_hdl.sv" "$out_pkg/ECC_out_pkg.sv" \
          "$out_pkg/src/ECC_out_driver_bfm.sv" "$out_pkg/src/ECC_out_if.sv" \

@@ -243,3 +243,13 @@ It used Caliptra commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and the same
 temporary trace-instrumented input-driver copy used by the ECDH probe. Treat it as
 diagnostic-only; rerun the stock generated driver on a clean, published Icarus
 SHA before making any qualification claim.
+
+2026-10-08 runner correction: `run_generated_ecc_reset_monitor.sh` now compiles
+the hash-checked temporary input-driver overlay it generates, including the
+512-clock status-poll cadence. Previously it compiled the untouched Caliptra
+driver, so the bounded-poll fix was not active in this runner. The reset/IRQ
+probe passed under IEEE 2017 with Icarus `ac4532fa-dirty` (zero UVM errors or
+fatals; diagnostic only). A key-sign run using this runner reached 110,000
+cycles with the Montgomery counter decreasing and no ECC error, then was
+stopped before a scoreboard verdict; the earlier full key-sign pass remains
+diagnostic-only. Re-run on a clean, published Icarus SHA before qualification.
