@@ -152,7 +152,9 @@ write traffic and includes the recovery availability policy plus optional
 autonomous FIFO traffic. Its optional
 recovery sequencer consumes the packed block-size list from Caliptra's existing
 Apache-2.0 DMA testcase generator. `tests/run_dma_subordinate.sh` now covers
-mixed SRAM/FIFO request routing and response arbitration. The UVM
+mixed SRAM/FIFO request routing and response arbitration. It also asserts
+reset with a partial write, a pending B response, and a pending R response,
+then checks that the map accepts fresh traffic after each reset. The UVM
 `run_caliptra_axi_dma_top_uvm_bfm.sh` also connects this target to the pinned
 DMA DUT and checks a 65-word FIFO-to-SRAM recovery transfer using one
 64-byte generated-block entry. The actual-DUT runner now replays all 27

@@ -202,6 +202,22 @@ module tb_axi4_caliptra_dma_subordinate;
     end
   endtask
 
+  task automatic reset_map;
+    begin
+      @(negedge ACLK); ARESETn = 0;
+      repeat (2) @(posedge ACLK);
+      #1;
+      if (BVALID || RVALID || dut.i_sram.BVALID || dut.i_fifo.BVALID ||
+          dut.i_sram.RVALID || dut.i_fifo.RVALID || dut.wr_route_count != 0 ||
+          dut.b_route_count != 0 || dut.r_route_count != 0 ||
+          dut.i_sram.wr_count != 0 || dut.i_sram.b_count != 0 ||
+          dut.i_sram.rd_count != 0)
+        $fatal(1, "DMA map reset left an outstanding request or response");
+      @(negedge ACLK); ARESETn = 1;
+      repeat (2) @(negedge ACLK);
+    end
+  endtask
+
   initial begin
     repeat (2) @(posedge ACLK);
     @(negedge ACLK);
@@ -453,6 +469,42 @@ module tb_axi4_caliptra_dma_subordinate;
     if (fifo_level != 0 || pop_event_count != pop_count_before_read + 1)
       $fatal(1, "Autonomous FIFO consumer failed: level=%0d pops=%0d",
              fifo_level, pop_event_count - pop_count_before_read);
+
+    // Reset must drop partial write state, queued B responses, and accepted
+    // reads; fresh requests through the map must still complete afterward.
+    send_aw(8'hb1, SRAM_BASE + 48'd32, 1, 2'b01, 32'hb100_0001);
+    send_w(32'hbad0_0001, 0);
+    reset_map();
+    write_one(SRAM_BASE + 48'd32, 32'hb100_0002);
+    read_one(SRAM_BASE + 48'd32, read_data);
+    if (read_data != 32'hb100_0002)
+      $fatal(1, "DMA map did not recover after a partial write reset");
+
+    @(negedge ACLK); BREADY = 0;
+    send_aw(8'hb2, SRAM_BASE + 48'd36, 0, 2'b01, 32'hb200_0001);
+    send_w(32'hb200_0002, 1);
+    wait (dut.i_sram.BVALID);
+    #1;
+    if (!BVALID || BID != 8'hb2)
+      $fatal(1, "DMA map did not expose the pending pre-reset B response");
+    reset_map();
+    @(negedge ACLK); BREADY = 1;
+    write_one(SRAM_BASE + 48'd36, 32'hb200_0003);
+    read_one(SRAM_BASE + 48'd36, read_data);
+    if (read_data != 32'hb200_0003)
+      $fatal(1, "DMA map did not recover after a pending B reset");
+
+    @(negedge ACLK); RREADY = 0;
+    send_ar(8'hb3, SRAM_BASE + 48'd32, 0, 2'b01, 32'hb300_0001);
+    wait (dut.i_sram.RVALID);
+    #1;
+    if (!RVALID || RID != 8'hb3)
+      $fatal(1, "DMA map did not expose the pending pre-reset R response");
+    reset_map();
+    @(negedge ACLK); RREADY = 1;
+    read_one(SRAM_BASE + 48'd32, read_data);
+    if (read_data != 32'hb100_0002)
+      $fatal(1, "DMA map did not recover after a pending R reset");
 
     @(negedge ACLK);
     dma_gen_block_size[0] = 12'd8;
