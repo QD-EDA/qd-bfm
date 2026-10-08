@@ -455,3 +455,20 @@ recorded 12 AW/W/B handshakes and one AR/R handshake; the scoreboard reported
 16/16 matches, zero mismatches/no-comparison/missed transactions, zero UVM
 errors/fatals, and one QVIP coverage notice. This remains diagnostic on paired
 Icarus/VVP 13.0-dev `ac4532fa-dirty`; it does not qualify the lane.
+
+
+### Top-environment AXI USER pin check on 2026-10-08 (diagnostic)
+
+The data-only readback follow-up did not verify the address USER sideband. A
+new monitor assertion checks the completed pin record for address `0x30048`,
+`ARUSER=0xc0de0000`, `OKAY`, and read data `0xc0de0000`. Its first run exposed
+that the stock initialization sequence's `axi_user_obj` still held the reset
+USER after initialization; the probe now sets that object to mailbox slot 0
+before issuing the read. The replay passed with 12 writes plus one read and
+16/16 scoreboard matches, zero mismatches/no-comparison/missed transactions,
+zero UVM errors/fatals, and one QVIP coverage notice. The raw VVP log is
+retained locally at `/private/tmp/qd-bfm-top-axi-user-aruser-vvp-20261008.log`,
+SHA-256 `b89922171bee602c4df3b249144b0398c16605147e0a52de15b8074b573b82e5`.
+It used
+clean Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and paired Icarus/VVP
+13.0-dev `ac4532fa-dirty`; diagnostic only, not qualification.

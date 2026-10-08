@@ -5,6 +5,7 @@ package caliptra_top_env_probe_pkg;
   import uvmf_base_pkg::*;
   import caliptra_top_env_pkg::*;
   import soc_ifc_ctrl_pkg::*;
+  import aaxi_uvm_pkg::*;
   `include "uvm_macros.svh"
 
   class caliptra_top_env_reset_sequence extends uvm_sequence #(soc_ifc_ctrl_transaction);
@@ -55,9 +56,32 @@ package caliptra_top_env_probe_pkg;
     endtask
   endclass
 
+  class caliptra_top_env_axi_user_observer extends uvm_component;
+    uvm_analysis_imp #(aaxi_master_tr, caliptra_top_env_axi_user_observer) read_export;
+    bit check_readback;
+    int readback_count;
+
+    `uvm_component_utils(caliptra_top_env_axi_user_observer)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+      read_export = new("read_export", this);
+    endfunction
+
+    function void write(aaxi_master_tr item);
+      if (!check_readback) return;
+      if (!item.is_read() || item.addr != 48'h3_0048 || item.aruser != 32'hc0de_0000 ||
+          !item.transport_success || item.resp != 2'b00 || item.beatQ.size() != 1 ||
+          item.respQ.size() != 1 || item.respQ[0] != 2'b00 || item.beatQ[0] != 32'hc0de_0000)
+        `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER_MON", $sformatf("AXI USER readback monitor mismatch (ARUSER=0x%08h, expected=0xc0de0000): %s", item.aruser, item.convert2string()))
+      readback_count++;
+    endfunction
+  endclass
+
   class caliptra_top_env_probe_test extends uvm_test;
     caliptra_top_env_configuration top_configuration;
     caliptra_top_environment top_environment;
+    caliptra_top_env_axi_user_observer axi_user_observer;
     string interface_names[];
     uvmf_active_passive_t interface_activity[];
 
@@ -95,6 +119,13 @@ package caliptra_top_env_probe_pkg;
       top_environment = caliptra_top_environment::type_id::create("environment", this);
       top_environment.set_config(top_configuration);
       top_environment.set_can_handle_reset(0);
+      axi_user_observer = caliptra_top_env_axi_user_observer::type_id::create("axi_user_observer", this);
+    endfunction
+
+    function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
+      top_environment.soc_ifc_subenv.aaxi_tb.env0.master[0].read_done_export.connect(
+          axi_user_observer.read_export);
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -139,8 +170,14 @@ package caliptra_top_env_probe_pkg;
         $display("PASS: generated Caliptra top environment completed AXI USER initialization");
         readback_sequence = caliptra_top_env_axi_user_readback_sequence::type_id::create("axi_user_readback_sequence");
         readback_sequence.reg_model = top_configuration.soc_ifc_subenv_config.soc_ifc_rm;
+        axi_user_init_sequence.axi_user_obj.set_addr_user(32'hc0de_0000);
         readback_sequence.axi_user_extension = axi_user_init_sequence.axi_user_obj;
+        axi_user_observer.readback_count = 0;
+        axi_user_observer.check_readback = 1;
         readback_sequence.start(top_configuration.soc_ifc_subenv_config.vsqr);
+        axi_user_observer.check_readback = 0;
+        if (axi_user_observer.readback_count != 1)
+          `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER_MON", $sformatf("Expected one monitored AXI USER readback, observed %0d", axi_user_observer.readback_count))
         $display("PASS: generated Caliptra top environment completed AXI USER readback");
       end
       $display("PASS: generated Caliptra top environment completed real reset");
