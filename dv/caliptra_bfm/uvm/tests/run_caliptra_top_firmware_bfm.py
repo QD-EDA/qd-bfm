@@ -81,6 +81,43 @@ def sha256(path):
     return digest.hexdigest()
 
 
+def tool_identity(path):
+    binary = Path(path).resolve()
+    version_run = subprocess.run(
+        [str(binary), "-V"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        text=True, check=False,
+    )
+    version_lines = version_run.stdout.splitlines()
+    return {
+        "path": str(binary),
+        "version": version_lines[0] if version_lines else "",
+        "version_exit_code": version_run.returncode,
+        "sha256": sha256(binary),
+    }
+
+
+def source_checkout_identity(root):
+    path = Path(root).expanduser().resolve()
+
+    def git(*args):
+        return subprocess.run(
+            ["git", "-C", str(path), *args], stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, text=True, check=True,
+        ).stdout.strip()
+
+    commit = git("rev-parse", "HEAD")
+    status = git("status", "--porcelain", "--untracked-files=all")
+    remote_refs = git(
+        "branch", "-r", "--contains", commit, "--format=%(refname:short)"
+    )
+    return {
+        "root": str(path),
+        "commit": commit,
+        "clean": not status,
+        "remote_tracking_refs_containing_head": remote_refs.splitlines() if remote_refs else [],
+    }
+
+
 def prepare_sram_export_overlay(rtl_root, output_path):
     source = Path(rtl_root) / "src/integration/tb/caliptra_veer_sram_export.sv"
     text = source.read_text()
@@ -845,6 +882,14 @@ def main():
     vvp = shutil.which(os.environ.get("VVP_BIN", "vvp"))
     if not iverilog or not vvp:
         raise ValueError("IVERILOG_BIN and VVP_BIN must name executable tools")
+    simulator_provenance = {
+        "iverilog": tool_identity(iverilog),
+        "vvp": tool_identity(vvp),
+        "source_checkout": (
+            source_checkout_identity(os.environ["IVERILOG_SOURCE_ROOT"])
+            if os.environ.get("IVERILOG_SOURCE_ROOT") else None
+        ),
+    }
     if args.output.exists():
         raise ValueError(f"output directory already exists: {args.output}")
 
@@ -1011,6 +1056,7 @@ def main():
         "axi_trace_compile_command": trace_compile_command,
         "axi_trace_compile_exit": trace_compile_exit,
         "sim_command": sim_command,
+        "simulator_provenance": simulator_provenance,
         "sim_exit": sim_exit,
         "testcase_pass_markers": log_scan["passed"],
         "testcase_fail_markers": log_scan["failed"],

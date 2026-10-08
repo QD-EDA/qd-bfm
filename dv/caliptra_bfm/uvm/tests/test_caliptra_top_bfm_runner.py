@@ -92,6 +92,38 @@ class ToolchainPrefixTest(unittest.TestCase):
         self.assertEqual(env["PATH"], f"/opt/riscv/bin{RUNNER.os.pathsep}/usr/bin")
 
 
+class SimulatorProvenanceTest(unittest.TestCase):
+    def test_tool_identity_records_version_and_binary_hash(self):
+        with tempfile.TemporaryDirectory() as temp:
+            binary = Path(temp) / "simulator"
+            binary.write_text("#!/bin/sh\nprintf 'stub simulator 1.0\\n'\n")
+            binary.chmod(0o755)
+            expected_hash = RUNNER.sha256(binary)
+            identity = RUNNER.tool_identity(binary)
+        self.assertEqual(identity["version"], "stub simulator 1.0")
+        self.assertEqual(identity["sha256"], expected_hash)
+
+    def test_source_identity_records_full_sha_cleanliness_and_remote_refs(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.name", "Test"], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.email", "test@example.invalid"], check=True)
+            (root / "source.c").write_text("int main(void) { return 0; }\n")
+            subprocess.run(["git", "-C", str(root), "add", "source.c"], check=True)
+            subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "source"], check=True)
+            subprocess.run(["git", "-C", str(root), "update-ref", "refs/remotes/origin/main", "HEAD"], check=True)
+
+            identity = RUNNER.source_checkout_identity(root)
+            (root / "untracked.tmp").write_text("dirty\n")
+            dirty_identity = RUNNER.source_checkout_identity(root)
+
+        self.assertRegex(identity["commit"], r"^[0-9a-f]{40}$")
+        self.assertTrue(identity["clean"])
+        self.assertEqual(identity["remote_tracking_refs_containing_head"], ["origin/main"])
+        self.assertFalse(dirty_identity["clean"])
+
+
 class NativeVectorSelectionTest(unittest.TestCase):
     def test_pq_skip_keeps_only_non_pq_runtime_assets(self):
         selected = RUNNER.native_vector_outputs(skip_pq_vectors=True)
