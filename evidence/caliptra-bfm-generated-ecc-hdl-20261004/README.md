@@ -225,3 +225,36 @@ PASS: generated reset scoreboard and ECC IRQ_EN AHB readback matched under IEEE 
 | `keygen_poll512_1m2_30m_trace100k_rerun_2023.log` | `0761baf6204c770b7b18c42762cde62124a1b76c0cb080f92004e21b74df86b8` |
 | `keygen_poll512_1m2_interrupted_trace100k_2017.log` | `62b9a8aae054b995c5438b82facd097dff674662b0fd37b65404a7f54aee9133` |
 | Icarus Verilog 13.0 devel binary | `235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392` |
+
+## Current-state diagnostic — 2026-10-08
+
+The generated ECC `key_sign` probe completed under IEEE 2017. It reported
+`PASS: generated ECC key-sign transaction matched`, with `UVM_ERROR=0` and
+`UVM_FATAL=0`. This is diagnostic evidence only: it used local Icarus source
+commit `ac4532fab037e91df2f903e67fb40f59baedccca`, which was dirty and
+unpublished. It does not qualify key signing. Re-run on a clean, published
+Icarus revision before making a qualification claim.
+
+The Caliptra checkout was clean at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`.
+The runner used its hash-guarded temporary monitor overlays and disposable
+build directory. Reproduce from the QD-EDA/qd-bfm repository root with:
+
+```sh
+env CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  ECC_IEEE_EDITION=2017 \
+  ECC_RUNTIME_PROBE=key_sign \
+  ECC_RESET_MONITOR_LOG_DIR=/private/tmp/caliptra-bfm-ecc-key-sign-v13_0-20261008/logs \
+  IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+  VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  sh dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh
+```
+
+| Diagnostic artifact | SHA-256 |
+| --- | --- |
+| Detailed `key_sign_overlay_2017.log` | `32edc9ab8c8afeb7378b409b39b503598118db451a628e2a6cebbd26c77dad1f` |
+| Captured runner output | `26457b59be14e2888b77f0ebf3228c074f8fe9ae564f1ded5622e3cd8a5ec275` |
+| Icarus compiler binary | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
+| VVP runtime binary | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
+| Reset-monitor runner | `4d0db7367428907a43e07bc139f2cafc8ddb74847cd62607ba064b9ad272888e` |
+| Probe package | `0c1b0b09c935e8294158acb797f6f830c6139a385974ae09da90a6b8d6bc8e66` |
+| Sparse progress probe | `732bd1e09e9d9ff816d5800d442790027564c0504e42a7f7408cc0477297f6aa` |
