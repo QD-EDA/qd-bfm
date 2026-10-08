@@ -58,3 +58,27 @@ recorded separately. The generated result and compact simulation log are
 
 This remains diagnostic evidence on the dirty, unpublished Icarus source SHA
 above; it does not qualify the stock firmware or the full 12-vector suite.
+
+## Third and fourth AES/DMA vectors — 2026-10-08
+
+The following vectors passed in isolated runs with the checker enabled. Their
+source and destination transactions use three and four beats respectively:
+
+| Vector | Source AW/W/B | Source AR/R | Destination AW/W/B | Destination AR/R | Firmware finish |
+| ---: | --- | --- | --- | --- | --- |
+| 3 | 1,383–1,388; 3 W beats | 2,943–2,949; 3 R beats | 3,035–3,040; 3 W beats | 3,182–3,188; 3 R beats | PASS; `mcycle=3857` |
+| 4 | 1,478–1,484; 4 W beats | 3,034–3,042; 4 R beats | 3,128–3,134; 4 W beats | 3,287–3,295; 4 R beats | PASS; `mcycle=4000` |
+
+All writes were accepted without W-channel stalls and the checker reported no
+framing errors. Each run emitted one testcase pass marker, no fail markers,
+unexpected diagnostics, or JTAG server errors. The paired sandbox listener
+denial was recorded separately. Per-run result JSON and logs are
+[`third-aes-result.json`](third-aes-result.json),
+[`third-aes-axi-wstate.log`](third-aes-axi-wstate.log),
+[`fourth-aes-result.json`](fourth-aes-result.json), and
+[`fourth-aes-axi-wstate.log`](fourth-aes-axi-wstate.log).
+
+Together with the first two vectors above, this gives separate full-top
+diagnostic passes for one-, two-, three-, and four-beat DMA buffers. The runs
+use a diagnostic firmware copy, fast TRNG cadence, and PQ-vector suppression;
+all remain diagnostic on the dirty, unpublished Icarus source SHA.
