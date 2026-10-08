@@ -218,3 +218,10 @@ the previous operation. The disposable QD overlay now samples `op_i` and
 `test_i` after completion; its transform check passes. A follow-up runtime
 attempt stopped during compilation before a new transaction verdict, so no
 key-sign pass is claimed.
+
+2026-10-08 follow-up: the same IEEE 2017 key-sign probe passed after the
+overlay sampled `op_i`/`test_i` on completion: expected=2, observed=2, matched=2,
+mismatched=0, pending=0, with zero UVM errors or fatals. The run used Caliptra
+commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and Icarus 13.0
+`ac4532fa-dirty`; it is diagnostic-only, not qualification. Re-run on a clean,
+published Icarus SHA before making any qualification claim.
