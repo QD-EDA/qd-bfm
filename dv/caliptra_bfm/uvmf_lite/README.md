@@ -276,3 +276,10 @@ mismatched=0, pending=0, UVM_ERROR=0, and UVM_FATAL=0 at 961,144 simulated
 clocks. It used dirty, unpublished Icarus `ac4532fa-dirty`, so this is
 diagnostic-only and does not qualify verification. The exact command and log
 hash are recorded in the generated ECC runtime evidence.
+
+2026-10-08 corrected-runner ECDH rerun: the generated IEEE 2017 shared-key
+transaction completed with expected=2, observed=2, matched=2, mismatched=0,
+pending=0, UVM_ERROR=0, and UVM_FATAL=0 at 716,432 simulated clocks. It used
+dirty, unpublished Icarus `ac4532fa-dirty`, so this is diagnostic-only and does
+not qualify ECDH. The exact command and log hash are recorded in the generated
+ECC runtime evidence.
