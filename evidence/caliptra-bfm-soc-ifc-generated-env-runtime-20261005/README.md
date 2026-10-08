@@ -421,3 +421,15 @@ request was not deliberately triggered.
 | Successful generated AHB/AAXI double-bit ECC roundtrip with AXI USER init and explicit shutdown | `f543ca3f6bf0e58dacc9895e8efe11d4102db8679574a659a4d8dc4fbde0702b` |
 | Successful generated AHB/AAXI no-ECC roundtrip using default AXI USER | `f3a03c5d483cf9b23d8e02c53cdbbb5ab647bfa4078c6c17ecf823e15119db6c` |
 | Captured guarded attempt log | `71515e623c552f7620ada01b57e0d34a6ef56ed730c8a2fccefb62a7da24a945` |
+
+### Caliptra top-environment probe on 2026-10-08 (diagnostic)
+
+The `--caliptra-top-env-probe` run completed against the generated top
+wrapper and actual `soc_ifc_top`, using clean Caliptra commit
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and paired Icarus/VVP 13.0-dev
+`ac4532fa-dirty`. It reached the generated top-environment reset pass marker;
+the scoreboard reported 3/3 matches with zero mismatches, no-comparison or
+missed transactions, zero UVM errors/fatals, and one QVIP coverage notice.
+This covers the wrapper reset/predictor path, not the full Caliptra core/top.
+Diagnostic only: the simulator build is dirty and unpublished, so this does
+not qualify the lane.
