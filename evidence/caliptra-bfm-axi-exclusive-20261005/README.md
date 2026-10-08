@@ -58,3 +58,35 @@ claim full Arm AXI conformance or generated Caliptra UVMF qualification.
 | `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_memory_subordinate.sv` | `4daaf6fc8b54f54f3af3ea7e3e23dde1fee64f3b3a77254b964ca8a238cfff0a` |
 | `dv/caliptra_bfm/axi/tests/run_subordinate.sh` | `d9643a4dcbe1ab919c343ed1dd8e19309c91cd50455bf7949598a6336c4dba72` |
 | `dv/caliptra_bfm/axi/tests/run_dma_subordinate.sh` | `caf93bd785ff1d4a7698a2b71c8c281a0668c66f23ade6b191f8ef9a99bcc10f` |
+
+## Current-state addendum — 2026-10-08
+
+The current `run_subordinate.sh` regression passed under upstream Icarus
+Verilog 13.0 stable. The installed compiler and runtime report `v13_0`; the
+published tag resolves to source commit
+`dfeee909ed9f20b4870dd93423156c0170c0e1ff` ([upstream release](https://github.com/steveicarus/iverilog/releases)).
+This is a focused AXI subordinate result, not full Caliptra-top or UVMF
+qualification.
+
+Both the bursts/stalls/USER/error/exclusive test and the bounded multi-ID
+queue test passed. Reproduce with:
+
+```sh
+IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp \
+  sh dv/caliptra_bfm/axi/tests/run_subordinate.sh
+```
+
+The raw log is `/private/tmp/caliptra-bfm-axi-subordinate-v13_0.log`.
+
+| Input | SHA-256 |
+|---|---|
+| Icarus 13.0 compiler binary | `5df81b269e1ff2c965dd00ad5a8071ca17717f416003b3661a18b2dde430e73c` |
+| Icarus 13.0 VVP binary | `1a9bdf1f40102f64f015514f5069f99a5dd9f9f38de343ef4c169fb358392` |
+| `axi4_caliptra_checker.sv` | `a679cf9b4119ed5a34b260be9d8b800d16b33180aa7b701a2f245bf6c5512245` |
+| `axi4_caliptra_master.sv` | `0883329316b1005c50048acfa0a73db8040e043a5d1406e78d8296b57f126844` |
+| `axi4_caliptra_memory_subordinate.sv` | `0a59bb61380113bb60115d20b06628da2c55a11360f31a8355ea738cea46bd10` |
+| `axi4_caliptra_monitor.sv` | `33ed58d9c3d4b2aac4493740704547169349a28a61b304e5281533f1879529ca` |
+| `tb_axi4_caliptra_memory_subordinate.sv` | `9d9e6091683fc940570c1aacafb71f65922a7046b3eac31ebfba9f6607f7a624` |
+| `tb_axi4_caliptra_memory_queue.sv` | `b4b715786767206ca151a975a7003748e47eaebad6ed3f0eb18a47a926a482dd` |
+| `run_subordinate.sh` | `011a0d1f16e75313f2e0e68d24c7d8b56e199bf65aa5021f6c8a263f3e762a1f` |
+| Raw run log | `0d7ed813706c334a4aba162c910baf11ca3cf6e78d14f07321915887fec486aa` |
