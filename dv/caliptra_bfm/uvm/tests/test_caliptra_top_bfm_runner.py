@@ -67,6 +67,7 @@ class ResetInFlightTraceTest(unittest.TestCase):
     def test_unused_jtag_listener_permission_denial_is_recorded_not_fatal(self):
         result = self.scan([
             "jtag0: Failed to bind socket: Operation not permitted (1)",
+            "jtag0: Unable to create TCP server on port 0",
             "* TESTCASE PASSED",
             "Finished : minstret = 7937, mcycle = 28414",
         ])
@@ -81,6 +82,10 @@ class ResetInFlightTraceTest(unittest.TestCase):
             "Finished : minstret = 7937, mcycle = 28414",
         ])
         self.assertEqual(result["jtag_bind_denials"], 0)
+        self.assertEqual(result["jtag_errors"], 1)
+
+    def test_tcp_server_start_failure_without_bind_denial_remains_fatal(self):
+        result = self.scan(["jtag0: Unable to create TCP server on port 0"])
         self.assertEqual(result["jtag_errors"], 1)
 
 

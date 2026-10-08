@@ -626,6 +626,7 @@ def run_logged(command, cwd, env, logfile):
 
 def scan_sim_log(path):
     passed = failed = bad = jtag_errors = jtag_bind_denials = 0
+    jtag_bind_denied = False
     finish = None
     reset_assert_cycles = []
     outstanding_writes = 0
@@ -637,8 +638,13 @@ def scan_sim_log(path):
             bad += bool(BAD.search(line))
             if JTAG_BIND_DENIED.match(line):
                 jtag_bind_denials += 1
+                jtag_bind_denied = True
             else:
-                jtag_errors += bool(JTAG_ERROR.match(line))
+                expected_jtag_unavailable = (
+                    jtag_bind_denied and
+                    line.rstrip("\r\n") == "jtag0: Unable to create TCP server on port 0"
+                )
+                jtag_errors += bool(JTAG_ERROR.match(line) and not expected_jtag_unavailable)
             if AXI_AW.search(line):
                 outstanding_writes += 1
             if AXI_B.search(line):
