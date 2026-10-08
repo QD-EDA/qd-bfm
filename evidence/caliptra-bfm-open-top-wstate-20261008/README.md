@@ -106,3 +106,26 @@ This is diagnostic evidence, not qualification. The full suite and clean,
 published Icarus replay remain open. See
 [`fifth-aes-result.json`](fifth-aes-result.json) and
 [`fifth-aes-axi-wstate.log`](fifth-aes-axi-wstate.log).
+
+## Sixth AES/DMA vector — 2026-10-08
+
+The sixth vector passed in isolation with the checker enabled
+(`--limit-aes-cases 1 --start-aes-case 5`). It exercised six-beat source
+transfers and split the destination into four- and two-beat writes:
+
+| Cycle | Channel | Address | Result |
+| ---: | --- | --- | --- |
+| 1,552–1,560 | AW, W, B | `0x123440000` | Six W beats; B completed |
+| 3,141–3,153 | AR, R | `0x123440000` | Six read beats |
+| 3,283–3,289 | AW, W, B | `0x123460000` | Four W beats; B completed |
+| 3,350–3,354 | AW, W, B | `0x123460010` | Two W beats; B completed |
+| 3,506–3,518 | AR, R | `0x123460000` | Six read beats |
+
+Firmware reported PASS at `mcycle=4379`; the runner recorded one pass marker,
+no fail markers, no error/fatal diagnostics, and no unexpected JTAG errors.
+The run used a single-vector firmware copy, fast TRNG cadence, PQ-vector
+suppression, and Icarus source `ac4532fab037e91df2f903e67fb40f59baedccca`
+(`ac4532fa-dirty`). This remains diagnostic only; a clean published Icarus
+replay and the full suite are open. See
+[`sixth-aes-result.json`](sixth-aes-result.json) and
+[`sixth-aes-axi-wstate.log`](sixth-aes-axi-wstate.log).
