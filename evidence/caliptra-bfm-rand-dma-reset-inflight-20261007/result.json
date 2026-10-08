@@ -1,0 +1,81 @@
+{
+  "classification": "diagnostic_only",
+  "qualified": false,
+  "test": "rand_test_dma",
+  "diagnostic_profile": {
+    "iterations": 1,
+    "force_first_reset": true,
+    "reset_delay_cycles": 3870,
+    "fast_trng": true,
+    "fast_boot_data_preload": true,
+    "quiet_firmware": true,
+    "trace_axi": true,
+    "bfm_checker_enabled": true,
+    "skip_unrelated_pq_vector_generation": true,
+    "firmware_images_reused_from_prior_runner_output": true
+  },
+  "reset_and_axi_timeline": {
+    "mailbox_request_cycle": 2383,
+    "reset_timer_start_cycle": 2382,
+    "reset_assert_cycle": 6254,
+    "reset_deassert_cycle": 6264,
+    "last_trace_before_assert": {
+      "cycle": 6200,
+      "aw_total": 8,
+      "w_total": 127,
+      "b_total": 7
+    },
+    "outstanding_writes_at_reset": 1,
+    "postreset_first_aw": {
+      "total_aw": 9,
+      "cycle": 9143
+    },
+    "postreset_first_b": {
+      "total_b": 8,
+      "cycle": 9177
+    },
+    "total_w_at_stop": 143
+  },
+  "stop": {
+    "reason": "diagnostic monitor deliberately stopped after the first post-reset B response",
+    "monitor_exit_code": 0,
+    "guard_exit_code": 0,
+    "testcase_pass_marker_seen": false,
+    "full_firmware_completion_observed": false,
+    "checker_or_fatal_marker_observed": false
+  },
+  "memory_guard": {
+    "max_process_bytes": 3999999999,
+    "min_available_bytes": 6000000000,
+    "timeout_seconds": 2400,
+    "minimum_available_gib": 9.1,
+    "maximum_process_group_gib": 0.94
+  },
+  "provenance": {
+    "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "qd_bfm_source_commit": "b217116459c1a4dd687145744a56b6d2ae278a9e",
+    "qd_bfm_worktree_had_unrelated_dirty_files": true,
+    "icarus_repository_branch": "claude/caliptra-bfm-plan-cxc8gn",
+    "icarus_repository_head": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "icarus_worktree_dirty": true,
+    "icarus_version": "13.0 (devel) (ac4532fa-dirty)",
+    "clean_published_iverilog_revision": false,
+    "evidence_status": "diagnostic; not qualification"
+  },
+  "artifacts": {
+    "sanitized_trace_sha256": "2465c9c049fddc89238401747c3520041bf12fada670bed6a32cd11255c83513",
+    "raw_sim_log_sha256": "cdacc5388d810be4d5e890766ff66c7712278db102747962daaada8b6971ae37",
+    "compile_log_sha256": "acef686ec3f274044d1c4437f4a049314e3a8d999c2193ae5b4adb13b50c9fd2",
+    "services_overlay_sha256": "6bd4797b9444050004be3ed91d17f3df34db15e493f76f203f7f90de83d4dc47",
+    "compiled_profile_sha256": "537b2c5ca83aa4843af5b68aef65a40d7f20049e04918d7230f8057665182c38",
+    "top_image_sha256": "b34a88c333eb50a9f470dfdd117e069fe94d67e6b6da3d72c7d4f693cb7a791a",
+    "trace_vpi_plugin_sha256": "9287bea07f301dfd6624d6321c92a88aeeace688281a116c7cff55e39fbf45a4",
+    "firmware_program_sha256": "137072076bdf3bca6053824714e86588d6755c36a663c851a3913805216fb289",
+    "firmware_dccm_sha256": "042c83d69d16884ee34a913632504617b7343ae15f2f5c4add216af885a90830",
+    "runner_source_sha256": "c6e8f821493fcca7f1e270cb37b9ee57e82342e3c5182dd95ac392b3ce31f069",
+    "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+    "monitor_sha256": "ff5d845c4e642995cd486ef3232a0854c87bcc52858456c48b869bb93167ad30",
+    "iverilog_binary_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_binary_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+  }
+}
