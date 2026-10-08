@@ -342,6 +342,11 @@ evidence for two directed FIXED modes only; it does not cover this mixed
 profile set. The current 25-profile replay is diagnostic until rerun on a clean,
 published Icarus revision; see the
 [`merged-simulator DMA evidence`](../../evidence/caliptra-bfm-merged-iverilog-dma-fixed-modes-20261007/README.md).
+The FIFO-destination size sweep also includes a 16,384-word record that fills
+the BFM's 64-KiB FIFO. Its 2026-10-08 actual-DUT replay passed all nine sizes
+and checked the full FIFO payload; this remains diagnostic on `ac4532fa-dirty`.
+See the dated note in the
+[`recreation plan`](../../docs/conformance/caliptra_bfm_uvmf_recreation_plan_2026-10-03.md).
 The actual DMA DUT reset-abort profile now
 holds B after AW and the final W beat, resets the DUT and target, then verifies
 a complete post-reset 65-word transfer. See

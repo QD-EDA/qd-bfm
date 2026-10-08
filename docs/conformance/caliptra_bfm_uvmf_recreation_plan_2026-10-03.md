@@ -1160,6 +1160,16 @@ through its own blocker, not this list.
    All 25 records passed with zero UVM errors on the locally installed Icarus
    binary, but its clean, published revision was not established, so this run
    is diagnostic and does not qualify the profile.
+   **2026-10-08 diagnostic update:** the FIFO-destination size sweep now adds
+   generated record 68 at 16,384 words, filling the BFM's full 65,536-byte
+   FIFO. All nine records passed through `axi_dma_top`; the maximum record
+   checked all 16,384 stored payload words and observed randomized stalls, with
+   zero UVM warnings, errors, or fatals. This run used Icarus/VVP
+   `13.0 (devel) (ac4532fa-dirty)` (`iverilog` SHA-256
+   `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114`,
+   `vvp` SHA-256
+   `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867`).
+   Diagnostic only; no clean, published Icarus revision is established.
 5. Is a real Axi4PC substitute wanted, or is "unbound, reported absent"
    acceptable for the first qualification claim?
 

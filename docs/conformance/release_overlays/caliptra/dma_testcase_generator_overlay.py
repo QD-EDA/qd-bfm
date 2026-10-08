@@ -100,6 +100,7 @@ def main() -> int:
             """        int unsigned replay_size;
         bit large_fifo_case;
         bit max_sram_case;
+        bit fifo_destination_capacity_case;
         bit sram_fixed_read_case;
         bit sram_fixed_write_case;
         bit sram_fixed_both_case;
@@ -117,6 +118,7 @@ def main() -> int:
         if ($test$plusargs("CALIPTRA_BFM_DUT_REPLAY")) begin
           large_fifo_case = (i == 0);
           max_sram_case = (i == 24);
+          fifo_destination_capacity_case = (i == 68);
           sram_fixed_read_case = (i == 29);
           sram_fixed_write_case = (i == 30);
           sram_fixed_both_case = (i == 31);
@@ -133,6 +135,8 @@ def main() -> int:
           if (large_fifo_case)
             replay_size = 65536;
           else if (max_sram_case)
+            replay_size = 16384;
+          else if (fifo_destination_capacity_case)
             replay_size = 16384;
           else if (fifo_source_size_sweep_case) begin
             case ((i - 35) % 8)
@@ -209,7 +213,8 @@ def main() -> int:
               src_offset == 32'h0000_1000;
               dst_offset == 32'h0002_0000;
             };
-          end else if (fifo_destination_case || fifo_destination_size_sweep_case) begin
+          end else if (fifo_destination_case || fifo_destination_size_sweep_case ||
+                       fifo_destination_capacity_case) begin
             randomize_success = dma_gen.randomize() with {
               dma_xfer_type == AXI2AXI;
               !src_is_fifo;

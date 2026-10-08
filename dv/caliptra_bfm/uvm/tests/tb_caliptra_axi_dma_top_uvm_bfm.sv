@@ -909,7 +909,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             (generated_case_count == 43 && generated_case_index < 43) ||
             (generated_case_count == 59 && generated_case_index < 59) ||
             (generated_case_count == 67 && generated_case_index < 67) ||
-            (generated_case_count == 68 && generated_case_index < 68)))
+            (generated_case_count == 68 && generated_case_index < 68) ||
+            (generated_case_count == 69 && generated_case_index < 69)))
         $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
                generated_case_index, generated_case_count);
 
@@ -980,8 +981,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         end else if (record_type.dst_is_fifo) begin
           if ((generated_case_count < 29) ||
               !((record_index == 25) ||
-                ((generated_case_count == 67 || generated_case_count == 68) &&
-                 record_index >= 59 && record_index <= 66)) ||
+                ((generated_case_count == 67 || generated_case_count == 68 ||
+                  generated_case_count == 69) &&
+                 ((record_index >= 59 && record_index <= 66) || record_index == 68))) ||
               (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
@@ -992,6 +994,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           if (record_index == 25) begin
             if (record_size != WORD_COUNT)
               $fatal(1, "Generated testcase 25 is not the 65-word FIFO-destination profile");
+          end else if (record_index == 68) begin
+            if (record_size != MAX_DCCM_PAYLOAD_WORDS)
+              $fatal(1, "Generated testcase 68 is not the full-capacity FIFO-destination profile");
           end else begin
             case (record_index - 59)
               0: if (record_size != 1)   $fatal(1, "FIFO-destination sweep record is not 1 word");
@@ -1031,7 +1036,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         end else if ((record_index >= 29) && (record_index <= 31)) begin
           if ((generated_case_count != 32 && generated_case_count != 35 &&
                generated_case_count != 43 && generated_case_count != 59 &&
-               generated_case_count != 67 && generated_case_count != 68) ||
+               generated_case_count != 67 && generated_case_count != 68 &&
+               generated_case_count != 69) ||
               (record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || record_type.src_is_fifo ||
               record_type.dst_is_fifo || record_type.inject_rst ||
@@ -1051,7 +1057,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
         end else if ((record_index >= 32) && (record_index <= 34)) begin
           if ((generated_case_count != 35 && generated_case_count != 43 &&
                generated_case_count != 59 && generated_case_count != 67 &&
-               generated_case_count != 68) ||
+               generated_case_count != 68 && generated_case_count != 69) ||
               (record_size != WORD_COUNT) ||
               !record_type.src_is_fifo || record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -1072,7 +1078,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           endcase
         end else if ((record_index >= 35) && (record_index <= 58)) begin
           if ((generated_case_count != 59 && generated_case_count != 67 &&
-               generated_case_count != 68) ||
+               generated_case_count != 68 && generated_case_count != 69) ||
               !record_type.src_is_fifo ||
               record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -1100,7 +1106,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             6: if (record_size != 255) $fatal(1, "FIFO-source sweep record is not 255 words");
             7: if (record_size != 256) $fatal(1, "FIFO-source sweep record is not 256 words");
           endcase
-        end else if ((record_index == 67) && (generated_case_count == 68)) begin
+        end else if ((record_index == 67) &&
+                     (generated_case_count == 68 || generated_case_count == 69)) begin
           if ((record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || record_type.dst_is_fifo ||

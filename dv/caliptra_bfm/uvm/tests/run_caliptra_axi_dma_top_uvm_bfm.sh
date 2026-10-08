@@ -426,7 +426,7 @@ if [ "$fifo_destination_size_sweep_only" -eq 1 ]; then
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
       +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=67 +CPTRA_VERBOSITY=0
     if ! grep -Fq "INFO: Caliptra DCCM case type=2 words=$word_count" "$log" ||
-       ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rand_delays=1' "$log" ||
+       ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rst=0 inject_rand_delays=1' "$log" ||
        ! grep -Fq "PASS: generated DCCM record index=$case_index route=2 replayed through axi_dma_top" "$log" ||
        ! grep -Fq 'INFO: randomized AXI target stalls observed' "$log"; then
       echo "Generated SRAM-to-FIFO transfer of $word_count words did not complete with stalls" >&2
@@ -434,7 +434,18 @@ if [ "$fifo_destination_size_sweep_only" -eq 1 ]; then
     fi
     case_index=$((case_index + 1))
   done
-  echo "INFO: generated SRAM-to-FIFO replay passed sizes 1, 4, 5, 16, 64, 65, 255, and 256"
+  run_case "generated-fifo-destination-full-capacity" \
+    +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
+    +CALIPTRA_BFM_DUT_REPLAY_INDEX=68 \
+    +SRAM2FIFO_CASE +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=69 +CPTRA_VERBOSITY=0
+  if ! grep -Fq 'INFO: Caliptra DCCM case type=2 words=16384' "$log" ||
+     ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rst=0 inject_rand_delays=1' "$log" ||
+     ! grep -Fq 'PASS: generated DCCM record index=68 route=2 replayed through axi_dma_top' "$log" ||
+     ! grep -Fq 'INFO: randomized AXI target stalls observed' "$log"; then
+    echo "Generated full-capacity SRAM-to-FIFO transfer did not complete with stalls" >&2
+    exit 1
+  fi
+  echo "INFO: generated SRAM-to-FIFO replay passed sizes 1, 4, 5, 16, 64, 65, 255, and 256 plus 16,384-word FIFO capacity"
   exit 0
 fi
 if [ "$mailbox_fixed_modes_only" -eq 1 ]; then
