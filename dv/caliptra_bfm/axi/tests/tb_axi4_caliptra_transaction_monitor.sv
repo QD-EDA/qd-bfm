@@ -51,6 +51,8 @@ module tb_axi4_caliptra_transaction_monitor;
   wire [63:0] cycle_count;
   wire write_complete;
   wire write_request_complete;
+  wire write_request_error;
+  wire [3:0] write_request_status;
   wire [ID_WIDTH-1:0] write_request_id;
   wire [ADDR_WIDTH-1:0] write_request_addr;
   wire [8:0] write_request_beat_count;
@@ -140,6 +142,8 @@ module tb_axi4_caliptra_transaction_monitor;
     .RREADY(RREADY), .cycle_count(cycle_count),
     .write_complete(write_complete),
     .write_request_complete(write_request_complete),
+    .write_request_error(write_request_error),
+    .write_request_status(write_request_status),
     .write_request_id(write_request_id), .write_request_addr(write_request_addr),
     .write_request_beat_count(write_request_beat_count),
     .write_request_data(write_request_data),
@@ -233,6 +237,66 @@ module tb_axi4_caliptra_transaction_monitor;
         write_response != 2'b10 || write_buser != 32'hb000_0001 ||
         !write_lock || write_awuser != 32'hface_cafe)
       $fatal(1, "Completed write record mismatch");
+
+    // Two complete W frames may precede their AWs; pair them in channel order.
+    send_w(32'h2a00_0001, 4'hf, 32'h2a01, 1'b1);
+    send_w(32'h2b00_0002, 4'h3, 32'h2b02, 1'b1);
+    if (write_error)
+      $fatal(1, "Second legal W-before-AW frame was rejected");
+    send_aw(8'h2b, 48'h0000_1250_0000, 0, 32'h2b00_0001);
+    if (!write_request_complete || write_request_error || write_request_status != 0 ||
+        write_request_id != 8'h2b || write_request_data[31:0] != 32'h2a00_0001)
+      $fatal(1, "First queued W-before-AW frame did not pair with the first AW");
+    send_aw(8'h2c, 48'h0000_1260_0000, 0, 32'h2c00_0002);
+    if (!write_request_complete || write_request_error || write_request_status != 0 ||
+        write_request_id != 8'h2c || write_request_data[31:0] != 32'h2b00_0002)
+      $fatal(1, "Second queued W-before-AW frame did not pair with the second AW");
+    send_b(8'h2c, 2'b00, 32'hb000_002c);
+    if (!write_complete || write_error || write_id != 8'h2c ||
+        write_data[31:0] != 32'h2b00_0002)
+      $fatal(1, "Second queued W-before-AW response was not retained");
+    send_b(8'h2b, 2'b00, 32'hb000_002b);
+    if (!write_complete || write_error || write_id != 8'h2b ||
+        write_data[31:0] != 32'h2a00_0001)
+      $fatal(1, "First queued W-before-AW response was not retained");
+
+    // AW may arrive in the middle of a W-before-AW frame.
+    send_w(32'h2d00_0001, 4'hf, 32'h2d01, 1'b0);
+    send_aw(8'h2d, 48'h0000_1270_0000, 1, 32'h2d00_0001);
+    if (write_request_complete)
+      $fatal(1, "Partial W-before-AW frame completed before its final beat");
+    send_w(32'h2d00_0002, 4'h3, 32'h2d02, 1'b1);
+    if (!write_request_complete || write_request_error || write_request_status != 0 ||
+        write_request_id != 8'h2d || write_request_beat_count != 2 ||
+        write_request_data[63:0] != 64'h2d00_0002_2d00_0001)
+      $fatal(1, "Partial W-before-AW frame did not resume after AW");
+    send_b(8'h2d, 2'b00, 32'hb000_002d);
+    if (!write_complete || write_error || write_id != 8'h2d)
+      $fatal(1, "Partial W-before-AW response was not retained");
+
+    // A first AW and its first W beat may handshake on the same edge.
+    @(negedge ACLK);
+    AWID = 8'h2e;
+    AWADDR = 48'h0000_1280_0000;
+    AWLEN = 0;
+    AWUSER = 32'h2e00_0001;
+    AWVALID = 1;
+    WDATA = 32'h2e00_0002;
+    WSTRB = 4'hf;
+    WUSER = 32'h2e02;
+    WLAST = 1;
+    WVALID = 1;
+    @(posedge ACLK);
+    @(negedge ACLK);
+    AWVALID = 0;
+    WVALID = 0;
+    #1;
+    if (!write_request_complete || write_request_error || write_request_id != 8'h2e ||
+        write_request_data[31:0] != 32'h2e00_0002)
+      $fatal(1, "Simultaneous AW/W handshake was not captured");
+    send_b(8'h2e, 2'b00, 32'hb000_002e);
+    if (!write_complete || write_error || write_id != 8'h2e)
+      $fatal(1, "Simultaneous AW/W response was not retained");
 
     // A two-beat read record preserves response, USER, and terminal markers.
     @(negedge ACLK);

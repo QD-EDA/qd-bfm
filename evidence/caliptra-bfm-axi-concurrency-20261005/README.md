@@ -42,3 +42,27 @@ free-memory floor or after its configured timeout. This run stayed at 82% free.
 | `dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh` | `7b08d280f89aba0b8180971074f32da7cd8a077d65367171280309d02c211988` |
 | `scripts/run_with_memory_pressure_guard.py` | `1695c427d2aff61a205c7062ad487395181c5ec90f6fe28bd090d2ee9708e0aa` |
 | `scripts/caliptra_bfm_memory_guard.sh` | `b15f9eeda7b61f036fe28b183a0c51461e7d7507e82252a28a24b756bf1e0593` |
+
+## 2026-10-08 current-state addendum
+
+The transaction-monitor regression now also checks two complete W frames
+arriving before either AW, channel-order pairing when the addresses arrive,
+out-of-order B responses, an AW arriving during a partial W frame, and a
+same-cycle first AW/W handshake. The guarded run passed with published Icarus
+Verilog 13.0 (`v13_0`, upstream source commit
+`dfeee909ed9f20b4870dd93423156c0170c0e1ff`).
+
+Command:
+
+```sh
+env IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp sh dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh
+```
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/axi/axi4_caliptra_transaction_monitor.sv` | `5b0e3b0ff501a943b65d462466d27496a9319d011632e4f6b9e394e185e22e04` |
+| `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_transaction_monitor.sv` | `cf59b6497b6a80e132b81d1be91ceae0bcddb442538f619dd53ff0ec430e63b1` |
+| `dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh` | `8e4ef6ad1f1c83b1f2057e348fe8c1be9175a172af274b8d0d0debceca9ca011` |
+| Icarus compiler `/opt/homebrew/bin/iverilog` | `5df81b269e1ff2c965dd00ad5a8071ca17717f416003b3661a18b2dde430e73c` |
+| Icarus runtime `/opt/homebrew/bin/vvp` | `1a9bdf1f40102f64f015514f5069f99a5dd9f9f38de343743ef4c169fb358392` |
+| Raw log `/private/tmp/caliptra-bfm-axi-concurrency-v13_0-20261008.log` | `afebfb686819919b1d4dba6830ffc0e72e03e07b4ccbb031cde53b5723cd3d31` |

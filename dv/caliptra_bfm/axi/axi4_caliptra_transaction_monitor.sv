@@ -111,6 +111,7 @@ module axi4_caliptra_transaction_monitor #(
   localparam [3:0] STATUS_ORPHAN = 4'd5;
 
   reg [MAX_OUTSTANDING-1:0] write_open;
+  reg [MAX_OUTSTANDING-1:0] write_address_seen;
   reg [MAX_OUTSTANDING-1:0] write_data_done;
   reg [MAX_OUTSTANDING-1:0] write_response_seen;
   reg [3:0] write_work_status [0:MAX_OUTSTANDING-1];
@@ -133,15 +134,12 @@ module axi4_caliptra_transaction_monitor #(
   integer write_w_tail;
   integer write_w_count;
 
-  // One bounded W-before-AW frame is retained before its address arrives.
-  reg pre_write_active;
-  reg pre_write_done;
-  reg [3:0] pre_write_status;
-  integer pre_write_count;
-  reg [DATA_WIDTH-1:0] pre_write_data [0:MAX_BEATS-1];
-  reg [STRB_WIDTH-1:0] pre_write_strb [0:MAX_BEATS-1];
-  reg [USER_WIDTH-1:0] pre_write_user [0:MAX_BEATS-1];
-  reg pre_write_last [0:MAX_BEATS-1];
+  integer pre_aw_order [0:MAX_OUTSTANDING-1];
+  integer pre_aw_head;
+  integer pre_aw_tail;
+  integer pre_aw_count;
+  integer pre_write_active_slot;
+  reg pre_aw_overflow;
 
   reg [MAX_OUTSTANDING-1:0] read_open;
   reg [3:0] read_work_status [0:MAX_OUTSTANDING-1];
@@ -164,6 +162,7 @@ module axi4_caliptra_transaction_monitor #(
   integer write_match_slot;
   integer write_oldest_slot;
   integer write_free_slot;
+  integer write_pre_aw_context;
   integer write_data_slot;
   integer read_match_slot;
   integer read_oldest_slot;
@@ -193,7 +192,7 @@ module axi4_caliptra_transaction_monitor #(
       match_slot = -1;
       oldest_slot = -1;
       for (s = 0; s < MAX_OUTSTANDING; s = s + 1) begin
-        if (write_open[s] && !write_response_seen[s]) begin
+        if (write_open[s] && write_address_seen[s] && !write_response_seen[s]) begin
           if (oldest_slot < 0)
             oldest_slot = s;
           else if (write_work_sequence[s] < write_work_sequence[oldest_slot])
@@ -265,6 +264,36 @@ module axi4_caliptra_transaction_monitor #(
     end
   endtask
 
+  task automatic capture_write_beat(input integer slot);
+    begin
+      if (write_work_count[slot] < MAX_BEATS) begin
+        if (write_address_seen[slot]) begin
+          if (WLAST !== (write_work_count[slot] == write_work_len[slot]))
+            flag_write_error(slot, STATUS_SHAPE);
+          if (write_work_count[slot] >= (write_work_len[slot] + 1))
+            flag_write_error(slot, STATUS_SHAPE);
+        end
+        write_data_work[slot][write_work_count[slot]] = WDATA;
+        write_strb_work[slot][write_work_count[slot]] = WSTRB;
+        write_wuser_work[slot][write_work_count[slot]] = WUSER;
+        write_last_work[slot][write_work_count[slot]] = WLAST;
+        write_work_count[slot] = write_work_count[slot] + 1;
+      end else begin
+        flag_write_error(slot, STATUS_CAPACITY);
+      end
+      if (WLAST) begin
+        write_data_done[slot] = 1'b1;
+        if (write_address_seen[slot]) begin
+          publish_write_request(slot);
+          if (write_response_seen[slot]) begin
+            write_open[slot] = 1'b0;
+            write_address_seen[slot] = 1'b0;
+          end
+        end
+      end
+    end
+  endtask
+
   task automatic finish_write(
     input integer slot,
     input [ID_WIDTH-1:0] response_id,
@@ -317,8 +346,10 @@ module axi4_caliptra_transaction_monitor #(
       write_response <= response_code;
       write_buser <= response_user;
       write_response_seen[slot] = 1'b1;
-      if (write_data_done[slot])
+      if (write_data_done[slot]) begin
         write_open[slot] = 1'b0;
+        write_address_seen[slot] = 1'b0;
+      end
     end
   endtask
 
@@ -434,16 +465,18 @@ module axi4_caliptra_transaction_monitor #(
       read_ruser <= 0;
       read_last_mask <= 0;
       write_open = 0;
+      write_address_seen = 0;
       write_data_done = 0;
       write_response_seen = 0;
       write_sequence_next = 0;
       write_w_head = 0;
       write_w_tail = 0;
       write_w_count = 0;
-      pre_write_active = 0;
-      pre_write_done = 0;
-      pre_write_status = STATUS_OK;
-      pre_write_count = 0;
+      pre_aw_head = 0;
+      pre_aw_tail = 0;
+      pre_aw_count = 0;
+      pre_write_active_slot = -1;
+      pre_aw_overflow = 0;
       read_open = 0;
       read_sequence_next = 0;
       write_b_used = 0;
@@ -459,6 +492,7 @@ module axi4_caliptra_transaction_monitor #(
         write_work_awuser[i] = 0;
         write_work_sequence[i] = 0;
         write_w_order[i] = 0;
+        pre_aw_order[i] = 0;
         read_work_status[i] = STATUS_OK;
         read_work_count[i] = 0;
         read_work_id[i] = 0;
@@ -480,12 +514,6 @@ module axi4_caliptra_transaction_monitor #(
           read_last_work[i][j] = 0;
         end
       end
-      for (i = 0; i < MAX_BEATS; i = i + 1) begin
-        pre_write_data[i] = 0;
-        pre_write_strb[i] = 0;
-        pre_write_user[i] = 0;
-        pre_write_last[i] = 0;
-      end
     end else begin
       cycle_count <= cycle_count + 1'b1;
       write_complete <= 0;
@@ -497,36 +525,50 @@ module axi4_caliptra_transaction_monitor #(
       read_error <= 0;
       write_b_used = 0;
 
-      // A W beat belongs to the oldest AW context that has not seen WLAST.
-      // Drain an already queued context before allocating this cycle's AW.
+      // Drain addressed W contexts first; otherwise retain W-only frames in
+      // the bounded write-context pool until their AWs arrive.
       write_data_slot = -1;
-      if (WVALID && WREADY && write_w_count > 0) begin
-        write_data_slot = write_w_order[write_w_head];
-        if (write_data_done[write_data_slot]) begin
-          flag_write_error(write_data_slot, STATUS_OVERLAP);
-        end else begin
-          if (write_work_count[write_data_slot] < MAX_BEATS) begin
-            if (WLAST !==
-                (write_work_count[write_data_slot] == write_work_len[write_data_slot]))
-              flag_write_error(write_data_slot, STATUS_SHAPE);
-            if (write_work_count[write_data_slot] >=
-                (write_work_len[write_data_slot] + 1))
-              flag_write_error(write_data_slot, STATUS_SHAPE);
-            write_data_work[write_data_slot][write_work_count[write_data_slot]] = WDATA;
-            write_strb_work[write_data_slot][write_work_count[write_data_slot]] = WSTRB;
-            write_wuser_work[write_data_slot][write_work_count[write_data_slot]] = WUSER;
-            write_last_work[write_data_slot][write_work_count[write_data_slot]] = WLAST;
-            write_work_count[write_data_slot] = write_work_count[write_data_slot] + 1;
-          end else begin
-            flag_write_error(write_data_slot, STATUS_CAPACITY);
-          end
+      if (WVALID && WREADY) begin
+        // Stop tracking writes after capacity loss so later beats cannot be mispaired.
+        if (pre_aw_overflow) begin
+          write_data_slot = -2;
+        end else if (write_w_count > 0) begin
+          write_data_slot = write_w_order[write_w_head];
+          capture_write_beat(write_data_slot);
           if (WLAST) begin
-            write_data_done[write_data_slot] = 1'b1;
-            publish_write_request(write_data_slot);
             write_w_head = (write_w_head + 1) % MAX_OUTSTANDING;
             write_w_count = write_w_count - 1;
-            if (write_response_seen[write_data_slot])
-              write_open[write_data_slot] = 1'b0;
+          end
+        end else if (pre_write_active_slot >= 0 || pre_aw_count > 0 ||
+                     !(AWVALID && AWREADY)) begin
+          if (pre_write_active_slot < 0) begin
+            write_free_slot = -1;
+            for (i = 0; i < MAX_OUTSTANDING; i = i + 1) begin
+              if (!write_open[i] && write_free_slot < 0)
+                write_free_slot = i;
+            end
+            if (write_free_slot < 0) begin
+              flag_write_error(-1, STATUS_CAPACITY);
+              pre_aw_overflow = 1'b1;
+              write_data_slot = -2;
+            end else begin
+              write_open[write_free_slot] = 1'b1;
+              write_address_seen[write_free_slot] = 1'b0;
+              write_data_done[write_free_slot] = 1'b0;
+              write_response_seen[write_free_slot] = 1'b0;
+              write_work_status[write_free_slot] = STATUS_OK;
+              write_work_count[write_free_slot] = 0;
+              pre_aw_order[pre_aw_tail] = write_free_slot;
+              pre_aw_tail = (pre_aw_tail + 1) % MAX_OUTSTANDING;
+              pre_aw_count = pre_aw_count + 1;
+              pre_write_active_slot = write_free_slot;
+            end
+          end
+          if (pre_write_active_slot >= 0) begin
+            write_data_slot = pre_write_active_slot;
+            capture_write_beat(write_data_slot);
+            if (WLAST)
+              pre_write_active_slot = -1;
           end
         end
       end
@@ -544,119 +586,82 @@ module axi4_caliptra_transaction_monitor #(
       end
 
       if (AWVALID && AWREADY) begin
-        write_free_slot = -1;
-        for (i = 0; i < MAX_OUTSTANDING; i = i + 1) begin
-          if (!write_open[i] && write_free_slot < 0)
-            write_free_slot = i;
-        end
-        if (write_free_slot < 0) begin
+        write_pre_aw_context = -1;
+        if (pre_aw_overflow) begin
           flag_write_error(-1, STATUS_CAPACITY);
         end else begin
-          write_open[write_free_slot] = 1'b1;
-          write_data_done[write_free_slot] = 1'b0;
-          write_response_seen[write_free_slot] = 1'b0;
-          write_work_status[write_free_slot] = STATUS_OK;
-          write_work_count[write_free_slot] = 0;
-          write_work_id[write_free_slot] = AWID;
-          write_work_addr[write_free_slot] = AWADDR;
-          write_work_len[write_free_slot] = AWLEN;
-          write_work_size[write_free_slot] = AWSIZE;
-          write_work_burst[write_free_slot] = AWBURST;
-          write_work_lock[write_free_slot] = AWLOCK;
-          write_work_awuser[write_free_slot] = AWUSER;
-          write_work_sequence[write_free_slot] = write_sequence_next;
-          write_sequence_next = write_sequence_next + 1'b1;
-          if (pre_write_active) begin
-            write_work_status[write_free_slot] = pre_write_status;
-            write_work_count[write_free_slot] = pre_write_count;
-            for (i = 0; i < MAX_BEATS; i = i + 1) begin
-              if (i < pre_write_count) begin
-                write_data_work[write_free_slot][i] = pre_write_data[i];
-                write_strb_work[write_free_slot][i] = pre_write_strb[i];
-                write_wuser_work[write_free_slot][i] = pre_write_user[i];
-                write_last_work[write_free_slot][i] = pre_write_last[i];
-                if (pre_write_last[i] !== (i == AWLEN))
-                  flag_write_error(write_free_slot, STATUS_SHAPE);
-              end
+          if (pre_aw_count > 0) begin
+            write_free_slot = pre_aw_order[pre_aw_head];
+            pre_aw_head = (pre_aw_head + 1) % MAX_OUTSTANDING;
+            pre_aw_count = pre_aw_count - 1;
+            write_pre_aw_context = write_free_slot;
+            if (pre_write_active_slot == write_free_slot)
+              pre_write_active_slot = -1;
+          end else begin
+            write_free_slot = -1;
+            for (i = 0; i < MAX_OUTSTANDING; i = i + 1) begin
+              if (!write_open[i] && write_free_slot < 0)
+                write_free_slot = i;
             end
-            if (pre_write_done && pre_write_count != (AWLEN + 1))
-              flag_write_error(write_free_slot, STATUS_SHAPE);
-            write_data_done[write_free_slot] = pre_write_done;
+          end
+
+          if (write_free_slot < 0) begin
+            flag_write_error(-1, STATUS_CAPACITY);
+            pre_aw_overflow = 1'b1;
+            if (WVALID && WREADY)
+              write_data_slot = -2;
+          end else begin
+            if (write_pre_aw_context < 0) begin
+              write_open[write_free_slot] = 1'b1;
+              write_data_done[write_free_slot] = 1'b0;
+              write_response_seen[write_free_slot] = 1'b0;
+              write_work_status[write_free_slot] = STATUS_OK;
+              write_work_count[write_free_slot] = 0;
+            end
+            write_address_seen[write_free_slot] = 1'b1;
+            write_work_id[write_free_slot] = AWID;
+            write_work_addr[write_free_slot] = AWADDR;
+            write_work_len[write_free_slot] = AWLEN;
+            write_work_size[write_free_slot] = AWSIZE;
+            write_work_burst[write_free_slot] = AWBURST;
+            write_work_lock[write_free_slot] = AWLOCK;
+            write_work_awuser[write_free_slot] = AWUSER;
+            write_work_sequence[write_free_slot] = write_sequence_next;
+            write_sequence_next = write_sequence_next + 1'b1;
+            if (write_pre_aw_context >= 0) begin
+              for (i = 0; i < MAX_BEATS; i = i + 1) begin
+                if (i < write_work_count[write_free_slot]) begin
+                  if (write_last_work[write_free_slot][i] !== (i == AWLEN))
+                    flag_write_error(write_free_slot, STATUS_SHAPE);
+                end
+              end
+              if (write_data_done[write_free_slot] &&
+                  write_work_count[write_free_slot] != (AWLEN + 1))
+                flag_write_error(write_free_slot, STATUS_SHAPE);
+            end
             if (write_data_done[write_free_slot])
               publish_write_request(write_free_slot);
-            pre_write_active = 1'b0;
-            pre_write_done = 1'b0;
-            pre_write_status = STATUS_OK;
-            pre_write_count = 0;
-            if (!write_data_done[write_free_slot]) begin
+            else begin
               write_w_order[write_w_tail] = write_free_slot;
               write_w_tail = (write_w_tail + 1) % MAX_OUTSTANDING;
               write_w_count = write_w_count + 1;
             end
-          end else begin
-            write_w_order[write_w_tail] = write_free_slot;
-            write_w_tail = (write_w_tail + 1) % MAX_OUTSTANDING;
-            write_w_count = write_w_count + 1;
+            if ((AWLEN + 1) > MAX_BEATS)
+              flag_write_error(write_free_slot, STATUS_CAPACITY);
           end
-          if ((AWLEN + 1) > MAX_BEATS)
-            flag_write_error(write_free_slot, STATUS_CAPACITY);
         end
       end
 
-      if (WVALID && WREADY && write_data_slot < 0) begin
+      if (WVALID && WREADY && write_data_slot == -1) begin
         if (write_w_count > 0) begin
           write_data_slot = write_w_order[write_w_head];
-          if (write_work_count[write_data_slot] < MAX_BEATS) begin
-            if (WLAST !==
-                (write_work_count[write_data_slot] == write_work_len[write_data_slot]))
-              flag_write_error(write_data_slot, STATUS_SHAPE);
-            if (write_work_count[write_data_slot] >=
-                (write_work_len[write_data_slot] + 1))
-              flag_write_error(write_data_slot, STATUS_SHAPE);
-            write_data_work[write_data_slot][write_work_count[write_data_slot]] = WDATA;
-            write_strb_work[write_data_slot][write_work_count[write_data_slot]] = WSTRB;
-            write_wuser_work[write_data_slot][write_work_count[write_data_slot]] = WUSER;
-            write_last_work[write_data_slot][write_work_count[write_data_slot]] = WLAST;
-            write_work_count[write_data_slot] = write_work_count[write_data_slot] + 1;
-          end else begin
-            flag_write_error(write_data_slot, STATUS_CAPACITY);
-          end
+          capture_write_beat(write_data_slot);
           if (WLAST) begin
-            write_data_done[write_data_slot] = 1'b1;
-            publish_write_request(write_data_slot);
             write_w_head = (write_w_head + 1) % MAX_OUTSTANDING;
             write_w_count = write_w_count - 1;
-            if (write_response_seen[write_data_slot])
-              write_open[write_data_slot] = 1'b0;
           end
-        end else if (!pre_write_active) begin
-          pre_write_active = 1'b1;
-          pre_write_done = 1'b0;
-          pre_write_status = STATUS_OK;
-          pre_write_count = 0;
-          if (pre_write_count < MAX_BEATS) begin
-            pre_write_data[pre_write_count] = WDATA;
-            pre_write_strb[pre_write_count] = WSTRB;
-            pre_write_user[pre_write_count] = WUSER;
-            pre_write_last[pre_write_count] = WLAST;
-            pre_write_count = pre_write_count + 1;
-          end
-          if (WLAST)
-            pre_write_done = 1'b1;
-        end else if (!pre_write_done) begin
-          if (pre_write_count < MAX_BEATS) begin
-            pre_write_data[pre_write_count] = WDATA;
-            pre_write_strb[pre_write_count] = WSTRB;
-            pre_write_user[pre_write_count] = WUSER;
-            pre_write_last[pre_write_count] = WLAST;
-            pre_write_count = pre_write_count + 1;
-          end else begin
-            pre_write_status = STATUS_CAPACITY;
-          end
-          if (WLAST)
-            pre_write_done = 1'b1;
         end else begin
-          flag_write_error(-1, STATUS_OVERLAP);
+          flag_write_error(-1, STATUS_CAPACITY);
         end
       end
 
