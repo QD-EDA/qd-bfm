@@ -10,10 +10,10 @@ esac
 
 probe=${ECC_RUNTIME_PROBE:-reset}
 case "$probe" in
-  reset|key_sign) ;;
-  *) echo "ECC_RUNTIME_PROBE must be reset or key_sign" >&2; exit 2 ;;
+  reset|key_sign|ecdh) ;;
+  *) echo "ECC_RUNTIME_PROBE must be reset, key_sign, or ecdh" >&2; exit 2 ;;
 esac
-if [ "$probe" = key_sign ] && [ -z "${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-}" ]; then
+if [ "$probe" != reset ] && [ -z "${CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS:-}" ]; then
   CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=5400
   export CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS
 fi
@@ -36,6 +36,11 @@ case "$probe" in
     test_name=ecc_key_sign_only_test
     pass_marker='PASS: generated ECC key-sign transaction matched'
     log_prefix=${ECC_KEY_SIGN_LOG_PREFIX:-key_sign_overlay}
+    ;;
+  ecdh)
+    test_name=ecc_ecdh_sharedkey_only_test
+    pass_marker='PASS: generated ECC ECDH shared-key transaction matched'
+    log_prefix=${ECC_ECDH_LOG_PREFIX:-ecdh_overlay}
     ;;
 esac
 
@@ -60,7 +65,7 @@ if [ "$hdl_sha" != "$expected_hdl_top_sha" ]; then
   echo "Generated hdl_top.sv hash changed: $hdl_sha" >&2
   exit 2
 fi
-if [ "$probe" = key_sign ] &&
+if [ "$probe" != reset ] &&
    [ "$(grep -Fc '.cptra_pwrgood    (),' "$hdl_src")" -ne 1 ]; then
   echo "Expected the pinned ECC hdl_top to leave cptra_pwrgood unconnected." >&2
   exit 2
@@ -69,7 +74,7 @@ fi
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
 python3 "$test_dir/generated_ecc_monitor_overlay.py" "$caliptra_root" "$tmpdir/monitors"
-if [ "$probe" = key_sign ]; then
+if [ "$probe" != reset ]; then
   brew_bin=${BREW:-brew}
   cc_bin=${CC:-clang}
   if ! mbedtls_root=$("$brew_bin" --prefix mbedtls@3); then
@@ -92,7 +97,7 @@ fi
     -e 's/ECC_in_agent_bus\.initiator_port/ECC_in_agent_bus/g' \
     "$hdl_src"
 } > "$tmpdir/hdl_top_icarus.sv"
-if [ "$probe" = key_sign ]; then
+if [ "$probe" != reset ]; then
   sed "s/\.cptra_pwrgood    (),/.cptra_pwrgood    (1'b1),/" \
     "$tmpdir/hdl_top_icarus.sv" > "$tmpdir/hdl_top_key_sign.sv"
   mv "$tmpdir/hdl_top_key_sign.sv" "$tmpdir/hdl_top_icarus.sv"

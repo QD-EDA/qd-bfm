@@ -225,3 +225,12 @@ mismatched=0, pending=0, with zero UVM errors or fatals. The run used Caliptra
 commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and Icarus 13.0
 `ac4532fa-dirty`; it is diagnostic-only, not qualification. Re-run on a clean,
 published Icarus SHA before making any qualification claim.
+
+2026-10-08 ECDH shared-key probe (diagnostic only; simulator `ac4532fa-dirty`):
+the generated IEEE 2017 ECDH transaction completed with expected=2, observed=2,
+matched=2, mismatched=0, pending=0, UVM_ERROR=0, and UVM_FATAL=0. It used
+Caliptra commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and a temporary
+trace-instrumented copy of the generated input driver to expose busy polling.
+Because the simulator build is dirty/unpublished and the driver was instrumented,
+this is diagnostic-only; rerun the stock generated driver on a clean, published
+Icarus SHA before making any qualification claim.
