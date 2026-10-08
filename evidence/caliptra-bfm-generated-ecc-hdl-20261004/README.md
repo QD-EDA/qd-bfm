@@ -258,3 +258,27 @@ env CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
 | Reset-monitor runner | `4d0db7367428907a43e07bc139f2cafc8ddb74847cd62607ba064b9ad272888e` |
 | Probe package | `0c1b0b09c935e8294158acb797f6f830c6139a385974ae09da90a6b8d6bc8e66` |
 | Sparse progress probe | `732bd1e09e9d9ff816d5800d442790027564c0504e42a7f7408cc0477297f6aa` |
+
+### Key-verification runner follow-up — 2026-10-08
+
+The corrected runner also completed the generated IEEE 2017 key-verification
+transaction: expected=2, observed=2, matched=2, mismatched=0, pending=0,
+`UVM_ERROR=0`, and `UVM_FATAL=0` at 961,144 simulated clocks. This is
+diagnostic-only because it used the same dirty, unpublished Icarus commit above;
+clean published-Icarus qualification remains open. It used the runner's
+hash-guarded monitor and input-driver overlays.
+
+```sh
+env CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  ECC_IEEE_EDITION=2017 \
+  ECC_RUNTIME_PROBE=key_verify \
+  ECC_RESET_MONITOR_LOG_DIR=/private/tmp/caliptra-bfm-ecc-key-verify-v13_0-20261008/logs \
+  IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+  VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  sh dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh
+```
+
+| Diagnostic artifact | SHA-256 |
+| --- | --- |
+| Detailed `key_verify_overlay_2017.log` | `77b3020f694ab31ebd3cdbdab7b82f4c4fa544df010c0dc3526cdacd6ac6644d` |
+| `generated_ecc_monitor_overlay.py` | `6070550509aabf541b3da7947f976e265a27eaefdf84c8079edf9b41d6a9a6f6` |

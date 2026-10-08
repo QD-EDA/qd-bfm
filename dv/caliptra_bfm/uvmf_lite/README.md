@@ -269,3 +269,10 @@ pending=0, UVM_ERROR=0, and UVM_FATAL=0. This remains diagnostic-only because
 it used dirty, unpublished Icarus `ac4532fa-dirty`; clean, published-Icarus
 qualification is still open. Exact command and hashes are in the
 [`generated ECC runtime evidence`](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md#current-state-diagnostic--2026-10-08).
+
+2026-10-08 corrected-runner key-verification rerun: the generated IEEE 2017
+verification transaction completed with expected=2, observed=2, matched=2,
+mismatched=0, pending=0, UVM_ERROR=0, and UVM_FATAL=0 at 961,144 simulated
+clocks. It used dirty, unpublished Icarus `ac4532fa-dirty`, so this is
+diagnostic-only and does not qualify verification. The exact command and log
+hash are recorded in the generated ECC runtime evidence.
