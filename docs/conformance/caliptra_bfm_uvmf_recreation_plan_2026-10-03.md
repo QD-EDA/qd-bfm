@@ -1151,6 +1151,15 @@ through its own blocker, not this list.
    sequencer, but the default size and flag combinations are not replayed through the DUT. AHB2AXI and
    AXI2AHB use component registers and do not exercise an AHB bus. Evidence is in
    [`the all-route run`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
+   **2026-10-08 diagnostic update:** `run_caliptra_axi_dma_top_uvm_bfm.sh
+   --default-mixed-replay-only` now replays 25 deterministically seeded stock
+   randomizer records through `axi_dma_top`, covering all routes and observed
+   FIFO-source, FIFO-destination, fixed-burst, and randomized-delay flags. It
+   excludes reset injection, recovery-block mode, transfers above 16,384 words,
+   and overlapping AXI2AXI SRAM ranges; those remain in their separate lanes.
+   All 25 records passed with zero UVM errors on the locally installed Icarus
+   binary, but its clean, published revision was not established, so this run
+   is diagnostic and does not qualify the profile.
 5. Is a real Axi4PC substitute wanted, or is "unbound, reported absent"
    acceptable for the first qualification claim?
 

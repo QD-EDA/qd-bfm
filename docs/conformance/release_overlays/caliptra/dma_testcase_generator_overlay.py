@@ -24,11 +24,12 @@ def main() -> int:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--dut-replay", action="store_true")
+    parser.add_argument("--dut-mixed-replay", action="store_true")
     parser.add_argument("--force-first-reset", action="store_true")
     parser.add_argument("--top", default=TOP)
     args = parser.parse_args()
-    if args.dut_replay and args.force_first_reset:
-        parser.error("--force-first-reset cannot be combined with --dut-replay")
+    if sum((args.dut_replay, args.dut_mixed_replay, args.force_first_reset)) > 1:
+        parser.error("--dut-replay, --dut-mixed-replay, and --force-first-reset are exclusive")
 
     root = args.caliptra_root.resolve()
     source_path = root / SOURCE
@@ -61,6 +62,32 @@ def main() -> int:
         if text.count(randomize_branch) != 1:
             raise SystemExit("Expected one randomize branch to force the first reset")
         text = text.replace(randomize_branch, forced_reset_branch, 1)
+
+    if args.dut_mixed_replay:
+        randomize_branch = '''        if (!dma_gen.randomize()) begin
+          $error("Randomization failed for dma_transfer_generator %d", i);
+        end
+        else begin'''
+        mixed_replay_branch = '''        bit randomize_success;
+        if ($test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY")) begin
+          dma_gen.srandom(32'hb0f0_0000 + i);
+          randomize_success = dma_gen.randomize() with {
+            !inject_rst;
+            !test_block_size;
+            xfer_size inside {[1:MAX_SIZE_TO_CHECK]};
+            (dma_xfer_type == AXI2AXI && !src_is_fifo && !dst_is_fifo) ->
+              ((src_offset + xfer_size * 4 <= dst_offset) ||
+               (dst_offset + xfer_size * 4 <= src_offset));
+          };
+        end else begin
+          randomize_success = dma_gen.randomize();
+        end
+        if (!randomize_success) begin
+          $error("Randomization failed for dma_transfer_generator %d", i);
+        end else begin'''
+        if text.count(randomize_branch) != 1:
+            raise SystemExit("Expected one randomize branch to qualify for mixed DUT replay")
+        text = text.replace(randomize_branch, mixed_replay_branch, 1)
 
     if args.dut_replay:
         randomize_branch = '''        if (!dma_gen.randomize()) begin
@@ -358,6 +385,11 @@ def main() -> int:
                         *(
                             ["Use deterministic per-case seeds to cover five DMA routes, short and maximum SRAM sizes, fixed-burst modes, FIFO-source and FIFO-destination profiles and size sweeps, three FIFO recovery routes, and one 65-word SRAM record with inject_rst set for directed reset-abort replay."]
                             if args.dut_replay
+                            else []
+                        ),
+                        *(
+                            ["Seed each stock DMA randomization and constrain only reset, recovery-block mode, over-16K sizes, and overlapping AXI2AXI SRAM ranges for actual-DUT replay."]
+                            if args.dut_mixed_replay
                             else []
                         ),
                     ],

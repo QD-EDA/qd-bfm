@@ -26,12 +26,29 @@ fifo_destination_size_sweep_only=0
 recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
 component_fixed_modes_only=0
-if [ "$#" -gt 1 ]; then
-  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+default_mixed_replay_only=0
+default_mixed_replay_index=-1
+if [ "$#" -gt 2 ]; then
+  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only|--default-mixed-replay-case INDEX]" >&2
   exit 2
 fi
-if [ "$#" -eq 1 ]; then
+if [ "$#" -ge 1 ]; then
   case "$1" in
+    --default-mixed-replay-case)
+      if [ "$#" -ne 2 ]; then
+        echo "usage: $0 --default-mixed-replay-case INDEX (0-24)" >&2
+        exit 2
+      fi
+      case "$2" in
+        ''|*[!0-9]*) echo "mixed replay index must be an integer from 0 to 24" >&2; exit 2 ;;
+      esac
+      if [ "$2" -gt 24 ]; then
+        echo "mixed replay index must be from 0 to 24" >&2
+        exit 2
+      fi
+      default_mixed_replay_only=1
+      default_mixed_replay_index=$2
+      ;;
     --reset-abort-only) reset_abort_only=1 ;;
     --reset-abort-mid-w-only) reset_abort_mid_w_only=1 ;;
     --generated-reset-abort-only) generated_reset_abort_only=1 ;;
@@ -45,15 +62,24 @@ if [ "$#" -eq 1 ]; then
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
+    --default-mixed-replay-only) default_mixed_replay_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only]" >&2
       exit 2
       ;;
   esac
 fi
+if [ "$#" -eq 2 ] && [ "$1" != "--default-mixed-replay-case" ]; then
+  echo "usage: $0 [single replay mode]" >&2
+  exit 2
+fi
 
 # Icarus requires the numeric finish argument for this otherwise unchanged
 # Apache-2.0 Caliptra randomizer class.
+generator_replay_mode=--dut-replay
+if [ "$default_mixed_replay_only" -eq 1 ]; then
+  generator_replay_mode=--dut-mixed-replay
+fi
 sed 's/\$fatal("/\$fatal(1, "/' \
   "$CALIPTRA_RTL/src/integration/tb/dma_transfer_randomizer.sv" \
   >"$tmpdir/dma_transfer_randomizer.sv"
@@ -62,7 +88,7 @@ python3 docs/conformance/release_overlays/caliptra/dma_testcase_generator_overla
   --output "$tmpdir/dma_testcase_generator.sv" \
   --manifest "$tmpdir/dma_testcase_generator_overlay.json" \
   --top tb_caliptra_axi_dma_top_uvm_bfm \
-  --dut-replay
+  "$generator_replay_mode"
 
 "$IVERILOG_BIN" -uvm -g2012 -DXCELIUM \
   -I"$tmpdir" \
@@ -116,6 +142,56 @@ run_case() {
     exit 1
   fi
 }
+
+if [ "$default_mixed_replay_only" -eq 1 ]; then
+  case_index=0
+  case_limit=25
+  if [ "$default_mixed_replay_index" -ge 0 ]; then
+    case_index=$default_mixed_replay_index
+    case_limit=$((case_index + 1))
+  fi
+  generated_routes="$tmpdir/default-mixed-routes"
+  generated_profiles="$tmpdir/default-mixed-profiles"
+  : >"$generated_routes"
+  : >"$generated_profiles"
+  while [ "$case_index" -lt "$case_limit" ]; do
+    run_case "default-mixed-dccm-replay-$case_index" \
+      +GENERATED_CASE +CALIPTRA_BFM_DUT_MIXED_REPLAY \
+      "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+      +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=25 +CPTRA_VERBOSITY=0
+    if ! grep -Fq "PASS: generated DCCM record index=$case_index route=" "$log"; then
+      echo "Default mixed DCCM record $case_index did not complete through axi_dma_top" >&2
+      exit 1
+    fi
+    route_type=$(sed -n 's/^PASS: generated DCCM record index=[0-9][0-9]* route=\([0-4]\) replayed through axi_dma_top$/\1/p' "$log")
+    profile=$(sed -n 's/^INFO: Caliptra DCCM case type=[0-4] words=[0-9][0-9]* .*/&/p' "$log")
+    if [ -z "$route_type" ] || [ -z "$profile" ]; then
+      echo "Default mixed DCCM record $case_index omitted its route or profile report" >&2
+      exit 1
+    fi
+    printf '%s\n' "$route_type" >>"$generated_routes"
+    printf '%s\n' "$profile" >>"$generated_profiles"
+    case_index=$((case_index + 1))
+  done
+  if [ "$default_mixed_replay_index" -ge 0 ]; then
+    echo "INFO: selected default mixed DCCM record $default_mixed_replay_index passed through axi_dma_top"
+    exit 0
+  fi
+  for route_type in 0 1 2 3 4; do
+    if ! grep -Fxq "$route_type" "$generated_routes"; then
+      echo "Default mixed replay did not cover DMA route $route_type" >&2
+      exit 1
+    fi
+  done
+  for profile_flag in 'src_fifo=1' 'dst_fifo=1' 'fixed_read=1' 'fixed_write=1' 'inject_rand_delays=1'; do
+    if ! grep -Fq "$profile_flag" "$generated_profiles"; then
+      echo "Default mixed replay did not cover $profile_flag" >&2
+      exit 1
+    fi
+  done
+  echo "INFO: replayed 25 seeded default mixed DCCM records through axi_dma_top across all routes and FIFO/fixed/delay flags"
+  exit 0
+fi
 
 run_reset_abort_case() {
   run_case reset-abort +RESET_ABORT

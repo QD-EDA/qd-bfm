@@ -28,6 +28,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   localparam integer WORD_COUNT = 65;
   localparam integer MAX_REPLAY_WORD_COUNT = 65536;
   localparam integer MAX_DCCM_PAYLOAD_WORDS = 16384;
+  localparam integer DMA_INPUT_FIFO_WORDS = 128; // Caliptra's 512-byte FIFO at 32 bits per word.
   localparam integer MAX_BURST_WORDS = 64;
   localparam integer MAX_FIXED_BURST_WORDS = 16;
   localparam logic [47:0] SRAM_BASE_ADDR = 48'h0001_2344_0000;
@@ -91,6 +92,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   integer recovery_fifo_push_count = 0;
   dma_transfer_type_e generated_dma_xfer_type;
   bit generated_route_ready = 0;
+  bit default_mixed_replay = 0;
   bit mailbox_case = 0;
   bit mailbox_read_case = 0;
   bit mailbox_fixed_read_case = 0;
@@ -349,6 +351,22 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     end
   endtask
 
+  task automatic write_component_word(input logic [31:0] value);
+    logic [31:0] status;
+    integer poll;
+    begin
+      status = '1;
+      poll = 0;
+      while ((status[15:4] >= DMA_INPUT_FIFO_WORDS) && (poll < 100000)) begin
+        read_status(status);
+        poll++;
+      end
+      if (status[15:4] >= DMA_INPUT_FIFO_WORDS)
+        $fatal(1, "Timed out waiting for space in the Caliptra DMA input FIFO");
+      write_reg(12'h02c, value);
+    end
+  endtask
+
   task automatic read_component_data(output logic [31:0] value);
     begin
       @(negedge clk);
@@ -414,6 +432,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       int expected_beats;
       int boundary_beats;
       int expected_word_index;
+      int debug_candidate_word;
+      int debug_payload_match;
       logic [1:0] expected_resp;
       expected_resp = expect_error ? AXI_RESP_SLVERR : AXI_RESP_OKAY;
       if (item.id != 0 || item.size != 2 || item.lock || item.protocol_error)
@@ -499,8 +519,19 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                                 0 : write_word_offset + beat;
           if (item.beatQ[beat] != source_word(expected_word_index) ||
               item.strbQ[beat] != 4'hf || item.beat_userQ[beat] != AXUSER ||
-              item.lastQ[beat] != (beat == beats - 1))
-            `uvm_fatal("DMA_TOP_WRITE_BEAT", $sformatf("DMA write beat %0d mismatch in burst %0d", beat, write_count))
+              item.lastQ[beat] != (beat == beats - 1)) begin
+            debug_payload_match = -1;
+            for (debug_candidate_word = 0; debug_candidate_word < active_word_count;
+                 debug_candidate_word++)
+              if (source_word(debug_candidate_word) === item.beatQ[beat])
+                debug_payload_match = debug_candidate_word;
+            `uvm_fatal("DMA_TOP_WRITE_BEAT", $sformatf(
+              "DMA write word %0d beat %0d burst %0d addr=%012h expected=%08h got=%08h payload_match=%0d reads=%0d/%0d strb=%h user=%08h last=%0b",
+              write_word_offset + beat, beat, write_count, item.addr,
+              source_word(expected_word_index), item.beatQ[beat],
+              debug_payload_match, read_count, read_word_offset,
+              item.strbQ[beat], item.beat_userQ[beat], item.lastQ[beat]))
+          end
         end
         write_word_offset += beats;
         write_count++;
@@ -550,6 +581,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       int expected_recovery_read_bursts;
       int expected_recovery_write_bursts;
       phase.raise_objection(this);
+      if ($test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY")) begin
+        wait (generated_route_ready);
+        env.scoreboard.expect_fifo_source = auto_fifo_source_case;
+        env.scoreboard.expect_fifo_write = sram2fifo_case;
+      end
       if ($test$plusargs("RESET_ABORT")) begin
         fork
           begin
@@ -683,7 +719,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                              env.scoreboard.write_count == 0);
               default: `uvm_fatal("DMA_TOP_GENERATED_ROUTE", "Unsupported generated DMA route")
             endcase
-            if ($test$plusargs("FIFO_SOURCE_STREAM")) begin
+            if (auto_fifo_source_case) begin
               #1;
               if (auto_fifo_source_push_count != active_word_count ||
                   auto_fifo_source_pop_count != active_word_count || fifo_level != 0)
@@ -840,6 +876,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     axi2ahb_case = $test$plusargs("AXI2AHB_CASE") || axi2ahb_fixed_read_case;
     sram2fifo_case = $test$plusargs("SRAM2FIFO_CASE");
     auto_fifo_source_case = $test$plusargs("FIFO_SOURCE_STREAM");
+    default_mixed_replay = $test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY");
     if (auto_fifo_source_case && !$test$plusargs("GENERATED_CASE"))
       $fatal(1, "FIFO_SOURCE_STREAM requires a generated DCCM replay record");
     scenario = new(MAX_REPLAY_WORD_COUNT, 0);
@@ -855,7 +892,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       if ((generated_case_index < 0) || (generated_case_index >= generated_case_count))
         $fatal(1, "Generated DCCM testcase index %0d is outside count %0d",
                generated_case_index, generated_case_count);
-      if (!((generated_case_count == 29 && generated_case_index < 29) ||
+      if (!((default_mixed_replay && generated_case_count == 25) ||
+            (generated_case_count == 29 && generated_case_index < 29) ||
             (generated_case_count == 32 && generated_case_index < 32) ||
             (generated_case_count == 35 && generated_case_index < 35) ||
             (generated_case_count == 43 && generated_case_index < 43) ||
@@ -886,7 +924,35 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           default: $fatal(1, "Generated testcase %0d has unknown DMA route %0d",
                           record_index, record_type.dma_xfer_type);
         endcase
-        if (record_is_large_fifo) begin
+        if (default_mixed_replay) begin
+          if (record_is_large_fifo || record_type.inject_rst ||
+              record_type.test_block_size || (record_type.block_size != 0) ||
+              (record_type.src_is_fifo && record_type.dst_is_fifo) ||
+              (record_type.src_is_fifo &&
+               ((record_type.dma_xfer_type != AXI2AXI &&
+                 record_type.dma_xfer_type != AXI2MBOX &&
+                 record_type.dma_xfer_type != AXI2AHB) || !record_type.use_rd_fixed)) ||
+              (record_type.dst_is_fifo &&
+               ((record_type.dma_xfer_type == AXI2MBOX ||
+                 record_type.dma_xfer_type == AXI2AHB) || !record_type.use_wr_fixed)) ||
+              ((record_type.dma_xfer_type == AHB2AXI ||
+                record_type.dma_xfer_type == MBOX2AXI) && record_type.use_rd_fixed) ||
+              ((record_type.dma_xfer_type == AXI2MBOX ||
+                record_type.dma_xfer_type == AXI2AHB) && record_type.use_wr_fixed) ||
+              (record_src_offset[1:0] != 0) || (record_dst_offset[1:0] != 0))
+            $fatal(1, "Generated testcase %0d violates mixed replay: route=%0d words=%0d src_fifo=%0b dst_fifo=%0b fixed_read=%0b fixed_write=%0b reset=%0b delays=%0b recovery=%0b block_bytes=%0d src=%08h dst=%08h",
+                   record_index, record_type.dma_xfer_type, record_size,
+                   record_type.src_is_fifo, record_type.dst_is_fifo,
+                   record_type.use_rd_fixed, record_type.use_wr_fixed,
+                   record_type.inject_rst, record_type.inject_rand_delays,
+                   record_type.test_block_size, record_type.block_size,
+                   record_src_offset, record_dst_offset);
+          if ((record_type.dma_xfer_type == AXI2AXI) &&
+              !record_type.src_is_fifo && !record_type.dst_is_fifo &&
+              (record_src_offset < record_dst_offset + (record_size * 4)) &&
+              (record_dst_offset < record_src_offset + (record_size * 4)))
+            $fatal(1, "Generated testcase %0d has overlapping AXI2AXI SRAM ranges", record_index);
+        end else if (record_is_large_fifo) begin
           if ((record_size != MAX_REPLAY_WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) || !record_type.src_is_fifo ||
               record_type.dst_is_fifo || !record_type.use_rd_fixed ||
@@ -1082,8 +1148,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           ((scenario.inject_rst && !$test$plusargs("RESET_ABORT")) ||
            (!scenario.inject_rst && $test$plusargs("RESET_ABORT"))))
         $fatal(1, "Generated reset metadata must match the directed +RESET_ABORT replay mode");
-      if (generated_type.dst_is_fifo)
+      if (default_mixed_replay) begin
+        sram2fifo_case = generated_type.dst_is_fifo;
+        auto_fifo_source_case = generated_type.src_is_fifo;
+      end else if (generated_type.dst_is_fifo) begin
         sram2fifo_case = 1'b1;
+      end
       generated_dma_xfer_type = generated_type.dma_xfer_type;
       mailbox_case = (generated_dma_xfer_type == AXI2MBOX);
       mailbox_read_case = (generated_dma_xfer_type == MBOX2AXI);
@@ -1413,7 +1483,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
 
     if (ahb2axi_case)
       for (word_index = 0; word_index < active_word_count; word_index++)
-        write_reg(12'h02c, expected_payload[word_index]);
+        write_component_word(expected_payload[word_index]);
     if (axi2ahb_case) begin
       for (word_index = 0; word_index < active_word_count; word_index++) begin
         status = '0;
@@ -1481,15 +1551,19 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       end
     end
     if (sram2fifo_case) begin
-      if (randomized_stall_cycles == 0)
+      if (scenario.inject_rand_delays && randomized_stall_cycles == 0)
         $fatal(1, "SRAM2FIFO randomized delay profile did not assert target backpressure");
       if (fifo_level != active_word_count)
         $fatal(1, "SRAM2FIFO left %0d words in the endpoint FIFO; expected %0d", fifo_level, active_word_count);
-      for (word_index = 0; word_index < active_word_count; word_index++)
-        if (dma_target.bfm.i_fifo.fifo_mem[word_index] !== expected_payload[word_index])
+      for (word_index = 0; word_index < active_word_count; word_index++) begin
+        expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ? 0 : word_index;
+        if (dma_target.bfm.i_fifo.fifo_mem[word_index] !== expected_payload[expected_word_index])
           $fatal(1, "SRAM2FIFO FIFO word %0d mismatch: got=%08h expected=%08h",
-                 word_index, dma_target.bfm.i_fifo.fifo_mem[word_index], expected_payload[word_index]);
-      $display("INFO: randomized AXI target stalls observed for %0d clock cycles", randomized_stall_cycles);
+                 word_index, dma_target.bfm.i_fifo.fifo_mem[word_index],
+                 expected_payload[expected_word_index]);
+      end
+      if (scenario.inject_rand_delays)
+        $display("INFO: randomized AXI target stalls observed for %0d clock cycles", randomized_stall_cycles);
     end
     if ($test$plusargs("GENERATED_CASE") && scenario.inject_rand_delays) begin
       if (randomized_stall_cycles == 0)

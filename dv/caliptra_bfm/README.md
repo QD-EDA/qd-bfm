@@ -327,6 +327,12 @@ The `--component-fixed-modes-only` replay similarly covers FIXED-read
 AXI2AHB and FIXED-write AHB2AXI; the component data path checks repeated
 source data and final fixed-address SRAM contents. See
 [`component FIXED-mode evidence`](../../evidence/caliptra-bfm-dma-component-fixed-modes-20261007/README.md).
+`uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh --default-mixed-replay-only`
+replays the generator's 25 seeded mixed profiles through the same DUT path;
+`--default-mixed-replay-case INDEX` selects one profile. This slice keeps the
+stock route, FIFO, fixed-burst, and delay choices while excluding reset,
+recovery-block mode, transfers above 16,384 words, and overlapping AXI2AXI
+SRAM ranges, which have separate replay lanes.
 The same profiles pass on the Icarus build merged from upstream `origin/main`
 at `197f9ba`; see the
 [`merged-simulator DMA evidence`](../../evidence/caliptra-bfm-merged-iverilog-dma-fixed-modes-20261007/README.md).
