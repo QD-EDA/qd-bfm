@@ -433,3 +433,15 @@ missed transactions, zero UVM errors/fatals, and one QVIP coverage notice.
 This covers the wrapper reset/predictor path, not the full Caliptra core/top.
 Diagnostic only: the simulator build is dirty and unpublished, so this does
 not qualify the lane.
+
+### Top-environment AXI USER run on 2026-10-08 (diagnostic)
+
+`--caliptra-top-env-probe --generated-axi-user-init` now starts Caliptra's
+stock AXI USER sequence through the generated top wrapper's SoC-IFC virtual
+sequencer. All 12 single-beat writes completed; the five mailbox USER values,
+five locks, and TRNG USER/lock RAL mirrors matched. The scoreboard reported
+15/15 matches with zero mismatches/no-comparison/missed transactions, zero
+UVM errors/fatals, and one QVIP coverage notice. This used clean Caliptra
+commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and paired Icarus/VVP
+13.0-dev `ac4532fa-dirty`. Diagnostic only: the simulator build is dirty and
+unpublished, so this does not qualify the lane.

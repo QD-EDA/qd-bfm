@@ -78,6 +78,7 @@ package caliptra_top_env_probe_pkg;
 
     task run_phase(uvm_phase phase);
       caliptra_top_env_reset_sequence reset_sequence;
+      soc_ifc_env_pkg::soc_ifc_env_axi_user_init_sequence_t axi_user_init_sequence;
       phase.raise_objection(this);
       if (top_environment.soc_ifc_subenv == null || top_environment.vsqr == null ||
           top_configuration.vsqr != top_environment.vsqr)
@@ -97,6 +98,24 @@ package caliptra_top_env_probe_pkg;
       reset_sequence = caliptra_top_env_reset_sequence::type_id::create("hard_reset_sequence");
       reset_sequence.start(top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.sequencer);
       top_configuration.soc_ifc_subenv_config.soc_ifc_ctrl_agent_config.wait_for_num_clocks(20);
+      if ($test$plusargs("CALIPTRA_GENERATED_AXI_USER_INIT")) begin
+        axi_user_init_sequence = soc_ifc_env_pkg::soc_ifc_env_axi_user_init_sequence_t::type_id::create("axi_user_init_sequence");
+        axi_user_init_sequence.soc_ifc_status_agent_rsp_seq =
+            soc_ifc_status_pkg::soc_ifc_status_agent_responder_seq_t::type_id::create("soc_ifc_status_agent_rsp_seq");
+        for (int i = 0; i < 5; i++)
+          axi_user_init_sequence.mbox_valid_users[i] = 32'hc0de_0000 | i;
+        axi_user_init_sequence.trng_valid_user = 32'hbeef_0001;
+        axi_user_init_sequence.start(top_configuration.soc_ifc_subenv_config.vsqr);
+        for (int i = 0; i < 5; i++) begin
+          if (top_configuration.soc_ifc_subenv_config.soc_ifc_rm.soc_ifc_reg_rm.CPTRA_MBOX_VALID_AXI_USER[i].get_mirrored_value() != (32'hc0de_0000 | i) ||
+              top_configuration.soc_ifc_subenv_config.soc_ifc_rm.soc_ifc_reg_rm.CPTRA_MBOX_AXI_USER_LOCK[i].get_mirrored_value() != 1)
+            `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER", $sformatf("MBOX AXI USER RAL mirror mismatch at slot %0d", i))
+        end
+        if (top_configuration.soc_ifc_subenv_config.soc_ifc_rm.soc_ifc_reg_rm.CPTRA_TRNG_VALID_AXI_USER.get_mirrored_value() != 32'hbeef_0001 ||
+            top_configuration.soc_ifc_subenv_config.soc_ifc_rm.soc_ifc_reg_rm.CPTRA_TRNG_AXI_USER_LOCK.get_mirrored_value() != 1)
+          `uvm_fatal("CALIPTRA_TOP_ENV_AXI_USER", "TRNG AXI USER RAL mirror mismatch")
+        $display("PASS: generated Caliptra top environment completed AXI USER initialization");
+      end
       $display("PASS: generated Caliptra top environment completed real reset");
       phase.drop_objection(this);
     endtask
