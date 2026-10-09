@@ -624,6 +624,17 @@ def run_logged(command, cwd, env, logfile):
         return subprocess.run(command, cwd=cwd, env=env, stdout=log, stderr=subprocess.STDOUT).returncode
 
 
+def preflight_riscv_toolchain(gcc_prefix, env, cwd, logfile):
+    cpp = shutil.which(f"{gcc_prefix}-cpp", path=env.get("PATH"))
+    if not cpp:
+        raise RuntimeError(f"RISC-V preflight failed: {gcc_prefix}-cpp not found on PATH")
+    command = [cpp, "-x", "c", "-E", "-o", os.devnull, os.devnull]
+    exit_code = run_logged(command, cwd, env, logfile)
+    if exit_code:
+        raise RuntimeError(f"RISC-V preflight failed ({exit_code}); see {logfile}")
+    return command
+
+
 def scan_sim_log(path):
     passed = failed = bad = jtag_errors = jtag_bind_denials = 0
     jtag_bind_denied = False
@@ -822,9 +833,9 @@ def main():
     parser.add_argument("--start-aes-case", type=int, metavar="INDEX",
                         help="zero-based start index for --limit-aes-cases")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
-                        help="diagnostic only: skip MLDSA/MLKEM vector generation for DMA-only cases")
+                        help="diagnostic only: skip MLDSA/MLKEM vector generation without limiting AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
-                        help="diagnostic only: suppress low-priority prints for DMA firmware cases")
+                        help="diagnostic only: quiet routine DMA output")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     parser.add_argument("--disable-bfm-checker", action="store_true",
@@ -935,6 +946,7 @@ def main():
         CALIPTRA_PRIM_MODULE_PREFIX="caliptra_prim_generic",
         CALIPTRA_AXI4PC_DIR=str(rtl / "src/integration/tb"),
     )
+    preflight_riscv_toolchain(gcc_prefix, env, args.output, args.output / "toolchain-preflight.log")
     profile_excluded_sources = prepare_iverilog_profile(
         base_profile, profile, REPO, rtl, checker_overlay,
         reset_overlay, jtag_overlay, generator_overlay, services_overlay)

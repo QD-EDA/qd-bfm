@@ -22,6 +22,46 @@ class CheckerCompileCommandTest(unittest.TestCase):
         self.assertIn("-gassertions", disabled)
 
 
+class RiscvToolchainPreflightTest(unittest.TestCase):
+    def test_preflight_checks_the_cpp_frontend_and_keeps_its_log(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            tool = root / "riscv64-unknown-elf-cpp"
+            tool.write_text("#!/bin/sh\nprintf 'preflight ran\\n'\n")
+            tool.chmod(0o755)
+            log = root / "preflight.log"
+
+            command = RUNNER.preflight_riscv_toolchain(
+                "riscv64-unknown-elf", {"PATH": temp}, root, log,
+            )
+
+            self.assertEqual(command[0], str(tool))
+            self.assertIn("preflight ran", log.read_text())
+
+    def test_preflight_reports_a_cpp_failure_before_compilation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            tool = root / "riscv64-unknown-elf-cpp"
+            tool.write_text("#!/bin/sh\necho missing cc1 library >&2\nexit 17\n")
+            tool.chmod(0o755)
+            log = root / "preflight.log"
+
+            with self.assertRaisesRegex(RuntimeError, r"preflight failed \(17\)"):
+                RUNNER.preflight_riscv_toolchain(
+                    "riscv64-unknown-elf", {"PATH": temp}, root, log,
+                )
+
+            self.assertIn("missing cc1 library", log.read_text())
+
+    def test_preflight_reports_a_missing_cpp_frontend(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            with self.assertRaisesRegex(RuntimeError, "riscv64-unknown-elf-cpp not found"):
+                RUNNER.preflight_riscv_toolchain(
+                    "riscv64-unknown-elf", {"PATH": temp}, root, root / "preflight.log",
+                )
+
+
 class StockDmaRunnerOptionsTest(unittest.TestCase):
     def run_cli(self, case, *options):
         with tempfile.TemporaryDirectory() as temp:
@@ -556,25 +596,25 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertIn("--skip-pq-vector-generation", result.stdout)
-        self.assertIn("keep all AES DMA cases", result.stdout)
+        self.assertIn("without limiting AES DMA cases", result.stdout)
 
-    def test_pq_skip_is_limited_to_the_short_aes_case(self):
+    def test_pq_skip_rejects_random_dma_case(self):
         result = subprocess.run(
-            ["python3", str(RUNNER_PATH), "--case", "smoke_test_dma",
+            ["python3", str(RUNNER_PATH), "--case", "rand_test_dma",
              "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output"),
              "--skip-pq-vector-generation"],
             capture_output=True, text=True,
         )
         self.assertEqual(result.returncode, 1)
-        self.assertIn("limited to smoke_test_dma_aes_gcm_short_1_dword", result.stderr)
+        self.assertIn("requires a DMA-only firmware case", result.stderr)
 
-    def test_cli_exposes_quiet_mode_without_limiting_firmware_cases(self):
+    def test_cli_exposes_quiet_mode(self):
         result = subprocess.run(
             ["python3", str(RUNNER_PATH), "--help"],
             capture_output=True, text=True, check=True,
         )
         self.assertIn("--quiet-firmware", result.stdout)
-        self.assertIn("keep all AES DMA cases", result.stdout)
+        self.assertIn("quiet routine DMA output", result.stdout)
 
     def test_cli_exposes_axi_trace(self):
         result = subprocess.run(
@@ -584,16 +624,6 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         self.assertIn("--trace-axi", result.stdout)
         self.assertIn("trace CPU progress", result.stdout)
         self.assertIn("handshakes with VPI", result.stdout)
-
-    def test_quiet_mode_is_limited_to_the_short_aes_case(self):
-        result = subprocess.run(
-            ["python3", str(RUNNER_PATH), "--case", "smoke_test_dma",
-             "--output", str(Path(tempfile.gettempdir()) / "unused-caliptra-bfm-output"),
-             "--quiet-firmware"],
-            capture_output=True, text=True,
-        )
-        self.assertEqual(result.returncode, 1)
-        self.assertIn("requires a supported DMA firmware case", result.stderr)
 
     def test_skips_only_unrelated_pq_vector_calls_when_requested(self):
         source = (
