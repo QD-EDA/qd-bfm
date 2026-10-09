@@ -139,6 +139,8 @@ module tb_axi4_caliptra_master_outstanding;
   initial begin
     wait (ARESETn === 1'b1);
     wait (ar_count == 4);
+    repeat (2) @(posedge ACLK);
+    if (ar_count != 4) $fatal(1, "manager issued a fifth read before a slot was freed");
     send_response(3);
     send_response(0);
     send_response(2);

@@ -220,6 +220,9 @@ module tb_axi4_caliptra_master_write_outstanding;
   initial begin
     wait (ARESETn === 1'b1);
     wait_counts(4);
+    repeat (2) @(posedge ACLK);
+    if (aw_count != 4 || w_count != 4)
+      $fatal(1, "manager issued a fifth write before a slot was freed");
     send_response(3, 2'b10);
     send_response(0, 2'b00);
     send_response(2, 2'b00);
