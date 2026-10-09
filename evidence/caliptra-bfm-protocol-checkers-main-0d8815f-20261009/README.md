@@ -42,3 +42,37 @@ c4c352d5bb72fc6fc2979f32fd697598bd79879ab1e7b957d9d25da9237ac4d1  dv/caliptra_bf
 
 This is standalone checker-unit evidence, not an actual-Caliptra integration
 run or Axi4PC-equivalence claim.
+
+## Cross-edition rerun — 2026-10-09
+
+Both standalone suites also passed under IEEE 2017 and 2023 on the same
+published Icarus `0d8815f` build. AXI rejected all 41 injected violations in
+each edition; AHB rejected all 11 in each edition. AHB's default IEEE 2012
+mode passed after adding `SV_EDITION` selection. The guard reported at least
+7.30 GiB available and at most 0.01 GiB process-group RSS for these runs.
+
+The AHB checker runner now accepts `SV_EDITION=2012` (default), `2017`, or
+`2023`, and rejects other values before compilation. Setting
+`SV_EDITION=2024` returned exit 2 with the expected validation message.
+
+Cross-edition commands from the QD repository root:
+
+```sh
+for ieee_edition in 2017 2023; do
+  SV_EDITION=$ieee_edition IVERILOG_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/iverilog \
+  VVP_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/vvp \
+    sh dv/caliptra_bfm/axi/tests/run_checker.sh
+  SV_EDITION=$ieee_edition IVERILOG_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/iverilog \
+  VVP_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/vvp \
+    sh dv/caliptra_bfm/ahb_lite/tests/run_checker.sh
+done
+```
+
+Updated AHB checker runner SHA-256:
+
+```text
+1af4eebd1e01145e17ff550e84d6dcdd597dc51aeef2ee9f79ab93994dfc143e  dv/caliptra_bfm/ahb_lite/tests/run_checker.sh
+```
+
+This closes the standalone checker edition-selection gap only; actual Caliptra
+counterparty and full agent qualification remain open.

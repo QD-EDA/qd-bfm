@@ -480,7 +480,9 @@ providers, define
 one implementation of each package and HDL module. The generated-style smoke
 runner is `tests/run_ahb_qvip_compat_env.sh`; it has passed under Icarus
 SystemVerilog editions 2012, 2017, and 2023. Evidence and hashes are recorded
-in `evidence/caliptra-bfm-ahb-qvip-compat-20261004/README.md`.
+in `evidence/caliptra-bfm-ahb-qvip-compat-20261004/README.md`. A current
+published-main replay covers both 32-bit and 64-bit profiles under 2017 and
+2023; see the [latest-main evidence](../../../evidence/caliptra-bfm-ahb-qvip-compat-main-0d8815f-20261009/README.md).
 
 The Adams Bridge ML-DSA YAML includes `ap_key: "trans_ap"` with a placeholder
 comment, but its checked-in generated `mldsa_environment.svh` omits that

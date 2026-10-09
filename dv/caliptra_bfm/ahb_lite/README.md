@@ -85,7 +85,8 @@ could not be refreshed due DNS failure; see the evidence's dated rerun section.
 then checks ten negative controls against the expected checker error code:
 unknown control, BUSY, excessive transfer size, misalignment, unstable
 address/control, unstable write data, malformed ERROR completion, single-cycle
-ERROR, orphan SEQ, and orphan ERROR.
+ERROR, orphan SEQ, and orphan ERROR. It accepts `SV_EDITION=2012` (default),
+`2017`, or `2023` and rejects any other value before compilation.
 
 `tests/run_caliptra_ecc_ahb_bfm.sh` connects the native 32-bit manager, profile
 checker, and monitor to the actual pinned Caliptra `ecc_top` RTL. It writes and

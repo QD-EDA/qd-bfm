@@ -7,11 +7,17 @@ set -eu
 cd "$(dirname "$0")"
 IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
 VVP_BIN=${VVP_BIN:-vvp}
+SV_EDITION=${SV_EDITION:-2012}
 out=$(mktemp)
 log=$(mktemp)
 trap 'rm -f "$out" "$log"' EXIT
 
-"$IVERILOG_BIN" -g2012 -s tb_ahb_lite_caliptra_checker -o "$out" \
+case "$SV_EDITION" in
+  2012|2017|2023) ;;
+  *) echo "SV_EDITION must be 2012, 2017, or 2023" >&2; exit 2 ;;
+esac
+
+"$IVERILOG_BIN" -g"$SV_EDITION" -s tb_ahb_lite_caliptra_checker -o "$out" \
   ../ahb_lite_caliptra_checker.sv tb_ahb_lite_caliptra_checker.sv
 "$VVP_BIN" "$out" +CASE=GOOD
 "$VVP_BIN" "$out" +CASE=GOOD_IDLE_TO_NONSEQ

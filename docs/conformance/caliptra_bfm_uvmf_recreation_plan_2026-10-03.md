@@ -1295,3 +1295,30 @@ SHA `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, matching the clean simulator
 build already used by current BFM evidence. The AXI and AHB standalone checker
 regressions were rerun on that build and rejected all 41 and 11 injected
 violations, respectively. See the [latest-main checker evidence](../../evidence/caliptra-bfm-protocol-checkers-main-0d8815f-20261009/README.md).
+
+### Generated KeyVault on latest published main
+
+The generated KeyVault four-beat AHB probe was checked against the same live-
+verified published Icarus `main` SHA `0d8815febc260928e62d5c2ce82b14afd2e38dc3`.
+Compilation still stops at package-qualified proxy declarations in the
+generated read/write driver and monitor BFMs, before simulation. No QD
+workaround was added. See the [current KeyVault result](../../evidence/caliptra-bfm-keyvault-main-0d8815f-20261009/README.md).
+
+### Standalone checker edition coverage
+
+The AHB checker runner now selects IEEE 2012 (default), 2017, or 2023 with
+`SV_EDITION`; invalid selections fail before compilation. On published Icarus
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`, both AXI and AHB checker suites
+pass under IEEE 2017 and 2023, rejecting all 41 and 11 injected violations
+per run. This verifies standalone checker behavior across editions, not the
+remaining actual-Caliptra protocol-agent gate. See the [cross-edition checker
+evidence](../../evidence/caliptra-bfm-protocol-checkers-main-0d8815f-20261009/README.md#cross-edition-rerun--2026-10-09).
+
+### Generated-name AHB compatibility on latest published main
+
+The AHB QVIP-compatible clean-room environment passed its synthetic-target
+burst/scoreboard smoke on published Icarus `0d8815febc260928e62d5c2ce82b14afd2e38dc3`
+for 32-bit and 64-bit profiles under IEEE 2017 and 2023. Each run checked
+12 transfers with no UVM errors or fatals. This advances provider compatibility
+coverage only; generated Caliptra KeyVault still stops at the simulator parser
+blocker above. See the [latest-main AHB compatibility evidence](../../evidence/caliptra-bfm-ahb-qvip-compat-main-0d8815f-20261009/README.md).
