@@ -73,6 +73,13 @@ options are diagnostic only; the default `rand_test_dma` remains unchanged.
 These are reusable module-level components; they do not include the full UVMF
 base library, a complete Avery-compatible agent/environment, or ARM Axi4PC. A
 bounded clean-room `uvmf_lite/` slice is described below.
+
+The AXI checker accepted its legal, out-of-order, same-ID, and exclusive
+transfer cases and rejected 41 injected violations; the AHB checker rejected
+11 injected violations. Both standalone suites passed on published Icarus
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`; see the
+[`protocol-checker evidence`](../../evidence/caliptra-bfm-protocol-checkers-published-20261009/README.md).
+
 Caliptra already supplies its DMA testcase generator at
 `src/integration/tb/dma_testcase_generator.sv`. The recovery sequence consumes
 that generator's packed block-size array, skips zero entries, selects
