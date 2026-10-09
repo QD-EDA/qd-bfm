@@ -556,6 +556,31 @@ package axi4_caliptra_uvm_pkg;
       super.new(name);
     endfunction
 
+    function void do_copy(uvm_object rhs);
+      axi4_caliptra_uvm_user_extension source;
+      if (!$cast(source, rhs)) begin
+        `uvm_error("AXI_RAL_USER_COPY", "Cannot copy a non-Caliptra AXI USER extension")
+        return;
+      end
+      super.do_copy(rhs);
+      addr_user = source.addr_user;
+    endfunction
+
+    function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+      axi4_caliptra_uvm_user_extension other;
+      if (!$cast(other, rhs)) return 0;
+      return super.do_compare(rhs, comparer) && addr_user == other.addr_user;
+    endfunction
+
+    function void do_print(uvm_printer printer);
+      super.do_print(printer);
+      printer.print_field_int("addr_user", addr_user, 32, UVM_HEX);
+    endfunction
+
+    function string convert2string();
+      return $sformatf("addr_user=%08h", addr_user);
+    endfunction
+
     function void set_addr_user(bit [31:0] value);
       addr_user = value;
     endfunction

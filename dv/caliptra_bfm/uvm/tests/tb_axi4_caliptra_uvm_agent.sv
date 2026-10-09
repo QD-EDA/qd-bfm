@@ -882,6 +882,8 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       axi4_caliptra_uvm_reg_adapter adapter;
       axi4_caliptra_uvm_user_extension user_extension;
       axi4_caliptra_uvm_transfer transfer;
+      axi4_caliptra_uvm_user_extension cloned_user_extension;
+      uvm_object cloned_user_object;
       uvm_reg_item reg_item;
       uvm_reg_bus_op rw;
       uvm_sequence_item bus_item;
@@ -893,6 +895,14 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       adapter = axi4_caliptra_uvm_reg_adapter::type_id::create("ral_adapter");
       user_extension = axi4_caliptra_uvm_user_extension::type_id::create("ral_user");
       user_extension.set_addr_user(32'hcafe_0123);
+      cloned_user_object = user_extension.clone();
+      if (!$cast(cloned_user_extension, cloned_user_object) ||
+          cloned_user_extension == user_extension ||
+          cloned_user_extension.get_addr_user() != 32'hcafe_0123)
+        `uvm_fatal("AXI_RAL_USER_CLONE", "AXI USER extension clone lost its AxUSER value")
+      cloned_user_extension.set_addr_user(32'h0);
+      if (user_extension.compare(cloned_user_extension))
+        `uvm_fatal("AXI_RAL_USER_COMPARE", "AXI USER extension comparison ignored AxUSER changes")
       reg_item = uvm_reg_item::type_id::create("ral_item");
       reg_item.set_extension(user_extension);
       adapter.m_set_item(reg_item);

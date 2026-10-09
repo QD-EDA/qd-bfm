@@ -342,7 +342,9 @@ the adapter uses all ones. `bus2reg` maps read data, byte enables, and AXI
 response status back to the register operation, including `SLVERR` as
 `UVM_NOT_OK`. The active smoke runs real UVM RAL frontdoor write/read
 operations with an extension and verifies an injected `SLVERR` read returns
-`UVM_NOT_OK`. The separate AAXI adapter maps the same USER extension through
+`UVM_NOT_OK`. The USER extension preserves AxUSER across UVM clone/copy,
+compares it, and prints the selected value; the agent regression checks clone
+and mutation behavior. The separate AAXI adapter maps the same USER extension through
 `aaxi_master_tr`, making the lower-bound AAXI sequencer usable for a
 Caliptra-style RAL map. For prediction callbacks, `bus2reg_user_obj` retains the
 AWUSER/ARUSER value from the most recent bus item. This is a native adapter
