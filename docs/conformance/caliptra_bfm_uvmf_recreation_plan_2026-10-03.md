@@ -1053,6 +1053,15 @@ post-reset read. The guarded standalone regression passes with published
 Icarus `4b3f3424c440aca6af92153b6860a7253b925234` under IEEE 2017 and 2023;
 this closes those manager reset paths, not the full Phase 3 gate. See
 [`AHB BFM regression`](../../dv/caliptra_bfm/ahb_lite/README.md).
+The active UVM compatibility path also verifies `response_aborted`, no
+completed-item publication on reset, and successful post-reset traffic under
+the same published revision; it uses a synthetic target, not generated
+Caliptra UVMF. See the
+[`AHB UVM reset-abort evidence`](../../evidence/caliptra-bfm-ahb-uvm-reset-abort-main-20261009/README.md).
+The standalone AHB and active UVM reset gates also pass on the latest locally
+available `iverilog-uvm` `origin/main` SHA
+`197f9baece79e66d25524906fb7b54c9faa8f4e2`; a fresh remote-head check was
+unavailable because GitHub DNS resolution failed.
 
 ### Phase 4 — Unit-level Caliptra/Adams Bridge UVMF environments
 

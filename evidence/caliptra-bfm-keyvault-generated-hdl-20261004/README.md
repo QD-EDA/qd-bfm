@@ -304,3 +304,22 @@ RSS. The source archive was built from the published revision in
 `/private/tmp/iverilog-uvm-install-4b3f342`; no Icarus source or branch was
 modified. The captured compile log SHA-256 is
 `0821ffab838096e6600303b12db4a63cad2b73444bbbb561437116b3813a50f2`.
+
+## `iverilog-uvm` main compile check (2026-10-09)
+
+The guarded KeyVault runtime command was also checked with the clean source
+archive of the latest locally available `dsellerbrock/iverilog-uvm`
+`origin/main`, `197f9baece79e66d25524906fb7b54c9faa8f4e2` (2026-10-07), and
+the pinned Caliptra commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`.
+Compilation again stops before simulation at the generated package-qualified
+parameterized proxy handles in the read/write BFM interfaces and monitors. No
+QD overlay was added for this parser failure. The captured compiler output is
+[`published-main-197f9ba-compile.log`](published-main-197f9ba-compile.log).
+
+The temporary Icarus binaries were built from that `origin/main` archive with
+UVM submodule `78c06547a2a0a29b3dc9dcafae62b75b2ff61544`; `iverilog` SHA-256
+`2588169190d99543c79d8a8c58ff3e75f7e0a9679fa871e895e5c3f15af29ba5`, `vvp`
+SHA-256 `edbc97b6a9fec8d1425c16d0b1a6b32ad4cbdb0ad609dbfbca155cbc30eb5c6d`.
+The guard observed 8.21 GiB minimum available and 0.08 GiB peak process-group
+RSS. GitHub DNS was unavailable, so the remote head could not be checked; this
+is the latest public `origin/main` reference available in the local checkout.

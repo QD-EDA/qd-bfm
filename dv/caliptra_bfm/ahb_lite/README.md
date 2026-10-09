@@ -72,6 +72,15 @@ also resets the manager during address wait, data wait, and an in-flight burst;
 each abort must idle the bus, keep the manager poisoned until reset recovery,
 and allow a later read to complete.
 
+The active UVM MVC path also has a guarded `+AHB_RESET_ABORT_ONLY` case. It
+checks the command bridge's `response_aborted` status, suppresses publication
+of the aborted request, then verifies post-reset traffic reaches all four
+compatibility streams. See the [published-main reset-abort evidence](../../../evidence/caliptra-bfm-ahb-uvm-reset-abort-main-20261009/README.md).
+Current-state update (2026-10-09): the standalone AHB and active UVM reset-abort
+regressions also pass on the latest locally available `iverilog-uvm`
+`origin/main` commit `197f9baece79e66d25524906fb7b54c9faa8f4e2`. The remote head
+could not be refreshed due DNS failure; see the evidence's dated rerun section.
+
 `tests/run_checker.sh` accepts a legal transfer and two-cycle ERROR response,
 then checks ten negative controls against the expected checker error code:
 unknown control, BUSY, excessive transfer size, misalignment, unstable
