@@ -141,10 +141,10 @@ address map, including FIXED FIFO traffic, exclusive access, and an invalidated
 exclusive write.
 
 Adams Bridge's generated MLDSA environment also completes a seed write and
-version read through the actual `abr_top` using the 32-bit AHB path; the runner
-now requires the passive monitor to observe both directions with no error
-transfers. Full keygen remains unverified because its guarded diagnostic run
-did not advance beyond the first busy sample. See
+version read through the actual `abr_top` using the 32-bit AHB path under IEEE
+2017 and 2023; the runner requires the passive monitor to observe both
+directions with no error transfers. Full keygen remains unverified because
+its guarded diagnostic run did not advance beyond the first busy sample. See
 [`Adams Bridge AHB evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md).
 
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
