@@ -218,3 +218,14 @@ and assembled `.f` filelists for the larger host-package probe remain under
 earlier larger probe is not independently replayable from this evidence
 directory. The latest guarded compile is replayable through the retained
 runner, but it does not qualify the generated UVMF environment.
+
+
+**2026-10-09 current-state compile-only recheck:** the retained runner was
+invoked with --include-project-bench-packages and the clean published Icarus
+main build 4b3f3424c440aca6af92153b6860a7253b925234. It exited 47 before VVP.
+The diagnostics still report unsupported generated bins syntax in mailbox,
+SoC-IFC register, and status coverage sources. The runner also reports its
+compile-only hostpkg_compile_top.sv fixture is absent from this checkout. No
+simulation ran; this is a diagnostic compile failure and leaves generated
+coverage integration open. The published revision is the newest main SHA in
+the local origin/main cache; a remote refresh was unavailable.
