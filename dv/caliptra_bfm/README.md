@@ -79,6 +79,9 @@ transfer cases and rejected 41 injected violations; the AHB checker rejected
 11 injected violations. Both standalone suites passed on published Icarus
 `127b887dfdc09283ab0187a2e618421dee3d5dcc`; see the
 [`protocol-checker evidence`](../../evidence/caliptra-bfm-protocol-checkers-published-20261009/README.md).
+The combined generated SoC-IFC runtime currently stops before simulation on
+unsupported generated coverage-bin syntax on that published revision; see
+[`published SoC-IFC evidence`](../../evidence/caliptra-bfm-soc-ifc-published-20261009/README.md).
 
 Caliptra already supplies its DMA testcase generator at
 `src/integration/tb/dma_testcase_generator.sv`. The recovery sequence consumes
