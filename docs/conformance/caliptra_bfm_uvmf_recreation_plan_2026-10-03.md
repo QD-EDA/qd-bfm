@@ -1210,6 +1210,11 @@ through its own blocker, not this list.
    `vvp` SHA-256
    `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867`).
    Diagnostic only; no clean, published Icarus revision is established.
+   **2026-10-09 clean local-main rerun:** all 25 seeded records pass through
+   `axi_dma_top` with zero UVM warnings/errors/fatals on the clean build of
+   locally available `origin/main` `197f9baece79e66d25524906fb7b54c9faa8f4e2`.
+   The remote head could not be refreshed because GitHub DNS resolution
+   failed. See the [dated replay evidence](../../evidence/caliptra-bfm-dma-default-mixed-main-20261009/README.md).
 5. Is a real Axi4PC substitute wanted, or is "unbound, reported absent"
    acceptable for the first qualification claim?
 
