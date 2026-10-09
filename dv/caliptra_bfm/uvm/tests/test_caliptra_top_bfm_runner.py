@@ -22,6 +22,21 @@ class CheckerCompileCommandTest(unittest.TestCase):
         self.assertIn("-gassertions", disabled)
 
 
+class FastBootDataPreloadCaseValidationTest(unittest.TestCase):
+    def run_cli(self, case):
+        with tempfile.TemporaryDirectory() as temp:
+            return subprocess.run(
+                ["python3", str(RUNNER_PATH), "--case", case,
+                 "--fast-boot-data-preload", "--output", str(Path(temp) / "out")],
+                capture_output=True, text=True,
+            )
+
+    def test_accepts_stock_dma_case(self):
+        result = self.run_cli("smoke_test_dma")
+        self.assertNotIn("fast-boot-data-preload requires", result.stderr)
+        self.assertIn("set CALIPTRA_RTL", result.stderr)
+
+
 class ResetInFlightTraceTest(unittest.TestCase):
     def scan(self, lines):
         with tempfile.TemporaryDirectory() as temp:

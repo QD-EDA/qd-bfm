@@ -837,7 +837,7 @@ def main():
                         help="diagnostic only: use a fixed 5..8191-cycle delay before the forced first warm reset")
     args = parser.parse_args()
     if args.fast_boot_data_preload and args.case not in (
-            "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
+            "smoke_test_dma", "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
         raise ValueError("--fast-boot-data-preload requires a supported DMA firmware case")
     if args.first_aes_case_diagnostic and args.limit_aes_cases is not None:
         raise ValueError("use only one of --first-aes-case-diagnostic and --limit-aes-cases")
