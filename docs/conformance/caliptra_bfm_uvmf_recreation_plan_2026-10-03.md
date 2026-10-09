@@ -1287,3 +1287,11 @@ other BFM replay lanes use a 600-second bound. Direct ad hoc compiler commands
 should use the same guard explicitly. The wrappers do not change compiler
 arguments or simulation inputs; existing evidence logs were not regenerated
 by this safety-only update, so their recorded command hashes remain historical.
+
+## 2026-10-09 current-state addendum
+
+A live remote-head query confirmed `iverilog-uvm` `main` remains at published
+SHA `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, matching the clean simulator
+build already used by current BFM evidence. The AXI and AHB standalone checker
+regressions were rerun on that build and rejected all 41 and 11 injected
+violations, respectively. See the [latest-main checker evidence](../../evidence/caliptra-bfm-protocol-checkers-main-0d8815f-20261009/README.md).
