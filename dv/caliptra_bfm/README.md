@@ -149,6 +149,13 @@ instrumented 180-second probe reached keygen instruction `MLDSA_KG_S+12`; its
 bounded-rejection sampler had accepted five coefficients before timeout. See
 [`Adams Bridge AHB evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md).
 
+Current-state diagnostic (2026-10-09): a 100-cycle trace reached controller
+PC 19 by cycle 1,500; the Keccak round counter advanced and wrapped while the
+sampler state changed. The 180-second guard still ended before keygen
+completion, so the AHB launch is working but full keygen/readback remains
+unverified. The trace used dirty, unpublished Icarus and is diagnostic only;
+see the dated Adams Bridge evidence for the command and hashes.
+
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
 transaction base, typed configuration/agent bases, driver/monitor hooks,
 sequencer and test bases, and the in-order scoreboard used by ECC, HMAC, and

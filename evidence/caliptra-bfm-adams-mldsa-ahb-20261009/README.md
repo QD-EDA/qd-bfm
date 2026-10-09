@@ -74,3 +74,38 @@ The trace log SHA-256 is
 `ea0206127a22c88b082e8a83a7ae7a8fa2c608725b291c877ecd9873c6881a0f`; the
 instrumented runner SHA-256 is
 `09388292753e2615dde416f1344b5455b67d97f92e7a5007f5d647ecdd5036a8`.
+
+### Keccak/controller follow-up — 2026-10-09
+
+A second 180-second diagnostic sampled the controller and Keccak engine every
+100 simulated cycles. The AHB command had set `busy=1`; controller PC advanced
+from 2 to 19 by cycle 1,500, while the sampler and Keccak state changed. The
+Keccak round counter advanced from 22 at cycle 400 to 4 at cycle 500, showing
+that the round engine completed a permutation and restarted. The outer guard
+ended the run at 180 seconds with `busy=1`, before keygen finished or key
+readback was checked. This rules out a failed AHB launch or a frozen Keccak
+round in the sampled interval; complete MLDSA keygen and scoreboard agreement
+remain unverified.
+
+This is diagnostic only: it used dirty, unpublished Icarus source HEAD
+`ac4532fab037e91df2f903e67fb40f59baedccca` (`ac4532fa-dirty`). The Caliptra
+checkout was clean at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, and Adams
+Bridge was pinned at `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. Re-run on a
+clean, published Icarus SHA before making a qualification claim.
+
+```sh
+TMPDIR=/private/tmp/qd-adams-keygen-roundtrace-20261009 \
+CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=180 \
+IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge \
+  --actual-keygen-smoke --edition 2017
+```
+
+| Diagnostic artifact | SHA-256 |
+|---|---|
+| `keygen-progress-keccak-180s.log` | `b148ddbdfd5666c59083b232509ef1f8ccc95c23b84ad1d8fb1d4b0eda343812` |
+| `run_adams_mldsa_env_compile.py` | `ec5a3b2db1d94bc9ccbac015067f17bf666b054a80b393928239d79b3cf40ce6` |
+| `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
+| `vvp` | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
