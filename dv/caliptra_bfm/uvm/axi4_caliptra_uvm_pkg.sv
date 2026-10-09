@@ -506,6 +506,45 @@ package axi4_caliptra_uvm_pkg;
       size = 2;
       burst = 2'b01;
     endfunction
+
+    function void do_copy(uvm_object rhs);
+      axi4_caliptra_uvm_transfer source;
+      if (!$cast(source, rhs)) begin
+        `uvm_error("AXI_TRANSFER_COPY", "Cannot copy a non-Caliptra AXI transfer")
+        return;
+      end
+      super.do_copy(rhs);
+      write = source.write;
+      addr = source.addr;
+      len = source.len;
+      size = source.size;
+      burst = source.burst;
+      id = source.id;
+      user = source.user;
+      lock = source.lock;
+      write_data = source.write_data;
+      write_strb = source.write_strb;
+      write_user = source.write_user;
+      success = source.success;
+      response = source.response;
+      response_user = source.response_user;
+      read_data = source.read_data;
+      read_user = source.read_user;
+      read_response = source.read_response;
+    endfunction
+
+    function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+      axi4_caliptra_uvm_transfer other;
+      if (!$cast(other, rhs)) return 0;
+      return super.do_compare(rhs, comparer) && write == other.write &&
+             addr == other.addr && len == other.len && size == other.size &&
+             burst == other.burst && id == other.id && user == other.user &&
+             lock == other.lock && write_data == other.write_data &&
+             write_strb == other.write_strb && write_user == other.write_user &&
+             success == other.success && response == other.response &&
+             response_user == other.response_user && read_data == other.read_data &&
+             read_user == other.read_user && read_response == other.read_response;
+    endfunction
   endclass
 
   class axi4_caliptra_uvm_user_extension extends uvm_object;

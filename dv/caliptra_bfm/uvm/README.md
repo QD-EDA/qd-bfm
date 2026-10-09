@@ -185,7 +185,9 @@ additional fixed-burst write and read through the FIFO window. Both runs check
 completed monitor records, USER values, strobes, LAST positions, IDs, and
 responses. An injected SLVERR confirms the active driver returns
 `success == 0` with the AXI response code intact while the monitor still
-reports valid transaction framing.
+reports valid transaction framing. The active request item copies and compares
+all request and response fields, including the full packed 256-beat payload
+vectors; the agent smoke checks clone fidelity at the high-order beat boundary.
 The active test also performs UVM RAL frontdoor traffic through both the
 native transfer adapter and the AAXI compatibility sequencer/adapter, then
 checks that both AAXI predictor exports update the register model. Its two

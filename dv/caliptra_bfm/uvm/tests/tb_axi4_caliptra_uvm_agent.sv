@@ -1001,6 +1001,9 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     endfunction
 
     function void build_phase(uvm_phase phase);
+      axi4_caliptra_uvm_transfer transfer_probe;
+      axi4_caliptra_uvm_transfer transfer_clone;
+      uvm_object transfer_clone_object;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_master_tr factory_probe;
       aaxi_master_tr clone_probe;
@@ -1010,6 +1013,46 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       if (!uvm_config_db#(bit)::get(this, "", "use_dma_target", use_dma_target))
         `uvm_fatal("AXI_TARGET_CFG", "Missing AXI UVM target selection")
       check_register_adapter();
+      transfer_probe = axi4_caliptra_uvm_transfer::type_id::create("transfer_probe");
+      transfer_probe.write = 1;
+      transfer_probe.addr = 48'h1234_5678_9abc;
+      transfer_probe.len = 8'hff;
+      transfer_probe.size = 2;
+      transfer_probe.burst = 2'b01;
+      transfer_probe.id = 8'ha5;
+      transfer_probe.user = 32'h7654_3210;
+      transfer_probe.lock = 1;
+      transfer_probe.write_data[8191 -: 32] = 32'hcafe_babe;
+      transfer_probe.write_strb[1023 -: 4] = 4'h5;
+      transfer_probe.write_user[8191 -: 32] = 32'h89ab_cdef;
+      transfer_probe.success = 1;
+      transfer_probe.response = 2'b00;
+      transfer_probe.response_user = 32'h1122_3344;
+      transfer_probe.read_data[8191 -: 32] = 32'hdead_beef;
+      transfer_probe.read_user[8191 -: 32] = 32'h5566_7788;
+      transfer_probe.read_response[511 -: 2] = 2'b10;
+      transfer_clone_object = transfer_probe.clone();
+      if (!$cast(transfer_clone, transfer_clone_object))
+        `uvm_fatal("AXI_TRANSFER_CLONE", "AXI transfer clone returned the wrong type")
+      if (transfer_clone == transfer_probe || !transfer_probe.compare(transfer_clone) ||
+          transfer_clone.write !== transfer_probe.write ||
+          transfer_clone.addr !== transfer_probe.addr || transfer_clone.len !== transfer_probe.len ||
+          transfer_clone.size !== transfer_probe.size || transfer_clone.burst !== transfer_probe.burst ||
+          transfer_clone.id !== transfer_probe.id || transfer_clone.user !== transfer_probe.user ||
+          transfer_clone.lock !== transfer_probe.lock ||
+          transfer_clone.write_data !== transfer_probe.write_data ||
+          transfer_clone.write_strb !== transfer_probe.write_strb ||
+          transfer_clone.write_user !== transfer_probe.write_user ||
+          transfer_clone.success !== transfer_probe.success ||
+          transfer_clone.response !== transfer_probe.response ||
+          transfer_clone.response_user !== transfer_probe.response_user ||
+          transfer_clone.read_data !== transfer_probe.read_data ||
+          transfer_clone.read_user !== transfer_probe.read_user ||
+          transfer_clone.read_response !== transfer_probe.read_response)
+        `uvm_fatal("AXI_TRANSFER_CLONE", "AXI transfer clone did not preserve every request/response field")
+      transfer_clone.write_data[8191] = ~transfer_probe.write_data[8191];
+      if (transfer_probe.compare(transfer_clone))
+        `uvm_fatal("AXI_TRANSFER_COMPARE", "AXI transfer comparison ignored payload changes")
       ral_model = axi4_caliptra_ral_smoke_block::type_id::create("ral_model");
       ral_model.build();
       ral_adapter = axi4_caliptra_uvm_reg_adapter::type_id::create("ral_adapter");
