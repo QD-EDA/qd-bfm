@@ -1046,6 +1046,14 @@ For each protocol: agent + monitor + subordinate memory model + self-checks.
 Gate: all injection controls detected; no false positives on the in-tree
 counterparty; both editions.
 
+Current AHB manager reset-abort coverage (2026-10-09) now forces reset during
+single-transfer address wait, single-transfer data wait, and an incrementing
+burst. It checks idle outputs, poison-until-reset behavior, and a successful
+post-reset read. The guarded standalone regression passes with published
+Icarus `4b3f3424c440aca6af92153b6860a7253b925234` under IEEE 2017 and 2023;
+this closes those manager reset paths, not the full Phase 3 gate. See
+[`AHB BFM regression`](../../dv/caliptra_bfm/ahb_lite/README.md).
+
 ### Phase 4 — Unit-level Caliptra/Adams Bridge UVMF environments
 
 Order by the Phase 0 census: units already at "compile pass" first, then the

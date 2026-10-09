@@ -221,3 +221,114 @@ module tb_ahb_lite_caliptra;
     $finish;
   end
 endmodule
+
+module tb_ahb_lite_caliptra_reset_abort;
+  reg HCLK = 0;
+  reg HRESETn = 0;
+  reg HREADY = 0;
+  reg HRESP = 0;
+  reg [63:0] HRDATA = 64'h1234_5678_9abc_def0;
+  wire HSEL;
+  wire [31:0] HADDR;
+  wire [63:0] HWDATA;
+  wire HWRITE;
+  wire [2:0] HSIZE;
+  wire [1:0] HTRANS;
+  wire busy;
+  wire poisoned;
+  reg request_ok;
+  reg success;
+  reg response_error;
+  reg [63:0] read_data;
+  reg [255:0] burst_data;
+  reg [3:0] burst_error;
+  integer burst_completed;
+
+  always #5 HCLK = ~HCLK;
+
+  ahb_lite_caliptra_master #(.ADDR_WIDTH(32), .DATA_WIDTH(64)) master (
+    .HCLK(HCLK), .HRESETn(HRESETn), .HREADY(HREADY), .HRESP(HRESP),
+    .HRDATA(HRDATA), .HSEL(HSEL), .HADDR(HADDR), .HWDATA(HWDATA),
+    .HWRITE(HWRITE), .HSIZE(HSIZE), .HTRANS(HTRANS), .busy(busy),
+    .poisoned(poisoned)
+  );
+
+  initial begin
+    #2000;
+    $fatal(1, "AHB reset-abort regression timed out");
+  end
+
+  task automatic check_aborted;
+    begin
+      if (!request_ok || success || response_error || busy || !poisoned ||
+          HTRANS !== 2'b00 || HSEL || HADDR !== 0 || HWDATA !== 0)
+        $fatal(1, "AHB reset abort left an invalid result or bus state");
+    end
+  endtask
+
+  task automatic recover_and_read;
+    begin
+      master.reset_master();
+      if (poisoned || busy || HTRANS !== 2'b00)
+        $fatal(1, "AHB manager did not clear after reset_master");
+      HREADY = 1;
+      repeat (2) @(posedge HCLK);
+      @(negedge HCLK); HRESETn = 1;
+      master.read_one(32'h1000_0000, 3'd3, request_ok, success,
+                      response_error, read_data);
+      if (!request_ok || !success || response_error || poisoned ||
+          read_data !== HRDATA)
+        $fatal(1, "AHB manager did not recover after reset abort");
+    end
+  endtask
+
+  initial begin
+    repeat (2) @(posedge HCLK);
+    @(negedge HCLK); HRESETn = 1;
+    fork
+      master.read_one(32'h1000_0000, 3'd3, request_ok, success,
+                      response_error, read_data);
+      begin
+        wait (HSEL === 1'b1);
+        @(posedge HCLK);
+        @(negedge HCLK); HRESETn = 0;
+      end
+    join
+    check_aborted();
+    recover_and_read();
+
+    fork
+      master.read_one(32'h1000_0000, 3'd3, request_ok, success,
+                      response_error, read_data);
+      begin
+        wait (HSEL === 1'b1);
+        @(posedge HCLK);
+        @(negedge HCLK); HREADY = 0;
+        @(posedge HCLK);
+        @(negedge HCLK); HRESETn = 0;
+      end
+    join
+    check_aborted();
+    recover_and_read();
+
+    fork
+      master.read_burst(32'h1000_0000, 3'd3, 4, request_ok, success,
+                        response_error, burst_completed, burst_error,
+                        burst_data);
+      begin
+        wait (HSEL === 1'b1);
+        wait (HTRANS === 2'b11);
+        HREADY = 0;
+        @(posedge HCLK);
+        @(negedge HCLK); HRESETn = 0;
+      end
+    join
+    check_aborted();
+    if (burst_completed != 0 || burst_data !== 0 || burst_error !== 0)
+      $fatal(1, "AHB burst reset abort retained a partial result");
+    recover_and_read();
+
+    $display("PASS: AHB manager aborts single/burst waits and recovers cleanly");
+    $finish;
+  end
+endmodule

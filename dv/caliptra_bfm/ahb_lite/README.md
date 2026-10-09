@@ -67,7 +67,10 @@ It covers 64-bit full-word and half-word lane
 behavior, configured wait cycles, injected and out-of-window two-cycle ERROR
 responses, and verifies that the checker and monitor remain clean while
 counting 15 completed transfers, including two four-beat INCR bursts, six
-accepted SEQ phases, and a post-reset readback that checks SRAM retention.
+accepted SEQ phases, and a post-reset readback that checks SRAM retention. It
+also resets the manager during address wait, data wait, and an in-flight burst;
+each abort must idle the bus, keep the manager poisoned until reset recovery,
+and allow a later read to complete.
 
 `tests/run_checker.sh` accepts a legal transfer and two-cycle ERROR response,
 then checks ten negative controls against the expected checker error code:
