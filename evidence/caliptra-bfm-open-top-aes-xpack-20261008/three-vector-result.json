@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-08",
+  "test": "smoke_test_dma_aes_gcm_short_1_dword",
+  "status": "diagnostic integration result; not qualification",
+  "passed": true,
+  "selected_aes_dma_vectors": 3,
+  "vector_lengths_dwords": [
+    1,
+    2,
+    3
+  ],
+  "diagnostic_modes": {
+    "fast_trng": true,
+    "fast_boot_data_preload": true,
+    "pq_vector_generation_skipped": true,
+    "bfm_checker_enabled": true
+  },
+  "check_summary": {
+    "sim_exit": 0,
+    "testcase_pass_markers": 1,
+    "testcase_fail_markers": 0,
+    "bad_diagnostics": 0,
+    "jtag_errors": 0,
+    "finish_minstret": 4333,
+    "finish_mcycle": 11110
+  },
+  "axi_handshake_counts": {
+    "AW": 6,
+    "W": 12,
+    "B": 6,
+    "AR": 6,
+    "R": 12
+  },
+  "memory_guard": {
+    "exit": 0,
+    "timeout_seconds": 2400
+  },
+  "initial_default_timeout": {
+    "timeout_seconds": 1800,
+    "exit": 124,
+    "last_trace_cycle": 10100,
+    "classification": "incomplete; guard timeout before third-vector readback, no failure marker"
+  },
+  "provenance": {
+    "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "case_yaml_sha256": "37d25ede775580271066061df4eb0dfb3e2eecde39649e26e9220931d55c3837",
+    "limited_firmware_source_sha256": "2a78b23e474a16f95c5f0487374ea60b173015c6f0651e239308df2442e1b67a",
+    "program_hex_sha256": "722f2ec6a8d4e6d882d8fa8f470257caad3069b97ff80c21359035f75312c5b9",
+    "dccm_hex_sha256": "5115af07ff9b640463ef391d621c3d849c02eedaef7ddd8f5ca2a9bcf7a7bd1a",
+    "qd_branch": "codex/caliptra-bfm-stack-20261006",
+    "qd_head": "63ed326d4ecea94ad691756412ba5936b2d4a48f",
+    "bfm_source_commit": "90af876124e958ae010928ac3203d3606f9599fa",
+    "top_vvp_sha256": "9b3203c4d4072f125ef15111bf44f2f6ab2bb94006536ffeb75d40e39a437e18",
+    "trace_vpi_sha256": "9e8bbdc59059c99f56a0e328c676537a8b8e24c4f6d6ae0e14899ab95145cde5",
+    "iverilog": {
+      "version": "13.0 (devel) (ac4532fa-dirty)",
+      "source_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+      "published_clean_revision": false
+    },
+    "vvp_runtime": {
+      "version": "13.0 (devel) (ac4532fa-dirty)",
+      "sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+    },
+    "simulation_log_sha256": "fb72c737d6483c511d396cead1b12b8246f3111b7c58bf14143bf3656e20e673",
+    "timeout_simulation_log_sha256": "a23492c6fb9034b6ace6ec0dc7c049bddbf4b1668bd96a5606c134b78024a997"
+  },
+  "extended_replay_shell_command": "python3 /private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/scripts/run_with_memory_pressure_guard.py --timeout-seconds 2400 --log /private/tmp/qd-bfm-first-three-aes-xpack-20261008/extended-sim.log -- env PATH=/private/tmp/qd-bfm-first-three-aes-xpack-20261008/smoke_test_dma_aes_gcm_short_1_dword/.bin:$PATH '/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' -d /private/tmp/qd-bfm-checkpoint.H2Ij8x/startup-probe/jtagdpi.vpi -n -m /private/tmp/qd-bfm-first-three-aes-xpack-20261008/trace_vpi/sim-axi-trace-vpi.vpi /private/tmp/qd-bfm-first-three-aes-xpack-20261008/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY +CLP_SKIP_PQ_VECTOR_GENERATION"
+}

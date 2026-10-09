@@ -83,3 +83,28 @@ runner/BFM revision above). Exact provenance and retained artifacts are in
 [`two-vector-compile.log`](two-vector-compile.log), and
 [`two-vector-firmware.log.gz`](two-vector-firmware.log.gz). Simulation log
 SHA-256: `3bf2f4d0e16e42699d421dc043f5266e84818dd20250c40ad9a42603e9da8791`.
+
+## First three vectors in one simulator execution — 2026-10-08
+
+The three-case run initially stopped at the runner's 1,800-second guard while
+the third vector was still executing; its trace had no failure marker and had
+not reached the third source read. Replaying the retained top image with a
+2,400-second guard completed all three vectors through one BFM/checker
+instance. Firmware emitted one pass marker, no fail markers or bad
+diagnostics, and finished at `minstret=4333`, `mcycle=11110`. Combined AXI
+counts were AW=6, W=12, B=6, AR=6, and R=12; the 1-, 2-, and 3-beat vectors
+completed their readbacks. This localizes the earlier symptom to the timeout,
+not a third-vector AXI failure.
+
+This remains diagnostic: fast TRNG, verified fast boot data preload, PQ-vector
+suppression, and dirty/unpublished Icarus `ac4532fa-dirty` were used. The
+2,400-second run replayed the retained top image rather than compiling a new
+one. Its SHA-256 is recorded in
+[`three-vector-result.json`](three-vector-result.json); the image itself is
+not bundled. Logs and result are in
+[`three-vector-sim.log`](three-vector-sim.log),
+[`three-vector-timeout-sim.log`](three-vector-timeout-sim.log),
+[`three-vector-compile.log`](three-vector-compile.log),
+[`three-vector-firmware.log.gz`](three-vector-firmware.log.gz), and
+[`three-vector-result.json`](three-vector-result.json). A clean, published
+Icarus build is still required before qualification.
