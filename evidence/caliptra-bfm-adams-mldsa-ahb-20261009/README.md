@@ -146,3 +146,32 @@ version-read smoke and `--compile-only` path are unchanged.
 
 Preflight runner SHA-256:
 `8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db`.
+
+### Generated MLDSA compile-only follow-up — 2026-10-09
+
+The `--actual-rtl-smoke --compile-only` path compiled the pinned generated
+MLDSA testbench, clean-room 32-bit AHB provider, and actual `abr_top` RTL in
+both IEEE 2017 and 2023 modes. The runner exited successfully in each mode;
+`-tnull` was used and VVP was not started, so this confirms compile/elaboration
+only, not AHB runtime behavior or keygen. The Adams Bridge checkout was clean
+at `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`.
+
+This is diagnostic only: the installed Icarus build was dirty and unpublished
+at `ac4532fab037e91df2f903e67fb40f59baedccca` (`ac4532fa-dirty`). No
+qualification claim is made. Both invocations used the repository's guarded
+runner and disposable generated-source overlays:
+
+```sh
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge \
+  --iverilog '/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+  --vvp '/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  --edition 2017 --actual-rtl-smoke --compile-only
+```
+
+The 2023 run used the same command with `--edition 2023`.
+
+| Input | SHA-256 |
+|---|---|
+| `run_adams_mldsa_env_compile.py` | `8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db` |
+| Icarus `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |

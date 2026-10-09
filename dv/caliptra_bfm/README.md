@@ -166,6 +166,13 @@ this pattern before starting the long simulation and stops with the cause when
 the field is lost. See the
 [`packed-member reproduction`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#packed-member-width-follow-up--2026-10-09).
 
+Generated MLDSA compile-only follow-up (2026-10-09): the pinned generated
+MLDSA testbench and actual `abr_top` now compile with the 32-bit AHB provider
+in IEEE 2017 and 2023. No simulation was started; keygen remains incomplete.
+This used dirty, unpublished Icarus `ac4532fa-dirty`, so the result is
+diagnostic only. See the
+[`compile-only evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#generated-mldsa-compile-only-follow-up--2026-10-09).
+
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
 transaction base, typed configuration/agent bases, driver/monitor hooks,
 sequencer and test bases, and the in-order scoreboard used by ECC, HMAC, and
