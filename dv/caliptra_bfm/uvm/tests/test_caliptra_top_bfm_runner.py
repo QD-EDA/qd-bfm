@@ -22,11 +22,11 @@ class CheckerCompileCommandTest(unittest.TestCase):
         self.assertIn("-gassertions", disabled)
 
 
-class FastBootDataPreloadCaseValidationTest(unittest.TestCase):
-    def run_cli(self, case):
+class StockDmaRunnerOptionsTest(unittest.TestCase):
+    def run_cli(self, case, *options):
         with tempfile.TemporaryDirectory() as temp:
             return subprocess.run(
-                ["python3", str(RUNNER_PATH), "--case", case,
+                ["python3", str(RUNNER_PATH), "--case", case, *options,
                  "--fast-boot-data-preload", "--output", str(Path(temp) / "out")],
                 capture_output=True, text=True,
             )
@@ -34,6 +34,16 @@ class FastBootDataPreloadCaseValidationTest(unittest.TestCase):
     def test_accepts_stock_dma_case(self):
         result = self.run_cli("smoke_test_dma")
         self.assertNotIn("fast-boot-data-preload requires", result.stderr)
+        self.assertIn("set CALIPTRA_RTL", result.stderr)
+
+    def test_accepts_pq_vector_skip(self):
+        result = self.run_cli("smoke_test_dma", "--skip-pq-vector-generation")
+        self.assertNotIn("skip-pq-vector-generation is limited", result.stderr)
+        self.assertIn("set CALIPTRA_RTL", result.stderr)
+
+    def test_accepts_quiet_firmware(self):
+        result = self.run_cli("smoke_test_dma", "--quiet-firmware")
+        self.assertNotIn("quiet-firmware requires", result.stderr)
         self.assertIn("set CALIPTRA_RTL", result.stderr)
 
 

@@ -822,9 +822,9 @@ def main():
     parser.add_argument("--start-aes-case", type=int, metavar="INDEX",
                         help="zero-based start index for --limit-aes-cases")
     parser.add_argument("--skip-pq-vector-generation", action="store_true",
-                        help="diagnostic only: skip native and testbench MLDSA/MLKEM vector generation; keep all AES DMA cases")
+                        help="diagnostic only: skip MLDSA/MLKEM vector generation for DMA-only cases")
     parser.add_argument("--quiet-firmware", action="store_true",
-                        help="diagnostic only: suppress low-priority prints; keep all AES DMA cases")
+                        help="diagnostic only: suppress low-priority prints for DMA firmware cases")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     parser.add_argument("--disable-bfm-checker", action="store_true",
@@ -853,10 +853,11 @@ def main():
         raise ValueError("AES case limits are available only for smoke_test_dma_aes_gcm_short_1_dword")
     if aes_case_limit is not None and aes_case_limit < 1:
         raise ValueError("--limit-aes-cases must be positive")
-    if args.skip_pq_vector_generation and args.case != "smoke_test_dma_aes_gcm_short_1_dword":
-        raise ValueError("--skip-pq-vector-generation is limited to smoke_test_dma_aes_gcm_short_1_dword")
+    if args.skip_pq_vector_generation and args.case not in (
+            "smoke_test_dma", "smoke_test_dma_aes_gcm_short_1_dword"):
+        raise ValueError("--skip-pq-vector-generation requires a DMA-only firmware case")
     if args.quiet_firmware and args.case not in (
-            "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
+            "smoke_test_dma", "smoke_test_dma_aes_gcm_short_1_dword", "rand_test_dma"):
         raise ValueError("--quiet-firmware requires a supported DMA firmware case")
     if args.rand_dma_iterations is not None:
         if args.case != "rand_test_dma":
