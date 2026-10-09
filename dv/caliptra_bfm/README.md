@@ -161,7 +161,9 @@ SKENCODE `RW_READ` field is lost by the current Icarus build when the packed
 request's 15-bit address member is assigned an expression containing the
 32-bit operand counter. Verilator preserves the field, and explicitly sizing
 the address does too. This explains the observed missing key-memory reads;
-keygen remains incomplete and diagnostic only. See the
+keygen remains incomplete and diagnostic only. The keygen runner now checks
+this pattern before starting the long simulation and stops with the cause when
+the field is lost. See the
 [`packed-member reproduction`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#packed-member-width-follow-up--2026-10-09).
 
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,

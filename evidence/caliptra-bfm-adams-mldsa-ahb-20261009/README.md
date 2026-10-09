@@ -135,3 +135,11 @@ revisions remain `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and
 source SHA-256 is recorded with this follow-up's commit.
 
 Reproduction source SHA-256: `d9a7586a19293ae11bbe9ce215cf8e5e6e4c85c9a0d1d226fdda32e2090d646e`.
+
+### Keygen preflight follow-up — 2026-10-09
+
+`run_adams_mldsa_env_compile.py --actual-keygen-smoke` now compiles and runs
+this small reproduction before building the native helper or starting the
+Caliptra simulation. On the current Icarus build it exits with the observed
+`raw_en=0` result and explains that keygen was not started. The ordinary
+version-read smoke and `--compile-only` path are unchanged.

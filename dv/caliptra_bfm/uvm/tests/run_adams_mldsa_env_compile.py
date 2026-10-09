@@ -127,6 +127,36 @@ def run_under_memory_guard(repo: Path) -> int | None:
     return subprocess.run(command, env=environment).returncode
 
 
+def check_packed_member_read_request(
+    iverilog: str, vvp: str, repo: Path, temp: Path
+) -> None:
+    source = (
+        repo
+        / "evidence/caliptra-bfm-adams-mldsa-ahb-20261009/packed_member_width_repro.sv"
+    )
+    binary = temp / "packed_member_width_repro.vvp"
+    compile_result = subprocess.run(
+        [iverilog, "-g2012", "-s", "top", "-o", str(binary), str(source)],
+        cwd=repo,
+        capture_output=True,
+        text=True,
+    )
+    if compile_result.returncode:
+        raise SystemExit(
+            "packed-member preflight compile failed; keygen simulation was not started:\n"
+            + compile_result.stderr
+        )
+    result = subprocess.run([vvp, str(binary)], cwd=temp, capture_output=True, text=True)
+    match = re.search(r"raw_en=(\d+).*sized_en=(\d+)", result.stdout)
+    if result.returncode or match is None or match.groups() != ("1", "1"):
+        observed = result.stdout.strip() or result.stderr.strip() or "no reproduction output"
+        raise SystemExit(
+            "packed-member preflight requires raw_en=1 and sized_en=1; "
+            f"observed {observed}. This simulator cannot safely run the actual "
+            "MLDSA keygen smoke; keygen simulation was not started."
+        )
+
+
 def main() -> int:
     repo = Path(__file__).resolve().parents[4]
     guarded_result = run_under_memory_guard(repo)
@@ -178,6 +208,7 @@ def main() -> int:
         runtime.mkdir()
         expected_pass = "PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB"
         if args.actual_keygen_smoke and not args.compile_only:
+            check_packed_member_read_request(args.iverilog, args.vvp, repo, temp)
             ref_source = adams / "src/abr_top/uvmf/Dilithium_ref/dilithium/ref"
             ref_copy = temp / "dilithium-ref"
             shutil.copytree(ref_source, ref_copy)
