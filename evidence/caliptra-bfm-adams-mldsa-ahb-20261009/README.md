@@ -59,3 +59,18 @@ progress log SHA-256 is
 `b22d5d7fa188567d289b41f7f8c0b45e15a0a428cb2bd7de201219de83595135`; the
 runner source used for this probe is
 `aa398f185df3931c405d266c1941ee1ed51b61828cc7df2549acc0521e317e73`.
+
+### Controller-progress follow-up — 2026-10-09
+
+An instrumented 180-second run reached `MLDSA_KG_S+12`, the bounded-rejection
+sampler instruction for `S2[1]`. At cycle 1,000, the sampler was in WAIT with
+five accepted coefficients, SHA3 in `StManualRun`, and the controller waiting
+for the sampler. This confirms progress through actual keygen RTL after the
+AHB seed and control writes; it did not complete the operation before the
+guard timeout. This remains diagnostic because the Icarus source build is
+dirty and unpublished (`ac4532fab037e91df2f903e67fb40f59baedccca`).
+
+The trace log SHA-256 is
+`ea0206127a22c88b082e8a83a7ae7a8fa2c608725b291c877ecd9873c6881a0f`; the
+instrumented runner SHA-256 is
+`09388292753e2615dde416f1344b5455b67d97f92e7a5007f5d647ecdd5036a8`.

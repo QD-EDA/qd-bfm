@@ -144,8 +144,9 @@ Adams Bridge's generated MLDSA environment also completes a seed write and
 version read through the actual `abr_top` using the 32-bit AHB path under IEEE
 2017 and 2023; the runner requires the passive monitor to observe both
 directions with no error transfers. Full keygen remains unverified because
-the 600-second run did not reach its 10,000-cycle logging interval; a finer
-180-second probe reached cycle 1,000 with `busy=1` before timeout. See
+the 600-second run did not reach its 10,000-cycle logging interval. An
+instrumented 180-second probe reached keygen instruction `MLDSA_KG_S+12`; its
+bounded-rejection sampler had accepted five coefficients before timeout. See
 [`Adams Bridge AHB evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md).
 
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
