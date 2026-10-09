@@ -26,6 +26,9 @@ class RiscvToolchainPreflightTest(unittest.TestCase):
     def test_preflight_checks_the_cpp_frontend_and_keeps_its_log(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
+            gcc = root / "riscv64-unknown-elf-gcc"
+            gcc.write_text("#!/bin/sh\nexit 0\n")
+            gcc.chmod(0o755)
             tool = root / "riscv64-unknown-elf-cpp"
             tool.write_text("#!/bin/sh\nprintf 'preflight ran\\n'\n")
             tool.chmod(0o755)
@@ -41,6 +44,9 @@ class RiscvToolchainPreflightTest(unittest.TestCase):
     def test_preflight_reports_a_cpp_failure_before_compilation(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
+            gcc = root / "riscv64-unknown-elf-gcc"
+            gcc.write_text("#!/bin/sh\nexit 0\n")
+            gcc.chmod(0o755)
             tool = root / "riscv64-unknown-elf-cpp"
             tool.write_text("#!/bin/sh\necho missing cc1 library >&2\nexit 17\n")
             tool.chmod(0o755)
@@ -56,7 +62,22 @@ class RiscvToolchainPreflightTest(unittest.TestCase):
     def test_preflight_reports_a_missing_cpp_frontend(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
+            gcc = root / "riscv64-unknown-elf-gcc"
+            gcc.write_text("#!/bin/sh\nexit 0\n")
+            gcc.chmod(0o755)
             with self.assertRaisesRegex(RuntimeError, "riscv64-unknown-elf-cpp not found"):
+                RUNNER.preflight_riscv_toolchain(
+                    "riscv64-unknown-elf", {"PATH": temp}, root, root / "preflight.log",
+                )
+
+    def test_preflight_reports_a_missing_gcc_driver(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            cpp = root / "riscv64-unknown-elf-cpp"
+            cpp.write_text("#!/bin/sh\nexit 0\n")
+            cpp.chmod(0o755)
+
+            with self.assertRaisesRegex(RuntimeError, "riscv64-unknown-elf-gcc not found"):
                 RUNNER.preflight_riscv_toolchain(
                     "riscv64-unknown-elf", {"PATH": temp}, root, root / "preflight.log",
                 )

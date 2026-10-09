@@ -625,6 +625,8 @@ def run_logged(command, cwd, env, logfile):
 
 
 def preflight_riscv_toolchain(gcc_prefix, env, cwd, logfile):
+    if not shutil.which(f"{gcc_prefix}-gcc", path=env.get("PATH")):
+        raise RuntimeError(f"RISC-V preflight failed: {gcc_prefix}-gcc not found on PATH")
     cpp = shutil.which(f"{gcc_prefix}-cpp", path=env.get("PATH"))
     if not cpp:
         raise RuntimeError(f"RISC-V preflight failed: {gcc_prefix}-cpp not found on PATH")
