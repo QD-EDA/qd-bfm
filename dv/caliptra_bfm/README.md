@@ -531,3 +531,10 @@ The top-level research and implementation plan is in
 [`../../docs/conformance/caliptra_bfm_uvmf_recreation_plan_2026-10-03.md`](../../docs/conformance/caliptra_bfm_uvmf_recreation_plan_2026-10-03.md),
 with source and reuse findings in
 [`../../docs/conformance/caliptra_bfm_research_2026-10-03.md`](../../docs/conformance/caliptra_bfm_research_2026-10-03.md).
+
+**2026-10-09 published-main recheck:** the generated ECC reset/IRQ environment
+does not compile on the newest locally cached published Icarus `main`
+(`4b3f3424c440aca6af92153b6860a7253b925234`). Parsing stops at package-scoped
+parameterized driver/monitor proxy handles in generated interfaces, before
+simulation; no QD compatibility rewrite was applied. See the
+[`published-main compile evidence`](../../evidence/caliptra-bfm-generated-ecc-published-20261009/README.md).
