@@ -55,3 +55,31 @@ stock-firmware or 12-vector qualification run.
 
 A clean, published Icarus replay is still required before any qualification
 claim.
+
+## First two vectors in one simulator execution — 2026-10-08
+
+The one-case run above was followed by a single top-level execution of vectors
+1 and 2 (`--limit-aes-cases 2 --start-aes-case 0`). Both completed through the
+same BFM and checker instance. The test emitted one overall pass marker, no
+fail markers or bad diagnostics, and finished at `minstret=2872`,
+`mcycle=7279`.
+
+| Vector | AXI source transfer | AXI source readback | AXI destination transfer | AXI destination readback |
+| ---: | --- | --- | --- | --- |
+| 1 (one beat) | AW/W/B 1,475–1,478 at `0x123440000` | AR/R 2,940–2,942 | AW/W/B 3,028–3,031 at `0x123460000` | AR/R 3,154–3,156 |
+| 2 (two beats) | AW/W/B 5,071–5,075 at `0x123440000` | AR/R 6,510–6,514 | AW/W/B 6,600–6,604 at `0x123460000` | AR/R 6,722–6,726 |
+
+The two-beat W bursts asserted `WLAST` only on the second beat. Combined
+counts were AW=4, W=6, B=4, AR=4, and R=6. The guard exited 0 with a minimum
+of 7.64 GiB available and maximum process-group footprint of 1.65 GiB.
+
+This is still a diagnostic run: it uses fast TRNG cadence, the two-vector
+firmware copy with fast data preload, PQ-vector suppression, and the dirty,
+unpublished Icarus source SHA recorded above. The QD source revision was
+`90af876124e958ae010928ac3203d3606f9599fa` (documentation-only relative to the
+runner/BFM revision above). Exact provenance and retained artifacts are in
+[`two-vector-result.json`](two-vector-result.json),
+[`two-vector-sim.log`](two-vector-sim.log),
+[`two-vector-compile.log`](two-vector-compile.log), and
+[`two-vector-firmware.log.gz`](two-vector-firmware.log.gz). Simulation log
+SHA-256: `3bf2f4d0e16e42699d421dc043f5266e84818dd20250c40ad9a42603e9da8791`.

@@ -252,6 +252,8 @@ and unpublished; see the [per-vector traces](../../evidence/caliptra-bfm-open-to
 The ARM64 xPack RISC-V toolchain also built and passed the first-vector
 diagnostic; exact artifacts and toolchain provenance are in the
 [recorded run](../../evidence/caliptra-bfm-open-top-aes-xpack-20261008/README.md).
+The first two vectors also pass sequentially in one top simulation; their
+AXI traces are in that evidence note.
 
 ## Connecting to the Caliptra DMA port
 

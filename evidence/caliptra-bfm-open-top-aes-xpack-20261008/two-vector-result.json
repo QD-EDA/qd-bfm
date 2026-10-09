@@ -1,0 +1,190 @@
+{
+  "test": "smoke_test_dma_aes_gcm_short_1_dword",
+  "passed": true,
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "case_yaml_sha256": "37d25ede775580271066061df4eb0dfb3e2eecde39649e26e9220931d55c3837",
+  "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+  "aes_pkg_overlay_sha256": "d29c80cd5e51629b25a924e5249f85032c0b42f0f4006c3944906395e98ec158",
+  "trng_duty_cycle": 50,
+  "physical_rng_source_sha256": "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c38abf01f",
+  "axi_if_overlay_sha256": "d9173b5d3ecf2bff70412016f752e902f3f6ccf4fdb68ffd58764fb33e34f834",
+  "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654",
+  "reset_overlay_sha256": "c5b901d338d0ee31feca6ea0cf9dd67f898c9d053e016cf835ab3468a21af3ed",
+  "jtag_overlay_sha256": "c4dbd3f75055982a5b31d05d8ba66039027b48b056e769985722a4db4b02dea6",
+  "pq_vector_source_sha256": "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343",
+  "services_overlay_sha256": "f2561015a18ff5649f51f47e9436de3ae1be5ff93e5c70f124c76b16e83f34e8",
+  "dma_generator_overlay_sha256": null,
+  "profile_sha256": "409488f4b4ffc863125b2275be72f095dd637651bd3939fdabb1165c4db54bd6",
+  "profile_excluded_sources": [
+    "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv"
+  ],
+  "caliptra_bfm_checker_enabled": true,
+  "compile_command": [
+    "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog",
+    "-g2017",
+    "-gassertions",
+    "-gcommercial-unsafe",
+    "-s",
+    "caliptra_top_tb",
+    "-D",
+    "RV_OPENSOURCE",
+    "-D",
+    "CLP_ASSERT_ON",
+    "-D",
+    "CALIPTRA_INTERNAL_TRNG",
+    "-D",
+    "CALIPTRA_BFM_CHECKER",
+    "-f",
+    "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/open_caliptra_top.vf",
+    "-o",
+    "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/caliptra_top_tb.vvp"
+  ],
+  "compile_exit": 0,
+  "firmware_command": [
+    "make",
+    "-f",
+    "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/tools/scripts/Makefile",
+    "TESTNAME=smoke_test_dma_aes_gcm_short_1_dword",
+    "GCC_PREFIX=riscv-none-elf",
+    "CALIPTRA_INTERNAL_TRNG=1",
+    "PLAYBOOK_RANDOM_SEED=1",
+    "BUILD_CFLAGS=-std=gnu11 -O2 -DCPT_VERBOSITY=ERROR",
+    "TEST_DIR=/private/tmp/qd-bfm-first-two-aes-xpack-20261008/limited_aes_case_source",
+    "program.hex"
+  ],
+  "firmware_exit": 0,
+  "aes_case_limit": 2,
+  "aes_case_start": 0,
+  "aes_case_limit_source_sha256": "683cae66d574f85fa2c9397b879a7f492189fda64f9c8c7a03f006521c14781b",
+  "rand_dma_iterations": null,
+  "force_first_rand_dma_reset": false,
+  "rand_dma_reset_delay_cycles": null,
+  "firmware_image_sha256": {
+    "program.hex": "59b59ac233525afa82ad4147c783c8257082fd8cdaa65fce5a32ee069becb1be",
+    "dccm.hex": "234197e2b93c36d39bddf40fb6ab268b1b253b58f03216f5459f5d89da77822e",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "simulation_image_sha256": {
+    "program.hex": "cdd651f521e3b2ab75d7e20b805efebcb1ef18f72e96bc009a3731d753070520",
+    "dccm.hex": "ace5482380d6f672c3e82767caf61d958aa3bae6b6338c8b69bed00d21844d20",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "fast_boot_data_preload": {
+    "diagnostic_only": true,
+    "source_lma_start": "0xfd60",
+    "source_lma_end": "0x13e1c",
+    "destination_vma_start": "0x50020000",
+    "destination_offset": "0x20000",
+    "data_bytes": 16572,
+    "data_sha256": "0c55984966f9f5baa2e6359c813d792348f099e5edca268658ae42dbb9854544",
+    "bss_lma_start": "0x13e1c",
+    "bss_lma_end": "0x13edc",
+    "bss_vma_start": "0x500240bc",
+    "bss_bytes": 192,
+    "bss_sha256": "5d89f056865052bcb89c910d2d62872e029fb273c3db03f8968a52a41593c1b5",
+    "branch_pc": "0x46",
+    "original_branch": "63fa6200",
+    "replacement_branch": "6f000004"
+  },
+  "diagnostic_modes": {
+    "fast_trng": true,
+    "fast_boot_data_preload": true,
+    "first_aes_case": false,
+    "aes_case_limit": 2,
+    "aes_case_start": 0,
+    "rand_dma_iterations": null,
+    "force_first_rand_dma_reset": false,
+    "rand_dma_reset_delay_cycles": null,
+    "caliptra_bfm_checker": true,
+    "skip_pq_vector_generation": true,
+    "quiet_firmware": true
+  },
+  "native_vector_build_commands": [
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-I/opt/homebrew/opt/mbedtls@3/include",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/ecc/tb/ecc_secp384r1.c",
+      "-L/opt/homebrew/opt/mbedtls@3/lib",
+      "-lmbedtls",
+      "-lmbedx509",
+      "-lmbedcrypto",
+      "-o",
+      "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/native_vectors/ecc_secp384r1.exe"
+    ],
+    [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/dv/caliptra_bfm/native_vectors/stage_sha256_wntz.py",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/sha256/tb/sha256_wntz_test_gen.py",
+      "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/native_vectors/sha256_wntz_test_gen.py"
+    ]
+  ],
+  "native_vector_tools": {
+    "brew": "/opt/homebrew/bin/brew",
+    "clang": "/usr/bin/clang",
+    "make": "/usr/bin/make",
+    "openssl": "/opt/homebrew/bin/openssl",
+    "xxd": "/opt/homebrew/bin/xxd",
+    "python3.12": "/opt/homebrew/bin/python3.12"
+  },
+  "native_vector_sha256": {
+    "ecc_secp384r1.exe": "0d429f5b731859031bf59689b3995f263a7d5065b854592e16621fd6a7006c1b",
+    "doe_test_gen.py": "d94bd571dd599a9431398778f195c05fb3a2f3ddb1adcc38925a2c1b3db6bdc0",
+    "sha256_wntz_test_gen.py": "45c8a4f5ac7032c0bdb3b62b3a7b8645bec78b09e028f6bf8ac9cda232b4fce9"
+  },
+  "axi_trace_source_sha256": "27295f3f2d6172fc925f950b862dc8f6d82f518f344f118a2a9e63b2b953bd20",
+  "axi_trace_plugin_sha256": "11b62d54d3b23b1d098f443c8845fa089076fdc99f3e3302eb8b6713f57b74e5",
+  "axi_trace_compile_command": [
+    "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/iverilog-vpi",
+    "/private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/evidence/caliptra-bfm-open-top-smoke-20261006/sim-axi-trace-vpi.c"
+  ],
+  "axi_trace_compile_exit": 0,
+  "sim_command": [
+    "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp",
+    "-d",
+    "/private/tmp/qd-bfm-checkpoint.H2Ij8x/startup-probe/jtagdpi.vpi",
+    "-n",
+    "-m",
+    "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/trace_vpi/sim-axi-trace-vpi.vpi",
+    "/private/tmp/qd-bfm-first-two-aes-xpack-20261008/caliptra_top_tb.vvp",
+    "+CLP_REGRESSION",
+    "+CLP_DMA_TB_MODE_NOT_EMPTY",
+    "+CLP_SKIP_PQ_VECTOR_GENERATION"
+  ],
+  "simulator_provenance": {
+    "iverilog": {
+      "path": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog",
+      "version": "Icarus Verilog version 13.0 (devel) (ac4532fa-dirty)",
+      "version_exit_code": 0,
+      "sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114"
+    },
+    "vvp": {
+      "path": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp",
+      "version": "Icarus Verilog runtime version 13.0 (devel) (ac4532fa-dirty)",
+      "version_exit_code": 0,
+      "sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+    },
+    "source_checkout": {
+      "root": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK",
+      "commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+      "clean": false,
+      "remote_tracking_refs_containing_head": []
+    }
+  },
+  "sim_exit": 0,
+  "testcase_pass_markers": 1,
+  "testcase_fail_markers": 0,
+  "jtag_server_errors": 0,
+  "jtag_bind_denials": 1,
+  "reset_assert_cycles": [],
+  "outstanding_writes_at_reset": [],
+  "reset_in_flight": false,
+  "bad_diagnostics": 0,
+  "finish": [
+    2872,
+    7279
+  ],
+  "sim_log_sha256": "3bf2f4d0e16e42699d421dc043f5266e84818dd20250c40ad9a42603e9da8791"
+}
