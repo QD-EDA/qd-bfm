@@ -175,3 +175,27 @@ suppression, and Icarus source `ac4532fab037e91df2f903e67fb40f59baedccca`
 replay and the full suite are open. See
 [`eighth-aes-result.json`](eighth-aes-result.json) and
 [`eighth-aes-axi-wstate.log`](eighth-aes-axi-wstate.log).
+
+## Ninth AES/DMA vector — 2026-10-08
+
+The ninth vector passed in isolation with the checker enabled
+(`--limit-aes-cases 1 --start-aes-case 8`). It exercised nine-beat source
+transfers and split the destination into four-, four-, and one-beat writes:
+
+| Cycle | Channel | Address | Result |
+| ---: | --- | --- | --- |
+| 1,730–1,741 | AW, W, B | `0x123440000` | Nine W beats; B completed |
+| 3,309–3,327 | AR, R | `0x123440000` | Nine read beats |
+| 3,403–3,409 | AW, W, B | `0x123460000` | Four W beats; B completed |
+| 3,523–3,529 | AW, W, B | `0x123460010` | Four W beats; B completed |
+| 3,588–3,591 | AW, W, B | `0x123460020` | One W beat; B completed |
+| 3,730–3,748 | AR, R | `0x123460000` | Nine read beats |
+
+Firmware reported PASS at `mcycle=4687`; the runner recorded one pass marker,
+no fail markers, no error/fatal diagnostics, and no unexpected JTAG errors.
+The run used a single-vector firmware copy, fast TRNG cadence, PQ-vector
+suppression, and Icarus source `ac4532fab037e91df2f903e67fb40f59baedccca`
+(`ac4532fa-dirty`). This remains diagnostic only; a clean published Icarus
+replay and the full suite are open. See
+[`ninth-aes-result.json`](ninth-aes-result.json) and
+[`ninth-aes-axi-wstate.log`](ninth-aes-axi-wstate.log).

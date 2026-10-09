@@ -401,13 +401,13 @@ demonstrates that the replay can complete, but remains diagnostic only: the
 Icarus build was dirty and unpublished, and JTAG DPI logged a socket-bind
 permission warning. Earlier 3,600-second timeout records are unchanged. See
 the [full-top replay evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-208-reset-20261008/README.md).
-**Track A AES/DMA update (2026-10-08).** Eight isolated short-suite vectors now
+**Track A AES/DMA update (2026-10-08).** Nine isolated short-suite vectors now
 pass through the full-top target with the open checker enabled, exercising
-one- through eight-beat source buffers; vectors five through seven split the
-destination into 4+1, 4+2, and 4+3 writes, while vector eight uses two four-beat
-writes. These diagnostic runs used dirty, unpublished Icarus `ac4532fa-dirty`,
-so they do not qualify the full suite. See the
-[`eight-vector trace evidence`](../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
+one- through nine-beat source buffers. Vectors five through eight split the
+destination into 4+1 through 4+4 beats; vector nine uses 4+4+1. These diagnostic
+runs used dirty, unpublished Icarus `ac4532fa-dirty`, so they do not qualify
+the full suite. See the
+[`nine-vector trace evidence`](../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
 The clean-room PV client master also runs against the actual PCRVault RTL. Its
 direct DUT probe covers concurrent PV read/write, client readback, AHB
 readback and control-register access, terminal `last`, invalid offsets, and
