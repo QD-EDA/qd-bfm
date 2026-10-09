@@ -84,3 +84,30 @@ The guarded runner's SHA-256 after its `sh` re-exec fix is
 | `run.sh` at the 2026-10-04 capture | `25f858df82425d23a33405d87452f733c364db81b0950bf3a56d4dac0162b3c7` |
 | `verify.log` | `1d91489f1eb19e5f96797b4572a9d3fcec62f517158afd18c9e3d9a99c020b94` |
 | overlay helper | `eafff8df6a3aa78d89832c7b901ba7158cecf56b6d12e826251519d05e38658d` |
+
+## Latest published Icarus check — 2026-10-09
+
+The guarded [`run.sh`](run.sh) and Python runner were restored as a reproducible
+entry point. The runner uses the pinned Caliptra v2.1.2 source, applies the
+existing exact-hash overlay in a temporary directory, and requires nonzero PV
+read and write scoreboard comparisons, the test pass marker, normal finish,
+and zero UVM errors/fatals. It runs under the repository memory guard.
+
+The simulator remote-head check returned published Icarus `main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`; the run used the existing build
+of that clean published revision. Compilation stops before VVP at four
+package-qualified proxy declarations in the generated PV driver/monitor BFMs
+(`pv_read_driver_bfm.sv:136`, `pv_read_monitor_bfm.sv:98`,
+`pv_write_driver_bfm.sv:135`, and `pv_write_monitor_bfm.sv:111`). No current-main
+runtime or scoreboard result was produced. The 2026-10-04/05 passing runs above
+remain historical results on their recorded Icarus revision; they do not show
+that this generated bench passes on current `main`.
+
+The current-main probe command was:
+
+```sh
+CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/vvp \
+sh evidence/caliptra-bfm-pv-generated-uvmf-20261004/run.sh
+```

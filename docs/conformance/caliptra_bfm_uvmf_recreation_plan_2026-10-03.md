@@ -1322,3 +1322,12 @@ for 32-bit and 64-bit profiles under IEEE 2017 and 2023. Each run checked
 12 transfers with no UVM errors or fatals. This advances provider compatibility
 coverage only; generated Caliptra KeyVault still stops at the simulator parser
 blocker above. See the [latest-main AHB compatibility evidence](../../evidence/caliptra-bfm-ahb-qvip-compat-main-0d8815f-20261009/README.md).
+
+### Generated PCRVault on latest published main
+
+The guarded PCRVault runner now reproduces the generated `pv_rand_wr_rd_test`
+compile from the pinned Caliptra file list and exact-hash overlay. On published
+Icarus `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, parsing stops at four
+package-qualified proxy declarations in the generated read/write driver and
+monitor BFMs, before VVP starts. The older PV runtime result remains historical;
+current-main runtime behavior is unverified. See the [PCRVault evidence note](../../evidence/caliptra-bfm-pv-generated-uvmf-20261004/README.md#latest-published-icarus-check--2026-10-09).
