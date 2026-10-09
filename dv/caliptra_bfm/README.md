@@ -254,6 +254,12 @@ diagnostic; exact artifacts and toolchain provenance are in the
 [recorded run](../../evidence/caliptra-bfm-open-top-aes-xpack-20261008/README.md).
 The first two vectors also pass sequentially in one top simulation; their
 AXI traces are in that evidence note.
+The first three vectors (1-, 2-, and 3-beat transfers) now pass sequentially
+through the same top-level BFM and checker instance. The 1,800-second guarded
+attempt ended before the third source read; replaying the retained top image
+with a 2,400-second guard completed at `mcycle=11110`. This is diagnostic on
+dirty, unpublished Icarus; see the dated result and timeout trace in the same
+evidence note.
 
 ## Connecting to the Caliptra DMA port
 
