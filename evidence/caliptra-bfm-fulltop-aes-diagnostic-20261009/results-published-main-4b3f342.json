@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-09",
+  "qualification": "diagnostic",
+  "test": "smoke_test_dma_aes_gcm_short_1_dword",
+  "passed": true,
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "icarus_source_commit": "4b3f3424c440aca6af92153b6860a7253b925234",
+  "icarus_source_ref": "locally cached origin/main, published main merged 2026-10-09 09:25 UTC",
+  "compile_exit": 0,
+  "simulation_exit": 0,
+  "caliptra_bfm_checker_enabled": true,
+  "testcase_pass_markers": 1,
+  "testcase_fail_markers": 0,
+  "finish": {
+    "minstret": 1429,
+    "mcycle": 3663
+  },
+  "firmware_image_provenance": {
+    "source": "reused from the prior clean published 127b887 run",
+    "program_hex_sha256": "c9fff8e108ff2d77b3598e29d3a8995cfd73f1898f5295d8ca29222e7f8d40be",
+    "dccm_hex_sha256": "528b4f13f1e1e12242eb050aa26bd42acb61144451a7c11a85f7152715747b52"
+  },
+  "profile_sha256": "ac1e73776a33b27fd21065ffed00f3c98055a8997e1d77a9894dcf8b7dfbef96",
+  "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+  "run_caliptra_top_firmware_bfm_py_sha256": "4c2d15ec0c86a242e25b9b677771ade1f5b2b1bb174da07381ceabea08cccc36",
+  "iverilog_sha256": "00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385",
+  "vvp_sha256": "f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a",
+  "compiled_vvp_sha256": "9e3f47850f63b68e86e9e678a3cecacf2908c0aa4cbc56405e81a80f50e3f5fe",
+  "jtagdpi_vpi_sha256": "948576be882402853160da7a082c31fa0e74ea0324bbacb6649b9f0d9d24eb96",
+  "sim_log": "sim-published-main-4b3f342.log",
+  "sim_log_sha256": "76f03787e406123e74adba50d9e4e5832b6a2d81cc900a1a1d72373c7478ade0",
+  "compile_environment": {
+    "CALIPTRA_ROOT": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl",
+    "CALIPTRA_PRIM_ROOT": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/caliptra_prim_generic",
+    "CALIPTRA_PRIM_MODULE_PREFIX": "caliptra_prim_generic",
+    "CALIPTRA_AXI4PC_DIR": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/tb"
+  },
+  "simulation_environment": {
+    "PATH": "/private/tmp/qd-bfm-python-shim-4b3:/opt/homebrew/bin:/opt/riscv/bin:/usr/bin:/bin"
+  },
+  "compile_command": [
+    "/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog",
+    "-g2017",
+    "-gassertions",
+    "-gcommercial-unsafe",
+    "-s",
+    "caliptra_top_tb",
+    "-D",
+    "RV_OPENSOURCE",
+    "-D",
+    "CLP_ASSERT_ON",
+    "-D",
+    "CALIPTRA_INTERNAL_TRNG",
+    "-D",
+    "CALIPTRA_BFM_CHECKER",
+    "-f",
+    "/private/tmp/caliptra-top-published-127b887-20261009/run/open_caliptra_top.vf",
+    "-o",
+    "/private/tmp/caliptra-top-published-127b887-20261009/run/caliptra_top_tb-4b3f342.vvp"
+  ],
+  "simulation_command": [
+    "/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp",
+    "-d",
+    "/private/tmp/caliptra-jtag-vpi-4b3f342/jtagdpi.vpi",
+    "-n",
+    "/private/tmp/caliptra-top-published-127b887-20261009/run/caliptra_top_tb-4b3f342.vvp",
+    "+CLP_REGRESSION",
+    "+CLP_DMA_TB_MODE_NOT_EMPTY",
+    "+CLP_SKIP_PQ_VECTOR_GENERATION"
+  ],
+  "notes": [
+    "A temporary PATH shim made python resolve to python3 for the firmware harness's shell calls.",
+    "The JTAG VPI listener needed local-socket permission; no client connection was used.",
+    "The live GitHub main head could not be checked because DNS resolution failed; this is the newest revision in the local origin/main cache.",
+    "The full runner's firmware-rebuild preflight could not use the installed x86 RISC-V toolchain because its libisl.23.dylib dependency is missing."
+  ]
+}

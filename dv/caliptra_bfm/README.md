@@ -538,3 +538,8 @@ does not compile on the newest locally cached published Icarus `main`
 parameterized driver/monitor proxy handles in generated interfaces, before
 simulation; no QD compatibility rewrite was applied. See the
 [`published-main compile evidence`](../../evidence/caliptra-bfm-generated-ecc-published-20261009/README.md).
+
+The full-top AES/DMA smoke also compiled and passed on that published revision,
+with the native AXI checker enabled. It reused the exact firmware image from the
+earlier `127b887` run; see the dated full-top
+[`4b3f342` evidence](../../evidence/caliptra-bfm-fulltop-aes-diagnostic-20261009/README.md#recompiled-and-rerun-on-published-main--2026-10-09).
