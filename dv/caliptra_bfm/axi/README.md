@@ -218,12 +218,12 @@ is a shorter-bound attempt and does not supersede that pass. The earlier boot
 case had no DMA traffic. The passing run uses a diagnostic firmware copy, fast
 TRNG, and PQ-vector suppression, so it does not qualify stock firmware or the
 full suite.
-On 2026-10-08, seven isolated runs of the short AES/DMA firmware vectors passed
+On 2026-10-08, eight isolated runs of the short AES/DMA firmware vectors passed
 through this full-top target with `CALIPTRA_BFM_CHECKER` enabled. They exercised
-one- through seven-beat source buffers; vectors five through seven also
-exercised four-plus-one, four-plus-two, and four-plus-three destination write
-splits. The logs show no W-channel stalls or checker errors. See the
-[`one-to-seven-beat trace evidence`](../../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
+one- through eight-beat source buffers; vectors five through seven exercised
+split destination writes, and vector eight used two four-beat writes. The logs
+show no W-channel stalls or checker errors. See the
+[`one-to-eight-beat trace evidence`](../../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
 These are diagnostic runs on a dirty, unpublished simulator source revision,
 not stock firmware or full-suite qualification.
 
