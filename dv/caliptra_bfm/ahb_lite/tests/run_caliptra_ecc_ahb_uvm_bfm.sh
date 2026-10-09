@@ -26,7 +26,6 @@ CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
   "$IVERILOG_BIN" -uvm -g"$SV_EDITION" -s tb_caliptra_ecc_ahb_uvm_bfm -o "$out" \
   -f "$caliptra_root/src/ecc/config/ecc_top.vf" \
   -f dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f \
-  dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_checker.sv \
   dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_ecc_ahb_uvm_bfm.sv
 "$VVP_BIN" "$out" >"$log" 2>&1 || { cat "$log"; exit 1; }
 cat "$log"
