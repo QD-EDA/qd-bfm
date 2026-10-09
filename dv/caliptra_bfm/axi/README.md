@@ -52,8 +52,9 @@ any monitored byte invalidates that reservation; a failed exclusive write
 returns OKAY and leaves memory unchanged. LOCKed writes are serialized around
 the data phase. The FIFO subordinate does not support exclusives and returns
 OKAY for LOCKed accesses. Reset clears protocol queues and reservations without
-clearing memory. The subordinate regression covers queued traffic and both
-successful and invalidated exclusive sequences.
+clearing memory. The subordinate regression covers queued traffic, successful
+and invalidated exclusive sequences, a legal WRAP burst, and atomically
+rejected boundary-crossing bursts.
 
 Run its end-to-end manager/checker test with:
 
