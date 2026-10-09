@@ -70,7 +70,7 @@ module tb_axi4_caliptra_master_write_outstanding;
 
   axi4_caliptra_master #(
     .ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32),
-    .MAX_BEATS(16), .TIMEOUT_CYCLES(64), .MAX_OUTSTANDING(2)
+    .MAX_BEATS(16), .TIMEOUT_CYCLES(64), .MAX_OUTSTANDING(4)
   ) bfm (.*);
 
   function automatic integer caller_for_id(input [7:0] id);
@@ -219,12 +219,11 @@ module tb_axi4_caliptra_master_write_outstanding;
 
   initial begin
     wait (ARESETn === 1'b1);
-    wait_counts(2);
-    send_response(1, 2'b01);
-    send_response(0, 2'b00);
     wait_counts(4);
     send_response(3, 2'b10);
+    send_response(0, 2'b00);
     send_response(2, 2'b00);
+    send_response(1, 2'b01);
     wait_counts(5);
     send_response(4, 2'b00);
   end

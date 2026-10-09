@@ -60,7 +60,7 @@ module tb_axi4_caliptra_master_outstanding;
 
   axi4_caliptra_master #(
     .ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32),
-    .MAX_BEATS(16), .TIMEOUT_CYCLES(32), .MAX_OUTSTANDING(2)
+    .MAX_BEATS(16), .TIMEOUT_CYCLES(32), .MAX_OUTSTANDING(4)
   ) bfm (.*);
 
   always @(posedge ACLK) begin
@@ -138,12 +138,11 @@ module tb_axi4_caliptra_master_outstanding;
 
   initial begin
     wait (ARESETn === 1'b1);
-    wait (ar_count == 2);
-    send_response(1);
-    send_response(0);
     wait (ar_count == 4);
     send_response(3);
+    send_response(0);
     send_response(2);
+    send_response(1);
     wait (ar_count == 5);
     send_response(4);
   end
