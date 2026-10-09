@@ -90,3 +90,25 @@ env IVERILOG_BIN=/opt/homebrew/bin/iverilog VVP_BIN=/opt/homebrew/bin/vvp sh dv/
 | Icarus compiler `/opt/homebrew/bin/iverilog` | `5df81b269e1ff2c965dd00ad5a8071ca17717f416003b3661a18b2dde430e73c` |
 | Icarus runtime `/opt/homebrew/bin/vvp` | `1a9bdf1f40102f64f015514f5069f99a5dd9f9f38de343743ef4c169fb358392` |
 | Raw log `/private/tmp/caliptra-bfm-axi-concurrency-v13_0-20261008.log` | `e6781af98bc2422ba96cde8c2d55be102bb9842696f645beb168836a9d52bc1d` |
+
+## Published-Icarus monitor follow-up — 2026-10-09
+
+The same transaction-monitor regression passed on a clean source archive of
+published Icarus main `127b887dfdc09283ab0187a2e618421dee3d5dcc`. It checked
+completed records, W-before-AW buffering, concurrent reads and writes, and
+capacity/error reporting. The runner printed its PASS marker and exited 0.
+This is a monitor-unit result, not full Caliptra environment qualification.
+
+```sh
+IVERILOG_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh
+```
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/axi/axi4_caliptra_transaction_monitor.sv` | `5b0e3b0ff501a943b65d462466d27496a9319d011632e4f6b9e394e185e22e04` |
+| `dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_transaction_monitor.sv` | `4227e2d387f488e46bfe3c3f69b61985897e150b5b40b489902668c843d55c30` |
+| `dv/caliptra_bfm/axi/tests/run_transaction_monitor.sh` | `8e4ef6ad1f1c83b1f2057e348fe8c1be9175a172af274b8d0d0debceca9ca011` |
+| `iverilog` | `a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602` |
+| `vvp` | `29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca` |
