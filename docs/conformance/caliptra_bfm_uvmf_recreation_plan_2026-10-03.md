@@ -1168,6 +1168,21 @@ native checker enabled. This is one diagnostic vector with fast TRNG,
 `.data`/`.bss` preload, and PQ-vector suppression; the 12-case batch remains
 open. See the [`case 4 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case4-main-0d8815f-20261009/README.md).
 
+**2026-10-09 published-main case-5 rerun:** the fifth short AES/DMA vector
+passes on published Icarus `main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`, with the open AXI target and
+native checker enabled. This diagnostic vector used fast TRNG, `.data`/`.bss`
+preload, and PQ-vector suppression; the 12-case batch remains open. See the
+[`case 5 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case5-main-0d8815f-20261009/README.md).
+
+**2026-10-09 Slurm workflow discovery:** `DAN-DESKTOP` is reachable through
+the configured SSH alias and exposes the `verilog` partition. Its current
+checkout has stock Icarus 12.0, no QD or Caliptra source tree, and no `make` or
+RISC-V firmware compiler. The current Caliptra BFM wrapper also exits 78 on
+Linux. A usable job must stage pinned inputs and toolchain components into a
+unique `~/slurm-runs/caliptra-bfm/...` directory and launch with `sbatch`;
+monitor with `squeue` and that run's log. No job was submitted during discovery.
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
