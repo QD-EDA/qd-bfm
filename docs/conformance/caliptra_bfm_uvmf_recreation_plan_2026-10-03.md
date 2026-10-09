@@ -1140,6 +1140,13 @@ testcase terminal marker or normal finish. The one-vector case-12 result above
 remains separate evidence, and the batch remains open. See the [12-case
 diagnostic](../../evidence/caliptra-bfm-fulltop-aes-cases1-12-main-0d8815f-20261009/README.md).
 
+**2026-10-09 published-main case-1 rerun:** the first short AES/DMA vector
+passes on published Icarus `main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3` with the AXI target and native
+checker enabled. This is one diagnostic vector with fast TRNG, `.data`/`.bss`
+preload, and PQ-vector suppression; the 12-case batch remains open. See the
+[`case 1 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case1-main-0d8815f-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
