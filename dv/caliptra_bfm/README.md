@@ -156,6 +156,14 @@ completion, so the AHB launch is working but full keygen/readback remains
 unverified. The trace used dirty, unpublished Icarus and is diagnostic only;
 see the dated Adams Bridge evidence for the command and hashes.
 
+Packed-member follow-up (2026-10-09): a standalone reproduction shows the
+SKENCODE `RW_READ` field is lost by the current Icarus build when the packed
+request's 15-bit address member is assigned an expression containing the
+32-bit operand counter. Verilator preserves the field, and explicitly sizing
+the address does too. This explains the observed missing key-memory reads;
+keygen remains incomplete and diagnostic only. See the
+[`packed-member reproduction`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#packed-member-width-follow-up--2026-10-09).
+
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
 transaction base, typed configuration/agent bases, driver/monitor hooks,
 sequencer and test bases, and the in-order scoreboard used by ECC, HMAC, and
