@@ -208,3 +208,50 @@ The 2023 run used the same command with `--edition 2023`.
 | `run_adams_mldsa_env_compile.py` | `8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db` |
 | Icarus `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
 | Icarus `vvp` | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
+
+### Published-Icarus generated MLDSA BFM check — 2026-10-09
+
+The same generated-environment compile and actual-RTL version-read smoke now
+pass using a clean source archive of published Icarus main
+`127b887dfdc09283ab0187a2e618421dee3d5dcc` and UVM Core
+`78c06547a2a0a29b3dc9dcafae62b75b2ff61544`. The pinned Adams Bridge tree was
+`b77e3d899e828d626cfc2a0d26a6b5704cc121e0`; the runner verifies this revision
+and a clean tree. It creates source-hash-checked compatibility overlays only
+in a temporary directory.
+
+The generated MLDSA environment plus the `abr_top` actual-RTL harness compiled
+under IEEE 2017 and 2023. The bounded version-read runtime also passed under
+both editions: generated RAL wrote the seed and read the actual version over
+the clean-room 32-bit AHB agent; the monitor observed one read and one write,
+zero transfer errors and six wait cycles. Each run reported zero UVM errors
+and fatals and the expected warning that internal QVIP covergroups are not
+recreated. This version-register smoke does not run MLDSA keygen; its
+scoreboard correctly reports zero matches because no MLDSA prediction was
+generated. It is targeted integration evidence, not full Adams Bridge
+qualification.
+
+The installed binaries were built from the published source archive. Their
+fingerprints and relevant source hashes are:
+
+```text
+Icarus source: 127b887dfdc09283ab0187a2e618421dee3d5dcc
+a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
+29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
+8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db  dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py
+afa63b20041ebef82ff585b449c06cfd208ddc95e8ba2bfd18396fc6ddd931c4  dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f
+82729c2af1f1ea9f3c97b9ea42e93d57b75134ded36a1bb027be8bdf5dbbb311  dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv
+4592ce31da201f0e56d4c2629aafbe3638f5d2970713fc382c3a4a5bff05bd9b  dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv
+0208f6d8c0fc6e83fa7533cf76990c58f4ad5a062d7cd7a943aea967bb8e4a35  dv/caliptra_bfm/uvm/caliptra_ahb_mvc_compat_pkg.sv
+```
+
+Runtime commands (run sequentially):
+
+```sh
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge \
+  --iverilog /private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+  --vvp /private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+  --edition 2017 --actual-rtl-smoke
+
+# Repeat with --edition 2023.
+```
