@@ -1119,6 +1119,14 @@ older 12-case batch on `197f9ba` was stopped before its terminal marker when
 the newer local main ref was found and is not counted. See
 [`case 12 on Icarus b452394f`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-b452394f-20261009/README.md).
 
+**2026-10-09 latest locally available main rerun:** the same final, 12-beat
+AES/DMA vector passes on clean `origin/main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3` with the native checker enabled.
+This remains one diagnostic vector using fast TRNG, `.data`/`.bss` preload,
+and PQ-vector suppression; it does not qualify stock firmware or full-top
+coverage. GitHub DNS prevented a live remote-head check. See the
+[`case 12 on Icarus 0d8815f`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-0d8815f-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a

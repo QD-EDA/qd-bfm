@@ -550,3 +550,12 @@ The full-top AES/DMA smoke also compiled and passed on that published revision,
 with the native AXI checker enabled. It reused the exact firmware image from the
 earlier `127b887` run; see the dated full-top
 [`4b3f342` evidence](../../evidence/caliptra-bfm-fulltop-aes-diagnostic-20261009/README.md#recompiled-and-rerun-on-published-main--2026-10-09).
+
+**2026-10-09 latest locally available Icarus main:** the final, 12-beat
+short AES/DMA vector also passes through the full Caliptra top with the open
+AXI target and native checker on clean `origin/main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`. This remains a one-vector
+diagnostic using fast TRNG, `.data`/`.bss` preload, and PQ-vector suppression,
+not stock-firmware qualification. GitHub DNS prevented a fresh remote-head
+check. See the
+[`0d8815f full-top evidence`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-0d8815f-20261009/README.md).
