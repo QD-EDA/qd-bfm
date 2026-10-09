@@ -261,6 +261,9 @@ module tb_axi4_caliptra_checker;
     end else if (test_case == "BAD_MISSING_R") begin
       send_ar(8'h8, 19'h100, 0);
       dut.check_idle();
+    end else if (test_case == "BAD_MISSING_W") begin
+      send_aw(8'h8, 19'h100, 0);
+      dut.check_idle();
     end else if (test_case == "BAD_EARLY_B") begin
       send_aw(8'h9, 19'h100, 0);
       send_b(8'h9);

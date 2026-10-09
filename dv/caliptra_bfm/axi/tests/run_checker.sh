@@ -51,6 +51,7 @@ for entry in \
   'BAD_X_RRESP:R payload is unknown' \
   'BAD_LOCK_MIXED_R:exclusive read mixes EXOKAY and non-EXOKAY' \
   'BAD_MISSING_R:incomplete read response' \
+  'BAD_MISSING_W:AXI checker has incomplete write address/data traffic' \
   'BAD_EARLY_B:B response ID has no completed write transaction' \
   'BAD_WRITE_QUEUE_FULL:AXI write response queue is full' \
   'BAD_READ_QUEUE_FULL:read request queue is full' \
@@ -79,4 +80,4 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected forty injected protocol violations\n'
+printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected forty-one injected protocol violations\n'
