@@ -1085,6 +1085,14 @@ Only after Phase 4 is stable across a meaningful set. Reconcile with Track A
 (shared `axi_if`/mailbox concerns) without letting one lane's results stand in
 for the other.
 
+**2026-10-09 full-top diagnostic:** the first short AES/DMA firmware vector
+passes through the pinned Caliptra top with the open AXI target and native
+checker under the clean locally available `origin/main` build
+`197f9baece79e66d25524906fb7b54c9faa8f4e2`. This is one diagnostic vector with
+fast TRNG, `.data`/`.bss` preload, and PQ-vector suppression, not full-top or
+stock-firmware qualification. See the
+[`full-top result`](../../evidence/caliptra-bfm-fulltop-aes-main-197f9ba-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
