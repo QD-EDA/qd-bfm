@@ -148,3 +148,6 @@ monitor infers item boundaries from accepted address phases. The UVM run checks
 a four-beat write/read, first-beat abort, and a partial burst with one successful
 beat followed by ERROR; unissued beats stay intact in the request. The generated-
 name QVIP smoke checks full bursts through active and passive keyed streams.
+The native sequencer transfer implements field-complete UVM copy/compare and
+printing; its agent regression clones a populated request/response item and
+checks that address and write-data mutations compare unequal.

@@ -502,6 +502,43 @@ module tb_ahb_lite_caliptra_uvm_agent;
   endclass
 
   initial begin
+    ahb_lite_caliptra_transfer source;
+    ahb_lite_caliptra_transfer copied;
+    uvm_object clone_object;
+
+    source = ahb_lite_caliptra_transfer::type_id::create("transfer_source");
+    source.write = 1;
+    source.address = 32'h1357_ace0;
+    source.size = 3;
+    source.write_data = 64'hdeca_fbad_0123_4567;
+    source.request_ok = 1;
+    source.success = 1;
+    source.response_error = 1;
+    source.aborted = 1;
+    source.read_data = 64'h7654_3210_cafe_beef;
+
+    clone_object = source.clone();
+    if (!$cast(copied, clone_object))
+      $fatal(1, "AHB transfer clone returned the wrong type");
+    if (copied == source || !source.compare(copied) ||
+        copied.write !== source.write || copied.address !== source.address ||
+        copied.size !== source.size || copied.write_data !== source.write_data ||
+        copied.request_ok !== source.request_ok || copied.success !== source.success ||
+        copied.response_error !== source.response_error || copied.aborted !== source.aborted ||
+        copied.read_data !== source.read_data)
+      $fatal(1, "AHB transfer clone did not preserve its request and response fields");
+
+    copied.address ^= 32'h4;
+    if (source.compare(copied))
+      $fatal(1, "AHB transfer comparison ignored address changes");
+    copied.address = source.address;
+    copied.write_data ^= 64'h1;
+    if (source.compare(copied))
+      $fatal(1, "AHB transfer comparison ignored write-data changes");
+    $display("PASS: AHB transfer clone and compare preserve request/response fields");
+  end
+
+  initial begin
     uvm_config_db#(virtual ahb_lite_caliptra_master_cmd_if)::set(
       null, "uvm_test_top.env.agent.mvc_driver", "cmd_vif", cmd_if);
     uvm_config_db#(virtual ahb_lite_caliptra_record_if)::set(

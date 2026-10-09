@@ -96,6 +96,53 @@ package ahb_lite_caliptra_uvm_pkg;
     function new(string name = "ahb_lite_caliptra_transfer");
       super.new(name);
     endfunction
+
+    function void do_copy(uvm_object rhs);
+      ahb_lite_caliptra_transfer source;
+      if (!$cast(source, rhs)) begin
+        `uvm_error("AHB_TRANSFER_COPY", "Cannot copy a non-Caliptra AHB transfer")
+        return;
+      end
+      super.do_copy(rhs);
+      write = source.write;
+      address = source.address;
+      size = source.size;
+      write_data = source.write_data;
+      request_ok = source.request_ok;
+      success = source.success;
+      response_error = source.response_error;
+      aborted = source.aborted;
+      read_data = source.read_data;
+    endfunction
+
+    function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+      ahb_lite_caliptra_transfer other;
+      if (!$cast(other, rhs)) return 0;
+      return super.do_compare(rhs, comparer) && write == other.write &&
+             address == other.address && size == other.size &&
+             write_data == other.write_data && request_ok == other.request_ok &&
+             success == other.success && response_error == other.response_error &&
+             aborted == other.aborted && read_data == other.read_data;
+    endfunction
+
+    function void do_print(uvm_printer printer);
+      super.do_print(printer);
+      printer.print_field_int("write", write, 1, UVM_BIN);
+      printer.print_field_int("address", address, 32, UVM_HEX);
+      printer.print_field_int("size", size, 3, UVM_DEC);
+      printer.print_field_int("write_data", write_data, 64, UVM_HEX);
+      printer.print_field_int("request_ok", request_ok, 1, UVM_BIN);
+      printer.print_field_int("success", success, 1, UVM_BIN);
+      printer.print_field_int("response_error", response_error, 1, UVM_BIN);
+      printer.print_field_int("aborted", aborted, 1, UVM_BIN);
+      printer.print_field_int("read_data", read_data, 64, UVM_HEX);
+    endfunction
+
+    function string convert2string();
+      return $sformatf("%s addr=%08h size=%0d write_data=%016h ok=%0b success=%0b error=%0b aborted=%0b read_data=%016h",
+                       write ? "WRITE" : "READ", address, size, write_data,
+                       request_ok, success, response_error, aborted, read_data);
+    endfunction
   endclass
 
   class ahb_lite_caliptra_sequencer extends uvm_sequencer #(ahb_lite_caliptra_transfer);
