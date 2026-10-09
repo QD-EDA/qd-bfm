@@ -104,6 +104,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   bit sram2fifo_case = 0;
   bit auto_fifo_source_case = 0;
   bit fifo_no_random_delays_case = 0;
+  bit fifo_source_reset_abort_case = 0;
   integer mailbox_word_index = 0;
   integer mailbox_hold_cycles = 0;
 
@@ -610,6 +611,17 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                   env.scoreboard.write_count == active_write_burst_count &&
                   env.scoreboard.read_word_offset == active_word_count &&
                   env.scoreboard.write_word_offset == active_word_count);
+            if (auto_fifo_source_case) begin
+              #1;
+              if (auto_fifo_source_push_count != active_word_count ||
+                  auto_fifo_source_pop_count != active_word_count || fifo_level != 0)
+                `uvm_fatal("DMA_TOP_FIFO_SOURCE_COUNT", $sformatf(
+                  "FIFO source stream pushed/popped %0d/%0d and %0d/%0d words, level %0d",
+                  auto_fifo_source_push_count, active_word_count,
+                  auto_fifo_source_pop_count, active_word_count, fifo_level))
+              $display("INFO: FIFO source stream supplied %0d words; FIFO drained",
+                       active_word_count);
+            end
             for (int word = 0; word < active_word_count; word++)
               if (dma_target.bfm.i_sram.word_at(destination_word_index + word) !== expected_payload[word])
                 `uvm_fatal("DMA_TOP_RESET_DATA", $sformatf("Post-reset destination word %0d mismatch", word))
@@ -888,11 +900,14 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     sram2fifo_case = $test$plusargs("SRAM2FIFO_CASE");
     auto_fifo_source_case = $test$plusargs("FIFO_SOURCE_STREAM");
     fifo_no_random_delays_case = $test$plusargs("FIFO_NO_RANDOM_DELAYS");
+    fifo_source_reset_abort_case = $test$plusargs("FIFO_SOURCE_RESET_ABORT");
     default_mixed_replay = $test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY");
     if (auto_fifo_source_case && !$test$plusargs("GENERATED_CASE"))
       $fatal(1, "FIFO_SOURCE_STREAM requires a generated DCCM replay record");
     if (fifo_no_random_delays_case && !$test$plusargs("GENERATED_CASE"))
       $fatal(1, "FIFO_NO_RANDOM_DELAYS requires a generated DCCM replay record");
+    if (fifo_source_reset_abort_case && !$test$plusargs("GENERATED_CASE"))
+      $fatal(1, "FIFO_SOURCE_RESET_ABORT requires a generated DCCM replay record");
     scenario = new(MAX_REPLAY_WORD_COUNT, 0);
     if ($test$plusargs("GENERATED_CASE")) begin
       generated_case_index = 0;
@@ -917,6 +932,9 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             (generated_case_count == 69 && generated_case_index < 69)))
         $fatal(1, "Generated DCCM replay index %0d is incompatible with %0d records",
                generated_case_index, generated_case_count);
+      if (fifo_source_reset_abort_case &&
+          !(generated_case_count == 68 && generated_case_index == 67))
+        $fatal(1, "FIFO_SOURCE_RESET_ABORT requires generated record 67 of 68");
 
       record_cursor = DCCM_WORDS - 2;
       generated_record_word = -1;
@@ -1116,13 +1134,16 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
                      (generated_case_count == 68 || generated_case_count == 69)) begin
           if ((record_size != WORD_COUNT) ||
               (record_type.dma_xfer_type != AXI2AXI) ||
-              record_type.src_is_fifo || record_type.dst_is_fifo ||
-              record_type.use_rd_fixed || record_type.use_wr_fixed ||
+              (record_type.src_is_fifo != fifo_source_reset_abort_case) ||
+              record_type.dst_is_fifo ||
+              (record_type.use_rd_fixed != fifo_source_reset_abort_case) ||
+              record_type.use_wr_fixed ||
               !record_type.inject_rst || record_type.inject_rand_delays ||
               record_type.test_block_size || (record_type.block_size != 0) ||
-              (record_src_offset != 32'h0000_1000) ||
+              (record_src_offset != (fifo_source_reset_abort_case ?
+                                     32'h0000_0000 : 32'h0000_1000)) ||
               (record_dst_offset != 32'h0000_4000))
-            $fatal(1, "Generated testcase 67 is outside the reset-abort SRAM profile");
+            $fatal(1, "Generated testcase 67 is outside the selected reset-abort profile");
         end else begin
           if (record_type.src_is_fifo || record_type.dst_is_fifo ||
               record_type.use_rd_fixed || record_type.use_wr_fixed ||
@@ -1210,7 +1231,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
             scenario.dma_xfer_type != AXI2AHB) ||
            !scenario.src_is_fifo || scenario.dst_is_fifo ||
            !scenario.use_rd_fixed || scenario.use_wr_fixed ||
-           scenario.inject_rst || scenario.test_block_size ||
+           (scenario.inject_rst && !fifo_source_reset_abort_case) ||
+           scenario.test_block_size ||
            (active_word_count > MAX_DCCM_PAYLOAD_WORDS &&
             active_word_count != MAX_REPLAY_WORD_COUNT)))
         $fatal(1, "+FIFO_SOURCE_STREAM selected an unsupported FIFO-source route profile");

@@ -26,6 +26,7 @@ def main() -> int:
     parser.add_argument("--dut-replay", action="store_true")
     parser.add_argument("--dut-mixed-replay", action="store_true")
     parser.add_argument("--fifo-no-random-delays", action="store_true")
+    parser.add_argument("--fifo-source-reset-abort", action="store_true")
     parser.add_argument("--force-first-reset", action="store_true")
     parser.add_argument("--top", default=TOP)
     args = parser.parse_args()
@@ -33,6 +34,8 @@ def main() -> int:
         parser.error("--dut-replay, --dut-mixed-replay, and --force-first-reset are exclusive")
     if args.fifo_no_random_delays and not args.dut_replay:
         parser.error("--fifo-no-random-delays requires --dut-replay")
+    if args.fifo_source_reset_abort and not args.dut_replay:
+        parser.error("--fifo-source-reset-abort requires --dut-replay")
 
     root = args.caliptra_root.resolve()
     source_path = root / SOURCE
@@ -117,6 +120,7 @@ def main() -> int:
         bit fifo_source_axi2ahb_case;
         bit fifo_source_size_sweep_case;
         bit reset_abort_case;
+        bit fifo_source_reset_case;
         bit randomize_success;
         if ($test$plusargs("CALIPTRA_BFM_DUT_REPLAY")) begin
           large_fifo_case = (i == 0);
@@ -134,7 +138,8 @@ def main() -> int:
           fifo_source_axi2mbox_case = (i == 33);
           fifo_source_axi2ahb_case = (i == 34);
           fifo_source_size_sweep_case = (i >= 35 && i <= 58);
-          reset_abort_case = (i == 67);
+          reset_abort_case = (i == 67 && !FIFO_SOURCE_RESET_ABORT_FLAG);
+          fifo_source_reset_case = (i == 67 && FIFO_SOURCE_RESET_ABORT_FLAG);
           if (large_fifo_case)
             replay_size = 65536;
           else if (max_sram_case)
@@ -171,7 +176,7 @@ def main() -> int:
                    fifo_source_axi2axi_case || fifo_source_axi2mbox_case ||
                    fifo_source_axi2ahb_case)
             replay_size = 65;
-          else if (reset_abort_case)
+          else if (reset_abort_case || fifo_source_reset_case)
             replay_size = 65;
           else begin
             case ((i - 1) % 8)
@@ -327,6 +332,21 @@ def main() -> int:
               dst_offset == ((i >= 43 && i <= 50) ?
                              32'h0000_1000 : 32'h0000_4000);
             };
+          end else if (fifo_source_reset_case) begin
+            randomize_success = dma_gen.randomize() with {
+              dma_xfer_type == AXI2AXI;
+              src_is_fifo;
+              !dst_is_fifo;
+              use_rd_fixed;
+              !use_wr_fixed;
+              inject_rst;
+              !inject_rand_delays;
+              !test_block_size;
+              block_size == 0;
+              xfer_size == replay_size;
+              src_offset == 0;
+              dst_offset == 32'h0000_4000;
+            };
           end else if (reset_abort_case) begin
             randomize_success = dma_gen.randomize() with {
               dma_xfer_type == AXI2AXI;
@@ -377,6 +397,11 @@ def main() -> int:
         if text.count("FIFO_RANDOM_DELAY_CONSTRAINT") != 3:
             raise SystemExit("Expected the three generated FIFO random-delay constraints")
         text = text.replace("FIFO_RANDOM_DELAY_CONSTRAINT", fifo_delay_constraint)
+        if text.count("FIFO_SOURCE_RESET_ABORT_FLAG") != 2:
+            raise SystemExit("Expected the two generated reset-profile selectors")
+        text = text.replace(
+            "FIFO_SOURCE_RESET_ABORT_FLAG", str(int(args.fifo_source_reset_abort))
+        )
 
     transformed = text.encode()
     output = args.output.resolve()
@@ -408,6 +433,11 @@ def main() -> int:
                         *(
                             ["Replay the generated FIFO routes with injected random delays disabled."]
                             if args.fifo_no_random_delays
+                            else []
+                        ),
+                        *(
+                            ["Replay generated FIFO-source AXI2AXI with reset injection for the reset-abort harness."]
+                            if args.fifo_source_reset_abort
                             else []
                         ),
                     ],

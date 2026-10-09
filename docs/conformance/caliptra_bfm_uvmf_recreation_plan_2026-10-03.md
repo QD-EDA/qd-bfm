@@ -741,6 +741,14 @@ records pass through `axi_dma_top`; the three source records drain all 65 FIFO
 words. This remains diagnostic on the dirty, unpublished Icarus build recorded
 in the evidence.
 
+**2026-10-09 diagnostic update:** Generated record 67 now also runs as a
+65-word fixed-read FIFO-source AXI2AXI reset-abort profile. The accepted write
+is aborted before B, then the DMA replays the full transfer; the checker
+verifies the payload and that all 65 FIFO words were consumed and drained. The
+existing SRAM-source reset-abort profile still passes. Both results are
+diagnostic on the dirty, unpublished Icarus build. See the
+[`FIFO-source reset-abort evidence`](../../evidence/caliptra-bfm-dma-fifo-source-reset-abort-20261009/README.md).
+
 ### 3.4 Axi4PC (ARM protocol checker)
 
 Treat as a distinct item. The new Caliptra-profile checker is useful

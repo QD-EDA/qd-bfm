@@ -16,6 +16,7 @@ cd "$repo_root"
 reset_abort_only=0
 reset_abort_mid_w_only=0
 generated_reset_abort_only=0
+fifo_source_reset_abort_only=0
 recovery_block_sweep_only=0
 recovery_route_sweep_only=0
 max_sram_dut_replay_only=0
@@ -30,7 +31,7 @@ default_mixed_replay_only=0
 fifo_no_random_delays_only=0
 default_mixed_replay_index=-1
 if [ "$#" -gt 2 ]; then
-  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only|--default-mixed-replay-case INDEX]" >&2
+  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--generated-fifo-source-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only|--default-mixed-replay-case INDEX]" >&2
   exit 2
 fi
 if [ "$#" -ge 1 ]; then
@@ -53,6 +54,7 @@ if [ "$#" -ge 1 ]; then
     --reset-abort-only) reset_abort_only=1 ;;
     --reset-abort-mid-w-only) reset_abort_mid_w_only=1 ;;
     --generated-reset-abort-only) generated_reset_abort_only=1 ;;
+    --generated-fifo-source-reset-abort-only) fifo_source_reset_abort_only=1 ;;
     --recovery-block-sweep-only) recovery_block_sweep_only=1 ;;
     --recovery-route-sweep-only) recovery_route_sweep_only=1 ;;
     --max-sram-dut-replay-only) max_sram_dut_replay_only=1 ;;
@@ -66,7 +68,7 @@ if [ "$#" -ge 1 ]; then
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     --default-mixed-replay-only) default_mixed_replay_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--generated-fifo-source-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only]" >&2
       exit 2
       ;;
   esac
@@ -85,6 +87,9 @@ fi
 set -- "$generator_replay_mode"
 if [ "$fifo_no_random_delays_only" -eq 1 ]; then
   set -- "$@" --fifo-no-random-delays
+fi
+if [ "$fifo_source_reset_abort_only" -eq 1 ]; then
+  set -- "$@" --fifo-source-reset-abort
 fi
 sed 's/\$fatal("/\$fatal(1, "/' \
   "$CALIPTRA_RTL/src/integration/tb/dma_transfer_randomizer.sv" \
@@ -335,6 +340,21 @@ if [ "$reset_abort_mid_w_only" -eq 1 ]; then
 fi
 if [ "$generated_reset_abort_only" -eq 1 ]; then
   run_generated_reset_abort_case
+  exit 0
+fi
+if [ "$fifo_source_reset_abort_only" -eq 1 ]; then
+  run_case generated-fifo-source-reset-abort \
+    +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY +FIFO_SOURCE_STREAM \
+    +FIFO_SOURCE_RESET_ABORT +RESET_ABORT +CALIPTRA_BFM_DUT_REPLAY_INDEX=67 \
+    +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=68 +CPTRA_VERBOSITY=0
+  if ! grep -Fq 'replaying generated DCCM testcase 67 of 68 cases' "$log" ||
+     ! grep -Fq 'case type=2 words=65 src_off=00000000 dst_off=00004000 src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rst=1 inject_rand_delays=0' "$log" ||
+     ! grep -Fq 'INFO: FIFO source stream supplied 65 words; FIFO drained' "$log" ||
+     ! grep -Fq 'PASS: actual Caliptra axi_dma_top reset an accepted write held before B and recovered for a post-reset DMA burst' "$log"; then
+    echo "Generated FIFO-source reset-abort profile did not recover through axi_dma_top" >&2
+    exit 1
+  fi
+  echo "INFO: generated FIFO-source AXI2AXI reset-abort profile passed with FIFO drain after recovery"
   exit 0
 fi
 if [ "$recovery_block_sweep_only" -eq 1 ]; then
