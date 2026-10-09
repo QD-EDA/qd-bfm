@@ -282,13 +282,15 @@ module tb_axi4_caliptra_dma_subordinate;
     send_aw(8'h51, SRAM_BASE + 48'd4, 1, 2'b01, 32'h5100_0001);
     send_aw(8'h62, FIFO_BASE, 0, 2'b00, 32'h6200_0002);
     send_aw(8'h73, SRAM_BASE + 48'd12, 0, 2'b01, 32'h7300_0003);
+    send_aw(8'h84, SRAM_BASE + 48'd20, 0, 2'b01, 32'h8400_0004);
     send_w(32'h1111_5151, 0);
     send_w(32'h2222_5151, 1);
     send_w(32'h3333_6262, 1);
     send_w(32'h4444_7373, 1);
+    send_w(32'h5555_8484, 1);
     wait (dut.i_sram.BVALID && dut.i_fifo.BVALID);
     #1;
-    if (!BVALID || (BID != 8'h51 && BID != 8'h62 && BID != 8'h73))
+    if (!BVALID || (BID != 8'h51 && BID != 8'h62 && BID != 8'h73 && BID != 8'h84))
       $fatal(1, "DMA map did not select a valid mixed-target B response");
     held_rid = BID;
     repeat (2) begin
@@ -299,7 +301,7 @@ module tb_axi4_caliptra_dma_subordinate;
     @(negedge ACLK); BREADY = 1;
     b_seen_mask = 0;
     timeout = 0;
-    while (b_seen_mask != 7 && timeout < 100) begin
+    while (b_seen_mask != 15 && timeout < 100) begin
       @(posedge ACLK);
       if (BVALID && BREADY) begin
         case (BID)
@@ -318,14 +320,20 @@ module tb_axi4_caliptra_dma_subordinate;
               $fatal(1, "Bad/duplicate second SRAM B response");
             b_seen_mask[2] = 1;
           end
+          8'h84: begin
+            if (BRESP != 0 || BUSER != 32'h8400_0004 || b_seen_mask[3])
+              $fatal(1, "Bad/duplicate fourth outstanding B response");
+            b_seen_mask[3] = 1;
+          end
           default: $fatal(1, "Unexpected mixed-target B ID %02h", BID);
         endcase
       end
       timeout = timeout + 1;
     end
-    if (b_seen_mask != 7 || dut.i_sram.word_at(1) != 32'h1111_5151 ||
+    if (b_seen_mask != 15 || dut.i_sram.word_at(1) != 32'h1111_5151 ||
         dut.i_sram.word_at(2) != 32'h2222_5151 ||
-        dut.i_sram.word_at(3) != 32'h4444_7373 || fifo_level != 1)
+        dut.i_sram.word_at(3) != 32'h4444_7373 ||
+        dut.i_sram.word_at(5) != 32'h5555_8484 || fifo_level != 1)
       $fatal(1, "Mixed-target write queue lost data or B responses");
 
     // Hold one SRAM burst and a FIFO read together. The R arbiter must keep
@@ -335,6 +343,7 @@ module tb_axi4_caliptra_dma_subordinate;
     send_ar(8'h81, SRAM_BASE + 48'd4, 1, 2'b01, 32'h8100_0001);
     send_ar(8'h92, FIFO_BASE, 0, 2'b00, 32'h9200_0002);
     send_ar(8'ha3, SRAM_BASE + 48'd12, 0, 2'b01, 32'ha300_0003);
+    send_ar(8'hb4, SRAM_BASE + 48'd20, 0, 2'b01, 32'hb400_0004);
     wait (dut.i_sram.RVALID && dut.i_fifo.RVALID);
     #1;
     if (!RVALID || (RID != 8'h81 && RID != 8'h92 && RID != 8'ha3))
@@ -351,7 +360,7 @@ module tb_axi4_caliptra_dma_subordinate;
     sram_read_beats = 0;
     response_count = 0;
     timeout = 0;
-    while (r_seen_mask != 7 && timeout < 200) begin
+    while (r_seen_mask != 15 && timeout < 200) begin
       @(posedge ACLK);
       if (RVALID && RREADY) begin
         case (RID)
@@ -375,13 +384,19 @@ module tb_axi4_caliptra_dma_subordinate;
               $fatal(1, "Bad/duplicate second SRAM R response");
             r_seen_mask[2] = 1;
           end
+          8'hb4: begin
+            if (RRESP != 0 || RUSER != 32'hb400_0004 ||
+                RDATA != 32'h5555_8484 || !RLAST || r_seen_mask[3])
+              $fatal(1, "Bad/duplicate fourth outstanding R response");
+            r_seen_mask[3] = 1;
+          end
           default: $fatal(1, "Unexpected mixed-target R ID %02h", RID);
         endcase
         response_count = response_count + 1;
       end
       timeout = timeout + 1;
     end
-    if (r_seen_mask != 7 || sram_read_beats != 2 || response_count != 4 ||
+    if (r_seen_mask != 15 || sram_read_beats != 2 || response_count != 5 ||
         fifo_level != 0)
       $fatal(1, "Mixed-target read arbitration did not complete all beats");
     @(negedge ACLK); RREADY = 1;
