@@ -249,6 +249,9 @@ On 2026-10-08, twelve separate checker-on full-top runs passed the short-suite
 vectors, covering 1–12-beat source transfers and split destination writes for
 vectors 5–12. These remain diagnostic because the simulator source was dirty
 and unpublished; see the [per-vector traces](../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
+The ARM64 xPack RISC-V toolchain also built and passed the first-vector
+diagnostic; exact artifacts and toolchain provenance are in the
+[recorded run](../../evidence/caliptra-bfm-open-top-aes-xpack-20261008/README.md).
 
 ## Connecting to the Caliptra DMA port
 
