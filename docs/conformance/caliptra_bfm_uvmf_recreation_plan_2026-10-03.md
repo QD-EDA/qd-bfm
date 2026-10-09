@@ -1133,6 +1133,13 @@ and PQ-vector suppression; it does not qualify stock firmware or full-top
 coverage. GitHub DNS prevented a live remote-head check. See the
 [`case 12 on Icarus 0d8815f`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-0d8815f-20261009/README.md).
 
+The 12-case AES/DMA batch was also attempted against that same live-verified
+published `main` with the checker enabled. It timed out at its 1,800-second
+bound after reaching cycle 5,900 and showing AXI traffic; it produced no
+testcase terminal marker or normal finish. The one-vector case-12 result above
+remains separate evidence, and the batch remains open. See the [12-case
+diagnostic](../../evidence/caliptra-bfm-fulltop-aes-cases1-12-main-0d8815f-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a

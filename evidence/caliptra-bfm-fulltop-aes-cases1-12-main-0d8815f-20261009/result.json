@@ -1,0 +1,36 @@
+{
+  "outcome": "diagnostic_timeout",
+  "guard_exit": 124,
+  "guard_timeout_seconds": 1800,
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "qd_bfm_commit_at_launch": "012909e45b76a16a3ee333ce71e77bc6f81ae3c7",
+  "icarus_published_main": "0d8815febc260928e62d5c2ce82b14afd2e38dc3",
+  "checker_enabled": true,
+  "firmware_case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "aes_case_limit": 12,
+  "aes_case_start": 0,
+  "compile_and_firmware_reached_simulation": true,
+  "testcase_pass_markers": 0,
+  "testcase_fail_markers": 0,
+  "recognized_checker_or_sva_errors": 0,
+  "normal_finish": false,
+  "last_trace": {
+    "cycle": 5900,
+    "retired_instructions": 2328,
+    "axi_aw": 3,
+    "axi_w": 4,
+    "axi_b": 3,
+    "axi_ar": 2,
+    "axi_r": 2
+  },
+  "simulator_sha256": {
+    "iverilog": "603b78bbe4053c331a36e4f6a379bad46baa94571d54bb1496e383a9ff43223a",
+    "vvp": "07c11f031c2c5a79c0bb015320eac7ace0b67fd91dd27effcb7085a4b2b9a69c",
+    "iverilog_vpi": "1e393171c4272f92db03541c9c483afb4b9211e01a1476ab01d4890f0e949d83"
+  },
+  "compiled_image_sha256": "5d37354e019781932e14ecd8b8db00d1c3663899421fb9af4e262894c2ee20be",
+  "compile_log_sha256": "62c32c8d3dc75928834b30e92cad0001c62940f8e4d37499d5aa782de406cbe4",
+  "compile_log_gzip_sha256": "818278738055444cfddaf43e631431c2926e54aff52aa92f86ff944f9f735b81",
+  "sim_log_sha256": "851660dc3dd1a6fe17fffe16f0bc408fead698c45a0649be0f7c14976b22b31c",
+  "sim_log_gzip_sha256": "b76b763b3728692239e7ef898fef6f7cc9047acb56077bb94c20082ee1761cba"
+}
