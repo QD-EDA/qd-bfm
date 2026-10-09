@@ -1,0 +1,10 @@
+FAIL: IEEE 2017
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/environment_packages/kv_env_pkg/registers/kv_reg_adapter_functions_pkg.sv:28: warning: Static variable initialization requires explicit lifetime in this context.
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_read_pkg/src/kv_read_driver_bfm.sv:136: syntax error
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_read_pkg/src/kv_read_driver_bfm.sv:138: error: Invalid module item.
+/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-keyvault-hdl-2sf7pqbf/overlay/src/kv_read_monitor_bfm.sv:98: syntax error
+/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-keyvault-hdl-2sf7pqbf/overlay/src/kv_read_monitor_bfm.sv:101: error: Invalid module item.
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_write_pkg/src/kv_write_driver_bfm.sv:134: syntax error
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_write_pkg/src/kv_write_driver_bfm.sv:137: error: Invalid module item.
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_write_pkg/src/kv_write_monitor_bfm.sv:109: syntax error
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_write_pkg/src/kv_write_monitor_bfm.sv:112: error: Invalid module item.

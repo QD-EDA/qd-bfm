@@ -282,3 +282,25 @@ SHA-256 for this follow-up:
 c29e60c3e1b24dacd2f3e85a5a3f98b5827d119de074166c39e1bfb699b15189  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime-20261009.log
 9bd9b8d52ee672c8216f4fc227e243a12b78bbd1e31978c5f62e61feb8728552  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime-dirty-20261009.log
 ```
+
+## Published-main compile check (2026-10-09)
+
+The guarded `--runtime-ahb-burst-smoke` command was retried with the clean
+published Icarus main revision
+`4b3f3424c440aca6af92153b6860a7253b925234` and the pinned Caliptra commit
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. Compilation stops before
+simulation at package-qualified parameterized class proxy declarations in the
+generated read/write BFM interfaces and monitors. No QD compatibility rewrite
+was made. The current KeyVault result remains diagnostic under overlays, not
+qualification; this published-main compile failure is retained in
+[`published-main-4b3f342-compile.log`](published-main-4b3f342-compile.log).
+
+Tool fingerprints: `iverilog` SHA-256
+`00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385`;
+`vvp` SHA-256
+`f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a`. The
+memory guard observed 7.83 GiB minimum available and 0.08 GiB peak process-group
+RSS. The source archive was built from the published revision in
+`/private/tmp/iverilog-uvm-install-4b3f342`; no Icarus source or branch was
+modified. The captured compile log SHA-256 is
+`0821ffab838096e6600303b12db4a63cad2b73444bbbb561437116b3813a50f2`.
