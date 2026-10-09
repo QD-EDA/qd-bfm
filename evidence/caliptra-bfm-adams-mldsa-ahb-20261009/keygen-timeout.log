@@ -1,0 +1,61 @@
+memory guard: preflight available 8.53 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+/usr/bin/clang -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls -Wshadow -Wvla -Wpointer-arith -O3 -fomit-frame-pointer -DDILITHIUM_MODE=5 \
+	  -o test/test_dilithium5 test/test_dilithium.c randombytes.c sign.c packing.c polyvec.c poly.c ntt.c reduce.c rounding.c fips202.c symmetric-shake.c
+packing.c:101:22: warning: argument 'sk' of type 'uint8_t[4928]' (aka 'unsigned char[4928]') with mismatched bound [-Warray-parameter]
+  101 | void pack_sk(uint8_t sk[CRYPTO_SECRETKEYBYTES+SEEDBYTES],
+      |                      ^
+./packing.h:12:22: note: previously declared as 'uint8_t[4896]' (aka 'unsigned char[4896]') here
+   12 | void pack_sk(uint8_t sk[CRYPTO_SECRETKEYBYTES],
+      |                      ^
+packing.c:103:28: warning: argument 'tr' of type 'const uint8_t[64]' (aka 'const unsigned char[64]') with mismatched bound [-Warray-parameter]
+  103 |              const uint8_t tr[SEEDBYTES*2],
+      |                            ^
+./packing.h:14:28: note: previously declared as 'const uint8_t[32]' (aka 'const unsigned char[32]') here
+   14 |              const uint8_t tr[SEEDBYTES],
+      |                            ^
+packing.c:193:24: warning: argument 'tr' of type 'uint8_t[64]' (aka 'unsigned char[64]') with mismatched bound [-Warray-parameter]
+  193 |                uint8_t tr[SEEDBYTES*2],
+      |                        ^
+./packing.h:28:24: note: previously declared as 'uint8_t[32]' (aka 'unsigned char[32]') here
+   28 |                uint8_t tr[SEEDBYTES],
+      |                        ^
+packing.c:239:23: warning: argument 'sig' of type 'uint8_t[4627]' (aka 'unsigned char[4627]') with mismatched bound [-Warray-parameter]
+  239 | void pack_sig(uint8_t sig[CRYPTO_BYTES+SEEDBYTES],
+      |                       ^
+./packing.h:21:23: note: previously declared as 'uint8_t[4595]' (aka 'unsigned char[4595]') here
+   21 | void pack_sig(uint8_t sig[CRYPTO_BYTES], const uint8_t c[SEEDBYTES], const polyvecl *z, const polyveck *h);
+      |                       ^
+packing.c:240:29: warning: argument 'c' of type 'const uint8_t[64]' (aka 'const unsigned char[64]') with mismatched bound [-Warray-parameter]
+  240 |               const uint8_t c[SEEDBYTES+SEEDBYTES],
+      |                             ^
+./packing.h:21:56: note: previously declared as 'const uint8_t[32]' (aka 'const unsigned char[32]') here
+   21 | void pack_sig(uint8_t sig[CRYPTO_BYTES], const uint8_t c[SEEDBYTES], const polyvecl *z, const polyveck *h);
+      |                                                        ^
+packing.c:284:24: warning: argument 'c' of type 'uint8_t[64]' (aka 'unsigned char[64]') with mismatched bound [-Warray-parameter]
+  284 | int unpack_sig(uint8_t c[SEEDBYTES*2],
+      |                        ^
+./packing.h:36:24: note: previously declared as 'uint8_t[32]' (aka 'unsigned char[32]') here
+   36 | int unpack_sig(uint8_t c[SEEDBYTES], polyvecl *z, polyveck *h, const uint8_t sig[CRYPTO_BYTES]);
+      |                        ^
+6 warnings generated.
+poly.c:493:44: warning: argument 'seed' of type 'const uint8_t[64]' (aka 'const unsigned char[64]') with mismatched bound [-Warray-parameter]
+  493 | void poly_challenge(poly *c, const uint8_t seed[SEEDBYTES*2]) {
+      |                                            ^
+./poly.h:54:44: note: previously declared as 'const uint8_t[32]' (aka 'const unsigned char[32]') here
+   54 | void poly_challenge(poly *c, const uint8_t seed[SEEDBYTES]);
+      |                                            ^
+1 warning generated.
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/verification_ip/environment_packages/mldsa_env_pkg/registers/mldsa_reg_model_top_pkg.sv:169: warning: Enable of unknown task ``set_inst_name'' ignored (class __covgrp_mldsa_AHB_map_coverage_ra_cov_t is covergroup stub; compile-progress fallback).
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367); emitting null fallback
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-dww0qeco/adams_mldsa_runtime.dpiexport.c (compile it into your DPI object).
+memory guard: stopping command (timeout after 600s)
+memory guard: minimum available 7.78 GiB; maximum process group 0.65 GiB

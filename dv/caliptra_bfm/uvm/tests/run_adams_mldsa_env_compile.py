@@ -13,6 +13,9 @@ import tempfile
 
 COMMIT = "b77e3d899e828d626cfc2a0d26a6b5704cc121e0"
 MEMORY_GUARD_CHILD = "CALIPTRA_BFM_MEMORY_GUARD_CHILD"
+AHB_COVERAGE = re.compile(
+    r"\[AHB_COVERAGE\].*reads=(\d+)/\d+ writes=(\d+)/\d+.*errors=(\d+)/\d+ transfers"
+)
 
 
 def replace_once(text: str, old: str, new: str) -> str:
@@ -389,10 +392,15 @@ def main() -> int:
             )
             print(result.stdout, end="")
             print(result.stderr, end="", file=sys.stderr)
+            ahb_coverage = AHB_COVERAGE.search(result.stdout)
             if (
                 result.returncode != 0
                 or expected_pass not in result.stdout
                 or re.search(r"UVM_(ERROR|FATAL) :\s*[1-9]", result.stdout)
+                or ahb_coverage is None
+                or int(ahb_coverage.group(1)) == 0
+                or int(ahb_coverage.group(2)) == 0
+                or int(ahb_coverage.group(3)) != 0
             ):
                 return result.returncode or 1
             if args.actual_keygen_smoke and not (runtime / "keygen.log").is_file():
