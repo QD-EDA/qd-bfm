@@ -61,6 +61,11 @@ preserves Caliptra's firmware preload path
 `axi/tests/run_caliptra_axi_complex_bfm.sh`. Its generated recovery sequence
 is enabled only with Caliptra's `+CPTRA_RAND_TEST_DMA` plusarg, which is also
 required for the pinned testbench to initialize the block-size array.
+The standalone replacement regression passes with its profile checker enabled
+on published Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`, covering
+injected errors, SRAM/FIFO traffic, randomized stalls, recovery controls, and
+208-dword burst readback. This is module-level evidence, not a Caliptra DUT
+run; see the [published AXI-complex BFM result](../../evidence/caliptra-bfm-axi-complex-published-20261009/README.md).
 The top-level firmware smoke and its diagnostic limits are recorded in
 [`open-top smoke evidence`](../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
 For a bounded random-DMA recovery diagnostic, `--rand-dma-iterations N`

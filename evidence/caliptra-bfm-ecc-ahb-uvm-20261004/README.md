@@ -97,3 +97,10 @@ done
 | `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_uvm_bfm.sh` | `a988d54e388ae9fc9b5c5fbafa16d7d1da7f9474ce2f38cda94bf81a0d61c617` |
 | Icarus `iverilog` binary | `a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602` |
 | Icarus `vvp` binary | `29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca` |
+
+### Coverage counter clarification (2026-10-09)
+
+The reported `pending_wait=0/12 cycles` means zero pending wait-state cycles
+out of 12 observed clock cycles. The run had no wait-state cycles; the earlier
+summary phrase “12 wait cycles” was a misreading. The transaction and UVM
+counts above are unchanged.
