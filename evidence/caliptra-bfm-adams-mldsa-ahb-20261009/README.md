@@ -255,3 +255,24 @@ python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
 
 # Repeat with --edition 2023.
 ```
+
+### Published-Icarus MLDSA keygen preflight — 2026-10-09
+
+The existing `--actual-keygen-smoke` preflight was run against a clean source
+archive of published Icarus main
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`. It reproduced
+`raw_en=0 raw_addr=1 sized_en=1 sized_addr=1` and exited before building the
+native helper or starting the generated MLDSA simulation. The version-read
+smoke above is unaffected. No QD or pinned RTL workaround was applied; actual
+keygen remains blocked on this simulator behavior and is not qualified.
+
+```sh
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge \
+  --iverilog /private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+  --vvp /private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+  --edition 2017 --actual-keygen-smoke
+```
+
+The binary fingerprints are `iverilog` `a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602`
+and `vvp` `29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca`.
