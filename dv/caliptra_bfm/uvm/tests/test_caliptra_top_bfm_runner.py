@@ -686,6 +686,8 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
         source = (
             "            mldsa_input_hex_gen();\n"
             "            mlkem_testvector_generator();\n"
+            '        $system($sformatf("python sha256_wntz_test_gen.py %d %d", w, n));\n'
+            '        $system("python doe_test_gen.py");\n'
             "            `ifndef VERILATOR\n"
             "                std::randomize(wait_time_to_rst) with {wait_time_to_rst dist {[5:24] :/ 3, [25:99] :/ 5, [100:255] :/ 8, [256:511] :/ 5, [512:1023] :/ 1};};\n"
             "            `else\n"
@@ -702,6 +704,10 @@ class FirstAesCaseDiagnosticTest(unittest.TestCase):
                 RUNNER.prepare_services_overlay(rtl, output, True, 512)
             overlay = output.read_text()
         self.assertIn('if (!$test$plusargs("CLP_SKIP_PQ_VECTOR_GENERATION")) begin', overlay)
+        self.assertIn('"python3 sha256_wntz_test_gen.py %d %d"', overlay)
+        self.assertIn('$system("python3 doe_test_gen.py");', overlay)
+        self.assertNotIn('"python sha256_wntz_test_gen.py %d %d"', overlay)
+        self.assertNotIn('$system("python doe_test_gen.py");', overlay)
         self.assertIn("            wait_time_to_rst = 512;\n", overlay)
         self.assertNotIn("std::randomize(wait_time_to_rst)", overlay)
 

@@ -308,6 +308,13 @@ def prepare_services_overlay(rtl_root, output_path, skip_pq_vectors=False,
         text = skip_pq_vector_generators(text)
     if rand_dma_reset_delay_cycles is not None:
         text = replace_random_reset_delay(text, rand_dma_reset_delay_cycles)
+    for before, after in (
+        ('"python sha256_wntz_test_gen.py %d %d"', '"python3 sha256_wntz_test_gen.py %d %d"'),
+        ('$system("python doe_test_gen.py");', '$system("python3 doe_test_gen.py");'),
+    ):
+        if text.count(before) != 1:
+            raise ValueError(f"expected one runtime vector-generator command: {before}")
+        text = text.replace(before, after, 1)
     Path(output_path).write_text(text)
 
 
