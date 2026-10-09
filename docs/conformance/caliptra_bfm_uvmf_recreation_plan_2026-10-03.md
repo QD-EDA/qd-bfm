@@ -1062,6 +1062,12 @@ The standalone AHB and active UVM reset gates also pass on the latest locally
 available `iverilog-uvm` `origin/main` SHA
 `197f9baece79e66d25524906fb7b54c9faa8f4e2`; a fresh remote-head check was
 unavailable because GitHub DNS resolution failed.
+**2026-10-09 latest locally available main agent rerun:** the synthetic AXI,
+AAXI-compatibility, and AHB UVM-agent smokes also pass on clean
+`origin/main` `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, with zero UVM errors
+or fatals. Remote DNS remains unavailable; this does not close Phase 3's
+protocol-violation and actual-RTL gates. See the
+[`0d8815f agent evidence`](../../evidence/caliptra-bfm-uvm-agents-main-0d8815f-20261009/README.md).
 
 ### Phase 4 — Unit-level Caliptra/Adams Bridge UVMF environments
 
@@ -1078,6 +1084,15 @@ Per environment, required evidence (AGENTS UVM ladder):
 - no unexplained outstanding objections/transactions;
 - normal termination.
 A run with zero traffic or an unchecked scoreboard is recorded as failed.
+
+Current-state note (2026-10-09): the standalone packed-member reproduction on
+the locally recorded published Icarus `origin/main`
+`b452394f148af5a5bcfa744e615f4681d6b80e5e` still loses the generated MLDSA
+`RW_READ` field when the 15-bit packed address member is assigned an expression
+containing the 32-bit operand counter. The existing preflight correctly stops
+before the long keygen run; no QD or pinned RTL workaround is appropriate.
+The keygen and its scoreboard readback remain open. See the
+[`b452394f preflight evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#latest-locally-recorded-main-recheck--2026-10-09).
 
 ### Phase 5 — Top-level UVMF environments and tests
 

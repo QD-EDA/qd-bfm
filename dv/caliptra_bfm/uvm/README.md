@@ -538,3 +538,11 @@ stream switches, but not the full QVIP coverage model or policy. The focused
 AHB UVM smokes exercise generated-style active/passive streams and the RAL
 path with read, write, wait-state, and ERROR traffic, and check that configured
 predictor/scoreboard/coverage outputs are separate objects.
+
+**2026-10-09 latest locally available Icarus main rerun:** the synthetic AXI,
+AAXI-compatibility, and AHB agent smokes pass on a clean build of
+`origin/main` `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, with zero UVM errors
+or fatals. The two predictor warnings per run correspond to injected error
+responses. GitHub DNS prevented a fresh remote-head check. These are agent
+smokes against synthetic targets, not generated-UVMF or actual-RTL evidence;
+see the [dated logs and fingerprints](../../../evidence/caliptra-bfm-uvm-agents-main-0d8815f-20261009/README.md).
