@@ -143,3 +143,6 @@ this small reproduction before building the native helper or starting the
 Caliptra simulation. On the current Icarus build it exits with the observed
 `raw_en=0` result and explains that keygen was not started. The ordinary
 version-read smoke and `--compile-only` path are unchanged.
+
+Preflight runner SHA-256:
+`8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db`.
