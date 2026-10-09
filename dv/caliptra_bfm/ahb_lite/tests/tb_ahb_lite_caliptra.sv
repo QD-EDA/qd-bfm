@@ -5,6 +5,7 @@ module tb_ahb_lite_caliptra;
   localparam integer MAX_BURST_BEATS = 16;
   reg HCLK = 0;
   reg HRESETn = 0;
+  reg target_resetn = 0;
   reg [7:0] wait_cycles = 2;
   reg inject_error = 0;
   wire HSEL;
@@ -71,7 +72,7 @@ module tb_ahb_lite_caliptra;
     .ADDR_WIDTH(32), .DATA_WIDTH(64), .MEMORY_BYTES(256),
     .BASE_ADDR(32'h1000_0000)
   ) memory (
-    .HCLK(HCLK), .HRESETn(HRESETn), .HADDR(HADDR), .HWDATA(HWDATA),
+    .HCLK(HCLK), .HRESETn(target_resetn), .HADDR(HADDR), .HWDATA(HWDATA),
     .HSEL(HSEL), .HWRITE(HWRITE), .HTRANS(HTRANS), .HSIZE(HSIZE),
     .HREADY(HREADYOUT), .wait_cycles(wait_cycles),
     .inject_error(inject_error), .HREADYOUT(HREADYOUT), .HRESP(HRESP),
@@ -133,6 +134,7 @@ module tb_ahb_lite_caliptra;
     repeat (2) @(posedge HCLK);
     @(negedge HCLK);
     HRESETn = 1;
+    target_resetn = 1;
 
     master.write_one(32'h1000_0000, 3'd3, 64'h0123_4567_89ab_cdef,
                      request_ok, success, response_error);
@@ -191,24 +193,31 @@ module tb_ahb_lite_caliptra;
                     request_ok, success, response_error, read_data);
     check_transfer_result(1'b0, 1'b0, 1'b1, 64'd0);
 
+    @(negedge HCLK); target_resetn = 0;
+    repeat (2) @(posedge HCLK);
+    @(negedge HCLK); target_resetn = 1;
+    master.read_one(32'h1000_0000, 3'd3,
+                    request_ok, success, response_error, read_data);
+    check_transfer_result(1'b1, 1'b1, 1'b0, 64'h0123_4567_00cc_cdef);
+
     repeat (2) @(posedge HCLK);
     if (checker_error || checker_error_count != 0 || protocol_error ||
         protocol_error_count != 0)
       $fatal(1, "AHB checker/monitor reported an error");
-    if (address_count != 14 || transfer_count != 14 || response_errors != 2 ||
+    if (address_count != 15 || transfer_count != 15 || response_errors != 2 ||
         seq_address_count != 6)
       $fatal(1, "Unexpected AHB accounting: addresses=%0d transfers=%0d seq=%0d errors=%0d",
              address_count, transfer_count, seq_address_count, response_errors);
-    if (read_address_count != 8 || write_address_count != 6 ||
+    if (read_address_count != 9 || write_address_count != 6 ||
         size_1byte_count != 0 || size_2byte_count != 1 ||
-        size_4byte_count != 0 || size_8byte_count != 13 ||
+        size_4byte_count != 0 || size_8byte_count != 14 ||
         pending_wait_cycle_count == 0 || error_transfer_count != 2)
       $fatal(1, "Unexpected AHB coverage counts: reads=%0d writes=%0d sizes={%0d,%0d,%0d,%0d} waits=%0d errors=%0d",
              read_address_count, write_address_count,
              size_1byte_count, size_2byte_count, size_4byte_count,
              size_8byte_count, pending_wait_cycle_count, error_transfer_count);
 
-    $display("PASS: AHB-Lite lanes, INCR bursts, waits, ERROR responses, checker, monitor coverage counts");
+    $display("PASS: AHB-Lite lanes, INCR bursts, waits, ERROR responses, reset retention, checker, monitor coverage counts");
     $finish;
   end
 endmodule

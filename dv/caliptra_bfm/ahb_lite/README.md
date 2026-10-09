@@ -61,11 +61,13 @@ pin-to-record boundary; it does not recreate QVIP's generated HDL/HVL wrapper
 or internal `uvm_config_db` setup.
 
 Run `dv/caliptra_bfm/ahb_lite/tests/run_ahb_lite.sh` from the repository root
-for the directed Icarus test. It covers 64-bit full-word and half-word lane
+for the directed Icarus test in IEEE 2012 by default. With the multi-edition
+Icarus fork, set `SV_EDITION=2017` or `SV_EDITION=2023` to select another mode.
+It covers 64-bit full-word and half-word lane
 behavior, configured wait cycles, injected and out-of-window two-cycle ERROR
 responses, and verifies that the checker and monitor remain clean while
-counting 14 completed transfers, including two four-beat INCR bursts and six
-accepted SEQ phases.
+counting 15 completed transfers, including two four-beat INCR bursts, six
+accepted SEQ phases, and a post-reset readback that checks SRAM retention.
 
 `tests/run_checker.sh` accepts a legal transfer and two-cycle ERROR response,
 then checks ten negative controls against the expected checker error code:
