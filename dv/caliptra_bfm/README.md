@@ -520,6 +520,13 @@ top.
 See
 [`../../evidence/caliptra-bfm-keyvault-generated-hdl-20261004/README.md`](../../evidence/caliptra-bfm-keyvault-generated-hdl-20261004/README.md).
 
+Published single-case full-top diagnostic (2026-10-09): the retained
+firmware runner passed smoke_test_dma_aes_gcm_short_1_dword with the native
+checker enabled and exited normally. It used fast TRNG, fast boot-data preload,
+and the first AES case only, so this is diagnostic evidence rather than
+stock-firmware qualification. See
+[full-top AES diagnostic evidence](../../evidence/caliptra-bfm-fulltop-aes-diagnostic-20261009/README.md).
+
 The top-level research and implementation plan is in
 [`../../docs/conformance/caliptra_bfm_uvmf_recreation_plan_2026-10-03.md`](../../docs/conformance/caliptra_bfm_uvmf_recreation_plan_2026-10-03.md),
 with source and reuse findings in
