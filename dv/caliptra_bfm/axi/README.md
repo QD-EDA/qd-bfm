@@ -56,7 +56,9 @@ clearing memory. The subordinate regression covers queued traffic, successful
 and invalidated exclusive sequences, legal FIXED/WRAP bursts, and atomically
 rejected boundary-crossing bursts.
 
-Run its end-to-end manager/checker test with:
+Run its end-to-end manager/checker test in IEEE 2012 by default. With the
+multi-edition Icarus fork, set `SV_EDITION=2017` or `SV_EDITION=2023` to select
+another mode:
 
 ```sh
 ./tests/run_subordinate.sh
@@ -343,6 +345,9 @@ negative controls—including payload stability on all five channels—with:
 ```sh
 ./tests/run_checker.sh
 ```
+
+The checker runner also accepts `SV_EDITION=2017` or `SV_EDITION=2023` with
+the multi-edition Icarus fork; the default is 2012.
 
 ## Directed single-beat manager seed
 
