@@ -27,9 +27,10 @@ recovery_availability_modes_only=0
 mailbox_fixed_modes_only=0
 component_fixed_modes_only=0
 default_mixed_replay_only=0
+fifo_no_random_delays_only=0
 default_mixed_replay_index=-1
 if [ "$#" -gt 2 ]; then
-  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only|--default-mixed-replay-case INDEX]" >&2
+  echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only|--default-mixed-replay-case INDEX]" >&2
   exit 2
 fi
 if [ "$#" -ge 1 ]; then
@@ -59,12 +60,13 @@ if [ "$#" -ge 1 ]; then
     --fifo-source-routes-only) fifo_source_routes_only=1 ;;
     --fifo-source-size-sweep-only) fifo_source_size_sweep_only=1 ;;
     --fifo-destination-size-sweep-only) fifo_destination_size_sweep_only=1 ;;
+    --fifo-no-random-delays-only) fifo_no_random_delays_only=1 ;;
     --recovery-availability-modes-only) recovery_availability_modes_only=1 ;;
     --mailbox-fixed-modes-only) mailbox_fixed_modes_only=1 ;;
     --component-fixed-modes-only) component_fixed_modes_only=1 ;;
     --default-mixed-replay-only) default_mixed_replay_only=1 ;;
     *)
-      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only]" >&2
+      echo "usage: $0 [--reset-abort-only|--reset-abort-mid-w-only|--generated-reset-abort-only|--recovery-block-sweep-only|--recovery-route-sweep-only|--max-sram-dut-replay-only|--fixed-sram-modes-only|--fifo-source-routes-only|--fifo-source-size-sweep-only|--fifo-destination-size-sweep-only|--fifo-no-random-delays-only|--recovery-availability-modes-only|--mailbox-fixed-modes-only|--component-fixed-modes-only|--default-mixed-replay-only]" >&2
       exit 2
       ;;
   esac
@@ -80,6 +82,10 @@ generator_replay_mode=--dut-replay
 if [ "$default_mixed_replay_only" -eq 1 ]; then
   generator_replay_mode=--dut-mixed-replay
 fi
+set -- "$generator_replay_mode"
+if [ "$fifo_no_random_delays_only" -eq 1 ]; then
+  set -- "$@" --fifo-no-random-delays
+fi
 sed 's/\$fatal("/\$fatal(1, "/' \
   "$CALIPTRA_RTL/src/integration/tb/dma_transfer_randomizer.sv" \
   >"$tmpdir/dma_transfer_randomizer.sv"
@@ -88,7 +94,7 @@ python3 docs/conformance/release_overlays/caliptra/dma_testcase_generator_overla
   --output "$tmpdir/dma_testcase_generator.sv" \
   --manifest "$tmpdir/dma_testcase_generator_overlay.json" \
   --top tb_caliptra_axi_dma_top_uvm_bfm \
-  "$generator_replay_mode"
+  "$@"
 
 "$IVERILOG_BIN" -uvm -g2012 -DXCELIUM \
   -I"$tmpdir" \
@@ -199,6 +205,41 @@ if [ "$default_mixed_replay_only" -eq 1 ]; then
     exit 1
   fi
   echo "INFO: replayed 25 seeded default mixed DCCM records through axi_dma_top across all routes and FIFO/fixed/delay/recovery flags"
+  exit 0
+fi
+
+if [ "$fifo_no_random_delays_only" -eq 1 ]; then
+  for case_index in 25 32 33 34; do
+    case "$case_index" in
+      25) route_type=2; iteration_count=29; route_name=axi2axi-fifo-destination ;;
+      32) route_type=2; iteration_count=35; route_name=axi2axi-fifo-source ;;
+      33) route_type=3; iteration_count=35; route_name=axi2mbox-fifo-source ;;
+      34) route_type=4; iteration_count=35; route_name=axi2ahb-fifo-source ;;
+    esac
+    if [ "$case_index" -eq 25 ]; then
+      run_case "fifo-no-random-delays-$route_name" \
+        +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY +FIFO_NO_RANDOM_DELAYS \
+        "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+        +CPTRA_RAND_TEST_DMA "+NUM_ITERATIONS=$iteration_count" +CPTRA_VERBOSITY=0
+    else
+      run_case "fifo-no-random-delays-$route_name" \
+        +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY +FIFO_NO_RANDOM_DELAYS \
+        +FIFO_SOURCE_STREAM "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
+        +CPTRA_RAND_TEST_DMA "+NUM_ITERATIONS=$iteration_count" +CPTRA_VERBOSITY=0
+    fi
+    if ! grep -Fq "INFO: Caliptra DCCM case type=$route_type words=65" "$log" ||
+       ! grep -Fq 'inject_rand_delays=0' "$log" ||
+       ! grep -Fq "PASS: generated DCCM record index=$case_index route=$route_type replayed through axi_dma_top" "$log"; then
+      echo "Generated $route_name no-delay profile did not complete through axi_dma_top" >&2
+      exit 1
+    fi
+    if [ "$case_index" -ne 25 ] &&
+       ! grep -Fq 'INFO: FIFO source stream supplied 65 words; FIFO drained' "$log"; then
+      echo "Generated $route_name did not drain all FIFO source words" >&2
+      exit 1
+    fi
+  done
+  echo "INFO: generated FIFO source routes and FIFO destination passed with random delay injection disabled"
   exit 0
 fi
 

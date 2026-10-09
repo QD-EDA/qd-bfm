@@ -103,6 +103,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
   bit axi2ahb_fixed_read_case = 0;
   bit sram2fifo_case = 0;
   bit auto_fifo_source_case = 0;
+  bit fifo_no_random_delays_case = 0;
   integer mailbox_word_index = 0;
   integer mailbox_hold_cycles = 0;
 
@@ -886,9 +887,12 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
     axi2ahb_case = $test$plusargs("AXI2AHB_CASE") || axi2ahb_fixed_read_case;
     sram2fifo_case = $test$plusargs("SRAM2FIFO_CASE");
     auto_fifo_source_case = $test$plusargs("FIFO_SOURCE_STREAM");
+    fifo_no_random_delays_case = $test$plusargs("FIFO_NO_RANDOM_DELAYS");
     default_mixed_replay = $test$plusargs("CALIPTRA_BFM_DUT_MIXED_REPLAY");
     if (auto_fifo_source_case && !$test$plusargs("GENERATED_CASE"))
       $fatal(1, "FIFO_SOURCE_STREAM requires a generated DCCM replay record");
+    if (fifo_no_random_delays_case && !$test$plusargs("GENERATED_CASE"))
+      $fatal(1, "FIFO_NO_RANDOM_DELAYS requires a generated DCCM replay record");
     scenario = new(MAX_REPLAY_WORD_COUNT, 0);
     if ($test$plusargs("GENERATED_CASE")) begin
       generated_case_index = 0;
@@ -987,7 +991,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_type.dma_xfer_type != AXI2AXI) ||
               record_type.src_is_fifo || !record_type.use_wr_fixed ||
               record_type.use_rd_fixed || record_type.inject_rst ||
-              !record_type.inject_rand_delays || record_type.test_block_size ||
+              (record_type.inject_rand_delays != !fifo_no_random_delays_case) ||
+              record_type.test_block_size ||
               (record_type.block_size != 0) || (record_dst_offset != 0) ||
               (record_src_offset < 32'h0000_1000 || record_src_offset > 32'h0000_1ffc))
             $fatal(1, "Generated testcase %0d has an unsupported FIFO-destination profile", record_index);
@@ -1061,7 +1066,8 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
               (record_size != WORD_COUNT) ||
               !record_type.src_is_fifo || record_type.dst_is_fifo ||
               !record_type.use_rd_fixed || record_type.use_wr_fixed ||
-              record_type.inject_rst || !record_type.inject_rand_delays ||
+              record_type.inject_rst ||
+              (record_type.inject_rand_delays != !fifo_no_random_delays_case) ||
               record_type.test_block_size || (record_type.block_size != 0) ||
               (record_src_offset != 0))
             $fatal(1, "Generated testcase %0d is outside the FIFO-source route profiles", record_index);
@@ -1168,6 +1174,11 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       scenario.inject_rand_delays = generated_type.inject_rand_delays;
       scenario.test_block_size = generated_type.test_block_size;
       scenario.block_size = generated_type.block_size;
+      if (fifo_no_random_delays_case &&
+          !((generated_case_count == 29 && generated_case_index == 25) ||
+            (generated_case_count == 35 && generated_case_index >= 32 &&
+             generated_case_index <= 34)))
+        $fatal(1, "FIFO_NO_RANDOM_DELAYS selected an unsupported generated testcase");
       if (($test$plusargs("GENERATED_CASE")) &&
           ((scenario.inject_rst && !$test$plusargs("RESET_ABORT")) ||
            (!scenario.inject_rst && $test$plusargs("RESET_ABORT"))))

@@ -733,6 +733,14 @@ The generated recovery block-size case is recorded in
 The directed route profiles are recorded in
 [`all-route DUT evidence`](../../evidence/caliptra-bfm-dma-all-routes-20261006/README.md).
 
+**2026-10-08 diagnostic update:** The new
+[`FIFO no-injected-delay sweep`](../../evidence/caliptra-bfm-dma-fifo-no-delay-20261008/README.md)
+replays generated 65-word FIFO-source AXI2AXI, AXI2MBOX, and AXI2AHB records,
+plus an AXI2AXI FIFO-destination record, with `inject_rand_delays=0`. All four
+records pass through `axi_dma_top`; the three source records drain all 65 FIFO
+words. This remains diagnostic on the dirty, unpublished Icarus build recorded
+in the evidence.
+
 ### 3.4 Axi4PC (ARM protocol checker)
 
 Treat as a distinct item. The new Caliptra-profile checker is useful

@@ -25,11 +25,14 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--dut-replay", action="store_true")
     parser.add_argument("--dut-mixed-replay", action="store_true")
+    parser.add_argument("--fifo-no-random-delays", action="store_true")
     parser.add_argument("--force-first-reset", action="store_true")
     parser.add_argument("--top", default=TOP)
     args = parser.parse_args()
     if sum((args.dut_replay, args.dut_mixed_replay, args.force_first_reset)) > 1:
         parser.error("--dut-replay, --dut-mixed-replay, and --force-first-reset are exclusive")
+    if args.fifo_no_random_delays and not args.dut_replay:
+        parser.error("--fifo-no-random-delays requires --dut-replay")
 
     root = args.caliptra_root.resolve()
     source_path = root / SOURCE
@@ -222,7 +225,7 @@ def main() -> int:
               !use_rd_fixed;
               use_wr_fixed;
               !inject_rst;
-              inject_rand_delays;
+              FIFO_RANDOM_DELAY_CONSTRAINT;
               !test_block_size;
               block_size == 0;
               xfer_size == replay_size;
@@ -299,7 +302,7 @@ def main() -> int:
               use_rd_fixed;
               !use_wr_fixed;
               !inject_rst;
-              inject_rand_delays;
+              FIFO_RANDOM_DELAY_CONSTRAINT;
               !test_block_size;
               block_size == 0;
               xfer_size == replay_size;
@@ -316,7 +319,7 @@ def main() -> int:
               use_rd_fixed;
               !use_wr_fixed;
               !inject_rst;
-              inject_rand_delays;
+              FIFO_RANDOM_DELAY_CONSTRAINT;
               !test_block_size;
               block_size == 0;
               xfer_size == replay_size;
@@ -368,6 +371,12 @@ def main() -> int:
           $error("Randomization failed for dma_transfer_generator %d", i);
         end else begin""",
         )
+        fifo_delay_constraint = (
+            "!inject_rand_delays" if args.fifo_no_random_delays else "inject_rand_delays"
+        )
+        if text.count("FIFO_RANDOM_DELAY_CONSTRAINT") != 3:
+            raise SystemExit("Expected the three generated FIFO random-delay constraints")
+        text = text.replace("FIFO_RANDOM_DELAY_CONSTRAINT", fifo_delay_constraint)
 
     transformed = text.encode()
     output = args.output.resolve()
@@ -394,6 +403,11 @@ def main() -> int:
                         *(
                             ["Seed each stock DMA randomization and constrain only reset, over-16K sizes, and overlapping AXI2AXI SRAM ranges for actual-DUT replay."]
                             if args.dut_mixed_replay
+                            else []
+                        ),
+                        *(
+                            ["Replay the generated FIFO routes with injected random delays disabled."]
+                            if args.fifo_no_random_delays
                             else []
                         ),
                     ],
