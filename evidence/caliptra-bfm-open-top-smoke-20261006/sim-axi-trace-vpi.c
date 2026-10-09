@@ -1,16 +1,18 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include "vpi_user.h"
 
 static vpiHandle clk, valid, pc, insn, ready, rst, fatal;
 static vpiHandle stdout_data, mailbox_write, reset_pending, reset_delay;
 static vpiHandle reset_start, reset_assert, reset_deassert;
 static vpiHandle arvalid, arready, araddr, rvalid, rready;
-static vpiHandle awvalid, awready, awaddr, wvalid, wready, bvalid, bready;
+static vpiHandle awvalid, awready, awaddr, wvalid, wready, wlast, bvalid, bready;
 static uint64_t cycles, retired, ar_count, r_count, aw_count, w_count, b_count;
 static uint32_t last_pc, last_insn;
 static char last_araddr[80], last_awaddr[80];
+static char last_wvalid[8], last_wready[8], last_wlast[8];
 static int reset_trace_bound, reset_seen, previous_reset_n, previous_reset_request;
 
 static int get_int(vpiHandle h) {
@@ -29,6 +31,7 @@ static void get_bin(vpiHandle h, char *out, size_t size) {
 
 static PLI_INT32 on_clock(p_cb_data cb) {
     (void)cb;
+    char wvalid_state[8], wready_state[8], wlast_state[8];
     if (reset_trace_bound) {
         int reset_n = get_int(rst);
         int reset_request = get_int(mailbox_write) && ((get_int(stdout_data) & 0xff) == 0xee);
@@ -58,6 +61,19 @@ static PLI_INT32 on_clock(p_cb_data cb) {
     if (get_int(awvalid) && get_int(awready)) { aw_count++; get_bin(awaddr, last_awaddr, sizeof(last_awaddr));
         vpi_printf("CALIPTRA_AXI AW count=%" PRIu64 " addr=%s cycle=%" PRIu64 " pc=%08" PRIx32 "\n", aw_count, last_awaddr, cycles, last_pc); }
     if (get_int(wvalid) && get_int(wready)) { w_count++; vpi_printf("CALIPTRA_AXI W count=%" PRIu64 " cycle=%" PRIu64 " pc=%08" PRIx32 "\n", w_count, cycles, last_pc); }
+    get_bin(wvalid, wvalid_state, sizeof(wvalid_state));
+    get_bin(wready, wready_state, sizeof(wready_state));
+    get_bin(wlast, wlast_state, sizeof(wlast_state));
+    if (strcmp(wvalid_state, last_wvalid) != 0 ||
+        (strcmp(wvalid_state, "0") != 0 &&
+         (strcmp(wready_state, last_wready) != 0 ||
+          strcmp(wlast_state, last_wlast) != 0)))
+        vpi_printf("CALIPTRA_AXI WSTATE cycle=%" PRIu64
+                   " valid=%s ready=%s last=%s pc=%08" PRIx32 "\n",
+                   cycles, wvalid_state, wready_state, wlast_state, last_pc);
+    snprintf(last_wvalid, sizeof(last_wvalid), "%s", wvalid_state);
+    snprintf(last_wready, sizeof(last_wready), "%s", wready_state);
+    snprintf(last_wlast, sizeof(last_wlast), "%s", wlast_state);
     if (get_int(bvalid) && get_int(bready)) { b_count++; vpi_printf("CALIPTRA_AXI B count=%" PRIu64 " cycle=%" PRIu64 " pc=%08" PRIx32 "\n", b_count, cycles, last_pc); }
     if (cycles % 100 == 0) {
         vpi_printf("CALIPTRA_TRACE cycle=%" PRIu64 " retired=%" PRIu64
@@ -114,13 +130,15 @@ static PLI_INT32 start(p_cb_data cb) {
     awaddr = bind("caliptra_top_tb.m_axi_if.awaddr");
     wvalid = bind("caliptra_top_tb.m_axi_if.wvalid");
     wready = bind("caliptra_top_tb.m_axi_if.wready");
+    wlast = bind("caliptra_top_tb.m_axi_if.wlast");
     bvalid = bind("caliptra_top_tb.m_axi_if.bvalid");
     bready = bind("caliptra_top_tb.m_axi_if.bready");
     if (!clk || !valid || !pc || !insn || !ready || !rst || !fatal || !arvalid || !arready || !araddr ||
-        !rvalid || !rready || !awvalid || !awready || !awaddr || !wvalid || !wready || !bvalid || !bready) {
-        vpi_printf("CALIPTRA_TRACE_BIND_FAIL clk=%p valid=%p pc=%p ready=%p arvalid=%p arready=%p araddr=%p awvalid=%p awready=%p awaddr=%p\n",
+        !rvalid || !rready || !awvalid || !awready || !awaddr || !wvalid || !wready || !wlast || !bvalid || !bready) {
+        vpi_printf("CALIPTRA_TRACE_BIND_FAIL clk=%p valid=%p pc=%p ready=%p arvalid=%p arready=%p araddr=%p awvalid=%p awready=%p awaddr=%p wvalid=%p wready=%p wlast=%p\n",
                    (void *)clk, (void *)valid, (void *)pc, (void *)ready, (void *)arvalid, (void *)arready,
-                   (void *)araddr, (void *)awvalid, (void *)awready, (void *)awaddr);
+                   (void *)araddr, (void *)awvalid, (void *)awready, (void *)awaddr,
+                   (void *)wvalid, (void *)wready, (void *)wlast);
         vpi_flush();
         return 0;
     }

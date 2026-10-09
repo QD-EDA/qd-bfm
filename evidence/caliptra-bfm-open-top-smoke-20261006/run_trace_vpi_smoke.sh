@@ -26,6 +26,8 @@ if ! {
   rg -q 'CALIPTRA_RESET_EDGE state=deassert ' "$tmp_dir/trace.log" &&
   rg -q 'CALIPTRA_AXI AW count=1 ' "$tmp_dir/trace.log" &&
   rg -q '^CALIPTRA_TRACE_END ' "$tmp_dir/trace.log" &&
+  rg -q 'CALIPTRA_AXI WSTATE .*valid=1 ready=1 last=1 ' "$tmp_dir/trace.log" &&
+  rg -q 'CALIPTRA_AXI W count=1 ' "$tmp_dir/trace.log" &&
   awk '
     /CALIPTRA_RESET_REQUEST .*code=ee / { request = NR }
     /CALIPTRA_RESET_EDGE state=assert / { asserted = NR }

@@ -164,3 +164,43 @@ then hit its time bound. The exact log/plugin hashes are in
 [`short-aes-one-case-axi-trace-timeout.json`](short-aes-one-case-axi-trace-timeout.json).
 This shorter attempt does not replace the 900-second passing first-case run
 above.
+
+Tracer follow-up (2026-10-07): `sim-axi-trace-vpi.c` now emits compact
+`CALIPTRA_AXI WSTATE` records when WVALID changes and when WREADY or WLAST
+changes while WVALID is active. This lets a later full-top replay distinguish
+source-side gaps from target backpressure around an incomplete burst. Saved
+logs and result hashes above predate this tracer change and are unchanged.
+
+## W-state smoke repair and replay — 2026-10-09
+
+The W-state tracer's new `wlast` VPI binding exposed a missing signal in its
+small smoke fixture. The fixture now declares and drives `wlast`, and its
+regression checks an accepted single-beat W transfer plus the `WSTATE` record.
+The guarded smoke passes.
+
+A replay of the retained first-AES compiled image with the updated tracer
+completed with `* TESTCASE PASSED` and normal `$finish` at cycle 3,802. The
+trace shows the open AXI target accepting each single-beat write without
+backpressure:
+
+| Cycle | Handshake | Result |
+| ---: | --- | --- |
+| 1,348–1,351 | AW, W, B to `0x123440000` | `WVALID=WREADY=WLAST=1`; B completed |
+| 2,907–2,909 | AR, R from `0x123440000` | Read response completed |
+| 2,995–2,998 | AW, W, B to `0x123460000` | `WVALID=WREADY=WLAST=1`; B completed |
+| 3,146–3,148 | AR, R from `0x123460000` | Destination readback completed |
+
+This trace localizes the interval between the first write response and the
+next read to firmware progress before it issues AR; the target was idle during
+that interval. It does not support an AXI target stall as the cause of the
+earlier short retry timeout.
+
+Diagnostic only: this reused the existing compiled image and dirty,
+unpublished Icarus build `ac4532fa-dirty`; it is not qualification evidence.
+The guarded replay exited 0, with a 0.81 GiB maximum process-group footprint
+and 7.84 GiB minimum available memory. The retained trace log is
+[`first-aes-wstate-retrace-20261009.log`](first-aes-wstate-retrace-20261009.log)
+with SHA-256
+`f5f001186e6f7b0a69878de8df8de77ac95f9ca6aa45a7056f86aff17c8c364b`;
+the VPI source SHA-256 is
+`27295f3f2d6172fc925f950b862dc8f6d82f518f344f118a2a9e63b2b953bd20`.

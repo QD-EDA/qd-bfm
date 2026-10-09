@@ -25,6 +25,7 @@ module caliptra_trace_axi_if;
   logic [47:0] awaddr = '0;
   logic wvalid = 1'b0;
   logic wready = 1'b0;
+  logic wlast = 1'b0;
   logic bvalid = 1'b0;
   logic bready = 1'b0;
 endmodule
@@ -65,10 +66,16 @@ module caliptra_top_tb;
     m_axi_if.awvalid = 1'b1;
     m_axi_if.awready = 1'b1;
     m_axi_if.awaddr = 48'h0000_0000_1234;
+    m_axi_if.wvalid = 1'b1;
+    m_axi_if.wready = 1'b1;
+    m_axi_if.wlast = 1'b1;
     @(negedge core_clk);
     caliptra_top_dut.trace_rv_i_valid_ip = 1'b0;
     m_axi_if.awvalid = 1'b0;
     m_axi_if.awready = 1'b0;
+    m_axi_if.wvalid = 1'b0;
+    m_axi_if.wready = 1'b0;
+    m_axi_if.wlast = 1'b0;
     #1 $finish;
   end
 endmodule
