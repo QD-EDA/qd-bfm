@@ -1215,6 +1215,11 @@ through its own blocker, not this list.
    locally available `origin/main` `197f9baece79e66d25524906fb7b54c9faa8f4e2`.
    The remote head could not be refreshed because GitHub DNS resolution
    failed. See the [dated replay evidence](../../evidence/caliptra-bfm-dma-default-mixed-main-20261009/README.md).
+   **2026-10-09 HMAC current-state check:** the generated HMAC runtime runner
+   stops before simulation on package-qualified parameterized proxy class
+   handles when compiled with the same clean local `origin/main` build. This
+   is recorded as an Icarus parser blocker without a QD workaround; see the
+   [HMAC compile evidence](../../evidence/caliptra-bfm-generated-hmac-runtime-20261005/README.md#current-state-compile-check-2026-10-09).
 5. Is a real Axi4PC substitute wanted, or is "unbound, reported absent"
    acceptable for the first qualification claim?
 

@@ -100,3 +100,26 @@ The successful runtime used a 65% free-memory floor and observed 69% minimum.
 | `reset-event-overlay/manifest.json` | `c7232944622f053883131b7801006ec22b8d57483dc0bc662463afd7171e6ee5` |
 | `reset-event-overlay/hmac_generated_overlay.f` | `263bf4692f1eb55df521da55585dbc00392f35f11860d087dc8d42b56eb237ed` |
 | `hmac_out_monitor_reset_event_overlay.py` | `6ab93ddcab8b62434c42289755ca0a92d462275fdce780d213d215ec708f364c` |
+
+## Current-state compile check (2026-10-09)
+
+The guarded HMAC runner was checked against the clean source archive for the
+newest locally available `iverilog-uvm` `origin/main`,
+`197f9baece79e66d25524906fb7b54c9faa8f4e2`, with UVM submodule
+`78c06547a2a0a29b3dc9dcafae62b75b2ff61544` and Caliptra
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. Compilation stops in the generated
+HMAC driver and monitor interfaces at package-qualified parameterized proxy
+class handles. The monitor overlay does not change those handles. This is an
+Icarus parser blocker; no QD workaround was added and simulation did not start.
+GitHub DNS resolution failed, so this local `origin/main` reference could not
+be checked against the current remote head. The captured runner output is
+[`published-main-197f9ba-compile.log.gz`](published-main-197f9ba-compile.log.gz);
+its uncompressed SHA-256 is
+`f44fd5d2176c1b1a51b3d1144db194176a5ac61ea3f8607e3a5a114038a8e1a9`.
+
+| Input | SHA-256 or revision |
+| --- | --- |
+| Icarus source | `197f9baece79e66d25524906fb7b54c9faa8f4e2` |
+| `iverilog` | `2588169190d99543c79d8a8c58ff3e75f7e0a9679fa871e895e5c3f15af29ba5` |
+| `vvp` | `edbc97b6a9fec8d1425c16d0b1a6b32ad4cbdb0ad609dbfbca155cbc30eb5c6d` |
+| HMAC runtime runner | `1741d418e10c8d9a04481501c6d521058d5e95d21b30e5f593d8a35cae1ea709` |
