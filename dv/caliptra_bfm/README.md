@@ -173,6 +173,14 @@ This used dirty, unpublished Icarus `ac4532fa-dirty`, so the result is
 diagnostic only. See the
 [`compile-only evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#generated-mldsa-compile-only-follow-up--2026-10-09).
 
+Generated MLDSA runtime follow-up (2026-10-09): the bounded seed-write/version-
+read smoke against actual `abr_top` passes in IEEE 2017 and 2023 through the
+32-bit AHB agent, with zero UVM errors/fatals and no scoreboard mismatch. One
+coverage warning remains because proprietary internal covergroups are absent.
+These runs used dirty, unpublished Icarus `ac4532fa-dirty`, so they are
+diagnostic only; keygen remains incomplete. See the
+[`runtime evidence`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#generated-mldsa-version-read-runtime-follow-up--2026-10-09).
+
 The clean-room `uvmf_lite/` layer now includes the shared HDL/HVL enums,
 transaction base, typed configuration/agent bases, driver/monitor hooks,
 sequencer and test bases, and the in-order scoreboard used by ECC, HMAC, and

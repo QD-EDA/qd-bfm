@@ -175,3 +175,36 @@ The 2023 run used the same command with `--edition 2023`.
 |---|---|
 | `run_adams_mldsa_env_compile.py` | `8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db` |
 | Icarus `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
+
+### Generated MLDSA version-read runtime follow-up — 2026-10-09
+
+The bounded `--actual-rtl-smoke` now passes against the pinned `abr_top` in
+both IEEE 2017 and 2023 modes. The generated environment writes the seed RAL
+register and reads the actual version register over the clean-room 32-bit AHB
+agent. The monitor records one read and one write, no transfer errors, and six
+wait cycles. Both runs report zero UVM errors and fatals; the single warning
+states that the proprietary internal coverage groups are not recreated. The
+scoreboard reports no mismatch. These are runtime smokes, not keygen runs.
+
+This remains diagnostic only because Icarus was dirty and unpublished at
+`ac4532fab037e91df2f903e67fb40f59baedccca` (`ac4532fa-dirty`). Adams Bridge
+was clean at `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. Each command used the
+guarded runner and disposable generated-source overlays:
+
+```sh
+python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
+  --adamsbridge-root /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge \
+  --iverilog '/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+  --vvp '/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  --edition 2017 --actual-rtl-smoke
+```
+
+The 2023 run used the same command with `--edition 2023`.
+
+| Artifact | SHA-256 |
+|---|---|
+| IEEE 2017 runtime log | `93e598b82bc19993388db6676019915064de7b5096dd8e07c7f8b15c0510416c` |
+| IEEE 2023 runtime log | `1c0984f12864dedf708a96ed487eb2c71af381e5c97d78fa145acc56ecf82d7d` |
+| `run_adams_mldsa_env_compile.py` | `8748d2a7beafd982175b2265fd2ce809add4c58746275df490fdfc59dbe6a2db` |
+| Icarus `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
+| Icarus `vvp` | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
