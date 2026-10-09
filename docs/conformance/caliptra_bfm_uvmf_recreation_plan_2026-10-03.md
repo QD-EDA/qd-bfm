@@ -1093,6 +1093,17 @@ fast TRNG, `.data`/`.bss` preload, and PQ-vector suppression, not full-top or
 stock-firmware qualification. See the
 [`full-top result`](../../evidence/caliptra-bfm-fulltop-aes-main-197f9ba-20261009/README.md).
 
+**Later 2026-10-09 current-state note:** the locally recorded `origin/main`
+advanced to published Icarus SHA
+`b452394f148af5a5bcfa744e615f4681d6b80e5e`; GitHub DNS still prevented a fresh
+remote-head check. A clean source archive at that SHA was built in temporary
+storage and passed the final, 12-beat AES/DMA vector through the open full-top
+AXI target and native checker. This remains a one-vector diagnostic using the
+same fast-TRNG, `.data`/`.bss` preload, and PQ-vector-suppression modes. The
+older 12-case batch on `197f9ba` was stopped before its terminal marker when
+the newer local main ref was found and is not counted. See
+[`case 12 on Icarus b452394f`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-b452394f-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
