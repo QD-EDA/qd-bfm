@@ -245,6 +245,10 @@ The first short AES/DMA case has a checker-on/off full-top diagnostic in
 [`the recorded evidence`](../../evidence/caliptra-bfm-fulltop-checker-dma-20261007/README.md).
 It uses a modified one-case firmware image and does not qualify stock firmware
 or the complete 12-case suite.
+On 2026-10-08, twelve separate checker-on full-top runs passed the short-suite
+vectors, covering 1–12-beat source transfers and split destination writes for
+vectors 5–12. These remain diagnostic because the simulator source was dirty
+and unpublished; see the [per-vector traces](../../evidence/caliptra-bfm-open-top-wstate-20261008/README.md).
 
 ## Connecting to the Caliptra DMA port
 
