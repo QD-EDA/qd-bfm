@@ -295,3 +295,22 @@ SHA-256 for the adapter and regression:
 0208f6d8c0fc6e83fa7533cf76990c58f4ad5a062d7cd7a943aea967bb8e4a35  dv/caliptra_bfm/uvm/caliptra_ahb_mvc_compat_pkg.sv
 bcc66378a8b0b498842c21def6264d1e638959b544a426dc24598c21ce6d47c4  dv/caliptra_bfm/uvm/tests/tb_ahb_lite_caliptra_uvm_agent.sv
 ```
+
+## Profile-matrix MVC copy/compare check (2026-10-09)
+
+The generated-name compatibility test now checks MVC transfer copy/compare in
+both supported profile widths. `run_ahb_qvip_compat_env.sh` passed with
+`AHB_PROFILE=32` and `AHB_PROFILE=64` on a clean source archive of published
+Icarus main `127b887dfdc09283ab0187a2e618421dee3d5dcc` and pinned UVM
+`78c06547a2a0a29b3dc9dcafae62b75b2ff61544`. Both runs printed the
+profile-specific copy/compare PASS marker and generated-name AHB stream and
+burst-prediction PASS marker; each reported zero UVM errors/fatals and the
+expected `AHB_QVIP_CVG` warning. These are targeted BFM regression results,
+not Caliptra/UVMF qualification.
+
+SHA-256 for the updated profile test sources:
+
+```text
+414e172aa96c3ad0fa63bd3150c3b45af42d04fac7d7617ebdb396edb070bc72  dv/caliptra_bfm/uvm/tests/tb_ahb_lite_caliptra_uvm_agent.sv
+73a90fe46abaef0d12a62918e9d6a362b1bfc4de303f12951fb088d30b2b2a24  dv/caliptra_bfm/uvm/tests/tb_ahb_qvip_compat_env.sv
+```
