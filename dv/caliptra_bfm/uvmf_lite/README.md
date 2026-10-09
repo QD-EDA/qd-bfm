@@ -286,6 +286,10 @@ dirty, unpublished Icarus `ac4532fa-dirty`, so this is diagnostic-only and does
 not qualify ECDH. The exact command and log hash are recorded in the generated
 ECC runtime evidence.
 
+The latest locally available published-Icarus run of the scoreboard and agent
+smokes is recorded in
+[`published simulator evidence`](../../../evidence/caliptra-bfm-uvmf-lite-published-20261009/README.md).
+
 2026-10-09 IEEE 2023 key-sign follow-up: the generated transaction completed
 with expected=2, observed=2, matched=2, mismatched=0, pending=0,
 UVM_ERROR=0, and UVM_FATAL=0 at 7,344,220 ns. This is diagnostic-only because
