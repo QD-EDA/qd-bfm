@@ -53,8 +53,9 @@ returns OKAY and leaves memory unchanged. LOCKed writes are serialized around
 the data phase. The FIFO subordinate does not support exclusives and returns
 OKAY for LOCKed accesses. Reset clears protocol queues and reservations without
 clearing memory. The subordinate regression covers queued traffic, successful
-and invalidated exclusive sequences, legal FIXED/WRAP bursts, and atomically
-rejected boundary-crossing bursts.
+and invalidated exclusive sequences, reservation clearing with SRAM retention
+on reset, legal FIXED/WRAP bursts, and atomically rejected boundary-crossing
+bursts.
 
 Run its end-to-end manager/checker test in IEEE 2012 by default. With the
 multi-edition Icarus fork, set `SV_EDITION=2017` or `SV_EDITION=2023` to select

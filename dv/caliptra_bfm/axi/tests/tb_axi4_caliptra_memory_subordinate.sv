@@ -4,6 +4,7 @@ module tb_axi4_caliptra_memory_subordinate;
   reg ACLK = 0;
   always #5 ACLK = ~ACLK;
   reg ARESETn = 0;
+  reg memory_resetn = 0;
   reg stall_aw = 0, stall_w = 0, stall_b = 0, stall_ar = 0, stall_r = 0;
   reg inject_error = 0;
 
@@ -24,7 +25,9 @@ module tb_axi4_caliptra_memory_subordinate;
   axi4_caliptra_master #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
     .USER_WIDTH(32), .MAX_BEATS(4), .TIMEOUT_CYCLES(64)) manager (.*);
   axi4_caliptra_memory_subordinate #(.ADDR_WIDTH(19), .DATA_WIDTH(32),
-    .ID_WIDTH(8), .USER_WIDTH(32), .BASE_ADDR(19'h100), .MEM_BYTES(256)) memory (.*);
+    .ID_WIDTH(8), .USER_WIDTH(32), .BASE_ADDR(19'h100), .MEM_BYTES(256)) memory (
+      .ARESETn(memory_resetn), .*
+    );
   axi4_caliptra_checker #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
     .USER_WIDTH(32)) checker_inst (.*);
 
@@ -71,7 +74,7 @@ module tb_axi4_caliptra_memory_subordinate;
 
   initial begin
     repeat (2) @(posedge ACLK);
-    @(negedge ACLK); manager.reset_master(); ARESETn = 1;
+    @(negedge ACLK); manager.reset_master(); ARESETn = 1; memory_resetn = 1;
 
     stall_aw = 1; stall_w = 1; stall_b = 1;
     write_data = {64'b0, 32'h2222_2222, 32'h1111_1111};
@@ -310,7 +313,27 @@ module tb_axi4_caliptra_memory_subordinate;
       r_valid_cycles, r_stall_cycles);
     $display("COVERAGE AXI R beats=%0d RLAST=%0d", r_count, r_last_count);
 
-    $display("PASS: AXI memory subordinate bursts, boundary DECERR, FIXED/WRAP, stalls, USER, errors, and exclusive access");
+    manager.read_burst(19'h108, 0, 2, 2'b01, 8'h6d, 32'h0, 1'b1,
+      success, read_data, read_user, read_response, response_user);
+    check(success && read_response[1:0] == 2'b01,
+      "pre-reset exclusive read did not establish a reservation");
+    @(negedge ACLK); memory_resetn = 0;
+    repeat (2) @(posedge ACLK);
+    @(negedge ACLK); memory_resetn = 1;
+
+    write_data = 0; write_data[31:0] = 32'hffff_ffff;
+    write_strb = 16'h000f;
+    manager.write_burst(19'h108, 0, 2, 2'b01, 8'h6d, 32'h0, 1'b1,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && response == 2'b00 && memory.word_at(2) == 32'hdddd_0003,
+      "reset did not clear the exclusive reservation while preserving SRAM");
+    manager.read_burst(19'h108, 0, 2, 2'b01, 8'h6f, 32'h0, 1'b0,
+      success, read_data, read_user, read_response, response_user);
+    check(success && read_data[31:0] == 32'hdddd_0003,
+      "post-reset AXI read did not return preserved SRAM data");
+    checker_inst.check_idle();
+
+    $display("PASS: AXI memory subordinate bursts, boundary DECERR, FIXED/WRAP, stalls, USER, errors, reset, and exclusive access");
     $finish;
   end
 endmodule
