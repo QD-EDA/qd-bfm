@@ -366,8 +366,37 @@ module tb_ahb_lite_caliptra_uvm_agent;
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
       bit [63:0] expected_burst[4];
+      ahb_lite_caliptra_mvc_transfer copy_source, copy_target;
       int burst_index;
       phase.raise_objection(this);
+
+      copy_source = new("copy_source");
+      copy_source.RnW = AHB_WRITE;
+      copy_source.address = 32'h24;
+      copy_source.size = AHB_MVC_WORD_SIZE;
+      copy_source.data.push_back(64'hcafef00d & AHB_MVC_DATA_MASK);
+      copy_source.resp.push_back(AHB_OKAY);
+      copy_target = new("copy_target");
+      copy_target.RnW = AHB_READ;
+      copy_target.address = 0;
+      copy_target.size = 0;
+      copy_target.data.push_back(0);
+      copy_target.resp.push_back(AHB_ERROR);
+      copy_target.copy(copy_source);
+      if (copy_target.RnW !== copy_source.RnW ||
+          copy_target.address !== copy_source.address ||
+          copy_target.size !== copy_source.size ||
+          copy_target.data.size() != 1 ||
+          copy_target.data[0] !== copy_source.data[0] ||
+          copy_target.resp.size() != 1 ||
+          copy_target.resp[0] !== copy_source.resp[0])
+        `uvm_fatal("AHB_MVC_COPY", "MVC transfer copy did not preserve typed fields")
+      if (!copy_target.compare(copy_source))
+        `uvm_fatal("AHB_MVC_COMPARE", "Matching MVC transfers compare unequal")
+      copy_target.data[0] ^= 1;
+      if (copy_target.compare(copy_source))
+        `uvm_fatal("AHB_MVC_COMPARE", "MVC transfer compare missed changed data")
+      $display("PASS: AHB MVC transfer copy/compare");
 
       if ($test$plusargs("AHB_RESET_ABORT_ONLY")) begin
         ahb_lite_caliptra_reset_abort_sequence reset_abort_seq;

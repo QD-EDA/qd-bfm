@@ -245,13 +245,6 @@ def main() -> int:
     )
     if ahb_burst_smoke:
         text = use_generated_transfer_alias(text, relative)
-        text = replace_once(
-            text,
-            '     void\'(qvip_ahb_lite_slave_subenv_config.ahb_lite_slave_0_cfg.set_monitor_item( "burst_transfer_sb"',
-            '     if (!$test$plusargs("KV_AHB_BURST_SMOKE"))\n'
-            '       void\'(qvip_ahb_lite_slave_subenv_config.ahb_lite_slave_0_cfg.set_monitor_item( "burst_transfer_sb"',
-            relative,
-        )
     write_overlay(overlay_root, text, "src/kv_env_configuration.svh")
 
     if ahb_burst_smoke:

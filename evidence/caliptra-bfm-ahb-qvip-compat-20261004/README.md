@@ -270,3 +270,28 @@ Updated proxy SHA-256:
 ```text
 a91be6b29501ce960b7a394f5bcd6b1da2d54c99818007e5c33632a53c8474d3  dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_master_proxy.sv
 ```
+
+## Parameterized MVC copy/compare diagnostic (2026-10-09)
+
+The focused `run_ahb_lite_uvm_agent.sh` regression passed with the current
+compatibility adapter on a clean source archive of published Icarus main
+`127b887dfdc09283ab0187a2e618421dee3d5dcc` (2026-10-09), using pinned UVM
+submodule `78c06547a2a0a29b3dc9dcafae62b75b2ff61544`. It printed the MVC
+copy/compare and keyed-stream PASS markers, with zero UVM errors/fatals and a
+0.36 GiB peak process-group RSS.
+
+A separate probe using the pre-adapter transfer class from QD commit `fa61bbc`
+still fails on that Icarus revision: `do_copy` leaves `RnW`, `address`, and
+`data` at their defaults. The non-parameterized base-class adapter is therefore
+still needed against this published simulator revision. This is a targeted
+diagnostic, not Caliptra/UVMF qualification. The installed binary reports
+`13.0 (devel) ()`; its source identity is the published commit recorded above.
+Upstream fetch was unavailable during this run, so this note makes no claim
+that the cached `origin/main` revision is newer than upstream's present head.
+
+SHA-256 for the adapter and regression:
+
+```text
+0208f6d8c0fc6e83fa7533cf76990c58f4ad5a062d7cd7a943aea967bb8e4a35  dv/caliptra_bfm/uvm/caliptra_ahb_mvc_compat_pkg.sv
+bcc66378a8b0b498842c21def6264d1e638959b544a426dc24598c21ce6d47c4  dv/caliptra_bfm/uvm/tests/tb_ahb_lite_caliptra_uvm_agent.sv
+```

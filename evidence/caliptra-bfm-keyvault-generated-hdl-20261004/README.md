@@ -251,3 +251,34 @@ e94d912ade235081d640111bc5c8fcffddfcef99d141f14fd8c627f40ee963b7  docs/conforman
 0261b793cdfc8e2c1403208e5e101df0f133c7cd33c2f81e06151f3acc18dbd0  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.py
 541a2f9cc7a385873aee7505f6d89897a1c565891e554d1c42a5bd12b277e4d8  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime.log
 ```
+
+## Scoreboard-enabled current-state follow-up (2026-10-09)
+
+The four-beat smoke now leaves the generated `burst_transfer_sb` stream enabled,
+uses `UVM_MEDIUM` for this mode, reports the number of generated AHB scoreboard
+matches, and requires at least one match before it passes.
+
+The focused AHB copy/compare test passed against the clean archived published
+Icarus source commit `127b887dfdc09283ab0187a2e618421dee3d5dcc`. That revision
+does not compile the generated KeyVault source set: parser errors stop the run
+in the pinned `kv_read_driver_bfm.sv`, `kv_write_driver_bfm.sv`, and monitor
+sources before simulation. The failure summary is preserved in
+`ahb-burst-smoke-runtime-20261009.log`.
+
+For diagnosis only, the scoreboard-enabled KeyVault smoke passed on Icarus
+`ac4532fa-dirty`: 409 generated AHB scoreboard matches, the four-beat read
+prediction pass marker, normal testcase completion, 0 UVM errors/fatals, and
+69,024 UVM warnings. The guarded run's peak process-group RSS was 0.62 GiB.
+Its concise result is in `ahb-burst-smoke-runtime-dirty-20261009.log`. This
+dirty-build result is diagnostic, not qualification. Upstream fetch was
+unavailable during this run; `127b887...` is the latest published `origin/main`
+revision available locally, not a verified current upstream head.
+
+SHA-256 for this follow-up:
+
+```text
+9694ef56fc337dad992c34697c603da82af12cfb83a9e888e05dc8006820d29e  docs/conformance/release_overlays/caliptra/keyvault_generated_bfm_iverilog_overlay.py
+63d409a1a831c55c9f8469d0acb357bd061634f292baa05758cc588e36715494  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.py
+c29e60c3e1b24dacd2f3e85a5a3f98b5827d119de074166c39e1bfb699b15189  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime-20261009.log
+9bd9b8d52ee672c8216f4fc227e243a12b78bbd1e31978c5f62e61feb8728552  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime-dirty-20261009.log
+```

@@ -50,6 +50,22 @@ package mgc_ahb_v2_0_pkg;
   localparam bit [1:0] AHB_OKAY = 2'b00;
   localparam bit [1:0] AHB_ERROR = 2'b01;
 
+  // Icarus needs copy/compare casts to target a non-parameterized base class.
+  virtual class ahb_master_burst_transfer_base extends mvc_sequence_item_base;
+    function new(string name = "ahb_master_burst_transfer_base");
+      super.new(name);
+    endfunction
+
+    virtual function string profile_key(); return ""; endfunction
+    virtual function bit transfer_rnw(); return 0; endfunction
+    virtual function longint unsigned transfer_address(); return 0; endfunction
+    virtual function bit [2:0] transfer_size(); return 0; endfunction
+    virtual function int transfer_data_count(); return 0; endfunction
+    virtual function longint unsigned transfer_data(int index); return 0; endfunction
+    virtual function int transfer_response_count(); return 0; endfunction
+    virtual function bit [1:0] transfer_response(int index); return 0; endfunction
+  endclass
+
   class ahb_master_burst_transfer #(
     parameter int NUM_MASTERS = 1,
     parameter int MASTER_BITS = 1,
@@ -57,7 +73,7 @@ package mgc_ahb_v2_0_pkg;
     parameter int ADDRESS_WIDTH = 32,
     parameter int WDATA_WIDTH = 64,
     parameter int RDATA_WIDTH = 64
-  ) extends mvc_sequence_item_base;
+  ) extends ahb_master_burst_transfer_base;
     localparam int DATA_WIDTH = WDATA_WIDTH > RDATA_WIDTH ? WDATA_WIDTH : RDATA_WIDTH;
 
     bit RnW;
@@ -74,29 +90,49 @@ package mgc_ahb_v2_0_pkg;
       super.new(name);
     endfunction
 
+    virtual function string profile_key();
+      return $sformatf("%0d/%0d/%0d/%0d/%0d/%0d", NUM_MASTERS, MASTER_BITS,
+                       NUM_SLAVES, ADDRESS_WIDTH, WDATA_WIDTH, RDATA_WIDTH);
+    endfunction
+
+    virtual function bit transfer_rnw(); return RnW; endfunction
+    virtual function longint unsigned transfer_address(); return address; endfunction
+    virtual function bit [2:0] transfer_size(); return size; endfunction
+    virtual function int transfer_data_count(); return data.size(); endfunction
+    virtual function longint unsigned transfer_data(int index); return data[index]; endfunction
+    virtual function int transfer_response_count(); return resp.size(); endfunction
+    virtual function bit [1:0] transfer_response(int index); return resp[index]; endfunction
+
     function void do_copy(uvm_object rhs);
-      ahb_master_burst_transfer #(NUM_MASTERS, MASTER_BITS, NUM_SLAVES,
-                                  ADDRESS_WIDTH, WDATA_WIDTH, RDATA_WIDTH) source;
-      if (!$cast(source, rhs)) return;
+      ahb_master_burst_transfer_base source;
+      if (!$cast(source, rhs) || source.profile_key() != profile_key()) begin
+        `uvm_error("AHB_COPY", "Cannot copy an incompatible AHB MVC transfer")
+        return;
+      end
       super.do_copy(rhs);
-      RnW = source.RnW;
-      address = source.address;
-      size = source.size;
-      data = source.data;
-      resp = source.resp;
+      RnW = source.transfer_rnw();
+      address = ADDRESS_WIDTH'(source.transfer_address());
+      size = source.transfer_size();
+      data.delete();
+      for (int i = 0; i < source.transfer_data_count(); i++)
+        data.push_back(DATA_WIDTH'(source.transfer_data(i)));
+      resp.delete();
+      for (int i = 0; i < source.transfer_response_count(); i++)
+        resp.push_back(source.transfer_response(i));
     endfunction
 
     function bit do_compare(uvm_object rhs, uvm_comparer comparer);
-      ahb_master_burst_transfer #(NUM_MASTERS, MASTER_BITS, NUM_SLAVES,
-                                  ADDRESS_WIDTH, WDATA_WIDTH, RDATA_WIDTH) other;
-      if (!$cast(other, rhs) || !super.do_compare(rhs, comparer)) return 0;
-      if (RnW != other.RnW || address != other.address || size != other.size ||
-          data.size() != other.data.size() || resp.size() != other.resp.size())
+      ahb_master_burst_transfer_base other;
+      if (!$cast(other, rhs) || !super.do_compare(rhs, comparer) ||
+          other.profile_key() != profile_key()) return 0;
+      if (RnW != other.transfer_rnw() || address != other.transfer_address() ||
+          size != other.transfer_size() || data.size() != other.transfer_data_count() ||
+          resp.size() != other.transfer_response_count())
         return 0;
       foreach (data[i])
-        if (data[i] != other.data[i]) return 0;
+        if (data[i] != other.transfer_data(i)) return 0;
       foreach (resp[i])
-        if (resp[i] != other.resp[i]) return 0;
+        if (resp[i] != other.transfer_response(i)) return 0;
       return 1;
     endfunction
 

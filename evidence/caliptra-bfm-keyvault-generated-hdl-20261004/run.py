@@ -120,11 +120,16 @@ def caliptra_filelist(
     return defines, include_dirs, sources
 
 
-def runtime_summary(output: str) -> list[str]:
+def runtime_summary(output: str, *, include_ahb_match_count: bool = False) -> list[str]:
     lines = output.splitlines()
     summary = [
         f"UVM_WARNING message count: {sum(line.startswith('UVM_WARNING /') for line in lines)}",
     ]
+    if include_ahb_match_count:
+        summary.append(
+            "KeyVault AHB scoreboard matches: "
+            f"{sum('[SCBD_AHB]' in line and 'matches expected' in line for line in lines)}"
+        )
     summary.extend(
         line for line in lines
         if line.startswith("UVM_ERROR /")
@@ -162,12 +167,13 @@ def main() -> int:
     template_root = caliptra_root / "src/keyvault/uvmf_kv/uvmf_template_output"
     helper = repo_root / "docs/conformance/release_overlays/caliptra/keyvault_generated_bfm_iverilog_overlay.py"
     bfm = repo_root / "dv/caliptra_bfm"
-    output_log = Path(__file__).with_name(
+    default_output_log = Path(__file__).with_name(
         "ahb-burst-smoke-runtime.log" if burst_smoke else
         "diagnose-runtime.log" if diagnostic else
         "verify-runtime-2023.log" if runtime_2023 else
         "verify-runtime.log" if runtime else "verify.log"
     )
+    output_log = Path(os.environ.get("CALIPTRA_BFM_SUMMARY_LOG", default_output_log)).resolve()
     iverilog = os.environ.get("IVERILOG_BIN", "iverilog")
 
     run_lines: list[str] = []
@@ -288,8 +294,11 @@ endpackage
         if runtime:
             vvp = os.environ.get("VVP_BIN", "vvp")
             runtime_timeout = int(os.environ.get("CALIPTRA_BFM_RUNTIME_TIMEOUT_SECONDS", "180"))
+            runtime_verbosity = os.environ.get(
+                "CALIPTRA_UVM_VERBOSITY", "UVM_MEDIUM" if burst_smoke else "UVM_NONE"
+            )
             runtime_args = [vvp, str(image), "+UVM_TESTNAME=kv_rand_wr_rd_test",
-                            f"+UVM_VERBOSITY={os.environ.get('CALIPTRA_UVM_VERBOSITY', 'UVM_NONE')}",
+                            f"+UVM_VERBOSITY={runtime_verbosity}",
                             "+UVM_NO_RELNOTES",
                             *( ["+KV_PIN_TRACE"] if diagnostic else []),
                             *( ["+KV_AHB_BURST_SMOKE"] if burst_smoke else []),
@@ -348,10 +357,14 @@ endpackage
                 or "$finish called" not in runtime_output
                 or (burst_smoke and
                     "PASS: generated KeyVault four-beat AHB read prediction" not in runtime_output)
+                or (burst_smoke and not any(
+                    "[SCBD_AHB]" in line and "matches expected" in line
+                    for line in runtime_output.splitlines()
+                ))
             ):
                 failure_summary = [
                     "FAIL: actual generated KeyVault kv_rand_wr_rd_test did not pass runtime gates.",
-                    *runtime_summary(runtime_output),
+                    *runtime_summary(runtime_output, include_ahb_match_count=burst_smoke),
                 ]
                 output_log.write_text(
                     "\n".join(run_lines + failure_summary) + "\n",
@@ -366,7 +379,7 @@ endpackage
                 "PASS: actual generated KeyVault kv_rand_wr_rd_test ran with open AHB replacement "
                 f"under IEEE {runtime_edition} ({runtime_warning_count} runtime warnings)."
             )
-            run_lines.extend(runtime_summary(runtime_output))
+            run_lines.extend(runtime_summary(runtime_output, include_ahb_match_count=burst_smoke))
 
     output_log.write_text("\n".join(run_lines) + "\n", encoding="utf-8")
     print("\n".join(run_lines))
