@@ -181,6 +181,13 @@ this pattern before starting the long simulation and stops with the cause when
 the field is lost. See the
 [`packed-member reproduction`](../../evidence/caliptra-bfm-adams-mldsa-ahb-20261009/README.md#packed-member-width-follow-up--2026-10-09).
 
+Latest locally recorded Icarus main recheck (2026-10-09): clean source
+`b452394f148af5a5bcfa744e615f4681d6b80e5e` still produces
+`raw_en=0 raw_addr=1 sized_en=1 sized_addr=1` on that packed-member probe.
+The actual MLDSA keygen runner therefore remains gated by the simulator defect;
+no QD workaround was added. The direct reproduction and binary hashes are
+recorded in the dated Adams Bridge evidence.
+
 Generated MLDSA compile-only follow-up (2026-10-09): the pinned generated
 MLDSA testbench and actual `abr_top` now compile with the 32-bit AHB provider
 in IEEE 2017 and 2023. No simulation was started; keygen remains incomplete.

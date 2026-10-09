@@ -301,3 +301,36 @@ python3 scripts/run_with_memory_pressure_guard.py --timeout-seconds 30 -- \
 The build used the same published-main source archive and binaries recorded in
 the ECC AHB evidence README. The probe source SHA-256 is
 `d9a7586a19293ae11bbe9ce215cf8e5e6e4c85c9a0d1d226fdda32e2090d646e`.
+
+### Latest locally recorded main recheck — 2026-10-09
+
+The standalone packed-member reproduction was rebuilt and run against a clean
+source archive of the locally recorded `origin/main` SHA
+`b452394f148af5a5bcfa744e615f4681d6b80e5e`, with UVM submodule pin
+`78c06547a2a0a29b3dc9dcafae62b75b2ff61544`. It still reports
+`raw_en=0 raw_addr=1 sized_en=1 sized_addr=1`. The published-main build
+therefore retains the same packed-struct assignment defect, and the existing
+keygen preflight would stop before launching the MLDSA UVM simulation. This
+was only the small standalone probe; no Caliptra/UVMF simulation was run and
+no QD or pinned RTL workaround was applied. GitHub DNS prevented confirming
+whether a newer remote head exists.
+
+```sh
+python3 scripts/run_with_memory_pressure_guard.py \
+  --max-process-bytes 4000000000 --min-available-bytes 6000000000 \
+  --timeout-seconds 120 -- \
+  /private/tmp/iverilog-uvm-origin-main-b452394f/install/bin/iverilog \
+  -g2017 -o /private/tmp/qd-bfm-mldsa-packed-b452394f.vvp \
+  evidence/caliptra-bfm-adams-mldsa-ahb-20261009/packed_member_width_repro.sv
+python3 scripts/run_with_memory_pressure_guard.py \
+  --max-process-bytes 4000000000 --min-available-bytes 6000000000 \
+  --timeout-seconds 120 -- \
+  /private/tmp/iverilog-uvm-origin-main-b452394f/install/bin/vvp \
+  /private/tmp/qd-bfm-mldsa-packed-b452394f.vvp
+```
+
+The captured VVP output is [`packed-member-b452.log`](packed-member-b452.log),
+SHA-256 `59fe053b0a10ad9f8dd52e0958dc14fce3e55b6532888712de6e87c8fe383e22`.
+The Icarus binary hashes are `iverilog`
+`211d47b1fec6835477ad0e6f0e8b5822e9d1dd0bf806308c0d01956d96ed5e80` and `vvp`
+`55b26201cee80bab131a44d23686d4b08c153159df5a1d81a6db7b7541e00b02`.
