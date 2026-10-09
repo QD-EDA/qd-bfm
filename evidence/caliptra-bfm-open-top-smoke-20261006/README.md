@@ -204,3 +204,26 @@ with SHA-256
 `f5f001186e6f7b0a69878de8df8de77ac95f9ca6aa45a7056f86aff17c8c364b`;
 the VPI source SHA-256 is
 `27295f3f2d6172fc925f950b862dc8f6d82f518f344f118a2a9e63b2b953bd20`.
+
+## Published-main AXI target replay — 2026-10-09
+
+A live remote-head query returned published Icarus `main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`. The guarded
+`dv/caliptra_bfm/axi/tests/run_caliptra_axi_complex_bfm.sh` regression passed
+with the existing build of that clean published revision and the profile
+checker enabled. It checked the one-shot SLVERR range, SRAM/FIFO traffic,
+FIFO controls, recovery availability, randomized stalls, and 208-dword burst
+readback, then finished normally at `16580000` ps.
+
+This is the AXI complex target's standalone top-testbench smoke, not a full
+Caliptra RTL firmware run. The actual full-top first AES/DMA result above
+remains a separate diagnostic result.
+
+Command from the QD repository root:
+
+```sh
+CALIPTRA_RTL=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/vvp \
+sh dv/caliptra_bfm/axi/tests/run_caliptra_axi_complex_bfm.sh
+```

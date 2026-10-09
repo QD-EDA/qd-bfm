@@ -1069,6 +1069,12 @@ or fatals. Remote DNS remains unavailable; this does not close Phase 3's
 protocol-violation and actual-RTL gates. See the
 [`0d8815f agent evidence`](../../evidence/caliptra-bfm-uvm-agents-main-0d8815f-20261009/README.md).
 
+The standalone AXI complex target smoke also passes with its profile checker
+enabled on that published `main`: it checks SRAM/FIFO, recovery controls,
+random stalls, one-shot SLVERR injection, and 208-dword burst readback. This
+exercises the open target and checker in its top-testbench harness, not the
+actual Caliptra RTL counterparty. See the [published-main AXI replay](../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md#published-main-axi-target-replay--2026-10-09).
+
 ### Phase 4 — Unit-level Caliptra/Adams Bridge UVMF environments
 
 Order by the Phase 0 census: units already at "compile pass" first, then the
