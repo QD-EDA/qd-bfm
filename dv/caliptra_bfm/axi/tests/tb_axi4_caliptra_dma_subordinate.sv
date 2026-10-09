@@ -283,6 +283,20 @@ module tb_axi4_caliptra_dma_subordinate;
     send_aw(8'h62, FIFO_BASE, 0, 2'b00, 32'h6200_0002);
     send_aw(8'h73, SRAM_BASE + 48'd12, 0, 2'b01, 32'h7300_0003);
     send_aw(8'h84, SRAM_BASE + 48'd20, 0, 2'b01, 32'h8400_0004);
+    @(negedge ACLK);
+    AWID = 8'h95;
+    AWADDR = SRAM_BASE + 48'd24;
+    AWLEN = 0;
+    AWBURST = 2'b01;
+    AWVALID = 1;
+    repeat (2) begin
+      @(posedge ACLK);
+      if (AWVALID && AWREADY)
+        $fatal(1, "DMA map accepted a fifth write before a B response freed a slot");
+    end
+    if (dut.wr_route_count != 4 || dut.b_route_count != 4)
+      $fatal(1, "DMA map changed full write-queue counts under backpressure");
+    @(negedge ACLK); AWVALID = 0;
     send_w(32'h1111_5151, 0);
     send_w(32'h2222_5151, 1);
     send_w(32'h3333_6262, 1);
@@ -344,6 +358,20 @@ module tb_axi4_caliptra_dma_subordinate;
     send_ar(8'h92, FIFO_BASE, 0, 2'b00, 32'h9200_0002);
     send_ar(8'ha3, SRAM_BASE + 48'd12, 0, 2'b01, 32'ha300_0003);
     send_ar(8'hb4, SRAM_BASE + 48'd20, 0, 2'b01, 32'hb400_0004);
+    @(negedge ACLK);
+    ARID = 8'hc5;
+    ARADDR = SRAM_BASE + 48'd24;
+    ARLEN = 0;
+    ARBURST = 2'b01;
+    ARVALID = 1;
+    repeat (2) begin
+      @(posedge ACLK);
+      if (ARVALID && ARREADY)
+        $fatal(1, "DMA map accepted a fifth read before an R response freed a slot");
+    end
+    if (dut.r_route_count != 4)
+      $fatal(1, "DMA map changed full read-queue count under backpressure");
+    @(negedge ACLK); ARVALID = 0;
     wait (dut.i_sram.RVALID && dut.i_fifo.RVALID);
     #1;
     if (!RVALID || (RID != 8'h81 && RID != 8'h92 && RID != 8'ha3))
