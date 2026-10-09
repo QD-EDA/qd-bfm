@@ -210,3 +210,44 @@ raw simulator transcripts are omitted.
 | AHB manager proxy before completed-lane packing | `735e256eb86e23d94f0588605cad5de85212ef6c6b7dc38be340ebd2c5333708` |
 | Current QD AHB manager proxy (2026-10-07) | `a91be6b29501ce960b7a394f5bcd6b1da2d54c99818007e5c33632a53c8474d3` |
 | Current QD AHB protocol checker (2026-10-07) | `ee3a6f9313dad251568011ac126f30f418de0f2ce15828d0e40dc0f42ffc2c05` |
+
+## Generated four-beat AHB predictor smoke (2026-10-09)
+
+The opt-in `--runtime-ahb-burst-smoke` mode issues a four-word read through the
+generated KeyVault MVC sequencer. It checks four successful responses and each
+corresponding RAL mirror after the generated monitor and predictor process the
+bus traffic. Its disposable overlay removes the generated HSEL tie-off only for
+this mode, then substitutes the provider's concrete transfer alias in pinned
+generated type expressions. The generated parameterized factory constructor
+returns a base MVC item under this Icarus build, so the overlay uses `new()` for
+that predictor output item.
+
+This smoke disables only the generated scoreboard's actual AHB comparison
+stream; that stream reports mismatches on the captured traffic. The smoke
+therefore checks the live monitor-to-predictor path, response status, and RAL
+mirrors, while the existing clean-room AHB regressions cover scoreboard
+streams. The result is **diagnostic only**, not qualification: it used Icarus
+13.0 devel `ac4532fa-dirty`, not a clean published revision. The run compiled
+with 76 warnings, reported 69,024 UVM warnings, zero UVM errors/fatals, printed
+the four-beat pass marker, and finished normally at 404.680 us. Summary output
+is retained in `ahb-burst-smoke-runtime.log`.
+
+The command was:
+
+```sh
+CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog \
+VVP_BIN=/private/tmp/bfm-work-install/bin/vvp \
+CALIPTRA_BFM_RUNTIME_TIMEOUT_SECONDS=300 \
+  sh evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.sh \
+    --runtime-ahb-burst-smoke
+```
+
+SHA-256 at note capture:
+
+```text
+e94d912ade235081d640111bc5c8fcffddfcef99d141f14fd8c627f40ee963b7  docs/conformance/release_overlays/caliptra/keyvault_generated_bfm_iverilog_overlay.py
+82729c2af1f1ea9f3c97b9ea42e93d57b75134ded36a1bb027be8bdf5dbbb311  dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv
+0261b793cdfc8e2c1403208e5e101df0f133c7cd33c2f81e06151f3acc18dbd0  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/run.py
+541a2f9cc7a385873aee7505f6d89897a1c565891e554d1c42a5bd12b277e4d8  evidence/caliptra-bfm-keyvault-generated-hdl-20261004/ahb-burst-smoke-runtime.log
+```

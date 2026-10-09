@@ -71,6 +71,8 @@ def caliptra_filelist(
             overlay / "kv_write_pkg.sv",
         "verification_ip/interface_packages/kv_read_pkg/src/kv_read_monitor_bfm.sv":
             overlay / "src/kv_read_monitor_bfm.sv",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh":
+            overlay / "src/kv_ahb_sequence.svh",
     }
     for raw in manifest.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
@@ -129,6 +131,7 @@ def runtime_summary(output: str) -> list[str]:
         or line.startswith("UVM_FATAL /")
         or re.match(r"^UVM_(?:INFO|WARNING|ERROR|FATAL)\s*:", line)
         or line == "** TESTCASE PASSED"
+        or line == "PASS: generated KeyVault four-beat AHB read prediction"
         or "$finish called" in line
     )
     return summary
@@ -136,12 +139,19 @@ def runtime_summary(output: str) -> list[str]:
 
 def main() -> int:
     runtime_2023 = sys.argv[1:] == ["--runtime-2023"]
-    runtime = sys.argv[1:] in (["--runtime"], ["--diagnose"], ["--runtime-2023"])
+    burst_smoke = sys.argv[1:] == ["--runtime-ahb-burst-smoke"]
+    runtime = sys.argv[1:] in (
+        ["--runtime"], ["--diagnose"], ["--runtime-2023"], ["--runtime-ahb-burst-smoke"]
+    )
     runtime_edition = "2023" if runtime_2023 else "2017"
     diagnostic = sys.argv[1:] == ["--diagnose"]
-    if sys.argv[1:] not in ([], ["--runtime"], ["--runtime-2023"], ["--diagnose"]):
+    if sys.argv[1:] not in (
+        [], ["--runtime"], ["--runtime-2023"], ["--diagnose"],
+        ["--runtime-ahb-burst-smoke"],
+    ):
         raise SystemExit(
-            f"usage: {Path(sys.argv[0]).name} [--runtime|--runtime-2023|--diagnose]"
+            f"usage: {Path(sys.argv[0]).name} "
+            "[--runtime|--runtime-2023|--diagnose|--runtime-ahb-burst-smoke]"
         )
     repo_root = Path(__file__).resolve().parents[2]
     caliptra_root = Path(
@@ -153,6 +163,7 @@ def main() -> int:
     helper = repo_root / "docs/conformance/release_overlays/caliptra/keyvault_generated_bfm_iverilog_overlay.py"
     bfm = repo_root / "dv/caliptra_bfm"
     output_log = Path(__file__).with_name(
+        "ahb-burst-smoke-runtime.log" if burst_smoke else
         "diagnose-runtime.log" if diagnostic else
         "verify-runtime-2023.log" if runtime_2023 else
         "verify-runtime.log" if runtime else "verify.log"
@@ -166,6 +177,8 @@ def main() -> int:
         overlay_command = [sys.executable, str(helper), str(template_root), str(overlay)]
         if diagnostic:
             overlay_command.append("--diagnose")
+        if burst_smoke:
+            overlay_command.append("--ahb-burst-smoke")
         overlay_result = subprocess.run(
             overlay_command,
             text=True,
@@ -279,6 +292,7 @@ endpackage
                             f"+UVM_VERBOSITY={os.environ.get('CALIPTRA_UVM_VERBOSITY', 'UVM_NONE')}",
                             "+UVM_NO_RELNOTES",
                             *( ["+KV_PIN_TRACE"] if diagnostic else []),
+                            *( ["+KV_AHB_BURST_SMOKE"] if burst_smoke else []),
                             *shlex.split(os.environ.get("CALIPTRA_UVM_PLUSARGS", ""))]
             try:
                 result = subprocess.run(
@@ -332,6 +346,8 @@ endpackage
                 or not re.search(r"^UVM_FATAL\s*:\s*0\s*$", runtime_output, re.MULTILINE)
                 or "** TESTCASE PASSED" not in runtime_output
                 or "$finish called" not in runtime_output
+                or (burst_smoke and
+                    "PASS: generated KeyVault four-beat AHB read prediction" not in runtime_output)
             ):
                 failure_summary = [
                     "FAIL: actual generated KeyVault kv_rand_wr_rd_test did not pass runtime gates.",

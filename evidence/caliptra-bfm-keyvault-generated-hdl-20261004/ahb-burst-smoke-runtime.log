@@ -1,0 +1,10 @@
+PASS: generated KeyVault runtime image compiled under IEEE 2017 (76 compile warnings).
+PASS: actual generated KeyVault kv_rand_wr_rd_test ran with open AHB replacement under IEEE 2017 (69024 runtime warnings).
+UVM_WARNING message count: 69024
+PASS: generated KeyVault four-beat AHB read prediction
+** TESTCASE PASSED
+UVM_INFO :    0
+UVM_WARNING :69024
+UVM_ERROR :    0
+UVM_FATAL :    0
+/private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 404680000 (1ps)

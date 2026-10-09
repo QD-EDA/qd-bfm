@@ -28,10 +28,14 @@ EXPECTED = {
         "7fff7e3b225ae13660aa2a4b4642d4069d7004aa3b45fa988ce31960154e8fd8",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_env_configuration.svh":
         "52de073510ca16bb8d672d355f54170bedd60268acc00b097d7ad6bcd40b862a",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_environment.svh":
+        "5640dcb30ca156dd4edfb52c2feae9e58cd14966847127a0fb1de10d247fbe89",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_env_sequence_base.svh":
         "2da8d4b1b176151d7570c68c94773ca09cad16a126918624d90cdbc7b78d7dd9",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_predictor.svh":
         "4d119cc45db7c78fbdd7128f979a922e9d1246db3bda98a739b87683f8ec7d08",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_scoreboard.svh":
+        "883925bf9e4ddb12b69b3e31cd9f70828dda9eab63a7682bd37c6cda431c807f",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_cold_rst_sequence.svh":
         "6205e7ded281753c52ade2f7a96b6c11d6226fda86a2472a8ff9ea1995483ff5",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_cold_rst_sequence.svh":
@@ -50,6 +54,8 @@ EXPECTED = {
         "49ea430a7dee3a12d17f51ec036d53aedb4f162aad334cf2bc6c3d2453cc6ff6",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_rst_sequence.svh":
         "45169b8a87aa60ddcf4c311ec6716d82618b00111b51ef1e115b073764e94742",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh":
+        "c66ed34b23f39a96ffa8597e8250eddfc0519e6fa7ab7dc1199e53e680331b74",
 }
 
 
@@ -71,6 +77,24 @@ def replace_once(text: str, old: str, new: str, source: str) -> str:
     return text.replace(old, new, 1)
 
 
+def use_generated_transfer_alias(text: str, source: str) -> str:
+    # Icarus miscasts class types specialized through class-scope constants.
+    text, count = re.subn(
+        r"ahb_master_burst_transfer\s*#\(\s*"
+        r"ahb_lite_slave_0_params::AHB_NUM_MASTERS\s*,\s*"
+        r"ahb_lite_slave_0_params::AHB_NUM_MASTER_BITS\s*,\s*"
+        r"ahb_lite_slave_0_params::AHB_NUM_SLAVES\s*,\s*"
+        r"ahb_lite_slave_0_params::AHB_ADDRESS_WIDTH\s*,\s*"
+        r"ahb_lite_slave_0_params::AHB_WDATA_WIDTH\s*,\s*"
+        r"ahb_lite_slave_0_params::AHB_RDATA_WIDTH\s*\)",
+        "ahb_lite_slave_0_transfer_t",
+        text,
+    )
+    if not count:
+        raise SystemExit(f"expected generated AHB transfer type in {source}")
+    return text
+
+
 def write_overlay(root: Path, text: str, output: str) -> None:
     target = root / output
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -78,11 +102,15 @@ def write_overlay(root: Path, text: str, output: str) -> None:
 
 
 def main() -> int:
-    diagnostic = len(sys.argv) == 4 and sys.argv[3] == "--diagnose"
-    if len(sys.argv) not in (3, 4) or (len(sys.argv) == 4 and not diagnostic):
+    flags = set(sys.argv[3:])
+    diagnostic = "--diagnose" in flags
+    ahb_burst_smoke = "--ahb-burst-smoke" in flags
+    if len(sys.argv) < 3 or len(flags) != len(sys.argv[3:]) or flags - {
+        "--diagnose", "--ahb-burst-smoke"
+    }:
         raise SystemExit(
             f"usage: {Path(sys.argv[0]).name} <keyvault-uvmf-template-output> "
-            "<overlay-dir> [--diagnose]"
+            "<overlay-dir> [--diagnose] [--ahb-burst-smoke]"
         )
     source_root, overlay_root = map(Path, sys.argv[1:3])
 
@@ -96,6 +124,13 @@ def main() -> int:
             f"driver modports; found {initiator_count} and {responder_count}"
         )
     text = text.replace(".initiator_port", "")
+    if ahb_burst_smoke:
+        text = replace_once(
+            text,
+            "    assign uvm_test_top_environment_qvip_ahb_lite_slave_subenv_qvip_hdl.ahb_lite_slave_0_HSEL      = 1'b0;\n",
+            "    // The open active manager drives HSEL from HTRANS.\n",
+            relative,
+        )
     if diagnostic:
         text = replace_once(
             text,
@@ -208,7 +243,22 @@ def main() -> int:
         '    qvip_ahb_lite_slave_subenv_interface_activity[0] = interface_activity[0];',
         relative,
     )
+    if ahb_burst_smoke:
+        text = use_generated_transfer_alias(text, relative)
+        text = replace_once(
+            text,
+            '     void\'(qvip_ahb_lite_slave_subenv_config.ahb_lite_slave_0_cfg.set_monitor_item( "burst_transfer_sb"',
+            '     if (!$test$plusargs("KV_AHB_BURST_SMOKE"))\n'
+            '       void\'(qvip_ahb_lite_slave_subenv_config.ahb_lite_slave_0_cfg.set_monitor_item( "burst_transfer_sb"',
+            relative,
+        )
     write_overlay(overlay_root, text, "src/kv_env_configuration.svh")
+
+    if ahb_burst_smoke:
+        for filename in ("kv_environment.svh", "kv_scoreboard.svh"):
+            relative = f"verification_ip/environment_packages/kv_env_pkg/src/{filename}"
+            text = use_generated_transfer_alias(read_pinned(source_root, relative), relative)
+            write_overlay(overlay_root, text, "src/" + filename)
 
     sequence_sources = (
         "verification_ip/environment_packages/kv_env_pkg/src/kv_env_sequence_base.svh",
@@ -247,9 +297,58 @@ def main() -> int:
             )
         write_overlay(overlay_root, text, "src/" + Path(relative).name)
 
+    if ahb_burst_smoke:
+        relative = "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh"
+        text = read_pinned(source_root, relative)
+        text = replace_once(
+            text,
+            "        reg [KV_DATA_W-1:0] wr_data, rd_data;\n",
+            "        reg [KV_DATA_W-1:0] wr_data, rd_data;\n"
+            "        mvc_sequencer ahb_seqr;\n"
+            "        ahb_lite_caliptra_uvm_pkg::ahb_lite_caliptra_four_word_read_sequence burst_probe;\n",
+            relative,
+        )
+        text = replace_once(
+            text,
+            "    endtask\n\n\nendclass",
+            "        if ($test$plusargs(\"KV_AHB_BURST_SMOKE\")) begin\n"
+            "            if (!uvm_config_db#(mvc_sequencer)::get(\n"
+            "                    null, UVMF_SEQUENCERS,\n"
+            "                    configuration.qvip_ahb_lite_slave_subenv_interface_names[0],\n"
+            "                    ahb_seqr))\n"
+            "                `uvm_fatal(\"KV_AHB_BURST\", \"Could not resolve generated AHB sequencer\")\n"
+            "            burst_probe = new(\"keyvault_four_beat_read\");\n"
+            "            burst_probe.address = reg_model.kv_reg_rm.KEY_CTRL[0].get_address(\n"
+            "                reg_model.kv_AHB_map);\n"
+            "            burst_probe.transfer_size = $clog2(reg_model.kv_AHB_map.get_n_bytes());\n"
+            "            burst_probe.start(ahb_seqr);\n"
+            "            kv_cfg.kv_rst_agent_config.wait_for_num_clocks(2);\n"
+            "            for (int beat = 0; beat < 4; beat++) begin\n"
+            "                if (reg_model.kv_reg_rm.KEY_CTRL[beat].get_mirrored_value() !==\n"
+            "                    ((burst_probe.transfer.data[beat] >>\n"
+            "                      (((burst_probe.address + beat * reg_model.kv_AHB_map.get_n_bytes()) %\n"
+            "                        (ahb_lite_slave_0_params::AHB_RDATA_WIDTH / 8)) * 8)) &\n"
+            "                     64'h0000_0000_ffff_ffff))\n"
+            "                    `uvm_fatal(\"KV_AHB_BURST\", \"Generated AHB burst mirror disagrees with returned beat\")\n"
+            "            end\n"
+            "            $display(\"PASS: generated KeyVault four-beat AHB read prediction\");\n"
+            "        end\n"
+            "    endtask\n\n\nendclass",
+            relative,
+        )
+        write_overlay(overlay_root, text, "src/kv_ahb_sequence.svh")
+
     relative = "verification_ip/environment_packages/kv_env_pkg/src/kv_predictor.svh"
     text = read_pinned(source_root, relative)
     text = replace_once(text, "  CONFIG_T configuration;", "  kv_env_configuration configuration;", relative)
+    if ahb_burst_smoke:
+        text = use_generated_transfer_alias(text, relative)
+        text = replace_once(
+            text,
+            'kv_sb_ahb_ap_output_transaction = kv_sb_ahb_ap_output_transaction_t::type_id::create("kv_sb_ahb_ap_output_transaction");',
+            'kv_sb_ahb_ap_output_transaction = new("kv_sb_ahb_ap_output_transaction");',
+            relative,
+        )
     if not re.search(
         r"configuration\.[A-Za-z0-9_]+_agent_config\s*\.wait_for_num_clocks\s*\(",
         text,

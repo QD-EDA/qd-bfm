@@ -599,6 +599,33 @@ package ahb_lite_caliptra_uvm_pkg;
     endtask
   endclass
 
+  class ahb_lite_caliptra_four_word_read_sequence extends uvm_sequence #(mvc_sequence_item_base);
+    `uvm_object_utils(ahb_lite_caliptra_four_word_read_sequence)
+
+    bit [31:0] address;
+    bit [2:0] transfer_size = AHB_MVC_WORD_SIZE;
+    ahb_lite_caliptra_mvc_transfer transfer;
+
+    function new(string name = "ahb_lite_caliptra_four_word_read_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      transfer = new("four_word_read");
+      transfer.RnW = AHB_READ;
+      transfer.address = address;
+      transfer.size = transfer_size;
+      repeat (4) transfer.data.push_back('0);
+      start_item(transfer);
+      finish_item(transfer);
+      if (transfer.resp.size() != 4)
+        `uvm_fatal("AHB_READ_BURST", "AHB four-word read did not return four responses")
+      foreach (transfer.resp[beat])
+        if (transfer.resp[beat] != AHB_OKAY)
+          `uvm_fatal("AHB_READ_BURST", "AHB four-word read returned ERROR")
+    endtask
+  endclass
+
   class ahb_lite_caliptra_error_sequence extends uvm_sequence #(mvc_sequence_item_base);
     `uvm_object_utils(ahb_lite_caliptra_error_sequence)
 
