@@ -60,3 +60,38 @@ this record preserves the command, hashes, and observed summary.
 | `dv/caliptra_bfm/uvm/axi4_caliptra_dma_if_monitor.sv` | `28bbc17e1079f44d808599642a7317d1248b43fc1ba5e2a3ee067655aa005f58` |
 | Pinned Caliptra `src/axi/rtl/axi_pkg.sv` | `07991843e3a2b77e6aae9c6903ae8ff08927ddbb517d83a23f96abd89be3af29` |
 | Pinned Caliptra `src/axi/rtl/axi_if.sv` | `e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c` |
+
+## Actual Caliptra AXI manager BFM check — 2026-10-09
+
+The focused `run_caliptra_axi_mgr_uvm_bfm.sh` smoke now passes on a clean
+source archive of published Icarus main
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`, using the clean pinned Caliptra
+tree `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. It connects the actual
+Caliptra `axi_mgr_wr` and `axi_mgr_rd` modules through `axi_if` to the open DMA
+target and passive UVM BFM adapter. The subscriber checked one two-beat write
+and one two-beat read, including USER, data, strobe, response, and LAST fields.
+The UVM report had zero warnings, errors, and fatals; the runner exited 0.
+This is targeted AXI manager/agent integration evidence, not a generated
+Caliptra environment or full protocol qualification.
+
+Command:
+
+```sh
+CALIPTRA_RTL=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+dv/caliptra_bfm/uvm/tests/run_caliptra_axi_mgr_uvm_bfm.sh
+```
+
+Current source fingerprints:
+
+```text
+a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
+29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
+07b55cfc11b1b1c448bb28a98c08c6318de4481d1bdffa05e247ece69dc75694  dv/caliptra_bfm/uvm/tests/run_caliptra_axi_mgr_uvm_bfm.sh
+7f0882627751bb4100ba64fe8ea63c6cf5a925fb76c72321af27cdd13de1c5ee  dv/caliptra_bfm/uvm/tests/tb_caliptra_axi_mgr_uvm_bfm.sv
+d01deae87900d61b59cff34cf065a8999fa2b2c616d22b22ffdca5b768a7eb94  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+ea020134f12c9bdfa9068b3e3431b5dad340da667234c8776bc272ccf957f01f  Caliptra src/axi/rtl/axi_mgr_rd.sv
+8b0d4c52996f1b19bb21a53c0d9103df853dccb0ddf10708a92c489d8b0bc157  Caliptra src/axi/rtl/axi_mgr_wr.sv
+e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c  Caliptra src/axi/rtl/axi_if.sv
+```
