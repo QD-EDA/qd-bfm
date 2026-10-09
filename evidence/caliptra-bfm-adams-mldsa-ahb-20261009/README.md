@@ -276,3 +276,28 @@ python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
 
 The binary fingerprints are `iverilog` `a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602`
 and `vvp` `29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca`.
+
+### Published-main preflight recheck — 2026-10-09
+
+The packed-member preflight was recompiled and run with a clean build of
+published Icarus `main` `4b3f3424c440aca6af92153b6860a7253b925234`, the newest
+revision in the local `origin/main` cache. It still reports
+`raw_en=0 raw_addr=1 sized_en=1`; the generated MLDSA keygen runner therefore
+stops before starting its UVM simulation. This confirms the keygen blocker
+persists on the latest locally available published build. The remote head
+could not be confirmed because GitHub DNS resolution failed.
+
+Reproduction used the standalone packed-member probe only:
+
+```sh
+/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog -g2012 -s top \
+  -o /private/tmp/qd-bfm-mldsa-packed-4b3f.vvp \
+  evidence/caliptra-bfm-adams-mldsa-ahb-20261009/packed_member_width_repro.sv
+python3 scripts/run_with_memory_pressure_guard.py --timeout-seconds 30 -- \
+  /private/tmp/iverilog-uvm-install-4b3f342/bin/vvp \
+  /private/tmp/qd-bfm-mldsa-packed-4b3f.vvp
+```
+
+The build used the same published-main source archive and binaries recorded in
+the ECC AHB evidence README. The probe source SHA-256 is
+`d9a7586a19293ae11bbe9ce215cf8e5e6e4c85c9a0d1d226fdda32e2090d646e`.
