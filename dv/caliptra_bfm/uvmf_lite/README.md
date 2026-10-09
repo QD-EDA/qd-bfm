@@ -98,10 +98,12 @@ runner also supports a deterministic `key_sign` transaction with a generated
 scoreboard check (`ECC_RUNTIME_PROBE=key_sign`); it builds the native vector
 helper in its temporary run directory using Homebrew `mbedtls@3`, submits the
 startup reset sample expected by the generated output monitor, and ties the
-otherwise-unconnected `cptra_pwrgood` high in its temporary top. Key signing is
-not qualified until that mode passes. Verification, ECDH shared-key
-operations, broader generated-environment
-traffic, and full generated `hdl_top`/`hvl_top` qualification remain open; see
+otherwise-unconnected `cptra_pwrgood` high in its temporary top. Key signing
+has diagnostic scoreboard passes under IEEE 2017 and 2023; it remains
+unqualified until rerun with a clean, published Icarus revision. Verification
+and ECDH shared-key operations have diagnostic IEEE 2017 passes. Broader
+generated-environment traffic and full generated `hdl_top`/`hvl_top`
+qualification remain open; see
 the [generated ECC runtime evidence](../../../evidence/caliptra-bfm-generated-ecc-hdl-20261004/README.md).
 Generated status-agent monitoring also has a focused runtime probe.
 The generated SHA-512 `SHA512_random_test` also runs against actual
@@ -282,4 +284,12 @@ transaction completed with expected=2, observed=2, matched=2, mismatched=0,
 pending=0, UVM_ERROR=0, and UVM_FATAL=0 at 716,432 simulated clocks. It used
 dirty, unpublished Icarus `ac4532fa-dirty`, so this is diagnostic-only and does
 not qualify ECDH. The exact command and log hash are recorded in the generated
+ECC runtime evidence.
+
+2026-10-09 IEEE 2023 key-sign follow-up: the generated transaction completed
+with expected=2, observed=2, matched=2, mismatched=0, pending=0,
+UVM_ERROR=0, and UVM_FATAL=0 at 7,344,220 ns. This is diagnostic-only because
+Icarus `ac4532fa-dirty` was unpublished; clean, published-Icarus qualification
+remains open. The raw log contains generated key material and remains outside
+the repository. Reproduction command and artifact hashes are in the generated
 ECC runtime evidence.

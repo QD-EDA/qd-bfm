@@ -305,3 +305,37 @@ env CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
 | --- | --- |
 | Detailed `ecdh_overlay_2017.log` | `82738669814ca646dd15d1fbf051f771fcbe434596137856d9f767da7b900096` |
 | `generated_ecc_monitor_overlay.py` | `6070550509aabf541b3da7947f976e265a27eaefdf84c8079edf9b41d6a9a6f6` |
+
+### IEEE 2023 key-sign follow-up — 2026-10-09
+
+The generated IEEE 2023 `key_sign` transaction completed with
+`PASS: generated ECC key-sign transaction matched`, expected=2, observed=2,
+matched=2, mismatched=0, pending=0, `UVM_ERROR=0`, and `UVM_FATAL=0` at
+7,344,220 ns (734,422 clocks). This is diagnostic only: Icarus 13.0 came from
+dirty, unpublished source HEAD `ac4532fab037e91df2f903e67fb40f59baedccca`
+(`ac4532fa-dirty`). The Caliptra checkout was clean at
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. Re-run on a clean, published
+Icarus revision before making any qualification claim. The raw log remains
+outside the repository because it contains generated key material.
+
+Reproduce from the QD-EDA/qd-bfm repository root with:
+
+```sh
+env CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  ECC_IEEE_EDITION=2023 \
+  ECC_RUNTIME_PROBE=key_sign \
+  ECC_RESET_MONITOR_LOG_DIR=/private/tmp/qd-ecc-key-sign-2023-20261009/logs \
+  IVERILOG_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/driver/iverilog' \
+  VVP_BIN='/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/vvp/vvp' \
+  sh dv/caliptra_bfm/uvmf_lite/tests/run_generated_ecc_reset_monitor.sh
+```
+
+| Diagnostic artifact | SHA-256 |
+| --- | --- |
+| `key_sign_overlay_2023.log` | `e299a345102f1981a914d633bbe322d2a168946b962d796e702b8d071d3536fa` |
+| Icarus compiler binary | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
+| VVP runtime binary | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
+| Reset-monitor runner | `4d0db7367428907a43e07bc139f2cafc8ddb74847cd62607ba064b9ad272888e` |
+| Probe package | `0c1b0b09c935e8294158acb797f6f830c6139a385974ae09da90a6b8d6bc8e66` |
+| Sparse progress probe | `732bd1e09e9d9ff816d5800d442790027564c0504e42a7f7408cc0477297f6aa` |
+| Generated ECC monitor overlay | `6070550509aabf541b3da7947f976e265a27eaefdf84c8079edf9b41d6a9a6f6` |
