@@ -48,3 +48,14 @@ keygen busy phase, but the guarded 600-second run timed out before its first
 `busy=1`; no keygen result is claimed. The captured diagnostic output and
 progress file hashes are `01b10cf4568fd04dc09a6af0c3a0bc8cb0b6403d97988e71a6b0d0dba04a6570`
 and `23f30a07acd54514eed77ab4782bd238407d4910d3e6e8c280ee1ae8ad17226e`.
+
+### Progress-sampling follow-up — 2026-10-09
+
+The progress interval was reduced to 1,000 cycles. A separate 180-second
+guarded run reached cycle 1,000 with `busy=1`, then exited at the guard before
+keygen completion. The earlier cycle-0-only log was therefore too coarse to
+show that the simulation had advanced. No keygen result is claimed. The
+progress log SHA-256 is
+`b22d5d7fa188567d289b41f7f8c0b45e15a0a428cb2bd7de201219de83595135`; the
+runner source used for this probe is
+`aa398f185df3931c405d266c1941ee1ed51b61828cc7df2549acc0521e317e73`.

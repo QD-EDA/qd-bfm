@@ -230,7 +230,7 @@ def main() -> int:
                 "      for (int cycle = 0; cycle < 500000; cycle++) begin\n"
                 "        #10ns;\n"
                 "        if (busy_if.busy) saw_busy = 1;\n"
-                "        if ((cycle % 10000) == 0) begin\n"
+                "        if ((cycle % 1000) == 0) begin\n"
                 "          $fdisplay(progress_fd, \"cycle=%0d busy=%b saw_busy=%b\", cycle, busy_if.busy, saw_busy);\n"
                 "          $fflush(progress_fd);\n"
                 "        end\n"
