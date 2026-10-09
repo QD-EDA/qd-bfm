@@ -93,6 +93,13 @@ clean. It passes in 2012, 2017, and 2023 modes with the local
 Icarus `-uvm` fork and Accellera UVM 2020.3.1. This exercises the open UVM AHB
 agent against a real Caliptra unit; the generated UVMF agent and full Caliptra
 top remain outside this smoke.
+Current-state update (2026-10-09): IEEE 2017 and 2023 reruns also pass with
+the clean published Icarus main revision 4b3f3424c440aca6af92153b6860a7253b925234.
+Both report four checked transfers and zero UVM warnings, errors, or fatals.
+This is the latest published main revision available in the local cache; the
+remote head could not be refreshed. See
+[updated-main evidence](../../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md).
+
 The command, pinned inputs, tool hashes, source hashes, and three-edition result
 are recorded in
 [`evidence/caliptra-bfm-ecc-ahb-uvm-20261004`](../../../evidence/caliptra-bfm-ecc-ahb-uvm-20261004/README.md).
