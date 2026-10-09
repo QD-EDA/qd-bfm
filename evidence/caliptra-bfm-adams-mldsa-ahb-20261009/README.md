@@ -109,3 +109,29 @@ python3 dv/caliptra_bfm/uvm/tests/run_adams_mldsa_env_compile.py \
 | `run_adams_mldsa_env_compile.py` | `ec5a3b2db1d94bc9ccbac015067f17bf666b054a80b393928239d79b3cf40ce6` |
 | `iverilog` | `6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114` |
 | `vvp` | `4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867` |
+
+### Packed-member width follow-up — 2026-10-09
+
+A standalone paired reproduction isolates the missing SKENCODE read request.
+It mirrors `skencode.sv` lines 280–281: `rd_wr_en` is `RW_READ`, while the
+named `addr` member is 15 bits and its expression includes the 32-bit
+`num_mem_operands`. The checked-in
+[`packed member-width reproduction`](packed_member_width_repro.sv) produces
+`raw_en=0 raw_addr=1` and `sized_en=1 sized_addr=1` on the Icarus build below.
+Verilator 5.050 produces `raw_en=1` for the same uncast assignment and warns
+that the 32-bit pattern value is truncated to the 15-bit member. This
+reproduces the field loss independently of Caliptra and localizes the observed
+no-read behavior to Icarus's handling of this packed-struct assignment
+pattern. No QD or pinned RTL workaround was applied. Actual keygen remains
+incomplete; this is diagnostic evidence, not qualification.
+
+Both compilers and runtimes were invoked through
+`scripts/run_with_memory_pressure_guard.py`. The Icarus source was dirty and
+unpublished at `ac4532fab037e91df2f903e67fb40f59baedccca`; its `iverilog` and
+`vvp` binary SHA-256 values are recorded above. Verilator was
+`5.050 2026-07-01 rev vUNKNOWN-built20260701`. The Caliptra and Adams Bridge
+revisions remain `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and
+`b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, respectively. The reproduction
+source SHA-256 is recorded with this follow-up's commit.
+
+Reproduction source SHA-256: `d9a7586a19293ae11bbe9ce215cf8e5e6e4c85c9a0d1d226fdda32e2090d646e`.
