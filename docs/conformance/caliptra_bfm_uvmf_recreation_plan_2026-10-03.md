@@ -1147,6 +1147,13 @@ checker enabled. This is one diagnostic vector with fast TRNG, `.data`/`.bss`
 preload, and PQ-vector suppression; the 12-case batch remains open. See the
 [`case 1 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case1-main-0d8815f-20261009/README.md).
 
+**2026-10-09 published-main case-2 rerun:** the second short AES/DMA vector
+also passes on published Icarus `main`
+`0d8815febc260928e62d5c2ce82b14afd2e38dc3`, with the open AXI target and
+native checker enabled. This is one diagnostic vector with fast TRNG,
+`.data`/`.bss` preload, and PQ-vector suppression; the 12-case batch remains
+open. See the [`case 2 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case2-main-0d8815f-20261009/README.md).
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
