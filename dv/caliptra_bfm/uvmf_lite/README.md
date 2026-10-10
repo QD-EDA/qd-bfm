@@ -20,9 +20,9 @@ module. Run `tests/run_default_reset_gen.sh` for the bounded reset check.
 It currently provides a transaction base with the generated
 `start_time`, `end_time`, and `transaction_view_h` fields plus copy/compare/
 print hooks. It records the base timestamps through the UVM transaction
-recorder. Derived classes can record selected fields in `do_record()`; it does
-not serialize `convert2string()` automatically because generated transaction
-strings may include sensitive payloads. The
+recorder. Derived classes can record selected fields in `do_record()` or use
+standard UVM field automation; `convert2string()` is never serialized because
+generated transaction strings may include sensitive payloads. The
 package also provides the `uvmf_sim_level_t` enum; typed
 environment and parameterized-agent configuration bases, including the
 generated `initiator_responder` setting; `set_config`-based environment and
@@ -54,9 +54,9 @@ Icarus `-uvm` fork selected through `IVERILOG_BIN` and `VVP_BIN`. Both runners
 compile and execute with `-g2017` and `-g2023`, using bundled Accellera UVM
 2020.3.1. Set `UVMF_IEEE_EDITION=2017` or `2023` to run one agent-smoke
 edition, including its negative control. `tests/run_uvmf_transaction_key.sh`
-checks transaction-key copying and records base timestamps plus an explicitly
-selected derived payload field through the UVM transaction database; it also
-checks that `convert2string()` output is not recorded. The scoreboard smoke
+checks transaction-key and generated-style field copying, records base
+timestamps and a derived payload field through the UVM transaction database,
+and checks that `convert2string()` output is not recorded. The scoreboard smoke
 includes a normal match with a publisher-side mutation after write, one compare
 mismatch, one expected-only leftover, and one actual-only leftover.
 The runner requires exactly four UVM_ERROR reports and zero UVM_FATAL reports:
@@ -134,10 +134,20 @@ config-DB identity checks. The
 clean-room base does not provide generic reset/clock wait helpers; the
 inspected generated Caliptra configuration classes implement
 `wait_for_reset` and `wait_for_num_clocks` by delegating to their monitor BFMs.
-Structured per-field recording of derived payloads remains open. The ECC
+Generated-style automatic recording is checked for one derived integer field;
+Caliptra-specific derived transaction record layouts and other field types
+remain open. The ECC
 `hdl_top`/`hvl_top` pair runs with a hash-guarded modport/timescale overlay;
 compatibility with unmodified and other generated tops remains open.
 Do not treat it as a drop-in UVMF package yet.
+
+Current-state update (2026-10-10): the transaction recording smoke now covers
+both an explicit derived `do_record()` and generated-style `uvm_field_int`
+automation. It checks field copy, base timestamps, both payload fields, and
+omission of `convert2string()` output. IEEE 2017 and 2023 runs pass on published
+Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`; this verifies the generic
+base API for one integer field, not Caliptra-generated record layouts. See the
+[dated result](../../../evidence/caliptra-bfm-uvmf-transaction-fields-published-20261010/README.md).
 
 The repeatable generated HMAC runtime is `tests/run_generated_hmac_runtime.sh`.
 It expands the pinned HMAC RTL filelist, hash-checks the test-generator and

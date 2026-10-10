@@ -1570,3 +1570,13 @@ warning and zero UVM errors/fatals. A local diagnostic rerun also passed with
 Icarus 13.0-devel; it is not a published-SHA result. Results validate the open
 generic BFM path against its memory target, not subword behavior on Caliptra
 peripheral RTL. See the [six-run evidence](../../evidence/caliptra-bfm-ahb-native-ral-published-20261010/README.md).
+
+**2026-10-10 UVMF transaction field automation:** the focused transaction
+recorder smoke now covers the explicit derived `do_record()` hook and
+generated-style `uvm_field_int` automation. It checks copy and structured
+recording of base timestamps and both derived payloads, while confirming that
+`convert2string()` is not serialized. IEEE 2017 and 2023 pass on published
+Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`. This verifies one generic
+integer field; Caliptra-generated record layouts and additional field types
+remain unverified. See the
+[dated evidence](../../evidence/caliptra-bfm-uvmf-transaction-fields-published-20261010/README.md).

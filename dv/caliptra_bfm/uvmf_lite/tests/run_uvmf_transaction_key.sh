@@ -20,12 +20,12 @@ for edition in 2017 2023; do
     dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv \
     dv/caliptra_bfm/uvmf_lite/tests/tb_uvmf_transaction_key.sv
   "$VVP_BIN" "$out" "+BFM_LITE_RECORD_FILE=$record_log" >"$log" 2>&1 || { cat "$log"; exit 1; }
-  grep -q 'PASS: UVMF transaction key and timestamp/payload recording' "$log" || {
+  grep -q 'PASS: UVMF transaction key and generated-style field recording' "$log" || {
     cat "$log"
     echo "Transaction record test did not pass under IEEE $edition" >&2
     exit 1
   }
-  for field in start_time end_time payload; do
+  for field in start_time end_time payload generated_payload; do
     grep -q "$field" "$record_log" || {
       echo "UVMF transaction record omitted $field under IEEE $edition" >&2
       exit 1
