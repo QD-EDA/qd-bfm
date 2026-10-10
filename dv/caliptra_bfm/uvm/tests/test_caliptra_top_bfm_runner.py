@@ -227,6 +227,74 @@ class NativeVectorSelectionTest(unittest.TestCase):
                          RUNNER.VECTOR_OUTPUTS)
 
 
+class NativeVectorPreparationTest(unittest.TestCase):
+    def test_linux_uses_cc_mbedtls_prefix_and_shared_libraries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            rtl = root / "caliptra-rtl"
+            prefix = root / "deps"
+            output = root / "output"
+            output.mkdir()
+            for relative in (
+                    "src/ecc/tb/ecc_secp384r1.c",
+                    "src/doe/tb/doe_test_gen.py",
+                    "src/sha256/tb/sha256_wntz_test_gen.py"):
+                path = rtl / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("stub\n")
+            for library in ("libmbedcrypto.so", "libmbedx509.so", "libmbedtls.so"):
+                path = prefix / "lib" / library
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("stub\n")
+
+            tools = {
+                "cc": str(root / "bin/cc"),
+                "make": str(root / "bin/make"),
+                "openssl": str(prefix / "bin/openssl"),
+                "xxd": str(root / "bin/xxd"),
+                "python3.12": str(root / "bin/python3.12"),
+            }
+            commands = []
+
+            def run_logged(command, cwd, env, log):
+                commands.append(command)
+                target = Path(command[-1])
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text("generated\n")
+                return 0
+
+            with patch.object(RUNNER.sys, "platform", "linux"), \
+                    patch.object(RUNNER.platform, "machine", return_value="x86_64"), \
+                    patch.object(RUNNER.shutil, "which", side_effect=lambda name: tools.get(name)), \
+                    patch.object(RUNNER, "run_logged", side_effect=run_logged):
+                files, _, prepared_commands, selected_tools = RUNNER.prepare_native_vectors(
+                    rtl, output, {"CALIPTRA_MBEDTLS_ROOT": str(prefix)},
+                    skip_pq_vectors=True,
+                )
+
+            self.assertEqual(selected_tools["compiler"], tools["cc"])
+            self.assertNotIn("brew", selected_tools)
+            self.assertEqual(prepared_commands, commands)
+            self.assertEqual(commands[0][0], tools["cc"])
+            self.assertIn(f"-I{prefix / 'include'}", commands[0])
+            self.assertIn(f"-L{prefix / 'lib'}", commands[0])
+            self.assertTrue(files["ecc_secp384r1.exe"].is_file())
+
+    def test_linux_requires_the_mbedtls_prefix(self):
+        tools = {
+            "cc": "/usr/bin/cc",
+            "make": "/usr/bin/make",
+            "openssl": "/usr/bin/openssl",
+            "xxd": "/usr/bin/xxd",
+            "python3.12": "/usr/bin/python3.12",
+        }
+        with patch.object(RUNNER.sys, "platform", "linux"), \
+                patch.object(RUNNER.platform, "machine", return_value="x86_64"), \
+                patch.object(RUNNER.shutil, "which", side_effect=lambda name: tools.get(name)):
+            with self.assertRaisesRegex(RuntimeError, "requires CALIPTRA_MBEDTLS_ROOT"):
+                RUNNER.prepare_native_vectors("unused", "unused", {}, skip_pq_vectors=True)
+
+
 class ProfileOverlayTest(unittest.TestCase):
     def test_fast_trng_profile_hash_checks_combined_top_overlay(self):
         with tempfile.TemporaryDirectory() as temp:
