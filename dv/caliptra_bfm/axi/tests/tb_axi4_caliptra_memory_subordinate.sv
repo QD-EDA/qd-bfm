@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
 module tb_axi4_caliptra_memory_subordinate;
+  localparam integer MAX_BEATS = 256;
   reg ACLK = 0;
   always #5 ACLK = ~ACLK;
   reg ARESETn = 0;
@@ -23,9 +24,9 @@ module tb_axi4_caliptra_memory_subordinate;
   wire [7:0] write_response_id, read_response_id;
 
   axi4_caliptra_master #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
-    .USER_WIDTH(32), .MAX_BEATS(4), .TIMEOUT_CYCLES(64)) manager (.*);
+    .USER_WIDTH(32), .MAX_BEATS(MAX_BEATS), .TIMEOUT_CYCLES(64)) manager (.*);
   axi4_caliptra_memory_subordinate #(.ADDR_WIDTH(19), .DATA_WIDTH(32),
-    .ID_WIDTH(8), .USER_WIDTH(32), .BASE_ADDR(19'h100), .MEM_BYTES(256)) memory (
+    .ID_WIDTH(8), .USER_WIDTH(32), .BASE_ADDR(19'h100), .MEM_BYTES(2048)) memory (
       .ARESETn(memory_resetn), .*
     );
   axi4_caliptra_checker #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
@@ -64,9 +65,9 @@ module tb_axi4_caliptra_memory_subordinate;
   reg success;
   reg [1:0] response;
   reg [31:0] response_user;
-  reg [127:0] write_data, write_user, read_data, read_user;
-  reg [15:0] write_strb;
-  reg [7:0] read_response;
+  reg [32*MAX_BEATS-1:0] write_data, write_user, read_data, read_user;
+  reg [4*MAX_BEATS-1:0] write_strb;
+  reg [2*MAX_BEATS-1:0] read_response;
 
   task automatic check(input condition, input [8*80-1:0] message);
     if (condition !== 1'b1) $fatal(1, "%0s", message);
@@ -189,21 +190,21 @@ module tb_axi4_caliptra_memory_subordinate;
     write_data[31:0] = 32'h6262_6262;
     write_data[63:32] = 32'h6363_6363;
     write_strb = 16'h00ff;
-    manager.write_burst(19'h1f8, 1, 2, 2'b01, 8'h66, 32'h0, 1'b0,
+    manager.write_burst(19'h8f8, 1, 2, 2'b01, 8'h66, 32'h0, 1'b0,
       write_data, write_strb, write_user, success, response, response_user);
     check(success && response == 2'b00 &&
-      memory.word_at(62) == 32'h6262_6262 && memory.word_at(63) == 32'h6363_6363,
+      memory.word_at(510) == 32'h6262_6262 && memory.word_at(511) == 32'h6363_6363,
       "valid write at the final mapped words failed");
 
     write_data = {32'hdddd_dddd, 32'hcccc_cccc, 32'hbbbb_bbbb, 32'haaaa_aaaa};
     write_strb = 16'hffff;
-    manager.write_burst(19'h1f8, 3, 2, 2'b01, 8'h67, 32'h0, 1'b0,
+    manager.write_burst(19'h8f8, 3, 2, 2'b01, 8'h67, 32'h0, 1'b0,
       write_data, write_strb, write_user, success, response, response_user);
     check(!success && response == 2'b11 &&
-      memory.word_at(62) == 32'h6262_6262 && memory.word_at(63) == 32'h6363_6363,
+      memory.word_at(510) == 32'h6262_6262 && memory.word_at(511) == 32'h6363_6363,
       "boundary-crossing write was not rejected atomically");
 
-    manager.read_burst(19'h1f8, 3, 2, 2'b01, 8'h68, 32'h0, 1'b0,
+    manager.read_burst(19'h8f8, 3, 2, 2'b01, 8'h68, 32'h0, 1'b0,
       success, read_data, read_user, read_response, response_user);
     check(!success && read_response == 8'hff && read_data == 0,
       "boundary-crossing read did not return zero data and DECERR on every beat");
@@ -237,13 +238,33 @@ module tb_axi4_caliptra_memory_subordinate;
       read_data[63:32] == 32'hcccc_dddd,
       "FIXED read did not repeat the same address for both beats");
 
+    for (integer beat = 0; beat < MAX_BEATS; beat = beat + 1) begin
+      write_data[32*beat +: 32] = 32'h5eed_0000 | beat;
+      write_strb[4*beat +: 4] = 4'hf;
+      write_user[32*beat +: 32] = 32'hd100_0000 | beat;
+    end
+    manager.write_burst(19'h200, 8'hff, 2, 2'b01, 8'ha1, 32'habcd_00a1,
+      1'b0, write_data, write_strb, write_user, success, response, response_user);
+    check(success && response == 2'b00 && response_user == 32'habcd_00a1,
+      "256-beat INCR write did not complete with its B response");
+    manager.read_burst(19'h200, 8'hff, 2, 2'b01, 8'ha2, 32'habcd_00a2,
+      1'b0, success, read_data, read_user, read_response, response_user);
+    check(success && response_user == 32'habcd_00a2,
+      "256-beat INCR read did not complete with its ARUSER");
+    for (integer beat = 0; beat < MAX_BEATS; beat = beat + 1) begin
+      if (read_data[32*beat +: 32] !== (32'h5eed_0000 | beat) ||
+          read_user[32*beat +: 32] !== 32'habcd_00a2 ||
+          read_response[2*beat +: 2] !== 2'b00)
+        $fatal(1, "256-beat INCR readback mismatch at beat %0d", beat);
+    end
+
     check(aw_burst_fixed_count + aw_burst_incr_count + aw_burst_wrap_count +
       aw_burst_reserved_count + aw_burst_unknown_count == aw_count &&
       aw_burst_fixed_count == 1 && aw_burst_incr_count == aw_count - 2 &&
       aw_burst_wrap_count == 1 && aw_burst_reserved_count == 0 &&
       aw_burst_unknown_count == 0 &&
       aw_lock_clear_count + aw_lock_set_count + aw_lock_unknown_count == aw_count &&
-      aw_lock_clear_count == 9 && aw_lock_set_count == 3 &&
+      aw_lock_clear_count == 10 && aw_lock_set_count == 3 &&
       aw_lock_unknown_count == 0,
       "write address coverage did not account for burst and exclusive bins");
     check(ar_burst_fixed_count + ar_burst_incr_count + ar_burst_wrap_count +
@@ -252,29 +273,29 @@ module tb_axi4_caliptra_memory_subordinate;
       ar_burst_wrap_count == 1 && ar_burst_reserved_count == 0 &&
       ar_burst_unknown_count == 0 &&
       ar_lock_clear_count + ar_lock_set_count + ar_lock_unknown_count == ar_count &&
-      ar_lock_clear_count == 6 && ar_lock_set_count == 3 &&
+      ar_lock_clear_count == 7 && ar_lock_set_count == 3 &&
       ar_lock_unknown_count == 0,
       "read address coverage did not account for burst and exclusive bins");
     check(b_resp_okay_count + b_resp_exokay_count + b_resp_slverr_count +
       b_resp_decerr_count + b_resp_unknown_count == b_count &&
-      b_resp_okay_count == 9 && b_resp_exokay_count == 2 &&
+      b_resp_okay_count == 10 && b_resp_exokay_count == 2 &&
       b_resp_slverr_count == 0 && b_resp_decerr_count == 1 &&
       b_resp_unknown_count == 0,
       "write response coverage did not match response denominator");
     check(r_resp_okay_count + r_resp_exokay_count + r_resp_slverr_count +
       r_resp_decerr_count + r_resp_unknown_count == r_count &&
-      r_resp_okay_count == 8 && r_resp_exokay_count == 4 &&
+      r_resp_okay_count == 264 && r_resp_exokay_count == 4 &&
       r_resp_slverr_count == 1 && r_resp_decerr_count == 5 &&
       r_resp_unknown_count == 0,
       "read response coverage did not match response-beat denominator");
     check(w_strb_full_count + w_strb_partial_count + w_strb_zero_count +
-      w_strb_unknown_count == w_count && w_strb_full_count == 20 &&
+      w_strb_unknown_count == w_count && w_strb_full_count == 276 &&
       w_strb_partial_count == 1 && w_strb_zero_count == 1 &&
-      w_strb_unknown_count == 0 && w_last_count == 12,
+      w_strb_unknown_count == 0 && w_last_count == 13,
       "write strobe coverage did not match beat denominator");
-    check(aw_count == 12 && w_count == 22 && b_count == 12 &&
-      ar_count == 9 && r_count == 18 && r_last_count == 9 &&
-      w_strb_full_count == 20,
+    check(aw_count == 13 && w_count == 278 && b_count == 13 &&
+      ar_count == 10 && r_count == 274 && r_last_count == 10 &&
+      w_strb_full_count == 276,
       "AXI monitor denominators did not include boundary, WRAP, and FIXED traffic");
     check(aw_valid_cycles == aw_count + aw_stall_cycles,
       "AW VALID cycles do not equal accepted transfers plus stalls");
@@ -289,8 +310,8 @@ module tb_axi4_caliptra_memory_subordinate;
     check(aw_stall_cycles != 0 && w_stall_cycles != 0 &&
       ar_stall_cycles != 0,
       "the directed backpressure profile missed a channel stall bin");
-    check(r_last_count == 9,
-      "read LAST coverage did not match the nine completed read transactions");
+    check(r_last_count == 10,
+      "read LAST coverage did not match the ten completed read transactions");
 
     $display("COVERAGE AXI address AW=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d AR=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d",
       aw_count, aw_burst_fixed_count, aw_burst_incr_count, aw_burst_wrap_count,
@@ -333,7 +354,7 @@ module tb_axi4_caliptra_memory_subordinate;
       "post-reset AXI read did not return preserved SRAM data");
     checker_inst.check_idle();
 
-    $display("PASS: AXI memory subordinate bursts, boundary DECERR, FIXED/WRAP, stalls, USER, errors, reset, and exclusive access");
+    $display("PASS: AXI memory subordinate bursts through 256 beats, boundary DECERR, FIXED/WRAP, stalls, USER, errors, reset, and exclusive access");
     $finish;
   end
 endmodule
