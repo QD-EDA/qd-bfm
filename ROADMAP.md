@@ -553,3 +553,14 @@ the watcher lost SSH; no terminal result was collected. Treat as lost
 infrastructure, not a test failure, and rerun when the server is restored.
 Job 229 was separately last noted running under the Icarus agent; its purpose
 and final progress were not captured, so it is excluded from QD conclusions.
+
+## 2026-10-10 Slurm restart reconciliation
+
+Job `238_1` was requeued into its existing output directory and its retry
+exited 1 before simulation because that directory already existed. The prior
+simulator log shows the intended reset at cycle 5335 with AW6 outstanding and
+trace output through cycle 18994, but has no structured result or completion
+record; classify the late-window outcome as incomplete, not a BFM failure.
+The queue had no matching live job. Fresh job `240_1` is running from a new
+output root with 1 CPU and 3 GB requested, based on prior MaxRSS near 1.77 GiB
+plus about 1.23 GiB headroom. See the [reset-window evidence](evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/README.md).

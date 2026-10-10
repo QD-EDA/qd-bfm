@@ -109,3 +109,19 @@ Job 229 was separately noted as running for the Icarus agent before the
 interruption. Its exact purpose and last progress were not collected. It is
 outside this QD-BFM evidence set and must remain with its Icarus owner; no
 result is inferred here.
+
+## 2026-10-10 Slurm restart reconciliation
+
+After Slurm returned, job `238_1` was no longer queued. Its reused output
+directory contained an earlier simulator log that asserted reset at cycle
+5335, with AW6 outstanding, and reached `CALIPTRA_TRACE_END` at cycle 18994;
+it had no structured runner result or completion record, so the late-window
+result remains incomplete. The requeued attempt itself exited 1 in 0.17 s
+because the runner refused the existing output directory; its 23,432 KiB RSS
+measures only that collision and is not a simulation peak. No late-window job
+was live when the queue was reconciled.
+
+Job `240_1` was then submitted to a fresh output root, requesting 1 CPU and
+3 GB. The request is based on prior full-top peaks near 1.77 GiB, with about
+1.23 GiB headroom. Its exact submission script is in [`job-240/`](job-240/);
+the immediate queue check showed it running, with the outcome pending.
