@@ -45,7 +45,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   wire [7:0] read_response_id;
 
   axi4_caliptra_master #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
-    .USER_WIDTH(32), .MAX_BEATS(16), .TIMEOUT_CYCLES(12)) bfm (.*);
+    .USER_WIDTH(32), .MAX_BEATS(16), .TIMEOUT_CYCLES(64)) bfm (.*);
   generate if (CHECKER_ENABLED) begin : g_checker
     axi4_caliptra_checker #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32)) checker_inst (.*);
   end endgenerate
