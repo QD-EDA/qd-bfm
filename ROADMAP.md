@@ -291,14 +291,14 @@ outputs, and recovers after reset. See the
 [reset-stall evidence bundle](evidence/caliptra-bfm-axi-master-reset-stalls-20261009/README.md).
 Reset timing across every handshake edge remains open.
 
-## Current full-top AES cases 8–11 trace status — 2026-10-10
+## Current full-top AES cases 8–12 trace status — 2026-10-10
 
-Published-Icarus full-top AES cases 8, 9, 10, and 11 pass with the native AXI
+Published-Icarus full-top AES cases 8 through 12 pass with the native AXI
 checker and VPI trace enabled. The trace plugin had passed a pointer to a
 stack-local callback value that it did not use; the active tracer now leaves
 that optional callback value unset, and the runner builds it from
 `dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c`. See the
 [trace-fix evidence](evidence/caliptra-bfm-fulltop-aes-trace-fix-20261010/README.md).
 This is one narrowed firmware diagnostic using fast TRNG and fast data/BSS
-preload, not stock-firmware or UVMF qualification; AES case 12 and the full
-firmware suite remain open.
+preload, not stock-firmware or UVMF qualification; the full firmware suite
+remains open.
