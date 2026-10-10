@@ -764,7 +764,10 @@ package axi4_caliptra_uvm_pkg;
   endclass
 
   class axi4_caliptra_uvm_driver extends uvm_driver #(axi4_caliptra_uvm_transfer);
+    localparam int unsigned COMMAND_SLOTS = 4;
     virtual axi4_caliptra_master_cmd_if cmd_vif;
+    int unsigned max_outstanding;
+    bit slot_busy [0:COMMAND_SLOTS-1];
     `uvm_component_utils(axi4_caliptra_uvm_driver)
 
     function new(string name, uvm_component parent);
@@ -776,35 +779,87 @@ package axi4_caliptra_uvm_pkg;
       if (!uvm_config_db#(virtual axi4_caliptra_master_cmd_if)::get(
             this, "", "cmd_vif", cmd_vif))
         `uvm_fatal("AXI_CMD_VIF", "Missing axi4_caliptra_master_cmd_if config")
+      if (!uvm_config_db#(int unsigned)::get(this, "", "max_outstanding", max_outstanding))
+        max_outstanding = 1;
+      if (max_outstanding < 1 || max_outstanding > COMMAND_SLOTS)
+        `uvm_fatal("AXI_MAX_OUTSTANDING", $sformatf("max_outstanding must be 1..%0d", COMMAND_SLOTS))
+      for (int slot = 0; slot < COMMAND_SLOTS; slot++) begin
+        slot_busy[slot] = 0;
+        cmd_vif.request_valid[slot] = 0;
+        cmd_vif.response_ready[slot] = 0;
+      end
     endfunction
+
+    task collect_response(int unsigned slot, axi4_caliptra_uvm_transfer rsp);
+      wait (cmd_vif.response_valid[slot] === 1'b1);
+      rsp.success = cmd_vif.response_success[slot];
+      rsp.response = cmd_vif.response_code[slot];
+      rsp.response_user = cmd_vif.response_user[slot];
+      rsp.read_data = cmd_vif.response_read_data[slot];
+      rsp.read_user = cmd_vif.response_read_user[slot];
+      rsp.read_response = cmd_vif.response_read_code[slot];
+      cmd_vif.response_ready[slot] = 1'b1;
+      seq_item_port.put_response(rsp);
+      wait (cmd_vif.response_valid[slot] === 1'b0);
+      cmd_vif.response_ready[slot] = 1'b0;
+      slot_busy[slot] = 0;
+    endtask
 
     task run_phase(uvm_phase phase);
       axi4_caliptra_uvm_transfer req;
+      axi4_caliptra_uvm_transfer pending_req;
+      uvm_object pending_object;
+      int slot;
       forever begin
         seq_item_port.get_next_item(req);
         wait (cmd_vif.ARESETn === 1'b1);
-        cmd_vif.request_write = req.write;
-        cmd_vif.request_addr = req.addr;
-        cmd_vif.request_len = req.len;
-        cmd_vif.request_size = req.size;
-        cmd_vif.request_burst = req.burst;
-        cmd_vif.request_id = req.id;
-        cmd_vif.request_user = req.user;
-        cmd_vif.request_lock = req.lock;
-        cmd_vif.request_write_data = req.write_data;
-        cmd_vif.request_write_strb = req.write_strb;
-        cmd_vif.request_write_user = req.write_user;
-        cmd_vif.request_valid = 1'b1;
-        wait (cmd_vif.response_valid === 1'b1);
-        req.success = cmd_vif.response_success;
-        req.response = cmd_vif.response_code;
-        req.response_user = cmd_vif.response_user;
-        req.read_data = cmd_vif.response_read_data;
-        req.read_user = cmd_vif.response_read_user;
-        req.read_response = cmd_vif.response_read_code;
-        cmd_vif.request_valid = 1'b0;
-        wait (cmd_vif.response_valid === 1'b0);
-        seq_item_port.item_done();
+        slot = -1;
+        while (slot < 0) begin
+          for (int candidate = 0; candidate < max_outstanding; candidate++)
+            if (slot < 0 && !slot_busy[candidate]) slot = candidate;
+          if (slot < 0) @(posedge cmd_vif.ACLK);
+        end
+        slot_busy[slot] = 1;
+        cmd_vif.request_write[slot] = req.write;
+        cmd_vif.request_addr[slot] = req.addr;
+        cmd_vif.request_len[slot] = req.len;
+        cmd_vif.request_size[slot] = req.size;
+        cmd_vif.request_burst[slot] = req.burst;
+        cmd_vif.request_id[slot] = req.id;
+        cmd_vif.request_user[slot] = req.user;
+        cmd_vif.request_lock[slot] = req.lock;
+        cmd_vif.request_write_data[slot] = req.write_data;
+        cmd_vif.request_write_strb[slot] = req.write_strb;
+        cmd_vif.request_write_user[slot] = req.write_user;
+        pending_object = null;
+        if (max_outstanding > 1) begin
+          pending_object = req.clone();
+          if (!$cast(pending_req, pending_object))
+            `uvm_fatal("AXI_PIPELINE_CLONE", "Could not clone an accepted AXI request for its response")
+          pending_req.set_id_info(req);
+        end
+        cmd_vif.request_valid[slot] = 1'b1;
+        wait (cmd_vif.request_ack[slot] === 1'b1);
+        cmd_vif.request_valid[slot] = 1'b0;
+        if (max_outstanding == 1) begin
+          wait (cmd_vif.response_valid[slot] === 1'b1);
+          req.success = cmd_vif.response_success[slot];
+          req.response = cmd_vif.response_code[slot];
+          req.response_user = cmd_vif.response_user[slot];
+          req.read_data = cmd_vif.response_read_data[slot];
+          req.read_user = cmd_vif.response_read_user[slot];
+          req.read_response = cmd_vif.response_read_code[slot];
+          cmd_vif.response_ready[slot] = 1'b1;
+          wait (cmd_vif.response_valid[slot] === 1'b0);
+          cmd_vif.response_ready[slot] = 1'b0;
+          slot_busy[slot] = 0;
+          seq_item_port.item_done();
+        end else begin
+          seq_item_port.item_done();
+          fork
+            collect_response(slot, pending_req);
+          join_none
+        end
       end
     endtask
   endclass
@@ -909,39 +964,42 @@ package axi4_caliptra_uvm_pkg;
         if (ports != null)
           wait (ports.ARESETn === 1'b1);
         wait (cmd_vif.ARESETn === 1'b1);
-        cmd_vif.request_write = req.is_write();
-        cmd_vif.request_addr = req.addr;
-        cmd_vif.request_len = req.len;
-        cmd_vif.request_size = req.size;
-        cmd_vif.request_burst = req.burst;
-        cmd_vif.request_id = req.id;
-        cmd_vif.request_user = req.is_write() ? req.awuser : req.aruser;
-        cmd_vif.request_lock = req.lock;
-        cmd_vif.request_write_data = write_data;
-        cmd_vif.request_write_strb = write_strb;
-        cmd_vif.request_write_user = write_user;
-        cmd_vif.request_valid = 1'b1;
-        wait (cmd_vif.response_valid === 1'b1);
-        req.transport_success = cmd_vif.response_success;
-        req.response_id = cmd_vif.response_id;
-        req.resp = cmd_vif.response_code;
-        req.buser = cmd_vif.response_user;
+        cmd_vif.request_write[0] = req.is_write();
+        cmd_vif.request_addr[0] = req.addr;
+        cmd_vif.request_len[0] = req.len;
+        cmd_vif.request_size[0] = req.size;
+        cmd_vif.request_burst[0] = req.burst;
+        cmd_vif.request_id[0] = req.id;
+        cmd_vif.request_user[0] = req.is_write() ? req.awuser : req.aruser;
+        cmd_vif.request_lock[0] = req.lock;
+        cmd_vif.request_write_data[0] = write_data;
+        cmd_vif.request_write_strb[0] = write_strb;
+        cmd_vif.request_write_user[0] = write_user;
+        cmd_vif.request_valid[0] = 1'b1;
+        wait (cmd_vif.request_ack[0] === 1'b1);
+        cmd_vif.request_valid[0] = 1'b0;
+        wait (cmd_vif.response_valid[0] === 1'b1);
+        req.transport_success = cmd_vif.response_success[0];
+        req.response_id = cmd_vif.response_id[0];
+        req.resp = cmd_vif.response_code[0];
+        req.buser = cmd_vif.response_user[0];
         if (!req.is_write()) begin
           req.beatQ.delete();
           req.respQ.delete();
           req.beat_userQ.delete();
           req.lastQ.delete();
           for (int beat = 0; beat < beat_count; beat++) begin
-            req.beatQ.push_back(cmd_vif.response_read_data[beat*32 +: 32]);
-            req.respQ.push_back(cmd_vif.response_read_code[beat*2 +: 2]);
-            req.beat_userQ.push_back(cmd_vif.response_read_user[beat*32 +: 32]);
+            req.beatQ.push_back(cmd_vif.response_read_data[0][beat*32 +: 32]);
+            req.respQ.push_back(cmd_vif.response_read_code[0][beat*2 +: 2]);
+            req.beat_userQ.push_back(cmd_vif.response_read_user[0][beat*32 +: 32]);
             req.lastQ.push_back(beat == req.len);
           end
           if (req.beatQ.size() != 0) req.data = req.beatQ[0];
           if (req.respQ.size() != 0) req.resp = req.respQ[0];
         end
-        cmd_vif.request_valid = 1'b0;
-        wait (cmd_vif.response_valid === 1'b0);
+        cmd_vif.response_ready[0] = 1'b1;
+        wait (cmd_vif.response_valid[0] === 1'b0);
+        cmd_vif.response_ready[0] = 1'b0;
         seq_item_port.item_done();
       end
     endtask

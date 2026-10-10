@@ -85,7 +85,7 @@ module tb_axi4_caliptra_uvm_axi_if;
       case (item.addr)
         CALIPTRA_DMA_SRAM_BASE + 48'h20: begin
           if (item.is_write()) begin
-            if (item.id != 8'h31 || !item.lock || item.awuser != 32'h1122_3344 ||
+            if (item.id != 8'h31 || item.lock || item.awuser != 32'h1122_3344 ||
                 item.beatQ.size() != 2 || item.beatQ[0] != 32'ha5a5_5a5a ||
                 item.beatQ[1] != 32'h1357_9bdf || item.resp != 0)
               `uvm_fatal("AXI_IF_SRAM_WRITE", "Unexpected UVM monitor record for SRAM write")

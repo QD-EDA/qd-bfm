@@ -28,6 +28,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   wire inject_error;
 
   axi4_caliptra_master_cmd_if cmd_if(ACLK);
+  wire stall_b_effective = stall_b | cmd_if.stall_b_control;
   axi4_caliptra_record_if record_if(ACLK);
   assign cmd_if.ARESETn = ARESETn;
   assign inject_error = cmd_if.inject_target_error;
@@ -129,9 +130,9 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         .dma_gen_block_size_bytes(1200'b0), .en_recovery_emulation(1'b0),
         .recovery_threshold_words(32'd2), .recovery_block_words(32'd8),
         .inject_error(inject_error),
-        .stall_sram_aw(stall_aw), .stall_sram_w(stall_w), .stall_sram_b(stall_b),
+        .stall_sram_aw(stall_aw), .stall_sram_w(stall_w), .stall_sram_b(stall_b_effective),
         .stall_sram_ar(stall_ar), .stall_sram_r(stall_r),
-        .stall_fifo_aw(stall_aw), .stall_fifo_w(stall_w), .stall_fifo_b(stall_b),
+        .stall_fifo_aw(stall_aw), .stall_fifo_w(stall_w), .stall_fifo_b(stall_b_effective),
         .stall_fifo_ar(stall_ar), .stall_fifo_r(stall_r),
         .fifo_level(), .fifo_push_event(), .fifo_pop_event(),
         .recovery_data_avail(),
@@ -151,7 +152,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         .ADDR_WIDTH(48), .BASE_ADDR(CALIPTRA_DMA_SRAM_BASE), .MEM_BYTES(256)
       ) memory (
         .ACLK(ACLK), .ARESETn(ARESETn),
-        .stall_aw(stall_aw), .stall_w(stall_w), .stall_b(stall_b),
+        .stall_aw(stall_aw), .stall_w(stall_w), .stall_b(stall_b_effective),
         .stall_ar(stall_ar), .stall_r(stall_r), .inject_error(inject_error),
         .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
         .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
@@ -734,6 +735,78 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     endtask
   endclass
 
+  class axi4_caliptra_uvm_pipeline_sequence extends uvm_sequence #(axi4_caliptra_uvm_transfer);
+    virtual axi4_caliptra_master_cmd_if cmd_vif;
+    `uvm_object_utils(axi4_caliptra_uvm_pipeline_sequence)
+
+    function new(string name = "axi4_caliptra_uvm_pipeline_sequence");
+      super.new(name);
+    endfunction
+
+    task body();
+      axi4_caliptra_uvm_transfer req;
+      axi4_caliptra_uvm_transfer rsp;
+
+      req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_setup_write");
+      start_item(req);
+      req.write = 1;
+      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h20;
+      req.len = 1;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.id = 8'h31;
+      req.user = 32'h1122_3344;
+      req.write_data[0 +: 32] = 32'ha5a5_5a5a;
+      req.write_data[32 +: 32] = 32'h1357_9bdf;
+      req.write_strb[0 +: 4] = 4'hf;
+      req.write_strb[4 +: 4] = 4'hf;
+      req.write_user[0 +: 32] = 32'h5566_7788;
+      req.write_user[32 +: 32] = 32'h1020_3040;
+      finish_item(req);
+      get_response(rsp);
+      if (rsp.id != 8'h31 || !rsp.success || rsp.response != 2'b00)
+        `uvm_fatal("AXI_PIPELINE_SETUP", "Setup write did not complete successfully")
+
+      cmd_vif.stall_b_control = 1;
+      req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_write");
+      start_item(req);
+      req.write = 1;
+      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h20;
+      req.len = 1;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.id = 8'h31;
+      req.user = 32'h1122_3344;
+      req.write_data[0 +: 32] = 32'ha5a5_5a5a;
+      req.write_data[32 +: 32] = 32'h1357_9bdf;
+      req.write_strb[0 +: 4] = 4'hf;
+      req.write_strb[4 +: 4] = 4'hf;
+      req.write_user[0 +: 32] = 32'h5566_7788;
+      req.write_user[32 +: 32] = 32'h1020_3040;
+      finish_item(req);
+
+      req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_read");
+      start_item(req);
+      req.write = 0;
+      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h20;
+      req.len = 1;
+      req.size = 2;
+      req.burst = 2'b01;
+      req.id = 8'h42;
+      req.user = 32'h89ab_cdef;
+      finish_item(req);
+
+      get_response(rsp);
+      if (rsp.id != 8'h42 || !rsp.success || rsp.read_response[3:0] != 4'b0000 ||
+          rsp.read_data[31:0] != 32'ha5a5_5a5a || rsp.read_data[63:32] != 32'h1357_9bdf)
+        `uvm_fatal("AXI_PIPELINE_READ", "Read did not complete while the write response was held")
+      cmd_vif.stall_b_control = 0;
+      get_response(rsp);
+      if (rsp.id != 8'h31 || !rsp.success || rsp.response != 2'b00)
+        `uvm_fatal("AXI_PIPELINE_WRITE", "Pipelined write response was lost or misrouted")
+    endtask
+  endclass
+
   class axi4_caliptra_ral_smoke_reg extends uvm_reg;
     uvm_reg_field value;
 
@@ -1154,6 +1227,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
 
     task run_phase(uvm_phase phase);
       axi4_caliptra_uvm_smoke_sequence smoke_seq;
+      axi4_caliptra_uvm_pipeline_sequence pipeline_seq;
       axi4_caliptra_uvm_reset_abort_sequence reset_abort_seq;
       axi4_caliptra_uvm_reset_abort_write_sequence reset_abort_write_seq;
       axi4_caliptra_uvm_exclusive_sequence exclusive_seq;
@@ -1167,6 +1241,25 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       uvm_status_e ral_status;
       uvm_reg_data_t ral_read_value;
       phase.raise_objection(this);
+      if ($test$plusargs("UVM_PIPELINE_SMOKE")) begin
+        pipeline_seq = axi4_caliptra_uvm_pipeline_sequence::type_id::create("pipeline_seq");
+        pipeline_seq.cmd_vif = env.agent.driver.cmd_vif;
+        fork
+          begin
+            pipeline_seq.start(env.agent.sequencer);
+          end
+          begin
+            #10000;
+            pipeline_seq.cmd_vif.stall_b_control = 0;
+            `uvm_fatal("AXI_PIPELINE_TIMEOUT", "Pipeline smoke did not complete before its response deadline")
+          end
+        join_any
+        disable fork;
+        pipeline_seq.cmd_vif.stall_b_control = 0;
+        $display("PASS: native UVM AXI driver pipelined a read past a held write response");
+        phase.drop_objection(this);
+        return;
+      end
       if ($test$plusargs("RESET_ABORT_WRITE")) begin
         reset_abort_write_seq = axi4_caliptra_uvm_reset_abort_write_sequence::type_id::create("reset_abort_write_seq");
         reset_abort_write_seq.start(env.agent.sequencer);
@@ -1322,6 +1415,9 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
   initial begin
     uvm_config_db#(bit)::set(
       null, "uvm_test_top", "use_dma_target", (USE_DMA_TARGET != 0));
+    if ($test$plusargs("UVM_PIPELINE_SMOKE"))
+      uvm_config_db#(int unsigned)::set(
+        null, "uvm_test_top.env.agent.driver", "max_outstanding", 4);
     uvm_config_db#(virtual axi4_caliptra_master_cmd_if)::set(
       null, "uvm_test_top.env.agent.driver", "cmd_vif", cmd_if);
     uvm_config_db#(virtual axi4_caliptra_record_if)::set(

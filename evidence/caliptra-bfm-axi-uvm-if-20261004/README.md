@@ -95,3 +95,37 @@ ea020134f12c9bdfa9068b3e3431b5dad340da667234c8776bc272ccf957f01f  Caliptra src/a
 8b0d4c52996f1b19bb21a53c0d9103df853dccb0ddf10708a92c489d8b0bc157  Caliptra src/axi/rtl/axi_mgr_wr.sv
 e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c  Caliptra src/axi/rtl/axi_if.sv
 ```
+
+## Current-state diagnostic rerun — 2026-10-10
+
+The interface smoke was rerun with the native UVM driver/proxy pipeline changes
+on QD base commit `b6cf7a70a6007a94087a50b445444efeaa9d15d6` and a dirty working
+tree. This is diagnostic evidence, not qualification. The run used the same
+published Icarus source SHA `127b887dfdc09283ab0187a2e618421dee3d5dcc` from the
+clean source archive recorded above and the clean Caliptra tree
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. Its installed `iverilog` and
+`vvp` hashes matched the 2026-10-09 run. The smoke passed with zero UVM
+warnings, errors, or fatals; Icarus emitted its mixed-timescale warning. The
+SRAM write scoreboard now expects LOCK clear, matching the sequence's
+non-exclusive write.
+
+Command:
+
+```sh
+CALIPTRA_RTL=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+dv/caliptra_bfm/uvm/tests/run_uvm_axi_if.sh
+```
+
+Current source fingerprints:
+
+```text
+647a43eca2cc6b608b0f56eff509f00c5323050b1a05e9c39d06d7e23ce1b232  dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
+89419c2a21a4ed05a86f573ce245f5912729b01b62a461e21d419b5c19e6fb55  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_master_proxy.sv
+e98475132f09290c45453d0f3c191cc6aeec092acbdfb834d7c27be885178495  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+a168f695a5129b72bdded985b2e09c1627fe752bb831082eb954334f27ebf34d  dv/caliptra_bfm/uvm/tests/tb_axi4_caliptra_uvm_axi_if.sv
+0622ccfe7839e676ceeb41f7691c4fa9ea3647f342216e89d097953d5a72bc55  dv/caliptra_bfm/uvm/tests/run_uvm_axi_if.sh
+a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
+29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
+```
