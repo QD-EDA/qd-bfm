@@ -1195,6 +1195,13 @@ monitor with `squeue` and that run's log. No job was submitted during discovery.
 Caliptra wrapper can launch on Linux. The first Slurm run will use this updated
 guard with pinned source and isolated toolchain inputs.
 
+**2026-10-09 Linux vector-runner unit coverage:** 52 tests pass in
+`test_caliptra_top_bfm_runner.py`. Two tests exercise the Linux native-vector
+path's `cc` selection, `CALIPTRA_MBEDTLS_ROOT` shared-library paths, and missing
+prefix error. They mock tool execution and do not establish that native helpers
+build on Linux. Slurm job 9 is queued for that end-to-end check with published
+Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`.
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a
