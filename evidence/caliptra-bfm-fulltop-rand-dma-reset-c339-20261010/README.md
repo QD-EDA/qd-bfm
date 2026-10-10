@@ -94,3 +94,18 @@ resource records are in [`job-234/`](job-234/).
 Job 238 repeats the 2822-cycle window alone at 1 CPU and 3 GB, based on the
 measured ~1.77 GiB MaxRSS and approximately 1.23 GiB headroom. Its outcome will
 be appended after it leaves the queue or reaches a terminal simulation state.
+
+## 2026-10-10 Slurm interruption
+
+The supervisor stopped the WSL-hosted Slurm machine before job 238 returned a
+result. Job `238_1` was the QD late-window repeat at delay 2822, requesting 1
+CPU and 3 GB; its last directly observed queue state was `RUNNING` at 00:43
+elapsed. The watcher later lost its SSH connection without collecting a
+terminal result. Treat this run as infrastructure-lost/incomplete, not as a
+simulation failure; its output is not available in this local evidence package.
+Rerun when the server is restored.
+
+Job 229 was separately noted as running for the Icarus agent before the
+interruption. Its exact purpose and last progress were not collected. It is
+outside this QD-BFM evidence set and must remain with its Icarus owner; no
+result is inferred here.

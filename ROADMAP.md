@@ -544,3 +544,12 @@ finished with the testcase pass marker. This remains diagnostic because it uses
 fast-TRNG and fast-boot overlays. The later write-response window and full
 firmware/qualification gates remain open; see the
 [reset-window evidence](evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/README.md).
+
+## 2026-10-10 Slurm interruption
+
+The WSL-hosted Slurm machine was stopped during late-window follow-up. QD job
+`238_1` (delay 2822; 1 CPU, 3 GB) was last observed `RUNNING` at 00:43, before
+the watcher lost SSH; no terminal result was collected. Treat as lost
+infrastructure, not a test failure, and rerun when the server is restored.
+Job 229 was separately last noted running under the Icarus agent; its purpose
+and final progress were not captured, so it is excluded from QD conclusions.
