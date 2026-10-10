@@ -406,3 +406,13 @@ comes from the matched slot. The run requested 1 CPU and 1 GiB, measured
 354,072 KiB MaxRSS and a 0.40 GiB process-group peak, and exited 0. Verilator
 warnings were non-fatal and its evidence is two-state only. See the
 [cross-simulator matrix evidence](evidence/caliptra-bfm-axi-crosssim-parameter-matrix-20261010/README.md).
+
+## AXI master full regression after response fix — 2026-10-10
+
+Slurm job 198 passed the guarded `run_master.sh` suite on QD commit
+`75ceb4b2f66b7140aabd3cab6d02df05e99be69e` with clean published Icarus main
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. All ten directed scenarios passed,
+including reset recovery, bad-response poisoning, W-before-AW ordering,
+overlapping read/write tasks, and queued/outstanding writes. The job requested
+1 CPU and 256 MiB and measured 17,680 KiB MaxRSS. See the
+[post-fix master evidence](evidence/caliptra-bfm-axi-master-post-fix-20261010/README.md).

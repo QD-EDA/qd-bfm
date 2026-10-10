@@ -607,3 +607,9 @@ guarded run passed Verilator target, reset-handshake, and bounded multi-ID
 queue regressions. Verilator warnings remain non-fatal, and its evidence is
 two-state only; see the
 [cross-simulator matrix evidence](../../evidence/caliptra-bfm-axi-crosssim-parameter-matrix-20261010/README.md).
+
+AXI master post-fix follow-up (2026-10-10): the guarded standalone `run_master.sh`
+suite passes on clean published Icarus main after the response-slot fix. It
+covers reset recovery, response poisoning, concurrent read/write tasks, and
+outstanding BID routing; see the
+[post-fix master evidence](../../evidence/caliptra-bfm-axi-master-post-fix-20261010/README.md).

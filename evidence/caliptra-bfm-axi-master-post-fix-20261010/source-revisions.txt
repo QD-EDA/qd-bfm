@@ -1,0 +1,6 @@
+QD commit: 75ceb4b2f66b7140aabd3cab6d02df05e99be69e
+QD source state: clean committed archive
+Icarus source commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus version: 13.0 (devel), c339b9f2
+Slurm job: 198
+Job request: 1 CPU, 256 MiB
