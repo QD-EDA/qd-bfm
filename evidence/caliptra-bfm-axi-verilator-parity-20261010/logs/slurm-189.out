@@ -1,0 +1,4 @@
+QD commit: bdc69ea2f7ae0de3f15f038928abff0bedecf77c
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+memory guard: preflight available 19.00 GiB; process-group cap 0.70 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 16.11 GiB; maximum process group 0.39 GiB

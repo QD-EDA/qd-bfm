@@ -593,3 +593,8 @@ passes against QD commit `5945efeae78580cc8a5bd7a4050ee4dfec39d7be` on clean
 published Icarus main, with the native BFM checker enabled. This remains a
 narrow diagnostic using fast TRNG and diagnostic fast boot-data preload; see
 the [current-source full-top evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/README.md).
+
+AXI memory-subordinate portability follow-up (2026-10-10): the main, reset-
+handshake, and bounded multi-ID queue regressions now pass on Verilator 5.032.
+The run emitted non-fatal width/case warnings and is two-state evidence only;
+see the [Verilator parity evidence](../../evidence/caliptra-bfm-axi-verilator-parity-20261010/README.md).

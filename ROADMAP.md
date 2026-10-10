@@ -383,3 +383,13 @@ provenance are in the
 This remains a single diagnostic iteration with fast TRNG and diagnostic fast
 boot-data preload, not stock-firmware, full-suite, UVMF, or qualification
 coverage.
+
+## AXI memory-subordinate Verilator parity — 2026-10-10
+
+Slurm job 189 passed the main target, reset-handshake, and bounded multi-ID
+queue tests under Verilator 5.032 at QD commit
+`bdc69ea2f7ae0de3f15f038928abff0bedecf77c`. The job requested 1 CPU and 1 GiB,
+measured 339,016 KiB maximum RSS and a 0.39 GiB process-group peak, and exited
+0 in 17.65 seconds. Verilator emitted non-fatal width and incomplete-case
+warnings and does not establish four-state behavior. See the
+[Verilator parity evidence](evidence/caliptra-bfm-axi-verilator-parity-20261010/README.md).
