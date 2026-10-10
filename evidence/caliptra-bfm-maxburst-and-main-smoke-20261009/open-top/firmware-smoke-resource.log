@@ -1,0 +1,23 @@
+	Command being timed: "sh /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.sh --case smoke_test_dma_aes_gcm_short_1_dword --limit-aes-cases 1 --start-aes-case 6 --fast-trng --trace-axi --output /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/output/case7"
+	User time (seconds): 617.23
+	System time (seconds): 9.37
+	Percent of CPU this job got: 103%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:07.95
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1859456
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 960987
+	Voluntary context switches: 5228618
+	Involuntary context switches: 1943
+	Swaps: 0
+	File system inputs: 488
+	File system outputs: 776776
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -227,3 +227,13 @@ IVERILOG_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/iverilog \
 VVP_BIN=/private/tmp/iverilog-uvm-origin-main-0d8815f/prefix/bin/vvp \
 sh dv/caliptra_bfm/axi/tests/run_caliptra_axi_complex_bfm.sh
 ```
+
+## Later published-main max-burst and firmware smoke — 2026-10-09
+
+The generic AXI memory subordinate and Caliptra AXI complex BFM both pass
+their 256-beat coverage on clean published Icarus `main`
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. A bounded open-top firmware smoke
+also passes one AES/DMA case with normal finish. It uses fast-TRNG, fast boot
+data preload, and skips PQ-vector generation, so it remains diagnostic rather
+than stock-firmware qualification. Full pins, logs, result JSON, and peak RSS
+are in the [dated evidence bundle](../caliptra-bfm-maxburst-and-main-smoke-20261009/README.md).

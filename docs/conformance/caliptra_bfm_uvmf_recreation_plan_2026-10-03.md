@@ -1406,3 +1406,16 @@ Icarus `0d8815febc260928e62d5c2ce82b14afd2e38dc3`, parsing stops at four
 package-qualified proxy declarations in the generated read/write driver and
 monitor BFMs, before VVP starts. The older PV runtime result remains historical;
 current-main runtime behavior is unverified. See the [PCRVault evidence note](../../evidence/caliptra-bfm-pv-generated-uvmf-20261004/README.md#latest-published-icarus-check--2026-10-09).
+
+### Later published-main max-burst and firmware smoke — 2026-10-09
+
+A later same-day run used clean published Icarus `main`
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, a descendant of the earlier
+`0d8815f` revision recorded above. The generic AXI subordinate passed a full
+256-beat INCR write/read with per-beat data, USER, and response checks; the
+Caliptra AXI complex BFM passed its 256-beat burst and existing error, FIFO,
+stall, and recovery checks. A single bounded open-top AES/DMA firmware case
+also completed with a pass marker and normal finish. That run used fast-TRNG,
+fast boot data preload, and skipped PQ-vector generation, so it is diagnostic
+integration evidence rather than stock-firmware qualification. Per-run RSS,
+source pins, logs, and result metadata are in the [dated evidence bundle](../../evidence/caliptra-bfm-maxburst-and-main-smoke-20261009/README.md).
