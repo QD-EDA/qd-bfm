@@ -1,0 +1,10 @@
+Slurm job: 252_1
+Submitted: 2026-10-10 (DAN-DESKTOP)
+State at initial queue check: RUNNING
+Partition: verilog
+Resources: 1 CPU, 3 GB, 2-hour Slurm limit
+Runner timeout: 7000 seconds
+Scenario: rand_test_dma, seed 1, one transfer, forced first reset, fixed delay 2822 cycles, AXI trace enabled
+Source/tool identities: same pinned identities as job 240 and job 242 (see array.sbatch)
+Remote output root: /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-07
+This is a new run directory; no prior output was reused.

@@ -10,14 +10,14 @@ These runs used QD source `708e51cd304422f367a61064449c5617fc97fec6`, Icarus `c3
 
 Selected raw logs, task stdout, status, source revisions, tool hashes, and a local SHA256 manifest are preserved under `completed-runs/`. The 368 MB compiled `.vvp` and other build products were not copied; the source and tool identities are retained.
 
-## Still running
+## Tasks 242_5/6 completion (2026-10-10 16:25 MDT)
 
-At the snapshot, tasks 242_5 (no-trace-2) and 242_6 (no-trace-3) were running on `DAN-DESKTOP`, each with the one-hour Slurm limit. Their output directories were live and were not copied or changed. No array tasks were cancelled or resubmitted.
+Both no-trace controls finished with `runner_exit=124` after the configured 3500-second timeout. Their resource logs report peak RSS of 1,859,920 and 1,859,960 KB. The runner logs are empty and no-trace simulation logs contain only startup warnings, so these tasks provide no reset-cycle trace or terminal BFM result. The warning text alone does not establish a cause. Selected raw logs and source/tool identities are preserved in `completed-runs/no-trace-2/` and `completed-runs/no-trace-3/`; compiled products were not copied. The local SHA256 manifest covers the selected logs for all six completed tasks.
 
-## Next action
-
-Wait for 242_5/6 to finish and classify their runner status and logs. If they also time out, move to a fresh, trace-enabled fixed-delay run for the cycle-relative reset question; the existing A/B array only compares VPI presence without that reset window.
+No array tasks were cancelled or resubmitted. All six tasks ended by timeout: the three traced runs reached roughly 25.5k cycles without sampled reset assertion; the three untraced runs have no cycle markers. The array therefore does not answer the fixed-delay reset question.
 
 ## Comparison with job 240 (2026-10-10 15:52 MDT)
 
 Job 240's `source-revisions.txt` matches task 242_1 for QD, runner SHA256, trace source SHA256, Icarus, UVM, Caliptra RTL, Adams-Bridge, and JTAG-VPI identities. Job 240 additionally used `--rand-dma-reset-delay-cycles 2822`; its `result.json` records compile and firmware exit 0, simulator exit -11, cycle 100 as the last trace sample, and no reset assertion. This isolates the fixed-delay run path as the changed condition, but one crash does not establish a reproducible cause.
+
+The six array outcomes do not change that interpretation: they omitted the fixed-delay option, and all reached the wrapper timeout. Next diagnostic is a fresh isolated run with the same pinned inputs and the 2822-cycle delay, preserving VPI tracing and a core dump if available. A repeat crash would support reproducibility; a different result would require inspecting the newly captured terminal trace before changing BFM code.

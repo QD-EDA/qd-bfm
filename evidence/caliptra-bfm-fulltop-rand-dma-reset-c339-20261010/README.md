@@ -145,3 +145,9 @@ requires trace mode for a fixed reset delay, so these runs compare VPI loading
 before the reset window rather than verify the 2822-cycle reset. Tasks 242_1
 and 242_2 were running at the first queue check; 242_3 through 242_6 were
 pending at the array limit. See [`job-242/`](job-242/).
+
+All six tasks later reached the configured 3500-second runner timeout. After
+reconciling those results, Job 252_1 was submitted as a fresh 2822-cycle
+fixed-delay reproduction with the same pinned source/tool inputs, seed, and
+1-CPU/3-GB settings. It uses a new isolated output root with AXI tracing; the
+submission script and live run record are in [`job-243/`](job-243/).
