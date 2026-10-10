@@ -13,7 +13,7 @@ components before writing replacements. Publish per-protocol role/version/
 feature/width/simulator matrices. A qualified AXI slice does not complete the
 multi-BFM library goal. Do not add unsupported protocol names as empty stubs.
 
-## Current capability
+## Starting baseline
 
 Baseline `d761ee8cc6594656e95582a28f471c473ebd1afc`: standalone single-beat
 AXI4 manager tasks; CI installs Icarus and runs `./run.sh`. Local memory target
@@ -21,6 +21,22 @@ checks read/write, stalls, response errors, address timeout, wrong RID and missi
 RLAST. There is no real Caliptra hookup, UVM adapter, burst handling or coverage.
 Reset during a transfer, concurrent task calls and four-state controls need
 explicit qualification; initial pin values alone are not reset behavior.
+
+## Current status — 2026-10-09
+
+The open stack now includes AXI and AHB-Lite managers, subordinates, monitors,
+checkers, active/passive UVM agents, Caliptra DMA SRAM/FIFO integration, and
+focused mailbox and PV client BFMs. Selected generated UVMF environments and
+actual Caliptra unit/top probes also run; the full generated UVMF integration
+and stock-firmware suite are not qualified. See the
+[`Caliptra BFM source summary`](dv/caliptra_bfm/README.md) for implemented
+components and their test evidence.
+
+Remaining release work includes the full width/ID/configuration matrix,
+independent cross-simulator and four-state qualification, remaining generated
+UVMF integration gates, and complete firmware coverage. The phase list below
+defines those gates; it is not a claim that the initial baseline is still the
+current implementation.
 
 ## Stages and interfaces
 
@@ -150,3 +166,14 @@ with request USER metadata and per-beat response checks. Strict mode accepts
 FIXED limit is 16 beats. This is not a full L0 replacement: response USER,
 the internal/outbound DMA interfaces, broader AXI traffic and production
 qualification remain outside the slice.
+
+## Delivered AXI WRAP and narrow manager coverage — 2026-10-09
+
+The manager regression now round-trips legal WRAP bursts of 2, 4, 8, and 16
+beats, and an aligned two-byte INCR write/read that preserves adjacent byte
+lanes. It rejects a three-beat WRAP and a misaligned narrow request before
+asserting VALID. The complete manager/outstanding regression passes on clean
+published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; see the
+[evidence bundle](evidence/caliptra-bfm-axi-wrap-narrow-20261009/README.md).
+Unaligned transfers, the broader width/ID matrix, four-state cross-simulator
+qualification, and full Caliptra/UVMF qualification remain open.

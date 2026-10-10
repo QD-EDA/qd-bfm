@@ -36,6 +36,12 @@ tests, and five-deep read/write queue tests with out-of-order responses using:
 ./tests/run_master.sh
 ```
 
+The manager regression also round-trips all legal WRAP lengths (2, 4, 8, and
+16 beats) and an aligned two-byte INCR transfer across byte lanes, including
+neighbor-byte preservation. It rejects unsupported three-beat WRAP and
+misaligned narrow requests before asserting VALID. The published-main run is
+recorded in the [WRAP/narrow evidence bundle](../../../evidence/caliptra-bfm-axi-wrap-narrow-20261009/README.md).
+
 ## Memory subordinate
 
 [`axi4_caliptra_memory_subordinate.sv`](axi4_caliptra_memory_subordinate.sv)
