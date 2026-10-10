@@ -429,3 +429,12 @@ the Caliptra v2.1.2 AW=19/DW=32/IW=8 sizing. Set `IVERILOG_BIN` and `VVP_BIN`
 to select another simulator installation. This directed test does not wire the
 helper to the Caliptra DUT or validate USER/LOCK mailbox traffic. Treat the
 code as an initial reuse slice, not qualified Caliptra DV evidence.
+
+## Current published-main maximum-burst replay — 2026-10-09
+
+The current AXI complex regression passed on clean QD-BFM `c8ce915` and
+published Icarus `main` `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, including
+the full 256-beat INCR write/read case. The successful run and the initial
+runtime-library setup failure are preserved in the
+[256-beat evidence bundle](../../../evidence/caliptra-bfm-axi-complex-256b-20261009/README.md).
+This remains module-level evidence, not firmware or UVM qualification.

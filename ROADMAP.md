@@ -254,3 +254,12 @@ The run used clean published Icarus `main`
 [transaction-monitor evidence bundle](evidence/caliptra-bfm-axi-transaction-monitor-parameter-matrix-20261009/README.md).
 Error, malformed-transaction, and capacity cases are not crossed through this
 matrix. Full Caliptra/UVMF qualification remains open.
+
+## Current Caliptra AXI complex maximum-burst status — 2026-10-09
+
+The guarded AXI complex regression passes the full 256-beat INCR write/read
+case on clean QD-BFM `c8ce915` and current published Icarus `main`
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. The run details and resource
+measurement are in the
+[maximum-burst evidence bundle](evidence/caliptra-bfm-axi-complex-256b-20261009/README.md).
+This does not qualify Caliptra firmware or UVM integration.
