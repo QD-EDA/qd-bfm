@@ -46,6 +46,16 @@ module tb_axi4_caliptra_parameter_matrix #(
     .USER_WIDTH(USER_WIDTH)
   ) checker_inst (.*);
 
+  wire [31:0] aw_count, w_count, b_count, ar_count, r_count;
+  wire [31:0] aw_burst_incr_count, aw_burst_wrap_count;
+  wire [31:0] ar_burst_incr_count, ar_burst_wrap_count;
+  wire [31:0] w_strb_partial_count, w_last_count, r_last_count;
+
+  axi4_caliptra_monitor #(
+    .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH), .ID_WIDTH(ID_WIDTH),
+    .USER_WIDTH(USER_WIDTH)
+  ) monitor_inst (.*);
+
   reg [DATA_WIDTH*MAX_BEATS-1:0] write_data, read_data;
   reg [DATA_BYTES*MAX_BEATS-1:0] write_strb;
   reg [USER_WIDTH*MAX_BEATS-1:0] write_user, read_user;
@@ -126,6 +136,13 @@ module tb_axi4_caliptra_parameter_matrix #(
         "WRAP payload, USER, or response failed for parameter configuration");
 
     checker_inst.check_idle();
+    check(aw_count == 2 && w_count == 6 && b_count == 2 &&
+      ar_count == 2 && r_count == 6 && w_last_count == 2 && r_last_count == 2,
+      "monitor channel or last-beat counts failed for parameter configuration");
+    check(aw_burst_incr_count == 1 && aw_burst_wrap_count == 1 &&
+      ar_burst_incr_count == 1 && ar_burst_wrap_count == 1 &&
+      w_strb_partial_count == 2,
+      "monitor burst or strobe counts failed for parameter configuration");
     $display("PASS: AXI DATA_WIDTH=%0d ID_WIDTH=%0d parameter matrix",
       DATA_WIDTH, ID_WIDTH);
     $finish;
