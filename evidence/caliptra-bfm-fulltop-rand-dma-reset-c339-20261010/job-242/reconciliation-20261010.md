@@ -17,3 +17,7 @@ At the snapshot, tasks 242_5 (no-trace-2) and 242_6 (no-trace-3) were running on
 ## Next action
 
 Wait for 242_5/6 to finish and classify their runner status and logs. If they also time out, move to a fresh, trace-enabled fixed-delay run for the cycle-relative reset question; the existing A/B array only compares VPI presence without that reset window.
+
+## Comparison with job 240 (2026-10-10 15:52 MDT)
+
+Job 240's `source-revisions.txt` matches task 242_1 for QD, runner SHA256, trace source SHA256, Icarus, UVM, Caliptra RTL, Adams-Bridge, and JTAG-VPI identities. Job 240 additionally used `--rand-dma-reset-delay-cycles 2822`; its `result.json` records compile and firmware exit 0, simulator exit -11, cycle 100 as the last trace sample, and no reset assertion. This isolates the fixed-delay run path as the changed condition, but one crash does not establish a reproducible cause.
