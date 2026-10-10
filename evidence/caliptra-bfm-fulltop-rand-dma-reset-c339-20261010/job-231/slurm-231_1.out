@@ -1,0 +1,16 @@
+QD=708e51cd304422f367a61064449c5617fc97fec6
+runner-sha256=ea57294b045c7cae66a8aa6b93692a4c1ae8b343160624e0f137b71d855c6cb0
+trace-source-sha256=cf378ed88ab6c3ec39fd38d3767d64a5598ad05a7afee63e90b5799743e09ae5
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+UVM=78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams-Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+JTAG-VPI-SHA=34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07
+array-task-id=1
+run-mode=window-567
+reset-delay-cycles=567
+34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi
+737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog
+5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp
+runner_exit=0
+	Maximum resident set size (kbytes): 1860128

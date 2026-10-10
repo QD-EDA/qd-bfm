@@ -1,0 +1,1 @@
+PASS (first 1 random DMA transfer(s), forced first reset after 567 cycles; not full-suite qualification) rand_test_dma: /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-control-20261010-03/runs/window-567/output/window-567/result.json

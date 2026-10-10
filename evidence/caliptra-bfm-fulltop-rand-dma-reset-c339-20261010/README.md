@@ -56,9 +56,18 @@ The trace calibration remains valid: reset delay 567 targets cycle 3080 between
 AW1 at 3066 and B1 at 3106. The separate delay 2822 targets cycle 5335 between
 AW6 at 5327 and B6 at 5356.
 
-## Job 231: baseline control and first reset window
+## Job 231: control and first in-flight reset window
 
-The paired no-reset control and 567-cycle reset run were submitted as job 231,
-1 CPU and 3 GB per task, with two-way concurrency. Outputs are under
-`bfm-rand-reset-c339-control-20261010-03/runs/{control,window-567}` on
-DAN-DESKTOP. Append both outcomes and measured peaks after completion.
+The no-reset control passed with `sim_exit=0`, one testcase pass marker, and no
+reset assertion. The 567-cycle reset run also passed: reset asserted at cycle
+3080, after AW1 at 3066 and before its response, with
+`outstanding_writes_at_reset=[1]` and `reset_in_flight=true`. It exited 0 with
+one testcase pass marker and a finish record. This is diagnostic full-top
+in-flight-reset evidence under fast-TRNG/fast-boot overlays, not qualification.
+
+The measured MaxRSS values were 1,859,936 KiB for control and 1,860,128 KiB for
+the reset run. Raw results, logs, revisions, and the exact array script are in
+[`job-231/`](job-231/).
+
+The later write-response window at delay 2822 (assert cycle 5335 between AW6 at
+5327 and B6 at 5356) remains unverified; job 227 exited before reaching it.

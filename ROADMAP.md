@@ -534,3 +534,13 @@ the [cross-simulator evidence](evidence/caliptra-bfm-axi-crosssim-width-matrix-2
 and the dated [read](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
 and [write](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md)
 post-fix reruns.
+
+## Caliptra full-top in-flight reset smoke — 2026-10-10
+
+A no-reset control and a forced warm reset during the first full-top AXI write
+now pass on clean published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`.
+The reset asserted at cycle 3080 with one AXI write outstanding; simulation
+finished with the testcase pass marker. This remains diagnostic because it uses
+fast-TRNG and fast-boot overlays. The later write-response window and full
+firmware/qualification gates remain open; see the
+[reset-window evidence](evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/README.md).
