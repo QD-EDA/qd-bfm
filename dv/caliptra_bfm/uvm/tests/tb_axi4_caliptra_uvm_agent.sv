@@ -29,6 +29,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
 
   axi4_caliptra_master_cmd_if cmd_if(ACLK);
   wire stall_b_effective = stall_b | cmd_if.stall_b_control;
+  wire stall_r_effective = stall_r | cmd_if.stall_r_control;
   axi4_caliptra_record_if record_if(ACLK);
   assign cmd_if.ARESETn = ARESETn;
   assign inject_error = cmd_if.inject_target_error;
@@ -131,9 +132,9 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         .recovery_threshold_words(32'd2), .recovery_block_words(32'd8),
         .inject_error(inject_error),
         .stall_sram_aw(stall_aw), .stall_sram_w(stall_w), .stall_sram_b(stall_b_effective),
-        .stall_sram_ar(stall_ar), .stall_sram_r(stall_r),
+        .stall_sram_ar(stall_ar), .stall_sram_r(stall_r_effective),
         .stall_fifo_aw(stall_aw), .stall_fifo_w(stall_w), .stall_fifo_b(stall_b_effective),
-        .stall_fifo_ar(stall_ar), .stall_fifo_r(stall_r),
+        .stall_fifo_ar(stall_ar), .stall_fifo_r(stall_r_effective),
         .fifo_level(), .fifo_push_event(), .fifo_pop_event(),
         .recovery_data_avail(),
         .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
@@ -153,7 +154,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       ) memory (
         .ACLK(ACLK), .ARESETn(ARESETn),
         .stall_aw(stall_aw), .stall_w(stall_w), .stall_b(stall_b_effective),
-        .stall_ar(stall_ar), .stall_r(stall_r), .inject_error(inject_error),
+        .stall_ar(stall_ar), .stall_r(stall_r_effective), .inject_error(inject_error),
         .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
         .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
         .AWVALID(AWVALID), .AWREADY(AWREADY), .WDATA(WDATA), .WSTRB(WSTRB),
@@ -746,6 +747,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     task body();
       axi4_caliptra_uvm_transfer req;
       axi4_caliptra_uvm_transfer rsp;
+      int read_transaction_ids[0:2];
 
       req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_setup_write");
       start_item(req);
@@ -768,6 +770,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         `uvm_fatal("AXI_PIPELINE_SETUP", "Setup write did not complete successfully")
 
       cmd_vif.stall_b_control = 1;
+      cmd_vif.stall_r_control = 1;
       req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_write");
       start_item(req);
       req.write = 1;
@@ -776,6 +779,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       req.size = 2;
       req.burst = 2'b01;
       req.id = 8'h31;
+      req.set_transaction_id(200);
       req.user = 32'h1122_3344;
       req.write_data[0 +: 32] = 32'ha5a5_5a5a;
       req.write_data[32 +: 32] = 32'h1357_9bdf;
@@ -785,24 +789,38 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       req.write_user[32 +: 32] = 32'h1020_3040;
       finish_item(req);
 
-      req = axi4_caliptra_uvm_transfer::type_id::create("pipeline_read");
-      start_item(req);
-      req.write = 0;
-      req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h20;
-      req.len = 1;
-      req.size = 2;
-      req.burst = 2'b01;
-      req.id = 8'h42;
-      req.user = 32'h89ab_cdef;
-      finish_item(req);
+      for (int read_index = 0; read_index < 3; read_index++) begin
+        req = axi4_caliptra_uvm_transfer::type_id::create(
+          $sformatf("pipeline_read_%0d", read_index));
+        start_item(req);
+        req.write = 0;
+        req.addr = CALIPTRA_DMA_SRAM_BASE + 48'h20;
+        req.len = 1;
+        req.size = 2;
+        req.burst = 2'b01;
+        req.id = 8'h42;
+        req.set_transaction_id(100 + read_index);
+        req.user = 32'h89ab_cdef;
+        finish_item(req);
+        read_transaction_ids[read_index] = req.get_transaction_id();
+      end
+      if (read_transaction_ids[0] == read_transaction_ids[1] ||
+          read_transaction_ids[1] == read_transaction_ids[2] ||
+          read_transaction_ids[0] == read_transaction_ids[2])
+        `uvm_fatal("AXI_PIPELINE_IDS", "Pipelined reads did not keep distinct UVM transaction IDs")
 
-      get_response(rsp);
-      if (rsp.id != 8'h42 || !rsp.success || rsp.read_response[3:0] != 4'b0000 ||
-          rsp.read_data[31:0] != 32'ha5a5_5a5a || rsp.read_data[63:32] != 32'h1357_9bdf)
-        `uvm_fatal("AXI_PIPELINE_READ", "Read did not complete while the write response was held")
+      cmd_vif.stall_r_control = 0;
+      for (int read_index = 0; read_index < 3; read_index++) begin
+        get_response(rsp);
+        if (rsp.get_transaction_id() != read_transaction_ids[read_index] ||
+            rsp.id != 8'h42 || !rsp.success || rsp.read_response[3:0] != 4'b0000 ||
+            rsp.read_data[31:0] != 32'ha5a5_5a5a || rsp.read_data[63:32] != 32'h1357_9bdf)
+          `uvm_fatal("AXI_PIPELINE_READ", "A full-depth read response was lost or misrouted while B was held")
+      end
       cmd_vif.stall_b_control = 0;
       get_response(rsp);
-      if (rsp.id != 8'h31 || !rsp.success || rsp.response != 2'b00)
+      if (rsp.get_transaction_id() != 200 || rsp.id != 8'h31 ||
+          !rsp.success || rsp.response != 2'b00)
         `uvm_fatal("AXI_PIPELINE_WRITE", "Pipelined write response was lost or misrouted")
     endtask
   endclass
@@ -1251,12 +1269,14 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
           begin
             #10000;
             pipeline_seq.cmd_vif.stall_b_control = 0;
+            pipeline_seq.cmd_vif.stall_r_control = 0;
             `uvm_fatal("AXI_PIPELINE_TIMEOUT", "Pipeline smoke did not complete before its response deadline")
           end
         join_any
         disable fork;
         pipeline_seq.cmd_vif.stall_b_control = 0;
-        $display("PASS: native UVM AXI driver pipelined a read past a held write response");
+        pipeline_seq.cmd_vif.stall_r_control = 0;
+        $display("PASS: native UVM AXI driver filled four command slots and drained reads past a held write response");
         phase.drop_objection(this);
         return;
       end

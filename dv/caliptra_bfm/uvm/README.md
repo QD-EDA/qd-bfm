@@ -182,8 +182,10 @@ manager. The native driver defaults to `max_outstanding=1`, preserving
 response-before-`item_done` behavior. Values 2–4 return `finish_item` after the
 proxy accepts a command and deliver cloned responses through `get_response()`;
 sequences using pipelining must drain their responses. Run
-`tests/run_uvm_agent.sh +UVM_PIPELINE_SMOKE` to check a read completing while
-an earlier write response is stalled. The basic active smoke writes and reads
+`tests/run_uvm_agent.sh +UVM_PIPELINE_SMOKE` to fill all four slots with one
+write and three reads, then drain the reads while the write response is held.
+The smoke checks distinct UVM transaction IDs on the returned responses. The
+basic active smoke writes and reads
 a two-beat INCR burst against the bounded SRAM subordinate at Caliptra's DMA
 SRAM base. The DMA-target UVM
 run connects the same manager to the full SRAM/FIFO address map and sends an

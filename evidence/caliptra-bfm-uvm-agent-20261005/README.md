@@ -63,3 +63,34 @@ Accellera UVM 2020.3.1.
 | `dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv` | `f589cb4395892a575a47fcdf1feecd718ac1202d92ba9151af8ecc39a609076d` |
 | `dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv` | `8e7da67e9a586912f5e6af630bafd8997dbd8090df19181fc5d2affa2a5cc5ff` |
 | `dv/caliptra_bfm/axi/axi4_caliptra_memory_subordinate.sv` | `9c5abea1072e99510b3aefb61d4c4c796685aeaec46314fb1bc7101144156e54` |
+
+## Four-slot native pipeline diagnostic — 2026-10-10
+
+The native UVM driver smoke filled all four command slots with one write and
+three reads while both B and R responses were stalled. It then drained the
+three read responses while B remained blocked and checked unique UVM
+transaction-ID routing. The test passed with zero UVM warnings, errors, or
+fatals. This diagnostic used QD commit `2c40242` with a dirty working tree and
+the published clean Icarus source revision
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`; it is not full BFM qualification.
+Icarus emitted its mixed-timescale warning.
+
+Command:
+
+```sh
+IVERILOG_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+dv/caliptra_bfm/uvm/tests/run_uvm_agent.sh +UVM_PIPELINE_SMOKE
+```
+
+Current source fingerprints:
+
+```text
+c05cb86e1527be319e1dede2c0140011982a7237eae54ada7ca9ab3979157a48  dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
+89419c2a21a4ed05a86f573ce245f5912729b01b62a461e21d419b5c19e6fb55  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_master_proxy.sv
+e98475132f09290c45453d0f3c191cc6aeec092acbdfb834d7c27be885178495  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+32ea377cd8d7a40b841dae255ed68275f33e5b79167ff406851fc008667b2eee  dv/caliptra_bfm/uvm/tests/tb_axi4_caliptra_uvm_agent.sv
+f3fed3f65ec424ef03d25526d673a3ab599eab2698d1fa6671e947fbbe02f404  dv/caliptra_bfm/uvm/tests/run_uvm_agent.sh
+a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
+29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
+```

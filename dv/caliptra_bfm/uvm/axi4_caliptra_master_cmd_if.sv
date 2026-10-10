@@ -5,6 +5,7 @@ interface axi4_caliptra_master_cmd_if(input wire ACLK);
   wire ARESETn;
 
   logic stall_b_control = 0;
+  logic stall_r_control = 0;
   logic inject_target_error = 0;
   logic request_valid [0:COMMAND_SLOTS-1];
   logic request_ack [0:COMMAND_SLOTS-1];
