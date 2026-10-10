@@ -16,10 +16,17 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
   localparam [383:0] TEST_KEY_384 = {48{8'h0b}};
   localparam [511:0] TEST_KEY_384_PADDED = {TEST_KEY_384, 128'b0};
   localparam [511:0] EXPECTED_TAG_384 = {384'hb6a8d5636f5c6a7224f9977dcf7ee6c7fb6d0c48cbdee9737a959796489bddbc4c5df61d5b3297b4fb68dab9f1b582c2, 128'b0};
+  localparam [511:0] TEST_KEY_DOUBLE = 512'he1b52c4ff8ce9c4b60bd8ec785ab7bf3dffc7023f7c51588f96b94eeba80ca3b9b9ed05ab2ac8797bb7039d681f2e41fcfe6dddab2e95122d9c716c2b8406bd4;
+  localparam [1023:0] TEST_BLOCK_FIRST = 1024'h5468697320697320612074657374207573696e672061206c6172676572207468616e20626c6f636b2d73697a65206b657920616e642061206c6172676572207468616e20626c6f636b2d73697a6520646174612e20546865206b6579206e6565647320746f20626520686173686564206265666f7265206265696e6720757365;
+  localparam [1023:0] TEST_BLOCK_FINAL = 1024'h642062792074686520484d414320616c676f726974686d2e80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008C0;
+  localparam [511:0] EXPECTED_TAG_DOUBLE = 512'he37b6a775dc87dbaa4dfa9f96e5e3ffddebd71f8867289865df5a32d20cdc944b6022cac3c4982b10d5eeb55c3e4de15134676fb6de0446065c97440fa8c6a58;
   localparam [383:0] TEST_SEED = 384'h00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff;
   localparam [31:0] SHA512_INIT =
     (32'h1 << `HMAC_REG_HMAC512_CTRL_MODE_LOW) |
     `HMAC_REG_HMAC512_CTRL_INIT_MASK;
+  localparam [31:0] SHA512_NEXT =
+    (32'h1 << `HMAC_REG_HMAC512_CTRL_MODE_LOW) |
+    `HMAC_REG_HMAC512_CTRL_NEXT_MASK;
   localparam [31:0] SHA384_INIT = `HMAC_REG_HMAC512_CTRL_INIT_MASK;
   localparam [31:0] CTRL_ZEROIZE = `HMAC_REG_HMAC512_CTRL_ZEROIZE_MASK;
 
@@ -139,23 +146,21 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       transfer(1'b0, address, 32'b0, value);
     endtask
 
-    task automatic run_single_block(input [511:0] key,
-                                    input [31:0] ctrl_init,
-                                    input [511:0] expected_tag);
-      reg [31:0] status;
-      reg [511:0] observed_tag;
-      bit ready_seen;
+    task automatic write_key_block_seed(input [511:0] key,
+                                        input [1023:0] block);
       int unsigned i;
-      int unsigned polls;
-
       for (i = 0; i < 16; i++)
         write_word(`CLP_HMAC_REG_HMAC512_KEY_0 + i*4, key[511-i*32 -: 32]);
       for (i = 0; i < 32; i++)
-        write_word(`CLP_HMAC_REG_HMAC512_BLOCK_0 + i*4, TEST_BLOCK[1023-i*32 -: 32]);
+        write_word(`CLP_HMAC_REG_HMAC512_BLOCK_0 + i*4, block[1023-i*32 -: 32]);
       for (i = 0; i < 12; i++)
         write_word(`CLP_HMAC_REG_HMAC512_LFSR_SEED_0 + i*4, TEST_SEED[383-i*32 -: 32]);
-      write_word(`CLP_HMAC_REG_HMAC512_CTRL, ctrl_init);
+    endtask
 
+    task automatic wait_ready();
+      reg [31:0] status;
+      bit ready_seen;
+      int unsigned polls;
       ready_seen = 0;
       for (polls = 0; polls < 10000 && !ready_seen; polls++) begin
         read_word(`CLP_HMAC_REG_HMAC512_STATUS, status);
@@ -163,12 +168,26 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       end
       if (!ready_seen)
         `uvm_fatal("HMAC_AHB_TIMEOUT", "HMAC did not become ready within 10000 status polls")
+    endtask
 
-      observed_tag = '0;
+    task automatic read_digest(output reg [511:0] digest);
+      reg [31:0] word;
+      int unsigned i;
+      digest = '0;
       for (i = 0; i < 16; i++) begin
-        read_word(`CLP_HMAC_REG_HMAC512_TAG_0 + i*4, status);
-        observed_tag[511-i*32 -: 32] = status;
+        read_word(`CLP_HMAC_REG_HMAC512_TAG_0 + i*4, word);
+        digest[511-i*32 -: 32] = word;
       end
+    endtask
+
+    task automatic run_single_block(input [511:0] key,
+                                    input [31:0] ctrl_init,
+                                    input [511:0] expected_tag);
+      reg [511:0] observed_tag;
+      write_key_block_seed(key, TEST_BLOCK);
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, ctrl_init);
+      wait_ready();
+      read_digest(observed_tag);
       if (observed_tag !== expected_tag)
         `uvm_fatal("HMAC_AHB_KAT", $sformatf("HMAC known-answer mismatch: got %0128x expected %0128x", observed_tag, expected_tag))
       if (hmac_busy || hmac_error)
@@ -177,9 +196,28 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       write_word(`CLP_HMAC_REG_HMAC512_CTRL, CTRL_ZEROIZE);
     endtask
 
+    task automatic run_double_block();
+      reg [511:0] observed_tag;
+      int unsigned i;
+      write_key_block_seed(TEST_KEY_DOUBLE, TEST_BLOCK_FIRST);
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, SHA512_INIT);
+      wait_ready();
+      for (i = 0; i < 32; i++)
+        write_word(`CLP_HMAC_REG_HMAC512_BLOCK_0 + i*4, TEST_BLOCK_FINAL[1023-i*32 -: 32]);
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, SHA512_NEXT);
+      wait_ready();
+      read_digest(observed_tag);
+      if (observed_tag !== EXPECTED_TAG_DOUBLE)
+        `uvm_fatal("HMAC_AHB_DOUBLE_KAT", $sformatf("HMAC double-block mismatch: got %0128x expected %0128x", observed_tag, EXPECTED_TAG_DOUBLE))
+      if (hmac_busy || hmac_error)
+        `uvm_fatal("HMAC_AHB_STATUS", "HMAC status is busy/error after double-block digest")
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, CTRL_ZEROIZE);
+    endtask
+
     task body();
       run_single_block(TEST_KEY, SHA512_INIT, EXPECTED_TAG);
       run_single_block(TEST_KEY_384_PADDED, SHA384_INIT, EXPECTED_TAG_384);
+      run_double_block();
     endtask
   endclass
 
@@ -242,7 +280,7 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
         record_if.transfer_addr !== `CLP_HMAC_REG_HMAC512_CTRL ||
         record_if.transfer_data[31:0] !== CTRL_ZEROIZE)
       $fatal(1, "Caliptra HMAC AHB UVM checker/monitor did not report clean transfers");
-    $display("PASS: Caliptra HMAC-SHA-384/512 known-answer tests through native UVM AHB agent (%0d transfers)", record_if.transfer_count);
+    $display("PASS: Caliptra HMAC-SHA-384/512 single/double-block tests through native UVM AHB agent (%0d transfers)", record_if.transfer_count);
     $finish;
   end
 endmodule

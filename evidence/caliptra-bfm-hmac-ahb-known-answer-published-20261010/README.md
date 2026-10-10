@@ -132,3 +132,32 @@ logs respectively
 `92ac91263410bbf8d6c699f3518c8bd9c9129ea6b85262a83e3413d896a62050`,
 `f090137a7388a3c92a132892e3303e65622ebfffac571a554acccde0ae970213`, and
 `ef24e9753acd3730fcf49ef9ec2b58592fdb503e109992ae36a219fcf78121a8`.
+
+## Current-state multi-block continuation rerun (2026-10-10)
+
+The native UVM sequence now also exercises SHA-512 continuation: it writes a
+full first block, waits for ready, writes a padded final block, issues `NEXT`,
+then compares the complete digest from Caliptra's two-block HMAC vector. The
+single-block SHA-384 and SHA-512 cases still run in the same sequence.
+
+| IEEE edition | Result | Transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 612 | 0 / 0 / 0 |
+| 2017 | PASS | 612 | 0 / 0 / 0 |
+| 2023 | PASS | 612 | 0 / 0 / 0 |
+
+The monitor counted 393 reads and 219 writes, all 4-byte transfers, with zero
+protocol errors. The local guard measured 0.36–0.37 GiB peak process-group RSS;
+these runs were not submitted through Slurm. Logs:
+[IEEE 2012](logs/uvm-sha384-512-init-next-sv-2012.log),
+[IEEE 2017](logs/uvm-sha384-512-init-next-sv-2017.log),
+[IEEE 2023](logs/uvm-sha384-512-init-next-sv-2023.log).
+
+SHA-256: UVM runner
+`9eb9107be6489469f453d2f9c79d0ae5e9bd58031210661d0b404abe618b9eab`;
+testbench
+`5c41f43457434ccbf725a06ed04f49415d0e47312cf6dc9563ed3041336e537c`;
+logs respectively
+`7f1ab05aeb35a1f069c1edf3507bc8f0de99ded8db7b68a4f91341ff709ba07d`,
+`83c2d50299680e4fd43e0153304c7acdddecf95484bb6ba7dd081aa3724f04c1`, and
+`5166290c94646778feff284d46a2f7a2f2aec394d44048f37fff4d8f672a9637`.

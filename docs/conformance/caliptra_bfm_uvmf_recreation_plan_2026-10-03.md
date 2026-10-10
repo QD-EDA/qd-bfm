@@ -1508,3 +1508,13 @@ warnings/errors/fatals on clean published Icarus
 `4b3f3424c440aca6af92153b6860a7253b925234`. This expands unit-level mode
 coverage only; multi-block behavior, generated UVMF runtime, and full-top
 qualification remain open. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-sha-384-and-sha-512-uvm-rerun-2026-10-10).
+
+**2026-10-10 HMAC UVM `INIT`/`NEXT` continuation:** the native AHB agent now
+also sends a two-block SHA-512 operation against the actual HMAC RTL, waits for
+the first block to complete, issues `NEXT` for the padded final block, and
+checks the complete expected tag. Together with the SHA-384 and SHA-512
+single-block vectors, the 612-transfer sequence passes in IEEE 2012, 2017, and
+2023 with zero UVM warnings/errors/fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. Multi-block continuation is now
+covered at this unit level; generated UVMF and full-top qualification remain
+open. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-multi-block-continuation-rerun-2026-10-10).

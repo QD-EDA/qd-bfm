@@ -189,3 +189,6 @@ Current-state update (2026-10-10): the native UVM HMAC sequence now runs both
 SHA-384 and SHA-512 known-answer cases through the same agent. All 344 bus
 transfers and both full tag comparisons pass in IEEE 2012, 2017, and 2023;
 see the [current results](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-sha-384-and-sha-512-uvm-rerun-2026-10-10).
+The same sequence now checks a SHA-512 two-block `INIT`/`NEXT` digest as well;
+the combined three-case run observes 612 transfers and passes in all three
+editions ([current evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-multi-block-continuation-rerun-2026-10-10)).
