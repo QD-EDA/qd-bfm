@@ -47,6 +47,11 @@ manager, checker, and SRAM subordinate, with 48-bit addresses, unaligned INCR,
 and WRAP traffic. The subordinate limits ID width to 8 bits. See the
 [parameter-matrix evidence](../../../evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
 
+The queued read and concurrent write outstanding-depth runners also cross all
+six supported sample widths with 1/4/8-bit IDs and depths 1/2/4 (54 cases each).
+Their 2026-10-10 published-Icarus run records are in the [read evidence](../../../evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
+and [write evidence](../../../evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md).
+
 The manager regression also round-trips all legal WRAP lengths (2, 4, 8, and
 16 beats), aligned narrow INCR, and unaligned INCR/FIXED transfers with lane
 strobes. It rejects unsupported three-beat and misaligned WRAP requests before

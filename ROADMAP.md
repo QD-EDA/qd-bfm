@@ -496,3 +496,15 @@ explicitly caps ID width at 8 bits. This extends only the data-width sample;
 outstanding-depth cross-products, independent simulator parity, and full
 Caliptra/UVMF qualification remain open. See the
 [dated matrix follow-up](evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
+
+## AXI outstanding width/ID/depth cross-product — 2026-10-10
+
+The queued read and concurrent write matrices each pass 54 configurations:
+32/64/128/256/512/1024-bit data, 1/4/8-bit IDs, and outstanding depths 1/2/4.
+Both matrices pass on clean published Icarus
+`127b887dfdc09283ab0187a2e618421dee3d5dcc` and the newer locally available
+published `origin/main` revision `4b3f3424c440aca6af92153b6860a7253b925234`.
+See the [read](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
+and [write](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md)
+evidence follow-ups. Cross-simulator/four-state qualification and complete
+Caliptra/UVMF integration remain open.
