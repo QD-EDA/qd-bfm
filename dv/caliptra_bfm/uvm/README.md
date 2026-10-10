@@ -353,6 +353,14 @@ clean-room fallback `aaxi_uvm_mem_adapter`; it is not Avery's implementation,
 and passing monitor records to the fallback predictor does not reproduce
 Caliptra's full generated environment.
 
+The native AXI agent's default RAL map also uses the stock UVM register
+predictor on completed monitor transactions, with frontdoor auto-prediction
+disabled. `bus2reg` accepts both the driver's transfer item and the monitor's
+single-beat 32-bit record; the map ignores unrelated addresses. The focused
+smoke checks that a successful monitored write/read updates the CSR mirror and
+that an injected SLVERR leaves it unchanged. See the
+[published-Icarus result](../../../evidence/caliptra-bfm-axi-native-ral-predictor-published-20261010/README.md).
+
 The UVM source list is `caliptra_bfm_uvm.f`. Each smoke uses
 `IVERILOG_BIN`/`VVP_BIN` when set and otherwise resolves `iverilog`/`vvp` from
 `PATH`. Point the variables at an Icarus build with this fork's `-uvm` support

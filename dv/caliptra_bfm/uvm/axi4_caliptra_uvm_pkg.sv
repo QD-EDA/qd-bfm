@@ -646,7 +646,37 @@ package axi4_caliptra_uvm_pkg;
 
     function void bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
       axi4_caliptra_uvm_transfer transfer;
+      axi4_caliptra_transaction observed;
       bit [1:0] response_code;
+
+      if ($cast(observed, bus_item)) begin
+        rw.kind = observed.is_write() ? UVM_WRITE : UVM_READ;
+        rw.addr = observed.addr;
+        rw.n_bits = 32;
+        rw.data = 0;
+        rw.byte_en = 0;
+        rw.status = UVM_NOT_OK;
+        last_addr_user = observed.is_write() ? observed.awuser : observed.aruser;
+        bus2reg_user_obj.set_addr_user(last_addr_user);
+        if (observed.len != 0 || observed.size != 2 ||
+            observed.beatQ.size() != 1 ||
+            (observed.is_write() && observed.strbQ.size() != 1) ||
+            (!observed.is_write() && observed.respQ.size() != 1))
+          return;
+
+        rw.data = observed.beatQ[0];
+        if (observed.is_write()) begin
+          rw.byte_en[3:0] = observed.strbQ[0];
+          response_code = observed.resp;
+        end else begin
+          rw.byte_en[3:0] = 4'hf;
+          response_code = observed.respQ[0];
+        end
+        rw.status = (!observed.protocol_error && observed.protocol_status == 0 &&
+                     (response_code == 2'b00 || response_code == 2'b01)) ?
+                    UVM_IS_OK : UVM_NOT_OK;
+        return;
+      end
 
       if (!$cast(transfer, bus_item)) begin
         `uvm_fatal("AXI_RAL_BUS_ITEM", "AXI register adapter received a non-Caliptra transfer item")

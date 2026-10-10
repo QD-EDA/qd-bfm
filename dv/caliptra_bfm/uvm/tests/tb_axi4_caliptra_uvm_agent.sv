@@ -867,6 +867,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     bit use_dma_target;
     axi4_caliptra_ral_smoke_block ral_model;
     axi4_caliptra_uvm_reg_adapter ral_adapter;
+    uvm_reg_predictor #(axi4_caliptra_transaction) native_predictor;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
     aaxi_uvm_reg_predictor #(aaxi_master_tr) aaxi_predictor;
     axi4_caliptra_aaxi_reg_adapter aaxi_reg_adapter;
@@ -1066,6 +1067,10 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       ral_model = axi4_caliptra_ral_smoke_block::type_id::create("ral_model");
       ral_model.build();
       ral_adapter = axi4_caliptra_uvm_reg_adapter::type_id::create("ral_adapter");
+      native_predictor = uvm_reg_predictor #(axi4_caliptra_transaction)::type_id::create(
+        "native_predictor", this);
+      native_predictor.map = ral_model.default_map;
+      native_predictor.adapter = ral_adapter;
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_predictor = aaxi_uvm_reg_predictor #(aaxi_master_tr)::type_id::create("aaxi_predictor", this);
       aaxi_reg_adapter = axi4_caliptra_aaxi_reg_adapter::type_id::create("aaxi_reg_adapter");
@@ -1092,6 +1097,8 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       ral_model.default_map.set_sequencer(env.agent.sequencer, ral_adapter);
+      ral_model.default_map.set_auto_predict(0);
+      env.agent.monitor.ap.connect(native_predictor.bus_in);
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       ral_model.aaxi_map.set_sequencer(env.aaxi_agent.sequencer, aaxi_reg_adapter);
       env.aaxi_agent.ms_tx_AW_W_export.connect(aaxi_predictor.bus_item_write_export);
@@ -1143,17 +1150,23 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
                           ral_model.default_map, null, -1, ral_user);
       if (ral_status != UVM_IS_OK)
         `uvm_fatal("AXI_RAL_WRITE", "RAL frontdoor write failed")
+      if (ral_model.csr.get_mirrored_value() !== 32'h7654_3210)
+        `uvm_fatal("AXI_RAL_PREDICT_WRITE", "Native AXI monitor did not predict the RAL write")
       ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
                          ral_model.default_map, null, -1, ral_user);
       if (ral_status != UVM_IS_OK || ral_read_value != 32'h7654_3210)
         `uvm_fatal("AXI_RAL_READ", $sformatf("RAL frontdoor read failed status=%s value=%08h",
                                              ral_status.name(), ral_read_value))
+      if (ral_model.csr.get_mirrored_value() !== 32'h7654_3210)
+        `uvm_fatal("AXI_RAL_PREDICT_READ", "Native AXI monitor did not preserve the RAL read mirror")
       env.agent.driver.cmd_vif.inject_target_error = 1'b1;
       ral_model.csr.read(ral_status, ral_read_value, UVM_FRONTDOOR,
                          ral_model.default_map, null, -1, ral_user);
       env.agent.driver.cmd_vif.inject_target_error = 1'b0;
       if (ral_status != UVM_NOT_OK)
         `uvm_fatal("AXI_RAL_ERROR", "RAL frontdoor did not report the injected SLVERR")
+      if (ral_model.csr.get_mirrored_value() !== 32'h7654_3210)
+        `uvm_fatal("AXI_RAL_PREDICT_ERROR", "Failed native AXI read changed the RAL mirror")
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_user = axi4_caliptra_uvm_user_extension::type_id::create("aaxi_user");
       aaxi_user.set_addr_user(32'hcafe_0123);
