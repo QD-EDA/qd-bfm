@@ -235,3 +235,12 @@ ID profile, including W-channel stalls and response routing. See the
 [write-depth evidence bundle](evidence/caliptra-bfm-axi-write-outstanding-depth-20261009/README.md).
 The concurrent write width/ID cross-product and full Caliptra/UVMF qualification
 remain open.
+
+## Current AXI outstanding read/write parameter status — 2026-10-09
+
+Both read and write paths now pass the representative 3×3×3 matrix of data
+width, ID width, and outstanding depth. Separate run records are in the
+[read evidence bundle](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
+and [write evidence bundle](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md).
+Full Caliptra/UVMF qualification and other supported-profile combinations
+remain open.
