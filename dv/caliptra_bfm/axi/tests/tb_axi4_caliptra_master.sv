@@ -278,6 +278,8 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         read_data[127:96] == 32'h4444_4444 && read_response_id == 8'h31,
         "WRAP read did not return the wrapped address sequence");
 
+      mem[16] = 32'h0000_00ff;
+      mem[17] = 32'h1234_5678;
       write_data = {480'b0, 32'h0000_c3d4, 32'ha1b2_0000};
       write_strb = {56'b0, 4'h3, 4'hc};
       write_user = {448'b0, 32'hd000_0001, 32'hd000_0000};
