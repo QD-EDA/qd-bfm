@@ -57,3 +57,20 @@ manager, simulator, and raw output SHA-256 values:
 | `logs/outstanding-1024-4b3f-published-20261010.log` | `8af67c35b6f6a2dec8546a093b9661b21e2a47de24e3ff40babeb6c07456e3ce` |
 | Icarus `iverilog` | `00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` |
 | Icarus `vvp` | `f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a` |
+
+## Response-ready hold regression — 2026-10-10
+
+After the manager kept `RREADY` asserted through the final response handshake
+edge, all 54 read width/ID/depth configurations passed again on clean published
+Icarus `4b3f3424c440aca6af92153b6860a7253b925234`. QD source is commit
+`da22b47cd01f3195e245e9700f28091fdf456491`.
+
+| Input | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/axi/axi4_caliptra_master.sv` | `bfbf58a05b00449fb5de805188c776a101673aa8b33f5bad3515cc4d663b176a` |
+| `dv/caliptra_bfm/axi/tests/run_outstanding_depth_matrix.sh` | `94d34573dcccc7efbd3ff37e8182ad06db0def59a943728c7be9e7c3ce0d6526` |
+| Post-fix output log | `3ab92d1bdd57fe9b7801e84d33d6d489b0d1678486f33b9d54dedfb85dc0ad09` |
+| Icarus `iverilog` | `00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` |
+| Icarus `vvp` | `f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a` |
+
+The raw result is [`logs/outstanding-rready-fix-4b3f-20261010.log`](logs/outstanding-rready-fix-4b3f-20261010.log).

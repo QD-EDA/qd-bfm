@@ -52,6 +52,13 @@ six supported sample widths with 1/4/8-bit IDs and depths 1/2/4 (54 cases each).
 Their 2026-10-10 published-Icarus run records are in the [read evidence](../../../evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
 and [write evidence](../../../evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md).
 
+The same 18-case width/ID parameter matrix passes under Verilator 5.050 with
+the ready/response handshake fix, and 54-case read/write outstanding matrices
+pass again on published Icarus `4b3f3424`. Run the Verilator matrix with
+[`run_parameter_matrix_verilator.sh`](tests/run_parameter_matrix_verilator.sh).
+The cross-simulator run is two-state evidence; details and logs are in the
+[cross-simulator width-matrix bundle](../../../evidence/caliptra-bfm-axi-crosssim-width-matrix-20261010/README.md).
+
 The manager regression also round-trips all legal WRAP lengths (2, 4, 8, and
 16 beats), aligned narrow INCR, and unaligned INCR/FIXED transfers with lane
 strobes. It rejects unsupported three-beat and misaligned WRAP requests before

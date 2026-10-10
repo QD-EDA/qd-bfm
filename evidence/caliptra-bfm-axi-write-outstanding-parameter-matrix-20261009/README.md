@@ -59,3 +59,20 @@ manager, simulator, and raw output SHA-256 values:
 | `logs/write-outstanding-1024-4b3f-published-20261010.log` | `0485dca5a2a5893974f31185f6ed00e7c3195c18929db23c44687ae2d5ec6613` |
 | Icarus `iverilog` | `00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` |
 | Icarus `vvp` | `f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a` |
+
+## Response-ready hold regression — 2026-10-10
+
+After the manager kept `BREADY` asserted through the final response handshake
+edge, all 54 concurrent-write width/ID/depth configurations passed again on
+clean published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`. QD source is
+commit `da22b47cd01f3195e245e9700f28091fdf456491`.
+
+| Input | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/axi/axi4_caliptra_master.sv` | `bfbf58a05b00449fb5de805188c776a101673aa8b33f5bad3515cc4d663b176a` |
+| `dv/caliptra_bfm/axi/tests/run_write_outstanding_depth_matrix.sh` | `b96697c6fbf2927390ab107d452028aa774e390b425c6c936a894e66e9974cee` |
+| Post-fix output log | `fd48b5f9f131e9e7af3c9b624c9dd930871d1e499875b4e8ffd905b075191020` |
+| Icarus `iverilog` | `00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` |
+| Icarus `vvp` | `f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a` |
+
+The raw result is [`logs/write-outstanding-rready-fix-4b3f-20261010.log`](logs/write-outstanding-rready-fix-4b3f-20261010.log).

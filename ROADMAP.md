@@ -508,3 +508,17 @@ See the [read](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/R
 and [write](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md)
 evidence follow-ups. Cross-simulator/four-state qualification and complete
 Caliptra/UVMF integration remain open.
+
+## AXI response-ready handshake fix and cross-simulator width matrix — 2026-10-10
+
+Verilator exposed a final-beat race: the manager deasserted READY in the same
+active edge that marked a response slot complete, allowing the subordinate to
+miss the handshake. The manager now leaves `RREADY`/`BREADY` asserted until its
+task releases the completed slot on the following negedge. The 18-case
+width/ID manager-checker-subordinate-monitor matrix passes under clean published
+Icarus `4b3f3424c440aca6af92153b6860a7253b925234` and Verilator 5.050. Verilator
+warnings remain non-fatal and it does not establish four-state behavior. See
+the [cross-simulator evidence](evidence/caliptra-bfm-axi-crosssim-width-matrix-20261010/README.md)
+and the dated [read](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md)
+and [write](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md)
+post-fix reruns.

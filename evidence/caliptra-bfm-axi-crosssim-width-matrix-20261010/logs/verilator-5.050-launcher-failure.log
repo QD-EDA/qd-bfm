@@ -1,0 +1,889 @@
+memory guard: preflight available 7.25 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: verilator: re-entered 17 levels deep via $VERILATOR_RUNNING; check that VERILATOR_BIN, VERILATOR_GDB and VERILATOR_VALGRIND do not resolve back to this wrapper script.
+%Error: Command Failed /opt/homebrew/bin/verilator --get-supported DEV_ASAN
+memory guard: stopping command (interrupted)
+Terminated: 15
+memory guard: minimum available 7.16 GiB; maximum process group 0.22 GiB
