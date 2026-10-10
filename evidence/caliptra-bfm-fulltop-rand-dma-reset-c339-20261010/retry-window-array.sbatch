@@ -1,17 +1,17 @@
 #!/bin/bash
-#SBATCH --job-name=bfm-rand-reset-windows
+#SBATCH --job-name=bfm-rand-reset-late
 #SBATCH --partition=verilog
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=3G
 #SBATCH --time=02:00:00
-#SBATCH --array=0-1%2
-#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-windows-20261010-04/submit
-#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-windows-20261010-04/submit/logs/%x-%A_%a.out
+#SBATCH --array=1-1%1
+#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-05/submit
+#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-05/submit/logs/%x-%A_%a.out
 
 set -Eeuo pipefail
-ARRAY_ROOT=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-windows-20261010-04
+ARRAY_ROOT=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-05
 BASE=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-20261010-01
 BUILT=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06
 PRIOR=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11
@@ -32,7 +32,7 @@ JTAG_VPI_SHA=34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07
 RUNNER_SHA=ea57294b045c7cae66a8aa6b93692a4c1ae8b343160624e0f137b71d855c6cb0
 TRACE_SOURCE_SHA=cf378ed88ab6c3ec39fd38d3767d64a5598ad05a7afee63e90b5799743e09ae5
 
-# Calibrated to assert at 3080 between AW1/B1 and 5335 between AW6/B6.
+# Repeat the late write-response window: assert at 5335 between AW6 and B6.
 case "${SLURM_ARRAY_TASK_ID:?}" in
   0) RUN_NAME=window-567; RESET_DELAY=567 ;;
   1) RUN_NAME=window-2822; RESET_DELAY=2822 ;;
