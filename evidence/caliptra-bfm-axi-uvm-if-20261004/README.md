@@ -129,3 +129,38 @@ a168f695a5129b72bdded985b2e09c1627fe752bb831082eb954334f27ebf34d  dv/caliptra_bf
 a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
 29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
 ```
+
+## Actual Caliptra AXI manager rerun — 2026-10-10
+
+The real `axi_mgr_rd` and `axi_mgr_wr` integration smoke passed with zero UVM
+warnings, errors, or fatals. This diagnostic used QD commit
+`73826a3` with unrelated worktree dirt, clean Caliptra
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, and the published clean Icarus
+source revision `127b887dfdc09283ab0187a2e618421dee3d5dcc`. Icarus emitted its
+mixed-timescale warning; this result is not full BFM qualification.
+
+Command:
+
+```sh
+CALIPTRA_RTL=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+IVERILOG_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/iverilog \
+VVP_BIN=/private/tmp/iverilog-uvm-latest-127b887/install/bin/vvp \
+dv/caliptra_bfm/uvm/tests/run_caliptra_axi_mgr_uvm_bfm.sh
+```
+
+Current source fingerprints:
+
+```text
+afa63b20041ebef82ff585b449c06cfd208ddc95e8ba2bfd18396fc6ddd931c4  dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f
+647a43eca2cc6b608b0f56eff509f00c5323050b1a05e9c39d06d7e23ce1b232  dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
+89419c2a21a4ed05a86f573ce245f5912729b01b62a461e21d419b5c19e6fb55  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_master_proxy.sv
+e98475132f09290c45453d0f3c191cc6aeec092acbdfb834d7c27be885178495  dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv
+98da8c8e57dfe659f03612c80f258110ab2eaa29c5416d9f89bafc9225b7a224  dv/caliptra_bfm/uvm/axi4_caliptra_dma_if_monitor.sv
+07b55cfc11b1b1c448bb28a98c08c6318de4481d1bdffa05e247ece69dc75694  dv/caliptra_bfm/uvm/tests/run_caliptra_axi_mgr_uvm_bfm.sh
+7f0882627751bb4100ba64fe8ea63c6cf5a925fb76c72321af27cdd13de1c5ee  dv/caliptra_bfm/uvm/tests/tb_caliptra_axi_mgr_uvm_bfm.sv
+ea020134f12c9bdfa9068b3e3431b5dad340da667234c8776bc272ccf957f01f  Caliptra src/axi/rtl/axi_mgr_rd.sv
+8b0d4c52996f1b19bb21a53c0d9103df853dccb0ddf10708a92c489d8b0bc157  Caliptra src/axi/rtl/axi_mgr_wr.sv
+e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c  Caliptra src/axi/rtl/axi_if.sv
+a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602  iverilog
+29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca  vvp
+```
