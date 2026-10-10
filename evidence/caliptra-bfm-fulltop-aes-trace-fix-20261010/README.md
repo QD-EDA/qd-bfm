@@ -79,3 +79,22 @@ measured a 1.80 GiB process-group peak, and minimum available memory was
 - [`case9-trace-sanitized.log`](case9-trace-sanitized.log): trace and finish markers.
 - [`case9-resource.log`](case9-resource.log) and [`case9-guard-summary.log`](case9-guard-summary.log): resource and guard records.
 - [`case9-source-revisions.txt`](case9-source-revisions.txt): source pins.
+
+## Follow-up: traced AES case 10
+
+The next vector passed with the active tracer and AXI checker enabled: one
+testcase pass, no failure or bad diagnostic markers, and normal `$finish` at
+`minstret=1752`, `mcycle=4809`. The trace recorded AR=2, R=20, AW=4, W=20, and
+B=4 handshakes. This run used QD-BFM commit
+`25228bd1e35bae806d055ca67a4378082730f198` and the same clean, published
+Icarus and Caliptra pins above.
+
+Slurm job 123 used 2 CPUs and 6 GiB and ran for 11:00.55; MaxRSS was
+1,859,704 KiB, the guard measured a 1.80 GiB process-group peak, and minimum
+available memory was 21.18 GiB. This remains narrowed firmware diagnostic
+evidence.
+
+- [`case10-result.json`](case10-result.json): structured pass and provenance.
+- [`case10-trace-sanitized.log`](case10-trace-sanitized.log): trace and finish markers.
+- [`case10-resource.log`](case10-resource.log) and [`case10-guard-summary.log`](case10-guard-summary.log): resource and guard records.
+- [`case10-source-revisions.txt`](case10-source-revisions.txt): source pins.
