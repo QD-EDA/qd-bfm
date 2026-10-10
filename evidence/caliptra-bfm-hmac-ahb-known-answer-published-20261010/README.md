@@ -98,3 +98,37 @@ logs respectively
 `442c8fb9e92b3670284abf058ff59f4cd2e216a5488b9f6dae2cbad48cc73903`,
 `eacc83481b1103016bc171e60cde43381209936f2e7b7e641b12e0b41186e5dc`, and
 `7eea4c05a673917ab17d137d821b923bf68733afb9fad5614d541ad301d25f78`.
+
+## Current-state SHA-384 and SHA-512 UVM rerun (2026-10-10)
+
+The native UVM-agent sequence now checks both HMAC modes against Caliptra's
+single-block known-answer vectors. SHA-384 writes its 384-bit key into the
+shared 512-bit key window with the remaining 128 bits cleared; both modes
+compare the full 512-bit tag window, including the zero-padded SHA-384 result.
+
+| IEEE edition | Result | Transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 344 | 0 / 0 / 0 |
+| 2017 | PASS | 344 | 0 / 0 / 0 |
+| 2023 | PASS | 344 | 0 / 0 / 0 |
+
+The monitor counted 220 reads and 124 writes, all 4-byte transfers, with zero
+protocol errors. Each local guarded run observed 0.36–0.37 GiB process-group
+RSS. Slurm was unavailable during this run, so these are not scheduler MaxRSS
+measurements.
+
+Run the same three-edition loop from the reproduction section with
+`dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh`.
+
+Logs: [IEEE 2012](logs/uvm-sha384-512-sv-2012.log),
+[IEEE 2017](logs/uvm-sha384-512-sv-2017.log),
+[IEEE 2023](logs/uvm-sha384-512-sv-2023.log).
+
+SHA-256: UVM runner
+`7239b86c4d226c02db912a78f745445bbe5db39fd6f32af12e530247f1fd4bdd`;
+testbench
+`4d73d7d97572f5273a2007d6c6649684c94c14a42f2c0d41f3fa832ea1014ecc`;
+logs respectively
+`92ac91263410bbf8d6c699f3518c8bd9c9129ea6b85262a83e3413d896a62050`,
+`f090137a7388a3c92a132892e3303e65622ebfffac571a554acccde0ae970213`, and
+`ef24e9753acd3730fcf49ef9ec2b58592fdb503e109992ae36a219fcf78121a8`.

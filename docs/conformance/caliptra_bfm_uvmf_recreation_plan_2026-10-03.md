@@ -1499,3 +1499,12 @@ warnings/errors/fatals on clean published Icarus
 `4b3f3424c440aca6af92153b6860a7253b925234`. This validates the native UVM
 agent path against the HMAC unit RTL; generated UVMF and full-top qualification
 remain open. See the [three-edition results](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-rerun-through-the-native-uvm-agent-2026-10-10).
+
+**2026-10-10 HMAC UVM dual-mode known-answer coverage:** the native AHB UVM
+agent now exercises HMAC-SHA-384 and HMAC-SHA-512 against the actual HMAC
+controller, including the padded SHA-384 tag window. All 344 transfers and
+both full-tag comparisons pass under IEEE 2012, 2017, and 2023 with zero UVM
+warnings/errors/fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. This expands unit-level mode
+coverage only; multi-block behavior, generated UVMF runtime, and full-top
+qualification remain open. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-sha-384-and-sha-512-uvm-rerun-2026-10-10).

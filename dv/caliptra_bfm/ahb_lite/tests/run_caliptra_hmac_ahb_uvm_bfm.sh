@@ -51,4 +51,4 @@ if grep -Eq '^UVM_(ERROR|FATAL) :[[:space:]]*[1-9]' "$log"; then
   echo "Caliptra HMAC AHB UVM BFM smoke reported UVM errors or fatals" >&2
   exit 1
 fi
-grep -Fq "PASS: Caliptra HMAC RTL known-answer test through native UVM AHB agent" "$log"
+grep -Fq "PASS: Caliptra HMAC-SHA-384/512 known-answer tests through native UVM AHB agent" "$log"
