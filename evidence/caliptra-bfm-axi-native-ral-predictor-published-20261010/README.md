@@ -47,3 +47,22 @@ output is in [`logs/runner-summary.txt`](logs/runner-summary.txt).
 
 This is synthetic AXI-agent evidence for the mapped CSR path. It is not a
 Caliptra DUT regression or UVMF qualification.
+
+## Adapter decode follow-up — 2026-10-10
+
+The same guarded runner now includes direct self-checks of monitor-record
+conversion: write data and partial WSTRB with AWUSER, read data with ARUSER,
+EXOKAY acceptance, SLVERR and protocol-error rejection, and fail-closed
+rejection of multi-beat items by the scalar RAL adapter. The full agent smoke
+still exits zero with zero UVM errors/fatals and four expected predictor skips.
+The appended log is [`adapter-probes-runner.log`](logs/adapter-probes-runner.log).
+
+This follow-up ran from a working tree based on QD commit
+`81b0c150d4f740eecca8b23d4f984909ae440d37`; the directly edited testbench was
+fingerprinted below. The prior run's hashes above remain unchanged.
+
+| Input | SHA-256 |
+| --- | --- |
+| `dv/caliptra_bfm/uvm/tests/tb_axi4_caliptra_uvm_agent.sv` | `351dc9fbb3c8149cb7c827803b6e462d76374bacb8769e4cb4716d1f8ed09e32` |
+| Icarus `iverilog` | `a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602` |
+| Icarus `vvp` | `29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca` |

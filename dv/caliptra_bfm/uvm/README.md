@@ -358,7 +358,9 @@ predictor on completed monitor transactions, with frontdoor auto-prediction
 disabled. `bus2reg` accepts both the driver's transfer item and the monitor's
 single-beat 32-bit record; the map ignores unrelated addresses. The focused
 smoke checks that a successful monitored write/read updates the CSR mirror and
-that an injected SLVERR leaves it unchanged. See the
+that an injected SLVERR leaves it unchanged. Adapter self-checks also cover
+partial WSTRB, AxUSER, EXOKAY, SLVERR, protocol-error status, and rejection of
+multi-beat records. See the
 [published-Icarus result](../../../evidence/caliptra-bfm-axi-native-ral-predictor-published-20261010/README.md).
 
 The UVM source list is `caliptra_bfm_uvm.f`. Each smoke uses

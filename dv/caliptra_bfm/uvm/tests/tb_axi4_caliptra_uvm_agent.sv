@@ -883,6 +883,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       axi4_caliptra_uvm_reg_adapter adapter;
       axi4_caliptra_uvm_user_extension user_extension;
       axi4_caliptra_uvm_transfer transfer;
+      axi4_caliptra_transaction observed;
       axi4_caliptra_uvm_user_extension cloned_user_extension;
       uvm_object cloned_user_object;
       uvm_reg_item reg_item;
@@ -963,6 +964,50 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       adapter.bus2reg(transfer, rw);
       if (rw.status != UVM_NOT_OK)
         `uvm_fatal("AXI_RAL_ERROR", "SLVERR did not map to UVM_NOT_OK")
+
+      observed = axi4_caliptra_transaction::type_id::create("observed_ral_write");
+      observed.kind = observed.AXI_WRITE;
+      observed.addr = CALIPTRA_DMA_SRAM_BASE + 48'h40;
+      observed.len = 0;
+      observed.size = 2;
+      observed.awuser = 32'hcafe_0123;
+      observed.beatQ.push_back(32'hdead_beef);
+      observed.strbQ.push_back(4'h5);
+      observed.resp = 2'b01;
+      adapter.bus2reg(observed, rw);
+      if (rw.kind != UVM_WRITE || rw.addr != observed.addr || rw.n_bits != 32 ||
+          rw.data != 32'hdead_beef || rw.byte_en[3:0] != 4'h5 ||
+          rw.status != UVM_IS_OK || adapter.get_last_addr_user() != 32'hcafe_0123)
+        `uvm_fatal("AXI_RAL_MON_WRITE", "Monitor write decode lost data, strobe, USER, or EXOKAY")
+      observed.resp = 2'b10;
+      adapter.bus2reg(observed, rw);
+      if (rw.status != UVM_NOT_OK)
+        `uvm_fatal("AXI_RAL_MON_WRITE_ERROR", "Monitor write SLVERR mapped to success")
+      observed.resp = 2'b00;
+      observed.protocol_error = 1;
+      adapter.bus2reg(observed, rw);
+      if (rw.status != UVM_NOT_OK)
+        `uvm_fatal("AXI_RAL_MON_PROTOCOL_ERROR", "Malformed monitor write mapped to success")
+
+      observed = axi4_caliptra_transaction::type_id::create("observed_ral_read");
+      observed.kind = observed.AXI_READ;
+      observed.addr = CALIPTRA_DMA_SRAM_BASE + 48'h40;
+      observed.len = 0;
+      observed.size = 2;
+      observed.aruser = 32'hface_cafe;
+      observed.beatQ.push_back(32'hcafe_babe);
+      observed.respQ.push_back(2'b00);
+      adapter.bus2reg(observed, rw);
+      if (rw.kind != UVM_READ || rw.addr != observed.addr || rw.n_bits != 32 ||
+          rw.data != 32'hcafe_babe || rw.byte_en[3:0] != 4'hf ||
+          rw.status != UVM_IS_OK || adapter.get_last_addr_user() != 32'hface_cafe)
+        `uvm_fatal("AXI_RAL_MON_READ", "Monitor read decode lost data, USER, or byte enables")
+      observed.len = 1;
+      observed.beatQ.push_back(32'hface_feed);
+      observed.respQ.push_back(2'b00);
+      adapter.bus2reg(observed, rw);
+      if (rw.status != UVM_NOT_OK)
+        `uvm_fatal("AXI_RAL_MON_BURST", "Unsupported monitor burst was accepted by the scalar RAL adapter")
 
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
       aaxi_adapter = new("aaxi_ral_adapter");
