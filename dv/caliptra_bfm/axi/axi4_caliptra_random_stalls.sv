@@ -12,27 +12,27 @@ module axi4_caliptra_random_stalls #(
   integer init_channel;
   integer channel;
 
-  // Exact per-value weights for dist {0..1 :/ 500, 2..7 :/ 75,
-  // 8..31 :/ 3, 32..255 :/ 1}; the total weight is 1746.
+  // Scale the pinned range weights to integer per-value counts: 56000, 2800,
+  // 28, and 1 for {[0:1] :/ 500, [2:7] :/ 75, [8:31] :/ 3, [32:255] :/ 1}.
   function automatic [7:0] choose_delay_from_draw(input integer draw);
     begin
-      if (draw < 500)
+      if (draw < 56000)
         choose_delay_from_draw = 0;
-      else if (draw < 1000)
+      else if (draw < 112000)
         choose_delay_from_draw = 1;
-      else if (draw < 1450)
-        choose_delay_from_draw = 2 + ((draw - 1000) / 75);
-      else if (draw < 1522)
-        choose_delay_from_draw = 8 + ((draw - 1450) / 3);
+      else if (draw < 128800)
+        choose_delay_from_draw = 2 + ((draw - 112000) / 2800);
+      else if (draw < 129472)
+        choose_delay_from_draw = 8 + ((draw - 128800) / 28);
       else
-        choose_delay_from_draw = 32 + (draw - 1522);
+        choose_delay_from_draw = 32 + (draw - 129472);
     end
   endfunction
 
   function automatic [7:0] choose_delay;
     integer draw;
     begin
-      draw = $urandom_range(1745, 0);
+      draw = $urandom_range(129695, 0);
       choose_delay = choose_delay_from_draw(draw);
     end
   endfunction

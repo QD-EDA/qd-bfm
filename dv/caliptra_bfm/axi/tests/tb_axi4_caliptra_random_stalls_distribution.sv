@@ -22,7 +22,7 @@ module tb_axi4_caliptra_random_stalls_distribution;
       channel_stall_frequency[value] = 0;
       fifo_auto_frequency[value] = 0;
     end
-    for (draw = 0; draw < 1746; draw = draw + 1) begin
+    for (draw = 0; draw < 129696; draw = draw + 1) begin
       channel_delay = dut.choose_delay_from_draw(draw);
       fifo_delay = fifo_dut.choose_auto_stall_count_from_draw(draw);
       if (channel_delay < 0 || channel_delay > 255 ||
@@ -35,11 +35,11 @@ module tb_axi4_caliptra_random_stalls_distribution;
 
     for (value = 0; value < 256; value = value + 1) begin
       if (value <= 1)
-        expected = 500;
+        expected = 56000;
       else if (value <= 7)
-        expected = 75;
+        expected = 2800;
       else if (value <= 31)
-        expected = 3;
+        expected = 28;
       else
         expected = 1;
       if (channel_stall_frequency[value] != expected ||
@@ -47,7 +47,7 @@ module tb_axi4_caliptra_random_stalls_distribution;
         $fatal(1, "delay %0d has channel/FIFO weights %0d/%0d, expected %0d",
                value, channel_stall_frequency[value], fifo_auto_frequency[value], expected);
     end
-    $display("PASS: AXI channel and FIFO auto delays match Caliptra weights 500/75/3/1");
+    $display("PASS: AXI channel and FIFO auto delays match Caliptra range weights 500/75/3/1");
     $finish;
   end
 endmodule
