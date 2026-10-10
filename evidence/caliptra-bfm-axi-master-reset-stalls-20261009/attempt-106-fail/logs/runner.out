@@ -1,0 +1,16 @@
+memory guard: preflight available 23.36 GiB; process-group cap 0.14 GiB; system reserve 5.59 GiB
+AXI master rejected burst outside the Caliptra profile
+AXI master read data timeout; reset required before reuse
+PASS: AXI manager bursts, USER/LOCK, stalls, errors, timeout and reset recovery
+tb_axi4_caliptra_master.sv:607: $finish called at 1050000 (1ps)
+AXI master rejected burst outside the Caliptra profile
+AXI master rejected burst outside the Caliptra profile
+PASS: AXI manager WRAP, narrow and unaligned INCR, and invalid burst shapes
+tb_axi4_caliptra_master.sv:345: $finish called at 1430000 (1ps)
+PASS: AXI manager completes a write when W is accepted before AW
+tb_axi4_caliptra_master.sv:362: $finish called at 120000 (1ps)
+PASS: AXI manager overlaps independent read and write tasks
+tb_axi4_caliptra_master.sv:393: $finish called at 130000 (1ps)
+FATAL: ../axi4_caliptra_checker.sv:453: AXI exclusive write has no completed exclusive read
+       Time: 285000  Scope: tb_axi4_caliptra_master.g_checker.checker_inst
+memory guard: command exited 1; minimum available 23.36 GiB; maximum process group 0.00 GiB

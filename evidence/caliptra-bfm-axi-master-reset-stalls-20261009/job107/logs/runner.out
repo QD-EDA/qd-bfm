@@ -1,0 +1,26 @@
+memory guard: preflight available 23.26 GiB; process-group cap 0.14 GiB; system reserve 5.59 GiB
+AXI master rejected burst outside the Caliptra profile
+AXI master read data timeout; reset required before reuse
+PASS: AXI manager bursts, USER/LOCK, stalls, errors, timeout and reset recovery
+tb_axi4_caliptra_master.sv:610: $finish called at 1050000 (1ps)
+AXI master rejected burst outside the Caliptra profile
+AXI master rejected burst outside the Caliptra profile
+PASS: AXI manager WRAP, narrow and unaligned INCR, and invalid burst shapes
+tb_axi4_caliptra_master.sv:345: $finish called at 1430000 (1ps)
+PASS: AXI manager completes a write when W is accepted before AW
+tb_axi4_caliptra_master.sv:362: $finish called at 120000 (1ps)
+PASS: AXI manager overlaps independent read and write tasks
+tb_axi4_caliptra_master.sv:393: $finish called at 130000 (1ps)
+PASS: AXI manager aborts in-flight reads and writes on reset, then recovers
+tb_axi4_caliptra_master.sv:504: $finish called at 550000 (1ps)
+AXI master write response has no outstanding BID
+PASS: bad BID poisons manager until reset, then recovers
+tb_axi4_caliptra_master.sv:525: $finish called at 170000 (1ps)
+AXI master read response ID or RLAST mismatch
+PASS: bad RLAST poisons manager until reset, then recovers
+tb_axi4_caliptra_master.sv:543: $finish called at 150000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI MAX_OUTSTANDING=4 queues writes and routes BID responses
+tb_axi4_caliptra_master_write_outstanding.sv:237: $finish called at 260000 (1ps)
+memory guard: command exited 0; minimum available 23.26 GiB; maximum process group 0.00 GiB

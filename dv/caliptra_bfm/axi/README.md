@@ -30,8 +30,9 @@ WRAP/exclusive requests, and 4KB-crossing requests are rejected before VALID
 is asserted. Unaligned INCR and FIXED requests are supported.
 
 Run the two-beat USER/LOCK/stall test, W-before-AW write completion, response
-errors, timeout/reset recovery, read/write reset aborts, bad BID/RLAST fail-stop
-tests, and five-deep read/write queue tests with out-of-order responses using:
+errors, timeout recovery, reset aborts while AR/AW/W requests are stalled or
+responses are pending, bad BID/RLAST fail-stop tests, and five-deep read/write
+queue tests with out-of-order responses using:
 
 ```sh
 ./tests/run_master.sh

@@ -281,3 +281,12 @@ guard thresholds, and raw logs are recorded in the
 [Verilator pilot evidence bundle](evidence/caliptra-bfm-verilator-pilot-20261009/README.md).
 Verilator runtime parity remains open; these pilots are not compile or
 behavioral passes.
+
+## Current AXI request-stall reset status — 2026-10-09
+
+The guarded Icarus manager regression now aborts requests during stalled AR,
+stalled AW, and stalled W-after-AW phases, in addition to the existing read
+data and write response waits. Each task exits unsuccessful, clears its
+outputs, and recovers after reset. See the
+[reset-stall evidence bundle](evidence/caliptra-bfm-axi-master-reset-stalls-20261009/README.md).
+Reset timing across every handshake edge remains open.

@@ -410,15 +410,78 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         success, read_data, read_user, read_response, response_user);
       check(success, "read manager did not recover after reset abort");
 
+      ar_delay = 2;
+      fork
+        bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h53, 32'hcafe_0001, 1'b1,
+          abort_read_success, read_data, read_user, read_response, response_user);
+        begin : reset_ar_stall
+          integer cycles;
+          cycles = 0;
+          while (!(ARVALID && !ARREADY) && cycles < 8) begin
+            @(posedge ACLK); #1; cycles = cycles + 1;
+          end
+          if (!(ARVALID && !ARREADY)) $fatal(1, "AR did not stall for reset test");
+          ARESETn = 0;
+          repeat (2) @(posedge ACLK);
+          @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
+        end
+      join
+      check(!abort_read_success && !bfm.read_busy && !ARVALID && !RREADY,
+        "reset did not abort and clear a stalled AR request");
+
       write_data = {480'b0, 32'h5678_1234};
       write_strb = {60'b0, 4'hf};
       write_user = {480'b0, 32'hd000_0000};
-      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h61, 32'hcafe_0001, 1'b1,
+
+      aw_delay = 2;
+      fork
+        bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h62, 32'hca11_ab1e, 1'b1,
+          write_data, write_strb, write_user, abort_write_success, response, response_user);
+        begin : reset_aw_stall
+          integer cycles;
+          cycles = 0;
+          while (!(AWVALID && !AWREADY) && cycles < 8) begin
+            @(posedge ACLK); #1; cycles = cycles + 1;
+          end
+          if (!(AWVALID && !AWREADY)) $fatal(1, "AW did not stall for reset test");
+          ARESETn = 0;
+          repeat (2) @(posedge ACLK);
+          @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
+        end
+      join
+      check(!abort_write_success && !bfm.write_busy && !AWVALID && !WVALID && !BREADY,
+        "reset did not abort and clear a stalled AW request");
+
+      bfm.read_burst(19'hc0, 0, 2, 2'b01, 8'h63, 32'hcafe_0001, 1'b1,
         success, read_data, read_user, read_response, response_user);
-      check(success, "exclusive read before reset-aborted write failed");
+      check(success, "exclusive read before reset-aborted W-stall write failed");
+      aw_delay = 0;
+      fork
+        bfm.write_burst(19'hc0, 0, 2, 2'b01, 8'h63, 32'hca11_ab1e, 1'b1,
+          write_data, write_strb, write_user, abort_write_success, response, response_user);
+        begin : reset_w_stall
+          integer cycles;
+          wait(AWVALID); #1; cycle_mod = 1;
+          cycles = 0;
+          while (!(write_pending && WVALID && !WREADY) && cycles < 8) begin
+            @(posedge ACLK); #1; cycles = cycles + 1;
+          end
+          if (!(write_pending && WVALID && !WREADY))
+            $fatal(1, "W did not stall after AW for reset test");
+          @(posedge ACLK); #1; ARESETn = 0;
+          repeat (2) @(posedge ACLK);
+          @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
+        end
+      join
+      check(!abort_write_success && !bfm.write_busy && !AWVALID && !WVALID && !BREADY,
+        "reset did not abort and clear a stalled W request");
+
+      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h64, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "exclusive read before reset-aborted response write failed");
       suppress_write_response = 1;
       fork
-        bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h61, 32'hca11_ab1e, 1'b1,
+        bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h64, 32'hca11_ab1e, 1'b1,
           write_data, write_strb, write_user, abort_write_success, response, response_user);
         begin
           wait(BREADY);
@@ -430,10 +493,10 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
       join
       check(!abort_write_success && !bfm.write_busy && !AWVALID && !WVALID && !BREADY,
         "reset did not abort and clear an in-flight write");
-      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h62, 32'hcafe_0001, 1'b1,
+      bfm.read_burst(19'h80, 0, 2, 2'b01, 8'h65, 32'hcafe_0001, 1'b1,
         success, read_data, read_user, read_response, response_user);
       check(success, "exclusive read before recovery write failed");
-      bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h62, 32'hca11_ab1e, 1'b1,
+      bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h65, 32'hca11_ab1e, 1'b1,
         write_data, write_strb, write_user, success, response, response_user);
       check(success, "write manager did not recover after reset abort");
       if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
