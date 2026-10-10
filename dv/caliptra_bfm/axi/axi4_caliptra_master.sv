@@ -114,7 +114,10 @@ module axi4_caliptra_master #(
 
   // ponytail: linear RID lookup is simple at bounded depth; index by ID if depth grows.
   always @(posedge ACLK) begin
-    if (ARESETn && RVALID && RREADY) begin
+    if (ARESETn && RREADY && (RVALID !== 1'b0) && (RVALID !== 1'b1)) begin
+      poisoned = 1'b1;
+      $display("AXI master read response has unknown RVALID");
+    end else if (ARESETn && RVALID && RREADY) begin
       rchosen_slot = -1;
       rchosen_order = 32'h7fffffff;
       for (rscan_index = 0; rscan_index < MAX_OUTSTANDING; rscan_index = rscan_index + 1) begin
@@ -139,7 +142,11 @@ module axi4_caliptra_master #(
           rd_data_q[rchosen_slot][rbeat_index*DATA_WIDTH +: DATA_WIDTH] = RDATA;
           rd_user_data_q[rchosen_slot][rbeat_index*USER_WIDTH +: USER_WIDTH] = RUSER;
           rd_response_q[rchosen_slot][rbeat_index*2 +: 2] = RRESP;
-          if (RRESP !== 2'b00 && RRESP !== 2'b01)
+          if ((^RRESP) === 1'bx) begin
+            rd_slot_success[rchosen_slot] = 1'b0;
+            poisoned = 1'b1;
+            $display("AXI master read response has unknown RRESP");
+          end else if (RRESP !== 2'b00 && RRESP !== 2'b01)
             rd_slot_success[rchosen_slot] = 1'b0;
           if (RLAST !== (rbeat_index == rd_len_q[rchosen_slot])) begin
             rd_slot_done[rchosen_slot] = 1'b1;
@@ -159,6 +166,10 @@ module axi4_caliptra_master #(
   // ponytail: linear BID lookup is simple at bounded depth; index by ID if depth grows.
   always @(posedge ACLK) begin
     if (ARESETn) begin
+      if (BREADY && (BVALID !== 1'b0) && (BVALID !== 1'b1)) begin
+        poisoned = 1'b1;
+        $display("AXI master write response has unknown BVALID");
+      end
       if (wr_drive_slot >= 0) begin
         if (wr_slot_valid[wr_drive_slot]) begin
           if (AWVALID && AWREADY) wr_slot_aw_done[wr_drive_slot] = 1'b1;
@@ -184,6 +195,10 @@ module axi4_caliptra_master #(
           wr_response_q[bchosen_slot] = BRESP;
           wr_user_q[bchosen_slot] = BUSER;
           wr_slot_done[bchosen_slot] = 1'b1;
+          if ((^BRESP) === 1'bx) begin
+            poisoned = 1'b1;
+            $display("AXI master write response has unknown BRESP");
+          end
         end
       end
     end
@@ -401,6 +416,11 @@ module axi4_caliptra_master #(
             @(posedge ACLK);
             if (!ARESETn) aborted = 1;
             else if (poisoned) aborted = 1;
+            else if ((AWVALID && (AWREADY !== 1'b0) && (AWREADY !== 1'b1)) ||
+                     (WVALID && (WREADY !== 1'b0) && (WREADY !== 1'b1))) begin
+              poisoned = 1'b1;
+              $display("AXI master write request has unknown AWREADY/WREADY");
+            end
             else begin
               if (AWVALID && AWREADY) aw_taken = 1;
               if (WVALID && WREADY) w_taken = 1;
@@ -581,7 +601,10 @@ module axi4_caliptra_master #(
             @(posedge ACLK);
             if (!ARESETn) aborted = 1;
             else if (poisoned) aborted = 1;
-            else if (ARVALID && ARREADY) taken = 1;
+            else if (ARVALID && (ARREADY !== 1'b0) && (ARREADY !== 1'b1)) begin
+              poisoned = 1'b1;
+              $display("AXI master read request has unknown ARREADY");
+            end else if (ARVALID && ARREADY) taken = 1;
             cycles = cycles + 1;
             @(negedge ACLK);
             if (aborted || !ARESETn || poisoned) begin

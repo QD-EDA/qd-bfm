@@ -80,6 +80,15 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg inject_read_error = 0;
   reg inject_bad_bid = 0;
   reg inject_bad_rlast = 0;
+  reg force_awready = 0, awready_override = 0;
+  reg force_wready = 0, wready_override = 0;
+  reg force_arready = 0, arready_override = 0;
+  reg force_bvalid = 0, bvalid_override = 0;
+  reg force_bresp = 0;
+  reg [1:0] bresp_override = 0;
+  reg force_rvalid = 0, rvalid_override = 0;
+  reg force_rresp = 0;
+  reg [1:0] rresp_override = 0;
   reg suppress_read = 0;
   reg suppress_write_response = 0;
   integer aw_stalls = 0;
@@ -87,6 +96,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   integer ar_stalls = 0;
   integer both_directions_active = 0;
   integer i, lane;
+  integer active_cycles = 0;
   integer wrap_beats, beat_index;
   reg [18:0] wrap_start;
   reg [18:0] beat_addr;
@@ -119,11 +129,13 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
     end
   endfunction
 
-  assign AWREADY = ARESETn && (aw_delay == 0);
-  assign WREADY = ARESETn &&
+  assign AWREADY = force_awready ? awready_override : ARESETn && (aw_delay == 0);
+  assign WREADY = force_wready ? wready_override : ARESETn &&
     (w_before_aw_mode ? !early_w_pending : write_pending) &&
     (cycle_mod[0] == 1'b1);
-  assign ARREADY = ARESETn && (ar_delay == 0);
+  assign ARREADY = force_arready ? arready_override : ARESETn && (ar_delay == 0);
+
+  always @(posedge ACLK) active_cycles <= active_cycles + 1;
 
   always @(posedge ACLK)
     if (ARESETn && (AWVALID || WVALID || BREADY) && (ARVALID || RREADY))
@@ -167,9 +179,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           early_w_pending <= 0;
           write_pending <= 0;
           BID <= AWID;
-          BRESP <= 2'b00;
+          BRESP <= force_bresp ? bresp_override : 2'b00;
           BUSER <= 32'hb000_0001;
-          BVALID <= 1;
+          BVALID <= force_bvalid ? bvalid_override : 1'b1;
         end else write_pending <= 1;
       end
 
@@ -193,9 +205,10 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           if (WLAST) begin
             write_pending <= 0;
             BID <= inject_bad_bid ? write_id + 1'b1 : write_id;
-            BRESP <= inject_error ? 2'b10 : 2'b00;
+            BRESP <= force_bresp ? bresp_override : (inject_error ? 2'b10 : 2'b00);
             BUSER <= 32'hb000_0001;
-            if (!suppress_write_response) BVALID <= 1;
+            if (!suppress_write_response)
+              BVALID <= force_bvalid ? bvalid_override : 1'b1;
           end else write_count <= write_count + 1'b1;
         end
       end
@@ -217,9 +230,9 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           beat_addr = address_for_beat(ARADDR, ARLEN, ARSIZE, ARBURST, 0);
           RDATA <= mem[beat_addr[7:2]];
           RUSER <= 32'ha000_0000;
-          RRESP <= inject_read_error ? 2'b10 : 2'b00;
+          RRESP <= force_rresp ? rresp_override : (inject_read_error ? 2'b10 : 2'b00);
           RLAST <= (ARLEN == 0) && !inject_bad_rlast;
-          RVALID <= 1;
+          RVALID <= force_rvalid ? rvalid_override : 1'b1;
         end
       end else if (RVALID && RREADY && read_pending && !suppress_read) begin
         if (read_count == read_len) begin
@@ -231,7 +244,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
                                         read_burst, read_count + 1'b1);
           RDATA <= mem[beat_addr[7:2]];
           RUSER <= 32'ha000_0000 + read_count + 1'b1;
-          RRESP <= inject_read_error ? 2'b10 : 2'b00;
+          RRESP <= force_rresp ? rresp_override : (inject_read_error ? 2'b10 : 2'b00);
           RLAST <= (read_count + 1'b1 == read_len) && !inject_bad_rlast;
         end
       end
@@ -306,6 +319,47 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           "reset at write handshake did not abort and clear the manager");
 
       @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
+    end
+  endtask
+
+  task automatic expect_unknown_control(input [8*8-1:0] channel, input signal_value);
+    integer start_cycle;
+    reg is_write;
+    begin
+      start_cycle = active_cycles;
+      is_write = 0;
+      case (channel)
+        "AWREADY": begin force_awready = 1; awready_override = signal_value; is_write = 1; end
+        "WREADY": begin force_wready = 1; wready_override = signal_value; is_write = 1; end
+        "BVALID": begin force_bvalid = 1; bvalid_override = signal_value; is_write = 1; end
+        "BRESP": begin force_bresp = 1; bresp_override = {signal_value, 1'b0}; is_write = 1; end
+        "ARREADY": begin force_arready = 1; arready_override = signal_value; end
+        "RVALID": begin force_rvalid = 1; rvalid_override = signal_value; end
+        "RRESP": begin force_rresp = 1; rresp_override = {1'b0, signal_value}; end
+        default: $fatal(1, "Unknown AXI four-state probe %0s", channel);
+      endcase
+
+      if (is_write)
+        bfm.write_burst(19'h80, 0, 2, 2'b01, 8'h70, 32'hca11_ab1e, 1'b1,
+          write_data, write_strb, write_user, success, response, response_user);
+      else
+        bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h71, 32'hcafe_0001, 1'b1,
+          success, read_data, read_user, read_response, response_user);
+
+      check(!success && bfm.poisoned,
+        "unknown AXI control or response did not fail-stop the manager");
+      check((active_cycles - start_cycle) < 32,
+        "unknown AXI control or response waited for the ordinary timeout");
+      check(!bfm.write_busy && !bfm.read_busy && !AWVALID && !WVALID && !BREADY && !ARVALID && !RREADY,
+        "unknown AXI control or response did not clear manager state");
+
+      @(negedge ACLK); ARESETn = 0;
+      repeat (2) @(posedge ACLK);
+      @(negedge ACLK);
+      bfm.reset_master();
+      force_awready = 0; force_wready = 0; force_arready = 0;
+      force_bvalid = 0; force_bresp = 0; force_rvalid = 0; force_rresp = 0;
+      ARESETn = 1;
     end
   endtask
 
@@ -613,6 +667,19 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         success, read_data, read_user, read_response, response_user);
       check(success, "manager did not recover after reset following bad RLAST");
       $display("PASS: bad RLAST poisons manager until reset, then recovers");
+      $finish;
+    end else if (test_case == "UNKNOWN_CONTROLS") begin
+      write_data = {480'b0, 32'h5678_1234};
+      write_strb = {60'b0, 4'hf};
+      write_user = {480'b0, 32'hd000_0000};
+      expect_unknown_control("AWREADY", 1'bx);
+      expect_unknown_control("WREADY", 1'bz);
+      expect_unknown_control("BVALID", 1'bx);
+      expect_unknown_control("BRESP", 1'bz);
+      expect_unknown_control("ARREADY", 1'bx);
+      expect_unknown_control("RVALID", 1'bz);
+      expect_unknown_control("RRESP", 1'bx);
+      $display("PASS: AXI manager rejects X/Z READY, VALID, and response controls");
       $finish;
     end
 

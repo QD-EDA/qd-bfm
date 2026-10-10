@@ -25,6 +25,7 @@ trap 'rm -f "$out" "$out_no_checker" "$out_outstanding" "$out_write_outstanding"
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv
 "$VVP_BIN" "$out_no_checker" +CASE=BAD_BID
 "$VVP_BIN" "$out_no_checker" +CASE=BAD_RLAST
+"$VVP_BIN" "$out_no_checker" +CASE=UNKNOWN_CONTROLS
 "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master_outstanding -o "$out_outstanding" \
   ../axi4_caliptra_master.sv tb_axi4_caliptra_master_outstanding.sv
 "$VVP_BIN" "$out_outstanding"

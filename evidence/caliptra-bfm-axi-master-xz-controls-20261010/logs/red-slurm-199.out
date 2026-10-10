@@ -1,0 +1,5 @@
+QD base commit: 29cc2af7b24c89105c3c54663f3b9e812389ea90
+QD source patch SHA256: 74f9ed5ab6dd1d44bfa7a60977b5c5fa169f397cbc70960eb70b16742cd00957  /home/dsell/slurm-runs/caliptra-bfm/codex/axi-master-xz-red-20261010-01/source-patch.patch
+Icarus source commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus Verilog version 13.0 (devel) (c339b9f2)
+EXPECTED RED: unknown AXI control was not rejected before ordinary timeout

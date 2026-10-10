@@ -20,10 +20,13 @@ Up to `MAX_OUTSTANDING` reads and writes may be outstanding independently
 including out-of-order responses for different IDs and in-order responses for
 repeated IDs. AW and W retain independent handshakes; write data transactions
 are issued in order because AXI4 has no WID. Reads and writes can run
-concurrently. A protocol mismatch or timeout poisons the manager; assert reset low and call
-`reset_master` before reuse. Reset also aborts in-flight tasks, returns them
-unsuccessful, and clears their channel outputs; call `reset_master` after they
-exit.
+concurrently. A protocol mismatch, unknown decisive READY/VALID/response-code
+input, or timeout poisons the manager; assert reset low and call `reset_master`
+before reuse. Reset also aborts in-flight tasks, returns them unsuccessful, and
+clears their channel outputs; call `reset_master` after they exit. The manager
+rejects X/Z on AWREADY/WREADY/ARREADY while requesting, BVALID/RVALID while
+ready, and BRESP/RRESP on accepted responses independently of the passive
+protocol checker.
 The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
 `RRESP` preserve the target's response code. Invalid burst shapes, misaligned
 WRAP/exclusive requests, and 4KB-crossing requests are rejected before VALID

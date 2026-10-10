@@ -416,3 +416,16 @@ including reset recovery, bad-response poisoning, W-before-AW ordering,
 overlapping read/write tasks, and queued/outstanding writes. The job requested
 1 CPU and 256 MiB and measured 17,680 KiB MaxRSS. See the
 [post-fix master evidence](evidence/caliptra-bfm-axi-master-post-fix-20261010/README.md).
+
+## AXI master unknown-control fail-stop — 2026-10-10
+
+The AXI master now poisons itself on X/Z AWREADY, WREADY, or ARREADY while
+requesting, X/Z BVALID/RVALID while response-ready, and unknown BRESP/RRESP on
+an accepted response. Seven standalone probes confirm prompt failure and
+channel/state cleanup with the protocol checker disabled. Slurm job 201 passed
+those cases and the existing full master suite, plus 18 Icarus/Verilator
+parameter runs and three Verilator target regressions. It measured 353,816 KiB
+MaxRSS for the matrix phase and a 0.39 GiB process-group peak. This is selected
+Icarus four-state coverage and Verilator two-state parity, not exhaustive
+four-state or full-top/UVMF qualification. See the
+[manager X/Z evidence](evidence/caliptra-bfm-axi-master-xz-controls-20261010/README.md).

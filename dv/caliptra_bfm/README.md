@@ -613,3 +613,10 @@ suite passes on clean published Icarus main after the response-slot fix. It
 covers reset recovery, response poisoning, concurrent read/write tasks, and
 outstanding BID routing; see the
 [post-fix master evidence](../../evidence/caliptra-bfm-axi-master-post-fix-20261010/README.md).
+
+AXI master four-state-control follow-up (2026-10-10): the standalone manager
+now fail-stops on unknown READY/VALID and response-code inputs while those
+signals are decisive. Seven X/Z probes pass with the checker disabled, and
+the full master suite plus the 3-by-3 Icarus/Verilator matrix passes. This is
+selected Icarus four-state coverage, not exhaustive four-state qualification;
+see the [manager X/Z evidence](../../evidence/caliptra-bfm-axi-master-xz-controls-20261010/README.md).
