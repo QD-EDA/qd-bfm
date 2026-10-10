@@ -192,3 +192,10 @@ see the [current results](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-p
 The same sequence now checks a SHA-512 two-block `INIT`/`NEXT` digest as well;
 the combined three-case run observes 612 transfers and passes in all three
 editions ([current evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-multi-block-continuation-rerun-2026-10-10)).
+Current-state update (2026-10-10): the HMAC UVM test now connects the native
+agent's completed-transfer stream to `ahb_reg_predictor` with RAL auto-predict
+disabled. Its smoke map covers the 78 CSR words exercised by the three KATs;
+the test checks that the observed final CTRL write updates the mirror. All 612
+transfers pass in IEEE 2012, 2017, and 2023 with zero UVM warnings, errors, or
+fatals. This checks monitor-driven prediction, not generated HMAC RAL or RAL
+frontdoor coverage. See the [dated rerun evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-monitor-driven-hmac-ral-prediction-2026-10-10).

@@ -161,3 +161,54 @@ logs respectively
 `7f1ab05aeb35a1f069c1edf3507bc8f0de99ded8db7b68a4f91341ff709ba07d`,
 `83c2d50299680e4fd43e0153304c7acdddecf95484bb6ba7dd081aa3724f04c1`, and
 `5166290c94646778feff284d46a2f7a2f2aec394d44048f37fff4d8f672a9637`.
+
+## Current-state monitor-driven HMAC RAL prediction (2026-10-10)
+
+The native HMAC UVM test now connects the AHB agent's completed-transfer
+stream to `ahb_reg_predictor` with RAL auto-prediction disabled. Its smoke RAL
+map includes the 78 HMAC CSR words used by the SHA-384, SHA-512, and two-block
+`INIT`/`NEXT` cases. After all three cases, the test checks that the monitor's
+final CTRL write updated the register mirror to the zeroize value.
+
+| IEEE edition | Result | Transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 612 | 0 / 0 / 0 |
+| 2017 | PASS | 612 | 0 / 0 / 0 |
+| 2023 | PASS | 612 | 0 / 0 / 0 |
+
+The monitor counted 393 reads and 219 writes; all were 4-byte transfers with
+zero checker or protocol errors. The three runs used the same UVM-enabled
+Icarus binaries identified above as clean published Icarus main
+`4b3f3424c440aca6af92153b6860a7253b925234`, and Accellera UVM 2020.3.1. The
+Caliptra RTL checkout was clean at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`.
+SSH to Slurm timed out, so these reruns used the local guarded runner. They
+validate monitor-driven prediction for this smoke map, not the generated HMAC
+RAL model or RAL frontdoor behavior.
+
+Reproduce from the QD-EDA repository root with:
+
+```sh
+set -e
+for edition in 2012 2017 2023; do
+  logfile="evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/logs/uvm-ral-predictor-sv-$edition.log"
+  CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  IVERILOG_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog \
+  VVP_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp \
+  SV_EDITION="$edition" dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh \
+    >"$logfile" 2>&1
+  gzip -n "$logfile"
+done
+```
+
+Logs: [IEEE 2012](logs/uvm-ral-predictor-sv-2012.log.gz),
+[IEEE 2017](logs/uvm-ral-predictor-sv-2017.log.gz),
+[IEEE 2023](logs/uvm-ral-predictor-sv-2023.log.gz).
+
+SHA-256: updated HMAC UVM testbench
+`eb82e122f1b29d86263523afaf494c2c2c0373584bf97c11fde57ec82be03783`;
+UVM runner
+`9eb9107be6489469f453d2f9c79d0ae5e9bd58031210661d0b404abe618b9eab`;
+logs respectively
+`8ffd998869a8f5f3cae62a8b7024e3e66645d5c2e198b85d43a0912182adc68b`,
+`4099f0f12354263a6c3848106357aab938a2376769f936f483ed7b91ffbee71a`, and
+`cc2e08b80d900fd807fdab2126c28ef44620743bde1e9b73dd9f67fb75873848`.

@@ -1530,3 +1530,14 @@ under IEEE 2017 and 2023 on clean published Icarus
 generated-style override coverage only; the base-library UVM-version gate and
 generated Caliptra compile/runtime blockers remain open. See the dated
 [UVMF-lite evidence](../../evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md#2026-10-10-generated-style-bench-sequence-override-follow-up).
+
+**2026-10-10 native HMAC monitor-driven RAL prediction:** the HMAC UVM test
+now connects the native AHB agent's completed-transfer stream to
+`ahb_reg_predictor` with auto-prediction disabled. A smoke register map covers
+all 78 HMAC CSR words used by the SHA-384, SHA-512, and `INIT`/`NEXT` KATs; an
+assertion verifies that the observed final CTRL write updates the mirror. All
+612 transfers pass under IEEE 2012, 2017, and 2023 with zero UVM warnings,
+errors, or fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. This validates monitor-based
+prediction for the exercised map, not generated HMAC RAL or RAL frontdoor
+coverage. See the [three-edition evidence and hashes](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-monitor-driven-hmac-ral-prediction-2026-10-10).

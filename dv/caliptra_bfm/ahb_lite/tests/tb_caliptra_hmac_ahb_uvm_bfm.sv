@@ -7,7 +7,10 @@
 
 module tb_caliptra_hmac_ahb_uvm_bfm;
   import uvm_pkg::*;
+  import mvc_pkg::*;
+  import mgc_ahb_v2_0_pkg::*;
   import ahb_lite_caliptra_uvm_pkg::*;
+  import qvip_ahb_lite_slave_pkg::*;
   import kv_defines_pkg::*;
 
   localparam [511:0] TEST_KEY = {4{128'h0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b}};
@@ -29,6 +32,16 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
     `HMAC_REG_HMAC512_CTRL_NEXT_MASK;
   localparam [31:0] SHA384_INIT = `HMAC_REG_HMAC512_CTRL_INIT_MASK;
   localparam [31:0] CTRL_ZEROIZE = `HMAC_REG_HMAC512_CTRL_ZEROIZE_MASK;
+  localparam integer HMAC_KEY_WORD_COUNT = 16;
+  localparam integer HMAC_BLOCK_WORD_COUNT = 32;
+  localparam integer HMAC_SEED_WORD_COUNT = 12;
+  localparam integer HMAC_TAG_WORD_COUNT = 16;
+  localparam integer HMAC_BLOCK_FIRST_INDEX = HMAC_KEY_WORD_COUNT;
+  localparam integer HMAC_SEED_FIRST_INDEX = HMAC_BLOCK_FIRST_INDEX + HMAC_BLOCK_WORD_COUNT;
+  localparam integer HMAC_CTRL_INDEX = HMAC_SEED_FIRST_INDEX + HMAC_SEED_WORD_COUNT;
+  localparam integer HMAC_STATUS_INDEX = HMAC_CTRL_INDEX + 1;
+  localparam integer HMAC_TAG_FIRST_INDEX = HMAC_STATUS_INDEX + 1;
+  localparam integer HMAC_REGISTER_COUNT = HMAC_TAG_FIRST_INDEX + HMAC_TAG_WORD_COUNT;
 
   reg HCLK = 0;
   reg HRESETn = 0;
@@ -110,6 +123,60 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       agent.ap.connect(observer.analysis_export);
+    endfunction
+  endclass
+
+  class hmac_ahb_smoke_reg extends uvm_reg;
+    uvm_reg_field value;
+    string access;
+    `uvm_object_utils(hmac_ahb_smoke_reg)
+
+    function new(string name = "hmac_ahb_smoke_reg");
+      super.new(name, 32, UVM_NO_COVERAGE);
+      access = "RW";
+    endfunction
+
+    virtual function void build();
+      value = uvm_reg_field::type_id::create("value");
+      value.configure(this, 32, 0, access, 0, 0, 1, 0, 0);
+    endfunction
+  endclass
+
+  class hmac_ahb_smoke_block extends uvm_reg_block;
+    hmac_ahb_smoke_reg registers[0:HMAC_REGISTER_COUNT-1];
+    hmac_ahb_smoke_reg ctrl;
+    `uvm_object_utils(hmac_ahb_smoke_block)
+
+    function new(string name = "hmac_ahb_smoke_block");
+      super.new(name, UVM_NO_COVERAGE);
+    endfunction
+
+    virtual function void build();
+      uvm_reg_addr_t address;
+      string access;
+      default_map = create_map("default_map", 0, 4, UVM_LITTLE_ENDIAN, 1);
+      for (int i = 0; i < HMAC_REGISTER_COUNT; i++) begin
+        registers[i] = hmac_ahb_smoke_reg::type_id::create($sformatf("reg_%0d", i));
+        registers[i].configure(this);
+        if (i < HMAC_KEY_WORD_COUNT)
+          address = `CLP_HMAC_REG_HMAC512_KEY_0 + i*4;
+        else if (i < HMAC_SEED_FIRST_INDEX)
+          address = `CLP_HMAC_REG_HMAC512_BLOCK_0 + (i-HMAC_BLOCK_FIRST_INDEX)*4;
+        else if (i < HMAC_CTRL_INDEX)
+          address = `CLP_HMAC_REG_HMAC512_LFSR_SEED_0 + (i-HMAC_SEED_FIRST_INDEX)*4;
+        else if (i == HMAC_CTRL_INDEX)
+          address = `CLP_HMAC_REG_HMAC512_CTRL;
+        else if (i == HMAC_STATUS_INDEX)
+          address = `CLP_HMAC_REG_HMAC512_STATUS;
+        else
+          address = `CLP_HMAC_REG_HMAC512_TAG_0 + (i-HMAC_TAG_FIRST_INDEX)*4;
+        access = (i <= HMAC_CTRL_INDEX) ? "WO" : "RO";
+        registers[i].access = access;
+        registers[i].build();
+        default_map.add_reg(registers[i], address, access);
+      end
+      ctrl = registers[HMAC_CTRL_INDEX];
+      lock_model();
     endfunction
   endclass
 
@@ -223,6 +290,9 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
 
   class hmac_ahb_uvm_test extends uvm_test;
     hmac_ahb_env env;
+    hmac_ahb_smoke_block ral_model;
+    ahb_lite_caliptra_reg_adapter ral_adapter;
+    ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer) ral_predictor;
     `uvm_component_utils(hmac_ahb_uvm_test)
 
     function new(string name, uvm_component parent);
@@ -232,6 +302,20 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
     function void build_phase(uvm_phase phase);
       super.build_phase(phase);
       env = hmac_ahb_env::type_id::create("env", this);
+      ral_model = hmac_ahb_smoke_block::type_id::create("ral_model");
+      ral_model.build();
+      ral_adapter = ahb_lite_caliptra_reg_adapter::type_id::create("ral_adapter");
+      ral_adapter.set_bus_data_width(32);
+      ral_predictor = ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer)::type_id::create(
+        "ral_predictor", this);
+    endfunction
+
+    function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
+      ral_model.default_map.set_auto_predict(0);
+      env.agent.burst_transfer_ap.connect(ral_predictor.bus_item_export);
+      ral_predictor.map = ral_model.default_map;
+      ral_predictor.adapter = ral_adapter;
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -252,6 +336,9 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       if (hmac_seq.transfer_count != env.observer.transfer_count)
         `uvm_fatal("HMAC_AHB_COUNT", $sformatf("Sequence issued %0d transfers; monitor observed %0d",
           hmac_seq.transfer_count, env.observer.transfer_count))
+      if (ral_model.ctrl.get_mirrored_value() !== CTRL_ZEROIZE)
+        `uvm_fatal("HMAC_AHB_RAL_PREDICT",
+          "Observed HMAC AHB CTRL write did not update the register mirror")
       expected_transfer_count = hmac_seq.transfer_count;
       phase.drop_objection(this);
     endtask
