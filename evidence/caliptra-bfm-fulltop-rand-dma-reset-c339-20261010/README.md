@@ -150,4 +150,14 @@ All six tasks later reached the configured 3500-second runner timeout. After
 reconciling those results, Job 252_1 was submitted as a fresh 2822-cycle
 fixed-delay reproduction with the same pinned source/tool inputs, seed, and
 1-CPU/3-GB settings. It uses a new isolated output root with AXI tracing; the
-submission script and live run record are in [`job-243/`](job-243/).
+submission script and run record are in [`job-243/`](job-243/).
+
+Job 252_1 completed with compile, firmware, and simulation exits 0. Its single
+`rand_test_dma` transfer passed with no testcase failures or bad diagnostics.
+The trace asserted reset at cycle 5335 while one write was outstanding, then
+deasserted reset at cycle 5345; the result records `reset_in_flight=true`.
+This reproduces the intended late-reset coverage and does not reproduce Job
+240's early VVP `-11`. The result is scoped to one transfer and is not a
+full-suite qualification; the pinned profile also excludes `Axi4PC.sv`.
+Selected logs and `result.json` are in
+[`job-243/window-2822/`](job-243/window-2822/), with a local checksum manifest.
