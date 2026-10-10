@@ -87,6 +87,8 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   integer ar_stalls = 0;
   integer both_directions_active = 0;
   integer i, lane;
+  integer wrap_beats, beat_index;
+  reg [18:0] wrap_start;
   reg [18:0] beat_addr;
   reg [1:0] next_resp;
 
@@ -261,22 +263,32 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
     @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
 
     if (test_case == "WRAP_NARROW") begin
-      write_data = {384'b0, 32'h4444_4444, 32'h3333_3333,
-                    32'h2222_2222, 32'h1111_1111};
-      write_strb = {48'b0, 4'hf, 4'hf, 4'hf, 4'hf};
-      write_user = {384'b0, 32'hd000_0003, 32'hd000_0002,
-                    32'hd000_0001, 32'hd000_0000};
-      bfm.write_burst(19'h4c, 3, 2, 2'b10, 8'h30, 32'hca11_ab1e, 1'b0,
-        write_data, write_strb, write_user, success, response, response_user);
-      check(success && response == 0 && write_response_id == 8'h30,
-        "legal WRAP write failed");
-      bfm.read_burst(19'h4c, 3, 2, 2'b10, 8'h31, 32'hcafe_0001, 1'b0,
-        success, read_data, read_user, read_response, response_user);
-      check(success && read_data[31:0] == 32'h1111_1111 &&
-        read_data[63:32] == 32'h2222_2222 &&
-        read_data[95:64] == 32'h3333_3333 &&
-        read_data[127:96] == 32'h4444_4444 && read_response_id == 8'h31,
-        "WRAP read did not return the wrapped address sequence");
+      write_data = 0;
+      write_strb = 0;
+      write_user = 0;
+      for (beat_index = 0; beat_index < 16; beat_index = beat_index + 1) begin
+        write_data[beat_index*32 +: 32] = 32'h5100_0000 + beat_index;
+        write_strb[beat_index*4 +: 4] = 4'hf;
+        write_user[beat_index*32 +: 32] = 32'hd000_0000 + beat_index;
+      end
+      for (wrap_beats = 2; wrap_beats <= 16; wrap_beats = wrap_beats * 2) begin
+        wrap_start = 19'h40 + wrap_beats*4 - 4;
+        bfm.write_burst(wrap_start, wrap_beats-1, 2, 2'b10, 8'h30,
+          32'hca11_ab1e, 1'b0, write_data, write_strb, write_user,
+          success, response, response_user);
+        check(success && response == 0 && write_response_id == 8'h30,
+          "legal WRAP write failed");
+        bfm.read_burst(wrap_start, wrap_beats-1, 2, 2'b10, 8'h31,
+          32'hcafe_0001, 1'b0, success, read_data, read_user,
+          read_response, response_user);
+        check(success && read_response_id == 8'h31,
+          "legal WRAP read failed");
+        for (beat_index = 0; beat_index < wrap_beats; beat_index = beat_index + 1)
+          check(read_data[beat_index*32 +: 32] === write_data[beat_index*32 +: 32] &&
+                read_user[beat_index*32 +: 32] === 32'ha000_0000 + beat_index &&
+                read_response[beat_index*2 +: 2] === 2'b00,
+            "WRAP read did not return the wrapped address sequence");
+      end
 
       mem[16] = 32'h0000_00ff;
       mem[17] = 32'h1234_5678;
