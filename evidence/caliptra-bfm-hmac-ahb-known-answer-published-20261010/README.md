@@ -264,3 +264,49 @@ logs respectively
 `5ccfca3ff33dfa0167fe9f0c36df800907f768ee050045a174993b4f9f59640e`,
 `8184a59a9a70c0331c79e483c659a06313ed68fcaff7a594b94d5355bc0647f0`, and
 `13421e2507d7dfbfabd178cc49efe49ba171b033324462317ee16474cb1939f7`.
+
+## Current-state native RAL adapter lane and status checks (2026-10-10)
+
+The HMAC UVM test now directly checks the native adapter's conversion helpers
+in addition to the full-word frontdoor run above. With a 32-bit bus, it checks
+that a halfword write at byte lane 2 and a byte write at lane 3 are packed
+into the upper bus lanes, and that a successful halfword read is unpacked with
+the expected byte enables. Native responses marked as AHB ERROR or aborted
+must map to `UVM_NOT_OK`. These conversion checks call the adapter directly;
+the HMAC RTL frontdoor accesses remain full-word transactions.
+
+| IEEE edition | Result | HMAC transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 615 | 0 / 0 / 0 |
+| 2017 | PASS | 615 | 0 / 0 / 0 |
+| 2023 | PASS | 615 | 0 / 0 / 0 |
+
+The checks pass on clean published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`
+with the same UVM and Caliptra inputs as the preceding section. Slurm SSH was
+unavailable, so the repository's guarded local runner was used.
+
+Reproduce from the QD-EDA repository root:
+
+```sh
+set -e
+for edition in 2012 2017 2023; do
+  logfile="evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/logs/uvm-ral-adapter-edge-sv-$edition.log"
+  CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  IVERILOG_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog \
+  VVP_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp \
+  SV_EDITION="$edition" dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh \
+    >"$logfile" 2>&1
+  gzip -n "$logfile"
+done
+```
+
+Logs: [IEEE 2012](logs/uvm-ral-adapter-edge-sv-2012.log.gz),
+[IEEE 2017](logs/uvm-ral-adapter-edge-sv-2017.log.gz),
+[IEEE 2023](logs/uvm-ral-adapter-edge-sv-2023.log.gz).
+
+SHA-256: HMAC UVM testbench
+`d681d60ff2e9b4ce1f54b496a2876f5e09d80585b088756729a3769b3c230188`;
+logs respectively
+`f9e4e11017160b00874b14f2d3861113226825929195c74313e456c803d0019f`,
+`cfe86f99618ec67f9e4f72367a7d4349f443ec368e7fe29928106ad90aebeb3d`, and
+`ea2bc74574b88d2612832860af35e070e8de55da7fbe2d34fcde0a39eb3f397a`.

@@ -324,12 +324,71 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       ral_predictor.adapter = ral_adapter;
     endfunction
 
+    function void check_native_adapter_lanes();
+      uvm_reg_bus_op rw;
+      uvm_sequence_item bus_item;
+      ahb_lite_caliptra_transfer transfer;
+
+      rw.kind = UVM_WRITE;
+      rw.addr = 32'h1002;
+      rw.data = 16'hcafe;
+      rw.n_bits = 16;
+      rw.byte_en = '1;
+      rw.status = UVM_IS_OK;
+      bus_item = ral_adapter.reg2bus(rw);
+      if (!$cast(transfer, bus_item)) begin
+        `uvm_fatal("AHB_RAL_NATIVE_LANE", "Native adapter did not return a native AHB transfer")
+        return;
+      end
+      if (!transfer.write || transfer.address != 32'h1002 || transfer.size != 1 ||
+          transfer.write_data[31:0] != 32'hcafe_0000)
+        `uvm_fatal("AHB_RAL_NATIVE_LANE", "Native adapter mispacked a halfword write into the upper bus lane")
+
+      rw.addr = 32'h1003;
+      rw.data = 8'h5a;
+      rw.n_bits = 8;
+      bus_item = ral_adapter.reg2bus(rw);
+      if (!$cast(transfer, bus_item)) begin
+        `uvm_fatal("AHB_RAL_NATIVE_LANE", "Native adapter did not return a native byte transfer")
+        return;
+      end
+      if (!transfer.write || transfer.address != 32'h1003 || transfer.size != 0 ||
+          transfer.write_data[31:0] != 32'h5a00_0000)
+        `uvm_fatal("AHB_RAL_NATIVE_LANE", "Native adapter mispacked a byte write into the upper bus lane")
+
+      transfer.write = 0;
+      transfer.address = 32'h1002;
+      transfer.size = 1;
+      transfer.read_data = 64'h0000_0000_cafe_1234;
+      transfer.request_ok = 1;
+      transfer.success = 1;
+      transfer.response_error = 0;
+      transfer.aborted = 0;
+      ral_adapter.bus2reg(transfer, rw);
+      if (rw.kind != UVM_READ || rw.data[15:0] !== 16'hcafe ||
+          (rw.byte_en & 2'b11) != 2'b11 || rw.status != UVM_IS_OK)
+        `uvm_fatal("AHB_RAL_NATIVE_LANE", "Native adapter did not unpack a successful halfword read")
+
+      transfer.success = 0;
+      transfer.response_error = 1;
+      ral_adapter.bus2reg(transfer, rw);
+      if (rw.status != UVM_NOT_OK)
+        `uvm_fatal("AHB_RAL_NATIVE_ERROR", "Native adapter accepted an AHB response error")
+      transfer.success = 1;
+      transfer.response_error = 0;
+      transfer.aborted = 1;
+      ral_adapter.bus2reg(transfer, rw);
+      if (rw.status != UVM_NOT_OK)
+        `uvm_fatal("AHB_RAL_NATIVE_ABORT", "Native adapter accepted an aborted AHB transfer")
+    endfunction
+
     task run_phase(uvm_phase phase);
       hmac_ahb_sequence hmac_seq;
       uvm_status_e ral_status;
       uvm_reg_data_t ral_value;
       int unsigned expected_monitor_count;
       phase.raise_objection(this);
+      check_native_adapter_lanes();
       hmac_seq = hmac_ahb_sequence::type_id::create("hmac_seq");
       hmac_seq.start(env.agent.sequencer);
       fork

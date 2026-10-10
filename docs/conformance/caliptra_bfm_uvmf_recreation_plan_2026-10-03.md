@@ -1552,3 +1552,11 @@ fatals on clean published Icarus
 `4b3f3424c440aca6af92153b6860a7253b925234`. This verifies scalar frontdoor
 traffic through the native driver; it is not a complete generated HMAC RAL
 model. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-agent-ral-frontdoor-2026-10-10).
+
+**2026-10-10 native AHB RAL adapter lane/status checks:** direct checks of
+`reg2bus` and `bus2reg` now cover 8- and 16-bit lane placement on the 32-bit
+bus, read lane extraction and byte enables, and rejection of ERROR/aborted
+responses. They pass alongside the 615-transfer HMAC UVM smoke in IEEE 2012,
+2017, and 2023 on the same clean published Icarus revision. These adapter
+conversion checks are not subword transactions against the HMAC RTL. See the
+[dated evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-ral-adapter-lane-and-status-checks-2026-10-10).
