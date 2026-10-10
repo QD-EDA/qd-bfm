@@ -249,6 +249,81 @@ module tb_caliptra_top_tb_axi_complex_bfm;
     end
   endtask
 
+  task automatic write_max_burst(
+    input [47:0] addr,
+    output [1:0] resp
+  );
+    reg accepted;
+    integer beat;
+    begin
+      @(negedge core_clk);
+      m_axi_if.awaddr = addr;
+      m_axi_if.awburst = 2'b01;
+      m_axi_if.awlen = 8'hff;
+      m_axi_if.awsize = 2;
+      m_axi_if.awid = 5'h0b;
+      m_axi_if.awuser = 32'h8765_4321;
+      m_axi_if.awvalid = 1;
+      accepted = 0;
+      timeout = 0;
+      while (!accepted && timeout < 2000) begin
+        @(posedge core_clk);
+        if (m_axi_if.awready) accepted = 1;
+        timeout = timeout + 1;
+      end
+      if (!accepted) $fatal(1, "Maximum AW burst timeout at %h", addr);
+      @(negedge core_clk);
+      m_axi_if.awvalid = 0;
+
+      for (beat = 0; beat < 256; beat = beat + 1) begin
+        m_axi_if.wdata = payload_word(beat);
+        m_axi_if.wstrb = 4'hf;
+        m_axi_if.wuser = 32'h8765_4321;
+        m_axi_if.wlast = (beat == 255);
+        m_axi_if.wvalid = 1;
+        accepted = 0;
+        timeout = 0;
+        while (!accepted && timeout < 2000) begin
+          @(posedge core_clk);
+          if (m_axi_if.wready) accepted = 1;
+          timeout = timeout + 1;
+        end
+        if (!accepted) $fatal(1, "Maximum W burst timeout at beat %0d", beat);
+        @(negedge core_clk);
+      end
+      m_axi_if.wvalid = 0;
+      m_axi_if.wlast = 0;
+      m_axi_if.bready = 0;
+      accepted = 0;
+      timeout = 0;
+      while (!accepted && timeout < 2000) begin
+        @(posedge core_clk);
+        if (m_axi_if.bvalid) begin
+          if (m_axi_if.bid != 5'h0b || m_axi_if.buser != 32'h8765_4321 ||
+              m_axi_if.bresp != 2'b00)
+            $fatal(1, "Bad maximum-burst B response at %h", addr);
+          resp = m_axi_if.bresp;
+          accepted = 1;
+        end
+        timeout = timeout + 1;
+      end
+      if (!accepted) $fatal(1, "Maximum B response timeout at %h", addr);
+      repeat (3) begin
+        @(posedge core_clk);
+        if (!m_axi_if.bvalid || m_axi_if.bid != 5'h0b ||
+            m_axi_if.buser != 32'h8765_4321 || m_axi_if.bresp != resp)
+          $fatal(1, "Maximum B response changed under backpressure");
+      end
+      @(negedge core_clk);
+      m_axi_if.bready = 1;
+      @(posedge core_clk);
+      if (!m_axi_if.bvalid || !m_axi_if.bready)
+        $fatal(1, "Maximum B response was not accepted");
+      @(negedge core_clk);
+      m_axi_if.bready = 0;
+    end
+  endtask
+
   initial begin
     verify_payload_read = 0;
     payload_read_base = 0;
@@ -376,7 +451,19 @@ module tb_caliptra_top_tb_axi_complex_bfm;
     end
     verify_payload_read = 0;
 
-    $display("PASS: Caliptra AXI complex BFM errors, SRAM/FIFO traffic, FIFO controls, recovery availability, randomized stalls, and 208-dword burst readback");
+    ctrl.rand_delays = 1;
+    write_max_burst(SRAM_BASE + 48'h1000, write_resp);
+    if (write_resp != 2'b00)
+      $fatal(1, "Maximum 256-beat write failed");
+    verify_payload_read = 1;
+    payload_read_base = 0;
+    read_one(SRAM_BASE + 48'h1000, 8'hff, read_data, read_resp);
+    if (read_resp != 2'b00)
+      $fatal(1, "Maximum 256-beat read failed");
+    verify_payload_read = 0;
+    ctrl.rand_delays = 0;
+
+    $display("PASS: Caliptra AXI complex BFM errors, SRAM/FIFO traffic, FIFO controls, recovery availability, randomized stalls, 208-dword segmented readback, and maximum 256-beat AXI bursts");
     $finish;
   end
 endmodule

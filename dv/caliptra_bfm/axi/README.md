@@ -216,6 +216,11 @@ word, response, ID, USER, and LAST field. The guarded run passes with Icarus
 `ac4532fa-dirty`; treat it as diagnostic only until repeated with a clean,
 published simulator revision. This isolates the open target's full-payload
 burst path, not the actual DUT DMA FIFO readback that remains open.
+Current regression extension (2026-10-09): the same top-level test retains the
+13 16-beat reads and adds a full 256-beat INCR write/read (`AWLEN=ARLEN=255`)
+within one 4 KiB window. It checks every data beat, WLAST/RLAST, response,
+ID, USER, and B-response stability under randomized channel delays. The clean
+published-Icarus replay is pending; this extension has no pass claim yet.
 The guarded 900-second first-case AES/DMA diagnostic passes through the
 real top and records source write/read plus AES destination write/readback.
 The [passing record](../../../evidence/caliptra-bfm-open-top-smoke-20261006/first-aes-axi-trace.json)
