@@ -1190,6 +1190,11 @@ Linux. A usable job must stage pinned inputs and toolchain components into a
 unique `~/slurm-runs/caliptra-bfm/...` directory and launch with `sbatch`;
 monitor with `squeue` and that run's log. No job was submitted during discovery.
 
+**2026-10-09 Slurm Linux follow-up:** the shared guard now reads Linux
+`MemAvailable` and process-group RSS from `/proc`, so the existing guarded
+Caliptra wrapper can launch on Linux. The first Slurm run will use this updated
+guard with pinned source and isolated toolchain inputs.
+
 ### Phase 6 — Qualification of the substitute
 
 - Mutation controls over the BFMs and base library (flip a compare, drop a

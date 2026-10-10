@@ -24,17 +24,23 @@ MAX_GROUP_PROCESSES = 65_536
 
 
 def memory_available_bytes() -> int:
-    if sys.platform != "darwin":
-        raise RuntimeError("memory guard currently requires macOS")
-    output = subprocess.check_output(["vm_stat"], text=True, stderr=subprocess.STDOUT)
-    page_size = re.search(r"page size of ([\d,]+) bytes", output)
-    free = re.search(r"^Pages free:\s*([\d,]+)", output, re.MULTILINE)
-    inactive = re.search(r"^Pages inactive:\s*([\d,]+)", output, re.MULTILINE)
-    if not page_size or not free or not inactive:
-        raise RuntimeError(f"cannot parse vm_stat output: {output!r}")
-    # vm_stat's speculative pages are already included in its free-page count.
-    pages = int(free[1].replace(",", "")) + int(inactive[1].replace(",", ""))
-    return pages * int(page_size[1].replace(",", ""))
+    if sys.platform == "darwin":
+        output = subprocess.check_output(["vm_stat"], text=True, stderr=subprocess.STDOUT)
+        page_size = re.search(r"page size of ([\d,]+) bytes", output)
+        free = re.search(r"^Pages free:\s*([\d,]+)", output, re.MULTILINE)
+        inactive = re.search(r"^Pages inactive:\s*([\d,]+)", output, re.MULTILINE)
+        if not page_size or not free or not inactive:
+            raise RuntimeError(f"cannot parse vm_stat output: {output!r}")
+        # vm_stat's speculative pages are already included in its free-page count.
+        pages = int(free[1].replace(",", "")) + int(inactive[1].replace(",", ""))
+        return pages * int(page_size[1].replace(",", ""))
+    if sys.platform.startswith("linux"):
+        output = Path("/proc/meminfo").read_text()
+        available = re.search(r"^MemAvailable:\s*(\d+)\s+kB$", output, re.MULTILINE)
+        if not available:
+            raise RuntimeError("cannot parse MemAvailable from /proc/meminfo")
+        return int(available[1]) * 1024
+    raise RuntimeError(f"memory guard does not support {sys.platform}")
 
 
 @lru_cache(maxsize=1)
@@ -54,31 +60,55 @@ def libproc() -> ctypes.CDLL:
 
 
 def process_group_pids(group_id: int) -> list[int]:
-    if sys.platform != "darwin":
-        raise RuntimeError("process-group memory guard currently requires macOS")
-    api = libproc()
-    capacity = 256
-    while True:
-        pids = (ctypes.c_int * capacity)()
-        ctypes.set_errno(0)
-        count = api.proc_listpgrppids(group_id, pids, ctypes.sizeof(pids))
-        if count < 0:
-            code = ctypes.get_errno()
-            raise OSError(code, os.strerror(code), "proc_listpgrppids")
-        if count < capacity:
-            break
-        if capacity >= MAX_GROUP_PROCESSES:
-            raise RuntimeError(f"process group {group_id} exceeds the guard's PID limit")
-        capacity = min(capacity * 2, MAX_GROUP_PROCESSES)
-    return list(pids[:count])
+    if sys.platform == "darwin":
+        api = libproc()
+        capacity = 256
+        while True:
+            pids = (ctypes.c_int * capacity)()
+            ctypes.set_errno(0)
+            count = api.proc_listpgrppids(group_id, pids, ctypes.sizeof(pids))
+            if count < 0:
+                code = ctypes.get_errno()
+                raise OSError(code, os.strerror(code), "proc_listpgrppids")
+            if count < capacity:
+                break
+            if capacity >= MAX_GROUP_PROCESSES:
+                raise RuntimeError(f"process group {group_id} exceeds the guard's PID limit")
+            capacity = min(capacity * 2, MAX_GROUP_PROCESSES)
+        return list(pids[:count])
+    if sys.platform.startswith("linux"):
+        pids = []
+        for entry in Path("/proc").iterdir():
+            if not entry.name.isdecimal():
+                continue
+            try:
+                stat = (entry / "stat").read_text()
+                fields = stat[stat.rfind(")") + 2 :].split()
+                if int(fields[2]) == group_id:
+                    pids.append(int(entry.name))
+            except (FileNotFoundError, ProcessLookupError, PermissionError, ValueError, IndexError):
+                continue
+        return pids
+    raise RuntimeError(f"process-group guard does not support {sys.platform}")
 
 
 def process_group_resident_bytes(group_id: int) -> int | None:
-    api = libproc()
     pids = process_group_pids(group_id)
     if not pids:
         return None  # The group may exit between proc.poll() and this sample.
 
+    if sys.platform.startswith("linux"):
+        page_size = os.sysconf("SC_PAGE_SIZE")
+        total = 0
+        for pid in pids:
+            try:
+                fields = Path(f"/proc/{pid}/statm").read_text().split()
+                total += int(fields[1]) * page_size
+            except (FileNotFoundError, ProcessLookupError, PermissionError, ValueError, IndexError):
+                continue
+        return total
+
+    api = libproc()
     # ponytail: summed RSS overcounts shared pages; use per-process footprints if this trips early.
     total = 0
     info = ctypes.create_string_buffer(256)
@@ -213,7 +243,7 @@ def main() -> int:
                     raise RuntimeError(f"guarded process group {proc.pid} disappeared")
                 minimum_available = min(minimum_available, current_available)
                 maximum_process_bytes = max(maximum_process_bytes, current_process_bytes)
-                if current_process_bytes > args.max_process_bytes:
+                if current_process_bytes >= args.max_process_bytes:
                     stop_reason = (
                         f"process group reached {gibibytes(current_process_bytes)} "
                         f"(cap {gibibytes(args.max_process_bytes)})"
