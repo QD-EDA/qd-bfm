@@ -598,3 +598,12 @@ AXI memory-subordinate portability follow-up (2026-10-10): the main, reset-
 handshake, and bounded multi-ID queue regressions now pass on Verilator 5.032.
 The run emitted non-fatal width/case warnings and is two-state evidence only;
 see the [Verilator parity evidence](../../evidence/caliptra-bfm-axi-verilator-parity-20261010/README.md).
+
+AXI master cross-simulator follow-up (2026-10-10): the 3-by-3 data-width/ID-
+width matrix passes under clean published Icarus main and Verilator 5.032. The
+master derives write success from the latched response and returns the matched
+response slot ID, fixing a Verilator-only 32-bit/1-bit-ID failure. The same
+guarded run passed Verilator target, reset-handshake, and bounded multi-ID
+queue regressions. Verilator warnings remain non-fatal, and its evidence is
+two-state only; see the
+[cross-simulator matrix evidence](../../evidence/caliptra-bfm-axi-crosssim-parameter-matrix-20261010/README.md).

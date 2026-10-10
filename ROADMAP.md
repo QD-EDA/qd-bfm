@@ -393,3 +393,16 @@ measured 339,016 KiB maximum RSS and a 0.39 GiB process-group peak, and exited
 0 in 17.65 seconds. Verilator emitted non-fatal width and incomplete-case
 warnings and does not establish four-state behavior. See the
 [Verilator parity evidence](evidence/caliptra-bfm-axi-verilator-parity-20261010/README.md).
+
+## AXI master Icarus/Verilator parameter matrix — 2026-10-10
+
+The 32/64/128-bit data by 1/4/8-bit ID matrix passes under both clean,
+published Icarus main `c339b9f2287a743aeb7ab6de6528e8d34a4dd602` and Verilator
+5.032. Slurm job 196 also passed the Verilator memory-target, handshake-reset,
+and bounded multi-ID queue regressions. A Verilator-only 32-bit/1-bit-ID
+failure exposed dependence on a separately latched success vector; write task
+success is now derived from its latched response, and the returned response ID
+comes from the matched slot. The run requested 1 CPU and 1 GiB, measured
+354,072 KiB MaxRSS and a 0.40 GiB process-group peak, and exited 0. Verilator
+warnings were non-fatal and its evidence is two-state only. See the
+[cross-simulator matrix evidence](evidence/caliptra-bfm-axi-crosssim-parameter-matrix-20261010/README.md).

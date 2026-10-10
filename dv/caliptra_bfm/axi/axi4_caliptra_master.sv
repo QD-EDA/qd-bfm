@@ -58,7 +58,6 @@ module axi4_caliptra_master #(
   reg [MAX_OUTSTANDING-1:0] wr_slot_aw_done = '0;
   reg [MAX_OUTSTANDING-1:0] wr_slot_w_done = '0;
   reg [MAX_OUTSTANDING-1:0] wr_slot_done = '0;
-  reg [MAX_OUTSTANDING-1:0] wr_slot_success = '0;
   reg [ID_WIDTH-1:0] wr_id_q [0:MAX_OUTSTANDING-1];
   reg [1:0] wr_response_q [0:MAX_OUTSTANDING-1];
   reg [USER_WIDTH-1:0] wr_user_q [0:MAX_OUTSTANDING-1];
@@ -184,7 +183,6 @@ module axi4_caliptra_master #(
         end else begin
           wr_response_q[bchosen_slot] = BRESP;
           wr_user_q[bchosen_slot] = BUSER;
-          wr_slot_success[bchosen_slot] = (BRESP === 2'b00 || BRESP === 2'b01);
           wr_slot_done[bchosen_slot] = 1'b1;
         end
       end
@@ -278,7 +276,6 @@ module axi4_caliptra_master #(
       wr_slot_aw_done = '0;
       wr_slot_w_done = '0;
       wr_slot_done = '0;
-      wr_slot_success = '0;
       write_busy = 0;
       write_response_id = 0;
       rd_alloc_ticket = 0;
@@ -356,7 +353,6 @@ module axi4_caliptra_master #(
           wr_slot_aw_done[slot] = 0;
           wr_slot_w_done[slot] = 0;
           wr_slot_done[slot] = 0;
-          wr_slot_success[slot] = 0;
           wr_id_q[slot] = id;
           wr_response_q[slot] = 0;
           wr_user_q[slot] = 0;
@@ -465,13 +461,14 @@ module axi4_caliptra_master #(
         if (allocated) begin
           response = wr_response_q[slot];
           response_user = wr_user_q[slot];
-          success = wr_slot_done[slot] && wr_slot_success[slot] &&
+          if (wr_slot_done[slot]) write_response_id = wr_id_q[slot];
+          success = wr_slot_done[slot] &&
+                    (response === 2'b00 || response === 2'b01) &&
                     !aborted && !timed_out && !poisoned;
           wr_slot_valid[slot] = 0;
           wr_slot_aw_done[slot] = 0;
           wr_slot_w_done[slot] = 0;
           wr_slot_done[slot] = 0;
-          wr_slot_success[slot] = 0;
           wr_active_count = wr_active_count - 1;
           write_busy = (wr_active_count != 0);
         end
