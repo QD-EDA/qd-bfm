@@ -293,7 +293,8 @@ module tb_ahb_qvip_compat_env;
     task run_phase(uvm_phase phase);
       ahb_lite_caliptra_smoke_sequence smoke_seq;
       ahb_lite_caliptra_partial_burst_error_sequence partial_burst_seq;
-      ahb_lite_slave_0_transfer_t copy_source, copy_target;
+      ahb_lite_slave_0_transfer_t copy_source, copy_target, synthetic_error_tail;
+      uvm_reg_data_t prior_error_mirror, prior_tail_mirror;
       ahb_rnw_e direction_probe;
       phase.raise_objection(this);
 
@@ -360,6 +361,26 @@ module tb_ahb_qvip_compat_env;
           ral_model.boundary_csr[1].get_mirrored_value() !== 0)
         `uvm_fatal("AHB_QVIP_RAL_BURST",
           "Generated-name predictor mishandled successful or partial-error burst mirrors")
+
+      prior_error_mirror = ral_model.burst_csr[1].get_mirrored_value();
+      prior_tail_mirror = ral_model.burst_csr[2].get_mirrored_value();
+      synthetic_error_tail = new("synthetic_error_tail");
+      synthetic_error_tail.RnW = AHB_WRITE;
+      synthetic_error_tail.address = 32'h80;
+      synthetic_error_tail.size = AHB_MVC_WORD_SIZE;
+      synthetic_error_tail.data.push_back(64'hA0A1_A2A3_A4A5_A6A7 & AHB_MVC_DATA_MASK);
+      synthetic_error_tail.data.push_back(64'hB0B1_B2B3_B4B5_B6B7 & AHB_MVC_DATA_MASK);
+      synthetic_error_tail.data.push_back(64'hC0C1_C2C3_C4C5_C6C7 & AHB_MVC_DATA_MASK);
+      synthetic_error_tail.resp.push_back(AHB_OKAY);
+      synthetic_error_tail.resp.push_back(AHB_ERROR);
+      synthetic_error_tail.resp.push_back(AHB_OKAY);
+      burst_predictor.write(synthetic_error_tail);
+      if (ral_model.burst_csr[0].get_mirrored_value() !==
+            (64'hA0A1_A2A3_A4A5_A6A7 & AHB_MVC_DATA_MASK) ||
+          ral_model.burst_csr[1].get_mirrored_value() !== prior_error_mirror ||
+          ral_model.burst_csr[2].get_mirrored_value() !== prior_tail_mirror)
+        `uvm_fatal("AHB_QVIP_RAL_ERROR_TAIL",
+          "AHB predictor updated failed or post-error burst beats")
       if (predictor_sink.last_item == scoreboard_sink.last_item ||
           predictor_sink.last_item == coverage_sink.last_item ||
           scoreboard_sink.last_item == coverage_sink.last_item)

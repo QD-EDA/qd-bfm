@@ -194,10 +194,11 @@ package qvip_ahb_lite_slave_pkg;
       beat.RnW = transfer.RnW;
       beat.size = transfer.size;
       for (int unsigned i = 0; i < transfer.data.size(); i++) begin
-        if (transfer.resp[i] == AHB_ERROR) continue;
         if (transfer.resp[i] != AHB_OKAY) begin
-          `uvm_error("AHB_RAL_RESPONSE", "AHB predictor burst has an invalid response code")
-          continue;
+          if (transfer.resp[i] != AHB_ERROR)
+            `uvm_error("AHB_RAL_RESPONSE", "AHB predictor burst has an invalid response code")
+          // AHB ERROR ends the burst; later beats are not completed transfers.
+          break;
         end
         beat.address = transfer.address + (i * (1 << transfer.size));
         beat.data.delete();
