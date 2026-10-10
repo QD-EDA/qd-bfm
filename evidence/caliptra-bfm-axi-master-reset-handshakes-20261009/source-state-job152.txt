@@ -1,0 +1,3 @@
+base=a00f9ec88f2652343f9e4d26abdab79ef2ecbe15
+branch=codex/caliptra-bfm-stack-20261006
+working tree: staged AXI manager test and runner; unrelated dirty files omitted

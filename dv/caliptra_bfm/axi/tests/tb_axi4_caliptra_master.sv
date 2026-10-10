@@ -255,6 +255,60 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg write_success_concurrent, read_success_concurrent;
   reg [1:0] write_response_concurrent;
   reg [31:0] write_user_concurrent, read_response_user_concurrent;
+
+  task automatic reset_after_handshake(input [15:0] channel);
+    reg handshook;
+    integer cycles;
+    begin
+      handshook = 0;
+      cycles = 0;
+      while (!handshook && cycles < 64) begin
+        @(posedge ACLK);
+        case (channel)
+          "AR": handshook = ARVALID && ARREADY;
+          "R":  handshook = RVALID && RREADY;
+          "AW": handshook = AWVALID && AWREADY;
+          "W":  handshook = WVALID && WREADY;
+          "B":  handshook = BVALID && BREADY;
+          default: $fatal(1, "Unknown AXI reset handshake channel %0s", channel);
+        endcase
+        cycles = cycles + 1;
+      end
+      if (!handshook) $fatal(1, "Timed out waiting for AXI %0s handshake", channel);
+      #1 ARESETn = 0;
+      repeat (2) @(posedge ACLK);
+    end
+  endtask
+
+  task automatic run_reset_handshake_case(input [15:0] channel);
+    begin
+      fork
+        begin
+          if (channel == "AR" || channel == "R")
+            bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h51, 32'hcafe_0001, 1'b1,
+              abort_read_success, read_data, read_user, read_response, response_user);
+          else begin
+            bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h51, 32'hcafe_0001, 1'b1,
+              success, read_data, read_user, read_response, response_user);
+            check(success, "exclusive read before locked reset-handshake write failed");
+            bfm.write_burst(19'h40, 0, 2, 2'b01, 8'h51, 32'hca11_ab1e, 1'b1,
+              write_data, write_strb, write_user, abort_write_success, response, response_user);
+          end
+        end
+        reset_after_handshake(channel);
+      join
+
+      if (channel == "AR" || channel == "R")
+        check(!abort_read_success && !bfm.read_busy && !ARVALID && !RREADY,
+          "reset at read handshake did not abort and clear the manager");
+      else
+        check(!abort_write_success && !bfm.write_busy && !AWVALID && !WVALID && !BREADY,
+          "reset at write handshake did not abort and clear the manager");
+
+      @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
+    end
+  endtask
+
   initial begin
     if ($value$plusargs("CASE=%s", test_case)) begin end
     for (i = 0; i < 64; i = i + 1) mem[i] = 0;
@@ -390,6 +444,25 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         "AXI manager serialized the read and write task calls");
       if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
       $display("PASS: AXI manager overlaps independent read and write tasks");
+      $finish;
+    end else if (test_case == "RESET_HANDSHAKES") begin
+      write_data = {480'b0, 32'h5678_1234};
+      write_strb = {60'b0, 4'hf};
+      write_user = {480'b0, 32'hd000_0000};
+      run_reset_handshake_case("AR");
+      run_reset_handshake_case("R");
+      run_reset_handshake_case("AW");
+      run_reset_handshake_case("W");
+      run_reset_handshake_case("B");
+
+      bfm.read_burst(19'h40, 0, 2, 2'b01, 8'h52, 32'hcafe_0001, 1'b1,
+        success, read_data, read_user, read_response, response_user);
+      check(success, "read manager did not recover after handshake-edge resets");
+      bfm.write_burst(19'h40, 0, 2, 2'b01, 8'h52, 32'hca11_ab1e, 1'b1,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success, "write manager did not recover after handshake-edge resets");
+      if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
+      $display("PASS: AXI manager aborts and recovers when reset follows AR/R/AW/W/B handshakes");
       $finish;
     end else if (test_case == "RESET_ABORT") begin
       suppress_read = 1;
