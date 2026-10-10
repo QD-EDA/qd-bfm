@@ -141,6 +141,10 @@ integration remain unverified. The AXI UVM smoke now checks matching and invalid
 accesses through the native and projected monitor paths; both RAL adapters map
 `EXOKAY` to success. Its basic run is recorded in
 [`evidence/caliptra-bfm-uvm-agent-20261005`](../../evidence/caliptra-bfm-uvm-agent-20261005/README.md).
+The native AXI default RAL map also predicts from completed monitor records
+with auto-prediction disabled; its smoke verifies successful CSR mirror updates
+and no mirror change on injected SLVERR. See the
+[`native AXI RAL evidence`](../../evidence/caliptra-bfm-axi-native-ral-predictor-published-20261010/README.md).
 Directed reset-abort runs cover an accepted read stalled before R and an
 accepted write stalled before B; both abort without publishing a completed
 record and recover for a post-reset burst. See

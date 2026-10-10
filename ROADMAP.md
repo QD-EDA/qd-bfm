@@ -474,3 +474,16 @@ intentional mismatch controls; reset generation passes in IEEE 2012. This is
 base-layer evidence only; generated ECC interface compilation remains blocked
 on current `c339b9f2`. See the
 [published UVMF-lite evidence](evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md).
+
+## Native AXI UVM RAL monitor prediction — 2026-10-10
+
+The native AXI agent now feeds its completed transaction monitor stream to the
+stock UVM register predictor with frontdoor auto-prediction disabled. Its
+adapter preserves the existing driver-item path and decodes single-beat,
+32-bit monitor records for the mapped CSR. The guarded agent smoke verifies
+successful write/read mirror updates and that injected SLVERR leaves the
+mirror unchanged; it passes with zero UVM errors or fatals on published Icarus
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`. The four expected predictor skips
+come from the two predictors observing failed reads. This is synthetic agent
+evidence, not full Caliptra/UVMF qualification; see the
+[dated evidence](evidence/caliptra-bfm-axi-native-ral-predictor-published-20261010/README.md).
