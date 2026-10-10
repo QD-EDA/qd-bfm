@@ -219,3 +219,11 @@ clean published Icarus run is recorded in the
 [monitor-matrix evidence bundle](evidence/caliptra-bfm-axi-monitor-matrix-20261009/README.md).
 The full supported-width/ID/outstanding matrix and independent
 cross-simulator/four-state qualification remain open.
+
+## Current AXI outstanding parameter status — 2026-10-09
+
+The read side now passes the representative 3×3×3 matrix of data width,
+ID width, and outstanding depth. The current run and provenance are in the
+[outstanding-parameter evidence bundle](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md).
+Concurrent writes across those parameters and full Caliptra/UVMF qualification
+remain open.
