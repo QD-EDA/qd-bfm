@@ -71,3 +71,11 @@ the reset run. Raw results, logs, revisions, and the exact array script are in
 
 The later write-response window at delay 2822 (assert cycle 5335 between AW6 at
 5327 and B6 at 5356) remains unverified; job 227 exited before reaching it.
+
+## Job 234: early/late reset array submitted
+
+Job 234 repeats the passing 567-cycle window and targets the later 2822-cycle
+window. It requests 1 CPU and 3 GB per task, with two-way concurrency. Per-task
+outputs are under `bfm-rand-reset-c339-windows-20261010-04/runs/window-567`
+and `.../window-2822` on DAN-DESKTOP. Append results and measured peaks after
+both tasks finish.
