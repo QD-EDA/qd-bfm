@@ -1,0 +1,1 @@
+FAIL (first 1 random DMA transfer(s), forced first reset after 64 cycles; not full-suite qualification) rand_test_dma: /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-20261010-01/output/reset-64-cycle/result.json
