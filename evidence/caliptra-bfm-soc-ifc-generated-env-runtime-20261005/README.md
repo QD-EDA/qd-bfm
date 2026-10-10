@@ -102,6 +102,13 @@ build both fail while parsing unchanged Caliptra AXI/primitive sources
 also reports unsupported default lifetime overrides in `axi_if.sv`. Those
 compile failures are separate from the time-zero stall.
 
+Source-level follow-up (2026-10-07): the bench sequence's `reg_model.reset()`
+and the predictor's `p_soc_ifc_rm.reset(kind)` both enter the generated
+`soc_ifc_reg_model_top::reset()` and its synchronous UVM RAL hierarchy walk.
+The stall is before AXI/AHB protocol traffic, so it is not localized to BFM
+channel handling; the exact trigger remains unisolated on the
+`246c58e4-dirty` diagnostic simulator build.
+
 ### Replay status on 2026-10-08 (diagnostic)
 
 Replayed the combined command above with `--trace-predictor-reset`,
@@ -422,6 +429,7 @@ request was not deliberately triggered.
 | Successful generated AHB/AAXI no-ECC roundtrip using default AXI USER | `f3a03c5d483cf9b23d8e02c53cdbbb5ab647bfa4078c6c17ecf823e15119db6c` |
 | Captured guarded attempt log | `71515e623c552f7620ada01b57e0d34a6ef56ed730c8a2fccefb62a7da24a945` |
 
+
 ### Caliptra top-environment probe on 2026-10-08 (diagnostic)
 
 The `--caliptra-top-env-probe` run completed against the generated top
@@ -434,6 +442,7 @@ This covers the wrapper reset/predictor path, not the full Caliptra core/top.
 Diagnostic only: the simulator build is dirty and unpublished, so this does
 not qualify the lane.
 
+
 ### Top-environment AXI USER run on 2026-10-08 (diagnostic)
 
 `--caliptra-top-env-probe --generated-axi-user-init` now starts Caliptra's
@@ -445,6 +454,7 @@ UVM errors/fatals, and one QVIP coverage notice. This used clean Caliptra
 commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and paired Icarus/VVP
 13.0-dev `ac4532fa-dirty`. Diagnostic only: the simulator build is dirty and
 unpublished, so this does not qualify the lane.
+
 
 ### Top-environment AXI USER readback on 2026-10-08 (diagnostic)
 
