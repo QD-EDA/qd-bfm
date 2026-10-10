@@ -313,3 +313,9 @@ The scoreboard's four intentional errors and the agent's injected mismatch
 are counted exactly, with zero UVM fatals. This validates the standalone base
 layer, not generated ECC/UVMF compatibility; see the
 [published UVMF-lite evidence](../../../evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md).
+
+2026-10-10 clean published-main HMAC recheck: the guarded generated runtime
+still stops at package-qualified parameterized proxy handles in the HMAC
+input/output interfaces on Icarus `4b3f3424c440aca6af92153b6860a7253b925234`.
+No simulation started and no QD adaptation was made; see the
+[HMAC compile evidence](../../../evidence/caliptra-bfm-generated-hmac-runtime-20261005/README.md#current-clean-published-main-compile-check-2026-10-10).

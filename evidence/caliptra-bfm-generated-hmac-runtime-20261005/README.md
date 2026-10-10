@@ -123,3 +123,22 @@ its uncompressed SHA-256 is
 | `iverilog` | `2588169190d99543c79d8a8c58ff3e75f7e0a9679fa871e895e5c3f15af29ba5` |
 | `vvp` | `edbc97b6a9fec8d1425c16d0b1a6b32ad4cbdb0ad609dbfbca155cbc30eb5c6d` |
 | HMAC runtime runner | `1741d418e10c8d9a04481501c6d521058d5e95d21b30e5f593d8a35cae1ea709` |
+
+## Current clean published-main compile check (2026-10-10)
+
+The same guarded runner was replayed with clean published Icarus main
+`4b3f3424c440aca6af92153b6860a7253b925234`, Accellera UVM 2020.3.1, and clean
+Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. Compilation still stops
+in the generated HMAC input driver/monitor and output driver at the
+package-qualified parameterized proxy class declarations; the reset-event
+overlay does not alter those declarations. The run did not start simulation,
+and no QD source adaptation was made. This is a current published-Icarus
+compile diagnostic, not HMAC runtime qualification.
+
+The captured runner output is
+[`published-4b3f-hmac-runtime.log`](logs/published-4b3f-hmac-runtime.log).
+The matching `iverilog` and `vvp` binary SHA-256 values are
+`00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` and
+`f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a`;
+the runner SHA-256 remains
+`1741d418e10c8d9a04481501c6d521058d5e95d21b30e5f593d8a35cae1ea709`.
