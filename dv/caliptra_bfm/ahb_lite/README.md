@@ -206,3 +206,12 @@ disabled, the monitor predictor updates the corresponding mirrors. The full
 KAT plus these three RAL operations passes in IEEE 2012, 2017, and 2023 with
 615 transfers and zero UVM warnings, errors, or fatals. See the [frontdoor
 evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-agent-ral-frontdoor-2026-10-10).
+
+`tests/run_caliptra_ahb_native_ral.sh` exercises the native AHB agent and RAL
+adapter against the open memory subordinate in both 32-bit and 64-bit bus
+profiles. It performs byte and halfword frontdoor write/read pairs, verifies
+monitor-driven prediction with auto-prediction disabled, and injects one
+target ERROR to check `UVM_NOT_OK`. All six bus-width/IEEE-edition runs pass;
+the expected failed-read predictor skip emits one UVM warning per run. This
+validates the generic AHB BFM path against its memory target, not narrow writes
+to a Caliptra peripheral. See the [six-run evidence](../../../evidence/caliptra-bfm-ahb-native-ral-published-20261010/README.md).

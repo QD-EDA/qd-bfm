@@ -1560,3 +1560,13 @@ responses. They pass alongside the 615-transfer HMAC UVM smoke in IEEE 2012,
 2017, and 2023 on the same clean published Icarus revision. These adapter
 conversion checks are not subword transactions against the HMAC RTL. See the
 [dated evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-ral-adapter-lane-and-status-checks-2026-10-10).
+
+**2026-10-10 native AHB RAL subword frontdoors:** the synthetic byte-addressable
+memory target regression passes in 32-bit and 64-bit profiles under IEEE 2012,
+2017, and 2023. It exercises byte/halfword frontdoor writes and reads,
+monitor-driven prediction with auto-prediction disabled, and an injected AHB
+ERROR mapped to `UVM_NOT_OK`; each run has one expected failed-read predictor
+warning and zero UVM errors/fatals. A local diagnostic rerun also passed with
+Icarus 13.0-devel; it is not a published-SHA result. Results validate the open
+generic BFM path against its memory target, not subword behavior on Caliptra
+peripheral RTL. See the [six-run evidence](../../evidence/caliptra-bfm-ahb-native-ral-published-20261010/README.md).
