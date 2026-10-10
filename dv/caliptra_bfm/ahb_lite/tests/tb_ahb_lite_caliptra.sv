@@ -260,6 +260,7 @@ module tb_ahb_lite_caliptra_reset_abort;
 
   task automatic check_aborted;
     begin
+      #1; // Let reset-gated HSEL settle before checking the combinational output.
       if (!request_ok || success || response_error || busy || !poisoned ||
           HTRANS !== 2'b00 || HSEL || HADDR !== 0 || HWDATA !== 0)
         $fatal(1, "AHB reset abort left an invalid result or bus state");

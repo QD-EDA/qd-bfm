@@ -100,8 +100,72 @@ module tb_ahb_lite_caliptra_checker;
     end
 
     case (test_case)
-      "BAD_X": begin
+      "BAD_X_HREADY": begin
         HREADY = 1'bx;
+        expected_code = 1;
+      end
+      "BAD_Z_HREADY": begin
+        HREADY = 1'bz;
+        expected_code = 1;
+      end
+      "BAD_X_HRESP": begin
+        HRESP = 1'bx;
+        expected_code = 1;
+      end
+      "BAD_Z_HRESP": begin
+        HRESP = 1'bz;
+        expected_code = 1;
+      end
+      "BAD_X_HSEL": begin
+        HSEL = 1'bx;
+        expected_code = 1;
+      end
+      "BAD_Z_HSEL": begin
+        HSEL = 1'bz;
+        expected_code = 1;
+      end
+      "BAD_X_HTRANS": begin
+        HTRANS = 2'bxx;
+        expected_code = 1;
+      end
+      "BAD_Z_HTRANS": begin
+        HTRANS = 2'bzz;
+        expected_code = 1;
+      end
+      "BAD_X_HWRITE": begin
+        HWRITE = 1'bx;
+        expected_code = 1;
+      end
+      "BAD_Z_HWRITE": begin
+        HWRITE = 1'bz;
+        expected_code = 1;
+      end
+      "BAD_X_HSIZE": begin
+        HSIZE = 3'bxxx;
+        expected_code = 1;
+      end
+      "BAD_Z_HSIZE": begin
+        HSIZE = 3'bzzz;
+        expected_code = 1;
+      end
+      "BAD_X_HADDR": begin
+        HADDR = 'x;
+        expected_code = 1;
+      end
+      "BAD_Z_HADDR": begin
+        HADDR = 'z;
+        expected_code = 1;
+      end
+      "BAD_X_HWDATA": begin
+        accept_transfer(1'b1);
+        @(negedge HCLK);
+        HWDATA = 'x;
+        expected_code = 1;
+      end
+      "BAD_Z_HWDATA": begin
+        accept_transfer(1'b1);
+        @(negedge HCLK);
+        HWDATA = 'z;
         expected_code = 1;
       end
       "BAD_BUSY": begin

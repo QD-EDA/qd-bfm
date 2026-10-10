@@ -23,7 +23,22 @@ esac
 "$VVP_BIN" "$out" +CASE=GOOD_IDLE_TO_NONSEQ
 
 for entry in \
-  'BAD_X:1' \
+  'BAD_X_HREADY:1' \
+  'BAD_Z_HREADY:1' \
+  'BAD_X_HRESP:1' \
+  'BAD_Z_HRESP:1' \
+  'BAD_X_HSEL:1' \
+  'BAD_Z_HSEL:1' \
+  'BAD_X_HTRANS:1' \
+  'BAD_Z_HTRANS:1' \
+  'BAD_X_HWRITE:1' \
+  'BAD_Z_HWRITE:1' \
+  'BAD_X_HSIZE:1' \
+  'BAD_Z_HSIZE:1' \
+  'BAD_X_HADDR:1' \
+  'BAD_Z_HADDR:1' \
+  'BAD_X_HWDATA:1' \
+  'BAD_Z_HWDATA:1' \
   'BAD_BUSY:2' \
   'BAD_SIZE:3' \
   'BAD_ALIGN:4' \
@@ -47,4 +62,4 @@ for entry in \
   fi
 done
 
-printf 'PASS: AHB checker rejected all eleven injected protocol violations\n'
+printf 'PASS: AHB checker rejected all 26 injected protocol violations\n'

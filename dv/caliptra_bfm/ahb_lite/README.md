@@ -82,10 +82,11 @@ regressions also pass on the latest locally available `iverilog-uvm`
 could not be refreshed due DNS failure; see the evidence's dated rerun section.
 
 `tests/run_checker.sh` accepts a legal transfer and two-cycle ERROR response,
-then checks ten negative controls against the expected checker error code:
-unknown control, BUSY, excessive transfer size, misalignment, unstable
-address/control, unstable write data, malformed ERROR completion, single-cycle
-ERROR, orphan SEQ, and orphan ERROR. It accepts `SV_EDITION=2012` (default),
+then checks 26 negative controls against the expected checker error code. These
+include X and Z on HREADY, HRESP, HSEL, HTRANS, HWRITE, HSIZE, HADDR, and
+write-phase HWDATA, plus BUSY, excessive transfer size, misalignment, unstable
+address/control and write data, malformed or single-cycle ERROR responses,
+orphan SEQ, and orphan ERROR. It accepts `SV_EDITION=2012` (default),
 `2017`, or `2023` and rejects any other value before compilation.
 
 `tests/run_caliptra_ecc_ahb_bfm.sh` connects the native 32-bit manager, profile
