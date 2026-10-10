@@ -90,6 +90,32 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg [18:0] beat_addr;
   reg [1:0] next_resp;
 
+  function automatic [18:0] address_for_beat(
+    input [18:0] start_addr,
+    input [7:0] len,
+    input [2:0] size,
+    input [1:0] burst,
+    input [7:0] beat
+  );
+    reg [63:0] bytes_per_beat;
+    reg [63:0] span;
+    reg [63:0] wrap_base;
+    begin
+      bytes_per_beat = 64'd1 << size;
+      case (burst)
+        2'b00: address_for_beat = start_addr;
+        2'b01: address_for_beat = start_addr + beat * bytes_per_beat;
+        2'b10: begin
+          span = ({56'b0, len} + 1) * bytes_per_beat;
+          wrap_base = (start_addr / span) * span;
+          address_for_beat = wrap_base +
+            ((start_addr - wrap_base + beat * bytes_per_beat) % span);
+        end
+        default: address_for_beat = start_addr;
+      endcase
+    end
+  endfunction
+
   assign AWREADY = ARESETn && (aw_delay == 0);
   assign WREADY = ARESETn &&
     (w_before_aw_mode ? !early_w_pending : write_pending) &&
@@ -155,9 +181,8 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         end else begin
           if (WLAST !== (write_count == write_len))
             $fatal(1, "master WLAST disagrees with AWLEN");
-          if (write_burst == 2'b01)
-            beat_addr = write_addr + (write_count << write_size);
-          else beat_addr = write_addr;
+          beat_addr = address_for_beat(write_addr, write_len, write_size,
+                                        write_burst, write_count);
           for (lane = 0; lane < 4; lane = lane + 1)
             if (WSTRB[lane]) mem[beat_addr[7:2]][8*lane +: 8] <= WDATA[8*lane +: 8];
           if (WUSER !== (32'hd000_0000 + write_count))
@@ -186,7 +211,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           $fatal(1, "master lost ARUSER or ARLOCK");
         if (!suppress_read) begin
           RID <= ARID;
-          beat_addr = ARADDR;
+          beat_addr = address_for_beat(ARADDR, ARLEN, ARSIZE, ARBURST, 0);
           RDATA <= mem[beat_addr[7:2]];
           RUSER <= 32'ha000_0000;
           RRESP <= inject_read_error ? 2'b10 : 2'b00;
@@ -199,9 +224,8 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
           read_pending <= 0;
         end else begin
           read_count <= read_count + 1'b1;
-          if (read_burst == 2'b01)
-            beat_addr = read_addr + ((read_count + 1'b1) << read_size);
-          else beat_addr = read_addr;
+          beat_addr = address_for_beat(read_addr, read_len, read_size,
+                                        read_burst, read_count + 1'b1);
           RDATA <= mem[beat_addr[7:2]];
           RUSER <= 32'ha000_0000 + read_count + 1'b1;
           RRESP <= inject_read_error ? 2'b10 : 2'b00;
