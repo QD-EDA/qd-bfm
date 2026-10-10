@@ -1,0 +1,6 @@
+PASS: AXI MAX_OUTSTANDING=1 queues writes and routes BID responses
+tb_axi4_caliptra_master_write_outstanding.sv:220: $finish called at 260000 (1ps)
+PASS: AXI MAX_OUTSTANDING=2 queues writes and routes BID responses
+tb_axi4_caliptra_master_write_outstanding.sv:220: $finish called at 220000 (1ps)
+PASS: AXI MAX_OUTSTANDING=4 queues writes and routes BID responses
+tb_axi4_caliptra_master_write_outstanding.sv:220: $finish called at 260000 (1ps)

@@ -227,3 +227,11 @@ ID width, and outstanding depth. The current run and provenance are in the
 [outstanding-parameter evidence bundle](evidence/caliptra-bfm-axi-outstanding-parameter-matrix-20261009/README.md).
 Concurrent writes across those parameters and full Caliptra/UVMF qualification
 remain open.
+
+## Current AXI write outstanding status — 2026-10-09
+
+The write manager now also passes depths 1, 2, and 4 at the 32-bit data / 8-bit
+ID profile, including W-channel stalls and response routing. See the
+[write-depth evidence bundle](evidence/caliptra-bfm-axi-write-outstanding-depth-20261009/README.md).
+The concurrent write width/ID cross-product and full Caliptra/UVMF qualification
+remain open.
