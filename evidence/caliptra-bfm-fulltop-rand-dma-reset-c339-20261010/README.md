@@ -79,3 +79,18 @@ window. It requests 1 CPU and 3 GB per task, with two-way concurrency. Per-task
 outputs are under `bfm-rand-reset-c339-windows-20261010-04/runs/window-567`
 and `.../window-2822` on DAN-DESKTOP. Append results and measured peaks after
 both tasks finish.
+
+
+## 2026-10-10 follow-up: Job 234 and late-window repeat
+
+Job 234 repeated the 567-cycle and 2822-cycle windows with 1 CPU and 3 GB per
+array task. The 567-cycle run exited `-11` before reset assertion, with no
+pass/fail marker or finish record; MaxRSS was 1,860,184 KiB. At 2822 cycles,
+reset asserted at cycle 5335 with one AXI write outstanding, but VVP later
+exited `-11` before a testcase marker or finish record; MaxRSS was 1,860,252
+KiB. These are incomplete diagnostics, not reset-test passes. Raw files and
+resource records are in [`job-234/`](job-234/).
+
+Job 238 repeats the 2822-cycle window alone at 1 CPU and 3 GB, based on the
+measured ~1.77 GiB MaxRSS and approximately 1.23 GiB headroom. Its outcome will
+be appended after it leaves the queue or reaches a terminal simulation state.
