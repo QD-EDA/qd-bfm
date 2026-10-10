@@ -569,3 +569,9 @@ Job `240_1` compiled and generated firmware, then VVP exited `-11` after
 51.21 s at cycle 100, before reset assertion. It recorded no test marker or
 finish record and used 1,860,052 KiB MaxRSS. This leaves late-window behavior
 unverified; the evidence package records it as an incomplete simulator crash.
+
+Job array 242 compares the same one-transfer forced-reset run with the trace
+VPI enabled and disabled (three repeats per arm, two concurrent tasks, 1 CPU
+and 3 GB each). The runner requires tracing for a fixed reset delay, so this
+checks VPI loading before reset rather than the late reset window. See the
+[reset-window evidence](evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/README.md).

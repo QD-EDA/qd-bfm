@@ -1,0 +1,10 @@
+Job array: 242_[1-6]
+Purpose: compare VVP startup with the AXI trace VPI loaded and not loaded
+Tasks: 1 CPU and 3 GB per task; array concurrency capped at 2
+Memory basis: job 240 MaxRSS was 1,860,052 KiB (~1.77 GiB); 3 GB leaves ~1.23 GiB headroom
+Common run: rand_test_dma, one transfer, forced first reset, seed 1, fast-TRNG and fast-boot diagnostic overlays
+Arm A: tasks 1-3 use --trace-axi
+Arm B: tasks 4-6 omit --trace-axi
+Fixed reset delay omitted because the runner requires --trace-axi for cycle-relative reset verification; this array isolates VPI loading, not the 2822-cycle window
+Core dumps requested with ulimit -c unlimited; each task records the effective limit and core pattern
+Queue at capture: tasks 242_1 and 242_2 RUNNING; tasks 242_3 through 242_6 pending at the array concurrency limit

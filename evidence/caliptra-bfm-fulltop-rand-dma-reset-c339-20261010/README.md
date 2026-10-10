@@ -135,3 +135,13 @@ MaxRSS was 1,860,052 KiB. This is an incomplete simulator-crash diagnostic,
 not a result about late-reset BFM behavior. The exact logs and result JSON are
 in [`job-240/window-2822/`](job-240/window-2822/), with hashes in
 [`job-240/SHA256SUMS`](job-240/SHA256SUMS).
+
+## 2026-10-10 Job 242 trace-VPI A/B submitted
+
+Job array 242 has six tasks (1 CPU and 3 GB each, at most two concurrent),
+with three repeats of `rand_test_dma` with `--trace-axi` and three without it.
+All tasks use the same seed and one-transfer forced-reset settings. The runner
+requires trace mode for a fixed reset delay, so these runs compare VPI loading
+before the reset window rather than verify the 2822-cycle reset. Tasks 242_1
+and 242_2 were running at the first queue check; 242_3 through 242_6 were
+pending at the array limit. See [`job-242/`](job-242/).

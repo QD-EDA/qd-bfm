@@ -1,0 +1,90 @@
+#!/bin/bash
+#SBATCH --job-name=bfm-vpi-ab
+#SBATCH --partition=verilog
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=3G
+#SBATCH --time=01:00:00
+#SBATCH --array=1-6%2
+#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-vpi-ab-c339-20261010-01/submit
+#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-vpi-ab-c339-20261010-01/submit/logs/%x-%A_%a.out
+
+set -Eeuo pipefail
+ulimit -c unlimited || true
+ARRAY_ROOT=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-vpi-ab-c339-20261010-01
+BASE=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-20261010-01
+BUILT=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06
+PRIOR=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11
+GCC_RUN=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10
+QD="$BASE/source/qd-bfm"
+IVERILOG_SRC="$BUILT/source/iverilog-uvm"
+RTL="$PRIOR/source/caliptra-rtl"
+ENV="$BUILT/deps"
+IVERILOG="$BUILT/toolchain/iverilog/bin"
+GCC="$GCC_RUN/xpack/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-"
+JTAG_VPI="$GCC_RUN/jtagdpi/jtagdpi.vpi"
+QD_SHA=708e51cd304422f367a61064449c5617fc97fec6
+IVERILOG_SHA=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+UVM_SHA=78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+RTL_SHA=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+ADAMS_BRIDGE_SHA=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+JTAG_VPI_SHA=34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07
+RUNNER_SHA=ea57294b045c7cae66a8aa6b93692a4c1ae8b343160624e0f137b71d855c6cb0
+TRACE_SOURCE_SHA=cf378ed88ab6c3ec39fd38d3767d64a5598ad05a7afee63e90b5799743e09ae5
+
+case "${SLURM_ARRAY_TASK_ID:?}" in
+  1|2|3) RUN_NAME="trace-${SLURM_ARRAY_TASK_ID}"; TRACE_ARGS=(--trace-axi) ;;
+  4|5|6) RUN_NAME="no-trace-$((SLURM_ARRAY_TASK_ID - 3))"; TRACE_ARGS=() ;;
+  *) echo "unsupported array task id: $SLURM_ARRAY_TASK_ID" >&2; exit 64 ;;
+esac
+RUN="$ARRAY_ROOT/runs/$RUN_NAME"
+RESET_ARGS=(--force-first-rand-dma-reset)
+mkdir -p "$RUN/logs" "$RUN/pycache" "$RUN/output"
+
+test "$(git -C "$QD" rev-parse HEAD)" = "$QD_SHA"
+test -z "$(git -C "$QD" status --porcelain --untracked-files=all)"
+test "$(sha256sum "$QD/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py" | cut -d' ' -f1)" = "$RUNNER_SHA"
+test "$(sha256sum "$QD/dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c" | cut -d' ' -f1)" = "$TRACE_SOURCE_SHA"
+test "$(git -C "$IVERILOG_SRC" rev-parse HEAD)" = "$IVERILOG_SHA"
+test "$(git -C "$IVERILOG_SRC/uvm-core" rev-parse HEAD)" = "$UVM_SHA"
+test -z "$(git -C "$IVERILOG_SRC" status --porcelain --untracked-files=all)"
+test "$(git -C "$RTL" rev-parse HEAD)" = "$RTL_SHA"
+test "$(git -C "$RTL/submodules/adams-bridge" rev-parse HEAD)" = "$ADAMS_BRIDGE_SHA"
+test -z "$(git -C "$RTL" status --porcelain --untracked-files=all)"
+test -x "$IVERILOG/iverilog" && test -x "$IVERILOG/vvp" && test -x "$IVERILOG/iverilog-vpi"
+test -x "${GCC}gcc" && test -x "$ENV/bin/python3.12" && test -f "$JTAG_VPI"
+
+printf 'QD=%s\nrunner-sha256=%s\ntrace-source-sha256=%s\nIcarus=%s\nUVM=%s\nCaliptra=%s\nAdams-Bridge=%s\nJTAG-VPI-SHA=%s\narray-task-id=%s\nrun-mode=%s\nseed=1\ntrace-vpi=%s\n' \
+  "$QD_SHA" "$RUNNER_SHA" "$TRACE_SOURCE_SHA" "$IVERILOG_SHA" "$UVM_SHA" "$RTL_SHA" "$ADAMS_BRIDGE_SHA" "$JTAG_VPI_SHA" \
+  "$SLURM_ARRAY_TASK_ID" "$RUN_NAME" "$([[ ${#TRACE_ARGS[@]} -gt 0 ]] && echo enabled || echo disabled)" | tee "$RUN/source-revisions.txt"
+printf 'core-limit=%s\ncore-pattern=%s\n' "$(ulimit -c)" "$(cat /proc/sys/kernel/core_pattern 2>/dev/null || echo unavailable)" | tee "$RUN/diagnostic-host.txt"
+sha256sum "$JTAG_VPI" "$IVERILOG/iverilog" "$IVERILOG/vvp" | tee "$RUN/tool-binaries.sha256"
+grep -q "$JTAG_VPI_SHA" "$RUN/tool-binaries.sha256"
+
+export PATH="$ENV/bin:$IVERILOG:$GCC_RUN/xpack/xpack-riscv-none-elf-gcc-15.2.0-1/bin:$PATH"
+export LD_LIBRARY_PATH="$BUILT/toolchain/iverilog/lib:$ENV/lib"
+export CALIPTRA_MBEDTLS_ROOT="$ENV"
+export CALIPTRA_RTL="$RTL"
+export IVERILOG_BIN="$IVERILOG/iverilog"
+export VVP_BIN="$IVERILOG/vvp"
+export IVERILOG_SOURCE_ROOT="$IVERILOG_SRC"
+export IVERILOG_VPI_BIN="$IVERILOG/iverilog-vpi"
+export CALIPTRA_BFM_PROFILE="$RTL/src/integration/config/caliptra_top_tb.vf"
+export CALIPTRA_GCC_PREFIX="$GCC"
+export CALIPTRA_JTAGDPI_VPI="$JTAG_VPI"
+export PYTHONPYCACHEPREFIX="$RUN/pycache"
+
+python3.12 -m py_compile "$QD/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py"
+set +e
+/usr/bin/time -v -o "$RUN/logs/resource.log" timeout --signal=TERM --kill-after=30s 3500s \
+  python3.12 "$QD/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py" \
+  --case rand_test_dma --rand-dma-iterations 1 "${RESET_ARGS[@]}" \
+  --fast-trng --fast-boot-data-preload --quiet-firmware "${TRACE_ARGS[@]}" \
+  --output "$RUN/output/$RUN_NAME" > "$RUN/logs/runner.log" 2>&1
+runner_status=$?
+set -e
+printf 'runner_exit=%s\n' "$runner_status" | tee "$RUN/runner-status.txt"
+dmesg --ctime 2>&1 | tail -30 > "$RUN/logs/dmesg-tail.log" || true
+grep 'Maximum resident set size' "$RUN/logs/resource.log" || true
+exit "$runner_status"
