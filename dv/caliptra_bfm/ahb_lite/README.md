@@ -168,3 +168,13 @@ It checks a direct sequence's `0 -> 1` mirror update and a later RAL frontdoor
 under IEEE 2012, 2017, and 2023 with zero UVM warnings, errors, or fatals; logs
 and tool provenance are in the
 [published-main rerun evidence](../../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md#current-state-rerun-monitor-driven-ral-prediction-2026-10-10).
+
+Current-state update (2026-10-10):
+`tests/run_caliptra_hmac_ahb_bfm.sh` drives the native 32-bit AHB manager,
+checker, and monitor against the pinned `hmac_ctrl` RTL. It writes a fixed
+SHA-512 key/block/seed vector, reads and compares the complete 512-bit tag,
+and checks idle/no-error status. The 172-transfer known-answer smoke passes
+under IEEE 2012, 2017, and 2023 on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`; see the [dated evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md).
+This is direct unit-level RTL coverage, not generated UVMF or full-top
+qualification.

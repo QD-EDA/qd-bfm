@@ -1,0 +1,4 @@
+memory guard: preflight available 7.26 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+PASS: native AHB BFM completed HMAC-SHA-512 known-answer test (172 bus transfers)
+/private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_hmac_ahb_bfm.sv:147: $finish called at 5211000 (1ps)
+memory guard: command exited 0; minimum available 7.22 GiB; maximum process group 0.03 GiB

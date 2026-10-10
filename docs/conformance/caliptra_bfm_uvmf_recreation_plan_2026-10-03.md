@@ -1480,3 +1480,13 @@ published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`, the guarded HMAC
 runtime still stops at package-qualified parameterized proxy declarations in
 the generated input/output interfaces; simulation does not start. The QD
 source was left unchanged. See the [compile result and hashes](../../evidence/caliptra-bfm-generated-hmac-runtime-20261005/README.md#current-clean-published-main-compile-check-2026-10-10).
+
+**2026-10-10 native HMAC AHB known-answer smoke:** the native 32-bit manager,
+checker, and monitor now drive the actual pinned HMAC controller RTL through
+172 bus transfers, write a deterministic SHA-512 input, and compare the full
+512-bit tag. This direct unit-level smoke passes under IEEE 2012, 2017, and
+2023 on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. Generated HMAC UVMF compilation
+and full-top qualification remain open; this case does not work around the
+generated-interface parser failure. See the [three-edition evidence and
+provenance](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md).
