@@ -37,6 +37,12 @@ tests, and five-deep read/write queue tests with out-of-order responses using:
 ./tests/run_master.sh
 ```
 
+[`run_parameter_matrix.sh`](tests/run_parameter_matrix.sh) checks all nine
+combinations of 32/64/128-bit data and 1/4/8-bit IDs through the manager,
+checker, and SRAM subordinate, with 48-bit addresses, unaligned INCR, and
+WRAP traffic. See the
+[parameter-matrix evidence](../../../evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
+
 The manager regression also round-trips all legal WRAP lengths (2, 4, 8, and
 16 beats), aligned narrow INCR, and unaligned INCR/FIXED transfers with lane
 strobes. It rejects unsupported three-beat and misaligned WRAP requests before

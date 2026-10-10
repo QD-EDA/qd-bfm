@@ -191,3 +191,14 @@ The full manager and subordinate evidence is in the
 [unaligned-transfer bundle](evidence/caliptra-bfm-axi-unaligned-20261009/README.md).
 This does not complete the broader width/ID, independent cross-simulator,
 four-state, or full Caliptra/UVMF qualification gates.
+
+## Delivered representative AXI width/ID matrix — 2026-10-09
+
+The parameter regression passes a 3×3 matrix of 32/64/128-bit data widths and
+1/4/8-bit IDs with 48-bit addresses. Every configuration checks unaligned INCR
+and four-beat WRAP read/write traffic through the manager, checker, and SRAM
+subordinate. The Slurm run used clean published Icarus
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; details are in the
+[parameter-matrix evidence bundle](evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
+The full supported-width/ID/outstanding matrix and independent
+cross-simulator/four-state qualification remain open.
