@@ -248,6 +248,14 @@ Current regression extension (2026-10-09): the same top-level test retains the
 within one 4 KiB window. It checks every data beat, WLAST/RLAST, response,
 ID, USER, and B-response stability under randomized channel delays. The clean
 published-Icarus replay is pending; this extension has no pass claim yet.
+Current-state follow-up (2026-10-10): the existing Slurm job 94 evidence
+replays this exact testbench and runner: their recorded SHA-256 values match
+the current files. The run used clean QD source `c8ce91584088cbdaa8d8f517d5ecc923f1fa4390`,
+published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, and pinned Caliptra
+RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`; its output includes the
+maximum-256-beat PASS line. This resolves the replay status for the module
+regression; actual DUT DMA FIFO readback remains open. See the
+[pass-94 evidence](../../../evidence/caliptra-bfm-axi-complex-256b-20261009/README.md).
 The guarded 900-second first-case AES/DMA diagnostic passes through the
 real top and records source write/read plus AES destination write/readback.
 The [passing record](../../../evidence/caliptra-bfm-open-top-smoke-20261006/first-aes-axi-trace.json)
