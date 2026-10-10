@@ -357,3 +357,15 @@ the process-group peak was 1.80 GiB. See the
 [full-top random-DMA evidence](evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/README.md).
 This is one diagnostic iteration without AXI trace, not stock-firmware or
 full-suite qualification.
+
+## AXI memory-subordinate simulator portability — 2026-10-10
+
+The memory-target regression passes under Verilator 5.032 after removing a
+nested memory-read helper from the RDATA assignment and making the exclusive
+success slot a single per-handshake assignment. Slurm job 181 also passed the
+main target, reset-handshake, and bounded multi-ID queue tests under clean
+published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. It requested 1 CPU
+and 1 GiB, measured 339,288 KiB MaxRSS and a 0.39 GiB process-group peak, and
+exited 0 in 13.09 seconds. This remains standalone module-level evidence, not
+full-top or UVMF qualification. See the
+[portability evidence](evidence/caliptra-bfm-axi-verilator-readback-20261010/README.md).

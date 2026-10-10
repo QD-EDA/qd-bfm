@@ -287,6 +287,7 @@ module axi4_caliptra_memory_subordinate #(
     reg [63:0] base64;
     reg [63:0] aligned64;
     integer index;
+    integer lane;
     begin
       read_word = 0;
       addr64 = addr;
@@ -294,7 +295,8 @@ module axi4_caliptra_memory_subordinate #(
       aligned64 = (addr64 / DATA_BYTES) * DATA_BYTES;
       index = (aligned64 - base64) / DATA_BYTES;
       if (in_range(addr) && index >= 0 && index < MEM_WORDS)
-        read_word = word_at(index);
+        for (lane = 0; lane < DATA_BYTES; lane = lane + 1)
+          read_word[8*lane +: 8] = ram[index][lane];
     end
   endfunction
 
@@ -334,7 +336,6 @@ module axi4_caliptra_memory_subordinate #(
                                ((AWLOCK === 1'b1) &&
                                 !exclusive_is_valid(AWADDR, AWLEN, AWSIZE, AWBURST)) ||
                                ((AWLOCK !== 1'b0) && (AWLOCK !== 1'b1));
-        wr_exclusive_success_q[wr_tail] <= 0;
         if ((AWLOCK === 1'b1) && ((^AWID) !== 1'bx)) begin
           wr_exclusive_success_q[wr_tail] <= exclusive_valid[AWID] &&
             (exclusive_addr[AWID] == AWADDR) && (exclusive_len[AWID] == AWLEN) &&
@@ -344,6 +345,8 @@ module axi4_caliptra_memory_subordinate #(
             exclusive_is_valid(AWADDR, AWLEN, AWSIZE, AWBURST);
           exclusive_valid[AWID] <= 0;
           exclusive_write_active <= 1;
+        end else begin
+          wr_exclusive_success_q[wr_tail] <= 0;
         end
         wr_tail <= (wr_tail == MAX_OUTSTANDING - 1) ? 0 : wr_tail + 1;
       end

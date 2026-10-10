@@ -576,3 +576,14 @@ preload, and quiet firmware, with AXI trace disabled. This confirms one
 full-top DMA iteration on clean published Icarus; it is not stock-firmware or
 full-suite qualification. See the
 [`rand_test_dma` evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/README.md).
+
+**2026-10-10 AXI target portability check:** Slurm exposed two Verilator 5.032
+issues in the memory subordinate: the nested read-word helper returned zero
+through the RDATA assignment, and two nonblocking writes to one exclusive
+success slot let the clear override the success value. The BFM now assembles
+read bytes directly and assigns the exclusive-success slot once per AW
+handshake. The standalone main target regression passes under Verilator 5.032;
+clean published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602` passes the
+main, reset-handshake, and multi-ID queue cases. This is module-level evidence,
+not full-top qualification. See the
+[`AXI portability evidence`](../../evidence/caliptra-bfm-axi-verilator-readback-20261010/README.md).

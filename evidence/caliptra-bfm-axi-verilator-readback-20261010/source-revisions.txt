@@ -1,0 +1,4 @@
+QD repository: QD-EDA/qd-bfm, branch codex/caliptra-bfm-stack-20261006
+QD base HEAD: 47d84c4; working tree contains only intended edit to axi4_caliptra_memory_subordinate.sv plus unrelated user files listed in the local task status.
+The run uses the clean published Icarus 13.0 build from c339b9f2287a743aeb7ab6de6528e8d34a4dd602, binary hashes are recorded by the job, and Verilator 5.032.
+The testbench, checker, master, monitor, and guard are copied unchanged from QD HEAD.
