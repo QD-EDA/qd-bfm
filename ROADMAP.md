@@ -429,3 +429,17 @@ MaxRSS for the matrix phase and a 0.39 GiB process-group peak. This is selected
 Icarus four-state coverage and Verilator two-state parity, not exhaustive
 four-state or full-top/UVMF qualification. See the
 [manager X/Z evidence](evidence/caliptra-bfm-axi-master-xz-controls-20261010/README.md).
+
+## Caliptra `axi_if` complex-BFM integration after manager X/Z fix — 2026-10-10
+
+Slurm job 203 passed the guarded complex-BFM smoke using Caliptra's actual
+`axi_if` and top-testbench package types on QD commit
+`b965acf0437236971a482a46e3d0499ce7988e16`, clean published Icarus main
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, and clean Caliptra RTL
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. It covered Caliptra AXI delay
+weights, error ranges, SRAM/FIFO traffic, FIFO controls, recovery availability,
+randomized stalls, segmented readback, and 256-beat bursts. The job requested
+1 CPU and 256 MiB, measured 17,684 KiB MaxRSS and a 0.02 GiB guarded process
+peak, and exited 0. This is component integration evidence, not full-top
+firmware, UVMF, or qualification coverage. See the
+[Caliptra `axi_if` integration evidence](evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).

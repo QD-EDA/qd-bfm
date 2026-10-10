@@ -620,3 +620,10 @@ signals are decisive. Seven X/Z probes pass with the checker disabled, and
 the full master suite plus the 3-by-3 Icarus/Verilator matrix passes. This is
 selected Icarus four-state coverage, not exhaustive four-state qualification;
 see the [manager X/Z evidence](../../evidence/caliptra-bfm-axi-master-xz-controls-20261010/README.md).
+
+Caliptra `axi_if` integration follow-up (2026-10-10): the guarded complex-BFM
+smoke passes against Caliptra's actual AXI interface and top-testbench package
+types after the manager X/Z fix. It covers AXI delay weights, SRAM/FIFO and
+recovery traffic, segmented readback, and maximum 256-beat bursts. This is
+component integration evidence, not full-top firmware, UVMF, or qualification;
+see the [Caliptra `axi_if` evidence](../../evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).

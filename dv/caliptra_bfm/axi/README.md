@@ -449,3 +449,11 @@ the full 256-beat INCR write/read case. The successful run and the initial
 runtime-library setup failure are preserved in the
 [256-beat evidence bundle](../../../evidence/caliptra-bfm-axi-complex-256b-20261009/README.md).
 This remains module-level evidence, not firmware or UVM qualification.
+
+## Caliptra `axi_if` integration after manager X/Z fix — 2026-10-10
+
+The guarded complex-BFM runner passes using Caliptra's actual `axi_if` and
+top-testbench package types on clean published Icarus main. It covers the
+Caliptra delay distributions, SRAM/FIFO and recovery traffic, segmented
+readback, randomized stalls, and 256-beat bursts. See the
+[post-X/Z integration evidence](../../../evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).

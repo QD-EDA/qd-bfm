@@ -1,0 +1,9 @@
+QD-BFM commit: b965acf0437236971a482a46e3d0499ce7988e16
+QD-BFM source tree: clean commit archive; see qd-bfm-source.tar.gz
+Icarus commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602 (clean, published main)
+Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e (clean)
+Slurm job: 203
+
+SHA-256:
+a5d386d6542759d82c45c145de745bf290d4d82966abfb9e66e35b88bfde50b8  qd-bfm-source.tar.gz
+242dc9d3e84053339533a0f192e3028d58798914956383a6bfd96c12d709fcb7  job.sbatch
