@@ -68,11 +68,13 @@ newest locally available published `origin/main` revision, clean commit
 | Icarus `iverilog` | `00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385` |
 | Icarus `vvp` | `f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a` |
 | Verilator executable | `fb2cc573b1055cf096c90e1efc9966fe56bdb4b265c83590cf2a49f7a0defcdf` |
+| Icarus 18-case pre-fix log | `43b48da87a544631813af121cd7b4a998c575eecdefc3b8a5edb8b834ca1edf9` |
 | Icarus 18-case log | `f4f2812e39651a5f48d466af38991559568ade1f762715f5a19babe2513fd7ab` |
 | Verilator 18-case log | `7466574920368367cfec22f8879fd57e7f934d57ab103e85ab0b0781e588f089` |
 
 ## Diagnostic artifacts
 
+- [`iverilog-4b3f-matrix.log`](logs/iverilog-4b3f-matrix.log): Icarus passed this matrix before the READY correction; Verilator exposed the final-beat race.
 - [`verilator-5.050-matrix.log`](logs/verilator-5.050-matrix.log): pre-fix stale-response failure.
 - [`verilator-5.050-debug-32x1.log`](logs/verilator-5.050-debug-32x1.log): focused signal trace for the final-beat race.
 - [`verilator-5.050-launcher-failure.log`](logs/verilator-5.050-launcher-failure.log): initial launcher recursion caused by exporting Verilator's reserved `VERILATOR_BIN`; the reusable runner now clears that variable before invoking Verilator.
