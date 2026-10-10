@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
-module tb_axi4_caliptra_master_outstanding;
+module tb_axi4_caliptra_master_outstanding #(
+  parameter integer MAX_OUTSTANDING = 4
+);
   reg ACLK = 0;
   always #5 ACLK = ~ACLK;
   reg ARESETn = 0;
@@ -60,7 +62,7 @@ module tb_axi4_caliptra_master_outstanding;
 
   axi4_caliptra_master #(
     .ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32),
-    .MAX_BEATS(16), .TIMEOUT_CYCLES(32), .MAX_OUTSTANDING(4)
+    .MAX_BEATS(16), .TIMEOUT_CYCLES(32), .MAX_OUTSTANDING(MAX_OUTSTANDING)
   ) bfm (.*);
 
   always @(posedge ACLK) begin
@@ -137,15 +139,17 @@ module tb_axi4_caliptra_master_outstanding;
   end
 
   initial begin
+    integer i;
     wait (ARESETn === 1'b1);
-    wait (ar_count == 4);
+    wait (ar_count >= MAX_OUTSTANDING);
     repeat (2) @(posedge ACLK);
-    if (ar_count != 4) $fatal(1, "manager issued a fifth read before a slot was freed");
-    send_response(3);
-    send_response(0);
-    send_response(2);
-    send_response(1);
-    wait (ar_count == 5);
-    send_response(4);
+    if (ar_count != MAX_OUTSTANDING)
+      $fatal(1, "manager exceeded MAX_OUTSTANDING=%0d before a response", MAX_OUTSTANDING);
+    for (i = MAX_OUTSTANDING - 1; i >= 0; i = i - 1)
+      send_response(i);
+    for (i = MAX_OUTSTANDING; i < 5; i = i + 1) begin
+      wait (ar_count >= i + 1);
+      send_response(i);
+    end
   end
 endmodule
