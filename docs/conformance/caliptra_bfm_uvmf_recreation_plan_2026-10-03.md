@@ -1419,3 +1419,25 @@ also completed with a pass marker and normal finish. That run used fast-TRNG,
 fast boot data preload, and skipped PQ-vector generation, so it is diagnostic
 integration evidence rather than stock-firmware qualification. Per-run RSS,
 source pins, logs, and result metadata are in the [dated evidence bundle](../../evidence/caliptra-bfm-maxburst-and-main-smoke-20261009/README.md).
+
+## 2026-10-10 current-state follow-up
+
+The standalone AHB checker now rejects X and Z on every checked control and
+write-data input. Its 26 negative controls and the full standalone AHB runner
+pass under IEEE 2012, 2017, and 2023 on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`; see the [four-state evidence](../../evidence/caliptra-bfm-ahb-xz-published-20261010/README.md).
+The clean-room UVMF-lite scoreboard, active/passive agent, transaction-key,
+and reset-generator tests also pass on that published revision; this verifies
+the base layer, not the generated Caliptra interfaces. See the
+[UVMF-lite evidence](../../evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md).
+
+On clean published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, traced
+Caliptra full-top AES/DMA cases 8 through 12 pass with the native AXI checker
+enabled. These are separate narrowed vector runs with fast TRNG, fast boot
+data preload, and PQ-vector generation skipped; they are diagnostic
+integration evidence, not stock-firmware or full-suite qualification. See the
+[trace evidence](../../evidence/caliptra-bfm-fulltop-aes-trace-fix-20261010/README.md).
+The same published simulator still stops the generated ECC probe at the
+package-qualified parameterized proxy declarations before simulation. This
+remains an Icarus-side blocker; no QD source adaptation was added
+([ECC compile evidence](../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md)).
