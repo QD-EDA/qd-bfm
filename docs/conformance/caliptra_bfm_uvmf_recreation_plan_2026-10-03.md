@@ -1441,3 +1441,11 @@ The same published simulator still stops the generated ECC probe at the
 package-qualified parameterized proxy declarations before simulation. This
 remains an Icarus-side blocker; no QD source adaptation was added
 ([ECC compile evidence](../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md)).
+
+**2026-10-10 AHB predictor ERROR-tail diagnostic:** the generated-name AHB
+compatibility smoke now covers a burst with `OKAY, ERROR, OKAY` responses and
+checks that RAL prediction stops at the first error. Both 32-bit and 64-bit
+profiles pass with zero UVM errors or fatals. This targeted rerun used the
+local dirty, unpublished Icarus `ac4532fa-dirty` binaries, so it is diagnostic
+only; the earlier clean published-main AHB compatibility evidence does not
+cover this new ERROR-tail case. See the [diagnostic logs and provenance](../../evidence/caliptra-bfm-ahb-qvip-error-tail-20261010/README.md).
