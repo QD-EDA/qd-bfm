@@ -1603,3 +1603,17 @@ actual HMAC controller under IEEE 2017 on published Icarus
 `127b887dfdc09283ab0187a2e618421dee3d5dcc`; 615 transfers complete with zero
 UVM warnings/errors/fatals. This validates the native agent/HMAC unit path,
 not generated HMAC UVMF. See the [dated result and hashes](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#latest-published-main-recheck--2026-10-10).
+
+**2026-10-10 full-top AES trace A/B diagnostic:** the seventh short AES/DMA
+firmware vector completes with one pass marker and normal `$finish` when the
+AXI VPI trace plugin is omitted. The otherwise matching traced run exits by
+SIGSEGV at cycle 2200 without a terminal marker. The same trace-source hash
+passes vectors 7–11, making this a vector-specific trace interaction rather
+than a general trace-plugin failure. Its root cause remains open. Both use QD
+`53c44cf9fcffe4cde4f47e2d89accaae099ffbcf`, clean published Icarus
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, and Caliptra
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. This implicates the trace-enabled
+path but does not prove whether the fault is in the QD plugin or Icarus VPI.
+Fast TRNG, diagnostic `.data`/`.bss` preload, one-vector selection, and skipped
+PQ vectors make the pass diagnostic rather than stock-firmware qualification.
+See the [paired runs and hashes](../../evidence/caliptra-bfm-fulltop-aes-trace-c339-20261010/README.md).

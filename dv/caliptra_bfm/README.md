@@ -644,3 +644,13 @@ types after the manager X/Z fix. It covers AXI delay weights, SRAM/FIFO and
 recovery traffic, segmented readback, and maximum 256-beat bursts. This is
 component integration evidence, not full-top firmware, UVMF, or qualification;
 see the [Caliptra `axi_if` evidence](../../evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).
+
+Full-top AES trace A/B diagnostic (2026-10-10): the seventh short AES/DMA
+vector passes through the full top without the optional AXI VPI trace plugin
+on clean published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. The
+otherwise matching trace-enabled run segfaults at cycle 2200 with no terminal
+marker. The same trace-source hash passes vectors 7–11, so this points to a
+case-specific trace interaction; its root cause remains open. Both runs use
+fast TRNG, `.data`/`.bss` preload, one selected vector, and PQ-vector
+suppression; they are diagnostic, not stock-firmware qualification. See the
+[paired result and hashes](../../evidence/caliptra-bfm-fulltop-aes-trace-c339-20261010/README.md).
