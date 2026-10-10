@@ -118,6 +118,7 @@ module tb_axi4_caliptra_master_outstanding #(
   initial begin
     integer i;
     reg [DATA_WIDTH-1:0] expected_data;
+    reg [ID_WIDTH-1:0] expected_id;
     for (i = 0; i < 5; i = i + 1) response_sent[i] = 0;
     repeat (2) @(posedge ACLK);
     @(negedge ACLK); ARESETn = 1'b1;
@@ -134,12 +135,13 @@ module tb_axi4_caliptra_master_outstanding #(
         !read_success[3] || !read_success[4])
       $fatal(1, "one or more queued read tasks failed");
     for (i = 0; i < 5; i = i + 1) begin
-      expected_data = accepted_addr[i];
+      expected_data = 32'h40 + (i * 32'h40);
+      expected_id = 8'h11 * (i + 1);
       if (read_data_result[i][0 +: DATA_WIDTH] !== expected_data)
         $fatal(1, "response data mismatch task=%0d DW=%0d IDW=%0d depth=%0d got=%h expected=%h",
           i, DATA_WIDTH, ID_WIDTH, MAX_OUTSTANDING,
           read_data_result[i][0 +: DATA_WIDTH], expected_data);
-      if (read_response_user_result[i] !== (32'hd000_0000 | accepted_id[i]))
+      if (read_response_user_result[i] !== (32'hd000_0000 | expected_id))
         $fatal(1, "RUSER was misrouted to read task %0d", i);
     end
     if (bfm.read_busy) $fatal(1, "manager remained busy after both reads completed");
