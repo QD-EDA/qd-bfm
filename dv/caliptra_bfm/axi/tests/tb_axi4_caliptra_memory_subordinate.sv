@@ -478,6 +478,29 @@ module tb_axi4_caliptra_memory_subordinate;
         $fatal(1, "16-beat FIXED readback mismatch at beat %0d", beat);
     end
 
+    write_data = 0; write_strb = 0; write_user = 0;
+    for (integer beat = 0; beat < 16; beat = beat + 1) begin
+      write_data[32*beat +: 32] = 32'hb16b_0000 | beat;
+      write_strb[4*beat +: 4] = 4'hf;
+    end
+    manager.write_burst(19'h23c, 8'h0f, 2, 2'b10, 8'h75, 32'habcd_0075,
+      1'b0, write_data, write_strb, write_user, success, response, response_user);
+    check(success && response == 2'b00 && response_user == 32'habcd_0075,
+      "16-beat WRAP write did not complete");
+    for (integer beat = 0; beat < 16; beat = beat + 1)
+      check(memory.word_at(64 + ((15 + beat) % 16)) == (32'hb16b_0000 | beat),
+        "16-beat WRAP write reached the wrong memory word");
+    manager.read_burst(19'h23c, 8'h0f, 2, 2'b10, 8'h76, 32'habcd_0076,
+      1'b0, success, read_data, read_user, read_response, response_user);
+    check(success && response_user == 32'habcd_0076,
+      "16-beat WRAP read did not complete");
+    for (integer beat = 0; beat < 16; beat = beat + 1) begin
+      if (read_data[32*beat +: 32] !== (32'hb16b_0000 | beat) ||
+          read_user[32*beat +: 32] !== 32'habcd_0076 ||
+          read_response[2*beat +: 2] !== 2'b00)
+        $fatal(1, "16-beat WRAP readback mismatch at beat %0d", beat);
+    end
+
     manager.read_burst(19'h108, 0, 2, 2'b01, 8'h6d, 32'h0, 1'b1,
       success, read_data, read_user, read_response, response_user);
     check(success && read_response[1:0] == 2'b01,

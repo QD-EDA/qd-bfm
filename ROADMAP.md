@@ -316,14 +316,17 @@ This is one narrowed firmware diagnostic using fast TRNG and fast data/BSS
 preload, not stock-firmware or UVMF qualification; the full firmware suite
 remains open.
 
-## AXI memory target 16-beat FIXED round trip — 2026-10-10
+## AXI memory target 16-beat FIXED and WRAP round trips — 2026-10-10
 
-The memory-subordinate regression now writes 16 distinct full-width beats to
-one FIXED address, checks that the last beat remains at that address, then
-reads the 16-beat FIXED burst and checks every returned word, response, and
-USER field. Slurm job 168 passed on clean published Icarus
-`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; the run used one CPU, requested
-256 MiB, measured 17,928 KiB maximum RSS, and exited 0. See the
-[16-beat FIXED evidence](evidence/caliptra-bfm-axi-fixed16-20261010/README.md).
-This is module-level memory-target coverage; the full-top random-DMA run
-remains separate.
+The memory-subordinate regression writes 16 distinct full-width beats to one
+FIXED address, checks the final stored word, then reads the 16-beat FIXED burst
+and checks every returned word, response, and USER field. It also writes a
+16-beat WRAP burst from the last word in its 64-byte window, checks each
+wrapped memory location, and verifies the complete readback. Slurm job 168
+passed the FIXED case; job 171 passed the expanded subordinate, reset, and
+queue suite on clean published Icarus
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. Job 171 used one CPU, requested
+256 MiB, measured 17,840 KiB maximum RSS, and exited 0. See the [FIXED evidence](evidence/caliptra-bfm-axi-fixed16-20261010/README.md)
+and [WRAP evidence](evidence/caliptra-bfm-axi-wrap16-20261010/README.md).
+This is module-level memory-target coverage; full-top random-DMA remains
+separate.

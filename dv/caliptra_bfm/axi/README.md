@@ -75,7 +75,9 @@ bursts. The generic manager/subordinate round trip also writes and reads back
 all 256 beats of a full-width INCR burst, checking each returned data, USER,
 and response field. A separate 16-beat full-width FIXED round trip verifies
 that every write overwrites the same memory word and all read beats return the
-final word with the expected response and USER fields.
+final word with the expected response and USER fields. A 16-beat full-width
+WRAP round trip also checks every wrapped memory word and returned data,
+response, and USER field.
 
 Run its end-to-end manager/checker test in IEEE 2012 by default. With the
 multi-edition Icarus fork, set `SV_EDITION=2017` or `SV_EDITION=2023` to select
