@@ -1,17 +1,17 @@
 #!/bin/bash
-#SBATCH --job-name=bfm-rand-reset-inflight
+#SBATCH --job-name=bfm-rand-reset-window
 #SBATCH --partition=verilog
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=3G
+#SBATCH --mem=2G
 #SBATCH --time=02:00:00
 #SBATCH --array=0-1%2
-#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-inflight-20261010-02/submit
-#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-inflight-20261010-02/submit/logs/%x-%A_%a.out
+#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-array-20261010/submit
+#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-array-20261010/submit/logs/%x-%A_%a.out
 
 set -Eeuo pipefail
-ARRAY_ROOT=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-inflight-20261010-02
+ARRAY_ROOT=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-array-20261010
 BASE=/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-20261010-01
 BUILT=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06
 PRIOR=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11
@@ -32,11 +32,10 @@ JTAG_VPI_SHA=34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07
 RUNNER_SHA=ea57294b045c7cae66a8aa6b93692a4c1ae8b343160624e0f137b71d855c6cb0
 TRACE_SOURCE_SHA=cf378ed88ab6c3ec39fd38d3767d64a5598ad05a7afee63e90b5799743e09ae5
 
-# Trace calibration: assert at 3080 after AW1 (3066), and 5335 after AW6 (5327), before B responses.
 # Runner has no seed override, so the array varies reset timing instead.
 case "${SLURM_ARRAY_TASK_ID:?}" in
-  0) RESET_DELAY=567 ;;
-  1) RESET_DELAY=2822 ;;
+  0) RESET_DELAY=3127 ;;
+  1) RESET_DELAY=3150 ;;
   *) echo "unsupported array task id: $SLURM_ARRAY_TASK_ID" >&2; exit 64 ;;
 esac
 RUN="$ARRAY_ROOT/runs/window-$RESET_DELAY"

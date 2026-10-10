@@ -30,19 +30,22 @@ snapshot was about 1,051,936 KiB, so it understated the completed run's peak.
 Raw logs, result JSON, source revisions, tool hashes, and the Slurm resource
 record are in [`job-216/`](job-216/); `SHA256SUMS` records their hashes.
 
-## Reset-window array
+## Job 218: completed reset-window attempt
 
-Slurm job 218 runs two independent timing points, with at most two tasks
-concurrent. Each task requested 1 CPU and 2 GB, based on the live VVP snapshot
-plus headroom available when submitted:
+Job 218 ran delays 3127 and 3150 cycles with 1 CPU and 2 GB per task, at most
+two concurrent. Both simulations exited 0 and printed one testcase pass marker,
+but the runner correctly returned FAIL because the reset was not in-flight. The
+trace shows AW6 at cycle 5327 and B6 at 5356; reset asserted later at cycles
+5640 and 5663, after all six writes had completed. Each result records
+`outstanding_writes_at_reset=[0]` and `reset_in_flight=false`.
 
-| Task | Reset delay | Run directory |
-|---|---:|---|
-| `218_0` | 3127 cycles | `runs/window-3127` |
-| `218_1` | 3150 cycles | `runs/window-3150` |
+The measured MaxRSS values were 1,860,292 KiB and 1,860,328 KiB. The complete
+array script and raw run records are in [`job-218/`](job-218/).
 
-The runner has no seed override, so these tasks vary reset timing. Job 216's
-completed peak (1,859,452 KiB) became available after job 218 had started; the
-2 GB requests leave only about 232 MiB against that measured peak. Do not alter
-these running jobs; use at least 3 GB per task for comparable future runs.
-Append their final results and resource peaks here when both tasks finish.
+## Next calibrated reset windows
+
+The same trace supports two in-flight windows: delay 567 asserts reset at cycle
+3080, between AW1 at 3066 and B1 at 3106; delay 2822 asserts at cycle 5335,
+between AW6 at 5327 and B6 at 5356. The refreshed script requests 1 CPU and
+3 GB per task, with two-way concurrency, based on the measured 1.77 GiB peak
+plus about 1.23 GiB headroom. Use distinct per-run output directories.
