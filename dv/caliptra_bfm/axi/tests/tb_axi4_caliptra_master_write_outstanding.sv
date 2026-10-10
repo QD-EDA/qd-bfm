@@ -1,90 +1,91 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
 module tb_axi4_caliptra_master_write_outstanding #(
+  parameter integer DATA_WIDTH = 32,
+  parameter integer ID_WIDTH = 8,
   parameter integer MAX_OUTSTANDING = 4
 );
+  localparam integer ADDR_WIDTH = 48;
+  localparam integer USER_WIDTH = 32;
+  localparam integer MAX_BEATS = 16;
   reg ACLK = 0;
   always #5 ACLK = ~ACLK;
   reg ARESETn = 0;
 
-  wire [7:0] AWID;
-  wire [18:0] AWADDR;
+  wire [ID_WIDTH-1:0] AWID;
+  wire [ADDR_WIDTH-1:0] AWADDR;
   wire [7:0] AWLEN;
   wire [2:0] AWSIZE;
   wire [1:0] AWBURST;
   wire AWLOCK;
-  wire [31:0] AWUSER;
+  wire [USER_WIDTH-1:0] AWUSER;
   wire AWVALID;
   wire AWREADY;
-  wire [31:0] WDATA;
-  wire [3:0] WSTRB;
-  wire [31:0] WUSER;
+  wire [DATA_WIDTH-1:0] WDATA;
+  wire [DATA_WIDTH/8-1:0] WSTRB;
+  wire [USER_WIDTH-1:0] WUSER;
   wire WLAST;
   wire WVALID;
   wire WREADY;
-  reg [7:0] BID = 0;
+  reg [ID_WIDTH-1:0] BID = 0;
   reg [1:0] BRESP = 0;
-  reg [31:0] BUSER = 0;
+  reg [USER_WIDTH-1:0] BUSER = 0;
   reg BVALID = 0;
   wire BREADY;
-  wire [7:0] ARID;
-  wire [18:0] ARADDR;
+  wire [ID_WIDTH-1:0] ARID;
+  wire [ADDR_WIDTH-1:0] ARADDR;
   wire [7:0] ARLEN;
   wire [2:0] ARSIZE;
   wire [1:0] ARBURST;
   wire ARLOCK;
-  wire [31:0] ARUSER;
+  wire [USER_WIDTH-1:0] ARUSER;
   wire ARVALID;
   wire ARREADY = 0;
-  wire [7:0] RID = 0;
-  wire [31:0] RDATA = 0;
+  wire [ID_WIDTH-1:0] RID = 0;
+  wire [DATA_WIDTH-1:0] RDATA = 0;
   wire [1:0] RRESP = 0;
-  wire [31:0] RUSER = 0;
+  wire [USER_WIDTH-1:0] RUSER = 0;
   wire RLAST = 0;
   wire RVALID = 0;
   wire RREADY;
-  wire [7:0] write_response_id;
-  wire [7:0] read_response_id;
+  wire [ID_WIDTH-1:0] write_response_id;
+  wire [ID_WIDTH-1:0] read_response_id;
 
   reg w_enabled = 0;
   integer aw_count = 0;
   integer w_count = 0;
-  reg [7:0] accepted_id [0:4];
-  reg [18:0] accepted_addr [0:4];
-  reg [31:0] accepted_awuser [0:4];
-  reg [31:0] accepted_data [0:4];
-  reg [3:0] accepted_strb [0:4];
-  reg [31:0] accepted_wuser [0:4];
+  reg [ID_WIDTH-1:0] accepted_id [0:4];
+  reg [ADDR_WIDTH-1:0] accepted_addr [0:4];
+  reg [USER_WIDTH-1:0] accepted_awuser [0:4];
+  reg [DATA_WIDTH-1:0] accepted_data [0:4];
+  reg [DATA_WIDTH/8-1:0] accepted_strb [0:4];
+  reg [USER_WIDTH-1:0] accepted_wuser [0:4];
   reg accepted_last [0:4];
   reg [1:0] sent_response [0:4];
-  reg [31:0] sent_response_user [0:4];
+  reg [USER_WIDTH-1:0] sent_response_user [0:4];
+  reg response_sent [0:4];
   reg w_stalled = 0;
-  reg [31:0] stalled_data;
-  reg [3:0] stalled_strb;
-  reg [31:0] stalled_user;
+  reg [DATA_WIDTH-1:0] stalled_data;
+  reg [DATA_WIDTH/8-1:0] stalled_strb;
+  reg [USER_WIDTH-1:0] stalled_user;
   reg stalled_last;
   reg write_success [0:4];
   reg [1:0] write_response_result [0:4];
-  reg [31:0] write_response_user_result [0:4];
+  reg [USER_WIDTH-1:0] write_response_user_result [0:4];
 
   assign AWREADY = ARESETn;
   assign WREADY = ARESETn && w_enabled;
 
   axi4_caliptra_master #(
-    .ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32),
-    .MAX_BEATS(16), .TIMEOUT_CYCLES(64), .MAX_OUTSTANDING(MAX_OUTSTANDING)
+    .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH), .ID_WIDTH(ID_WIDTH),
+    .USER_WIDTH(USER_WIDTH), .MAX_BEATS(MAX_BEATS), .TIMEOUT_CYCLES(64),
+    .MAX_OUTSTANDING(MAX_OUTSTANDING)
   ) bfm (.*);
 
-  function automatic integer caller_for_id(input [7:0] id);
+  function automatic integer caller_for_awuser(input [USER_WIDTH-1:0] awuser);
     begin
-      case (id)
-        8'h11: caller_for_id = 0;
-        8'h22: caller_for_id = 1;
-        8'h33: caller_for_id = 2;
-        8'h44: caller_for_id = 3;
-        8'h55: caller_for_id = 4;
-        default: caller_for_id = -1;
-      endcase
+      caller_for_awuser = awuser[2:0];
+      if (caller_for_awuser > 4) caller_for_awuser = -1;
     end
   endfunction
 
@@ -128,21 +129,22 @@ module tb_axi4_caliptra_master_write_outstanding #(
     end
   end
 
-  task automatic launch_write(input integer index, input [18:0] addr, input [7:0] id);
+  task automatic launch_write(input integer index, input [ADDR_WIDTH-1:0] addr,
+                              input [ID_WIDTH-1:0] id);
     reg success;
-    reg [511:0] data;
-    reg [63:0] strb;
-    reg [511:0] user;
+    reg [MAX_BEATS*DATA_WIDTH-1:0] data;
+    reg [MAX_BEATS*(DATA_WIDTH/8)-1:0] strb;
+    reg [MAX_BEATS*USER_WIDTH-1:0] user;
     reg [1:0] response;
-    reg [31:0] response_user;
+    reg [USER_WIDTH-1:0] response_user;
     begin
       data = 0;
       data[31:0] = 32'hface_0000 | index;
       strb = 0;
-      strb[3:0] = 4'hf;
+      strb[0 +: 4] = 4'hf;
       user = 0;
       user[31:0] = 32'hcafe_0000 | index;
-      bfm.write_burst(addr, 0, 2, 2'b01, id, 32'hab00_0000 | id, 1'b0,
+      bfm.write_burst(addr, 0, 2, 2'b01, id, 32'hab00_0000 | index, 1'b0,
         data, strb, user, success, response, response_user);
       write_success[index] = success;
       write_response_result[index] = response;
@@ -189,30 +191,45 @@ module tb_axi4_caliptra_master_write_outstanding #(
   initial begin
     integer i;
     integer caller;
+    reg [DATA_WIDTH-1:0] expected_data;
+    reg [DATA_WIDTH/8-1:0] expected_strb;
+    reg [ID_WIDTH-1:0] expected_id;
+    for (i = 0; i < 5; i = i + 1) response_sent[i] = 0;
     wait (ARESETn === 1'b1);
     fork
-      launch_write(0, 19'h40, 8'h11);
-      launch_write(1, 19'h50, 8'h22);
-      launch_write(2, 19'h60, 8'h33);
-      launch_write(3, 19'h70, 8'h44);
-      launch_write(4, 19'h80, 8'h55);
+      launch_write(0, 48'h40, 8'h11);
+      launch_write(1, 48'h50, 8'h22);
+      launch_write(2, 48'h60, 8'h33);
+      launch_write(3, 48'h70, 8'h44);
+      launch_write(4, 48'h80, 8'h55);
     join
 
     if (aw_count != 5 || w_count != 5)
       $fatal(1, "target accepted AW=%0d W=%0d, expected five of each", aw_count, w_count);
     for (i = 0; i < 5; i = i + 1) begin
-      caller = caller_for_id(accepted_id[i]);
-      if (caller < 0) $fatal(1, "target accepted unknown BID %h", accepted_id[i]);
+      caller = caller_for_awuser(accepted_awuser[i]);
+      if (caller < 0) $fatal(1, "target accepted unknown AWUSER %h", accepted_awuser[i]);
+      expected_id = 8'h11 * (caller + 1);
+      if (accepted_id[i] !== expected_id ||
+          accepted_addr[i] !== (48'h40 + (caller * 16)) ||
+          accepted_awuser[i] !== (32'hab00_0000 | caller))
+        $fatal(1, "caller %0d AW channel was mismatched", caller);
       if (caller == 3 && sent_response[i] !== 2'b10)
         $fatal(1, "caller 3 did not receive its expected SLVERR response");
-      if (accepted_addr[i] !== (19'h40 + (caller * 16)) ||
-          accepted_awuser[i] !== (32'hab00_0000 | accepted_id[i]) ||
-          accepted_data[i] !== (32'hface_0000 | caller) || accepted_strb[i] !== 4'hf ||
-          accepted_wuser[i] !== (32'hcafe_0000 | caller) || accepted_last[i] !== 1'b1 ||
-          write_response_result[caller] !== sent_response[i] ||
+      if (write_response_result[caller] !== sent_response[i] ||
           write_response_user_result[caller] !== sent_response_user[i] ||
           write_success[caller] !== (sent_response[i] === 2'b00 || sent_response[i] === 2'b01))
         $fatal(1, "write caller %0d was mismatched to its accepted BID response", caller);
+    end
+    expected_strb = 0;
+    expected_strb[0 +: 4] = 4'hf;
+    for (i = 0; i < 5; i = i + 1) begin
+      caller = accepted_wuser[i][2:0];
+      if (caller > 4) $fatal(1, "target accepted unknown WUSER %h", accepted_wuser[i]);
+      expected_data = 32'hface_0000 | caller;
+      if (accepted_data[i] !== expected_data || accepted_strb[i] !== expected_strb ||
+          accepted_wuser[i] !== (32'hcafe_0000 | caller) || accepted_last[i] !== 1'b1)
+        $fatal(1, "caller %0d W channel was mismatched", caller);
     end
     if (bfm.write_busy) $fatal(1, "manager remained busy after all writes completed");
     $display("PASS: AXI MAX_OUTSTANDING=%0d queues writes and routes BID responses",
@@ -223,6 +240,10 @@ module tb_axi4_caliptra_master_write_outstanding #(
   initial begin
     integer i;
     integer caller;
+    integer prior;
+    integer candidate;
+    integer responses_sent;
+    reg blocked;
     reg [1:0] response_code;
     wait (ARESETn === 1'b1);
     wait_counts(MAX_OUTSTANDING);
@@ -230,16 +251,28 @@ module tb_axi4_caliptra_master_write_outstanding #(
     if (aw_count != MAX_OUTSTANDING || w_count != MAX_OUTSTANDING)
       $fatal(1, "manager exceeded MAX_OUTSTANDING=%0d before a response",
              MAX_OUTSTANDING);
-    for (i = MAX_OUTSTANDING - 1; i >= 0; i = i - 1) begin
-      caller = caller_for_id(accepted_id[i]);
-      response_code = caller == 3 ? 2'b10 : ((i % 2) ? 2'b01 : 2'b00);
-      send_response(i, response_code);
-    end
-    for (i = MAX_OUTSTANDING; i < 5; i = i + 1) begin
-      wait_counts(i + 1);
-      caller = caller_for_id(accepted_id[i]);
-      response_code = caller == 3 ? 2'b10 : ((i % 2) ? 2'b01 : 2'b00);
-      send_response(i, response_code);
+    responses_sent = 0;
+    while (responses_sent < 5) begin
+      if ((aw_count > responses_sent) && (w_count > responses_sent)) begin
+        candidate = -1;
+        for (i = 0; i < aw_count; i = i + 1) begin
+          if (!response_sent[i]) begin
+            blocked = 0;
+            for (prior = 0; prior < i; prior = prior + 1)
+              if (!response_sent[prior] && accepted_id[prior] == accepted_id[i])
+                blocked = 1;
+            if (!blocked) candidate = i;
+          end
+        end
+        if (candidate < 0) $fatal(1, "no eligible outstanding BID response");
+        caller = caller_for_awuser(accepted_awuser[candidate]);
+        response_code = caller == 3 ? 2'b10 : ((candidate % 2) ? 2'b01 : 2'b00);
+        send_response(candidate, response_code);
+        response_sent[candidate] = 1;
+        responses_sent = responses_sent + 1;
+      end else begin
+        @(posedge ACLK);
+      end
     end
   end
 
