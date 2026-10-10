@@ -1,0 +1,238 @@
+// SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
+`include "uvm_macros.svh"
+`include "caliptra_reg_defines.svh"
+`include "caliptra_reg_field_defines.svh"
+`include "kv_macros.svh"
+
+module tb_caliptra_hmac_ahb_uvm_bfm;
+  import uvm_pkg::*;
+  import ahb_lite_caliptra_uvm_pkg::*;
+  import kv_defines_pkg::*;
+
+  localparam [511:0] TEST_KEY = {4{128'h0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b}};
+  localparam [1023:0] TEST_BLOCK = 1024'h4869205468657265800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000440;
+  localparam [511:0] EXPECTED_TAG = 512'h637edc6e01dce7e6742a99451aae82df23da3e92439e590e43e761b33e910fb8ac2878ebd5803f6f0b61dbce5e251ff8789a4722c1be65aea45fd464e89f8f5b;
+  localparam [383:0] TEST_SEED = 384'h00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff;
+  localparam [31:0] SHA512_INIT =
+    (32'h1 << `HMAC_REG_HMAC512_CTRL_MODE_LOW) |
+    `HMAC_REG_HMAC512_CTRL_INIT_MASK;
+  localparam [31:0] CTRL_ZEROIZE = `HMAC_REG_HMAC512_CTRL_ZEROIZE_MASK;
+  localparam int unsigned EXPECTED_TRANSFERS = 172;
+
+  reg HCLK = 0;
+  reg HRESETn = 0;
+  wire HSEL, HWRITE, HRESP, HREADY, HREADYOUT;
+  wire [31:0] HADDR, HWDATA, HRDATA;
+  wire [2:0] HSIZE;
+  wire [1:0] HTRANS;
+  wire hmac_busy, hmac_error;
+  ahb_lite_caliptra_master_cmd_if cmd_if(HCLK);
+  ahb_lite_caliptra_record_if record_if(HCLK);
+  kv_read_t [1:0] kv_read;
+  kv_write_t kv_write;
+  kv_rd_resp_t [1:0] kv_rd_resp = '0;
+  kv_wr_resp_t kv_wr_resp = '0;
+  reg [`CLP_CSR_HMAC_KEY_DWORDS-1:0][31:0] cptra_csr_hmac_key = '0;
+
+  assign cmd_if.HRESETn = HRESETn;
+  assign HREADY = HREADYOUT;
+  always #5 HCLK = ~HCLK;
+
+  ahb_lite_caliptra_uvm_master_proxy #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) master_proxy (
+    .cmd_if(cmd_if), .HCLK(HCLK), .HRESETn(HRESETn), .HREADY(HREADY),
+    .HRESP(HRESP), .HRDATA(HRDATA), .HSEL(HSEL), .HADDR(HADDR),
+    .HWDATA(HWDATA), .HWRITE(HWRITE), .HSIZE(HSIZE), .HTRANS(HTRANS)
+  );
+
+  ahb_lite_caliptra_checker #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) checker_bfm (
+    .HCLK(HCLK), .HRESETn(HRESETn), .HADDR(HADDR), .HWDATA(HWDATA),
+    .HSEL(HSEL), .HWRITE(HWRITE), .HTRANS(HTRANS), .HSIZE(HSIZE),
+    .HREADY(HREADY), .HRESP(HRESP), .error(checker_error),
+    .error_code(checker_error_code), .error_count(checker_error_count)
+  );
+
+  ahb_lite_caliptra_pin_monitor_adapter #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) monitor_adapter (
+    .HCLK(HCLK), .HRESETn(HRESETn), .HADDR(HADDR), .HWDATA(HWDATA),
+    .HSEL(HSEL), .HWRITE(HWRITE), .HTRANS(HTRANS), .HSIZE(HSIZE),
+    .HREADY(HREADY), .HRESP(HRESP), .HRDATA(HRDATA), .record_if(record_if)
+  );
+
+  hmac_ctrl #(.AHB_ADDR_WIDTH(32), .AHB_DATA_WIDTH(32)) dut (
+    .clk(HCLK), .reset_n(HRESETn), .cptra_pwrgood(1'b1),
+    .cptra_csr_hmac_key(cptra_csr_hmac_key),
+    .haddr_i(HADDR), .hwdata_i(HWDATA), .hsel_i(HSEL), .hwrite_i(HWRITE),
+    .hready_i(HREADY), .htrans_i(HTRANS), .hsize_i(HSIZE),
+    .hresp_o(HRESP), .hreadyout_o(HREADYOUT), .hrdata_o(HRDATA),
+    .kv_read(kv_read), .kv_write(kv_write), .kv_rd_resp(kv_rd_resp),
+    .kv_wr_resp(kv_wr_resp), .busy_o(hmac_busy), .error_intr(hmac_error),
+    .notif_intr(), .ocp_lock_in_progress(1'b0),
+    .debugUnlock_or_scan_mode_switch(1'b0)
+  );
+
+  class hmac_ahb_monitor_subscriber extends uvm_subscriber #(ahb_lite_caliptra_transaction);
+    int unsigned transfer_count;
+    `uvm_component_utils(hmac_ahb_monitor_subscriber)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+    endfunction
+
+    function void write(ahb_lite_caliptra_transaction item);
+      if (item.protocol_error || item.error)
+        `uvm_fatal("HMAC_AHB_MON", $sformatf("Unexpected AHB response: %s", item.convert2string()))
+      if (item.size != 2 || item.trans != 2'b10 || item.data[63:32] != 0)
+        `uvm_fatal("HMAC_AHB_RECORD", $sformatf("Unexpected HMAC AHB record: %s", item.convert2string()))
+      transfer_count++;
+    endfunction
+  endclass
+
+  class hmac_ahb_env extends uvm_env;
+    ahb_lite_caliptra_agent agent;
+    hmac_ahb_monitor_subscriber observer;
+    `uvm_component_utils(hmac_ahb_env)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+    endfunction
+
+    function void build_phase(uvm_phase phase);
+      super.build_phase(phase);
+      agent = ahb_lite_caliptra_agent::type_id::create("agent", this);
+      agent.is_active = UVM_ACTIVE;
+      observer = hmac_ahb_monitor_subscriber::type_id::create("observer", this);
+    endfunction
+
+    function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
+      agent.ap.connect(observer.analysis_export);
+    endfunction
+  endclass
+
+  class hmac_ahb_sequence extends uvm_sequence #(ahb_lite_caliptra_transfer);
+    `uvm_object_utils(hmac_ahb_sequence)
+
+    function new(string name = "hmac_ahb_sequence");
+      super.new(name);
+    endfunction
+
+    task automatic transfer(input bit write, input [31:0] address,
+                            input [31:0] write_data, output [31:0] read_data);
+      ahb_lite_caliptra_transfer request;
+      request = ahb_lite_caliptra_transfer::type_id::create("request");
+      start_item(request);
+      request.write = write;
+      request.address = address;
+      request.size = 3'd2;
+      request.write_data = write_data;
+      finish_item(request);
+      if (!request.request_ok || !request.success || request.response_error || request.aborted)
+        `uvm_fatal("HMAC_AHB_TRANSFER", $sformatf("AHB transfer failed: %s", request.convert2string()))
+      read_data = request.read_data[31:0];
+    endtask
+
+    task automatic write_word(input [31:0] address, input [31:0] value);
+      reg [31:0] unused;
+      transfer(1'b1, address, value, unused);
+    endtask
+
+    task automatic read_word(input [31:0] address, output reg [31:0] value);
+      transfer(1'b0, address, 32'b0, value);
+    endtask
+
+    task body();
+      reg [31:0] status;
+      reg [511:0] observed_tag;
+      bit ready_seen;
+      int unsigned i;
+      int unsigned polls;
+
+      for (i = 0; i < 16; i++)
+        write_word(`CLP_HMAC_REG_HMAC512_KEY_0 + i*4, TEST_KEY[511-i*32 -: 32]);
+      for (i = 0; i < 32; i++)
+        write_word(`CLP_HMAC_REG_HMAC512_BLOCK_0 + i*4, TEST_BLOCK[1023-i*32 -: 32]);
+      for (i = 0; i < 12; i++)
+        write_word(`CLP_HMAC_REG_HMAC512_LFSR_SEED_0 + i*4, TEST_SEED[383-i*32 -: 32]);
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, SHA512_INIT);
+
+      ready_seen = 0;
+      for (polls = 0; polls < 10000 && !ready_seen; polls++) begin
+        read_word(`CLP_HMAC_REG_HMAC512_STATUS, status);
+        ready_seen = (status != 0);
+      end
+      if (!ready_seen)
+        `uvm_fatal("HMAC_AHB_TIMEOUT", "HMAC did not become ready within 10000 status polls")
+
+      observed_tag = '0;
+      for (i = 0; i < 16; i++) begin
+        read_word(`CLP_HMAC_REG_HMAC512_TAG_0 + i*4, status);
+        observed_tag[511-i*32 -: 32] = status;
+      end
+      if (observed_tag !== EXPECTED_TAG)
+        `uvm_fatal("HMAC_AHB_KAT", $sformatf("HMAC-SHA-512 known-answer mismatch: got %0128x", observed_tag))
+
+      write_word(`CLP_HMAC_REG_HMAC512_CTRL, CTRL_ZEROIZE);
+    endtask
+  endclass
+
+  class hmac_ahb_uvm_test extends uvm_test;
+    hmac_ahb_env env;
+    `uvm_component_utils(hmac_ahb_uvm_test)
+
+    function new(string name, uvm_component parent);
+      super.new(name, parent);
+    endfunction
+
+    function void build_phase(uvm_phase phase);
+      super.build_phase(phase);
+      env = hmac_ahb_env::type_id::create("env", this);
+    endfunction
+
+    task run_phase(uvm_phase phase);
+      hmac_ahb_sequence hmac_seq;
+      phase.raise_objection(this);
+      hmac_seq = hmac_ahb_sequence::type_id::create("hmac_seq");
+      hmac_seq.start(env.agent.sequencer);
+      fork
+        begin
+          wait (env.observer.transfer_count == EXPECTED_TRANSFERS);
+        end
+        begin
+          #2000000;
+          `uvm_fatal("HMAC_AHB_TIMEOUT", "Timed out waiting for HMAC AHB monitor records")
+        end
+      join_any
+      disable fork;
+      if (hmac_busy || hmac_error)
+        `uvm_fatal("HMAC_AHB_STATUS", "HMAC status is busy/error after digest completion")
+      phase.drop_objection(this);
+    endtask
+  endclass
+
+  initial begin
+    uvm_config_db#(virtual ahb_lite_caliptra_master_cmd_if)::set(
+      null, "uvm_test_top.env.agent.driver", "cmd_vif", cmd_if);
+    uvm_config_db#(virtual ahb_lite_caliptra_record_if)::set(
+      null, "uvm_test_top.env.agent.monitor", "vif", record_if);
+    run_test("hmac_ahb_uvm_test");
+  end
+
+  initial begin
+    repeat (4) @(posedge HCLK);
+    @(negedge HCLK);
+    HRESETn = 1;
+  end
+
+  final begin
+    if (record_if.checker_error !== 1'b0 || record_if.checker_error_count !== 0 ||
+        record_if.protocol_error !== 1'b0 || record_if.protocol_error_count !== 0 ||
+        record_if.address_count !== EXPECTED_TRANSFERS ||
+        record_if.transfer_count !== EXPECTED_TRANSFERS || record_if.transfer_error !== 1'b0 ||
+        record_if.transfer_fire !== 1'b1 || record_if.transfer_write !== 1'b1 ||
+        record_if.transfer_addr !== `CLP_HMAC_REG_HMAC512_CTRL ||
+        record_if.transfer_data[31:0] !== CTRL_ZEROIZE)
+      $fatal(1, "Caliptra HMAC AHB UVM checker/monitor did not report clean transfers");
+    $display("PASS: Caliptra HMAC RTL known-answer test through native UVM AHB agent (%0d transfers)", record_if.transfer_count);
+    $finish;
+  end
+endmodule

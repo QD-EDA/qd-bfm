@@ -107,6 +107,10 @@ actual ECC unit through `ahb_lite/tests/run_caliptra_ecc_ahb_uvm_bfm.sh`; this
 is unit-level DUT integration, not generated UVMF or full-top qualification.
 The three-edition tool/source provenance is recorded in
 [`evidence/caliptra-bfm-ecc-ahb-uvm-20261004`](../../evidence/caliptra-bfm-ecc-ahb-uvm-20261004/README.md).
+The native AHB manager and UVM agent also complete a SHA-512 known-answer
+operation against the actual HMAC unit RTL; the three-edition logs and source
+provenance are in
+[`evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010`](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md).
 
 The [`pv/`](pv/README.md) client master drives PCRVault read/write request
 lanes and samples the actual read response. It passes a direct DUT smoke with
@@ -507,7 +511,9 @@ Run the focused AXI and AHB simulations from the repository root with
 `dv/caliptra_bfm/axi/tests/run_*.sh` and
 `dv/caliptra_bfm/ahb_lite/tests/run_ahb_lite.sh`. Run the unit-level Caliptra
 ECC RTL checks with `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_bfm.sh`
-and `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_uvm_bfm.sh`.
+and `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_uvm_bfm.sh`. Run the
+HMAC RTL checks with `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_bfm.sh`
+and `dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh`.
 The direct-pin tests use system Icarus 13.0. The tests that compile Caliptra's
 typed `axi_if` or ECC RTL
 (`run_caliptra_axi_if.sh`, `run_caliptra_axi_complex_bfm.sh`,

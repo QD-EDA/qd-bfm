@@ -63,3 +63,38 @@ This native unit smoke makes no source workaround for that simulator defect.
 | Caliptra `hmac_ctrl.sv` | `5d5c34496cd8b57facb8802949901c19423b206ec13bb5662c1f8da6fe2a57d3` |
 | Caliptra vector testbench | `cb0b5d82b855b3d951c19a550e0017606a24e1bf4864229f09070795e2470cbd` |
 | Each edition log | `7eea3b938f33e244b7f9c8a08539bca5ab1475778fdee527f9b2a4dead90c52d` |
+
+## Current-state rerun through the native UVM agent (2026-10-10)
+
+The same known-answer case now runs through the native active
+`ahb_lite_caliptra_agent`, its sequencer/driver, command proxy, and pin monitor
+before reaching the pinned HMAC RTL. The test checks all transfer responses,
+monitor records, checker/protocol error flags, the full digest, and the final
+idle/no-error state.
+
+| IEEE edition | Result | Transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 172 | 0 / 0 / 0 |
+| 2017 | PASS | 172 | 0 / 0 / 0 |
+| 2023 | PASS | 172 | 0 / 0 / 0 |
+
+The agent monitor counted 110 reads and 62 writes, all 4-byte transfers, with
+zero protocol errors. The local memory guard observed 0.36–0.37 GiB peak
+process-group RSS. These are local measurements, not Slurm MaxRSS.
+
+Reproduce with the same loop above, setting
+`dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh` in place of
+the direct-manager runner.
+
+Logs: [IEEE 2012](logs/uvm-sv-2012.log),
+[IEEE 2017](logs/uvm-sv-2017.log),
+[IEEE 2023](logs/uvm-sv-2023.log).
+
+SHA-256: UVM runner
+`2bb37855889565b156e65c8d62129472ecf76e41de091fc1744b76769424628d`;
+testbench
+`aa69fd79b4eae261eeb791844b493f27b983a503e24d9a76cf9b263867f1c3c6`;
+logs respectively
+`442c8fb9e92b3670284abf058ff59f4cd2e216a5488b9f6dae2cbad48cc73903`,
+`eacc83481b1103016bc171e60cde43381209936f2e7b7e641b12e0b41186e5dc`, and
+`7eea4c05a673917ab17d137d821b923bf68733afb9fad5614d541ad301d25f78`.

@@ -1490,3 +1490,12 @@ checker, and monitor now drive the actual pinned HMAC controller RTL through
 and full-top qualification remain open; this case does not work around the
 generated-interface parser failure. See the [three-edition evidence and
 provenance](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md).
+
+**2026-10-10 native UVM HMAC-agent integration:** the same real-HMAC
+known-answer test passes through the open active AHB UVM agent, including its
+sequencer, driver, pin monitor, and protocol checker. All 172 transfers and
+the full 512-bit tag pass under IEEE 2012, 2017, and 2023 with zero UVM
+warnings/errors/fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. This validates the native UVM
+agent path against the HMAC unit RTL; generated UVMF and full-top qualification
+remain open. See the [three-edition results](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-rerun-through-the-native-uvm-agent-2026-10-10).

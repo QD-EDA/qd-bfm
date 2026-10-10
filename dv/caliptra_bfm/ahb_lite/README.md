@@ -178,3 +178,10 @@ under IEEE 2012, 2017, and 2023 on clean published Icarus
 `4b3f3424c440aca6af92153b6860a7253b925234`; see the [dated evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md).
 This is direct unit-level RTL coverage, not generated UVMF or full-top
 qualification.
+
+The same HMAC known-answer case also runs through the native UVM
+`ahb_lite_caliptra_agent` sequencer, driver, and monitor using
+`tests/run_caliptra_hmac_ahb_uvm_bfm.sh`. All 172 checked transfers and the
+512-bit digest pass under IEEE 2012, 2017, and 2023 with zero UVM warnings,
+errors, or fatals. This adds native UVM-agent integration coverage; generated
+UVMF and full-top qualification remain open. See the [dated evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-rerun-through-the-native-uvm-agent-2026-10-10).
