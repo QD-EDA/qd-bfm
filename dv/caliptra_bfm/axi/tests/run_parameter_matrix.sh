@@ -17,6 +17,7 @@ for config in 32:1 32:4 32:8 64:1 64:4 64:8 128:1 128:4 128:8; do
     -Ptb_axi4_caliptra_parameter_matrix.ID_WIDTH="$id_width" -o "$out" \
     ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv \
     ../axi4_caliptra_memory_subordinate.sv ../axi4_caliptra_monitor.sv \
+    ../axi4_caliptra_transaction_monitor.sv \
     tb_axi4_caliptra_parameter_matrix.sv
   "$VVP_BIN" "$out"
 done

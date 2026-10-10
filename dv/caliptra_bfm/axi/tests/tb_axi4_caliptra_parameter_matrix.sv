@@ -75,6 +75,87 @@ module tb_axi4_caliptra_parameter_matrix #(
     .w_last_count(w_last_count), .r_last_count(r_last_count)
   );
 
+  wire transaction_write_complete, transaction_write_error;
+  wire [3:0] transaction_write_status;
+  wire [ID_WIDTH-1:0] transaction_write_id, transaction_write_response_id;
+  wire [ADDR_WIDTH-1:0] transaction_write_addr;
+  wire [7:0] transaction_write_len;
+  wire [2:0] transaction_write_size;
+  wire [1:0] transaction_write_burst, transaction_write_response;
+  wire transaction_write_lock;
+  wire [USER_WIDTH-1:0] transaction_write_awuser, transaction_write_buser;
+  wire [8:0] transaction_write_beat_count;
+  wire [MAX_BEATS*DATA_WIDTH-1:0] transaction_write_data;
+  wire [MAX_BEATS*DATA_BYTES-1:0] transaction_write_strb;
+  wire [MAX_BEATS*USER_WIDTH-1:0] transaction_write_wuser;
+  wire [MAX_BEATS-1:0] transaction_write_last_mask;
+  wire transaction_read_complete, transaction_read_error;
+  wire [3:0] transaction_read_status;
+  wire [ID_WIDTH-1:0] transaction_read_id;
+  wire [ADDR_WIDTH-1:0] transaction_read_addr;
+  wire [7:0] transaction_read_len;
+  wire [2:0] transaction_read_size;
+  wire [1:0] transaction_read_burst;
+  wire transaction_read_lock;
+  wire [USER_WIDTH-1:0] transaction_read_aruser;
+  wire [8:0] transaction_read_beat_count;
+  wire [MAX_BEATS*DATA_WIDTH-1:0] transaction_read_data;
+  wire [MAX_BEATS*2-1:0] transaction_read_resp;
+  wire [MAX_BEATS*USER_WIDTH-1:0] transaction_read_ruser;
+  wire [MAX_BEATS-1:0] transaction_read_last_mask;
+  integer transaction_write_complete_count = 0;
+  integer transaction_read_complete_count = 0;
+
+  axi4_caliptra_transaction_monitor #(
+    .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH), .ID_WIDTH(ID_WIDTH),
+    .USER_WIDTH(USER_WIDTH), .MAX_BEATS(MAX_BEATS), .MAX_OUTSTANDING(2)
+  ) transaction_monitor_inst (
+    .ACLK(ACLK), .ARESETn(ARESETn),
+    .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
+    .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
+    .AWVALID(AWVALID), .AWREADY(AWREADY), .WDATA(WDATA), .WSTRB(WSTRB),
+    .WUSER(WUSER), .WLAST(WLAST), .WVALID(WVALID), .WREADY(WREADY),
+    .BID(BID), .BRESP(BRESP), .BUSER(BUSER), .BVALID(BVALID), .BREADY(BREADY),
+    .ARID(ARID), .ARADDR(ARADDR), .ARLEN(ARLEN), .ARSIZE(ARSIZE),
+    .ARBURST(ARBURST), .ARLOCK(ARLOCK), .ARUSER(ARUSER),
+    .ARVALID(ARVALID), .ARREADY(ARREADY), .RID(RID), .RDATA(RDATA),
+    .RRESP(RRESP), .RUSER(RUSER), .RLAST(RLAST), .RVALID(RVALID),
+    .RREADY(RREADY), .write_complete(transaction_write_complete),
+    .write_error(transaction_write_error), .write_status(transaction_write_status),
+    .write_id(transaction_write_id), .write_addr(transaction_write_addr),
+    .write_len(transaction_write_len), .write_size(transaction_write_size),
+    .write_burst(transaction_write_burst), .write_lock(transaction_write_lock),
+    .write_awuser(transaction_write_awuser),
+    .write_beat_count(transaction_write_beat_count),
+    .write_data(transaction_write_data), .write_strb(transaction_write_strb),
+    .write_wuser(transaction_write_wuser),
+    .write_last_mask(transaction_write_last_mask),
+    .write_response_id(transaction_write_response_id),
+    .write_response(transaction_write_response),
+    .write_buser(transaction_write_buser),
+    .read_complete(transaction_read_complete), .read_error(transaction_read_error),
+    .read_status(transaction_read_status), .read_id(transaction_read_id),
+    .read_addr(transaction_read_addr), .read_len(transaction_read_len),
+    .read_size(transaction_read_size), .read_burst(transaction_read_burst),
+    .read_lock(transaction_read_lock), .read_aruser(transaction_read_aruser),
+    .read_beat_count(transaction_read_beat_count),
+    .read_data(transaction_read_data), .read_resp(transaction_read_resp),
+    .read_ruser(transaction_read_ruser),
+    .read_last_mask(transaction_read_last_mask)
+  );
+
+  always @(posedge ACLK) begin
+    if (!ARESETn) begin
+      transaction_write_complete_count <= 0;
+      transaction_read_complete_count <= 0;
+    end else begin
+      if (transaction_write_complete)
+        transaction_write_complete_count <= transaction_write_complete_count + 1;
+      if (transaction_read_complete)
+        transaction_read_complete_count <= transaction_read_complete_count + 1;
+    end
+  end
+
   reg [DATA_WIDTH*MAX_BEATS-1:0] write_data, read_data;
   reg [DATA_BYTES*MAX_BEATS-1:0] write_strb;
   reg [USER_WIDTH*MAX_BEATS-1:0] write_user, read_user;
@@ -84,6 +165,7 @@ module tb_axi4_caliptra_parameter_matrix #(
   reg [1:0] response;
   reg [USER_WIDTH-1:0] response_user;
   reg [DATA_WIDTH-1:0] expected_data;
+  reg [4*USER_WIDTH-1:0] expected_transaction_ruser;
   integer beat, lane;
 
   task automatic check(input condition, input [8*100-1:0] message);
@@ -155,6 +237,7 @@ module tb_axi4_caliptra_parameter_matrix #(
         "WRAP payload, USER, or response failed for parameter configuration");
 
     checker_inst.check_idle();
+    repeat (2) @(posedge ACLK);
     check(aw_count == 2 && w_count == 6 && b_count == 2 &&
       ar_count == 2 && r_count == 6 && w_last_count == 2 && r_last_count == 2,
       "monitor channel or last-beat counts failed for parameter configuration");
@@ -162,6 +245,36 @@ module tb_axi4_caliptra_parameter_matrix #(
       ar_burst_incr_count == 1 && ar_burst_wrap_count == 1 &&
       w_strb_partial_count == 2,
       "monitor burst or strobe counts failed for parameter configuration");
+    check(transaction_write_complete_count == 2 &&
+      transaction_read_complete_count == 2,
+      "transaction monitor missed a completed matrix read or write");
+    check(!transaction_write_error && transaction_write_status == 0 &&
+      transaction_write_id === transaction_id &&
+      transaction_write_addr === WRAP_START && transaction_write_len == 3 &&
+      transaction_write_size == $clog2(DATA_BYTES) &&
+      transaction_write_burst == 2'b10 && !transaction_write_lock &&
+      transaction_write_awuser == 8'ha3 && transaction_write_beat_count == 4 &&
+      transaction_write_data[0 +: 4*DATA_WIDTH] === write_data[0 +: 4*DATA_WIDTH] &&
+      transaction_write_strb[0 +: 4*DATA_BYTES] === write_strb[0 +: 4*DATA_BYTES] &&
+      transaction_write_wuser[0 +: 4*USER_WIDTH] === write_user[0 +: 4*USER_WIDTH] &&
+      transaction_write_last_mask[3:0] == 4'b1000 &&
+      transaction_write_response_id === transaction_id &&
+      transaction_write_response == 0 && transaction_write_buser == 8'ha3,
+      "transaction monitor WRAP write record failed for parameter configuration");
+    expected_transaction_ruser = 0;
+    for (beat = 0; beat < 4; beat = beat + 1)
+      expected_transaction_ruser[beat*USER_WIDTH +: USER_WIDTH] = 8'ha4;
+    check(!transaction_read_error && transaction_read_status == 0 &&
+      transaction_read_id === transaction_id &&
+      transaction_read_addr === WRAP_START && transaction_read_len == 3 &&
+      transaction_read_size == $clog2(DATA_BYTES) &&
+      transaction_read_burst == 2'b10 && !transaction_read_lock &&
+      transaction_read_aruser == 8'ha4 && transaction_read_beat_count == 4 &&
+      transaction_read_data[0 +: 4*DATA_WIDTH] === write_data[0 +: 4*DATA_WIDTH] &&
+      transaction_read_resp[0 +: 8] == 0 &&
+      transaction_read_ruser[0 +: 4*USER_WIDTH] === expected_transaction_ruser &&
+      transaction_read_last_mask[3:0] == 4'b1000,
+      "transaction monitor WRAP read record failed for parameter configuration");
     $display("PASS: AXI DATA_WIDTH=%0d ID_WIDTH=%0d parameter matrix",
       DATA_WIDTH, ID_WIDTH);
     $finish;
