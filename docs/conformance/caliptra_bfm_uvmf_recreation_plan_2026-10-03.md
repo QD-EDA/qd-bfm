@@ -1518,3 +1518,15 @@ single-block vectors, the 612-transfer sequence passes in IEEE 2012, 2017, and
 `4b3f3424c440aca6af92153b6860a7253b925234`. Multi-block continuation is now
 covered at this unit level; generated UVMF and full-top qualification remain
 open. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-multi-block-continuation-rerun-2026-10-10).
+
+**2026-10-10 generated-style bench-sequence factory override:** the UVMF-lite
+active/passive reference test now installs the bench-sequence type override in
+the derived test's `build_phase`, before the base test constructs its
+top-level sequence. A check-phase assertion confirms the replacement body ran
+and delegated to the inherited environment sequence. The no-override control
+fails that assertion; the guarded positive and scoreboard-mismatch runs pass
+under IEEE 2017 and 2023 on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. This extends self-authored
+generated-style override coverage only; the base-library UVM-version gate and
+generated Caliptra compile/runtime blockers remain open. See the dated
+[UVMF-lite evidence](../../evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md#2026-10-10-generated-style-bench-sequence-override-follow-up).

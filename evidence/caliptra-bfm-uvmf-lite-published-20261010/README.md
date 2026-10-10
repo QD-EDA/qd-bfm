@@ -37,3 +37,25 @@ clean-room UVMF-lite foundation only. It does not prove compatibility with the
 generated Caliptra ECC interfaces, full generated UVMF environments, or
 full-top firmware; the current `c339b9f2` generated-interface compile failure
 is recorded separately.
+
+## 2026-10-10 generated-style bench-sequence override follow-up
+
+The active/passive smoke now applies the same factory pattern used by generated
+tests: `agent_test.build_phase` overrides `agent_bench_sequence` before calling
+the UVMF test base, and the derived sequence records execution before running
+the inherited body. The check-phase assertion requires that derived body to
+have run, so a bypassed override fails the test. The no-override red control
+failed at that assertion; with the override enabled, the guarded runner passed
+under IEEE 2017 and 2023. Positive runs reported zero UVM errors/fatals; the
+intentional scoreboard-mismatch controls reported exactly one UVM error and
+zero fatals per edition. All used clean published Icarus main
+`4b3f3424c440aca6af92153b6860a7253b925234` with Accellera UVM 2020.3.1.
+
+The complete runner output is retained losslessly in
+[`logs/bench-sequence-override.log.gz`](logs/bench-sequence-override.log.gz);
+its uncompressed log SHA-256 and source, runner, and simulator hashes are
+listed in [`logs/bench-sequence-override-sha256.txt`](logs/bench-sequence-override-sha256.txt).
+The run was local under the existing process-group memory guard because SSH to
+the Slurm host timed out. It extends only the clean-room UVMF-lite factory
+smoke; generated Caliptra interfaces remain blocked by the separately recorded
+Icarus compile defect.

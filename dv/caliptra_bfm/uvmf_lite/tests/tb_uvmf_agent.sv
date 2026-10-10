@@ -380,6 +380,18 @@ package uvmf_lite_agent_test_pkg;
     endtask
   endclass
 
+  class agent_bench_sequence_override extends agent_bench_sequence;
+    static bit run_observed;
+    `uvm_object_utils(agent_bench_sequence_override)
+    function new(string name = "agent_bench_sequence_override");
+      super.new(name);
+    endfunction
+    virtual task body();
+      run_observed = 1;
+      super.body();
+    endtask
+  endclass
+
   class agent_test extends uvmf_test_base #(
     agent_environment_configuration, agent_environment, agent_bench_sequence
   );
@@ -405,6 +417,8 @@ package uvmf_lite_agent_test_pkg;
     endfunction
 
     virtual function void build_phase(uvm_phase phase);
+      agent_bench_sequence::type_id::set_type_override(
+        agent_bench_sequence_override::get_type());
       super.build_phase(phase);
       expect_scoreboard_mismatch = $test$plusargs("BFM_LITE_EXPECT_MISMATCH");
       configuration.initialize(NA, "uvm_test_top.environment", interface_names,
@@ -477,6 +491,7 @@ package uvmf_lite_agent_test_pkg;
           agent_sequence::completed_value != 42 ||
           agent_sequence::response_value != 42 ||
           !agent_sequence::response_copy_isolated ||
+          !agent_bench_sequence_override::run_observed ||
           agent_observer::item_count != 1 || agent_observer::last_value != 42 ||
           agent_coverage::sample_count != 1 || agent_coverage::sampled_value != 42 ||
           driver_bfm.proxy != agent::active_driver ||

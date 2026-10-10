@@ -65,9 +65,9 @@ It also checks that the out-of-order scoreboard matches reordered items. The
 negative controls are part of the pass condition. The agent smoke
 follows a generated-style test → environment → active/passive agent hierarchy,
 initializes typed virtual BFMs, exercises the active sequencer/driver path,
-verifies the type override creates both agents, checks driver and monitor
-proxy installation, starts a virtual sequence on a configured virtual sequencer,
-and carries monitor data
+verifies type overrides create both agents and replace the generated-style
+top-level bench sequence, checks driver and monitor proxy installation, starts
+a virtual sequence on a configured virtual sequencer, and carries monitor data
 through `monitored_ap` to an observer and coverage sink. A second passive agent
 reuses a parent-created monitor provided under its `monitor` config-db key to
 observe the response from a one-cycle combinational toy DUT. A predictor
