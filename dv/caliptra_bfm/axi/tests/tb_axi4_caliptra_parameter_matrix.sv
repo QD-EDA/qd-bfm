@@ -54,7 +54,26 @@ module tb_axi4_caliptra_parameter_matrix #(
   axi4_caliptra_monitor #(
     .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH), .ID_WIDTH(ID_WIDTH),
     .USER_WIDTH(USER_WIDTH)
-  ) monitor_inst (.*);
+  ) monitor_inst (
+    .ACLK(ACLK), .ARESETn(ARESETn),
+    .AWID(AWID), .AWADDR(AWADDR), .AWLEN(AWLEN), .AWSIZE(AWSIZE),
+    .AWBURST(AWBURST), .AWLOCK(AWLOCK), .AWUSER(AWUSER),
+    .AWVALID(AWVALID), .AWREADY(AWREADY), .WDATA(WDATA), .WSTRB(WSTRB),
+    .WUSER(WUSER), .WLAST(WLAST), .WVALID(WVALID), .WREADY(WREADY),
+    .BID(BID), .BRESP(BRESP), .BUSER(BUSER), .BVALID(BVALID), .BREADY(BREADY),
+    .ARID(ARID), .ARADDR(ARADDR), .ARLEN(ARLEN), .ARSIZE(ARSIZE),
+    .ARBURST(ARBURST), .ARLOCK(ARLOCK), .ARUSER(ARUSER),
+    .ARVALID(ARVALID), .ARREADY(ARREADY), .RID(RID), .RDATA(RDATA),
+    .RRESP(RRESP), .RUSER(RUSER), .RLAST(RLAST), .RVALID(RVALID),
+    .RREADY(RREADY), .aw_count(aw_count), .w_count(w_count),
+    .b_count(b_count), .ar_count(ar_count), .r_count(r_count),
+    .aw_burst_incr_count(aw_burst_incr_count),
+    .aw_burst_wrap_count(aw_burst_wrap_count),
+    .ar_burst_incr_count(ar_burst_incr_count),
+    .ar_burst_wrap_count(ar_burst_wrap_count),
+    .w_strb_partial_count(w_strb_partial_count),
+    .w_last_count(w_last_count), .r_last_count(r_last_count)
+  );
 
   reg [DATA_WIDTH*MAX_BEATS-1:0] write_data, read_data;
   reg [DATA_BYTES*MAX_BEATS-1:0] write_strb;
