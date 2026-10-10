@@ -564,3 +564,8 @@ record; classify the late-window outcome as incomplete, not a BFM failure.
 The queue had no matching live job. Fresh job `240_1` is running from a new
 output root with 1 CPU and 3 GB requested, based on prior MaxRSS near 1.77 GiB
 plus about 1.23 GiB headroom. See the [reset-window evidence](evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/README.md).
+
+Job `240_1` compiled and generated firmware, then VVP exited `-11` after
+51.21 s at cycle 100, before reset assertion. It recorded no test marker or
+finish record and used 1,860,052 KiB MaxRSS. This leaves late-window behavior
+unverified; the evidence package records it as an incomplete simulator crash.

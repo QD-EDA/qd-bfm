@@ -125,3 +125,13 @@ Job `240_1` was then submitted to a fresh output root, requesting 1 CPU and
 3 GB. The request is based on prior full-top peaks near 1.77 GiB, with about
 1.23 GiB headroom. Its exact submission script is in [`job-240/`](job-240/);
 the immediate queue check showed it running, with the outcome pending.
+
+## 2026-10-10 Job 240 result
+
+Job `240_1` compiled and generated firmware successfully, then VVP exited
+`-11` after 51.21 seconds at cycle 100, before the requested reset window. The
+result has no testcase pass/fail marker, reset assertion, or finish record;
+MaxRSS was 1,860,052 KiB. This is an incomplete simulator-crash diagnostic,
+not a result about late-reset BFM behavior. The exact logs and result JSON are
+in [`job-240/window-2822/`](job-240/window-2822/), with hashes in
+[`job-240/SHA256SUMS`](job-240/SHA256SUMS).
