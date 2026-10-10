@@ -1,0 +1,3 @@
+memory guard: preflight available 23.72 GiB; process-group cap 1.40 GiB; system reserve 5.59 GiB
+memory guard: stopping command (process group reached 1.42 GiB (cap 1.40 GiB))
+memory guard: minimum available 22.62 GiB; maximum process group 1.42 GiB

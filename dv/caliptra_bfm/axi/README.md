@@ -366,8 +366,9 @@ does not impose a wall-clock response timeout; that policy belongs to the
 testbench or active BFM.
 
 Run the stalled multi-beat case, legal W-before-AW and cross-ID response
-reordering, exclusive-monitor invalidation, narrow transfers, and forty-one
-negative controls—including payload stability on all five channels—with:
+reordering, exclusive-monitor invalidation, narrow transfers, and negative
+controls—including payload stability on all five channels and X/Z on every
+VALID/READY control—with:
 
 ```sh
 ./tests/run_checker.sh

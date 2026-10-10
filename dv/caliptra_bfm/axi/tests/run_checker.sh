@@ -42,7 +42,6 @@ for entry in \
   'BAD_RLAST:AXI RLAST does not match' \
   'BAD_WSTRB:WSTRB enables bytes outside' \
   'BAD_X_WSTRB:W payload is unknown' \
-  'BAD_X_HANDSHAKE:VALID/READY control is unknown' \
   'BAD_X_RESET:ARESETn is unknown' \
   'BAD_X_WDATA:W payload is unknown' \
   'BAD_4KB:crosses a 4KB boundary' \
@@ -85,4 +84,17 @@ for entry in \
     exit 1
   fi
 done
-printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected forty-one injected protocol violations\n'
+for control in 0 1 2 3 4 5 6 7 8 9; do
+  for use_z in 0 1; do
+    if "$VVP_BIN" "$out" +CASE=BAD_UNKNOWN_CONTROL +CONTROL="$control" +USE_Z="$use_z" >"$log" 2>&1; then
+      printf 'unknown VALID/READY control %s unexpectedly passed\n' "$control" >&2
+      exit 1
+    fi
+    if ! grep -q 'VALID/READY control is unknown' "$log"; then
+      cat "$log" >&2
+      printf 'unknown VALID/READY control %s failed for an unexpected reason\n' "$control" >&2
+      exit 1
+    fi
+  done
+done
+printf 'PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected protocol violations and X/Z on every VALID/READY control\n'

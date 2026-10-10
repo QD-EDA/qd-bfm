@@ -42,11 +42,31 @@ module tb_axi4_caliptra_checker;
   reg RVALID = 0;
   reg RREADY = 0;
   reg [8*32-1:0] test_case = "GOOD";
+  integer control_index;
+  integer use_z;
 
   axi4_caliptra_checker #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32)) dut (.*);
 
   task automatic step;
     begin @(posedge ACLK); #1; end
+  endtask
+
+  task automatic set_unknown_control(input integer index, input integer inject_z);
+    begin
+      case (index)
+        0: AWVALID = inject_z ? 1'bz : 1'bx;
+        1: AWREADY = inject_z ? 1'bz : 1'bx;
+        2: WVALID = inject_z ? 1'bz : 1'bx;
+        3: WREADY = inject_z ? 1'bz : 1'bx;
+        4: BVALID = inject_z ? 1'bz : 1'bx;
+        5: BREADY = inject_z ? 1'bz : 1'bx;
+        6: ARVALID = inject_z ? 1'bz : 1'bx;
+        7: ARREADY = inject_z ? 1'bz : 1'bx;
+        8: RVALID = inject_z ? 1'bz : 1'bx;
+        9: RREADY = inject_z ? 1'bz : 1'bx;
+        default: $fatal(1, "unknown VALID/READY control index %0d", index);
+      endcase
+    end
   endtask
 
   task automatic send_aw(input [7:0] id, input [18:0] addr, input [7:0] len);
@@ -175,8 +195,11 @@ module tb_axi4_caliptra_checker;
     end else if (test_case == "BAD_X_WSTRB") begin
       WSTRB = 4'bx001;
       send_w(32'haaaa, 1);
-    end else if (test_case == "BAD_X_HANDSHAKE") begin
-      @(negedge ACLK); AWVALID = 1'bx;
+    end else if (test_case == "BAD_UNKNOWN_CONTROL") begin
+      if (!$value$plusargs("CONTROL=%d", control_index) ||
+          !$value$plusargs("USE_Z=%d", use_z))
+        $fatal(1, "BAD_UNKNOWN_CONTROL requires CONTROL and USE_Z plusargs");
+      @(negedge ACLK); set_unknown_control(control_index, use_z);
       step();
     end else if (test_case == "BAD_X_RESET") begin
       @(negedge ACLK); ARESETn = 1'bx;

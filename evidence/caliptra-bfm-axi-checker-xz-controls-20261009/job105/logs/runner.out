@@ -1,0 +1,29 @@
+memory guard: preflight available 23.41 GiB; process-group cap 0.14 GiB; system reserve 5.59 GiB
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD
+tb_axi4_caliptra_checker.sv:524: $finish called at 200000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_REORDER
+tb_axi4_caliptra_checker.sv:524: $finish called at 220000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_SAME_ID_READS
+tb_axi4_caliptra_checker.sv:524: $finish called at 120000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_SAME_ID_WRITES
+tb_axi4_caliptra_checker.sv:524: $finish called at 140000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_EXCLUSIVE
+tb_axi4_caliptra_checker.sv:524: $finish called at 250000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_LOCK_INVALIDATED_OKAY
+tb_axi4_caliptra_checker.sv:524: $finish called at 300000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_LOCK_NONOVERLAP_EXOKAY
+tb_axi4_caliptra_checker.sv:524: $finish called at 310000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_LOCK_ZERO_STROBE_EXOKAY
+tb_axi4_caliptra_checker.sv:524: $finish called at 310000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_LOCK_ACTIVE_EXOKAY
+tb_axi4_caliptra_checker.sv:524: $finish called at 310000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_LOCK_READ_FAIL_OKAY
+tb_axi4_caliptra_checker.sv:524: $finish called at 240000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_NARROW_INCR
+tb_axi4_caliptra_checker.sv:524: $finish called at 100000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_NARROW_FIXED
+tb_axi4_caliptra_checker.sv:524: $finish called at 100000 (1ps)
+PASS: Caliptra AXI checker accepts valid traffic case=GOOD_NARROW_WRAP
+tb_axi4_caliptra_checker.sv:524: $finish called at 140000 (1ps)
+PASS: AXI checker accepted reordered, exclusive-monitor, and narrow transfers; rejected protocol violations and X/Z on every VALID/READY control
+memory guard: command exited 0; minimum available 23.35 GiB; maximum process group 0.01 GiB

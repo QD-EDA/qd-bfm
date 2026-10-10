@@ -245,6 +245,15 @@ and [write evidence bundle](evidence/caliptra-bfm-axi-write-outstanding-paramete
 Full Caliptra/UVMF qualification and other supported-profile combinations
 remain open.
 
+## Current AXI checker X/Z control status — 2026-10-09
+
+The guarded Icarus checker regression now injects X and Z independently on
+every VALID/READY control across all five channels, and rejects all 20 cases.
+The full run passed on clean published Icarus `main`
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; see the
+[checker X/Z evidence bundle](evidence/caliptra-bfm-axi-checker-xz-controls-20261009/README.md).
+Cross-simulator parity remains open.
+
 ## Current AXI transaction-monitor parameter status — 2026-10-09
 
 The transaction monitor now passes the representative 3×3 width/ID matrix,
@@ -263,3 +272,12 @@ case on clean QD-BFM `c8ce915` and current published Icarus `main`
 measurement are in the
 [maximum-burst evidence bundle](evidence/caliptra-bfm-axi-complex-256b-20261009/README.md).
 This does not qualify Caliptra firmware or UVM integration.
+
+## Current Verilator parity status — 2026-10-09
+
+Full-complex and standalone-checker Slurm pilots were stopped by the memory
+guard during compilation before simulation. Their requested memory, observed
+guard thresholds, and raw logs are recorded in the
+[Verilator pilot evidence bundle](evidence/caliptra-bfm-verilator-pilot-20261009/README.md).
+Verilator runtime parity remains open; these pilots are not compile or
+behavioral passes.
