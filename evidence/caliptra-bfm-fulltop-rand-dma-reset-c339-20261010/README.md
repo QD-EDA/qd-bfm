@@ -42,12 +42,16 @@ trace shows AW6 at cycle 5327 and B6 at 5356; reset asserted later at cycles
 The measured MaxRSS values were 1,860,292 KiB and 1,860,328 KiB. The complete
 array script and raw run records are in [`job-218/`](job-218/).
 
-## Next calibrated reset windows
+## Job 227: targeted reset run inconclusive
 
-The same trace supports two in-flight windows: delay 567 asserts reset at cycle
-3080, between AW1 at 3066 and B1 at 3106; delay 2822 asserts at cycle 5335,
-between AW6 at 5327 and B6 at 5356. The refreshed script requests 1 CPU and
-3 GB per task, with two-way concurrency, based on the measured 1.77 GiB peak
-plus about 1.23 GiB headroom. Use distinct per-run output directories.
+Job 227 used the calibrated delays 567 and 2822 with 1 CPU and 3 GB per task.
+Both VVP processes exited `-11` before the scheduled reset request at cycle
+2511. Neither log contains a reset assertion, testcase pass/fail marker, or
+finish record; the last CPU trace samples were cycles 100 and 600. These runs
+provide no evidence about in-flight reset behavior; the crash cause is not
+localized. Their measured MaxRSS values were 1,860,240 KiB and 1,860,224 KiB.
+Raw records and the exact submitted script are in [`job-227/`](job-227/).
 
-Submitted as Slurm array job 227. Per-task output is under `bfm-rand-reset-c339-inflight-20261010-02/runs/window-567` and `.../window-2822` on DAN-DESKTOP. Append the final results and resource peaks here.
+The trace calibration remains valid: reset delay 567 targets cycle 3080 between
+AW1 at 3066 and B1 at 3106. The separate delay 2822 targets cycle 5335 between
+AW6 at 5327 and B6 at 5356.
