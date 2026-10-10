@@ -14,6 +14,7 @@ trap 'rm -rf "$tmpdir"' EXIT
 cd "$repo_root"
 "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_random_stalls_distribution -o "$out" \
   dv/caliptra_bfm/axi/axi4_caliptra_random_stalls.sv \
+  dv/caliptra_bfm/axi/axi4_caliptra_fifo_subordinate.sv \
   dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_random_stalls_distribution.sv
 "$VVP_BIN" "$out"
 "$IVERILOG_BIN" -g2012 -DVERILATOR -DXCELIUM -DCALIPTRA_BFM_CHECKER \

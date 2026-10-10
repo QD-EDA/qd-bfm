@@ -153,20 +153,26 @@ module axi4_caliptra_fifo_subordinate #(
 
   // Integer sampling equivalent to the pinned dist {0..1 :/ 500,
   // 2..7 :/ 75, 8..31 :/ 3, 32..255 :/ 1} group weights.
+  function automatic [11:0] choose_auto_stall_count_from_draw(input integer draw);
+    begin
+      if (draw < 500)
+        choose_auto_stall_count_from_draw = 0;
+      else if (draw < 1000)
+        choose_auto_stall_count_from_draw = 1;
+      else if (draw < 1450)
+        choose_auto_stall_count_from_draw = 2 + ((draw - 1000) / 75);
+      else if (draw < 1522)
+        choose_auto_stall_count_from_draw = 8 + ((draw - 1450) / 3);
+      else
+        choose_auto_stall_count_from_draw = 32 + (draw - 1522);
+    end
+  endfunction
+
   function automatic [11:0] choose_auto_stall_count;
     integer draw;
     begin
-      draw = $urandom_range(129695, 0);
-      if (draw < 56000)
-        choose_auto_stall_count = 0;
-      else if (draw < 112000)
-        choose_auto_stall_count = 1;
-      else if (draw < 128800)
-        choose_auto_stall_count = 2 + ((draw - 112000) / 2800);
-      else if (draw < 129472)
-        choose_auto_stall_count = 8 + ((draw - 128800) / 28);
-      else
-        choose_auto_stall_count = 32 + (draw - 129472);
+      draw = $urandom_range(1745, 0);
+      choose_auto_stall_count = choose_auto_stall_count_from_draw(draw);
     end
   endfunction
 

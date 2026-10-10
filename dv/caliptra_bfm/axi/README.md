@@ -206,9 +206,9 @@ leaves its block-size array unknown otherwise. The test fails on that X array
 without the gate and passes with it. Full-top runs using the replacement are
 recorded in
 [`open-top smoke evidence`](../../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
-The random-stall delay mapper preserves Caliptra's per-value `dist` weights
-exactly; the same runner checks all 1,746 weighted draws against the 256
-expected delay values.
+The AXI-channel and autonomous FIFO delay mappers preserve Caliptra's
+per-value `dist` weights exactly; the same runner checks all 1,746 weighted
+draws against the 256 expected delay values for both.
 The 2026-10-07 wrapper smoke also writes 208 deterministic SRAM words through
 AXI and reads them back in thirteen 16-beat INCR bursts, checking every data
 word, response, ID, USER, and LAST field. The guarded run passes with Icarus
