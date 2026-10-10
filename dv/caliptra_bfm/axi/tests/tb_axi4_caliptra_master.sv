@@ -125,7 +125,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         write_burst <= AWBURST;
         write_id <= AWID;
         write_count <= 0;
-        if (AWUSER !== 32'hca11_ab1e || AWLOCK !== 1'b1)
+        if (AWUSER !== 32'hca11_ab1e || AWLOCK !== (test_case != "WRAP_NARROW"))
           $fatal(1, "master lost AWUSER or AWLOCK");
         if (w_before_aw_mode && early_w_pending) begin
           if (AWLEN !== 0 || !early_wlast)
@@ -181,7 +181,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         read_burst <= ARBURST;
         read_id <= ARID;
         read_count <= 0;
-        if (ARUSER !== 32'hcafe_0001 || ARLOCK !== 1'b1)
+        if (ARUSER !== 32'hcafe_0001 || ARLOCK !== (test_case != "WRAP_NARROW"))
           $fatal(1, "master lost ARUSER or ARLOCK");
         if (!suppress_read) begin
           RID <= ARID;
@@ -236,7 +236,48 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
     repeat (2) @(posedge ACLK);
     @(negedge ACLK); bfm.reset_master(); ARESETn = 1;
 
-    if (test_case == "W_BEFORE_AW") begin
+    if (test_case == "WRAP_NARROW") begin
+      write_data = {384'b0, 32'h4444_4444, 32'h3333_3333,
+                    32'h2222_2222, 32'h1111_1111};
+      write_strb = {48'b0, 4'hf, 4'hf, 4'hf, 4'hf};
+      write_user = {384'b0, 32'hd000_0003, 32'hd000_0002,
+                    32'hd000_0001, 32'hd000_0000};
+      bfm.write_burst(19'h4c, 3, 2, 2'b10, 8'h30, 32'hca11_ab1e, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && response == 0 && write_response_id == 8'h30,
+        "legal WRAP write failed");
+      bfm.read_burst(19'h4c, 3, 2, 2'b10, 8'h31, 32'hcafe_0001, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(success && read_data[31:0] == 32'h1111_1111 &&
+        read_data[63:32] == 32'h2222_2222 &&
+        read_data[95:64] == 32'h3333_3333 &&
+        read_data[127:96] == 32'h4444_4444 && read_response_id == 8'h31,
+        "WRAP read did not return the wrapped address sequence");
+
+      write_data = {480'b0, 32'h0000_c3d4, 32'ha1b2_0000};
+      write_strb = {56'b0, 4'h3, 4'hc};
+      write_user = {448'b0, 32'hd000_0001, 32'hd000_0000};
+      bfm.write_burst(19'h42, 1, 1, 2'b01, 8'h32, 32'hca11_ab1e, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && response == 0, "aligned narrow INCR write failed");
+      bfm.read_burst(19'h42, 1, 1, 2'b01, 8'h33, 32'hcafe_0001, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(success && read_data[31:0] == 32'ha1b2_00ff &&
+        read_data[63:32] == 32'h1234_c3d4,
+        "narrow INCR transfer corrupted adjacent byte lanes");
+
+      bfm.write_burst(19'h40, 2, 2, 2'b10, 8'h34, 32'hca11_ab1e, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(!success && !AWVALID && !WVALID && !bfm.write_busy,
+        "manager accepted a three-beat WRAP burst");
+      bfm.read_burst(19'h41, 0, 1, 2'b01, 8'h35, 32'hcafe_0001, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(!success && !ARVALID && !bfm.read_busy,
+        "manager accepted a misaligned narrow transfer");
+      if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
+      $display("PASS: AXI manager WRAP, narrow INCR, and invalid burst shapes");
+      $finish;
+    end else if (test_case == "W_BEFORE_AW") begin
       w_before_aw_mode = 1;
       write_data = {480'b0, 32'h0123_4567};
       write_strb = {60'b0, 4'hf};

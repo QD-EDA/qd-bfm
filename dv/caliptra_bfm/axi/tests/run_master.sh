@@ -15,6 +15,7 @@ trap 'rm -f "$out" "$out_no_checker" "$out_outstanding" "$out_write_outstanding"
 "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master -o "$out" \
   ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv tb_axi4_caliptra_master.sv
 "$VVP_BIN" "$out"
+"$VVP_BIN" "$out" +CASE=WRAP_NARROW
 "$VVP_BIN" "$out" +CASE=W_BEFORE_AW
 "$VVP_BIN" "$out" +CASE=CONCURRENT
 "$VVP_BIN" "$out" +CASE=RESET_ABORT
