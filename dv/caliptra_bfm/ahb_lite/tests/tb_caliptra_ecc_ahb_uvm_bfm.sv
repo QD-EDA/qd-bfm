@@ -6,6 +6,7 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
   import uvm_pkg::*;
   import mvc_pkg::*;
   import mgc_ahb_v2_0_pkg::*;
+  import qvip_ahb_lite_slave_pkg::*;
   import ahb_lite_caliptra_uvm_pkg::*;
   import kv_defines_pkg::*;
 
@@ -67,6 +68,7 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
   class ecc_ahb_monitor_subscriber extends uvm_subscriber #(ahb_lite_caliptra_transaction);
     int unsigned write_count;
     int unsigned read_count;
+    bit [31:0] expected_data = 32'h1;
 
     `uvm_component_utils(ecc_ahb_monitor_subscriber)
 
@@ -78,7 +80,7 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
       if (item.protocol_error || item.error)
         `uvm_fatal("ECC_AHB_MON", $sformatf("Unexpected AHB response: %s", item.convert2string()))
       if (item.address != 32'h0000_0804 || item.trans != 2'b10 || item.size != 2 ||
-          item.data[31:0] != 32'h1 || item.data[63:32] != 0)
+          item.data[31:0] != expected_data || item.data[63:32] != 0)
         `uvm_fatal("ECC_AHB_RECORD", $sformatf("Unexpected ECC CSR record: %s", item.convert2string()))
       if (item.write)
         write_count++;
@@ -179,6 +181,7 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
     ecc_ahb_env env;
     ecc_ahb_smoke_block ral_model;
     ahb_lite_caliptra_reg_adapter ral_adapter;
+    ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer) ral_predictor;
 
     `uvm_component_utils(ecc_ahb_uvm_test)
 
@@ -193,11 +196,17 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
       ral_model.build();
       ral_adapter = ahb_lite_caliptra_reg_adapter::type_id::create("ral_adapter");
       ral_adapter.set_bus_data_width(32);
+      ral_predictor = ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer)::type_id::create(
+        "ral_predictor", this);
     endfunction
 
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       ral_model.default_map.set_sequencer(env.agent.m_sequencer, ral_adapter);
+      ral_model.default_map.set_auto_predict(0);
+      env.agent.agent.burst_transfer_ap.connect(ral_predictor.bus_item_export);
+      ral_predictor.map = ral_model.default_map;
+      ral_predictor.adapter = ral_adapter;
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -207,11 +216,17 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
       phase.raise_objection(this);
       rw_seq = ecc_ahb_rw_sequence::type_id::create("rw_seq");
       rw_seq.start(env.agent.m_sequencer);
-      ral_model.intr_enable.write(status, 32'h1, UVM_FRONTDOOR, ral_model.default_map);
+      wait (env.observer.write_count == 1 && env.observer.read_count == 1);
+      repeat (2) @(negedge HCLK);
+      if (ral_model.intr_enable.get_mirrored_value() !== 32'h1)
+        `uvm_fatal("ECC_AHB_RAL_PREDICT",
+          "Observed ECC AHB write did not update the register mirror")
+      env.observer.expected_data = 32'h0;
+      ral_model.intr_enable.write(status, 32'h0, UVM_FRONTDOOR, ral_model.default_map);
       if (status != UVM_IS_OK)
         `uvm_fatal("ECC_AHB_RAL_WRITE", "RAL frontdoor write to ECC interrupt-enable CSR failed")
       ral_model.intr_enable.read(status, value, UVM_FRONTDOOR, ral_model.default_map);
-      if (status != UVM_IS_OK || value != 32'h1)
+      if (status != UVM_IS_OK || value != 32'h0)
         `uvm_fatal("ECC_AHB_RAL_READ", $sformatf("RAL ECC CSR readback failed status=%s value=%08h", status.name(), value))
       fork
         begin
@@ -223,6 +238,9 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
         end
       join_any
       disable fork;
+      if (ral_model.intr_enable.get_mirrored_value() !== 32'h0)
+        `uvm_fatal("ECC_AHB_RAL_PREDICT",
+          "Observed RAL write/read traffic did not update the register mirror")
       phase.drop_objection(this);
     endtask
   endclass
