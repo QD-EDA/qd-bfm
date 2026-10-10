@@ -1,0 +1,9 @@
+QD-BFM commit: 3f1a87eab605d2e91a307855c6911ce0756eb4f7
+QD-BFM tested source paths match that commit; unrelated pre-existing worktree changes were outside these paths.
+Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge submodule commit: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus source commit: 4b3f3424c440aca6af92153b6860a7253b925234 (clean, published main)
+Icarus version: Icarus Verilog version 13.0 (devel) ()
+Icarus executable SHA-256: 00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385
+VVP executable SHA-256: f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a
+UVM: Accellera UVM 2020.3.1 (reported by the run)

@@ -358,6 +358,18 @@ the process-group peak was 1.80 GiB. See the
 This is one diagnostic iteration without AXI trace, not stock-firmware or
 full-suite qualification.
 
+## Current actual-DUT mixed DMA replay status — 2026-10-10
+
+The existing actual-DUT UVM runner passed all 25 seeded default mixed-DCCM
+records through Caliptra's `axi_dma_top` on clean, published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. The runner verifies all five DMA
+routes and the required FIFO, FIXED, delay-injection, and recovery-block
+profiles; every report summary has zero UVM errors and fatals. The local
+memory-guarded process-group peak was 0.38 GiB. This is DMA-block evidence; the
+full-top firmware suite and four-state/cross-simulator qualification remain
+open. Details and logs are in the
+[mixed-DMA replay evidence bundle](evidence/caliptra-bfm-axi-dma-mixed-replay-20261010/README.md).
+
 ## AXI memory-subordinate simulator portability — 2026-10-10
 
 The memory-target regression passes under Verilator 5.032 after removing a

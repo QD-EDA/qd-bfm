@@ -439,6 +439,13 @@ evidence for two directed FIXED modes only; it does not cover this mixed
 profile set. The current 25-profile replay is diagnostic until rerun on a clean,
 published Icarus revision; see the
 [`merged-simulator DMA evidence`](../../evidence/caliptra-bfm-merged-iverilog-dma-fixed-modes-20261007/README.md).
+Current-state follow-up (2026-10-10): all 25 seeded mixed profiles now pass
+through the actual pinned `axi_dma_top` using clean, published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. The run covers every route and the
+required FIFO, FIXED, delay, and recovery-block profiles, with zero UVM errors
+or fatals. This closes the published-simulator replay gap for this DMA-block
+profile set; it remains separate from full-top firmware qualification. See the
+[`mixed-replay evidence`](../../evidence/caliptra-bfm-axi-dma-mixed-replay-20261010/README.md).
 The FIFO-destination size sweep also includes a 16,384-word record that fills
 the BFM's 64-KiB FIFO. Its 2026-10-08 actual-DUT replay passed all nine sizes
 and checked the full FIFO payload; this remains diagnostic on `ac4532fa-dirty`.
