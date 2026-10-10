@@ -453,3 +453,13 @@ Caliptra's generated BFM interfaces; no UVM simulation starts. This confirms
 the current generated ECC integration blocker without introducing a QD-side
 syntax adaptation. Peak RSS was 75,944 KiB. See the
 [current ECC compile evidence](evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md).
+
+## AHB unknown-input matrix and standalone regression — 2026-10-10
+
+The 26-case checker matrix and full standalone AHB regression pass under
+IEEE 2012, 2017, and 2023 on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. The new negative cases inject X
+and Z on HREADY, HRESP, HSEL, HTRANS, HWRITE, HSIZE, HADDR, and write-phase
+HWDATA. The reset-abort test waits for reset-gated HSEL to settle before
+sampling it. This local result is not the pending current-`c339b9f2` Slurm
+run; see the [published-main AHB evidence](evidence/caliptra-bfm-ahb-xz-published-20261010/README.md).

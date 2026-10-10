@@ -1,0 +1,16 @@
+The tests ran from a clean extraction of qd-bfm-source.tar.gz with:
+
+IVERILOG_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog
+VVP_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp
+CALIPTRA_BFM_MAX_PROCESS_BYTES=400000000
+CALIPTRA_BFM_MIN_AVAILABLE_BYTES=6000000000
+CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=300
+
+From the extracted QD archive root, the six commands were:
+
+SV_EDITION=2012 sh dv/caliptra_bfm/ahb_lite/tests/run_checker.sh
+SV_EDITION=2017 sh dv/caliptra_bfm/ahb_lite/tests/run_checker.sh
+SV_EDITION=2023 sh dv/caliptra_bfm/ahb_lite/tests/run_checker.sh
+SV_EDITION=2012 sh dv/caliptra_bfm/ahb_lite/tests/run_ahb_lite.sh
+SV_EDITION=2017 sh dv/caliptra_bfm/ahb_lite/tests/run_ahb_lite.sh
+SV_EDITION=2023 sh dv/caliptra_bfm/ahb_lite/tests/run_ahb_lite.sh

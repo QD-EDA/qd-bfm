@@ -118,6 +118,13 @@ The command, pinned inputs, tool hashes, source hashes, and three-edition result
 are recorded in
 [`evidence/caliptra-bfm-ecc-ahb-uvm-20261004`](../../../evidence/caliptra-bfm-ecc-ahb-uvm-20261004/README.md).
 
+Current-state update (2026-10-10): the 26-case checker negative matrix and the
+full standalone AHB regression both pass in IEEE 2012, 2017, and 2023 on clean
+published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`. The matrix injects
+X and Z on each checked control/address/data input. The reset-abort test also
+settles the combinational HSEL before checking it. See the
+[published-main evidence](../../../evidence/caliptra-bfm-ahb-xz-published-20261010/README.md).
+
 [`ahb_lite_caliptra_checker.sv`](ahb_lite_caliptra_checker.sv) checks control
 and write-data stability through wait states, including the final HREADY-high
 sample. It permits IDLE address changes before a valid transfer is presented

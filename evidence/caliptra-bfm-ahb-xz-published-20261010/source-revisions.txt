@@ -1,0 +1,8 @@
+QD-BFM commit: 10b86e64cc7b1a0af9cda410b27e4120e614ca55 (clean archive)
+Icarus commit: 4b3f3424c440aca6af92153b6860a7253b925234 (clean, published main)
+Platform: Darwin 27.0.0 arm64
+
+SHA-256:
+57c1af39393e4cd1de027c2c7bb836495070788a8dbd76e3e2dcc4da5d52c691  qd-bfm-source.tar.gz
+00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385  iverilog
+f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a  vvp
