@@ -203,6 +203,14 @@ subordinate. The Slurm run used clean published Icarus
 The full supported-width/ID/outstanding matrix and independent
 cross-simulator/four-state qualification remain open.
 
+## Delivered AXI read outstanding-depth matrix — 2026-10-09
+
+The queued-read manager test now runs at outstanding depths 1, 2, and 4,
+including capacity checks and out-of-order response routing. See the
+[outstanding-depth evidence bundle](evidence/caliptra-bfm-axi-outstanding-depth-20261009/README.md).
+Concurrent write coverage at each depth and the width/ID/outstanding
+cross-product remain open.
+
 ## Delivered AXI monitor width/ID matrix — 2026-10-09
 
 The same nine configurations now instantiate the passive channel monitor and
