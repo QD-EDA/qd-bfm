@@ -55,3 +55,10 @@ Raw records and the exact submitted script are in [`job-227/`](job-227/).
 The trace calibration remains valid: reset delay 567 targets cycle 3080 between
 AW1 at 3066 and B1 at 3106. The separate delay 2822 targets cycle 5335 between
 AW6 at 5327 and B6 at 5356.
+
+## Job 231: baseline control and first reset window
+
+The paired no-reset control and 567-cycle reset run were submitted as job 231,
+1 CPU and 3 GB per task, with two-way concurrency. Outputs are under
+`bfm-rand-reset-c339-control-20261010-03/runs/{control,window-567}` on
+DAN-DESKTOP. Append both outcomes and measured peaks after completion.
