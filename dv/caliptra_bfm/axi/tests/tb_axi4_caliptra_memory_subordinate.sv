@@ -456,6 +456,28 @@ module tb_axi4_caliptra_memory_subordinate;
       r_valid_cycles, r_stall_cycles);
     $display("COVERAGE AXI R beats=%0d RLAST=%0d", r_count, r_last_count);
 
+    write_data = 0; write_strb = 0; write_user = 0;
+    for (integer beat = 0; beat < 16; beat = beat + 1) begin
+      write_data[32*beat +: 32] = 32'hf17e_0000 | beat;
+      write_strb[4*beat +: 4] = 4'hf;
+      write_user[32*beat +: 32] = 32'hd200_0000 | beat;
+    end
+    manager.write_burst(19'h140, 8'h0f, 2, 2'b00, 8'h73, 32'habcd_0073,
+      1'b0, write_data, write_strb, write_user, success, response, response_user);
+    check(success && response == 2'b00 && response_user == 32'habcd_0073 &&
+      memory.word_at(16) == 32'hf17e_000f,
+      "16-beat FIXED write did not complete at its repeated address");
+    manager.read_burst(19'h140, 8'h0f, 2, 2'b00, 8'h74, 32'habcd_0074,
+      1'b0, success, read_data, read_user, read_response, response_user);
+    check(success && response_user == 32'habcd_0074,
+      "16-beat FIXED read did not complete with its ARUSER");
+    for (integer beat = 0; beat < 16; beat = beat + 1) begin
+      if (read_data[32*beat +: 32] !== 32'hf17e_000f ||
+          read_user[32*beat +: 32] !== 32'habcd_0074 ||
+          read_response[2*beat +: 2] !== 2'b00)
+        $fatal(1, "16-beat FIXED readback mismatch at beat %0d", beat);
+    end
+
     manager.read_burst(19'h108, 0, 2, 2'b01, 8'h6d, 32'h0, 1'b1,
       success, read_data, read_user, read_response, response_user);
     check(success && read_response[1:0] == 2'b01,
