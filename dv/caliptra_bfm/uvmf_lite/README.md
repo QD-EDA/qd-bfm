@@ -329,3 +329,9 @@ still stops at package-qualified parameterized proxy handles in the HMAC
 input/output interfaces on Icarus `4b3f3424c440aca6af92153b6860a7253b925234`.
 No simulation started and no QD adaptation was made; see the
 [HMAC compile evidence](../../../evidence/caliptra-bfm-generated-hmac-runtime-20261005/README.md#current-clean-published-main-compile-check-2026-10-10).
+
+2026-10-10 latest published-main ECC recheck: the generated reset/IRQ runner
+still stops at the package-qualified parameterized proxy class declarations
+with Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`, before simulation
+starts. No QD source adaptation was made; see the [dated ECC compile
+evidence](../../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md#latest-published-main-recheck--2026-10-10).

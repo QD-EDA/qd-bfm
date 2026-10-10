@@ -1589,3 +1589,10 @@ every SRAM destination word against the consumed payload, and confirms the
 FIFO drains. This closes that block-level readback gap only; same-run
 SRAM-to-FIFO-to-SRAM and full-top firmware qualification remain open. See the
 [dated result and provenance](../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md#published-main-current-state-rerun--2026-10-10).
+
+**2026-10-10 generated ECC latest-main compile recheck:** the guarded IEEE
+2017 reset/IRQ runner still fails before simulation on the generated
+package-qualified parameterized proxy declarations with published Icarus
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`. No QD compatibility workaround was
+added; generated ECC UVMF remains blocked on the Icarus compile path. See the
+[dated compile result](../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md#latest-published-main-recheck--2026-10-10).

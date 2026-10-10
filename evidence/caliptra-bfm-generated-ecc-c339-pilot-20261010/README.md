@@ -36,3 +36,15 @@ This confirms the latest tested published Icarus still cannot compile this
 generated ECC interface shape. Generated ECC UVMF runtime remains blocked at
 compile; standalone UVMF-lite tests and other Caliptra BFM integrations are
 separate paths.
+
+## Latest published-main recheck — 2026-10-10
+
+The guarded `run_generated_ecc_reset_monitor.sh` compile was repeated under
+IEEE 2017 with published Icarus main
+`127b887dfdc09283ab0187a2e618421dee3d5dcc` (compiler SHA-256
+`a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602`) and
+clean Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. It stops at
+the same package-qualified parameterized proxy declarations with `syntax
+error` and `Invalid module item`; VVP and the UVM test do not start. No QD
+compatibility adaptation was made. This confirms the current blocker is still
+on the Icarus compile path, rather than a missing runtime dependency.
