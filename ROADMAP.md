@@ -296,7 +296,13 @@ of those five handshakes, checks that pending responses are cleared, and
 verifies post-reset read/write recovery. See the
 [manager handshake-reset evidence](evidence/caliptra-bfm-axi-master-reset-handshakes-20261009/README.md)
 and [subordinate handshake-reset evidence](evidence/caliptra-bfm-axi-subordinate-reset-handshakes-20261009/README.md).
-Generated DMA paths and full-top/UVM reset-edge coverage remain open.
+The integrated DMA-map FIFO route now also tests reset after each of those
+five handshakes while the generated recovery-block sequence is active. It
+checks FIFO and route cleanup, generated-block re-arming, and post-reset FIFO
+read/write recovery; see the
+[DMA-map reset evidence](evidence/caliptra-bfm-dma-map-reset-handshakes-20261010/README.md).
+Caliptra's generated DMA master and full-top/UVM reset-edge coverage remain
+open.
 
 ## Current full-top AES cases 8–12 trace status — 2026-10-10
 

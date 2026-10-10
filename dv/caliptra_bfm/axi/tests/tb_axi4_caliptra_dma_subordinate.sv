@@ -211,10 +211,24 @@ module tb_axi4_caliptra_dma_subordinate;
           dut.i_sram.RVALID || dut.i_fifo.RVALID || dut.wr_route_count != 0 ||
           dut.b_route_count != 0 || dut.r_route_count != 0 ||
           dut.i_sram.wr_count != 0 || dut.i_sram.b_count != 0 ||
-          dut.i_sram.rd_count != 0)
+          dut.i_sram.rd_count != 0 || fifo_level != 0)
         $fatal(1, "DMA map reset left an outstanding request or response");
       @(negedge ACLK); ARESETn = 1;
       repeat (2) @(negedge ACLK);
+    end
+  endtask
+
+  task automatic reset_recover_generated_fifo(input [31:0] expected_data);
+    begin
+      reset_map();
+      @(negedge ACLK); BREADY = 1; RREADY = 1;
+      if (!dut.recovery_sequence_ready || dut.sequenced_block_index != 0 ||
+          dut.sequenced_block_words != 2 || fifo_level != 0)
+        $fatal(1, "DMA reset did not re-arm the generated FIFO block");
+      write_one(FIFO_BASE, expected_data);
+      read_one(FIFO_BASE, read_data);
+      if (read_data != expected_data)
+        $fatal(1, "DMA map did not recover generated FIFO traffic after reset");
     end
   endtask
 
@@ -560,6 +574,30 @@ module tb_axi4_caliptra_dma_subordinate;
         dut.sequenced_threshold_words < 1 || dut.sequenced_threshold_words > 2)
       $fatal(1, "DMA wrapper did not select the first generated recovery block");
 
+    // Exercise reset after each accepted channel handshake with the generated
+    // block sequence active and verify the FIFO route recovers afterward.
+    send_aw(8'hc1, FIFO_BASE, 0, 2'b00, 32'hc100_0001);
+    reset_recover_generated_fifo(32'hc100_0002);
+
+    @(negedge ACLK); BREADY = 0;
+    send_aw(8'hc2, FIFO_BASE, 0, 2'b00, 32'hc200_0001);
+    send_w(32'hc200_0002, 1);
+    reset_recover_generated_fifo(32'hc200_0003);
+
+    send_aw(8'hc3, FIFO_BASE, 0, 2'b00, 32'hc300_0001);
+    send_w(32'hc300_0002, 1);
+    do @(posedge ACLK); while (!(BVALID && BREADY));
+    reset_recover_generated_fifo(32'hc300_0003);
+
+    @(negedge ACLK); RREADY = 0;
+    send_ar(8'hc4, FIFO_BASE, 0, 2'b00, 32'hc400_0001);
+    reset_recover_generated_fifo(32'hc400_0002);
+
+    write_one(FIFO_BASE, 32'hc500_0001);
+    send_ar(8'hc5, FIFO_BASE, 0, 2'b00, 32'hc500_0002);
+    do @(posedge ACLK); while (!(RVALID && RREADY));
+    reset_recover_generated_fifo(32'hc500_0003);
+
     en_recovery_emulation = 1;
     write_one(FIFO_BASE, 32'h1111_0001);
     write_one(FIFO_BASE, 32'h1111_0002);
@@ -574,7 +612,7 @@ module tb_axi4_caliptra_dma_subordinate;
     read_one(FIFO_BASE, read_data);
     read_one(FIFO_BASE, read_data);
 
-    $display("PASS: DMA map, unknown optional controls, autonomous FIFO push/pop, and recovery sequence integration");
+    $display("PASS: DMA map reset handshakes, FIFO, and recovery sequence integration");
     $finish;
   end
 endmodule

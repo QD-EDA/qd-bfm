@@ -66,6 +66,10 @@ on published Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`, covering
 injected errors, SRAM/FIFO traffic, randomized stalls, recovery controls, and
 208-dword burst readback. This is module-level evidence, not a Caliptra DUT
 run; see the [published AXI-complex BFM result](../../evidence/caliptra-bfm-axi-complex-published-20261009/README.md).
+The integrated DMA-map regression also resets after AR, R, AW, W, and B
+handshakes with the generated FIFO recovery sequence active, then checks FIFO
+state and post-reset traffic; see the
+[DMA-map reset evidence](../../evidence/caliptra-bfm-dma-map-reset-handshakes-20261010/README.md).
 The top-level firmware smoke and its diagnostic limits are recorded in
 [`open-top smoke evidence`](../../evidence/caliptra-bfm-open-top-smoke-20261006/README.md).
 For a bounded random-DMA recovery diagnostic, `--rand-dma-iterations N`
