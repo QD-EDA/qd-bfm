@@ -9,9 +9,15 @@ IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
 VVP_BIN=${VVP_BIN:-vvp}
 out=$(mktemp)
 trap 'rm -f "$out"' EXIT
-for depth in 1 2 4; do
-  "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master_outstanding \
-    -Ptb_axi4_caliptra_master_outstanding.MAX_OUTSTANDING="$depth" -o "$out" \
-    ../axi4_caliptra_master.sv tb_axi4_caliptra_master_outstanding.sv
-  "$VVP_BIN" "$out"
+for config in 32:1 32:4 32:8 64:1 64:4 64:8 128:1 128:4 128:8; do
+  data_width=${config%:*}
+  id_width=${config#*:}
+  for depth in 1 2 4; do
+    "$IVERILOG_BIN" -g2012 -s tb_axi4_caliptra_master_outstanding \
+      -Ptb_axi4_caliptra_master_outstanding.DATA_WIDTH="$data_width" \
+      -Ptb_axi4_caliptra_master_outstanding.ID_WIDTH="$id_width" \
+      -Ptb_axi4_caliptra_master_outstanding.MAX_OUTSTANDING="$depth" -o "$out" \
+      ../axi4_caliptra_master.sv tb_axi4_caliptra_master_outstanding.sv
+    "$VVP_BIN" "$out"
+  done
 done
