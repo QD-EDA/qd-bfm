@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=bfm-rand-reset-552
+#SBATCH --job-name=bfm-rand-reset-3127
 #SBATCH --partition=verilog
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -44,7 +44,8 @@ test -z "$(git -C "$RTL" status --porcelain --untracked-files=all)"
 test -x "$IVERILOG/iverilog" && test -x "$IVERILOG/vvp" && test -x "$IVERILOG/iverilog-vpi"
 test -x "${GCC}gcc" && test -x "$ENV/bin/python3.12" && test -f "$JTAG_VPI"
 
-printf 'QD=%s\nrunner-sha256=%s\ntrace-source-sha256=%s\nIcarus=%s\nUVM=%s\nCaliptra=%s\nAdams-Bridge=%s\nJTAG-VPI-SHA=%s\nreset-delay-cycles=552\n' \
+# Current firmware trace: start=2511; wait+2 asserts at 5640, after six W beats and before B.
+printf 'QD=%s\nrunner-sha256=%s\ntrace-source-sha256=%s\nIcarus=%s\nUVM=%s\nCaliptra=%s\nAdams-Bridge=%s\nJTAG-VPI-SHA=%s\nreset-delay-cycles=3127\n' \
   "$QD_SHA" "$RUNNER_SHA" "$TRACE_SOURCE_SHA" "$IVERILOG_SHA" "$UVM_SHA" "$RTL_SHA" "$ADAMS_BRIDGE_SHA" "$JTAG_VPI_SHA" \
   | tee "$RUN/source-revisions.txt"
 sha256sum "$JTAG_VPI" "$IVERILOG/iverilog" "$IVERILOG/vvp" | tee "$RUN/tool-binaries.sha256"
@@ -68,8 +69,8 @@ set +e
 /usr/bin/time -v -o "$RUN/logs/rand-dma-reset-resource.log" timeout --signal=TERM --kill-after=30s 7000s \
   python3.12 "$QD/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py" \
   --case rand_test_dma --rand-dma-iterations 1 --force-first-rand-dma-reset \
-  --rand-dma-reset-delay-cycles 552 --fast-trng --fast-boot-data-preload \
-  --quiet-firmware --trace-axi --output "$RUN/output/reset-552-cycle" \
+  --rand-dma-reset-delay-cycles 3127 --fast-trng --fast-boot-data-preload \
+  --quiet-firmware --trace-axi --output "$RUN/output/reset-3127-cycle" \
   > "$RUN/logs/rand-dma-reset.out" 2>&1
 runner_status=$?
 set -e
