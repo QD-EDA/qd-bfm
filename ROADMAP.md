@@ -244,3 +244,13 @@ width, ID width, and outstanding depth. Separate run records are in the
 and [write evidence bundle](evidence/caliptra-bfm-axi-write-outstanding-parameter-matrix-20261009/README.md).
 Full Caliptra/UVMF qualification and other supported-profile combinations
 remain open.
+
+## Current AXI transaction-monitor parameter status — 2026-10-09
+
+The transaction monitor now passes the representative 3×3 width/ID matrix,
+checking completed reads and writes plus the captured four-beat WRAP records.
+The run used clean published Icarus `main`
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; results are in the
+[transaction-monitor evidence bundle](evidence/caliptra-bfm-axi-transaction-monitor-parameter-matrix-20261009/README.md).
+Error, malformed-transaction, and capacity cases are not crossed through this
+matrix. Full Caliptra/UVMF qualification remains open.
