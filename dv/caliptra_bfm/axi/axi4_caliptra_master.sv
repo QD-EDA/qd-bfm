@@ -92,11 +92,12 @@ module axi4_caliptra_master #(
   integer bchosen_slot;
   integer bchosen_order;
 
+  // Tasks release completed slots on negedge; keep READY through the response handshake edge.
   always @* begin
     BREADY = 1'b0;
     if (ARESETn && !poisoned)
       for (bready_index = 0; bready_index < MAX_OUTSTANDING; bready_index = bready_index + 1)
-        if (wr_slot_valid[bready_index] && !wr_slot_done[bready_index] &&
+        if (wr_slot_valid[bready_index] &&
             (wr_slot_aw_done[bready_index] ||
              ((wr_drive_slot == bready_index) && AWVALID && AWREADY)) &&
             (wr_slot_w_done[bready_index] ||
@@ -108,7 +109,7 @@ module axi4_caliptra_master #(
     RREADY = 1'b0;
     if (ARESETn && !poisoned)
       for (rready_index = 0; rready_index < MAX_OUTSTANDING; rready_index = rready_index + 1)
-        if (rd_slot_valid[rready_index] && rd_slot_issued[rready_index] && !rd_slot_done[rready_index])
+        if (rd_slot_valid[rready_index] && rd_slot_issued[rready_index])
           RREADY = 1'b1;
   end
 
