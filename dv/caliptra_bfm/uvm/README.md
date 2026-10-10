@@ -413,6 +413,15 @@ contiguous accepted SEQ beats with matching direction and size, ending an item
 at an accepted IDLE/NONSEQ boundary or after 256 beats. HBURST is absent, so
 item boundaries are inferred from accepted address phases. Each output is a
 separate object because Caliptra predictors copy and mutate queue data.
+
+The `ahb_lite_caliptra_native_reg_adapter` reuses that scalar validation and
+lane formatting, then maps the result to the native agent's
+`ahb_lite_caliptra_transfer` item. Its `bus2reg` handles native driver
+responses for frontdoor calls and delegates MVC monitor items to the base
+adapter for predictor updates. The actual HMAC UVM smoke performs a RAL key
+write, status read, and control write through the native agent and checks the
+monitor-predicted mirrors; see the [three-edition result](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-agent-ral-frontdoor-2026-10-10).
+
 The generated-name `ahb_reg_predictor` expands a grouped item into fresh
 single-beat records at incrementing addresses before calling the stock UVM
 predictor; successful beats update their individual RAL mirrors, while ERROR

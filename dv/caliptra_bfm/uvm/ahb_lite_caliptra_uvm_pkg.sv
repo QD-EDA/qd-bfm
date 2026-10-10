@@ -359,6 +359,69 @@ package ahb_lite_caliptra_uvm_pkg;
     endfunction
   endclass
 
+  class ahb_lite_caliptra_native_reg_adapter extends ahb_lite_caliptra_reg_adapter;
+    `uvm_object_utils(ahb_lite_caliptra_native_reg_adapter)
+
+    function new(string name = "ahb_lite_caliptra_native_reg_adapter");
+      super.new(name);
+    endfunction
+
+    function uvm_sequence_item reg2bus(const ref uvm_reg_bus_op rw);
+      ahb_lite_caliptra_mvc_transfer mvc_transfer;
+      ahb_lite_caliptra_transfer transfer;
+      if (!$cast(mvc_transfer, super.reg2bus(rw))) return null;
+      if (mvc_transfer.data.size() != 1) begin
+        `uvm_fatal("AHB_RAL_NATIVE_ITEM", "Native AHB RAL adapter requires one scalar MVC beat")
+        return null;
+      end
+      transfer = ahb_lite_caliptra_transfer::type_id::create("ahb_reg_transfer");
+      transfer.write = mvc_transfer.RnW == AHB_WRITE;
+      transfer.address = mvc_transfer.address;
+      transfer.size = mvc_transfer.size;
+      transfer.write_data = mvc_transfer.data[0];
+      return transfer;
+    endfunction
+
+    function void bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
+      ahb_lite_caliptra_transfer transfer;
+      int unsigned byte_count;
+      int unsigned bus_bytes;
+      int unsigned lane;
+      bit [63:0] bus_data;
+
+      if (!$cast(transfer, bus_item)) begin
+        super.bus2reg(bus_item, rw);
+        return;
+      end
+      if (transfer.size > 3) begin
+        `uvm_error("AHB_RAL_RESPONSE", "AHB response has an unsupported size or address alignment")
+        rw.status = UVM_NOT_OK;
+        return;
+      end
+      byte_count = 1 << transfer.size;
+      bus_bytes = bus_data_width / 8;
+      if (byte_count > bus_bytes || transfer.address % byte_count != 0 ||
+          (transfer.address % bus_bytes) + byte_count > bus_bytes) begin
+        `uvm_error("AHB_RAL_RESPONSE", "AHB response has an unsupported size or address alignment")
+        rw.status = UVM_NOT_OK;
+        return;
+      end
+      rw.kind = transfer.write ? UVM_WRITE : UVM_READ;
+      rw.addr = transfer.address;
+      rw.n_bits = byte_count * 8;
+      rw.data = '0;
+      rw.byte_en = '0;
+      lane = transfer.address % bus_bytes;
+      bus_data = transfer.write ? transfer.write_data : transfer.read_data;
+      for (int byte_index = 0; byte_index < byte_count; byte_index++) begin
+        rw.data[byte_index*8 +: 8] = bus_data[(lane + byte_index)*8 +: 8];
+        rw.byte_en[byte_index] = 1'b1;
+      end
+      rw.status = (transfer.request_ok && transfer.success &&
+                   !transfer.response_error && !transfer.aborted) ? UVM_IS_OK : UVM_NOT_OK;
+    endfunction
+  endclass
+
   class ahb_lite_caliptra_monitor extends uvm_monitor;
     virtual ahb_lite_caliptra_record_if vif;
     uvm_analysis_port #(ahb_lite_caliptra_transaction) ap;

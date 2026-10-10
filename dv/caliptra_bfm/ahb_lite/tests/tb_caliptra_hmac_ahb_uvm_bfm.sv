@@ -32,6 +32,7 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
     `HMAC_REG_HMAC512_CTRL_NEXT_MASK;
   localparam [31:0] SHA384_INIT = `HMAC_REG_HMAC512_CTRL_INIT_MASK;
   localparam [31:0] CTRL_ZEROIZE = `HMAC_REG_HMAC512_CTRL_ZEROIZE_MASK;
+  localparam [31:0] RAL_KEY0_VALUE = 32'hd3a5c9e7;
   localparam integer HMAC_KEY_WORD_COUNT = 16;
   localparam integer HMAC_BLOCK_WORD_COUNT = 32;
   localparam integer HMAC_SEED_WORD_COUNT = 12;
@@ -144,6 +145,8 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
 
   class hmac_ahb_smoke_block extends uvm_reg_block;
     hmac_ahb_smoke_reg registers[0:HMAC_REGISTER_COUNT-1];
+    hmac_ahb_smoke_reg key0;
+    hmac_ahb_smoke_reg status_csr;
     hmac_ahb_smoke_reg ctrl;
     `uvm_object_utils(hmac_ahb_smoke_block)
 
@@ -175,6 +178,8 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
         registers[i].build();
         default_map.add_reg(registers[i], address, access);
       end
+      key0 = registers[0];
+      status_csr = registers[HMAC_STATUS_INDEX];
       ctrl = registers[HMAC_CTRL_INDEX];
       lock_model();
     endfunction
@@ -291,7 +296,7 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
   class hmac_ahb_uvm_test extends uvm_test;
     hmac_ahb_env env;
     hmac_ahb_smoke_block ral_model;
-    ahb_lite_caliptra_reg_adapter ral_adapter;
+    ahb_lite_caliptra_native_reg_adapter ral_adapter;
     ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer) ral_predictor;
     `uvm_component_utils(hmac_ahb_uvm_test)
 
@@ -304,7 +309,7 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       env = hmac_ahb_env::type_id::create("env", this);
       ral_model = hmac_ahb_smoke_block::type_id::create("ral_model");
       ral_model.build();
-      ral_adapter = ahb_lite_caliptra_reg_adapter::type_id::create("ral_adapter");
+      ral_adapter = ahb_lite_caliptra_native_reg_adapter::type_id::create("ral_adapter");
       ral_adapter.set_bus_data_width(32);
       ral_predictor = ahb_reg_predictor #(ahb_lite_caliptra_mvc_transfer)::type_id::create(
         "ral_predictor", this);
@@ -312,6 +317,7 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
 
     function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
+      ral_model.default_map.set_sequencer(env.agent.sequencer, ral_adapter);
       ral_model.default_map.set_auto_predict(0);
       env.agent.burst_transfer_ap.connect(ral_predictor.bus_item_export);
       ral_predictor.map = ral_model.default_map;
@@ -320,6 +326,9 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
 
     task run_phase(uvm_phase phase);
       hmac_ahb_sequence hmac_seq;
+      uvm_status_e ral_status;
+      uvm_reg_data_t ral_value;
+      int unsigned expected_monitor_count;
       phase.raise_objection(this);
       hmac_seq = hmac_ahb_sequence::type_id::create("hmac_seq");
       hmac_seq.start(env.agent.sequencer);
@@ -336,10 +345,33 @@ module tb_caliptra_hmac_ahb_uvm_bfm;
       if (hmac_seq.transfer_count != env.observer.transfer_count)
         `uvm_fatal("HMAC_AHB_COUNT", $sformatf("Sequence issued %0d transfers; monitor observed %0d",
           hmac_seq.transfer_count, env.observer.transfer_count))
-      if (ral_model.ctrl.get_mirrored_value() !== CTRL_ZEROIZE)
-        `uvm_fatal("HMAC_AHB_RAL_PREDICT",
-          "Observed HMAC AHB CTRL write did not update the register mirror")
-      expected_transfer_count = hmac_seq.transfer_count;
+      ral_model.key0.write(ral_status, RAL_KEY0_VALUE, UVM_FRONTDOOR, ral_model.default_map);
+      if (ral_status != UVM_IS_OK)
+        `uvm_fatal("HMAC_AHB_RAL_WRITE", "RAL frontdoor write to HMAC key CSR failed")
+      ral_model.status_csr.read(ral_status, ral_value, UVM_FRONTDOOR, ral_model.default_map);
+      if (ral_status != UVM_IS_OK)
+        `uvm_fatal("HMAC_AHB_RAL_READ", "RAL frontdoor read from HMAC status CSR failed")
+      ral_model.ctrl.write(ral_status, CTRL_ZEROIZE, UVM_FRONTDOOR, ral_model.default_map);
+      if (ral_status != UVM_IS_OK)
+        `uvm_fatal("HMAC_AHB_RAL_WRITE", "RAL frontdoor write to HMAC control CSR failed")
+      expected_monitor_count = hmac_seq.transfer_count + 3;
+      fork
+        begin
+          wait (env.observer.transfer_count == expected_monitor_count);
+        end
+        begin
+          #2000;
+          `uvm_fatal("HMAC_AHB_RAL_TIMEOUT", "Timed out waiting for HMAC RAL frontdoor monitor records")
+        end
+      join_any
+      disable fork;
+      if (env.observer.transfer_count != expected_monitor_count)
+        `uvm_fatal("HMAC_AHB_RAL_COUNT", "Native AHB agent missed a RAL frontdoor transfer")
+      if (ral_model.key0.get_mirrored_value() !== RAL_KEY0_VALUE ||
+          ral_model.status_csr.get_mirrored_value() !== ral_value ||
+          ral_model.ctrl.get_mirrored_value() !== CTRL_ZEROIZE)
+        `uvm_fatal("HMAC_AHB_RAL_PREDICT", "Observed HMAC RAL frontdoor traffic did not update its register mirrors")
+      expected_transfer_count = expected_monitor_count;
       phase.drop_objection(this);
     endtask
   endclass

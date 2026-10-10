@@ -199,3 +199,10 @@ the test checks that the observed final CTRL write updates the mirror. All 612
 transfers pass in IEEE 2012, 2017, and 2023 with zero UVM warnings, errors, or
 fatals. This checks monitor-driven prediction, not generated HMAC RAL or RAL
 frontdoor coverage. See the [dated rerun evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-monitor-driven-hmac-ral-prediction-2026-10-10).
+Current-state update (2026-10-10): the native HMAC UVM test now also uses the
+native RAL adapter for frontdoor access to the actual controller: it writes
+key word 0, reads status, and writes CTRL zeroize. With RAL auto-prediction
+disabled, the monitor predictor updates the corresponding mirrors. The full
+KAT plus these three RAL operations passes in IEEE 2012, 2017, and 2023 with
+615 transfers and zero UVM warnings, errors, or fatals. See the [frontdoor
+evidence](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-agent-ral-frontdoor-2026-10-10).

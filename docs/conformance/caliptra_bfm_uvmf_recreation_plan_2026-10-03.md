@@ -1541,3 +1541,14 @@ errors, or fatals on clean published Icarus
 `4b3f3424c440aca6af92153b6860a7253b925234`. This validates monitor-based
 prediction for the exercised map, not generated HMAC RAL or RAL frontdoor
 coverage. See the [three-edition evidence and hashes](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-monitor-driven-hmac-ral-prediction-2026-10-10).
+
+**2026-10-10 native HMAC RAL frontdoor:** the HMAC smoke now uses a native
+agent RAL adapter to write key word 0, read the status CSR, and write CTRL
+zeroize through the actual `hmac_ctrl` RTL. With RAL auto-prediction disabled,
+the native monitor stream updates all three mirrored values. The complete
+SHA-384, SHA-512, and `INIT`/`NEXT` run plus these frontdoor operations passes
+in IEEE 2012, 2017, and 2023: 615 transfers and zero UVM warnings, errors, or
+fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`. This verifies scalar frontdoor
+traffic through the native driver; it is not a complete generated HMAC RAL
+model. See the [three-edition evidence](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#current-state-native-agent-ral-frontdoor-2026-10-10).

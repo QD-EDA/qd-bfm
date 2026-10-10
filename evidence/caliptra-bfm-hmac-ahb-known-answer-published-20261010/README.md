@@ -212,3 +212,55 @@ logs respectively
 `8ffd998869a8f5f3cae62a8b7024e3e66645d5c2e198b85d43a0912182adc68b`,
 `4099f0f12354263a6c3848106357aab938a2376769f936f483ed7b91ffbee71a`, and
 `cc2e08b80d900fd807fdab2126c28ef44620743bde1e9b73dd9f67fb75873848`.
+
+## Current-state native-agent RAL frontdoor (2026-10-10)
+
+The test now uses `ahb_lite_caliptra_native_reg_adapter` with the active native
+AHB sequencer. After the three HMAC known-answer cases, it writes a distinct
+value to key word 0, reads the HMAC status CSR, and writes CTRL zeroize through
+UVM RAL. RAL auto-prediction stays disabled; the monitor's completed-transfer
+stream predicts each access, and the test checks the key, status, and CTRL
+mirrors.
+
+| IEEE edition | Result | Transfers | UVM warnings/errors/fatals |
+| --- | --- | ---: | --- |
+| 2012 | PASS | 615 | 0 / 0 / 0 |
+| 2017 | PASS | 615 | 0 / 0 / 0 |
+| 2023 | PASS | 615 | 0 / 0 / 0 |
+
+The monitor counted 394 reads and 221 writes, all 4-byte transfers, with zero
+checker or protocol errors. The published Icarus revision, executable hashes,
+UVM version, and clean Caliptra revision are the same as the preceding
+monitor-prediction rerun. SSH to Slurm timed out, so the local guarded runner
+was used. This covers three scalar frontdoor operations through the native
+agent; it does not instantiate Caliptra's full generated HMAC RAL model.
+
+Reproduce from the QD-EDA repository root with:
+
+```sh
+set -e
+for edition in 2012 2017 2023; do
+  logfile="evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/logs/uvm-ral-frontdoor-sv-$edition.log"
+  CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
+  IVERILOG_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog \
+  VVP_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp \
+  SV_EDITION="$edition" dv/caliptra_bfm/ahb_lite/tests/run_caliptra_hmac_ahb_uvm_bfm.sh \
+    >"$logfile" 2>&1
+  gzip -n "$logfile"
+done
+```
+
+Logs: [IEEE 2012](logs/uvm-ral-frontdoor-sv-2012.log.gz),
+[IEEE 2017](logs/uvm-ral-frontdoor-sv-2017.log.gz),
+[IEEE 2023](logs/uvm-ral-frontdoor-sv-2023.log.gz).
+
+SHA-256: HMAC UVM testbench
+`89808dea30c0e653396272de0ab83c0b6e00195ee5082179c19c8f86dc08e62e`;
+AHB UVM package (including the native adapter)
+`6240666058c8fa12dafef13435648ae7880843cfef8519ae7d203079b101c7fa`;
+runner
+`9eb9107be6489469f453d2f9c79d0ae5e9bd58031210661d0b404abe618b9eab`;
+logs respectively
+`5ccfca3ff33dfa0167fe9f0c36df800907f768ee050045a174993b4f9f59640e`,
+`8184a59a9a70c0331c79e483c659a06313ed68fcaff7a594b94d5355bc0647f0`, and
+`13421e2507d7dfbfabd178cc49efe49ba171b033324462317ee16474cb1939f7`.
