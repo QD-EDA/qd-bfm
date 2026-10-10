@@ -61,3 +61,21 @@ firmware, full-suite, generated-UVMF, or qualification evidence.
 
 Raw simulation logs were left in the Slurm run directory; they are not copied
 here.
+
+## Follow-up: traced AES case 9
+
+The next vector also passed with the active tracer and AXI checker enabled:
+one testcase pass, no failure or bad diagnostic markers, and normal `$finish`
+at `minstret=1721`, `mcycle=4649`. The trace recorded AR=2, R=18, AW=4,
+W=18, and B=4 handshakes. This run used QD-BFM commit
+`accfce9c6ef0e4742a1b6b9f4a784262d0c348c8` and the same clean, published
+Icarus and Caliptra pins above.
+
+Slurm job 121 used 2 CPUs and 6 GiB; MaxRSS was 1,859,820 KiB, the guard
+measured a 1.80 GiB process-group peak, and minimum available memory was
+21.43 GiB. This remains narrowed firmware diagnostic evidence.
+
+- [`case9-result.json`](case9-result.json): structured pass and provenance.
+- [`case9-trace-sanitized.log`](case9-trace-sanitized.log): trace and finish markers.
+- [`case9-resource.log`](case9-resource.log) and [`case9-guard-summary.log`](case9-guard-summary.log): resource and guard records.
+- [`case9-source-revisions.txt`](case9-source-revisions.txt): source pins.
