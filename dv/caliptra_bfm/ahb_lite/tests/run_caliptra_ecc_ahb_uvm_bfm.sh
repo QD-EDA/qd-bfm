@@ -12,6 +12,7 @@ SV_EDITION=${SV_EDITION:-2012}
 tmpdir=$(mktemp -d)
 out="$tmpdir/caliptra_ecc_ahb_uvm_bfm.vvp"
 log="$tmpdir/caliptra_ecc_ahb_uvm_bfm.log"
+mutation_log="$tmpdir/caliptra_ecc_ahb_uvm_bfm_no_predictor.log"
 trap 'rm -rf "$tmpdir"' EXIT
 
 case "$SV_EDITION" in
@@ -33,3 +34,18 @@ if grep -Eq '^UVM_(ERROR|FATAL) :[[:space:]]*[1-9]' "$log"; then
   echo "Caliptra ECC AHB UVM BFM smoke reported UVM errors or fatals" >&2
   exit 1
 fi
+
+if "$VVP_BIN" "$out" +AHB_NO_RAL_PREDICTOR >"$mutation_log" 2>&1; then
+  mutation_status=0
+else
+  mutation_status=$?
+fi
+cat "$mutation_log"
+mutation_fatals=$(grep -Ec '^UVM_FATAL .*\[ECC_AHB_RAL_PREDICT\]' "$mutation_log" || true)
+if [ "$mutation_fatals" -ne 1 ] ||
+   ! grep -Eq '^UVM_FATAL :[[:space:]]*1$' "$mutation_log" ||
+   ! grep -Eq '^UVM_ERROR :[[:space:]]*0$' "$mutation_log"; then
+  echo "Predictor-disconnect mutation did not produce exactly the expected UVM_FATAL" >&2
+  exit 1
+fi
+echo "PASS: predictor disconnect was detected (vvp exit $mutation_status)"

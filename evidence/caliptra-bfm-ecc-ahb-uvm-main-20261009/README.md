@@ -78,3 +78,19 @@ the updated testbench SHA-256 is
 `74eab23a5e882a12f5ebce57f6b92992bfd422beeb279accdee422f76812d319`. Caliptra
 remained clean at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. The executable
 hashes are the same as in the simulator provenance table above.
+
+## Predictor-disconnect mutation control (2026-10-10)
+
+The runner now repeats the simulation with `+AHB_NO_RAL_PREDICTOR`, which
+deliberately skips the monitor-to-predictor connection. The normal run passes;
+the mutation run is accepted only when it reports exactly one
+`ECC_AHB_RAL_PREDICT` UVM fatal and zero UVM errors. Both checks pass for IEEE
+2012, 2017, and 2023 on the same clean published Icarus revision. The memory
+guard measured a 0.38 GiB peak process group during these runs.
+
+Logs: [2012](logs/predictor-ral-mutation-2012.log),
+[2017](logs/predictor-ral-mutation-2017.log),
+[2023](logs/predictor-ral-mutation-2023.log).
+
+Current testbench SHA-256: `aabf24f1138087e807433bee8def065adf58799696aa3b9fd966b97a22d7a03e`.
+Current runner SHA-256: `f35dfa99b519700c1e250c1aa2ca77b27d1ad68048cd8867ab4ad4820cbe3102`.

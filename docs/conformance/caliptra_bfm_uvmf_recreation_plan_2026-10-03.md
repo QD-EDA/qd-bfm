@@ -1466,3 +1466,11 @@ published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`, with zero UVM
 warnings/errors/fatals. This closes this ECC-unit integration slice only;
 generated UVMF and full-top qualification remain open. See the [dated
 evidence](../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md#current-state-rerun-monitor-driven-ral-prediction-2026-10-10).
+
+**2026-10-10 ECC predictor-disconnect mutation control:** the ECC runner now
+replays with the monitor-to-predictor connection deliberately skipped and
+requires the expected single `ECC_AHB_RAL_PREDICT` fatal with zero UVM errors.
+The passing path plus mutation control passes under IEEE 2012, 2017, and 2023
+on clean published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`; this
+protects the unit-level integration wiring, not generated UVMF/full-top
+qualification. See the [mutation evidence](../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md#predictor-disconnect-mutation-control-2026-10-10).

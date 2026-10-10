@@ -204,7 +204,8 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
       super.connect_phase(phase);
       ral_model.default_map.set_sequencer(env.agent.m_sequencer, ral_adapter);
       ral_model.default_map.set_auto_predict(0);
-      env.agent.agent.burst_transfer_ap.connect(ral_predictor.bus_item_export);
+      if (!$test$plusargs("AHB_NO_RAL_PREDICTOR"))
+        env.agent.agent.burst_transfer_ap.connect(ral_predictor.bus_item_export);
       ral_predictor.map = ral_model.default_map;
       ral_predictor.adapter = ral_adapter;
     endfunction
@@ -259,7 +260,8 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
         transfer_write || transfer_error || transfer_addr != 32'h0000_0804 ||
         transfer_data != 32'h1)
       $fatal(1, "Caliptra ECC AHB UVM checker/monitor did not report two clean transfers");
-    $display("PASS: Caliptra ECC RTL AHB write/readback through native UVM agent");
+    if (!$test$plusargs("AHB_NO_RAL_PREDICTOR"))
+      $display("PASS: Caliptra ECC RTL AHB write/readback through native UVM agent");
     $finish;
   end
 
