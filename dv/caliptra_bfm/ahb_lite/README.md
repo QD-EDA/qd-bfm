@@ -215,3 +215,8 @@ target ERROR to check `UVM_NOT_OK`. All six bus-width/IEEE-edition runs pass;
 the expected failed-read predictor skip emits one UVM warning per run. This
 validates the generic AHB BFM path against its memory target, not narrow writes
 to a Caliptra peripheral. See the [six-run evidence](../../../evidence/caliptra-bfm-ahb-native-ral-published-20261010/README.md).
+
+2026-10-10 latest published-main follow-up: the 615-transfer native UVM AHB
+HMAC SHA-384/SHA-512 and multi-block `INIT`/`NEXT` known-answer run also passes
+under IEEE 2017 on Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`, with
+zero UVM warnings/errors/fatals. See the [dated rerun](../../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#latest-published-main-recheck--2026-10-10).

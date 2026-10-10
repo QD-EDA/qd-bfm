@@ -1596,3 +1596,10 @@ package-qualified parameterized proxy declarations with published Icarus
 `127b887dfdc09283ab0187a2e618421dee3d5dcc`. No QD compatibility workaround was
 added; generated ECC UVMF remains blocked on the Icarus compile path. See the
 [dated compile result](../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md#latest-published-main-recheck--2026-10-10).
+
+**2026-10-10 latest published-main native AHB/HMAC recheck:** the native AHB
+UVM agent passes SHA-384, SHA-512, and multi-block `INIT`/`NEXT` against the
+actual HMAC controller under IEEE 2017 on published Icarus
+`127b887dfdc09283ab0187a2e618421dee3d5dcc`; 615 transfers complete with zero
+UVM warnings/errors/fatals. This validates the native agent/HMAC unit path,
+not generated HMAC UVMF. See the [dated result and hashes](../../evidence/caliptra-bfm-hmac-ahb-known-answer-published-20261010/README.md#latest-published-main-recheck--2026-10-10).

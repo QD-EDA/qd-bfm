@@ -310,3 +310,22 @@ logs respectively
 `f9e4e11017160b00874b14f2d3861113226825929195c74313e456c803d0019f`,
 `cfe86f99618ec67f9e4f72367a7d4349f443ec368e7fe29928106ad90aebeb3d`, and
 `ea2bc74574b88d2612832860af35e070e8de55da7fbe2d34fcde0a39eb3f397a`.
+
+## Latest published-main recheck — 2026-10-10
+
+The complete SHA-384, SHA-512, and `INIT`/`NEXT` multi-block known-answer
+sequence passes again through the native AHB UVM agent under IEEE 2017 on
+published Icarus main `127b887dfdc09283ab0187a2e618421dee3d5dcc`. It checks
+615 AHB transfers and both full tags, with zero UVM warnings, errors, or
+fatals. Caliptra RTL is clean at
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`; tested QD inputs are unchanged at
+`06d4e2c2fd3f105432d987367102823c36d55def`.
+
+Icarus/VVP executable SHA-256 values are
+`a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602` and
+`29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca`. The
+current QD runner, testbench, AHB UVM package, and filelist hashes are
+`9eb9107be6489469f453d2f9c79d0ae5e9bd58031210661d0b404abe618b9eab`,
+`d681d60ff2e9b4ce1f54b496a2876f5e09d80585b088756729a3769b3c230188`,
+`6240666058c8fa12dafef13435648ae7880843cfef8519ae7d203079b101c7fa`, and
+`afa63b20041ebef82ff585b449c06cfd208ddc95e8ba2bfd18396fc6ddd931c4`.
