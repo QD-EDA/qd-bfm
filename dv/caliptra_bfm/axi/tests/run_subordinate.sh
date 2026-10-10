@@ -19,6 +19,7 @@ esac
   ../axi4_caliptra_memory_subordinate.sv ../axi4_caliptra_monitor.sv \
   tb_axi4_caliptra_memory_subordinate.sv
 "$VVP_BIN" "$out"
+"$VVP_BIN" "$out" +CASE=RESET_HANDSHAKES
 
 "$IVERILOG_BIN" -g"$SV_EDITION" -s tb_axi4_caliptra_memory_queue -o "$out" \
   ../axi4_caliptra_memory_subordinate.sv tb_axi4_caliptra_memory_queue.sv

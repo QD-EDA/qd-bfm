@@ -69,14 +69,92 @@ module tb_axi4_caliptra_memory_subordinate;
   reg [32*MAX_BEATS-1:0] write_data, write_user, read_data, read_user;
   reg [4*MAX_BEATS-1:0] write_strb;
   reg [2*MAX_BEATS-1:0] read_response;
+  reg [8*32-1:0] test_case = "FULL";
 
   task automatic check(input condition, input [8*80-1:0] message);
     if (condition !== 1'b1) $fatal(1, "%0s", message);
   endtask
 
+  task automatic reset_after_target_handshake(input [15:0] channel);
+    reg handshook;
+    integer cycles;
+    begin
+      handshook = 0;
+      cycles = 0;
+      while (!handshook && cycles < 64) begin
+        @(posedge ACLK);
+        case (channel)
+          "AR": handshook = ARVALID && ARREADY;
+          "R":  handshook = RVALID && RREADY;
+          "AW": handshook = AWVALID && AWREADY;
+          "W":  handshook = WVALID && WREADY;
+          "B":  handshook = BVALID && BREADY;
+          default: $fatal(1, "Unknown AXI reset handshake channel %0s", channel);
+        endcase
+        cycles = cycles + 1;
+      end
+      if (!handshook) $fatal(1, "Timed out waiting for AXI %0s handshake", channel);
+      #1 ARESETn = 0; memory_resetn = 0;
+      repeat (2) @(posedge ACLK);
+    end
+  endtask
+
+  task automatic run_reset_handshake_case(input [15:0] channel);
+    reg abort_read_success, abort_write_success;
+    begin
+      fork
+        begin
+          if (channel == "AR" || channel == "R")
+            manager.read_burst(19'h100, 0, 2, 2'b01, 8'h51, 32'h0, 1'b0,
+              abort_read_success, read_data, read_user, read_response, response_user);
+          else
+            manager.write_burst(19'h100, 0, 2, 2'b01, 8'h51, 32'h0, 1'b0,
+              write_data, write_strb, write_user, abort_write_success, response, response_user);
+        end
+        reset_after_target_handshake(channel);
+      join
+
+      if (channel == "AR" || channel == "R")
+        check(!abort_read_success && !manager.read_busy && !ARVALID && !RREADY,
+          "reset at read handshake did not abort and clear the manager");
+      else
+        check(!abort_write_success && !manager.write_busy && !AWVALID && !WVALID && !BREADY,
+          "reset at write handshake did not abort and clear the manager");
+      check(!BVALID && !RVALID, "reset left a subordinate response pending");
+
+      @(negedge ACLK); manager.reset_master(); ARESETn = 1; memory_resetn = 1;
+      repeat (2) @(posedge ACLK);
+      check(!BVALID && !RVALID, "stale response appeared after reset release");
+    end
+  endtask
+
   initial begin
+    if ($value$plusargs("CASE=%s", test_case)) begin end
     repeat (2) @(posedge ACLK);
     @(negedge ACLK); manager.reset_master(); ARESETn = 1; memory_resetn = 1;
+
+    if (test_case == "RESET_HANDSHAKES") begin
+      write_data = 0; write_data[31:0] = 32'hcafe_1234;
+      write_strb = 0; write_user = 0;
+      run_reset_handshake_case("AR");
+      run_reset_handshake_case("R");
+      run_reset_handshake_case("AW");
+      run_reset_handshake_case("W");
+      run_reset_handshake_case("B");
+
+      write_strb[3:0] = 4'hf;
+      manager.write_burst(19'h100, 0, 2, 2'b01, 8'h52, 32'h0, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && response == 0 && memory.word_at(0) == 32'hcafe_1234,
+        "subordinate did not recover for a post-reset write");
+      manager.read_burst(19'h100, 0, 2, 2'b01, 8'h53, 32'h0, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(success && read_data[31:0] == 32'hcafe_1234,
+        "subordinate did not recover for a post-reset read");
+      checker_inst.check_idle();
+      $display("PASS: AXI memory subordinate aborts/reset-clears at AR/R/AW/W/B handshakes and recovers");
+      $finish;
+    end
 
     stall_aw = 1; stall_w = 1; stall_b = 1;
     write_data = {64'b0, 32'h2222_2222, 32'h1111_1111};

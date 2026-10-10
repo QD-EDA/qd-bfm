@@ -291,8 +291,12 @@ outputs, and recovers after reset. See the
 [reset-stall evidence bundle](evidence/caliptra-bfm-axi-master-reset-stalls-20261009/README.md).
 The standalone AXI manager now asserts reset just after AR, R, AW, W, and B
 handshakes, checks abort cleanup, and recovers with a locked read/write pair.
-Reset-at-handshake coverage for other BFM blocks remains open; see the
-[manager handshake-reset evidence](evidence/caliptra-bfm-axi-master-reset-handshakes-20261009/README.md).
+The integrated AXI memory subordinate regression now also resets after each
+of those five handshakes, checks that pending responses are cleared, and
+verifies post-reset read/write recovery. See the
+[manager handshake-reset evidence](evidence/caliptra-bfm-axi-master-reset-handshakes-20261009/README.md)
+and [subordinate handshake-reset evidence](evidence/caliptra-bfm-axi-subordinate-reset-handshakes-20261009/README.md).
+Generated DMA paths and full-top/UVM reset-edge coverage remain open.
 
 ## Current full-top AES cases 8–12 trace status — 2026-10-10
 
