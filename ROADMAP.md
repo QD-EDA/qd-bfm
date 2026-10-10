@@ -202,3 +202,12 @@ subordinate. The Slurm run used clean published Icarus
 [parameter-matrix evidence bundle](evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
 The full supported-width/ID/outstanding matrix and independent
 cross-simulator/four-state qualification remain open.
+
+## Delivered AXI monitor width/ID matrix — 2026-10-09
+
+The same nine configurations now instantiate the passive channel monitor and
+assert accepted beat, INCR/WRAP, partial-strobe, and last-beat counts. The
+clean published Icarus run is recorded in the
+[monitor-matrix evidence bundle](evidence/caliptra-bfm-axi-monitor-matrix-20261009/README.md).
+The full supported-width/ID/outstanding matrix and independent
+cross-simulator/four-state qualification remain open.
