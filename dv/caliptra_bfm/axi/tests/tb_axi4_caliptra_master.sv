@@ -106,7 +106,8 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
       bytes_per_beat = 64'd1 << size;
       case (burst)
         2'b00: address_for_beat = start_addr;
-        2'b01: address_for_beat = start_addr + beat * bytes_per_beat;
+        2'b01: address_for_beat = (beat == 0) ? start_addr :
+          ((start_addr / bytes_per_beat) + beat) * bytes_per_beat;
         2'b10: begin
           span = ({56'b0, len} + 1) * bytes_per_beat;
           wrap_base = (start_addr / span) * span;
@@ -304,16 +305,43 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
         read_data[63:32] == 32'h1234_c3d4,
         "narrow INCR transfer corrupted adjacent byte lanes");
 
+      write_data = {480'b0, 32'h1122_3344, 32'haa00_0000};
+      write_strb = {56'b0, 4'hf, 4'h8};
+      write_user = {448'b0, 32'hd000_0001, 32'hd000_0000};
+      bfm.write_burst(19'h43, 1, 2, 2'b01, 8'h36, 32'hca11_ab1e, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && mem[16] == 32'haa_b2_00ff &&
+        mem[17] == 32'h1122_3344,
+        "unaligned INCR write did not use one partial first beat then an aligned beat");
+      bfm.read_burst(19'h43, 1, 2, 2'b01, 8'h37, 32'hcafe_0001, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(success && read_data[31:0] == 32'haa_b2_00ff &&
+        read_data[63:32] == 32'h1122_3344,
+        "unaligned INCR read did not advance to the aligned second beat");
+
+      write_data = {480'b0, 32'hbb00_0000, 32'haa00_0000};
+      write_strb = {56'b0, 4'h8, 4'h8};
+      write_user = {448'b0, 32'hd000_0001, 32'hd000_0000};
+      bfm.write_burst(19'h47, 1, 2, 2'b00, 8'h38, 32'hca11_ab1e, 1'b0,
+        write_data, write_strb, write_user, success, response, response_user);
+      check(success && mem[17] == 32'hbb22_3344,
+        "unaligned FIXED write did not retain its address and byte lane");
+      bfm.read_burst(19'h47, 1, 2, 2'b00, 8'h39, 32'hcafe_0001, 1'b0,
+        success, read_data, read_user, read_response, response_user);
+      check(success && read_data[31:0] == 32'hbb22_3344 &&
+        read_data[63:32] == 32'hbb22_3344,
+        "unaligned FIXED read did not repeat the same address");
+
       bfm.write_burst(19'h40, 2, 2, 2'b10, 8'h34, 32'hca11_ab1e, 1'b0,
         write_data, write_strb, write_user, success, response, response_user);
       check(!success && !AWVALID && !WVALID && !bfm.write_busy,
         "manager accepted a three-beat WRAP burst");
-      bfm.read_burst(19'h41, 0, 1, 2'b01, 8'h35, 32'hcafe_0001, 1'b0,
+      bfm.read_burst(19'h42, 3, 2, 2'b10, 8'h35, 32'hcafe_0001, 1'b0,
         success, read_data, read_user, read_response, response_user);
       check(!success && !ARVALID && !bfm.read_busy,
-        "manager accepted a misaligned narrow transfer");
+        "manager accepted a misaligned WRAP burst");
       if (CHECKER_ENABLED) g_checker.checker_inst.check_idle();
-      $display("PASS: AXI manager WRAP, narrow INCR, and invalid burst shapes");
+      $display("PASS: AXI manager WRAP, narrow and unaligned INCR, and invalid burst shapes");
       $finish;
     end else if (test_case == "W_BEFORE_AW") begin
       w_before_aw_mode = 1;

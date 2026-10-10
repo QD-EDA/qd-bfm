@@ -239,6 +239,49 @@ module tb_axi4_caliptra_memory_subordinate;
       read_data[63:32] == 32'hcccc_dddd,
       "FIXED read did not repeat the same address for both beats");
 
+    write_data = 0;
+    write_data[31:0] = 32'haa00_0000;
+    write_data[63:32] = 32'h1122_3344;
+    write_strb = 0;
+    write_strb[3:0] = 4'h8;
+    write_strb[7:4] = 4'hf;
+    write_user = 0;
+    manager.write_burst(19'h12b, 1, 2, 2'b01, 8'h6d, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && memory.word_at(10) == 32'haa00_0000 &&
+      memory.word_at(11) == 32'h1122_3344,
+      "unaligned INCR write did not align its second beat");
+    manager.read_burst(19'h12b, 1, 2, 2'b01, 8'h6e, 32'h0, 1'b0,
+      success, read_data, read_user, read_response, response_user);
+    check(success && read_data[31:0] == 32'haa00_0000 &&
+      read_data[63:32] == 32'h1122_3344,
+      "unaligned INCR read did not align its second beat");
+
+    write_data = 0;
+    write_data[31:0] = 32'haa00_0000;
+    write_data[63:32] = 32'hbb00_0000;
+    write_strb = 0; write_strb[3:0] = 4'h8; write_strb[7:4] = 4'h8;
+    manager.write_burst(19'h127, 1, 2, 2'b00, 8'h71, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && memory.word_at(9) == 32'hbb00_0000,
+      "unaligned FIXED write did not retain its address and lane");
+    manager.read_burst(19'h127, 1, 2, 2'b00, 8'h72, 32'h0, 1'b0,
+      success, read_data, read_user, read_response, response_user);
+    check(success && read_data[31:0] == 32'hbb00_0000 &&
+      read_data[63:32] == 32'hbb00_0000,
+      "unaligned FIXED read did not repeat its address");
+
+    write_data = 0; write_data[31:0] = 32'haa00_0000;
+    write_strb = 0; write_strb[3:0] = 4'h8;
+    manager.write_burst(19'h8ff, 0, 2, 2'b01, 8'h6f, 32'h0, 1'b0,
+      write_data, write_strb, write_user, success, response, response_user);
+    check(success && response == 2'b00 && memory.word_at(511) == 32'haa63_6363,
+      "single-beat unaligned write at the final mapped byte was rejected");
+    manager.read_burst(19'h8ff, 0, 2, 2'b01, 8'h70, 32'h0, 1'b0,
+      success, read_data, read_user, read_response, response_user);
+    check(success && read_data[31:0] == 32'haa63_6363,
+      "single-beat unaligned read at the final mapped byte was rejected");
+
     for (integer beat = 0; beat < MAX_BEATS; beat = beat + 1) begin
       write_data[32*beat +: 32] = 32'h5eed_0000 | beat;
       write_strb[4*beat +: 4] = 4'hf;
@@ -261,42 +304,42 @@ module tb_axi4_caliptra_memory_subordinate;
 
     check(aw_burst_fixed_count + aw_burst_incr_count + aw_burst_wrap_count +
       aw_burst_reserved_count + aw_burst_unknown_count == aw_count &&
-      aw_burst_fixed_count == 1 && aw_burst_incr_count == aw_count - 2 &&
+      aw_burst_fixed_count == 2 && aw_burst_incr_count == aw_count - 3 &&
       aw_burst_wrap_count == 1 && aw_burst_reserved_count == 0 &&
       aw_burst_unknown_count == 0 &&
       aw_lock_clear_count + aw_lock_set_count + aw_lock_unknown_count == aw_count &&
-      aw_lock_clear_count == 10 && aw_lock_set_count == 3 &&
+      aw_lock_clear_count == 13 && aw_lock_set_count == 3 &&
       aw_lock_unknown_count == 0,
       "write address coverage did not account for burst and exclusive bins");
     check(ar_burst_fixed_count + ar_burst_incr_count + ar_burst_wrap_count +
       ar_burst_reserved_count + ar_burst_unknown_count == ar_count &&
-      ar_burst_fixed_count == 1 && ar_burst_incr_count == ar_count - 2 &&
+      ar_burst_fixed_count == 2 && ar_burst_incr_count == ar_count - 3 &&
       ar_burst_wrap_count == 1 && ar_burst_reserved_count == 0 &&
       ar_burst_unknown_count == 0 &&
       ar_lock_clear_count + ar_lock_set_count + ar_lock_unknown_count == ar_count &&
-      ar_lock_clear_count == 7 && ar_lock_set_count == 3 &&
+      ar_lock_clear_count == 10 && ar_lock_set_count == 3 &&
       ar_lock_unknown_count == 0,
       "read address coverage did not account for burst and exclusive bins");
     check(b_resp_okay_count + b_resp_exokay_count + b_resp_slverr_count +
       b_resp_decerr_count + b_resp_unknown_count == b_count &&
-      b_resp_okay_count == 10 && b_resp_exokay_count == 2 &&
+      b_resp_okay_count == 13 && b_resp_exokay_count == 2 &&
       b_resp_slverr_count == 0 && b_resp_decerr_count == 1 &&
       b_resp_unknown_count == 0,
       "write response coverage did not match response denominator");
     check(r_resp_okay_count + r_resp_exokay_count + r_resp_slverr_count +
       r_resp_decerr_count + r_resp_unknown_count == r_count &&
-      r_resp_okay_count == 264 && r_resp_exokay_count == 4 &&
+      r_resp_okay_count == 269 && r_resp_exokay_count == 4 &&
       r_resp_slverr_count == 1 && r_resp_decerr_count == 5 &&
       r_resp_unknown_count == 0,
       "read response coverage did not match response-beat denominator");
     check(w_strb_full_count + w_strb_partial_count + w_strb_zero_count +
-      w_strb_unknown_count == w_count && w_strb_full_count == 276 &&
-      w_strb_partial_count == 1 && w_strb_zero_count == 1 &&
-      w_strb_unknown_count == 0 && w_last_count == 13,
+      w_strb_unknown_count == w_count && w_strb_full_count == 277 &&
+      w_strb_partial_count == 5 && w_strb_zero_count == 1 &&
+      w_strb_unknown_count == 0 && w_last_count == 16,
       "write strobe coverage did not match beat denominator");
-    check(aw_count == 13 && w_count == 278 && b_count == 13 &&
-      ar_count == 10 && r_count == 274 && r_last_count == 10 &&
-      w_strb_full_count == 276,
+    check(aw_count == 16 && w_count == 283 && b_count == 16 &&
+      ar_count == 13 && r_count == 279 && r_last_count == 13 &&
+      w_strb_full_count == 277,
       "AXI monitor denominators did not include boundary, WRAP, and FIXED traffic");
     check(aw_valid_cycles == aw_count + aw_stall_cycles,
       "AW VALID cycles do not equal accepted transfers plus stalls");
@@ -311,8 +354,8 @@ module tb_axi4_caliptra_memory_subordinate;
     check(aw_stall_cycles != 0 && w_stall_cycles != 0 &&
       ar_stall_cycles != 0,
       "the directed backpressure profile missed a channel stall bin");
-    check(r_last_count == 10,
-      "read LAST coverage did not match the ten completed read transactions");
+    check(r_last_count == 13,
+      "read LAST coverage did not match the thirteen completed read transactions");
 
     $display("COVERAGE AXI address AW=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d AR=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d",
       aw_count, aw_burst_fixed_count, aw_burst_incr_count, aw_burst_wrap_count,

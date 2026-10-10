@@ -177,3 +177,17 @@ published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; see the
 [evidence bundle](evidence/caliptra-bfm-axi-wrap-narrow-20261009/README.md).
 Unaligned transfers, the broader width/ID matrix, four-state cross-simulator
 qualification, and full Caliptra/UVMF qualification remain open.
+
+## Delivered unaligned AXI transfers — 2026-10-09
+
+The manager, protocol checker, and SRAM subordinate now support unaligned
+INCR and FIXED starts. INCR advances to the next AxSIZE-aligned address after
+its partial first transfer; FIXED retains the same unaligned address and byte
+lanes for each beat. WRAP starts remain AxSIZE-aligned. Directed coverage
+checks byte-lane preservation, both burst types, and a one-byte transfer at the
+end of the mapped memory. Address and lane progression follows Arm
+[IHI0022H A3.4](https://developer.arm.com/-/media/Arm%20Developer%20Community/PDF/IHI0022H_amba_axi_protocol_spec.pdf).
+The full manager and subordinate evidence is in the
+[unaligned-transfer bundle](evidence/caliptra-bfm-axi-unaligned-20261009/README.md).
+This does not complete the broader width/ID, independent cross-simulator,
+four-state, or full Caliptra/UVMF qualification gates.

@@ -201,19 +201,22 @@ module axi4_caliptra_master #(
     reg [63:0] beats;
     reg [63:0] span;
     reg [63:0] wrap_base;
+    reg [63:0] aligned_addr;
     begin
       burst_is_valid = 0;
       bytes_per_beat = 64'd1 << size;
       beats = {56'd0, len} + 1;
-      if ((size <= $clog2(DATA_WIDTH/8)) && ((addr % bytes_per_beat) == 0)) begin
+      if (size <= $clog2(DATA_WIDTH/8)) begin
         case (burst)
           2'b00: burst_is_valid = (beats <= 16);
           2'b01: begin
             span = beats * bytes_per_beat;
-            burst_is_valid = ((addr[11:0] + span) <= 4096);
+            aligned_addr = (addr / bytes_per_beat) * bytes_per_beat;
+            burst_is_valid = (((aligned_addr % 4096) + span) <= 4096);
           end
           2'b10: begin
-            if (beats == 2 || beats == 4 || beats == 8 || beats == 16) begin
+            if (((addr % bytes_per_beat) == 0) &&
+                (beats == 2 || beats == 4 || beats == 8 || beats == 16)) begin
               span = beats * bytes_per_beat;
               wrap_base = (addr / span) * span;
               burst_is_valid = (((wrap_base % 4096) + span) <= 4096);
@@ -323,7 +326,8 @@ module axi4_caliptra_master #(
       ticket = -1;
       slot = -1;
       if (poisoned || (({1'b0, len} + 1) > MAX_BEATS) ||
-          !burst_is_valid(addr, len, size, burst)) begin
+          !burst_is_valid(addr, len, size, burst) ||
+          (lock && ((addr % (64'd1 << size)) != 0))) begin
         if (({1'b0, len} + 1) > MAX_BEATS)
           $display("AXI master burst length exceeds MAX_BEATS");
         else if (!burst_is_valid(addr, len, size, burst))
@@ -508,7 +512,8 @@ module axi4_caliptra_master #(
       ticket = -1;
       slot = -1;
       if (poisoned || (({1'b0, len} + 1) > MAX_BEATS) ||
-          !burst_is_valid(addr, len, size, burst)) begin
+          !burst_is_valid(addr, len, size, burst) ||
+          (lock && ((addr % (64'd1 << size)) != 0))) begin
         if (({1'b0, len} + 1) > MAX_BEATS)
           $display("AXI master burst length exceeds MAX_BEATS");
         else if (!burst_is_valid(addr, len, size, burst))

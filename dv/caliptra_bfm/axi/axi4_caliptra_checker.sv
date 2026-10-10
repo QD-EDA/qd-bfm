@@ -100,13 +100,12 @@ module axi4_caliptra_checker #(
     reg [63:0] beats;
     reg [63:0] span;
     reg [63:0] wrap_base;
+    reg [63:0] aligned_addr;
     begin
       if (size > $clog2(DATA_BYTES))
         $fatal(1, "AXI %0s AxSIZE exceeds bus width", channel);
       bytes_per_beat = 64'd1 << size;
       beats = {56'd0, len} + 1;
-      if ((addr % bytes_per_beat) != 0)
-        $fatal(1, "AXI %0s unaligned transfer is outside the Caliptra profile", channel);
       case (burst)
         2'b00: begin
           if (beats > 16)
@@ -114,10 +113,13 @@ module axi4_caliptra_checker #(
         end
         2'b01: begin
           span = beats * bytes_per_beat;
-          if ((addr[11:0] + span) > 4096)
+          aligned_addr = (addr / bytes_per_beat) * bytes_per_beat;
+          if (((aligned_addr % 4096) + span) > 4096)
             $fatal(1, "AXI %0s INCR burst crosses a 4KB boundary", channel);
         end
         2'b10: begin
+          if ((addr % bytes_per_beat) != 0)
+            $fatal(1, "AXI %0s WRAP start address is not aligned to AxSIZE", channel);
           if (!(beats == 2 || beats == 4 || beats == 8 || beats == 16))
             $fatal(1, "AXI %0s WRAP burst length must be 2, 4, 8, or 16", channel);
           span = beats * bytes_per_beat;
@@ -201,6 +203,28 @@ module axi4_caliptra_checker #(
     end
   endtask
 
+  // Arm IHI0022H A3.4: INCR aligns every transfer after an unaligned start.
+  function automatic [63:0] next_beat_address(
+    input [63:0] addr,
+    input [63:0] beat_bytes,
+    input [1:0] burst,
+    input [63:0] wrap_base,
+    input [63:0] burst_span
+  );
+    reg [63:0] candidate;
+    begin
+      candidate = addr;
+      case (burst)
+        2'b01: candidate = ((addr / beat_bytes) + 1) * beat_bytes;
+        2'b10: begin
+          candidate = addr + beat_bytes;
+          if (candidate >= (wrap_base + burst_span)) candidate = wrap_base;
+        end
+      endcase
+      next_beat_address = candidate;
+    end
+  endfunction
+
   task automatic invalidate_for_write_beat(
     input [ADDR_WIDTH-1:0] addr,
     input [7:0] len,
@@ -213,16 +237,16 @@ module axi4_caliptra_checker #(
     reg [63:0] span;
     reg [63:0] wrap_base;
     reg [63:0] beat_address;
+    integer prior_beat;
     integer lane;
     begin
       beat_bytes = 64'd1 << size;
       span = ({56'd0, len} + 1) * beat_bytes;
-      beat_address = addr + beat_index * beat_bytes;
-      if (burst == 2'b10) begin
-        wrap_base = (addr / span) * span;
-        if (beat_address >= wrap_base + span)
-          beat_address = wrap_base + ((beat_address - wrap_base) % span);
-      end
+      wrap_base = (addr / span) * span;
+      beat_address = addr;
+      for (prior_beat = 0; prior_beat < beat_index; prior_beat = prior_beat + 1)
+        beat_address = next_beat_address(beat_address, beat_bytes, burst,
+                                         wrap_base, span);
       for (lane = 0; lane < DATA_BYTES; lane = lane + 1) begin
         if (strobes[lane])
           invalidate_exclusive_byte((beat_address / DATA_BYTES) * DATA_BYTES + lane);
@@ -268,16 +292,8 @@ module axi4_caliptra_checker #(
                  write_exclusive_success_possible[id][slot]))
               invalidate_exclusive_byte((beat_address / DATA_BYTES) * DATA_BYTES + byte_index);
           end
-          case (expected_burst[expected_read])
-            2'b01: beat_address = beat_address + beat_bytes;
-            2'b10: begin
-              if ((beat_address + beat_bytes) >= (wrap_base + burst_span))
-                beat_address = wrap_base;
-              else
-                beat_address = beat_address + beat_bytes;
-            end
-            default: begin end
-          endcase
+          beat_address = next_beat_address(beat_address, beat_bytes,
+            expected_burst[expected_read], wrap_base, burst_span);
         end
         wr_data_done[id][slot] = 1'b1;
         expected_read = (expected_read + 1) % QUEUE_DEPTH;

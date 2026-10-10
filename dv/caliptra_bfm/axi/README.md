@@ -25,8 +25,9 @@ concurrently. A protocol mismatch or timeout poisons the manager; assert reset l
 unsuccessful, and clears their channel outputs; call `reset_master` after they
 exit.
 The `success` output is false for SLVERR/DECERR, while `BRESP`/per-beat
-`RRESP` preserve the target's response code. Invalid aligned/burst/4KB profile
-requests are rejected before VALID is asserted.
+`RRESP` preserve the target's response code. Invalid burst shapes, misaligned
+WRAP/exclusive requests, and 4KB-crossing requests are rejected before VALID
+is asserted. Unaligned INCR and FIXED requests are supported.
 
 Run the two-beat USER/LOCK/stall test, W-before-AW write completion, response
 errors, timeout/reset recovery, read/write reset aborts, bad BID/RLAST fail-stop
@@ -37,17 +38,19 @@ tests, and five-deep read/write queue tests with out-of-order responses using:
 ```
 
 The manager regression also round-trips all legal WRAP lengths (2, 4, 8, and
-16 beats) and an aligned two-byte INCR transfer across byte lanes, including
-neighbor-byte preservation. It rejects unsupported three-beat WRAP and
-misaligned narrow requests before asserting VALID. The published-main run is
-recorded in the [WRAP/narrow evidence bundle](../../../evidence/caliptra-bfm-axi-wrap-narrow-20261009/README.md).
+16 beats), aligned narrow INCR, and unaligned INCR/FIXED transfers with lane
+strobes. It rejects unsupported three-beat and misaligned WRAP requests before
+asserting VALID. Evidence is recorded in the
+[WRAP/narrow bundle](../../../evidence/caliptra-bfm-axi-wrap-narrow-20261009/README.md)
+and the [unaligned-transfer bundle](../../../evidence/caliptra-bfm-axi-unaligned-20261009/README.md).
 
 ## Memory subordinate
 
 [`axi4_caliptra_memory_subordinate.sv`](axi4_caliptra_memory_subordinate.sv)
 provides a bounded SRAM-style target with up to `MAX_OUTSTANDING` accepted
 reads and writes per direction, independent READY stalls, FIXED/INCR/WRAP
-address progression, byte strobes, B/R ID and USER responses, DECERR for
+address progression (including unaligned FIXED and first-beat INCR addresses),
+byte strobes, B/R ID and USER responses, DECERR for
 unmapped addresses, and injectable SLVERR. W data is consumed in AW order and
 B responses are queued; read bursts are returned in AR order without beat
 interleaving. It accepts W only after AW, which is legal AXI backpressure. The

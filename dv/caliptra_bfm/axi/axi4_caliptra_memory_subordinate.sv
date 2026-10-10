@@ -142,19 +142,22 @@ module axi4_caliptra_memory_subordinate #(
     reg [63:0] beats;
     reg [63:0] span;
     reg [63:0] wrap_base;
+    reg [63:0] aligned_addr;
     begin
       burst_is_valid = 0;
       bytes_per_beat = 64'd1 << size;
       beats = {56'd0, len} + 1;
-      if ((size <= $clog2(DATA_BYTES)) && ((addr % bytes_per_beat) == 0)) begin
+      if (size <= $clog2(DATA_BYTES)) begin
         case (burst)
           2'b00: burst_is_valid = (beats <= 16);
           2'b01: begin
             span = beats * bytes_per_beat;
-            burst_is_valid = ((addr[11:0] + span) <= 4096);
+            aligned_addr = (addr / bytes_per_beat) * bytes_per_beat;
+            burst_is_valid = (((aligned_addr % 4096) + span) <= 4096);
           end
           2'b10: begin
-            if (beats == 2 || beats == 4 || beats == 8 || beats == 16) begin
+            if (((addr % bytes_per_beat) == 0) &&
+                (beats == 2 || beats == 4 || beats == 8 || beats == 16)) begin
               span = beats * bytes_per_beat;
               wrap_base = (addr / span) * span;
               burst_is_valid = (((wrap_base % 4096) + span) <= 4096);
@@ -181,7 +184,8 @@ module axi4_caliptra_memory_subordinate #(
       candidate = addr;
       case (burst)
         2'b00: candidate = addr;
-        2'b01: candidate = addr + bytes_per_beat;
+        // Arm IHI0022H A3.4 aligns INCR transfers after the start address.
+        2'b01: candidate = ((addr / bytes_per_beat) + 1) * bytes_per_beat;
         2'b10: begin
           span = ({56'd0, len} + 1) * bytes_per_beat;
           wrap_base = (addr / span) * span;
@@ -204,6 +208,7 @@ module axi4_caliptra_memory_subordinate #(
     reg [63:0] current64;
     reg [63:0] limit64;
     reg [63:0] transfer_bytes;
+    reg [63:0] beat_extent;
     integer beat;
     begin
       burst_fits_memory = 1;
@@ -212,7 +217,11 @@ module axi4_caliptra_memory_subordinate #(
       transfer_bytes = 64'd1 << size;
       for (beat = 0; beat <= len; beat = beat + 1) begin
         current64 = current_addr;
-        if ((current64 < BASE_ADDR) || ((current64 + transfer_bytes) > limit64))
+        beat_extent = transfer_bytes;
+        if (((burst == 2'b00) || (beat == 0)) &&
+            ((current64 % transfer_bytes) != 0))
+          beat_extent = transfer_bytes - (current64 % transfer_bytes);
+        if ((current64 < BASE_ADDR) || ((current64 + beat_extent) > limit64))
           burst_fits_memory = 0;
         current_addr = increment_addr(current_addr, len, size, burst);
       end
