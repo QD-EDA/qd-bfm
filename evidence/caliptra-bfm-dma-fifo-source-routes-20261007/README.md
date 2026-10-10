@@ -61,3 +61,24 @@ commit `6d6de5c62664195595dde0bbdeb0d2f672263426`.
 This qualifies the three listed block-level routes. Other generated FIFO
 profiles, firmware-triggered warm reset, full-top firmware traffic, and full
 generated UVMF environments remain unqualified.
+
+## Published-main current-state rerun — 2026-10-10
+
+The guarded `--fifo-source-routes-only` run passed again with current BFM
+sources on published Icarus main `127b887dfdc09283ab0187a2e618421dee3d5dcc`
+and clean Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. All three
+65-word FIFO-source routes passed with randomized stalls: AXI2AXI (414 stall
+cycles), AXI2MBOX (232), and AXI2AHB (232). Each route drained exactly 65
+words and reported zero UVM warnings, errors, or fatals. For AXI2AXI, every
+SRAM destination word matched the corresponding FIFO word consumed by the
+actual `axi_dma_top`. This closes the block-level FIFO-source readback gap; it
+does not establish a same-run SRAM-to-FIFO-to-SRAM round trip or full-top
+firmware qualification.
+
+QD source was branch commit `b5c3f802b6bb666ebe3fae92b04613e705d638aa`;
+the runner inputs were unchanged from that commit, and unrelated worktree
+files were left untouched. Their hashes match
+[`runner-inputs.sha256`](../caliptra-bfm-axi-dma-mixed-replay-20261010/runner-inputs.sha256).
+The Icarus/VVP executable hashes were
+`a89a2e29bf1b47b71a6e4f285e32692cd7a4877a21ee9bb554e066d6e9e27602` and
+`29daf647fac57ec276dbed18fcc8978777f1f0a5c79064389838d05f8bc785ca`.

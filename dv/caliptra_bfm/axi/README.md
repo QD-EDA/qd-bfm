@@ -477,3 +477,11 @@ top-testbench package types on clean published Icarus main. It covers the
 Caliptra delay distributions, SRAM/FIFO and recovery traffic, segmented
 readback, randomized stalls, and 256-beat bursts. See the
 [post-X/Z integration evidence](../../../evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).
+
+**2026-10-10 FIFO-source readback follow-up:** the earlier open-gap notes above
+are superseded for the block-level AXI2AXI FIFO-source route. The latest
+published-main rerun drains 65 words from the endpoint FIFO through the actual
+`axi_dma_top`, checks every SRAM destination word against the consumed FIFO
+payload, and passes with zero UVM warnings/errors/fatals. This does not claim a
+same-run SRAM-to-FIFO-to-SRAM round trip or full-top firmware qualification;
+see the [dated route evidence](../../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md#published-main-current-state-rerun--2026-10-10).

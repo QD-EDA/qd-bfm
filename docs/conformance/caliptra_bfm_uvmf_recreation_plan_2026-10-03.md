@@ -1580,3 +1580,12 @@ Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`. This verifies one generic
 integer field; Caliptra-generated record layouts and additional field types
 remain unverified. See the
 [dated evidence](../../evidence/caliptra-bfm-uvmf-transaction-fields-published-20261010/README.md).
+
+**2026-10-10 published-main FIFO-source readback:** the guarded
+`--fifo-source-routes-only` DMA-block replay passes all three 65-word routes on
+clean published Icarus `127b887dfdc09283ab0187a2e618421dee3d5dcc`. The
+AXI2AXI case reads endpoint FIFO data through the actual `axi_dma_top`, checks
+every SRAM destination word against the consumed payload, and confirms the
+FIFO drains. This closes that block-level readback gap only; same-run
+SRAM-to-FIFO-to-SRAM and full-top firmware qualification remain open. See the
+[dated result and provenance](../../evidence/caliptra-bfm-dma-fifo-source-routes-20261007/README.md#published-main-current-state-rerun--2026-10-10).
