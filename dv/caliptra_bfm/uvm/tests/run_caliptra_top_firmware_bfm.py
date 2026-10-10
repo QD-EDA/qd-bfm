@@ -694,18 +694,37 @@ def native_vector_outputs(skip_pq_vectors=False):
 
 
 def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
-    if sys.platform != "darwin" or platform.machine() != "arm64":
-        raise RuntimeError("native Caliptra vector preparation currently requires macOS ARM64")
-    tool_names = ("brew", "clang", "make", "openssl", "xxd", "python3.12")
+    macos = sys.platform == "darwin" and platform.machine() == "arm64"
+    linux = sys.platform == "linux" and platform.machine() in ("x86_64", "amd64")
+    if not (macos or linux):
+        raise RuntimeError("native Caliptra vector preparation requires macOS ARM64 or Linux x86-64")
+    compiler = shutil.which("clang") if macos else shutil.which("cc")
+    tool_names = ("make", "openssl", "xxd", "python3.12")
     tools = {name: shutil.which(name) for name in tool_names}
+    tools["compiler"] = compiler
     missing = [name for name, path in tools.items() if path is None]
+    if macos:
+        tools["brew"] = shutil.which("brew")
+        if tools["brew"] is None:
+            missing.append("brew")
     if missing:
         raise RuntimeError(f"missing native vector tools: {missing}")
-    packages = ["mbedtls@3"] + ([] if skip_pq_vectors else ["openssl@3"])
-    roots = {
-        package: Path(subprocess.check_output([tools["brew"], "--prefix", package], text=True).strip())
-        for package in packages
-    }
+    if macos:
+        packages = ["mbedtls@3"] + ([] if skip_pq_vectors else ["openssl@3"])
+        roots = {
+            package: Path(subprocess.check_output([tools["brew"], "--prefix", package], text=True).strip())
+            for package in packages
+        }
+        library_suffix = ".dylib"
+    else:
+        mbedtls_root = env.get("CALIPTRA_MBEDTLS_ROOT")
+        if not mbedtls_root:
+            raise RuntimeError("Linux native vector preparation requires CALIPTRA_MBEDTLS_ROOT")
+        roots = {
+            "mbedtls@3": Path(mbedtls_root),
+            "openssl@3": Path(tools["openssl"]).resolve().parent.parent,
+        }
+        library_suffix = ".so"
     adams = Path(rtl_root) / "submodules/adams-bridge"
     ref_source = adams / "src/abr_top/uvmf/Dilithium_ref/dilithium/ref"
     vectors = REPO / "dv/caliptra_bfm/native_vectors"
@@ -715,9 +734,9 @@ def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
         "doe_test_gen.py": Path(rtl_root) / "src/doe/tb/doe_test_gen.py",
         "sha256_wntz_test_gen.py": Path(rtl_root) / "src/sha256/tb/sha256_wntz_test_gen.py",
         "stage_sha256_wntz.py": vectors / "stage_sha256_wntz.py",
-        "mbedtls_libcrypto": mbedtls / "lib/libmbedcrypto.dylib",
-        "mbedtls_libx509": mbedtls / "lib/libmbedx509.dylib",
-        "mbedtls_libtls": mbedtls / "lib/libmbedtls.dylib",
+        "mbedtls_libcrypto": mbedtls / f"lib/libmbedcrypto{library_suffix}",
+        "mbedtls_libx509": mbedtls / f"lib/libmbedx509{library_suffix}",
+        "mbedtls_libtls": mbedtls / f"lib/libmbedtls{library_suffix}",
     }
     if not skip_pq_vectors:
         openssl = roots["openssl@3"]
@@ -729,7 +748,7 @@ def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
             "check_native_mldsa.py": vectors / "check_native_mldsa.py",
             "test_dilithium.c": ref_source / "test/test_dilithium.c",
             "smoke_test_mldsa_vector.hex": Path(rtl_root) / "src/mldsa/tb/smoke_test_mldsa_vector.hex",
-            "openssl_libcrypto": openssl / "lib/libcrypto.dylib",
+            "openssl_libcrypto": openssl / f"lib/libcrypto{library_suffix}",
         })
         if not ref_source.is_dir():
             raise RuntimeError(f"missing native vector input directory: {ref_source}")
@@ -753,12 +772,12 @@ def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
             "native_mlkem": native / "native_mlkem",
         })
         commands.append([
-            tools["clang"], "-Wall", "-Wextra", "-Werror", "-O2",
+            tools["compiler"], "-Wall", "-Wextra", "-Werror", "-O2",
             f"-I{roots['openssl@3'] / 'include'}", str(inputs["native_mlkem.c"]),
             f"-L{roots['openssl@3'] / 'lib'}", "-lcrypto", "-o", str(generated["native_mlkem"]),
         ])
     commands.append([
-        tools["clang"], "-O2", f"-I{mbedtls / 'include'}", str(inputs["ecc_secp384r1.c"]),
+        tools["compiler"], "-O2", f"-I{mbedtls / 'include'}", str(inputs["ecc_secp384r1.c"]),
         f"-L{mbedtls / 'lib'}", "-lmbedtls", "-lmbedx509", "-lmbedcrypto",
         "-o", str(generated["ecc_secp384r1.exe"]),
     ])
@@ -766,7 +785,7 @@ def prepare_native_vectors(rtl_root, output, env, skip_pq_vectors=False):
         commands.extend([
             [sys.executable, str(vectors / "stage_mldsa.py"), str(inputs["test_dilithium.c"]),
              str(ref / "test/test_dilithium.c")],
-            [tools["make"], "-C", str(ref), f"CC={tools['clang']}", "test/test_dilithium5"],
+            [tools["make"], "-C", str(ref), f"CC={tools['compiler']}", "test/test_dilithium5"],
         ])
     commands.append([
         sys.executable, str(vectors / "stage_sha256_wntz.py"),

@@ -288,7 +288,10 @@ containing the original AXI-complex source exactly once,
 `CALIPTRA_GCC_PREFIX` (toolchain name or path, with or without a trailing
 hyphen), and `CALIPTRA_JTAGDPI_VPI`. It builds and checks the
 open native crypto-vector helpers in `native_vectors/`; this currently requires
-macOS ARM64, Homebrew OpenSSL 3 and mbedTLS 3, Clang, Make, and Python 3.12.
+either macOS ARM64 with Homebrew OpenSSL 3 and mbedTLS 3, Clang, Make, and
+Python 3.12, or Linux x86-64 with OpenSSL, mbedTLS 3, a C compiler, Make,
+`xxd`, and Python 3.12. On Linux, set `CALIPTRA_MBEDTLS_ROOT` to the mbedTLS
+prefix containing `include/` and `lib/`.
 Hash-checked disposable Icarus overlays also allocate Caliptra's missing AXI
 read response-user array and work around the pinned SRAM, reset, JTAG-port, and
 debug-print compatibility issues. The AES package overlay keeps `aes_mul2`
