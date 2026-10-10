@@ -1442,6 +1442,13 @@ package-qualified parameterized proxy declarations before simulation. This
 remains an Icarus-side blocker; no QD source adaptation was added
 ([ECC compile evidence](../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md)).
 
+**2026-10-10 published-main AHB predictor rerun:** the same AHB ERROR-tail
+regression also passes with zero UVM errors/fatals on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234`, for both 32-bit and 64-bit
+profiles. This validates the targeted predictor behavior on a published
+simulator; generated Caliptra interfaces and full BFM qualification remain
+open. See the [clean published rerun](../../evidence/caliptra-bfm-ahb-qvip-error-tail-20261010/README.md#clean-published-simulator-rerun-2026-10-10).
+
 **2026-10-10 AHB predictor ERROR-tail diagnostic:** the generated-name AHB
 compatibility smoke now covers a burst with `OKAY, ERROR, OKAY` responses and
 checks that RAL prediction stops at the first error. Both 32-bit and 64-bit
