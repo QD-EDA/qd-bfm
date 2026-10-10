@@ -38,7 +38,7 @@ module tb_axi4_caliptra_parameter_matrix #(
   axi4_caliptra_memory_subordinate #(
     .ADDR_WIDTH(ADDR_WIDTH), .DATA_WIDTH(DATA_WIDTH), .ID_WIDTH(ID_WIDTH),
     .USER_WIDTH(USER_WIDTH), .BASE_ADDR({ADDR_WIDTH{1'b0}}),
-    .MEM_BYTES(512), .MAX_OUTSTANDING(2)
+    .MEM_BYTES(4096), .MAX_OUTSTANDING(2)
   ) memory (.*);
 
   axi4_caliptra_checker #(

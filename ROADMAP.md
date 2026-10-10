@@ -487,3 +487,12 @@ mirror unchanged; it passes with zero UVM errors or fatals on published Icarus
 come from the two predictors observing failed reads. This is synthetic agent
 evidence, not full Caliptra/UVMF qualification; see the
 [dated evidence](evidence/caliptra-bfm-axi-native-ral-predictor-published-20261010/README.md).
+
+## AXI data-width matrix extension — 2026-10-10
+
+The guarded manager/checker/SRAM/monitor matrix now passes 18 cases across
+32/64/128/256/512/1024-bit data and 1/4/8-bit IDs. The SRAM subordinate
+explicitly caps ID width at 8 bits. This extends only the data-width sample;
+outstanding-depth cross-products, independent simulator parity, and full
+Caliptra/UVMF qualification remain open. See the
+[dated matrix follow-up](evidence/caliptra-bfm-axi-parameter-matrix-20261009/README.md).
