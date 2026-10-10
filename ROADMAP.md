@@ -369,3 +369,17 @@ and 1 GiB, measured 339,288 KiB MaxRSS and a 0.39 GiB process-group peak, and
 exited 0 in 13.09 seconds. This remains standalone module-level evidence, not
 full-top or UVMF qualification. See the
 [portability evidence](evidence/caliptra-bfm-axi-verilator-readback-20261010/README.md).
+
+## Current-source full-top random-DMA rerun — 2026-10-10
+
+Slurm job 184 passed one `rand_test_dma` iteration from current QD commit
+`5945efeae78580cc8a5bd7a4050ee4dfec39d7be` through the pinned Caliptra top
+with the native BFM checker enabled. It recorded one testcase pass, zero
+failures or bad diagnostics, zero JTAG errors, and normal finish at
+`minstret=7898`, `mcycle=27467`. Clean published Icarus main
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602` was used. Runtime and source
+provenance are in the
+[current-source full-top evidence](evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/README.md).
+This remains a single diagnostic iteration with fast TRNG and diagnostic fast
+boot-data preload, not stock-firmware, full-suite, UVMF, or qualification
+coverage.

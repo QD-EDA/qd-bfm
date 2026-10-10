@@ -587,3 +587,9 @@ clean published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602` passes the
 main, reset-handshake, and multi-ID queue cases. This is module-level evidence,
 not full-top qualification. See the
 [`AXI portability evidence`](../../evidence/caliptra-bfm-axi-verilator-readback-20261010/README.md).
+
+Current-source full-top follow-up (2026-10-10): one `rand_test_dma` iteration
+passes against QD commit `5945efeae78580cc8a5bd7a4050ee4dfec39d7be` on clean
+published Icarus main, with the native BFM checker enabled. This remains a
+narrow diagnostic using fast TRNG and diagnostic fast boot-data preload; see
+the [current-source full-top evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/README.md).

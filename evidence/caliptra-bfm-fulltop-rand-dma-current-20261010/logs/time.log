@@ -1,0 +1,23 @@
+	Command being timed: "sh /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-rand-dma-notrace-5945efe-20261010-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.sh --case rand_test_dma --rand-dma-iterations 1 --fast-trng --fast-boot-data-preload --quiet-firmware --output /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-rand-dma-notrace-5945efe-20261010-04/output/rand-dma-one"
+	User time (seconds): 3720.85
+	System time (seconds): 64.46
+	Percent of CPU this job got: 103%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01:02
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1860408
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 1021302
+	Voluntary context switches: 32474337
+	Involuntary context switches: 8628
+	Swaps: 0
+	File system inputs: 168
+	File system outputs: 781208
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
