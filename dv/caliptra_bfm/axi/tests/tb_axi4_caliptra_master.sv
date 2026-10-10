@@ -55,6 +55,7 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg [2:0] aw_delay = 2;
   reg [2:0] ar_delay = 2;
   reg write_pending = 0;
+  reg [8*32-1:0] test_case = "GOOD";
   reg w_before_aw_mode = 0;
   reg early_w_pending = 0;
   reg [31:0] early_wdata;
@@ -227,7 +228,6 @@ module tb_axi4_caliptra_master #(parameter CHECKER_ENABLED = 1);
   reg write_success_concurrent, read_success_concurrent;
   reg [1:0] write_response_concurrent;
   reg [31:0] write_user_concurrent, read_response_user_concurrent;
-  reg [8*32-1:0] test_case = "GOOD";
   initial begin
     if ($value$plusargs("CASE=%s", test_case)) begin end
     for (i = 0; i < 64; i = i + 1) mem[i] = 0;
