@@ -24,7 +24,8 @@ module tb_axi4_caliptra_memory_subordinate;
   wire [7:0] write_response_id, read_response_id;
 
   axi4_caliptra_master #(.ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8),
-    .USER_WIDTH(32), .MAX_BEATS(MAX_BEATS), .TIMEOUT_CYCLES(64)) manager (.*);
+    .USER_WIDTH(32), .MAX_BEATS(MAX_BEATS),
+    .TIMEOUT_CYCLES(MAX_BEATS + 64)) manager (.*);
   axi4_caliptra_memory_subordinate #(.ADDR_WIDTH(19), .DATA_WIDTH(32),
     .ID_WIDTH(8), .USER_WIDTH(32), .BASE_ADDR(19'h100), .MEM_BYTES(2048)) memory (
       .ARESETn(memory_resetn), .*
