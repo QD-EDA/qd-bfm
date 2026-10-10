@@ -342,3 +342,18 @@ regression on clean published Icarus
 256 MiB, measured 17,456 KiB maximum RSS, and exited 0. See the
 [monitor-coverage evidence](evidence/caliptra-bfm-axi-burst-monitor-coverage-20261010/README.md).
 This remains module-level target evidence, not full-top DMA qualification.
+
+## Current full-top random-DMA status — 2026-10-10
+
+Slurm job 164 passed one `rand_test_dma` iteration through the actual pinned
+Caliptra top with the native AXI BFM checker enabled. Firmware, elaboration,
+and simulation exited 0; one testcase pass marker and normal `$finish` were
+recorded at `minstret=7898`, `mcycle=27467`, with zero bad diagnostics and no
+JTAG errors. The run used clean published Icarus
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, pinned Caliptra RTL, fast TRNG,
+and diagnostic fast boot-data preload. The single iteration ran for 59:25.73
+with 1 CPU and a 4 GiB Slurm request; measured MaxRSS was 1,860,208 KiB and
+the process-group peak was 1.80 GiB. See the
+[full-top random-DMA evidence](evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/README.md).
+This is one diagnostic iteration without AXI trace, not stock-firmware or
+full-suite qualification.

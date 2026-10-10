@@ -566,3 +566,13 @@ diagnostic using fast TRNG, `.data`/`.bss` preload, and PQ-vector suppression,
 not stock-firmware qualification. GitHub DNS prevented a fresh remote-head
 check. See the
 [`0d8815f full-top evidence`](../../evidence/caliptra-bfm-fulltop-aes-case12-main-0d8815f-20261009/README.md).
+
+**2026-10-10 published-Icarus random-DMA follow-up:** one `rand_test_dma`
+iteration passed through the actual Caliptra top with the native BFM checker
+enabled. It reached the single firmware testcase pass marker and normal
+`$finish` at `minstret=7898`, `mcycle=27467`; no simulator diagnostics or JTAG
+errors were reported. The run used fast TRNG, a diagnostic fast boot-data
+preload, and quiet firmware, with AXI trace disabled. This confirms one
+full-top DMA iteration on clean published Icarus; it is not stock-firmware or
+full-suite qualification. See the
+[`rand_test_dma` evidence](../../evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/README.md).
