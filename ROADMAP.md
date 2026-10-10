@@ -443,3 +443,13 @@ randomized stalls, segmented readback, and 256-beat bursts. The job requested
 peak, and exited 0. This is component integration evidence, not full-top
 firmware, UVMF, or qualification coverage. See the
 [Caliptra `axi_if` integration evidence](evidence/caliptra-bfm-axi-caliptra-if-post-xz-20261010/README.md).
+
+## Generated ECC UVMF check on current clean published Icarus — 2026-10-10
+
+Slurm job 206 reran the generated ECC reset/IRQ path on clean published
+Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. It still stops during
+compile at the package-qualified parameterized proxy class declarations in
+Caliptra's generated BFM interfaces; no UVM simulation starts. This confirms
+the current generated ECC integration blocker without introducing a QD-side
+syntax adaptation. Peak RSS was 75,944 KiB. See the
+[current ECC compile evidence](evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md).

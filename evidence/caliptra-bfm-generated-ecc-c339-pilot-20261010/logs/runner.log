@@ -1,0 +1,14 @@
+memory guard: preflight available 14.55 GiB; process-group cap 0.70 GiB; system reserve 5.59 GiB
+OVERLAY: ECC_in_monitor_bfm.sv 4bdd8631566d578514affb2c7e34ab4706fe45f3f53352bfda26d447297cfaf2 -> /tmp/tmp.kHkwnGZajY/monitors/ECC_in_monitor_bfm.sv
+OVERLAY: ECC_out_monitor_bfm.sv 360f641ca3f51f1a3c26fb7c47217d7cf80f72a1cb1405e3633540a453e78393 -> /tmp/tmp.kHkwnGZajY/monitors/ECC_out_monitor_bfm.sv
+OVERLAY: ECC_in_driver_bfm.sv ac6594e2ff7bac5a30c2b3def59067099e3e9749e559b23251b99c52e8ecf9dc -> /tmp/tmp.kHkwnGZajY/monitors/ECC_in_driver_bfm.sv
+/tmp/tmp.kHkwnGZajY/monitors/ECC_in_driver_bfm.sv:166: syntax error
+/tmp/tmp.kHkwnGZajY/monitors/ECC_in_driver_bfm.sv:170: error: Invalid module item.
+/tmp/tmp.kHkwnGZajY/monitors/ECC_in_monitor_bfm.sv:106: syntax error
+/tmp/tmp.kHkwnGZajY/monitors/ECC_in_monitor_bfm.sv:110: error: Invalid module item.
+/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/source/caliptra-rtl/src/ecc/uvmf_ecc/uvmf_template_output/verification_ip/interface_packages/ECC_out_pkg/src/ECC_out_driver_bfm.sv:139: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/source/caliptra-rtl/src/ecc/uvmf_ecc/uvmf_template_output/verification_ip/interface_packages/ECC_out_pkg/src/ECC_out_driver_bfm.sv:144: error: Invalid module item.
+/tmp/tmp.kHkwnGZajY/monitors/ECC_out_monitor_bfm.sv:93: syntax error
+/tmp/tmp.kHkwnGZajY/monitors/ECC_out_monitor_bfm.sv:98: error: Invalid module item.
+Generated ECC reset-monitor probe did not compile under IEEE 2017.
+memory guard: command exited 1; minimum available 14.50 GiB; maximum process group 0.06 GiB

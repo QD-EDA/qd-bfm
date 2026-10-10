@@ -297,3 +297,11 @@ Icarus `ac4532fa-dirty` was unpublished; clean, published-Icarus qualification
 remains open. The raw log contains generated key material and remains outside
 the repository. Reproduction command and artifact hashes are in the generated
 ECC runtime evidence.
+
+2026-10-10 clean published-Icarus recheck: Slurm job 206 reran the generated
+ECC reset/IRQ probe on clean Icarus main `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`.
+Compilation still stops at the generated package-qualified parameterized
+proxy class declarations in the input/output BFM interfaces, before UVM
+simulation begins. This reproduces the earlier published-main compile failure;
+the QD sources do not adapt those declarations. The process peaked at 75,944
+KiB RSS. See the [current ECC compile evidence](../../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md).
