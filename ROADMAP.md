@@ -330,3 +330,15 @@ queue suite on clean published Icarus
 and [WRAP evidence](evidence/caliptra-bfm-axi-wrap16-20261010/README.md).
 This is module-level memory-target coverage; full-top random-DMA remains
 separate.
+
+## AXI target burst monitor accounting — 2026-10-10
+
+The 16-beat FIXED and WRAP cases now execute before the memory monitor
+snapshot. Assertions check totals of 18 AW/B transactions, 15 AR/R
+transactions, and 315 W beats, including burst-type, response, strobe, and
+LAST bins. Slurm job 172 passed the full subordinate, reset, and queue
+regression on clean published Icarus
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; the run used one CPU, requested
+256 MiB, measured 17,456 KiB maximum RSS, and exited 0. See the
+[monitor-coverage evidence](evidence/caliptra-bfm-axi-burst-monitor-coverage-20261010/README.md).
+This remains module-level target evidence, not full-top DMA qualification.

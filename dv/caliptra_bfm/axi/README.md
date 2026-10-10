@@ -77,7 +77,9 @@ and response field. A separate 16-beat full-width FIXED round trip verifies
 that every write overwrites the same memory word and all read beats return the
 final word with the expected response and USER fields. A 16-beat full-width
 WRAP round trip also checks every wrapped memory word and returned data,
-response, and USER field.
+response, and USER field. Both maximum-length cases execute before the monitor
+snapshot, whose assertions include their address, response, and beat totals;
+see the [monitor-coverage evidence](../../../evidence/caliptra-bfm-axi-burst-monitor-coverage-20261010/README.md).
 
 Run its end-to-end manager/checker test in IEEE 2012 by default. With the
 multi-edition Icarus fork, set `SV_EDITION=2017` or `SV_EDITION=2023` to select

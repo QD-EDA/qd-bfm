@@ -380,82 +380,6 @@ module tb_axi4_caliptra_memory_subordinate;
         $fatal(1, "256-beat INCR readback mismatch at beat %0d", beat);
     end
 
-    check(aw_burst_fixed_count + aw_burst_incr_count + aw_burst_wrap_count +
-      aw_burst_reserved_count + aw_burst_unknown_count == aw_count &&
-      aw_burst_fixed_count == 2 && aw_burst_incr_count == aw_count - 3 &&
-      aw_burst_wrap_count == 1 && aw_burst_reserved_count == 0 &&
-      aw_burst_unknown_count == 0 &&
-      aw_lock_clear_count + aw_lock_set_count + aw_lock_unknown_count == aw_count &&
-      aw_lock_clear_count == 13 && aw_lock_set_count == 3 &&
-      aw_lock_unknown_count == 0,
-      "write address coverage did not account for burst and exclusive bins");
-    check(ar_burst_fixed_count + ar_burst_incr_count + ar_burst_wrap_count +
-      ar_burst_reserved_count + ar_burst_unknown_count == ar_count &&
-      ar_burst_fixed_count == 2 && ar_burst_incr_count == ar_count - 3 &&
-      ar_burst_wrap_count == 1 && ar_burst_reserved_count == 0 &&
-      ar_burst_unknown_count == 0 &&
-      ar_lock_clear_count + ar_lock_set_count + ar_lock_unknown_count == ar_count &&
-      ar_lock_clear_count == 10 && ar_lock_set_count == 3 &&
-      ar_lock_unknown_count == 0,
-      "read address coverage did not account for burst and exclusive bins");
-    check(b_resp_okay_count + b_resp_exokay_count + b_resp_slverr_count +
-      b_resp_decerr_count + b_resp_unknown_count == b_count &&
-      b_resp_okay_count == 13 && b_resp_exokay_count == 2 &&
-      b_resp_slverr_count == 0 && b_resp_decerr_count == 1 &&
-      b_resp_unknown_count == 0,
-      "write response coverage did not match response denominator");
-    check(r_resp_okay_count + r_resp_exokay_count + r_resp_slverr_count +
-      r_resp_decerr_count + r_resp_unknown_count == r_count &&
-      r_resp_okay_count == 269 && r_resp_exokay_count == 4 &&
-      r_resp_slverr_count == 1 && r_resp_decerr_count == 5 &&
-      r_resp_unknown_count == 0,
-      "read response coverage did not match response-beat denominator");
-    check(w_strb_full_count + w_strb_partial_count + w_strb_zero_count +
-      w_strb_unknown_count == w_count && w_strb_full_count == 277 &&
-      w_strb_partial_count == 5 && w_strb_zero_count == 1 &&
-      w_strb_unknown_count == 0 && w_last_count == 16,
-      "write strobe coverage did not match beat denominator");
-    check(aw_count == 16 && w_count == 283 && b_count == 16 &&
-      ar_count == 13 && r_count == 279 && r_last_count == 13 &&
-      w_strb_full_count == 277,
-      "AXI monitor denominators did not include boundary, WRAP, and FIXED traffic");
-    check(aw_valid_cycles == aw_count + aw_stall_cycles,
-      "AW VALID cycles do not equal accepted transfers plus stalls");
-    check(w_valid_cycles == w_count + w_stall_cycles,
-      "W VALID cycles do not equal accepted transfers plus stalls");
-    check(b_valid_cycles == b_count + b_stall_cycles,
-      "B VALID cycles do not equal accepted transfers plus stalls");
-    check(ar_valid_cycles == ar_count + ar_stall_cycles,
-      "AR VALID cycles do not equal accepted transfers plus stalls");
-    check(r_valid_cycles == r_count + r_stall_cycles,
-      "R VALID cycles do not equal accepted transfers plus stalls");
-    check(aw_stall_cycles != 0 && w_stall_cycles != 0 &&
-      ar_stall_cycles != 0,
-      "the directed backpressure profile missed a channel stall bin");
-    check(r_last_count == 13,
-      "read LAST coverage did not match the thirteen completed read transactions");
-
-    $display("COVERAGE AXI address AW=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d AR=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d",
-      aw_count, aw_burst_fixed_count, aw_burst_incr_count, aw_burst_wrap_count,
-      aw_burst_reserved_count, aw_burst_unknown_count, aw_lock_clear_count,
-      aw_lock_set_count, aw_lock_unknown_count, ar_count, ar_burst_fixed_count,
-      ar_burst_incr_count, ar_burst_wrap_count, ar_burst_reserved_count,
-      ar_burst_unknown_count, ar_lock_clear_count, ar_lock_set_count,
-      ar_lock_unknown_count);
-    $display("COVERAGE AXI responses B=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d R=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d",
-      b_count, b_resp_okay_count, b_resp_exokay_count, b_resp_slverr_count,
-      b_resp_decerr_count, b_resp_unknown_count, r_count, r_resp_okay_count,
-      r_resp_exokay_count, r_resp_slverr_count, r_resp_decerr_count,
-      r_resp_unknown_count);
-    $display("COVERAGE AXI W beats=%0d WSTRB full/partial/zero/unknown=%0d/%0d/%0d/%0d WLAST=%0d",
-      w_count, w_strb_full_count, w_strb_partial_count, w_strb_zero_count,
-      w_strb_unknown_count, w_last_count);
-    $display("COVERAGE AXI VALID/stall cycles AW=%0d/%0d W=%0d/%0d B=%0d/%0d AR=%0d/%0d R=%0d/%0d",
-      aw_valid_cycles, aw_stall_cycles, w_valid_cycles, w_stall_cycles,
-      b_valid_cycles, b_stall_cycles, ar_valid_cycles, ar_stall_cycles,
-      r_valid_cycles, r_stall_cycles);
-    $display("COVERAGE AXI R beats=%0d RLAST=%0d", r_count, r_last_count);
-
     write_data = 0; write_strb = 0; write_user = 0;
     for (integer beat = 0; beat < 16; beat = beat + 1) begin
       write_data[32*beat +: 32] = 32'hf17e_0000 | beat;
@@ -500,6 +424,82 @@ module tb_axi4_caliptra_memory_subordinate;
           read_response[2*beat +: 2] !== 2'b00)
         $fatal(1, "16-beat WRAP readback mismatch at beat %0d", beat);
     end
+
+    check(aw_burst_fixed_count + aw_burst_incr_count + aw_burst_wrap_count +
+      aw_burst_reserved_count + aw_burst_unknown_count == aw_count &&
+      aw_burst_fixed_count == 3 && aw_burst_incr_count == aw_count - 5 &&
+      aw_burst_wrap_count == 2 && aw_burst_reserved_count == 0 &&
+      aw_burst_unknown_count == 0 &&
+      aw_lock_clear_count + aw_lock_set_count + aw_lock_unknown_count == aw_count &&
+      aw_lock_clear_count == 15 && aw_lock_set_count == 3 &&
+      aw_lock_unknown_count == 0,
+      "write address coverage did not account for burst and exclusive bins");
+    check(ar_burst_fixed_count + ar_burst_incr_count + ar_burst_wrap_count +
+      ar_burst_reserved_count + ar_burst_unknown_count == ar_count &&
+      ar_burst_fixed_count == 3 && ar_burst_incr_count == ar_count - 5 &&
+      ar_burst_wrap_count == 2 && ar_burst_reserved_count == 0 &&
+      ar_burst_unknown_count == 0 &&
+      ar_lock_clear_count + ar_lock_set_count + ar_lock_unknown_count == ar_count &&
+      ar_lock_clear_count == 12 && ar_lock_set_count == 3 &&
+      ar_lock_unknown_count == 0,
+      "read address coverage did not account for burst and exclusive bins");
+    check(b_resp_okay_count + b_resp_exokay_count + b_resp_slverr_count +
+      b_resp_decerr_count + b_resp_unknown_count == b_count &&
+      b_resp_okay_count == 15 && b_resp_exokay_count == 2 &&
+      b_resp_slverr_count == 0 && b_resp_decerr_count == 1 &&
+      b_resp_unknown_count == 0,
+      "write response coverage did not match response denominator");
+    check(r_resp_okay_count + r_resp_exokay_count + r_resp_slverr_count +
+      r_resp_decerr_count + r_resp_unknown_count == r_count &&
+      r_resp_okay_count == 301 && r_resp_exokay_count == 4 &&
+      r_resp_slverr_count == 1 && r_resp_decerr_count == 5 &&
+      r_resp_unknown_count == 0,
+      "read response coverage did not match response-beat denominator");
+    check(w_strb_full_count + w_strb_partial_count + w_strb_zero_count +
+      w_strb_unknown_count == w_count && w_strb_full_count == 309 &&
+      w_strb_partial_count == 5 && w_strb_zero_count == 1 &&
+      w_strb_unknown_count == 0 && w_last_count == 18,
+      "write strobe coverage did not match beat denominator");
+    check(aw_count == 18 && w_count == 315 && b_count == 18 &&
+      ar_count == 15 && r_count == 311 && r_last_count == 15 &&
+      w_strb_full_count == 309,
+      "AXI monitor denominators did not include boundary, WRAP, and FIXED traffic");
+    check(aw_valid_cycles == aw_count + aw_stall_cycles,
+      "AW VALID cycles do not equal accepted transfers plus stalls");
+    check(w_valid_cycles == w_count + w_stall_cycles,
+      "W VALID cycles do not equal accepted transfers plus stalls");
+    check(b_valid_cycles == b_count + b_stall_cycles,
+      "B VALID cycles do not equal accepted transfers plus stalls");
+    check(ar_valid_cycles == ar_count + ar_stall_cycles,
+      "AR VALID cycles do not equal accepted transfers plus stalls");
+    check(r_valid_cycles == r_count + r_stall_cycles,
+      "R VALID cycles do not equal accepted transfers plus stalls");
+    check(aw_stall_cycles != 0 && w_stall_cycles != 0 &&
+      ar_stall_cycles != 0,
+      "the directed backpressure profile missed a channel stall bin");
+    check(r_last_count == 15,
+      "read LAST coverage did not match the fifteen completed read transactions");
+
+    $display("COVERAGE AXI address AW=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d AR=%0d FIXED/INCR/WRAP/reserved/unknown=%0d/%0d/%0d/%0d/%0d lock-clear/set/unknown=%0d/%0d/%0d",
+      aw_count, aw_burst_fixed_count, aw_burst_incr_count, aw_burst_wrap_count,
+      aw_burst_reserved_count, aw_burst_unknown_count, aw_lock_clear_count,
+      aw_lock_set_count, aw_lock_unknown_count, ar_count, ar_burst_fixed_count,
+      ar_burst_incr_count, ar_burst_wrap_count, ar_burst_reserved_count,
+      ar_burst_unknown_count, ar_lock_clear_count, ar_lock_set_count,
+      ar_lock_unknown_count);
+    $display("COVERAGE AXI responses B=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d R=%0d OKAY/EXOKAY/SLVERR/DECERR/unknown=%0d/%0d/%0d/%0d/%0d",
+      b_count, b_resp_okay_count, b_resp_exokay_count, b_resp_slverr_count,
+      b_resp_decerr_count, b_resp_unknown_count, r_count, r_resp_okay_count,
+      r_resp_exokay_count, r_resp_slverr_count, r_resp_decerr_count,
+      r_resp_unknown_count);
+    $display("COVERAGE AXI W beats=%0d WSTRB full/partial/zero/unknown=%0d/%0d/%0d/%0d WLAST=%0d",
+      w_count, w_strb_full_count, w_strb_partial_count, w_strb_zero_count,
+      w_strb_unknown_count, w_last_count);
+    $display("COVERAGE AXI VALID/stall cycles AW=%0d/%0d W=%0d/%0d B=%0d/%0d AR=%0d/%0d R=%0d/%0d",
+      aw_valid_cycles, aw_stall_cycles, w_valid_cycles, w_stall_cycles,
+      b_valid_cycles, b_stall_cycles, ar_valid_cycles, ar_stall_cycles,
+      r_valid_cycles, r_stall_cycles);
+    $display("COVERAGE AXI R beats=%0d RLAST=%0d", r_count, r_last_count);
 
     manager.read_burst(19'h108, 0, 2, 2'b01, 8'h6d, 32'h0, 1'b1,
       success, read_data, read_user, read_response, response_user);
