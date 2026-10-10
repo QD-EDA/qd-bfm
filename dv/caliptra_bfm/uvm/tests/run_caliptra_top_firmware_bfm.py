@@ -994,7 +994,7 @@ def main():
     trace_compile_command = None
     trace_compile_exit = None
     if args.trace_axi:
-        trace_source = REPO / "evidence/caliptra-bfm-open-top-smoke-20261006/sim-axi-trace-vpi.c"
+        trace_source = REPO / "dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c"
         trace_compiler = shutil.which(os.environ.get(
             "IVERILOG_VPI_BIN", str(Path(iverilog).with_name("iverilog-vpi"))))
         if not trace_compiler:

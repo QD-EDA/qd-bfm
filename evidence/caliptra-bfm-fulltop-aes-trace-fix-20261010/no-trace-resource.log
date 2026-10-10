@@ -1,0 +1,23 @@
+	Command being timed: "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/bin/python3.12 /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case8-c339b9f-20261010-01/source/qd-bfm/scripts/run_with_memory_pressure_guard.py --max-process-bytes 4000000000 --min-available-bytes 6000000000 --interval 0.1 --timeout-seconds 3600 --log /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-bfm-case8-no-trace-20261010-01/logs/memory-guard.log -- /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-bfm-case8-no-trace-20261010-01/input/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY +CLP_SKIP_PQ_VECTOR_GENERATION"
+	User time (seconds): 643.75
+	System time (seconds): 10.84
+	Percent of CPU this job got: 103%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:30.05
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1135228
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 321310
+	Voluntary context switches: 5561818
+	Involuntary context switches: 1666
+	Swaps: 0
+	File system inputs: 432
+	File system outputs: 184
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
