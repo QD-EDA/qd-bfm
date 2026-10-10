@@ -1,0 +1,2 @@
+3789a549f1171b7bde7b57e0786f11e17a8f20b8e14fda36a45c38b06925723d  agent.log (uncompressed SHA-256)
+ea2fe82414114c21b80417d31e9f55e3ec871f0f2ac9213a28dac54aab3cc417  scoreboard.log (uncompressed SHA-256)

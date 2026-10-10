@@ -1,0 +1,9 @@
+QD-BFM commit: 9ab26c499c9b4b974a28e8ee914a0000a42f1feb (clean archive)
+Icarus commit: 4b3f3424c440aca6af92153b6860a7253b925234 (clean, published main)
+Bundled UVM: Accellera 2020.3.1
+Platform: Darwin 27.0.0 arm64
+
+SHA-256:
+6e588370e3b952945a1406dd9d411238eb4bde53a543f343ead9b9d2810a3db8  qd-bfm-source.tar.gz
+00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385  iverilog
+f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a  vvp

@@ -305,3 +305,11 @@ proxy class declarations in the input/output BFM interfaces, before UVM
 simulation begins. This reproduces the earlier published-main compile failure;
 the QD sources do not adapt those declarations. The process peaked at 75,944
 KiB RSS. See the [current ECC compile evidence](../../../evidence/caliptra-bfm-generated-ecc-c339-pilot-20261010/README.md).
+
+2026-10-10 clean published-Icarus follow-up: the UVMF-lite scoreboard,
+active/passive agent, transaction recording, and default reset-generator
+regressions pass on published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`.
+The scoreboard's four intentional errors and the agent's injected mismatch
+are counted exactly, with zero UVM fatals. This validates the standalone base
+layer, not generated ECC/UVMF compatibility; see the
+[published UVMF-lite evidence](../../../evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md).

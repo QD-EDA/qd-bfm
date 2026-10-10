@@ -463,3 +463,14 @@ and Z on HREADY, HRESP, HSEL, HTRANS, HWRITE, HSIZE, HADDR, and write-phase
 HWDATA. The reset-abort test waits for reset-gated HSEL to settle before
 sampling it. This local result is not the pending current-`c339b9f2` Slurm
 run; see the [published-main AHB evidence](evidence/caliptra-bfm-ahb-xz-published-20261010/README.md).
+
+## UVMF-lite base layer on clean published Icarus — 2026-10-10
+
+The UVMF-lite scoreboard, active/passive agent, transaction-recording, and
+default reset-generator runners pass on clean published Icarus
+`4b3f3424c440aca6af92153b6860a7253b925234` with bundled Accellera UVM
+2020.3.1. Both IEEE 2017 and 2023 agent/scoreboard paths pass with their
+intentional mismatch controls; reset generation passes in IEEE 2012. This is
+base-layer evidence only; generated ECC interface compilation remains blocked
+on current `c339b9f2`. See the
+[published UVMF-lite evidence](evidence/caliptra-bfm-uvmf-lite-published-20261010/README.md).
