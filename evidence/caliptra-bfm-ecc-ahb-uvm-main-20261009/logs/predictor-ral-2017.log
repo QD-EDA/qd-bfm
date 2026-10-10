@@ -1,0 +1,40 @@
+memory guard: preflight available 7.46 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.xI9AtauuPA/caliptra_ecc_ahb_uvm_bfm.dpiexport.c (compile it into your DPI object).
+UVM_INFO /private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_root.svh(476) @ 0: reporter [UVM/RELNOTES] 
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2:UVM:2020.3.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test ecc_ahb_uvm_test...
+UVM_INFO dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv(394) @ 180000: uvm_test_top.env.agent.agent.monitor [AHB_COVERAGE] reads=2/4 writes=2/4 sizes(1/2/4/8B)=0/0/4/0 of 4 addresses; pending_wait=0/14 cycles; errors=0/4 transfers
+UVM_INFO /private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 180000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    3
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[AHB_COVERAGE]     1
+[RNTST]     1
+[UVM/RELNOTES]     1
+
+/private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 180000 (1ps)
+PASS: Caliptra ECC RTL AHB write/readback through native UVM agent
+dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_ecc_ahb_uvm_bfm.sv:263: $finish called at 180000 (1ps)
+memory guard: command exited 0; minimum available 7.30 GiB; maximum process group 0.38 GiB

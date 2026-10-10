@@ -101,9 +101,9 @@ generated UVMF environment or top-level Caliptra run.
 
 `tests/run_caliptra_ecc_ahb_uvm_bfm.sh` runs the same 32-bit ECC counterparty
 through the native UVM sequencer/driver and manager proxy. A direct sequence
-and a UVM RAL frontdoor operation each write `1` to CSR `0x804` and read it
-back; the monitor checks all four records and the profile checker must remain
-clean. It passes in 2012, 2017, and 2023 modes with the local
+writes and reads `1` at CSR `0x804`; a UVM RAL frontdoor operation then writes
+and reads `0`. The monitor checks all four records and the profile checker
+must remain clean. It passes in 2012, 2017, and 2023 modes with the local
 Icarus `-uvm` fork and Accellera UVM 2020.3.1. This exercises the open UVM AHB
 agent against a real Caliptra unit; the generated UVMF agent and full Caliptra
 top remain outside this smoke.
@@ -160,3 +160,11 @@ name QVIP smoke checks full bursts through active and passive keyed streams.
 The native sequencer transfer implements field-complete UVM copy/compare and
 printing; its agent regression clones a populated request/response item and
 checks that address and write-data mutations compare unequal.
+
+Current-state update (2026-10-10): the ECC UVM smoke now connects the
+monitor's burst stream to `ahb_reg_predictor` with RAL auto-prediction disabled.
+It checks a direct sequence's `0 -> 1` mirror update and a later RAL frontdoor
+`1 -> 0` update against the actual ECC RTL. The four monitored records pass
+under IEEE 2012, 2017, and 2023 with zero UVM warnings, errors, or fatals; logs
+and tool provenance are in the
+[published-main rerun evidence](../../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md#current-state-rerun-monitor-driven-ral-prediction-2026-10-10).

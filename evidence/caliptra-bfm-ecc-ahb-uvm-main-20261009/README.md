@@ -51,3 +51,30 @@ so the current remote head could not be confirmed.
 
 This qualifies only the listed ECC unit-level AHB/UVM smoke on these builds; it
 does not qualify full UVMF environments or full-top Caliptra firmware.
+
+## Current-state rerun: monitor-driven RAL prediction (2026-10-10)
+
+The test now connects the actual ECC AHB monitor's burst stream to the
+clean-room `ahb_reg_predictor` and explicitly disables RAL auto-prediction. A
+direct UVM sequence writes and reads `1` at CSR `0x804`; the test checks the
+mirror becomes `1`. It then uses RAL frontdoor traffic to write and read `0`
+and checks the monitor predictor changes the mirror to `0`. All four
+transactions are observed against the pinned `ecc_top` RTL.
+
+The run passed in IEEE 2012, 2017, and 2023 on clean published Icarus source
+`4b3f3424c440aca6af92153b6860a7253b925234`. Every run reported two reads,
+two writes, four checked transfers, and zero UVM warnings/errors/fatals. The
+local Slurm host timed out over SSH, so this focused run used the existing
+local Icarus install under the runner's memory guard.
+
+Logs:
+
+- [IEEE 2012](logs/predictor-ral-2012.log)
+- [IEEE 2017](logs/predictor-ral-2017.log)
+- [IEEE 2023](logs/predictor-ral-2023.log)
+
+QD test source is pinned by commit `2ce14f978f21c095a3c2a7c04dd52fe1fdfb5d88`;
+the updated testbench SHA-256 is
+`74eab23a5e882a12f5ebce57f6b92992bfd422beeb279accdee422f76812d319`. Caliptra
+remained clean at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`. The executable
+hashes are the same as in the simulator provenance table above.

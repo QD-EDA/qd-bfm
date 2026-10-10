@@ -1456,3 +1456,13 @@ profiles pass with zero UVM errors or fatals. This targeted rerun used the
 local dirty, unpublished Icarus `ac4532fa-dirty` binaries, so it is diagnostic
 only; the earlier clean published-main AHB compatibility evidence does not
 cover this new ERROR-tail case. See the [diagnostic logs and provenance](../../evidence/caliptra-bfm-ahb-qvip-error-tail-20261010/README.md).
+
+**2026-10-10 actual ECC AHB RAL-predictor integration:** the native UVM AHB
+smoke connects the agent's monitor burst stream to the clean-room RAL
+predictor while auto-prediction is disabled. It verifies monitor-driven mirror
+updates from direct sequencer traffic and later RAL frontdoor traffic against
+the real ECC RTL. It passes under IEEE 2012, 2017, and 2023 on clean
+published Icarus `4b3f3424c440aca6af92153b6860a7253b925234`, with zero UVM
+warnings/errors/fatals. This closes this ECC-unit integration slice only;
+generated UVMF and full-top qualification remain open. See the [dated
+evidence](../../evidence/caliptra-bfm-ecc-ahb-uvm-main-20261009/README.md#current-state-rerun-monitor-driven-ral-prediction-2026-10-10).
