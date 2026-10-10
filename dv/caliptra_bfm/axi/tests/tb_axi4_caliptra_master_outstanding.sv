@@ -136,7 +136,9 @@ module tb_axi4_caliptra_master_outstanding #(
     for (i = 0; i < 5; i = i + 1) begin
       expected_data = accepted_addr[i];
       if (read_data_result[i][0 +: DATA_WIDTH] !== expected_data)
-        $fatal(1, "response data was misrouted to read task %0d", i);
+        $fatal(1, "response data mismatch task=%0d DW=%0d IDW=%0d depth=%0d got=%h expected=%h",
+          i, DATA_WIDTH, ID_WIDTH, MAX_OUTSTANDING,
+          read_data_result[i][0 +: DATA_WIDTH], expected_data);
       if (read_response_user_result[i] !== (32'hd000_0000 | accepted_id[i]))
         $fatal(1, "RUSER was misrouted to read task %0d", i);
     end
