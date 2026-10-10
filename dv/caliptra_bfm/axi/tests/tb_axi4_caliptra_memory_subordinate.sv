@@ -116,7 +116,7 @@ module tb_axi4_caliptra_memory_subordinate;
       "memory subordinate did not return injected SLVERR");
     inject_error = 0;
 
-    manager.read_burst(19'h300, 0, 2, 2'b01, 8'h54, 32'h0, 1'b0,
+    manager.read_burst(19'h900, 0, 2, 2'b01, 8'h54, 32'h0, 1'b0,
       success, read_data, read_user, read_response, response_user);
     check(!success && read_response[1:0] == 2'b11 && read_data[31:0] == 0,
       "unmapped read did not return zero data and DECERR");
