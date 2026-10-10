@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 `timescale 1ns/1ps
-module tb_axi4_caliptra_master_write_outstanding;
+module tb_axi4_caliptra_master_write_outstanding #(
+  parameter integer MAX_OUTSTANDING = 4
+);
   reg ACLK = 0;
   always #5 ACLK = ~ACLK;
   reg ARESETn = 0;
@@ -70,7 +72,7 @@ module tb_axi4_caliptra_master_write_outstanding;
 
   axi4_caliptra_master #(
     .ADDR_WIDTH(19), .DATA_WIDTH(32), .ID_WIDTH(8), .USER_WIDTH(32),
-    .MAX_BEATS(16), .TIMEOUT_CYCLES(64), .MAX_OUTSTANDING(4)
+    .MAX_BEATS(16), .TIMEOUT_CYCLES(64), .MAX_OUTSTANDING(MAX_OUTSTANDING)
   ) bfm (.*);
 
   function automatic integer caller_for_id(input [7:0] id);
@@ -156,7 +158,7 @@ module tb_axi4_caliptra_master_write_outstanding;
         @(posedge ACLK);
         cycles = cycles + 1;
       end
-      if ((aw_count != expected) || (w_count != expected))
+      if ((aw_count < expected) || (w_count < expected))
         $fatal(1, "timed out waiting for AW/W count %0d (got %0d/%0d)",
                expected, aw_count, w_count);
     end
@@ -198,11 +200,11 @@ module tb_axi4_caliptra_master_write_outstanding;
 
     if (aw_count != 5 || w_count != 5)
       $fatal(1, "target accepted AW=%0d W=%0d, expected five of each", aw_count, w_count);
-    if (sent_response[3] !== 2'b10)
-      $fatal(1, "test did not inject its expected SLVERR response");
     for (i = 0; i < 5; i = i + 1) begin
       caller = caller_for_id(accepted_id[i]);
       if (caller < 0) $fatal(1, "target accepted unknown BID %h", accepted_id[i]);
+      if (caller == 3 && sent_response[i] !== 2'b10)
+        $fatal(1, "caller 3 did not receive its expected SLVERR response");
       if (accepted_addr[i] !== (19'h40 + (caller * 16)) ||
           accepted_awuser[i] !== (32'hab00_0000 | accepted_id[i]) ||
           accepted_data[i] !== (32'hface_0000 | caller) || accepted_strb[i] !== 4'hf ||
@@ -213,22 +215,32 @@ module tb_axi4_caliptra_master_write_outstanding;
         $fatal(1, "write caller %0d was mismatched to its accepted BID response", caller);
     end
     if (bfm.write_busy) $fatal(1, "manager remained busy after all writes completed");
-    $display("PASS: AXI manager queues writes, preserves AW/W payloads, and routes out-of-order BID responses");
+    $display("PASS: AXI MAX_OUTSTANDING=%0d queues writes and routes BID responses",
+      MAX_OUTSTANDING);
     $finish;
   end
 
   initial begin
+    integer i;
+    integer caller;
+    reg [1:0] response_code;
     wait (ARESETn === 1'b1);
-    wait_counts(4);
+    wait_counts(MAX_OUTSTANDING);
     repeat (2) @(posedge ACLK);
-    if (aw_count != 4 || w_count != 4)
-      $fatal(1, "manager issued a fifth write before a slot was freed");
-    send_response(3, 2'b10);
-    send_response(0, 2'b00);
-    send_response(2, 2'b00);
-    send_response(1, 2'b01);
-    wait_counts(5);
-    send_response(4, 2'b00);
+    if (aw_count != MAX_OUTSTANDING || w_count != MAX_OUTSTANDING)
+      $fatal(1, "manager exceeded MAX_OUTSTANDING=%0d before a response",
+             MAX_OUTSTANDING);
+    for (i = MAX_OUTSTANDING - 1; i >= 0; i = i - 1) begin
+      caller = caller_for_id(accepted_id[i]);
+      response_code = caller == 3 ? 2'b10 : ((i % 2) ? 2'b01 : 2'b00);
+      send_response(i, response_code);
+    end
+    for (i = MAX_OUTSTANDING; i < 5; i = i + 1) begin
+      wait_counts(i + 1);
+      caller = caller_for_id(accepted_id[i]);
+      response_code = caller == 3 ? 2'b10 : ((i % 2) ? 2'b01 : 2'b00);
+      send_response(i, response_code);
+    end
   end
 
   initial begin
