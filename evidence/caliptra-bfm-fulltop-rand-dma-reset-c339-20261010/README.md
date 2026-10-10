@@ -49,3 +49,5 @@ The same trace supports two in-flight windows: delay 567 asserts reset at cycle
 between AW6 at 5327 and B6 at 5356. The refreshed script requests 1 CPU and
 3 GB per task, with two-way concurrency, based on the measured 1.77 GiB peak
 plus about 1.23 GiB headroom. Use distinct per-run output directories.
+
+Submitted as Slurm array job 227. Per-task output is under `bfm-rand-reset-c339-inflight-20261010-02/runs/window-567` and `.../window-2822` on DAN-DESKTOP. Append the final results and resource peaks here.
