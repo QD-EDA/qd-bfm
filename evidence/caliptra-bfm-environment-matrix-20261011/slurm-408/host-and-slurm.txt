@@ -1,0 +1,9 @@
+DAN-DESKTOP
+Linux DAN-DESKTOP 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun  5 01:12:21 UTC 2026 x86_64 GNU/Linux
+Ubuntu 26.04.1 LTS
+verilog*|2/18/0/20|39101
+JobId=408 ArrayJobId=408 ArrayTaskId=2 ArrayTaskThrottle=3 JobName=caliptra-env04
+   JobState=COMPLETED Reason=None Dependency=(null)
+   RunTime=00:06:51 TimeLimit=02:00:00 TimeMin=N/A
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   MinCPUsNode=1 MinMemoryNode=3G MinTmpDiskNode=0
