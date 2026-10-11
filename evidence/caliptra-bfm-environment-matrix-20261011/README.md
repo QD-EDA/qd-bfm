@@ -21,6 +21,18 @@ PASS requires an explicit testcase pass marker, no error/failure diagnostics, an
 
 The remote run archives, row manifests, submission records, local fallback logs, and tool provenance are preserved beside this report. The fresh source archive SHA256 is `193745f235f14c7095f876266b3b32b9999cb5a21483cbcac186e16388b7435b`.
 
+## Remaining compile/setup blockers, grouped by root cause
+
+The matrix's former generic `setup` labels have been replaced by specific non-setup blockers, using the raw compile/run evidence already linked in each row. No status was promoted to PASS.
+
+- **Missing source prerequisites:** `abr_sha3_tb`, `abr_top_tb`, `exp_mask_tb`, `mldsa_rej_sampler_tb`, `mlkem_rej_sampler_tb`, and `sample_in_ball_tb` include `mldsa_config_defines.svh`, which is absent from the pinned Adams Bridge source tree. The filelist cannot repair a missing source file.
+- **Filelist omissions or top mismatch:** `csrng_tb` lacks its RAM package; `compress_tb` imports `ntt_defines_pkg` without its package in the compile list; `masking_tb` and `ntt_masked_mult_reduction_tb` request top modules absent from their submitted source lists.
+- **Stale testbench/RTL interfaces:** `decompose_tb`, `norm_check_tb`, `makehint_tb`, `pkdecode_tb`, `sigdecode_z_tb`, `sigdecode_h_tb`, `skdecode_tb`, and `skencode_tb` use the removed `MLDSA_MEM_ADDR_WIDTH` identifier. The later `decompose_tb` compile also connects absent `w1_encode_done`; `pkdecode_tb` overrides absent `MEM_ADDR_WIDTH`. For `decompose_tb` and `norm_check_tb`, array 433 confirms the shared include-path correction works and exposes these later source mismatches.
+- **Source/testbench defects:** `el2_veer_wrapper_tb` connects ports absent from the pinned `rvtop`; `soc_ifc_tb` has a malformed associative-array initializer; `ntt_top_masking_tb` uses indefinite-width concatenation operands.
+- **Missing or incomplete vectors:** `doe_cbc_tb` requires absent `CBCVarTxt256_clean.txt`; `ntt_top_tb` reads only 64 words where 16,384 are requested and prints no testcase pass marker.
+
+These rows remain BLOCKED until their upstream source/test prerequisites are corrected or supplied. All 44 rows still have pinned c339 evidence, so the latest resubmission instruction does not authorize duplicate matrix runs.
+
 ## Corrected NTT top run
 
 Array 408 staged the test-vector directory into the simulation CWD. Compile and simulation both exited 0 after 410 seconds, but `$readmemh` warned that `ntt_unmasked_input.hex` has only 64 words for the requested 16,384, and the test emitted no explicit pass marker before `$finish`. The row remains BLOCKED on setup; raw logs, hashes, tool versions, and host details are preserved in [slurm-408](slurm-408/README.md).
