@@ -1,0 +1,7 @@
+test=sha512_ctrl_32bit_tb
+result=PASS
+runner_exit=0
+pass_markers=1
+fail_markers=0
+error_markers=0
+wall_seconds=6

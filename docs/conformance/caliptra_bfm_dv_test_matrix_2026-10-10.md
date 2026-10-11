@@ -36,11 +36,20 @@ the matrix.
 See [the per-test CSV](caliptra_bfm_dv_test_matrix_2026-10-10.csv) for source
 lines, status, blocker class, and evidence. The companion
 [environment CSV](caliptra_bfm_dv_environment_matrix_2026-10-10.csv) records
-all 44 frozen filelists and their older compile observations. Its current
-status describes compile/elaboration only; `PASS` there does not qualify a
-test runtime. The pinned `caliptra_top_tb` environment compiled and elaborated
-with current Icarus c339; both the untraced and traced `smoke_test_dma`
-diagnostics finished by timeout without a testcase result.
+all 44 frozen filelists and their compile observations. Three block-unit rows
+also have terminal runtime passes on pinned Icarus c339; these results are
+listed below and do not change the count of YAML test declarations. Other
+environment rows retain their compile/elaboration status, which alone does
+not qualify a test runtime.
+
+## Block-unit runtime follow-up — 2026-10-11
+
+On the same pinned Caliptra and Icarus sources, the local Mac runs for
+`hmac_ctrl_tb`, `sha256_ctrl_tb`, and `sha512_ctrl_32bit_tb` each exited 0 with
+one pass marker and no failure/error markers. The environment CSV records
+these three runtime results. Full commands, source/tool hashes, host versions,
+and retained logs are in the
+[local run report](../../evidence/caliptra-bfm-unit-tests-20261011/README.md).
 
 ## Status rules
 
@@ -87,11 +96,11 @@ ECC includes the online-reset test but has only two generated configurations;
 its source supplied the smallest reproducer. All three share one external
 Icarus blocker, so no QD-BFM workaround is appropriate.
 
-Slurm array 280 is running a bounded first pass over the QD-BFM runner's three
-top-level firmware cases. `smoke_test_dma` uses fast RNG and boot-data preload;
-the AES case is limited to its first case; `rand_test_dma` is limited to one
-transfer. Each row will be updated only after its own runner result and source
-hashes are checked. These are diagnostic executions, not full-suite claims.
+Slurm array 280 is no longer active. Its saved `smoke_test_dma` task timed out
+with runner exit 124; the saved AES task output records scheduler termination.
+Neither has a testcase result. The 2026-10-11 queue check showed only A1 jobs
+321–323 pending on the unavailable node. These firmware diagnostics remain
+inconclusive and are not promoted to test passes or failures.
 
 ## Older compile-only census
 

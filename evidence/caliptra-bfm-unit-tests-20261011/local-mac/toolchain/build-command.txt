@@ -1,0 +1,2 @@
+cd /tmp/a2-caliptra-unit-20261011/source/iverilog-uvm
+~/codex-supervisor/localrun 1200 zsh -c 'export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/bin:$PATH"; export CPPFLAGS="$(pkg-config --cflags z3 libffi)"; export LDFLAGS="$(pkg-config --libs z3 libffi)"; make clean; sh autoconf.sh; ./configure --prefix=/tmp/a2-caliptra-unit-20261011/toolchain --enable-libveriuser; make -j3; make install'

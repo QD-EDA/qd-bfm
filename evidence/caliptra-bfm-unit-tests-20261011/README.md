@@ -1,34 +1,36 @@
-# Caliptra block-unit test array — 2026-10-11
+# Caliptra block-unit suite results — 2026-10-11
 
-## Selection and runtime budget
+## Run conditions
 
-The array runs the pinned Caliptra `hmac_ctrl_tb`, `sha256_ctrl_tb`, and
-`sha512_ctrl_32bit_tb` unit environments. Their 2026-10-03 filelist compiles
-exited 0, and these non-generated SystemVerilog benches do not use the
-package-qualified parameterized UVMF handles blocked by Icarus issue #533.
-The historical HMAC and SHA-512 generated-runtime probes completed within
-300- and 600-second guards. Using the slower 600-second result as the
-comparable upper bound, each unit test has a 1,200-second process-group timeout
-and the Slurm allocation is 40 minutes (about 2x that per-test bound).
+The three pinned Caliptra v2.1.2 block benches below were compiled and run
+serially on the local Mac, each under `~/codex-supervisor/localrun 1200`.
+Slurm had no available node; the only jobs in `squeue -u dsell` were A1's
+pending jobs. No Slurm run was submitted, and these local passes must not be
+rerun on Slurm.
 
-Each task requests 1 CPU and 3 GiB. The memory request rounds up 1.25x the
-prior full-top peak of 1.86 GiB; the host snapshot showed 17 idle CPUs and
-30 GiB available memory before submission, so three concurrent tasks fit.
-The harness applies SIGTERM then SIGKILL to the process group at timeout and
-keeps compile, simulation, guard, and resource logs per test.
+Icarus was built locally from clean source commit
+`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, with its pinned UVM submodule
+commits. The first build attempt selected Apple Bison 2.3 and failed during
+parser generation; the successful retry used Homebrew Bison 3.8.2. Compressed build logs, versions, host details, and tool binary hashes are in
+[local-mac](local-mac/).
+The successful local compiler reports Icarus Verilog 13.0 (devel).
 
-## Inputs and results
+Caliptra is pinned at
+`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Adams Bridge at
+`b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, and the QD-BFM checkout was
+`cfac19fb9ae4acce570e9682488fe244dee3a672` (dirty only in an unrelated,
+unsubmitted Slurm harness edit). The Caliptra source archive SHA-256 and exact
+filelist/testbench hashes are retained under `local-mac/source/`.
 
-Caliptra RTL is pinned at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` with
-Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. Its clean source tree
-is staged as an archive with SHA-256
-`193745f235f14c7095f876266b3b32b9999cb5a21483cbcac186e16388b7435b`. QD-BFM
-source is at the run's recorded commit, and Icarus is clean published
-`c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. Each result requires simulator
-exit 0, exactly one `* TESTCASE PASSED`, no `* TESTCASE FAILED`, and no unit
-test error marker. The staged Caliptra tree is checked clean, and the three
-testbench/filelist pairs and compiler binaries are SHA-256 recorded.
-Environment and per-test status matrices will be updated from the retained
-results.
+## Results
 
-Slurm job ID and per-task outcomes will be appended after the array finishes.
+| Top | Result | Runner exit | Pass / fail / error markers | Wall time | Peak RSS |
+| --- | --- | ---: | --- | ---: | ---: |
+| `hmac_ctrl_tb` | PASS | 0 | 1 / 0 / 0 | 48.24 s | 16,089,088 bytes |
+| `sha256_ctrl_tb` | PASS | 0 | 1 / 0 / 0 | 0.48 s | 9,863,168 bytes |
+| `sha512_ctrl_32bit_tb` | PASS | 0 | 1 / 0 / 0 | 6.10 s | 14,401,536 bytes |
+
+Each pass requires simulator/runner exit 0, exactly one `* TESTCASE PASSED`,
+no `* TESTCASE FAILED`, and no test error markers. Per-test commands, compile
+and simulation logs, localrun resource output, and result summaries are in
+`local-mac/tests/<top>/`.
