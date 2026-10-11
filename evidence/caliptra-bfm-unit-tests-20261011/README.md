@@ -22,7 +22,7 @@ keeps compile, simulation, guard, and resource logs per test.
 Caliptra RTL is pinned at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` with
 Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`. Its clean source tree
 is staged as an archive with SHA-256
-`65294ca75a79639b4d2bd1b8748a1f972d7c0344ede3499bb4ce1aebad96c3e6`. QD-BFM
+`193745f235f14c7095f876266b3b32b9999cb5a21483cbcac186e16388b7435b`. QD-BFM
 source is at the run's recorded commit, and Icarus is clean published
 `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. Each result requires simulator
 exit 0, exactly one `* TESTCASE PASSED`, no `* TESTCASE FAILED`, and no unit
