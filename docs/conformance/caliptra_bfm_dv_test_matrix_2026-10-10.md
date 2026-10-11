@@ -19,6 +19,14 @@ path, line, and `testname:` value:
 | Adams Bridge generated UVMF | 30 |
 | **Total** | **271** |
 
+The 162 stock-firmware YAML rows contain 158 distinct `testname` values; the
+repeated names are separate source configurations and remain separate CSV
+rows. The pinned integration `test_suites` tree also has six top-level
+directories with no YAML test declaration (`caliptra_fmc`, `caliptra_rt`,
+`caliptra_top`, `fw_test_rom`, `includes`, and `libs`). These are firmware or
+support inputs rather than additional runnable YAML test cases, so they are
+not counted as tests.
+
 The census uses active `testname:` keys under the pinned `src` trees. It omits
 the two Adams Bridge `sim/testlist.yaml` placeholder entries and the
 `abr_example_test.yml.orig` backup; those are not runnable test definitions.
@@ -59,6 +67,14 @@ The shared parser issue is tracked as
 The other 261 rows remain **UNVERIFIED** pending a qualifying terminal result.
 Earlier PCRVault and KeyVault passes on older Icarus revisions are not promoted
 to current-tool passes.
+
+For follow-up after the simulator parser is fixed, the first three generated
+environments are PCRVault, KeyVault, then ECC. PCRVault has a focused runtime
+runner and prior bounded runtime evidence, so it is the quickest end-to-end
+recheck. KeyVault adds five generated test configurations on the same blocker.
+ECC includes the online-reset test but has only two generated configurations;
+its source supplied the smallest reproducer. All three share one external
+Icarus blocker, so no QD-BFM workaround is appropriate.
 
 Slurm array 280 is running a bounded first pass over the QD-BFM runner's three
 top-level firmware cases. `smoke_test_dma` uses fast RNG and boot-data preload;

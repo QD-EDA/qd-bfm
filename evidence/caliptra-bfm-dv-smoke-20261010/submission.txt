@@ -1,0 +1,12 @@
+Slurm job: 280 (array tasks 280_0 through 280_2)
+Submitted: 2026-10-10 (DAN-DESKTOP)
+Partition: verilog
+Resources: 1 CPU, 3 GiB, 2-hour per-task limit, array concurrency 1
+Per-test timeout: 7000 seconds, TERM then KILL after 30 seconds
+Remote output root: /home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01
+QD snapshot: 72d965adc2d7e9bfdbadaa3348add9781319bd1c
+Icarus: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Cases: smoke_test_dma; first AES/DMA short case; first rand_test_dma transfer
+All tasks are diagnostic runs. No trace VPI or reset injection is enabled.
