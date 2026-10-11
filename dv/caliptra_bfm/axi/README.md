@@ -5,6 +5,13 @@ task-based AXI manager, protocol checker, single-window memory subordinate,
 and passive handshake monitor. These are the first native components of the
 open BFM stack; they are not yet a complete Avery replacement.
 
+For Caliptra filelists that require the licensed ARM `Axi4PC` module, the
+[`arm_axi4pc_compat/Axi4PC.sv`](arm_axi4pc_compat/Axi4PC.sv) adapter maps
+Caliptra's fixed checker instance to `axi4_caliptra_checker`. Set
+`CALIPTRA_AXI4PC_DIR` to that adapter directory and compile
+`axi4_caliptra_checker.sv` with the filelist. This checks the AXI fields
+exposed by QD-BFM; it does not provide ARM VIP parity or timing checks.
+
 The combined AXI and AHB-Lite source list is
 [`../caliptra_bfm.f`](../caliptra_bfm.f), intended to be invoked from the
 repository root with the consuming testbench appended.
