@@ -36,8 +36,11 @@ the matrix.
 See [the per-test CSV](caliptra_bfm_dv_test_matrix_2026-10-10.csv) for source
 lines, status, blocker class, and evidence. The companion
 [environment CSV](caliptra_bfm_dv_environment_matrix_2026-10-10.csv) records
-all 44 frozen filelists and their older compile observations; every current
-environment status remains unverified until rechecked with pinned Icarus.
+all 44 frozen filelists and their older compile observations. Its current
+status describes compile/elaboration only; `PASS` there does not qualify a
+test runtime. The pinned `caliptra_top_tb` environment compiled and elaborated
+with current Icarus c339; both the untraced and traced `smoke_test_dma`
+diagnostics finished by timeout without a testcase result.
 
 ## Status rules
 
@@ -46,7 +49,8 @@ environment status remains unverified until rechecked with pinned Icarus.
   remain in the row evidence and do not qualify an entire suite.
 - **FAIL** requires a completed test with an explicit failure result.
 - **BLOCKED** requires a reproduced setup, compile, simulator, or dependency
-  blocker before a test can run.
+  blocker before a test can run. Runtime timeout without a testcase result
+  remains **UNVERIFIED**.
 - **UNVERIFIED** means there is no qualifying terminal result for that exact
   test row yet. Compile-only success and historical runs on another pin do not
   change this status.
@@ -67,6 +71,13 @@ The shared parser issue is tracked as
 The other 261 rows remain **UNVERIFIED** pending a qualifying terminal result.
 Earlier PCRVault and KeyVault passes on older Icarus revisions are not promoted
 to current-tool passes.
+
+Two top-level diagnostic slices have pass markers but do not qualify their
+full firmware tests: AES case 0 in `smoke_test_dma_aes_gcm_short_1_dword`, and
+one transfer in `rand_test_dma`. The `smoke_test_dma` diagnostic timed out
+before a testcase result; its traced follow-up also timed out while the CPU was
+preparing a 512-word random payload, before the AHB transfer. These diagnostic
+limits are recorded in the per-test CSV and their evidence reports.
 
 For follow-up after the simulator parser is fixed, the first three generated
 environments are PCRVault, KeyVault, then ECC. PCRVault has a focused runtime

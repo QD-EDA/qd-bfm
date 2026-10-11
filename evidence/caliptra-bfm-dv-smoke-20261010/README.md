@@ -19,6 +19,26 @@ commit `72d965adc2d7e9bfdbadaa3348add9781319bd1c`; Icarus is clean published
 `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and
 `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`.
 
-See [`three-cases.sbatch`](three-cases.sbatch) and [`submission.txt`](submission.txt).
-Task logs, result JSON files, hashes, and resource logs will be added after
-the array finishes.
+Array task 0 timed out after 7,000 seconds without a testcase result marker;
+its log's partial final line did not identify the timeout phase. Task 1
+compiled and entered simulation, then was cancelled without a result. Task 2
+was cancelled before it started. Their retained evidence is in
+[`task-0-smoke-timeout/`](task-0-smoke-timeout/) and
+[`task-1-stopped/`](task-1-stopped/).
+
+The isolated trace follow-up was Slurm job 289. It timed out after 7,000
+seconds with no testcase marker or result JSON. The final trace reached cycle
+58,500 in the firmware loop that generates 512 random words for the AHB FIFO,
+before its large DMA transfer. It confirms the fuse-ready poll cleared after
+one read and the ROM began running. Its logs, hashes, and resource report are
+in [`trace-smoke-timeout/`](trace-smoke-timeout/); the pinned-source script is
+[`trace-smoke.sbatch`](trace-smoke.sbatch).
+
+The first AES/DMA vector diagnostic was rerun independently as job 301 without
+the trace plugin. It exited 0 with one pass marker and no fail markers, but
+only AES case 0 ran; the full stock-firmware test row remains unverified. See
+[`aes-first/`](aes-first/) for the run manifest and artifacts.
+
+The two smoke timeout log copies redact three firmware-printed test-key values
+each. Their original SHA-256 digests and redacted line numbers are recorded in
+[`redactions.txt`](redactions.txt); the remote run artifacts were not changed.

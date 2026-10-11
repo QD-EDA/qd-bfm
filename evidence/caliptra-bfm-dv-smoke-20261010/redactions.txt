@@ -1,0 +1,11 @@
+Only the committed simulator-log copies are sanitized. The removed values
+were printed by the firmware as "secret key is ...". Remote run artifacts
+remain unchanged.
+
+task-0-smoke-timeout/output/sim.log
+  redacted lines: 5, 9, 13
+  original SHA-256: 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0
+
+trace-smoke-timeout/output/sim.log
+  redacted lines: 7, 11, 15
+  original SHA-256: 3816fc0b3011b55357717913eeb6addfba21e3d3dee939dbaf6d9974a9c82571

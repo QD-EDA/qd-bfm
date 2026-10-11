@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 7000s python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_dma_aes_gcm_short_1_dword --first-aes-case-diagnostic --fast-trng --fast-boot-data-preload --quiet-firmware --output /home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/runs/smoke_test_dma_aes_gcm_short_1_dword/output/smoke_test_dma_aes_gcm_short_1_dword"
+	User time (seconds): 518.29
+	System time (seconds): 14.57
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:52.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1861124
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 14
+	Minor (reclaiming a frame) page faults: 951769
+	Voluntary context switches: 4901061
+	Involuntary context switches: 4900998
+	Swaps: 0
+	File system inputs: 21000
+	File system outputs: 777376
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
