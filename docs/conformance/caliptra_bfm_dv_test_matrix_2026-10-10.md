@@ -44,12 +44,12 @@ not qualify a test runtime.
 
 ## Environment filelist follow-up — 2026-10-11
 
-The 44 pinned c339 environment rows currently classify as 11 **PASS**, 30
-**BLOCKED**, 1 **FAIL**, and 2 **UNVERIFIED**. The remaining two rows are
+The 44 pinned c339 environment rows currently classify as 11 **PASS**, 32
+**BLOCKED**, 1 **FAIL**, and 0 **UNVERIFIED**. The remaining two rows are
 exhaustive masked NTT simulations that reached the 6,900-second timeout without
 a testcase verdict. Several zero-exit runs remain blocked because generated
 vectors or Python dependencies were unavailable. Full per-row status and logs
-are in the [environment matrix report](../../evidence/caliptra-bfm-environment-matrix-20261011/README.md).
+are in the [environment matrix report](../../evidence/caliptra-bfm-environment-matrix-20261011/README.md). A reduced, pinned-c339 reproducer for the VVP unpacked-array equality flag limit is filed as [Icarus issue #538](https://github.com/dsellerbrock/iverilog-uvm/issues/538).
 
 ## Block-unit runtime follow-up — 2026-10-11
 
