@@ -1,0 +1,20 @@
+RESULT bad=0002 bad_en=00 bad_addr=0002 good=4002 good_en=01 good_addr=0002
+self-contained.sv:25: $finish called at 21 (1s)
+        0.06 real         0.01 user         0.00 sys
+             6488064  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                1445  page reclaims
+                  11  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                  80  involuntary context switches
+           146784063  instructions retired
+            46355184  cycles elapsed
+             3768704  peak memory footprint

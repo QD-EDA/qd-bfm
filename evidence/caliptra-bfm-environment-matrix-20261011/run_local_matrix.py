@@ -64,11 +64,15 @@ def main():
                    CALIPTRA_AXI4PC_DIR=str(RTL / "src/integration/tb"),
                    ADAMSBRIDGE_ROOT=str(RTL / "submodules/adams-bridge"),
                    PATH=f"{IVL.parent}:{env.get('PATH', '')}")
+        include_args = []
+        if source_repo == "adams_bridge_v2.0.3":
+            include_args = ["-I", str(root / "src/abr_prim/rtl"),
+                            "-I", str(root / "src/abr_libs/rtl")]
         binary = out / f"{top}.vvp"
         deadline = time.monotonic() + TIMEOUT
         compile_exit, compile_seconds = run_stage(
             ["/usr/bin/time", "-l", str(IVL), "-g2017", "-gassertions", "-s", top,
-             "-f", str(vf), "-o", str(binary)], cwd, env, out / "compile.log", deadline)
+             *include_args, "-f", str(vf), "-o", str(binary)], cwd, env, out / "compile.log", deadline)
         sim_exit, sim_seconds = None, None
         if compile_exit == 0:
             sim_exit, sim_seconds = run_stage(

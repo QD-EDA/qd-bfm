@@ -20,8 +20,11 @@ VVP="$BASE/toolchain/iverilog/bin/vvp"
 
 IFS=$'\t' read -r ENV_ID TOP SOURCE_REPO FILELIST < <(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "$TASKS")
 case "$SOURCE_REPO" in
-  caliptra_v2.1.2) ROOT="$RTL" ;;
-  adams_bridge_v2.0.3) ROOT="$RTL/submodules/adams-bridge" ;;
+  caliptra_v2.1.2) ROOT="$RTL"; EXTRA_INCLUDES=() ;;
+  adams_bridge_v2.0.3)
+    ROOT="$RTL/submodules/adams-bridge"
+    EXTRA_INCLUDES=(-I "$ROOT/src/abr_prim/rtl" -I "$ROOT/src/abr_libs/rtl")
+    ;;
   *) echo "unknown source repo: $SOURCE_REPO" >&2; exit 2 ;;
 esac
 
@@ -61,7 +64,7 @@ runner_rc=0
 set +e
 timeout --signal=TERM --kill-after=30s 6900s bash -c '
   set +e
-  /usr/bin/time -v -o "$TASK_DIR/compile.resource" "$IVERILOG" -g2017 -gassertions -s "$TOP" -f "$FILE" -o "$TASK_DIR/$TOP.vvp" > "$TASK_DIR/compile.log" 2>&1
+  /usr/bin/time -v -o "$TASK_DIR/compile.resource" "$IVERILOG" -g2017 -gassertions -s "$TOP" "$@" -f "$FILE" -o "$TASK_DIR/$TOP.vvp" > "$TASK_DIR/compile.log" 2>&1
   compile_rc=$?
   if [[ $compile_rc == 0 ]]; then
     cd "$TASK_DIR/runtime"
@@ -72,7 +75,7 @@ timeout --signal=TERM --kill-after=30s 6900s bash -c '
   fi
   printf "compile_exit=%s\\nsim_exit=%s\\n" "$compile_rc" "$sim_rc" > "$TASK_DIR/stage-status.txt"
   [[ $compile_rc == 0 && $sim_rc == 0 ]]
-'
+' bash "${EXTRA_INCLUDES[@]}"
 runner_rc=$?
 set -e
 end=$(date +%s)
