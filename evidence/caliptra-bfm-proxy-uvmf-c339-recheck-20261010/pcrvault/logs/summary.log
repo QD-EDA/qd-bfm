@@ -1,0 +1,10 @@
+COMPILE FAILED
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/pcrvault/uvmf_pv/uvmf_template_output/verification_ip/environment_packages/pv_env_pkg/registers/pv_reg_adapter_functions_pkg.sv:28: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/caliptra-pv-uvmf-_krvdr3t/overlay/src/pv_read_driver_bfm.sv:136: syntax error
+/tmp/caliptra-pv-uvmf-_krvdr3t/overlay/src/pv_read_driver_bfm.sv:139: error: Invalid module item.
+/tmp/caliptra-pv-uvmf-_krvdr3t/overlay/src/pv_read_monitor_bfm.sv:98: syntax error
+/tmp/caliptra-pv-uvmf-_krvdr3t/overlay/src/pv_read_monitor_bfm.sv:101: error: Invalid module item.
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/pcrvault/uvmf_pv/uvmf_template_output/verification_ip/interface_packages/pv_write_pkg/src/pv_write_driver_bfm.sv:135: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/pcrvault/uvmf_pv/uvmf_template_output/verification_ip/interface_packages/pv_write_pkg/src/pv_write_driver_bfm.sv:138: error: Invalid module item.
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/pcrvault/uvmf_pv/uvmf_template_output/verification_ip/interface_packages/pv_write_pkg/src/pv_write_monitor_bfm.sv:111: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/pcrvault/uvmf_pv/uvmf_template_output/verification_ip/interface_packages/pv_write_pkg/src/pv_write_monitor_bfm.sv:114: error: Invalid module item.
