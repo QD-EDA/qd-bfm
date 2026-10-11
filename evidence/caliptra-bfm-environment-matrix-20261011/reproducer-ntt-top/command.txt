@@ -1,0 +1,2 @@
+~/codex-supervisor/localrun 1200 python3 evidence/caliptra-bfm-environment-matrix-20261011/reproducer-ntt-top/run_local_matrix.py
+The simulator finished with exit 0 after 1027.89 seconds; the result is BLOCKED because it emitted vector-file errors and lacked a terminal testcase pass marker.

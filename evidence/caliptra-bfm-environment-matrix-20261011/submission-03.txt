@@ -1,0 +1,14 @@
+job_id=388
+submitted_utc=2026-10-11T19:07:00Z
+remote_run=/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-03
+array=0-1%2
+cpus_per_task=1
+mem_per_task=3G
+wall_limit=02:00:00
+per_test_timeout_seconds=6900
+rows: adams-bridge-v2-0-3-masked_barrett_redux_tb, adams-bridge-v2-0-3-mlkem_masked_gs_butterfly_tb
+filter: only rows with no result.txt in job 367 and no completed local-fallback result.json
+local duplicate masked_barrett_redux_tb stopped after both array tasks RUNNING
+archive_sha256=193745f235f14c7095f876266b3b32b9999cb5a21483cbcac186e16388b7435b
+iverilog_commit=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+caliptra_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e

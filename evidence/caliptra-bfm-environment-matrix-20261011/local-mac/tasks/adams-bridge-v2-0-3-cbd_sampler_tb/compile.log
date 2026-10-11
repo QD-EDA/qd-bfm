@@ -1,0 +1,19 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/tb/cbd_sampler_tb.sv:260: warning: method function 'pop_front' is being called as a task.
+        0.06 real         0.03 user         0.01 sys
+             9732096  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2191  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   7  voluntary context switches
+                  58  involuntary context switches
+            25693005  instructions retired
+            11821284  cycles elapsed
+             1343848  peak memory footprint

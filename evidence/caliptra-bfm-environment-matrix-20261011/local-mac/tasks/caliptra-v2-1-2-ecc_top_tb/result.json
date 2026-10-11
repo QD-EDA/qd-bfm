@@ -1,0 +1,14 @@
+{
+  "environment_id": "caliptra-v2-1-2-ecc_top_tb",
+  "top": "ecc_top_tb",
+  "source_repo": "caliptra_v2.1.2",
+  "filelist": "src/ecc/config/ecc_top_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/src/ecc/tb",
+  "compile_exit": 0,
+  "compile_seconds": 0.79,
+  "sim_exit": 0,
+  "sim_seconds": 0.23,
+  "classification": "PASS",
+  "blocker_class": "none",
+  "classification_note": "compile and simulation exited 0"
+}

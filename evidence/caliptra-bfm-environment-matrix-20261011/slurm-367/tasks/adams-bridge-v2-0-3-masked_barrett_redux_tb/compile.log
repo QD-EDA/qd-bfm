@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/masked_barrett_redux_tb.sv:66: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/masked_barrett_redux_tb.sv:67: warning: Static variable initialization requires explicit lifetime in this context.

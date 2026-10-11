@@ -1,0 +1,20 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:116: syntax error
+I give up.
+        0.47 real         0.42 user         0.03 sys
+            34930688  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3767  page reclaims
+                  15  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  41  voluntary context switches
+                 523  involuntary context switches
+            27372581  instructions retired
+            12972606  cycles elapsed
+             1458536  peak memory footprint

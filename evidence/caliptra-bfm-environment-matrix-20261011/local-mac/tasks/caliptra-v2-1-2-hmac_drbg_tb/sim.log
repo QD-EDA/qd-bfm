@@ -1,0 +1,80 @@
+hmac_drbg_tb: Running hmac_drbg test = HMAC_DRBG_directed_test
+hmac_drbg_tb: There is no valid test vector file.
+   -= Testbench for HMAC DRBG started =-
+    ==============================
+
+*** Toggle reset.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 6b9d3dad2e1b8c1c05b19875b6659f4de23c3b667bf297ba9aa47740787137d896d5724e4c70a825f872c9ea60d2edf5
+*** nonce     : 9a9083505bc92276aec4be312696ef7bf3bf603f4bbd381196a029f340585312313bca4a9b5b890efee42c77b1ee25fe
+*** lfsr_seed : 64323d6be2d251cb319d64f1d9f6c2bd994aa69c4304c0a03cd549acd00a355594fedc7b66d86323f7dfde84e382cbe0
+The HMAC DRBG core completed the execution
+*** TC 0 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 6b9d3dad2e1b8c1c05b19875b6659f4de23c3b667bf297ba9aa47740787137d896d5724e4c70a825f872c9ea60d2edf5
+*** nonce     : 768412320f7b0aa5812fce428dc4706b3cae50e02a64caa16a782249bfe8efc4b7ef1ccb126255d196047dfedf17a0a9
+*** lfsr_seed : b0236fdb4929fc235721e75d0482215bf3c35c716a3d9f8c9cfe35fb22d7b27e66ae3cf6e83064400e086e8bf14a9a94
+The HMAC DRBG core completed the execution
+*** TC 1 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 14aefb51df578ff3d77662153b10cee5c7930454aae90e1a68c951e7466216deeeab7032856f3e6244194e9be0923be9
+*** nonce     : 31759bd97e875f3559d260bee1c6f9995f330ba2d3dd2d93502e7e696c1900632e22672eb5c83cf761f592aafc0e040a
+*** lfsr_seed : 211650677c6da16bfc9a17404c82fbc97349d4b626a0d59f7e1ff3520f829f1df0894265cc543e283fffbbd4284ffdd6
+The HMAC DRBG core completed the execution
+*** TC 2 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 14f93f145ce951b987cc52cd8ee5b916df9042433e63f5771210b2e596709cfd4a9080ec1e0252f82e08333cbb259f0c
+*** nonce     : 31759bd97e875f3559d260bee1c6f9995f330ba2d3dd2d93502e7e696c1900632e22672eb5c83cf761f592aafc0e040a
+*** lfsr_seed : 5f89ba2ab3444247513d0fa77ddc867bb7afa262130524bd7f63068dd2d2573b2d2e3f16d6ff290155f7ce52d5d83d45
+The HMAC DRBG core completed the execution
+*** TC 3 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+*** nonce     : ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+*** lfsr_seed : e279f08a4c31a00f0aa18ca5355a3fcf9e7729c057749a45c6e2d0884201d29bdb0ef10b3cb643f204e5e462840d9e58
+The HMAC DRBG core completed the execution
+*** TC 4 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+*** nonce     : 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+*** lfsr_seed : d1d6b46b1f0342e54643bf04be02092484bf3c58c7a0a2d8322fba126790dae71fbdbfe3c1f6d235759e633691cb155c
+The HMAC DRBG core completed the execution
+*** TC 5 successful.
+
+HMAC-DRBG failure injection
+*** entropy   : 1e8dcd3d3b23f17606d7cd0d00f3e30189375212b2c2846546df998d06b97b0db1f056638484d609c0895e8112153524
+*** nonce     : e77696ce793069f247ecdb8f8932d612bbd2727772aff7e5d513d2aae2f784c5e33724c67cfde9f9462df78c76d457ed
+*** lfsr_seed : 73eb333676b93d574bb31c8a0f78cad8de3a6d94dae2788a10a661ab6f03130be761b5660a02bce603ebf980988e8319
+The HMAC DRBG core completed the execution
+*** TC 6 successful.
+
+HMAC DRBG Zeroize...
+*** All 08 test cases completed successfully
+* TESTCASE PASSED
+
+*** HMAC DRBG simulation done. ***
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/hmac_drbg/tb/hmac_drbg_tb.sv:705: $finish called at 26675 (1s)
+      128.94 real       104.96 user         0.68 sys
+            11141120  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 976  page reclaims
+                   8  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               63718  involuntary context switches
+        948679934628  instructions retired
+        216036467821  cycles elapsed
+             8143232  peak memory footprint

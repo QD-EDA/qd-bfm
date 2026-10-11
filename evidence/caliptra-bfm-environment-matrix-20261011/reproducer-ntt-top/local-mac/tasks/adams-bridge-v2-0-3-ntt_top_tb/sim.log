@@ -1,0 +1,133 @@
+In ram, initing mem_tb
+
+WARNING: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+In ram, initing mem_tb
+
+WARNING: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+In ram, initing mem_tb
+
+WARNING: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+Start of init
+
+End of init
+
+*** Toggle reset.
+End of reset
+Starting init mem
+
+Starting ntt test
+
+NTT operation
+
+Waiting for ntt_done
+
+Received ntt_done
+
+INTT operation
+
+Waiting for intt_done
+
+Received intt_done
+
+PWM operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWA operation 1
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWS operation 1
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM + sampler operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM + sampler operation 2 with acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+INTT operation
+
+Waiting for intt_done
+
+Received intt_done
+
+End of test
+
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_top_tb.sv:921: $finish called at 51525 (1s)
+     1027.86 real       915.24 user         6.65 sys
+           224116736  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               13983  page reclaims
+                   9  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+              784580  involuntary context switches
+       9409884944331  instructions retired
+       1949922837378  cycles elapsed
+           221250088  peak memory footprint

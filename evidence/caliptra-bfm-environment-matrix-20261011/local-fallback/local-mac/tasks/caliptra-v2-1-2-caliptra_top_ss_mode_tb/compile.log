@@ -1,0 +1,24 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:584: warning: Anachronistic use of named begin/end to surround generate schemes.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:597: warning: Anachronistic use of named begin/end to surround generate schemes.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:610: warning: Anachronistic use of named begin/end to surround generate schemes.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:624: warning: Anachronistic use of named begin/end to surround generate schemes.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/integration/tb/Axi4PC.sv:17: syntax error
+I give up.
+        1.18 real         1.44 user         0.11 sys
+           147062784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               10477  page reclaims
+                 192  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 857  voluntary context switches
+                 871  involuntary context switches
+            33699119  instructions retired
+            13936060  cycles elapsed
+             1524072  peak memory footprint

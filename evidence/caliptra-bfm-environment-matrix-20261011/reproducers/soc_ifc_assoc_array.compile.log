@@ -1,0 +1,20 @@
+evidence/caliptra-bfm-environment-matrix-20261011/reproducers/soc_ifc_assoc_array.sv:3: syntax error
+evidence/caliptra-bfm-environment-matrix-20261011/reproducers/soc_ifc_assoc_array.sv:1: error: Syntax error in variable list.
+        0.03 real         0.01 user         0.01 sys
+             4128768  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                1793  page reclaims
+                  14  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   3  voluntary context switches
+                  45  involuntary context switches
+            25314225  instructions retired
+            12259874  cycles elapsed
+             1229160  peak memory footprint

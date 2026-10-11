@@ -1,0 +1,68 @@
+   -- Testbench for sha512 started --
+*** Toggle reset.
+*** TC0 - Single block test started.
+   entropy_tb= 12153524c0895e818484d609b1f0566306b97b0d46df998d
+*** Single block test processing time = 92 cycles
+TC0: OK.
+*** TC0 - Single block test done.
+*** TC1 - Single block test started.
+   entropy_tb= b2c284658937521200f3e30106d7cd0d3b23f1761e8dcd3d
+*** Single block test processing time = 92 cycles
+TC1: OK.
+*** TC1 - Single block test done.
+*** TC2 - Single block test started.
+   entropy_tb= 76d457ed462df78c7cfde9f9e33724c6e2f784c5d513d2aa
+*** Single block test processing time = 92 cycles
+TC2: OK.
+*** TC2 - Single block test done.
+*** TC3 - Single block test started.
+   entropy_tb= 72aff7e5bbd272778932d61247ecdb8f793069f2e77696ce
+*** Single block test processing time = 92 cycles
+TC3: OK.
+*** TC3 - Single block test done.
+*** TC4 - Double block test started.
+   entropy_tb= f4007ae8e2ca4ec52e58495cde8e28bd96ab582db2a72665
+TC4 first block: OK.
+*** Double block test processing time = 184 cycles
+TC4 final block: OK.
+*** TC4 - Double block test done.
+*** TC5 - Double block test started.
+   entropy_tb= b1ef62630573870ac03b228010642120557845aacecccc9d
+TC5 first block: OK.
+*** Double block test processing time = 184 cycles
+TC5 final block: OK.
+*** TC5 - Double block test done.
+*** TC6 - Double block test started.
+   entropy_tb= cb203e968983b81386bc380da9a7d653359fdd6beaa62ad5
+TC6 first block: OK.
+*** Double block test processing time = 184 cycles
+TC6 final block: OK.
+*** TC6 - Double block test done.
+*** TC7 - Double block test started.
+   entropy_tb= 81174a02d7563eae0effe91de7c572cf118449230509650a
+TC7 first block: OK.
+*** Double block test processing time = 184 cycles
+TC7 final block: OK.
+*** TC7 - Double block test done.
+*** All 08 test cases completed successfully.
+* TESTCASE PASSED
+   -- Testbench for sha512 done. --
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/sha512_masked/tb/sha512_masked_core_tb.sv:474: $finish called at 2212 (1s)
+        5.51 real         4.40 user         0.03 sys
+             9322496  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 867  page reclaims
+                   8  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                2596  involuntary context switches
+         40221418511  instructions retired
+          9098934503  cycles elapsed
+             6357376  peak memory footprint

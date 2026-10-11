@@ -1,0 +1,5 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sigdecode_h/tb/sigdecode_h_tb.sv:62: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `sigdecode_h_tb'
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sigdecode_h/tb/sigdecode_h_tb.sv:62: error: Cast size expression must be constant and greater than zero.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sigdecode_h/tb/sigdecode_h_tb.sv:62: internal error: Found a zero width constant!
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sigdecode_h/tb/sigdecode_h_tb.sv:62: internal error: Port expression too complicated for elaboration.
+2 error(s) during elaboration.

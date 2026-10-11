@@ -1,0 +1,14 @@
+{
+  "environment_id": "adams-bridge-v2-0-3-cbd_sampler_tb",
+  "top": "cbd_sampler_tb",
+  "source_repo": "adams_bridge_v2.0.3",
+  "filelist": "src/cbd_sampler/config/cbd_sampler_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/tb",
+  "compile_exit": 0,
+  "compile_seconds": 0.11,
+  "sim_exit": 0,
+  "sim_seconds": 0.26,
+  "classification": "FAIL",
+  "blocker_class": "behavior",
+  "classification_note": "the simulation completed with 10 test errors and a TESTCASE FAILED marker despite exit 0"
+}

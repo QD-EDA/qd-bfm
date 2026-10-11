@@ -1,0 +1,19 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/entropy_src/tb/entropy_src_tb.sv:386: warning: method function 'pop_front' is being called as a task.
+        0.91 real         0.76 user         0.05 sys
+            74350592  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6146  page reclaims
+                  22  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  44  voluntary context switches
+                 515  involuntary context switches
+            27044879  instructions retired
+            13839266  cycles elapsed
+             1409384  peak memory footprint

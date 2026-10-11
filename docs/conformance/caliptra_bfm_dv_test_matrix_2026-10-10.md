@@ -36,11 +36,20 @@ the matrix.
 See [the per-test CSV](caliptra_bfm_dv_test_matrix_2026-10-10.csv) for source
 lines, status, blocker class, and evidence. The companion
 [environment CSV](caliptra_bfm_dv_environment_matrix_2026-10-10.csv) records
-all 44 frozen filelists and their compile observations. Three block-unit rows
+all 44 frozen filelists and their pinned c339 compile/runtime observations. Three block-unit rows
 also have terminal runtime passes on pinned Icarus c339; these results are
 listed below and do not change the count of YAML test declarations. Other
 environment rows retain their compile/elaboration status, which alone does
 not qualify a test runtime.
+
+## Environment filelist follow-up — 2026-10-11
+
+The 44 pinned c339 environment rows currently classify as 11 **PASS**, 30
+**BLOCKED**, 1 **FAIL**, and 2 **UNVERIFIED**. The remaining two rows are
+exhaustive masked NTT simulations that reached the 6,900-second timeout without
+a testcase verdict. Several zero-exit runs remain blocked because generated
+vectors or Python dependencies were unavailable. Full per-row status and logs
+are in the [environment matrix report](../../evidence/caliptra-bfm-environment-matrix-20261011/README.md).
 
 ## Block-unit runtime follow-up — 2026-10-11
 
@@ -50,6 +59,19 @@ one pass marker and no failure/error markers. The environment CSV records
 these three runtime results. Full commands, source/tool hashes, host versions,
 and retained logs are in the
 [local run report](../../evidence/caliptra-bfm-unit-tests-20261011/README.md).
+
+## Firmware-suite runtime projection — 2026-10-11
+
+The pinned c339 `rand_test_dma` trace run in
+[`job-242/trace-1`](../../evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/)
+advanced from cycle 100 to cycle 25,700 before its 3,500-second runner timeout:
+25,600 cycles, or 7.31 effective cycles per end-to-end wall second. This wall
+time includes runner setup, so it conservatively understates VVP-only speed.
+Scaling one such segment across 271 YAML rows projects 948,500 seconds
+(10.98 days). This rough estimate assumes comparable cycles per row; the rows
+vary, and the timed-out run did not finish its testcase. The measurement and
+projection are reported in
+[Icarus issue #536](https://github.com/dsellerbrock/iverilog-uvm/issues/536).
 
 ## Status rules
 

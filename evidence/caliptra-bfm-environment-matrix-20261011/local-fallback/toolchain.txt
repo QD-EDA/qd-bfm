@@ -1,0 +1,12 @@
+utc=2026-10-11T16:17:33Z
+MacBook-Air.local
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+Darwin MacBook-Air.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+Python 3.14.7
+Icarus Verilog version 13.0 (devel) ()
+Icarus Verilog runtime version 13.0 (devel) ()
+8fe4c77928f9ee6c08d4e403514fba7efb04501c4ce332ddafbbfdc2a41d2441  /tmp/a2-caliptra-unit-20261011/toolchain/bin/iverilog
+6944b600e1ec093a9ae7bb91ede10fdda0bc75598cf02262bf6f65dba4a8dfc7  /tmp/a2-caliptra-unit-20261011/toolchain/bin/vvp
+Per-test runner: compile and simulation share a 6900-second process-group timeout; tasks run sequentially.

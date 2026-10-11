@@ -1,0 +1,24 @@
+sh: 1: python: not found
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:56: No argument provided for MAX_CYCLES, defaulting to      200000
+      Time: 0  Scope: rej_bounded_tb
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:62: No argument provided for VEC_CNT, defaulting to          10
+      Time: 0  Scope: rej_bounded_tb
+PLAYBOOK_RANDOM_SEED = 
+   -- Testbench for REJ_BOUNDED started --
+*** Toggle reset.
+
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:340: Cannot open file exp_results.txt for reading
+       Time: 35  Scope: rej_bounded_tb.gen_rand_test_vectors
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:362: Cannot open file input_vectors.txt for reading
+       Time: 35  Scope: rej_bounded_tb.run_rand_test
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:369: Cannot open file exp_results.txt for reading
+       Time: 35  Scope: rej_bounded_tb.run_rand_test
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:375: invalid file descriptor (0x0) given to $fgets.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:376: Failed to read a new line
+       Time: 35  Scope: rej_bounded_tb.run_rand_test
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:385: invalid file descriptor (0x0) given to $fgets.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:386: Failed to read a new line
+       Time: 35  Scope: rej_bounded_tb.run_rand_test
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:180: Hit max cycle count (200000) .. stopping
+       Time: 2000005  Scope: rej_bounded_tb.sys_monitor
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:181: $finish called at 2000005 (1s)

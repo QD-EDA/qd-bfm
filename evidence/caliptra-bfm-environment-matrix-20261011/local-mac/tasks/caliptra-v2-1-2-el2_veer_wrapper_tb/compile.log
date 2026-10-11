@@ -1,0 +1,63 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1124: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd0].dccm.dccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_dccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1125: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd1].dccm.dccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_dccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1127: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd2].dccm.dccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_dccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1128: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd3].dccm.dccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_dccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1092: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd0].iccm.iccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_iccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1093: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd1].iccm.iccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_iccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1095: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd2].iccm.iccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_iccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1096: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd3].iccm.iccm_bank.ram_core'' in ``el2_veer_wrapper_tb.init_iccm'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1029: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd0].dccm.dccm_bank.ram_core[indx]'' in ``el2_veer_wrapper_tb.slam_dccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1030: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd1].dccm.dccm_bank.ram_core[indx]'' in ``el2_veer_wrapper_tb.slam_dccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1032: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd2].dccm.dccm_bank.ram_core[indx]'' in ``el2_veer_wrapper_tb.slam_dccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1033: warning: Could not find variable ``rvtop.mem.Gen_dccm_enable.dccm.mem_bank['sd3].dccm.dccm_bank.ram_core[indx]'' in ``el2_veer_wrapper_tb.slam_dccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1055: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd0].iccm.iccm_bank.ram_core[idx]'' in ``el2_veer_wrapper_tb.slam_iccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1056: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd1].iccm.iccm_bank.ram_core[idx]'' in ``el2_veer_wrapper_tb.slam_iccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1058: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd2].iccm.iccm_bank.ram_core[idx]'' in ``el2_veer_wrapper_tb.slam_iccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:1059: warning: Could not find variable ``caliptra_top_tb.caliptra_top_dut.rvtop.mem.iccm.iccm.mem_bank['sd3].iccm.iccm_bank.ram_core[idx]'' in ``el2_veer_wrapper_tb.slam_iccm_ram'' (compile-progress: assignment ignored).
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: port ``dccm_ext_in_pkt'' is not a port of rvtop.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: port ``iccm_ext_in_pkt'' is not a port of rvtop.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: port ``ic_data_ext_in_pkt'' is not a port of rvtop.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: port ``ic_tag_ext_in_pkt'' is not a port of rvtop.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: Interface port `el2_icache_export' of module `el2_veer_wrapper' cannot be left unconnected.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv:440: error: Interface port `el2_mem_export' of module `el2_veer_wrapper' cannot be left unconnected.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:101: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:103: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:104: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:105: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:106: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:107: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:111: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:112: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:113: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:114: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:115: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:120: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:121: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:122: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:123: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:124: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:125: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:130: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:131: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:132: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:133: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/rtl/el2_mem.sv:134: error: Unable to resolve the static variable member driven by this interface continuous assignment.
+28 error(s) during elaboration.
+        3.21 real         2.74 user         0.08 sys
+           237174784  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               16044  page reclaims
+                  27  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 111  voluntary context switches
+                1629  involuntary context switches
+            25899218  instructions retired
+            13034723  cycles elapsed
+             1376616  peak memory footprint
