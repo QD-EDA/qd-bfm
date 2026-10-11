@@ -1,0 +1,9 @@
+Local Mac environment-matrix provenance
+
+Icarus source: c339b9f2287a743aeb7ab6de6528e8d34a4dd602, clean source archive SHA256 140225a678f61a31725a6850d66671fc7737fd744257982f53d3d91b77a06133.
+Compiler binary used by run_local_matrix.py: /tmp/a2-caliptra-unit-20261011/toolchain/bin/iverilog, SHA256 8fe4c77928f9ee6c08d4e403514fba7efb04501c4ce332ddafbbfdc2a41d2441.
+VVP binary: /tmp/a2-caliptra-unit-20261011/toolchain/bin/vvp, SHA256 6944b600e1ec093a9ae7bb91ede10fdda0bc75598cf02262bf6f65dba4a8dfc7.
+Caliptra source snapshot at /tmp/a2-env-c339/runtime/caliptra-rtl: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Adams Bridge submodule: b77e3d899e828d626cfc2a0d26a6b5704cc121e0.
+The local runner script points at these exact source/tool paths and uses a 6,900-second process-group timeout per row. Simulations run from each source testbench directory; generated files may be untracked afterward. At audit time the Caliptra/Adams tracked source files were unchanged; the only submodule status entries were generated files under cbd_sampler/tb.
+See local-host-toolchain.txt for Mac OS/Python/tool version output and run_local_matrix.py for the runner command.

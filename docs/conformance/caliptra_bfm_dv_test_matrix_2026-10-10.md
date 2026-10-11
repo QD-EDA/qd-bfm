@@ -44,8 +44,8 @@ not qualify a test runtime.
 
 ## Environment filelist follow-up — 2026-10-11
 
-The 44 pinned c339 environment rows currently classify as 11 **PASS**, 32
-**BLOCKED**, 1 **FAIL**, and 0 **UNVERIFIED**. The remaining two rows are
+The 44 pinned c339 environment rows currently classify as 12 **PASS**, 29
+**BLOCKED**, 3 **FAIL**, and 0 **UNVERIFIED**. The remaining two rows are
 exhaustive masked NTT simulations that reached the 6,900-second timeout without
 a testcase verdict. Several zero-exit runs remain blocked because generated
 vectors or Python dependencies were unavailable. Full per-row status and logs
