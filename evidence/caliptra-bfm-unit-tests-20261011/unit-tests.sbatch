@@ -34,14 +34,16 @@ export CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic
 export IVERILOG VVP TOP FILELIST TASK_DIR
 export LD_LIBRARY_PATH="$BASE/deps/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-test "$(git -C "$RTL" rev-parse HEAD)" = 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
-test -z "$(git -C "$RTL" status --porcelain --untracked-files=all)"
+test "$(cat "$RUN/source/caliptra-rtl.commit")" = 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+test "$(cat "$RUN/source/caliptra-rtl-source.sha256")" = 65294ca75a79639b4d2bd1b8748a1f972d7c0344ede3499bb4ce1aebad96c3e6
 test "$(git -C "$BASE/source/iverilog-uvm" rev-parse HEAD)" = c339b9f2287a743aeb7ab6de6528e8d34a4dd602
 test -z "$(git -C "$BASE/source/iverilog-uvm" status --porcelain --untracked-files=all)"
 test -x "$IVERILOG" && test -x "$VVP"
 {
   printf 'QD-BFM=%s (archive of feature-branch HEAD)\n' "$(cat "$RUN/source/qd-bfm-commit.txt")"
-  printf 'Caliptra=%s (clean)\n' "$(git -C "$RTL" rev-parse HEAD)"
+  printf 'Caliptra=%s (source-archive-sha256=%s)\n' \
+    "$(cat "$RUN/source/caliptra-rtl.commit")" "$(cat "$RUN/source/caliptra-rtl-source.sha256")"
+  printf 'Adams-Bridge=%s\n' b77e3d899e828d626cfc2a0d26a6b5704cc121e0
   printf 'Icarus=%s (clean)\n' "$(git -C "$BASE/source/iverilog-uvm" rev-parse HEAD)"
 } > "$RUN/source-revisions.txt"
 sha256sum "$IVERILOG" "$VVP" > "$RUN/tool-binaries.sha256"
