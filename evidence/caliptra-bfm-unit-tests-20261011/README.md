@@ -23,7 +23,9 @@ Caliptra RTL is pinned at `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, QD-BFM
 source at the run's recorded commit, and Icarus at clean published
 `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. Each result requires simulator
 exit 0, exactly one `* TESTCASE PASSED`, no `* TESTCASE FAILED`, and no unit
-test error marker. Environment and per-test status matrices will be updated
-from the retained results.
+test error marker. The staged Caliptra tree is checked clean, and the three
+testbench/filelist pairs and compiler binaries are SHA-256 recorded.
+Environment and per-test status matrices will be updated from the retained
+results.
 
 Slurm job ID and per-task outcomes will be appended after the array finishes.

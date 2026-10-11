@@ -45,6 +45,11 @@ test -x "$IVERILOG" && test -x "$VVP"
   printf 'Icarus=%s (clean)\n' "$(git -C "$BASE/source/iverilog-uvm" rev-parse HEAD)"
 } > "$RUN/source-revisions.txt"
 sha256sum "$IVERILOG" "$VVP" > "$RUN/tool-binaries.sha256"
+sha256sum \
+  "$RTL/src/hmac/config/hmac_ctrl_tb.vf" "$RTL/src/hmac/tb/hmac_ctrl_tb.sv" \
+  "$RTL/src/sha256/config/sha256_ctrl_tb.vf" "$RTL/src/sha256/tb/sha256_ctrl_tb.sv" \
+  "$RTL/src/sha512/config/sha512_ctrl_32bit_tb.vf" "$RTL/src/sha512/tb/sha512_ctrl_32bit_tb.sv" \
+  > "$RUN/test-sources.sha256"
 "$IVERILOG" -V > "$RUN/iverilog-version.txt" 2>&1
 
 start=$(date +%s)
