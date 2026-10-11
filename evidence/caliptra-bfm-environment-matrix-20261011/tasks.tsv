@@ -11,7 +11,7 @@ caliptra-v2-1-2-el2_veer_wrapper_tb	el2_veer_wrapper_tb	caliptra_v2.1.2	src/risc
 caliptra-v2-1-2-sha512_masked_core_tb	sha512_masked_core_tb	caliptra_v2.1.2	src/sha512_masked/config/sha512_masked_core_tb.vf
 caliptra-v2-1-2-soc_ifc_axi_sha_acc_dis_tb	soc_ifc_axi_sha_acc_dis_tb	caliptra_v2.1.2	src/soc_ifc/config/soc_ifc_axi_sha_acc_dis_tb.vf
 caliptra-v2-1-2-soc_ifc_tb	soc_ifc_tb	caliptra_v2.1.2	src/soc_ifc/config/soc_ifc_tb.vf
-adams-bridge-v2-0-3-masking_tb	masking_tb	adams_bridge_v2.0.3	src/abr_libs/config/masking_tb.vf
+adams-bridge-v2-0-3-masking_tb	abr_masked_OR_tb	adams_bridge_v2.0.3	src/abr_libs/config/masking_tb.vf
 adams-bridge-v2-0-3-abr_sha3_tb	abr_sha3_tb	adams_bridge_v2.0.3	src/abr_sha3/config/abr_sha3_tb.vf
 adams-bridge-v2-0-3-abr_top_tb	abr_top_tb	adams_bridge_v2.0.3	src/abr_top/config/abr_top_tb.vf
 adams-bridge-v2-0-3-cbd_sampler_tb	cbd_sampler_tb	adams_bridge_v2.0.3	src/cbd_sampler/config/cbd_sampler_tb.vf
@@ -23,7 +23,7 @@ adams-bridge-v2-0-3-norm_check_tb	norm_check_tb	adams_bridge_v2.0.3	src/norm_che
 adams-bridge-v2-0-3-butterfly_top_tb	butterfly_top_tb	adams_bridge_v2.0.3	src/ntt_top/config/butterfly_top_tb.vf
 adams-bridge-v2-0-3-masked_barrett_redux_tb	masked_barrett_redux_tb	adams_bridge_v2.0.3	src/ntt_top/config/masked_barrett_redux_tb.vf
 adams-bridge-v2-0-3-mlkem_masked_gs_butterfly_tb	mlkem_masked_gs_butterfly_tb	adams_bridge_v2.0.3	src/ntt_top/config/mlkem_masked_gs_butterfly_tb.vf
-adams-bridge-v2-0-3-ntt_masked_mult_reduction_tb	ntt_masked_mult_reduction_tb	adams_bridge_v2.0.3	src/ntt_top/config/ntt_masked_mult_reduction_tb.vf
+adams-bridge-v2-0-3-ntt_masked_mult_reduction_tb	ntt_masked_mult_redux46_auto_tb	adams_bridge_v2.0.3	src/ntt_top/config/ntt_masked_mult_reduction_tb.vf
 adams-bridge-v2-0-3-ntt_mult_reduction_tb	ntt_mult_reduction_tb	adams_bridge_v2.0.3	src/ntt_top/config/ntt_mult_reduction_tb.vf
 adams-bridge-v2-0-3-ntt_top_masking_tb	ntt_top_masking_tb	adams_bridge_v2.0.3	src/ntt_top/config/ntt_top_masking_tb.vf
 adams-bridge-v2-0-3-ntt_top_tb	ntt_top_tb	adams_bridge_v2.0.3	src/ntt_top/config/ntt_top_tb.vf
