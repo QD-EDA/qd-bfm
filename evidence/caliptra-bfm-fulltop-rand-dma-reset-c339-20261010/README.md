@@ -146,18 +146,25 @@ before the reset window rather than verify the 2822-cycle reset. Tasks 242_1
 and 242_2 were running at the first queue check; 242_3 through 242_6 were
 pending at the array limit. See [`job-242/`](job-242/).
 
-All six tasks later reached the configured 3500-second runner timeout. After
-reconciling those results, Job 252_1 was submitted as a fresh 2822-cycle
-fixed-delay reproduction with the same pinned source/tool inputs, seed, and
-1-CPU/3-GB settings. It uses a new isolated output root with AXI tracing; the
-submission script and run record are in [`job-243/`](job-243/).
+All six tasks later reached the configured 3500-second runner timeout. The
+three trace-enabled tasks reached about 25.5k simulated cycles without a
+sampled reset; the no-trace logs have no cycle markers. Since none used the
+fixed-delay option, the A/B does not diagnose Job 240's cycle-100 crash. It
+shows no deterministic crash from loading the trace VPI in the no-delay run,
+but provides no terminal test result for either group.
 
-Job 252_1 completed with compile, firmware, and simulation exits 0. Its single
-`rand_test_dma` transfer passed with no testcase failures or bad diagnostics.
-The trace asserted reset at cycle 5335 while one write was outstanding, then
-deasserted reset at cycle 5345; the result records `reset_in_flight=true`.
-This reproduces the intended late-reset coverage and does not reproduce Job
-240's early VVP `-11`. The result is scoped to one transfer and is not a
-full-suite qualification; the pinned profile also excludes `Axi4PC.sv`.
-Selected logs and `result.json` are in
-[`job-243/window-2822/`](job-243/window-2822/), with a local checksum manifest.
+Two fresh 2822-cycle fixed-delay runs followed with the same pinned source/tool
+inputs, seed, and 1-CPU/3-GB settings. Jobs 252_1 and 268_1 each passed one
+`rand_test_dma` transfer, with compile, firmware, and simulation exits 0, one
+pass marker, zero fail markers, and no bad diagnostics. Both asserted reset
+at cycle 5335 with one AXI write outstanding and deasserted at cycle 5345.
+Their maximum RSS was 1,860,044 and 1,859,936 KiB; each finished before its
+7000-second runner timeout. This reproduces the in-flight reset pass on the
+clean pinned Icarus SHA. Earlier VVP `-11` outcomes from Jobs 234 and 240 did
+not reproduce in these two fresh runs. Their causes remain unverified; the
+evidence does not establish a reproducible simulator blocker.
+
+The terminal evidence is preserved in [`job-243/window-2822/`](job-243/window-2822/)
+and [`job-244/window-2822/`](job-244/window-2822/), each with a local checksum
+manifest. Each pass covers one random DMA transfer, not the full suite; the
+pinned profile excludes `Axi4PC.sv`.
