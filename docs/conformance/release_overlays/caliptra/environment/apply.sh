@@ -12,7 +12,8 @@ PATCH_FILE="$OVERLAYS/$PATCH_NAME"
 
 case "$PATCH_NAME" in
   csrng-package-order.patch|csrng-generated-reg-include.patch) STRIP=0 ;;
-  adams-legacy-width-alias.patch|adams-decompose-drop-stale-port.patch|adams-pkdecode-remove-stale-parameter.patch|adams-sigdecode-z-update-call-arity.patch|adams-skencode-drop-stale-port.patch|adams-compress-filelist-package.patch|el2-veer-remove-stale-dft-ports.patch) STRIP=1 ;;
+  soc-ifc-assignment-patterns.patch|soc-ifc-function-return-types.patch) STRIP=0 ;;
+  adams-legacy-width-alias.patch|adams-decompose-drop-stale-port.patch|adams-pkdecode-remove-stale-parameter.patch|adams-pkdecode-c339-539-address-cast.patch|adams-pkdecode-source-base.patch|adams-sigdecode-z-update-call-arity.patch|adams-skencode-drop-stale-port.patch|adams-compress-filelist-package.patch|el2-veer-remove-stale-dft-ports.patch) STRIP=1 ;;
   *) echo "unknown overlay: $PATCH_NAME" >&2; exit 2 ;;
 esac
 BINARY=()
