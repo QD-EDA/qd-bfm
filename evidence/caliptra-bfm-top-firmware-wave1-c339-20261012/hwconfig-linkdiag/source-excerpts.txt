@@ -1,0 +1,31 @@
+Host: DAN-DESKTOP
+Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Compiler: riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+
+Source: src/integration/test_suites/smoke_test_hw_config/caliptra_isr.h
+129 inline void service_soc_ifc_notif_intr () {
+
+Source: src/integration/test_suites/libs/caliptra_isr/caliptra_isr.c
+808 nonstd_veer_isr(soc_ifc_notif)
+
+Pinned -std=gnu11 -O2 object evidence (run-02/o2-inline):
+caliptra_isr.o: U service_soc_ifc_notif_intr
+smoke_test_hw_config.o: no definition of service_soc_ifc_notif_intr
+caliptra_isr.o: no definition of service_soc_ifc_notif_intr
+
+The matching link diagnostic points at caliptra_isr.c:808. This is consistent with the non-static inline definition not providing an external definition under the GNU11/C99 inline model while the ISR translation unit still makes an external call.
+
+Variant status and raw-log SHA-256:
+run-01/qd-gnu11-o3/status.txt  ee573b735a42c13f97668a1b26299fb9e42d8571b1967247d2bb60ad88533383
+run-01/qd-gnu11-o3/build.log   5f5c31cfd3b86dbab263b9f70b5deee6d4f3170288d9fa0b7cdb98f061478ce2
+run-01/upstream-default/status.txt  7bbd03cf30635127f42029c209f1a20f88e854dd85e0d86da4a581a10c5c1d61
+run-01/upstream-default/build.log   545caab60d30263b0f4d6b52b6dac9089154c587c5e7d69cbad2b29c37caf483
+run-01/slurm-588.out  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+run-02/gnu89-inline/status.txt  422471d1e1d959e8442340e0f92fea3609f09381b75e25b9975a6b8907fef384
+run-02/gnu89-inline/build.log   3bacaa621c07b2a8d98b6414d9ee3fe46a40f7810953f535184e72d1e1349391
+run-02/os/status.txt  5e0d5276bbf1f022e6e8ab4d06b28e56a6b0abec8863f943588ed14b3ba77cf2
+run-02/os/build.log   571b9968bf5b2f822c482094cba26cb32da34e426f068ee9461c01de82a861f1
+run-02/o2-inline/status.txt  13cba75cea24d8b2474ae6d9ed212eb15ac2f681620827a3e2cf6707c6c03571
+run-02/o2-inline/build.log   d3076a8ed7201bf14b843f8662e943d868503bbdec84a69a24831fd6fc5fcfad
+run-02/o2-inline/symbol-evidence.txt  adaf623e9c069b3214e7b9dd346e8b674838062ee93afd8810fe846be5fae225
+run-02/slurm-589.out  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
