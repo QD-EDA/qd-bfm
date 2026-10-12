@@ -1,0 +1,1 @@
+The submitted array wrapper's raw status says FAIL because it did not find result.json at its incorrect output/$case_dir/result.json path. The runner reports PASS, result.json has passed=true for smoke_test_sha512, and sim.log contains * TESTCASE PASSED. The test verdict is therefore PASS; array-status.txt preserves the wrapper's raw status.
