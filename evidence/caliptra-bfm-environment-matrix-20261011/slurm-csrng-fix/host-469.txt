@@ -1,0 +1,11 @@
+host=DAN-DESKTOP
+PARTITION|AVAIL|TIMELIMIT|NODES|CPUS(A/I/O/T)|GRES|AVAIL_FEATURES
+verilog*|up|infinite|1|4/16/0/20|(null)|(null)
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      467_[0-15%2]   verilog a1-boot-    dsell PD       0:00      1 (Dependency)
+     418_[18-19%2]   verilog a1-step1    dsell PD       0:00      1 (JobArrayTaskLimit)
+      457_[0-19%2]   verilog a1-stale    dsell PD       0:00      1 (Dependency)
+            418_17   verilog a1-step1    dsell  R      18:26      1 DAN-DESKTOP
+            418_16   verilog a1-step1    dsell  R      32:18      1 DAN-DESKTOP
+             460_1   verilog caliptra    dsell  R      45:14      1 DAN-DESKTOP
+               451   verilog a1-boot-    dsell  R      47:22      1 DAN-DESKTOP
