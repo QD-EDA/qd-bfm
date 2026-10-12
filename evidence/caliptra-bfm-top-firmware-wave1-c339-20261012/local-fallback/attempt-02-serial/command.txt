@@ -1,0 +1,6 @@
+row=4
+case=smoke_test_dma_aes_gcm_cmd_err
+case_yaml=smoke_test_dma_aes_gcm_cmd_err/smoke_test_dma_aes_gcm_cmd_err.yml
+timeout_s=7431
+MAKEFLAGS=-j1
+localrun=/Users/danielellerbrock/codex-supervisor/localrun 7431
