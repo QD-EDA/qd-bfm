@@ -8,4 +8,4 @@ Job 669 uses the protected c339 toolchain and OpenSSL prefix under `/home/dsell/
 
 The submitted array script SHA-256 is `83b0f82bd723728454a7a8a97e31559aa7fa6e9f826bba67a7d4db74f66b5733`; the selection SHA-256 is `deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289`. Job 669 was verified PENDING with dependency `afterany:660` and `ArrayTaskThrottle=6`.
 
-At 13:34 MDT, tasks 660_8, 660_10, 660_12, and 660_14 have terminal `FAIL`, `TIMEOUT`, `PASS`, and `PASS` verdicts, respectively. Tasks 660_13 and 660_15 remain running; job 669 is still dependency-held.
+At 13:45 MDT, tasks 660_8, 660_10, 660_12, 660_13, and 660_14 have terminal `FAIL`, `TIMEOUT`, `PASS`, `TIMEOUT`, and `PASS` verdicts, respectively. Task 660_15 remains running; job 669 is still dependency-held.

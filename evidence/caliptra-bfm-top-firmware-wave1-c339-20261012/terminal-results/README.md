@@ -11,6 +11,7 @@ These six Slurm runs ended with the runner's explicit per-test timeout (`runner_
 | 6 | `smoke_test_dma_aes_gcm_wr_enc_axi_err` | TIMEOUT | 7,628 s |
 | 7 | `smoke_test_kv_lock_use_mid_read` | TIMEOUT | 7,956 s |
 | 10 | `smoke_test_sram_ecc` | TIMEOUT | 8,876 s |
+| 13 | `smoke_test_hek_flow` | TIMEOUT | 9,467 s |
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
