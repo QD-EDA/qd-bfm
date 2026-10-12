@@ -1,0 +1,7 @@
+2026-10-12 15:23 MDT — job 669 live-state checkpoint
+
+Host DAN-DESKTOP reported uptime 6:48, so these jobs started after the current boot and are not stale crash ghosts. Job 669 has tasks 16–21 RUNNING and tasks 22–51 PENDING at array throttle 6. The six active VVP processes use the protected `/home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp`; each had elapsed about 1:11:40, CPU about 99.9%, and RSS about 1,036,000 KiB. Their per-test timeout budgets are 10,714–11,240 seconds, so none had reached its timeout.
+
+No active task had a `result.json`. Each task's `sim.log` was 45,302 bytes with identical SHA-256 `76797540afb40c5686b0b9fc9ee37c5ecc02085bad7a5a3de68ec42551abb5a0`, modified at launch. Direct marker counts for every log were zero for `TESTCASE PASSED`, `TESTCASE FAILED`, `FATAL`, `ERROR`, and `timeout`. The intern triage described initialization-only output and no verdict/progress marker; the log sizes, hashes, and marker counts were checked directly. These are still-running, compute-active simulations, not terminal test outcomes; no job was canceled.
+
+Queue snapshot command: `ssh DAN-DESKTOP 'squeue -j 669 -o "%.18i %.10T %.10M %.19S %.24R"'`.
