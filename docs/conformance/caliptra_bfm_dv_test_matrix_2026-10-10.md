@@ -91,7 +91,7 @@ projection are reported in
 This section records the initial generated-environment findings. It predates
 later environment reruns and the top-level firmware sample below; use the CSV
 for current row statuses. At the 2026-10-12 reconciliation, the 271-row CSV
-contains 254 UNVERIFIED, 10 BLOCKED, 5 PASS, 1 FAIL, and 1 TIMEOUT row. Three
+contains 253 UNVERIFIED, 10 BLOCKED, 5 PASS, 1 FAIL, and 2 TIMEOUT rows. Two
 additional selected firmware tests are still running and remain UNVERIFIED
 until terminal results are recorded.
 
@@ -147,7 +147,7 @@ matrix and submitted together as Slurm array 561 on pinned Icarus c339. The
 estimates are conservative timeout-sizing inputs based on source-path review,
 not measured runtimes. The sample report records the selection rationale,
 per-test evidence, and current outcomes. At the latest reconciliation, five
-tests PASS, `smoke_test_hw_config` fails during firmware linking,
-`smoke_test_strap` times out without a terminal test verdict, and the three
-crypto cases remain active. See the
+tests PASS, `smoke_test_hw_config` fails during firmware linking, two tests
+time out without terminal verdicts, and the `doe_rand` and
+`sha256_wntz_rand` cases remain active. See the
 [sample evidence report](../../evidence/caliptra-bfm-top-firmware-sample-c339-20261011/README.md).
