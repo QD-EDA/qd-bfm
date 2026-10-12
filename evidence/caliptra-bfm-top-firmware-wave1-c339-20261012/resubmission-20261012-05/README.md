@@ -8,4 +8,4 @@ Job 669 uses the protected c339 toolchain and OpenSSL prefix under `/home/dsell/
 
 The submitted array script SHA-256 is `83b0f82bd723728454a7a8a97e31559aa7fa6e9f826bba67a7d4db74f66b5733`; the selection SHA-256 is `deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289`. Job 669 was verified PENDING with dependency `afterany:660` and `ArrayTaskThrottle=6`.
 
-At 13:45 MDT, tasks 660_8, 660_10, 660_12, 660_13, and 660_14 have terminal `FAIL`, `TIMEOUT`, `PASS`, `TIMEOUT`, and `PASS` verdicts, respectively. Task 660_15 remains running; job 669 is still dependency-held.
+At 14:18 MDT, job 660 is complete. Tasks 660_8, 660_10, 660_12, 660_13, 660_14, and 660_15 have terminal `FAIL`, `TIMEOUT`, `PASS`, `TIMEOUT`, `PASS`, and `TIMEOUT` verdicts. Job 669 has started rows 16–21; rows 22–51 are pending at throttle 6. Provenance confirms each active task uses QD commit `0e331dec3d83ad70e5e73d8f0198dbdd4a226f74`, Icarus source `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`, Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, and the protected OpenSSL prefix; each active task's binary SHA checks passed.

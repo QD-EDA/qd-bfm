@@ -1,0 +1,1 @@
+The wrapper reports TIMEOUT with runner_exit=124 and no result.json was produced. The simulator log reached ROM Flow and began the first DMA AES test case before the timeout; there is no terminal PASS or FAIL marker.
