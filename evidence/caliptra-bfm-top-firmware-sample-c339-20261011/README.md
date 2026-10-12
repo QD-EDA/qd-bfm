@@ -24,8 +24,8 @@ Run-local overlays are generated outside the pinned source checkout by the
 QD-BFM runner.
 
 Array script and selection manifest: [`array.sbatch`](array.sbatch),
-[`selection.tsv`](selection.tsv). Results will be added under `runs/` after
-reconciling the array.
+[`selection.tsv`](selection.tsv). Per-test logs, statuses, and tool provenance
+are retained under `runs/`.
 
 ## Current results
 
