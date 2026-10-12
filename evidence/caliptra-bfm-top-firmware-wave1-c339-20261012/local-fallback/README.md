@@ -1,6 +1,6 @@
 # Local fallback, 2026-10-12
 
-DAN-DESKTOP accepts SSH but its Slurm controller and run filesystem are unhealthy. `squeue` cannot contact the controller, `/usr/bin/scancel` fails with `Input/output error`, `scontrol hold` returns `Unexpected message received`, and the run directory returns `Input/output error`. Job 591 could not be held or canceled.
+As of 03:44 MDT, SSH to DAN-DESKTOP resets the connection. Before that, `squeue` could not contact the Slurm controller, `/usr/bin/scancel` failed with `Input/output error`, `scontrol hold` returned `Unexpected message received`, and run directories returned I/O errors. `/usr/bin/sacct` also returned `Input/output error`. Job 591 could not be held or canceled; local work continues within the Mac budget.
 
 ## Local simulator and toolchain
 
@@ -16,8 +16,8 @@ At 03:31 MDT, the four remote VVP PIDs were gone. `squeue` still could not reach
 
 ## Local run
 
-The first row-4 setup attempt exited before simulation with two header-copy errors under `MAKEFLAGS=-j3`. The upstream Makefile copies the same header set for each object, consistent with a parallel-copy race; the serial retry will verify this. Raw logs and its 38-second, 1.84 GiB resource record are in `attempt-01-setup-race/`; this is not a test verdict. A fresh run of `smoke_test_dma_aes_gcm_cmd_err` started at 02:45:59 MDT with `MAKEFLAGS=-j1`, its 7,431-second manifest timeout, and `~/codex-supervisor/localrun`. At 03:31 its VVP process remained active at about 90% CPU and 0.59 GiB RSS; `sim.log` was unchanged from 02:46:58, with no `result.json` or terminal marker. The latest status is in [`attempt-02-serial/observations-03-31.txt`](attempt-02-serial/observations-03-31.txt); the immutable QD source archive and live run output are under `/private/tmp/qd-bfm-localwave1-c339-20261012-01/` until it terminates.
+The first row-4 setup attempt exited before simulation with two header-copy errors under `MAKEFLAGS=-j3`. The upstream Makefile copies the same header set for each object, consistent with a parallel-copy race; the serial retry will verify this. Raw logs and its 38-second, 1.84 GiB resource record are in `attempt-01-setup-race/`; this is not a test verdict. A fresh run of `smoke_test_dma_aes_gcm_cmd_err` started at 02:45:59 MDT with `MAKEFLAGS=-j1`, its 7,431-second manifest timeout, and `~/codex-supervisor/localrun`. At 03:44 its VVP process remained active at about 85% CPU and 0.60 GiB RSS; `sim.log` was unchanged from 02:46:58, with no `result.json` or terminal marker. The latest status is in [`attempt-02-serial/observations-03-44.txt`](attempt-02-serial/observations-03-44.txt); the immutable QD source archive and live run output are under `/private/tmp/qd-bfm-localwave1-c339-20261012-01/` until it terminates.
 
 The shared per-row tracker is [`../results.tsv`](../results.tsv); infrastructure and setup states leave its terminal outcome blank.
 
-Because Slurm cannot currently hold job 591, pending rows may be dispatched remotely if the controller recovers. Run local rows sequentially, checking Slurm before each launch, and cancel this array as soon as its controller is usable.
+Because Slurm cannot currently hold job 591, pending rows may be dispatched remotely if the controller recovers. After row 4 finishes, check Slurm once before each local launch; cancel this array if the controller is usable, and continue locally one row at a time if it is not.
