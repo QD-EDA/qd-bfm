@@ -9,3 +9,5 @@ The remaining wave-1 array (job 611, rows 8–51) uses `/home/dsell/toolchains/i
 GCC reported an upstream warning in the pinned JTAG support source `tcp_server.c` about `ctx` being freed twice on an error path. The VPI build succeeded; the source was left unchanged. If a firmware test reaches that error path, its effect remains a risk to inspect in the test evidence.
 
 Per-test outputs remain in disposable run directories and will be copied into the repository as evidence.
+
+A Debian-compatible OpenSSL prefix was added under `/home/dsell/toolchains/iverilog-c339/openssl` after job 611 exposed the runner's assumption that `libcrypto.so` lives directly under the OpenSSL prefix. The exact binary, library, and header hashes, plus the successful native-vector preparation check, are in [`../openssl-prefix-recovery.txt`](../openssl-prefix-recovery.txt).

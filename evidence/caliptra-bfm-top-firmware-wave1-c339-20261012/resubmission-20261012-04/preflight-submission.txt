@@ -1,0 +1,4 @@
+job_id=659
+state=COMPLETED
+exit_code=0:0
+commands_completed=7

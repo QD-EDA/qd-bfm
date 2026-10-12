@@ -1,0 +1,15 @@
+ERRORS
+8:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:39:16: error: 'SOC_IFC_REG_CPTRA_HW_CONFIG_UART_EN_MASK' undeclared (first use in this function); did you mean 'SOC_IFC_REG_CPTRA_HW_CONFIG_RSVD_EN_MASK'?
+14:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:54:26: error: 'CLP_UART_STATUS' undeclared (first use in this function); did you mean 'CLP_SHA3_STATUS'?
+18:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:55:26: error: 'UART_STATUS_TXFULL_MASK' undeclared (first use in this function); did you mean 'KMAC_STATUS_FIFO_FULL_MASK'?
+22:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:55:54: error: 'UART_STATUS_TXFULL_LOW' undeclared (first use in this function); did you mean 'KMAC_STATUS_FIFO_FULL_LOW'?
+26:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:59:16: error: 'CLP_UART_WDATA' undeclared (first use in this function)
+30:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:68:26: error: 'CLP_UART_STATUS' undeclared (first use in this function); did you mean 'CLP_SHA3_STATUS'?
+34:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:69:27: error: 'UART_STATUS_RXEMPTY_MASK' undeclared (first use in this function); did you mean 'SHA3_STATUS_FIFO_EMPTY_MASK'?
+38:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:69:56: error: 'UART_STATUS_RXEMPTY_LOW' undeclared (first use in this function); did you mean 'SHA3_STATUS_FIFO_EMPTY_LOW'?
+42:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:73:22: error: 'CLP_UART_RDATA' undeclared (first use in this function)
+46:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:105:29: error: 'UART_CTRL_NCO_LOW' undeclared (first use in this function)
+49:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:105:50: error: 'UART_CTRL_TX_MASK' undeclared (first use in this function)
+52:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:106:10: error: 'UART_CTRL_RX_MASK' undeclared (first use in this function)
+55:/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c:107:16: error: 'CLP_UART_CTRL' undeclared (first use in this function)
+TEST_MACROS

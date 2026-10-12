@@ -1,0 +1,4 @@
+outcome=TIMEOUT
+reason=per_test_timeout
+runner_exit=124
+result_testname=

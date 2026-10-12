@@ -1,0 +1,42 @@
+captured=2026-10-12T11:05:26-06:00
+QUEUE
+             JOBID    STATE       TIME TIME_LIMI NODELIST(REASON)
+     660_[15-51%6]  PENDING       0:00   6:10:00 (JobArrayTaskLimit)
+            660_14  RUNNING       2:24   6:10:00 DAN-DESKTOP
+            660_13  RUNNING       2:51   6:10:00 DAN-DESKTOP
+            660_12  RUNNING       2:51   6:10:00 DAN-DESKTOP
+            660_11  RUNNING       2:51   6:10:00 DAN-DESKTOP
+            660_10  RUNNING       2:51   6:10:00 DAN-DESKTOP
+             660_8  RUNNING       2:51   6:10:00 DAN-DESKTOP
+ACTIVE_PROCESSES
+      02:50  0.0  1724 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/42f2671ec114cfb5-10/resource.log timeout --signal=TERM --kill-after=30s 8876 pytho
+      02:50  0.0  1732 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/2092a5bfea85bd9a-11/resource.log timeout --signal=TERM --kill-after=30s 9073 pytho
+      02:50  0.0  1760 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/9160c33b030e9483-8/resource.log timeout --signal=TERM --kill-after=30s 8153 python
+      02:50  0.0  8020 S    timeout         timeout --signal=TERM --kill-after=30s 8876 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:50  0.0  7992 S    timeout         timeout --signal=TERM --kill-after=30s 9073 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:50  0.0  8080 S    timeout         timeout --signal=TERM --kill-after=30s 8153 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:50  0.0 26208 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_kv --
+      02:50  0.0 26216 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_sram_
+      02:50  0.0 26256 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case pv_hash_zeroize
+      02:50  0.0  1760 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/7acba2db04d9935d-12/resource.log timeout --signal=TERM --kill-after=30s 9335 pytho
+      02:50  0.0  7992 S    timeout         timeout --signal=TERM --kill-after=30s 9335 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:50  0.0 26200 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_sha51
+      02:50  0.0  1760 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/d732d22bcd20abb2-13/resource.log timeout --signal=TERM --kill-after=30s 9467 pytho
+      02:50  0.0  8052 S    timeout         timeout --signal=TERM --kill-after=30s 9467 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:50  0.0 26496 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_hek_f
+      02:23  0.0  1756 S    time            /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/dcd97efbe80e5c76-14/resource.log timeout --signal=TERM --kill-after=30s 9795 pytho
+      02:23  0.0  7976 S    timeout         timeout --signal=TERM --kill-after=30s 9795 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra
+      02:23  0.0 26516 S    python3.12      python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_zeroi
+EARLY_RESULTS
+8 no_outcome_yet
+9 outcome=FAIL
+10 no_outcome_yet
+11 no_outcome_yet
+12 no_outcome_yet
+13 no_outcome_yet
+TOOLCHAIN
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+1d72cbc5bf62be3f3dbd7626c295b63c5fdc1dd8439f323ac47998d8a062b4c9  /home/dsell/toolchains/iverilog-c339/openssl/bin/openssl
+5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28  /home/dsell/toolchains/iverilog-c339/openssl/lib/libcrypto.so
