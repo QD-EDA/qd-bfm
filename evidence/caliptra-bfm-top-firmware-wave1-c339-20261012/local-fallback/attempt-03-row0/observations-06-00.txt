@@ -1,0 +1,6 @@
+Local row-0 rerun snapshot, 2026-10-12 06:00 MDT
+
+- VVP PID 59171 remained active; elapsed 1:03:21, 96.6% CPU, RSS 985,824 KiB.
+- `sim.log` remained 45,302 bytes with mtime 04:57:06 MDT; no `result.json` or `exit.txt` existed.
+- A one-second sample recorded 889.9 MB physical footprint (1.0 GB peak); 562 of 565 main-thread samples were in `schedule_simulate`, mostly `vthread_run` / vector part operations. This still does not establish firmware progress.
+- SSH to DAN-DESKTOP continued to reset. This is a progress snapshot, not a test verdict; the configured timeout remains 6,775 seconds.
