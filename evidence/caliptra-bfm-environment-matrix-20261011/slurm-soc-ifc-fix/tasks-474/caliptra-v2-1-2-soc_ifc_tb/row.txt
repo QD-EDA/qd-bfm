@@ -1,0 +1,4 @@
+caliptra-v2-1-2-soc_ifc_tb
+soc_ifc_tb
+caliptra_v2.1.2
+src/soc_ifc/config/soc_ifc_tb.vf

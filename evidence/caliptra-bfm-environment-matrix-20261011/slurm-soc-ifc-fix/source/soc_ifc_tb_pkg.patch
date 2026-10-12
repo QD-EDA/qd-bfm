@@ -1,0 +1,11 @@
+--- src/soc_ifc/tb/soc_ifc_tb_pkg.sv
++++ src/soc_ifc/tb/soc_ifc_tb_pkg.sv (run-local overlay)
+@@ -112,7 +112,7 @@
+   int _clk_period = 0;
+ 
+   // typedef enum logic [2:0] { 
+-  logic [2:0] _security_state_dict [string] = {
++  logic [2:0] _security_state_dict [string] = '{
+     "DEBUG_UNLOCKED_UNPROVISIONED" : 3'b000, // {DEBUG_UNLOCKED, UNPROVISIONED},     
+     "DEBUG_LOCKED_UNPROVISIONED"   : 3'b100, // {DEBUG_LOCKED, UNPROVISIONED},       
+     "DEBUG_UNLOCKED_MANUFACTURING" : 3'b001, // {DEBUG_UNLOCKED, MANUFACTURING},     

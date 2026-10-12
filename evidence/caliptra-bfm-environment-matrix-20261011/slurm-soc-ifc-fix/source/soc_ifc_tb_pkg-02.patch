@@ -1,0 +1,90 @@
+--- src/soc_ifc/tb/soc_ifc_tb_pkg.sv
++++ src/soc_ifc/tb/soc_ifc_tb_pkg.sv (run-local overlay)
+@@ -112,7 +112,7 @@
+   int _clk_period = 0;
+ 
+   // typedef enum logic [2:0] { 
+-  logic [2:0] _security_state_dict [string] = {
++  logic [2:0] _security_state_dict [string] = '{
+     "DEBUG_UNLOCKED_UNPROVISIONED" : 3'b000, // {DEBUG_UNLOCKED, UNPROVISIONED},     
+     "DEBUG_LOCKED_UNPROVISIONED"   : 3'b100, // {DEBUG_LOCKED, UNPROVISIONED},       
+     "DEBUG_UNLOCKED_MANUFACTURING" : 3'b001, // {DEBUG_UNLOCKED, MANUFACTURING},     
+@@ -128,7 +128,7 @@
+   // are easier to use and lookup stuff. To be updated if overhead is too high. 
+   // FIXME why are most of the SS straps not included?
+ 
+-  word_addr_t _wide_register_dict [string] = {
++  word_addr_t _wide_register_dict [string] = '{
+     "CPTRA_FW_EXTENDED_ERROR_INFO"          : 8, 
+     "CPTRA_MBOX_VALID_AXI_USER"             : 5,  
+     "CPTRA_MBOX_AXI_USER_LOCK"              : 5,  
+@@ -161,7 +161,7 @@
+   // ** NOTE. INTR_BRF (== INTR_BLOCK_RF) registers are NOT explictly tested. Only provided to check for undefined ranges, and for future **
+   //  
+   // Identifier                                       Base Addr      Offset                                                            // Offset   Description
+-  word_addr_t _soc_register_dict [string] = {
++  word_addr_t _soc_register_dict [string] = '{
+     "CPTRA_HW_ERROR_FATAL"                          : SOCIFC_BASE + `SOC_IFC_REG_CPTRA_HW_ERROR_FATAL,                                 // 0x000      Hardware Error Fatal 
+     "CPTRA_HW_ERROR_NON_FATAL"                      : SOCIFC_BASE + `SOC_IFC_REG_CPTRA_HW_ERROR_NON_FATAL,                             // 0x004      Hardware Error Non-Fatal 
+     "CPTRA_FW_ERROR_FATAL"                          : SOCIFC_BASE + `SOC_IFC_REG_CPTRA_FW_ERROR_FATAL,                                 // 0x008      Firmware Error Fatal 
+@@ -341,7 +341,7 @@
+                                                                                         
+   
+   // These address ranges (inclusive) in each extent have no definition 
+-  extent_t _undefined_addr_ranges [$] = {
++  extent_t _undefined_addr_ranges [$] = '{
+     '{addr_min: SOCIFC_BASE + 16'h0134, addr_max: SOCIFC_BASE + 16'h013c},
+     '{addr_min: SOCIFC_BASE + 16'h0174, addr_max: SOCIFC_BASE + 16'h01fc},
+     '{addr_min: SOCIFC_BASE + 16'h0294, addr_max: SOCIFC_BASE + 16'h02b0},
+@@ -358,7 +358,7 @@
+  
+ 
+   // Only non-zero power-on values are stored; also populated by SocRegisters instantiation 
+-  dword_t _soc_register_initval_dict [string] = {
++  dword_t _soc_register_initval_dict [string] = '{
+     "CPTRA_MBOX_VALID_AXI_USER"              : 32'hffff_ffff,
+     "CPTRA_TRNG_VALID_AXI_USER"              : 32'hffff_ffff,
+     "INTERNAL_FW_UPDATE_RESET_WAIT_CYCLES" : 32'h5,
+@@ -370,13 +370,13 @@
+     //"SS_NUM_OF_PROD_DEBUG_UNLOCK_AUTH_PK_HASHES": 32'h8
+   };
+ 
+-  dword_t _soc_register_initval_passive_dict [string] = {
++  dword_t _soc_register_initval_passive_dict [string] = '{
+     "CPTRA_HW_CONFIG"                      : (32'h0000_0010 | // LMS Acc Cap bit is set
+                                               (itrng_tb << `SOC_IFC_REG_CPTRA_HW_CONFIG_ITRNG_EN_LOW) |
+                                               (Fuse_Granularity_tb << `SOC_IFC_REG_CPTRA_HW_CONFIG_FUSE_GRANULARITY_LOW))
+   };
+ 
+-  dword_t _soc_register_initval_ss_dict [string] = {
++  dword_t _soc_register_initval_ss_dict [string] = '{
+     "CPTRA_HW_CONFIG"                      : (32'h0000_0030 | // LMS Acc Cap bit is set, Subsystem Mode bit is set, OCP LOCK EN bit overridden in init_regs
+                                               (itrng_tb << `SOC_IFC_REG_CPTRA_HW_CONFIG_ITRNG_EN_LOW) |
+                                               (Fuse_Granularity_tb << `SOC_IFC_REG_CPTRA_HW_CONFIG_FUSE_GRANULARITY_LOW))
+@@ -385,7 +385,7 @@
+ 
+   // Sticky registers preserve values across warm reset -- groups of regs might be populated by code
+   // mask of all bits to be protected in case of warm reset
+-  word_addr_t _sticky_register_prefix_dict [string] = {
++  word_addr_t _sticky_register_prefix_dict [string] = '{
+     "FUSE_UDS_SEED"                                    : 32'hffff_ffff,
+     "FUSE_FIELD_ENTROPY"                               : 32'hffff_ffff,
+     "FUSE_VENDOR_PK_HASH"                              : 32'hffff_ffff ,
+@@ -452,7 +452,7 @@
+ 
+ 
+   // mask bits that reflect which fields can be modified  
+-  dword_t _soc_register_mask_dict [string] = {
++  dword_t _soc_register_mask_dict [string] = '{
+     "CPTRA_HW_CONFIG"                                  : (`SOC_IFC_REG_CPTRA_HW_CONFIG_ITRNG_EN_MASK          |
+                                                           `SOC_IFC_REG_CPTRA_HW_CONFIG_FUSE_GRANULARITY_MASK  |
+                                                           `SOC_IFC_REG_CPTRA_HW_CONFIG_RSVD_EN_MASK           |
+@@ -621,7 +621,7 @@
+   word_addr_t _exp_register_data_dict [string]; 
+ 
+   // pulsed registers - includes self-clearing bits
+-  string _pulsed_regnames [] = {
++  string _pulsed_regnames [] = '{
+     "INTERNAL_FW_UPDATE_RESET",
+     "INTR_BRF_ERROR_INTERNAL_INTR_COUNT_INCR_R"      ,        
+     "INTR_BRF_ERROR_INV_DEV_INTR_COUNT_INCR_R"       ,
