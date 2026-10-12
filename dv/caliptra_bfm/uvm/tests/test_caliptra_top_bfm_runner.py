@@ -1,4 +1,5 @@
 import importlib.util
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -107,6 +108,40 @@ class StockDmaRunnerOptionsTest(unittest.TestCase):
         self.assertNotIn("quiet-firmware requires", result.stderr)
         self.assertIn("set CALIPTRA_RTL", result.stderr)
 
+    def test_cli_accepts_a_stock_suite_outside_the_dma_shortlist(self):
+        with tempfile.TemporaryDirectory() as temp:
+            env = os.environ.copy()
+            for name in ("CALIPTRA_BFM_PROFILE", "CALIPTRA_JTAGDPI_VPI", "CALIPTRA_GCC_PREFIX"):
+                env.pop(name, None)
+            env["CALIPTRA_RTL"] = temp
+            result = subprocess.run(
+                ["python3", str(RUNNER_PATH), "--case", "hello_world_iccm",
+                 "--output", str(Path(temp) / "out")],
+                capture_output=True, text=True, env=env,
+            )
+        self.assertNotIn("invalid choice", result.stderr)
+        self.assertIn("set CALIPTRA_BFM_PROFILE", result.stderr)
+
+
+class StockFirmwareCaseTest(unittest.TestCase):
+    def test_loads_a_case_from_its_upstream_yaml(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case = Path(temp) / "src/integration/test_suites/hello_world_iccm"
+            case.mkdir(parents=True)
+            (case / "hello_world_iccm.yml").write_text(
+                "seed: 1\ntestname: hello_world_iccm\nplusargs:\n  - +CLP_REGRESSION\n"
+            )
+
+            yaml, seed, plusargs = RUNNER.load_case(temp, "hello_world_iccm")
+
+        self.assertEqual(yaml.name, "hello_world_iccm.yml")
+        self.assertEqual(seed, "1")
+        self.assertEqual(plusargs, ["+CLP_REGRESSION"])
+
+    def test_rejects_case_names_that_escape_the_suite_directory(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "letters, digits, and underscores"):
+                RUNNER.load_case(temp, "../outside")
 
 class ResetInFlightTraceTest(unittest.TestCase):
     def scan(self, lines):

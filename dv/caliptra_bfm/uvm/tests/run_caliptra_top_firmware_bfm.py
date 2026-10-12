@@ -428,9 +428,11 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
 
 
 def load_case(rtl_root, name):
-    if name not in CASE_NAMES:
-        raise ValueError(f"supported cases: {', '.join(CASE_NAMES)}")
+    if not re.fullmatch(r"[A-Za-z0-9_]+", name):
+        raise ValueError("case name must contain only letters, digits, and underscores")
     case_yaml = Path(rtl_root) / "src/integration/test_suites" / name / f"{name}.yml"
+    if not case_yaml.is_file():
+        raise ValueError(f"case YAML not found: {case_yaml}")
     text = case_yaml.read_text()
     testnames = re.findall(r"(?m)^testname:\s*(\S+)\s*$", text)
     seeds = re.findall(r"(?m)^seed:\s*(\S+)\s*$", text)
@@ -848,7 +850,8 @@ def fulltop_compile_command(iverilog, profile, binary, checker_enabled):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", choices=CASE_NAMES, default="smoke_test_dma")
+    parser.add_argument("--case", default="smoke_test_dma",
+                        help="stock firmware test suite directory under src/integration/test_suites")
     parser.add_argument("--output", required=True, type=Path, help="new directory outside the source checkouts")
     parser.add_argument("--fast-trng", action="store_true",
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
