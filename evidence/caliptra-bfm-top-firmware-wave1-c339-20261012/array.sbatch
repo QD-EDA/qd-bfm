@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=3G
 #SBATCH --time=06:10:00
-#SBATCH --array=0-51%6
+#SBATCH --array=0-51%4
 #SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/submit
 #SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/logs/%x-%A_%a.out
 
