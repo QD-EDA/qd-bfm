@@ -31,7 +31,7 @@ reconciling the array.
 
 | Test | Result | Evidence |
 |---|---|---|
-| `smoke_test_strap` | Running | Job 561, task 0 |
+| `smoke_test_strap` | TIMEOUT | `runs/smoke_test_strap/` |
 | `smoke_test_veer` | PASS | `runs/smoke_test_veer/` |
 | `memCpy_ROM_to_dccm` | PASS | `runs/memCpy_ROM_to_dccm/` |
 | `memCpy_dccm_to_iccm` | PASS | `runs/memCpy_dccm_to_iccm/` |
@@ -46,5 +46,9 @@ The runner's raw `SETUP_BLOCKED` for `smoke_test_hw_config` is recorded as a
 sample `FAIL` because firmware linking fails before simulation: the linker
 reports the undefined callback `service_soc_ifc_notif_intr`. The linker diagnostic is preserved in
 `runs/smoke_test_hw_config/firmware.log`. This is a firmware build failure,
-not a simulator result. Five cases have passed so far; the
-remaining array tasks are still running.
+not a simulator result. Five cases passed, `smoke_test_strap` timed out, and
+three array tasks remain active. Strap reached `SoC: Ready for Fuses deasserted`
+before the configured 3,852-second runner timeout (exit 124); VVP did not emit
+a terminal test result. Wall time was 1:04:12 and peak RSS was 1,859,896 KiB.
+The raw runner, resource, compile, and simulation logs are in
+`runs/smoke_test_strap/`.
