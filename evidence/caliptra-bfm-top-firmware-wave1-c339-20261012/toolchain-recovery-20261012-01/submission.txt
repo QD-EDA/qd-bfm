@@ -1,0 +1,15 @@
+submitted_at=2026-10-12T09:18:33-06:00
+host=DAN-DESKTOP
+slurm_job_id=609
+state_at_2026-10-12T09:20:51-06:00=RUNNING
+resources=2 CPUs, 4 GiB, 2 hours
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/toolchain-recovery-20261012-01
+protected_toolchain_root=/home/dsell/toolchains/iverilog-c339
+rebuild_script_sha256=3d4c503a140c6b11a571d12e240140fdd1c08e2dcd18ea55b29cd43e1dfe928f
+iverilog_source_commit=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+caliptra_rtl_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge_commit=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+old_iverilog_sha256=737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2
+old_vvp_sha256=5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a
+
+The build log and final binary hashes will be copied into this evidence directory on completion. The old hashes came from the immutable per-task `tool-binaries.sha256` records in rows 1–3.

@@ -7,47 +7,47 @@ array_index	test_id	test_name	state	terminal_outcome	run_source	runner_exit	evid
 5	b72c5535dc1dc634	smoke_test_dma_aes_gcm_rd_enc_axi_err	SLURM_RUNNING	-	slurm_591	-	resubmission-20261012-02/status-08-45.txt	Task 591_5 RUNNING; VVP process observed after host reboot
 6	2ed04fcd9fe06e81	smoke_test_dma_aes_gcm_wr_enc_axi_err	SLURM_RUNNING	-	slurm_591	-	resubmission-20261012-02/status-08-45.txt	Task 591_6 RUNNING; VVP process observed after host reboot
 7	5623a0f9b5e00f77	smoke_test_kv_lock_use_mid_read	SLURM_RUNNING	-	slurm_591	-	resubmission-20261012-02/status-08-45.txt	Task 591_7 RUNNING; VVP process observed after host reboot
-8	9160c33b030e9483	pv_hash_zeroize	PENDING	-	-	-	-	-
-9	1e057b20d3564828	smoke_test_uart	PENDING	-	-	-	-	-
-10	42f2671ec114cfb5	smoke_test_sram_ecc	PENDING	-	-	-	-	-
-11	2092a5bfea85bd9a	smoke_test_kv	PENDING	-	-	-	-	-
-12	7acba2db04d9935d	smoke_test_sha512	PENDING	-	-	-	-	-
-13	d732d22bcd20abb2	smoke_test_hek_flow	PENDING	-	-	-	-	-
-14	dcd97efbe80e5c76	smoke_test_zeroize_crypto	PENDING	-	-	-	-	-
-15	ea3af7f88b5170c5	smoke_test_dma_aes_gcm_non_gcm_en_dec	PENDING	-	-	-	-	-
-16	78bfcc1e9aac255e	smoke_test_mbox	PENDING	-	-	-	-	-
-17	32a51e049923c576	c_intr_handler	PENDING	-	-	-	-	-
-18	4e0dd412c82b419a	smoke_test_doe_kv_ocp_progress	PENDING	-	-	-	-	-
-19	40a2264a41561d60	smoke_test_mbox_byte_read	PENDING	-	-	-	-	-
-20	0627acabfee6876c	smoke_test_dma_aes_gcm_collision_test	PENDING	-	-	-	-	-
-21	c95f8624d4cb7fe0	smoke_test_dma_aes_gcm_short_dword	PENDING	-	-	-	-	-
-22	871bf14a358781fb	smoke_test_kv_securitystate	PENDING	-	-	-	-	-
-23	40ec556410264b2f	smoke_test_datavault_lock	PENDING	-	-	-	-	-
-24	483ee327507dab77	smoke_test_datavault_mini	PENDING	-	-	-	-	-
-25	6bccff716e6bcab5	smoke_test_aes_gcm	PENDING	-	-	-	-	-
-26	ca84d5f757b500b2	smoke_test_dma_aes_gcm_short_1_dword	PENDING	-	-	-	-	-
-27	9f91b0f948764f74	smoke_test_qspi	PENDING	-	-	-	-	-
-28	4ca47c7da4afd810	smoke_test_dma_aes_kv_short	PENDING	-	-	-	-	-
-29	3439695c6637d6f2	jtag_tap_mbox	PENDING	-	-	-	-	-
-30	35735b41cd07eed7	iccm_lock	PENDING	-	-	-	-	-
-31	eaeb97287ce63194	smoke_test_ecc_errortrigger4	PENDING	-	-	-	-	-
-32	2f1b875490838662	smoke_test_ecc_keygen	PENDING	-	-	-	-	-
-33	ba452156bdfcaf3a	smoke_test_ecc_sign	PENDING	-	-	-	-	-
-34	8edb704b0e17c6c8	smoke_test_ecc_verify	PENDING	-	-	-	-	-
-35	78ad1bab537c2ff8	smoke_test_ecc_errortrigger2	PENDING	-	-	-	-	-
-36	37f012b3a23a9e50	smoke_test_ecc_errortrigger3	PENDING	-	-	-	-	-
-37	a79fb02e90b4ffbd	smoke_test_ecc_errortrigger4	PENDING	-	-	-	-	-
-38	b65eaf52203ca1c3	smoke_test_kv_ecc_flow1	PENDING	-	-	-	-	-
-39	109971edd9458a51	kv_entry_read_err	PENDING	-	-	-	-	-
-40	244a281ff42ebdc1	smoke_test_kv_ecc_flow2	PENDING	-	-	-	-	-
-41	044d2b8bcd486492	smoke_test_ecc_flow1_kv_ocp_progress	PENDING	-	-	-	-	-
-42	ac4e209a8a8dca30	smoke_test_kv_rules_ocp_lock	PENDING	-	-	-	-	-
-43	d39c57745790b3e2	smoke_test_kv_parallel_access	PENDING	-	-	-	-	-
-44	bcb5b29a003aa2a6	smoke_test_ecc_flow2_kv_ocp_progress	PENDING	-	-	-	-	-
-45	c7d7b277746f7500	smoke_test_pcr_zeroize	PENDING	-	-	-	-	-
-46	3847bda2dcc7e016	smoke_test_kv_swwe_lock	PENDING	-	-	-	-	-
-47	d51cc47c71747905	smoke_test_sha256_wntz	PENDING	-	-	-	-	-
-48	33a3aad04d3bc842	smoke_test_ecc_errortrigger1	PENDING	-	-	-	-	-
-49	6dc114367c8b520c	smoke_test_ras	PENDING	-	-	-	-	-
-50	804790f41f3373fe	smoke_test_strap	PENDING_RETRY	-	-	-	-	One six-hour retry required
-51	e0d4538883521cca	smoke_test_sha256	PENDING_RETRY	-	-	-	-	One six-hour retry required
+8	9160c33b030e9483	pv_hash_zeroize	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 8 pending dependencies; prior task 591_8 cancelled before launch with no result; -
+9	1e057b20d3564828	smoke_test_uart	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 9 pending dependencies; prior task 591_9 cancelled before launch with no result; -
+10	42f2671ec114cfb5	smoke_test_sram_ecc	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 10 pending dependencies; prior task 591_10 cancelled before launch with no result; -
+11	2092a5bfea85bd9a	smoke_test_kv	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 11 pending dependencies; prior task 591_11 cancelled before launch with no result; -
+12	7acba2db04d9935d	smoke_test_sha512	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 12 pending dependencies; prior task 591_12 cancelled before launch with no result; -
+13	d732d22bcd20abb2	smoke_test_hek_flow	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 13 pending dependencies; prior task 591_13 cancelled before launch with no result; -
+14	dcd97efbe80e5c76	smoke_test_zeroize_crypto	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 14 pending dependencies; prior task 591_14 cancelled before launch with no result; -
+15	ea3af7f88b5170c5	smoke_test_dma_aes_gcm_non_gcm_en_dec	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 15 pending dependencies; prior task 591_15 cancelled before launch with no result; -
+16	78bfcc1e9aac255e	smoke_test_mbox	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 16 pending dependencies; prior task 591_16 cancelled before launch with no result; -
+17	32a51e049923c576	c_intr_handler	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 17 pending dependencies; prior task 591_17 cancelled before launch with no result; -
+18	4e0dd412c82b419a	smoke_test_doe_kv_ocp_progress	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 18 pending dependencies; prior task 591_18 cancelled before launch with no result; -
+19	40a2264a41561d60	smoke_test_mbox_byte_read	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 19 pending dependencies; prior task 591_19 cancelled before launch with no result; -
+20	0627acabfee6876c	smoke_test_dma_aes_gcm_collision_test	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 20 pending dependencies; prior task 591_20 cancelled before launch with no result; -
+21	c95f8624d4cb7fe0	smoke_test_dma_aes_gcm_short_dword	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 21 pending dependencies; prior task 591_21 cancelled before launch with no result; -
+22	871bf14a358781fb	smoke_test_kv_securitystate	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 22 pending dependencies; prior task 591_22 cancelled before launch with no result; -
+23	40ec556410264b2f	smoke_test_datavault_lock	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 23 pending dependencies; prior task 591_23 cancelled before launch with no result; -
+24	483ee327507dab77	smoke_test_datavault_mini	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 24 pending dependencies; prior task 591_24 cancelled before launch with no result; -
+25	6bccff716e6bcab5	smoke_test_aes_gcm	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 25 pending dependencies; prior task 591_25 cancelled before launch with no result; -
+26	ca84d5f757b500b2	smoke_test_dma_aes_gcm_short_1_dword	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 26 pending dependencies; prior task 591_26 cancelled before launch with no result; -
+27	9f91b0f948764f74	smoke_test_qspi	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 27 pending dependencies; prior task 591_27 cancelled before launch with no result; -
+28	4ca47c7da4afd810	smoke_test_dma_aes_kv_short	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 28 pending dependencies; prior task 591_28 cancelled before launch with no result; -
+29	3439695c6637d6f2	jtag_tap_mbox	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 29 pending dependencies; prior task 591_29 cancelled before launch with no result; -
+30	35735b41cd07eed7	iccm_lock	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 30 pending dependencies; prior task 591_30 cancelled before launch with no result; -
+31	eaeb97287ce63194	smoke_test_ecc_errortrigger4	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 31 pending dependencies; prior task 591_31 cancelled before launch with no result; -
+32	2f1b875490838662	smoke_test_ecc_keygen	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 32 pending dependencies; prior task 591_32 cancelled before launch with no result; -
+33	ba452156bdfcaf3a	smoke_test_ecc_sign	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 33 pending dependencies; prior task 591_33 cancelled before launch with no result; -
+34	8edb704b0e17c6c8	smoke_test_ecc_verify	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 34 pending dependencies; prior task 591_34 cancelled before launch with no result; -
+35	78ad1bab537c2ff8	smoke_test_ecc_errortrigger2	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 35 pending dependencies; prior task 591_35 cancelled before launch with no result; -
+36	37f012b3a23a9e50	smoke_test_ecc_errortrigger3	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 36 pending dependencies; prior task 591_36 cancelled before launch with no result; -
+37	a79fb02e90b4ffbd	smoke_test_ecc_errortrigger4	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 37 pending dependencies; prior task 591_37 cancelled before launch with no result; -
+38	b65eaf52203ca1c3	smoke_test_kv_ecc_flow1	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 38 pending dependencies; prior task 591_38 cancelled before launch with no result; -
+39	109971edd9458a51	kv_entry_read_err	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 39 pending dependencies; prior task 591_39 cancelled before launch with no result; -
+40	244a281ff42ebdc1	smoke_test_kv_ecc_flow2	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 40 pending dependencies; prior task 591_40 cancelled before launch with no result; -
+41	044d2b8bcd486492	smoke_test_ecc_flow1_kv_ocp_progress	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 41 pending dependencies; prior task 591_41 cancelled before launch with no result; -
+42	ac4e209a8a8dca30	smoke_test_kv_rules_ocp_lock	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 42 pending dependencies; prior task 591_42 cancelled before launch with no result; -
+43	d39c57745790b3e2	smoke_test_kv_parallel_access	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 43 pending dependencies; prior task 591_43 cancelled before launch with no result; -
+44	bcb5b29a003aa2a6	smoke_test_ecc_flow2_kv_ocp_progress	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 44 pending dependencies; prior task 591_44 cancelled before launch with no result; -
+45	c7d7b277746f7500	smoke_test_pcr_zeroize	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 45 pending dependencies; prior task 591_45 cancelled before launch with no result; -
+46	3847bda2dcc7e016	smoke_test_kv_swwe_lock	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 46 pending dependencies; prior task 591_46 cancelled before launch with no result; -
+47	d51cc47c71747905	smoke_test_sha256_wntz	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 47 pending dependencies; prior task 591_47 cancelled before launch with no result; -
+48	33a3aad04d3bc842	smoke_test_ecc_errortrigger1	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 48 pending dependencies; prior task 591_48 cancelled before launch with no result; -
+49	6dc114367c8b520c	smoke_test_ras	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 49 pending dependencies; prior task 591_49 cancelled before launch with no result; -
+50	804790f41f3373fe	smoke_test_strap	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 50 pending dependencies; prior task 591_50 cancelled before launch with no result; One six-hour retry required
+51	e0d4538883521cca	smoke_test_sha256	SLURM_DEPENDENCY_PENDING	-	slurm_611	-	resubmission-20261012-03/submission.txt	Job 611 task 51 pending dependencies; prior task 591_51 cancelled before launch with no result; One six-hour retry required

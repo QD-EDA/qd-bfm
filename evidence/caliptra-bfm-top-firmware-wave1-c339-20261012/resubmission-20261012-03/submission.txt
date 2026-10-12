@@ -1,0 +1,31 @@
+2026-10-12T09:22:27-06:00
+JobId=611
+ArrayTaskThrottle=6
+Dependency=afterany:591_*(unfulfilled),afterany:606_*(unfulfilled),afterok:609(unfulfilled)
+TimeLimit=06:10:00
+SubmitTime=2026-10-12T09:22:21
+StartTime=Unknown
+NumCPUs=1
+MinMemoryNode=3G
+Command=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/submit/array.sbatch
+WorkDir=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/submit
+array=8-51
+throttle=6
+resources=1 CPU, 3 GiB, 6h10m scheduler allocation per task
+dependency=afterany:591:606,afterok:609
+array_script_sha256=645aafdc2e6e20be9def0f54fbeef3a12825e5ad9ec4b67e5f6b4412b014abfa
+selection_sha256=deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289
+qd_source_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+qd_runner_sha256=b3a6c532239e0e1b2eb60daa5328e434a4ae2deb6ae9f1f21825c0aecfe0a4c7
+protected_shared_input_root=/home/dsell/toolchains/iverilog-c339
+             JOBID      STATE       TIME                                NAME
+      611_[8-51%6]    PENDING       0:00                       bfm-top-wave1
+               609    RUNNING       3:54                     a2-c339-rebuild
+             606_1    RUNNING      37:45                       bfm-top-wave1
+             606_2    RUNNING      37:45                       bfm-top-wave1
+             606_3    RUNNING      37:45                       bfm-top-wave1
+               605    RUNNING      38:39                            a3-t2-b5
+            603_14    RUNNING      41:06                       a1-boot-smoke
+             591_5    RUNNING      46:49                       bfm-top-wave1
+             591_6    RUNNING      46:49                       bfm-top-wave1
+             591_7    RUNNING      46:49                       bfm-top-wave1
