@@ -1,0 +1,5 @@
+2026-10-12 16:04 MDT — job 669 follow-up
+
+Job 669 still has tasks 16–21 RUNNING and 22–51 PENDING at throttle 6. The six protected c339 VVPs have elapsed 1:53:10, CPU time 1:53:08–1:53:09, about 99.9% CPU, and about 1.04 GiB RSS each. Their test limits are 10,714–11,240 seconds. No result JSON exists. Each sim.log remains 45,302 bytes with launch-time (14:11) modification time; no task has a terminal verdict. The previously recorded 15:23 hash and marker scan showed identical initialization-only logs with no pass/fail/fatal/error markers.
+
+The earlier row-12 `smoke_test_sha512` completed PASS in 2:18:44, so current elapsed times are within a demonstrated top-level simulation runtime. These active tasks are kept running; no hang or test outcome is inferred from quiet logs.
