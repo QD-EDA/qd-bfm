@@ -1,6 +1,6 @@
 array_index	test_id	test_name	state	terminal_outcome	run_source	runner_exit	evidence	notes
 0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	TIMEOUT	TIMEOUT	macOS_localrun	124	local-fallback/attempt-03-row0/	6,775-second timeout; final sim log reached ROM Flow, no result.json
-1	f1991acb7ebadfe1	cptra_ss_test_rom	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required
+1	f1991acb7ebadfe1	cptra_ss_test_rom	LOCAL_RERUN_RUNNING	-	macOS_localrun	-	local-fallback/attempt-04-row1/	Started about 06:57 MDT with 6,873-second timeout; prior Slurm attempt was infrastructure-unclassified
 2	db58d7495957ab2d	smoke_test_dma_aes_gcm	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required
 3	c4e8f85716a36bd8	smoke_test_datavault_basic	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required
 4	c88b4de9c260074a	smoke_test_dma_aes_gcm_cmd_err	TIMEOUT	TIMEOUT	macOS_localrun	124	local-fallback/attempt-02-serial/	7,431-second timeout; final sim log reached ROM Flow, no result.json

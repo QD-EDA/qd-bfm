@@ -22,4 +22,4 @@ After the row-4 timeout, SSH was checked at 04:53 MDT and still reset. Row 0, `s
 
 The shared per-row tracker is [`../results.tsv`](../results.tsv); infrastructure and setup states leave its terminal outcome blank.
 
-SSH was checked at 06:52 MDT and still reset. Row 1 (`cptra_ss_test_rom`) is next for local execution with its 6,873-second limit. Because Slurm cannot currently hold job 591, pending rows may be dispatched remotely if the controller recovers. Check Slurm once before each later local launch, cancel this array if the controller is usable, and continue locally one row at a time if it is not.
+SSH was checked at 06:54 MDT and still reset. Row 1 (`cptra_ss_test_rom`) started locally around 06:57 MDT with its 6,873-second limit; its command and start record are in `attempt-04-row1/`. Because Slurm cannot currently hold job 591, pending rows may be dispatched remotely if the controller recovers. Check Slurm once before each later local launch, cancel this array if the controller is usable, and continue locally one row at a time if it is not.

@@ -1,0 +1,15 @@
+QD_SOURCE=archive-from-0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+QD_ARCHIVE_COMMIT=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+RTL=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+ADAMS=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+HOST=MacBook-Air.local
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+Darwin MacBook-Air.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+PYTHON=Python 3.12.14
+GCC=riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0
+IVERILOG_SOURCE=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+f65c90dc8c982d0ae362d208b36eb3fb163c806ff5a9116d848315a0c1d0b60f  /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/iverilog
+a0610b36e1b9f46e9d3f7877d5814d2e1002fd161b7092fae641e6d31b1db0bc  /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/vvp
+c262df385e56f7abaa9474335a341adcbf74349fcad577ed7a10ab0d263071ae  /private/tmp/qd-bfm-localwave1-prep-20261012/jtagdpi/jtagdpi.vpi

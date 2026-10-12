@@ -1,0 +1,11 @@
+Local row 1 launch, 2026-10-12 06:57:39 MDT
+host=MacBook-Air.local
+ssh DAN-DESKTOP check at 06:54 MDT reset the SSH connection; Slurm unavailable.
+ask-intern triage at 06:54 MDT could not read the API key from DAN-DESKTOP; row 0 was verified from its raw log and exit file.
+Icarus source SHA c339b9f2287a743aeb7ab6de6528e8d34a4dd602; local-preflight records this pin.
+iverilog_sha256=f65c90dc8c982d0ae362d208b36eb3fb163c806ff5a9116d848315a0c1d0b60f
+vvp_sha256=a0610b36e1b9f46e9d3f7877d5814d2e1002fd161b7092fae641e6d31b1db0bc
+GCC=riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0
+Python=Python 3.12.14
+RTL commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; working tree clean at launch.
+localrun timeout=6873 seconds; MAKEFLAGS=-j1.
