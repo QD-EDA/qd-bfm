@@ -1,0 +1,15 @@
+Slurm submission for the ten-case top-level firmware sample
+
+Job: 561 (array indices 0-9, throttle 6)
+Submitted: 2026-10-11 (DAN-DESKTOP local time)
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01
+Script: array.sbatch
+Selection: selection.tsv
+QD-BFM snapshot: a8664c7a8092ac8342dce2f47a6efe9a8a3e9af8
+Runner SHA256: 37e8197f66be466a6345ae0f863e7af3826b5d1ced21b3499f5d9a36ee38807d
+Icarus: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Resources: 1 CPU, 3 GiB/task, 03:00:00 allocation, six tasks maximum in flight.
+Per-case timeouts are in selection.tsv and use ceil(3*expected_mcycle/7.31+1800).
+At first check, tasks 0-5 were RUNNING and 6-9 PENDING; no local duplicate was running.

@@ -26,3 +26,25 @@ QD-BFM runner.
 Array script and selection manifest: [`array.sbatch`](array.sbatch),
 [`selection.tsv`](selection.tsv). Results will be added under `runs/` after
 reconciling the array.
+
+## Current results
+
+| Test | Result | Evidence |
+|---|---|---|
+| `smoke_test_strap` | Running | Job 561, task 0 |
+| `smoke_test_veer` | PASS | `runs/smoke_test_veer/` |
+| `memCpy_ROM_to_dccm` | PASS | `runs/memCpy_ROM_to_dccm/` |
+| `memCpy_dccm_to_iccm` | PASS | `runs/memCpy_dccm_to_iccm/` |
+| `hello_world_iccm` | PASS | `runs/hello_world_iccm/` |
+| `smoke_test_hw_config` | FAIL (firmware link) | `runs/smoke_test_hw_config/` |
+| `smoke_test_ahb_mux` | PASS | `runs/smoke_test_ahb_mux/` |
+| `smoke_test_sha256` | Running | Job 561, task 7 |
+| `smoke_test_doe_rand` | Running | Job 561, task 8 |
+| `smoke_test_sha256_wntz_rand` | Running | Job 561, task 9 |
+
+The runner's raw `SETUP_BLOCKED` for `smoke_test_hw_config` is recorded as a
+sample `FAIL` because firmware linking fails before simulation: the linker
+reports the undefined callback `service_soc_ifc_notif_intr`. The linker diagnostic is preserved in
+`runs/smoke_test_hw_config/firmware.log`. This is a firmware build failure,
+not a simulator result. Five cases have passed so far; the
+remaining array tasks are still running.
