@@ -1,0 +1,2 @@
+PASS: force/release leaves continuously assigned interface siblings intact
+/home/dsell/slurm-runs/caliptra-bfm/a2/interface-sibling-c339-20261011-01/source/force_release_interface_siblings.sv:42: $finish called at 21000 (1ps)

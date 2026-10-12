@@ -1,0 +1,2 @@
+PASS: delay macro force/release works with continuous interface assignments
+/home/dsell/slurm-runs/caliptra-bfm/a2/macro-c339-20261011-01/source/force_release_axi_macro.sv:79: $finish called at 22000 (1ps)

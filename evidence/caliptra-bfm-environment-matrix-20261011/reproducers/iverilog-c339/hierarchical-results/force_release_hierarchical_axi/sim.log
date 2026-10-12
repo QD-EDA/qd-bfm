@@ -1,0 +1,2 @@
+PASS: force/release of nested child variables leaves interface inputs intact
+/home/dsell/slurm-runs/caliptra-bfm/a2/hierarchical-c339-20261011-01/source/force_release_hierarchical_axi.sv:104: $finish called at 22000 (1ps)

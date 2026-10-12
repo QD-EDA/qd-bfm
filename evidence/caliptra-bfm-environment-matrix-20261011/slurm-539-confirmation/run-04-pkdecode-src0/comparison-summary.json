@@ -1,0 +1,16 @@
+{
+  "job_id": 539,
+  "pinned_iverilog_commit": "c339b9f2287a743aeb7ab6de6528e8d34a4dd602",
+  "compile_exit": 0,
+  "simulation_exit": 0,
+  "invocations": 2,
+  "outputs_compared_per_invocation": 2048,
+  "mismatch_diagnostics": 0,
+  "explicit_pass_marker": false,
+  "matrix_classification": "BLOCKED: matrix requires explicit testcase/case-level success output",
+  "run_local_changes": [
+    "retained #539 packed-address casts",
+    "removed stale MEM_ADDR_WIDTH testbench override",
+    "changed second test call source base from 0x20 to 0x00 because DUT reads from address zero"
+  ]
+}

@@ -1,0 +1,2 @@
+PASS: macro force/release works through separate nested R/W modports
+/home/dsell/slurm-runs/caliptra-bfm/a2/dual-c339-20261011-01/source/force_release_dual_modports.sv:89: $finish called at 22000 (1ps)

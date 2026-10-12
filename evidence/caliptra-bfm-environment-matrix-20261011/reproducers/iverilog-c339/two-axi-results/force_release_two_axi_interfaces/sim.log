@@ -1,0 +1,2 @@
+PASS: macro force/release across two nested AXI interfaces
+/home/dsell/slurm-runs/caliptra-bfm/a2/two-axi-c339-20261011-01/source/force_release_two_axi_interfaces.sv:118: $finish called at 22000 (1ps)
