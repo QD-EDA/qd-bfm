@@ -1,9 +1,9 @@
 array_index	test_id	test_name	state	terminal_outcome	run_source	runner_exit	evidence	notes
-0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:08 MDT; no terminal marker
-1	f1991acb7ebadfe1	cptra_ss_test_rom	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:08 MDT; no terminal marker
-2	db58d7495957ab2d	smoke_test_dma_aes_gcm	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:08 MDT; no terminal marker
-3	c4e8f85716a36bd8	smoke_test_datavault_basic	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:08 MDT; no terminal marker
-4	c88b4de9c260074a	smoke_test_dma_aes_gcm_cmd_err	LOCAL_RETRY_RUNNING	-	macOS_localrun	-	local-fallback/attempt-02-serial/	Fresh -j1 retry active at 03:08 MDT; no result.json or terminal marker
+0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:19 MDT; no terminal marker
+1	f1991acb7ebadfe1	cptra_ss_test_rom	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:19 MDT; no terminal marker
+2	db58d7495957ab2d	smoke_test_dma_aes_gcm	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:19 MDT; no terminal marker
+3	c4e8f85716a36bd8	smoke_test_datavault_basic	RUNNING_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP live at 03:19 MDT; no terminal marker
+4	c88b4de9c260074a	smoke_test_dma_aes_gcm_cmd_err	LOCAL_RETRY_RUNNING	-	macOS_localrun	-	local-fallback/attempt-02-serial/	Fresh -j1 retry active at 03:19 MDT; no result.json or terminal marker
 5	b72c5535dc1dc634	smoke_test_dma_aes_gcm_rd_enc_axi_err	PENDING	-	-	-	-	-
 6	2ed04fcd9fe06e81	smoke_test_dma_aes_gcm_wr_enc_axi_err	PENDING	-	-	-	-	-
 7	5623a0f9b5e00f77	smoke_test_kv_lock_use_mid_read	PENDING	-	-	-	-	-
