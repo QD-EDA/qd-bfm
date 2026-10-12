@@ -16,4 +16,8 @@ The `smoke_test_hw_config` link failure is recorded separately in [`hwconfig-lin
 
 ## Results
 
-Array submission details and terminal results will be appended after the tasks finish. No wave-1 test result is claimed by this preparation commit.
+No wave-1 test verdict is claimed yet; terminal results will be appended after the tasks finish.
+
+## Submission
+
+Slurm job 591 is submitted from the immutable snapshot above. The initial queue snapshot showed tasks 0–3 running and the remaining 48 pending at the four-task throttle. Host, tool versions, resource state, and input hashes are in [`preflight.txt`](preflight.txt); the submission command, run root, pins, and first queue snapshot are in [`submission.txt`](submission.txt).

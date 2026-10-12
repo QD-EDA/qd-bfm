@@ -1,0 +1,12 @@
+Slurm array job: 591
+Submitted with: sbatch --parsable submit/array.sbatch
+Observed on: DAN-DESKTOP at 2026-10-12T01:27:31-06:00
+Remote run root: /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01
+Array tasks: 0-51, throttle 4; tasks 0-49 are new matrix rows, 50 retries smoke_test_strap, 51 retries smoke_test_sha256.
+Per task: 1 CPU, 3 GiB, 6h10m Slurm allocation; case timeout is in selection.tsv and never exceeds 21,600 seconds.
+Staged QD commit: 0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus source: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+
+Initial squeue snapshot at 01:27:31 MDT: array tasks 591_0 through 591_3 were RUNNING; tasks 591_4 through 591_51 were PENDING at the array throttle. The first four task provenance files and Slurm output logs existed. The concurrent A1 and A3 jobs were left unchanged.
