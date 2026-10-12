@@ -1,0 +1,67 @@
+captured=2026-10-12T10:27:17-06:00
+uptime=up 1 hour, 52 minutes
+QUEUE
+             JOBID    STATE       TIME TIME_LIMI NODELIST(REASON)
+      611_[8-51%6]  PENDING       0:00   6:10:00 (Dependency)
+             606_1  RUNNING    1:42:35   6:10:00 DAN-DESKTOP
+             606_2  RUNNING    1:42:35   6:10:00 DAN-DESKTOP
+             606_3  RUNNING    1:42:35   6:10:00 DAN-DESKTOP
+             591_5  RUNNING    1:51:39   6:10:00 DAN-DESKTOP
+             591_6  RUNNING    1:51:39   6:10:00 DAN-DESKTOP
+             591_7  RUNNING    1:51:39   6:10:00 DAN-DESKTOP
+ARRAY611
+JobId=611 ArrayJobId=611 ArrayTaskId=8-51%6 ArrayTaskThrottle=6 JobName=bfm-top-wave1 UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=PENDING Reason=Dependency Dependency=afterany:591_*(unfulfilled),afterany:606_*(unfulfilled) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:10:00 TimeMin=N/A SubmitTime=2026-10-12T09:22:21 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-12T09:22:21 Scheduler=Main Partition=verilog AllocNode:Sid=localhost:196301 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=3G,node=1,billing=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=3G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/submit/array.sbatch SubmitLine=sbatch --parsable array.sbatch WorkDir=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/submit StdErr= StdIn=/dev/null StdOut=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/logs/bfm-top-wave1-611_4294967294.out TresPerTask=cpu=1
+LIVE_PROCESSES
+    PID     ELAPSED %CPU   RSS STAT COMMAND
+   2133    01:51:15 99.9 1038104 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/2ed04fcd9fe06e81-6/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2143    01:51:15 99.9 1038104 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/5623a0f9b5e00f77-7/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2169    01:51:15 99.9 1038080 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/b72c5535dc1dc634-5/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55015    01:42:07 99.9 1038064 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/c4e8f85716a36bd8-3/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55020    01:42:07 99.9 1038064 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/f1991acb7ebadfe1-1/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55060    01:42:06 99.9 1038068 Rl /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/db58d7495957ab2d-2/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+EXECUTABLE_MAPPINGS
+2133 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+2143 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+2169 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+55015 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+55020 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+55060 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp (deleted)
+PROTECTED_HASHES
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+Icarus Verilog version 13.0 (devel) ()
+
+ACTIVE_LOGS
+--- smoke_test_dma_aes_gcm_rd_enc_axi_err
+bytes=49398 mtime=2026-10-12 08:36:24.520949785 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/b72c5535dc1dc634-5/output/smoke_test_dma_aes_gcm_rd_enc_axi_err/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+--- smoke_test_dma_aes_gcm_wr_enc_axi_err
+bytes=49398 mtime=2026-10-12 08:36:24.532949957 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/2ed04fcd9fe06e81-6/output/smoke_test_dma_aes_gcm_wr_enc_axi_err/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+--- smoke_test_kv_lock_use_mid_read
+bytes=49398 mtime=2026-10-12 08:36:24.480949211 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/5623a0f9b5e00f77-7/output/smoke_test_kv_lock_use_mid_read/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+--- cptra_ss_test_rom
+bytes=49398 mtime=2026-10-12 08:45:38.829245014 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/f1991acb7ebadfe1-1/output/cptra_ss_test_rom/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+--- smoke_test_dma_aes_gcm
+bytes=49398 mtime=2026-10-12 08:45:38.985247242 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/db58d7495957ab2d-2/output/smoke_test_dma_aes_gcm/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+--- smoke_test_datavault_basic
+bytes=49398 mtime=2026-10-12 08:45:38.833245074 -0600
+3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/c4e8f85716a36bd8-3/output/smoke_test_datavault_basic/sim.log
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted afno_result_json
+manual_log_triage=all six tasks remain RUNNING; each has no result.json and the same unchanged 49,398-byte sim.log hash, ending at fuse-ready polling text
+ask_intern=attempted for current six logs; local model endpoint timed out while listing models, so state was verified manually
