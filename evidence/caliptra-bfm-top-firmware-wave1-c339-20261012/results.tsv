@@ -1,5 +1,5 @@
 array_index	test_id	test_name	state	terminal_outcome	run_source	runner_exit	evidence	notes
-0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	LOCAL_RERUN_RUNNING	-	macOS_localrun	-	local-fallback/attempt-03-row0/	Fresh local rerun started 04:56 MDT; timeout 6,775s, MAKEFLAGS=-j1
+0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	LOCAL_RERUN_RUNNING	-	macOS_localrun	-	local-fallback/attempt-03-row0/	VVP active at 05:07 MDT, 94.6% CPU; no result or exit record
 1	f1991acb7ebadfe1	cptra_ss_test_rom	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required
 2	db58d7495957ab2d	smoke_test_dma_aes_gcm	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required
 3	c4e8f85716a36bd8	smoke_test_datavault_basic	INFRA_EXIT_UNCLASSIFIED	-	slurm_591	-	local-fallback/remote-startup-snapshot/	VVP exited; no status/result/resource record recoverable at 03:31 MDT; rerun required

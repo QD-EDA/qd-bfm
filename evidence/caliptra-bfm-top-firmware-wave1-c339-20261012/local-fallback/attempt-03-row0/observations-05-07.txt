@@ -1,0 +1,6 @@
+Local row-0 rerun snapshot, 2026-10-12 05:07 MDT
+
+- VVP PID 59171 remained active; elapsed 10:41, 94.6% CPU, RSS 974,752 KiB.
+- `sim.log` was 45,302 bytes with mtime 04:57:06 MDT. Its 13 lines contain generated key/vector labels; no `result.json` or `exit.txt` existed.
+- The `ask-intern` request failed because it could not retrieve its API key from DAN-DESKTOP after the SSH reset. The raw log was checked locally without printing vector contents.
+- This is a progress snapshot, not a test verdict. The run remains governed by its 6,775-second timeout.
