@@ -1,0 +1,5 @@
+Snapshot, 2026-10-12 07:55:31 MDT
+- SSH to DAN-DESKTOP reset at port 22; Slurm remains unavailable.
+- Runner PID 53363 and VVP PID 53757 remain active. VVP elapsed 57m02s, using 94.9% CPU and 985,248 KiB RSS.
+- `sim.log` remains 45,302 bytes, last written at 06:58:42 MDT. `result.json` and localrun exit record are absent.
+- No terminal result is inferred from CPU use or the quiet log. The 6,873-second localrun timeout remains active.
