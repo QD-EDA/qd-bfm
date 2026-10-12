@@ -1,0 +1,5 @@
+2026-10-12 16:15 MDT — job 669 result and queue checkpoint
+
+Task 669_18 (`smoke_test_doe_kv_ocp_progress`) completed PASS after 2:02:55, with maximum RSS 1,852,448 KiB. Its `result.json` reports passed=true, sim_exit=0, one pass marker, zero fail markers, and mcycle=53,552; runner.log and status.txt report PASS/exit 0; sim.log contains `* TESTCASE PASSED` and the matching Finished line. The nine unique/priority-case warnings from pinned entropy_src and csrng RTL are preserved in sim.log; result.json reports bad_diagnostics=0. Three optional overlay hash fields are null here, as they are in prior PASS rows 11, 12, and 14.
+
+Job 669 now has tasks 16, 17, 19, 20, 21, and 22 RUNNING; rows 23–51 are PENDING at throttle 6. Task 22 (`smoke_test_kv_securitystate`) started at 16:14. Row 18 raw logs, JSON, tool hashes, provenance, resource report, runner status, and batch output were copied into `terminal-results/task-18-smoke_test_doe_kv_ocp_progress/` before the Slurm run directory is cleaned.

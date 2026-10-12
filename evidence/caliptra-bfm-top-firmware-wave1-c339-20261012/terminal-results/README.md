@@ -25,3 +25,5 @@ Row 12, `smoke_test_sha512`, is a terminal `PASS`: its result JSON has `passed=t
 Row 14, `smoke_test_zeroize_crypto`, is a terminal `PASS`: its result JSON has `passed=true`, its runner log reports `PASS`, and its simulation log contains `* TESTCASE PASSED`. Its raw wrapper false `FAIL` and corrected verdict are preserved in [`task-14-smoke_test_zeroize_crypto/`](task-14-smoke_test_zeroize_crypto/).
 
 Rows 0 and 4 have local `TIMEOUT` evidence under [`../local-fallback/`](../local-fallback/README.md).
+
+Row 18, `smoke_test_doe_kv_ocp_progress`, is a terminal `PASS`: runner and task status report exit 0, result JSON reports `passed=true` with one pass and zero fail markers, and sim.log contains `* TESTCASE PASSED` (`mcycle=53552`). Wall time was 2:02:55 with 1,852,448 KiB maximum RSS. Nine entropy_src/csrng unique/priority-case warnings are preserved; the result reports `bad_diagnostics=0`. See [`task-18-smoke_test_doe_kv_ocp_progress/`](task-18-smoke_test_doe_kv_ocp_progress/).
