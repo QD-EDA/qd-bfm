@@ -1,0 +1,6 @@
+Local row-4 serial retry snapshot, 2026-10-12 04:07 MDT
+
+- Local VVP PID 29261 remained active; elapsed 1:20:21, 93.1% CPU, RSS 627,536 KiB.
+- `sim.log` remained 45,302 bytes with mtime 02:46:58 MDT; no `result.json` or `exit.txt` existed.
+- SSH to DAN-DESKTOP returned `Connection closed by 192.168.4.77 port 22`; no second local simulation was started.
+- The run remains governed by the 7,431-second timeout from its 02:45:59 MDT start. This is not a terminal result.
