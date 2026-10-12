@@ -1,0 +1,12 @@
+Remote status snapshot, 2026-10-12 03:31 MDT
+
+Scheduler state was unavailable: `squeue -j 591` could not contact the controller, and `/usr/bin/sacct` returned `Input/output error`. The array log directory also returned a general I/O error. A `/proc` scan found no remaining VVP or firmware-runner process for this array; all four VVP PIDs seen at 03:19 were gone.
+
+| Array row | Test | `runner.log` | `resource.log` | `sim.log` | `status.txt` / `result.json` |
+|---:|---|---:|---:|---|---|
+| 0 | smoke_test_kv_write_scan_mode | 0 B | 0 B | 49,398 B, mtime 1791790084 | status path I/O error; result absent |
+| 1 | cptra_ss_test_rom | 0 B | 0 B | 49,398 B, mtime 1791790084 | status path I/O error; result absent |
+| 2 | smoke_test_dma_aes_gcm | 0 B | 0 B | 49,398 B, mtime 1791790084 | status absent; result absent |
+| 3 | smoke_test_datavault_basic | 0 B | 0 B | 49,398 B, mtime 1791790085 | status path I/O error; result absent |
+
+The log files retained the same bytes as the earlier SHA-256-checked capture. Although the VVP processes disappeared after their estimated timeout windows, no runner exit code, `status.txt`, or populated resource record exists to prove a test TIMEOUT. Keep all four terminal outcomes unset and rerun them locally after the active row-4 run finishes.
