@@ -1,0 +1,6 @@
+row=0
+case=smoke_test_kv_write_scan_mode
+case_yaml=smoke_test_kv_write_scan_mode/smoke_test_kv_write_scan_mode.yml
+timeout_s=6775
+MAKEFLAGS=-j1
+localrun=/Users/danielellerbrock/codex-supervisor/localrun 6775

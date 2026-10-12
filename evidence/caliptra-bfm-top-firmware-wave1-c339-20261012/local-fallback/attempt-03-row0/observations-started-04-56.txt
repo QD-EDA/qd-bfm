@@ -1,0 +1,7 @@
+Local row-0 rerun started, 2026-10-12 04:56 MDT
+
+- Test: `smoke_test_kv_write_scan_mode`, selection row 0, manifest timeout 6,775 seconds.
+- Fresh local output path: `/private/tmp/qd-bfm-localwave1-c339-20261012-01/runs/0000-smoke_test_kv_write_scan_mode-local-01/`.
+- Launch uses `MAKEFLAGS=-j1`, pinned local Icarus c339, and `/Users/danielellerbrock/codex-supervisor/localrun 6775`.
+- At 04:56 the runner had begun generating HDL output and was in setup/compile; no test result was available.
+- SSH to DAN-DESKTOP reset at 04:53 MDT; no Slurm task could be checked or canceled before this local fallback.
