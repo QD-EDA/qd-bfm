@@ -39,19 +39,22 @@ reconciling the array.
 | `smoke_test_hw_config` | FAIL (firmware link) | `runs/smoke_test_hw_config/` |
 | `smoke_test_ahb_mux` | PASS | `runs/smoke_test_ahb_mux/` |
 | `smoke_test_sha256` | TIMEOUT | `runs/smoke_test_sha256/` |
-| `smoke_test_doe_rand` | Running | Job 561, task 8 |
-| `smoke_test_sha256_wntz_rand` | Running | Job 561, task 9 |
+| `smoke_test_doe_rand` | PASS | `runs/smoke_test_doe_rand/` |
+| `smoke_test_sha256_wntz_rand` | PASS | `runs/smoke_test_sha256_wntz_rand/` |
 
 The runner's raw `SETUP_BLOCKED` for `smoke_test_hw_config` is recorded as a
 sample `FAIL` because firmware linking fails before simulation: the linker
 reports the undefined callback `service_soc_ifc_notif_intr`. The linker diagnostic is preserved in
 `runs/smoke_test_hw_config/firmware.log`. This is a firmware build failure,
-not a simulator result. Five cases passed, two timed out without terminal test
-results, and two array tasks remain active. Strap reached
+not a simulator result. Seven cases passed and two timed out without terminal
+test results. Strap reached
 `SoC: Ready for Fuses deasserted` before its configured 3,852-second runner
 timeout (exit 124); VVP did not emit a terminal test result. Its wall time was
 1:04:12 and peak RSS was 1,859,896 KiB. `smoke_test_sha256` reached the same
 flow-status poll before its configured 6,725-second runner timeout (exit 124),
 with no terminal pass/fail marker; wall time was 1:52:05 and peak RSS was
-1,860,216 KiB. Raw runner, resource, compile, and simulation logs are retained
-under each test's `runs/` directory.
+1,860,216 KiB. The other two crypto cases completed: DOE random reported
+`mcycle=56787`, and WNTZ random reported `mcycle=60240`; both emitted
+`* TESTCASE PASSED`, had zero simulator exit, and have runner/resource/compile/
+simulation evidence under their `runs/` directories. All ten array tasks are
+terminal.

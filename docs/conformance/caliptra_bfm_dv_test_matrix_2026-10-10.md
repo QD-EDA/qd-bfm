@@ -91,9 +91,7 @@ projection are reported in
 This section records the initial generated-environment findings. It predates
 later environment reruns and the top-level firmware sample below; use the CSV
 for current row statuses. At the 2026-10-12 reconciliation, the 271-row CSV
-contains 253 UNVERIFIED, 10 BLOCKED, 5 PASS, 1 FAIL, and 2 TIMEOUT rows. Two
-additional selected firmware tests are still running and remain UNVERIFIED
-until terminal results are recorded.
+contains 251 UNVERIFIED, 10 BLOCKED, 7 PASS, 1 FAIL, and 2 TIMEOUT rows.
 
 Ten generated UVMF tests in three environments are **BLOCKED** on clean
 published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`: ECC (2 tests),
@@ -146,8 +144,6 @@ The ten lowest estimated-cycle full-top firmware suites were selected from the
 matrix and submitted together as Slurm array 561 on pinned Icarus c339. The
 estimates are conservative timeout-sizing inputs based on source-path review,
 not measured runtimes. The sample report records the selection rationale,
-per-test evidence, and current outcomes. At the latest reconciliation, five
-tests PASS, `smoke_test_hw_config` fails during firmware linking, two tests
-time out without terminal verdicts, and the `doe_rand` and
-`sha256_wntz_rand` cases remain active. See the
+per-test evidence, and current outcomes. The completed array recorded seven
+PASS, two TIMEOUT, and one firmware-link FAIL result. See the
 [sample evidence report](../../evidence/caliptra-bfm-top-firmware-sample-c339-20261011/README.md).
