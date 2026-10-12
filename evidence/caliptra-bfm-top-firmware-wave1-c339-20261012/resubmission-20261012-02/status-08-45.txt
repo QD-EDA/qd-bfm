@@ -1,0 +1,29 @@
+captured_at=2026-10-12T08:46:03-06:00
+DAN-DESKTOP
+2026-10-12 08:35:02
+PARTITION|NODES|CPUS(A/I/O/T)
+verilog*|1|14/6/0/20
+             JOBID      STATE          START_TIME       TIME          NODELIST(REASON)
+      591_[8-51%3]    PENDING                 N/A       0:00       (JobArrayTaskLimit)
+             606_1    RUNNING 2026-10-12T08:44:42       1:21               DAN-DESKTOP
+             606_2    RUNNING 2026-10-12T08:44:42       1:21               DAN-DESKTOP
+             606_3    RUNNING 2026-10-12T08:44:42       1:21               DAN-DESKTOP
+             591_5    RUNNING 2026-10-12T08:35:38      10:25               DAN-DESKTOP
+             591_6    RUNNING 2026-10-12T08:35:38      10:25               DAN-DESKTOP
+             591_7    RUNNING 2026-10-12T08:35:38      10:25               DAN-DESKTOP
+   2133    1116    1112 Mon Oct 12 08:36:00 2026       10:01 99.9 1038104 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/2ed04fcd9fe06e81-6/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2143    1117    1111 Mon Oct 12 08:36:00 2026       10:01 99.9 1038104 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/5623a0f9b5e00f77-7/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2169    1115    1113 Mon Oct 12 08:36:00 2026       10:01 99.9 1038080 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/b72c5535dc1dc634-5/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2918    2865    2865 Mon Oct 12 08:39:16 2026       06:46  0.0  5724 sbatch --wait --export=ALL,MAIN_SHA=b43a07447b4157147ddff8b0cbed375f30659ecf --output=/home/dsell/slurm-runs/iverilog-uvm/a4/nightly-control-logs/nightly-main-%j.out /home/dsell/slurm-runs/iverilog-uvm/a4/nightly-control/source/ci/nightly-main.sbatch
+   2961    2958    2958 Mon Oct 12 08:39:17 2026       06:45  0.0  7668 tee -a /home/dsell/slurm-runs/iverilog-uvm/a4/nightly-main/602/full-gate.log
+   8292    8070    2958 Mon Oct 12 08:41:18 2026       04:44  1.6 22272 perl vvp_reg.pl
+  55015   53789   53788 Mon Oct 12 08:45:09 2026       00:53 99.7 1038064 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/c4e8f85716a36bd8-3/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55020   53795   53794 Mon Oct 12 08:45:09 2026       00:53 99.7 1038064 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/f1991acb7ebadfe1-1/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55060   53792   53791 Mon Oct 12 08:45:09 2026       00:52 99.7 1038068 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/db58d7495957ab2d-2/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+  55087   44099   44098 Mon Oct 12 08:45:13 2026       00:49  0.0  1996 /bin/sh -c make -C ivlpp all &&  make -C vhdlpp all &&  make -C vvp all &&  make -C vpi all &&  make -C tgt-null all &&  make -C tgt-stub all &&  make -C tgt-vvp all &&  make -C tgt-vhdl all &&  make -C tgt-vlog95 all &&  make -C tgt-pcb all &&  make -C tgt-blif all &&  make -C tgt-sizer all &&  make -C driver all &&  make -C libveriuser all &&  make -C cadpli all &&  true
+  55549   55087   44098 Mon Oct 12 08:45:22 2026       00:39  0.0  3680 make -C vvp all
+  55746    8292    2958 Mon Oct 12 08:45:28 2026       00:34  0.0 12136 python3 ../scripts/run_with_timeout.py 299.96935915947 -- sh -c vvp vsim
+  55747   55746   55747 Mon Oct 12 08:45:28 2026       00:34  0.0  1996 sh -c vvp vsim
+  55748   55747   55747 Mon Oct 12 08:45:28 2026       00:34 99.9 49692 vvp vsim
+  55843   55549   44098 Mon Oct 12 08:45:40 2026       00:21  0.0  3284 g++ -I. -I.. -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX="" -DMODULE_DIR1="/home/dsell/slurm-runs/iverilog-uvm/a3/t2-batch-20261012-7/install/lib/ivl" -Wall -Wextra -Wshadow -g -O2 -std=c++11 -MD -c vvp_z3.cc -o vvp_z3.o
+  55844   55843   44098 Mon Oct 12 08:45:40 2026       00:21 99.8 1076900 /usr/libexec/gcc/x86_64-linux-gnu/15/cc1plus -quiet -I . -I .. -imultiarch x86_64-linux-gnu -MD vvp_z3.d -MQ vvp_z3.o -D_GNU_SOURCE -D HAVE_CONFIG_H -D ICARUS_VPI_CONST=const -D USE_LIBFFI=1 -D IVL_SUFFIX="" -D MODULE_DIR1="/home/dsell/slurm-runs/iverilog-uvm/a3/t2-batch-20261012-7/install/lib/ivl" vvp_z3.cc -D_FORTIFY_SOURCE=3 -quiet -dumpbase vvp_z3.cc -dumpbase-ext .cc -mtune=generic -march=x86-64 -g -O2 -Wall -Wextra -Wshadow -std=c++11 -fasynchronous-unwind-tables -fstack-protector-strong -Wformat-security -fstack-clash-protection -fcf-protection -fzero-init-padding-bits=all -Wbidi-chars=any -o /tmp/ccMLR5z7.s

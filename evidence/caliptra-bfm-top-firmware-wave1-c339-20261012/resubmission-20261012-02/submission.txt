@@ -1,0 +1,11 @@
+Job 606 submitted on DAN-DESKTOP at 2026-10-12T08:44 MDT.
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/submit && sbatch --parsable array.sbatch
+Remote run root: /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02
+Array: task indices 1-3, throttle 3. At submit time, original job 591 had tasks 5-7 RUNNING, each with a live VVP process; its pending range was throttled to 3. Combined A2 ceiling: six tasks.
+Resources: one CPU, 3 GiB, 6h10m scheduler allocation; per-test timeout is selected from the existing manifest and no more than 7,333 seconds for these rows.
+Rows: 1 cptra_ss_test_rom (6,873 s); 2 smoke_test_dma_aes_gcm (7,004 s); 3 smoke_test_datavault_basic (7,333 s). Each had no terminal result before submission.
+Staged QD commit: 0e331dec3d83ad70e5e73d8f0198dbdd4a226f74. The fresh source directory and selection manifest were byte-for-byte compared with job 591's immutable inputs. Pinned RTL, Adams Bridge, and Icarus revisions are unchanged.
+Script SHA-256: f703e8cd49a9f7a04550960de8479edfd5bb4e44d38a61b6c59b6c9dbbe4e58c.
+Manifest SHA-256: deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289.
+At 08:46 MDT, tasks 606_1-3 were RUNNING and had reached VVP; tasks 591_5-7 remained RUNNING. Snapshot is status-08-45.txt.
+The local row-1 duplicate was terminated with SIGTERM after 606_1 was confirmed RUNNING; localrun_exit=143 is intentional supersession, not a firmware verdict. The local sim log contained no PASS/FAIL/TIMEOUT marker and no result.json/status.txt existed.
