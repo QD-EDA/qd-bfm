@@ -1,0 +1,6 @@
+DAN-DESKTOP
+2026-10-11T18:14:33-06:00
+PARTITION|AVAIL|TIMELIMIT|NODES|CPUS(A/I/O/T)|GRES|AVAIL_FEATURES
+verilog*|up|infinite|1|4/16/0/20|(null)|(null)
+             JOBID      STATE       TIME                           NAME
+             460_1    RUNNING      35:49                   caliptra-env
