@@ -23,6 +23,12 @@ issue #539 and does not modify the pinned checkout.
 | `soc-ifc-assignment-patterns.patch` | Add the required apostrophes to associative-array initializers and struct assignment patterns. | Caliptra `soc_ifc_tb` | `evidence/caliptra-bfm-environment-matrix-20261011/slurm-soc-ifc-fix/` (job 474 applied the equivalent cumulative patch; compile reached c339 limits). |
 | `soc-ifc-function-return-types.patch` | Declare the existing `lock_fuses` and `unlock_fuses` functions with their required `void` return types. | Caliptra `soc_ifc_tb` | `evidence/caliptra-bfm-environment-matrix-20261011/slurm-soc-ifc-fix/` (job 474 applied the equivalent cumulative patch; compile reached c339 limits). |
 
+For a row with multiple fixes, apply each patch in this order: `csrng_tb` uses
+the two CSRNG patches in table order; `decompose_tb` uses the Adams width alias
+then the stale-port patch; `pkdecode_tb` uses the width alias, stale-parameter
+removal, c339 address cast, and source-base correction; `soc_ifc_tb` uses the
+assignment-pattern patch then the function-return-type patch.
+
 ## Causes not suitable for a compatibility patch
 
 - Caliptra `caliptra_top_ss_mode_tb` and `caliptra_top_trng_tb`: `axi_if.rst_mgr()` is compiled for the shared interface type and writes fields that those tops continuously drive; removing it globally would break the separate BFM reset-manager instance, while splitting the interface changes its type contract. The c339 compile also reaches independent Icarus issue #545. Evidence: `evidence/caliptra-bfm-environment-matrix-20261011/slurm-vip-adapter/`.
