@@ -1,0 +1,12 @@
+Remote status snapshot, 2026-10-12 03:08 MDT
+
+`squeue -j 591` still returned `slurm_load_jobs error: Unable to contact slurm controller (connect failure)`.
+
+| Array row | VVP PID | `/proc` state | VmRSS | Open `sim.log` size | mtime (Unix) |
+|---:|---:|---|---:|---:|---:|
+| 0 | 1039309 | R | 1,037,508 kB | 49398 | 1791790084 |
+| 1 | 1039276 | R | 1,037,564 kB | 49398 | 1791790084 |
+| 2 | 1039121 | R | 1,037,500 kB | 49398 | 1791790084 |
+| 3 | 1039377 | R | 1,037,508 kB | 49398 | 1791790085 |
+
+All four logs retained the prior sizes and mtimes. This snapshot contains no new output and no terminal result; it does not change their `RUNNING_UNCLASSIFIED` state.
