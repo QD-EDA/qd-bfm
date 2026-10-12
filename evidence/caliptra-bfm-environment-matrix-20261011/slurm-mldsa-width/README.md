@@ -18,6 +18,8 @@ Eight Adams testbenches import `abr_params_pkg` and refer to `MLDSA_MEM_ADDR_WID
 
 The array 502 compatibility overlay is preserved in `runs/502/testbench-compat.patch`. Array 506 raw logs, runtime vectors, hashes, tool versions, and result are under `runs/506/`.
 
+The all-X `sigdecode_z_tb`, `pkdecode_tb`, and `skencode_tb` outcomes resemble `sigencode_z_tb`, but they were not separately reduced to the packed-struct bug; their blocker remains the observed invalid outputs with root cause unconfirmed.
+
 The `mldsa_config_defines.svh` omission is a separate source defect: that file is absent from the pinned source tree, while six other filelists/testbenches reference it. The width alias does not fabricate or replace that absent header.
 
 ## Runner errors kept out of matrix results
