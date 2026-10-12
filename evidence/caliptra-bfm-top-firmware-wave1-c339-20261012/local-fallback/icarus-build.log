@@ -1,0 +1,2716 @@
+checking build system type... aarch64-apple-darwin27.0.0
+checking host system type... aarch64-apple-darwin27.0.0
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... -std=gnu23
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for aarch64-apple-darwin27.0.0-gcc... no
+checking for gcc... gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... (cached) -std=gnu23
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for ranlib... ranlib
+checking for ld... ld
+checking for ar... ar
+checking for strip... strip
+checking for windres... no
+checking for gperf... gperf
+checking for man... man
+checking for ps2pdf... ps2pdf
+checking for groff... no
+checking for git... git
+checking for flex... flex
+checking for bison... bison
+checking for Microsoft Windows... no
+checking for gcc -std=gnu23 options to detect undeclared functions... none needed
+checking for gcc -std=gnu23 options to ignore future-version functions... -Werror=unguarded-availability-new
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking whether __SUNPRO_C is declared... no
+checking if gcc supports -Wextra... yes
+checking for g++ options to detect undeclared functions... none needed
+checking for g++ options to ignore future-version functions... -Werror=unguarded-availability-new
+checking whether __SUNPRO_CC is declared... no
+checking for getopt.h... yes
+checking for inttypes.h... (cached) yes
+checking for libiberty.h... no
+checking for iosfwd... yes
+checking for sys/wait.h... yes
+checking for execinfo.h... yes
+checking size of unsigned long long... 8
+checking size of unsigned long... 8
+checking size of unsigned... 4
+checking size of void *... 8
+checking for tputs in -ltermcap... yes
+checking for readline in -lreadline... yes
+checking for add_history in -lreadline... yes
+checking for readline/readline.h... yes
+checking for readline/history.h... yes
+checking for sys/resource.h... yes
+checking for pthread_create in -lpthread... yes
+checking for gzwrite in -lz... yes
+checking for gzwrite in -lz... (cached) yes
+checking for BZ2_bzdopen in -lbz2... yes
+checking for BZ2_bzdopen in -lbz2... (cached) yes
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for declarations of fseeko and ftello... yes
+configure: Not using valgrind hooks
+checking for sys/times... yes
+checking for dlfcn.h... yes
+checking for dlopen in -ldl... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether byte ordering is bigendian... no
+checking for extra libs needed... 
+checking for flag to make position independent code... -fPIC
+checking for realpath... yes
+checking for fopen64... no
+checking for library containing lround... none required
+checking for library containing llround... none required
+checking for library containing nan... none required
+checking for library containing fmin... none required
+checking for library containing fmax... none required
+checking if uint64_t and unsigned long are identical... no
+checking for -rdynamic compiler flag... -Wl,-all_load
+checking for shared library link flag... -bundle -undefined dynamic_lookup -flat_namespace
+checking for leading underscores... no
+checking for trailing underscores... no
+checking for sanity of prefix... ok
+checking for sanity of exec_prefix... ok
+checking for sanity of libdir... ok
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating ivlpp/Makefile
+config.status: creating vhdlpp/Makefile
+config.status: creating vvp/Makefile
+config.status: creating vpi/Makefile
+config.status: creating driver/Makefile
+config.status: creating driver-vpi/Makefile
+config.status: creating cadpli/Makefile
+config.status: creating libveriuser/Makefile
+config.status: creating tgt-null/Makefile
+config.status: creating tgt-stub/Makefile
+config.status: creating tgt-vvp/Makefile
+config.status: creating tgt-vhdl/Makefile
+config.status: creating tgt-fpga/Makefile
+config.status: creating tgt-verilog/Makefile
+config.status: creating tgt-pal/Makefile
+config.status: creating tgt-vlog95/Makefile
+config.status: creating tgt-pcb/Makefile
+config.status: creating tgt-blif/Makefile
+config.status: creating tgt-sizer/Makefile
+config.status: creating config.h
+config.status: creating _pli_types.h
+config.status: creating vhdlpp/vhdlpp_config.h
+config.status: creating vvp/config.h
+config.status: creating vpi/vpi_config.h
+config.status: creating libveriuser/config.h
+config.status: creating tgt-vvp/vvp_config.h
+config.status: creating tgt-vhdl/vhdl_config.h
+config.status: creating tgt-pcb/pcb_config.h
+mkdir dep
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c async.cc -o async.o
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c design_dump.cc -o design_dump.o
+Using empty VERSION_TAG
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c discipline.cc -o discipline.o
+mv discipline.d dep/discipline.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c dup_expr.cc -o dup_expr.o
+In file included from async.cc:23:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from design_dump.cc:29:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv async.d dep/async.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elaborate.cc -o elaborate.o
+In file included from dup_expr.cc:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+In file included from elaborate.cc:46:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv dup_expr.d dep/dup_expr.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sv_edition.cc -o sv_edition.o
+1 warning generated.
+mv design_dump.d dep/design_dump.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_expr.cc -o elab_expr.o
+In file included from sv_edition.cc:20:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv sv_edition.d dep/sv_edition.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elaborate_analog.cc -o elaborate_analog.o
+In file included from elab_expr.cc:37:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from elaborate_analog.cc:22:
+In file included from ./AStatement.h:26:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv elaborate_analog.d dep/elaborate_analog.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_lval.cc -o elab_lval.o
+elaborate.cc:35959:41: warning: declaration shadows a local variable [-Wshadow]
+ 35959 |             } else if (const PECastSize*cast = dynamic_cast<const PECastSize*>(expr)) {
+       |                                         ^
+elaborate.cc:35946:34: note: previous declaration is here
+ 35946 |             if (const PECastType*cast = dynamic_cast<const PECastType*>(expr)) {
+       |                                  ^
+elaborate.cc:34316:27: warning: comparison of integers of different signs: 'unsigned int' and 'const int' [-Wsign-compare]
+ 34316 |                       && (unsigned)qidx == dynforeach_emit_ctx_->prop_idx) {
+       |                          ~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+elaborate.cc:42985:19: warning: enumeration value 'SEL_WITH' not handled in switch [-Wswitch]
+ 42985 |                                       switch (s->op) {
+       |                                               ^~~~~
+elaborate.cc:42985:19: note: add missing switch cases
+ 42985 |                                       switch (s->op) {
+       |                                               ^
+In file included from elab_lval.cc:26:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv elab_lval.d dep/elab_lval.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_net.cc -o elab_net.o
+In file included from elab_net.cc:23:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv elab_net.d dep/elab_net.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_scope.cc -o elab_scope.o
+In file included from elab_scope.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+elab_scope.cc:5071:65: warning: unused parameter 'scope' [-Wunused-parameter]
+ 5071 | static void complete_class_scope_in_place_(Design*des, NetScope*scope,
+      |                                                                 ^
+elab_scope.cc:5307:35: warning: declaration shadows a field of 'Module' [-Wshadow]
+ 5307 |                   NetScope::modport_port_list_t ports;
+      |                                                 ^
+./Module.h:168:28: note: previous declaration is here
+  168 |       std::vector<port_t*> ports;
+      |                            ^
+1 warning generated.
+mv elab_expr.d dep/elab_expr.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_sig.cc -o elab_sig.o
+In file included from elab_sig.cc:31:
+In file included from ./Module.h:32:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+3 warnings generated.
+mv elab_scope.d dep/elab_scope.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_sig_analog.cc -o elab_sig_analog.o
+In file included from elab_sig_analog.cc:22:
+In file included from ./AStatement.h:26:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv elab_sig_analog.d dep/elab_sig_analog.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_type.cc -o elab_type.o
+In file included from elab_type.cc:20:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+elab_type.cc:2749:13: warning: unused function 'finite_enum_index_range_' [-Wunused-function]
+ 2749 | static bool finite_enum_index_range_(const netenum_t*enum_type,
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+mv elab_sig.d dep/elab_sig.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c emit.cc -o emit.o
+In file included from emit.cc:29:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+2 warnings generated.
+mv elab_type.d dep/elab_type.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c eval_attrib.cc -o eval_attrib.o
+1 warning generated.
+mv emit.d dep/emit.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c eval_tree.cc -o eval_tree.o
+In file included from eval_attrib.cc:22:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from eval_tree.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv eval_attrib.d dep/eval_attrib.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expr_synth.cc -o expr_synth.o
+In file included from expr_synth.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv eval_tree.d dep/eval_tree.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c functor.cc -o functor.o
+In file included from functor.cc:25:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv expr_synth.d dep/expr_synth.d
+flex -s -t lexor.lex > lexor.cc
+1 warning generated.
+mv functor.d dep/functor.d
+bison --verbose -t -p VL --defines=parse.h -o parse.cc parse.y
+parse.y:2701.5: warning: empty rule without %empty [-Wempty-rule]
+ 2701 |    | /* empty */
+      |     ^
+      |     %empty
+parse.y:2819.7-51: warning: empty rule without %empty [-Wempty-rule]
+ 2819 |       { pform_sva_set_assertion_label(0); $$ = 0; }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:2834.5-19: warning: empty rule without %empty [-Wempty-rule]
+ 2834 |   | { $$ = false; }
+      |     ^~~~~~~~~~~~~~~
+      |     %empty
+parse.y:2924.7-2926.7: warning: empty rule without %empty [-Wempty-rule]
+ 2924 |       { clear_pending_class_params();
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:3051.5-21: warning: empty rule without %empty [-Wempty-rule]
+ 3051 |   | { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:3059.5-15: warning: empty rule without %empty [-Wempty-rule]
+ 3059 |   | { $$ = 0; }
+      |     ^~~~~~~~~~~
+      |     %empty
+parse.y:3099.7-3100.7: warning: empty rule without %empty [-Wempty-rule]
+ 3099 |       { $$ = {nullptr, nullptr};
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:3107.7-43: warning: empty rule without %empty [-Wempty-rule]
+ 3107 |       { $$ = new std::list<data_type_t*>; }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:3114.7-43: warning: empty rule without %empty [-Wempty-rule]
+ 3114 |       { $$ = new std::list<data_type_t*>; }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:3162.7-17: warning: empty rule without %empty [-Wempty-rule]
+ 3162 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:3170.4: warning: empty rule without %empty [-Wempty-rule]
+ 3170 |   |
+      |    ^
+      |    %empty
+parse.y:4059.5-47: warning: empty rule without %empty [-Wempty-rule]
+ 4059 |   | { $$ = property_qualifier_t::make_none(); }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:4254.7-23: warning: empty rule without %empty [-Wempty-rule]
+ 4254 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:4265.7-44: warning: empty rule without %empty [-Wempty-rule]
+ 4265 |       { $$ = new std::list<perm_string>(); }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:4275.7-23: warning: empty rule without %empty [-Wempty-rule]
+ 4275 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:4616.7-23: warning: empty rule without %empty [-Wempty-rule]
+ 4616 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:4804.4: warning: empty rule without %empty [-Wempty-rule]
+ 4804 |   :
+      |    ^
+      |    %empty
+parse.y:4810.32-48: warning: empty rule without %empty [-Wempty-rule]
+ 4810 |   :                            { $$ = nullptr; }
+      |                                ^~~~~~~~~~~~~~~~~
+      |                                %empty
+parse.y:4816.7-23: warning: empty rule without %empty [-Wempty-rule]
+ 4816 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:4848.36-52: warning: empty rule without %empty [-Wempty-rule]
+ 4848 |   :                                { $$ = nullptr; }
+      |                                    ^~~~~~~~~~~~~~~~~
+      |                                    %empty
+parse.y:4853.36-52: warning: empty rule without %empty [-Wempty-rule]
+ 4853 |   :                                { $$ = nullptr; }
+      |                                    ^~~~~~~~~~~~~~~~~
+      |                                    %empty
+parse.y:5030.4: warning: empty rule without %empty [-Wempty-rule]
+ 5030 |   : /* empty */
+      |    ^
+      |    %empty
+parse.y:5517.5-15: warning: empty rule without %empty [-Wempty-rule]
+ 5517 |   | { $$ = 0; }
+      |     ^~~~~~~~~~~
+      |     %empty
+parse.y:5531.7-22: warning: empty rule without %empty [-Wempty-rule]
+ 5531 |       { /* Ignore */ }
+      |       ^~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:5536.5-21: warning: empty rule without %empty [-Wempty-rule]
+ 5536 |   | { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:5559.7-5563.7: warning: empty rule without %empty [-Wempty-rule]
+ 5559 |       { vector_type_t*tmp = new vector_type_t(IVL_VT_LOGIC, false, nu...
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:5951.25: warning: empty rule without %empty [-Wempty-rule]
+ 5951 | endnew_opt : ':' K_new | ;
+      |                         ^
+      |                         %empty
+parse.y:6002.5-21: warning: empty rule without %empty [-Wempty-rule]
+ 6002 |   | { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:6322.14-46: warning: empty rule without %empty [-Wempty-rule]
+ 6322 |   |          { $$ = LexicalScope::INHERITED; }
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |              %empty
+parse.y:6842.4-20: warning: empty rule without %empty [-Wempty-rule]
+ 6842 |  | { $$ = nullptr; }
+      |    ^~~~~~~~~~~~~~~~~
+      |    %empty
+parse.y:6957.7-6960.7: warning: empty rule without %empty [-Wempty-rule]
+ 6957 |       { std::list<perm_string>*tmp = new std::list<perm_string>;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:6964.4: warning: empty rule without %empty [-Wempty-rule]
+ 6964 |   : /* explicit virtual task/function forms are parsed directly */
+      |    ^
+      |    %empty
+parse.y:6968.4: warning: empty rule without %empty [-Wempty-rule]
+ 6968 |   :
+      |    ^
+      |    %empty
+parse.y:7431.7-17: warning: empty rule without %empty [-Wempty-rule]
+ 7431 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:7436.19-29: warning: empty rule without %empty [-Wempty-rule]
+ 7436 |   |               { $$ = 0; }
+      |                   ^~~~~~~~~~~
+      |                   %empty
+parse.y:7446.4: warning: empty rule without %empty [-Wempty-rule]
+ 7446 |   |
+      |    ^
+      |    %empty
+parse.y:7503.4: warning: empty rule without %empty [-Wempty-rule]
+ 7503 |   :
+      |    ^
+      |    %empty
+parse.y:7524.25-39: warning: empty rule without %empty [-Wempty-rule]
+ 7524 |   :                     { $$ = false; }
+      |                         ^~~~~~~~~~~~~~~
+      |                         %empty
+parse.y:8171.44: warning: empty rule without %empty [-Wempty-rule]
+ 8171 | package_item_list_opt : package_item_list | ;
+      |                                            ^
+      |                                            %empty
+parse.y:8192.20-46: warning: empty rule without %empty [-Wempty-rule]
+ 8192 |   |                { $$ = NetNet::PIMPLICIT; }
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                    %empty
+parse.y:8412.7-23: warning: empty rule without %empty [-Wempty-rule]
+ 8412 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:9216.5-47: warning: empty rule without %empty [-Wempty-rule]
+ 9216 |   | { $$ = property_qualifier_t::make_none(); }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:9236.5-47: warning: empty rule without %empty [-Wempty-rule]
+ 9236 |   | %prec sva_decl_expr_start { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:9246.5-47: warning: empty rule without %empty [-Wempty-rule]
+ 9246 |   | { $$ = property_qualifier_t::make_none(); }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:9788.27-56: warning: empty rule without %empty [-Wempty-rule]
+ 9788 |   : /* empty */           %prec no_timeunits_declaration
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                           %empty
+parse.y:9902.5-9904.7: warning: empty rule without %empty [-Wempty-rule]
+ 9902 |   | { var_lifetime = LexicalScope::INHERITED;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:9914.7-17: warning: empty rule without %empty [-Wempty-rule]
+ 9914 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:10239.5-47: warning: empty rule without %empty [-Wempty-rule]
+10239 |   | %prec block_item_decls_done { $$ = false; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:10455.7-10457.7: warning: empty rule without %empty [-Wempty-rule]
+10455 |       { $$ = new atom_type_t(atom_type_t::INT, true);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:10523.7-10525.7: warning: empty rule without %empty [-Wempty-rule]
+10523 |       { $$.packed_flag = false;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:10892.4: warning: empty rule without %empty [-Wempty-rule]
+10892 |   |
+      |    ^
+      |    %empty
+parse.y:10959.12-28: warning: empty rule without %empty [-Wempty-rule]
+10959 |   |        { $$ = nullptr; }
+      |            ^~~~~~~~~~~~~~~~~
+      |            %empty
+parse.y:10995.12-22: warning: empty rule without %empty [-Wempty-rule]
+10995 |   |        { $$ = 0; }
+      |            ^~~~~~~~~~~
+      |            %empty
+parse.y:11078.27: warning: empty rule without %empty [-Wempty-rule]
+11078 | optional_semicolon : ';' | ;
+      |                           ^
+      |                           %empty
+parse.y:11159.4: warning: empty rule without %empty [-Wempty-rule]
+11159 |   : /* The BNF implies this can be blank, but I'm not sure exactly what
+      |    ^
+      |    %empty
+parse.y:11165.4: warning: empty rule without %empty [-Wempty-rule]
+11165 |   : /* config rules are optional. */
+      |    ^
+      |    %empty
+parse.y:11180.4: warning: empty rule without %empty [-Wempty-rule]
+11180 |   : /* The use clause takes an optional :config. */
+      |    ^
+      |    %empty
+parse.y:11192.4: warning: empty rule without %empty [-Wempty-rule]
+11192 |   : /* A NULL library means use the parents cell library. */
+      |    ^
+      |    %empty
+parse.y:11228.7-59: warning: empty rule without %empty [-Wempty-rule]
+11228 |       { $$.str0 = IVL_DR_STRONG; $$.str1 = IVL_DR_STRONG; }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:11247.5-47: warning: empty rule without %empty [-Wempty-rule]
+11247 |   | %prec sva_decl_expr_start { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:11612.5-21: warning: empty rule without %empty [-Wempty-rule]
+11612 |   | { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:11923.7-11925.7: warning: empty rule without %empty [-Wempty-rule]
+11923 |       { std::list<PExpr*>*tmp = new std::list<PExpr*>;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:11956.7-11960.7: warning: empty rule without %empty [-Wempty-rule]
+11956 |       { named_pexpr_t *tmp = new named_pexpr_t;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:11994.7-44: warning: empty rule without %empty [-Wempty-rule]
+11994 |       { $$ = new std::list<named_pexpr_t>; }
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:12003.7-17: warning: empty rule without %empty [-Wempty-rule]
+12003 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:14150.5-14151.17: warning: empty rule without %empty [-Wempty-rule]
+14150 |   | %prec block_item_decls_done
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:15034.16-30: warning: empty rule without %empty [-Wempty-rule]
+15034 |   |            { $$ = false; }
+      |                ^~~~~~~~~~~~~~~
+      |                %empty
+parse.y:15040.16-29: warning: empty rule without %empty [-Wempty-rule]
+15040 |   |            { $$ = true; }
+      |                ^~~~~~~~~~~~~~
+      |                %empty
+parse.y:15253.25-35: warning: empty rule without %empty [-Wempty-rule]
+15253 |   |                     { $$ = 0; }
+      |                         ^~~~~~~~~~~
+      |                         %empty
+parse.y:15258.5-15: warning: empty rule without %empty [-Wempty-rule]
+15258 |   | { $$ = 0; }
+      |     ^~~~~~~~~~~
+      |     %empty
+parse.y:15267.7-17: warning: empty rule without %empty [-Wempty-rule]
+15267 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:15279.4: warning: empty rule without %empty [-Wempty-rule]
+15279 |   :
+      |    ^
+      |    %empty
+parse.y:15287.4: warning: empty rule without %empty [-Wempty-rule]
+15287 |   :
+      |    ^
+      |    %empty
+parse.y:16152.7-17: warning: empty rule without %empty [-Wempty-rule]
+16152 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:16190.4: warning: empty rule without %empty [-Wempty-rule]
+16190 |   |
+      |    ^
+      |    %empty
+parse.y:16244.4: warning: empty rule without %empty [-Wempty-rule]
+16244 |   |
+      |    ^
+      |    %empty
+parse.y:16323.14-39: warning: empty rule without %empty [-Wempty-rule]
+16323 |   |          { $$ = NetNet::IMPLICIT; }
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+      |              %empty
+parse.y:16383.68-78: warning: empty rule without %empty [-Wempty-rule]
+16383 | parameter_value_ranges_opt : parameter_value_ranges { $$ = $1; } | { ...
+      |                                                                    ^~
+      |                                                                    %empty
+parse.y:16471.7-17: warning: empty rule without %empty [-Wempty-rule]
+16471 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:16673.10-20: warning: empty rule without %empty [-Wempty-rule]
+16673 |   |      { $$ = 0; }
+      |          ^~~~~~~~~~~
+      |          %empty
+parse.y:16744.7-16747.7: warning: empty rule without %empty [-Wempty-rule]
+16744 |       { std::list<PExpr*>*tmp = new std::list<PExpr*>;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:16845.16-26: warning: empty rule without %empty [-Wempty-rule]
+16845 |   :            { $$ = 0; }
+      |                ^~~~~~~~~~~
+      |                %empty
+parse.y:17162.7-10: warning: empty rule without %empty [-Wempty-rule]
+17162 |       {  }
+      |       ^~~~
+      |       %empty
+parse.y:17327.10-22: warning: empty rule without %empty [-Wempty-rule]
+17327 |   |      { $$ = 0;   }
+      |          ^~~~~~~~~~~~~
+      |          %empty
+parse.y:17431.5-47: warning: empty rule without %empty [-Wempty-rule]
+17431 |     { $$ = new PTimingCheck::optional_args_t; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:17438.5-47: warning: empty rule without %empty [-Wempty-rule]
+17438 |     { $$ = new PTimingCheck::optional_args_t; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:17545.5-47: warning: empty rule without %empty [-Wempty-rule]
+17545 |     { $$ = new PTimingCheck::optional_args_t; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:17552.5-47: warning: empty rule without %empty [-Wempty-rule]
+17552 |     { $$ = new PTimingCheck::optional_args_t; }
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:17615.7-23: warning: empty rule without %empty [-Wempty-rule]
+17615 |       { $$ = nullptr; }
+      |       ^~~~~~~~~~~~~~~~~
+      |       %empty
+parse.y:19709.28-44: warning: empty rule without %empty [-Wempty-rule]
+19709 |   |                        { $$ = nullptr; }
+      |                            ^~~~~~~~~~~~~~~~~
+      |                            %empty
+parse.y:19831.24-40: warning: empty rule without %empty [-Wempty-rule]
+19831 |   |                    { $$ = nullptr; }
+      |                        ^~~~~~~~~~~~~~~~~
+      |                        %empty
+parse.y:19892.5-21: warning: empty rule without %empty [-Wempty-rule]
+19892 |   | { $$ = nullptr; }
+      |     ^~~~~~~~~~~~~~~~~
+      |     %empty
+parse.y:19919.7-17: warning: empty rule without %empty [-Wempty-rule]
+19919 |       { $$ = 0; }
+      |       ^~~~~~~~~~~
+      |       %empty
+parse.y:19964.18-28: warning: empty rule without %empty [-Wempty-rule]
+19964 |   |              { $$ = 0; }
+      |                  ^~~~~~~~~~~
+      |                  %empty
+parse.y:19972.30-40: warning: empty rule without %empty [-Wempty-rule]
+19972 |   |                          { $$ = 0; }
+      |                              ^~~~~~~~~~~
+      |                              %empty
+parse.y:20071.17-27: warning: empty rule without %empty [-Wempty-rule]
+20071 |   |             { $$ = 0; }
+      |                 ^~~~~~~~~~~
+      |                 %empty
+parse.y:20188.12-26: warning: empty rule without %empty [-Wempty-rule]
+20188 |   |        { $$ = false; };
+      |            ^~~~~~~~~~~~~~~
+      |            %empty
+parse.y:20235.17-48: warning: empty rule without %empty [-Wempty-rule]
+20235 |   :             { $$ = IVL_CASE_QUALITY_BASIC; }
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                 %empty
+parse.y:20253.12-26: warning: empty rule without %empty [-Wempty-rule]
+20253 |  |         { $$ = false; }
+      |            ^~~~~~~~~~~~~~~
+      |            %empty
+parse.y:20258.13-27: warning: empty rule without %empty [-Wempty-rule]
+20258 |  |          { $$ = false; }
+      |             ^~~~~~~~~~~~~~~
+      |             %empty
+parse.y:20263.13-27: warning: empty rule without %empty [-Wempty-rule]
+20263 |  |          { $$ = false; }
+      |             ^~~~~~~~~~~~~~~
+      |             %empty
+parse.y:20268.15-29: warning: empty rule without %empty [-Wempty-rule]
+20268 |   |           { $$ = false; }
+      |               ^~~~~~~~~~~~~~~
+      |               %empty
+parse.y:20273.4: warning: empty rule without %empty [-Wempty-rule]
+20273 |   |
+      |    ^
+      |    %empty
+parse.y: warning: 3 nonterminals useless in grammar [-Wother]
+parse.y: warning: 5 rules useless in grammar [-Wother]
+parse.y:6963.1-16: warning: nonterminal useless in grammar: method_qualifier [-Wother]
+ 6963 | method_qualifier /* IEEE1800-2005: A.1.8 */
+      | ^~~~~~~~~~~~~~~~
+parse.y:7470.1-15: warning: nonterminal useless in grammar: open_range_list [-Wother]
+ 7470 | open_range_list /* IEEE1800-2005 A.2.11 */
+      | ^~~~~~~~~~~~~~~
+parse.y:9793.1-11: warning: nonterminal useless in grammar: value_range [-Wother]
+ 9793 | value_range /* IEEE1800-2005: A.8.3 */
+      | ^~~~~~~~~~~
+gperf -o -i 7 -C -k 1-4,6,9,$ -H keyword_hash -N check_identifier -t lexor_keyword.gperf > lexor_keyword.cc || (rm -f lexor_keyword.cc ; false)
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c link_const.cc -o link_const.o
+parse.y: warning: 574 shift/reduce conflicts [-Wconflicts-sr]
+parse.y: warning: 1122 reduce/reduce conflicts [-Wconflicts-rr]
+parse.y: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples
+parse.y:3952.7-3954.56: warning: rule useless in parser due to conflicts [-Wother]
+ 3952 |       { pform_pop_scope();
+      |       ^~~~~~~~~~~~~~~~~~~~
+parse.y:7808.7-7809.103: warning: rule useless in parser due to conflicts [-Wother]
+ 7808 |       { pform_pop_scope();
+      |       ^~~~~~~~~~~~~~~~~~~~
+parse.y:17739.40-67: warning: rule useless in parser due to conflicts [-Wother]
+17739 |   | package_scope hierarchy_identifier { lex_in_package_scope(0); } a...
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from link_const.cc:24:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv link_const.d dep/link_const.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c load_module.cc -o load_module.o
+In file included from load_module.cc:23:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv load_module.d dep/load_module.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netlist.cc -o netlist.o
+parse.y: warning: fix-its can be applied.  Rerun with option '--update'. [-Wother]
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netmisc.cc -o netmisc.o
+In file included from netlist.cc:28:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from netmisc.cc:30:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv netlist.d dep/netlist.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nettypes.cc -o nettypes.o
+mv nettypes.d dep/nettypes.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_analog.cc -o net_analog.o
+1 warning generated.
+mv netmisc.d dep/netmisc.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_assign.cc -o net_assign.o
+In file included from net_analog.cc:25:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_assign.cc:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv net_analog.d dep/net_analog.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_design.cc -o net_design.o
+net_assign.cc:308:28: warning: declaration shadows a local variable [-Wshadow]
+  308 |                   if (const netstruct_t *struct_type = dynamic_cast<const netstruct_t*>(etype)) {
+      |                                          ^
+net_assign.cc:286:36: note: previous declaration is here
+  286 |             } else if (const netstruct_t *struct_type = dynamic_cast<const netstruct_t*>(ntype)) {
+      |                                           ^
+2 warnings generated.
+mv net_assign.d dep/net_assign.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netclass.cc -o netclass.o
+In file included from net_design.cc:35:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from netclass.cc:21:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+4 warnings generated.
+mv elaborate.d dep/elaborate.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netdarray.cc -o netdarray.o
+mv netdarray.d dep/netdarray.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netenum.cc -o netenum.o
+1 warning generated.
+mv net_design.d dep/net_design.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netparray.cc -o netparray.o
+1 warning generated.
+mv netclass.d dep/netclass.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netqueue.cc -o netqueue.o
+mv netqueue.d dep/netqueue.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netscalar.cc -o netscalar.o
+mv netparray.d dep/netparray.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netstruct.cc -o netstruct.o
+In file included from netenum.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv netscalar.d dep/netscalar.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netvector.cc -o netvector.o
+1 warning generated.
+mv netenum.d dep/netenum.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_event.cc -o net_event.o
+In file included from netstruct.cc:20:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from netvector.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_event.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv netstruct.d dep/netstruct.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_expr.cc -o net_expr.o
+1 warning generated.
+mv netvector.d dep/netvector.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_func.cc -o net_func.o
+In file included from net_expr.cc:21:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_func.cc:21:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv net_event.d dep/net_event.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_func_eval.cc -o net_func_eval.o
+1 warning generated.
+mv net_func.d dep/net_func.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_link.cc -o net_link.o
+In file included from net_func_eval.cc:20:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv net_expr.d dep/net_expr.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_modulo.cc -o net_modulo.o
+net_func_eval.cc:1352:32: warning: declaration shadows a local variable [-Wshadow]
+ 1352 |                   } else if (const NetECReal*value = dynamic_cast<const NetECReal*>(arg)) {
+      |                                              ^
+net_func_eval.cc:1346:25: note: previous declaration is here
+ 1346 |                   if (const NetEConst*value = dynamic_cast<const NetEConst*>(arg)) {
+      |                                       ^
+net_func_eval.cc:1360:30: warning: declaration shadows a local variable [-Wshadow]
+ 1360 |                   else if (const NetEConst*value = dynamic_cast<const NetEConst*>(arg))
+      |                                            ^
+net_func_eval.cc:1358:25: note: previous declaration is here
+ 1358 |                   if (const NetECReal*value = dynamic_cast<const NetECReal*>(arg))
+      |                                       ^
+net_func_eval.cc:1397:32: warning: declaration shadows a local variable [-Wshadow]
+ 1397 |                   } else if (const NetECReal*number =
+      |                                              ^
+net_func_eval.cc:1390:25: note: previous declaration is here
+ 1390 |                   if (const NetEConst*number = dynamic_cast<const NetEConst*>(evaluated)) {
+      |                                       ^
+In file included from net_link.cc:27:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_modulo.cc:27:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv net_modulo.d dep/net_modulo.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_nex_input.cc -o net_nex_input.o
+4 warnings generated.
+mv net_func_eval.d dep/net_func_eval.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_nex_output.cc -o net_nex_output.o
+1 warning generated.
+mv net_link.d dep/net_link.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_proc.cc -o net_proc.o
+In file included from net_nex_input.cc:26:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_nex_output.cc:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_proc.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv net_nex_input.d dep/net_nex_input.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_scope.cc -o net_scope.o
+1 warning generated.
+mv net_nex_output.d dep/net_nex_output.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_tran.cc -o net_tran.o
+1 warning generated.
+mv net_proc.d dep/net_proc.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_udp.cc -o net_udp.o
+In file included from net_scope.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_tran.cc:26:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from net_udp.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+1 warning generated.
+mv net_udp.d dep/net_udp.d
+mv net_tran.d dep/net_tran.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c map_named_args.cc -o map_named_args.o
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pad_to_width.cc -o pad_to_width.o
+In file included from map_named_args.cc:4:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from pad_to_width.cc:23:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv pad_to_width.d dep/pad_to_width.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse.cc -o parse.o
+1 warning generated.
+mv map_named_args.d dep/map_named_args.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse_misc.cc -o parse_misc.o
+1 warning generated.
+mv net_scope.d dep/net_scope.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform.cc -o pform.o
+In file included from parse.y:27:
+In file included from ./parse_misc.h:24:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from parse_misc.cc:23:
+In file included from ./parse_misc.h:24:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv parse_misc.d dep/parse_misc.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_sva_nfa.cc -o pform_sva_nfa.o
+parse.cc:21361:18: warning: missing field 'lexical_pos' initializer [-Wmissing-field-initializers]
+ 21361 |   = { 1, 1, 1, 1 }
+       |                  ^
+In file included from pform.cc:25:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+pform.cc:1614:75: warning: unused parameter 'loc' [-Wunused-parameter]
+ 1614 | static typedef_t* pform_find_potential_imported_type(const struct vlltype&loc,
+      |                                                                           ^
+In file included from pform_sva_nfa.cc:18:
+In file included from ./parse_misc.h:24:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+pform.cc:7459:60: warning: unused parameter 'loc' [-Wunused-parameter]
+ 7459 | void pform_set_clocking_default_skews(const struct vlltype&loc,
+      |                                                            ^
+pform.cc:8250:52: warning: unused parameter 'loc' [-Wunused-parameter]
+ 8250 | void pform_end_clocking_block(const struct vlltype&loc)
+      |                                                    ^
+parse.y:274:19: warning: unused variable 'recently_completed_class_method_' [-Wunused-variable]
+  274 | static PTaskFunc* recently_completed_class_method_ = 0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pform.cc:13729:39: warning: unused parameter 'loc' [-Wunused-parameter]
+ 13729 | pform_sva_repeat(const struct vlltype&loc,
+       |                                       ^
+pform.cc:15907:27: warning: unused parameter 'loc' [-Wunused-parameter]
+ 15907 |                                         const struct vlltype&loc, int op_type,
+       |                                                              ^
+pform.cc:18440:13: warning: declaration shadows a local variable [-Wshadow]
+ 18440 |             PBlock*spawn = new PBlock(PBlock::BL_JOIN_NONE);
+       |                    ^
+pform.cc:17850:32: note: previous declaration is here
+ 17850 |       std::vector<perm_string> spawn (endpoint_fanout ? K : 0);
+       |                                ^
+1 warning generated.
+mv pform_sva_nfa.d dep/pform_sva_nfa.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_analog.cc -o pform_analog.o
+In file included from pform_analog.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv pform_analog.d dep/pform_analog.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_disciplines.cc -o pform_disciplines.o
+In file included from pform_disciplines.cc:22:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv pform_disciplines.d dep/pform_disciplines.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_dump.cc -o pform_dump.o
+In file included from pform_dump.cc:28:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+pform_dump.cc:408:34: warning: expression with side effects will be evaluated despite being used as an operand to 'typeid' [-Wpotentially-evaluated-expression]
+  408 |       out << (type.get()? typeid(*type).name() : "<nil type>");
+      |                                  ^
+2 warnings generated.
+mv pform_dump.d dep/pform_dump.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_package.cc -o pform_package.o
+In file included from pform_package.cc:22:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv pform_package.d dep/pform_package.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_pclass.cc -o pform_pclass.o
+In file included from pform_pclass.cc:26:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+3 warnings generated.
+mv parse.d dep/parse.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_types.cc -o pform_types.o
+In file included from pform_types.cc:22:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv pform_types.d dep/pform_types.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c symbol_search.cc -o symbol_search.o
+1 warning generated.
+mv pform_pclass.d dep/pform_pclass.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sync.cc -o sync.o
+In file included from symbol_search.cc:21:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from sync.cc:23:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv sync.d dep/sync.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sys_funcs.cc -o sys_funcs.o
+1 warning generated.
+mv symbol_search.d dep/symbol_search.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c verinum.cc -o verinum.o
+In file included from sys_funcs.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv sys_funcs.d dep/sys_funcs.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c verireal.cc -o verireal.o
+In file included from verireal.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv verinum.d dep/verinum.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_modules.cc -o vpi_modules.o
+1 warning generated.
+mv verireal.d dep/verireal.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c target.cc -o target.o
+In file included from vpi_modules.cc:21:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from target.cc:24:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv vpi_modules.d dep/vpi_modules.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Attrib.cc -o Attrib.o
+mv Attrib.d dep/Attrib.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c HName.cc -o HName.o
+1 warning generated.
+mv target.d dep/target.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Module.cc -o Module.o
+mv HName.d dep/HName.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PClass.cc -o PClass.o
+In file included from Module.cc:22:
+In file included from ./Module.h:32:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv PClass.d dep/PClass.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PDelays.cc -o PDelays.o
+1 warning generated.
+mv Module.d dep/Module.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PEvent.cc -o PEvent.o
+In file included from PDelays.cc:25:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv PEvent.d dep/PEvent.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PExpr.cc -o PExpr.o
+1 warning generated.
+mv PDelays.d dep/PDelays.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PFunction.cc -o PFunction.o
+In file included from PExpr.cc:26:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from PFunction.cc:22:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+7 warnings generated.
+mv pform.d dep/pform.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PGate.cc -o PGate.o
+1 warning generated.
+mv PFunction.d dep/PFunction.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PGenerate.cc -o PGenerate.o
+In file included from PGate.cc:22:
+In file included from ./PGate.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from PGenerate.cc:21:
+In file included from ./PWire.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv PExpr.d dep/PExpr.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PModport.cc -o PModport.o
+1 warning generated.
+mv PGenerate.d dep/PGenerate.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PNamedItem.cc -o PNamedItem.o
+1 warning generated.
+mv PGate.d dep/PGate.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PPackage.cc -o PPackage.o
+In file included from PModport.cc:22:
+In file included from ./PModport.h:25:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+mv PNamedItem.d dep/PNamedItem.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PScope.cc -o PScope.o
+1 warning generated.
+mv PModport.d dep/PModport.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PSpec.cc -o PSpec.o
+mv PPackage.d dep/PPackage.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PTimingCheck.cc -o PTimingCheck.o
+mv PSpec.d dep/PSpec.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PTask.cc -o PTask.o
+In file included from PScope.cc:21:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from PTimingCheck.cc:20:
+In file included from ./PTimingCheck.h:23:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from PTask.cc:22:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv PScope.d dep/PScope.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PUdp.cc -o PUdp.o
+1 warning generated.
+mv PTimingCheck.d dep/PTimingCheck.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PWire.cc -o PWire.o
+mv PUdp.d dep/PUdp.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Statement.cc -o Statement.o
+1 warning generated.
+mv PTask.d dep/PTask.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c AStatement.cc -o AStatement.o
+In file included from PWire.cc:22:
+In file included from ./PWire.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from Statement.cc:27:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from AStatement.cc:22:
+In file included from ./AStatement.h:26:
+In file included from ./Statement.h:30:
+In file included from ./PExpr.h:28:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv PWire.d dep/PWire.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ./libmisc/LineInfo.cc -o LineInfo.o
+1 warning generated.
+mv AStatement.d dep/AStatement.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ./libmisc/StringHeap.cc -o StringHeap.o
+mv LineInfo.d dep/LineInfo.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c cprop.cc -o cprop.o
+mv StringHeap.d dep/StringHeap.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c exposenodes.cc -o exposenodes.o
+In file included from cprop.cc:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from exposenodes.cc:24:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv cprop.d dep/cprop.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nodangle.cc -o nodangle.o
+1 warning generated.
+mv exposenodes.d dep/exposenodes.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c synth.cc -o synth.o
+1 warning generated.
+mv Statement.d dep/Statement.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c synth2.cc -o synth2.o
+In file included from synth.cc:23:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from nodangle.cc:30:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from synth2.cc:23:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv synth.d dep/synth.d
+bison --verbose -t -p syn_ -o syn-rules.cc syn-rules.y
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll.cc -o t-dll.o
+synth2.cc:402:43: warning: unused parameter 'des' [-Wunused-parameter]
+  402 | NetNet* synth_blocking_read_signal(Design*des, NetScope*scope, NetNet*sig)
+      |                                           ^
+1 warning generated.
+mv nodangle.d dep/nodangle.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-api.cc -o t-dll-api.o
+In file included from t-dll.cc:28:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from t-dll-api.cc:24:
+In file included from ./t-dll.h:22:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv t-dll-api.d dep/t-dll-api.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-expr.cc -o t-dll-expr.o
+1 warning generated.
+mv t-dll.d dep/t-dll.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-proc.cc -o t-dll-proc.o
+In file included from t-dll-expr.cc:25:
+In file included from ./t-dll.h:22:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from t-dll-proc.cc:26:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+2 warnings generated.
+mv synth2.d dep/synth2.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-analog.cc -o t-dll-analog.o
+1 warning generated.
+mv t-dll-expr.d dep/t-dll-expr.d
+gcc -std=gnu23 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -Wl,-all_load   -o version.exe -I. -I. ./version.c
+sed -e 's;@SHARED@;-bundle -undefined dynamic_lookup -flat_namespace;' -e 's;@PIC@;-fPIC;' \
+	    -e 's;@ENABLE_PLI1@;no;' \
+	    -e 's;@SUFFIX@;;' \
+	    -e 's;@IVCC@;gcc -std=gnu23;' \
+	    -e 's;@IVCXX@;g++;' \
+	    -e 's;@IVCFLAGS@;-Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2;' \
+	    -e 's;@IVCXXFLAGS@;-Wall -Wextra -Wshadow   -g -O2 -std=c++11;' \
+	    -e 's;@IVCTARGETFLAGS@;;' \
+	    -e 's;@INCLUDEDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog;' \
+	    -e 's;@LIBDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib;' iverilog-vpi.sh > iverilog-vpi
+1 warning generated.
+mv t-dll-proc.d dep/t-dll-proc.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c main.cc -o main.o
+chmod +x iverilog-vpi
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor.cc -o lexor.o
+In file included from t-dll-analog.cc:26:
+In file included from ./target.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from lexor.lex:32:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+In file included from main.cc:58:
+In file included from ./pform.h:22:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv t-dll-analog.d dep/t-dll-analog.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor_keyword.cc -o lexor_keyword.o
+<stdout>:2854:13: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 2854 |             if ( ! (yy_state_buf) )
+      |             ^
+<stdout>:2852:9: note: previous statement is here
+ 2852 |         if ( ! (yy_state_buf) )
+      |         ^
+<stdout>:5086:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 5086 |                 return yy_is_jam ? 0 : yy_current_state;
+      |                 ^
+<stdout>:5083:2: note: previous statement is here
+ 5083 |         if ( ! yy_is_jam )
+      |         ^
+In file included from lexor_keyword.gperf:14:
+In file included from ./parse_misc.h:24:
+In file included from ./compiler.h:26:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+lexor_keyword.gperf:39:21: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   39 | Lkwd::keyword_hash (register const char *str, register unsigned int len)
+      |                     ^~~~~~~~
+lexor_keyword.gperf:39:47: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   39 | Lkwd::keyword_hash (register const char *str, register unsigned int len)
+      |                                               ^~~~~~~~
+lexor_keyword.gperf:70:3: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   70 |   register unsigned int hval = len;
+      |   ^~~~~~~~
+lexor_keyword.gperf:100:25: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  100 | Lkwd::check_identifier (register const char *str, register unsigned int len)
+      |                         ^~~~~~~~
+lexor_keyword.gperf:100:51: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  100 | Lkwd::check_identifier (register const char *str, register unsigned int len)
+      |                                                   ^~~~~~~~
+lexor_keyword.gperf:281:11: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  281 |           register const char *s = wordlist[key].name;
+      |           ^~~~~~~~
+7 warnings generated.
+mv lexor_keyword.d dep/lexor_keyword.d
+g++ -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c syn-rules.cc -o syn-rules.o
+3 warnings generated.
+mv lexor.d dep/lexor.d
+./version.exe `head -1 iverilog-vpi.man.in`'\n' > iverilog-vpi.man
+1 warning generated.
+mv main.d dep/main.d
+tail -n +2 iverilog-vpi.man.in >> iverilog-vpi.man
+In file included from syn-rules.y:34:
+./netlist.h:1089:29: warning: default member initializer for bit-field is a C++20 extension [-Wc++20-extensions]
+ 1089 |       bool comb_written_: 1 = false;
+      |                             ^
+1 warning generated.
+mv syn-rules.d dep/syn-rules.d
+g++ -Wl,-all_load   -o ivl main.o async.o design_dump.o discipline.o dup_expr.o elaborate.o sv_edition.o elab_expr.o elaborate_analog.o elab_lval.o elab_net.o elab_scope.o elab_sig.o elab_sig_analog.o elab_type.o emit.o eval_attrib.o eval_tree.o expr_synth.o functor.o lexor.o lexor_keyword.o link_const.o load_module.o netlist.o netmisc.o nettypes.o net_analog.o net_assign.o net_design.o netclass.o netdarray.o netenum.o netparray.o netqueue.o netscalar.o netstruct.o netvector.o net_event.o net_expr.o net_func.o net_func_eval.o net_link.o net_modulo.o net_nex_input.o net_nex_output.o net_proc.o net_scope.o net_tran.o net_udp.o map_named_args.o pad_to_width.o parse.o parse_misc.o pform.o pform_sva_nfa.o pform_analog.o pform_disciplines.o pform_dump.o pform_package.o pform_pclass.o pform_types.o symbol_search.o sync.o sys_funcs.o verinum.o verireal.o vpi_modules.o target.o Attrib.o HName.o Module.o PClass.o PDelays.o PEvent.o PExpr.o PFunction.o PGate.o PGenerate.o PModport.o PNamedItem.o PPackage.o PScope.o PSpec.o PTimingCheck.o PTask.o PUdp.o PWire.o Statement.o AStatement.o LineInfo.o StringHeap.o cprop.o exposenodes.o nodangle.o synth.o synth2.o syn-rules.o t-dll.o t-dll-api.o t-dll-expr.o t-dll-proc.o t-dll-analog.o -ldl
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ivlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vhdlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vpi all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-null all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-stub all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vhdl all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vlog95 all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-pcb all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-blif all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-sizer all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C driver all &&  true
+gcc -std=gnu23 -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -I. -I..  -DHAVE_CONFIG_H  -c -o main.o main.c
+flex -t lexor.lex > lexor.c
+gcc -std=gnu23 -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -I. -I..  -DHAVE_CONFIG_H  -c -o lexor.o lexor.c
+<stdout>:1922:13: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 1922 |             if ( ! (yy_state_buf) )
+      |             ^
+<stdout>:1920:9: note: previous statement is here
+ 1920 |         if ( ! (yy_state_buf) )
+      |         ^
+<stdout>:3730:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 3730 |                 return yy_is_jam ? 0 : yy_current_state;
+      |                 ^
+<stdout>:3727:2: note: previous statement is here
+ 3727 |         if ( ! yy_is_jam )
+      |         ^
+2 warnings generated.
+gcc -std=gnu23  main.o lexor.o -o ivlpp 
+mkdir dep
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c main.cc -o main.o
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec.cc -o architec.o
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c compiler.cc -o compiler.o
+mv compiler.d dep/compiler.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity.cc -o entity.o
+mv main.d dep/main.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c std_funcs.cc -o std_funcs.o
+mv architec.d dep/architec.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c std_types.cc -o std_types.o
+mv entity.d dep/entity.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression.cc -o expression.o
+mv std_funcs.d dep/std_funcs.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c package.cc -o package.o
+mv std_types.d dep/std_types.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+mv package.d dep/package.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential.cc -o sequential.o
+mv expression.d dep/expression.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c subprogram.cc -o subprogram.o
+mv sequential.d dep/sequential.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vsignal.cc -o vsignal.o
+mv scope.d dep/scope.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype.cc -o vtype.o
+mv subprogram.d dep/subprogram.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_match.cc -o vtype_match.o
+mv vsignal.d dep/vsignal.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_elaborate.cc -o architec_elaborate.o
+mv vtype_match.d dep/vtype_match.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_elaborate.cc -o entity_elaborate.o
+mv vtype.d dep/vtype.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_elaborate.cc -o expression_elaborate.o
+mv architec_elaborate.d dep/architec_elaborate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_evaluate.cc -o expression_evaluate.o
+mv entity_elaborate.d dep/entity_elaborate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_elaborate.cc -o sequential_elaborate.o
+mv expression_elaborate.d dep/expression_elaborate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_elaborate.cc -o vtype_elaborate.o
+mv expression_evaluate.d dep/expression_evaluate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_stream.cc -o entity_stream.o
+mv sequential_elaborate.d dep/sequential_elaborate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_stream.cc -o expression_stream.o
+mv vtype_elaborate.d dep/vtype_elaborate.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_stream.cc -o vtype_stream.o
+mv entity_stream.d dep/entity_stream.d
+flex -s -olexor.cc ./lexor.lex
+bison --verbose -t --defines=parse.h -o parse.cc parse.y
+mv expression_stream.d dep/expression_stream.d
+gperf -o -i 7 --ignore-case -C -k 1-4,6,9,$ -H keyword_hash -N check_identifier -t ./lexor_keyword.gperf > lexor_keyword.cc || (rm -f lexor_keyword.cc ; false)
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse_misc.cc -o parse_misc.o
+mv vtype_stream.d dep/vtype_stream.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c library.cc -o library.o
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdlreal.cc -o vhdlreal.o
+mv vhdlreal.d dep/vhdlreal.d
+mv parse_misc.d dep/parse_misc.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdlint.cc -o vhdlint.o
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_emit.cc -o architec_emit.o
+mv vhdlint.d dep/vhdlint.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_emit.cc -o entity_emit.o
+mv library.d dep/library.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_emit.cc -o expression_emit.o
+mv architec_emit.d dep/architec_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c package_emit.cc -o package_emit.o
+mv entity_emit.d dep/entity_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_emit.cc -o sequential_emit.o
+mv package_emit.d dep/package_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c subprogram_emit.cc -o subprogram_emit.o
+mv expression_emit.d dep/expression_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_emit.cc -o vtype_emit.o
+mv sequential_emit.d dep/sequential_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c debug.cc -o debug.o
+mv vtype_emit.d dep/vtype_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_debug.cc -o architec_debug.o
+mv subprogram_emit.d dep/subprogram_emit.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_debug.cc -o expression_debug.o
+mv architec_debug.d dep/architec_debug.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_debug.cc -o sequential_debug.o
+mv expression_debug.d dep/expression_debug.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ../libmisc/StringHeap.cc -o StringHeap.o
+mv debug.d dep/debug.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ../libmisc/LineInfo.cc -o LineInfo.o
+mv StringHeap.d dep/StringHeap.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor.cc -o lexor.o
+mv LineInfo.d dep/LineInfo.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor_keyword.cc -o lexor_keyword.o
+mv sequential_debug.d dep/sequential_debug.d
+g++ -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse.cc -o parse.o
+./lexor_keyword.gperf:55:20: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   55 | gperf_case_strcmp (register const char *s1, register const char *s2)
+      |                    ^~~~~~~~
+./lexor_keyword.gperf:55:45: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   55 | gperf_case_strcmp (register const char *s1, register const char *s2)
+      |                                             ^~~~~~~~
+./lexor_keyword.gperf:77:21: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   77 | Lkwd::keyword_hash (register const char *str, register unsigned int len)
+      |                     ^~~~~~~~
+./lexor_keyword.gperf:77:47: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   77 | Lkwd::keyword_hash (register const char *str, register unsigned int len)
+      |                                               ^~~~~~~~
+./lexor_keyword.gperf:108:3: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  108 |   register unsigned int hval = len;
+      |   ^~~~~~~~
+./lexor_keyword.gperf:138:25: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  138 | Lkwd::check_identifier (register const char *str, register unsigned int len)
+      |                         ^~~~~~~~
+./lexor_keyword.gperf:138:51: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+  138 | Lkwd::check_identifier (register const char *str, register unsigned int len)
+      |                                                   ^~~~~~~~
+./lexor_keyword.gperf:41:11: warning: 'register' storage class specifier is deprecated and incompatible with C++17 [-Wdeprecated-register]
+   41 |           register const char *s = wordlist[key].name;
+      |           ^~~~~~~~
+8 warnings generated.
+mv lexor_keyword.d dep/lexor_keyword.d
+parse.y:2398:2: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 2398 |         (yyval.sequ_list) = tmp;
+      |         ^
+parse.y:2396:5: note: previous statement is here
+ 2396 |     if((yyvsp[0].sequ))
+      |     ^
+parse.y:2404:2: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+ 2404 |         (yyval.sequ_list) = tmp;
+      |         ^
+parse.y:2402:5: note: previous statement is here
+ 2402 |     if((yyvsp[0].sequ))
+      |     ^
+parse.cc:2278:9: warning: variable 'yynerrs' set but not used [-Wunused-but-set-variable]
+ 2278 |     int yynerrs = 0;
+      |         ^
+mv lexor.d dep/lexor.d
+3 warnings generated.
+mv parse.d dep/parse.d
+g++ -o vhdlpp  main.o architec.o compiler.o entity.o std_funcs.o std_types.o expression.o package.o scope.o sequential.o subprogram.o vsignal.o vtype.o vtype_match.o architec_elaborate.o entity_elaborate.o expression_elaborate.o expression_evaluate.o sequential_elaborate.o vtype_elaborate.o entity_stream.o expression_stream.o vtype_stream.o lexor.o lexor_keyword.o parse.o parse_misc.o library.o vhdlreal.o vhdlint.o architec_emit.o entity_emit.o expression_emit.o package_emit.o sequential_emit.o subprogram_emit.o vtype_emit.o debug.o architec_debug.o expression_debug.o sequential_debug.o StringHeap.o LineInfo.o -lbz2 -lz -lpthread -lreadline -ltermcap  
+mkdir dep
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lib_main.cc -o lib_main.o
+bison --verbose -t --defines=parse.h -o parse.cc parse.y
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse_misc.cc -o parse_misc.o
+parse.y: warning: 14 shift/reduce conflicts [-Wconflicts-sr]
+parse.y: warning: 5 reduce/reduce conflicts [-Wconflicts-rr]
+parse.y: note: rerun with option '-Wcounterexamples' to generate conflict counterexamples
+parse.cc:4310: warning: suspicious sequence in the output: m4_type [-Wother]
+parse.cc:4316: warning: suspicious sequence in the output: m4_type [-Wother]
+flex -s -Cf -olexor.cc lexor.lex
+mv parse_misc.d dep/parse_misc.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c arith.cc -o arith.o
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c array_common.cc -o array_common.o
+mv lib_main.d dep/lib_main.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c array.cc -o array.o
+mv array_common.d dep/array_common.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c bufif.cc -o bufif.o
+mv arith.d dep/arith.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c compile.cc -o compile.o
+array.cc:1415:29: warning: declaration shadows a local variable [-Wshadow]
+ 1415 |             else if (vvp_wire_vec8*sig =
+      |                                    ^
+array.cc:1412:24: note: previous declaration is here
+ 1412 |             if (vvp_wire_vec4*sig =
+      |                               ^
+array.cc:1436:28: warning: declaration shadows a local variable [-Wshadow]
+ 1436 |                   else if (vvp_wire_vec8*sig =
+      |                                          ^
+array.cc:1433:23: note: previous declaration is here
+ 1433 |                   if (vvp_wire_vec4*sig =
+      |                                     ^
+mv bufif.d dep/bufif.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c concat.cc -o concat.o
+mv concat.d dep/concat.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c dff.cc -o dff.o
+2 warnings generated.
+mv array.d dep/array.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c class_type.cc -o class_type.o
+mv dff.d dep/dff.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c enum_type.cc -o enum_type.o
+mv compile.d dep/compile.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c extend.cc -o extend.o
+class_type.cc:1864:16: warning: missing field 'argument_dependencies' initializer [-Wmissing-field-initializers]
+ 1864 |             is_virtual};
+      |                       ^
+mv enum_type.d dep/enum_type.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c file_line.cc -o file_line.o
+mv extend.d dep/extend.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c latch.cc -o latch.o
+mv file_line.d dep/file_line.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c npmos.cc -o npmos.o
+mv latch.d dep/latch.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c part.cc -o part.o
+mv npmos.d dep/npmos.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c permaheap.cc -o permaheap.o
+mv permaheap.d dep/permaheap.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c reduce.cc -o reduce.o
+mv part.d dep/part.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c resolv.cc -o resolv.o
+mv reduce.d dep/reduce.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sfunc.cc -o sfunc.o
+mv resolv.d dep/resolv.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c stop.cc -o stop.o
+mv sfunc.d dep/sfunc.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c substitute.cc -o substitute.o
+mv stop.d dep/stop.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c symbols.cc -o symbols.o
+mv substitute.d dep/substitute.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ufunc.cc -o ufunc.o
+mv symbols.d dep/symbols.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c codes.cc -o codes.o
+mv codes.d dep/codes.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vthread.cc -o vthread.o
+mv ufunc.d dep/ufunc.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c schedule.cc -o schedule.o
+vthread.cc:4621:25: warning: unused parameter 'thr' [-Wunused-parameter]
+ 4621 | bool of_QSORT(vthread_t thr, vvp_code_t cp)
+      |                         ^
+vthread.cc:4636:27: warning: unused parameter 'thr' [-Wunused-parameter]
+ 4636 | bool of_QSORT_R(vthread_t thr, vvp_code_t cp)
+      |                           ^
+vthread.cc:4651:27: warning: unused parameter 'thr' [-Wunused-parameter]
+ 4651 | bool of_QUNIQUE(vthread_t thr, vvp_code_t cp)
+      |                           ^
+vthread.cc:14636:18: warning: declaration shadows a local variable [-Wshadow]
+ 14636 |                     __vpiScope*child_scope = child->parent_scope;
+       |                                ^
+vthread.cc:14305:18: note: previous declaration is here
+ 14305 |       __vpiScope*child_scope = child->parent_scope;
+       |                  ^
+mv schedule.d dep/schedule.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c statistics.cc -o statistics.o
+mv statistics.d dep/statistics.d
+gcc -std=gnu23 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -Wl,-all_load   -o draw_tt ./draw_tt.c
+vthread.cc:22473:36: warning: '/*' within block comment [-Wcomment]
+ 22473 | /* Container spec codes for %aa/viv/*: which empty inner container to
+       |                                    ^
+vthread.cc:23281:51: warning: '/*' within block comment [-Wcomment]
+ 23281 |  * c.aq[key].push_back(v) — a plain %aa/load/obj/* returns nil for a
+       |                                                 ^
+./draw_tt > tables.cc
+rm draw_tt
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c udp.cc -o udp.o
+1 warning generated.
+mv class_type.d dep/class_type.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_island.cc -o vvp_island.o
+mv udp.d dep/udp.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_net.cc -o vvp_net.o
+mv vvp_island.d dep/vvp_island.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_net_sig.cc -o vvp_net_sig.o
+vthread.cc:13866:13: warning: unused function 'copy_call_inputs_to_allocated_context_' [-Wunused-function]
+ 13866 | static bool copy_call_inputs_to_allocated_context_(__vpiScope*scope, vthread_t thr,
+       |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vthread.cc:2287:21: warning: unused function 'lookup_scope_port_by_index_' [-Wunused-function]
+ 2287 | static vpiPortInfo* lookup_scope_port_by_index_(__vpiScope*scope, unsigned index)
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+vthread.cc:11796:13: warning: unused function 'context_on_stacked_chain_' [-Wunused-function]
+ 11796 | static bool context_on_stacked_chain_(vvp_context_t head, vvp_context_t needle,
+       |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+vthread.cc:28039:13: warning: unused function 'get_from_process_obj' [-Wunused-function]
+ 28039 | static bool get_from_process_obj(unsigned pid, unsigned idx, vvp_process*proc, double&val)
+       |             ^~~~~~~~~~~~~~~~~~~~
+vthread.cc:28045:13: warning: unused function 'get_from_process_obj' [-Wunused-function]
+ 28045 | static bool get_from_process_obj(unsigned pid, unsigned idx, vvp_process*proc, string&val)
+       |             ^~~~~~~~~~~~~~~~~~~~
+mv vvp_net.d dep/vvp_net.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_object.cc -o vvp_object.o
+vvp_net_sig.cc:2505:37: warning: unused function 'signal_object_aa_slot_from_raw' [-Wunused-function]
+ 2505 | static const signal_object_aa_slot* signal_object_aa_slot_from_raw(const void*raw)
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mv vvp_object.d dep/vvp_object.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_assoc.cc -o vvp_assoc.o
+1 warning generated.
+mv vvp_net_sig.d dep/vvp_net_sig.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_cobject.cc -o vvp_cobject.o
+mv vvp_assoc.d dep/vvp_assoc.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_darray.cc -o vvp_darray.o
+mv vvp_cobject.d dep/vvp_cobject.d
+g++ -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_dpi.cc -o vvp_dpi.o
+vvp_dpi.cc:15:12: fatal error: 'ffi.h' file not found
+   15 | # include  <ffi.h>
+      |            ^~~~~~~
+1 error generated.
+make[1]: *** [vvp_dpi.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+mv vvp_darray.d dep/vvp_darray.d
+11 warnings generated.
+mv vthread.d dep/vthread.d
+make: *** [all] Error 2
+      193.71 real       371.62 user        32.04 sys
+          1338032128  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             3578687  page reclaims
+               53477  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                 580  signals received
+               15546  voluntary context switches
+              313907  involuntary context switches
+            29571118  instructions retired
+            16081172  cycles elapsed
+             1720704  peak memory footprint
+checking build system type... aarch64-apple-darwin27.0.0
+checking host system type... aarch64-apple-darwin27.0.0
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... -std=gnu23
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for aarch64-apple-darwin27.0.0-gcc... no
+checking for gcc... gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... (cached) -std=gnu23
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for ranlib... ranlib
+checking for ld... ld
+checking for ar... ar
+checking for strip... strip
+checking for windres... no
+checking for gperf... gperf
+checking for man... man
+checking for ps2pdf... ps2pdf
+checking for groff... no
+checking for git... git
+checking for flex... flex
+checking for bison... bison
+checking for Microsoft Windows... no
+checking for gcc -std=gnu23 options to detect undeclared functions... none needed
+checking for gcc -std=gnu23 options to ignore future-version functions... -Werror=unguarded-availability-new
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking whether __SUNPRO_C is declared... no
+checking if gcc supports -Wextra... yes
+checking for g++ options to detect undeclared functions... none needed
+checking for g++ options to ignore future-version functions... -Werror=unguarded-availability-new
+checking whether __SUNPRO_CC is declared... no
+checking for getopt.h... yes
+checking for inttypes.h... (cached) yes
+checking for libiberty.h... no
+checking for iosfwd... yes
+checking for sys/wait.h... yes
+checking for execinfo.h... yes
+checking size of unsigned long long... 8
+checking size of unsigned long... 8
+checking size of unsigned... 4
+checking size of void *... 8
+checking for tputs in -ltermcap... yes
+checking for readline in -lreadline... yes
+checking for add_history in -lreadline... yes
+checking for readline/readline.h... yes
+checking for readline/history.h... yes
+checking for sys/resource.h... yes
+checking for pthread_create in -lpthread... yes
+checking for gzwrite in -lz... yes
+checking for gzwrite in -lz... (cached) yes
+checking for BZ2_bzdopen in -lbz2... yes
+checking for BZ2_bzdopen in -lbz2... (cached) yes
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for declarations of fseeko and ftello... yes
+configure: Not using valgrind hooks
+checking for sys/times... yes
+checking for dlfcn.h... yes
+checking for dlopen in -ldl... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether byte ordering is bigendian... no
+checking for extra libs needed... 
+checking for flag to make position independent code... -fPIC
+checking for realpath... yes
+checking for fopen64... no
+checking for library containing lround... none required
+checking for library containing llround... none required
+checking for library containing nan... none required
+checking for library containing fmin... none required
+checking for library containing fmax... none required
+checking if uint64_t and unsigned long are identical... no
+checking for -rdynamic compiler flag... -Wl,-all_load
+checking for shared library link flag... -bundle -undefined dynamic_lookup -flat_namespace
+checking for leading underscores... no
+checking for trailing underscores... no
+checking for sanity of prefix... ok
+checking for sanity of exec_prefix... ok
+checking for sanity of libdir... ok
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating ivlpp/Makefile
+config.status: creating vhdlpp/Makefile
+config.status: creating vvp/Makefile
+config.status: creating vpi/Makefile
+config.status: creating driver/Makefile
+config.status: creating driver-vpi/Makefile
+config.status: creating cadpli/Makefile
+config.status: creating libveriuser/Makefile
+config.status: creating tgt-null/Makefile
+config.status: creating tgt-stub/Makefile
+config.status: creating tgt-vvp/Makefile
+config.status: creating tgt-vhdl/Makefile
+config.status: creating tgt-fpga/Makefile
+config.status: creating tgt-verilog/Makefile
+config.status: creating tgt-pal/Makefile
+config.status: creating tgt-vlog95/Makefile
+config.status: creating tgt-pcb/Makefile
+config.status: creating tgt-blif/Makefile
+config.status: creating tgt-sizer/Makefile
+config.status: creating config.h
+config.status: config.h is unchanged
+config.status: creating _pli_types.h
+config.status: _pli_types.h is unchanged
+config.status: creating vhdlpp/vhdlpp_config.h
+config.status: vhdlpp/vhdlpp_config.h is unchanged
+config.status: creating vvp/config.h
+config.status: vvp/config.h is unchanged
+config.status: creating vpi/vpi_config.h
+config.status: vpi/vpi_config.h is unchanged
+config.status: creating libveriuser/config.h
+config.status: libveriuser/config.h is unchanged
+config.status: creating tgt-vvp/vvp_config.h
+config.status: tgt-vvp/vvp_config.h is unchanged
+config.status: creating tgt-vhdl/vhdl_config.h
+config.status: tgt-vhdl/vhdl_config.h is unchanged
+config.status: creating tgt-pcb/pcb_config.h
+config.status: tgt-pcb/pcb_config.h is unchanged
+sed -e 's;@SHARED@;-bundle -undefined dynamic_lookup -flat_namespace;' -e 's;@PIC@;-fPIC;' \
+	    -e 's;@ENABLE_PLI1@;no;' \
+	    -e 's;@SUFFIX@;;' \
+	    -e 's;@IVCC@;gcc -std=gnu23;' \
+	    -e 's;@IVCXX@;g++;' \
+	    -e 's;@IVCFLAGS@;-Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2;' \
+	    -e 's;@IVCXXFLAGS@;-Wall -Wextra -Wshadow   -g -O2 -std=c++11;' \
+	    -e 's;@IVCTARGETFLAGS@;;' \
+	    -e 's;@INCLUDEDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog;' \
+	    -e 's;@LIBDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib;' iverilog-vpi.sh > iverilog-vpi
+chmod +x iverilog-vpi
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ivlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vhdlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vpi all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-null all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-stub all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vhdl all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vlog95 all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-pcb all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-blif all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-sizer all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C driver all &&  true
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse.cc -o parse.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor.cc -o lexor.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c tables.cc -o tables.o
+mv tables.d dep/tables.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_dpi.cc -o vvp_dpi.o
+mv lexor.d dep/lexor.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_mailbox.cc -o vvp_mailbox.o
+mv parse.d dep/parse.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_vinterface.cc -o vvp_vinterface.o
+mv vvp_dpi.d dep/vvp_dpi.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_z3.cc -o vvp_z3.o
+vvp_z3.cc:34:12: fatal error: 'z3.h' file not found
+   34 | # include  <z3.h>
+      |            ^~~~~~
+1 error generated.
+make[1]: *** [vvp_z3.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+mv vvp_mailbox.d dep/vvp_mailbox.d
+mv vvp_vinterface.d dep/vvp_vinterface.d
+make: *** [all] Error 2
+       20.56 real        11.63 user         5.51 sys
+           172720128  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              869012  page reclaims
+               17522  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                 196  signals received
+                2048  voluntary context switches
+               34237  involuntary context switches
+            27366507  instructions retired
+            12711434  cycles elapsed
+             1720704  peak memory footprint
+checking build system type... aarch64-apple-darwin27.0.0
+checking host system type... aarch64-apple-darwin27.0.0
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... -std=gnu23
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for aarch64-apple-darwin27.0.0-gcc... no
+checking for gcc... gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C23 features... (cached) -std=gnu23
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking how to run the C preprocessor... gcc -std=gnu23 -E
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for ranlib... ranlib
+checking for ld... ld
+checking for ar... ar
+checking for strip... strip
+checking for windres... no
+checking for gperf... gperf
+checking for man... man
+checking for ps2pdf... ps2pdf
+checking for groff... no
+checking for git... git
+checking for flex... flex
+checking for bison... bison
+checking for Microsoft Windows... no
+checking for gcc -std=gnu23 options to detect undeclared functions... none needed
+checking for gcc -std=gnu23 options to ignore future-version functions... -Werror=unguarded-availability-new
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking whether __SUNPRO_C is declared... no
+checking if gcc supports -Wextra... yes
+checking for g++ options to detect undeclared functions... none needed
+checking for g++ options to ignore future-version functions... -Werror=unguarded-availability-new
+checking whether __SUNPRO_CC is declared... no
+checking for getopt.h... yes
+checking for inttypes.h... (cached) yes
+checking for libiberty.h... no
+checking for iosfwd... yes
+checking for sys/wait.h... yes
+checking for execinfo.h... yes
+checking size of unsigned long long... 8
+checking size of unsigned long... 8
+checking size of unsigned... 4
+checking size of void *... 8
+checking for tputs in -ltermcap... yes
+checking for readline in -lreadline... yes
+checking for add_history in -lreadline... yes
+checking for readline/readline.h... yes
+checking for readline/history.h... yes
+checking for sys/resource.h... yes
+checking for pthread_create in -lpthread... yes
+checking for gzwrite in -lz... yes
+checking for gzwrite in -lz... (cached) yes
+checking for BZ2_bzdopen in -lbz2... yes
+checking for BZ2_bzdopen in -lbz2... (cached) yes
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for declarations of fseeko and ftello... yes
+configure: Not using valgrind hooks
+checking for sys/times... yes
+checking for dlfcn.h... yes
+checking for dlopen in -ldl... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether byte ordering is bigendian... no
+checking for extra libs needed... 
+checking for flag to make position independent code... -fPIC
+checking for realpath... yes
+checking for fopen64... no
+checking for library containing lround... none required
+checking for library containing llround... none required
+checking for library containing nan... none required
+checking for library containing fmin... none required
+checking for library containing fmax... none required
+checking if uint64_t and unsigned long are identical... no
+checking for -rdynamic compiler flag... -Wl,-all_load
+checking for shared library link flag... -bundle -undefined dynamic_lookup -flat_namespace
+checking for leading underscores... no
+checking for trailing underscores... no
+checking for sanity of prefix... ok
+checking for sanity of exec_prefix... ok
+checking for sanity of libdir... ok
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating ivlpp/Makefile
+config.status: creating vhdlpp/Makefile
+config.status: creating vvp/Makefile
+config.status: creating vpi/Makefile
+config.status: creating driver/Makefile
+config.status: creating driver-vpi/Makefile
+config.status: creating cadpli/Makefile
+config.status: creating libveriuser/Makefile
+config.status: creating tgt-null/Makefile
+config.status: creating tgt-stub/Makefile
+config.status: creating tgt-vvp/Makefile
+config.status: creating tgt-vhdl/Makefile
+config.status: creating tgt-fpga/Makefile
+config.status: creating tgt-verilog/Makefile
+config.status: creating tgt-pal/Makefile
+config.status: creating tgt-vlog95/Makefile
+config.status: creating tgt-pcb/Makefile
+config.status: creating tgt-blif/Makefile
+config.status: creating tgt-sizer/Makefile
+config.status: creating config.h
+config.status: config.h is unchanged
+config.status: creating _pli_types.h
+config.status: _pli_types.h is unchanged
+config.status: creating vhdlpp/vhdlpp_config.h
+config.status: vhdlpp/vhdlpp_config.h is unchanged
+config.status: creating vvp/config.h
+config.status: vvp/config.h is unchanged
+config.status: creating vpi/vpi_config.h
+config.status: vpi/vpi_config.h is unchanged
+config.status: creating libveriuser/config.h
+config.status: libveriuser/config.h is unchanged
+config.status: creating tgt-vvp/vvp_config.h
+config.status: tgt-vvp/vvp_config.h is unchanged
+config.status: creating tgt-vhdl/vhdl_config.h
+config.status: tgt-vhdl/vhdl_config.h is unchanged
+config.status: creating tgt-pcb/pcb_config.h
+config.status: tgt-pcb/pcb_config.h is unchanged
+sed -e 's;@SHARED@;-bundle -undefined dynamic_lookup -flat_namespace;' -e 's;@PIC@;-fPIC;' \
+	    -e 's;@ENABLE_PLI1@;no;' \
+	    -e 's;@SUFFIX@;;' \
+	    -e 's;@IVCC@;gcc -std=gnu23;' \
+	    -e 's;@IVCXX@;g++;' \
+	    -e 's;@IVCFLAGS@;-Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2;' \
+	    -e 's;@IVCXXFLAGS@;-Wall -Wextra -Wshadow   -g -O2 -std=c++11;' \
+	    -e 's;@IVCTARGETFLAGS@;;' \
+	    -e 's;@INCLUDEDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog;' \
+	    -e 's;@LIBDIR@;/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib;' iverilog-vpi.sh > iverilog-vpi
+chmod +x iverilog-vpi
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ivlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vhdlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vpi all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-null all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-stub all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vhdl all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vlog95 all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-pcb all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-blif all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-sizer all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C driver all &&  true
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_z3.cc -o vvp_z3.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c event.cc -o event.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c logic.cc -o logic.o
+mv logic.d dep/logic.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c delay.cc -o delay.o
+vvp_z3.cc:11017:6: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+ 11017 |             for (const auto&sv : builder.size_vars) {
+       |             ^
+vvp_z3.cc:11011:7: note: previous statement is here
+ 11011 |       for (const auto&pv : builder.prop_vars)
+       |       ^
+vvp_z3.cc:14081:21: warning: declaration shadows a local variable [-Wshadow]
+ 14081 |                   if (vvp_cobject*owner = cobj_struct_prop(builder.object(mv.outer),
+       |                                   ^
+vvp_z3.cc:14023:18: note: previous declaration is here
+ 14023 |             vvp_cobject*owner = cobj_struct_prop(builder.object(mv.outer), builder.local_index(mv.outer));
+       |                         ^
+mv delay.d dep/delay.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c words.cc -o words.o
+mv words.d dep/words.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c island_tran.cc -o island_tran.o
+mv event.d dep/event.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_modules.cc -o vpi_modules.o
+mv vpi_modules.d dep/vpi_modules.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_bit.cc -o vpi_bit.o
+mv island_tran.d dep/island_tran.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_callback.cc -o vpi_callback.o
+mv vpi_bit.d dep/vpi_bit.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_cobject.cc -o vpi_cobject.o
+mv vpi_callback.d dep/vpi_callback.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_const.cc -o vpi_const.o
+mv vpi_const.d dep/vpi_const.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_darray.cc -o vpi_darray.o
+mv vpi_cobject.d dep/vpi_cobject.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_event.cc -o vpi_event.o
+mv vpi_darray.d dep/vpi_darray.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_iter.cc -o vpi_iter.o
+mv vpi_event.d dep/vpi_event.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_mcd.cc -o vpi_mcd.o
+mv vpi_iter.d dep/vpi_iter.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_priv.cc -o vpi_priv.o
+mv vpi_mcd.d dep/vpi_mcd.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_scope.cc -o vpi_scope.o
+mv vpi_priv.d dep/vpi_priv.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_real.cc -o vpi_real.o
+vpi_scope.cc:811:11: warning: private field 'idx_' is not used [-Wunused-private-field]
+  811 |       int idx_;
+      |           ^
+1 warning generated.
+mv vpi_scope.d dep/vpi_scope.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_signal.cc -o vpi_signal.o
+mv vpi_real.d dep/vpi_real.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_string.cc -o vpi_string.o
+mv vpi_string.d dep/vpi_string.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_tasks.cc -o vpi_tasks.o
+mv vpi_signal.d dep/vpi_signal.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_time.cc -o vpi_time.o
+mv vpi_tasks.d dep/vpi_tasks.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_vthr_vector.cc -o vpi_vthr_vector.o
+mv vpi_time.d dep/vpi_time.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpip_bin.cc -o vpip_bin.o
+mv vpip_bin.d dep/vpip_bin.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpip_hex.cc -o vpip_hex.o
+mv vpi_vthr_vector.d dep/vpi_vthr_vector.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpip_oct.cc -o vpip_oct.o
+mv vpip_hex.d dep/vpip_hex.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpip_to_dec.cc -o vpip_to_dec.o
+mv vpip_oct.d dep/vpip_oct.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpip_format.cc -o vpip_format.o
+mv vpip_format.d dep/vpip_format.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vvp_vpi.cc -o vvp_vpi.o
+mv vvp_vpi.d dep/vvp_vpi.d
+mv vpip_to_dec.d dep/vpip_to_dec.d
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DUSE_LIBFFI=1 -DIVL_SUFFIX='""' -DMODULE_DIR1='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c main.cc -o main.o
+../version.exe `head -1 vvp.man.in`'\n' > vvp.man
+tail -n +2 vvp.man.in >> vvp.man
+mv main.d dep/main.d
+2 warnings generated.
+mv vvp_z3.d dep/vvp_z3.d
+g++ -Wl,-all_load  -L/opt/homebrew/Cellar/z3/5.1.0/lib -o vvp main.o lib_main.o parse.o parse_misc.o lexor.o arith.o array_common.o array.o bufif.o compile.o concat.o dff.o class_type.o enum_type.o extend.o file_line.o latch.o npmos.o part.o permaheap.o reduce.o resolv.o sfunc.o stop.o substitute.o symbols.o ufunc.o codes.o vthread.o schedule.o statistics.o tables.o udp.o vvp_island.o vvp_net.o vvp_net_sig.o vvp_object.o vvp_assoc.o vvp_cobject.o vvp_darray.o vvp_dpi.o vvp_mailbox.o vvp_vinterface.o vvp_z3.o event.o logic.o delay.o words.o island_tran.o vpi_modules.o vpi_bit.o vpi_callback.o vpi_cobject.o vpi_const.o vpi_darray.o vpi_event.o vpi_iter.o vpi_mcd.o vpi_priv.o vpi_scope.o vpi_real.o vpi_signal.o vpi_string.o vpi_tasks.o vpi_time.o vpi_vthr_vector.o vpip_bin.o vpip_hex.o vpip_oct.o vpip_to_dec.o vpip_format.o vvp_vpi.o -lbz2 -lz -lpthread -lreadline -ltermcap   -lz3 -lffi -ldl
+mkdir dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -c libvpi.c
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_table.c -o sys_table.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_convert.c -o sys_convert.o
+rm -f libvpi.a
+ar cqv libvpi.a libvpi.o
+mv sys_table.d dep
+mv sys_convert.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_countdrivers.c -o sys_countdrivers.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_coverage.c -o sys_coverage.o
+q - libvpi.o
+ranlib libvpi.a
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_darray.c -o sys_darray.o
+mv sys_countdrivers.d dep
+mv sys_darray.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_deposit.c -o sys_deposit.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_display.c -o sys_display.o
+mv sys_coverage.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_fileio.c -o sys_fileio.o
+mv sys_deposit.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_finish.c -o sys_finish.o
+mv sys_finish.d dep
+mv sys_fileio.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_icarus.c -o sys_icarus.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_plusargs.c -o sys_plusargs.o
+mv sys_icarus.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_queue.c -o sys_queue.o
+mv sys_plusargs.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_random.c -o sys_random.o
+mv sys_random.d dep
+mv sys_display.d dep
+mv sys_queue.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_random_mti.c -o sys_random_mti.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_readmem.c -o sys_readmem.o
+flex -t sys_readmem_lex.lex > sys_readmem_lex.c
+mv sys_random_mti.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_scanf.c -o sys_scanf.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_sva.c -o sys_sva.o
+mv sys_readmem.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_sdf.c -o sys_sdf.o
+mv sys_sdf.d dep
+mv sys_sva.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_time.c -o sys_time.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_vcd.c -o sys_vcd.o
+mv sys_time.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_vcdoff.c -o sys_vcdoff.o
+mv sys_vcd.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_dumpports.c -o sys_dumpports.o
+mv sys_scanf.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vcd_priv.c -o vcd_priv.o
+mv sys_vcdoff.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c mt19937int.c -o mt19937int.o
+mv vcd_priv.d dep
+mv mt19937int.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_priv.c -o sys_priv.o
+bison --verbose -t -p sdf -d -o sdf_parse.c sdf_parse.y
+mv sys_priv.d dep
+flex -t sdf_lexor.lex > sdf_lexor.c
+mv sys_dumpports.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stringheap.c -o stringheap.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vams_simparam.c -o vams_simparam.o
+mv stringheap.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod.c -o table_mod.o
+bison --verbose -t -p tblmod -d -o table_mod_parse.c table_mod_parse.y
+mv vams_simparam.d dep
+flex -t table_mod_lexor.lex > table_mod_lexor.c
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_lxt.c -o sys_lxt.o
+mv table_mod.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c lxt_write.c -o lxt_write.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_lxt2.c -o sys_lxt2.o
+mv sys_lxt.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c lxt2_write.c -o lxt2_write.o
+mv sys_lxt2.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -DFST_WRITER_PARALLEL -DHAVE_LIBPTHREAD -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_fst.c -o sys_fst.o
+mv sys_fst.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -DFST_WRITER_PARALLEL -DHAVE_LIBPTHREAD -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c fstapi.c -o fstapi.o
+mv lxt_write.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c fastlz.c -o fastlz.o
+fstapi.c:511:23: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  511 |     unsigned char buf[chk_len_max];
+      |                       ^~~~~~~~~~~
+fstapi.c:541:23: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  541 |     unsigned char buf[chk_len_max];
+      |                       ^~~~~~~~~~~
+fstapi.c:572:23: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  572 |     unsigned char buf[chk_len_max];
+      |                       ^~~~~~~~~~~
+mv lxt2_write.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c lz4.c -o lz4.o
+mv fastlz.d dep
+g++ -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vcd_priv2.cc -o vcd_priv2.o
+mv vcd_priv2.d dep
+g++ -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sys_sv_class.cc -o sys_sv_class.o
+3 warnings generated.
+mv fstapi.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c va_math.c -o va_math.o
+mv va_math.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_clog2.c -o sys_clog2.o
+mv sys_clog2.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2005_math.c -o v2005_math.o
+mv v2005_math.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_table.c -o v2009_table.o
+mv sys_sv_class.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_array.c -o v2009_array.o
+mv v2009_table.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_bitvec.c -o v2009_bitvec.o
+v2009_array.c:67:27: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+   67 |       vpiHandle argv, arg[MAX_ARGC];
+      |                           ^~~~~~~~
+v2009_array.c:68:26: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+   68 |       PLI_INT32 arg_type[MAX_ARGC];
+      |                          ^~~~~~~~
+v2009_array.c:159:35: warning: unused parameter 'name' [-Wunused-parameter]
+  159 | static void high_array(const char*name, vpiHandle callh, vpiHandle arg)
+      |                                   ^
+v2009_array.c:248:34: warning: unused parameter 'name' [-Wunused-parameter]
+  248 | static void low_array(const char*name, vpiHandle callh, vpiHandle arg)
+      |                                  ^
+4 warnings generated.
+mv v2009_array.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_enum.c -o v2009_enum.o
+mv v2009_bitvec.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_string.c -o v2009_string.o
+mv v2009_enum.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vhdl_table.c -o vhdl_table.o
+mv v2009_string.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vhdl_textio.c -o vhdl_textio.o
+vhdl_textio.c:236:14: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  236 |     char buf[STRING_BUF_SIZE];
+      |              ^~~~~~~~~~~~~~~
+vhdl_textio.c:495:14: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  495 |     char buf[STRING_BUF_SIZE];
+      |              ^~~~~~~~~~~~~~~
+vhdl_textio.c:852:14: warning: variable length array folded to constant array as an extension [-Wgnu-folding-constant]
+  852 |     char buf[STRING_BUF_SIZE];
+      |              ^~~~~~~~~~~~~~~
+mv vhdl_table.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vpi_debug.c -o vpi_debug.o
+3 warnings generated.
+mv vpi_debug.d dep
+mv vhdl_textio.d dep
+mv lz4.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_readmem_lex.c -o sys_readmem_lex.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sdf_parse.c -o sdf_parse.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sdf_lexor.c -o sdf_lexor.o
+mv sdf_parse.d dep
+mv sdf_lexor.d dep
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod_parse.c -o table_mod_parse.o
+gcc -std=gnu23 -I. -I..  -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod_lexor.c -o table_mod_lexor.o
+mv sys_readmem_lex.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o va_math.vpi va_math.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi 
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o v2005_math.vpi sys_clog2.o v2005_math.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi 
+mv table_mod_parse.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o v2009.vpi v2009_table.o v2009_array.o v2009_bitvec.o v2009_enum.o v2009_string.o sys_priv.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi -lbz2 -lz -lpthread -lreadline -ltermcap 
+mv table_mod_lexor.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o vhdl_sys.vpi vhdl_table.o sys_priv.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi -lbz2 -lz -lpthread -lreadline -ltermcap 
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o vhdl_textio.vpi vhdl_textio.o sys_priv.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi -lbz2 -lz -lpthread -lreadline -ltermcap 
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -o vpi_debug.vpi vpi_debug.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi -lbz2 -lz -lpthread -lreadline -ltermcap 
+g++ -bundle -undefined dynamic_lookup -flat_namespace -o system.vpi sys_table.o sys_convert.o sys_countdrivers.o sys_coverage.o sys_darray.o sys_deposit.o sys_display.o sys_fileio.o sys_finish.o sys_icarus.o sys_plusargs.o sys_queue.o sys_random.o sys_random_mti.o sys_readmem.o sys_readmem_lex.o sys_scanf.o sys_sva.o sys_sdf.o sys_time.o sys_vcd.o sys_vcdoff.o sys_dumpports.o vcd_priv.o mt19937int.o sys_priv.o sdf_parse.o sdf_lexor.o stringheap.o vams_simparam.o table_mod.o table_mod_parse.o table_mod_lexor.o sys_lxt.o lxt_write.o sys_lxt2.o lxt2_write.o sys_fst.o fstapi.o fastlz.o lz4.o vcd_priv2.o sys_sv_class.o -L. -L/opt/homebrew/Cellar/z3/5.1.0/lib -lvpi -lbz2 -lz -lpthread -lreadline -ltermcap 
+mkdir dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c null.c -o null.o
+mv null.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o null.tgt null.o 
+mkdir dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stub.c -o stub.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c classes.c -o classes.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c constant.c -o constant.o
+stub.c:1427:15: warning: enumeration value 'IVL_SIP_REF' not handled in switch [-Wswitch]
+ 1427 |       switch (ivl_signal_port(net)) {
+      |               ^~~~~~~~~~~~~~~~~~~~
+stub.c:1427:15: note: add missing switch cases
+ 1427 |       switch (ivl_signal_port(net)) {
+      |               ^
+mv classes.d dep
+mv constant.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c enumerate.c -o enumerate.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c expression.c -o expression.o
+mv enumerate.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c statement.c -o statement.o
+mv expression.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c switches.c -o switches.o
+mv statement.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c types.c -o types.o
+mv switches.d dep
+mv types.d dep
+1 warning generated.
+mv stub.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o stub.tgt stub.o classes.o constant.o enumerate.o expression.o statement.o switches.o types.o 
+mkdir dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp.c -o vvp.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_class.c -o draw_class.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_delay.c -o draw_delay.o
+vvp.c:785:13: warning: unused function 'segfault_handler' [-Wunused-function]
+  785 | static void segfault_handler(int sig)
+      |             ^~~~~~~~~~~~~~~~
+mv draw_delay.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_enum.c -o draw_enum.o
+mv draw_class.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_mux.c -o draw_mux.o
+mv draw_enum.d dep
+1 warning generated.
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_net_input.c -o draw_net_input.o
+mv vvp.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_substitute.c -o draw_substitute.o
+mv draw_mux.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_switch.c -o draw_switch.o
+mv draw_substitute.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_ufunc.c -o draw_ufunc.o
+mv draw_switch.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_vpi.c -o draw_vpi.o
+mv draw_net_input.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_condit.c -o eval_condit.o
+mv eval_condit.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_expr.c -o eval_expr.o
+mv draw_ufunc.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_object.c -o eval_object.o
+mv draw_vpi.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_real.c -o eval_real.o
+mv eval_expr.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_string.c -o eval_string.o
+eval_object.c:3400:49: warning: '/*' within block comment [-Wcomment]
+ 3400 |              * used as the max-size bound for %store/qb/* (0 = unbounded). */
+      |                                                        ^
+eval_object.c:3421:14: warning: declaration shadows a local variable [-Wshadow]
+ 3421 |                   unsigned kind;
+      |                            ^
+eval_object.c:3271:17: note: previous declaration is here
+ 3271 |             const char*kind = name + 28;
+      |                        ^
+mv eval_real.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_vec4.c -o eval_vec4.o
+mv eval_string.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c modpath.c -o modpath.o
+eval_vec4.c:1322:61: warning: '/*' within block comment [-Wcomment]
+ 1322 |                * numeric queue index reads garbage; emit %aa/load/v/* with
+      |                                                                    ^
+mv modpath.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stmt_assign.c -o stmt_assign.o
+2 warnings generated.
+mv eval_object.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_process.c -o vvp_process.o
+vvp_process.c:6524:57: warning: '/*' within block comment [-Wcomment]
+ 6524 |             /* Iterator-type dispatch: pick the right %load/dar/* +
+      |                                                                ^
+vvp_process.c:6525:15: warning: '/*' within block comment [-Wcomment]
+ 6525 |                %store/* pair to fetch q[idx] into iter.
+      |                      ^
+1 warning generated.
+mv eval_vec4.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_proc_loops.c -o vvp_proc_loops.o
+mv vvp_proc_loops.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_scope.c -o vvp_scope.o
+mv stmt_assign.d dep
+echo 'flag:VVP_EXECUTABLE=/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/vvp' | cat ./vvp.conf.in - > vvp.conf
+echo 'flag:VVP_EXECUTABLE=/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/vvp' | cat ./vvp-s.conf.in - > vvp-s.conf
+mv vvp_scope.d dep
+2 warnings generated.
+mv vvp_process.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o vvp.tgt vvp.o draw_class.o draw_delay.o draw_enum.o draw_mux.o draw_net_input.o draw_substitute.o draw_switch.o draw_ufunc.o draw_vpi.o eval_condit.o eval_expr.o eval_object.o eval_real.o eval_string.o eval_vec4.o modpath.o stmt_assign.o vvp_process.o vvp_proc_loops.o vvp_scope.o 
+mkdir dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl.cc -o vhdl.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c state.cc -o state.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_element.cc -o vhdl_element.o
+mv vhdl_element.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_type.cc -o vhdl_type.o
+mv vhdl.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_syntax.cc -o vhdl_syntax.o
+mv state.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+mv vhdl_type.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c process.cc -o process.o
+mv process.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c stmt.cc -o stmt.o
+mv scope.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expr.cc -o expr.o
+mv vhdl_syntax.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm.cc -o lpm.o
+mv expr.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c support.cc -o support.o
+mv lpm.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c cast.cc -o cast.o
+mv stmt.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c logic.cc -o logic.o
+mv support.d dep
+mv cast.d dep
+mv logic.d dep
+g++ -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o vhdl.tgt vhdl.o state.o vhdl_element.o vhdl_type.o vhdl_syntax.o scope.o process.o stmt.o expr.o lpm.o support.o cast.o logic.o 
+mkdir dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vlog95.c -o vlog95.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c event.c -o event.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c expr.c -o expr.o
+mv vlog95.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c logic_lpm.c -o logic_lpm.o
+mv event.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c misc.c -o misc.o
+logic_lpm.c:2670:13: warning: enumeration value 'IVL_SIP_REF' not handled in switch [-Wswitch]
+ 2670 |                   switch (ivl_signal_port(sig)) {
+      |                           ^~~~~~~~~~~~~~~~~~~~
+logic_lpm.c:2670:13: note: add missing switch cases
+ 2670 |                   switch (ivl_signal_port(sig)) {
+      |                           ^
+ 2671 |                       case IVL_SIP_INPUT:  fprintf(stderr, " input"); break;
+ 2672 |                       case IVL_SIP_OUTPUT: fprintf(stderr, " output"); break;
+ 2673 |                       case IVL_SIP_INOUT:  fprintf(stderr, " inout"); break;
+ 2674 |                       case IVL_SIP_NONE: break;
+ 2675 |                   }
+mv expr.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c numbers.c -o numbers.o
+mv misc.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c scope.c -o scope.o
+mv numbers.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stmt.c -o stmt.o
+1 warning generated.
+mv logic_lpm.d dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c udp.c -o udp.o
+mv scope.d dep
+mv udp.d dep
+mv stmt.d dep
+gcc -std=gnu23 -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o vlog95.tgt vlog95.o event.o expr.o logic_lpm.o misc.o numbers.o scope.o stmt.o udp.o -lm 
+mkdir dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pcb.cc -o pcb.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c show_netlist.cc -o show_netlist.o
+mv pcb.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c show_pcb.cc -o show_pcb.o
+mv show_netlist.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c footprint.cc -o footprint.o
+mv scope.d dep
+bison --verbose -t -p fp --defines=fp.h -o fp.cc fp.y
+flex -s -ofp_lex.cc ./fp.lex
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c fp.cc -o fp.o
+mv show_pcb.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c fp_lex.cc -o fp_lex.o
+mv footprint.d dep
+fp.cc:1007:9: warning: variable 'fpnerrs' set but not used [-Wunused-but-set-variable]
+ 1007 |     int yynerrs = 0;
+      |         ^
+fp.cc:72:25: note: expanded from macro 'yynerrs'
+   72 | #define yynerrs         fpnerrs
+      |                         ^
+mv fp_lex.d dep
+1 warning generated.
+mv fp.d dep
+g++ -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o pcb.tgt pcb.o scope.o show_netlist.o show_pcb.o footprint.o fp.o fp_lex.o 
+mkdir dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c blif.cc -o blif.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c constants.cc -o constants.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c logic_gate.cc -o logic_gate.o
+blif.cc:180:14: warning: enumeration value 'IVL_SIP_REF' not handled in switch [-Wswitch]
+  180 |             switch (dir) {
+      |                     ^~~
+blif.cc:180:14: note: add missing switch cases
+  180 |             switch (dir) {
+      |                     ^
+mv constants.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm.cc -o lpm.o
+mv logic_gate.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_add.cc -o lpm_add.o
+1 warning generated.
+mv blif.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_cmp_eq.cc -o lpm_cmp_eq.o
+mv lpm.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_cmp_gt.cc -o lpm_cmp_gt.o
+mv lpm_add.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_ff.cc -o lpm_ff.o
+mv lpm_cmp_eq.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_mux.cc -o lpm_mux.o
+mv lpm_cmp_gt.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_part_vp.cc -o lpm_part_vp.o
+mv lpm_ff.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_re_logic.cc -o lpm_re_logic.o
+mv lpm_mux.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_shift.cc -o lpm_shift.o
+mv lpm_part_vp.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_sign_ext.cc -o lpm_sign_ext.o
+mv lpm_re_logic.d dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nex_data.cc -o nex_data.o
+mv lpm_shift.d dep
+mv lpm_sign_ext.d dep
+mv nex_data.d dep
+g++ -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o blif.tgt blif.o constants.o logic_gate.o lpm.o lpm_add.o lpm_cmp_eq.o lpm_cmp_gt.o lpm_ff.o lpm_mux.o lpm_part_vp.o lpm_re_logic.o lpm_shift.o lpm_sign_ext.o nex_data.o 
+mkdir dep
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sizer.cc -o sizer.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scan_lpms.cc -o scan_lpms.o
+g++ -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scan_logs.cc -o scan_logs.o
+mv scan_logs.d dep
+mv scan_lpms.d dep
+mv sizer.d dep
+g++ -bundle -undefined dynamic_lookup -flat_namespace -L/opt/homebrew/Cellar/z3/5.1.0/lib -o sizer.tgt sizer.o scan_lpms.o scan_logs.o 
+mkdir dep
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c -DIVL_ROOT='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"' -DIVL_SUFFIX='""' -DIVL_INC='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include"' -DIVL_LIB='"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib"' -DDLLIB='"-ldl"' -DIVL_UVM_VERSION='"Accellera UVM (not installed)"' -DIVL_INCLUDE_INSTALL_DIR="\"\"" ./main.c
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c substit.c -o substit.o
+flex -s -t cflexor.lex > cflexor.c
+bison --verbose -t -p cf -d -o cfparse.c cfparse.y
+mv substit.d dep
+../version.exe `head -1 iverilog.man.in`'\n' > iverilog.man
+tail -n +2 iverilog.man.in >> iverilog.man
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c cflexor.c -o cflexor.o
+gcc -std=gnu23 -I. -I.. -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/z3/5.1.0/include -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c cfparse.c -o cfparse.o
+mv main.d dep
+mv cfparse.d dep
+mv cflexor.d dep
+gcc -std=gnu23 -L/opt/homebrew/Cellar/z3/5.1.0/lib main.o substit.o cflexor.o cfparse.o -o iverilog 
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ivlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vhdlpp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vpi all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-null all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-stub all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vvp all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vhdl all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vlog95 all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-pcb all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-blif all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-sizer all &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C driver all &&  true
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+./mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install"
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man
+mkdir /private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1
+/usr/bin/install -c -m 644 iverilog-vpi.man "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1/iverilog-vpi.1"
+/usr/bin/install -c ./iverilog-vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/iverilog-vpi"
+/usr/bin/install -c ./ivl "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/ivl"
+/usr/bin/install -c -m 644 ./constants.vams "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include/constants.vams"
+/usr/bin/install -c -m 644 ./disciplines.vams "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include/disciplines.vams"
+/usr/bin/install -c -m 644 ./uvm_dpi/uvm_legacy_recorder.svh "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include/uvm_legacy_recorder.svh"
+/usr/bin/install -c -m 644 ./ivl_target.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/ivl_target.h"
+/usr/bin/install -c -m 644 ./_pli_types.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/_pli_types.h"
+/usr/bin/install -c -m 644 ./sv_vpi_user.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/sv_vpi_user.h"
+/usr/bin/install -c -m 644 ./svdpi.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/svdpi.h"
+/usr/bin/install -c -m 644 ./vpi_user.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/vpi_user.h"
+/usr/bin/install -c -m 644 ./acc_user.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/acc_user.h"
+/usr/bin/install -c -m 644 ./veriuser.h "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog/veriuser.h"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ivlpp install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vhdlpp install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vvp install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C vpi install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-null install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-stub install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vvp install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vhdl install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-vlog95 install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-pcb install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-blif install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C tgt-sizer install &&  /Applications/Xcode.app/Contents/Developer/usr/bin/make -C driver install &&  true
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./ivlpp "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/ivlpp"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./vhdlpp "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdlpp"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" \
+		"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib" \
+		"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1" \
+		"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install"
+/usr/bin/install -c -m 644 vvp.man "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1/vvp.1"
+/usr/bin/install -c ./vvp "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/vvp"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c -m 644 ./libvpi.a "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/libvpi.a"
+/usr/bin/install -c ./system.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/system.vpi"
+/usr/bin/install -c ./va_math.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/va_math.vpi"
+/usr/bin/install -c ./v2005_math.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/v2005_math.vpi"
+/usr/bin/install -c ./v2009.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/v2009.vpi"
+/usr/bin/install -c ./vhdl_sys.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdl_sys.vpi"
+/usr/bin/install -c ./vhdl_textio.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdl_textio.vpi"
+/usr/bin/install -c ./vpi_debug.vpi "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vpi_debug.vpi"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./null.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/null.tgt"
+/usr/bin/install -c -m 644 ./null.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/null.conf"
+/usr/bin/install -c -m 644 ./null-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/null-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./stub.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/stub.tgt"
+/usr/bin/install -c -m 644 ./stub.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/stub.conf"
+/usr/bin/install -c -m 644 ./stub-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/stub-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./vvp.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vvp.tgt"
+/usr/bin/install -c -m 644 ./vvp.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vvp.conf"
+/usr/bin/install -c -m 644 ./vvp-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vvp-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./vhdl.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdl.tgt"
+/usr/bin/install -c -m 644 ./vhdl.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdl.conf"
+/usr/bin/install -c -m 644 ./vhdl-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vhdl-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./vlog95.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vlog95.tgt"
+/usr/bin/install -c -m 644 ./vlog95.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vlog95.conf"
+/usr/bin/install -c -m 644 ./vlog95-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vlog95-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./pcb.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/pcb.tgt"
+/usr/bin/install -c -m 644 ./pcb.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/pcb.conf"
+/usr/bin/install -c -m 644 ./pcb-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/pcb-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./blif.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/blif.tgt"
+/usr/bin/install -c -m 644 ./blif.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/blif.conf"
+/usr/bin/install -c -m 644 ./blif-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/blif-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl"
+/usr/bin/install -c ./sizer.tgt "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/sizer.tgt"
+/usr/bin/install -c -m 644 ./sizer.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/sizer.conf"
+/usr/bin/install -c -m 644 ./sizer-s.conf "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/sizer-s.conf"
+./../mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" \
+		"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1" \
+		"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install"
+/usr/bin/install -c -m 644 iverilog.man "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1/iverilog.1"
+/usr/bin/install -c ./iverilog "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/iverilog"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make installuvm
+./mkinstalldirs "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/include/iverilog" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/include" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/share/man/man1" \
+	    "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install"
+note: uvm-core submodule not checked out; skipping UVM install.
+      run 'git submodule update --init' to enable 'iverilog -uvm'.
+Icarus Verilog version 13.0 (devel) ()
+Unable to get version from "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/ivlpp -V"
+Unable to get version from "/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/ivl -V -C"/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T//ivrlhfff10a0" -C"/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/lib/ivl/vvp.conf""
+Icarus Verilog runtime version 13.0 (devel) ()
+
+Copyright (c) 2001-2026 Stephen Williams (steve@icarus.com)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+       64.90 real        92.00 user        15.85 sys
+           808583168  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2141931  page reclaims
+               48189  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                 629  signals received
+                2714  voluntary context switches
+              109128  involuntary context switches
+            35046280  instructions retired
+            20329432  cycles elapsed
+             1769856  peak memory footprint

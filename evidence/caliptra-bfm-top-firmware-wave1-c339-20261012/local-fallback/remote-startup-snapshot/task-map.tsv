@@ -1,0 +1,5 @@
+array_index	test_id	test_name	vvp_pid	state_at_capture
+0	66a04bb4080f0165	smoke_test_kv_write_scan_mode	1039309	RUNNING_NO_TERMINAL_RESULT
+1	f1991acb7ebadfe1	cptra_ss_test_rom	1039276	RUNNING_NO_TERMINAL_RESULT
+2	db58d7495957ab2d	smoke_test_dma_aes_gcm	1039121	RUNNING_NO_TERMINAL_RESULT
+3	c4e8f85716a36bd8	smoke_test_datavault_basic	1039377	RUNNING_NO_TERMINAL_RESULT

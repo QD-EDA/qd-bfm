@@ -1,0 +1,3 @@
+This attempt exited with localrun status 1 after 38.10 seconds and peak RSS 1,837,170,688 bytes. The runner never produced a result.json or sim.log; it stopped during the firmware build, so this is setup evidence and not a test verdict.
+
+The first failures were concurrent `cp` operations for `riscv_hw_if.h` and `doe.h`. This attempt exported `MAKEFLAGS=-j3`. The upstream Caliptra Makefile has a `%.o` rule that copies the same header list into the build directory for each object target; three parallel object builds can race on those copies. A fresh attempt will use `MAKEFLAGS=-j1`. The serial retry determines whether this diagnosis is correct.
