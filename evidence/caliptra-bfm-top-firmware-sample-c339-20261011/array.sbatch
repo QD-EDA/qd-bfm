@@ -23,6 +23,7 @@ GCC_RUN=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10
 GCC="$GCC_RUN/xpack/xpack-riscv-none-elf-gcc-15.2.0-1/bin/riscv-none-elf-"
 JTAG_VPI="$GCC_RUN/jtagdpi/jtagdpi.vpi"
 QD_SHA=a8664c7a8092ac8342dce2f47a6efe9a8a3e9af8
+RUNNER_SHA=37e8197f66be466a6345ae0f863e7af3826b5d1ced21b3499f5d9a36ee38807d
 IVERILOG_SHA=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
 RTL_SHA=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
 ADAMS_SHA=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
@@ -33,6 +34,7 @@ IFS=$'\t' read -r sample_order test_id case_name expected_mcycle timeout_s selec
 test -n "$case_name"
 RUN="$ROOT/runs/$case_name"
 mkdir -p "$RUN/pycache" "$RUN/output"
+test "$(sha256sum "$QD/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py" | cut -d' ' -f1)" = "$RUNNER_SHA"
 
 test "$(git -C "$RTL" rev-parse HEAD)" = "$RTL_SHA"
 test "$(git -C "$RTL/submodules/adams-bridge" rev-parse HEAD)" = "$ADAMS_SHA"
