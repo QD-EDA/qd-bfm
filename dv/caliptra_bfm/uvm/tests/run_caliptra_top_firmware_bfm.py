@@ -427,22 +427,29 @@ def prepare_iverilog_profile(base_profile, output_profile, repo_root, rtl_root,
     return excluded_sources
 
 
-def load_case(rtl_root, name):
+def load_case(rtl_root, name, case_yaml_path=None):
     if not re.fullmatch(r"[A-Za-z0-9_]+", name):
         raise ValueError("case name must contain only letters, digits, and underscores")
-    case_yaml = Path(rtl_root) / "src/integration/test_suites" / name / f"{name}.yml"
+    suites = (Path(rtl_root) / "src/integration/test_suites").resolve()
+    relative_yaml = Path(case_yaml_path) if case_yaml_path else Path(name) / f"{name}.yml"
+    if relative_yaml.is_absolute():
+        raise ValueError("case YAML path must be relative to src/integration/test_suites")
+    case_yaml = (suites / relative_yaml).resolve()
+    if not case_yaml.is_relative_to(suites):
+        raise ValueError("case YAML path must stay within src/integration/test_suites")
     if not case_yaml.is_file():
         raise ValueError(f"case YAML not found: {case_yaml}")
     text = case_yaml.read_text()
     testnames = re.findall(r"(?m)^testname:\s*(\S+)\s*$", text)
     seeds = re.findall(r"(?m)^seed:\s*(\S+)\s*$", text)
-    if testnames != [name] or len(seeds) != 1:
+    if (len(testnames) != 1 or not re.fullmatch(r"[A-Za-z0-9_]+", testnames[0]) or
+            len(seeds) != 1 or (case_yaml_path is None and testnames != [name])):
         raise ValueError(f"unexpected Caliptra case YAML: {case_yaml}")
     seed = "1" if seeds[0] == "${PLAYBOOK_RANDOM_SEED}" else seeds[0]
     if not seed.isdigit():
         raise ValueError(f"case seed must be numeric: {seed}")
     plusargs = re.findall(r"(?m)^\s*-\s+(\+\S+)\s*$", text)
-    return case_yaml, seed, plusargs
+    return case_yaml, seed, plusargs, testnames[0]
 
 
 DCCM_BASE = 0x50000000
@@ -852,6 +859,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--case", default="smoke_test_dma",
                         help="stock firmware test suite directory under src/integration/test_suites")
+    parser.add_argument("--case-yaml", metavar="RELATIVE_PATH",
+                        help="specific test-suite YAML under src/integration/test_suites")
     parser.add_argument("--output", required=True, type=Path, help="new directory outside the source checkouts")
     parser.add_argument("--fast-trng", action="store_true",
                         help="use the diagnostic 50-cycle physical RNG cadence; default is 500")
@@ -942,7 +951,7 @@ def main():
     if args.output.exists():
         raise ValueError(f"output directory already exists: {args.output}")
 
-    case_yaml, seed, plusargs = load_case(rtl, args.case)
+    case_yaml, seed, plusargs, yaml_testname = load_case(rtl, args.case, args.case_yaml)
     source_commit = subprocess.check_output(["git", "-C", str(rtl), "rev-parse", "HEAD"], text=True).strip()
     args.output.mkdir(parents=True)
     args.output = args.output.resolve()
@@ -1057,6 +1066,8 @@ def main():
         passed = passed and log_scan["reset_in_flight"]
     result = {
         "test": args.case,
+        "testname": yaml_testname,
+        "case_yaml": str(case_yaml.relative_to(Path(rtl).resolve())),
         "passed": passed,
         "caliptra_commit": source_commit,
         "case_yaml_sha256": sha256(case_yaml),

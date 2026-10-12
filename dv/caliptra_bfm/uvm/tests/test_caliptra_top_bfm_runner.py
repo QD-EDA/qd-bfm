@@ -132,16 +132,55 @@ class StockFirmwareCaseTest(unittest.TestCase):
                 "seed: 1\ntestname: hello_world_iccm\nplusargs:\n  - +CLP_REGRESSION\n"
             )
 
-            yaml, seed, plusargs = RUNNER.load_case(temp, "hello_world_iccm")
+            yaml, seed, plusargs, testname = RUNNER.load_case(temp, "hello_world_iccm")
 
         self.assertEqual(yaml.name, "hello_world_iccm.yml")
         self.assertEqual(seed, "1")
         self.assertEqual(plusargs, ["+CLP_REGRESSION"])
+        self.assertEqual(testname, "hello_world_iccm")
+
+    def test_loads_the_selected_matrix_yaml_variant(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case = Path(temp) / "src/integration/test_suites/smoke_test_dma_aes_kv"
+            case.mkdir(parents=True)
+            (case / "smoke_test_dma_aes_kv_large.yml").write_text(
+                "seed: 1\ntestname: smoke_test_dma_aes_kv\n"
+                "plusargs:\n  - +CLP_OCP_LOCK_EN\n  - +STRAP_SS_KEY_RELEASE_KEY_SIZE_RAND_HIGH\n"
+            )
+
+            yaml, seed, plusargs, testname = RUNNER.load_case(
+                temp, "smoke_test_dma_aes_kv",
+                "smoke_test_dma_aes_kv/smoke_test_dma_aes_kv_large.yml",
+            )
+
+        self.assertEqual(yaml.name, "smoke_test_dma_aes_kv_large.yml")
+        self.assertEqual(seed, "1")
+        self.assertEqual(plusargs, ["+CLP_OCP_LOCK_EN", "+STRAP_SS_KEY_RELEASE_KEY_SIZE_RAND_HIGH"])
+        self.assertEqual(testname, "smoke_test_dma_aes_kv")
+
+    def test_matrix_yaml_may_name_a_variant_with_a_shared_firmware_directory(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case = Path(temp) / "src/integration/test_suites/smoke_test_dma_aes_kv"
+            case.mkdir(parents=True)
+            yaml_path = case / "smoke_test_dma_aes_kv_short.yml"
+            yaml_path.write_text("seed: 1\ntestname: smoke_test_dma_aes_kv_short\n")
+
+            yaml, seed, plusargs, testname = RUNNER.load_case(
+                temp, "smoke_test_dma_aes_kv", str(yaml_path.relative_to(case.parent))
+            )
+
+        self.assertEqual(yaml.name, "smoke_test_dma_aes_kv_short.yml")
+        self.assertEqual(testname, "smoke_test_dma_aes_kv_short")
 
     def test_rejects_case_names_that_escape_the_suite_directory(self):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, "letters, digits, and underscores"):
                 RUNNER.load_case(temp, "../outside")
+
+    def test_rejects_case_yaml_paths_that_escape_the_suite_tree(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "stay within"):
+                RUNNER.load_case(temp, "hello_world_iccm", "../../outside.yml")
 
 class ResetInFlightTraceTest(unittest.TestCase):
     def scan(self, lines):
