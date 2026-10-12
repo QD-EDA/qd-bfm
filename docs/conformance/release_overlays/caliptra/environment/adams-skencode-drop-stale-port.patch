@@ -1,0 +1,15 @@
+diff --git a/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv b/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv
+--- a/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv
++++ b/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv
+@@ -77,10 +77,11 @@
+     .mem_b_rd_data(mem_b_rd_data_tb),
+     .keymem_a_wr_req(keymem_a_wr_req_tb),
+     .keymem_a_wr_data(keymem_a_wr_data_tb),
+-    .skencode_done(skencode_done_tb),
+-    .skencode_error(skencode_error_tb)
++    .skencode_done(skencode_done_tb)
+ );
+
++assign skencode_error_tb = dut.error_flag;
++
+ wire [AHB_DATA_WIDTH-1:0] dummy_mem_out0, dummy_mem_out1;

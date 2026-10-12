@@ -1,0 +1,6 @@
+checking file src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
+Hunk #1 succeeded at 733 with fuzz 2.
+patching file src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
+Hunk #1 succeeded at 733 with fuzz 2.
+compile_exit=24
+sim_exit=NOT_RUN

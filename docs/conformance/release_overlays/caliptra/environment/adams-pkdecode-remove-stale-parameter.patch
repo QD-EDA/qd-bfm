@@ -1,0 +1,12 @@
+diff --git a/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv b/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
+--- a/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
++++ b/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
+@@ -57,8 +57,7 @@
+ // Instantiate the Device Under Test (DUT)
+ pkdecode #(
+-    .MEM_ADDR_WIDTH(MEM_ADDR_WIDTH),
+-    .MLDSA_K(MLDSA_K),
++        .MLDSA_K(MLDSA_K),
+     .MLDSA_N(256),
+     .REG_SIZE(REG_SIZE),
+     .API_ADDR_WIDTH(API_ADDR_WIDTH)
