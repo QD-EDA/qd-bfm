@@ -1,0 +1,4 @@
+outcome=PASS
+reason=result_json_passed_and_simulation_testcase_passed
+runner_exit=0
+result_testname=smoke_test_zeroize_crypto

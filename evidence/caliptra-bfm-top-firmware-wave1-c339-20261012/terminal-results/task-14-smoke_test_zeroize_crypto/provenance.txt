@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=14
+test_id=dcd97efbe80e5c76
+matrix_testname=smoke_test_zeroize_crypto
+case_dir=smoke_test_zeroize_crypto
+case_yaml=smoke_test_zeroize_crypto/smoke_test_zeroize_crypto.yml
+yaml_testname=smoke_test_zeroize_crypto
+expected_mcycle_estimate=19480
+per_test_timeout_s=9795
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=181; body_lines=109, loops=6, waits=0, crypto_calls=0
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
