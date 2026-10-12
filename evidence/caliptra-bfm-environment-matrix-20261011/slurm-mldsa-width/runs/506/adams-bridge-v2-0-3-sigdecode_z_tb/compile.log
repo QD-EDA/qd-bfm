@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-python-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:185: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-python-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.

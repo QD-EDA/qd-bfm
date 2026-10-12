@@ -1,0 +1,23 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Signing decompose
+
+Reading hex file
+
+Starting dcmp test
+
+Starting Poly 0
+Decompose success
+
+Verify decompose
+
+Reading hex file
+
+Starting dcmp test
+
+Starting Poly 0
+Decompose + usehint success
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:339: $finish called at 22395 (1s)

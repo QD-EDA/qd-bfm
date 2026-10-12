@@ -1,0 +1,10 @@
+DAN-DESKTOP Slurm submissions for the Adams Bridge address-width alias investigation:
+
+- Job 475: single compile-only `decompose_tb` probe with `-DMLDSA_MEM_ADDR_WIDTH=14`; bare identifier remained unbound. Run: `env-mldsa-width-c339-20261011-01`.
+- Job 477: compile-only package-alias probe; resolved the width error and exposed stale `w1_encode_done`. Run: `env-mldsa-alias-probe-c339-20261011-01`.
+- Jobs 478 and 486: array runner errors before compiler launch (manifest name, then unexported variables). Preserved under `runs/478/` and `runs/486/`; no test results.
+- Job 494: eight-row array with one CPU and 3 GiB per task, throttle 4, 6,900-second timeout; address alias in the copied package. Run: `env-mldsa-alias-matrix-c339-20261011-03`.
+- Job 502: four-row compatibility follow-up with the alias and narrow run-local testbench patches; one CPU and 3 GiB per task. `decompose_tb` passed both checks; `pkdecode_tb` and `skencode_tb` produced all-X outputs; `sigdecode_z_tb` still lacked NumPy and vectors. Run: `env-mldsa-tbcompat-c339-20261011-01`.
+- Job 506: fresh single-row retry of `sigdecode_z_tb` using the already validated read-only Python 3.14.4/NumPy 2.5.4 environment and copied test vectors. One CPU, 3 GiB, 6,900-second timeout. Compile/simulation exited zero, but 3,584 expected outputs were all X. Run: `env-mldsa-python-c339-20261011-01`.
+
+All test runs used pinned Icarus c339 `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`; run-specific source revisions and hashes are retained with each task. No pinned RTL, testbench, or Icarus source was modified.

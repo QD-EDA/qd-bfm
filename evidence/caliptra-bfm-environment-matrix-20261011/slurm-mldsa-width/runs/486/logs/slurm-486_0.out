@@ -1,0 +1,10 @@
+bash: line 3: /compile.log: Permission denied
+bash: line 14: /stage-status.txt: Permission denied
+environment_id=adams-bridge-v2-0-3-decompose_tb
+top=decompose_tb
+filelist=src/decompose/config/decompose_tb.vf
+runner_exit=1
+compile_exit=TIMEOUT_OR_SETUP_FAILURE
+sim_exit=NOT_RECORDED
+pass_markers=
+failure_markers=

@@ -1,0 +1,40 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+reading coeffs
+
+reading z vector
+
+Starting makehint test
+
+Starting Poly 0
+Wait 2 cycles to let poly finish
+
+Starting Poly 1
+Wait 2 cycles to let poly finish
+
+Starting Poly 2
+Wait 2 cycles to let poly finish
+
+Starting Poly 3
+Wait 2 cycles to let poly finish
+
+Starting Poly 4
+Wait 2 cycles to let poly finish
+
+Starting Poly 5
+Wait 2 cycles to let poly finish
+
+Starting Poly 6
+Wait 2 cycles to let poly finish
+
+Starting Poly 7
+Wait 2 cycles to let poly finish
+
+Wait for done signal from makehint
+
+Hint sum =   x, invalid_h = x
+Test done
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:203: $finish called at 15355 (1s)

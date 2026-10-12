@@ -1,0 +1,8 @@
+environment_id=adams-bridge-v2-0-3-decompose_tb
+top=decompose_tb
+filelist=src/decompose/config/decompose_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=0
+failure_markers=0

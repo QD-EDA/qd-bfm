@@ -1,0 +1,8 @@
+environment_id=adams-bridge-v2-0-3-sigdecode_h_tb
+top=sigdecode_h_tb
+filelist=src/sigdecode_h/config/sigdecode_h_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=0
+failure_markers=0
