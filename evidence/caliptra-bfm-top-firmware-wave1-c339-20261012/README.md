@@ -35,3 +35,8 @@ At the 15:23 MDT checkpoint, rows 16–21 remained active in job 669 and rows 22
 At 16:04 MDT, job 669 tasks 16–21 remained active and rows 22–51 pending. The six simulations had each consumed about 1:53 of CPU time, remained under their per-test limits, and had no result JSON; the previous top-level PASS in this sweep took 2:18:44. No verdict is inferred. See [`resubmission-20261012-05/status-16-04.txt`](resubmission-20261012-05/status-16-04.txt).
 
 At 16:15 MDT, row 18 (`smoke_test_doe_kv_ocp_progress`) completed PASS on job 669: the runner/status, JSON, and simulator pass marker agree; it took 2:02:55 and peaked at 1,852,448 KiB. Five prior tasks (16, 17, 19–21) and new task 22 are running, with rows 23–51 pending. The ledger now has 17 terminal verdicts, six running rows, and 29 pending. Full task evidence is in [`terminal-results/task-18-smoke_test_doe_kv_ocp_progress/`](terminal-results/task-18-smoke_test_doe_kv_ocp_progress/); queue/result details are in [`resubmission-20261012-05/status-16-15.txt`](resubmission-20261012-05/status-16-15.txt).
+
+
+## Current checkpoint — 17:44 MDT, 2026-10-12
+
+Rows 0–21 and 27 now have terminal outcomes: 15 TIMEOUT, 5 PASS, and 3 FAIL. Row 27 (`smoke_test_qspi`) failed during firmware compilation because its test source references QSPI register symbols absent from the generated register header at the pinned Caliptra revision; simulation did not start. Rows 22–26 and 28 are running on job 669; rows 29–51 are pending at throttle 6. The two six-hour retries (`smoke_test_strap` and `smoke_test_sha256`, rows 50–51) remain queued. The hardware-config link failure has an evidenced upstream inline-linkage cause in [`hwconfig-linkdiag/README.md`](hwconfig-linkdiag/README.md).

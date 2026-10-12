@@ -1,0 +1,114 @@
+rv_gcc_version is 15.2.0
+cp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/caliptra_defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/rtl/caliptra_reg/caliptra_reg.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/riscv_hw_if.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/caliptra_isr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/printf/printf.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-csr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-interrupts.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/veer-csr.h   /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/aes/aes.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/doe/doe.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/ecc/ecc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mldsa/mldsa.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mlkem/mlkem.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/hmac/hmac.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/keyvault/keyvault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/datavault/datavault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha256/sha256.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha512/sha512.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha3/sha3.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/soc_ifc/soc_ifc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_rtl_lib/caliptra_rtl_lib.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/clk_gate/clk_gate.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/wdt/wdt.h /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/9f91b0f948764f74-27/output/smoke_test_qspi
+riscv-none-elf-cpp -I/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/9f91b0f948764f74-27/output/smoke_test_qspi -I/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/crt0.s  > crt0.cpp.s
+riscv-none-elf-as -mabi=ilp32 -march=rv32imc_zicsr_zifencei crt0.cpp.s -o crt0.o
+cp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/caliptra_defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/rtl/caliptra_reg/caliptra_reg.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/riscv_hw_if.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/caliptra_isr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/printf/printf.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-csr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-interrupts.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/veer-csr.h   /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/aes/aes.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/doe/doe.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/ecc/ecc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mldsa/mldsa.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mlkem/mlkem.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/hmac/hmac.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/keyvault/keyvault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/datavault/datavault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha256/sha256.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha512/sha512.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha3/sha3.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/soc_ifc/soc_ifc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_rtl_lib/caliptra_rtl_lib.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/clk_gate/clk_gate.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/wdt/wdt.h /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/9f91b0f948764f74-27/output/smoke_test_qspi
+riscv-none-elf-gcc -I/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/9f91b0f948764f74-27/output/smoke_test_qspi -g -O3 -DMY_RANDOM_SEED=1 -std=gnu11 -O2 -DCALIPTRA_HWCONFIG_LMS_EN -DCALIPTRA_HW_REV_ID=0x0212 -DCALIPTRA_HWCONFIG_TRNG_EN -DCOMPILER_FLAGS="\"-g -O3 -DMY_RANDOM_SEED=1 -std=gnu11 -O2\"" -mabi=ilp32 -march=rv32imc_zicsr_zifencei -nostdlib -c /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c -o smoke_test_qspi.o
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'end_sim_if_qspi_disabled':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:57:16: error: 'SOC_IFC_REG_CPTRA_HW_CONFIG_QSPI_EN_MASK' undeclared (first use in this function); did you mean 'SOC_IFC_REG_CPTRA_HW_CONFIG_RSVD_EN_MASK'?
+   57 |   if (hw_cfg & SOC_IFC_REG_CPTRA_HW_CONFIG_QSPI_EN_MASK) {
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                SOC_IFC_REG_CPTRA_HW_CONFIG_RSVD_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:57:16: note: each undeclared identifier is reported only once for each function it appears in
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'set_spi_csid':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:67:44: error: 'CLP_SPI_HOST_REG_CSID' undeclared (first use in this function)
+   67 | void set_spi_csid(int host) { lsu_write_32(CLP_SPI_HOST_REG_CSID, host); }
+      |                                            ^~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'spi_command':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:77:26: error: 'CLP_SPI_HOST_REG_STATUS' undeclared (first use in this function); did you mean 'CLP_AES_REG_STATUS'?
+   77 |     status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~
+      |                          CLP_AES_REG_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:78:27: error: 'SPI_HOST_REG_STATUS_READY_MASK' undeclared (first use in this function); did you mean 'ECC_REG_ECC_STATUS_READY_MASK'?
+   78 |   } while (0 == (status & SPI_HOST_REG_STATUS_READY_MASK));
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                           ECC_REG_ECC_STATUS_READY_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:80:16: error: 'CLP_SPI_HOST_REG_COMMAND' undeclared (first use in this function)
+   80 |   lsu_write_32(CLP_SPI_HOST_REG_COMMAND,
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:81:30: error: 'SPI_HOST_REG_COMMAND_DIRECTION_LOW' undeclared (first use in this function)
+   81 |                (direction << SPI_HOST_REG_COMMAND_DIRECTION_LOW) |
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:82:30: error: 'SPI_HOST_REG_COMMAND_SPEED_LOW' undeclared (first use in this function)
+   82 |                    (speed << SPI_HOST_REG_COMMAND_SPEED_LOW) |
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:83:30: error: 'SPI_HOST_REG_COMMAND_CSAAT_LOW' undeclared (first use in this function)
+   83 |                    (csaat << SPI_HOST_REG_COMMAND_CSAAT_LOW) |
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:84:31: error: 'SPI_HOST_REG_COMMAND_LEN_LOW' undeclared (first use in this function)
+   84 |                    (length << SPI_HOST_REG_COMMAND_LEN_LOW));
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'spi_command_wait':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:92:26: error: 'CLP_SPI_HOST_REG_STATUS' undeclared (first use in this function); did you mean 'CLP_AES_REG_STATUS'?
+   92 |     status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~
+      |                          CLP_AES_REG_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:93:27: error: 'SPI_HOST_REG_STATUS_ACTIVE_MASK' undeclared (first use in this function)
+   93 |   } while (0 == (status & SPI_HOST_REG_STATUS_ACTIVE_MASK));
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'fifo_rx_wait':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:100:26: error: 'CLP_SPI_HOST_REG_STATUS' undeclared (first use in this function); did you mean 'CLP_AES_REG_STATUS'?
+  100 |     status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~
+      |                          CLP_AES_REG_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:101:23: error: 'SPI_HOST_REG_STATUS_RXQD_MASK' undeclared (first use in this function); did you mean 'AXI_DMA_REG_STATUS0_RSVD0_MASK'?
+  101 |     rxqd = ((status & SPI_HOST_REG_STATUS_RXQD_MASK) >>
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                       AXI_DMA_REG_STATUS0_RSVD0_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:102:13: error: 'SPI_HOST_REG_STATUS_RXQD_LOW' undeclared (first use in this function)
+  102 |             SPI_HOST_REG_STATUS_RXQD_LOW);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'write_tx_fifo':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:116:16: error: 'CLP_SPI_HOST_REG_TXDATA' undeclared (first use in this function)
+  116 |   lsu_write_32(CLP_SPI_HOST_REG_TXDATA, data);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'enable_spi_host':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:123:16: error: 'CLP_SPI_HOST_REG_CONTROL' undeclared (first use in this function)
+  123 |   lsu_write_32(CLP_SPI_HOST_REG_CONTROL,
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:124:22: error: 'SPI_HOST_REG_CONTROL_SPIEN_LOW' undeclared (first use in this function)
+  124 |                (1 << SPI_HOST_REG_CONTROL_SPIEN_LOW) |
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:125:26: error: 'SPI_HOST_REG_CONTROL_OUTPUT_EN_LOW' undeclared (first use in this function)
+  125 |                    (1 << SPI_HOST_REG_CONTROL_OUTPUT_EN_LOW) |
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:126:29: error: 'SPI_HOST_REG_CONTROL_RX_WATERMARK_LOW' undeclared (first use in this function)
+  126 |                    (0x7f << SPI_HOST_REG_CONTROL_RX_WATERMARK_LOW));
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'configure_spi_host':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:133:14: error: 'CLP_SPI_HOST_REG_CONFIGOPTS_0' undeclared (first use in this function)
+  133 |     offset = CLP_SPI_HOST_REG_CONFIGOPTS_0;
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:135:14: error: 'CLP_SPI_HOST_REG_CONFIGOPTS_1' undeclared (first use in this function)
+  135 |     offset = CLP_SPI_HOST_REG_CONFIGOPTS_1;
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:139:30: error: 'SPI_HOST_REG_CONFIGOPTS_0_CPOL_LOW' undeclared (first use in this function)
+  139 |   lsu_write_32(offset, (0 << SPI_HOST_REG_CONFIGOPTS_0_CPOL_LOW) |
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:140:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_CPHA_LOW' undeclared (first use in this function)
+  140 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_CPHA_LOW) |
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:141:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_FULLCYC_LOW' undeclared (first use in this function)
+  141 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_FULLCYC_LOW) |
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:142:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_CSNLEAD_LOW' undeclared (first use in this function)
+  142 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNLEAD_LOW) |
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:143:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_CSNTRAIL_LOW' undeclared (first use in this function)
+  143 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNTRAIL_LOW) |
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:144:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_CSNIDLE_LOW' undeclared (first use in this function)
+  144 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNIDLE_LOW) |
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:145:34: error: 'SPI_HOST_REG_CONFIGOPTS_0_CLKDIV_LOW' undeclared (first use in this function)
+  145 |                            (0 << SPI_HOST_REG_CONFIGOPTS_0_CLKDIV_LOW));
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'run_jedec_id_test':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:200:31: error: 'CLP_SPI_HOST_REG_RXDATA' undeclared (first use in this function)
+  200 |     error += read_and_compare(CLP_SPI_HOST_REG_RXDATA, exp_data[ii]);
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c: In function 'run_read_test':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c:268:31: error: 'CLP_SPI_HOST_REG_RXDATA' undeclared (first use in this function)
+  268 |     error += read_and_compare(CLP_SPI_HOST_REG_RXDATA,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+make: *** [/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile:365: smoke_test_qspi.o] Error 1

@@ -1,0 +1,11 @@
+0.000 ns - ----------------------------------
+0.000 ns -  Caliptra Mailbox Smoke Test!!
+0.000 ns - ----------------------------------
+0.000 ns - FW: Wait
+0.000 ns - FW: Reading 1024 bytes from mailbox
+0.000 ns - FW: Writing 32 bytes to mailbox
+0.000 ns - FW: Set data ready status
+0.000 ns - FW: Mailbox in expected state, MBOX_EXECUTE_SOC, ending test with success
+0.000 ns - FW: Wait for SoC to reset execute register
+0.000 ns - FW: Writing 32 bytes to mailbox
+0.000 ns - FW: Checking 32 bytes from mailbox as if return data

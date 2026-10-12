@@ -1,0 +1,15 @@
+Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+QD source commit: 0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+Test source: src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.c
+Test source SHA256: cd7f75c50cb4a2f59f1a32d3c4a5fa6d376fd9fa577119979be10c540a6f3286
+Generated register header: src/integration/rtl/caliptra_reg/caliptra_reg.h
+Header SHA256: f5a9e5631e570b245915089463e348bdb5ecd84c6b18f5e356042c49d0b1636e
+Test YAML: src/integration/test_suites/smoke_test_qspi/smoke_test_qspi.yml
+Test YAML SHA256: 96bfd027a1550454327c204af35c55e47e7e22c1751396c1944bb86c87218d69
+Firmware log SHA256: 1df8b36b8d5e98411533fce6cd2d02a9ff532f2bd342e68418c16492e835b678
+
+The test C source references `SOC_IFC_REG_CPTRA_HW_CONFIG_QSPI_EN_MASK` at
+line 57 and QSPI-host register identifiers including `CLP_SPI_HOST_REG_CSID`
+at line 67. The generated header defines neither of those identifiers; it has
+`SOC_IFC_REG_CPTRA_HW_CONFIG_RSVD_EN_MASK` at line 10947 instead. The full
+firmware compiler output is preserved in `firmware.log`.

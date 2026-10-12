@@ -1,0 +1,4 @@
+outcome=PASS
+reason=terminal_result_passed
+runner_exit=0
+result_testname=smoke_test_mbox

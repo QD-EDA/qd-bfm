@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These six Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. Their simulator output stopped during fuse-ready polling, before a `result.json` was written. Each directory contains the Slurm output, status, provenance, tool hashes, resource report, simulator log, and firmware log.
+These thirteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. Their simulator output stopped during fuse-ready polling, before a `result.json` was written. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -13,6 +13,10 @@ These six Slurm runs ended with the runner's explicit per-test timeout (`runner_
 | 10 | `smoke_test_sram_ecc` | TIMEOUT | 8,876 s |
 | 13 | `smoke_test_hek_flow` | TIMEOUT | 9,467 s |
 | 15 | `smoke_test_dma_aes_gcm_non_gcm_en_dec` | TIMEOUT | 10,091 s |
+| 17 | `c_intr_handler` | TIMEOUT | 10,813 s |
+| 19 | `smoke_test_mbox_byte_read` | TIMEOUT | 10,846 s |
+| 20 | `smoke_test_dma_aes_gcm_collision_test` | TIMEOUT | 11,010 s |
+| 21 | `smoke_test_dma_aes_gcm_short_dword` | TIMEOUT | 11,240 s |
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
@@ -27,3 +31,6 @@ Row 14, `smoke_test_zeroize_crypto`, is a terminal `PASS`: its result JSON has `
 Rows 0 and 4 have local `TIMEOUT` evidence under [`../local-fallback/`](../local-fallback/README.md).
 
 Row 18, `smoke_test_doe_kv_ocp_progress`, is a terminal `PASS`: runner and task status report exit 0, result JSON reports `passed=true` with one pass and zero fail markers, and sim.log contains `* TESTCASE PASSED` (`mcycle=53552`). Wall time was 2:02:55 with 1,852,448 KiB maximum RSS. Nine entropy_src/csrng unique/priority-case warnings are preserved; the result reports `bad_diagnostics=0`. See [`task-18-smoke_test_doe_kv_ocp_progress/`](task-18-smoke_test_doe_kv_ocp_progress/).
+
+
+Row 27, `smoke_test_qspi`, is a terminal firmware-build `FAIL`: its C source references QSPI register macros absent from the generated `caliptra_reg.h` at the pinned Caliptra revision. The runner exited 1 before simulation, and no testcase result was written. The compiler log, raw task status, resource report, tool provenance, source/header hashes, and exact missing-symbol evidence are in [`task-27-smoke_test_qspi/`](task-27-smoke_test_qspi/). This is an upstream firmware test/header mismatch, not an Icarus result.

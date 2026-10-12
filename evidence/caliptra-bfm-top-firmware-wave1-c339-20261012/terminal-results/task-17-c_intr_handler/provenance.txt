@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=17
+test_id=32a51e049923c576
+matrix_testname=c_intr_handler
+case_dir=c_intr_handler
+case_yaml=c_intr_handler/c_intr_handler.yml
+yaml_testname=c_intr_handler
+expected_mcycle_estimate=21960
+per_test_timeout_s=10813
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=212; body_lines=159, loops=4, waits=1, crypto_calls=0
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl

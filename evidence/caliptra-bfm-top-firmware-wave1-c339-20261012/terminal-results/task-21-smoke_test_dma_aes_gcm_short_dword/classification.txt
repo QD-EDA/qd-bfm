@@ -1,0 +1,1 @@
+TIMEOUT. status.txt records reason=per_test_timeout and runner_exit=124; result.json was not written. sim.log has no testcase pass/fail marker and no Finished line. The 11,240-second test bound expired after 3:07:20; maximum RSS was 1,852,384 KiB. This is a timeout, not a testcase failure.

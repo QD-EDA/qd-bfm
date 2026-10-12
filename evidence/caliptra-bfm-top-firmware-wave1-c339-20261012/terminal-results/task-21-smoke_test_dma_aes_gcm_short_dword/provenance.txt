@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=21
+test_id=c95f8624d4cb7fe0
+matrix_testname=smoke_test_dma_aes_gcm_short_dword
+case_dir=smoke_test_dma_aes_gcm_short_dword
+case_yaml=smoke_test_dma_aes_gcm_short_dword/smoke_test_dma_aes_gcm_short_dword.yml
+yaml_testname=smoke_test_dma_aes_gcm_short_dword
+expected_mcycle_estimate=23000
+per_test_timeout_s=11240
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=225; body_lines=181, loops=3, waits=0, crypto_calls=1
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
