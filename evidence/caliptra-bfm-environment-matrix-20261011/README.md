@@ -35,9 +35,13 @@ These rows remain BLOCKED on specific source, testbench, simulator, vector, or r
 
 On 2026-10-11, the matrix evidence references were audited after Slurm array 367 disappeared. All 44 rows have linked evidence files with c339 provenance, so no blanket resubmission was needed. Corrected-top job 460 passed `abr_masked_OR_tb`; `ntt_masked_mult_redux46_auto_tb` timed out after reaching 719,999 of 1,000,000 cycles. No local duplicate was started. A separate 506 retry was needed for `sigdecode_z_tb` because the earlier evidence only covered its compile/setup failures.
 
-## Milestone 3 limit under the current resubmission rule
+## Milestone 3 status under the corrected resubmission rule
 
-The matrix has 18 valid PASS rows. A scan of the linked BLOCKED logs found no additional terminal success output to promote. All 44 rows already have local or Slurm c339 evidence, and the supervisor's current instruction allows new runs only for rows without c339 evidence; there are none. The other 26 rows therefore remain failures or specific blockers: examples include six missing pinned headers, missing or incomplete vectors, c339 compile/runtime limits, and all-X outputs. Reaching 24 PASS under this run scope is not possible without changing pinned inputs/tool behavior or rerunning already-evidenced rows after remediation.
+The earlier resubmission limit is superseded: rows may be rerun after a setup, harness, or vector fix, with each result kept beside its earlier evidence. Current matrix counts are 18 PASS, 23 BLOCKED, and 3 FAIL. The latest one-array shared-fix rerun is array 511, documented in `slurm-539-confirmation/README.md`: it reconfirmed the CSRNG filelist/include overlay and Python/NumPy vector setup. `csrng_tb` and `power2round_tb` passed; `cbd_sampler_tb` and `rej_bounded_tb` still fail at the 256-coefficient boundary after the generators stream their final full 136-byte SHAKE block.
+
+The isolated pkdecode check in job 510 used only a copied source tree. Casting its two packed write-address expressions removed the all-X output seen in the uncast array 502 baseline: 2,048 outputs were non-X, but 1,790 still mismatched. This confirms the all-X symptom is sensitive to the packed-struct assignment-width defect tracked as [Icarus issue #539](https://github.com/dsellerbrock/iverilog-uvm/issues/539); it does not establish a passing test. The matrix now records #539 as the specific blocker for `pkdecode_tb`, `sigdecode_z_tb`, `skencode_tb`, and `sigencode_z_tb`. No pinned source or Icarus source was changed.
+
+The remaining rows have specific recorded causes, including missing pinned headers or vectors, stale testbench/RTL ports, unsupported Icarus constructs, #538/#539 simulator defects, vector/testbench sample-boundary failures, and tests that exceed their recorded runtime bound. The narrow QD `Axi4PC` adapter is present and array 464's actual-top reruns reached Icarus mixed-driver and clock-generator errors before simulation. The matrix remains at 18 PASS; array 511 added no new PASS rows.
 
 ## Caliptra AXI adapter matrix result
 

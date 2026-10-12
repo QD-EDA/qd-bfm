@@ -1,0 +1,4 @@
+caliptra-v2-1-2-csrng_tb	csrng_tb	caliptra_v2.1.2	src/csrng/config/csrng_tb.vf
+adams-bridge-v2-0-3-power2round_tb	power2round_tb	adams_bridge_v2.0.3	src/power2round/config/power2round_tb.vf
+adams-bridge-v2-0-3-cbd_sampler_tb	cbd_sampler_tb	adams_bridge_v2.0.3	src/cbd_sampler/config/cbd_sampler_tb.vf
+adams-bridge-v2-0-3-rej_bounded_tb	rej_bounded_tb	adams_bridge_v2.0.3	src/rej_bounded/config/rej_bounded_tb.vf

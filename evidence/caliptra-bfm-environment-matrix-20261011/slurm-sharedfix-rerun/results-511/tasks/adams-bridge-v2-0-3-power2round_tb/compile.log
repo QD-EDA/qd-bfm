@@ -1,0 +1,7 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:174: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:175: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:176: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:79: warning: Port 5 (src_base_addr) of module power2round_top expects 14 bit(s), given 15.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:79:        : Pruning 1 high bits of the expression.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:79: warning: Port 6 (skmem_dest_base_addr) of module power2round_top expects 14 bit(s), given 15.
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:79:        : Pruning 1 high bits of the expression.

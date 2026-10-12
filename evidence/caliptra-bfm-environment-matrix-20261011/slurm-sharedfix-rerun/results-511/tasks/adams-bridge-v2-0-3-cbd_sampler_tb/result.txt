@@ -1,0 +1,9 @@
+environment_id=adams-bridge-v2-0-3-cbd_sampler_tb
+top=cbd_sampler_tb
+filelist=src/cbd_sampler/config/cbd_sampler_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=0
+failure_markers=1
+elapsed_seconds=0

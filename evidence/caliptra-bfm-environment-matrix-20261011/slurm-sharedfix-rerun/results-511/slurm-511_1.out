@@ -1,0 +1,9 @@
+environment_id=adams-bridge-v2-0-3-power2round_tb
+top=power2round_tb
+filelist=src/power2round/config/power2round_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=0

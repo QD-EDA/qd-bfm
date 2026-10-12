@@ -1,0 +1,21 @@
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:56: No argument provided for MAX_CYCLES, defaulting to      200000
+      Time: 0  Scope: rej_bounded_tb
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:62: No argument provided for VEC_CNT, defaulting to          10
+      Time: 0  Scope: rej_bounded_tb
+PLAYBOOK_RANDOM_SEED = 
+   -- Testbench for REJ_BOUNDED started --
+*** Toggle reset.
+
+[                 705] Not enough valid samples in the queue
+[                2745] Not enough valid samples in the queue
+[                3425] Not enough valid samples in the queue
+[                4105] Not enough valid samples in the queue
+[                4785] Not enough valid samples in the queue
+[                5465] Not enough valid samples in the queue
+[                6145] Not enough valid samples in the queue
+[                6825] Not enough valid samples in the queue
+*** 10 test cases completed.
+*** 08 errors detected during testing.
+* TESTCASE FAILED
+   -- Testbench for REJ_BOUNDED done. --
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:433: $finish called at 6845 (1s)

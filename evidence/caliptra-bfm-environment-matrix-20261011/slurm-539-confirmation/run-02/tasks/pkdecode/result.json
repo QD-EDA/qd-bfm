@@ -1,0 +1,20 @@
+{
+  "job_id": 510,
+  "host": "DAN-DESKTOP",
+  "source_revisions": {
+    "iverilog": "c339b9f2287a743aeb7ab6de6528e8d34a4dd602",
+    "caliptra": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "adams_bridge": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0"
+  },
+  "compile_exit": 0,
+  "simulation_exit": 0,
+  "output_words": 2048,
+  "output_x_words": 0,
+  "distinct_output_words": 887,
+  "mismatch_lines": 1790,
+  "got_values_in_mismatch_lines": 1790,
+  "got_values_all_x": 0,
+  "explicit_pass_marker": false,
+  "explicit_fail_marker": false,
+  "classification": "BLOCKED_BY_IVERILOG_ISSUE_539; address cast removes all-X symptom but mismatches remain"
+}
