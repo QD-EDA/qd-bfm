@@ -1,0 +1,25 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Reading test vectors from hex files
+
+Starting pkdecode test
+
+Waiting for pkdecode to complete
+
+Checking output data
+
+* TESTCASE PASSED
+Test completed
+
+Starting pkdecode test
+
+Waiting for pkdecode to complete
+
+Checking output data
+
+* TESTCASE PASSED
+Test completed
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/pkdecode-passmarker-c339-20261011-05/source/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:256: $finish called at 5245 (1s)

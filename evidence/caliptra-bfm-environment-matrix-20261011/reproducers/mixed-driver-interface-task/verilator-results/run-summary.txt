@@ -1,0 +1,5 @@
+Command: ~/codex-supervisor/localrun 120 sh -c 'verilator --binary --timing --top-module axi_if_task_mixed_driver -Wno-fatal --Mdir /tmp/a2-vlt-interface-task-final <source> && /tmp/a2-vlt-interface-task-final/Vaxi_if_task_mixed_driver'
+Compile and simulation exit: 0
+Wall time: 8.54 seconds
+Peak RSS: 272,941,056 bytes
+The simulator log ends with $finish at 3 ns.

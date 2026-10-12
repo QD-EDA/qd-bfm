@@ -12,13 +12,13 @@ Eight Adams testbenches import `abr_params_pkg` and refer to `MLDSA_MEM_ADDR_WID
 - `norm_check_tb` exited zero and printed successful checks and `Ctrl test done`; it is PASS in the matrix.
 - `makehint_tb` exited zero but printed `Hint sum = x, invalid_h = x` and only `Test done`; it remains BLOCKED.
 - `decompose_tb` passed both its normal and usehint checks in array 502 after a run-local stale-port compatibility patch. The raw log prints `Decompose success` and `Decompose + usehint success`; compile and simulation exited zero.
-- `pkdecode_tb` compiled and ran in array 502 after removing the obsolete `MEM_ADDR_WIDTH` override, but all 2,048 outputs were X. It remains blocked on invalid all-X results.
+- `pkdecode_tb` compiled and ran in array 502 after removing the obsolete `MEM_ADDR_WIDTH` override, but all 2,048 outputs were X. The later job 539/552 follow-up traced the remaining mismatch to the testbench writing the second vector at an unconnected source base; the corrected run is PASS under `slurm-539-confirmation/run-05-pkdecode-passmarker/`.
 - `skencode_tb` compiled and ran in array 502 after adapting the stale error signal, but all outputs were X. It remains blocked on invalid all-X results.
 - `sigdecode_z_tb` first had a task-argument mismatch in 494 and lacked NumPy/vectors in 502. Array 506 supplied Python 3.14.4, NumPy 2.5.4, vectors, the address alias, and a one-argument task call; compile and simulation both exited zero, but all 3,584 outputs were X and no testcase pass marker appeared. It remains blocked on invalid all-X results, not Python or vector setup.
 
 The array 502 compatibility overlay is preserved in `runs/502/testbench-compat.patch`. Array 506 raw logs, runtime vectors, hashes, tool versions, and result are under `runs/506/`.
 
-The all-X `sigdecode_z_tb`, `pkdecode_tb`, and `skencode_tb` outcomes resemble `sigencode_z_tb`, but they were not separately reduced to the packed-struct bug; their blocker remains the observed invalid outputs with root cause unconfirmed.
+The historical all-X `pkdecode_tb` output was not solely caused by #539: job 510 reduced the packed-address symptom, then job 539/552 found and fixed the separate source-base testbench error. `skencode_tb` and `sigdecode_z_tb` still have observed invalid outputs whose root cause is unconfirmed.
 
 The `mldsa_config_defines.svh` omission is a separate source defect: that file is absent from the pinned source tree, while six other filelists/testbenches reference it. The width alias does not fabricate or replace that absent header.
 

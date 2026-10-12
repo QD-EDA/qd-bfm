@@ -1,0 +1,8 @@
+{
+  "runner_exit": 0,
+  "stage_status": "compile_exit=0\nsim_exit=0",
+  "pass_markers": 2,
+  "fail_markers": 0,
+  "mismatch_lines": 0,
+  "comparison_loops": 2
+}

@@ -1,0 +1,5 @@
+# pkdecode source-base correction with explicit comparison result
+
+Job 552 used a fresh copy of the job 539 run-local source: c339 issue #539's two packed-address casts, removal of the stale `MEM_ADDR_WIDTH` override, and source base `0x00` for both invocations. The pinned DUT has no source-base input; `src_base_addr_tb` is only assigned in the testbench and is not connected. Its API read address starts at zero. Writing the second vector at `0x20` therefore made the testbench compare data read from the wrong region, causing the 1,790 mismatches in job 510.
+
+The run-local testbench added a mismatch counter around the existing comparison loop, prints `* TESTCASE PASSED` only when the count is zero, and calls `$fatal` otherwise. With `MLDSA_K=8`, each loop checks `256*8=2,048` coefficients. c339 compiled and simulated with exit 0; both loops emitted the pass marker, there were zero mismatch lines, and there were no failure markers. The testbench and RTL hashes in `results/input-hashes.txt` match the saved applied sources. These changes were confined to the copied run tree; no pinned RTL or testbench was changed.

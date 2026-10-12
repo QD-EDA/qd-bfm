@@ -246,7 +246,7 @@ initial begin
     reset_dut();
     $display("Reading test vectors from hex files\n");
     pkdecode_test('h0, 'h0);
-    pkdecode_test('h40, 'h20);
+    pkdecode_test('h40, 'h0);
     $finish;
 end
 

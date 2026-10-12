@@ -21,6 +21,8 @@ The uncast array 502 baseline produced 4,096 mismatch lines whose `Got:` values 
 
 Source inspection found the remaining mismatch cause in the testbench: `src_base_addr_tb` is assigned but is not connected to `pkdecode`, whose `API_rd_address` starts at zero. The second call wrote its input data at base `0x20`, so the DUT continued reading addresses `0..255`. Job 539 retained the #539 address casts and changed only that call's source base to zero. Both 2,048-word comparisons then produced zero mismatch lines; compile and simulation exited 0. The testbench has no explicit pass marker, so this is recorded as zero comparison diagnostics rather than claiming a marker the log does not contain. See [run 539](run-04-pkdecode-src0/README.md).
 
+Job 552 reran the corrected source-base test with a run-local mismatch counter and explicit marker around the existing comparison loop. Both 2,048-word comparisons printed `* TESTCASE PASSED`, with zero mismatches and compile/simulation exit 0. The matrix now records `pkdecode_tb` as PASS; see [run 552](run-05-pkdecode-passmarker/README.md).
+
 Job 537 is a wrapper-only setup attempt that stopped before compile because it reapplied an already-present compatibility patch; it is retained but not counted as test evidence. The job 510 isolated source patch and output remain under `run-02/`. `attribution.md` records the corresponding packed-assignment patterns in `pkdecode`, `sigdecode_z`, and `skencode`. All changes were confined to run-local copies; pinned source and Icarus were left untouched.
 
 ## Existing Axi4PC adapter run

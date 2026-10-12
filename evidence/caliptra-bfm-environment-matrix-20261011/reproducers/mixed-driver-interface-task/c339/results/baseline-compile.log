@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/interface-task-c339-20261011-01/source/axi_if_task_mixed_driver.sv:26: error: Variable 'arvalid' cannot have continuous and procedural drivers on the same bits.
+/home/dsell/slurm-runs/caliptra-bfm/a2/interface-task-c339-20261011-01/source/axi_if_task_mixed_driver.sv:27: error: Variable 'araddr' cannot have continuous and procedural drivers on the same bits.
+2 error(s) during elaboration.
