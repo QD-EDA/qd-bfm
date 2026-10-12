@@ -1,0 +1,5 @@
+host=DAN-DESKTOP
+uptime= 17:22:43 up  8:47,  3 users,  load average: 8.35, 8.33, 8.17
+caliptra_source_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+iverilog_source_commit=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+source_has_timescale_or_timeunit=no

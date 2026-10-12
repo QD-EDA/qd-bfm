@@ -1,6 +1,6 @@
 ## Summary
 
-> **Superseded draft:** This bit-versus-logic reproducer has not been confirmed against the actual Caliptra clock generator. Do not submit this text as the current issue description; #545 is marked `needs-repro` pending a corrected c339/Verilator comparison.
+> **Superseded draft:** This pre-correction bit-versus-logic description is not the current issue text. The actual Caliptra clock snippet is now reproduced under c339 and Verilator; the bit-versus-logic distinction remains unsupported. See the current #545 description and `../caliptra-top-clock-generator/README.md`.
 
 Icarus reports that an `always` loop has no delay when its only timing control is a blocking intra-assignment delay to a 2-state `bit` variable. The construct is legal SystemVerilog and the equivalent `logic` clock works in c339.
 

@@ -1,6 +1,6 @@
 # Intra-assignment delay in a `bit` clock generator
 
-**Status:** This bit-versus-logic comparison is not a confirmed reproducer for the Caliptra row. Issue #545 is labeled `needs-repro`; keep the row `blocked-by-#545 (unconfirmed)` until a reducer from `caliptra_top_tb.sv:138` fails on pinned c339 and passes on Verilator. Treat the results below as historical pending that comparison.
+**Status:** Historical reducer only. Its bit-versus-logic result is not valid because its variants had different time-scope declarations. The corrected source-derived reproducer is in `../caliptra-top-clock-generator/`; it confirms the c339 clock diagnostic but does not confirm a bit-versus-logic difference.
 
 `core_clk = #5ns ~core_clk;` is a blocking assignment with an intra-assignment timing control. IEEE 1800-2023 §9.4.5 (p. 237) defines the delay as postponing the assignment, and §10.4.1 (p. 251) includes `variable_lvalue = delay_or_event_control expression` in blocking-assignment syntax.
 

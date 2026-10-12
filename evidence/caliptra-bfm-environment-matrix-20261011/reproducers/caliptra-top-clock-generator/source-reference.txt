@@ -1,0 +1,11 @@
+Caliptra source commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Source file: src/integration/tb/caliptra_top_tb.sv
+Source SHA256: c212c32da99e90cd3991da65e653998cac3e945d7479abfd640b9d82f47659f9
+Clock declaration: line 47, `bit core_clk;` under `ifndef VERILATOR
+Clock process: lines 137-142, guarded by `ifndef VERILATOR
+Intra-assignment delay: line 140, `core_clk = #5ns ~core_clk;`
+Time scope: no timescale/timeunit/timeprecision declaration in the module
+
+The reducer omits the original `ifndef VERILATOR` guard so Verilator exercises
+the same clock generator. It retains the bit declaration and #5ns delayed
+blocking assignment and adds only a finite four-transition check.
