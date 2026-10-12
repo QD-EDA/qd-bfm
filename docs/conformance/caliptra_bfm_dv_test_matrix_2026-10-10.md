@@ -86,7 +86,14 @@ projection are reported in
   test row yet. Compile-only success and historical runs on another pin do not
   change this status.
 
-## Current classification
+## Earlier generated-UVMF triage snapshot — 2026-10-10
+
+This section records the initial generated-environment findings. It predates
+later environment reruns and the top-level firmware sample below; use the CSV
+for current row statuses. At the 2026-10-12 reconciliation, the 271-row CSV
+contains 254 UNVERIFIED, 10 BLOCKED, 5 PASS, 1 FAIL, and 1 TIMEOUT row. Three
+additional selected firmware tests are still running and remain UNVERIFIED
+until terminal results are recorded.
 
 Ten generated UVMF tests in three environments are **BLOCKED** on clean
 published Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`: ECC (2 tests),
@@ -99,7 +106,7 @@ the current PCRVault/KeyVault recheck is in
 The shared parser issue is tracked as
 [iverilog-uvm #533](https://github.com/dsellerbrock/iverilog-uvm/issues/533).
 
-The other 261 rows remain **UNVERIFIED** pending a qualifying terminal result.
+At the time of this earlier snapshot, the other 261 rows were **UNVERIFIED**.
 Earlier PCRVault and KeyVault passes on older Icarus revisions are not promoted
 to current-tool passes.
 
@@ -132,3 +139,15 @@ classified 20 filelists as compile-pass, 6 as compile-fail, 17 as setup-blocked,
 and 1 as unsupported by the simulator. Those are environment compile results
 from the frozen census, not runtime passes for the 271 tests; they are retained
 as triage evidence only.
+
+## Top-level firmware sample — 2026-10-11
+
+The ten lowest estimated-cycle full-top firmware suites were selected from the
+matrix and submitted together as Slurm array 561 on pinned Icarus c339. The
+estimates are conservative timeout-sizing inputs based on source-path review,
+not measured runtimes. The sample report records the selection rationale,
+per-test evidence, and current outcomes. At the latest reconciliation, five
+tests PASS, `smoke_test_hw_config` fails during firmware linking,
+`smoke_test_strap` times out without a terminal test verdict, and the three
+crypto cases remain active. See the
+[sample evidence report](../../evidence/caliptra-bfm-top-firmware-sample-c339-20261011/README.md).
