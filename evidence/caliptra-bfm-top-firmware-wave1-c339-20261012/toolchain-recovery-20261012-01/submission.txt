@@ -12,4 +12,18 @@ adams_bridge_commit=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
 old_iverilog_sha256=737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2
 old_vvp_sha256=5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a
 
-The build log and final binary hashes will be copied into this evidence directory on completion. The old hashes came from the immutable per-task `tool-binaries.sha256` records in rows 1–3.
+The old hashes came from the immutable per-task `tool-binaries.sha256` records in rows 1–3.
+
+job609_exit=1:0
+job609_stop=JTAG VPI was emitted under the Slurm submit directory instead of the protected directory
+job612_exit=1:0
+job612_stop=the pinned MbedTLS version header has no VERSION_STRING macro
+job613_exit=0:0
+job613_completed=2026-10-12T09:27:53-06:00
+finalize_script_sha256=e6b606aebe70c553ece95fe7447fc14ba561879dde7cb94326e65f8d1c5b7884
+final_manifest=BUILD-MANIFEST.txt
+final_binary_and_input_hashes=BUILD-MANIFEST.txt
+protected_path_preflight=PASS
+mbedtls_system_links=include/mbedtls and libmbed{tls,x509,crypto}.so under deps resolve to system libmbedtls 3.6.5
+python_build_dependency=libssl-dev 3.5.5-1ubuntu3.7
+jtag_build_warning=upstream tcp_server.c error-path ctx use-after-free warning; see jtagdpi-build.log
