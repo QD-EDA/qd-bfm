@@ -4,8 +4,8 @@ The 44 frozen Caliptra/Adams Bridge filelists were classified against Icarus c33
 
 ## Current classifications
 
-- PASS: 12
-- BLOCKED: 29
+- PASS: 13
+- BLOCKED: 28
 - FAIL: 3
 - UNVERIFIED: 0
 
@@ -23,15 +23,19 @@ The remote run archives, row manifests, submission records, local fallback logs,
 
 ## Remaining compile/setup blockers, grouped by root cause
 
-The matrix's former generic `setup` labels have been replaced by specific non-setup blockers, using the raw compile/run evidence already linked in each row. No status was promoted to PASS.
+The matrix's former generic `setup` labels have been replaced by specific non-setup blockers, using the raw compile/run evidence already linked in each row. The actual `abr_masked_OR_tb` top has now passed all five test cases on c339; its raw log records `Total tests: 5, Errors: 0`, `PASS`, and `All tests completed.` The old alias-top compile failure remains in the historical fields, while the new run is linked in the matrix row.
 
 - **Missing source prerequisites:** `abr_sha3_tb`, `abr_top_tb`, `exp_mask_tb`, `mldsa_rej_sampler_tb`, `mlkem_rej_sampler_tb`, and `sample_in_ball_tb` include `mldsa_config_defines.svh`, which is absent from the pinned Adams Bridge source tree. The filelist cannot repair a missing source file.
-- **Filelist omissions or top mismatch:** `csrng_tb` lacks its RAM package; `compress_tb` imports `ntt_defines_pkg` without its package in the compile list. The earlier `masking_tb` and `ntt_masked_mult_reduction_tb` submissions used the `provides` aliases as simulator tops; pinned Adams `compile.yml` instead names `abr_masked_OR_tb` and `ntt_masked_mult_redux46_auto_tb`. The canonical task manifest and matrix tops now use those actual modules; old compile logs do not qualify the corrected targets.
+- **Filelist omissions or top mismatch:** `csrng_tb` lacks its RAM package; `compress_tb` imports `ntt_defines_pkg` without its package in the compile list. The earlier `masking_tb` and `ntt_masked_mult_reduction_tb` submissions used `provides` aliases as simulator tops; pinned Adams `compile.yml` instead names `abr_masked_OR_tb` and `ntt_masked_mult_redux46_auto_tb`. The Caliptra `caliptra_top_trng_tb` and `caliptra_top_ss_mode_tb` names are also build-target aliases: both pinned compile entries declare `caliptra_top_tb` as the simulator top. The canonical task manifest now uses actual module names; old logs do not qualify the corrected targets. See `slurm-vip-adapter/top-audit.txt`.
 - **Stale testbench/RTL interfaces:** `decompose_tb`, `norm_check_tb`, `makehint_tb`, `pkdecode_tb`, `sigdecode_z_tb`, `sigdecode_h_tb`, `skdecode_tb`, and `skencode_tb` use the removed `MLDSA_MEM_ADDR_WIDTH` identifier. The later `decompose_tb` compile also connects absent `w1_encode_done`; `pkdecode_tb` overrides absent `MEM_ADDR_WIDTH`. For `decompose_tb` and `norm_check_tb`, array 433 confirms the shared include-path correction works and exposes these later source mismatches.
 - **Source/testbench defects:** `el2_veer_wrapper_tb` connects ports absent from the pinned `rvtop`; `soc_ifc_tb` has a malformed associative-array initializer; `ntt_top_masking_tb` uses indefinite-width concatenation operands.
 - **Missing or incomplete vectors:** `doe_cbc_tb` requires absent `CBCVarTxt256_clean.txt`; `ntt_top_tb` reads only 64 words where 16,384 are requested and prints no testcase pass marker.
 
-These rows remain BLOCKED until their upstream source/test prerequisites are corrected or supplied. The matrix has 12 PASS rows. A top-specific audit found 42 rows with c339 evidence for the currently declared top; the two corrected top targets lack valid evidence and are the only eligible fresh runs under the latest resubmission instruction. Reaching 24 PASS still requires addressing and qualifying additional blockers after those runs.
+These rows remain BLOCKED until their upstream source/test prerequisites are corrected or supplied. The matrix has 13 PASS rows. A module-name audit verified all 44 CSV top labels against actual SystemVerilog module declarations. The corrected Adams NTT top is running in fresh array 460. The Caliptra rows now use their actual top `caliptra_top_tb`; array 464 compiled them with the QD AXI adapter, then stopped at Icarus continuous/procedural driver errors in the existing delay-injection testbench. Neither simulation ran.
+
+## Caliptra AXI adapter matrix result
+
+Array 464 used the QD `Axi4PC` adapter and `axi4_caliptra_checker` from commit `3c41c09eca43ed31506013ca70973b99388421aa`. Both actual-top compiles passed the original licensed-`Axi4PC.sv` syntax location and reached elaboration, confirming the adapter source was accepted. Each then exited 1 with 46 errors in `caliptra_top_tb_axi_complex.sv`: interface `logic` signals such as `axi_sram_if.arvalid` are continuously assigned (line 427) and procedurally forced/released by the randomized delay macro (lines 184–202). Icarus rejects these mixed drivers. Each log also reports `always process does not have any delay` for the clock generator's intra-assignment `#5ns` at `caliptra_top_tb.sv:138`. There are no simulator runs or testcase outcomes. The two rows remain BLOCKED on these c339/testbench compile diagnostics, not as BFM protocol failures. Raw logs and hashes are in `slurm-vip-adapter/`.
 
 ## Corrected NTT top run
 

@@ -1,0 +1,14 @@
+Pinned Caliptra source revision: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+
+src/integration/config/compile.yml entries at lines 246 and 287:
+  provides: [caliptra_top_trng_tb]
+  provides: [caliptra_top_ss_mode_tb]
+For both targets, targets.tb.tops is [caliptra_top_tb] and the source file is
+$COMPILE_ROOT/tb/caliptra_top_tb.sv. That file declares module caliptra_top_tb
+at line 24. The provided names are build-target aliases, not SV simulator tops.
+
+The previous array 367 compile logs stop at the syntax error in the licensed
+Axi4PC.sv guard before elaboration, so they do not validate the actual top.
+A 2026-10-11 source audit found these are the only two remaining matrix top
+labels without a matching module declaration; both CSV rows and the canonical
+manifest now name caliptra_top_tb.

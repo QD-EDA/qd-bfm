@@ -5,8 +5,8 @@ caliptra-v2-1-2-ecc_montgomerymultiplier_tb	ecc_montgomerymultiplier_tb	caliptra
 caliptra-v2-1-2-ecc_top_tb	ecc_top_tb	caliptra_v2.1.2	src/ecc/config/ecc_top_tb.vf
 caliptra-v2-1-2-entropy_src_tb	entropy_src_tb	caliptra_v2.1.2	src/entropy_src/config/entropy_src_tb.vf
 caliptra-v2-1-2-hmac_drbg_tb	hmac_drbg_tb	caliptra_v2.1.2	src/hmac_drbg/config/hmac_drbg_tb.vf
-caliptra-v2-1-2-caliptra_top_ss_mode_tb	caliptra_top_ss_mode_tb	caliptra_v2.1.2	src/integration/config/caliptra_top_ss_mode_tb.vf
-caliptra-v2-1-2-caliptra_top_trng_tb	caliptra_top_trng_tb	caliptra_v2.1.2	src/integration/config/caliptra_top_trng_tb.vf
+caliptra-v2-1-2-caliptra_top_ss_mode_tb	caliptra_top_tb	caliptra_v2.1.2	src/integration/config/caliptra_top_ss_mode_tb.vf
+caliptra-v2-1-2-caliptra_top_trng_tb	caliptra_top_tb	caliptra_v2.1.2	src/integration/config/caliptra_top_trng_tb.vf
 caliptra-v2-1-2-el2_veer_wrapper_tb	el2_veer_wrapper_tb	caliptra_v2.1.2	src/riscv_core/veer_el2/config/el2_veer_wrapper_tb.vf
 caliptra-v2-1-2-sha512_masked_core_tb	sha512_masked_core_tb	caliptra_v2.1.2	src/sha512_masked/config/sha512_masked_core_tb.vf
 caliptra-v2-1-2-soc_ifc_axi_sha_acc_dis_tb	soc_ifc_axi_sha_acc_dis_tb	caliptra_v2.1.2	src/soc_ifc/config/soc_ifc_axi_sha_acc_dis_tb.vf
