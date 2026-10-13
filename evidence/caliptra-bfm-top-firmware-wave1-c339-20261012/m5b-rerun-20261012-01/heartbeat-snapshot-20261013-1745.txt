@@ -1,0 +1,13 @@
+DAN-DESKTOP queue snapshot at 17:45 MDT, 2026-10-13.
+Job 799: 29 terminal, 6 running, 7 pending (JobHeldUser).
+
+  799_27 RUNNING 4:06:14; smoke_test_ecc_errortrigger3; wall_s=14700 mcycle=103965.
+  799_28 RUNNING 3:43:48; smoke_test_ecc_errortrigger4; wall_s=13200 mcycle=30173.
+  799_30 RUNNING 3:18:33; kv_entry_read_err; wall_s=11700 mcycle=83589.
+  799_32 TERMINAL PASS; smoke_test_ecc_flow1_kv_ocp_progress; final mcycle=60927.
+  799_33 RUNNING 2:23:29; smoke_test_kv_rules_ocp_lock; wall_s=8400 mcycle=58921.
+  799_34 RUNNING 0:43:33; smoke_test_kv_parallel_access; wall_s=2400 mcycle=17040.
+  799_35 RUNNING 0:29:33; smoke_test_ecc_flow2_kv_ocp_progress; wall_s=1500 mcycle=10793.
+  799_36-42 PENDING, held by user.
+
+The six running sim.log files were summarized by the local intern and then checked directly. All latest heartbeat values match; every captured adjacent sample advances mcycle (max flat interval 0 seconds). No result.json or terminal testcase marker was present. Task 35 remains below the 30-minute hang threshold.

@@ -25,15 +25,15 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 24	33	smoke_test_ecc_sign	smoke_test_ecc_sign	TERMINAL	TIMEOUT	115159	15900	115159	16033	16033	137	54	0	1852444	timeout-reclassification-799/results.tsv
 25	34	smoke_test_ecc_verify	smoke_test_ecc_verify	TERMINAL	TIMEOUT	111247	15900	111247	16033	16033	137	53	0	1852452	timeout-reclassification-799/results.tsv
 26	35	smoke_test_ecc_errortrigger2	smoke_test_ecc_errortrigger2	TERMINAL	FAIL	62553	9000	62553	16985	9317	1	29	0	1852436	failure-evidence-799/README.md
-27	36	smoke_test_ecc_errortrigger3	smoke_test_ecc_errortrigger3	RUNNING			13800	97438	17149	12299		47	0		heartbeat-snapshot-20261013-1733.txt
-28	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	RUNNING			12600	25906	17281	10953		43	0		heartbeat-snapshot-20261013-1733.txt
+27	36	smoke_test_ecc_errortrigger3	smoke_test_ecc_errortrigger3	RUNNING			14700	103965	17149	12299		50	0		heartbeat-snapshot-20261013-1745.txt
+28	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	RUNNING			13200	30173	17281	10953		45	0		heartbeat-snapshot-20261013-1745.txt
 29	38	smoke_test_kv_ecc_flow1	smoke_test_kv_ecc_flow1	TERMINAL	FAIL	N/A		N/A	17412	36.47	1	0	N/A	1852204	failure-evidence-799/README.md
-30	39	kv_entry_read_err	kv_entry_read_err	RUNNING			11100	79268	17543	9438		38	0		heartbeat-snapshot-20261013-1733.txt
+30	39	kv_entry_read_err	kv_entry_read_err	RUNNING			11700	83589	17543	9438		40	0		heartbeat-snapshot-20261013-1745.txt
 31	40	smoke_test_kv_ecc_flow2	smoke_test_kv_ecc_flow2	TERMINAL	FAIL	N/A		N/A	17675	26.31	1	0	N/A	1852384	failure-evidence-799/README.md
 32	41	smoke_test_ecc_flow1_kv_ocp_progress	smoke_test_ecc_flow1_kv_ocp_progress	TERMINAL	PASS	59912	8400	59912	17740	8574	0	29	0	1852488	pass-evidence-799/results.tsv
-33	42	smoke_test_kv_rules_ocp_lock	smoke_test_kv_rules_ocp_lock	RUNNING			7800	54602	17872	6134		27	0		heartbeat-snapshot-20261013-1733.txt
-34	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	RUNNING			1800	12861	18167	138		7	0		heartbeat-snapshot-20261013-1733.txt
-35	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	RUNNING			900	6451	19152			4	0		heartbeat-snapshot-20261013-1733.txt
+33	42	smoke_test_kv_rules_ocp_lock	smoke_test_kv_rules_ocp_lock	RUNNING			8400	58921	17872	6134		29	0		heartbeat-snapshot-20261013-1745.txt
+34	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	RUNNING			2400	17040	18167	138		9	0		heartbeat-snapshot-20261013-1745.txt
+35	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	RUNNING			1500	10793	19152			6	0		heartbeat-snapshot-20261013-1745.txt
 36	45	smoke_test_pcr_zeroize	smoke_test_pcr_zeroize	PENDING					20859						heartbeat-snapshot-20261013-1332.txt
 37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
 38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
