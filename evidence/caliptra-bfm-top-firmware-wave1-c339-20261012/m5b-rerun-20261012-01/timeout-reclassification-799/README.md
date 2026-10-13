@@ -1,6 +1,6 @@
 # Job 799 timeout reclassification
 
-The submitted wrapper labeled Slurm tasks 1–7 `INFRA_ERROR` because VVP was
+The submitted wrapper labeled Slurm tasks 1–8 `INFRA_ERROR` because VVP was
 terminated with exit 137. For every task, the measured elapsed time equals its
 configured per-test timeout exactly, so the terminal outcome is `TIMEOUT`.
 Each task requested 3 GiB and peaked at about 1.85 GiB RSS; the logs do not
@@ -15,5 +15,10 @@ wrapper's original status is unchanged.
 
 Task 7's resource report records `2:07:08` (7,628 seconds), exactly matching
 its configured timeout. Its last heartbeat is `wall_s=7500 mcycle=51400`; the
+full sequence advances at every 300-second sample, and no testcase PASS/FAIL
+marker or result JSON exists. It is a timeout, not a hang.
+
+Task 8's resource report records `2:12:36` (7,956 seconds), exactly matching
+its configured timeout. Its last heartbeat is `wall_s=7800 mcycle=54368`; the
 full sequence advances at every 300-second sample, and no testcase PASS/FAIL
 marker or result JSON exists. It is a timeout, not a hang.
