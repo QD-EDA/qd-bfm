@@ -123,7 +123,6 @@ and its testcase-marker checks; this capped run is TIMEOUT. Maximum RSS was
 provenance files are in `runs/26-ca84d5f757b500b2-20/`, with remote hashes in
 `REMOTE-SHA256SUMS-task20.txt`.
 
-
 Task 21 (`jtag_tap_mbox`) records 15,212 seconds, exactly its configured
 per-test timeout; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected
 to TIMEOUT. The full simulator log contains 50 heartbeats through
@@ -132,7 +131,6 @@ testcase PASS/FAIL marker or result JSON exists. Maximum RSS was 1,852,512 KiB.
 The copied status, resource, simulator, firmware, console, and provenance files
 are in `runs/29-3439695c6637d6f2-21/`, with remote hashes in
 `REMOTE-SHA256SUMS-task21.txt`.
-
 
 Task 22 (`iccm_lock`) records 15,639 seconds, exactly its configured
 per-test timeout; the resource report also records 4:20:39 and runner exit 137.
@@ -144,7 +142,6 @@ simulator, firmware, console, and provenance files are in
 `runs/30-35735b41cd07eed7-22/`, with remote hashes in
 `REMOTE-SHA256SUMS-task22.txt`.
 
-
 Task 23 (`smoke_test_ecc_keygen`) records 16,033 seconds, exactly its
 configured per-test timeout; resource wall time is 4:27:13 and runner exit is
 137. The wrapper's `INFRA_ERROR` is corrected to TIMEOUT. Status and full log
@@ -153,3 +150,11 @@ mcycle values advance. No testcase PASS/FAIL marker or result JSON exists.
 Maximum RSS was 1,852,344 KiB. Its copied run logs and provenance are under
 `runs/32-2f1b875490838662-23/`, with remote hashes in
 `REMOTE-SHA256SUMS-task23.txt`.
+
+Task 24 (`smoke_test_ecc_sign`) records 16,033 seconds, exactly its
+configured per-test cap; resource wall time is 4:27:13 and runner exit is 137.
+The wrapper's `INFRA_ERROR` is corrected to TIMEOUT. Status and full log contain
+54 heartbeats through `wall_s=15900 mcycle=115159`, all advancing. No testcase
+PASS/FAIL marker or result JSON exists. Maximum RSS was 1,852,444 KiB. Its copied
+run logs and provenance are under `runs/33-ba452156bdfcaf3a-24/`, with remote
+hashes in `REMOTE-SHA256SUMS-task24.txt`.

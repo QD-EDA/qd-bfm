@@ -251,3 +251,14 @@ At 14:43 MDT, tasks 799_24–28 and 799_30 remained RUNNING at
 `900/6181`; tasks 799_31–42 remained PENDING. All active rows had advancing
 mcycle samples and no result JSON or exact testcase PASS/FAIL marker. See the
 [14:43 snapshot](heartbeat-snapshot-20261013-1443.txt).
+
+At 14:54 MDT, task 799_24 (`smoke_test_ecc_sign`) reached its exact
+16,033-second cap and is TIMEOUT with final mcycle 115,159. Task 799_31
+(`smoke_test_kv_ecc_flow2`) is FAIL: firmware compilation exited 1 after
+26.31 seconds on the implicit `srand` declaration at line 197, before VVP
+started; no mcycle was emitted. Tasks 799_25–28, 799_30, and 799_32 were
+RUNNING at `8100/56344`, `7500/51916`, `4200/28689`, `3000/20544`,
+`1500/10338`, and `0/0`; tasks 799_33–42 were PENDING. Active logs had no
+result JSON or exact testcase markers. See the
+[14:54 snapshot](heartbeat-snapshot-20261013-1454.txt) and
+[failure evidence](failure-evidence-799/README.md).
