@@ -1,0 +1,14 @@
+DAN-DESKTOP queue snapshot at 11:20 MDT, 2026-10-13.
+Host uptime: 1 day, 2 hours, 45 minutes.
+
+Job 799, array throttle 6:
+  799_19 RUNNING 2:26:17; smoke_test_aes_gcm; wall_s=8700 mcycle=61600.
+  799_20 RUNNING 2:16:27; smoke_test_dma_aes_gcm_short_1_dword; wall_s=8100 mcycle=57353.
+  799_21 RUNNING 1:55:05; jtag_tap_mbox; wall_s=6600 mcycle=47024.
+  799_22 RUNNING 1:39:46; iccm_lock; wall_s=5700 mcycle=40292.
+  799_23 RUNNING 1:21:42; smoke_test_ecc_keygen; wall_s=4800 mcycle=34727.
+  799_24 RUNNING 0:55:27; smoke_test_ecc_sign; wall_s=3000 mcycle=21782.
+  799_25-42 PENDING at throttle 6.
+
+All six active rows' mcycle values advanced from the 11:09 snapshot. No result
+JSON or explicit testcase PASS/FAIL marker was found for active rows.
