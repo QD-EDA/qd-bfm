@@ -285,3 +285,9 @@ wall 9,000. Tasks 799_25, 799_27–28, 799_30, and 799_32–33 were RUNNING at
 testcase terminal marker and no flat-mcycle window. See the
 [15:27 snapshot](heartbeat-snapshot-20261013-1527.txt) and
 [failure evidence](failure-evidence-799/README.md).
+
+At 15:39 MDT, tasks 799_25, 799_27–28, 799_30, and 799_32–33 remained
+RUNNING at `10800/75322`, `6900/47965`, `5700/39576`, `4200/29375`,
+`2700/18999`, and `900/6100`; tasks 799_34–42 remained PENDING. All active
+logs had advancing mcycle samples with no flat window, result JSON, or testcase
+terminal marker. See the [15:39 snapshot](heartbeat-snapshot-20261013-1539.txt).
