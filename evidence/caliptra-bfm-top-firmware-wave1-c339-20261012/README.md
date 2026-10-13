@@ -88,3 +88,7 @@ Task 669_33 (`smoke_test_ecc_sign`) reached its 16,033-second timeout after 4:27
 ## Current checkpoint — 01:22 MDT, 2026-10-13
 
 Task 669_34 (`smoke_test_ecc_verify`) reached its 16,033-second timeout after 4:27:13, with peak RSS 1,852,436 KiB. It has no result JSON, testcase marker, or heartbeat, so it remains `TIMEOUT (progress unknown)`, not a hang. All job 669 tasks are now terminal: 25 timeouts, six PASS, five FAIL, and 16 `CANCELLED_BEFORE_START` rows. Smoke verification job 785 has started and is RUNNING; no rerun array has been submitted. Row 34 evidence is in [`terminal-results/task-34-smoke_test_ecc_verify/`](terminal-results/task-34-smoke_test_ecc_verify/).
+
+## Current checkpoint — 01:45 MDT, 2026-10-13
+
+Smoke verification job 785 completed successfully. `result.json` reports `passed=true`, `testname=smoke_test_kv`, and `sim_exit=0`; the simulator log has one `* TESTCASE PASSED` marker and no failure marker. The runner status records `firmware_outcome=PASS`, `heartbeat_verification=PASS`, and two flushed heartbeats; mcycle advanced from 0 to 1,722 by wall time 300 seconds. The 42-row rerun selection is ready, ordered by expected mcycle cost, and will use throttle 6, one CPU, and 3 GiB per task. See [`m5b-verification-20261012-01/`](m5b-verification-20261012-01/) and [`m5b-rerun-20261012-01/`](m5b-rerun-20261012-01/).
