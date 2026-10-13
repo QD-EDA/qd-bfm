@@ -37,6 +37,8 @@ At 16:04 MDT, job 669 tasks 16–21 remained active and rows 22–51 pending. Th
 At 16:15 MDT, row 18 (`smoke_test_doe_kv_ocp_progress`) completed PASS on job 669: the runner/status, JSON, and simulator pass marker agree; it took 2:02:55 and peaked at 1,852,448 KiB. Five prior tasks (16, 17, 19–21) and new task 22 are running, with rows 23–51 pending. The ledger now has 17 terminal verdicts, six running rows, and 29 pending. Full task evidence is in [`terminal-results/task-18-smoke_test_doe_kv_ocp_progress/`](terminal-results/task-18-smoke_test_doe_kv_ocp_progress/); queue/result details are in [`resubmission-20261012-05/status-16-15.txt`](resubmission-20261012-05/status-16-15.txt).
 
 
-## Current checkpoint — 17:44 MDT, 2026-10-12
+## Current checkpoint — 18:27 MDT, 2026-10-12
 
 Rows 0–21 and 27 now have terminal outcomes: 15 TIMEOUT, 5 PASS, and 3 FAIL. Row 27 (`smoke_test_qspi`) failed during firmware compilation because its test source references QSPI register symbols absent from the generated register header at the pinned Caliptra revision; simulation did not start. Rows 22–26 and 28 are running on job 669; rows 29–51 are pending at throttle 6. The two six-hour retries (`smoke_test_strap` and `smoke_test_sha256`, rows 50–51) remain queued. The hardware-config link failure has an evidenced upstream inline-linkage cause in [`hwconfig-linkdiag/README.md`](hwconfig-linkdiag/README.md).
+
+At 18:27 MDT the queue remains rows 22–26 and 28 running, with rows 29–51 pending at throttle 6. DAN-DESKTOP had been up 9:52; all six VVP processes were active at 99.9% CPU. Their simulator logs remained 45,302 bytes with no PASS/FAIL/Finished marker, result JSON, or task status file. This is nonterminal simulation activity, not a verdict. The queue, process, log-size, and marker snapshot is [`resubmission-20261012-05/status-18-27.txt`](resubmission-20261012-05/status-18-27.txt).
