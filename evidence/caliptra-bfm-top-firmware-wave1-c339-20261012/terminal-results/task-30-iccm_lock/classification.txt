@@ -1,0 +1,12 @@
+outcome=TIMEOUT (progress unknown)
+job=669
+task=669_30
+per_test_timeout_s=15639
+runner_exit=124
+elapsed=4:20:39
+maximum_rss_kib=1852396
+result_json=absent
+terminal_testcase_marker=absent
+heartbeat_count=0
+last_meaningful_log_marker=0.000 ns - First pass through ICCM
+classification=timeout with progress unknown; this run predates mcycle heartbeat instrumentation, so it is not classified as a hang

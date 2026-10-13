@@ -72,3 +72,7 @@ Row 26 (smoke_test_dma_aes_gcm_short_1_dword) reached its 13,341-second per-test
 ## Current checkpoint — 23:40 MDT, 2026-10-12
 
 Task 669_29 ended at its configured timeout and task 669_35 failed on `ERR_ECC_PRIVKEY_NOT_STABLE`. The ledger now has 21 `TIMEOUT (progress unknown)`, six PASS, five FAIL, four RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Tasks 669_30, 669_32, 669_33, and 669_34 remain running under their existing limits. Row 35 remains in the original 17-row resubmission set even though its earlier run failed. Raw evidence for rows 29 and 35 is under [`terminal-results/`](terminal-results/README.md).
+
+## Current checkpoint — 00:29 MDT, 2026-10-13
+
+Task 669_30 (`iccm_lock`) reached its 15,639-second timeout after 4:20:39, with peak RSS 1,852,396 KiB. The simulator log reached the first pass through ICCM, but no result JSON, testcase marker, or mcycle heartbeat exists; it remains `TIMEOUT (progress unknown)`, not a hang. The ledger now has 22 timeouts, six PASS, five FAIL, three RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Tasks 669_32–34 remain running; smoke verification job 785 remains pending after array 669. Row 30 evidence is in [`terminal-results/task-30-iccm_lock/`](terminal-results/task-30-iccm_lock/).
