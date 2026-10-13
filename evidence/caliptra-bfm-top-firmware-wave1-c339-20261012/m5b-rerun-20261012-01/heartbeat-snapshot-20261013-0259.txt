@@ -1,0 +1,11 @@
+observed_at=2026-10-13 02:59 MDT
+job_id=799
+array_state=tasks 1-6 RUNNING at 1:06:02; tasks 7-42 PENDING at throttle 6
+terminal_results=none among the six running tasks
+task_1=smoke_test_kv_write_scan_mode; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27478
+task_2=cptra_ss_test_rom; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27548
+task_3=smoke_test_dma_aes_gcm; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27524
+task_4=smoke_test_datavault_basic; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27395
+task_5=smoke_test_dma_aes_gcm_cmd_err; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27381
+task_6=smoke_test_dma_aes_gcm_rd_enc_axi_err; heartbeat_count=14; first=wall_s:0,mcycle:0; latest=wall_s:3900,mcycle:27509
+hang_classification=none; each running task's mcycle increased, and no flat-30-minute interval is present
