@@ -32,3 +32,10 @@ heartbeats; tasks 19–42 remained pending at throttle 6. Overlay retry 826_1
 remained active, with latest heartbeat `wall_s=10200 mcycle=2882`; its mcycle
 value decreased between the 9,600- and 9,900-second samples, and no terminal
 marker/result was present. See [`heartbeat-snapshot-20261013-0707.txt`](heartbeat-snapshot-20261013-0707.txt).
+
+At 07:17 MDT, tasks 799_13–18 were still running with all six mcycle
+heartbeats advancing; tasks 19–42 remained pending at throttle 6. Overlay
+retry 826_1 was also running, at `wall_s=10800 mcycle=7106`. The observed
+mcycle decrease between its 9,600- and 9,900-second heartbeats remains
+unexplained. Current values are in
+[`heartbeat-snapshot-20261013-0717.txt`](heartbeat-snapshot-20261013-0717.txt).

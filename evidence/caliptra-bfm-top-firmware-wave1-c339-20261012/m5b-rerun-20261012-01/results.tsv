@@ -11,12 +11,12 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 10	13	smoke_test_hek_flow	smoke_test_hek_flow	TERMINAL	TIMEOUT	63131	9300	63131	9467	9467	137	30	0	1852440	timeout-reclassification-799/results.tsv
 11	15	smoke_test_dma_aes_gcm_non_gcm_en_dec	smoke_test_dma_aes_gcm_non_gcm_en_dec	TERMINAL	TIMEOUT	67671	9900	67671	10091	10091	137	31	0	1852444	timeout-reclassification-799/results.tsv
 12	17	c_intr_handler	c_intr_handler	TERMINAL	TIMEOUT	73262	10500	73262	10813	10813	137	35	0	1852508	timeout-reclassification-799/results.tsv
-13	19	smoke_test_mbox_byte_read	smoke_test_mbox_byte_read	RUNNING			4200	27917	10846	4456					heartbeat-snapshot-20261013-0707.txt
-14	20	smoke_test_dma_aes_gcm_collision_test	smoke_test_dma_aes_gcm_collision_test	RUNNING			3900	26304	11010	4031					heartbeat-snapshot-20261013-0707.txt
-15	21	smoke_test_dma_aes_gcm_short_dword	smoke_test_dma_aes_gcm_short_dword	RUNNING			2700	18266	11240	2979					heartbeat-snapshot-20261013-0707.txt
-16	22	smoke_test_kv_securitystate	smoke_test_kv_securitystate	RUNNING			1800	11924	11240	2059					heartbeat-snapshot-20261013-0707.txt
-17	23	smoke_test_datavault_lock	smoke_test_datavault_lock	RUNNING			1200	8173	11601	1337					heartbeat-snapshot-20261013-0707.txt
-18	24	smoke_test_datavault_mini	smoke_test_datavault_mini	RUNNING			300	1991	12257	418					heartbeat-snapshot-20261013-0707.txt
+13	19	smoke_test_mbox_byte_read	smoke_test_mbox_byte_read	RUNNING			4800	31980	10846	5070					heartbeat-snapshot-20261013-0717.txt
+14	20	smoke_test_dma_aes_gcm_collision_test	smoke_test_dma_aes_gcm_collision_test	RUNNING			4500	30370	11010	4645					heartbeat-snapshot-20261013-0717.txt
+15	21	smoke_test_dma_aes_gcm_short_dword	smoke_test_dma_aes_gcm_short_dword	RUNNING			3300	22323	11240	3593					heartbeat-snapshot-20261013-0717.txt
+16	22	smoke_test_kv_securitystate	smoke_test_kv_securitystate	RUNNING			2400	15870	11240	2673					heartbeat-snapshot-20261013-0717.txt
+17	23	smoke_test_datavault_lock	smoke_test_datavault_lock	RUNNING			1800	12289	11601	1951					heartbeat-snapshot-20261013-0717.txt
+18	24	smoke_test_datavault_mini	smoke_test_datavault_mini	RUNNING			900	6110	12257	1032					heartbeat-snapshot-20261013-0717.txt
 19	25	smoke_test_aes_gcm	smoke_test_aes_gcm	PENDING					13210						heartbeat-snapshot-20261013-0707.txt
 20	26	smoke_test_dma_aes_gcm_short_1_dword	smoke_test_dma_aes_gcm_short_1_dword	PENDING					13341						heartbeat-snapshot-20261013-0707.txt
 21	29	jtag_tap_mbox	jtag_tap_mbox	PENDING					15212						heartbeat-snapshot-20261013-0707.txt
