@@ -194,3 +194,10 @@ At 13:00 MDT, tasks 799_21–26 remained RUNNING at `12600/90981`,
 snapshot. Task 22 advanced after its earlier mcycle drop, so the temporary
 flat interval ended; no cause is inferred. See the
 [13:00 snapshot](heartbeat-snapshot-20261013-1300.txt).
+
+At 13:11 MDT, tasks 799_21–26 remained RUNNING at `13500/97352`,
+`12300/10602`, `11400/83086`, `9900/72405`, `2100/14725`, and `1200/8256`;
+tasks 27–42 remained PENDING. All six mcycle values advanced from the prior
+snapshot, including task 22 after its earlier drop. No result JSON or
+testcase PASS/FAIL marker was found for active rows. See the
+[13:11 snapshot](heartbeat-snapshot-20261013-1311.txt).
