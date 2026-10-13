@@ -3,8 +3,15 @@ da56865b78333aaee1f754957f710211e88d991c0998224c4d0fa67fd37874c9  ./array.sbatch
 b3ecc822f206800db65153cecbb78d2183cf245abbde8587be2a2e4092bc9159  ./README.md
 6b3da2cbecc930e4c170bfc97981c82d7f52da33e40a5030c9b36e7e1c94ae03  ./attempt-01-row31/README.md
 5662144ceba8609c1ae7dfc5a3de75cb64afed9aa3b87828ac34f77c828227e7  ./attempt-01-row31/logs/bfm-fw-compat-823_3.out
+5709e2a2d58f0b756243f3cc20a21793a150e281f61b8ec4e5eaee556f1f65aa  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/riscv-gcc-version.txt
 127fa6667f6025014ac9da6df911f6012fc1cbca5a31fc5fb4fad35ec42d33c0  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/resource.log
+ad510908f05d3c11522439c1466863e3cdcb2da2ea6a1ed44041e20aa5013a93  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/tool-binaries.sha256
 d85b81ee14743914c7dd5c75681bd53ddefe10762f8c7bddc3d0115799141e93  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/output/smoke_test_ecc_errortrigger5/firmware.log
 fba9c26c4f768cecf2b32a6753c829d555adc2d532a6b4565d1640e59ade029b  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/output/caliptra_firmware_compat.h
+89dbefceb0880076acaf3025479210a1e2ba739b83a0609ea6cb4d34d5b498e5  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/vvp-version.txt
+80cb8363034fd198f09c89830925ce0547aa5fe6b7bbd3888a49d6e771bfd720  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/provenance.txt
+7eef8e1d66ce40bdc77f1a380f41b719d204dcdd396aadae885b5eac3b97ac1a  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/openssl-binaries.sha256
 38235adc5afc009a58d44f0a39ac9c4eded434970c8ea1c6b459837da18ed21c  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/status.txt
+9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/python-version.txt
+5924c0f1d504d08f18bc420e2f66c610478d1334973b9fbea1cfddd0bfa62c64  ./attempt-01-row31/runs/31-eaeb97287ce63194-3/iverilog-version.txt
 1f0807d43f4911d7aedb3fba8cef8aa6b6f653596764b9904751fa73afb6fb7c  ./submission.txt
