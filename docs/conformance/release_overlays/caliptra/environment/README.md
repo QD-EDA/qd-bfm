@@ -7,6 +7,25 @@ one documented compatibility issue; no test vector or expected value is
 fabricated. The pkdecode address cast is a QD-side workaround for known c339
 issue #539 and does not modify the pinned checkout.
 
+## Build-time firmware overlays
+
+The firmware runner's opt-in `--firmware-compat-overlay` copies the selected
+header into the run output and force-includes it for the firmware C build. It
+does not edit the pinned RTL or the testcase source.
+
+| Header | Case | Compatibility change |
+|---|---|---|
+| `caliptra-legacy-uart-qspi-reg-compat.h` | `smoke_test_uart`, `smoke_test_qspi` | Restores only register identifiers referenced by these stale tests, using definitions from generated-header blob `87ba5382a7b237a6f5b15105aed52fa672c82206` at Caliptra parent `2bcf063ceb5c06fb4d4af6089a0d437ed4c5ee66`, immediately before upstream removal commit `26cda9bd019248a0516427facb2602a9274f1d17`. |
+| `caliptra-errortrigger5-abr-compat.h` | `smoke_test_ecc_errortrigger5` | Supplies the two no-op ABR ISR hooks already present in the pinned errortrigger4 ISR header, missing from errortrigger5. |
+
+The pinned RTL no longer integrates UART or QSPI. Their old enable bits also
+overlap current hardware-config fields, so restoring the old definitions allows
+the test to build but does not make either peripheral available or validate its
+old register map against this RTL. Preserve any runtime FAIL or TIMEOUT as-is.
+The errortrigger5 YAML still names itself errortrigger4; the runner records both
+the case directory (`test`) and YAML name (`testname`) so this source mismatch
+stays visible. No test logic or result checks are changed by these overlays.
+
 | Patch | One-line justification | Environment row(s) | Evidence |
 |---|---|---|---|
 | `csrng-package-order.patch` | Compile the pinned RAM package before its first importer. | `caliptra-v2-1-2-csrng_tb` | `evidence/caliptra-bfm-environment-matrix-20261011/slurm-csrng-fix/` |

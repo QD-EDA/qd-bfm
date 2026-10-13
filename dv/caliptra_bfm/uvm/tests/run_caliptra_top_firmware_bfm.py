@@ -57,6 +57,14 @@ PHYSICAL_RNG_SHA256 = "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c3
 TOP_TB_JTAG_OVERLAY_SHA256 = "6b3d6eeb6bbb3acddcc6045b86c9cc6c6ca3934164f29564485a9a3d2fc4d02a"
 FAST_TRNG_TOP_TB_OVERLAY_SHA256 = "c4dbd3f75055982a5b31d05d8ba66039027b48b056e769985722a4db4b02dea6"
 TOP_SERVICES_SHA256 = "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343"
+FIRMWARE_COMPAT_OVERLAYS = {
+    "smoke_test_uart": "caliptra-legacy-uart-qspi-reg-compat.h",
+    "smoke_test_qspi": "caliptra-legacy-uart-qspi-reg-compat.h",
+    "smoke_test_ecc_errortrigger5": "caliptra-errortrigger5-abr-compat.h",
+}
+FIRMWARE_COMPAT_OVERLAY_DIR = (
+    REPO / "docs/conformance/release_overlays/caliptra/environment"
+)
 DMA_GENERATOR_HELPER_SCOPE = "caliptra_top_tb.tb_services_i"
 FINISH = re.compile(r"Finished : minstret = (\d+), mcycle = (\d+)")
 RESET_ASSERT = re.compile(r"CALIPTRA_RESET_EDGE state=assert cycle=(\d+)")
@@ -198,6 +206,18 @@ def prepare_axi_if_overlay(rtl_root, output_path):
     Path(output_path).write_text(allocate_axi_read_resp_user(source.read_text()))
     if sha256(output_path) != AXI_IF_OVERLAY_SHA256:
         raise ValueError("Icarus AXI interface overlay did not match its recorded hash")
+
+
+def prepare_firmware_compat_overlay(case, output_path):
+    filename = FIRMWARE_COMPAT_OVERLAYS.get(case)
+    if filename is None:
+        raise ValueError(f"no firmware compatibility overlay for {case}")
+    source = FIRMWARE_COMPAT_OVERLAY_DIR / filename
+    if not source.is_file():
+        raise ValueError(f"firmware compatibility overlay not found: {source}")
+    output = Path(output_path)
+    output.write_bytes(source.read_bytes())
+    return output
 
 
 def remove_sva_debug_print(text, message):
@@ -882,6 +902,8 @@ def main():
                         help="diagnostic only: skip MLDSA/MLKEM vector generation without limiting AES DMA cases")
     parser.add_argument("--quiet-firmware", action="store_true",
                         help="diagnostic only: quiet routine DMA output")
+    parser.add_argument("--firmware-compat-overlay", action="store_true",
+                        help="use a case-specific build-time upstream firmware compatibility header")
     parser.add_argument("--trace-axi", action="store_true",
                         help="diagnostic only: trace CPU progress and full-top AXI handshakes with VPI")
     parser.add_argument("--disable-bfm-checker", action="store_true",
@@ -961,6 +983,11 @@ def main():
     source_commit = subprocess.check_output(["git", "-C", str(rtl), "rev-parse", "HEAD"], text=True).strip()
     args.output.mkdir(parents=True)
     args.output = args.output.resolve()
+    firmware_compat_overlay = None
+    if args.firmware_compat_overlay:
+        firmware_compat_overlay = prepare_firmware_compat_overlay(
+            args.case, args.output / "caliptra_firmware_compat.h"
+        )
     profile = args.output / "open_caliptra_top.vf"
     checker_overlay = args.output / "caliptra_top_sva_icarus.sv"
     prepare_checker_overlay(rtl, checker_overlay)
@@ -1026,6 +1053,8 @@ def main():
     build_flags = "-std=gnu11 -O2"
     if quiet_firmware:
         build_flags += " -DCPT_VERBOSITY=ERROR"
+    if firmware_compat_overlay:
+        build_flags += f" -include {firmware_compat_overlay}"
     firmware_command = [
         "make", "-f", str(rtl / "tools/scripts/Makefile"), f"TESTNAME={args.case}",
         f"GCC_PREFIX={gcc_prefix}", "CALIPTRA_INTERNAL_TRNG=1", f"PLAYBOOK_RANDOM_SEED={seed}",
@@ -1091,6 +1120,12 @@ def main():
         "compile_exit": compile_exit,
         "firmware_command": firmware_command,
         "firmware_exit": firmware_exit,
+        "firmware_compat_overlay": (
+            str(firmware_compat_overlay) if firmware_compat_overlay else None
+        ),
+        "firmware_compat_overlay_sha256": (
+            sha256(firmware_compat_overlay) if firmware_compat_overlay else None
+        ),
         "aes_case_limit": aes_case_limit,
         "aes_case_start": aes_case_start if aes_case_limit is not None else None,
         "aes_case_limit_source_sha256": case_limit_source[1] if case_limit_source else None,

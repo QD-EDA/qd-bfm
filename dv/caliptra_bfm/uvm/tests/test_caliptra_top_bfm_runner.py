@@ -208,6 +208,24 @@ class StockFirmwareCaseTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "stay within"):
                 RUNNER.load_case(temp, "hello_world_iccm", "../../outside.yml")
 
+
+class FirmwareCompatibilityOverlayTest(unittest.TestCase):
+    def test_copies_only_the_case_specific_compatibility_headers(self):
+        overlay_root = RUNNER.REPO / "docs/conformance/release_overlays/caliptra/environment"
+        with tempfile.TemporaryDirectory() as temp:
+            for case, filename in RUNNER.FIRMWARE_COMPAT_OVERLAYS.items():
+                output = Path(temp) / f"{case}.h"
+                result = RUNNER.prepare_firmware_compat_overlay(case, output)
+                self.assertEqual(result, output)
+                self.assertEqual(
+                    output.read_bytes(), (overlay_root / filename).read_bytes()
+                )
+
+            with self.assertRaisesRegex(ValueError, "no firmware compatibility overlay"):
+                RUNNER.prepare_firmware_compat_overlay(
+                    "smoke_test_unrelated", Path(temp) / "unrelated.h"
+                )
+
 class ResetInFlightTraceTest(unittest.TestCase):
     def scan(self, lines):
         with tempfile.TemporaryDirectory() as temp:
