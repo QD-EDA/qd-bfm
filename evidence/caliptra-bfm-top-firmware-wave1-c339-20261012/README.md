@@ -116,3 +116,7 @@ Array task 799_7 (`smoke_test_dma_aes_gcm_wr_enc_axi_err`) reached its configure
 ## Current checkpoint — 06:07 MDT, 2026-10-13
 
 Array task 799_8 (`smoke_test_kv_lock_use_mid_read`) reached its configured timeout: 7,956 seconds, exactly matching `/usr/bin/time`'s `2:12:36`, with 1,852,348 KiB peak RSS. Its wrapper reported exit 137 as `INFRA_ERROR`; the corrected result is `TIMEOUT`, last heartbeat `wall_s=7800 mcycle=54368`, and maximum flat interval 0 seconds. Tasks 799_9–14 are RUNNING, 15–42 remain pending at throttle 6, and the three overlay simulations continue with advancing heartbeats. See [`timeout-reclassification-799/`](m5b-rerun-20261012-01/timeout-reclassification-799/) and [`heartbeat-snapshot-20261013-0607.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0607.txt).
+
+## Current checkpoint — 06:23 MDT, 2026-10-13
+
+Array task 799_9 (`smoke_test_sram_ecc`) reached its configured timeout: 8,876 seconds, exactly matching `/usr/bin/time`'s `2:27:56`, with 1,852,468 KiB peak RSS. Its wrapper reported exit 137 as `INFRA_ERROR`; the corrected result is `TIMEOUT`, last heartbeat `wall_s=8700 mcycle=59294`, and maximum flat interval 0 seconds. Tasks 799_10–15 are RUNNING, 16–42 remain pending at throttle 6, and the three overlay simulations continue with advancing heartbeats. The timeout records are in [`timeout-reclassification-799/`](m5b-rerun-20261012-01/timeout-reclassification-799/), with the live snapshot in [`heartbeat-snapshot-20261013-0623.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0623.txt).

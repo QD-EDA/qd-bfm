@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+m5b_index=9
+source_row=10
+test_id=42f2671ec114cfb5
+matrix_testname=smoke_test_sram_ecc
+case_dir=smoke_test_sram_ecc
+case_yaml=smoke_test_sram_ecc/smoke_test_sram_ecc.yml
+yaml_testname=smoke_test_sram_ecc
+expected_mcycle_estimate=17240
+per_test_timeout_s=8876
+selection_basis=static score=153; body_lines=93, loops=5, waits=0, crypto_calls=0
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=07ee859ae7a442e38c4a9e0fb86026ccd2b14f67bd416f35c59dae44327210b8
