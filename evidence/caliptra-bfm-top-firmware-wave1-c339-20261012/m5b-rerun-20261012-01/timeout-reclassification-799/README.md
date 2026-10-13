@@ -66,3 +66,11 @@ The wrapper status's `last_heartbeat` field is older at wall 10,200; the
 simulator log contains the later sample. Its copied evidence is under
 `runs/20-0627acabfee6876c-14/`, with original remote hashes in
 `REMOTE-SHA256SUMS-task14.txt`.
+
+Task 15 (`smoke_test_dma_aes_gcm_short_dword`) records 11,240 seconds,
+exactly its configured cap. Its wrapper outcome `INFRA_ERROR` is corrected to
+TIMEOUT from elapsed time and runner exit 137. The last heartbeat was
+`wall_s=11100 mcycle=78702`; no testcase PASS/FAIL marker or result JSON exists.
+The full log has no repeated adjacent mcycle sample. Maximum RSS was 1,852,384
+KiB. Raw evidence and the copied task output are in
+`runs/21-c95f8624d4cb7fe0-15/`, with hashes in `REMOTE-SHA256SUMS-task15.txt`.

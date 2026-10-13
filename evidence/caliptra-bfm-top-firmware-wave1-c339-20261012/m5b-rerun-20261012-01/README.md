@@ -78,3 +78,11 @@ TIMEOUT with final mcycle 75,743. Tasks 799_15–18 were RUNNING at
 (`smoke_test_dma_aes_gcm_short_1_dword`) was at `600/4198`. Tasks 21–42 were
 PENDING. The mcycle drop for task 16 noted earlier has since increased; no
 cause is inferred. See the [09:15 snapshot](heartbeat-snapshot-20261013-0915.txt).
+
+At 09:34 MDT, task 799_15 reached its 11,240-second cap and is recorded as
+TIMEOUT with final mcycle 78,702. Tasks 799_16–21 remained RUNNING with latest
+heartbeat pairs `10800/17148`, `9900/70757`, `9000/64463`, `2100/14865`,
+`1500/10649`, and `300/2071`; tasks 22–42 were PENDING. Task 16's mcycle had
+fallen at wall 8,700 in the earlier sample, then rose to 17,148 by wall 10,800;
+the evidence does not establish the reason for the earlier decrease. See the
+[09:34 snapshot](heartbeat-snapshot-20261013-0934.txt).
