@@ -1,0 +1,16 @@
+DAN-DESKTOP queue snapshot at 17:03 MDT, 2026-10-13.
+Host uptime: 1 day, 8 hours, 28 minutes.
+
+Job 799, array throttle 6:
+  799_25 TERMINAL TIMEOUT; smoke_test_ecc_verify; cap=16033 s; elapsed=16033 s; exit=137; wall_s=15900 mcycle=111247.
+  799_27 RUNNING 3:24:59; smoke_test_ecc_errortrigger3; wall_s=12000 mcycle=84315.
+  799_28 RUNNING 3:02:33; smoke_test_ecc_errortrigger4; wall_s=10800 mcycle=13049.
+  799_30 RUNNING 2:37:18; kv_entry_read_err; wall_s=9300 mcycle=66247.
+  799_32 RUNNING 2:11:14; smoke_test_ecc_flow1_kv_ocp_progress; wall_s=7800 mcycle=55508.
+  799_33 RUNNING 1:42:14; smoke_test_kv_rules_ocp_lock; wall_s=6000 mcycle=41577.
+  799_34 RUNNING 0:02:18; smoke_test_kv_parallel_access; wall_s=0 mcycle=0.
+  799_35-42 PENDING at throttle 6.
+
+Task 25's elapsed time equals its cap. The full log has one more heartbeat than
+status.txt but the same final sample. Active rows had no result JSON or terminal
+marker; task 34 had only its initial 0/0 sample.

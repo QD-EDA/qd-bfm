@@ -335,3 +335,12 @@ RUNNING at `15300/106937`, `11400/79930`, `10200/8745`, `8400/59669`,
 mcycle rose from 4,430 to 8,745 after its earlier drop; the cause remains
 unknown. All active rows remained non-flat and had no terminal markers or result
 JSON. See the [16:52 snapshot](heartbeat-snapshot-20261013-1652.txt).
+
+At 17:03 MDT, task 799_25 (`smoke_test_ecc_verify`) reached its exact
+16,033-second cap and is TIMEOUT with final mcycle 111,247. The wrapper status
+reports 53 heartbeats; the full log contains 54 through wall 15,900, with no
+flat interval or testcase terminal marker. Tasks 799_27–28, 799_30, and
+799_32–34 were RUNNING at `12000/84315`, `10800/13049`, `9300/66247`,
+`7800/55508`, `6000/41577`, and `0/0`; tasks 799_35–42 were PENDING. All active
+rows had no result JSON or terminal marker. See the
+[17:03 snapshot](heartbeat-snapshot-20261013-1703.txt).
