@@ -1,0 +1,18 @@
+0.000 ns - -------------------------------------------------------------------
+0.000 ns -  Datavault (Mini) Smoke Test for checking Lock & Basic Controls
+0.000 ns - -------------------------------------------------------------------
+0.000 ns - 
+0.000 ns - INFO. Using random seed = 17
+0.000 ns - 
+0.000 ns - 
+0.000 ns - ** Working on new Control Group Prefix LOCKABLE_SCRATCHREG_CTRL to Start Locking Data Registers **
+0.000 ns - 
+0.000 ns - INFO. handle_1d_locking(). Number of items in datset = 2
+0.000 ns - 
+0.000 ns - --next set--
+0.000 ns - LOCKABLE_SCRATCHREG_CTRL[0] -LOCKS-> LOCKABLE_SCRATCHREG[0]
+0.000 ns - INFO. (Single Write) For addr 0x1001C438 (LOCKABLE_SCRATCHREG[0]), attempting to write 0x4742F8A9, read back 0x4742F8A9
+0.000 ns - INFO. (Single Write) For addr 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL[0]), attempting to write 0x1, read back 0x1
+0.000 ns - INFO. (Single Write) For addr 0x1001C438 (LOCKABLE_SCRATCHREG[0]), attempting to write 0x29CD88B5, read back 0x4742F8A9
+0.000 ns - checking all dv_reg indices for unlocked registers
+0.000 ns - INFO. (Single Write) For addr 0x1001C030 (STICKY_DATA_VAULT_ENTRY_0[2]), attempting to write 0x2A06FFCB, read back 0x2A06FFCB

@@ -108,3 +108,11 @@ At 10:19 MDT, tasks 799_18–23 remained RUNNING at `11700/83780`,
 tasks 24–42 remained PENDING. All six mcycle values advanced from the prior
 snapshot. No result JSON or explicit PASS/FAIL marker was found for active
 rows. See the [10:19 snapshot](heartbeat-snapshot-20261013-1019.txt).
+
+At 10:44 MDT, task 799_18 reached its 12,257-second cap and is recorded as
+TIMEOUT with final mcycle 85,975. The wrapper reports INFRA_ERROR and exit 137;
+elapsed time matches the configured cap. The full log has 41 advancing
+heartbeats through wall 12,000, with no 30-minute flat interval. Tasks 799_19–24
+remained RUNNING at `6300/44228`, `5700/39945`, `4500/31617`, `3600/25138`,
+`2700/19386`, and `900/6543`; tasks 25–42 remained PENDING. See the
+[10:44 snapshot](heartbeat-snapshot-20261013-1044.txt).

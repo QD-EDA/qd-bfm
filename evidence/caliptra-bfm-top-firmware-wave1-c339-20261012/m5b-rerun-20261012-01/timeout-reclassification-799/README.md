@@ -91,3 +91,13 @@ The full log has no repeated adjacent mcycle values, result JSON, or testcase
 terminal marker. Maximum RSS was 1,852,436 KiB. The raw status, resource,
 simulator, and provenance files are in `runs/23-40ec556410264b2f-17/`, with
 their remote hashes in `REMOTE-SHA256SUMS-task17.txt`.
+
+Task 18 (`smoke_test_datavault_mini`) records 12,257 seconds, exactly its
+configured cap; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected
+to TIMEOUT. The wrapper reports 29 heartbeats; the full simulator log contains
+41 samples through `wall_s=12000 mcycle=85975`. All samples advance, so there is
+no 30-minute flat interval. No result JSON or testcase terminal marker is
+present. Maximum RSS was 1,852,408 KiB. The raw status, resource, simulator,
+firmware, console, and provenance files are in
+`runs/24-483ee327507dab77-18/`, with their remote hashes in
+`REMOTE-SHA256SUMS-task18.txt`.
