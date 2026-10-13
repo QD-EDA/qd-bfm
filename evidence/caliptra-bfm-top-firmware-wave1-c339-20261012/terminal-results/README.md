@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These thirteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. Their simulator output stopped during fuse-ready polling, before a `result.json` was written. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
+These fourteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; row 22 progressed through reset assertion/deassertion before its timeout. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -17,6 +17,9 @@ These thirteen Slurm runs ended with the runner's explicit per-test timeout (`ru
 | 19 | `smoke_test_mbox_byte_read` | TIMEOUT | 10,846 s |
 | 20 | `smoke_test_dma_aes_gcm_collision_test` | TIMEOUT | 11,010 s |
 | 21 | `smoke_test_dma_aes_gcm_short_dword` | TIMEOUT | 11,240 s |
+| 22 | `smoke_test_kv_securitystate` | TIMEOUT | 11,240 s |
+
+Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 

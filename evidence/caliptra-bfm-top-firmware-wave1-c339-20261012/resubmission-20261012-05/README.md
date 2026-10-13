@@ -15,3 +15,5 @@ At 15:23 MDT, job 669 tasks 16–21 remained RUNNING and rows 22–51 PENDING at
 At 16:04 MDT, the same six tasks remained active with 1:53:10 elapsed and about 99.9% CPU each; no result JSON or terminal status existed. This duration remains below their configured limits and within the 2:18:44 observed runtime of an earlier top-level PASS. See [`status-16-04.txt`](status-16-04.txt).
 
 At 16:15 MDT, task 669_18 completed PASS and row 22 started; five other tasks from the original running group remain active. The corrected runner, JSON, simulator marker, warning count, and runtime are recorded under `terminal-results/task-18-smoke_test_doe_kv_ocp_progress/`. The updated queue snapshot is [`status-16-15.txt`](status-16-15.txt).
+
+At 19:27 MDT, task 669_22 ended with the runner's configured 11,240-second timeout (3:07:20; peak RSS 1,852,368 KiB), so row 22 is recorded as terminal TIMEOUT. Its raw status and logs are in `terminal-results/task-22-smoke_test_kv_securitystate/`. Rows 23–26, 28, and 29 are RUNNING; rows 30–51 remain PENDING at throttle 6. DAN-DESKTOP had been up 10:52, and all six VVP processes were active. See [`status-19-26.txt`](status-19-26.txt).

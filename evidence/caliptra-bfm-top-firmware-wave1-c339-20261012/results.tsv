@@ -21,7 +21,7 @@ array_index	test_id	test_name	state	terminal_outcome	run_source	runner_exit	evid
 19	40a2264a41561d60	smoke_test_mbox_byte_read	TIMEOUT	TIMEOUT	slurm_669	124	terminal-results/task-19-smoke_test_mbox_byte_read/	10,846 s per-test timeout; no result JSON or terminal testcase marker; wall=3:00:46; max RSS=1,852,296 KiB.
 20	0627acabfee6876c	smoke_test_dma_aes_gcm_collision_test	TIMEOUT	TIMEOUT	slurm_669	124	terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/	11,010 s per-test timeout; no result JSON or terminal testcase marker; wall=3:03:30; max RSS=1,852,364 KiB.
 21	c95f8624d4cb7fe0	smoke_test_dma_aes_gcm_short_dword	TIMEOUT	TIMEOUT	slurm_669	124	terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/	11,240 s per-test timeout; no result JSON or terminal testcase marker; wall=3:07:20; max RSS=1,852,384 KiB.
-22	871bf14a358781fb	smoke_test_kv_securitystate	SLURM_RUNNING	-	slurm_669	-	resubmission-20261012-05/submission.txt	Task 669_22 RUNNING since 16:14 MDT; no result.json yet.
+22	871bf14a358781fb	smoke_test_kv_securitystate	TIMEOUT	TIMEOUT	slurm_669	124	terminal-results/task-22-smoke_test_kv_securitystate/	Task 669_22 hit its 11,240-second limit after 3:07:20; peak RSS 1,852,368 KiB; no result.json or testcase terminal marker.
 23	40ec556410264b2f	smoke_test_datavault_lock	SLURM_RUNNING	-	slurm_669	-	resubmission-20261012-05/submission.txt	Task 669_23 RUNNING since 17:02 MDT; no result.json yet.
 24	483ee327507dab77	smoke_test_datavault_mini	SLURM_RUNNING	-	slurm_669	-	resubmission-20261012-05/submission.txt	Task 669_24 RUNNING since 17:11 MDT; no result.json yet.
 25	6bccff716e6bcab5	smoke_test_aes_gcm	SLURM_RUNNING	-	slurm_669	-	resubmission-20261012-05/submission.txt	Task 669_25 RUNNING since 17:11 MDT; no result.json yet.

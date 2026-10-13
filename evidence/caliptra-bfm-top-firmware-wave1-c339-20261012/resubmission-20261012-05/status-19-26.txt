@@ -1,0 +1,16 @@
+2026-10-12 19:27:05 MDT
+ 19:27:05 up 10:52,  4 users,  load average: 8.96, 9.23, 9.29
+             JOBID      STATE       TIME     CPUS NODELIST(REASON)
+     669_[30-51%6]    PENDING       0:00        1 (JobArrayTaskLimit)
+            669_29    RUNNING       5:43        1 DAN-DESKTOP
+            669_28    RUNNING    1:52:54        1 DAN-DESKTOP
+            669_26    RUNNING    2:12:30        1 DAN-DESKTOP
+            669_25    RUNNING    2:15:14        1 DAN-DESKTOP
+            669_24    RUNNING    2:15:47        1 DAN-DESKTOP
+            669_23    RUNNING    2:25:02        1 DAN-DESKTOP
+ 700978    02:24:35 99.9 1034892 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 715902    02:15:17 99.9 1034644 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 716499    02:14:39 99.9 1034712 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 720361    02:11:59 99.9 1034740 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+ 742175    01:52:28 99.9 1034956 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4ca47c7da4afd810-28/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY +STRAP_SS_KEY_RELEASE_BASE_ADDR_RAND_SRAM +STRAP_SS_KEY_RELEASE_KEY_SIZE_RAND_LOW +CLP_OCP_LOCK_EN
+1082401       05:09 99.9 1037136 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/caliptra_top_tb.vvp +CLP_REGRESSION
