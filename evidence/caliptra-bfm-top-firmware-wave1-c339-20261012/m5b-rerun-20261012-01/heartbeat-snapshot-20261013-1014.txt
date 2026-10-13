@@ -1,0 +1,20 @@
+DAN-DESKTOP queue snapshot at 10:14 MDT, 2026-10-13.
+Host uptime: 1 day, 1 hour, 35 minutes.
+
+Job 799, array throttle 6:
+  799_18 RUNNING 3:13:26; smoke_test_datavault_mini; wall_s=11400 mcycle=81586.
+  799_19 RUNNING 1:19:57; smoke_test_aes_gcm; wall_s=4500 mcycle=31335.
+  799_20 RUNNING 1:10:07; smoke_test_dma_aes_gcm_short_1_dword; wall_s=3900 mcycle=27117.
+  799_21 RUNNING 0:48:45; jtag_tap_mbox; wall_s=2700 mcycle=18809.
+  799_22 RUNNING 0:33:26; iccm_lock; wall_s=1800 mcycle=12542.
+  799_23 RUNNING 0:15:22; smoke_test_ecc_keygen; wall_s=600 mcycle=4285.
+  799_24-42 PENDING at throttle 6.
+
+Task 799_17 (`smoke_test_datavault_lock`) reached its 11,601-second cap and is
+TIMEOUT with runner exit 137 and final heartbeat wall_s=11400 mcycle=81461.
+The wrapper's last heartbeat is stale at wall_s=7500, mcycle=53013; the full
+simulator log was used to recover the final heartbeat. No repeated adjacent
+mcycle sample established a 30-minute hang.
+
+All six active rows' heartbeat values were checked directly against sim.log.
+No result JSON or testcase terminal marker was present for active rows.

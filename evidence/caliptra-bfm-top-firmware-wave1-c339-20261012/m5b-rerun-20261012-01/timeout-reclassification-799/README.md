@@ -82,3 +82,12 @@ with no repeated adjacent mcycle sample, result JSON, or testcase PASS/FAIL
 marker. Maximum RSS was 1,852,360 KiB. The wrapper status and full log are in
 `runs/22-871bf14a358781fb-16/`, with original hashes in
 `REMOTE-SHA256SUMS-task16.txt`.
+
+Task 17 (`smoke_test_datavault_lock`) records 11,601 seconds, exactly its
+configured cap; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected
+to TIMEOUT. The wrapper status ends at wall 7,500/mcycle 53,013, but the full
+simulator log contains later heartbeats through `wall_s=11400 mcycle=81461`.
+The full log has no repeated adjacent mcycle values, result JSON, or testcase
+terminal marker. Maximum RSS was 1,852,436 KiB. The raw status, resource,
+simulator, and provenance files are in `runs/23-40ec556410264b2f-17/`, with
+their remote hashes in `REMOTE-SHA256SUMS-task17.txt`.

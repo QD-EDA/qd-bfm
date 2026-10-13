@@ -15,3 +15,4 @@ array_task	source_row	test	wrapper_outcome	corrected_outcome	runner_exit	timeout
 14	20	smoke_test_dma_aes_gcm_collision_test	INFRA_ERROR	TIMEOUT	137	11010	11010	34	10800	75743	0	1852448
 15	21	smoke_test_dma_aes_gcm_short_dword	INFRA_ERROR	TIMEOUT	137	11240	11240	34	11100	78702	0	1852384
 16	22	smoke_test_kv_securitystate	INFRA_ERROR	TIMEOUT	137	11240	11240	37	11100	19222	0	1852360
+17	23	smoke_test_datavault_lock	INFRA_ERROR	TIMEOUT	137	11601	11601	26	11400	81461	0	1852436

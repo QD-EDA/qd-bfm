@@ -79,13 +79,6 @@ TIMEOUT with final mcycle 75,743. Tasks 799_15–18 were RUNNING at
 PENDING. The mcycle drop for task 16 noted earlier has since increased; no
 cause is inferred. See the [09:15 snapshot](heartbeat-snapshot-20261013-0915.txt).
 
-At 09:51 MDT, task 799_16 reached its 11,240-second cap and is recorded as
-TIMEOUT with final mcycle 19,222. Tasks 799_17–22 were RUNNING with latest
-heartbeat pairs `11100/79384`, `9900/70883`, `3300/23093`, `2700/18891`,
-`1500/10584`, and `300/2054`; tasks 23–42 were PENDING. Task 16's earlier
-mcycle drop had been followed by advancing samples through its timeout; its
-cause remains unknown. See the [09:51 snapshot](heartbeat-snapshot-20261013-0951.txt).
-
 At 09:34 MDT, task 799_15 reached its 11,240-second cap and is recorded as
 TIMEOUT with final mcycle 78,702. Tasks 799_16–21 remained RUNNING with latest
 heartbeat pairs `10800/17148`, `9900/70757`, `9000/64463`, `2100/14865`,
@@ -93,3 +86,25 @@ heartbeat pairs `10800/17148`, `9900/70757`, `9000/64463`, `2100/14865`,
 fallen at wall 8,700 in the earlier sample, then rose to 17,148 by wall 10,800;
 the evidence does not establish the reason for the earlier decrease. See the
 [09:34 snapshot](heartbeat-snapshot-20261013-0934.txt).
+
+At 09:51 MDT, task 799_16 reached its 11,240-second cap and is recorded as
+TIMEOUT with final mcycle 19,222. Tasks 799_17–22 were RUNNING with latest
+heartbeat pairs `11100/79384`, `9900/70883`, `3300/23093`, `2700/18891`,
+`1500/10584`, and `300/2054`; tasks 23–42 were PENDING. Task 16's earlier
+mcycle drop had been followed by advancing samples through its timeout; its
+cause remains unknown. See the [09:51 snapshot](heartbeat-snapshot-20261013-0951.txt).
+
+At 10:14 MDT, task 799_17 reached its 11,601-second cap and is recorded as
+TIMEOUT with final mcycle 81,461. The wrapper status last shows mcycle 53,013 at
+wall 7,500, while the full simulator log advances through wall 11,400; the
+full log is used for the final mcycle. Tasks 799_18–23 remained RUNNING at
+`11400/81586`, `4500/31335`, `3900/27117`, `2700/18809`, `1800/12542`, and
+`600/4285`; tasks 24–42 were PENDING. No result JSON or testcase terminal
+marker was present for active rows. See the
+[10:14 snapshot](heartbeat-snapshot-20261013-1014.txt).
+
+At 10:19 MDT, tasks 799_18–23 remained RUNNING at `11700/83780`,
+`5100/35660`, `4500/31389`, `3000/20929`, `2100/14653`, and `1200/8693`;
+tasks 24–42 remained PENDING. All six mcycle values advanced from the prior
+snapshot. No result JSON or explicit PASS/FAIL marker was found for active
+rows. See the [10:19 snapshot](heartbeat-snapshot-20261013-1019.txt).
