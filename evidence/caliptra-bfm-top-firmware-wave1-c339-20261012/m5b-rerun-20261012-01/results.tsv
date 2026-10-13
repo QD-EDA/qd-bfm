@@ -19,13 +19,13 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 18	24	smoke_test_datavault_mini	smoke_test_datavault_mini	TERMINAL	TIMEOUT	85975	12000	85975	12257	12257	137	29	0	1852408	timeout-reclassification-799/results.tsv
 19	25	smoke_test_aes_gcm	smoke_test_aes_gcm	TERMINAL	TIMEOUT	91549	12900	91549	13210	13210	137	39	0	1852480	timeout-reclassification-799/results.tsv
 20	26	smoke_test_dma_aes_gcm_short_1_dword	smoke_test_dma_aes_gcm_short_1_dword	TERMINAL	TIMEOUT	93689	13200	93689	13341	13341	137	36	0	1852436	timeout-reclassification-799/results.tsv
-21	29	jtag_tap_mbox	jtag_tap_mbox	RUNNING			14700	105976	15212	14797					heartbeat-snapshot-20261013-1332.txt
-22	30	iccm_lock	iccm_lock	RUNNING			13800	21123	15639	13878					heartbeat-snapshot-20261013-1332.txt
-23	32	smoke_test_ecc_keygen	smoke_test_ecc_keygen	RUNNING			12600	91737	16033	12794					heartbeat-snapshot-20261013-1332.txt
-24	33	smoke_test_ecc_sign	smoke_test_ecc_sign	RUNNING			11100	81086	16033	11219					heartbeat-snapshot-20261013-1332.txt
-25	34	smoke_test_ecc_verify	smoke_test_ecc_verify	RUNNING			3300	22990	16033	3457					heartbeat-snapshot-20261013-1332.txt
-26	35	smoke_test_ecc_errortrigger2	smoke_test_ecc_errortrigger2	RUNNING			2400	16563	16985	2736					heartbeat-snapshot-20261013-1332.txt
-27	36	smoke_test_ecc_errortrigger3	smoke_test_ecc_errortrigger3	PENDING					17149						heartbeat-snapshot-20261013-1332.txt
+21	29	jtag_tap_mbox	jtag_tap_mbox	TERMINAL	TIMEOUT	108152	15000	108152	15212	15212	137	50	0	1852512	timeout-reclassification-799/results.tsv
+22	30	iccm_lock	iccm_lock	RUNNING			14700	27337	15639	14786					heartbeat-snapshot-20261013-1347.txt
+23	32	smoke_test_ecc_keygen	smoke_test_ecc_keygen	RUNNING			13500	98165	16033	13702					heartbeat-snapshot-20261013-1347.txt
+24	33	smoke_test_ecc_sign	smoke_test_ecc_sign	RUNNING			12000	87510	16033	12127					heartbeat-snapshot-20261013-1347.txt
+25	34	smoke_test_ecc_verify	smoke_test_ecc_verify	RUNNING			4200	29214	16033	4365					heartbeat-snapshot-20261013-1347.txt
+26	35	smoke_test_ecc_errortrigger2	smoke_test_ecc_errortrigger2	RUNNING			3600	24759	16985	3644					heartbeat-snapshot-20261013-1347.txt
+27	36	smoke_test_ecc_errortrigger3	smoke_test_ecc_errortrigger3	RUNNING			300	1921	17149	491					heartbeat-snapshot-20261013-1347.txt
 28	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	PENDING					17281						heartbeat-snapshot-20261013-1332.txt
 29	38	smoke_test_kv_ecc_flow1	smoke_test_kv_ecc_flow1	PENDING					17412						heartbeat-snapshot-20261013-1332.txt
 30	39	kv_entry_read_err	kv_entry_read_err	PENDING					17543						heartbeat-snapshot-20261013-1332.txt

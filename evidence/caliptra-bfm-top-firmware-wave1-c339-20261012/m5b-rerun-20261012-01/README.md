@@ -213,3 +213,12 @@ At 13:32 MDT, tasks 799_21–26 remained RUNNING at `14700/105976`,
 tasks 27–42 remained PENDING. All six mcycle values advanced from the prior
 snapshot, and no result JSON or testcase PASS/FAIL marker was found for active
 rows. See the [13:32 snapshot](heartbeat-snapshot-20261013-1332.txt).
+
+At 13:47 MDT, task 799_21 (`jtag_tap_mbox`) exited 137 at its exact
+15,212-second cap and is recorded as TIMEOUT. Its full log has 50 heartbeats
+through `wall_s=15000 mcycle=108152`, no repeated adjacent mcycle, no testcase
+terminal marker, and no result JSON. Maximum RSS was 1,852,512 KiB. Tasks
+799_22–27 were RUNNING at `14700/27337`, `13500/98165`, `12000/87510`,
+`4200/29214`, `3600/24759`, and `300/1921`; tasks 799_28–42 were PENDING. No
+result JSON or exact testcase PASS/FAIL marker was found for active rows. See the
+[13:47 snapshot](heartbeat-snapshot-20261013-1347.txt).

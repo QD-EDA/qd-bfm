@@ -122,3 +122,13 @@ and its testcase-marker checks; this capped run is TIMEOUT. Maximum RSS was
 1,852,436 KiB. Raw status, resource, simulator, firmware, console, and
 provenance files are in `runs/26-ca84d5f757b500b2-20/`, with remote hashes in
 `REMOTE-SHA256SUMS-task20.txt`.
+
+
+Task 21 (`jtag_tap_mbox`) records 15,212 seconds, exactly its configured
+per-test timeout; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected
+to TIMEOUT. The full simulator log contains 50 heartbeats through
+`wall_s=15000 mcycle=108152`, with no adjacent repeated mcycle sample. No
+testcase PASS/FAIL marker or result JSON exists. Maximum RSS was 1,852,512 KiB.
+The copied status, resource, simulator, firmware, console, and provenance files
+are in `runs/29-3439695c6637d6f2-21/`, with remote hashes in
+`REMOTE-SHA256SUMS-task21.txt`.

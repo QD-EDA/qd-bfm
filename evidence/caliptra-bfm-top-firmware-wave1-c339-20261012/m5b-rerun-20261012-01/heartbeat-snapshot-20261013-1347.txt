@@ -1,0 +1,16 @@
+DAN-DESKTOP queue snapshot at 13:47 MDT, 2026-10-13.
+Host uptime: 1 day, 5 hours, 12 minutes.
+
+Job 799, array throttle 6:
+  799_21 TERMINAL TIMEOUT; jtag_tap_mbox; cap=15212 s; exit=137; wall_s=15000 mcycle=108152.
+  799_22 RUNNING 4:06:26; iccm_lock; wall_s=14700 mcycle=27337.
+  799_23 RUNNING 3:48:22; smoke_test_ecc_keygen; wall_s=13500 mcycle=98165.
+  799_24 RUNNING 3:22:07; smoke_test_ecc_sign; wall_s=12000 mcycle=87510.
+  799_25 RUNNING 1:12:45; smoke_test_ecc_verify; wall_s=4200 mcycle=29214.
+  799_26 RUNNING 1:00:44; smoke_test_ecc_errortrigger2; wall_s=3600 mcycle=24759.
+  799_27 RUNNING 0:08:11; smoke_test_ecc_errortrigger3; wall_s=300 mcycle=1921.
+  799_28-42 PENDING at throttle 6.
+
+Task 21's elapsed time equals its configured cap. All six active tasks' latest
+heartbeats advance mcycle, with no adjacent flat samples. No active task had a
+result JSON or exact testcase PASS/FAIL marker at this snapshot.
