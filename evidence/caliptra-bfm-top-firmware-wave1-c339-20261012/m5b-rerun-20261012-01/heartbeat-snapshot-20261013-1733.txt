@@ -1,0 +1,13 @@
+DAN-DESKTOP queue snapshot at 17:33 MDT, 2026-10-13.
+Job 799: 29 terminal, 6 running, 7 pending (JobHeldUser).
+
+  799_27 RUNNING 3:54:59; smoke_test_ecc_errortrigger3; wall_s=13800 mcycle=97438.
+  799_28 RUNNING 3:32:33; smoke_test_ecc_errortrigger4; wall_s=12600 mcycle=25906.
+  799_30 RUNNING 3:07:18; kv_entry_read_err; wall_s=11100 mcycle=79268.
+  799_32 TERMINAL PASS; smoke_test_ecc_flow1_kv_ocp_progress; final mcycle=60927.
+  799_33 RUNNING 2:12:14; smoke_test_kv_rules_ocp_lock; wall_s=7800 mcycle=54602.
+  799_34 RUNNING 0:32:18; smoke_test_kv_parallel_access; wall_s=1800 mcycle=12861.
+  799_35 RUNNING 0:18:18; smoke_test_ecc_flow2_kv_ocp_progress; wall_s=900 mcycle=6451.
+  799_36-42 PENDING, held by user.
+
+All six running sim.log files were checked directly after log triage. Their progress heartbeats advance at each captured sample; maximum adjacent equal-mcycle interval is 0 seconds. No terminal marker was present in those logs.
