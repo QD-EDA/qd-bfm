@@ -74,3 +74,11 @@ TIMEOUT from elapsed time and runner exit 137. The last heartbeat was
 The full log has no repeated adjacent mcycle sample. Maximum RSS was 1,852,384
 KiB. Raw evidence and the copied task output are in
 `runs/21-c95f8624d4cb7fe0-15/`, with hashes in `REMOTE-SHA256SUMS-task15.txt`.
+
+Task 16 (`smoke_test_kv_securitystate`) records 11,240 seconds, exactly its
+configured cap; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected
+to TIMEOUT. Its final simulator-log heartbeat is `wall_s=11100 mcycle=19222`,
+with no repeated adjacent mcycle sample, result JSON, or testcase PASS/FAIL
+marker. Maximum RSS was 1,852,360 KiB. The wrapper status and full log are in
+`runs/22-871bf14a358781fb-16/`, with original hashes in
+`REMOTE-SHA256SUMS-task16.txt`.

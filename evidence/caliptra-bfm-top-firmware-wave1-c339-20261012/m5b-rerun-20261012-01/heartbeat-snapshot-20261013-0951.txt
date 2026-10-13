@@ -1,0 +1,22 @@
+DAN-DESKTOP queue snapshot at 09:51:17 MDT, 2026-10-13.
+Host uptime: 1 day, 1 hour, 16 minutes.
+
+Job 799, array throttle 6:
+  799_17 RUNNING 3:05:51; smoke_test_datavault_lock; wall_s=11100 mcycle=79384.
+  799_18 RUNNING 2:50:32; smoke_test_datavault_mini; wall_s=9900 mcycle=70883.
+  799_19 RUNNING 0:57:03; smoke_test_aes_gcm; wall_s=3300 mcycle=23093.
+  799_20 RUNNING 0:47:13; smoke_test_dma_aes_gcm_short_1_dword; wall_s=2700 mcycle=18891.
+  799_21 RUNNING 0:25:51; jtag_tap_mbox; wall_s=1500 mcycle=10584.
+  799_22 RUNNING 0:10:32; smoke_test_ecc_keygen; wall_s=300 mcycle=2054.
+  799_23-42 PENDING at throttle 6.
+
+Task 799_16 (`smoke_test_kv_securitystate`) is terminal TIMEOUT. Its wrapper
+status says INFRA_ERROR, but elapsed time 11,240 seconds matches the cap,
+runner exit is 137, and the last heartbeat is wall_s=11100 mcycle=19222. The
+full log has no repeated adjacent mcycle sample, result JSON, or testcase
+terminal marker. The earlier mcycle drop was followed by advancing samples;
+no cause is inferred.
+
+All six active heartbeat values were checked directly against their sim.log
+files. Rows 17–22 had no result.json or testcase terminal marker at this
+snapshot.

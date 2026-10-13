@@ -79,6 +79,13 @@ TIMEOUT with final mcycle 75,743. Tasks 799_15–18 were RUNNING at
 PENDING. The mcycle drop for task 16 noted earlier has since increased; no
 cause is inferred. See the [09:15 snapshot](heartbeat-snapshot-20261013-0915.txt).
 
+At 09:51 MDT, task 799_16 reached its 11,240-second cap and is recorded as
+TIMEOUT with final mcycle 19,222. Tasks 799_17–22 were RUNNING with latest
+heartbeat pairs `11100/79384`, `9900/70883`, `3300/23093`, `2700/18891`,
+`1500/10584`, and `300/2054`; tasks 23–42 were PENDING. Task 16's earlier
+mcycle drop had been followed by advancing samples through its timeout; its
+cause remains unknown. See the [09:51 snapshot](heartbeat-snapshot-20261013-0951.txt).
+
 At 09:34 MDT, task 799_15 reached its 11,240-second cap and is recorded as
 TIMEOUT with final mcycle 78,702. Tasks 799_16–21 remained RUNNING with latest
 heartbeat pairs `10800/17148`, `9900/70757`, `9000/64463`, `2100/14865`,
