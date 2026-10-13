@@ -245,3 +245,9 @@ rows 799_24–28 had advancing mcycle samples; task 799_30 had only its
 initial `0/0` sample. See the
 [14:32 snapshot](heartbeat-snapshot-20261013-1432.txt) and
 [failure evidence](failure-evidence-799/README.md).
+
+At 14:43 MDT, tasks 799_24–28 and 799_30 remained RUNNING at
+`15300/110979`, `7500/52216`, `6900/47760`, `3600/24579`, `2400/16538`, and
+`900/6181`; tasks 799_31–42 remained PENDING. All active rows had advancing
+mcycle samples and no result JSON or exact testcase PASS/FAIL marker. See the
+[14:43 snapshot](heartbeat-snapshot-20261013-1443.txt).
