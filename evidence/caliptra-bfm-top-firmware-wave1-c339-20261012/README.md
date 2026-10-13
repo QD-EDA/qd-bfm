@@ -76,3 +76,7 @@ Task 669_29 ended at its configured timeout and task 669_35 failed on `ERR_ECC_P
 ## Current checkpoint — 00:29 MDT, 2026-10-13
 
 Task 669_30 (`iccm_lock`) reached its 15,639-second timeout after 4:20:39, with peak RSS 1,852,396 KiB. The simulator log reached the first pass through ICCM, but no result JSON, testcase marker, or mcycle heartbeat exists; it remains `TIMEOUT (progress unknown)`, not a hang. The ledger now has 22 timeouts, six PASS, five FAIL, three RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Tasks 669_32–34 remain running; smoke verification job 785 remains pending after array 669. Row 30 evidence is in [`terminal-results/task-30-iccm_lock/`](terminal-results/task-30-iccm_lock/).
+
+## Current checkpoint — 00:51 MDT, 2026-10-13
+
+Task 669_32 (`smoke_test_ecc_keygen`) reached its 16,033-second timeout after 4:27:13, with peak RSS 1,852,504 KiB. It has no result JSON, testcase marker, or heartbeat, so the result is `TIMEOUT (progress unknown)`, not a hang. The ledger now has 23 timeouts, six PASS, five FAIL, two RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Tasks 669_33–34 remain under their existing limits, and smoke verification job 785 remains pending after array 669. Row 32 evidence is in [`terminal-results/task-32-smoke_test_ecc_keygen/`](terminal-results/task-32-smoke_test_ecc_keygen/).
