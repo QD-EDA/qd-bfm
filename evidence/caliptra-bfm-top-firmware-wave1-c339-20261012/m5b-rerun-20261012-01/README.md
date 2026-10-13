@@ -222,3 +222,14 @@ terminal marker, and no result JSON. Maximum RSS was 1,852,512 KiB. Tasks
 `4200/29214`, `3600/24759`, and `300/1921`; tasks 799_28–42 were PENDING. No
 result JSON or exact testcase PASS/FAIL marker was found for active rows. See the
 [13:47 snapshot](heartbeat-snapshot-20261013-1347.txt).
+
+
+At 14:08 MDT, task 799_22 (`iccm_lock`) reached its exact 15,639-second
+per-test cap (resource wall time 4:20:39), exited 137, and is recorded as
+TIMEOUT. The status reports 47 heartbeats; the full simulator log contains 53
+through `wall_s=15600 mcycle=33461`, with no repeated adjacent mcycle, testcase
+terminal marker, or result JSON. Maximum RSS was 1,852,468 KiB. Tasks 799_23–28
+were RUNNING at `14700/106536`, `13200/95971`, `5400/37445`, `4800/32965`,
+`1500/10136`, and `300/1974`; tasks 799_29–42 were PENDING. No result JSON or
+exact testcase PASS/FAIL marker was found for active rows. See the
+[14:08 snapshot](heartbeat-snapshot-20261013-1408.txt).

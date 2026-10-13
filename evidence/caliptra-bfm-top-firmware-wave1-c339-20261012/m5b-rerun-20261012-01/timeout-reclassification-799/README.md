@@ -132,3 +132,14 @@ testcase PASS/FAIL marker or result JSON exists. Maximum RSS was 1,852,512 KiB.
 The copied status, resource, simulator, firmware, console, and provenance files
 are in `runs/29-3439695c6637d6f2-21/`, with remote hashes in
 `REMOTE-SHA256SUMS-task21.txt`.
+
+
+Task 22 (`iccm_lock`) records 15,639 seconds, exactly its configured
+per-test timeout; the resource report also records 4:20:39 and runner exit 137.
+The wrapper's `INFRA_ERROR` is corrected to TIMEOUT. Its status reports 47
+heartbeats; the full simulator log has 53 samples through
+`wall_s=15600 mcycle=33461`, all advancing. No testcase PASS/FAIL marker or
+result JSON exists. Maximum RSS was 1,852,468 KiB. The copied status, resource,
+simulator, firmware, console, and provenance files are in
+`runs/30-35735b41cd07eed7-22/`, with remote hashes in
+`REMOTE-SHA256SUMS-task22.txt`.
