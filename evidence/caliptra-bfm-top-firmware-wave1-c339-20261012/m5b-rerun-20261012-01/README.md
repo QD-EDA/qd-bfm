@@ -309,3 +309,9 @@ RUNNING at `12900/89730`, `9000/62561`, `7500/52080`, `6000/41957`,
 `4500/31304`, and `2700/18129`; tasks 799_34–42 remained PENDING. All active
 logs had advancing mcycle samples, no flat interval, result JSON, or testcase
 terminal marker. See the [16:10 snapshot](heartbeat-snapshot-20261013-1610.txt).
+
+At 16:21 MDT, tasks 799_25, 799_27–28, 799_30, and 799_32–33 remained
+RUNNING at `13500/93993`, `9600/66795`, `8100/56329`, `6600/46297`,
+`5100/35597`, and `3300/22217`; tasks 799_34–42 remained PENDING. All active
+logs had advancing mcycle samples, no flat interval, result JSON, or testcase
+terminal marker. See the [16:21 snapshot](heartbeat-snapshot-20261013-1621.txt).
