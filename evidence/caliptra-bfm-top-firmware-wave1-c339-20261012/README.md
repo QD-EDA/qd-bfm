@@ -92,3 +92,7 @@ Task 669_34 (`smoke_test_ecc_verify`) reached its 16,033-second timeout after 4:
 ## Current checkpoint — 01:45 MDT, 2026-10-13
 
 Smoke verification job 785 completed successfully. `result.json` reports `passed=true`, `testname=smoke_test_kv`, and `sim_exit=0`; the simulator log has one `* TESTCASE PASSED` marker and no failure marker. The runner status records `firmware_outcome=PASS`, `heartbeat_verification=PASS`, and two flushed heartbeats; mcycle advanced from 0 to 1,722 by wall time 300 seconds. The 42-row rerun selection is ready, ordered by expected mcycle cost, and will use throttle 6, one CPU, and 3 GiB per task. See [`m5b-verification-20261012-01/`](m5b-verification-20261012-01/) and [`m5b-rerun-20261012-01/`](m5b-rerun-20261012-01/).
+
+## Current checkpoint — 01:53 MDT, 2026-10-13
+
+Instrumented array 799 was submitted from the immutable M5b source and protected c339 toolchain, with 42 rows, one CPU and 3 GiB per task, a six-task throttle, and 6h10m allocation. Slurm accepted the array; per-task heartbeat visibility is pending the next log check. The recorded selection and submission details are in [`m5b-rerun-20261012-01/`](m5b-rerun-20261012-01/).
