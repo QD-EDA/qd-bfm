@@ -262,3 +262,9 @@ RUNNING at `8100/56344`, `7500/51916`, `4200/28689`, `3000/20544`,
 result JSON or exact testcase markers. See the
 [14:54 snapshot](heartbeat-snapshot-20261013-1454.txt) and
 [failure evidence](failure-evidence-799/README.md).
+
+At 15:06 MDT, tasks 799_25–28, 799_30, and 799_32 remained RUNNING at
+`9000/62579`, `8100/56126`, `5100/34969`, `3600/24679`, `2100/14501`, and
+`600/4109`; tasks 799_33–42 remained PENDING. All six active logs had advancing
+mcycle samples with no flat interval; none had a result JSON or testcase
+terminal marker. See the [15:06 snapshot](heartbeat-snapshot-20261013-1506.txt).
