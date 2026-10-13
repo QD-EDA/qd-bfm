@@ -96,3 +96,7 @@ Smoke verification job 785 completed successfully. `result.json` reports `passed
 ## Current checkpoint — 01:53 MDT, 2026-10-13
 
 Instrumented array 799 was submitted from the immutable M5b source and protected c339 toolchain, with 42 rows, one CPU and 3 GiB per task, a six-task throttle, and 6h10m allocation. Slurm accepted the array; per-task heartbeat visibility is pending the next log check. The recorded selection and submission details are in [`m5b-rerun-20261012-01/`](m5b-rerun-20261012-01/).
+
+## Current checkpoint — 02:07 MDT, 2026-10-13
+
+Array 799 tasks 1–6 are RUNNING, with tasks 7–42 pending at the six-task throttle. Each running simulator log has three heartbeats; mcycle rose from 0 at wall time 0 to 4,306–4,347 by wall time 600 seconds. No task has a terminal marker yet, and none meets the flat-mcycle hang rule. The M5b completion checkpoint is met: the runner change is committed and pushed, `smoke_test_kv` PASS and heartbeat behavior are verified, the timeout ledger is updated, and the instrumented rerun is active with heartbeats visible. Per-task values are recorded in [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0207.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0207.txt).
