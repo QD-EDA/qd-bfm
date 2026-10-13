@@ -29,3 +29,8 @@ At 20:22 MDT, task 669_23 timed out at its 11,601-second cap (3:13:21; peak RSS 
 At 20:36 MDT, task 669_24 reached its 12,257-second per-test timeout (3:24:17; peak RSS 1,852,492 KiB). The status is TIMEOUT with runner exit 124, no result JSON, no testcase marker, and no finish record. Tasks 669_25, 26, 29, 30, 32, and 33 are RUNNING; rows 34–51 remain PENDING at throttle 6. The snapshot records the live queue and process state in [`status-20-36.txt`](status-20-36.txt); row 24's raw files are under [`../terminal-results/task-24-smoke_test_datavault_mini/`](../terminal-results/task-24-smoke_test_datavault_mini/).
 
 At 20:54 MDT, task 669_25 reached its 13,210-second per-test timeout (3:40:10; peak RSS 1,852,500 KiB). Its compile log has warnings but no errors and the VVP artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. Task 669_34 has started and the array remains at six active tasks. Tasks 669_26, 29, 30, 32, 33, and 34 are RUNNING; rows 35–51 are PENDING. See [`status-20-54.txt`](status-20-54.txt) and the raw row 25 files in [`../terminal-results/task-25-smoke_test_aes_gcm/`](../terminal-results/task-25-smoke_test_aes_gcm/).
+
+
+## M5b cancellation checkpoint — 21:06 MDT
+
+Only pending array indices 669_36–669_51 were canceled. Six running tasks (669_29, 30, 32, 33, 34, 35) were left in place. Row 26 separately reached its configured timeout and is recorded as TIMEOUT (progress unknown). Cancellation details are in [../m5b-progress-20261012/pending-cancellation.txt](../m5b-progress-20261012/pending-cancellation.txt).

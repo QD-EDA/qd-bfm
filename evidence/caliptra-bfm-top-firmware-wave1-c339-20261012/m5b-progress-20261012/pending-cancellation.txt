@@ -1,0 +1,5 @@
+DAN-DESKTOP, 2026-10-12 21:05–21:06 MDT
+
+After the goal update, the array had six RUNNING tasks and pending indices 669_36–669_51. To prevent a pending task from starting during cancellation, job 669 was held; the queue was then checked again. Only 669_36 through 669_51 still showed PENDING (JobHeldUser), while 669_29, 669_30, 669_32, 669_33, 669_34, and 669_35 showed RUNNING. scancel was issued for only 669_36 through 669_51. The post-cancel queue showed those six RUNNING tasks and no pending tasks.
+
+Array task 669_35 had started before the hold and was left running. Row 35 remains in the rerun set requested by M5b, to be submitted only after its original run terminates.

@@ -1,26 +1,27 @@
 # Terminal results preserved from top-level wave 1
 
-These seventeen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; rows 22–25 progressed further before their timeouts. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
+These eighteen Slurm runs ended at the configured per-test timeout with runner_exit=124 and are TIMEOUT (progress unknown). The first thirteen timeout logs lack a result JSON and terminal testcase marker; their last visible line does not establish where execution stopped. Rows 22–26 have their available per-task activity recorded below. Each directory contains raw status, provenance, tool hashes, resource reports, and available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
-| 1 | `cptra_ss_test_rom` | TIMEOUT | 6,873 s |
-| 2 | `smoke_test_dma_aes_gcm` | TIMEOUT | 7,004 s |
-| 3 | `smoke_test_datavault_basic` | TIMEOUT | 7,333 s |
-| 5 | `smoke_test_dma_aes_gcm_rd_enc_axi_err` | TIMEOUT | 7,628 s |
-| 6 | `smoke_test_dma_aes_gcm_wr_enc_axi_err` | TIMEOUT | 7,628 s |
-| 7 | `smoke_test_kv_lock_use_mid_read` | TIMEOUT | 7,956 s |
-| 10 | `smoke_test_sram_ecc` | TIMEOUT | 8,876 s |
-| 13 | `smoke_test_hek_flow` | TIMEOUT | 9,467 s |
-| 15 | `smoke_test_dma_aes_gcm_non_gcm_en_dec` | TIMEOUT | 10,091 s |
-| 17 | `c_intr_handler` | TIMEOUT | 10,813 s |
-| 19 | `smoke_test_mbox_byte_read` | TIMEOUT | 10,846 s |
-| 20 | `smoke_test_dma_aes_gcm_collision_test` | TIMEOUT | 11,010 s |
-| 21 | `smoke_test_dma_aes_gcm_short_dword` | TIMEOUT | 11,240 s |
-| 22 | `smoke_test_kv_securitystate` | TIMEOUT | 11,240 s |
-| 23 | `smoke_test_datavault_lock` | TIMEOUT | 11,601 s |
-| 24 | `smoke_test_datavault_mini` | TIMEOUT | 12,257 s |
-| 25 | `smoke_test_aes_gcm` | TIMEOUT | 13,210 s |
+| 1 | `cptra_ss_test_rom` | TIMEOUT (progress unknown) | 6,873 s |
+| 2 | `smoke_test_dma_aes_gcm` | TIMEOUT (progress unknown) | 7,004 s |
+| 3 | `smoke_test_datavault_basic` | TIMEOUT (progress unknown) | 7,333 s |
+| 5 | `smoke_test_dma_aes_gcm_rd_enc_axi_err` | TIMEOUT (progress unknown) | 7,628 s |
+| 6 | `smoke_test_dma_aes_gcm_wr_enc_axi_err` | TIMEOUT (progress unknown) | 7,628 s |
+| 7 | `smoke_test_kv_lock_use_mid_read` | TIMEOUT (progress unknown) | 7,956 s |
+| 10 | `smoke_test_sram_ecc` | TIMEOUT (progress unknown) | 8,876 s |
+| 13 | `smoke_test_hek_flow` | TIMEOUT (progress unknown) | 9,467 s |
+| 15 | `smoke_test_dma_aes_gcm_non_gcm_en_dec` | TIMEOUT (progress unknown) | 10,091 s |
+| 17 | `c_intr_handler` | TIMEOUT (progress unknown) | 10,813 s |
+| 19 | `smoke_test_mbox_byte_read` | TIMEOUT (progress unknown) | 10,846 s |
+| 20 | `smoke_test_dma_aes_gcm_collision_test` | TIMEOUT (progress unknown) | 11,010 s |
+| 21 | `smoke_test_dma_aes_gcm_short_dword` | TIMEOUT (progress unknown) | 11,240 s |
+| 22 | `smoke_test_kv_securitystate` | TIMEOUT (progress unknown) | 11,240 s |
+| 23 | `smoke_test_datavault_lock` | TIMEOUT (progress unknown) | 11,601 s |
+| 24 | `smoke_test_datavault_mini` | TIMEOUT (progress unknown) | 12,257 s |
+| 25 | `smoke_test_aes_gcm` | TIMEOUT (progress unknown) | 13,210 s |
+| 26 | smoke_test_dma_aes_gcm_short_1_dword | TIMEOUT (progress unknown) | 13,341 s |
 
 Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
 
@@ -29,6 +30,8 @@ Row 23 reached its 11,601-second per-test limit after 3:13:21, with peak RSS 1,8
 Row 24 reached its 12,257-second per-test limit after 3:24:17, with peak RSS 1,852,492 KiB. It has no `result.json`, testcase terminal marker, or finish record; see [`task-24-smoke_test_datavault_mini/`](task-24-smoke_test_datavault_mini/).
 
 Row 25 reached its 13,210-second per-test limit after 3:40:10, with peak RSS 1,852,500 KiB. The compile log has warnings but no errors and the VVP output artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. See [`task-25-smoke_test_aes_gcm/`](task-25-smoke_test_aes_gcm/).
+
+Row 26 reached its 13,341-second per-test limit after 3:42:21, with peak RSS 1,852,348 KiB. The compile log has warnings but no errors and the VVP output artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. Evidence is in [`task-26-smoke_test_dma_aes_gcm_short_1_dword/`](task-26-smoke_test_dma_aes_gcm_short_1_dword/).
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
@@ -40,7 +43,7 @@ Row 12, `smoke_test_sha512`, is a terminal `PASS`: its result JSON has `passed=t
 
 Row 14, `smoke_test_zeroize_crypto`, is a terminal `PASS`: its result JSON has `passed=true`, its runner log reports `PASS`, and its simulation log contains `* TESTCASE PASSED`. Its raw wrapper false `FAIL` and corrected verdict are preserved in [`task-14-smoke_test_zeroize_crypto/`](task-14-smoke_test_zeroize_crypto/).
 
-Rows 0 and 4 have local `TIMEOUT` evidence under [`../local-fallback/`](../local-fallback/README.md).
+Rows 0 and 4 have local TIMEOUT (progress unknown) evidence under ../local-fallback/.
 
 Row 18, `smoke_test_doe_kv_ocp_progress`, is a terminal `PASS`: runner and task status report exit 0, result JSON reports `passed=true` with one pass and zero fail markers, and sim.log contains `* TESTCASE PASSED` (`mcycle=53552`). Wall time was 2:02:55 with 1,852,448 KiB maximum RSS. Nine entropy_src/csrng unique/priority-case warnings are preserved; the result reports `bad_diagnostics=0`. See [`task-18-smoke_test_doe_kv_ocp_progress/`](task-18-smoke_test_doe_kv_ocp_progress/).
 
