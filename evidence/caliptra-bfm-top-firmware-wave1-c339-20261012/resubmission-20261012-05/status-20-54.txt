@@ -1,0 +1,38 @@
+Mon Oct 12 20:54:23 MDT 2026
+ 20:54:23 up 12:19,  5 users,  load average: 8.01, 8.66, 8.68
+QUEUE
+             JOBID      STATE       TIME                           NAME
+     669_[35-51%6]    PENDING       0:00                bfm-wave1-fixed
+            669_34    RUNNING       2:21                bfm-wave1-fixed
+            669_33    RUNNING      18:46                bfm-wave1-fixed
+            669_32    RUNNING      38:30                bfm-wave1-fixed
+            669_30    RUNNING      55:49                bfm-wave1-fixed
+            669_29    RUNNING    1:33:01                bfm-wave1-fixed
+            669_26    RUNNING    3:39:48                bfm-wave1-fixed
+VVP
+720361 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+1082401 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1146165 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1162553 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/2f1b875490838662-32/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1183710 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ba452156bdfcaf3a-33/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1203059 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/8edb704b0e17c6c8-34/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1204309 bash -c date; uptime; echo QUEUE; squeue -j 669 -o "%.18i %.10T %.10M %.30j"; echo VVP; pgrep -af "/home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp" | head -20; echo ACTIVE-RUN-DIRS; for i in 26 29 30 32 33 34; do d=$(find /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs -maxdepth 1 -type d -name "*-$i" -print -quit); [ -n "$d" ] && { echo ===$i; [ -f "$d/status.txt" ] && cat "$d/status.txt" || echo status_absent; [ -f "$d/output/result.json" ] && cat "$d/output/result.json" || echo result_json_absent; }; done
+ACTIVE-RUN-DIRS
+===26
+status_absent
+result_json_absent
+===29
+status_absent
+result_json_absent
+===30
+status_absent
+result_json_absent
+===32
+status_absent
+result_json_absent
+===33
+status_absent
+result_json_absent
+===34
+status_absent
+result_json_absent

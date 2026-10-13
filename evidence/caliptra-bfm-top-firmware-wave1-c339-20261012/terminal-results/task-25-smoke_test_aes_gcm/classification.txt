@@ -1,0 +1,15 @@
+row=25
+array_task=669_25
+test=smoke_test_aes_gcm
+per_test_timeout_s=13210
+runner_exit=124
+elapsed=3:40:10
+peak_rss_kib=1852500
+result_json=absent
+sim_log=absent
+testcase_pass_markers=0
+testcase_fail_markers=0
+finished_markers=0
+compile_artifact=present (367680829 bytes)
+
+This is a terminal TIMEOUT at the configured per-test limit. The compile log contains warnings but no compile error, and the generated VVP artifact exists. No result JSON, simulation log, testcase terminal marker, or finish record was preserved, so the evidence does not establish whether the simulation made test progress or what its eventual verdict would have been.

@@ -60,3 +60,7 @@ At 20:22 MDT, task 669_23 reached its 11,601-second TIMEOUT (3:13:21; peak RSS 1
 ## Current checkpoint — 20:36 MDT, 2026-10-12
 
 Row 24 (`smoke_test_datavault_mini`) reached its configured 12,257-second timeout on job 669: runner exit 124, elapsed 3:24:17, peak RSS 1,852,492 KiB, and no result JSON, testcase terminal marker, or finish record. Rows 0–24, 27–28, and 31 now have 28 terminal outcomes: 18 TIMEOUT, 6 PASS, and 4 FAIL. Rows 25, 26, 29, 30, 32, and 33 are RUNNING; rows 34–51 are PENDING at throttle 6. The live queue/process snapshot is [`resubmission-20261012-05/status-20-36.txt`](resubmission-20261012-05/status-20-36.txt), and row 24's raw logs and hashes are in [`terminal-results/task-24-smoke_test_datavault_mini/`](terminal-results/task-24-smoke_test_datavault_mini/).
+
+## Current checkpoint — 20:54 MDT, 2026-10-12
+
+Row 25 (`smoke_test_aes_gcm`) reached its 13,210-second timeout on job 669: runner exit 124, elapsed 3:40:10, and peak RSS 1,852,500 KiB. The compile log has warnings but no errors and a 367,680,829-byte VVP artifact was present; no result JSON, simulation log, testcase marker, or finish record was preserved, so test progress is unknown. Rows 0–25, 27–28, and 31 now have 29 terminal outcomes: 19 TIMEOUT, 6 PASS, and 4 FAIL. Rows 26, 29, 30, 32, 33, and 34 are RUNNING; rows 35–51 are PENDING at throttle 6. See [`resubmission-20261012-05/status-20-54.txt`](resubmission-20261012-05/status-20-54.txt) and [`terminal-results/task-25-smoke_test_aes_gcm/`](terminal-results/task-25-smoke_test_aes_gcm/).

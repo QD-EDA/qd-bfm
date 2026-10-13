@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These sixteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; rows 22–24 progressed further before their timeouts. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
+These seventeen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; rows 22–25 progressed further before their timeouts. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -20,12 +20,15 @@ These sixteen Slurm runs ended with the runner's explicit per-test timeout (`run
 | 22 | `smoke_test_kv_securitystate` | TIMEOUT | 11,240 s |
 | 23 | `smoke_test_datavault_lock` | TIMEOUT | 11,601 s |
 | 24 | `smoke_test_datavault_mini` | TIMEOUT | 12,257 s |
+| 25 | `smoke_test_aes_gcm` | TIMEOUT | 13,210 s |
 
 Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
 
 Row 23 reached its 11,601-second per-test limit after 3:13:21, with peak RSS 1,852,440 KiB. It has no `result.json` or testcase terminal marker; see [`task-23-smoke_test_datavault_lock/`](task-23-smoke_test_datavault_lock/).
 
 Row 24 reached its 12,257-second per-test limit after 3:24:17, with peak RSS 1,852,492 KiB. It has no `result.json`, testcase terminal marker, or finish record; see [`task-24-smoke_test_datavault_mini/`](task-24-smoke_test_datavault_mini/).
+
+Row 25 reached its 13,210-second per-test limit after 3:40:10, with peak RSS 1,852,500 KiB. The compile log has warnings but no errors and the VVP output artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. See [`task-25-smoke_test_aes_gcm/`](task-25-smoke_test_aes_gcm/).
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
