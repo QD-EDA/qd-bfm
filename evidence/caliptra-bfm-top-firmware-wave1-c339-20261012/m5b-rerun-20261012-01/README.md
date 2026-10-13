@@ -344,3 +344,6 @@ flat interval or testcase terminal marker. Tasks 799_27–28, 799_30, and
 `7800/55508`, `6000/41577`, and `0/0`; tasks 799_35–42 were PENDING. All active
 rows had no result JSON or terminal marker. See the
 [17:03 snapshot](heartbeat-snapshot-20261013-1703.txt).
+
+
+At 17:20 MDT, task 799_32 (`smoke_test_ecc_flow1_kv_ocp_progress`) completed PASS. Its result JSON reports `passed=true`; the full log has 29 heartbeats through `8400/59912`, one `* TESTCASE PASSED`, no fail marker, and `$finish` at mcycle 60,927. The wrapper status stops at `7800/55508`, so the ledger uses the later full-log heartbeat. Tasks 27, 28, 30, 33, 34, and 35 remained RUNNING; tasks 36–42 were PENDING. Active rows were advancing or had only a recent initial heartbeat, with no 30-minute flat interval. See [the 17:20 snapshot](heartbeat-snapshot-20261013-1720.txt).
