@@ -108,3 +108,7 @@ Array 799 tasks 1–6 are still RUNNING; tasks 7–42 are PENDING at throttle 6.
 ## Current checkpoint — 05:08 MDT, 2026-10-13
 
 Array 799 tasks 1–6 reached their configured per-test timeouts and are recorded as TIMEOUT with their last mcycle. Tasks 7–12 remain RUNNING and tasks 13–42 are PENDING at throttle 6. All six active heartbeats advanced since the previous check; none meets the 30-minute flat-mcycle hang rule. Overlay jobs 823 (UART and QSPI) and 826 (corrected errortrigger5) are also RUNNING, with advancing heartbeats and no terminal markers. See [`heartbeat-snapshot-20261013-0508.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0508.txt).
+
+## Current checkpoint — 05:58 MDT, 2026-10-13
+
+Array task 799_7 (`smoke_test_dma_aes_gcm_wr_enc_axi_err`) reached its configured 7,628-second cap. Its wrapper recorded exit 137 as `INFRA_ERROR`, but `/usr/bin/time` recorded exactly 7,628 seconds and 1,852,420 KiB peak RSS; the corrected result is `TIMEOUT`, with last heartbeat `wall_s=7500 mcycle=51400` and maximum flat interval 0 seconds. Tasks 799_8–13 are RUNNING, with task 13 just starting; tasks 14–42 remain pending at throttle 6. Overlay jobs 823 and 826 continue with advancing heartbeats. The raw timeout evidence is in [`timeout-reclassification-799/`](m5b-rerun-20261012-01/timeout-reclassification-799/), and active heartbeats are in [`heartbeat-snapshot-20261013-0558.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0558.txt).
