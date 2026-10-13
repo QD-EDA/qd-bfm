@@ -1,5 +1,4 @@
-83283a7274b88647fd50ff77b4ab759f3202c19db2c4e8abea6044945460201e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/README.md
-0019558200ec62a504d234d7adb2ff08feb9bb23d342e30edb24bc107550da58  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/SHA256SUMS
+5bc99a9e6906ecb4cf24cb44e9546427f7a1aca159fb2fa99116526b850b2007  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/README.md
 a94cfd7e987d810eaf1010e6f212a4fce182d467efd732877ea6e6a12c8c03c8  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/bfm-top-wave1-606_1.out
 776d9230b7e76375cbffe4cb35ad30577a15f6531383a8cef6440946fd699cf1  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/firmware.log
 df8deb2fb153a4d5b839c0afaac17ceb224b97a8a2210a30c1e5ee73c7885082  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/provenance.txt
@@ -8,7 +7,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-1-cptra_ss_test_rom/tool-binaries.sha256
-f1347d03f2ae0bd11c20992ad88876763bf85fd319be44948cc0838cf71242ac  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/SHA256SUMS
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/array-status.txt
 3137d7d68a5cdbda1ea7a13df80251925deb4eff1e1a8ff22d7eac7548110291  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/bfm-top-wave1-660_10.out
 95367794603e15b57bad2740b63db210e1c10979b2c8fdc7f91a54e91cb85b28  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/classification.txt
@@ -25,7 +23,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 d6cf3eae996a692541339304448333cf73613e6b159eacc472cb18ccc3a45fb8  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-10-smoke_test_sram_ecc/tool-binaries.sha256
-4da91db7a88df5f42e6751b704a4dfc5ab420b86e4b7bee3c5da5e3650e5a368  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/SHA256SUMS
 e9344eca7897a08ae67458e7aaabd2edbdc2a33d884dc378bc656313a3cb7e47  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/array-status.txt
 b6b806b2c067f3ad3ecf6638a587b6224dcbdd19e28e24ff55e0b9ae9e6ad957  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/bfm-top-wave1-660_11.out
 85923ab21f5653170f8e7052f39b76abc44e0587517c440c6f4c908d807ab9e7  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/classification.txt
@@ -43,7 +40,6 @@ d0761411df04df30db9855a9070130ba886a20442eff5492121ca5e2d23fc440  evidence/calip
 bbbd0f229a46751be7206b26ff59be74f8d26f5f890885312ba0b2e8dee285e2  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/sim.log
 445d94756744baef08de29a84a8ade6bdb52fe818a055de43445545207cea7b1  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-11-smoke_test_kv/tool-binaries.sha256
-9cd54ba59fd616c5eaff5c01d93b63e543944a11d36688a8b1a17a9f189bd83a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/SHA256SUMS
 e9344eca7897a08ae67458e7aaabd2edbdc2a33d884dc378bc656313a3cb7e47  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/array-status.txt
 9ff6549fc3eb35d88c44b4bf15b7ef2f8dcb90ad53d27e5c1ca6b9a26c20c863  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/bfm-top-wave1-660_12.out
 a272cfe8b2eed37ef24ea3eb13a466ea6d1e8989a046186ae2645ed896b9f0c4  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/classification.txt
@@ -61,7 +57,6 @@ b975f12c102d4fa5eaf610b4db63d3020ea5ef59644cf6cb271108a76e1309cd  evidence/calip
 5576555597ae487bd4fa42762615c8d206484fb2118a3b5e916030f32f9f81b3  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/sim.log
 1887e52a5cf77eb9844240b2a16b90f68d789cf8948c2acebe7206e4c29d25da  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-12-smoke_test_sha512/tool-binaries.sha256
-4fa9e6dffd55697ceda7e77a3bc1d63ed253edca7e00f0d31622a9d4d6e5b023  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/SHA256SUMS
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/array-status.txt
 a701624ef6b5c6ee865d4569bc3c2d2b7e8da99fd498c5b4f049c2b691f98555  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/bfm-top-wave1-660_13.out
 8c0a6063443567651cbea76a72a88be66dd9c8005850459c38d5a2a4050f13fb  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/classification.txt
@@ -78,7 +73,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 5a3f4da436c1037cc817d817a029e1fc9863d2b55231d0759b575b0ef8b57789  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-13-smoke_test_hek_flow/tool-binaries.sha256
-07eb7b7429625a6847d5e779c18e8b903f9bfeac925b17e4fa94cee9d5867197  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/SHA256SUMS
 e9344eca7897a08ae67458e7aaabd2edbdc2a33d884dc378bc656313a3cb7e47  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/array-status.txt
 bd0807a1b619e9b1a7409963bb7c66d0b790d5965a73429efa70a4ba26e1a8ba  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/bfm-top-wave1-660_14.out
 177725ee0b9ad831770516d4e7e7d4520fbd5c7d229d86df5a0c22d028e0a415  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/classification.txt
@@ -96,7 +90,6 @@ d07c576cbcead579e0df2fa756aeffa8ce6cf3a3a5999d0ec445ceca1881aa5a  evidence/calip
 02a2acf4a1e1ba7f6ec1316396531ea334f55384bd72ad126595b67bcce8bb3a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/sim.log
 a477fd489d8c2e2d097d2885fa227ed7115966d79fe0fea73347b805485a7014  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-14-smoke_test_zeroize_crypto/tool-binaries.sha256
-7a09e0f198d02b3cdaec058674a6eacb85f3ae208e48fa0046af5ac3d7cfb955  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/SHA256SUMS
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/array-status.txt
 d25650cb43b772c8663dce0e4311ce399f88417cd766f305fbf7136190aaaf14  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/bfm-top-wave1-660_15.out
 61d7a51b5c6013d60d2963852373f463dc829ff5f02932aa2d00fdec836ce5c5  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/classification.txt
@@ -113,7 +106,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 1d3b81f35c9291426e9ed492d865f29aef0a0a30ed5da8c27cc649de17fd01c3  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-15-smoke_test_dma_aes_gcm_non_gcm_en_dec/tool-binaries.sha256
-1e594d094aeeb8dd047a4699f928b9eb821b84ebc3b78e2f8c4007dde13d5701  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/SHA256SUMS
 d2741135d6cfb2f8e1c9d411037a8ba160588818025402e2c7b932353f0e1071  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/bfm-wave1-fixed-669_16.out
 99057100cd41fe4a616e6c0e2d13d0f1ab458f59fc83c0c0fd07f5db431c6a7a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/classification.txt
 ba1fade37e53982d4924dca8b34b6273aecf502359275680800b413dcd51aa4b  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/compile.log
@@ -130,7 +122,6 @@ b99c02c3b21d3f5d8dfe3cb3ceb8190beb63b49a67904c868234e1dd3afe444e  evidence/calip
 8f266ca7c0fccb72542f26f65bb5d53bd758b1eaf32e3a32829bc58c7a065ade  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/sim.log
 e591f7b9045518402650304e2947aad6ae96b7e8d34e7948ba5acde68466c0e1  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-16-smoke_test_mbox/tool-binaries.sha256
-105f2b0d2cfc6e87cf1a3492c0576b1a16aac9a27f0089923de319367bd9ed26  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/SHA256SUMS
 00f0518260d78ae79e7dac2f16f4ef3db667d45a22c38f1806157bf954fd8542  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/bfm-wave1-fixed-669_17.out
 b9eaebc3e47d196584b59d937b7fcc1ce53e7ff275cf56a18c57bf0eb7ca9f9a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/classification.txt
 606c1d2dc30de9aed3430700833aa7b07827ab1d7cc1c404c55323e6578bd1ca  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/compile.log
@@ -146,7 +137,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 76797540afb40c5686b0b9fc9ee37c5ecc02085bad7a5a3de68ec42551abb5a0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-17-c_intr_handler/tool-binaries.sha256
-c72a13078620c6d75f0258d27baf927b63ca77f14d68f95a759f6e6344ffd241  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/SHA256SUMS
 f6bd0d79af5d02c17e97563390ae0384b0786aea7f7e55a4da8901247fe9225c  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/bfm-top-wave1-669_18.out
 0cc179dbaa53df19e159e65cf8147865111474d8c7dafcf1ac1821f8a2080e5d  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/classification.txt
 9aaff5a1a16a2287d21e3e876d257b095f9999cdc35ac945838d9491313f4cd4  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/compile.log
@@ -163,7 +153,6 @@ e8acbb87fe1636616e50bfd2a4f133f09a461d5e2efd18c77d73d4dae2bb0089  evidence/calip
 2e011161508c1f6650a7cd0e05137d7eec1d74ee92992dfa9505f23ae2259712  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/sim.log
 bbbec39bf87d4a0d63ac3f2201e3d50abc65fd1f78897f16e812dc903ac2ba40  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-18-smoke_test_doe_kv_ocp_progress/tool-binaries.sha256
-79ec6c277f2592e0d57ce015eb559f8d47a27322db0b57242b8c13bd7c1493ff  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/SHA256SUMS
 96a6a36065d55221e5e111efe9ed2a58957ca8ebf91d8240b1af405ebc0b2b66  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/bfm-wave1-fixed-669_19.out
 f66d32fa915d3f3cc632f1382c2c8950f15bc3f297a698007c4a93b23446c81e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/classification.txt
 56163854c70613992b8555bea685d5273b90c259a276549d07efe32f0bc86853  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/compile.log
@@ -179,7 +168,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 911f6fbfaf185641ef42d4e73962d3333c8e8d4222a805666ab8bdecfa4dde85  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-19-smoke_test_mbox_byte_read/tool-binaries.sha256
-578b5d010ef65be84e05fdead1fbc8c01b48875aafcc930c1918434663179a45  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/SHA256SUMS
 2ab61e3a58c1e2b64eb0cf2a4a85429b0b44908e27acf24398092e4c6caa7f6e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/bfm-top-wave1-606_2.out
 c477f8f881f98e15c46f43e6a3dc7e1eb910f0193b6d0aee150e2e3ba5c4b34c  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/firmware.log
 2c682808f23ab320557b677e97a2a1f4bd3e24726f98254d54f529462b7dd68e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/provenance.txt
@@ -188,7 +176,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-2-smoke_test_dma_aes_gcm/tool-binaries.sha256
-e0510b08ca57c0f37b7cdd685fbd287101a199aa4aefa224f077197e0d441cd6  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/SHA256SUMS
 ec2235132de91b900f897e48cb3e319638c6b984322293f5a4d07b162b786efe  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/bfm-wave1-fixed-669_20.out
 6883fd552737da1b0e238e35d2183865a6b6cec607fccfc7d14bf8a7918053eb  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/classification.txt
 6afa977525e21c0ed20a37b549a905b773fbfb4a7299c7aa01d4b8d544235f8a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/compile.log
@@ -204,7 +191,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 9ce26d6d89beab00adc69bd25021b6c08bcfae5cd858bc2e5e56a556af2811c4  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-20-smoke_test_dma_aes_gcm_collision_test/tool-binaries.sha256
-6ce1856a1d1d1c4c05bcf16eeab23c12acc739ff7a928647fb4df2a062520efd  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/SHA256SUMS
 9b4b5f8e4874064d4692ce32d6a38eb10b6ade624fb8cc95c95840cf2793eb1f  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/bfm-wave1-fixed-669_21.out
 0a7689054c948c99b9c638938567411e2cba37d0eae55bab3b74951e62131bab  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/classification.txt
 e7fbbf0bc6c6227ce1a818ebf37d95397f906fbc611b9a218305d39dedfc5130  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/compile.log
@@ -220,7 +206,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 0c218fc14ba78bd624fece4356d85ab5f9ac72b3ca5318221e1e93844970adb7  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-21-smoke_test_dma_aes_gcm_short_dword/tool-binaries.sha256
-5c298be79c72ab51a9417a5d4e008bff159fbae8b0225238eea435482621a3b6  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/SHA256SUMS
 2c83a6c8bf5535bf18601bba9d81aa848a5ef4f911ecdaf2d915034aa70d4f1f  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/bfm-wave1-fixed-669_22.out
 a6d7bfc67dab3e0735e86c5ded06cbc6997b4575ed3915141f308a6550748b7a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/classification.txt
 613e2173b1fed07b96734f64d2ed20caccf04a387ba913a228693e2175c3ae33  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/compile.log
@@ -236,7 +221,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 655d50d3bb8a5862c546cdcb83a3974e2cface6c87b2d5dbdd245f3a7b681378  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-22-smoke_test_kv_securitystate/tool-binaries.sha256
-8fda043756396aec078a2f2208c11c4c672b424d314776139f65a171ca845a86  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/SHA256SUMS
 7e1022bb540a22565f8cc26bfb89c5c1b96b8fedc35dc698ecb8da938c958ba6  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/bfm-wave1-fixed-669_23.out
 aa3ae297ce3d42eab2a17cf5b8f45e7cfc0fbb919064c770c09be12c8efc3ff0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/classification.txt
 0eedb7a54b899e62103a1907b4639e815daa5538096cf92bd1c9801ea96acc76  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/compile.log
@@ -252,7 +236,21 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 6d1e05c1f1f9ea0e6af5812163059bfd81091f6f6a95e334c0d4ac4939b27858  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-23-smoke_test_datavault_lock/tool-binaries.sha256
-bdf0194b0e6cf668c51ff724aee236da17beac6dffc9f2f585455d16856d7723  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/SHA256SUMS
+038c0481d17606f2a9dee74da008b7214a4a59a7a37a4aecc6988d56459d260f  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/bfm-wave1-fixed-669_24.out
+3ff5aed6ef35eddb225b2e050891ab7c5ff1ad8c52e9643aaa4976de22130448  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/classification.txt
+444233867d9549441cdf75fece680f7ccb1d77efcfc48a9faaa517047418fb22  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/compile.log
+0ab4787b36c2cdbb3828c436803e5ebb79756255abec3edf989dcbfc9bb35dc9  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/console.log
+5b2925251af673da864845e50572d9625aa9f30e534ac29e5841f06b4af7ab23  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/firmware.log
+5924c0f1d504d08f18bc420e2f66c610478d1334973b9fbea1cfddd0bfa62c64  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/iverilog-version.txt
+7eef8e1d66ce40bdc77f1a380f41b719d204dcdd396aadae885b5eac3b97ac1a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/openssl-binaries.sha256
+35e50d8e4bd9f6d2cb34bdc90f04e9d4b6cf9254d1a7d2a84d3bfc493a981058  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/provenance.txt
+9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/python-version.txt
+5ecdd2abbf607e53e490758835f7c574b557d5004b548709492d8054cfd46548  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/resource.log
+5709e2a2d58f0b756243f3cc20a21793a150e281f61b8ec4e5eaee556f1f65aa  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/riscv-gcc-version.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/runner.log
+28b220adb569a48d40beb214fc319a8c95ddf185c6fd4891daf9085dc9923a37  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/sim.log
+6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/status.txt
+e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-24-smoke_test_datavault_mini/tool-binaries.sha256
 cca3bd9598090a5291ac99407c8a2e22dfd2ab704a7f3034086b55d86007b636  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/array-output.txt
 69a4fd4840d623a6aa040a005676aa5d1b8933f0b5475095c4a4f7e75b28fd6e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/classification.txt
 74c4360d344d4e7188cd62e429fee8d4c77a2289f96dd1c507bda6ae7ceb30fb  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/compile.log
@@ -267,7 +265,6 @@ cca3bd9598090a5291ac99407c8a2e22dfd2ab704a7f3034086b55d86007b636  evidence/calip
 0f94024144879e9136feb13c365d69902a8cf813e18694b4f1f99ac33f84b7b1  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/source-reference.txt
 fe708817d4e24faa8197da8cc2fb711d617c3d8007da2643a7574169d62cf3ca  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-27-smoke_test_qspi/tool-binaries.sha256
-6966836228bc890f5e95578e27b8e3bf06cf568a08b1bed8d2ef98ed2d3b61ff  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/SHA256SUMS
 c5e59d20c8cb6e6f6ca3f546643a0de6373fb2f604e5dfaef71e94e7f2e96005  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/bfm-wave1-fixed-669_28.out
 c957cb90cd15738c5a5f464f8446e70c2cc34331165919a9f9f2fd6846f1adc4  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/classification.txt
 38973e26c175658c67663f89a86f9bde0cc0e959342775d85286296f4494b5ba  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/compile.log
@@ -284,7 +281,6 @@ de9abd4d74a521264dd167cda1eafc38ccc732369f7658da4c202ed437cfe9d6  evidence/calip
 608f6e8d3a5d08037aa4afbdfa875e73f5b91bd1cd05533f977b3ee7f8c9af11  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/sim.log
 a56c78501db2d71cf34ff8383cbaad6e129392e004c04ec130f54b0504a3a288  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-28-smoke_test_dma_aes_kv_short/tool-binaries.sha256
-032bde9c1ac4535f2cf9944cbb716b346ded54031b50ebd1cbe97290cffdbc74  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/SHA256SUMS
 f6c29abff7fa2be4eafe2f4e7a5677926add4a3e87b61b6a69bef814339e0110  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/bfm-top-wave1-606_3.out
 c704e6236d5a0d3cb770cbf6f34769b8c3c2cf87bf19f71a4b64aaa712f5318c  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/firmware.log
 c384048be7a60a763d8d307a0ba833ac9f7ef38ee605be2f05fe1337856d4796  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/provenance.txt
@@ -293,7 +289,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-3-smoke_test_datavault_basic/tool-binaries.sha256
-13ef931a74158e4e3d921b82d9f92d37a440dba753941fbda3e2d253021a7056  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/SHA256SUMS
 2ed0320118d051e6f1e5f8017007a84e96e925da84be4ec0d0679649adbf5725  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/bfm-wave1-fixed-669_31.out
 a67a6daecaf9799c0d5f423b5135f420f9c4d50d87352e94833b78a5870dc456  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/classification.txt
 bcb3d86f2b81444f04dd49f0600658c15f2ad7551dbbbaa253fe3d4bbc05b939  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/compile.log
@@ -308,7 +303,6 @@ c49d53e7d8fda598d3e8c26ed804d4ede399d989de9499cc995a8891b348d36d  evidence/calip
 fe708817d4e24faa8197da8cc2fb711d617c3d8007da2643a7574169d62cf3ca  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/tool-binaries.sha256
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-31-smoke_test_ecc_errortrigger4/toolchain-preflight.log
-81ada3d86c4db375828773c01502b89b8d9801380b8efed59f50a3db8483ea52  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/SHA256SUMS
 8558f26831635d95befd1a75feb535d6ada976da7353643c9f7fa8dfe08f2f7a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/bfm-top-wave1-591_5.out
 b40fe7cff647e99acd992495e0ea28676ea3c92aad13a4bf8a67e1ba3df36e42  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/firmware.log
 96d2340bf72b3382fd2b69af79a15105275a74a767386ac2bc16f99bb196db6b  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/provenance.txt
@@ -317,7 +311,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-5-smoke_test_dma_aes_gcm_rd_enc_axi_err/tool-binaries.sha256
-1cd3636c2f12a58f49813b78f4fc152366f02ea340cec2f7a2852c0272b27fc9  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/SHA256SUMS
 758a757aa79eb67b9f0725eaa240ade6164c8afd1a8009afa21904d9b8c1f192  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/bfm-top-wave1-591_6.out
 9f4263a6202969524863841d22e89dc0c367d8b8fecc6291cd27fd54b47a42ba  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/firmware.log
 31f6b97887ea968f0bba7920e1ad8775a030cc783fff59db0576212d005f848c  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/provenance.txt
@@ -326,7 +319,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-6-smoke_test_dma_aes_gcm_wr_enc_axi_err/tool-binaries.sha256
-21e91299c26149d97da24f0d71c39f548e7924474d204e723a7ccfb289ec08e3  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/SHA256SUMS
 cc0e840c394208f03355b6d86269cda3a074b0534fd307f78ed4bf4d4caecce5  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/bfm-top-wave1-591_7.out
 520ab689ff864f219c8c3c153867ee0ba16248213eba039163839c60cc58fde0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/firmware.log
 b327527696d533bab67acee09afc1e7f35c1991615435fe06b475de8d065e102  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/provenance.txt
@@ -335,7 +327,6 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/calip
 3fd1d3058c42cf4245ec309776e91206aae7c7e44e581da6cbbad1f4110745e0  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/sim.log
 6fa69cb10d14b53b43ab63cbdbca755dff7c7329efea91aff41ac6d5e40c5a5a  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/status.txt
 b96d4d39c77950579a0e1b56cc65f0353ec0dd8876c629f7be39ea3056a78854  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-7-smoke_test_kv_lock_use_mid_read/tool-binaries.sha256
-d375c360f8099e7323d77ed8c39ccfb8085850b32b78acb57088d69dcee583b2  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/SHA256SUMS
 fe708817d4e24faa8197da8cc2fb711d617c3d8007da2643a7574169d62cf3ca  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/array-status.txt
 20d23537b3f5e05d02fb1ade8420539a05dfa6a39c2da2c7171cb86fca5f602d  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/bfm-top-wave1-660_8.out
 cd44216038530b1b002ef0da90099f749c96b0d58da3cdf80f489a8d0a14e954  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/classification.txt
@@ -353,7 +344,6 @@ f809647992240adc2ce328f9268e684f65b95077f4d84d6d9aa120ab98859129  evidence/calip
 ad937c94bd68a610324733db9f36ce1a5d4716b7e5496539bf70246aa05c3bda  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/sim.log
 1c25ef1f6e9d6acc9fdaad26f92f2f8af85ea962102e1635731a284f79c63bbe  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/status.txt
 e67c3bc18ab603b93af7308da21d140b3ba4efc9383021d498bc05700d613aef  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-8-pv_hash_zeroize/tool-binaries.sha256
-490b597c9dd9c117f7d9155c3e277c8fcf0db2897e452fb6aec40adaa3ca25d8  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-9-smoke_test_uart/SHA256SUMS
 de90ccc2756b1d51229db9a7e2000b5ce480efe559f2cd6792b59601ae461468  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-9-smoke_test_uart/bfm-top-wave1-660_9.out
 f5a9e5631e570b245915089463e348bdb5ecd84c6b18f5e356042c49d0b1636e  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-9-smoke_test_uart/caliptra_reg.h
 318efb5676d4a254d8ffc3d918c57bd24b6623ad1e5c58b5e81d637ac3da2f8f  evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/terminal-results/task-9-smoke_test_uart/compile.log
