@@ -70,3 +70,11 @@ heartbeat pairs `10800/75743`, `9600/67713`, `8700/1983`, `8100/57470`, and
 were found for active rows. Task 16's mcycle decreased from 58,129 at wall
 8,400 to 1,983 at wall 8,700; the evidence does not identify why. See the
 [09:03 snapshot](heartbeat-snapshot-20261013-0903.txt).
+
+At 09:15 MDT, task 799_14 reached its 11,010-second cap and is recorded as
+TIMEOUT with final mcycle 75,743. Tasks 799_15–18 were RUNNING at
+`10500/74302`, `9600/8523`, `8700/61906`, and `7800/55590`; task 799_19
+(`smoke_test_aes_gcm`) was at `1200/8478`, and task 799_20
+(`smoke_test_dma_aes_gcm_short_1_dword`) was at `600/4198`. Tasks 21–42 were
+PENDING. The mcycle drop for task 16 noted earlier has since increased; no
+cause is inferred. See the [09:15 snapshot](heartbeat-snapshot-20261013-0915.txt).

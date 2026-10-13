@@ -1,0 +1,17 @@
+0.000 ns - ----------------------------------
+0.000 ns - Smoke Test AXI DMA AES  !!
+0.000 ns - ----------------------------------
+0.000 ns - Tag address: 0x50020108
+0.000 ns - Tag: 
+0.000 ns - Sending image payload via AHB i/f to AXI SRAM
+0.000 ns - Configuring AES for little endian mode
+0.000 ns - Write AES CTRL with value 0x481
+0.000 ns - Load Key data to AES
+0.000 ns - Write AES IV
+0.000 ns - Write GCM_AAD Phase, NUM_BYTES 0x10
+0.000 ns - Wait for INPUT_READY
+0.000 ns - Write AES AAD Block 0
+0.000 ns - Write GCM_AAD Phase, NUM_BYTES 0x4
+0.000 ns - Wait for INPUT_READY
+0.000 ns - Write AES AAD Block 1
+0.000 ns - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }

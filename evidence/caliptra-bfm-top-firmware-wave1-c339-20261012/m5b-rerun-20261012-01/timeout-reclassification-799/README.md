@@ -56,3 +56,13 @@ outcome is TIMEOUT. Its last heartbeat is `wall_s=10800 mcycle=74961`; all
 marker or result JSON. The copied raw status, resource, simulator, and
 provenance artifacts are under `runs/19-40a2264a41561d60-13/`; their remote
 SHA-256 values are in `REMOTE-SHA256SUMS-task13.txt`.
+
+Task 14 (`smoke_test_dma_aes_gcm_collision_test`) ran for 11,010 seconds,
+exactly its configured cap; runner exit 137 and the wrapper's INFRA_ERROR are
+therefore corrected to TIMEOUT. `resource.log` reports maximum RSS 1,852,448
+KiB. The last heartbeat in the full simulator log is
+`wall_s=10800 mcycle=75743`, with no testcase terminal marker or result JSON.
+The wrapper status's `last_heartbeat` field is older at wall 10,200; the
+simulator log contains the later sample. Its copied evidence is under
+`runs/20-0627acabfee6876c-14/`, with original remote hashes in
+`REMOTE-SHA256SUMS-task14.txt`.

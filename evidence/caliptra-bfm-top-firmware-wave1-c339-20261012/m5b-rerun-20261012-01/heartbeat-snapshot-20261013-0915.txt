@@ -1,0 +1,22 @@
+DAN-DESKTOP queue snapshot at 09:15:49 MDT, 2026-10-13.
+Host uptime: 1 day, 40 minutes.
+
+Job 799, array throttle 6:
+  799_15 RUNNING 2:57:45; smoke_test_dma_aes_gcm_short_dword; wall_s=10500 mcycle=74302.
+  799_16 RUNNING 2:42:25; smoke_test_kv_securitystate; wall_s=9600 mcycle=8523.
+  799_17 RUNNING 2:30:23; smoke_test_datavault_lock; wall_s=8700 mcycle=61906.
+  799_18 RUNNING 2:15:04; smoke_test_datavault_mini; wall_s=7800 mcycle=55590.
+  799_19 RUNNING 0:21:35; smoke_test_aes_gcm; wall_s=1200 mcycle=8478.
+  799_20 RUNNING 0:11:45; smoke_test_dma_aes_gcm_short_1_dword; wall_s=600 mcycle=4198.
+  799_21-42 PENDING at throttle 6.
+
+Task 799_14 (`smoke_test_dma_aes_gcm_collision_test`) is terminal TIMEOUT.
+Its wrapper status says INFRA_ERROR, but elapsed time 11,010 seconds matches
+its cap, and the full simulator log's final heartbeat is wall_s=10800
+mcycle=75743. The wrapper's heartbeat field stops at wall_s=10200; the later
+simulator log sample is preserved and used as the final mcycle.
+
+All six active heartbeat values were verified from their sim.log files.
+Task 16's mcycle fell from 58,129 at wall_s=8400 to 1,983 at wall_s=8700,
+then rose to 8,523 at wall_s=9600. No cause is inferred. Rows 15–20 had no
+result.json or testcase terminal marker at this snapshot.
