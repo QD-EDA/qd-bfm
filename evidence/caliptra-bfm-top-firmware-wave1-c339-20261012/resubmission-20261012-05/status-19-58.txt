@@ -1,0 +1,17 @@
+2026-10-12 20:00:08 MDT
+ 20:00:08 up 11:25,  4 users,  load average: 7.89, 8.60, 9.27
+             JOBID      STATE       TIME     CPUS NODELIST(REASON)
+     669_[31-51%6]    PENDING       0:00        1 (JobArrayTaskLimit)
+            669_30    RUNNING       1:34        1 DAN-DESKTOP
+            669_29    RUNNING      38:46        1 DAN-DESKTOP
+            669_26    RUNNING    2:45:33        1 DAN-DESKTOP
+            669_25    RUNNING    2:48:17        1 DAN-DESKTOP
+            669_24    RUNNING    2:48:50        1 DAN-DESKTOP
+            669_23    RUNNING    2:58:05        1 DAN-DESKTOP
+700978 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/caliptra_top_tb.vvp +CLP_REGRESSION
+715902 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+716499 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+720361 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+1082401 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1146165 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1147022 bash -c date "+%Y-%m-%d %H:%M:%S %Z"; uptime; squeue -j 669 -o "%.18i %.10T %.10M %.8C %R"; pgrep -a -f "vvp.*m5-top-wave1-c339-20261012-05" || true

@@ -1,0 +1,11 @@
+0.000 ns - ----------------------------------
+0.000 ns - Smoke Test AXI DMA AES KV  !!
+0.000 ns - ----------------------------------
+0.000 ns - OCP_LOCK_IN_PROGRESS: 0x0
+0.000 ns - MEK KEY SIZE: 0x10
+0.000 ns - MEK KEY DEST: 0x5000BE08
+0.000 ns - KV KEY SIZE is less than 0x40 and is valid.
+0.000 ns - FW: Arm err command
+0.000 ns - AXI DMA reports err status for err injection xfer
+0.000 ns - Enable random delays in AXI
+0.000 ns - OCP_LOCK_MODE_EN is not set, SKIPPING KV key test

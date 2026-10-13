@@ -37,3 +37,5 @@ Row 18, `smoke_test_doe_kv_ocp_progress`, is a terminal `PASS`: runner and task 
 
 
 Row 27, `smoke_test_qspi`, is a terminal firmware-build `FAIL`: its C source references QSPI register macros absent from the generated `caliptra_reg.h` at the pinned Caliptra revision. The runner exited 1 before simulation, and no testcase result was written. The compiler log, raw task status, resource report, tool provenance, source/header hashes, and exact missing-symbol evidence are in [`task-27-smoke_test_qspi/`](task-27-smoke_test_qspi/). This is an upstream firmware test/header mismatch, not an Icarus result.
+
+Row 28, `smoke_test_dma_aes_kv_short`, is a terminal `PASS`: the task status and runner exit 0, result JSON `passed=true`, and one simulator testcase pass marker agree. It finished in 2:24:22 with peak RSS 1,852,464 KiB (`mcycle=60,133`). See [`task-28-smoke_test_dma_aes_kv_short/`](task-28-smoke_test_dma_aes_kv_short/).

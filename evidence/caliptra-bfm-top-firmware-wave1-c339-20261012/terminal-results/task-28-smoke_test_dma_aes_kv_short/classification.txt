@@ -1,0 +1,18 @@
+verdict=PASS
+row=28
+array_task=669_28
+test=smoke_test_dma_aes_kv_short
+case_dir=smoke_test_dma_aes_kv
+per_test_timeout_s=15114
+runner_exit=0
+result_testname=smoke_test_dma_aes_kv_short
+result_passed=true
+sim_exit=0
+testcase_pass_markers=1
+testcase_fail_markers=0
+minstret=19842
+mcycle=60133
+elapsed=2:24:22
+peak_rss_kib=1852464
+
+Task status reports PASS with runner exit 0. The result JSON reports passed=true and sim_exit=0, and the nested simulator log contains one testcase pass marker followed by the finish marker. This is a terminal PASS verdict.
