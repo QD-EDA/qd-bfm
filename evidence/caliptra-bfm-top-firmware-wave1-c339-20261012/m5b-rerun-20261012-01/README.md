@@ -52,3 +52,12 @@ At 08:29 MDT, tasks 799_13–18 remained RUNNING with latest heartbeat pairs
 with no result JSON or testcase terminal markers. Overlay retry 826_1 remained
 RUNNING at 4:16:38, with `wall_s=15300 mcycle=39698` and no terminal result.
 See the [08:29 snapshot](heartbeat-snapshot-20261013-0829.txt).
+
+At 08:40 MDT, tasks 799_13–18 remained RUNNING with latest heartbeat pairs
+`9900/68484`, `9300/64893`, `8400/58958`, `7500/51642`, `6600/46409`, and
+`5700/40070`. Tasks 19–42 remained PENDING. Each latest mcycle advanced from
+its prior sample; no result JSON or testcase terminal marker was present.
+Overlay retry 826_1 reached its 15,738-second per-test cap and is recorded as
+TIMEOUT, with final heartbeat `wall_s=15600 mcycle=41872`; see the overlay
+rerun evidence for status and resource logs. The [08:40 snapshot](heartbeat-snapshot-20261013-0840.txt)
+records this queue state.

@@ -17,7 +17,7 @@ This three-row array reruns the terminal firmware-build failures from the pinned
 |---:|---|---|---|
 | 9 `smoke_test_uart` | FAIL during firmware build: missing UART register identifiers. Evidence: [`terminal-results/task-9-smoke_test_uart/`](../terminal-results/task-9-smoke_test_uart/). | PASS, final mcycle 56,493. The test log says internal UART is disabled and skips the UART smoke test, so this confirms the compatibility build and testcase flow, not UART peripheral behavior. | `caliptra-legacy-uart-qspi-reg-compat.h` |
 | 27 `smoke_test_qspi` | FAIL during firmware build: missing QSPI register identifiers. Evidence: [`terminal-results/task-27-smoke_test_qspi/`](../terminal-results/task-27-smoke_test_qspi/). | PASS, final mcycle 56,761. | `caliptra-legacy-uart-qspi-reg-compat.h` |
-| 31 matrix `smoke_test_ecc_errortrigger4` | FAIL during firmware build: undeclared ABR hooks. Source case directory is `smoke_test_ecc_errortrigger5`; its YAML still says `testname: smoke_test_ecc_errortrigger4`. Evidence: [`terminal-results/task-31-smoke_test_ecc_errortrigger4/`](../terminal-results/task-31-smoke_test_ecc_errortrigger4/). | Retry job 826_1 is running; at 07:55 MDT its latest heartbeat was wall 13,200 s, mcycle 24,461, with no terminal marker. | `caliptra-errortrigger5-abr-compat.h` |
+| 31 matrix `smoke_test_ecc_errortrigger4` | FAIL during firmware build: undeclared ABR hooks. Source case directory is `smoke_test_ecc_errortrigger5`; its YAML still says `testname: smoke_test_ecc_errortrigger4`. Evidence: [`terminal-results/task-31-smoke_test_ecc_errortrigger4/`](../terminal-results/task-31-smoke_test_ecc_errortrigger4/). | TIMEOUT at the original 15,738-second cap; final heartbeat mcycle 41,872 at wall 15,600. Build succeeded and VVP ran, but there was no testcase terminal marker or result JSON. Raw artifacts: [`retry run`](../firmware-compat-rerun-20261013-02/runs/31-eaeb97287ce63194-1/). | `caliptra-errortrigger5-abr-compat.h` |
 
 Rows 9 and 27 reference register identifiers from the generated header immediately before upstream removed UART/QSPI. The pinned RTL no longer integrates those blocks, and their old enable bits overlap current hardware-config fields. Therefore a successful C build alone does not imply a working peripheral; any resulting runtime FAIL or TIMEOUT is recorded without changing the tests.
 
@@ -59,6 +59,13 @@ no terminal marker or result JSON is present.
 At 08:12 MDT, retry job 826_1 remained RUNNING after 3:59:53. Its latest
 heartbeat was `wall_s=14100 mcycle=31005`, advancing from `28829` at
 `wall_s=13800`; no terminal marker or result JSON was present.
+
+At 08:40 MDT, retry job 826_1 had reached its per-test cap. It is classified
+TIMEOUT, with runner exit 137 and final heartbeat `wall_s=15600 mcycle=41872`;
+the log contains no PASS/FAIL or testcase-completion marker. Its saved status,
+resource report, simulator log, and provenance hashes are in the linked retry
+run. The remote build output was removed after the copied files matched their
+remote SHA-256 values.
 
 At 08:29 MDT, retry job 826_1 remained RUNNING at 4:16:38. Its latest
 heartbeat was `wall_s=15300 mcycle=39698`, advancing from `37526` at

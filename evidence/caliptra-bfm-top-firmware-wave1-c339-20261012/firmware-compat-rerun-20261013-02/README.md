@@ -23,13 +23,14 @@ no-op hooks. It changes no test source, vectors, result checks, or pass criteria
 
 ## Result
 
-Pending. Job 826 passed source and toolchain preflight, completed the firmware
-build, and started VVP. At the 07:55 MDT queue check it had run 3:42:43. Its
-latest heartbeat is `wall_s=13200 mcycle=24461`, advancing from mcycle 22,278
-at wall 12,900. No terminal marker or result JSON is present. Earlier the mcycle
-value decreased from 66,375 at wall 9,600 to 749 at wall 9,900; the evidence
-does not establish why. The final outcome and mcycle will be recorded here
-after the row reaches a terminal result.
+TIMEOUT. Job 826 passed source and toolchain preflight, completed the firmware
+build, and started VVP. The runner exited 137 at the configured 15,738-second
+per-test cap; `status.txt` records `outcome=TIMEOUT`, and `resource.log`
+reports a 4:22:18 elapsed run with maximum RSS 1,852,516 KiB. The final
+heartbeat was `wall_s=15600 mcycle=41872`. There is no result JSON or testcase
+PASS/FAIL/completion marker, so this is a timeout rather than a firmware
+testcase verdict. Earlier the mcycle decreased from 66,375 at wall 9,600 to
+749 at wall 9,900; the evidence does not establish why.
 
 At 08:12 MDT, it remained RUNNING at 3:59:53. The latest heartbeat was
 `wall_s=14100 mcycle=31005`, advancing from 28,829 at wall 13,800. No terminal
@@ -38,3 +39,10 @@ marker or result JSON was present.
 At 08:29 MDT, job 826_1 remained RUNNING at 4:16:38. Its latest heartbeat
 was `wall_s=15300 mcycle=39698`, advancing from 37,526 at wall 15,000. No
 terminal marker or result JSON was present.
+
+By 08:40 MDT, the job had timed out at its configured cap. Selected logs,
+status, resource, provenance, tool versions, and compatibility header were
+copied under `runs/31-eaeb97287ce63194-1/`; every copied artifact matches the
+remote hash listed in [`REMOTE-SHA256SUMS.txt`](REMOTE-SHA256SUMS.txt). The
+remote `output/` build tree was then removed. The Slurm output is preserved at
+[`logs/bfm-fw-compat31-826_1.out`](logs/bfm-fw-compat31-826_1.out).

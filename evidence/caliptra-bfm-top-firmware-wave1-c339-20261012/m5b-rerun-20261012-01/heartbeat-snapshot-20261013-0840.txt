@@ -1,0 +1,21 @@
+DAN-DESKTOP queue snapshot at 08:40:30 MDT, 2026-10-13.
+Host uptime: 1 day, 5 minutes.
+
+Job 799, array throttle 6:
+  799_13 RUNNING 2:47:03; smoke_test_mbox_byte_read; wall_s=9900 mcycle=68484.
+  799_14 RUNNING 2:39:58; smoke_test_dma_aes_gcm_collision_test; wall_s=9300 mcycle=64893.
+  799_15 RUNNING 2:22:26; smoke_test_dma_aes_gcm_short_dword; wall_s=8400 mcycle=58958.
+  799_16 RUNNING 2:07:06; smoke_test_kv_securitystate; wall_s=7500 mcycle=51642.
+  799_17 RUNNING 1:55:04; smoke_test_datavault_lock; wall_s=6600 mcycle=46409.
+  799_18 RUNNING 1:39:45; smoke_test_datavault_mini; wall_s=5700 mcycle=40070.
+  799_19-42 PENDING at throttle 6.
+
+The six heartbeat values were checked directly in their sim.log files and all
+advanced from the previous samples. No result.json or testcase terminal marker
+was found for these active rows; Slurm reports them RUNNING.
+
+Overlay job 826_1 is absent from squeue. Its status.txt reports TIMEOUT at the
+configured 15,738-second cap, runner exit 137, and final heartbeat
+wall_s=15600 mcycle=41872. The raw simulator log has no PASS/FAIL or testcase
+completion marker. The timeout status and resource report were copied and
+hash-verified before deleting the remote output build tree.
