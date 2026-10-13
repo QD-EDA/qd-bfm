@@ -328,3 +328,10 @@ RUNNING at `14700/102619`, `10800/75544`, `9600/4430`, `7800/55217`,
 mcycle fell from 60,660 at wall 8,700 to 4,430 at wall 9,600; the evidence
 does not identify why. It is not flat. All active logs lacked a terminal marker
 or result JSON. See the [16:42 snapshot](heartbeat-snapshot-20261013-1642.txt).
+
+At 16:52 MDT, tasks 799_25, 799_27–28, 799_30, and 799_32–33 remained
+RUNNING at `15300/106937`, `11400/79930`, `10200/8745`, `8400/59669`,
+`6900/48866`, and `5400/37240`; tasks 799_34–42 remained PENDING. Task 28's
+mcycle rose from 4,430 to 8,745 after its earlier drop; the cause remains
+unknown. All active rows remained non-flat and had no terminal markers or result
+JSON. See the [16:52 snapshot](heartbeat-snapshot-20261013-1652.txt).
