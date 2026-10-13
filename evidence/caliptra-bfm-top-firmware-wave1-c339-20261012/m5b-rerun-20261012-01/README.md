@@ -116,3 +116,9 @@ heartbeats through wall 12,000, with no 30-minute flat interval. Tasks 799_19–
 remained RUNNING at `6300/44228`, `5700/39945`, `4500/31617`, `3600/25138`,
 `2700/19386`, and `900/6543`; tasks 25–42 remained PENDING. See the
 [10:44 snapshot](heartbeat-snapshot-20261013-1044.txt).
+
+At 10:58 MDT, tasks 799_19–24 remained RUNNING at `7200/50749`,
+`6600/46476`, `5400/38195`, `4500/31576`, `3300/23730`, and `1800/13146`;
+tasks 25–42 remained PENDING. All six mcycle values advanced from the prior
+snapshot, and no result JSON or testcase PASS/FAIL marker was present for
+active rows. See the [10:58 snapshot](heartbeat-snapshot-20261013-1058.txt).
