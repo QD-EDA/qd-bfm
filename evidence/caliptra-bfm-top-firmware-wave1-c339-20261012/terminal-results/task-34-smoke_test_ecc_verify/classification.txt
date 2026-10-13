@@ -1,0 +1,11 @@
+outcome=TIMEOUT (progress unknown)
+job=669
+task=669_34
+per_test_timeout_s=16033
+runner_exit=124
+elapsed=4:27:13
+maximum_rss_kib=1852436
+result_json=absent
+terminal_testcase_marker=absent
+heartbeat_count=0
+classification=timeout with progress unknown; this run predates mcycle heartbeat instrumentation, so it is not classified as a hang

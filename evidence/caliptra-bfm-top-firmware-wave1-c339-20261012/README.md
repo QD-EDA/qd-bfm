@@ -84,3 +84,7 @@ Task 669_32 (`smoke_test_ecc_keygen`) reached its 16,033-second timeout after 4:
 ## Current checkpoint — 01:04 MDT, 2026-10-13
 
 Task 669_33 (`smoke_test_ecc_sign`) reached its 16,033-second timeout after 4:27:13, with peak RSS 1,852,384 KiB. It has no result JSON, testcase marker, or heartbeat, so its status is `TIMEOUT (progress unknown)`, not a hang. The ledger now has 24 timeouts, six PASS, five FAIL, one RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Task 669_34 remains within its existing limit; smoke verification job 785 remains pending after array 669. Row 33 evidence is in [`terminal-results/task-33-smoke_test_ecc_sign/`](terminal-results/task-33-smoke_test_ecc_sign/).
+
+## Current checkpoint — 01:22 MDT, 2026-10-13
+
+Task 669_34 (`smoke_test_ecc_verify`) reached its 16,033-second timeout after 4:27:13, with peak RSS 1,852,436 KiB. It has no result JSON, testcase marker, or heartbeat, so it remains `TIMEOUT (progress unknown)`, not a hang. All job 669 tasks are now terminal: 25 timeouts, six PASS, five FAIL, and 16 `CANCELLED_BEFORE_START` rows. Smoke verification job 785 has started and is RUNNING; no rerun array has been submitted. Row 34 evidence is in [`terminal-results/task-34-smoke_test_ecc_verify/`](terminal-results/task-34-smoke_test_ecc_verify/).
