@@ -23,6 +23,32 @@ class CheckerCompileCommandTest(unittest.TestCase):
         self.assertIn("-gassertions", disabled)
 
 
+class SimulationCommandTest(unittest.TestCase):
+    def test_line_buffers_vvp_and_loads_the_progress_plugin(self):
+        command = RUNNER.build_sim_command(
+            "/tools/vvp", "/tools/jtagdpi.vpi", "/output/top.vvp",
+            ["+CLP_REGRESSION", "+CLP_SKIP_PQ_VECTOR_GENERATION"],
+            progress_plugin="/output/progress.vpi", stdbuf="/usr/bin/stdbuf",
+        )
+
+        self.assertEqual(command, [
+            "/usr/bin/stdbuf", "-oL", "/tools/vvp", "-d", "/tools/jtagdpi.vpi",
+            "-n", "-m", "/output/progress.vpi", "/output/top.vvp",
+            "+CLP_REGRESSION", "+CLP_SKIP_PQ_VECTOR_GENERATION",
+        ])
+
+    def test_uses_vvp_directly_when_stdbuf_is_unavailable(self):
+        command = RUNNER.build_sim_command(
+            "/tools/vvp", "/tools/jtagdpi.vpi", "/output/top.vvp", [],
+            progress_plugin="/output/progress.vpi", stdbuf=None,
+        )
+
+        self.assertEqual(command, [
+            "/tools/vvp", "-d", "/tools/jtagdpi.vpi", "-n", "-m",
+            "/output/progress.vpi", "/output/top.vvp",
+        ])
+
+
 class RiscvToolchainPreflightTest(unittest.TestCase):
     def test_preflight_checks_the_cpp_frontend_and_keeps_its_log(self):
         with tempfile.TemporaryDirectory() as temp:

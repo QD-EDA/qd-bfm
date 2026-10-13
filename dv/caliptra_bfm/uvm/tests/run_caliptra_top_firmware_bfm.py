@@ -640,6 +640,12 @@ def run_logged(command, cwd, env, logfile):
         return subprocess.run(command, cwd=cwd, env=env, stdout=log, stderr=subprocess.STDOUT).returncode
 
 
+def build_sim_command(vvp, jtagdpi, binary, plusargs, progress_plugin, stdbuf):
+    command = [stdbuf, "-oL"] if stdbuf else []
+    command.extend([vvp, "-d", jtagdpi, "-n", "-m", progress_plugin, binary, *plusargs])
+    return command
+
+
 def preflight_riscv_toolchain(gcc_prefix, env, cwd, logfile):
     if not shutil.which(f"{gcc_prefix}-gcc", path=env.get("PATH")):
         raise RuntimeError(f"RISC-V preflight failed: {gcc_prefix}-gcc not found on PATH")
@@ -1001,24 +1007,19 @@ def main():
     if compile_exit:
         raise RuntimeError(f"top compile failed ({compile_exit}); see {args.output / 'compile.log'}")
 
-    trace_source = None
-    trace_plugin = None
-    trace_compile_command = None
-    trace_compile_exit = None
-    if args.trace_axi:
-        trace_source = REPO / "dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c"
-        trace_compiler = shutil.which(os.environ.get(
-            "IVERILOG_VPI_BIN", str(Path(iverilog).with_name("iverilog-vpi"))))
-        if not trace_compiler:
-            raise ValueError("--trace-axi requires IVERILOG_VPI_BIN or sibling iverilog-vpi")
-        trace_dir = args.output / "trace_vpi"
-        trace_dir.mkdir()
-        trace_compile_command = [trace_compiler, str(trace_source)]
-        trace_compile_exit = run_logged(
-            trace_compile_command, trace_dir, env, trace_dir / "compile.log")
-        trace_plugin = trace_dir / f"{trace_source.stem}.vpi"
-        if trace_compile_exit or not trace_plugin.is_file():
-            raise RuntimeError(f"AXI trace VPI build failed ({trace_compile_exit}); see {trace_dir / 'compile.log'}")
+    trace_source = REPO / "dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c"
+    trace_compiler = shutil.which(os.environ.get(
+        "IVERILOG_VPI_BIN", str(Path(iverilog).with_name("iverilog-vpi"))))
+    if not trace_compiler:
+        raise ValueError("VVP progress requires IVERILOG_VPI_BIN or sibling iverilog-vpi")
+    trace_dir = args.output / "trace_vpi"
+    trace_dir.mkdir()
+    trace_compile_command = [trace_compiler, str(trace_source)]
+    trace_compile_exit = run_logged(
+        trace_compile_command, trace_dir, env, trace_dir / "compile.log")
+    trace_plugin = trace_dir / f"{trace_source.stem}.vpi"
+    if trace_compile_exit or not trace_plugin.is_file():
+        raise RuntimeError(f"Progress VPI build failed ({trace_compile_exit}); see {trace_dir / 'compile.log'}")
 
     test_output = args.output / args.case
     test_output.mkdir()
@@ -1050,15 +1051,16 @@ def main():
     staged_vector_hashes = stage_native_vectors(
         test_output, vector_files, vector_hashes, vector_tools, env, skip_pq_vectors
     )
-    sim_command = [str(vvp), "-d", str(jtagdpi), "-n"]
-    if trace_plugin:
-        sim_command.extend(["-m", str(trace_plugin)])
-    sim_command.extend([str(binary), "+CLP_REGRESSION", *plusargs])
+    sim_command = build_sim_command(
+        str(vvp), str(jtagdpi), str(binary), ["+CLP_REGRESSION", *plusargs],
+        str(trace_plugin), shutil.which("stdbuf", path=env.get("PATH")))
     if args.rand_dma_iterations is not None:
         sim_command.append(f"+NUM_ITERATIONS={args.rand_dma_iterations}")
     if skip_pq_vectors:
         sim_command.append("+CLP_SKIP_PQ_VECTOR_GENERATION")
-    sim_exit = run_logged(sim_command, test_output, env, test_output / "sim.log")
+    sim_env = env.copy()
+    sim_env["CALIPTRA_BFM_PROGRESS_ONLY"] = "0" if args.trace_axi else "1"
+    sim_exit = run_logged(sim_command, test_output, sim_env, test_output / "sim.log")
     log_scan = scan_sim_log(test_output / "sim.log")
     passed = (sim_exit == 0 and log_scan["passed"] == 1 and log_scan["failed"] == 0 and
               log_scan["bad"] == 0 and log_scan["jtag_errors"] == 0 and log_scan["finish"] is not None)
@@ -1112,10 +1114,14 @@ def main():
         "native_vector_build_commands": vector_commands,
         "native_vector_tools": vector_tools,
         "native_vector_sha256": staged_vector_hashes,
-        "axi_trace_source_sha256": sha256(trace_source) if trace_source else None,
-        "axi_trace_plugin_sha256": sha256(trace_plugin) if trace_plugin else None,
-        "axi_trace_compile_command": trace_compile_command,
-        "axi_trace_compile_exit": trace_compile_exit,
+        "progress_vpi_source_sha256": sha256(trace_source),
+        "progress_vpi_plugin_sha256": sha256(trace_plugin),
+        "progress_vpi_compile_command": trace_compile_command,
+        "progress_vpi_compile_exit": trace_compile_exit,
+        "axi_trace_source_sha256": sha256(trace_source) if args.trace_axi else None,
+        "axi_trace_plugin_sha256": sha256(trace_plugin) if args.trace_axi else None,
+        "axi_trace_compile_command": trace_compile_command if args.trace_axi else None,
+        "axi_trace_compile_exit": trace_compile_exit if args.trace_axi else None,
         "sim_command": sim_command,
         "simulator_provenance": simulator_provenance,
         "sim_exit": sim_exit,

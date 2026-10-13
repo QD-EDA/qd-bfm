@@ -1,10 +1,12 @@
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <time.h>
 #include "vpi_user.h"
 
-static vpiHandle clk, valid, pc, insn, ready, rst, fatal;
+static vpiHandle clk, mcycle, valid, pc, insn, ready, rst, fatal;
 static vpiHandle stdout_data, mailbox_write, reset_pending, reset_delay;
 static vpiHandle reset_start, reset_assert, reset_deassert;
 static vpiHandle arvalid, arready, araddr, rvalid, rready;
@@ -14,6 +16,8 @@ static uint32_t last_pc, last_insn;
 static char last_araddr[80], last_awaddr[80];
 static char last_wvalid[8], last_wready[8], last_wlast[8];
 static int reset_trace_bound, reset_seen, previous_reset_n, previous_reset_request;
+static int progress_only;
+static time_t progress_start, progress_last;
 
 static int get_int(vpiHandle h) {
     s_vpi_value v;
@@ -104,9 +108,39 @@ static vpiHandle bind(const char *name) {
     return vpi_handle_by_name((PLI_BYTE8 *)name, NULL);
 }
 
+static void progress_heartbeat(time_t now) {
+    vpi_printf("CALIPTRA_PROGRESS_HEARTBEAT wall_s=%" PRIu64 " mcycle=%" PRIu32 "\n",
+               (uint64_t)difftime(now, progress_start), (uint32_t)get_int(mcycle));
+    progress_last = now;
+    vpi_flush();
+}
+
+static PLI_INT32 on_progress_clock(p_cb_data cb) {
+    (void)cb;
+    if (get_int(clk) == 1) {
+        time_t now = time(NULL);
+        if (difftime(now, progress_last) >= 300.0) progress_heartbeat(now);
+    }
+    return 0;
+}
+
 static PLI_INT32 start(p_cb_data cb) {
     (void)cb;
+    const char *progress_mode = getenv("CALIPTRA_BFM_PROGRESS_ONLY");
+    progress_only = progress_mode && strcmp(progress_mode, "1") == 0;
     clk = bind("caliptra_top_tb.core_clk");
+    mcycle = bind("caliptra_top_tb.caliptra_top_dut.rvtop.veer.dec.tlu.mcyclel");
+    if (clk && mcycle) {
+        progress_start = progress_last = time(NULL);
+        progress_heartbeat(progress_start);
+        s_cb_data cb_progress = {0}; cb_progress.reason = cbValueChange; cb_progress.cb_rtn = on_progress_clock; cb_progress.obj = clk;
+        vpi_register_cb(&cb_progress);
+    } else {
+        vpi_printf("CALIPTRA_PROGRESS_BIND_FAIL clk=%p mcycle=%p\n", (void *)clk, (void *)mcycle);
+        vpi_flush();
+        if (progress_only) return 0;
+    }
+    if (progress_only) return 0;
     valid = bind("caliptra_top_tb.caliptra_top_dut.trace_rv_i_valid_ip");
     pc = bind("caliptra_top_tb.caliptra_top_dut.trace_rv_i_address_ip");
     insn = bind("caliptra_top_tb.caliptra_top_dut.trace_rv_i_insn_ip");
