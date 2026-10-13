@@ -16,7 +16,7 @@ does not edit the pinned RTL or the testcase source.
 | Header | Case | Compatibility change |
 |---|---|---|
 | `caliptra-legacy-uart-qspi-reg-compat.h` | `smoke_test_uart`, `smoke_test_qspi` | Restores only register identifiers referenced by these stale tests, using definitions from generated-header blob `87ba5382a7b237a6f5b15105aed52fa672c82206` at Caliptra parent `2bcf063ceb5c06fb4d4af6089a0d437ed4c5ee66`, immediately before upstream removal commit `26cda9bd019248a0516427facb2602a9274f1d17`. |
-| `caliptra-errortrigger5-abr-compat.h` | `smoke_test_ecc_errortrigger5` | Supplies the two no-op ABR ISR hooks already present in the pinned errortrigger4 ISR header, missing from errortrigger5. |
+| `caliptra-errortrigger5-abr-compat.h` | `smoke_test_ecc_errortrigger5` | Supplies the two no-op ABR ISR hooks missing from errortrigger5 and maps the shared MLDSA helper's stale `abr_*` status names to errortrigger5's current `mldsa_*` fields. |
 
 The pinned RTL no longer integrates UART or QSPI. Their old enable bits also
 overlap current hardware-config fields, so restoring the old definitions allows
