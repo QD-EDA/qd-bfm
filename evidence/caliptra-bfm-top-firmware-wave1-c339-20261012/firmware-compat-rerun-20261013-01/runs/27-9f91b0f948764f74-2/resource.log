@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=INT --kill-after=60s 13899 python3.12 /home/dsell/toolchains/qd-bfm-0b5efd3/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_qspi --case-yaml smoke_test_qspi/smoke_test_qspi.yml --firmware-compat-overlay --output /home/dsell/slurm-runs/caliptra-bfm/a2/firmware-compat-rerun-20261013-01/runs/27-9f91b0f948764f74-2/output"
+	User time (seconds): 8185.32
+	System time (seconds): 240.97
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:20:27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1852684
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 639
+	Minor (reclaiming a frame) page faults: 1016226
+	Voluntary context switches: 81156435
+	Involuntary context switches: 81161685
+	Swaps: 0
+	File system inputs: 40232
+	File system outputs: 778488
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

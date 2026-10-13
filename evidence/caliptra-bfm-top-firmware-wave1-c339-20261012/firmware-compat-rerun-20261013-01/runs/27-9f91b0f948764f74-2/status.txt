@@ -1,0 +1,8 @@
+outcome=PASS
+reason=terminal_result_passed
+runner_exit=0
+elapsed_s=8427
+progress_heartbeat_count=27
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=7800 mcycle=52772
+last_mcycle=52772
+result_testname=smoke_test_qspi

@@ -9,3 +9,21 @@ Status: the final 42-row selection is prepared: 25 terminal timeouts plus the or
 At 04:12 MDT, tasks 1–6 had each exited 137 at exactly their configured timeout (6,775–7,628 seconds). The wrapper's `INFRA_ERROR` label is therefore corrected to `TIMEOUT`; their last mcycles are recorded in [`timeout-reclassification-799/results.tsv`](timeout-reclassification-799/results.tsv), with raw status and resource logs alongside it. Peak RSS was about 1.85 GiB under the 3 GiB cap, and no adjacent heartbeat samples repeated mcycle. Tasks 7–12 were still running and advancing at the latest check; tasks 13–42 remained pending at the array throttle.
 
 At 04:25 MDT, tasks 7–12 were still running. Their latest mcycles ranged from 10,431 to 14,979, with no repeated adjacent mcycle samples; tasks 13–42 remained pending at throttle 6. The [04:25 snapshot](heartbeat-snapshot-20261013-0425.txt) records the six heartbeat values and the overlay job progress.
+
+At 06:49 MDT, task 11 had exited 137 at exactly its 10,091-second cap; its
+latest simulator heartbeat was `wall_s=9900 mcycle=67671`, with no testcase
+terminal marker. This is classified as TIMEOUT in
+[`timeout-reclassification-799/results.tsv`](timeout-reclassification-799/results.tsv).
+Tasks 12–17 were running with advancing heartbeats; their latest
+`wall_s/mcycle` pairs were 10,200/71,202; 3,300/21,788; 3,000/20,147;
+1,800/12,200; 900/5,864; and 300/1,945. Tasks 18–42 were pending at throttle 6.
+Overlay retry 826_1 was also running, with latest heartbeat
+`wall_s=9300 mcycle=64274`; no observed mcycle window was flat for 30 minutes.
+
+At 07:07 MDT, task 799_12 (`c_intr_handler`) reached its 10,813-second
+per-test timeout and is recorded as TIMEOUT with final heartbeat
+`wall_s=10500 mcycle=73262`. Tasks 799_13–18 were running with advancing
+heartbeats; tasks 19–42 remained pending at throttle 6. Overlay retry 826_1
+remained active, with latest heartbeat `wall_s=10200 mcycle=2882`; its mcycle
+value decreased between the 9,600- and 9,900-second samples, and no terminal
+marker/result was present. See [`heartbeat-snapshot-20261013-0707.txt`](heartbeat-snapshot-20261013-0707.txt).

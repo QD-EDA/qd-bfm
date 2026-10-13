@@ -1,0 +1,4 @@
+0.000 ns - ---------------------------
+0.000 ns -  QSPI Smoke Test 
+0.000 ns - ---------------------------
+0.000 ns - Internal QSPI is not enabled, skipping QSPI smoke test

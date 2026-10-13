@@ -1,0 +1,4 @@
+0.000 ns - ---------------------------
+0.000 ns -  UART Smoke Test 
+0.000 ns - ---------------------------
+0.000 ns - Internal UART is not enabled, skipping UART smoke test

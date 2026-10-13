@@ -1,0 +1,15 @@
+corrected_outcome=TIMEOUT
+reason=elapsed time matched the configured per-test wall-clock cap; no testcase terminal marker or result JSON
+array_job=799
+array_task=12
+source_row=17
+test=c_intr_handler
+wrapper_outcome=INFRA_ERROR
+runner_exit=137
+timeout_s=10813
+elapsed_s=10813
+last_heartbeat_wall_s=10500
+last_mcycle=73262
+max_flat_wall_s=0
+max_rss_kib=1852508
+host=DAN-DESKTOP
