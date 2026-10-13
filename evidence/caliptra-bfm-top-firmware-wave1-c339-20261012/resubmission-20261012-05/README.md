@@ -21,3 +21,5 @@ At 19:27 MDT, task 669_22 ended with the runner's configured 11,240-second timeo
 At 19:45 MDT, the same six tasks remained RUNNING. Task 669_24’s nested simulator log advanced to the Datavault Mini Smoke Test, but all six still lacked runner status, result JSON, and terminal markers. The other visible logs were unchanged; no test verdict is inferred. See [`status-19-45.txt`](status-19-45.txt).
 
 At 20:00 MDT, task 669_28 completed PASS. Task status, runner exit 0, result JSON (`passed=true`, `sim_exit=0`), one testcase pass marker, and finish record agree; wall time was 2:24:22 and peak RSS 1,852,464 KiB. Rows 23–26, 29, and 30 are RUNNING; rows 31–51 are PENDING at throttle 6. The before/after queue snapshots are [`status-19-57.txt`](status-19-57.txt) and [`status-19-58.txt`](status-19-58.txt); full raw evidence is under `terminal-results/task-28-smoke_test_dma_aes_kv_short/`.
+
+At 20:10 MDT, task 669_23 was at 3:08:53 of its 11,601-second cap, with no runner status, result JSON, or testcase marker. The other five active rows likewise had no terminal result. The saved queue and nested-log snapshot is [`status-20-10.txt`](status-20-10.txt).
