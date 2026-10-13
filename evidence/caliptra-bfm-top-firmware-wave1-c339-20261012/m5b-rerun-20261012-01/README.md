@@ -158,3 +158,9 @@ At 12:03 MDT, tasks 799_19–24 remained RUNNING at `11100/78773`,
 tasks 25–42 remained PENDING. All six mcycle values advanced from the prior
 snapshot, and no result JSON or testcase PASS/FAIL marker was present for
 active rows. See the [12:03 snapshot](heartbeat-snapshot-20261013-1203.txt).
+
+At 12:13 MDT, tasks 799_19–24 remained RUNNING at `11700/83023`,
+`11100/78833`, `9900/71236`, `9000/64258`, `7800/56955`, and `6300/46153`;
+tasks 25–42 remained PENDING. All six mcycle values advanced from the prior
+snapshot, and no result JSON or testcase PASS/FAIL marker was present for
+active rows. See the [12:13 snapshot](heartbeat-snapshot-20261013-1213.txt).
