@@ -210,6 +210,12 @@ class StockFirmwareCaseTest(unittest.TestCase):
 
 
 class FirmwareCompatibilityOverlayTest(unittest.TestCase):
+    def test_errortrigger5_maps_the_shared_mldsa_status_names(self):
+        overlay_root = RUNNER.REPO / "docs/conformance/release_overlays/caliptra/environment"
+        header = (overlay_root / "caliptra-errortrigger5-abr-compat.h").read_text()
+        self.assertIn("#define abr_error mldsa_error", header)
+        self.assertIn("#define abr_notif mldsa_notif", header)
+
     def test_copies_only_the_case_specific_compatibility_headers(self):
         overlay_root = RUNNER.REPO / "docs/conformance/release_overlays/caliptra/environment"
         with tempfile.TemporaryDirectory() as temp:
