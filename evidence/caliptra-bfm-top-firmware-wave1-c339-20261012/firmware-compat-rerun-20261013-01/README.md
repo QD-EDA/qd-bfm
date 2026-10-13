@@ -42,3 +42,7 @@ queue check.
 
 At 04:25 MDT, jobs 823 tasks 1 and 2 were still running; task 3 remained the
 initial overlay-build failure, with its retry active as job 826.
+
+At 05:08 MDT, jobs 823 tasks 1 and 2 remain in simulation. Their latest
+heartbeats are `wall_s=3600 mcycle=24172` and `wall_s=3600 mcycle=24236`;
+neither log has a terminal marker.

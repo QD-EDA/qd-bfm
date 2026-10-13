@@ -24,6 +24,7 @@ no-op hooks. It changes no test source, vectors, result checks, or pass criteria
 ## Result
 
 Pending. Job 826 passed source and toolchain preflight, completed the firmware
-build, and started VVP. Its latest heartbeat is `wall_s=600 mcycle=4075`; no
-terminal result was present at that check. The final outcome and mcycle will be
-recorded here after the row reaches a terminal result.
+build, and started VVP. At 05:08 MDT its latest heartbeat is
+`wall_s=3300 mcycle=22721`; no terminal result was present at that check. The
+final outcome and mcycle will be recorded here after the row reaches a terminal
+result.

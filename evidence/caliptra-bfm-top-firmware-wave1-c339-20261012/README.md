@@ -104,3 +104,7 @@ Array 799 tasks 1–6 are RUNNING, with tasks 7–42 pending at the six-task thr
 ## Current checkpoint — 02:59 MDT, 2026-10-13
 
 Array 799 tasks 1–6 are still RUNNING; tasks 7–42 are PENDING at throttle 6. Each running task has 14 heartbeats, with mcycle increasing from 0 to 27,381–27,548 by wall time 3,900 seconds. No terminal result marker is present, and no task meets the flat-mcycle hang rule. The requested M5b checkpoint is satisfied while the longer array continues; current values are in [`heartbeat-snapshot-20261013-0259.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0259.txt).
+
+## Current checkpoint — 05:08 MDT, 2026-10-13
+
+Array 799 tasks 1–6 reached their configured per-test timeouts and are recorded as TIMEOUT with their last mcycle. Tasks 7–12 remain RUNNING and tasks 13–42 are PENDING at throttle 6. All six active heartbeats advanced since the previous check; none meets the 30-minute flat-mcycle hang rule. Overlay jobs 823 (UART and QSPI) and 826 (corrected errortrigger5) are also RUNNING, with advancing heartbeats and no terminal markers. See [`heartbeat-snapshot-20261013-0508.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0508.txt).
