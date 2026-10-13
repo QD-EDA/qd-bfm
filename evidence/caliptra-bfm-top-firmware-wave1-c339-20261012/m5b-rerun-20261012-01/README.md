@@ -177,3 +177,13 @@ through wall 12,900 and no 30-minute flat interval. Tasks 799_20–25 remained
 RUNNING at `12600/89440`, `11100/80029`, `10200/72892`, `9300/67896`,
 `7800/57293`, and `0/0`; tasks 26–42 remained PENDING. No terminal result was
 found for active rows. See the [12:35 snapshot](heartbeat-snapshot-20261013-1235.txt).
+
+At 12:49 MDT, task 799_20 reached its 13,341-second cap and is recorded as
+TIMEOUT with final mcycle 93,689. Its log includes an internal `Test 1 PASSED`
+line, but no row-level `* TESTCASE PASSED` marker or result JSON; the runner
+was killed with exit 137 at the configured cap. Tasks 799_21–26 remained
+RUNNING at `12000/86614`, `11100/2215`, `9900/72308`, `8400/61688`, `600/4244`,
+and `0/0`; tasks 27–42 remained PENDING. Task 22's mcycle drop from wall 10,200
+to 11,100 is unclassified; its latest sample had been unchanged for about 2.5
+minutes, below the 30-minute hang criterion. See the
+[12:49 snapshot](heartbeat-snapshot-20261013-1249.txt).

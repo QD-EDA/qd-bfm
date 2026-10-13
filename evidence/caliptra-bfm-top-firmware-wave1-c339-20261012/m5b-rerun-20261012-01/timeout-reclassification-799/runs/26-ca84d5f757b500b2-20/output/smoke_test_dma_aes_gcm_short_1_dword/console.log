@@ -1,0 +1,38 @@
+0.000 ns - ----------------------------------
+0.000 ns - Smoke Test AXI DMA AES - Variable Length Test Cases
+0.000 ns - ----------------------------------
+0.000 ns - 
+0.000 ns - ========================================
+0.000 ns - Running Test 1 of 12
+0.000 ns - ========================================
+0.000 ns - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+0.000 ns - Random length: 1 dwords (4 bytes)
+0.000 ns - 
+0.000 ns - ----------------------------------
+0.000 ns - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+0.000 ns - ----------------------------------
+0.000 ns - Configuring AES for GCM mode
+0.000 ns - Using test vector 0 for 1 dwords (4 bytes)
+0.000 ns - Plaintext length: 1 dwords (4 bytes)
+0.000 ns - Ciphertext length: 1 dwords (4 bytes)
+0.000 ns - Key bytes: 32: 
+0.000 ns - Key DWORD: 8: 
+0.000 ns - Key LEN: 4: 
+0.000 ns - AAD bytes: 20: 
+0.000 ns - AAD DWORD: 5: 
+0.000 ns - Sending image payload via AHB i/f to AXI SRAM AES GCM
+0.000 ns - Configuring AES for little endian mode
+0.000 ns - Write AES CTRL with value 0x481
+0.000 ns - Load Key data to AES
+0.000 ns - Write AES IV
+0.000 ns - Write GCM_AAD Phase, NUM_BYTES 0x10
+0.000 ns - Wait for INPUT_READY
+0.000 ns - Write AES AAD Block 0
+0.000 ns - Write GCM_AAD Phase, NUM_BYTES 0x4
+0.000 ns - Wait for INPUT_READY
+0.000 ns - Write AES AAD Block 1
+0.000 ns - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+0.000 ns - Read and Compare GCM TAG
+0.000 ns - AES Operation Complete
+0.000 ns - Test 1 PASSED
+0.000 ns - 

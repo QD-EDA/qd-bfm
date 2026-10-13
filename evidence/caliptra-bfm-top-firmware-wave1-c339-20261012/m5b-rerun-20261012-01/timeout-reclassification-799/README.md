@@ -111,3 +111,14 @@ present. Maximum RSS was 1,852,480 KiB. The raw status, resource, simulator,
 firmware, console, and provenance files are in
 `runs/25-6bccff716e6bcab5-19/`, with their remote hashes in
 `REMOTE-SHA256SUMS-task19.txt`.
+
+Task 20 (`smoke_test_dma_aes_gcm_short_1_dword`) records 13,341 seconds,
+exactly its configured cap; runner exit 137 and wrapper outcome `INFRA_ERROR`
+are corrected to TIMEOUT. The wrapper reports 36 heartbeats; the full log has
+45 samples through `wall_s=13200 mcycle=93689`, all advancing. It includes an
+internal `Test 1 PASSED` line but no row-level `* TESTCASE PASSED` marker or
+result JSON. The runner only records a row PASS after a normal simulator exit
+and its testcase-marker checks; this capped run is TIMEOUT. Maximum RSS was
+1,852,436 KiB. Raw status, resource, simulator, firmware, console, and
+provenance files are in `runs/26-ca84d5f757b500b2-20/`, with remote hashes in
+`REMOTE-SHA256SUMS-task20.txt`.
