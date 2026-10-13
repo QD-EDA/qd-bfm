@@ -1,0 +1,15 @@
+row=35
+array_task=669_35
+test=smoke_test_ecc_errortrigger2
+expected_mcycle=37000
+per_test_timeout_s=16985
+runner_exit=1
+elapsed=2:33:31
+peak_rss_kib=1852384
+result_json=passed=false
+sim_exit=1
+result_testname=smoke_test_ecc_errortrigger2
+progress_heartbeat=not instrumented
+testcase_pass_markers=0
+testcase_fail_markers=0
+failure=ERR_ECC_PRIVKEY_NOT_STABLE assertion at ecc_dsa_ctrl.sv:1081 (assertion source line 1014)

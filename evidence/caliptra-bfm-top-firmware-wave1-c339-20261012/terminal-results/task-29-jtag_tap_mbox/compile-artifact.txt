@@ -1,0 +1,3 @@
+path=output/caliptra_top_tb.vvp
+present=true
+size_bytes=367680829

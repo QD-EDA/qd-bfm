@@ -68,3 +68,7 @@ Row 25 (`smoke_test_aes_gcm`) reached its 13,210-second timeout on job 669: runn
 ## Current checkpoint — 21:06 MDT, 2026-10-12
 
 Row 26 (smoke_test_dma_aes_gcm_short_1_dword) reached its 13,341-second per-test timeout: runner exit 124, elapsed 3:42:21, peak RSS 1,852,348 KiB. Its compile artifact exists, but no result JSON, simulation log, testcase terminal marker, or finish record was preserved. The ledger now marks 20 timeouts as TIMEOUT (progress unknown); six rows have PASS, four have FAIL, and six remain RUNNING. To prepare M5b, only previously pending tasks 669_36–669_51 were canceled; tasks 669_29, 30, 32–35 remain running. The cancellation record and queue snapshot are in [m5b-progress-20261012/](m5b-progress-20261012/); row 26 evidence is in [terminal-results/task-26-smoke_test_dma_aes_gcm_short_1_dword/](terminal-results/task-26-smoke_test_dma_aes_gcm_short_1_dword/).
+
+## Current checkpoint — 23:40 MDT, 2026-10-12
+
+Task 669_29 ended at its configured timeout and task 669_35 failed on `ERR_ECC_PRIVKEY_NOT_STABLE`. The ledger now has 21 `TIMEOUT (progress unknown)`, six PASS, five FAIL, four RUNNING, and 16 `CANCELLED_BEFORE_START` rows. Tasks 669_30, 669_32, 669_33, and 669_34 remain running under their existing limits. Row 35 remains in the original 17-row resubmission set even though its earlier run failed. Raw evidence for rows 29 and 35 is under [`terminal-results/`](terminal-results/README.md).

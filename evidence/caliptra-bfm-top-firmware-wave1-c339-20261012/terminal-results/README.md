@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These eighteen Slurm runs ended at the configured per-test timeout with runner_exit=124 and are TIMEOUT (progress unknown). The first thirteen timeout logs lack a result JSON and terminal testcase marker; their last visible line does not establish where execution stopped. Rows 22–26 have their available per-task activity recorded below. Each directory contains raw status, provenance, tool hashes, resource reports, and available build/simulation logs.
+These nineteen Slurm runs ended at the configured per-test timeout with runner_exit=124 and are TIMEOUT (progress unknown). The first thirteen timeout logs lack a result JSON and terminal testcase marker; their last visible line does not establish where execution stopped. Rows 22–26 and 29 have their available per-task activity recorded below. Each directory contains raw status, provenance, tool hashes, resource reports, and available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -22,6 +22,7 @@ These eighteen Slurm runs ended at the configured per-test timeout with runner_e
 | 24 | `smoke_test_datavault_mini` | TIMEOUT (progress unknown) | 12,257 s |
 | 25 | `smoke_test_aes_gcm` | TIMEOUT (progress unknown) | 13,210 s |
 | 26 | smoke_test_dma_aes_gcm_short_1_dword | TIMEOUT (progress unknown) | 13,341 s |
+| 29 | `jtag_tap_mbox` | TIMEOUT (progress unknown) | 15,212 s |
 
 Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
 
@@ -32,6 +33,8 @@ Row 24 reached its 12,257-second per-test limit after 3:24:17, with peak RSS 1,8
 Row 25 reached its 13,210-second per-test limit after 3:40:10, with peak RSS 1,852,500 KiB. The compile log has warnings but no errors and the VVP output artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. See [`task-25-smoke_test_aes_gcm/`](task-25-smoke_test_aes_gcm/).
 
 Row 26 reached its 13,341-second per-test limit after 3:42:21, with peak RSS 1,852,348 KiB. The compile log has warnings but no errors and the VVP output artifact exists; no result JSON, simulation log, testcase marker, or finish record was preserved. Evidence is in [`task-26-smoke_test_dma_aes_gcm_short_1_dword/`](task-26-smoke_test_dma_aes_gcm_short_1_dword/).
+
+Row 29, `jtag_tap_mbox`, reached its 15,212-second per-test limit after 4:13:32, with peak RSS 1,852,372 KiB. Its result JSON is absent and the simulator log has no testcase terminal marker. This run predates the heartbeat instrumentation, so progress is unknown. The compile log, VVP artifact metadata, status, provenance, resource report, and logs are in [`task-29-jtag_tap_mbox/`](task-29-jtag_tap_mbox/).
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
@@ -53,3 +56,5 @@ Row 27, `smoke_test_qspi`, is a terminal firmware-build `FAIL`: its C source ref
 Row 28, `smoke_test_dma_aes_kv_short`, is a terminal `PASS`: the task status and runner exit 0, result JSON `passed=true`, and one simulator testcase pass marker agree. It finished in 2:24:22 with peak RSS 1,852,464 KiB (`mcycle=60,133`). See [`task-28-smoke_test_dma_aes_kv_short/`](task-28-smoke_test_dma_aes_kv_short/).
 
 Row 31, `smoke_test_ecc_errortrigger4`, is a terminal firmware-build `FAIL`: GCC reports implicit declarations for `service_abr_error_intr` and `service_abr_notif_intr` in pinned `caliptra_isr.c:754`; simulation did not start. The selected matrix test is `smoke_test_ecc_errortrigger4`, while its case directory and YAML path are `smoke_test_ecc_errortrigger5` and the YAML test name is `smoke_test_ecc_errortrigger4`. The raw status and compiler evidence are in [`task-31-smoke_test_ecc_errortrigger4/`](task-31-smoke_test_ecc_errortrigger4/).
+
+Row 35, `smoke_test_ecc_errortrigger2`, is a terminal simulation `FAIL`: `result.json` reports `passed=false` and `sim_exit=1`; the simulator stopped on the pinned RTL assertion `ERR_ECC_PRIVKEY_NOT_STABLE` at `ecc_dsa_ctrl.sv:1081`. It ran for 2:33:31 with peak RSS 1,852,384 KiB. The raw result, simulator and firmware logs, status, provenance, and resource report are in [`task-35-smoke_test_ecc_errortrigger2/`](task-35-smoke_test_ecc_errortrigger2/).
