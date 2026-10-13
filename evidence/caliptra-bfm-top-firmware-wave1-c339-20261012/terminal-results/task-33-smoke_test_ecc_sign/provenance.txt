@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=33
+test_id=ba452156bdfcaf3a
+matrix_testname=smoke_test_ecc_sign
+case_dir=smoke_test_ecc_sign
+case_yaml=smoke_test_ecc_sign/smoke_test_ecc_sign.yml
+yaml_testname=smoke_test_ecc_sign
+expected_mcycle_estimate=34680
+per_test_timeout_s=16033
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=371; body_lines=199, loops=13, waits=0, crypto_calls=2
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl

@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These twenty-one Slurm runs ended at the configured per-test timeout with runner_exit=124 and are TIMEOUT (progress unknown). The first thirteen timeout logs lack a result JSON and terminal testcase marker; their last visible line does not establish where execution stopped. Rows 22–26, 29, 30, and 32 have their available per-task activity recorded below. Each directory contains raw status, provenance, tool hashes, resource reports, and available build/simulation logs.
+These twenty-two Slurm runs ended at the configured per-test timeout with runner_exit=124 and are TIMEOUT (progress unknown). The first thirteen timeout logs lack a result JSON and terminal testcase marker; their last visible line does not establish where execution stopped. Rows 22–26, 29, 30, and 32–33 have their available per-task activity recorded below. Each directory contains raw status, provenance, tool hashes, resource reports, and available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -25,6 +25,7 @@ These twenty-one Slurm runs ended at the configured per-test timeout with runner
 | 29 | `jtag_tap_mbox` | TIMEOUT (progress unknown) | 15,212 s |
 | 30 | `iccm_lock` | TIMEOUT (progress unknown) | 15,639 s |
 | 32 | `smoke_test_ecc_keygen` | TIMEOUT (progress unknown) | 16,033 s |
+| 33 | `smoke_test_ecc_sign` | TIMEOUT (progress unknown) | 16,033 s |
 
 Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
 
@@ -64,3 +65,5 @@ Row 35, `smoke_test_ecc_errortrigger2`, is a terminal simulation `FAIL`: `result
 Row 30, `iccm_lock`, reached its 15,639-second per-test timeout after 4:20:39 with peak RSS 1,852,396 KiB. Its log reached `First pass through ICCM`, but no result JSON or terminal testcase marker exists. This run predates heartbeat instrumentation, so progress is unknown and it is not classified as a hang. The available raw logs, status, provenance, hashes, and resource report are in [`task-30-iccm_lock/`](task-30-iccm_lock/).
 
 Row 32, `smoke_test_ecc_keygen`, reached its 16,033-second timeout after 4:27:13 with peak RSS 1,852,504 KiB. It has no result JSON, terminal testcase marker, or mcycle heartbeat. This run predates heartbeat instrumentation, so it remains `TIMEOUT (progress unknown)`, not a hang. Its raw logs, status, provenance, hashes, and resource report are in [`task-32-smoke_test_ecc_keygen/`](task-32-smoke_test_ecc_keygen/).
+
+Row 33, `smoke_test_ecc_sign`, reached its 16,033-second timeout after 4:27:13 with peak RSS 1,852,384 KiB. It has no result JSON, terminal testcase marker, or mcycle heartbeat. This run predates heartbeat instrumentation, so it remains `TIMEOUT (progress unknown)`, not a hang. Its raw logs, status, provenance, hashes, and resource report are in [`task-33-smoke_test_ecc_sign/`](task-33-smoke_test_ecc_sign/).
