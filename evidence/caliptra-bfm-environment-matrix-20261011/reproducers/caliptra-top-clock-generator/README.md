@@ -43,3 +43,12 @@ This confirms the c339 diagnostic on the actual Caliptra clock construct and
 its acceptance by Verilator. It does **not** confirm the filed bit-versus-logic
 distinction: job 747 showed both `bit` and initialized `logic` fail without a
 timescale and pass with one. The current issue text records that correction.
+
+An independent rerun is preserved in `rerun-20261013-job-810/`. Slurm job 810
+used the protected c339 toolchain and Verilator 5.032 again: c339 exited 1 with
+the expected diagnostic, while Verilator built and ran the same four-transition
+check successfully. The original top-level `caliptra_top_ss_mode_tb` compile log
+also contains the diagnostic at `caliptra_top_tb.sv:138`, alongside independent
+mixed-driver errors. The row remains compile-failing; only the actual clock
+diagnostic is confirmed, while the reported bit-versus-logic distinction is
+still unconfirmed.
