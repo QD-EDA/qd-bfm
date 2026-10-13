@@ -59,3 +59,7 @@ no terminal marker or result JSON is present.
 At 08:12 MDT, retry job 826_1 remained RUNNING after 3:59:53. Its latest
 heartbeat was `wall_s=14100 mcycle=31005`, advancing from `28829` at
 `wall_s=13800`; no terminal marker or result JSON was present.
+
+At 08:29 MDT, retry job 826_1 remained RUNNING at 4:16:38. Its latest
+heartbeat was `wall_s=15300 mcycle=39698`, advancing from `37526` at
+`wall_s=15000`; no terminal marker or result JSON was present.

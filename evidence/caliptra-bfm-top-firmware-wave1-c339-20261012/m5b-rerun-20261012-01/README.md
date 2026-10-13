@@ -45,3 +45,10 @@ testcase terminal marker. Overlay retry 826_1 was RUNNING at 3:59:53 with
 latest heartbeat `wall_s=14100 mcycle=31005`, advancing from `28829` at
 `wall_s=13800`. The [08:12 snapshot](heartbeat-snapshot-20261013-0812.txt)
 records the queue and raw heartbeat values.
+
+At 08:29 MDT, tasks 799_13–18 remained RUNNING with latest heartbeat pairs
+`9300/64205`, `8700/60601`, `7800/54614`, `6900/47367`, `6000/42083`, and
+`5100/35759`; tasks 19–42 remained PENDING. The six log pairs were advancing,
+with no result JSON or testcase terminal markers. Overlay retry 826_1 remained
+RUNNING at 4:16:38, with `wall_s=15300 mcycle=39698` and no terminal result.
+See the [08:29 snapshot](heartbeat-snapshot-20261013-0829.txt).

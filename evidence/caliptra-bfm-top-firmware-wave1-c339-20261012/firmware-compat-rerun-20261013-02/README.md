@@ -34,3 +34,7 @@ after the row reaches a terminal result.
 At 08:12 MDT, it remained RUNNING at 3:59:53. The latest heartbeat was
 `wall_s=14100 mcycle=31005`, advancing from 28,829 at wall 13,800. No terminal
 marker or result JSON was present.
+
+At 08:29 MDT, job 826_1 remained RUNNING at 4:16:38. Its latest heartbeat
+was `wall_s=15300 mcycle=39698`, advancing from 37,526 at wall 15,000. No
+terminal marker or result JSON was present.
