@@ -1,0 +1,18 @@
+DAN-DESKTOP queue snapshot at 14:32 MDT, 2026-10-13.
+Host uptime: 1 day, 5 hours, 57 minutes.
+
+Job 799, array throttle 6:
+  799_23 TERMINAL TIMEOUT; smoke_test_ecc_keygen; cap=16033 s; elapsed=16033 s; exit=137; wall_s=15900 mcycle=115112.
+  799_24 RUNNING 4:07:33; smoke_test_ecc_sign; wall_s=14700 mcycle=106772.
+  799_25 RUNNING 1:58:11; smoke_test_ecc_verify; wall_s=6900 mcycle=48065.
+  799_26 RUNNING 1:46:10; smoke_test_ecc_errortrigger2; wall_s=6300 mcycle=43563.
+  799_27 RUNNING 0:53:37; smoke_test_ecc_errortrigger3; wall_s=3000 mcycle=20483.
+  799_28 RUNNING 0:31:11; smoke_test_ecc_errortrigger4; wall_s=1800 mcycle=12489.
+  799_29 TERMINAL FAIL; smoke_test_kv_ecc_flow1; firmware build error; exit=1; no VVP heartbeat.
+  799_30 RUNNING 0:05:56; kv_entry_read_err; wall_s=0 mcycle=0.
+  799_31-42 PENDING at throttle 6.
+
+Task 23's elapsed time equals its configured cap. Task 29 failed before the
+simulator started, so its final mcycle is N/A. No active row had a result JSON
+or exact testcase PASS/FAIL marker. Rows 24–28 had advancing mcycle samples; task 30 had only its initial 0/0
+sample.

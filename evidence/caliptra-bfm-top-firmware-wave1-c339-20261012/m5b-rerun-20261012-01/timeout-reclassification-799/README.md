@@ -143,3 +143,13 @@ result JSON exists. Maximum RSS was 1,852,468 KiB. The copied status, resource,
 simulator, firmware, console, and provenance files are in
 `runs/30-35735b41cd07eed7-22/`, with remote hashes in
 `REMOTE-SHA256SUMS-task22.txt`.
+
+
+Task 23 (`smoke_test_ecc_keygen`) records 16,033 seconds, exactly its
+configured per-test timeout; resource wall time is 4:27:13 and runner exit is
+137. The wrapper's `INFRA_ERROR` is corrected to TIMEOUT. Status and full log
+both report 54 heartbeats through `wall_s=15900 mcycle=115112`; all adjacent
+mcycle values advance. No testcase PASS/FAIL marker or result JSON exists.
+Maximum RSS was 1,852,344 KiB. Its copied run logs and provenance are under
+`runs/32-2f1b875490838662-23/`, with remote hashes in
+`REMOTE-SHA256SUMS-task23.txt`.

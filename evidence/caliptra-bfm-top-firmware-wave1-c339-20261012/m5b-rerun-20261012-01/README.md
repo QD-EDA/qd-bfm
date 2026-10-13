@@ -223,7 +223,6 @@ terminal marker, and no result JSON. Maximum RSS was 1,852,512 KiB. Tasks
 result JSON or exact testcase PASS/FAIL marker was found for active rows. See the
 [13:47 snapshot](heartbeat-snapshot-20261013-1347.txt).
 
-
 At 14:08 MDT, task 799_22 (`iccm_lock`) reached its exact 15,639-second
 per-test cap (resource wall time 4:20:39), exited 137, and is recorded as
 TIMEOUT. The status reports 47 heartbeats; the full simulator log contains 53
@@ -233,3 +232,16 @@ were RUNNING at `14700/106536`, `13200/95971`, `5400/37445`, `4800/32965`,
 `1500/10136`, and `300/1974`; tasks 799_29–42 were PENDING. No result JSON or
 exact testcase PASS/FAIL marker was found for active rows. See the
 [14:08 snapshot](heartbeat-snapshot-20261013-1408.txt).
+
+At 14:32 MDT, task 799_23 (`smoke_test_ecc_keygen`) reached its exact
+16,033-second cap and is recorded as TIMEOUT, with final mcycle 115,112. Task
+799_29 (`smoke_test_kv_ecc_flow1`) is recorded as FAIL: firmware compilation
+exited 1 after 36.47 seconds because GCC rejected an implicit `srand`
+declaration at line 197. VVP did not start, so no mcycle was emitted. Tasks
+799_24–28 and 799_30 were RUNNING at `14700/106772`, `6900/48065`,
+`6300/43563`, `3000/20483`, `1800/12489`, and `0/0`; tasks 799_31–42 were
+PENDING. Active logs had no result JSON or exact testcase PASS/FAIL markers, and
+rows 799_24–28 had advancing mcycle samples; task 799_30 had only its
+initial `0/0` sample. See the
+[14:32 snapshot](heartbeat-snapshot-20261013-1432.txt) and
+[failure evidence](failure-evidence-799/README.md).
