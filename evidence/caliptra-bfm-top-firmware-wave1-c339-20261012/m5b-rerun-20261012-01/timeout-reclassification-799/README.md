@@ -47,3 +47,12 @@ matching its configured timeout. Its last heartbeat is
 simulator-prefixed record advance mcycle. No testcase PASS/FAIL marker or
 result JSON exists, so this is a timeout, not a hang. The wrapper status and
 raw resource report are preserved under `runs/17-32a51e049923c576-12/`.
+
+Task 13 (`smoke_test_mbox_byte_read`) records 10,846 seconds, exactly its
+configured per-test cap. The wrapper left `INFRA_ERROR` in `status.txt`, but
+`resource.log` confirms the exact cap and runner exit 137, so the corrected
+outcome is TIMEOUT. Its last heartbeat is `wall_s=10800 mcycle=74961`; all
+36 anchored heartbeats have distinct adjacent mcycle values, with no PASS/FAIL
+marker or result JSON. The copied raw status, resource, simulator, and
+provenance artifacts are under `runs/19-40a2264a41561d60-13/`; their remote
+SHA-256 values are in `REMOTE-SHA256SUMS-task13.txt`.

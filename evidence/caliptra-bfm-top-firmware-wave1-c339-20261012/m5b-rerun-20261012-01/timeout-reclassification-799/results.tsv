@@ -11,3 +11,4 @@ array_task	source_row	test	wrapper_outcome	corrected_outcome	runner_exit	timeout
 10	13	smoke_test_hek_flow	INFRA_ERROR	TIMEOUT	137	9467	9467	30	9300	63131	0	1852440
 11	15	smoke_test_dma_aes_gcm_non_gcm_en_dec	INFRA_ERROR	TIMEOUT	137	10091	10091	31	9900	67671	0	1852444
 12	17	c_intr_handler	INFRA_ERROR	TIMEOUT	137	10813	10813	35	10500	73262	0	1852508
+13	19	smoke_test_mbox_byte_read	INFRA_ERROR	TIMEOUT	137	10846	10846	36	10800	74961	0	1852388

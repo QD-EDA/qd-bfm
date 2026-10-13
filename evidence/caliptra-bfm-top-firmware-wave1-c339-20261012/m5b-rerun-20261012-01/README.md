@@ -61,3 +61,12 @@ Overlay retry 826_1 reached its 15,738-second per-test cap and is recorded as
 TIMEOUT, with final heartbeat `wall_s=15600 mcycle=41872`; see the overlay
 rerun evidence for status and resource logs. The [08:40 snapshot](heartbeat-snapshot-20261013-0840.txt)
 records this queue state.
+
+At 09:03 MDT, task 799_13 reached its 10,846-second cap and is recorded as
+TIMEOUT with final mcycle 74,961. Tasks 799_14–18 remained RUNNING with latest
+heartbeat pairs `10800/75743`, `9600/67713`, `8700/1983`, `8100/57470`, and
+`7200/51137`; task 799_19 (`smoke_test_aes_gcm`) had started and reached
+`wall_s=300 mcycle=2034`. Tasks 20–42 remained PENDING. No terminal markers
+were found for active rows. Task 16's mcycle decreased from 58,129 at wall
+8,400 to 1,983 at wall 8,700; the evidence does not identify why. See the
+[09:03 snapshot](heartbeat-snapshot-20261013-0903.txt).
