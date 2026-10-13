@@ -7,7 +7,6 @@
 #SBATCH --mem=3G
 #SBATCH --time=06:10:00
 #SBATCH --array=1-42%6
-#SBATCH --dependency=afterok:785
 #SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/submit
 #SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/logs/%x-%A_%a.out
 
