@@ -101,3 +101,13 @@ present. Maximum RSS was 1,852,408 KiB. The raw status, resource, simulator,
 firmware, console, and provenance files are in
 `runs/24-483ee327507dab77-18/`, with their remote hashes in
 `REMOTE-SHA256SUMS-task18.txt`.
+
+Task 19 (`smoke_test_aes_gcm`) records 13,210 seconds, exactly its configured
+cap; runner exit 137 and wrapper outcome `INFRA_ERROR` are corrected to
+TIMEOUT. The wrapper reports 39 heartbeats; the full simulator log contains 44
+samples through `wall_s=12900 mcycle=91549`. All samples advance, so there is
+no 30-minute flat interval. No result JSON or testcase terminal marker is
+present. Maximum RSS was 1,852,480 KiB. The raw status, resource, simulator,
+firmware, console, and provenance files are in
+`runs/25-6bccff716e6bcab5-19/`, with their remote hashes in
+`REMOTE-SHA256SUMS-task19.txt`.

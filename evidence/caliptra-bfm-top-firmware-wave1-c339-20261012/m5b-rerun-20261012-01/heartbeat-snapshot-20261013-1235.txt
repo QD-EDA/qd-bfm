@@ -1,0 +1,19 @@
+DAN-DESKTOP queue snapshot at 12:35 MDT, 2026-10-13.
+Host uptime: 1 day, 4 hours.
+
+Job 799, array throttle 6:
+  799_19 TIMEOUT; smoke_test_aes_gcm; elapsed=13210 s; final mcycle=91549.
+  799_20 RUNNING 3:31:40; smoke_test_dma_aes_gcm_short_1_dword; wall_s=12600 mcycle=89440.
+  799_21 RUNNING 3:10:18; jtag_tap_mbox; wall_s=11100 mcycle=80029.
+  799_22 RUNNING 2:54:59; iccm_lock; wall_s=10200 mcycle=72892.
+  799_23 RUNNING 2:36:55; smoke_test_ecc_keygen; wall_s=9300 mcycle=67896.
+  799_24 RUNNING 2:10:40; smoke_test_ecc_sign; wall_s=7800 mcycle=57293.
+  799_25 RUNNING 0:01:18; smoke_test_ecc_verify; wall_s=0 mcycle=0.
+  799_26-42 PENDING at throttle 6.
+
+Task 799_19 reached its 13,210-second cap with runner exit 137; the full log's
+last heartbeat is wall_s=12900 mcycle=91549. Its 44 raw heartbeat samples
+advance throughout, with no 30-minute flat interval. No result JSON or
+testcase PASS/FAIL marker was present. The five other active rows' latest
+heartbeats were checked directly against sim.log; no result JSON or explicit
+PASS/FAIL marker was found for them.
