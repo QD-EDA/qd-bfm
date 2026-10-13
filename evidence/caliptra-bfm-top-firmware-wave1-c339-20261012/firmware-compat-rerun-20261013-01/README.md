@@ -17,7 +17,7 @@ This three-row array reruns the terminal firmware-build failures from the pinned
 |---:|---|---|---|
 | 9 `smoke_test_uart` | FAIL during firmware build: missing UART register identifiers. Evidence: [`terminal-results/task-9-smoke_test_uart/`](../terminal-results/task-9-smoke_test_uart/). | PASS, final mcycle 56,493. The test log says internal UART is disabled and skips the UART smoke test, so this confirms the compatibility build and testcase flow, not UART peripheral behavior. | `caliptra-legacy-uart-qspi-reg-compat.h` |
 | 27 `smoke_test_qspi` | FAIL during firmware build: missing QSPI register identifiers. Evidence: [`terminal-results/task-27-smoke_test_qspi/`](../terminal-results/task-27-smoke_test_qspi/). | PASS, final mcycle 56,761. | `caliptra-legacy-uart-qspi-reg-compat.h` |
-| 31 matrix `smoke_test_ecc_errortrigger4` | FAIL during firmware build: undeclared ABR hooks. Source case directory is `smoke_test_ecc_errortrigger5`; its YAML still says `testname: smoke_test_ecc_errortrigger4`. Evidence: [`terminal-results/task-31-smoke_test_ecc_errortrigger4/`](../terminal-results/task-31-smoke_test_ecc_errortrigger4/). | Retry job 826_1 is running; at 07:29 MDT its latest heartbeat was wall 11,700 s, mcycle 13,518, with no terminal marker. | `caliptra-errortrigger5-abr-compat.h` |
+| 31 matrix `smoke_test_ecc_errortrigger4` | FAIL during firmware build: undeclared ABR hooks. Source case directory is `smoke_test_ecc_errortrigger5`; its YAML still says `testname: smoke_test_ecc_errortrigger4`. Evidence: [`terminal-results/task-31-smoke_test_ecc_errortrigger4/`](../terminal-results/task-31-smoke_test_ecc_errortrigger4/). | Retry job 826_1 is running; at 07:42 MDT its latest heartbeat was wall 12,300 s, mcycle 17,901, with no terminal marker. | `caliptra-errortrigger5-abr-compat.h` |
 
 Rows 9 and 27 reference register identifiers from the generated header immediately before upstream removed UART/QSPI. The pinned RTL no longer integrates those blocks, and their old enable bits overlap current hardware-config fields. Therefore a successful C build alone does not imply a working peripheral; any resulting runtime FAIL or TIMEOUT is recorded without changing the tests.
 
@@ -52,6 +52,6 @@ saved simulator logs contain `* TESTCASE PASSED`, with final mcycles 56,493
 and 56,761; both have matching `passed=true` result JSON and runner exit 0.
 Task 3's first attempt remains a build FAIL as documented under
 `attempt-01-row31/`; retry job 826_1 is still simulating and advancing. At the
-07:29 MDT check its latest heartbeat was wall 11,700 s, mcycle 13,518. The
+07:42 MDT check its latest heartbeat was wall 12,300 s, mcycle 17,901. The
 simulator log reports a lower mcycle value at wall 9,900 than at wall 9,600;
 no terminal marker or result JSON is present.
