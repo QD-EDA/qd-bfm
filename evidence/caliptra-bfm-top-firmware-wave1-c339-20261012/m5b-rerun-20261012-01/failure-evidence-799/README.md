@@ -19,3 +19,13 @@ exists. GCC reports the same implicit `srand` declaration at line 197. The raw
 status, resource, build, firmware, provenance, and Slurm logs are under
 `runs/40-244a281ff42ebdc1-31/`, with remote hashes in
 `REMOTE-SHA256SUMS-task31.txt`.
+
+Task 26 (`smoke_test_ecc_errortrigger2`) ended as FAIL after 2:35:17. Its
+result JSON reports `passed=false`; the simulator log contains a fatal
+`ERR_ECC_PRIVKEY_NOT_STABLE` assertion at `ecc_dsa_ctrl.sv:1081`. The wrapper
+status stops at `wall_s=8700 mcycle=60408`, but the full log advances through
+`wall_s=9000 mcycle=62553`; that later sample is the recorded final mcycle.
+There was no 30-minute flat interval. Maximum RSS was 1,852,436 KiB. Its raw
+result JSON, status, simulator, firmware, console, provenance, and Slurm logs
+are under `runs/35-78ad1bab537c2ff8-26/`, with remote hashes in
+`REMOTE-SHA256SUMS-task26.txt`.

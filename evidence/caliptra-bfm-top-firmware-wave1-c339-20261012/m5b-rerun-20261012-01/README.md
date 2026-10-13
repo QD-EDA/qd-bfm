@@ -274,3 +274,14 @@ At 15:16 MDT, tasks 799_25–28, 799_30, and 799_32 remained RUNNING at
 `1200/8451`; tasks 799_33–42 remained PENDING. All active logs had advancing
 mcycle samples, no flat interval, and no result JSON or testcase terminal
 marker. See the [15:16 snapshot](heartbeat-snapshot-20261013-1516.txt).
+
+At 15:27 MDT, task 799_26 (`smoke_test_ecc_errortrigger2`) is recorded as
+FAIL: the result JSON says `passed=false`, with a fatal
+`ERR_ECC_PRIVKEY_NOT_STABLE` assertion. Its wrapper status ended at
+`8700/60408`, but the full simulator log continues to final mcycle 62,553 at
+wall 9,000. Tasks 799_25, 799_27–28, 799_30, and 799_32–33 were RUNNING at
+`10200/71164`, `6300/43704`, `5100/35396`, `3300/23045`, `1800/12826`, and
+`0/0`; tasks 799_34–42 were PENDING. Active logs had no result JSON or exact
+testcase terminal marker and no flat-mcycle window. See the
+[15:27 snapshot](heartbeat-snapshot-20261013-1527.txt) and
+[failure evidence](failure-evidence-799/README.md).
