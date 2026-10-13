@@ -187,3 +187,10 @@ and `0/0`; tasks 27–42 remained PENDING. Task 22's mcycle drop from wall 10,20
 to 11,100 is unclassified; its latest sample had been unchanged for about 2.5
 minutes, below the 30-minute hang criterion. See the
 [12:49 snapshot](heartbeat-snapshot-20261013-1249.txt).
+
+At 13:00 MDT, tasks 799_21–26 remained RUNNING at `12600/90981`,
+`11700/6469`, `10800/78835`, `9300/68128`, `1500/10638`, and `600/4152`; tasks
+27–42 remained PENDING. All six mcycle values advanced from the prior
+snapshot. Task 22 advanced after its earlier mcycle drop, so the temporary
+flat interval ended; no cause is inferred. See the
+[13:00 snapshot](heartbeat-snapshot-20261013-1300.txt).
