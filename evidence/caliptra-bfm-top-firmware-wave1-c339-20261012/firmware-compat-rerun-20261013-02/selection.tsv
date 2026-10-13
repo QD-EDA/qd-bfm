@@ -1,0 +1,2 @@
+array_index	source_row	test_id	matrix_testname	case_dir	case_yaml	yaml_testname	expected_mcycle	timeout_s	compat_overlay	selection_basis
+1	31	eaeb97287ce63194	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger5	smoke_test_ecc_errortrigger5/smoke_test_ecc_errortrigger5.yml	smoke_test_ecc_errortrigger4	33960	15738	caliptra-errortrigger5-abr-compat.h	row 31 retry after the first overlay exposed stale abr_* status field references in shared mldsa.c

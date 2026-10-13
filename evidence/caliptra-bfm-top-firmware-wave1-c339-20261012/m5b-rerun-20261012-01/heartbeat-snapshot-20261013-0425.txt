@@ -1,0 +1,14 @@
+host=DAN-DESKTOP
+captured_at=2026-10-13 04:25 MDT
+job_799=running; tasks_13_42=pending_at_array_throttle_6
+job_823_1_2=running
+job_826_1=running
+
+job_799 task 7: wall_s=2100 mcycle=14620 max_flat_wall_s=0
+job_799 task 8: wall_s=2100 mcycle=14979 max_flat_wall_s=0
+job_799 task 9: wall_s=2100 mcycle=14573 max_flat_wall_s=0
+job_799 task 10: wall_s=1500 mcycle=10431 max_flat_wall_s=0
+job_799 task 11: wall_s=1500 mcycle=10554 max_flat_wall_s=0
+job_799 task 12: wall_s=1500 mcycle=10790 max_flat_wall_s=0
+
+job_826 row 31: wall_s=600 mcycle=4075

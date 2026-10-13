@@ -1,0 +1,33 @@
+host=DAN-DESKTOP
+qd_commit=0b5efd3fa67ee7e68d62914c403128ba8f400948
+array_index=3
+source_row=31
+test_id=eaeb97287ce63194
+matrix_testname=smoke_test_ecc_errortrigger4
+case_dir=smoke_test_ecc_errortrigger5
+case_yaml=smoke_test_ecc_errortrigger5/smoke_test_ecc_errortrigger5.yml
+yaml_testname=smoke_test_ecc_errortrigger4
+expected_mcycle_estimate=33960
+per_test_timeout_s=15738
+compat_overlay=caliptra-errortrigger5-abr-compat.h
+selection_basis=original row 31; ABR hooks missing; case directory is errortrigger5 while YAML testname is errortrigger4
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=d4a819ed4e2fb38461a181b57a921ff9a2a3185d7ddbbb85c462b1834466b3d4
+da56865b78333aaee1f754957f710211e88d991c0998224c4d0fa67fd37874c9  /home/dsell/slurm-runs/caliptra-bfm/a2/firmware-compat-rerun-20261013-01/array.sbatch
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+5d01ec6ee2bbecb7f924e9a6487f09c526dbb54de600c4252f54a632523e25ad  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog-vpi
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+1d72cbc5bf62be3f3dbd7626c295b63c5fdc1dd8439f323ac47998d8a062b4c9  /home/dsell/toolchains/iverilog-c339/openssl/bin/openssl
+5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28  /home/dsell/toolchains/iverilog-c339/openssl/lib/libcrypto.so
+outcome=FAIL
+reason=firmware_build_failed
+runner_exit=1
+elapsed_s=36
+progress_heartbeat_count=0
+last_heartbeat=
+last_mcycle=none
+result_testname=
+	Maximum resident set size (kbytes): 1852672

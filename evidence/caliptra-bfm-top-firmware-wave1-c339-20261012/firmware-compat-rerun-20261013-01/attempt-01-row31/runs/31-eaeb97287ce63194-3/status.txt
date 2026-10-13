@@ -1,0 +1,8 @@
+outcome=FAIL
+reason=firmware_build_failed
+runner_exit=1
+elapsed_s=36
+progress_heartbeat_count=0
+last_heartbeat=
+last_mcycle=none
+result_testname=
