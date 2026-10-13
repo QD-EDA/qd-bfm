@@ -37,3 +37,11 @@ At 07:55 MDT, tasks 799_13–18 were still running with all six mcycle
 heartbeats advancing; tasks 19–42 remained pending at throttle 6. Overlay
 retry 826_1 was also running, at `wall_s=13200 mcycle=24461`. Current values
 are in [`heartbeat-snapshot-20261013-0755.txt`](heartbeat-snapshot-20261013-0755.txt).
+
+At 08:12 MDT, tasks 799_13–18 remained RUNNING with latest heartbeat pairs
+`8100/55628`, `7800/54123`, `6600/45941`, `5700/38836`, `5100/35590`, and
+`4200/29324`. Tasks 19–42 were PENDING; no active row had a result JSON or
+testcase terminal marker. Overlay retry 826_1 was RUNNING at 3:59:53 with
+latest heartbeat `wall_s=14100 mcycle=31005`, advancing from `28829` at
+`wall_s=13800`. The [08:12 snapshot](heartbeat-snapshot-20261013-0812.txt)
+records the queue and raw heartbeat values.

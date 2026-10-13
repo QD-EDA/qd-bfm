@@ -30,3 +30,7 @@ at wall 12,900. No terminal marker or result JSON is present. Earlier the mcycle
 value decreased from 66,375 at wall 9,600 to 749 at wall 9,900; the evidence
 does not establish why. The final outcome and mcycle will be recorded here
 after the row reaches a terminal result.
+
+At 08:12 MDT, it remained RUNNING at 3:59:53. The latest heartbeat was
+`wall_s=14100 mcycle=31005`, advancing from 28,829 at wall 13,800. No terminal
+marker or result JSON was present.

@@ -55,3 +55,7 @@ Task 3's first attempt remains a build FAIL as documented under
 07:55 MDT check its latest heartbeat was wall 13,200 s, mcycle 24,461. The
 simulator log reports a lower mcycle value at wall 9,900 than at wall 9,600;
 no terminal marker or result JSON is present.
+
+At 08:12 MDT, retry job 826_1 remained RUNNING after 3:59:53. Its latest
+heartbeat was `wall_s=14100 mcycle=31005`, advancing from `28829` at
+`wall_s=13800`; no terminal marker or result JSON was present.
