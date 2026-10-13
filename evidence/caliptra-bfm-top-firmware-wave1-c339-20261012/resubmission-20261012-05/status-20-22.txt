@@ -1,0 +1,68 @@
+2026-10-12 20:22:33 MDT
+ 20:22:33 up 11:47,  5 users,  load average: 10.59, 9.40, 9.02
+             JOBID      STATE       TIME     CPUS NODELIST(REASON)
+     669_[33-51%6]    PENDING       0:00        1 (JobArrayTaskLimit)
+            669_32    RUNNING       6:40        1 DAN-DESKTOP
+            669_30    RUNNING      23:59        1 DAN-DESKTOP
+            669_29    RUNNING    1:01:11        1 DAN-DESKTOP
+            669_26    RUNNING    3:07:58        1 DAN-DESKTOP
+            669_25    RUNNING    3:10:42        1 DAN-DESKTOP
+            669_24    RUNNING    3:11:15        1 DAN-DESKTOP
+row=23 run=40ec556410264b2f-23 status_files=1
+ result_jsons=0
+ bytes=49398
+ mtime=2026-10-12 19:19:22.930981052 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=24 run=483ee327507dab77-24 status_files=0
+ result_jsons=0
+ bytes=49398
+ mtime=2026-10-12 19:34:16.394807015 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=25 run=6bccff716e6bcab5-25 status_files=0
+ result_jsons=0
+ bytes=49398
+ mtime=2026-10-12 19:55:23.964901126 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=26 run=ca84d5f757b500b2-26 status_files=0
+ result_jsons=0
+ bytes=49398
+ mtime=2026-10-12 19:54:25.566593397 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=29 run=3439695c6637d6f2-29 status_files=0
+ result_jsons=0
+ bytes=45302
+ mtime=2026-10-12 19:22:05.106839463 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=30 run=35735b41cd07eed7-30 status_files=0
+ result_jsons=0
+ bytes=45302
+ mtime=2026-10-12 19:59:11.483824873 -0600
+ pass=0
+ fail=0
+ finish=0
+
+row=31 run=eaeb97287ce63194-31 status_files=1
+ result_jsons=0
+
+715902 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+716499 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+720361 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+1082401 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1146165 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1161180 bash -c sleep 600; date "+%Y-%m-%d %H:%M:%S %Z"; uptime; squeue -j 669 -o "%.18i %.10T %.10M %.8C %R"; root=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs; for row in 23 24 25 26 29 30 31; do d=$(find "$root" -maxdepth 1 -type d -name "*-$row" -print -quit); [ -n "$d" ] || continue; sim=$(find "$d/output" -type f -name sim.log -print -quit); printf "row=%s run=%s status_files=" "$row" "${d##*/}"; find "$d" -type f -name status.txt | wc -l | tr -d " "; printf " result_jsons="; find "$d" -type f -name result.json | wc -l | tr -d " "; if [ -n "$sim" ]; then printf " bytes="; wc -c < "$sim" | tr -d " "; printf " mtime="; stat -c %y "$sim"; printf " pass="; grep -cF "* TESTCASE PASSED" "$sim" || true; printf " fail="; grep -cF "TESTCASE FAILED" "$sim" || true; printf " finish="; grep -cF "Finished : minstret = " "$sim" || true; fi; printf "\n"; done; pgrep -a -f "vvp.*m5-top-wave1-c339-20261012-05" || true
+1162553 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/2f1b875490838662-32/output/caliptra_top_tb.vvp +CLP_REGRESSION

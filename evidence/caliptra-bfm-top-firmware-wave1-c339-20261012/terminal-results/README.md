@@ -1,6 +1,6 @@
 # Terminal results preserved from top-level wave 1
 
-These fourteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; row 22 progressed through reset assertion/deassertion before its timeout. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
+These fifteen Slurm runs ended with the runner's explicit per-test timeout (`runner_exit=124`) and are terminal `TIMEOUT` verdicts. The thirteen earlier timeouts stopped during fuse-ready polling before a `result.json` was written; rows 22 and 23 progressed further before their timeouts. Each directory contains raw status, provenance, tool hashes, resource reports, and the available build/simulation logs.
 
 | Row | Test | Verdict | Per-test timeout |
 |---:|---|---|---:|
@@ -18,8 +18,11 @@ These fourteen Slurm runs ended with the runner's explicit per-test timeout (`ru
 | 20 | `smoke_test_dma_aes_gcm_collision_test` | TIMEOUT | 11,010 s |
 | 21 | `smoke_test_dma_aes_gcm_short_dword` | TIMEOUT | 11,240 s |
 | 22 | `smoke_test_kv_securitystate` | TIMEOUT | 11,240 s |
+| 23 | `smoke_test_datavault_lock` | TIMEOUT | 11,601 s |
 
 Row 22 reached its 11,240-second per-test limit after 3:07:20, with peak RSS 1,852,368 KiB. It has no `result.json` or testcase terminal marker; see [`task-22-smoke_test_kv_securitystate/`](task-22-smoke_test_kv_securitystate/).
+
+Row 23 reached its 11,601-second per-test limit after 3:13:21, with peak RSS 1,852,440 KiB. It has no `result.json` or testcase terminal marker; see [`task-23-smoke_test_datavault_lock/`](task-23-smoke_test_datavault_lock/).
 
 Row 8, `pv_hash_zeroize`, is a terminal `FAIL`: its result JSON reports `passed=false`, and the simulation ends on the pinned SHA-512 RTL assertion `ERR_SHA_BLOCK_NOT_STABLE`. The logs and raw wrapper status are in [`task-8-pv_hash_zeroize/`](task-8-pv_hash_zeroize/). This evidence records the RTL assertion failure and does not identify an Icarus defect.
 
@@ -39,3 +42,5 @@ Row 18, `smoke_test_doe_kv_ocp_progress`, is a terminal `PASS`: runner and task 
 Row 27, `smoke_test_qspi`, is a terminal firmware-build `FAIL`: its C source references QSPI register macros absent from the generated `caliptra_reg.h` at the pinned Caliptra revision. The runner exited 1 before simulation, and no testcase result was written. The compiler log, raw task status, resource report, tool provenance, source/header hashes, and exact missing-symbol evidence are in [`task-27-smoke_test_qspi/`](task-27-smoke_test_qspi/). This is an upstream firmware test/header mismatch, not an Icarus result.
 
 Row 28, `smoke_test_dma_aes_kv_short`, is a terminal `PASS`: the task status and runner exit 0, result JSON `passed=true`, and one simulator testcase pass marker agree. It finished in 2:24:22 with peak RSS 1,852,464 KiB (`mcycle=60,133`). See [`task-28-smoke_test_dma_aes_kv_short/`](task-28-smoke_test_dma_aes_kv_short/).
+
+Row 31, `smoke_test_ecc_errortrigger4`, is a terminal firmware-build `FAIL`: GCC reports implicit declarations for `service_abr_error_intr` and `service_abr_notif_intr` in pinned `caliptra_isr.c:754`; simulation did not start. The selected matrix test is `smoke_test_ecc_errortrigger4`, while its case directory and YAML path are `smoke_test_ecc_errortrigger5` and the YAML test name is `smoke_test_ecc_errortrigger4`. The raw status and compiler evidence are in [`task-31-smoke_test_ecc_errortrigger4/`](task-31-smoke_test_ecc_errortrigger4/).
