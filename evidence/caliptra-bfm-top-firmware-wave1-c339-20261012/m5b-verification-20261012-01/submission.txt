@@ -1,0 +1,9 @@
+job_id=785
+job_name=bfm-m5b-kv
+job_state_at_submission=PENDING
+dependency=afterany:669
+submitted_at=2026-10-12T21:27:59-06:00
+script_sha256=2815c73a6a968930f66c65662f59821b1d04c8cd4afa4310e010724b5fb30793
+remote_run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-heartbeat-smoke-c339-20261012-01
+requested=1 CPU, 3 GiB, 06:10:00
+per_test_timeout=9073 seconds; SIGINT with 60-second kill grace
