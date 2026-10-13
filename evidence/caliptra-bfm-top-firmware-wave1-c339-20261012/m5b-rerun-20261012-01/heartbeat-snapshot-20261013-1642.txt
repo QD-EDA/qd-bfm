@@ -1,0 +1,15 @@
+DAN-DESKTOP queue snapshot at 16:42 MDT, 2026-10-13.
+Host uptime: 1 day, 8 hours, 7 minutes.
+
+Job 799, array throttle 6:
+  799_25 RUNNING 4:07:43; smoke_test_ecc_verify; wall_s=14700 mcycle=102619.
+  799_27 RUNNING 3:03:09; smoke_test_ecc_errortrigger3; wall_s=10800 mcycle=75544.
+  799_28 RUNNING 2:40:43; smoke_test_ecc_errortrigger4; wall_s=9600 mcycle=4430.
+  799_30 RUNNING 2:15:28; kv_entry_read_err; wall_s=7800 mcycle=55217.
+  799_32 RUNNING 1:49:24; smoke_test_ecc_flow1_kv_ocp_progress; wall_s=6300 mcycle=44427.
+  799_33 RUNNING 1:20:24; smoke_test_kv_rules_ocp_lock; wall_s=4500 mcycle=30741.
+  799_34-42 PENDING at throttle 6.
+
+Task 28's mcycle fell from 60,660 at wall 8,700 to 4,430 at wall 9,600;
+its samples are not flat, and the cause is unknown. Other active rows advanced
+mcycle. No active row had a result JSON or testcase PASS/FAIL marker.
