@@ -51,3 +51,6 @@ The fresh rerun of original task 799_35 / source row 44 passed. It has 26 heartb
 
 
 After commit `722c0ea`, I removed task 955_4's completed remote output and Python cache trees. Their recorded size was 377,301,648 bytes (about 0.351 GiB). Tasks 955_1–3 remained active, and the protected shared toolchain was untouched. See [`pass-evidence-955/cleanup-task955_4-20261014.txt`](pass-evidence-955/cleanup-task955_4-20261014.txt).
+
+
+At 10:05 MDT tasks 955_1–3 remained RUNNING. Task 1's heartbeat mcycle reset from 59,285 at wall 7,500 to 1,333 at wall 8,100, then advanced to 6,195 at wall 8,700; this is recorded as observed without assigning a cause. Task 2 reached wall 8,400 / mcycle 66,338, and task 3 wall 8,700 / mcycle 63,534. Task 4 remains recorded PASS. See [`heartbeat-snapshot-20261014-1005.txt`](heartbeat-snapshot-20261014-1005.txt).
