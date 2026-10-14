@@ -173,3 +173,10 @@ All six simulations remain RUNNING. The four fresh job 936 rows are at wall 2,10
 ## Current checkpoint — 07:33 MDT, 2026-10-14
 
 The older 799 array is terminal: task 799_37 TIMEOUT at the exact 21,600-second cap (last heartbeat mcycle 157,015), and 799_38 PASS (last heartbeat mcycle 149,887). Fresh job 936 was interrupted by a DAN-DESKTOP reboot before any wrapper completion record; its four partial attempts have no result JSON or testcase markers and are not test outcomes. The host is back up, and I’m preparing a new isolated four-row rerun. Evidence and the 07:31 queue snapshot are recorded under the wave-1 run folders.
+
+
+After commit `6e16604`, I removed the six completed/interrupted output trees and their run-local caches from DAN-DESKTOP. Their combined allocated tree size was 2,263,652,833 bytes; `/home/dsell` available space increased by 2,267,467,776 bytes. Shared toolchains and the unrelated queued work were untouched.
+
+## Current checkpoint — 07:39 MDT, 2026-10-14
+
+Corrected fresh array 955 is running the four rows previously cancelled for maintenance (799_28, 799_30, 799_34, and 799_35), mapped to source rows 37, 39, 43, and 44. All four tasks were RUNNING by 07:39:21, with one CPU and 3 GiB per task, a 6h10m allocation, and array throttle 6. No local duplicate is running. Array 949 exited before test startup because its selection file was staged at the wrong path; its setup-error logs are preserved and it produced no test result. Pinned source/toolchain hashes were re-verified before array 955. See [`cancelled-reruns-c339-20261014-02/`](cancelled-reruns-c339-20261014-02/) and [`cancelled-reruns-c339-20261014-03/`](cancelled-reruns-c339-20261014-03/).

@@ -1,0 +1,5 @@
+array_task	source_row	original_799_task	test	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
+1	37	28	smoke_test_ecc_errortrigger4	SETUP-ERROR					17281						setup-error-949/README.md
+2	39	30	kv_entry_read_err	SETUP-ERROR					17543						setup-error-949/README.md
+3	43	34	smoke_test_kv_parallel_access	SETUP-ERROR					18167						setup-error-949/README.md
+4	44	35	smoke_test_ecc_flow2_kv_ocp_progress	SETUP-ERROR					19152						setup-error-949/README.md
