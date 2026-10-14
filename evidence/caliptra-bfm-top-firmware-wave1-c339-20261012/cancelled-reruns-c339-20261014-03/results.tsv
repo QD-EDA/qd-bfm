@@ -1,5 +1,5 @@
 array_task	source_row	original_799_task	test	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
-1	37	28	smoke_test_ecc_errortrigger4	RUNNING			12000	32304	17281			41			heartbeat-snapshot-20261014-1101.txt
-2	39	30	kv_entry_read_err	RUNNING			12000	94428	17543			41			heartbeat-snapshot-20261014-1101.txt
-3	43	34	smoke_test_kv_parallel_access	RUNNING			12000	69438	18167			41			heartbeat-snapshot-20261014-1101.txt
+1	37	28	smoke_test_ecc_errortrigger4	RUNNING			12600	37023	17281			43			heartbeat-snapshot-20261014-1112.txt
+2	39	30	kv_entry_read_err	RUNNING			12600	99066	17543			43			heartbeat-snapshot-20261014-1112.txt
+3	43	34	smoke_test_kv_parallel_access	RUNNING			12600	70511	18167			43			heartbeat-snapshot-20261014-1112.txt
 4	44	35	smoke_test_ecc_flow2_kv_ocp_progress	TERMINAL	PASS	59434	7500	59434	19152	7909	0	26	0	1852844	pass-evidence-955/README.md
