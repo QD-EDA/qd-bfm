@@ -184,3 +184,7 @@ Corrected fresh array 955 is running the four rows previously cancelled for main
 ## Current checkpoint — 07:52 MDT, 2026-10-14
 
 Array 955 remains RUNNING on all four reruns. Each simulator has three progress heartbeats through wall 600 seconds; latest mcycles are 4,500, 4,500, 4,512, and 4,512. VVP processes are consuming CPU, but no row has a terminal marker or result JSON. None meets the 30-minute flat-heartbeat hang threshold. Full details are in [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt).
+
+## Current checkpoint — 08:03 MDT, 2026-10-14
+
+Array 955 remains active on all four rows. Latest heartbeats are at wall 1,200 seconds with mcycles 9,185, 9,185, 9,231, and 9,238. VVP is using CPU; no terminal result has appeared, and the latest heartbeat was only about 3.5 minutes old. No row meets the 30-minute hang threshold. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0803.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0803.txt).

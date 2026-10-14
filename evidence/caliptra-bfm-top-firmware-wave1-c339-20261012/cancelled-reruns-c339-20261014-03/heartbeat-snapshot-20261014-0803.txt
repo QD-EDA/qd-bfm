@@ -1,0 +1,42 @@
+2026-10-14 08:03:28 MDT
+             JOBID|     STATE|        TIME|NODELIST(REASON)
+             955_4|   RUNNING|       24:11|     DAN-DESKTOP
+             955_3|   RUNNING|       24:11|     DAN-DESKTOP
+             955_2|   RUNNING|       24:11|     DAN-DESKTOP
+             955_1|   RUNNING|       24:11|     DAN-DESKTOP
+--- 37-a79fb02e90b4ffbd-1
+log_mtime=2026-10-14 07:59:50.036625667 -0600 heartbeat_count=5
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2165
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4500
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=900 mcycle=6843
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1200 mcycle=9185
+status=not-finished
+result=absent
+--- 39-109971edd9458a51-2
+log_mtime=2026-10-14 07:59:50.108630961 -0600 heartbeat_count=5
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2167
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4500
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=900 mcycle=6844
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1200 mcycle=9185
+status=not-finished
+result=absent
+--- 43-d39c57745790b3e2-3
+log_mtime=2026-10-14 07:59:50.048626549 -0600 heartbeat_count=5
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2176
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4512
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=900 mcycle=6885
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1200 mcycle=9231
+status=not-finished
+result=absent
+--- 44-bcb5b29a003aa2a6-4
+log_mtime=2026-10-14 07:59:50.068628021 -0600 heartbeat_count=5
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2174
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4512
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=900 mcycle=6888
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1200 mcycle=9238
+status=not-finished
+result=absent
+   5629       23:46 99.9 1037456 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n -m /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/39-109971edd9458a51-2/output/trace_vpi/sim-axi-trace-vpi.vpi /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/39-109971edd9458a51-2/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   5630       23:46 99.9 1037424 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n -m /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3/output/trace_vpi/sim-axi-trace-vpi.vpi /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   5631       23:46 99.9 1037500 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n -m /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/output/trace_vpi/sim-axi-trace-vpi.vpi /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_OCP_LOCK_EN
+   5632       23:46 99.9 1037440 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n -m /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/37-a79fb02e90b4ffbd-1/output/trace_vpi/sim-axi-trace-vpi.vpi /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/37-a79fb02e90b4ffbd-1/output/caliptra_top_tb.vvp +CLP_REGRESSION
