@@ -29,3 +29,16 @@ There was no 30-minute flat interval. Maximum RSS was 1,852,436 KiB. Its raw
 result JSON, status, simulator, firmware, console, provenance, and Slurm logs
 are under `runs/35-78ad1bab537c2ff8-26/`, with remote hashes in
 `REMOTE-SHA256SUMS-task26.txt`.
+
+Task 36 (`smoke_test_pcr_zeroize`, source row 45) ended as FAIL after 2:40:56.
+`result.json` reports `passed=false`, compile exit 0, simulation exit 1, one
+bad diagnostic, and no finish record. `sim.log` contains a fatal
+`ERR_ECC_PRIVKEY_NOT_STABLE` assertion at `ecc_dsa_ctrl.sv:1081`; there is no
+`TESTCASE PASSED` or `TESTCASE FAILED` marker. The final heartbeat in the full
+log is `wall_s=9600 mcycle=63065` (33 heartbeats). `status.txt` is stale at
+`wall_s=9000 mcycle=61392` and 29 heartbeats, so the full log supplies the
+final heartbeat. Resource wall time was 2:40:56 and maximum RSS was 1,852,300
+KiB. Selected result JSON, status, simulator, firmware, compile, provenance,
+and Slurm logs are under `runs/45-c7d7b277746f7500-36/`; all 25 copied files
+match `REMOTE-SHA256SUMS-task36.txt`. Remote output cleanup is pending the
+evidence commit.
