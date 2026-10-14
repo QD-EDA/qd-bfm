@@ -31,3 +31,6 @@ At 08:46 MDT all four tasks remained RUNNING and advanced to `wall_s=3900`. Late
 
 
 At 08:57 MDT all four array-955 tasks remained RUNNING, with sixteen heartbeats through `wall_s=4500`. Latest mcycles are 35,184; 35,164; 35,259; and 35,299. No result JSON, status file, or testcase terminal marker is present. VVP remains near 100% CPU. The captured queue/log state is [`heartbeat-snapshot-20261014-0857.txt`](heartbeat-snapshot-20261014-0857.txt).
+
+
+At 09:08 MDT the four tasks remained RUNNING with eighteen heartbeats through `wall_s=5100`. Latest mcycles are 39,977; 39,950; 40,054; and 40,094. Result/status files and terminal markers remain absent. VVP processes remain active near 100% CPU. Snapshot: [`heartbeat-snapshot-20261014-0908.txt`](heartbeat-snapshot-20261014-0908.txt).
