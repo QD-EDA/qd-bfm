@@ -1,0 +1,4 @@
+QD_BASE_SHA=16ae08093aff9e7b7e49f463bd014bad8f9b0a03
+1dc48173ebe30a63158b4c22d52d119e7a41a99f82be66a3b4312fb17e95a8da  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-axi-param-crosssim-fix-20261010-01/source/qd-bfm-source.tar.gz
+b8c54dc797d852154859ada96816fa52d7a17691b44ec60ddfc943dbcde88715  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-axi-param-crosssim-fix-20261010-01/working-master.sv.applied
+ed96f4aeef3f0d4757e0ed180d40dc880bf7690f9e54458a8e1de99690583d94  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-axi-param-crosssim-fix-20261010-01/qd-bfm-working-tree.patch

@@ -1,0 +1,6 @@
+planned row=caliptra-v2-1-2-soc_ifc_tb
+top=soc_ifc_tb
+filelist=src/soc_ifc/config/soc_ifc_tb.vf
+run-local source overlay: add apostrophe before assignment-pattern brace at soc_ifc_tb_pkg.sv:116
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+resources=1 CPU, 3 GiB, 2-hour allocation, 6900-second per-test timeout

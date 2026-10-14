@@ -1,0 +1,16 @@
+Mon Oct 12 17:44:28 MDT 2026
+ 17:44:28 up  9:09,  3 users,  load average: 6.88, 7.22, 7.31
+             JOBID     STATE           START_TIME
+     669_[29-51%6]   PENDING                  N/A
+            669_28   RUNNING  2026-10-12T17:34:11
+            669_26   RUNNING  2026-10-12T17:14:35
+            669_25   RUNNING  2026-10-12T17:11:51
+            669_24   RUNNING  2026-10-12T17:11:18
+            669_23   RUNNING  2026-10-12T17:02:03
+            669_22   RUNNING  2026-10-12T16:14:00
+621579 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/871bf14a358781fb-22/output/caliptra_top_tb.vvp +CLP_REGRESSION
+700978 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/caliptra_top_tb.vvp +CLP_REGRESSION
+715902 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+716499 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+720361 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+742175 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4ca47c7da4afd810-28/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY +STRAP_SS_KEY_RELEASE_BASE_ADDR_RAND_SRAM +STRAP_SS_KEY_RELEASE_KEY_SIZE_RAND_LOW +CLP_OCP_LOCK_EN

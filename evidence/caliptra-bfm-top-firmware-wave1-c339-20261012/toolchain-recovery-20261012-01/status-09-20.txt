@@ -1,0 +1,18 @@
+2026-10-12T09:20:51-06:00
+ 09:20:51 up 45 min,  4 users,  load average: 10.66, 10.06, 9.17
+             JOBID      STATE       TIME                                NAME
+               609    RUNNING       2:18                     a2-c339-rebuild
+             606_1    RUNNING      36:09                       bfm-top-wave1
+             606_2    RUNNING      36:09                       bfm-top-wave1
+             606_3    RUNNING      36:09                       bfm-top-wave1
+               605    RUNNING      37:03                            a3-t2-b5
+            603_14    RUNNING      39:30                       a1-boot-smoke
+             591_5    RUNNING      45:13                       bfm-top-wave1
+             591_6    RUNNING      45:13                       bfm-top-wave1
+             591_7    RUNNING      45:13                       bfm-top-wave1
+   2133    1116 Rl         44:49 99.9 1038104 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/2ed04fcd9fe06e81-6/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2143    1117 Rl         44:49 99.9 1038104 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/5623a0f9b5e00f77-7/output/caliptra_top_tb.vvp +CLP_REGRESSION
+   2169    1115 Rl         44:49 99.9 1038080 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/b72c5535dc1dc634-5/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55015   53789 Rl         35:41 99.9 1038064 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/c4e8f85716a36bd8-3/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55020   53795 Rl         35:41 99.9 1038064 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/f1991acb7ebadfe1-1/output/caliptra_top_tb.vvp +CLP_REGRESSION
+  55060   53792 Rl         35:40 99.9 1038068 /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp -d /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/db58d7495957ab2d-2/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY

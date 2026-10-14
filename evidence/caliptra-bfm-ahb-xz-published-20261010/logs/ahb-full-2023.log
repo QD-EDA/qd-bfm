@@ -1,0 +1,5 @@
+memory guard: preflight available 7.50 GiB; process-group cap 0.37 GiB; system reserve 5.59 GiB
+PASS: AHB-Lite lanes, INCR bursts, waits, ERROR responses, reset retention, checker, monitor coverage counts
+tb_ahb_lite_caliptra.sv:221: $finish called at 695000 (1ps)
+PASS: AHB manager aborts single/burst waits and recovers cleanly
+memory guard: command exited 0; minimum available 7.50 GiB; maximum process group 0.00 GiB

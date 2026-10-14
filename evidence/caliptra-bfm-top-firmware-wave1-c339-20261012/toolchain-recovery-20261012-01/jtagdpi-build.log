@@ -1,0 +1,12 @@
+Compiling /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c...
+Compiling /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c...
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c: In function ‘tcp_server_create’:
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:409:5: warning: pointer ‘ctx’ used after ‘free’ [-Wuse-after-free]
+  409 |     free(ctx);
+      |     ^~~~~~~~~
+In function ‘ctx_free’,
+    inlined from ‘tcp_server_create’ at /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:408:5:
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:298:3: note: call to ‘free’ here
+  298 |   free(ctx);
+      |   ^~~~~~~~~
+Making jtagdpi.vpi from  jtagdpi.o tcp_server.o...

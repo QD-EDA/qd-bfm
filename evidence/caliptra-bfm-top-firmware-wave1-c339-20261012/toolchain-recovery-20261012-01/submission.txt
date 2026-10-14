@@ -1,0 +1,29 @@
+submitted_at=2026-10-12T09:18:33-06:00
+host=DAN-DESKTOP
+slurm_job_id=609
+state_at_2026-10-12T09:20:51-06:00=RUNNING
+resources=2 CPUs, 4 GiB, 2 hours
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/toolchain-recovery-20261012-01
+protected_toolchain_root=/home/dsell/toolchains/iverilog-c339
+rebuild_script_sha256=3d4c503a140c6b11a571d12e240140fdd1c08e2dcd18ea55b29cd43e1dfe928f
+iverilog_source_commit=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+caliptra_rtl_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge_commit=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+old_iverilog_sha256=737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2
+old_vvp_sha256=5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a
+
+The old hashes came from the immutable per-task `tool-binaries.sha256` records in rows 1–3.
+
+job609_exit=1:0
+job609_stop=JTAG VPI was emitted under the Slurm submit directory instead of the protected directory
+job612_exit=1:0
+job612_stop=the pinned MbedTLS version header has no VERSION_STRING macro
+job613_exit=0:0
+job613_completed=2026-10-12T09:27:53-06:00
+finalize_script_sha256=e6b606aebe70c553ece95fe7447fc14ba561879dde7cb94326e65f8d1c5b7884
+final_manifest=BUILD-MANIFEST.txt
+final_binary_and_input_hashes=BUILD-MANIFEST.txt
+protected_path_preflight=PASS
+mbedtls_system_links=include/mbedtls and libmbed{tls,x509,crypto}.so under deps resolve to system libmbedtls 3.6.5
+python_build_dependency=libssl-dev 3.5.5-1ubuntu3.7
+jtag_build_warning=upstream tcp_server.c error-path ctx use-after-free warning; see jtagdpi-build.log

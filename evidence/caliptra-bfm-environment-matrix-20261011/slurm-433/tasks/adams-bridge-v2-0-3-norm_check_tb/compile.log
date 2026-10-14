@@ -1,0 +1,5 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-02/source/submodules/adams-bridge/src/norm_check/tb/norm_check_tb.sv:76: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `norm_check_tb.mem_blocks[0]'
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-02/source/submodules/adams-bridge/src/norm_check/tb/norm_check_tb.sv:76: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `norm_check_tb.mem_blocks[1]'
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-02/source/submodules/adams-bridge/src/norm_check/tb/norm_check_tb.sv:76: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `norm_check_tb.mem_blocks[2]'
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-02/source/submodules/adams-bridge/src/norm_check/tb/norm_check_tb.sv:76: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `norm_check_tb.mem_blocks[3]'
+4 error(s) during elaboration.

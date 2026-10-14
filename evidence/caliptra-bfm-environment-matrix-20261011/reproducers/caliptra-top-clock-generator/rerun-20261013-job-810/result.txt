@@ -1,0 +1,3 @@
+result=PASS
+c339=expected_compile_rejection
+verilator=build_and_runtime_pass

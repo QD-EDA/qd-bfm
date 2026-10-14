@@ -1,0 +1,6 @@
+QD base commit: 29cc2af7b24c89105c3c54663f3b9e812389ea90
+Icarus source commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus Verilog version 13.0 (devel) (c339b9f2)
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+memory guard: preflight available 13.47 GiB; process-group cap 0.70 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 12.42 GiB; maximum process group 0.39 GiB

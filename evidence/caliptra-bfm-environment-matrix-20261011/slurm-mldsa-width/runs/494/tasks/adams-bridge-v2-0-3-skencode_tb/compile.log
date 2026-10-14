@@ -1,0 +1,8 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:187: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:220: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:221: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:67: error: port ``skencode_error'' is not a port of dut.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:113: warning: Port 6 (addr_b) of module dual_port_memory expects 14 bit(s), given 15.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:113:        : Pruning 1 high bits of the expression.
+1 error(s) during elaboration.

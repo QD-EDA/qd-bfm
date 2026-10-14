@@ -1,0 +1,9 @@
+0.000 ns - ----------------------------------------
+0.000 ns -  Running ECC Smoke Test error_trigger !!
+0.000 ns - ----------------------------------------
+0.000 ns - 
+0.000 ns -  TEST PCR WITH INVALID OUTPUT SIGN_R
+0.000 ns - Inject PRIVKEY into KV slot 7
+0.000 ns - Inject MSG into SHA512 digest
+0.000 ns - 
+0.000 ns - ECC PCR SIGNING

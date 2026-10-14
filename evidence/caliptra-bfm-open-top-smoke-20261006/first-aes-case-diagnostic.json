@@ -1,0 +1,68 @@
+{
+  "status": "TIMEOUT_IN_ROM_FLOW_BEFORE_AES_DMA",
+  "diagnostic_only": true,
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "runner_base_commit": "ffe4c37fc1bc72af4f198d8ee5baedf61a05f24b",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "runner_options": [
+    "--fast-trng",
+    "--first-aes-case-diagnostic"
+  ],
+  "sim_plusargs": [
+    "+CLP_REGRESSION",
+    "+CLP_DMA_TB_MODE_NOT_EMPTY",
+    "+CLP_BUS_LOGS",
+    "+CLP_SKIP_PQ_VECTOR_GENERATION"
+  ],
+  "temporary_diagnostics": [
+    "one-case firmware source copy",
+    "low-priority firmware prints suppressed",
+    ".data preload with the CRT0 copy skipped; BSS clear retained",
+    "MLDSA/MLKEM startup vector generation gated by a plusarg; DOE fuse generation retained"
+  ],
+  "memory_guard": {
+    "free_floor_percent": 60,
+    "preflight_percent": 76,
+    "minimum_observed_percent": 76,
+    "timeout_seconds": 300,
+    "exit_code": 124
+  },
+  "compile": {
+    "exit": 0,
+    "binary_bytes": 324231310,
+    "log_sha256": "f833afcec0e05f64bdd8187b9e4c58a3034ec9447bd36799ae3300d4ae03a3e8",
+    "profile_sha256": "577861eb1c4c9a26ada2379f55e3215d097e1cc317804a0f3155c3786ed381f2"
+  },
+  "firmware": {
+    "build_exit": 0,
+    "original_source_sha256": "8e45d5918c291425e99c6391896c955ef495e19d85e8bc187891f82260ee20a6",
+    "diagnostic_source_sha256": "117e982342a40ba5a36719945005a760933c5a5a51fbcbbc7baf50750c531390",
+    "program_image_sha256_after_preload": "d8939f8ddfa12d5d88fd40855281875949545a0698bae72669ddb0d1b3d03a90",
+    "dccm_image_sha256_after_preload": "b571498e206ebeeb41afd073e0265175c64279867808583e836f98e7410047d1"
+  },
+  "vector_overlay": {
+    "source_sha256": "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343",
+    "overlay_sha256": "f2561015a18ff5649f51f47e9436de3ae1be5ff93e5c70f124c76b16e83f34e8"
+  },
+  "simulation": {
+    "exit": 124,
+    "log_bytes": 3651,
+    "log_sha256": "a223686c31c926c7a30b8e07cf9090a31e79306df1c6d8ca19426bcd1512301f",
+    "markers": {
+      "reset_deasserted": true,
+      "fuses_ready": true,
+      "bootgo_reached": true,
+      "aes_test_banner": false,
+      "dma_send_marker": false,
+      "testcase_pass": false,
+      "testcase_fail": false,
+      "fatal_marker": false,
+      "finish_marker": false
+    },
+    "jtag_port_bound": true,
+    "ahb_slave0_trace_bytes": 190823,
+    "ahb_slave0_trace_sha256": "9cbed3fe3c6c304c71b81bfdbeb34de3ddef5e6d7ad813c76910a7b9e22a8be9",
+    "ahb_slave0_trace_lines": 5047
+  },
+  "qualification": "Not established: reset, fuse setup, and BootGo complete, but ROM remains in progress; no AES test banner, DMA payload, testcase result, or normal finish within 300 seconds."
+}

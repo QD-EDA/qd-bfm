@@ -1,0 +1,7 @@
+* TESTCASE PASSED
+Finished : minstret = 1685, mcycle = 4528
+/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case8-c339b9f-20261010-01/output/case8/caliptra_top_tb_services_icarus.sv:2445: $finish called at 46670000 (1ps)
+54c3f027e19ffa4ff11761c874d23f2949b38e8c9c82dc8dc88c10a7430971fd  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-bfm-case8-no-trace-20261010-01/logs/memory-guard.log
+efe416c88f7eb26e96e34e6833ae8ffc129691a4f31edaba93032498868a8d71  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-bfm-case8-no-trace-20261010-01/logs/sim-no-trace.log
+memory guard: preflight available 19.79 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 19.58 GiB; maximum process group 1.08 GiB

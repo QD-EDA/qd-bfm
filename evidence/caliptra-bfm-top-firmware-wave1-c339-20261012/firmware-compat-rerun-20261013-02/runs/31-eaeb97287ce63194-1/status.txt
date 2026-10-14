@@ -1,0 +1,8 @@
+outcome=TIMEOUT
+reason=per_test_timeout_kill_after
+runner_exit=137
+elapsed_s=15738
+progress_heartbeat_count=51
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=15600 mcycle=41872
+last_mcycle=41872
+result_testname=

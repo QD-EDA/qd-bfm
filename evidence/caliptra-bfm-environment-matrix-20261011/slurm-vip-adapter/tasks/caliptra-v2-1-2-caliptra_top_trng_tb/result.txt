@@ -1,0 +1,10 @@
+environment_id=caliptra-v2-1-2-caliptra_top_trng_tb
+top=caliptra_top_tb
+source_repo=caliptra_v2.1.2
+filelist=src/integration/config/caliptra_top_trng_tb.vf
+runner_exit=1
+compile_exit=1
+sim_exit=NOT_RUN
+pass_markers=
+failure_markers=
+elapsed_seconds=10

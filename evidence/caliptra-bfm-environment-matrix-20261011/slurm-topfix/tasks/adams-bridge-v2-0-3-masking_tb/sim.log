@@ -1,0 +1,4 @@
+Total tests: 5, Errors: 0
+PASS
+All tests completed.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-topfix-c339-20261011-01/source/submodules/adams-bridge/src/abr_libs/tb/abr_masked_OR_tb.sv:110: $finish called at 120000 (1ps)

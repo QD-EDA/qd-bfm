@@ -1,0 +1,15 @@
+DAN-DESKTOP queue snapshot at 17:57 MDT, 2026-10-13.
+Job 799: 30 terminal, 5 running, 7 pending (JobHeldUser). Task 33 completed PASS.
+
+  799_27 RUNNING 4:18:15; smoke_test_ecc_errortrigger3; wall_s=15300 mcycle=108375.
+  799_28 RUNNING 3:55:49; smoke_test_ecc_errortrigger4; wall_s=14100 mcycle=36672.
+  799_30 RUNNING 3:30:34; kv_entry_read_err; wall_s=12300 mcycle=87965.
+  799_32 TERMINAL PASS; smoke_test_ecc_flow1_kv_ocp_progress; final mcycle=60927.
+  799_33 TERMINAL PASS; smoke_test_kv_rules_ocp_lock; last heartbeat mcycle=58921; finish mcycle=60518.
+  799_34 RUNNING 0:55:34; smoke_test_kv_parallel_access; wall_s=3000 mcycle=21275.
+  799_35 RUNNING 0:41:34; smoke_test_ecc_flow2_kv_ocp_progress; wall_s=2400 mcycle=17281.
+  799_36-42 PENDING, held by user.
+
+Task 33 was summarized by the local intern, then verified against status.txt, result.json, the full sim.log, resource.log, and wrapper log. Its final heartbeat is wall_s=8400 mcycle=58921; result.json finish is mcycle=60518.
+
+The five running sim.log files were summarized by the local intern and checked directly. Each latest heartbeat matches; all adjacent samples advance mcycle (maximum flat interval 0 seconds). No terminal marker or result.json was present for those five rows.

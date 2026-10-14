@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/issue539-pkdecode-c339-20261011-02/source/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:185: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/issue539-pkdecode-c339-20261011-02/source/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.

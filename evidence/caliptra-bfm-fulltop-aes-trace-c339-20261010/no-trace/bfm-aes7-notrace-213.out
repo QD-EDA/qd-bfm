@@ -1,0 +1,20 @@
+QD=53c44cf9fcffe4cde4f47e2d89accaae099ffbcf
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+UVM=78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Compiling /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c...
+Compiling /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c...
+/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c: In function ‘tcp_server_create’:
+/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:409:5: warning: pointer ‘ctx’ used after ‘free’ [-Wuse-after-free]
+  409 |     free(ctx);
+      |     ^~~~~~~~~
+In function ‘ctx_free’,
+    inlined from ‘tcp_server_create’ at /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:408:5:
+/home/dsell/slurm-runs/caliptra-bfm/codex/bfm-fulltop-aes-case7-20261010-04/source/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c:298:3: note: call to ‘free’ here
+  298 |   free(ctx);
+      |   ^~~~~~~~~
+Making jtagdpi.vpi from  jtagdpi.o tcp_server.o...
+runner_exit=0
+Peak RSS records (kB):
+firmware-smoke-resource.log: 	Maximum resident set size (kbytes): 1860440
+jtagdpi-resource.log: 	Maximum resident set size (kbytes): 37224

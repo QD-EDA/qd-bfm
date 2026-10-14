@@ -1,0 +1,3 @@
+baseline_compile_exit=2
+synthesis_compile_exit=0
+synthesis_sim_exit=0

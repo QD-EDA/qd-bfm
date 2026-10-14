@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-07",
+  "classification": "diagnostic_only_not_qualification",
+  "qualification_reason": "The Icarus source checkout was dirty and unpublished; the run used a temporary four-dword testcase overlay and reused fast-boot diagnostic firmware images.",
+  "run": {
+    "test": "rand_test_dma",
+    "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "iterations": 1,
+    "transfer_type": "AHB2AXI",
+    "transfer_dwords": 4,
+    "forced_first_reset": true,
+    "reset_delay_cycles": 214,
+    "checker_enabled": true,
+    "firmware_images_reused_from": "/private/tmp/qd-bfm-rand-dma-first-reset-20261007/rand_test_dma (fast-boot diagnostic images)",
+    "temporary_generator_overlay_sha256": "215b50269dd451334ba4eb3283e987e7e6e85d922523273bccaa2cf90f789822",
+    "services_overlay_sha256": "c0b9b291725abb69cd44ddee51c560d5847f594d6fa9c3b86d2d8573f68c9205",
+    "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654",
+    "profile_sha256": "4c5ed897ca7651eac56e69b30ba7bb0c29d45fdfa3b049898c96ed1d951ee833",
+    "firmware_image_sha256": {
+      "program.hex": "6f69e82508d89a93ad14e4a848faef581f572a8ef9d93a1753d17b34a3d12783",
+      "dccm.hex": "042c83d69d16884ee34a913632504617b7343ae15f2f5c4add216af885a90830",
+      "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "simulator": {
+    "iverilog_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "source_checkout_state": "dirty_unpublished",
+    "qualification_eligible": false
+  },
+  "replay": {
+    "mode": "direct VVP replay of the runner-built binary under the memory guard",
+    "local_jtag_socket_bind_allowed": true,
+    "staged_python_helper_path_restored": true,
+    "exit_code": 0,
+    "runner_scan_passed": true
+  },
+  "scan": {
+    "testcase_pass_markers": 1,
+    "testcase_fail_markers": 0,
+    "bad_diagnostics": 0,
+    "jtag_server_errors": 0,
+    "reset_in_flight": true,
+    "outstanding_writes_at_reset": [
+      1
+    ],
+    "reset_assert_cycles": [
+      2614
+    ],
+    "finish": [
+      1416,
+      3717
+    ],
+    "uvm_warning_count": 0,
+    "uvm_error_count": 0,
+    "uvm_fatal_count": 0
+  },
+  "observed": {
+    "reset_requests": [
+      2399
+    ],
+    "reset_edges": [
+      {
+        "state": "deassert",
+        "cycle": 21
+      },
+      {
+        "state": "assert",
+        "cycle": 2614
+      },
+      {
+        "state": "deassert",
+        "cycle": 2624
+      }
+    ],
+    "axi_handshake_totals": {
+      "AW": 2,
+      "W": 8,
+      "B": 2,
+      "AR": 1,
+      "R": 4
+    },
+    "last_axi_handshake_cycles": {
+      "AW": 5186,
+      "W": 5192,
+      "B": 5201,
+      "AR": 5676,
+      "R": 5684
+    },
+    "note": "AXI B count 1 is logged at cycle 2615 after reset assert at 2614; the scanner sampled one outstanding write at assertion. The post-reset write and read complete before the testcase pass marker."
+  },
+  "trace": {
+    "raw_log_sha256": "28537f9abcc261c7968262d3929b698bf10ccf8bcf906ed2ecb478a57aa39653",
+    "sanitized_log": "sim-trace-sanitized.log",
+    "sanitized_log_sha256": "cb7080b1e317d3a0157abbe93907f44600e4f006836dc4dbfc7f4dd66b1b6f50",
+    "raw_log_retained": false
+  }
+}

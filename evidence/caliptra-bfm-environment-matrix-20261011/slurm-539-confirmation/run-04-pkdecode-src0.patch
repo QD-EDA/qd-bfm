@@ -1,0 +1,5 @@
+--- a/src/pk_decode/tb/pkdecode_tb.sv
++++ b/src/pk_decode/tb/pkdecode_tb.sv
+@@
+-    pkdecode_test('h40, 'h20);
++    pkdecode_test('h40, 'h0);

@@ -1,0 +1,6 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:187: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:188: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:221: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:222: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:114: warning: Port 6 (addr_b) of module dual_port_memory expects 14 bit(s), given 15.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:114:        : Pruning 1 high bits of the expression.

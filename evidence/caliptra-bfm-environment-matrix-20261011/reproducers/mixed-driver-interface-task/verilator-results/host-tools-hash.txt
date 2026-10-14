@@ -1,0 +1,5 @@
+MacBook-Air.local
+Darwin MacBook-Air.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+Verilator 5.051 devel rev v5.050-196-g7dcd4e0b6 (mod)
+Apple clang version 21.0.0 (clang-2100.3.34.2)
+b81c931684bf88494f7f92d1eca176d5ff936f32763b9625e2cea3d687123549  evidence/caliptra-bfm-environment-matrix-20261011/reproducers/mixed-driver-interface-task/axi_if_task_mixed_driver.sv

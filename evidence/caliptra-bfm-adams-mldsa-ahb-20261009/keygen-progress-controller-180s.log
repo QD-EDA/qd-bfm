@@ -1,0 +1,3 @@
+keygen busy trace start
+cycle=0 busy=1 saw_busy=1 pc=2 ctrl=0 ntt=0 sampler=0 sample_state=0 coeff=0 sha3_state=0
+cycle=1000 busy=1 saw_busy=1 pc=14 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=5 sha3_state=3

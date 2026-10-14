@@ -1,0 +1,13 @@
+diff --git a/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv b/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv
+--- a/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv
++++ b/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv
+@@ -244,8 +244,8 @@
+     init_sim();
+     reset_dut();
+     $display("Reading test vectors from hex files\n");
+-    sigdecode_z_test('h0,'h0);
+-    sigdecode_z_test('h40, 'h20);
++    sigdecode_z_test('h0);
++    sigdecode_z_test('h40);
+     $finish;
+ end

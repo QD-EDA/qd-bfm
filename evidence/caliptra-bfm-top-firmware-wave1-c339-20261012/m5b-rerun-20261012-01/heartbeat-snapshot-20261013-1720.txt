@@ -1,0 +1,13 @@
+DAN-DESKTOP queue snapshot at 17:20 MDT, 2026-10-13.
+Job 799 array throttle 6; 29 terminal, 6 running, 7 pending.
+
+  799_27 RUNNING 3:41:55; smoke_test_ecc_errortrigger3; wall_s=13200 mcycle=93070.
+  799_28 RUNNING 3:19:29; smoke_test_ecc_errortrigger4; wall_s=11700 mcycle=19497.
+  799_30 RUNNING 2:54:14; kv_entry_read_err; wall_s=10200 mcycle=72765.
+  799_32 TERMINAL PASS 2:22:54; smoke_test_ecc_flow1_kv_ocp_progress; final heartbeat wall_s=8400 mcycle=59912; finish mcycle=60927.
+  799_33 RUNNING 1:59:10; smoke_test_kv_rules_ocp_lock; wall_s=6900 mcycle=48107.
+  799_34 RUNNING 0:19:14; smoke_test_kv_parallel_access; wall_s=900 mcycle=6417.
+  799_35 RUNNING 0:05:14; smoke_test_ecc_flow2_kv_ocp_progress; initial wall_s=0 mcycle=0.
+  799_36-42 PENDING at throttle 6.
+
+All running rows had advancing mcycle samples; task 35 had only its initial sample and had run for less than 30 minutes. No terminal marker or result JSON was observed for the active rows.

@@ -1,0 +1,16 @@
+0.000 ns - ----------------------------------
+0.000 ns - Smoke Test AXI DMA AES - Variable Length Test Cases
+0.000 ns - ----------------------------------
+0.000 ns - 
+0.000 ns - ========================================
+0.000 ns - Running Test 1 of 3
+0.000 ns - ========================================
+0.000 ns - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+0.000 ns - Random length: 8 dwords (32 bytes)
+0.000 ns - 
+0.000 ns - ----------------------------------
+0.000 ns - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+0.000 ns - ----------------------------------
+0.000 ns - Configuring AES for GCM mode
+0.000 ns - Using test vector 7 for 8 dwords (32 bytes)
+0.000 ns - String length is 64.

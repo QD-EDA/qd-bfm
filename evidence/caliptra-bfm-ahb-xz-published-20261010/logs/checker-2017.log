@@ -1,0 +1,7 @@
+memory guard: preflight available 7.52 GiB; process-group cap 0.37 GiB; system reserve 5.59 GiB
+PASS: AHB checker accepts a legal transfer and two-cycle ERROR response
+tb_ahb_lite_caliptra_checker.sv:78: $finish called at 56000 (1ps)
+PASS: AHB checker accepts IDLE-to-NONSEQ while a transfer is waited
+tb_ahb_lite_caliptra_checker.sv:99: $finish called at 66000 (1ps)
+PASS: AHB checker rejected all 26 injected protocol violations
+memory guard: command exited 0; minimum available 7.52 GiB; maximum process group 0.00 GiB

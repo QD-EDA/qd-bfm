@@ -1,0 +1,1 @@
+PASS. status.txt and runner.log report PASS with exit 0. result.json has passed=true, compile_exit=0, firmware_exit=0, sim_exit=0, one testcase pass marker, zero fail markers, and bad_diagnostics=0. sim.log contains `* TESTCASE PASSED`; its SHA256 matches result.json and the finish is minstret=23813, mcycle=74924. Wall time was 2:50:59; maximum RSS was 1,852,152 KiB.

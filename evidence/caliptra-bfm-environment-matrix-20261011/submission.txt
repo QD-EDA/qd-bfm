@@ -1,0 +1,8 @@
+job_id=325
+submitted_utc=2026-10-11T16:04:10Z
+remote_run=/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-01
+array=0-39%8
+cpus_per_task=1
+mem_per_task=3G
+wall_limit=02:00:00
+per_test_timeout_seconds=6900

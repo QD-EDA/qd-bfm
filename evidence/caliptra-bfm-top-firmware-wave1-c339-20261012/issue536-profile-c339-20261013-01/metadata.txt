@@ -1,0 +1,49 @@
+HOST DAN-DESKTOP
+TIME 2026-10-13T03:44:04-06:00
+PERF perf version 7.0.14
+VVP_VERSION
+Icarus Verilog runtime version 13.0 (devel) ()
+
+Copyright (c) 2001-2026 Stephen Williams (steve@icarus.com)
+
+  This program is free software; you can redistribute it and/or modify
+BINARY
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+SAMPLES
+# ========
+# captured on    : Tue Oct 13 03:39:24 2026
+# header version : 1
+# data offset    : 584
+# data size      : 234720
+# feat offset    : 235304
+# hostname : DAN-DESKTOP
+# os release : 6.18.33.1-microsoft-standard-WSL2
+# perf version : 7.0.14
+# arch : x86_64
+# nrcpus online : 20
+# nrcpus avail : 20
+# cpudesc : Intel(R) Core(TM) Ultra 9 285K
+# cpuid : GenuineIntel,6,198,2
+# total memory : 40041100 kB
+# cmdline : /usr/bin/perf
+# event desc: not available or unable to read
+# CPU_TOPOLOGY info available, use -I to display
+# NUMA_TOPOLOGY info available, use -I to display
+# pmu mappings: cpu = 4, breakpoint = 5, kprobe = 8, msr = 11, power = 10, software = 1, tool = 4294967294, tracepoint = 2, uprobe = 9
+# CACHE info available, use -I to display
+# time of first sample : 68599.494857
+# time of last sample : 68659.457950
+# sample duration :  59963.092 ms
+# MEM_TOPOLOGY info available, use -I to display
+# bpf_prog_info empty
+# btf info empty
+# cpu pmu capabilities: not available
+# CPU_DOMAIN_INFO info available, use -I to display
+# e_machine : 62
+#   e_flags : 0
+# missing features: TRACING_DATA BUILD_ID BRANCH_STACK GROUP_DESC AUXTRACE STAT CLOCKID DIR_FORMAT COMPRESSED CLOCK_DATA HYBRID_TOPOLOGY
+# ========
+#
+RECORDER
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.224 MB perf.data (2892 samples) ]

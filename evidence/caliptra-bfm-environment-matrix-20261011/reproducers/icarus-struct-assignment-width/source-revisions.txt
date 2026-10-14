@@ -1,0 +1,3 @@
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Adams-Bridge=b77e3d899e828d626cfa2d0a26a6b5704cc121e0
+Host=MacBook-Air.local (macOS 27.0, arm64)

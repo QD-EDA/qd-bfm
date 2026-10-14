@@ -1,0 +1,12 @@
+host=DAN-DESKTOP
+qd_commit=a8664c7a8092ac8342dce2f47a6efe9a8a3e9af8
+array_task_id=9
+sample_order=10
+test_id=3aebd231d5081e23
+testname=smoke_test_sha256_wntz_rand
+expected_mcycle=18000
+per_test_timeout_s=9188
+timeout_formula=ceil(3*expected_mcycle/7.31+1800)
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0

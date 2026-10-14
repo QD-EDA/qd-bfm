@@ -1,0 +1,18 @@
+0.000 ns - -------------------------------------------
+0.000 ns -  DV Smoke Test for checking Lock Controls
+0.000 ns - -------------------------------------------
+0.000 ns - 
+0.000 ns - INFO. Using random seed = 17
+0.000 ns - 
+0.000 ns - 
+0.000 ns - ** Working on new Control Group Prefix STICKYDATAVAULTCTRL to Start Locking Data Registers **
+0.000 ns - 
+0.000 ns - INFO. handle_2d_locking(). Number of items in datset = 10
+0.000 ns - 
+0.000 ns - --next set--
+0.000 ns - STICKYDATAVAULTCTRL[0] -LOCKS-> STICKY_DATA_VAULT_ENTRY_0[0..11]
+0.000 ns - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x29CD88B5, read back 0x29CD88B5
+0.000 ns - ...........
+0.000 ns - INFO. (Single Write) For addr 0x1001C000 (STICKYDATAVAULTCTRL[0]), attempting to write 0x1, read back 0x1
+0.000 ns - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x1C3C8954, read back 0x29CD88B5
+0.000 ns - ...........

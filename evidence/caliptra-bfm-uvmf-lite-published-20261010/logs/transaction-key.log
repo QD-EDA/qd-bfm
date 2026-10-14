@@ -1,0 +1,6 @@
+memory guard: preflight available 7.56 GiB; process-group cap 0.37 GiB; system reserve 5.59 GiB
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.C6cIOabSMU/uvmf_transaction_key_2017.dpiexport.c (compile it into your DPI object).
+PASS: UVMF transaction key and recording API under IEEE 2017
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.C6cIOabSMU/uvmf_transaction_key_2023.dpiexport.c (compile it into your DPI object).
+PASS: UVMF transaction key and recording API under IEEE 2023
+memory guard: command exited 0; minimum available 7.38 GiB; maximum process group 0.28 GiB

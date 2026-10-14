@@ -1,0 +1,6 @@
+firmware_outcome=PASS
+heartbeat_verification=PASS
+heartbeat_count=2
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=1722
+runner_exit=0
+result_json=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-heartbeat-smoke-c339-20261012-01/run/output/result.json

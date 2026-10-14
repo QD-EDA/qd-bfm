@@ -1,0 +1,20 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/masked_barrett_redux_tb.sv:66: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/masked_barrett_redux_tb.sv:67: warning: Static variable initialization requires explicit lifetime in this context.
+        0.15 real         0.08 user         0.02 sys
+            15089664  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2504  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  11  voluntary context switches
+                  78  involuntary context switches
+            27682723  instructions retired
+            13932137  cycles elapsed
+             1409384  peak memory footprint

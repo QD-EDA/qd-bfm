@@ -1,0 +1,15 @@
+verdict=FAIL
+row=31
+array_task=669_31
+test=smoke_test_ecc_errortrigger4
+case_dir=smoke_test_ecc_errortrigger5
+case_yaml=smoke_test_ecc_errortrigger5/smoke_test_ecc_errortrigger5.yml
+yaml_testname=smoke_test_ecc_errortrigger4
+runner_exit=1
+firmware_build_exit=1
+result_json=absent
+simulation=not_started
+elapsed=0:25.78
+peak_rss_kib=1852384
+
+The firmware C build failed before simulation. GCC reports implicit declarations for `service_abr_error_intr` and `service_abr_notif_intr` at `caliptra_isr.c:754`; no testcase result JSON was written. The selected matrix test name is `smoke_test_ecc_errortrigger4`, while the configured case directory and YAML filename are `smoke_test_ecc_errortrigger5`; the YAML test name is `smoke_test_ecc_errortrigger4`.

@@ -1,0 +1,15 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=8
+test_id=9160c33b030e9483
+matrix_testname=pv_hash_zeroize
+case_dir=pv_hash_zeroize
+case_yaml=pv_hash_zeroize/pv_hash_zeroize.yml
+yaml_testname=pv_hash_zeroize
+expected_mcycle_estimate=15480
+per_test_timeout_s=8153
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=131; body_lines=79, loops=3, waits=0, crypto_calls=2
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0

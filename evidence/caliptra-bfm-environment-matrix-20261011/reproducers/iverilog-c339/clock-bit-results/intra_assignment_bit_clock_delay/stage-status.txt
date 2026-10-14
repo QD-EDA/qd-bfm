@@ -1,0 +1,3 @@
+compile_exit=1
+sim_exit=NOT_RUN
+runner_exit=1

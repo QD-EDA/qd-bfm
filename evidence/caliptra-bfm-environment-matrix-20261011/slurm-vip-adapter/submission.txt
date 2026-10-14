@@ -1,0 +1,10 @@
+job_id=464
+submission_command=sbatch --parsable environment-array.sbatch
+run_directory=/home/dsell/slurm-runs/caliptra-bfm/a2/vip-adapter-c339-20261011-01
+array=0-1%2
+cpus_per_task=1
+memory_per_task=3G
+job_time_limit=02:00:00
+per_test_timeout_seconds=6900
+tasks=caliptra_top_ss_mode_tb,caliptra_top_trng_tb (actual simulator top caliptra_top_tb)
+adapter_source_commit=3c41c09eca43ed31506013ca70973b99388421aa

@@ -1,0 +1,2 @@
+PASS: force/release overrides and restores continuous interface assignment with modport connection
+/home/dsell/slurm-runs/caliptra-bfm/a2/interface-min-c339-20261011-01/source/force_release_interface_port.sv:38: $finish called at 21000 (1ps)

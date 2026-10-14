@@ -1,0 +1,23 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `makehint_tb'
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: error: Cast size expression must be constant and greater than zero.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: internal error: Found a zero width constant!
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: internal error: Port expression too complicated for elaboration.
+2 error(s) during elaboration.
+        0.05 real         0.03 user         0.01 sys
+             9109504  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2114  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   7  voluntary context switches
+                  47  involuntary context switches
+            26179240  instructions retired
+            12871742  cycles elapsed
+             1360232  peak memory footprint

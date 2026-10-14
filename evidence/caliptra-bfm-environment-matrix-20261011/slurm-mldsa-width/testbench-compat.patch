@@ -1,0 +1,53 @@
+--- a/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv
++++ b/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv
+@@ -72,8 +72,7 @@
+     .z_neq_z(),
+     .w1_o(),
+     .buffer_en(),
+-    .decompose_done(),
+-    .w1_encode_done()
++    .decompose_done()
+ );
+ 
+ // w1_encode dut(
+--- a/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
++++ b/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
+@@ -57,8 +57,7 @@
+ 
+ // Instantiate the Device Under Test (DUT)
+ pkdecode #(
+-    .MEM_ADDR_WIDTH(MEM_ADDR_WIDTH),
+-    .MLDSA_K(MLDSA_K),
++        .MLDSA_K(MLDSA_K),
+     .MLDSA_N(256),
+     .REG_SIZE(REG_SIZE),
+     .API_ADDR_WIDTH(API_ADDR_WIDTH)
+--- a/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv
++++ b/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv
+@@ -244,8 +244,8 @@
+     init_sim();
+     reset_dut();
+     $display("Reading test vectors from hex files\n");
+-    sigdecode_z_test('h0,'h0);
+-    sigdecode_z_test('h40, 'h20);
++    sigdecode_z_test('h0);
++    sigdecode_z_test('h40);
+     $finish;
+ end
+ 
+--- a/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv
++++ b/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv
+@@ -77,10 +77,11 @@
+     .mem_b_rd_data(mem_b_rd_data_tb),
+     .keymem_a_wr_req(keymem_a_wr_req_tb),
+     .keymem_a_wr_data(keymem_a_wr_data_tb),
+-    .skencode_done(skencode_done_tb),
+-    .skencode_error(skencode_error_tb)
++    .skencode_done(skencode_done_tb)
+ );
+ 
++assign skencode_error_tb = dut.error_flag;
++
+ wire [AHB_DATA_WIDTH-1:0] dummy_mem_out0, dummy_mem_out1;
+ 
+ genvar k;

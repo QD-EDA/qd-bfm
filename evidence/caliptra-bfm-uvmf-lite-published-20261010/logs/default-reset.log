@@ -1,0 +1,4 @@
+memory guard: preflight available 7.57 GiB; process-group cap 0.37 GiB; system reserve 5.59 GiB
+PASS: default_reset_gen asserts at startup and releases after two clocks
+dv/caliptra_bfm/uvmf_lite/tests/tb_default_reset_gen.sv:22: $finish called at 36000 (1ps)
+memory guard: command exited 0; minimum available 7.57 GiB; maximum process group 0.00 GiB

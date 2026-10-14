@@ -1,0 +1,6 @@
+outcome=INFRA_ERROR
+reason=runner_terminated_by_signal
+runner_exit=137
+progress_heartbeat_count=24
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=6900 mcycle=49467
+result_testname=

@@ -1,0 +1,9 @@
+{
+  "environment_id": "caliptra-v2-1-2-caliptra_top_ss_mode_tb",
+  "top": "caliptra_top_ss_mode_tb",
+  "runner_exit": 2,
+  "error": "source lookup: 0 top files; filelist=True",
+  "classification": "BLOCKED",
+  "blocker_class": "setup",
+  "classification_note": "compile stopped on missing include, package, or binding setup"
+}

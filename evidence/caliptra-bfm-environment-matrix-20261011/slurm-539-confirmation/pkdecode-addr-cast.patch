@@ -1,0 +1,10 @@
+--- a/submodules/adams-bridge/src/pk_decode/rtl/pkdecode.sv
++++ b/submodules/adams-bridge/src/pk_decode/rtl/pkdecode.sv
+@@ -158,8 +158,8 @@
+         end
+         else if (state == READ_and_WRITE || state == WRITE) begin
+-            mem_a_wr_req <= '{rd_wr_en: RW_WRITE, addr: locked_dest_addr + num_mem_operands};
+-            mem_b_wr_req <= '{rd_wr_en: RW_WRITE, addr: locked_dest_addr + num_mem_operands + 1};
++            mem_a_wr_req <= '{rd_wr_en: RW_WRITE, addr: ABR_MEM_ADDR_WIDTH'(locked_dest_addr + num_mem_operands)};
++            mem_b_wr_req <= '{rd_wr_en: RW_WRITE, addr: ABR_MEM_ADDR_WIDTH'(locked_dest_addr + num_mem_operands + 1)};
+         end

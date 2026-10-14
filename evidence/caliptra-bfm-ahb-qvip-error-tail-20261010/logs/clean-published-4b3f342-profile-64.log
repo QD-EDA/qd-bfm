@@ -1,0 +1,45 @@
+memory guard: preflight available 7.49 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.wyNTa3Vcot/ahb_qvip_compat_64_2012.dpiexport.c (compile it into your DPI object).
+UVM_INFO /private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_root.svh(476) @ 0: reporter [UVM/RELNOTES] 
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2:UVM:2020.3.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 1000: reporter [RNTST] Running test ahb_qvip_compat_test...
+UVM_WARNING dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv(294) @ 1000: uvm_test_top.qvip_ahb_lite_slave_subenv [AHB_QVIP_CVG] Internal QVIP covergroups are not recreated; configured burst_transfer_cov still publishes monitored records to the environment coverage consumer
+UVM_INFO /private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_comparer.svh(527) @ 1000: reporter [MISCMP] copy_target@834 vs. copy_source@832
+PASS: AHB MVC copy/compare profile width=64
+PASS: generated-name AHB QVIP streams and full/partial-error RAL burst prediction
+UVM_INFO dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv(394) @ 490000: uvm_test_top.passive_qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.agent.monitor [AHB_COVERAGE] reads=5/12 writes=7/12 sizes(1/2/4/8B)=0/0/0/12 of 12 addresses; pending_wait=23/47 cycles; errors=1/12 transfers
+UVM_INFO dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv(394) @ 490000: uvm_test_top.qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.agent.monitor [AHB_COVERAGE] reads=5/12 writes=7/12 sizes(1/2/4/8B)=0/0/0/12 of 12 addresses; pending_wait=23/47 cycles; errors=1/12 transfers
+UVM_INFO /private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 490000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    5
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[AHB_COVERAGE]     2
+[AHB_QVIP_CVG]     1
+[MISCMP]     1
+[RNTST]     1
+[UVM/RELNOTES]     1
+
+/private/tmp/iverilog-uvm-install-4b3f342/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 490000 (1ps)
+memory guard: command exited 0; minimum available 7.34 GiB; maximum process group 0.36 GiB

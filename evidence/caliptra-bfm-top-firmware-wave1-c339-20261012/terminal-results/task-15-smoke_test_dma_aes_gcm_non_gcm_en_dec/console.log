@@ -1,0 +1,12 @@
+0.000 ns - ----------------------------------
+0.000 ns - Smoke Test AXI DMA AES - Multiple Test Cases
+0.000 ns - ----------------------------------
+0.000 ns - 
+0.000 ns - ========================================
+0.000 ns - Running Test 1 of 10
+0.000 ns - ========================================
+0.000 ns - 
+0.000 ns - ----------------------------------
+0.000 ns - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+0.000 ns - ----------------------------------
+0.000 ns - Configuring AES for GCM mode

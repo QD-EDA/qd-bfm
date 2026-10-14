@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "date": "2026-10-07",
+  "repository": "QD-EDA/qd-bfm",
+  "branch": "codex/caliptra-bfm-stack-20261006",
+  "test": "dv/caliptra_bfm/axi/tests/run_subordinate.sh",
+  "simulator": {
+    "name": "Icarus Verilog",
+    "version": "13.0 (devel) (ac4532fa-dirty)",
+    "source_merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "merged_origin_main": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+  },
+  "memory_guard": {
+    "free_percent_floor": 40,
+    "preflight_free_percent": 47,
+    "minimum_observed_free_percent": 46,
+    "timeout_seconds": 300,
+    "exit_code": 0
+  },
+  "coverage": {
+    "aw": {
+      "accepted_transactions": 8,
+      "burst_fixed_incr_wrap_reserved_unknown": [0, 8, 0, 0, 0],
+      "lock_clear_set_unknown": [5, 3, 0]
+    },
+    "ar": {
+      "accepted_transactions": 6,
+      "burst_fixed_incr_wrap_reserved_unknown": [0, 6, 0, 0, 0],
+      "lock_clear_set_unknown": [3, 3, 0]
+    },
+    "b": {
+      "accepted_responses": 8,
+      "resp_okay_exokay_slverr_decerr_unknown": [6, 2, 0, 0, 0]
+    },
+    "w": {
+      "accepted_beats": 10,
+      "strb_full_partial_zero_unknown": [8, 1, 1, 0],
+      "wlast_asserted_beats": 8
+    },
+    "r": {
+      "accepted_beats": 8,
+      "resp_okay_exokay_slverr_decerr_unknown": [2, 4, 1, 1, 0],
+      "rlast_asserted_beats": 6
+    },
+    "valid_and_stall_cycles": {
+      "aw": [10, 2],
+      "w": [22, 12],
+      "b": [8, 0],
+      "ar": [8, 2],
+      "r": [8, 0]
+    }
+  },
+  "sha256": {
+    "dv/caliptra_bfm/axi/axi4_caliptra_monitor.sv": "aa8039a286b0b9230d7913b86f7873d2b9f1259008c5315d096c457e3835f5c0",
+    "dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_memory_subordinate.sv": "9d9e6091683fc940570c1aacafb71f65922a7046b3eac31ebfba9f6607f7a624",
+    "dv/caliptra_bfm/axi/tests/run_subordinate.sh": "011a0d1f16e75313f2e0e68d24c7d8b56e199bf65aa5021f6c8a263f3e762a1f"
+  }
+}

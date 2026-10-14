@@ -1,0 +1,32 @@
+   -= Testbench for mm started =-
+    ==============================
+
+ERROR: /tmp/a2-env-c339/runtime/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:279: Can't open file mm_test_vectors_5_key_16_word_4.hex
+       Time: 0  Scope: ecc_montgomerymultiplier_tb.read_test_vectors
+WARNING: /tmp/a2-env-c339/runtime/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:280: invalid file descriptor (0x0) given to $feof.
+Read 0 test vectors from mm_test_vectors_5_key_16_word_4.hex
+*** Toggle reset.
+
+*** All 00 test cases completed successfully
+* TESTCASE PASSED
+
+*** mm simulation done. ***
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:334: $finish called at 4 (1s)
+        0.05 real         0.02 user         0.00 sys
+             8798208  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 836  page reclaims
+                   8  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                  42  involuntary context switches
+           169504838  instructions retired
+            55169744  cycles elapsed
+             5915008  peak memory footprint

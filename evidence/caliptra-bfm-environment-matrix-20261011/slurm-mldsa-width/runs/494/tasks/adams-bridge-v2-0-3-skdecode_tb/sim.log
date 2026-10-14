@@ -1,0 +1,45 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Starting random test
+
+Wait a cycle to emulate mem read
+
+Starting s1 poly
+
+Waiting for s1s2 valid
+
+Received s1s2 valid
+
+s1 unpack passed, check count =        1792
+Waiting for s1 done, value = 0
+
+Starting s2 poly
+
+Waiting for s1s2 valid
+
+Received s1s2 valid
+
+s2 unpack passed, check count =        2048
+Waiting for s2 done, value = 0
+
+Starting t0 poly
+
+Waiting for t0 valid
+
+Received t0 valid
+
+T0 unpack passed, check count =        2048
+Waiting for t0 done, value = 0
+
+Random Test done
+
+Starting error test
+
+Starting s1 poly
+
+invalid s1 is detected at         108!
+*** All test cases completed successfully.
+* TESTCASE PASSED
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:462: $finish called at 11635 (1s)

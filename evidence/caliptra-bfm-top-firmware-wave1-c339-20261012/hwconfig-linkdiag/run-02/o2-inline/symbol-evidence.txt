@@ -1,0 +1,6 @@
+command: nm -A -u caliptra_isr.o | grep service_soc_ifc_notif_intr
+/home/dsell/slurm-runs/caliptra-bfm/a2/m5-hwconfig-linkdiag-c339-20261012-02/o2-inline/caliptra_isr.o:         U service_soc_ifc_notif_intr
+command: nm -A --defined-only smoke_test_hw_config.o | grep service_soc_ifc_notif_intr
+(no matching definition)
+command: nm -A --defined-only caliptra_isr.o | grep service_soc_ifc_notif_intr
+(no matching definition)

@@ -1,0 +1,12 @@
+QD=5945efeae78580cc8a5bd7a4050ee4dfec39d7be
+runner-sha256=ea57294b045c7cae66a8aa6b93692a4c1ae8b343160624e0f137b71d855c6cb0
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+UVM=78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams-Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+JTAG-VPI-SHA=34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07
+34bb301fe6ec5e6b50fba076d433310c8168a628aa3a4f8f81837324823d0d07  /home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi
+737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog
+5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp
+memory guard: preflight available 22.69 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 22.69 GiB; maximum process group 0.00 GiB

@@ -1,0 +1,19 @@
+DAN-DESKTOP queue snapshot at 15:27 MDT, 2026-10-13.
+Host uptime: 1 day, 6 hours, 52 minutes.
+
+Job 799, array throttle 6:
+  799_25 RUNNING 2:52:54; smoke_test_ecc_verify; wall_s=10200 mcycle=71164.
+  799_26 TERMINAL FAIL; smoke_test_ecc_errortrigger2; elapsed=9317 s; exit=1; wall_s=9000 mcycle=62553.
+  799_27 RUNNING 1:48:20; smoke_test_ecc_errortrigger3; wall_s=6300 mcycle=43704.
+  799_28 RUNNING 1:25:54; smoke_test_ecc_errortrigger4; wall_s=5100 mcycle=35396.
+  799_29 TERMINAL FAIL; smoke_test_kv_ecc_flow1; firmware build failure; no VVP heartbeat.
+  799_30 RUNNING 1:00:39; kv_entry_read_err; wall_s=3300 mcycle=23045.
+  799_31 TERMINAL FAIL; smoke_test_kv_ecc_flow2; firmware build failure; no VVP heartbeat.
+  799_32 RUNNING 0:34:35; smoke_test_ecc_flow1_kv_ocp_progress; wall_s=1800 mcycle=12826.
+  799_33 RUNNING 0:05:35; smoke_test_kv_rules_ocp_lock; wall_s=0 mcycle=0.
+  799_34-42 PENDING at throttle 6.
+
+Task 26's raw log advances two samples beyond the wrapper status. Its JSON
+reports `passed=false` and the log contains the ECC assertion. Active rows had
+no result JSON or testcase terminal marker; rows 25, 27, 28, 30, and 32 had
+advancing mcycle samples, while task 33 had only its initial 0/0 sample.

@@ -1,0 +1,11 @@
+sample_order	test_id	testname	expected_mcycle	timeout_s	selection_basis
+1	804790f41f3373fe	smoke_test_strap	5000	3852	Two expected-path MMIO reads; no data-processing loop. YAML seed is 1.
+2	c4a037c3790cf0d0	smoke_test_veer	5000	3852	26-instruction assembly smoke path; one sentinel-terminated output loop. YAML seed is 1.
+3	aaa5ebf3126ccc89	memCpy_ROM_to_dccm	5500	4058	27-instruction assembly path; copies a short sentinel-terminated data block. YAML seed is 1.
+4	1bc18f6a5473b0ea	memCpy_dccm_to_iccm	5500	4058	27-instruction assembly path; copies a short sentinel-terminated data block. YAML seed is 1.
+5	ec7bc649d6f7cd68	hello_world_iccm	6000	4263	37-instruction assembly path; copies a small ICCM routine and emits its short string. YAML seed is 1.
+6	4e6f763fa02018da	smoke_test_hw_config	6500	4468	Three expected-path configuration-register reads and comparisons; no expected-path wait. YAML seed is 1.
+7	cadf43c78de6a454	smoke_test_ahb_mux	8000	5084	87 static assembly instructions and bounded ROM/AHB reads; no data-dependent workload. YAML seed is 1.
+8	e0d4538883521cca	smoke_test_sha256	12000	6725	One fixed 512-bit SHA-256 block, 16 input words and one digest comparison. YAML seed is 1.
+9	58e2fa25b16ef0e5	smoke_test_doe_rand	15000	7956	Two DOE flows with ready-status polls; no software-sized random loop. YAML seed is 1.
+10	3aebd231d5081e23	smoke_test_sha256_wntz_rand	18000	9188	One WNTZ random SHA-256 flow and zeroize; no software data loop in main. YAML seed is 1.

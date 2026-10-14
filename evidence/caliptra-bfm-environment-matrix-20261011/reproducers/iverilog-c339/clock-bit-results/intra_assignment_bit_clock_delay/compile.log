@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/clock-bit-c339-20261011-01/source/intra_assignment_bit_clock_delay.sv:4: error: always process does not have any delay.
+/home/dsell/slurm-runs/caliptra-bfm/a2/clock-bit-c339-20261011-01/source/intra_assignment_bit_clock_delay.sv:4:      : A runtime infinite loop will occur.
+Elaboration failed

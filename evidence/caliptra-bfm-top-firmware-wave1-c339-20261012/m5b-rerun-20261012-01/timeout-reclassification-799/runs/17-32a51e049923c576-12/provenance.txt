@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+m5b_index=12
+source_row=17
+test_id=32a51e049923c576
+matrix_testname=c_intr_handler
+case_dir=c_intr_handler
+case_yaml=c_intr_handler/c_intr_handler.yml
+yaml_testname=c_intr_handler
+expected_mcycle_estimate=21960
+per_test_timeout_s=10813
+selection_basis=static score=212; body_lines=159, loops=4, waits=1, crypto_calls=0
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=07ee859ae7a442e38c4a9e0fb86026ccd2b14f67bd416f35c59dae44327210b8

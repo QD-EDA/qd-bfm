@@ -1,0 +1,14 @@
+verdict=TIMEOUT
+row=24
+array_task=669_24
+test=smoke_test_datavault_mini
+per_test_timeout_s=12257
+runner_exit=124
+elapsed=3:24:17
+peak_rss_kib=1852492
+result_json=absent
+testcase_pass_markers=0
+testcase_fail_markers=0
+finished_markers=0
+
+The runner reached its configured per-test limit. The simulator log has no testcase terminal marker or finish record, and no result JSON was written. This is a terminal TIMEOUT verdict; it does not establish whether the firmware test itself would pass or fail.

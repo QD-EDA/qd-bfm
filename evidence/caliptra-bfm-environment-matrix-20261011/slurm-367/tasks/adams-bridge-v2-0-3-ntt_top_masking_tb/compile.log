@@ -1,0 +1,9 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:141: error: port ``hybrid_pw_uvw_i'' is not a port of dut.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:611: error: Enable of unknown task ``masked_bfu_1x2_test''.
+8 error(s) during elaboration.

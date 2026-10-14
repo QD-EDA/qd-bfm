@@ -1,0 +1,10 @@
+0.000 ns - ----------------------------------------
+0.000 ns -  Running ECC Smoke Test error_trigger !!
+0.000 ns - ----------------------------------------
+0.000 ns - 
+0.000 ns -  TEST invalid privkey error
+0.000 ns - 
+0.000 ns - ECC KEYGEN
+0.000 ns - ECC flow in progress...
+0.000 ns - Received ECC notif/ err intr with status = 0/ 1
+0.000 ns - ECC zeroize flow.

@@ -1,0 +1,9 @@
+0.000 ns - ----------------------------------
+0.000 ns -  KV Smoke Test With HEK flow !!
+0.000 ns - ----------------------------------
+0.000 ns - OCP_LOCK_MODE_EN: 0x0
+0.000 ns - doe_uds_dest_id = 0x12
+0.000 ns - doe_fe_dest_id  = 0xF
+0.000 ns - doe_hek_dest_id = 0x0
+0.000 ns - DOE: Init
+0.000 ns - DOE: Skipping HEK Deobfuscation due to HW_CONFIG

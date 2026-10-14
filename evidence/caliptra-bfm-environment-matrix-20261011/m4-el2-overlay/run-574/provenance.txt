@@ -1,0 +1,6 @@
+host=DAN-DESKTOP
+environment=caliptra-v2-1-2-el2_veer_wrapper_tb
+top=el2_veer_wrapper_tb
+filelist=src/riscv_core/veer_el2/config/el2_veer_wrapper_tb.vf
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602

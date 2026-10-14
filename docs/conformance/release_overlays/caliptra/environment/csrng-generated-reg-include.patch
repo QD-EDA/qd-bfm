@@ -1,0 +1,8 @@
+--- src/csrng/config/csrng_tb.vf
++++ src/csrng/config/csrng_tb.vf
+@@ -1,4 +1,5 @@
+ +incdir+${CALIPTRA_ROOT}/src/integration/rtl
++incdir+${CALIPTRA_ROOT}/src/integration/rtl/caliptra_reg
+ +incdir+${CALIPTRA_ROOT}/src/libs/rtl
+ +incdir+${CALIPTRA_ROOT}/src/caliptra_prim_generic/rtl
+ +incdir+${CALIPTRA_ROOT}/src/caliptra_prim/rtl

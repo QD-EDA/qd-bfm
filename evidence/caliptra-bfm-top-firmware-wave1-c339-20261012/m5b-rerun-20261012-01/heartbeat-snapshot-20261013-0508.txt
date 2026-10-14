@@ -1,0 +1,20 @@
+host=DAN-DESKTOP
+captured_at=2026-10-13 05:08 MDT
+job_799=running; tasks_13_42=pending_at_array_throttle_6
+job_823_1_2=running
+job_826_1=running
+
+job_799 task 7: wall_s=4800 mcycle=32827 terminal_marker=none
+job_799 task 8: wall_s=4800 mcycle=33511 terminal_marker=none
+job_799 task 9: wall_s=4500 mcycle=30706 terminal_marker=none
+job_799 task 10: wall_s=4200 mcycle=28523 terminal_marker=none
+job_799 task 11: wall_s=4200 mcycle=28773 terminal_marker=none
+job_799 task 12: wall_s=3900 mcycle=27475 terminal_marker=none
+
+job_823 task 1 / source row 9: wall_s=3600 mcycle=24172 terminal_marker=none
+job_823 task 2 / source row 27: wall_s=3600 mcycle=24236 terminal_marker=none
+job_826 task 1 / source row 31: wall_s=3300 mcycle=22721 terminal_marker=none
+
+The latest mcycle is higher than the previous live snapshot for every running
+task. No row has been flat for 30 minutes; these are in-progress runs, not
+hang classifications.

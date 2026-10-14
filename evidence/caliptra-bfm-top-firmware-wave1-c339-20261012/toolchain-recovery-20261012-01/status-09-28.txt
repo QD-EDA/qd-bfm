@@ -1,0 +1,19 @@
+2026-10-12T09:28:32-06:00
+JobId=611
+ArrayTaskThrottle=6
+JobState=PENDING
+Reason=Dependency
+Dependency=afterany:591_*(unfulfilled),afterany:606_*(unfulfilled)
+StartTime=Unknown
+             JOBID      STATE       TIME                                NAME
+      611_[8-51%6]    PENDING       0:00                       bfm-top-wave1
+             606_1    RUNNING      43:50                       bfm-top-wave1
+             606_2    RUNNING      43:50                       bfm-top-wave1
+             606_3    RUNNING      43:50                       bfm-top-wave1
+            603_14    RUNNING      47:11                       a1-boot-smoke
+             591_5    RUNNING      52:54                       bfm-top-wave1
+             591_6    RUNNING      52:54                       bfm-top-wave1
+             591_7    RUNNING      52:54                       bfm-top-wave1
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi

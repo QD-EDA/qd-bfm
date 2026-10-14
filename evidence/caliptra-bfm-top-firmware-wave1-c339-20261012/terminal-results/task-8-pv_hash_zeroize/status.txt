@@ -1,0 +1,4 @@
+outcome=FAIL
+reason=simulation_assertion_ERR_SHA_BLOCK_NOT_STABLE
+runner_exit=1
+result_testname=pv_hash_zeroize

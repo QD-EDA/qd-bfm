@@ -1,0 +1,7 @@
+QD branch at evidence review: codex/caliptra-bfm-stack-20261006
+QD HEAD at evidence review: c15e59307cca636daf7de50ead980fe84066c351
+QD source base used by job 164: b40e5f952638dd12d9ccf3dfc2db71304fb057b7
+Tracked files under dv/caliptra_bfm differing from the run base at review:
+  dv/caliptra_bfm/axi/README.md
+  dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_memory_subordinate.sv
+The runner, shell wrapper, and Caliptra top AXI BFM wrapper were unchanged.

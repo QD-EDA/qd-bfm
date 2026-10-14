@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+m5b_index=29
+source_row=38
+test_id=b65eaf52203ca1c3
+matrix_testname=smoke_test_kv_ecc_flow1
+case_dir=smoke_test_kv_ecc_flow1
+case_yaml=smoke_test_kv_ecc_flow1/smoke_test_kv_ecc_flow1.yml
+yaml_testname=smoke_test_kv_ecc_flow1
+expected_mcycle_estimate=38040
+per_test_timeout_s=17412
+selection_basis=static score=413; body_lines=209, loops=15, waits=0, crypto_calls=3
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=07ee859ae7a442e38c4a9e0fb86026ccd2b14f67bd416f35c59dae44327210b8

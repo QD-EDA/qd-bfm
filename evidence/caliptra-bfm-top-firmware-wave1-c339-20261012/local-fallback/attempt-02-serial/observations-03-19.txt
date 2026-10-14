@@ -1,0 +1,6 @@
+Local row-4 serial retry snapshot, 2026-10-12 03:19 MDT
+
+- Local VVP PID 29261 remained active; elapsed 32:52, 89.7% CPU, RSS 619,808 KiB.
+- `sim.log` remained 45,302 bytes with mtime 02:46:58 MDT; `runner.log` and `localrun.log` were still empty.
+- No `result.json`, exit file, or PASS/FAIL/TIMEOUT/FATAL marker was present.
+- The run remains governed by the 7,431-second timeout from its 02:45:59 MDT start. This is not a terminal result.

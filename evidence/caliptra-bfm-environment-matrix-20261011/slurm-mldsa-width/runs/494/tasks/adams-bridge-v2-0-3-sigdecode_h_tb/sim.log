@@ -1,0 +1,15 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Starting sigdecode h test
+Poly 0
+Poly 1
+Poly 2
+Poly 3
+Poly 4
+Poly 5
+Poly 6
+Poly 7
+Test passed
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sigdecode_h/tb/sigdecode_h_tb.sv:201: $finish called at 15475 (1s)

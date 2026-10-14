@@ -1,0 +1,2 @@
+PASS: UVMF transaction key and recording API under IEEE 2017
+PASS: UVMF transaction key and recording API under IEEE 2023

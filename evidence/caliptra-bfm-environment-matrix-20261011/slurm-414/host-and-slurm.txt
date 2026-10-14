@@ -1,0 +1,27 @@
+DAN-DESKTOP
+Linux DAN-DESKTOP 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun  5 01:12:21 UTC 2026 x86_64 GNU/Linux
+Ubuntu 26.04.1 LTS
+verilog*|3/17/0/20|39101
+Python 3.14.4
+python3-pip-whl	25.1.1+dfsg-1ubuntu2
+python3-setuptools-whl	78.1.1-0.1build1
+python3.14-venv	3.14.4-1ubuntu0.2
+numpy==2.5.4
+JobId=414 ArrayJobId=414 ArrayTaskId=2 ArrayTaskThrottle=3 JobName=caliptra-env05
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:01 TimeLimit=00:20:00 TimeMin=N/A
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   MinCPUsNode=1 MinMemoryNode=256M MinTmpDiskNode=0
+JobId=416 ArrayJobId=414 ArrayTaskId=1 ArrayTaskThrottle=3 JobName=caliptra-env05
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:01 TimeLimit=00:20:00 TimeMin=N/A
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   MinCPUsNode=1 MinMemoryNode=256M MinTmpDiskNode=0
+JobId=415 ArrayJobId=414 ArrayTaskId=0 ArrayTaskThrottle=3 JobName=caliptra-env05
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:01 TimeLimit=00:20:00 TimeMin=N/A
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   MinCPUsNode=1 MinMemoryNode=256M MinTmpDiskNode=0

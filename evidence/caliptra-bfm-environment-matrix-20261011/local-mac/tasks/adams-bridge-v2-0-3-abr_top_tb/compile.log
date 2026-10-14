@@ -1,0 +1,20 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/abr_top/tb/abr_top_tb.sv:25: Include file mldsa_config_defines.svh not found
+Preprocessor failed with 1 errors.
+        0.27 real         0.25 user         0.04 sys
+            25903104  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3167  page reclaims
+                  15  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 224  voluntary context switches
+                 202  involuntary context switches
+            28726726  instructions retired
+            12516791  cycles elapsed
+             1442152  peak memory footprint

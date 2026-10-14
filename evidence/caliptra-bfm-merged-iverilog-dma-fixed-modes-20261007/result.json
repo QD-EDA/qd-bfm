@@ -1,0 +1,52 @@
+{
+  "classification": "focused actual-DUT BFM pass on merged, dirty Icarus build; not full-top qualification",
+  "qd_bfm_source_commit_before_evidence": "af7bf04ce500f89a48e5282a762b733fdd195d9f",
+  "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "simulator": {
+    "merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "upstream_main_tip": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "working_tree_dirty": true,
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+  },
+  "runner": {
+    "script": "dv/caliptra_bfm/uvm/tests/run_caliptra_axi_dma_top_uvm_bfm.sh",
+    "arguments": ["--component-fixed-modes-only"],
+    "runner_sha256": "1d01caefe894793246f6b982eba12daa97506be5b7c320646055b4230f76cbbf",
+    "testbench_sha256": "a07f28783a9e6f6c7760a2e8e22be52096339e0a332ac3aeaaa0ffbcdc1bf214"
+  },
+  "executions": [
+    {
+      "exit_code": 0,
+      "minimum_free_memory_percent": 61,
+      "memory_floor_percent": 40,
+      "uvm_warning": 0,
+      "uvm_error": 0,
+      "uvm_fatal": 0
+    },
+    {
+      "exit_code": 0,
+      "minimum_free_memory_percent": 62,
+      "memory_floor_percent": 40,
+      "uvm_warning": 0,
+      "uvm_error": 0,
+      "uvm_fatal": 0
+    }
+  ],
+  "profiles": [
+    {
+      "name": "AXI2AHB FIXED read",
+      "pass_marker": "PASS: actual Caliptra axi_dma_top read 65 FIXED-address SRAM words through the component data register"
+    },
+    {
+      "name": "AHB2AXI FIXED write",
+      "pass_marker": "PASS: actual Caliptra axi_dma_top sent 65 component-register words to one FIXED SRAM address"
+    }
+  ],
+  "compiler_diagnostics": [
+    "Non-fatal eval_object_select null-fallback warnings in uvmf_base_pkg.sv",
+    "Static variable initialization lifetime warnings in generated DMA testcase overlay",
+    "Default/explicit timescale warning"
+  ],
+  "raw_log": "Not retained; runner removes temporary output and simulator image."
+}

@@ -1,0 +1,12 @@
+Remote status snapshot, 2026-10-12 02:59 MDT
+
+`squeue -j 591` returned `slurm_load_jobs error: Unable to contact slurm controller (connect failure)`. The remote `ps` command segfaulted, so task state was read directly from `/proc`.
+
+| Array row | Test | VVP PID | `/proc` state | Open `sim.log` size | mtime (Unix) |
+|---:|---|---:|---|---:|---:|
+| 0 | smoke_test_kv_write_scan_mode | 1039309 | R | 49398 | 1791790084 |
+| 1 | cptra_ss_test_rom | 1039276 | R | 49398 | 1791790084 |
+| 2 | smoke_test_dma_aes_gcm | 1039121 | R | 49398 | 1791790084 |
+| 3 | smoke_test_datavault_basic | 1039377 | R | 49398 | 1791790085 |
+
+The four open descriptors still point into the Slurm run tree. A direct read of each descriptor ended with the same partial text: `SoC: Polling Flow Status...` followed by the beginning of `Ready for Fuses deasserted after polling ...`. The pinned RTL testbench emits that second message after its loop waiting for `CPTRA_FLOW_STATUS.READY_FOR_FUSES_LOW` to clear; no captured line shows the later BootGo write, ROM-flow progress, or a terminal verdict. These process/log observations do not establish PASS, FAIL, or TIMEOUT.

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-09",
+  "test": "Caliptra ECC AHB native UVM smoke",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "icarus_source_commit": "4b3f3424c440aca6af92153b6860a7253b925234",
+  "icarus_source_ref": "local origin/main; published main at 2026-10-09T09:25:58Z",
+  "uvm_core_commit": "78c06547a2a0a29b3dc9dcafae62b75b2ff61544",
+  "uvm_release": "2020.3.1",
+  "binary_sha256": {
+    "iverilog": "00a0686a9f0d6962d3e9cd4790464321a608d77efe4db8e50fa02ec7f3f69385",
+    "vvp": "f7b6f7cbb87d60f96914ad1213beab2a359e15cc3a2bcf176190cecb28fdc19a"
+  },
+  "editions": [
+    {"edition": "2017", "runner_exit": 0, "passed": true, "reads": 2, "writes": 2, "transfers": 4, "uvm_warning": 0, "uvm_error": 0, "uvm_fatal": 0},
+    {"edition": "2023", "runner_exit": 0, "passed": true, "reads": 2, "writes": 2, "transfers": 4, "uvm_warning": 0, "uvm_error": 0, "uvm_fatal": 0}
+  ],
+  "remote_main_refresh": "unavailable; github.com DNS resolution failed"
+}

@@ -1,0 +1,31 @@
+--- src/soc_ifc/tb/soc_ifc_tb_pkg.sv
++++ src/soc_ifc/tb/soc_ifc_tb_pkg.sv
+@@ -1679,8 +1679,8 @@
+ 
+     extern function new();
+     extern task     wait_setup_done();
+-    extern function lock_fuses();
+-    extern function unlock_fuses();
++    extern function void lock_fuses();
++    extern function void unlock_fuses();
+     extern function void build_inverse_addr_map();
+     extern function void init_regs();
+     extern function word_addr_t get_addr(string name);
+@@ -1714,7 +1714,7 @@
+   endtask
+ 
+ 
+-  function SocRegisters::lock_fuses();
++  function void SocRegisters::lock_fuses();
+     // assume over APB or some other means. NOTE that CPTRA_FUSE_WR_DONE 
+     // may be set from 1 to 0, which will have no effect on this variable. 
+     
+@@ -1723,7 +1723,7 @@
+   endfunction  // lock_fuses 
+ 
+ 
+-  function SocRegisters::unlock_fuses();
++  function void SocRegisters::unlock_fuses();
+     // unset global var; done over cold boot, warm reset or mailbox command  
+ 
+     _fuses_locked = 0; 

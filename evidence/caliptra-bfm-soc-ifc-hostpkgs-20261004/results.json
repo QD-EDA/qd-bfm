@@ -1,0 +1,318 @@
+{
+  "date": "2026-10-04",
+  "scope": "Pinned Caliptra SoC-IFC generated host packages with open BFM compatibility packages and hash-guarded disposable source overlays",
+  "caliptra": {
+    "release": "v2.1.2",
+    "commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "checkout_modified": false
+  },
+  "compiler": "Icarus 13.0 development build 246c58e4-dirty",
+  "focused_ahb_qvip_compatibility_smoke": {
+    "result": "pass",
+    "command": "IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog VVP_BIN=/private/tmp/bfm-work-install/bin/vvp ./dv/caliptra_bfm/uvm/tests/run_ahb_qvip_compat_env.sh",
+    "editions": [
+      2012,
+      2017,
+      2023
+    ],
+    "uvm_errors": 0,
+    "uvm_fatals": 0,
+    "uvm_warnings": 1,
+    "rerun_logs": [
+      "../caliptra-bfm-ahb-qvip-compat-20261004/ahb_qvip_compat_2012_after_rnw_enum.log",
+      "../caliptra-bfm-ahb-qvip-compat-20261004/ahb_qvip_compat_2017_after_rnw_enum.log",
+      "../caliptra-bfm-ahb-qvip-compat-20261004/ahb_qvip_compat_2023_after_rnw_enum.log"
+    ]
+  },
+  "ahb_rnw_enum_compile_probe": {
+    "result": "pass",
+    "standard": "IEEE 1800-2017",
+    "checks": [
+      "ahb_rnw_e import",
+      "AHB_READ assignment",
+      "AHB_WRITE assignment"
+    ],
+    "exit_code": 0
+  },
+  "bfm_only_compile_probe": {
+    "result": "pass",
+    "selected_top": "hostpkg_compile_top",
+    "elapsed_seconds": 1.5,
+    "exit_code": 0
+  },
+  "whole_host_package_compile": {
+    "result": "compile-only pass with hash-guarded disposable overlays",
+    "runs": [
+      {
+        "top_selection": "default",
+        "wall_time_seconds_before_manual_interrupt": 180,
+        "termination": "manual interrupt; shell exit 130",
+        "hard_errors_in_captured_log": 0,
+        "log": "compile-no-errors-before-timeout.log"
+      },
+      {
+        "top_selection": "hostpkg_compile_top",
+        "wall_time_seconds_before_manual_interrupt": 120,
+        "termination": "manual interrupt; shell exit 130",
+        "hard_errors_in_captured_log": 0,
+        "log": "compile-synthetic-top-before-timeout.log"
+      },
+      {
+        "scope": "generated soc_ifc_ctrl_pkg plus BFM compatibility packages",
+        "top_selection": "hostpkg_compile_top",
+        "wall_time_seconds_before_manual_interrupt": 60,
+        "termination": "manual interrupt; shell exit 130",
+        "hard_errors_in_captured_log": 0,
+        "log": "compile-single-generated-package-before-timeout.log"
+      }
+    ],
+    "diagnostics": [
+      "Historical timeout logs showed filter-limit notices and covergroup-stub set_inst_name warnings; these did not establish meaningful coverage elaboration.",
+      "After the guard fix, the generated control package reports eight explicit over-limit with-filter errors rather than enumerating the full domain.",
+      "A historical one-off larger-filelist invocation emitted unresolved generated-type and macro-visibility diagnostics followed by parse cascades. Its copied package tree, assembled filelist, and log were not retained, so that specific failure remains unclassified; the retained whole host-package runner later compiled the generated package set with hash-guarded overlays.",
+      "The latest run is compile-only evidence. It does not qualify generated UVMF sequence execution, meaningful coverage, full-agent behavior, or end-to-end Caliptra DV."
+    ],
+    "qualification": "generated host-package compile passes with hash-guarded disposable overlays; UVMF runtime, meaningful coverage, and end-to-end behavior are not qualified",
+    "latest_compile_probe": {
+      "result": "pass",
+      "scope": "generated soc_ifc_env_pkg and register-model package with generated interface packages and open BFM/UVM compatibility packages",
+      "compile_mode": "Icarus compile/elaboration only; hash-guarded disposable generated-source overlays",
+      "runner": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py",
+      "runner_sha256": "311b6848e406914eedaab866bd0355e9238c3b81133ba716ea990d109fd9e5a3",
+      "compiler": "/private/tmp/bfm-work-install/bin/iverilog",
+      "compiler_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+      "command": "IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py",
+      "captured_log": "soc-ifc-env-compile-after-ports-vif.log",
+      "captured_log_sha256": "2b521ec5ff4b0255b7af53bdaa5c7fe738c7f00f9536a3ae8e10ca36431175cb",
+      "memory_guard_log": "memory-guard-ports-vif-package.log",
+      "memory_guard_log_sha256": "b5d26b3a15a4ac1f16c179ee73a98fa78dda9192e1daba5244f265202a3ebddf",
+      "exit_code": 0,
+      "hard_or_sorry_diagnostics": 0,
+      "warning_count": 364,
+      "memory_guard": {
+        "free_memory_floor_percent": 70,
+        "preflight_free_memory_percent": 81,
+        "minimum_observed_free_memory_percent": 80,
+        "timeout_seconds": 300,
+        "telemetry_failure_behavior": "fail closed; do not start or terminate the guarded process group"
+      },
+      "qualification": "compile-only; no UVM runtime, generated coverage behavior, full-agent, or end-to-end Caliptra DV qualification"
+    },
+    "post_fix_runs": [
+      {
+        "scope": "generated soc_ifc_ctrl_pkg plus BFM compatibility packages",
+        "elapsed_seconds": 2.59,
+        "exit_code": 8,
+        "result": "controlled compiler errors for eight full-domain with-filter bins; no hang and no compile pass",
+        "log": "compile-single-generated-package-after-range-guard.log"
+      },
+      {
+        "scope": "larger generated host-package filelist",
+        "elapsed_seconds": 1.97,
+        "exit_code": 255,
+        "result": "compiler emitted unresolved generated-type and macro-visibility diagnostics followed by parse cascades; inputs and log were not retained, so causes are unclassified",
+        "retained_log": false
+      }
+    ],
+    "root_cause": {
+      "pinned_generated_source": "caliptra-rtl/src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/verification_ip/interface_packages/soc_ifc_ctrl_pkg/src/soc_ifc_ctrl_transaction_coverage.svh",
+      "generated_source_sha256": "9e5e6f540303af5302315afca7ea8323a3ef883024aa11a0410f83f24c1fbfaf",
+      "compiler_location": "elaborate.cc:41259",
+      "compiler_source_sha256": "e39becfb5d1880f5e0c6684072ea3aa5b7355b23be787e24c135b5d292d091c2",
+      "description": "uint64_t candidate-count arithmetic wrapped for [0:UINT64_MAX], bypassing the 4096-value guard and causing effectively unbounded enumeration.",
+      "fix_boundary": "Detect spans over the existing limit before addition; emit a compile error. General full-domain non-inside with-filter coverage remains unsupported."
+    }
+  },
+  "compiler_guard_regression": {
+    "reproducer": "ivtest/ivltests/sv_covergroup_with_full_range_limit.v",
+    "editions": [
+      2017,
+      2023
+    ],
+    "legacy_runner": {
+      "command": "env PATH=/private/tmp/bfm-work-install/bin:/usr/bin:/bin:/opt/homebrew/bin perl vvp_reg.pl regress-pr-coverage-repairs-legacy.list",
+      "result": "pass",
+      "tests": 10,
+      "failed": 0
+    },
+    "json_runner": {
+      "command": "env PATH=/private/tmp/bfm-work-install/bin:/usr/bin:/bin:/opt/homebrew/bin python3 vvp_reg.py regress-pr-coverage-repairs-vvp.list",
+      "result": "pass",
+      "tests": 10,
+      "failed": 0
+    },
+    "boundary_control": "sv_covergroup_with_range_limit.v accepts and samples the exact 4096-candidate limit.",
+    "tests": [
+      "sv_covergroup_with_range_limit",
+      "sv_covergroup_with_range_limit_2023",
+      "sv_covergroup_with_full_range_limit",
+      "sv_covergroup_with_full_range_limit_2023"
+    ]
+  },
+  "generated_control_package_wildcard_overlay": {
+    "runner": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/verify-control-package-wildcard-overlay.py",
+    "runner_sha256": "9efaf5947af4ad186287a6a01d89e9cc77f71c8919a0c924684f084b97dd5516",
+    "command": "IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog VVP_BIN=/private/tmp/bfm-work-install/bin/vvp python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/verify-control-package-wildcard-overlay.py",
+    "result": "pass",
+    "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "generated_coverage_source_sha256": "9e5e6f540303af5302315afca7ea8323a3ef883024aa11a0410f83f24c1fbfaf",
+    "overlay": {
+      "file": "docs/conformance/release_overlays/caliptra/soc_ifc_ctrl_nonzero_byte_coverage_overlay.py",
+      "source_sha256": "755c78e55a0034487e6aad9da0213ba434561d2d32af3025a397fe21f8eaee7e",
+      "output_sha256": "1e34b47b59077b12f66c0b1b072cd4fdf64e7316e58b20ceec47ca172d6dad57",
+      "semantics": "exact for the 2-state 64-bit item: each byte bin matches when any bit of its byte is 1; bins overlap when multiple bytes are nonzero"
+    },
+    "generated_control_package_compile": {
+      "selected_top": "hostpkg_compile_top",
+      "elapsed_seconds": 2.85,
+      "exit_code": 0,
+      "over_limit_with_filter_diagnostics": 0,
+      "covergroup_stub_set_inst_name_warnings": 8,
+      "uvmf_lite_eval_object_select_fallback_warnings": 7,
+      "scope": "generated soc_ifc_ctrl_pkg reducer with disposable hash-guarded source overlays",
+      "qualification": "package compile/elaboration only; covergroup class is a compile-progress stub; not generated UVMF coverage runtime"
+    },
+    "standalone_wildcard_semantic_smoke": {
+      "file": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/nonzero-byte-wildcard-smoke.sv",
+      "sha256": "2864288d0d6b24c3a55cc5a76988a1365ffb3760630a7698850b21b6b730b14e",
+      "compiler_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+      "vvp_sha256": "a78ea8a8dfdaaef20402733cf26870f71b18f3fd6971655ae5e94103ebf8a749",
+      "nonzero_values_checked": 2040,
+      "byte_positions_checked": 8,
+      "checks": [
+        "each isolated byte value 1..255 increments only its matching byte bin",
+        "zero hits only byte_none",
+        "64'h0102_0000_0000_0000 hits byte_none, byte_6, and byte_7"
+      ],
+      "all_values_exit_code": 0,
+      "overlap_exit_code": 0
+    },
+    "captured_log": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/compile-control-package-wildcard-overlay.log",
+    "captured_log_sha256": "66329949930222717765ceddecf8c4caf6d20efe0bb208ba92fa35ac58017a4d",
+    "limitation": "this exact source overlay does not implement arbitrary full-domain with filters and does not qualify the generated SoC-IFC UVMF environment"
+  },
+  "bounded_control_package_replay": {
+    "runner": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/replay-control-package.py",
+    "command": "IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/replay-control-package.py",
+    "runner_result": "pass: reproduced the expected bounded compiler diagnostics",
+    "runner_exit_code": 0,
+    "compiler_exit_code": 8,
+    "elapsed_seconds": 2.07,
+    "over_limit_diagnostics": 8,
+    "generated_coverage_source_sha256": "9e5e6f540303af5302315afca7ea8323a3ef883024aa11a0410f83f24c1fbfaf",
+    "compiler_binary_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+    "filelist_template": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/ctrl-core-coverage.f.in",
+    "filelist_template_sha256": "95b63b5a55f0b7f462c3ec3d0996bc52fefddfaac4de06d49239728603c1b148",
+    "overlay_builder_sha256": "4743ab6c0b6c33282a57055cacfa370d01ec9e32cde87084c578a7875aadb00c",
+    "package_reducer_sha256": "403e020342a477aad078ab0b56c69316e71678f6f3fd89830b71ceab487dff11",
+    "synthetic_top_sha256": "92807628fbf65f49e0a1a7ceb378e7e30aaae87463130a5ec00c36b20aee9746",
+    "runner_sha256": "38a1c676056940d9120f28331c0a8b0b25f35b5e7d10533df7ee0f144119f06e",
+    "captured_log": "compile-single-generated-package-replay.log",
+    "captured_log_sha256": "97c364cbd1eb24bd03f35133d8e597e60ce3ad28e46ff1aea8714266c764c902",
+    "qualification": "not established; full-domain with-filter coverage remains unsupported"
+  },
+  "build_provenance": {
+    "source_head": "246c58e4580f38a130ec08e5a7e6d93f110a5084",
+    "source_worktree": "dirty; unrelated existing BFM/Caliptra changes preserved",
+    "installed_iverilog": "/private/tmp/bfm-work-install/bin/iverilog",
+    "installed_iverilog_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+    "installed_ivl_sha256": "0281704609a703d256abb2311a22375bf4fc10a05cb920ef9380084484e0401f"
+  },
+  "host_package_coverage_pattern_generation": {
+    "result": "pass",
+    "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "helper": "docs/conformance/release_overlays/caliptra/soc_ifc_host_coverage_wildcard_overlay.py",
+    "helper_sha256": "b3f765ec68ab6f27e676abe576c14dbe677b1cb602e60a46047418553d7f6a61",
+    "verifier": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/verify-host-coverage-patterns.py",
+    "verifier_sha256": "0d537c79e4c8609015f6b21a7a19438ee33b4bc4f214ace4e3b5aae6f1c5873e",
+    "source_sha256": {
+      "soc_ifc_ctrl_transaction_coverage.svh": "9e5e6f540303af5302315afca7ea8323a3ef883024aa11a0410f83f24c1fbfaf",
+      "soc_ifc_status_transaction_coverage.svh": "72c789323c1d1e934cf051cfcc734bbca3f003219fed686fed9efe74399abf92",
+      "soc_ifc_reg_covergroups.svh": "dd755ccfb21f8188ce4903dabd170808d1156ad0dd314867beb45f2f7d064d65",
+      "mbox_csr_covergroups.svh": "974af3660d68930f4cd83704f38ffcc560eeffcefedd25ba0a55e437331dc6b3",
+      "sha512_acc_csr_covergroups.svh": "abe8101925d9d7bad1c618d1b7a416d37af838e41426c5f5ae92f089b686f6a3"
+    },
+    "transformed_sha256": {
+      "soc_ifc_ctrl_transaction_coverage.svh": "1e34b47b59077b12f66c0b1b072cd4fdf64e7316e58b20ceec47ca172d6dad57",
+      "soc_ifc_status_transaction_coverage.svh": "6a982420c35cd115669418d475cfce7cb91610fbb0302eb56c9ab8a0c4309a79",
+      "soc_ifc_reg_covergroups.svh": "062680805d29d8d924bbb0ac21c553991f9a904f3957b153d31fc3cb2e62ac8a",
+      "mbox_csr_covergroups.svh": "0c70dae16368cceda882723218065decb49628e9b9c8183b360fd1f8d8a2c737",
+      "sha512_acc_csr_covergroups.svh": "d6ffb87a17b37aca08813e194f2486f267ea8091308d81dd9eaa060c924284c5"
+    },
+    "byte_mask_membership_checks": 3320,
+    "aligned_range_membership_checks": 131088,
+    "qualification": "source hash and mask-generation check only; no Icarus covergroup runtime or full generated UVMF qualification",
+    "command": "python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/verify-host-coverage-patterns.py"
+  },
+  "reduced_soc_ifc_ral_package_compile": {
+    "result": "pass",
+    "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "scope": "generated soc_ifc_reg_model_top_pkg with Caliptra RAL packages and open BFM UVM compatibility packages; generated interface-agent package copies excluded",
+    "constructor_overlay": {
+      "helper": "docs/conformance/release_overlays/caliptra/soc_ifc_generated_case_selector_overlay.py",
+      "helper_sha256": "adea8bcc7dc054f4dad2cd2884ffdf7762d1e6af1353022c97fb43c0cc5867dd",
+      "pinned_register_tree_sha256": "0669b3e035845fb835403edffa4918a4c9f41cd2bfe3cf28c87e092c72a6fa5f",
+      "transformed_register_tree_sha256": "015e761e822f9df931a718af61dbfefcf5a17b5b0fccab35ec1e45d60c9543f1",
+      "registered_classes_with_explicit_name_constructor": 47,
+      "transformed_files": 39,
+      "manifest": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/reg-model-constructor-overlay-manifest.json",
+      "manifest_sha256": "b9d1a863f73a8142f00126ad622b8ee2ffef0aa831459a9f43bbb338669fc844"
+    },
+    "iverilog": "/private/tmp/bfm-work-install/bin/iverilog",
+    "iverilog_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+    "command": "iverilog -g2012 -uvm -s hostpkg_compile_top -o <temporary image> -f reg-model-constructor-overlay.captured.f",
+    "elapsed_seconds": 2.8,
+    "memory_free_percent_before_compile": 80,
+    "exit_code": 0,
+    "hard_or_sorry_diagnostics": 0,
+    "warning_count": 48,
+    "captured_filelist": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/reg-model-constructor-overlay.captured.f",
+    "captured_filelist_sha256": "41d3c60bf737bda7640f31020a90aca210295f627d6a72b52389030f984481fd",
+    "captured_log": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/compile-reg-model-constructor-overlay.log",
+    "captured_log_sha256": "1f4fff1c6f743ce1ab8dfae4ef05a54c22f769a1439a79a47a545bb0f91060b2",
+    "qualification": "compile only; no UVM runtime, covergroup runtime, or generated SoC-IFC UVMF agent/environment qualification; captured filelist references temporary absolute paths and is not portable"
+  },
+  "generated_project_bench_package_compile": {
+    "date": "2026-10-05",
+    "result": "pass; compile-only",
+    "scope": "Generated SoC-IFC host packages plus soc_ifc_parameters_pkg, soc_ifc_sequences_pkg, and soc_ifc_tests_pkg",
+    "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "runner": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py",
+    "runner_sha256": "81ee66da93aecc8820e804acbb3bbca36e28302838a122975098baaa4f066f61",
+    "overlay": "docs/conformance/release_overlays/caliptra/soc_ifc_generated_cmdline_test_overlay.py",
+    "overlay_sha256": "6d2c1a9516cff017a1ff28e05eb6a11612248c8541ad7f4a5001ca265ae02211",
+    "overlay_manifest": "evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/project-bench-overlay-manifest-20261005.json",
+    "overlay_manifest_sha256": "ce924aaca04a8f6813d2862cc700746936662eb8b407f5785afb9922a02b51a6",
+    "excluded_generated_test": "soc_ifc_cmdline_test and soc_ifc_cmdline_test_sequence",
+    "exclusion_reason": "factory.create_object_by_name is unavailable in this UVM implementation",
+    "clean_room_import_shims": [
+      "QUESTA_MVC",
+      "qvip_utils_pkg::qvip_memory_message_handler"
+    ],
+    "compiler": "/private/tmp/bfm-work-install/bin/iverilog",
+    "compiler_sha256": "235804ad26d84eaa3ab043f201e38e63643ddcf1e4fb0671f43b705199566392",
+    "command": "python3 scripts/run_with_memory_pressure_guard.py --min-free-percent 70 --timeout-seconds 300 --log evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/project-bench-packages-overlay-20261005.log -- env CALIPTRA_BFM_MEMORY_GUARD_CHILD=1 IVERILOG_BIN=/private/tmp/bfm-work-install/bin/iverilog python3 evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py --include-project-bench-packages",
+    "captured_log": "project-bench-packages-overlay-20261005.log",
+    "captured_log_sha256": "73f3695731c8abdb413a53399894a305a5d79de86c11ba406f40e46aa5d9f136",
+    "exit_code": 0,
+    "hard_or_sorry_diagnostics": 0,
+    "warning_count": 364,
+    "memory_guard": {
+      "free_memory_floor_percent": 70,
+      "preflight_free_memory_percent": 81,
+      "minimum_observed_free_memory_percent": 81,
+      "timeout_seconds": 300,
+      "telemetry_failure_behavior": "fail closed; command is not started or is stopped"
+    },
+    "qualification": "generated host and project-bench package compile only; no generated UVMF environment runtime or full Caliptra DV qualification"
+  },
+  "generated_project_bench_package_compile_initial_attempt": {
+    "date": "2026-10-05",
+    "result": "compile failed with one known unsupported dynamic factory API",
+    "diagnostic": "factory.create_object_by_name was not found in soc_ifc_cmdline_test_sequence.svh",
+    "captured_log": "project-bench-packages-20261005.log",
+    "captured_log_sha256": "52ffd8ae138bd5519fb893b69b487fb860f049c31b1a3d57a49d2c9436f907ee",
+    "memory_guard_minimum_free_percent": 80,
+    "resolution": "excluded the unrelated command-line test and sequence in a hash-checked temporary source overlay; pinned Caliptra files unchanged"
+  }
+}

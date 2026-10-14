@@ -1,0 +1,14 @@
+{
+  "environment_id": "caliptra-v2-1-2-soc_ifc_tb",
+  "top": "soc_ifc_tb",
+  "source_repo": "caliptra_v2.1.2",
+  "filelist": "src/soc_ifc/config/soc_ifc_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/src/soc_ifc/tb",
+  "compile_exit": 2,
+  "compile_seconds": 0.51,
+  "sim_exit": null,
+  "sim_seconds": null,
+  "classification": "FAIL",
+  "blocker_class": "simulator",
+  "classification_note": "Icarus rejected source syntax during elaboration"
+}

@@ -1,0 +1,11 @@
+diff --git a/submodules/adams-bridge/src/abr_top/rtl/abr_params_pkg.sv b/submodules/adams-bridge/src/abr_top/rtl/abr_params_pkg.sv
+--- a/submodules/adams-bridge/src/abr_top/rtl/abr_params_pkg.sv
++++ b/submodules/adams-bridge/src/abr_top/rtl/abr_params_pkg.sv
+@@ -82,6 +82,7 @@
+   
+   parameter ABR_MEM_MAX_DEPTH = ABR_MEM_INST2_DEPTH;
+   parameter ABR_MEM_ADDR_WIDTH = $clog2(ABR_MEM_MAX_DEPTH) + 3; //+ 3 bits for bank selection
++  parameter MLDSA_MEM_ADDR_WIDTH = ABR_MEM_ADDR_WIDTH;
+   
+   typedef enum logic [2:0] {
+     MLDSA_NONE        = 3'b000,

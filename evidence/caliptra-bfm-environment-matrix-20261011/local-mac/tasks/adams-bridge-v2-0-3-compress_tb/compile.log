@@ -1,0 +1,21 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/barrett_reduction/rtl/masked_barrett_if_cond.sv:23: error: Unknown package `ntt_defines_pkg' in import. Is its source in the compile list?
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/barrett_reduction/rtl/masked_barrett_reduction.sv:23: error: Unknown package `ntt_defines_pkg' in import. Is its source in the compile list?
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/barrett_reduction/rtl/masked_barrett_if_cond_v2.sv:23: error: Unknown package `ntt_defines_pkg' in import. Is its source in the compile list?
+        0.09 real         0.03 user         0.01 sys
+             6946816  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                1988  page reclaims
+                  15  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   7  voluntary context switches
+                  69  involuntary context switches
+            25871219  instructions retired
+            13796059  cycles elapsed
+             1360232  peak memory footprint

@@ -1,0 +1,12 @@
+0.000 ns - ----------------------------------
+0.000 ns -  Caliptra Mbox SRAM DIR Smoke Test!!
+0.000 ns - ----------------------------------
+0.000 ns - Writing [0x30040000] to addr [0x30040000]
+0.000 ns - Writing [0x30044000] to addr [0x30044000]
+0.000 ns - Writing [0x30048000] to addr [0x30048000]
+0.000 ns - Writing [0x3004C000] to addr [0x3004C000]
+0.000 ns - Writing [0x30050000] to addr [0x30050000]
+0.000 ns - Writing [0x30054000] to addr [0x30054000]
+0.000 ns - Writing [0x30058000] to addr [0x30058000]
+0.000 ns - Writing [0x3005C000] to addr [0x3005C000]
+0.000 ns - Writing [0x30060000] to addr [0x30060000]

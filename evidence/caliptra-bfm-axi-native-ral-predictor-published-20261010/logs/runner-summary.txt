@@ -1,0 +1,77 @@
+memory guard: preflight available 7.40 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/tmp.V9v3sNUBOt/uvm_agent.dpiexport.c (compile it into your DPI object).
+UVM_INFO /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/base/uvm_root.svh(476) @ 0: reporter [UVM/RELNOTES]
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2:UVM:2020.3.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test axi4_caliptra_uvm_agent_test...
+UVM_INFO /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/base/uvm_comparer.svh(527) @ 0: reporter [MISCMP] ral_user@235 vs. ral_user@236
+UVM_INFO /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/base/uvm_comparer.svh(527) @ 0: reporter [MISCMP] transfer_probe@251 vs. transfer_probe@253
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 70000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=0}, expected { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 110000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=0}, expected {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=0}
+UVM_WARNING /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/reg/uvm_reg.svh(1663) @ 150000: reporter [PREDICT_NOK] status UVM_NOT_OK; skip prediction.
+UVM_WARNING /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/reg/uvm_reg.svh(1663) @ 150000: reporter [PREDICT_NOK] status UVM_NOT_OK; skip prediction.
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 150000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=2}, expected {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=2}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 200000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=0}, expected { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 240000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=0}, expected {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=0}
+UVM_WARNING /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/reg/uvm_reg.svh(1663) @ 280000: reporter [PREDICT_NOK] status UVM_NOT_OK; skip prediction.
+UVM_WARNING /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/reg/uvm_reg.svh(1663) @ 280000: reporter [PREDICT_NOK] status UVM_NOT_OK; skip prediction.
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 280000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=00 addr=000123440040 beats=1 data=76543210 resp=2}, expected {AAXI_WRITE id=00 addr=000123440040 beats=1 data=76543210 resp=2}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 340000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=31 addr=000123440020 beats=2 data=a5a55a5a resp=0}, expected { AAXI_READ id=31 addr=000123440020 beats=2 data=a5a55a5a resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 400000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=42 addr=000123440020 beats=2 data=a5a55a5a resp=0}, expected {AAXI_WRITE id=42 addr=000123440020 beats=2 data=a5a55a5a resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 440000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=71 addr=000123440060 beats=1 data=00000000 resp=1}, expected {AAXI_WRITE id=71 addr=000123440060 beats=1 data=00000000 resp=1}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 490000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=71 addr=000123440060 beats=1 data=c0de6001 resp=1}, expected { AAXI_READ id=71 addr=000123440060 beats=1 data=c0de6001 resp=1}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 530000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=72 addr=000123440060 beats=1 data=c0de6001 resp=0}, expected {AAXI_WRITE id=72 addr=000123440060 beats=1 data=c0de6001 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 570000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=73 addr=000123440060 beats=1 data=c0de6001 resp=1}, expected {AAXI_WRITE id=73 addr=000123440060 beats=1 data=c0de6001 resp=1}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 620000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=74 addr=000123440060 beats=1 data=c0de6002 resp=0}, expected { AAXI_READ id=74 addr=000123440060 beats=1 data=c0de6002 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 670000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual {AAXI_WRITE id=73 addr=000123440060 beats=1 data=c0de6003 resp=0}, expected { AAXI_READ id=73 addr=000123440060 beats=1 data=c0de6003 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 710000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=75 addr=000123440060 beats=1 data=c0de6002 resp=0}, expected {AAXI_WRITE id=75 addr=000123440060 beats=1 data=c0de6002 resp=0}
+UVM_INFO dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv(145) @ 750000: reporter@@copy [AAXI_COMPARE] Mismatch in kind: actual { AAXI_READ id=43 addr=000123440020 beats=1 data=a5a55a5a resp=2}, expected {AAXI_WRITE id=43 addr=000123440020 beats=1 data=a5a55a5a resp=2}
+PASS: UVM AXI agent and AAXI compatibility stream completed burst read/write and propagated SLVERR
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(309) @ 750000: uvm_test_top.env.aaxi_agent.monitor [AXI_COVERAGE] accepted AW/W/B/AR/R=6/7/6/10/11; VALID=6/13/6/10/11; stalled AW/W/B/AR/R=0/6/0/0/0
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(315) @ 750000: uvm_test_top.env.aaxi_agent.monitor [AXI_AW_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/6/0/0/0 of AW=6; lock clear/set/X=4/2/0 of AW=6
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(321) @ 750000: uvm_test_top.env.aaxi_agent.monitor [AXI_AR_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/10/0/0/0 of AR=10; lock clear/set/X=8/2/0 of AR=10
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(327) @ 750000: uvm_test_top.env.aaxi_agent.monitor [AXI_RESP_COVERAGE] B OKAY/EXOKAY/SLVERR/DECERR/X=5/1/0/0/0 of B=6; R=6/2/3/0/0 of R=11
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(332) @ 750000: uvm_test_top.env.aaxi_agent.monitor [AXI_W_COVERAGE] WSTRB full/partial/zero/X=7/0/0/0 of W=7; LAST W=6 of W=7; R=10 of R=11
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(309) @ 750000: uvm_test_top.env.agent.monitor [AXI_COVERAGE] accepted AW/W/B/AR/R=6/7/6/10/11; VALID=6/13/6/10/11; stalled AW/W/B/AR/R=0/6/0/0/0
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(315) @ 750000: uvm_test_top.env.agent.monitor [AXI_AW_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/6/0/0/0 of AW=6; lock clear/set/X=4/2/0 of AW=6
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(321) @ 750000: uvm_test_top.env.agent.monitor [AXI_AR_COVERAGE] burst FIXED/INCR/WRAP/RESERVED/X=0/10/0/0/0 of AR=10; lock clear/set/X=8/2/0 of AR=10
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(327) @ 750000: uvm_test_top.env.agent.monitor [AXI_RESP_COVERAGE] B OKAY/EXOKAY/SLVERR/DECERR/X=5/1/0/0/0 of B=6; R=6/2/3/0/0 of R=11
+UVM_INFO dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv(332) @ 750000: uvm_test_top.env.agent.monitor [AXI_W_COVERAGE] WSTRB full/partial/zero/X=7/0/0/0 of W=7; LAST W=6 of W=7; R=10 of R=11
+UVM_INFO /private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 750000: reporter [UVM/REPORT/SERVER]
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   30
+UVM_WARNING :    4
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[AAXI_COMPARE]    16
+[AXI_AR_COVERAGE]     2
+[AXI_AW_COVERAGE]     2
+[AXI_COVERAGE]     2
+[AXI_RESP_COVERAGE]     2
+[AXI_W_COVERAGE]     2
+[MISCMP]     2
+[PREDICT_NOK]     4
+[RNTST]     1
+[UVM/RELNOTES]     1
+
+/private/tmp/iverilog-uvm-latest-127b887/install/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 750000 (1ps)
+memory guard: command exited 0; minimum available 7.18 GiB; maximum process group 0.35 GiB

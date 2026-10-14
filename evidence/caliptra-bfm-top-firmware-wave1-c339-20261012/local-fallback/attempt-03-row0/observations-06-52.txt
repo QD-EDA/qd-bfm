@@ -1,0 +1,8 @@
+Local row-0 rerun terminal snapshot, 2026-10-12 06:52 MDT
+
+- `localrun_exit=124`; `localrun.log` states `localrun: timed out after 6775s`. The process group was terminated at the configured timeout.
+- `sim.log` is 49,159 bytes and ends with `SoC: Writing BootGo register` / `CLP: ROM Flow in progress...`; it contains no PASS, FAIL, FATAL, or TIMEOUT marker.
+- The expected `result.json` is absent. The harness timeout is the terminal `TIMEOUT` recorded for row 0.
+- Raw command, compile, firmware, simulator, runner, exit, and localrun logs are copied here; `SHA256SUMS` covers them and both process samples.
+- The samples reported 1.0 GB peak physical footprint. `localrun` emitted no final resource summary after timing out the process group.
+- SSH to DAN-DESKTOP still reset at 06:52 MDT. `ask-intern` could not fetch its API key; the timeout record and final simulator phase were verified directly.

@@ -1,0 +1,6 @@
+Job 460 task 1 completion audit (DAN-DESKTOP, 2026-10-11 19:34 MDT)
+
+- The task wrapper ended with runner_exit=124 after the configured 6,900-second timeout; no testcase pass/fail marker was present. The testbench targets 1,000,000 cycles and the last progress line was interval 719,999 (about 72%); no mismatch line appeared before timeout.
+- `compile.resource` records Icarus exit status 0 and 0.15-second compile time. VVP was observed running at about 100% CPU until the timeout; `sim.log` remained empty and the killed wrapper could not record sim_exit.
+- `squeue` no longer listed job 460_1 after completion. `sacct` could not confirm final scheduler state because accounting storage is disabled on DAN-DESKTOP.
+- No local duplicate was run.

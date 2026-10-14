@@ -1,0 +1,6 @@
+Snapshot, 2026-10-12 07:32:35 MDT
+- SSH to DAN-DESKTOP reset at port 22; Slurm remains unavailable.
+- VVP PID 53757 remained active for 34m06s, using 86.6% CPU and 979,104 KiB RSS.
+- The 13-line sim.log remains unchanged since 06:58:42. It has no testcase PASS/FAIL/FATAL/TIMEOUT marker; `result.json` is absent.
+- A second five-second process sample repeats the hot path through `schedule_simulate`, `vthread_run`, `vpip_vec4_to_int64_saturated`, and vector part-select operations. This confirms CPU activity but not firmware progress.
+- The run remains active under localrun's 6,873-second timeout. No second local heavy task was started.

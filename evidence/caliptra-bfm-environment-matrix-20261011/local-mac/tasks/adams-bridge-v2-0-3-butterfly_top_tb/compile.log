@@ -1,0 +1,26 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:405: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:406: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:407: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:472: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:477: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:478: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:479: warning: Static variable initialization requires explicit lifetime in this context.
+vvp.tgt error: Exceeded the maximum flag count of 512 during VVP code generation.
+        0.26 real         0.16 user         0.02 sys
+            23052288  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2993  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  11  voluntary context switches
+                 139  involuntary context switches
+            26955364  instructions retired
+            13922782  cycles elapsed
+             1425768  peak memory footprint

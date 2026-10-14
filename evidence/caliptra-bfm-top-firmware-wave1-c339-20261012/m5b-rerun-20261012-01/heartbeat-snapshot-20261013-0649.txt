@@ -1,0 +1,22 @@
+DAN-DESKTOP queue snapshot at 06:49:50 MDT, 2026-10-13
+Host uptime: 22:14; load average: 9.58, 9.74, 10.00.
+
+Job 799, array throttle 6:
+  799_12 RUNNING 2:49:20; c_intr_handler; latest heartbeat wall_s=10200 mcycle=71202.
+  799_13 RUNNING 0:56:23; smoke_test_mbox_byte_read; wall_s=3300 mcycle=21788.
+  799_14 RUNNING 0:49:18; smoke_test_dma_aes_gcm_collision_test; wall_s=3000 mcycle=20147.
+  799_15 RUNNING 0:31:46; smoke_test_dma_aes_gcm_short_dword; wall_s=1800 mcycle=12200.
+  799_16 RUNNING 0:16:26; smoke_test_kv_securitystate; wall_s=900 mcycle=5864.
+  799_17 RUNNING 0:04:24; smoke_test_datavault_lock; wall_s=300 mcycle=1945.
+  799_18-42 PENDING at throttle 6.
+
+Array task 799_11 had completed. Its resource report records exactly the configured
+10,091-second timeout (2:48:11), runner exit 137, peak RSS 1,852,444 KiB, and
+no testcase terminal marker or result JSON. Its final simulator heartbeat was
+wall_s=9900 mcycle=67671; all 31 anchored heartbeats and three later
+simulator-prefixed heartbeats advance mcycle. Corrected verdict: TIMEOUT, not hang.
+The copied per-task artifacts and checksums are in timeout-reclassification-799/.
+
+Overlay job 826_1 was RUNNING at the check. Its retry for source row 31 had
+completed firmware build and its latest heartbeat was wall_s=9300 mcycle=64274;
+no terminal marker/result was present. The latest run also shows mcycle advancing.

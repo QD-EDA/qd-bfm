@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-04/source/submodules/adams-bridge/src/ntt_top/tb/mlkem_hybrid_bf_tb.sv:114: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-04/source/submodules/adams-bridge/src/ntt_top/tb/mlkem_hybrid_bf_tb.sv:194: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-04/source/submodules/adams-bridge/src/ntt_top/tb/mlkem_karatsuba_tb.sv:119: warning: Static variable initialization requires explicit lifetime in this context.

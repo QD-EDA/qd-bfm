@@ -1,0 +1,66 @@
+memory guard: preflight available 8.11 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/verification_ip/environment_packages/mldsa_env_pkg/registers/mldsa_reg_model_top_pkg.sv:169: warning: Enable of unknown task ``set_inst_name'' ignored (class __covgrp_mldsa_AHB_map_coverage_ra_cov_t is covergroup stub; compile-progress fallback).
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:256); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:350); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:352); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:358); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:365); emitting null fallback
+Warning: eval_object_select: base is not a signal at dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367 (expr_type=7 sube_type=22 sube@dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv:367); emitting null fallback
+iverilog: note: wrote DPI export C stubs to /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/adams_mldsa_runtime.dpiexport.c (compile it into your DPI object).
+UVM_INFO /private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_root.svh(476) @ 0: reporter [UVM/RELNOTES]
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2:UVM:2020.3.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 1000: reporter [RNTST] Running test adams_mldsa_runtime_smoke_test...
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_env_configuration.svh(136) @ 1000: reporter [LOCK_MODEL] Register model mldsa_rm is successfully locked.
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_predictor.svh(123) @ 1000: uvm_test_top.environment.mldsa_pred [PREDICTOR] DILITHIUM_COMMAND to be used: test_dilithium5
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_predictor.svh(131) @ 1000: uvm_test_top.environment.mldsa_pred [PREDICTOR] expect_predictor_verif_failure to be used: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_predictor.svh(132) @ 1000: uvm_test_top.environment.mldsa_pred [PREDICTOR] disable_pred_from_test to be used: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(110) @ 1000: uvm_test_top.environment.mldsa_sb [SCOREBOARD] expect_verif_failure to be used: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(111) @ 1000: uvm_test_top.environment.mldsa_sb [SCOREBOARD] expect_verif_pass_after_failure to be used: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(112) @ 1000: uvm_test_top.environment.mldsa_sb [SCOREBOARD] disable_scrboard_from_test to be used: 0
+UVM_WARNING dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv(293) @ 1000: uvm_test_top.environment.qvip_ahb_lite_slave_subenv [AHB_QVIP_CVG] Internal QVIP covergroups are not recreated; configured burst_transfer_cov still publishes monitored records to the environment coverage consumer
+UVM_INFO /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/hdl_top.sv(82) @ 200000: reporter [HDL_TOP_TB]  waiting for the reset event trigger
+PASS: generated MLDSA environment RAL-wrote seed and read abr_top version through 32-bit AHB
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(310) @ 256000: uvm_test_top.environment.mldsa_sb [SCBD_REPORT] Total Matches: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(311) @ 256000: uvm_test_top.environment.mldsa_sb [SCBD_REPORT] Total Mismatches: 0
+UVM_INFO /var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-adams-mldsa-env-khc8ivje/overlay/src/mldsa_scoreboard.svh(312) @ 256000: uvm_test_top.environment.mldsa_sb [SCBD_REPORT] No Predicted Entries to Compare Against: 0
+* TESTCASE PASSED
+UVM_INFO dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv(347) @ 256000: uvm_test_top.environment.qvip_ahb_lite_slave_subenv.ahb_lite_slave_0.agent.monitor [AHB_COVERAGE] reads=1/2 writes=1/2 sizes(1/2/4/8B)=0/0/2/0 of 2 addresses; pending_wait=0/6 cycles; errors=0/2 transfers
+UVM_INFO /private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 256000: reporter [UVM/REPORT/SERVER]
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   14
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[AHB_COVERAGE]     1
+[AHB_QVIP_CVG]     1
+[HDL_TOP_TB]     1
+[LOCK_MODEL]     1
+[PREDICTOR]     3
+[RNTST]     1
+[SCBD_REPORT]     3
+[SCOREBOARD]     3
+[UVM/RELNOTES]     1
+
+/private/tmp/bfm-work-install/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 256000 (1ps)
+memory guard: command exited 0; minimum available 7.87 GiB; maximum process group 0.63 GiB

@@ -1,0 +1,12 @@
+captured_at=2026-10-12T09:07:56-06:00
+BEFORE
+             JOBID      STATE          START_TIME       TIME          NODELIST(REASON)
+      591_[8-51%3]    PENDING                 N/A       0:00       (JobArrayTaskLimit)
+             591_7    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP
+             591_6    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP
+             591_5    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP
+AFTER
+             JOBID      STATE          START_TIME       TIME          NODELIST(REASON)
+             591_7    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP
+             591_6    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP
+             591_5    RUNNING 2026-10-12T08:35:38      32:18               DAN-DESKTOP

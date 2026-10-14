@@ -1,0 +1,17 @@
+CALIPTRA_COMMIT=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+e92768897ce9a517c402ab1f775f9a81854e0debed5c5e2f78101130202180b0  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_uart/smoke_test_uart.c
+f5a9e5631e570b245915089463e348bdb5ecd84c6b18f5e356042c49d0b1636e  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/rtl/caliptra_reg/caliptra_reg.h
+TEST_USES
+39:  if (hw_cfg & SOC_IFC_REG_CPTRA_HW_CONFIG_UART_EN_MASK) {
+40:    VPRINTF(LOW, "Internal UART is enabled, running UART smoke test\n");
+42:    VPRINTF(FATAL, "Internal UART is not enabled, skipping UART smoke test\n");
+54:    status = lsu_read_32(CLP_UART_STATUS);
+55:    tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+59:  lsu_write_32(CLP_UART_WDATA, wdata);
+68:    status = lsu_read_32(CLP_UART_STATUS);
+69:    rx_empty = ((status & UART_STATUS_RXEMPTY_MASK) >> UART_STATUS_RXEMPTY_LOW);
+73:  data = lsu_read_32(CLP_UART_RDATA);
+105:  ctrl = ((nco & 0xffff) << UART_CTRL_NCO_LOW) | UART_CTRL_TX_MASK |
+106:         UART_CTRL_RX_MASK;
+107:  lsu_write_32(CLP_UART_CTRL, ctrl);  // Enable RX/TX
+HEADER_DEFINITIONS

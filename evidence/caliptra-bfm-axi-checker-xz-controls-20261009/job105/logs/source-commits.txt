@@ -1,0 +1,3 @@
+QD base=e88c8809b01c59ff0147f9232124444ce820c7f0
+QD source files=working-tree patch, recorded by SHA256 manifest
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602

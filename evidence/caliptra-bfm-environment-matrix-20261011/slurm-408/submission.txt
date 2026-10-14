@@ -1,0 +1,6 @@
+Slurm array 408 was submitted on DAN-DESKTOP on 2026-10-11 from a fresh run directory:
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-04
+
+Manifest: tasks.tsv (3 rows; array 0-2, throttle 3). Each task requested 1 CPU and 3 GiB, with a 2-hour Slurm limit and a 7,100-second per-test timeout. The staged source pins Caliptra RTL commit 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e and Icarus source c339b9f2287a743aeb7ab6de6528e8d34a4dd602.
+
+After reconciling existing evidence, duplicate tasks 408_0 and 408_1 were cancelled; their Slurm outputs record SIGTERM. Task 408_2 ran `ntt_top_tb` to completion. The run preserved the filelist hash, vector hashes, tool hashes, versions, compile/simulation logs, resource logs, and result summary.

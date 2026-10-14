@@ -1,0 +1,110 @@
+Starting AXI sha access test
+
+*** Toggle pwrgood/reset.
+
+Init and reset done
+
+Clearing SHA LOCK over AHB
+
+-----------------
+Testing access with user 8af2f9cf with strap set to user 8af2f9cf
+-----------------
+
+Attempt to acquire SHA ACC LOCK reg over AXI
+
+Warning: cannot write to an undefined darray<vector[32]>.
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA Acc Lock acquired
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA mode set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA dlen set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA datain set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA execute set to 1 over AXI
+Waiting for SHA status
+
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA status read over AXI = 00000002
+
+Issuing cold reset
+
+*** Toggle pwrgood/reset.
+
+Restarting AXI sha access test
+
+Clearing SHA LOCK over AHB
+
+-----------------
+Testing access with user 8af2f9cf with strap set to user 8af2f9cf
+-----------------
+
+Attempt to acquire SHA ACC LOCK reg over AXI
+
+Warning: cannot write to an undefined darray<vector[32]>.
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA Acc Lock acquired
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA mode set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA dlen set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA datain set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA execute set to 1 over AXI
+Waiting for SHA status
+
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA status read over AXI = 00000002
+
+Issuing warm reset
+
+*** Toggle reset.
+
+Restarting AXI sha access test
+
+Clearing SHA LOCK over AHB
+
+-----------------
+Testing access with user 8af2f9cf with strap set to user 8af2f9cf
+-----------------
+
+Attempt to acquire SHA ACC LOCK reg over AXI
+
+Warning: cannot write to an undefined darray<vector[32]>.
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA Acc Lock acquired
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA mode set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA dlen set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA datain set to 1 over AXI
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA execute set to 1 over AXI
+Waiting for SHA status
+
+Warning: cannot write to an undefined darray<vector[32]>.
+SHA status read over AXI = 00000002
+
+* TESTCASE PASSED
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/soc_ifc/tb/soc_ifc_axi_sha_acc_dis_tb.sv:725: $finish called at 2325000 (1s)
+        2.48 real         2.01 user         0.02 sys
+            31965184  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2244  page reclaims
+                   8  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                1333  involuntary context switches
+         22772402260  instructions retired
+          4272501198  cycles elapsed
+            28672408  peak memory footprint

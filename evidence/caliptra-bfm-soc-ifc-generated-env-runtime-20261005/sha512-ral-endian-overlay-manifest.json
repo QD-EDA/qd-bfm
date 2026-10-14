@@ -1,0 +1,11 @@
+{
+  "anchor": "create_map(\"reg_map\", 0, 4, UVM_NO_ENDIAN)",
+  "overlay": "/private/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-soc-ifc-env-dfvxlrey/sha512_acc_csr_uvm.sv",
+  "overlay_sha256": "6d30676cf4c85f49b879ccbd766ee4fcde83e49da444300380b93f54054db796",
+  "purpose": "Use the SoC-IFC little-endian AHB/AXI ordering on the SHA512 RAL leaf maps in the disposable runtime probe.",
+  "replacement": "create_map(\"reg_map\", 0, 4, UVM_LITTLE_ENDIAN)",
+  "replacements": 2,
+  "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/soc_ifc/rtl/sha512_acc_csr_uvm.sv",
+  "source_checkout_modified": false,
+  "source_sha256": "50b08a6020386bc0858ce4c2ab31837a480fd6e3b072915f23d22d8eb5401e5f"
+}

@@ -1,0 +1,15 @@
+verdict=FAIL
+stage=firmware_build
+runner_exit=1
+terminal_testcase_started=no
+result_json=absent
+
+The firmware build exits 2 because the pinned Caliptra test source uses QSPI
+register symbols that are absent from the generated register header at the
+same pinned Caliptra revision. The compiler reports
+`SOC_IFC_REG_CPTRA_HW_CONFIG_QSPI_EN_MASK`, `CLP_SPI_HOST_REG_CSID`, and other
+`CLP_SPI_HOST_REG_*` / `SPI_HOST_REG_*` symbols as undeclared. The generated
+`caliptra_reg.h` contains neither `SOC_IFC_REG_CPTRA_HW_CONFIG_QSPI_EN_MASK`
+nor `CLP_SPI_HOST_REG_STATUS`. The runner then reports all four firmware
+images missing. The simulator never ran; this is an upstream firmware
+test/header mismatch, not an Icarus verdict or QD harness failure.

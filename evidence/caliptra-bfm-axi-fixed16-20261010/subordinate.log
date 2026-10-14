@@ -1,0 +1,13 @@
+memory guard: preflight available 21.67 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+COVERAGE AXI address AW=16 FIXED/INCR/WRAP/reserved/unknown=2/13/1/0/0 lock-clear/set/unknown=13/3/0 AR=13 FIXED/INCR/WRAP/reserved/unknown=2/10/1/0/0 lock-clear/set/unknown=10/3/0
+COVERAGE AXI responses B=16 OKAY/EXOKAY/SLVERR/DECERR/unknown=13/2/0/1/0 R=279 OKAY/EXOKAY/SLVERR/DECERR/unknown=269/4/1/5/0
+COVERAGE AXI W beats=283 WSTRB full/partial/zero/unknown=277/5/1/0 WLAST=16
+COVERAGE AXI VALID/stall cycles AW=18/2 W=303/20 B=16/0 AR=15/2 R=279/0
+COVERAGE AXI R beats=279 RLAST=13
+PASS: AXI memory subordinate bursts through 256 beats, boundary DECERR, FIXED/WRAP, stalls, USER, errors, reset, and exclusive access
+tb_axi4_caliptra_memory_subordinate.sv:502: $finish called at 10180000 (1ps)
+PASS: AXI memory subordinate aborts/reset-clears at AR/R/AW/W/B handshakes and recovers
+tb_axi4_caliptra_memory_subordinate.sv:156: $finish called at 420000 (1ps)
+PASS: AXI memory subordinate bounded multi-ID read/write queues
+tb_axi4_caliptra_memory_queue.sv:184: $finish called at 306000 (1ps)
+memory guard: command exited 0; minimum available 21.67 GiB; maximum process group 0.00 GiB

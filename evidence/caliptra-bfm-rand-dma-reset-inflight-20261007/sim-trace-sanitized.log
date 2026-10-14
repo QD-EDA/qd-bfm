@@ -1,0 +1,14 @@
+CALIPTRA_RESET_EDGE state=deassert cycle=21 pending=0 wait=0 start=0
+CALIPTRA_RESET_REQUEST cycle=2383 code=ee pending=0 wait=0 start=0
+CALIPTRA_AXI B count=7 cycle=5824 pc=<omitted>
+CALIPTRA_AXI AW count=8 addr=<omitted> cycle=6062 pc=<omitted>
+CALIPTRA_TRACE cycle=6100 reset_n=1 fatal=0 aw=8 w=112 b=7
+CALIPTRA_TRACE cycle=6200 reset_n=1 fatal=0 aw=8 w=127 b=7
+CALIPTRA_RESET_EDGE state=assert cycle=6254 pending=1 wait=3870 start=2382
+CALIPTRA_RESET_EDGE state=deassert cycle=6264 pending=0 wait=3870 start=2382
+CALIPTRA_TRACE cycle=6400 reset_n=1 fatal=0 aw=8 w=127 b=7
+CALIPTRA_TRACE cycle=9000 reset_n=1 fatal=0 aw=8 w=127 b=7
+CALIPTRA_TRACE cycle=9100 reset_n=1 fatal=0 aw=8 w=127 b=7
+CALIPTRA_AXI AW count=9 addr=<omitted> cycle=9143 pc=<omitted>
+CALIPTRA_AXI B count=8 cycle=9177 pc=<omitted>
+BFM_DIAG post-reset AW/B observed: AW=9 B=8 W=143; outstanding_at_reset=1

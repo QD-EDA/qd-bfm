@@ -1,0 +1,65 @@
+2026-10-12 20:10:56 MDT
+ 20:10:56 up 11:35,  5 users,  load average: 9.08, 9.06, 9.08
+             JOBID      STATE       TIME     CPUS NODELIST(REASON)
+     669_[31-51%6]    PENDING       0:00        1 (JobArrayTaskLimit)
+            669_30    RUNNING      12:22        1 DAN-DESKTOP
+            669_29    RUNNING      49:34        1 DAN-DESKTOP
+            669_26    RUNNING    2:56:21        1 DAN-DESKTOP
+            669_25    RUNNING    2:59:05        1 DAN-DESKTOP
+            669_24    RUNNING    2:59:38        1 DAN-DESKTOP
+            669_23    RUNNING    3:08:53        1 DAN-DESKTOP
+run=40ec556410264b2f-23 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/smoke_test_datavault_lock/sim.log bytes=49398
+ mtime=2026-10-12 19:19:22.930981052 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=483ee327507dab77-24 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/smoke_test_datavault_mini/sim.log bytes=49398
+ mtime=2026-10-12 19:34:16.394807015 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=6bccff716e6bcab5-25 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/smoke_test_aes_gcm/sim.log bytes=49398
+ mtime=2026-10-12 19:55:23.964901126 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=ca84d5f757b500b2-26 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/smoke_test_dma_aes_gcm_short_1_dword/sim.log bytes=49398
+ mtime=2026-10-12 19:54:25.566593397 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=3439695c6637d6f2-29 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/jtag_tap_mbox/sim.log bytes=45302
+ mtime=2026-10-12 19:22:05.106839463 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=35735b41cd07eed7-30 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output/iccm_lock/sim.log bytes=45302
+ mtime=2026-10-12 19:59:11.483824873 -0600
+ pass=0
+ fail=0
+ finish=0
+
+700978 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/caliptra_top_tb.vvp +CLP_REGRESSION
+715902 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+716499 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+720361 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+1082401 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1146165 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output/caliptra_top_tb.vvp +CLP_REGRESSION
+1147281 bash -c sleep 600; date "+%Y-%m-%d %H:%M:%S %Z"; uptime; squeue -j 669 -o "%.18i %.10T %.10M %.8C %R"; root=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs; for run in 40ec556410264b2f-23 483ee327507dab77-24 6bccff716e6bcab5-25 ca84d5f757b500b2-26 3439695c6637d6f2-29 35735b41cd07eed7-30; do d="$root/$run"; sim=$(find "$d/output" -type f -name sim.log -print -quit); printf "run=%s status_files=" "$run"; find "$d" -type f -name status.txt | wc -l | tr -d " "; printf " result_jsons="; find "$d" -type f -name result.json | wc -l | tr -d " "; if [ -n "$sim" ]; then printf " sim_log=%s bytes=" "$sim"; wc -c < "$sim" | tr -d " "; printf " mtime="; stat -c %y "$sim"; printf " pass="; grep -cF "* TESTCASE PASSED" "$sim" || true; printf " fail="; grep -cF "TESTCASE FAILED" "$sim" || true; printf " finish="; grep -cF "Finished : minstret = " "$sim" || true; fi; printf "\n"; done; pgrep -a -f "vvp.*m5-top-wave1-c339-20261012-05" || true

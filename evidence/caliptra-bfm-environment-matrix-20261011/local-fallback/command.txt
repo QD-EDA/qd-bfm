@@ -1,0 +1,2 @@
+~/codex-supervisor/localrun 172800 python3 evidence/caliptra-bfm-environment-matrix-20261011/local-fallback/run_local_matrix.py
+Per-test timeout: 6900 seconds. Local sweep was stopped when Slurm job 388 had both rows RUNNING.

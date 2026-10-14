@@ -1,0 +1,7 @@
+QD repo base: b40e5f952638dd12d9ccf3dfc2db71304fb057b7
+QD branch: codex/caliptra-bfm-stack-20261006
+Changed testbench SHA-256: 770fafce3f8a6d7a6285fb38caeffc85cae09373d9f694d202953b3980ee7963
+Icarus source HEAD: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus origin/main: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus source worktree: clean, including untracked files
+Icarus HEAD is an ancestor of origin/main: yes

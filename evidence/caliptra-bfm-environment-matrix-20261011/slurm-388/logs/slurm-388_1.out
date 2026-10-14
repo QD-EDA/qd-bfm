@@ -1,0 +1,10 @@
+environment_id=adams-bridge-v2-0-3-mlkem_masked_gs_butterfly_tb
+top=mlkem_masked_gs_butterfly_tb
+source_repo=adams_bridge_v2.0.3
+filelist=src/ntt_top/config/mlkem_masked_gs_butterfly_tb.vf
+runner_exit=124
+compile_exit=NOT_RECORDED
+sim_exit=NOT_RECORDED
+pass_markers=0
+failure_markers=0
+elapsed_seconds=6900

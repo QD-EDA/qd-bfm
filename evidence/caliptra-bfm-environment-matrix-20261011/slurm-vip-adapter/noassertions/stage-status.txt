@@ -1,0 +1,2 @@
+compile_exit=1
+runner_exit=1

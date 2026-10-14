@@ -1,0 +1,3 @@
+commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+runner_sha256=b3a6c532239e0e1b2eb60daa5328e434a4ae2deb6ae9f1f21825c0aecfe0a4c7
+source_copy=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm

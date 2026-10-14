@@ -1,0 +1,24 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 4 (cptra_obf_key) of module doe_ctrl expects 256 bit(s), given 1.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 255 high bits of the port.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 5 (obf_field_entropy) of module doe_ctrl expects 256 bit(s), given 1.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 255 high bits of the port.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 6 (obf_uds_seed) of module doe_ctrl expects 512 bit(s), given 1.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 511 high bits of the port.
+        0.31 real         0.21 user         0.04 sys
+            29114368  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3262  page reclaims
+                 137  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  53  voluntary context switches
+                 251  involuntary context switches
+            27953463  instructions retired
+            13473028  cycles elapsed
+             1409384  peak memory footprint

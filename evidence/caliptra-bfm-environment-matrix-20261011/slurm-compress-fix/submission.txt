@@ -1,0 +1,12 @@
+job_id=468
+submission_command=sbatch --parsable environment-array.sbatch
+run_directory=/home/dsell/slurm-runs/caliptra-bfm/a2/compress-filelist-c339-20261011-01
+array=0-0%1
+cpus_per_task=1
+memory_per_task=3G
+job_time_limit=02:00:00
+per_test_timeout_seconds=6900
+task=adams-bridge-v2-0-3-compress_tb
+top=compress_tb
+base_filelist=src/compress/config/compress_tb.vf
+overlay_filelist=src/compress/config/compress_tb_qd.vf

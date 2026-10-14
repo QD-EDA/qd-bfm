@@ -1,0 +1,110 @@
+memory guard: preflight available 7.20 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=32 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=64 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=128 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=256 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=512 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=1 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=1 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=1 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 210000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=4 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=4 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=4 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=8 MAX_OUTSTANDING=1 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=8 MAX_OUTSTANDING=2 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 190000 (1ps)
+PASS: AXI DATA_WIDTH=1024 ID_WIDTH=8 MAX_OUTSTANDING=4 queued reads
+tb_axi4_caliptra_master_outstanding.sv:150: $finish called at 230000 (1ps)
+memory guard: command exited 0; minimum available 7.20 GiB; maximum process group 0.01 GiB

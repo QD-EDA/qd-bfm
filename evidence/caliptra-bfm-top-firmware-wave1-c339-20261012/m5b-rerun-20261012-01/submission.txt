@@ -1,0 +1,12 @@
+job_id=799
+job_name=bfm-m5b-rerun
+array=1-42%6
+dependency=none-smoke-pass-verified
+requested=1 CPU, 3 GiB per task, 6h10m allocation, max 6 tasks
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+iverilog_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+iverilog_binary_sha256=683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb
+selection_rows=42
+selection_sha256=72133f702c7416592a33d1751d8906242b238ba23195d8a6c8e7bf0b06e161cd
+array_script_sha256=7778fa7db35177d20ca1bb1b804d3a167b6b785d7354cd3b0e2acfd6908bf385
+submitted_at=2026-10-13T01:53:21-06:00

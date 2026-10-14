@@ -1,0 +1,18 @@
+keygen busy trace start
+cycle=0 busy=1 saw_busy=1 pc=2 ctrl=0 ntt=0 sampler=0 sample_state=0 coeff=0 sha3_state=0 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=100 busy=1 saw_busy=1 pc=6 ctrl=3 ntt=0 sampler=0 sample_state=0 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=200 busy=1 saw_busy=1 pc=7 ctrl=2 ntt=0 sampler=0 sample_state=0 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=300 busy=1 saw_busy=1 pc=7 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=61 sha3_state=2 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=400 busy=1 saw_busy=1 pc=8 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=53 sha3_state=3 keccak_state=4 keccak_round=22 keccak_run=0 keccak_complete=0
+cycle=500 busy=1 saw_busy=1 pc=9 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=45 sha3_state=3 keccak_state=4 keccak_round=4 keccak_run=0 keccak_complete=0
+cycle=600 busy=1 saw_busy=1 pc=10 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=37 sha3_state=2 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=700 busy=1 saw_busy=1 pc=11 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=29 sha3_state=2 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=800 busy=1 saw_busy=1 pc=12 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=21 sha3_state=2 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=900 busy=1 saw_busy=1 pc=13 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=13 sha3_state=2 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=1000 busy=1 saw_busy=1 pc=14 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=5 sha3_state=3 keccak_state=4 keccak_round=10 keccak_run=0 keccak_complete=0
+cycle=1100 busy=1 saw_busy=1 pc=15 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=1200 busy=1 saw_busy=1 pc=16 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=0 sha3_state=1 keccak_state=4 keccak_round=10 keccak_run=0 keccak_complete=0
+cycle=1300 busy=1 saw_busy=1 pc=17 ctrl=6 ntt=0 sampler=1 sample_state=2 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=1400 busy=1 saw_busy=1 pc=18 ctrl=6 ntt=0 sampler=1 sample_state=1 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=1500 busy=1 saw_busy=1 pc=19 ctrl=3 ntt=0 sampler=0 sample_state=0 coeff=0 sha3_state=1 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0
+cycle=1600 busy=1 saw_busy=1 pc=19 ctrl=6 ntt=0 sampler=1 sample_state=4 coeff=0 sha3_state=0 keccak_state=31 keccak_round=0 keccak_run=0 keccak_complete=0

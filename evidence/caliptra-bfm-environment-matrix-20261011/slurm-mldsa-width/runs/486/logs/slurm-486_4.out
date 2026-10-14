@@ -1,0 +1,10 @@
+bash: line 3: /compile.log: Permission denied
+bash: line 14: /stage-status.txt: Permission denied
+environment_id=adams-bridge-v2-0-3-sigdecode_z_tb
+top=sigdecode_z_tb
+filelist=src/sig_decode_z/config/sigdecode_z_tb.vf
+runner_exit=1
+compile_exit=TIMEOUT_OR_SETUP_FAILURE
+sim_exit=NOT_RECORDED
+pass_markers=
+failure_markers=

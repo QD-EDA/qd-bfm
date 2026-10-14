@@ -1,0 +1,81 @@
+Mon Oct 12 14:19:32 MDT 2026
+ 14:19:32 up  5:44,  3 users,  load average: 7.10, 5.95, 4.07
+             JOBID      STATE                 TIME                         NODELIST(REASON)
+            669_22    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_23    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_24    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_25    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_26    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_27    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_28    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_29    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_30    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_31    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_32    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_33    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_34    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_35    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_36    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_37    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_38    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_39    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_40    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_41    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_42    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_43    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_44    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_45    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_46    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_47    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_48    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_49    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_50    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_51    PENDING                 0:00                      (JobArrayTaskLimit)
+            669_21    RUNNING                 8:28                              DAN-DESKTOP
+            669_20    RUNNING                 8:29                              DAN-DESKTOP
+            669_19    RUNNING                 8:29                              DAN-DESKTOP
+            669_18    RUNNING                 8:29                              DAN-DESKTOP
+            669_17    RUNNING                 8:29                              DAN-DESKTOP
+            669_16    RUNNING                 8:29                              DAN-DESKTOP
+task=16 directory=78bfcc1e9aac255e-16
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=16
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified
+task=17 directory=32a51e049923c576-17
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=17
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified
+task=18 directory=4e0dd412c82b419a-18
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=18
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified
+task=19 directory=40a2264a41561d60-19
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=19
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified
+task=20 directory=0627acabfee6876c-20
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=20
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified
+task=21 directory=c95f8624d4cb7fe0-21
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=21
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+OpenSSL_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+binary_hashes=verified

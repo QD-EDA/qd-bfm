@@ -1,0 +1,24 @@
+DAN-DESKTOP queue snapshot at 12:49 MDT, 2026-10-13.
+Host uptime: 1 day, 4 hours, 14 minutes.
+
+Job 799, array throttle 6:
+  799_19 TIMEOUT; smoke_test_aes_gcm; elapsed=13210 s; final mcycle=91549.
+  799_20 TIMEOUT; smoke_test_dma_aes_gcm_short_1_dword; elapsed=13341 s; final mcycle=93689.
+  799_21 RUNNING 3:23:49; jtag_tap_mbox; wall_s=12000 mcycle=86614.
+  799_22 RUNNING 3:08:30; iccm_lock; wall_s=11100 mcycle=2215.
+  799_23 RUNNING 2:50:26; smoke_test_ecc_keygen; wall_s=9900 mcycle=72308.
+  799_24 RUNNING 2:24:11; smoke_test_ecc_sign; wall_s=8400 mcycle=61688.
+  799_25 RUNNING 0:14:49; smoke_test_ecc_verify; wall_s=600 mcycle=4244.
+  799_26 RUNNING 0:02:48; smoke_test_ecc_errortrigger2; wall_s=0 mcycle=0.
+  799_27-42 PENDING at throttle 6.
+
+Task 799_20 reached its 13,341-second cap with runner exit 137. The full log
+ends at wall_s=13200 mcycle=93689, with 45 advancing raw heartbeats. It contains
+an internal `Test 1 PASSED` line, but no row-level `* TESTCASE PASSED` marker or
+result JSON; the runner's row verdict therefore remains TIMEOUT.
+
+Task 799_22's mcycle dropped from 72,892 at wall_s=10200 to 2,215 at
+wall_s=11100 and remains at that latest heartbeat. The last sample is about
+2.5 minutes old, below the 30-minute hang criterion; no cause is inferred.
+No result JSON or explicit testcase PASS/FAIL marker was found for the other
+active rows.

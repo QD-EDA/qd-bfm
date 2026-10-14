@@ -1,0 +1,47 @@
+completed=2026-10-12T09:27:53-06:00
+host=DAN-DESKTOP
+slurm_job_id=613
+original_rebuild_job=609
+original_rebuild_exit_code=1:0
+original_rebuild_stop=JTAG artifact was generated outside its protected output directory
+prior_finalize_job=612
+prior_finalize_exit_code=1:0
+prior_finalize_stop=version.h has no VERSION_STRING macro; package version is recorded below
+iverilog_source_commit=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+caliptra_rtl_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge_commit=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+source_clean=yes
+old_iverilog_sha256=737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2
+old_vvp_sha256=5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+aaaa8060c914851a3e5ee1ba82cc3d6f80972f90638a05c6e823a37557a33758  /home/dsell/toolchains/iverilog-c339/downloads/xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz
+de1a241a519e0a3374fea98988d0b52c886743f9d953f23be8269cc7b59c5fab  /home/dsell/toolchains/iverilog-c339/downloads/Python-3.12.15.tgz
+
+Icarus version:
+Icarus Verilog version 13.0 (devel) ()
+
+
+VVP version:
+Icarus Verilog runtime version 13.0 (devel) ()
+
+
+RISC-V GCC:
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+
+Python:
+Python 3.12.15
+cffi==2.1.1
+cryptography==46.0.5
+pycparser==3.11
+PyYAML==6.0.3
+
+OpenSSL:
+OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+
+Relevant system packages:
+libffi-dev:amd64=3.5.2-4
+libmbedtls-dev:amd64=3.6.5-0.1ubuntu2
+libssl-dev:amd64=3.5.5-1ubuntu3.7
+libz3-dev:amd64=4.13.3-1build1

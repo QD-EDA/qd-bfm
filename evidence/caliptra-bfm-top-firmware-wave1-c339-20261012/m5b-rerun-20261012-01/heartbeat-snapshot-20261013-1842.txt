@@ -1,0 +1,14 @@
+Array 799 status snapshot — 2026-10-13 18:42 MDT
+
+At 18:42:09 MDT, Slurm terminated array tasks 799_28, 799_30, 799_34, and 799_35 by signal for maintenance. The last simulator heartbeats were:
+
+  799_28 TERMINAL CANCELLED-FOR-MAINTENANCE; smoke_test_ecc_errortrigger4; wall_s=16800 mcycle=56216.
+  799_30 TERMINAL CANCELLED-FOR-MAINTENANCE; kv_entry_read_err; wall_s=15000 mcycle=107664.
+  799_34 TERMINAL CANCELLED-FOR-MAINTENANCE; smoke_test_kv_parallel_access; wall_s=5700 mcycle=40947.
+  799_35 TERMINAL CANCELLED-FOR-MAINTENANCE; smoke_test_ecc_flow2_kv_ocp_progress; wall_s=5100 mcycle=37091.
+
+No adjacent heartbeat pair repeats the mcycle value, and none has a testcase terminal marker or result JSON. Resource and runner logs are empty because the jobs were terminated before wrapper completion data was written. These are not TIMEOUT results.
+
+  799_36-42 PENDING, held by user (JobHeldUser); do not release or resubmit.
+
+Tasks 1–27, 29, and 31–33 remain recorded terminal. The four cancelled rows and held rows 36–42 require reruns after Slurm reopens. See [cancelled-evidence-799/README.md](cancelled-evidence-799/README.md) for the archived log set and checksums.

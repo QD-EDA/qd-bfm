@@ -1,0 +1,15 @@
+submitted_at=2026-10-13T19:02:01-06:00
+host=DAN-DESKTOP
+job_id=895
+array=1-4%6
+requested=1 CPU, 3 GiB RAM per task; 6:10:00 Slurm limit
+basis=prior full-top VVP measured MaxRSS about 1,852,520 KiB (1.77 GiB); times 1.25 is 2.21 GiB, rounded to requested 3 GiB; each runner uses 1 CPU; per-test runner limits retained from original selection
+run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01
+source_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+iverilog_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+selection_sha256=6eea2d16861e11a80d7d2f2cbf7ebf3164fce3adb8404f8f8ce4fc5c16d9edec
+array_script_sha256=1dde64e705c44aa8173002e76abfe4512674932c7e169d5f68af57856182ffec
+submit_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01 && sbatch --parsable submit/array.sbatch
+initial_queue_snapshot_at=2026-10-13T19:02:05-06:00
+initial_queue_state=895_1,895_2,895_3 RUNNING; 895_4 PENDING(Resources)
+concurrent_original_array=799_36,799_37,799_38,799_39,799_41,799_42 RUNNING; no rows overlap the fresh four-row selection

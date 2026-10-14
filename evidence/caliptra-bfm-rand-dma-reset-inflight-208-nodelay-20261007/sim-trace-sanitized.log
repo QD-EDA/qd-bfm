@@ -1,0 +1,406 @@
+CALIPTRA_RESET_TRACE_BOUND
+CALIPTRA_TRACE_BOUND
+CALIPTRA_AXI WSTATE cycle=1 valid=0 ready=0 last=0 pc=00000000
+CALIPTRA_RESET_EDGE state=deassert cycle=21 pending=0 wait=0 start=0
+CALIPTRA_TRACE cycle=100 retired=0 pc=00000000 insn=00000000 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=200 retired=7 pc=00000016 insn=0000100f ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=300 retired=46 pc=00000814 insn=c001c7b7 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=400 retired=89 pc=00003b5a insn=0000c698 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=500 retired=136 pc=00003bf4 insn=0000c2fc ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=600 retired=180 pc=00003c90 insn=bcb05073 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=700 retired=224 pc=00003ccc insn=0ff7f793 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=800 retired=265 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=900 retired=308 pc=00003cb4 insn=0006a023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1000 retired=347 pc=00003cb4 insn=0006a023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1100 retired=381 pc=00003cd0 insn=00000711 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1200 retired=408 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1300 retired=440 pc=00003cbc insn=00a706b3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1400 retired=473 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1500 retired=501 pc=00003cac insn=0ff0000f ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1600 retired=533 pc=00003cc4 insn=0000c290 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1700 retired=564 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1800 retired=598 pc=00003cee insn=80ec2223 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1900 retired=657 pc=00003dd0 insn=07f00d93 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2000 retired=699 pc=0000087c insn=ffc7a603 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2100 retired=756 pc=00000946 insn=02ed81a3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2200 retired=801 pc=00000ad8 insn=00004318 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2300 retired=844 pc=00000fbc insn=021dc783 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2400 retired=881 pc=0000dcc8 insn=00000585 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2500 retired=919 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2600 retired=950 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2700 retired=976 pc=0000dd0c insn=00008391 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=2800 retired=1006 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_AXI AW count=1 cycle=2882 pc=0000dd1a
+CALIPTRA_AXI W count=1 cycle=2883 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=2883 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=2 cycle=2884 pc=0000dd1a
+CALIPTRA_AXI W count=3 cycle=2885 pc=0000dd1a
+CALIPTRA_AXI W count=4 cycle=2886 pc=0000dd1a
+CALIPTRA_AXI W count=5 cycle=2887 pc=0000dd1a
+CALIPTRA_AXI W count=6 cycle=2888 pc=0000dd1a
+CALIPTRA_AXI W count=7 cycle=2889 pc=0000dd0a
+CALIPTRA_AXI W count=8 cycle=2890 pc=0000dd0a
+CALIPTRA_AXI W count=9 cycle=2891 pc=0000dd0a
+CALIPTRA_AXI W count=10 cycle=2892 pc=0000dd0a
+CALIPTRA_RESET_EDGE state=assert cycle=2892 pending=1 wait=552 start=2338
+CALIPTRA_AXI WSTATE cycle=2893 valid=1 ready=0 last=0 pc=0000dd0a
+CALIPTRA_AXI WSTATE cycle=2898 valid=0 ready=0 last=0 pc=0000dd0a
+CALIPTRA_TRACE cycle=2900 retired=1031 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=0 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_RESET_EDGE state=deassert cycle=2902 pending=0 wait=552 start=2338
+CALIPTRA_TRACE cycle=3000 retired=1031 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3100 retired=1040 pc=0000001e insn=0000100f ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3200 retired=1082 pc=00000826 insn=00e7f463 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3300 retired=1129 pc=00003b78 insn=0000cadc ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3400 retired=1176 pc=00003c12 insn=0000cab8 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3500 retired=1222 pc=00003cb4 insn=0006a023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3600 retired=1258 pc=00003ca8 insn=00072023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3700 retired=1302 pc=00003cbc insn=00a706b3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3800 retired=1348 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=3900 retired=1386 pc=00003cd0 insn=00000711 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4000 retired=1414 pc=00003ca8 insn=00072023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4100 retired=1447 pc=00003cc4 insn=0000c290 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4200 retired=1478 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4300 retired=1508 pc=00003cb4 insn=0006a023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4400 retired=1541 pc=00003ccc insn=0ff7f793 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4500 retired=1569 pc=00003cd2 insn=fcb79be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4600 retired=1601 pc=00003cbc insn=00a706b3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4700 retired=1634 pc=00003d02 insn=100116b7 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4800 retired=1700 pc=00003dfc insn=64dda623 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=4900 retired=1745 pc=0000089c insn=010dac03 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5000 retired=1802 pc=00000968 insn=0ef9fe63 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5100 retired=1847 pc=00001298 insn=00004705 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5200 retired=1883 pc=00000fc0 insn=60079f63 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5300 retired=1930 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5400 retired=1961 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5500 retired=1988 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5600 retired=2017 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=5700 retired=2046 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=10 axi_b=0 axi_r=0
+CALIPTRA_AXI AW count=2 cycle=5737 pc=0000dd1a
+CALIPTRA_AXI W count=11 cycle=5738 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=5738 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=12 cycle=5739 pc=0000dd1a
+CALIPTRA_AXI W count=13 cycle=5740 pc=0000dd1a
+CALIPTRA_AXI W count=14 cycle=5741 pc=0000dd1a
+CALIPTRA_AXI W count=15 cycle=5742 pc=0000dd1a
+CALIPTRA_AXI W count=16 cycle=5743 pc=0000dd1a
+CALIPTRA_AXI W count=17 cycle=5744 pc=0000dd0a
+CALIPTRA_AXI W count=18 cycle=5745 pc=0000dd0a
+CALIPTRA_AXI W count=19 cycle=5746 pc=0000dd0a
+CALIPTRA_AXI W count=20 cycle=5747 pc=0000dd0a
+CALIPTRA_AXI W count=21 cycle=5748 pc=0000dd0a
+CALIPTRA_AXI W count=22 cycle=5749 pc=0000dd0a
+CALIPTRA_AXI W count=23 cycle=5750 pc=0000dd0a
+CALIPTRA_AXI W count=24 cycle=5751 pc=0000dd0c
+CALIPTRA_AXI W count=25 cycle=5752 pc=0000dd0e
+CALIPTRA_AXI W count=26 cycle=5753 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=5753 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=5754 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=1 cycle=5755 pc=0000dd14
+CALIPTRA_TRACE cycle=5800 retired=2074 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=2 axi_w=26 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=5900 retired=2104 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=2 axi_w=26 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=6000 retired=2130 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=2 axi_w=26 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=6100 retired=2161 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=2 axi_w=26 axi_b=1 axi_r=0
+CALIPTRA_AXI AW count=3 cycle=6185 pc=0000dd1a
+CALIPTRA_AXI W count=27 cycle=6186 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=6186 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=28 cycle=6187 pc=0000dd1a
+CALIPTRA_AXI W count=29 cycle=6188 pc=0000dd1a
+CALIPTRA_AXI W count=30 cycle=6189 pc=0000dd1a
+CALIPTRA_AXI W count=31 cycle=6190 pc=0000dd1a
+CALIPTRA_AXI W count=32 cycle=6191 pc=0000dd1a
+CALIPTRA_AXI W count=33 cycle=6192 pc=0000dd0a
+CALIPTRA_AXI W count=34 cycle=6193 pc=0000dd0a
+CALIPTRA_AXI W count=35 cycle=6194 pc=0000dd0a
+CALIPTRA_AXI W count=36 cycle=6195 pc=0000dd0a
+CALIPTRA_AXI W count=37 cycle=6196 pc=0000dd0a
+CALIPTRA_AXI W count=38 cycle=6197 pc=0000dd0a
+CALIPTRA_AXI W count=39 cycle=6198 pc=0000dd0a
+CALIPTRA_AXI W count=40 cycle=6199 pc=0000dd0c
+CALIPTRA_AXI W count=41 cycle=6200 pc=0000dd0e
+CALIPTRA_TRACE cycle=6200 retired=2188 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=3 axi_w=41 axi_b=1 axi_r=0
+CALIPTRA_AXI W count=42 cycle=6201 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=6201 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=6202 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=2 cycle=6203 pc=0000dd14
+CALIPTRA_TRACE cycle=6300 retired=2217 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=3 axi_w=42 axi_b=2 axi_r=0
+CALIPTRA_TRACE cycle=6400 retired=2246 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=3 axi_w=42 axi_b=2 axi_r=0
+CALIPTRA_TRACE cycle=6500 retired=2274 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=3 axi_w=42 axi_b=2 axi_r=0
+CALIPTRA_TRACE cycle=6600 retired=2304 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=3 axi_w=42 axi_b=2 axi_r=0
+CALIPTRA_AXI AW count=4 cycle=6633 pc=0000dd1a
+CALIPTRA_AXI W count=43 cycle=6634 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=6634 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=44 cycle=6635 pc=0000dd1a
+CALIPTRA_AXI W count=45 cycle=6636 pc=0000dd1a
+CALIPTRA_AXI W count=46 cycle=6637 pc=0000dd1a
+CALIPTRA_AXI W count=47 cycle=6638 pc=0000dd1a
+CALIPTRA_AXI W count=48 cycle=6639 pc=0000dd1a
+CALIPTRA_AXI W count=49 cycle=6640 pc=0000dd0a
+CALIPTRA_AXI W count=50 cycle=6641 pc=0000dd0a
+CALIPTRA_AXI W count=51 cycle=6642 pc=0000dd0a
+CALIPTRA_AXI W count=52 cycle=6643 pc=0000dd0a
+CALIPTRA_AXI W count=53 cycle=6644 pc=0000dd0a
+CALIPTRA_AXI W count=54 cycle=6645 pc=0000dd0a
+CALIPTRA_AXI W count=55 cycle=6646 pc=0000dd0a
+CALIPTRA_AXI W count=56 cycle=6647 pc=0000dd0c
+CALIPTRA_AXI W count=57 cycle=6648 pc=0000dd0e
+CALIPTRA_AXI W count=58 cycle=6649 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=6649 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=6650 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=3 cycle=6651 pc=0000dd14
+CALIPTRA_TRACE cycle=6700 retired=2330 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=4 axi_w=58 axi_b=3 axi_r=0
+CALIPTRA_TRACE cycle=6800 retired=2361 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=4 axi_w=58 axi_b=3 axi_r=0
+CALIPTRA_TRACE cycle=6900 retired=2388 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=4 axi_w=58 axi_b=3 axi_r=0
+CALIPTRA_TRACE cycle=7000 retired=2417 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=4 axi_w=58 axi_b=3 axi_r=0
+CALIPTRA_AXI AW count=5 cycle=7081 pc=0000dd1a
+CALIPTRA_AXI W count=59 cycle=7082 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=7082 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=60 cycle=7083 pc=0000dd1a
+CALIPTRA_AXI W count=61 cycle=7084 pc=0000dd1a
+CALIPTRA_AXI W count=62 cycle=7085 pc=0000dd1a
+CALIPTRA_AXI W count=63 cycle=7086 pc=0000dd1a
+CALIPTRA_AXI W count=64 cycle=7087 pc=0000dd1a
+CALIPTRA_AXI W count=65 cycle=7088 pc=0000dd0a
+CALIPTRA_AXI W count=66 cycle=7089 pc=0000dd0a
+CALIPTRA_AXI W count=67 cycle=7090 pc=0000dd0a
+CALIPTRA_AXI W count=68 cycle=7091 pc=0000dd0a
+CALIPTRA_AXI W count=69 cycle=7092 pc=0000dd0a
+CALIPTRA_AXI W count=70 cycle=7093 pc=0000dd0a
+CALIPTRA_AXI W count=71 cycle=7094 pc=0000dd0a
+CALIPTRA_AXI W count=72 cycle=7095 pc=0000dd0c
+CALIPTRA_AXI W count=73 cycle=7096 pc=0000dd0e
+CALIPTRA_AXI W count=74 cycle=7097 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7097 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7098 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=4 cycle=7099 pc=0000dd14
+CALIPTRA_TRACE cycle=7100 retired=2446 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=5 axi_w=74 axi_b=4 axi_r=0
+CALIPTRA_TRACE cycle=7200 retired=2474 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=5 axi_w=74 axi_b=4 axi_r=0
+CALIPTRA_TRACE cycle=7300 retired=2504 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=5 axi_w=74 axi_b=4 axi_r=0
+CALIPTRA_TRACE cycle=7400 retired=2530 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=5 axi_w=74 axi_b=4 axi_r=0
+CALIPTRA_TRACE cycle=7500 retired=2561 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=5 axi_w=74 axi_b=4 axi_r=0
+CALIPTRA_AXI AW count=6 cycle=7529 pc=0000dd1a
+CALIPTRA_AXI W count=75 cycle=7530 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=7530 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=76 cycle=7531 pc=0000dd1a
+CALIPTRA_AXI W count=77 cycle=7532 pc=0000dd1a
+CALIPTRA_AXI W count=78 cycle=7533 pc=0000dd1a
+CALIPTRA_AXI W count=79 cycle=7534 pc=0000dd1a
+CALIPTRA_AXI W count=80 cycle=7535 pc=0000dd1a
+CALIPTRA_AXI W count=81 cycle=7536 pc=0000dd0a
+CALIPTRA_AXI W count=82 cycle=7537 pc=0000dd0a
+CALIPTRA_AXI W count=83 cycle=7538 pc=0000dd0a
+CALIPTRA_AXI W count=84 cycle=7539 pc=0000dd0a
+CALIPTRA_AXI W count=85 cycle=7540 pc=0000dd0a
+CALIPTRA_AXI W count=86 cycle=7541 pc=0000dd0a
+CALIPTRA_AXI W count=87 cycle=7542 pc=0000dd0a
+CALIPTRA_AXI W count=88 cycle=7543 pc=0000dd0c
+CALIPTRA_AXI W count=89 cycle=7544 pc=0000dd0e
+CALIPTRA_AXI W count=90 cycle=7545 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7545 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7546 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=5 cycle=7547 pc=0000dd14
+CALIPTRA_TRACE cycle=7600 retired=2588 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=6 axi_w=90 axi_b=5 axi_r=0
+CALIPTRA_TRACE cycle=7700 retired=2617 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=6 axi_w=90 axi_b=5 axi_r=0
+CALIPTRA_TRACE cycle=7800 retired=2646 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=6 axi_w=90 axi_b=5 axi_r=0
+CALIPTRA_TRACE cycle=7900 retired=2674 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=6 axi_w=90 axi_b=5 axi_r=0
+CALIPTRA_AXI AW count=7 cycle=7977 pc=0000dd1a
+CALIPTRA_AXI W count=91 cycle=7978 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=7978 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=92 cycle=7979 pc=0000dd1a
+CALIPTRA_AXI W count=93 cycle=7980 pc=0000dd1a
+CALIPTRA_AXI W count=94 cycle=7981 pc=0000dd1a
+CALIPTRA_AXI W count=95 cycle=7982 pc=0000dd1a
+CALIPTRA_AXI W count=96 cycle=7983 pc=0000dd1a
+CALIPTRA_AXI W count=97 cycle=7984 pc=0000dd0a
+CALIPTRA_AXI W count=98 cycle=7985 pc=0000dd0a
+CALIPTRA_AXI W count=99 cycle=7986 pc=0000dd0a
+CALIPTRA_AXI W count=100 cycle=7987 pc=0000dd0a
+CALIPTRA_AXI W count=101 cycle=7988 pc=0000dd0a
+CALIPTRA_AXI W count=102 cycle=7989 pc=0000dd0a
+CALIPTRA_AXI W count=103 cycle=7990 pc=0000dd0a
+CALIPTRA_AXI W count=104 cycle=7991 pc=0000dd0c
+CALIPTRA_AXI W count=105 cycle=7992 pc=0000dd0e
+CALIPTRA_AXI W count=106 cycle=7993 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7993 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=7994 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=6 cycle=7995 pc=0000dd14
+CALIPTRA_TRACE cycle=8000 retired=2704 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=7 axi_w=106 axi_b=6 axi_r=0
+CALIPTRA_TRACE cycle=8100 retired=2730 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=7 axi_w=106 axi_b=6 axi_r=0
+CALIPTRA_TRACE cycle=8200 retired=2761 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=7 axi_w=106 axi_b=6 axi_r=0
+CALIPTRA_TRACE cycle=8300 retired=2788 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=7 axi_w=106 axi_b=6 axi_r=0
+CALIPTRA_TRACE cycle=8400 retired=2817 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=7 axi_w=106 axi_b=6 axi_r=0
+CALIPTRA_AXI AW count=8 cycle=8425 pc=0000dd1a
+CALIPTRA_AXI W count=107 cycle=8426 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=8426 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=108 cycle=8427 pc=0000dd1a
+CALIPTRA_AXI W count=109 cycle=8428 pc=0000dd1a
+CALIPTRA_AXI W count=110 cycle=8429 pc=0000dd1a
+CALIPTRA_AXI W count=111 cycle=8430 pc=0000dd1a
+CALIPTRA_AXI W count=112 cycle=8431 pc=0000dd1a
+CALIPTRA_AXI W count=113 cycle=8432 pc=0000dd0a
+CALIPTRA_AXI W count=114 cycle=8433 pc=0000dd0a
+CALIPTRA_AXI W count=115 cycle=8434 pc=0000dd0a
+CALIPTRA_AXI W count=116 cycle=8435 pc=0000dd0a
+CALIPTRA_AXI W count=117 cycle=8436 pc=0000dd0a
+CALIPTRA_AXI W count=118 cycle=8437 pc=0000dd0a
+CALIPTRA_AXI W count=119 cycle=8438 pc=0000dd0a
+CALIPTRA_AXI W count=120 cycle=8439 pc=0000dd0c
+CALIPTRA_AXI W count=121 cycle=8440 pc=0000dd0e
+CALIPTRA_AXI W count=122 cycle=8441 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=8441 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=8442 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=7 cycle=8443 pc=0000dd14
+CALIPTRA_TRACE cycle=8500 retired=2846 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=8 axi_w=122 axi_b=7 axi_r=0
+CALIPTRA_TRACE cycle=8600 retired=2874 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=8 axi_w=122 axi_b=7 axi_r=0
+CALIPTRA_TRACE cycle=8700 retired=2904 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=8 axi_w=122 axi_b=7 axi_r=0
+CALIPTRA_TRACE cycle=8800 retired=2930 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=8 axi_w=122 axi_b=7 axi_r=0
+CALIPTRA_AXI AW count=9 cycle=8873 pc=0000dd1a
+CALIPTRA_AXI W count=123 cycle=8874 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=8874 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=124 cycle=8875 pc=0000dd1a
+CALIPTRA_AXI W count=125 cycle=8876 pc=0000dd1a
+CALIPTRA_AXI W count=126 cycle=8877 pc=0000dd1a
+CALIPTRA_AXI W count=127 cycle=8878 pc=0000dd1a
+CALIPTRA_AXI W count=128 cycle=8879 pc=0000dd1a
+CALIPTRA_AXI W count=129 cycle=8880 pc=0000dd0a
+CALIPTRA_AXI W count=130 cycle=8881 pc=0000dd0a
+CALIPTRA_AXI W count=131 cycle=8882 pc=0000dd0a
+CALIPTRA_AXI W count=132 cycle=8883 pc=0000dd0a
+CALIPTRA_AXI W count=133 cycle=8884 pc=0000dd0a
+CALIPTRA_AXI W count=134 cycle=8885 pc=0000dd0a
+CALIPTRA_AXI W count=135 cycle=8886 pc=0000dd0a
+CALIPTRA_AXI W count=136 cycle=8887 pc=0000dd0c
+CALIPTRA_AXI W count=137 cycle=8888 pc=0000dd0e
+CALIPTRA_AXI W count=138 cycle=8889 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=8889 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=8890 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=8 cycle=8891 pc=0000dd14
+CALIPTRA_TRACE cycle=8900 retired=2961 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=9 axi_w=138 axi_b=8 axi_r=0
+CALIPTRA_TRACE cycle=9000 retired=2988 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=9 axi_w=138 axi_b=8 axi_r=0
+CALIPTRA_TRACE cycle=9100 retired=3017 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=9 axi_w=138 axi_b=8 axi_r=0
+CALIPTRA_TRACE cycle=9200 retired=3046 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=9 axi_w=138 axi_b=8 axi_r=0
+CALIPTRA_TRACE cycle=9300 retired=3074 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=9 axi_w=138 axi_b=8 axi_r=0
+CALIPTRA_AXI AW count=10 cycle=9321 pc=0000dd1a
+CALIPTRA_AXI W count=139 cycle=9322 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=9322 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=140 cycle=9323 pc=0000dd1a
+CALIPTRA_AXI W count=141 cycle=9324 pc=0000dd1a
+CALIPTRA_AXI W count=142 cycle=9325 pc=0000dd1a
+CALIPTRA_AXI W count=143 cycle=9326 pc=0000dd1a
+CALIPTRA_AXI W count=144 cycle=9327 pc=0000dd1a
+CALIPTRA_AXI W count=145 cycle=9328 pc=0000dd0a
+CALIPTRA_AXI W count=146 cycle=9329 pc=0000dd0a
+CALIPTRA_AXI W count=147 cycle=9330 pc=0000dd0a
+CALIPTRA_AXI W count=148 cycle=9331 pc=0000dd0a
+CALIPTRA_AXI W count=149 cycle=9332 pc=0000dd0a
+CALIPTRA_AXI W count=150 cycle=9333 pc=0000dd0a
+CALIPTRA_AXI W count=151 cycle=9334 pc=0000dd0a
+CALIPTRA_AXI W count=152 cycle=9335 pc=0000dd0c
+CALIPTRA_AXI W count=153 cycle=9336 pc=0000dd0e
+CALIPTRA_AXI W count=154 cycle=9337 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=9337 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=9338 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=9 cycle=9339 pc=0000dd14
+CALIPTRA_TRACE cycle=9400 retired=3104 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=10 axi_w=154 axi_b=9 axi_r=0
+CALIPTRA_TRACE cycle=9500 retired=3130 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=10 axi_w=154 axi_b=9 axi_r=0
+CALIPTRA_TRACE cycle=9600 retired=3161 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=10 axi_w=154 axi_b=9 axi_r=0
+CALIPTRA_TRACE cycle=9700 retired=3188 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=10 axi_w=154 axi_b=9 axi_r=0
+CALIPTRA_AXI AW count=11 cycle=9769 pc=0000dd1a
+CALIPTRA_AXI W count=155 cycle=9770 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=9770 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=156 cycle=9771 pc=0000dd1a
+CALIPTRA_AXI W count=157 cycle=9772 pc=0000dd1a
+CALIPTRA_AXI W count=158 cycle=9773 pc=0000dd1a
+CALIPTRA_AXI W count=159 cycle=9774 pc=0000dd1a
+CALIPTRA_AXI W count=160 cycle=9775 pc=0000dd1a
+CALIPTRA_AXI W count=161 cycle=9776 pc=0000dd0a
+CALIPTRA_AXI W count=162 cycle=9777 pc=0000dd0a
+CALIPTRA_AXI W count=163 cycle=9778 pc=0000dd0a
+CALIPTRA_AXI W count=164 cycle=9779 pc=0000dd0a
+CALIPTRA_AXI W count=165 cycle=9780 pc=0000dd0a
+CALIPTRA_AXI W count=166 cycle=9781 pc=0000dd0a
+CALIPTRA_AXI W count=167 cycle=9782 pc=0000dd0a
+CALIPTRA_AXI W count=168 cycle=9783 pc=0000dd0c
+CALIPTRA_AXI W count=169 cycle=9784 pc=0000dd0e
+CALIPTRA_AXI W count=170 cycle=9785 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=9785 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=9786 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=10 cycle=9787 pc=0000dd14
+CALIPTRA_TRACE cycle=9800 retired=3217 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=11 axi_w=170 axi_b=10 axi_r=0
+CALIPTRA_TRACE cycle=9900 retired=3246 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=11 axi_w=170 axi_b=10 axi_r=0
+CALIPTRA_TRACE cycle=10000 retired=3274 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=11 axi_w=170 axi_b=10 axi_r=0
+CALIPTRA_TRACE cycle=10100 retired=3304 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=11 axi_w=170 axi_b=10 axi_r=0
+CALIPTRA_TRACE cycle=10200 retired=3330 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=11 axi_w=170 axi_b=10 axi_r=0
+CALIPTRA_AXI AW count=12 cycle=10217 pc=0000dd1a
+CALIPTRA_AXI W count=171 cycle=10218 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=10218 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=172 cycle=10219 pc=0000dd1a
+CALIPTRA_AXI W count=173 cycle=10220 pc=0000dd1a
+CALIPTRA_AXI W count=174 cycle=10221 pc=0000dd1a
+CALIPTRA_AXI W count=175 cycle=10222 pc=0000dd1a
+CALIPTRA_AXI W count=176 cycle=10223 pc=0000dd1a
+CALIPTRA_AXI W count=177 cycle=10224 pc=0000dd0a
+CALIPTRA_AXI W count=178 cycle=10225 pc=0000dd0a
+CALIPTRA_AXI W count=179 cycle=10226 pc=0000dd0a
+CALIPTRA_AXI W count=180 cycle=10227 pc=0000dd0a
+CALIPTRA_AXI W count=181 cycle=10228 pc=0000dd0a
+CALIPTRA_AXI W count=182 cycle=10229 pc=0000dd0a
+CALIPTRA_AXI W count=183 cycle=10230 pc=0000dd0a
+CALIPTRA_AXI W count=184 cycle=10231 pc=0000dd0c
+CALIPTRA_AXI W count=185 cycle=10232 pc=0000dd0e
+CALIPTRA_AXI W count=186 cycle=10233 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=10233 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=10234 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=11 cycle=10235 pc=0000dd14
+CALIPTRA_TRACE cycle=10300 retired=3361 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=12 axi_w=186 axi_b=11 axi_r=0
+CALIPTRA_TRACE cycle=10400 retired=3388 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=12 axi_w=186 axi_b=11 axi_r=0
+CALIPTRA_TRACE cycle=10500 retired=3417 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=12 axi_w=186 axi_b=11 axi_r=0
+CALIPTRA_TRACE cycle=10600 retired=3446 pc=0000dd14 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=12 axi_w=186 axi_b=11 axi_r=0
+CALIPTRA_AXI AW count=13 cycle=10665 pc=0000dd1a
+CALIPTRA_AXI W count=187 cycle=10666 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=10666 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=188 cycle=10667 pc=0000dd1a
+CALIPTRA_AXI W count=189 cycle=10668 pc=0000dd1a
+CALIPTRA_AXI W count=190 cycle=10669 pc=0000dd1a
+CALIPTRA_AXI W count=191 cycle=10670 pc=0000dd1a
+CALIPTRA_AXI W count=192 cycle=10671 pc=0000dd1a
+CALIPTRA_AXI W count=193 cycle=10672 pc=0000dd0a
+CALIPTRA_AXI W count=194 cycle=10673 pc=0000dd0a
+CALIPTRA_AXI W count=195 cycle=10674 pc=0000dd0a
+CALIPTRA_AXI W count=196 cycle=10675 pc=0000dd0a
+CALIPTRA_AXI W count=197 cycle=10676 pc=0000dd0a
+CALIPTRA_AXI W count=198 cycle=10677 pc=0000dd0a
+CALIPTRA_AXI W count=199 cycle=10678 pc=0000dd0a
+CALIPTRA_AXI W count=200 cycle=10679 pc=0000dd0c
+CALIPTRA_AXI W count=201 cycle=10680 pc=0000dd0e
+CALIPTRA_AXI W count=202 cycle=10681 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=10681 valid=1 ready=1 last=1 pc=0000dd10
+CALIPTRA_AXI WSTATE cycle=10682 valid=0 ready=0 last=0 pc=0000dd14
+CALIPTRA_AXI B count=12 cycle=10683 pc=0000dd14
+CALIPTRA_TRACE cycle=10700 retired=3474 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=13 axi_w=202 axi_b=12 axi_r=0
+CALIPTRA_TRACE cycle=10800 retired=3504 pc=0000dd18 insn=0000c11c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=13 axi_w=202 axi_b=12 axi_r=0
+CALIPTRA_TRACE cycle=10900 retired=3530 pc=0000dd0a insn=0000419c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=13 axi_w=202 axi_b=12 axi_r=0
+CALIPTRA_TRACE cycle=11000 retired=3561 pc=0000dd1a insn=ff0698e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=13 axi_w=202 axi_b=12 axi_r=0
+CALIPTRA_TRACE cycle=11100 retired=3588 pc=0000dd0e insn=00008ff1 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=13 axi_w=202 axi_b=12 axi_r=0
+CALIPTRA_AXI AW count=14 cycle=11113 pc=0000dd1a
+CALIPTRA_AXI W count=203 cycle=11114 pc=0000dd1a
+CALIPTRA_AXI WSTATE cycle=11114 valid=1 ready=1 last=0 pc=0000dd1a
+CALIPTRA_AXI W count=204 cycle=11115 pc=0000dd1a
+CALIPTRA_AXI W count=205 cycle=11116 pc=0000dd1a
+CALIPTRA_AXI W count=206 cycle=11117 pc=0000dd1a
+CALIPTRA_AXI W count=207 cycle=11118 pc=0000dd1a
+CALIPTRA_AXI W count=208 cycle=11119 pc=0000dd1a
+CALIPTRA_AXI W count=209 cycle=11120 pc=0000dd1a
+CALIPTRA_AXI W count=210 cycle=11121 pc=0000dd1e
+CALIPTRA_AXI W count=211 cycle=11122 pc=0000dd22
+CALIPTRA_AXI W count=212 cycle=11123 pc=0000dd24
+CALIPTRA_AXI W count=213 cycle=11124 pc=0000dd26
+CALIPTRA_AXI W count=214 cycle=11125 pc=0000dd26
+CALIPTRA_AXI W count=215 cycle=11126 pc=0000dd26
+CALIPTRA_AXI W count=216 cycle=11127 pc=0000dd26
+CALIPTRA_AXI W count=217 cycle=11128 pc=0000dd26
+CALIPTRA_AXI W count=218 cycle=11129 pc=0000dd28
+CALIPTRA_AXI WSTATE cycle=11129 valid=1 ready=1 last=1 pc=0000dd28
+CALIPTRA_AXI WSTATE cycle=11130 valid=0 ready=0 last=0 pc=0000dd2c
+CALIPTRA_AXI B count=13 cycle=11131 pc=0000dd2e
+CALIPTRA_TRACE cycle=11200 retired=3632 pc=00004672 insn=00008082 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=14 axi_w=218 axi_b=13 axi_r=0
+CALIPTRA_TRACE cycle=11300 retired=3676 pc=00002bba insn=30023737 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=14 axi_w=218 axi_b=13 axi_r=0

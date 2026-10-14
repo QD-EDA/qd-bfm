@@ -1,0 +1,10 @@
+environment_id=caliptra-v2-1-2-csrng_tb
+top=csrng_tb
+source_repo=caliptra_v2.1.2
+filelist=src/csrng/config/csrng_tb_qd02.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=5

@@ -1,0 +1,12 @@
+submitted=2026-10-12T11:02 MDT
+job_id=660
+array=8-51
+throttle=6
+resources=1 CPU, 3 GiB per task; 6h10m scheduler allocation; per-test timeout from selection.tsv (max 6h)
+dependency=none; jobs 591 and 606 had terminated and native-vector preflight job 659 completed successfully
+array_script_sha256=cfc3c25ec2b3ec5390c52ccb58fe03f099311d71786f03681651e26a40018bd3
+selection_sha256=deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289
+qd_source_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+runner_sha256=b3a6c532239e0e1b2eb60daa5328e434a4ae2deb6ae9f1f21825c0aecfe0a4c7
+protected_iverilog=/home/dsell/toolchains/iverilog-c339/iverilog/bin (iverilog 683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb; vvp ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f)
+protected_openssl=/home/dsell/toolchains/iverilog-c339/openssl

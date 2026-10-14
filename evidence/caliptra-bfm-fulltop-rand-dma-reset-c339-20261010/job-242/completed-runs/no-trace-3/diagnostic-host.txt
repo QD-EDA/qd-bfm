@@ -1,0 +1,2 @@
+core-limit=unlimited
+core-pattern=core

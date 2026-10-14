@@ -216,3 +216,9 @@ This BFM is not a drop-in replacement for the released `axi_if` task API or
 full L0 bench. It drives only Caliptra's inbound `s_axi_*` ports. Caliptra's
 outbound `m_axi_*` DMA interface and internal `axi_dma_req_if` compiler errors
 remain separate. No application RTL or DV file is changed for this slice.
+
+## Caliptra BFM stack
+
+The root-level qd_axi4_single_master.sv remains the small directed manager described above. The broader open Caliptra stack is in [dv/caliptra_bfm](dv/caliptra_bfm/README.md): AXI4 and AHB-Lite managers, checkers, monitors, bounded SRAM/FIFO/DMA targets, recovery handling, mailbox SRAM and PV paths, plus focused native UVM and clean-room UVMF compatibility layers. It is a source-compatible recreation with documented boundaries, not Avery/QVIP/ARM VIP or full Caliptra DV qualification.
+
+Set CALIPTRA_RTL to a clean Caliptra v2.1.2 checkout to run Caliptra-dependent regressions. Set IVERILOG_BIN and VVP_BIN to the compiler and runtime to use. The evidence/caliptra-bfm-* directories in this branch retain report and JSON summaries; large generated logs and build products remain in the local BFM development checkout.

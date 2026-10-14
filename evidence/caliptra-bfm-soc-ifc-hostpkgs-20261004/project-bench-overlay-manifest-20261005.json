@@ -1,0 +1,19 @@
+{
+  "excluded_feature": "soc_ifc_cmdline_test and its dynamic factory sequence",
+  "purpose": "Compile generated SoC-IFC project-bench packages with Icarus.",
+  "reason": "The generated sequence uses factory.create_object_by_name, unavailable in this UVM implementation.",
+  "sources": [
+    {
+      "overlay": "/private/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-soc-ifc-env-dfvxlrey/project_bench/sequences/soc_ifc_sequences_pkg.sv",
+      "overlay_sha256": "929efe470ccc1b22025282dc6af8f43393885475483bd79970451d56447d59e8",
+      "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/sequences/soc_ifc_sequences_pkg.sv",
+      "source_sha256": "837d3e1e73d13f644fb31eeccc6be883602b5db7d58f32f5afcd0189f5a110d0"
+    },
+    {
+      "overlay": "/private/var/folders/kt/49lpgwld33s6v4r2xn718tkh0000gn/T/caliptra-soc-ifc-env-dfvxlrey/project_bench/tests/soc_ifc_tests_pkg.sv",
+      "overlay_sha256": "a4d38c843504bcbdfd60526a26e530ad8ce2515b9cbc8fea961627e2d232d331",
+      "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/soc_ifc_tests_pkg.sv",
+      "source_sha256": "df467377efe37cf3ce39e5319d8f51cab8bfb21dbcacd9b7c299b077de2a1fe4"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+Mon Oct 12 18:27:25 MDT 2026
+ 18:27:25 up  9:52,  5 users,  load average: 10.14, 8.90, 8.04
+             JOBID     STATE           START_TIME
+     669_[29-51%6]   PENDING                  N/A
+            669_28   RUNNING  2026-10-12T17:34:11
+            669_26   RUNNING  2026-10-12T17:14:35
+            669_25   RUNNING  2026-10-12T17:11:51
+            669_24   RUNNING  2026-10-12T17:11:18
+            669_23   RUNNING  2026-10-12T17:02:03
+            669_22   RUNNING  2026-10-12T16:14:00
+ 621579    02:12:57 02:12:55 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/871bf14a358781fb-22/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 700978    01:24:55 01:24:53 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 715902    01:15:37 01:15:35 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 716499    01:14:59 01:14:57 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/caliptra_top_tb.vvp +CLP_REGRESSION
+ 720361    01:12:19 01:12:17 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY
+ 742175       52:48 00:52:47 99.9 Rl   /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4ca47c7da4afd810-28/output/caliptra_top_tb.vvp +CLP_REGRESSION +CLP_DMA_TB_MODE_NOT_EMPTY +STRAP_SS_KEY_RELEASE_BASE_ADDR_RAND_SRAM +STRAP_SS_KEY_RELEASE_KEY_SIZE_RAND_LOW +CLP_OCP_LOCK_EN
+task=22 case=smoke_test_kv_securitystate bytes=45302 mtime=2026-10-12 16:14:35.850578774 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent
+task=23 case=smoke_test_datavault_lock bytes=45302 mtime=2026-10-12 17:02:37.775939746 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent
+task=24 case=smoke_test_datavault_mini bytes=45302 mtime=2026-10-12 17:11:56.069808846 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent
+task=25 case=smoke_test_aes_gcm bytes=45302 mtime=2026-10-12 17:12:33.719690019 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent
+task=26 case=smoke_test_dma_aes_gcm_short_1_dword bytes=45302 mtime=2026-10-12 17:15:14.712735197 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent
+task=28 case=smoke_test_dma_aes_kv bytes=45302 mtime=2026-10-12 17:34:44.338477200 -0600
+markers PASS=0
+FAIL=0
+Finished=0
+status.txt absent
+result.json absent

@@ -1,0 +1,20 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/decompose/rtl/decompose.sv:36: Include file abr_prim_assert.sv not found
+Preprocessor failed with 1 errors.
+        0.08 real         0.07 user         0.01 sys
+            11501568  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2270  page reclaims
+                  15  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  10  voluntary context switches
+                  82  involuntary context switches
+            26268302  instructions retired
+            13126372  cycles elapsed
+             1425768  peak memory footprint

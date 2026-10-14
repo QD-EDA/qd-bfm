@@ -1,0 +1,11 @@
+DAN-DESKTOP
+2026-10-11T17:50:03-06:00
+PARTITION|AVAIL|TIMELIMIT|NODES|CPUS(A/I/O/T)|GRES|AVAIL_FEATURES
+verilog*|up|infinite|1|4/16/0/20|(null)|(null)
+             JOBID      STATE       TIME                           NAME
+     418_[16-19%2]    PENDING       0:00              a1-step1-platform
+      457_[0-19%2]    PENDING       0:00                a1-stale-target
+            418_15    RUNNING       4:29              a1-step1-platform
+             460_1    RUNNING      11:19                   caliptra-env
+               451    RUNNING      13:27           a1-boot-budget-check
+            418_14    RUNNING      24:26              a1-step1-platform

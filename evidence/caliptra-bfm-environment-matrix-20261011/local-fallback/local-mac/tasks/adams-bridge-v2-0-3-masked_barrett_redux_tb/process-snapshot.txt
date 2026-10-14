@@ -1,0 +1,4 @@
+Local fallback command: ~/codex-supervisor/localrun 172800 python3 evidence/caliptra-bfm-environment-matrix-20261011/local-fallback/run_local_matrix.py
+At replacement array 388 launch, VVP had run 01:52:25 wall, CPU 96:25, RSS sample 134464 KiB, state R/N.
+Stopped immediately after both job 388 tasks were verified RUNNING to avoid duplicate execution. No final localrun peak-RSS summary was available after the runner was stopped.
+The task's per-stage timeout was 6900 seconds; no sim.log output or terminal testcase result was emitted before stop.

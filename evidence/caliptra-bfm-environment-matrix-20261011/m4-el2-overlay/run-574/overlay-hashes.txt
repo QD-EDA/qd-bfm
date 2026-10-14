@@ -1,0 +1,2 @@
+57f85709aabe5d2c017890e61d40dd149329b3835cf92471cefc7394e0bf21d9  /home/dsell/slurm-runs/caliptra-bfm/a2/m4-env-overlay-c339-20261011-03/source/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
+482057bc2a94b2655746d13bbb208111e5f7386903e13f7a3a40eaf49df6dff0  /home/dsell/slurm-runs/caliptra-bfm/a2/m4-env-overlay-c339-20261011-03/overlays/el2-veer-remove-stale-dft-ports.patch

@@ -1,0 +1,2 @@
+PASS: intra-assignment delay generated four clock edges
+/home/dsell/slurm-runs/caliptra-bfm/a2/minrepro-c339-20261011-01/source/intra_assignment_clock_delay.sv:16: $finish called at 20001 (1ps)

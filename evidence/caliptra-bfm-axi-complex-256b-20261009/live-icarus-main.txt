@@ -1,0 +1,4 @@
+Checked 2026-10-09 with:
+git ls-remote git@github.com:dsellerbrock/iverilog-uvm.git refs/heads/main
+
+c339b9f2287a743aeb7ab6de6528e8d34a4dd602	refs/heads/main

@@ -1,0 +1,7 @@
+Snapshot, 2026-10-12 07:20:54 MDT
+- SSH to DAN-DESKTOP reset at port 22; Slurm remains unavailable.
+- The simulator log's last write was 06:58:42 MDT. VVP PID 53757 remained active for 22m25s, using 91.6% CPU and 976,800 KiB RSS at the sample.
+- `sample` shows most time in `schedule_simulate` / `vthread_run`, especially `vpip_vec4_to_int64_saturated` and vector part-select operations. This shows CPU activity, not firmware progress.
+- The log contains no terminal testcase PASS/FAIL or result.json. Its generated key/vector payload is retained only in raw evidence and not reproduced here.
+- `ask-intern` could not read its API key from DAN-DESKTOP, so the log was checked locally without classifying a result.
+- The run remains active under localrun's 6,873-second timeout. No second local heavy task was started.

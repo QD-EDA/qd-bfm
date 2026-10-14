@@ -1,0 +1,4 @@
+host=DAN-DESKTOP
+rtl_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+BUILD_CFLAGS=-std=gnu11 -O2 -fgnu89-inline
+exit_code=2

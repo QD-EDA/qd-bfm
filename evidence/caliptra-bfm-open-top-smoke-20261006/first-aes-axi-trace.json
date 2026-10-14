@@ -1,0 +1,101 @@
+{
+  "status": "PASS_DIAGNOSTIC_FIRST_AES_DMA_CASE",
+  "diagnostic_only": true,
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "runner_commit": "1f816c6e117235e314a5e5d4e3baecb3636494e1",
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "runner_options": [
+    "--fast-trng",
+    "--first-aes-case-diagnostic"
+  ],
+  "sim_plusargs": [
+    "+CLP_REGRESSION",
+    "+CLP_DMA_TB_MODE_NOT_EMPTY",
+    "+CLP_SKIP_PQ_VECTOR_GENERATION"
+  ],
+  "memory_guard": {
+    "free_floor_percent": 60,
+    "minimum_observed_percent": 75,
+    "timeout_seconds": 900,
+    "exit_code": 0
+  },
+  "simulator": {
+    "iverilog_version": "13.0 (devel) (246c58e4-dirty)",
+    "image_bytes": 324207957,
+    "image_sha256": "2c62f9c063a1ac8b0516f8af33beb6c8765af2af202810e58cdb6924d07b98ba",
+    "profile_sha256": "98b8704df54ac6374c2d686f5af53dabc561f63eead56a3773b05fd232b62aeb",
+    "compile_log_sha256": "99344e3a9e50a5306fbe47cb99a28095a37f4602a7d7d9d8830d9a8a4e251cb4"
+  },
+  "axi_dma": {
+    "handshakes": {
+      "AR": 2,
+      "R": 2,
+      "AW": 2,
+      "W": 2,
+      "B": 2
+    },
+    "events": [
+      {
+        "channel": "AW",
+        "cycle": 2905,
+        "address": "0x123440000"
+      },
+      {
+        "channel": "W",
+        "cycle": 2906
+      },
+      {
+        "channel": "B",
+        "cycle": 2908
+      },
+      {
+        "channel": "AR",
+        "cycle": 4359,
+        "address": "0x123440000"
+      },
+      {
+        "channel": "R",
+        "cycle": 4361
+      },
+      {
+        "channel": "AW",
+        "cycle": 4447,
+        "address": "0x123460000"
+      },
+      {
+        "channel": "W",
+        "cycle": 4448
+      },
+      {
+        "channel": "B",
+        "cycle": 4450
+      },
+      {
+        "channel": "AR",
+        "cycle": 4594,
+        "address": "0x123460000"
+      },
+      {
+        "channel": "R",
+        "cycle": 4596
+      }
+    ]
+  },
+  "firmware": {
+    "testcase_passed": true,
+    "testcase_marker": "TESTCASE PASSED",
+    "normal_finish": true,
+    "finish_marker": "$finish called at 52300000 (1ps)",
+    "simulation_cycles": 5230,
+    "retired_instructions": 1857,
+    "jtag_port_bound": true
+  },
+  "trace": {
+    "file": "first-aes-axi-trace.log",
+    "bytes": 11763,
+    "sha256": "d4bdd4bbf597d6f3bc8f8c09e2ae225e5e94bae2b03ba349afbaecf30f60d6b2",
+    "vpi_source": "sim-axi-trace-vpi.c",
+    "vpi_source_sha256": "bd4205500aab6aca7833cd67006b6b7ffdacc5f28beacc2f02ea768597a2145b"
+  },
+  "qualification": "The open AXI target services the first 1-dword AES/DMA firmware case through source write/read and destination write/readback on the full Caliptra top. This uses a diagnostic firmware copy, fast TRNG cadence, and PQ vector suppression; it does not qualify stock firmware, the full DMA suite, entropy timing, or general AXI signoff."
+}

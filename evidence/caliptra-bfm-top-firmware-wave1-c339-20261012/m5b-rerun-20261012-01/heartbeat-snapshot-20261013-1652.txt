@@ -1,0 +1,15 @@
+DAN-DESKTOP queue snapshot at 16:52 MDT, 2026-10-13.
+Host uptime: 1 day, 8 hours, 17 minutes.
+
+Job 799, array throttle 6:
+  799_25 RUNNING 4:18:14; smoke_test_ecc_verify; wall_s=15300 mcycle=106937.
+  799_27 RUNNING 3:13:40; smoke_test_ecc_errortrigger3; wall_s=11400 mcycle=79930.
+  799_28 RUNNING 2:51:14; smoke_test_ecc_errortrigger4; wall_s=10200 mcycle=8745.
+  799_30 RUNNING 2:25:59; kv_entry_read_err; wall_s=8400 mcycle=59669.
+  799_32 RUNNING 1:59:55; smoke_test_ecc_flow1_kv_ocp_progress; wall_s=6900 mcycle=48866.
+  799_33 RUNNING 1:30:55; smoke_test_kv_rules_ocp_lock; wall_s=5400 mcycle=37240.
+  799_34-42 PENDING at throttle 6.
+
+Task 25 is near its 16,033-second cap. Task 28's mcycle rose from 4,430 at
+wall 9,600 to 8,745 at wall 10,200 after its earlier drop; cause unknown.
+All six active logs are non-flat and have no terminal result.

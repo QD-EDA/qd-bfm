@@ -1,0 +1,24 @@
+AXI master rejected burst outside the Caliptra profile
+AXI master read data timeout; reset required before reuse
+PASS: AXI manager bursts, USER/LOCK, stalls, errors, timeout and reset recovery
+tb_axi4_caliptra_master.sv:519: $finish called at 1050000 (1ps)
+AXI master rejected burst outside the Caliptra profile
+AXI master rejected burst outside the Caliptra profile
+PASS: AXI manager WRAP, narrow INCR, and invalid burst shapes
+tb_axi4_caliptra_master.sv:317: $finish called at 1230000 (1ps)
+PASS: AXI manager completes a write when W is accepted before AW
+tb_axi4_caliptra_master.sv:334: $finish called at 120000 (1ps)
+PASS: AXI manager overlaps independent read and write tasks
+tb_axi4_caliptra_master.sv:365: $finish called at 130000 (1ps)
+PASS: AXI manager aborts in-flight reads and writes on reset, then recovers
+tb_axi4_caliptra_master.sv:413: $finish called at 360000 (1ps)
+AXI master write response has no outstanding BID
+PASS: bad BID poisons manager until reset, then recovers
+tb_axi4_caliptra_master.sv:434: $finish called at 170000 (1ps)
+AXI master read response ID or RLAST mismatch
+PASS: bad RLAST poisons manager until reset, then recovers
+tb_axi4_caliptra_master.sv:452: $finish called at 150000 (1ps)
+PASS: AXI manager bounds queued reads and routes out-of-order responses by ID
+tb_axi4_caliptra_master_outstanding.sv:136: $finish called at 210000 (1ps)
+PASS: AXI manager queues writes, preserves AW/W payloads, and routes out-of-order BID responses
+tb_axi4_caliptra_master_write_outstanding.sv:217: $finish called at 240000 (1ps)

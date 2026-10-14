@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-07",
+  "classification": "diagnostic_only_not_qualification",
+  "qualification_reason": "Dirty, unpublished Icarus revision and reused fast-boot diagnostic firmware image; guard timeout before testcase completion.",
+  "run": {
+    "test": "rand_test_dma",
+    "caliptra_rtl_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "iterations": 1,
+    "transfer_type": "AHB2AXI",
+    "transfer_dwords": 208,
+    "forced_first_reset": true,
+    "reset_delay_cycles": 3870,
+    "fast_trng": true,
+    "fast_boot_data_preload_image_reused": true,
+    "checker_enabled": true,
+    "dma_generator_overlay_sha256": "a9f2485cb71d714a43a1318b8a8700109027a9e1b7afcf9511c0574fa870af11",
+    "services_overlay_sha256": "76efbf9345aea9961f572be425ab96c3c5a76034c48cf81ceec1dd69b29b13d4",
+    "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654",
+    "profile_sha256": "c670f09b014ff215e64cf1445f2475da5d52c165d85cf1e6d912cf74b8684b7d"
+  },
+  "simulator": {
+    "iverilog_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "source_checkout_state": "dirty_unpublished",
+    "qualification_eligible": false
+  },
+  "termination": {
+    "memory_guard_timeout_seconds": 1800,
+    "stopped_by_guard": true,
+    "guard_exit_code": 124,
+    "simulator_exit_code": null,
+    "testcase_completion_observed": false
+  },
+  "scan": {
+    "testcase_pass_markers": 0,
+    "testcase_fail_markers": 0,
+    "bad_diagnostics": 0,
+    "jtag_server_errors": 0,
+    "reset_assert_cycles": [
+      6270
+    ],
+    "outstanding_writes_at_reset": [
+      1
+    ],
+    "reset_in_flight": true,
+    "finish": null,
+    "uvm_warning_count": 0,
+    "uvm_error_count": 0,
+    "uvm_fatal_count": 0
+  },
+  "observed": {
+    "reset_requests": [
+      2399
+    ],
+    "reset_edges": [
+      {
+        "state": "deassert",
+        "cycle": 21
+      },
+      {
+        "state": "assert",
+        "cycle": 6270
+      },
+      {
+        "state": "deassert",
+        "cycle": 6280
+      }
+    ],
+    "last_sampled_cycle": 10600,
+    "axi_handshake_totals": {
+      "AW": 12,
+      "W": 175,
+      "B": 10,
+      "AR": 0,
+      "R": 0
+    },
+    "last_axi_handshake_cycles": {
+      "AW": 10597,
+      "W": 10106,
+      "B": 10140,
+      "AR": null,
+      "R": null
+    },
+    "note": "At reset, eight AW, 127 W, and seven B handshakes had occurred. Post-reset traffic continued to eleven AW, 175 W, and ten B handshakes before timeout."
+  },
+  "trace": {
+    "raw_log_sha256": "c57d93d77dea2e48c500fde22a395e8d6ad34e2abf0b79d2983921a0b478f3f0",
+    "sanitized_log": "sim-trace-sanitized.log",
+    "sanitized_log_sha256": "52ccf495ff6b7e8a275bd733e7730ad456a50ec361a6a0153432b531b40b2644",
+    "raw_log_retained": false
+  }
+}

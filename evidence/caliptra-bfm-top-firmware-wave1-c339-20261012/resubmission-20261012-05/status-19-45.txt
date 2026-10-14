@@ -1,0 +1,58 @@
+2026-10-12 19:45:18 MDT
+ 19:45:18 up 11:10,  4 users,  load average: 14.63, 12.02, 10.27
+             JOBID      STATE       TIME     CPUS NODELIST(REASON)
+     669_[30-51%6]    PENDING       0:00        1 (JobArrayTaskLimit)
+            669_29    RUNNING      23:56        1 DAN-DESKTOP
+            669_28    RUNNING    2:11:07        1 DAN-DESKTOP
+            669_26    RUNNING    2:30:43        1 DAN-DESKTOP
+            669_25    RUNNING    2:33:27        1 DAN-DESKTOP
+            669_24    RUNNING    2:34:00        1 DAN-DESKTOP
+            669_23    RUNNING    2:43:15        1 DAN-DESKTOP
+run=40ec556410264b2f-23 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output/smoke_test_datavault_lock/sim.log bytes=49398
+ mtime=2026-10-12 19:19:22.930981052 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=483ee327507dab77-24 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output/smoke_test_datavault_mini/sim.log bytes=49398
+ mtime=2026-10-12 19:34:16.394807015 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=6bccff716e6bcab5-25 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output/smoke_test_aes_gcm/sim.log bytes=45302
+ mtime=2026-10-12 17:12:33.719690019 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=ca84d5f757b500b2-26 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output/smoke_test_dma_aes_gcm_short_1_dword/sim.log bytes=45302
+ mtime=2026-10-12 17:15:14.712735197 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=4ca47c7da4afd810-28 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4ca47c7da4afd810-28/output/smoke_test_dma_aes_kv/sim.log bytes=45302
+ mtime=2026-10-12 17:34:44.338477200 -0600
+ pass=0
+ fail=0
+ finish=0
+
+run=3439695c6637d6f2-29 status_files=0
+ result_jsons=0
+ sim_log=/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output/jtag_tap_mbox/sim.log bytes=45302
+ mtime=2026-10-12 19:22:05.106839463 -0600
+ pass=0
+ fail=0
+ finish=0
+

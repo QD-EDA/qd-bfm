@@ -1,0 +1,14 @@
+{
+  "environment_id": "adams-bridge-v2-0-3-butterfly_top_tb",
+  "top": "butterfly_top_tb",
+  "source_repo": "adams_bridge_v2.0.3",
+  "filelist": "src/ntt_top/config/butterfly_top_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb",
+  "compile_exit": 1,
+  "compile_seconds": 0.37,
+  "sim_exit": null,
+  "sim_seconds": null,
+  "classification": "FAIL",
+  "blocker_class": "simulator",
+  "classification_note": "Icarus VVP code generation exceeded its 512-flag limit"
+}

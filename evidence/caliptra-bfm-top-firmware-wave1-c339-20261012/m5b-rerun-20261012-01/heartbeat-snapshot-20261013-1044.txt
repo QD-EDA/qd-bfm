@@ -1,0 +1,21 @@
+DAN-DESKTOP queue snapshot at 10:44 MDT, 2026-10-13.
+Host uptime: 1 day, 2 hours, 9 minutes.
+
+Job 799, array throttle 6:
+  799_18 TIMEOUT; smoke_test_datavault_mini; elapsed=12257 s; final mcycle=85975.
+  799_19 RUNNING 1:50:14; smoke_test_aes_gcm; wall_s=6300 mcycle=44228.
+  799_20 RUNNING 1:40:24; smoke_test_dma_aes_gcm_short_1_dword; wall_s=5700 mcycle=39945.
+  799_21 RUNNING 1:19:02; jtag_tap_mbox; wall_s=4500 mcycle=31617.
+  799_22 RUNNING 1:03:43; iccm_lock; wall_s=3600 mcycle=25138.
+  799_23 RUNNING 0:45:39; smoke_test_ecc_keygen; wall_s=2700 mcycle=19386.
+  799_24 RUNNING 0:19:24; smoke_test_ecc_sign; wall_s=900 mcycle=6543.
+  799_25-42 PENDING at throttle 6.
+
+Task 799_18's configured cap and recorded elapsed time are both 12,257 seconds;
+runner exit was 137. The wrapper reports INFRA_ERROR, corrected to TIMEOUT by
+the matching cap and exit. The full simulator log ends at wall_s=12000,
+mcycle=85975. Its 41 raw heartbeat samples advance throughout, with no adjacent
+flat mcycle interval. No result JSON or testcase PASS/FAIL marker was present.
+
+The six active rows' latest heartbeats were checked directly against sim.log.
+No result JSON or explicit PASS/FAIL marker was found for them.

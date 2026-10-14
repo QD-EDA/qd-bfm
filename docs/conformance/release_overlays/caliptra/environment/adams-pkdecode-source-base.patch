@@ -1,0 +1,10 @@
+--- a/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
++++ b/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv
+@@ -246,7 +246,7 @@
+     reset_dut();
+     $display("Reading test vectors from hex files\n");
+     pkdecode_test('h0, 'h0);
+-    pkdecode_test('h40, 'h20);
++    pkdecode_test('h40, 'h0);
+     $finish;
+ end

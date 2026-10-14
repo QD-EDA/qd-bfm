@@ -1,0 +1,14 @@
+Runs were performed from a clean extraction of qd-bfm-source.tar.gz with:
+
+IVERILOG_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/iverilog
+VVP_BIN=/private/tmp/iverilog-uvm-install-4b3f342/bin/vvp
+CALIPTRA_BFM_MAX_PROCESS_BYTES=400000000
+CALIPTRA_BFM_MIN_AVAILABLE_BYTES=6000000000
+CALIPTRA_BFM_MEMORY_GUARD_TIMEOUT_SECONDS=300
+
+Commands:
+
+sh dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_scoreboard.sh
+sh dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_agent.sh
+sh dv/caliptra_bfm/uvmf_lite/tests/run_uvmf_transaction_key.sh
+sh dv/caliptra_bfm/uvmf_lite/tests/run_default_reset_gen.sh

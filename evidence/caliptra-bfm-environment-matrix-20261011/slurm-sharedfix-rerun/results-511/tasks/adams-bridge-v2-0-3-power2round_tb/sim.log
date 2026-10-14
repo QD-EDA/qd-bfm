@@ -1,0 +1,16 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Read input test vectors from coeff_input.hex
+Read input test vectors from coeff_high.hex
+Read input test vectors from coeff_low.hex
+Starting power2round test
+
+Test done
+
+*** All 2048 test cases completed successfully
+* TESTCASE PASSED
+
+*** ecc simulation done. ***
+/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:314: $finish called at 5255 (1s)

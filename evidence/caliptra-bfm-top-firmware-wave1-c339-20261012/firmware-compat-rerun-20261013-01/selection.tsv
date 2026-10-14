@@ -1,0 +1,4 @@
+array_index	source_row	test_id	matrix_testname	case_dir	case_yaml	yaml_testname	expected_mcycle	timeout_s	compat_overlay	selection_basis
+1	9	1e057b20d3564828	smoke_test_uart	smoke_test_uart	smoke_test_uart/smoke_test_uart.yml	smoke_test_uart	16840	8712	caliptra-legacy-uart-qspi-reg-compat.h	original row 9; pinned-only firmware build failed on missing UART register identifiers
+2	27	9f91b0f948764f74	smoke_test_qspi	smoke_test_qspi	smoke_test_qspi/smoke_test_qspi.yml	smoke_test_qspi	29480	13899	caliptra-legacy-uart-qspi-reg-compat.h	original row 27; pinned-only firmware build failed on missing QSPI register identifiers
+3	31	eaeb97287ce63194	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger5	smoke_test_ecc_errortrigger5/smoke_test_ecc_errortrigger5.yml	smoke_test_ecc_errortrigger4	33960	15738	caliptra-errortrigger5-abr-compat.h	original row 31; ABR hooks missing; case directory is errortrigger5 while YAML testname is errortrigger4

@@ -1,0 +1,4 @@
+outcome=FAIL
+reason=terminal_result_failed_or_yaml_name_mismatch
+runner_exit=1
+result_testname=smoke_test_ecc_errortrigger2

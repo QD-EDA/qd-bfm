@@ -1,0 +1,8 @@
+environment_id=adams-bridge-v2-0-3-skencode_tb
+top=skencode_tb
+filelist=src/sk_encode/config/skencode_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=0
+failure_markers=0

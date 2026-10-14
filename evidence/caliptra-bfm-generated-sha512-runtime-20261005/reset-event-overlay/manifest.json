@@ -1,0 +1,12 @@
+{
+  "change": "Wait through reset, then capture one output when read_flag_monitor is asserted.",
+  "filelist": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/evidence/caliptra-bfm-generated-sha512-runtime-20261005/sha512_generated_full.f",
+  "filelist_sha256": "fcc7c718de6915a0fe00af582f830de12ef96c4b6d008a9811c9de7734002a22",
+  "overlay_filelist_sha256": "7b2d37f1ef4d5ad29e06824685224c93ed43941b2d3b5522a56a081a15b2ad7f",
+  "overlay_source_retained": false,
+  "overlay_source_sha256": "32cd928c01b979103f4a649fe448024f98e735dcbd0b38c87d5638a8798b57b6",
+  "purpose": "Remove a reset-only SHA512 output record that shifts the expected/actual stream.",
+  "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/sha512/uvmf_sha512/uvmf_template_output/verification_ip/interface_packages/SHA512_out_pkg/src/SHA512_out_monitor_bfm.sv",
+  "source_checkout_modified": false,
+  "source_sha256": "3eb250732e4553aecf0e6e5515884c9394a88f3b2259c9a3d3b741275f9731ff"
+}

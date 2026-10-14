@@ -1,0 +1,10 @@
+Slurm job: 268_1
+Submitted: 2026-10-10 (DAN-DESKTOP)
+State at initial queue check: RUNNING
+Partition: verilog
+Resources: 1 CPU, 3 GB, 2-hour Slurm limit
+Runner timeout: 7000 seconds
+Scenario: repeat job 252_1 with rand_test_dma, seed 1, one transfer, forced first reset, fixed delay 2822 cycles, AXI trace enabled
+Pinned QD/Icarus/UVM/Caliptra/Adams-Bridge/JTAG-VPI identities match job-243/array.sbatch and are checked by the job script.
+Remote output root: /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-08
+Fresh isolated output root; no prior output was reused.

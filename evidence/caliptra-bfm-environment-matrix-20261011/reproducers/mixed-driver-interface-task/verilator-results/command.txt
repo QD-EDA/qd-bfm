@@ -1,0 +1,1 @@
+~/codex-supervisor/localrun 120 sh -c 'verilator --binary --timing --top-module axi_if_task_mixed_driver -Wno-fatal --Mdir /tmp/a2-vlt-interface-task-final evidence/caliptra-bfm-environment-matrix-20261011/reproducers/mixed-driver-interface-task/axi_if_task_mixed_driver.sv && /tmp/a2-vlt-interface-task-final/Vaxi_if_task_mixed_driver'

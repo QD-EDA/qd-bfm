@@ -1,0 +1,19 @@
+0.000 ns - ----------------------------------
+0.000 ns -  AES-GCM smoke test !!
+0.000 ns - ----------------------------------
+0.000 ns - Test Case 1
+0.000 ns - Configuring AES for little endian mode
+0.000 ns - Write AES CTRL with value 0x481
+0.000 ns - Load Key data to AES
+0.000 ns - Write AES IV
+0.000 ns - Read and Compare GCM TAG
+0.000 ns - AES Operation Complete
+0.000 ns - Test Case 2
+0.000 ns - Configuring AES for little endian mode
+0.000 ns - Write AES CTRL with value 0x481
+0.000 ns - Load Key data to AES
+0.000 ns - Write AES IV
+0.000 ns - Write AES Input Data Block 0
+0.000 ns - Read and Compare GCM TAG
+0.000 ns - AES Operation Complete
+0.000 ns - Test Case 3

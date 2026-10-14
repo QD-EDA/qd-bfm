@@ -1,0 +1,6 @@
+Host: macOS, arm64
+Verilator: 5.051 devel rev v5.050-196-g7dcd4e0b6 (mod)
+Command: /Users/danielellerbrock/codex-supervisor/localrun 120 /Users/danielellerbrock/oss-cad-suite/bin/verilator --binary --timing --build-jobs 1 --top-module intra_assignment_bit_clock_delay --Mdir /tmp/a2-repro-clock-bit evidence/caliptra-bfm-environment-matrix-20261011/reproducers/intra-assignment-clock-delay/intra_assignment_bit_clock_delay.sv
+Run: /Users/danielellerbrock/codex-supervisor/localrun 30 /tmp/a2-repro-clock-bit/Vintra_assignment_bit_clock_delay
+Result: compile succeeded; runtime printed PASS and finished at 20 ns.
+Pinned c339 compile result: ../iverilog-c339/clock-bit-results/intra_assignment_bit_clock_delay/compile.log (job 524 on DAN-DESKTOP).

@@ -1,0 +1,7 @@
+memory guard: preflight available 33.07 GiB; process-group cap 3.73 GiB; system reserve 5.59 GiB
+PASS: AXI channel and FIFO auto delays match Caliptra range weights 500/75/3/1
+dv/caliptra_bfm/axi/tests/tb_axi4_caliptra_random_stalls_distribution.sv:51: $finish called at 0 (1s)
+[0] TB: one-shot AXI SLVERR range 0xfa570000 to 0x123440000
+PASS: Caliptra AXI complex BFM errors, SRAM/FIFO traffic, FIFO controls, recovery availability, randomized stalls, 208-dword segmented readback, and maximum 256-beat AXI bursts
+dv/caliptra_bfm/axi/tests/tb_caliptra_top_tb_axi_complex_bfm.sv:467: $finish called at 30110000 (1ps)
+memory guard: command exited 0; minimum available 33.07 GiB; maximum process group 0.02 GiB

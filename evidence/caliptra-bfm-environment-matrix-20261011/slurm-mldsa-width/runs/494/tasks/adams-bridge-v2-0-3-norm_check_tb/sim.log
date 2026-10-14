@@ -1,0 +1,41 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Starting check norm ctrl test
+
+Z bound mode
+
+Norm check for z is successful
+
+r0 bound mode
+
+Norm check for r0 is successful
+
+ct0 bound mode
+
+Norm check for r0 is successful
+
+Rejected test for ct0 bound mode
+
+Starting poly 0
+Starting poly 1
+Starting poly 2
+Starting poly 3
+Starting poly 4
+Starting poly 5
+Starting poly 6
+Starting poly 7
+Norm check for ct0 is rejected as expected
+
+Z bound mode
+
+Norm check for z is rejected as expected
+
+r0 bound mode
+
+Norm check for r0 is rejected as expected
+
+Ctrl test done
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/norm_check/tb/norm_check_tb.sv:429: $finish called at 13804095 (1s)

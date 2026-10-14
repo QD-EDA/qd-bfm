@@ -1,0 +1,21 @@
+host=DAN-DESKTOP
+captured_at=2026-10-13 06:07 MDT
+job_799=running; tasks_9_14=running; tasks_15_42=pending_at_array_throttle_6
+job_823_1_2=running
+job_826_1=running
+
+job_799 task 7: TIMEOUT; timeout_s=7628; elapsed_s=7628; last_wall_s=7500; last_mcycle=51400; max_flat_wall_s=0
+job_799 task 8: TIMEOUT; timeout_s=7956; elapsed_s=7956; last_wall_s=7800; last_mcycle=54368; max_flat_wall_s=0
+job_799 task 9: wall_s=7800 mcycle=53217 max_flat_wall_s=0
+job_799 task 10: wall_s=7800 mcycle=52961 max_flat_wall_s=0
+job_799 task 11: wall_s=7800 mcycle=53352 max_flat_wall_s=0
+job_799 task 12: wall_s=7500 mcycle=52732 max_flat_wall_s=0
+job_799 task 13: wall_s=600 mcycle=3839 max_flat_wall_s=0
+job_799 task 14: wall_s=300 mcycle=1945 max_flat_wall_s=0
+
+job_823 task 1 / source row 9: wall_s=7200 mcycle=48560 max_flat_wall_s=0
+job_823 task 2 / source row 27: wall_s=7200 mcycle=48683 max_flat_wall_s=0
+job_826 task 1 / source row 31: wall_s=6600 mcycle=45555 max_flat_wall_s=0
+
+All live tasks have advancing mcycle heartbeats. No active task meets the
+30-minute flat-mcycle hang criterion.

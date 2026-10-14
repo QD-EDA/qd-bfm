@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "date": "2026-10-07",
+  "test": "dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_bfm.sh",
+  "editions": {
+    "2012": {
+      "pass_marker": "PASS: Caliptra ECC RTL AHB write/readback through native manager",
+      "completed_transfers": 2,
+      "checker_errors": 0,
+      "monitor_errors": 0,
+      "memory_guard_preflight_free_percent": 54,
+      "memory_guard_minimum_free_percent": 54,
+      "log": "verify-2012.log",
+      "log_sha256": "53a53be5a1fd44f485c42f1bff40ea3da3cb59984f428cfb5995e2533571552a"
+    },
+    "2017": {
+      "pass_marker": "PASS: Caliptra ECC RTL AHB write/readback through native manager",
+      "completed_transfers": 2,
+      "checker_errors": 0,
+      "monitor_errors": 0,
+      "memory_guard_preflight_free_percent": 54,
+      "memory_guard_minimum_free_percent": 54,
+      "log": "verify-2017.log",
+      "log_sha256": "53a53be5a1fd44f485c42f1bff40ea3da3cb59984f428cfb5995e2533571552a"
+    },
+    "2023": {
+      "pass_marker": "PASS: Caliptra ECC RTL AHB write/readback through native manager",
+      "completed_transfers": 2,
+      "checker_errors": 0,
+      "monitor_errors": 0,
+      "memory_guard_preflight_free_percent": 53,
+      "memory_guard_minimum_free_percent": 53,
+      "log": "verify-2023.log",
+      "log_sha256": "9c924a5838fbe040171780dcf59f724d159769087cac46813fec1886420a6c4a"
+    }
+  },
+  "caliptra_rtl": {
+    "commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "ecc_top_vf_sha256": "a1b22f20543ebdc0b732981c96554bd287e98d11236fa5d1860c8819aae95ef2",
+    "ecc_top_sha256": "5b727a2f05dace84b262b61a0c5b303b32268b08bf57d0463fbf7589c0241a1c"
+  },
+  "simulator": {
+    "name": "Icarus Verilog",
+    "version": "13.0 (devel) (ac4532fa-dirty)",
+    "source_merge_commit": "ac4532fab037e91df2f903e67fb40f59baedccca",
+    "merged_origin_main": "197f9baece79e66d25524906fb7b54c9faa8f4e2",
+    "iverilog_sha256": "6e756b01d956e5686c9bb00fd443465dba00ef8f4c77d1ae91b45e78d641c114",
+    "vvp_sha256": "4bf80d6d22b44c22d518514c2f98f1f3fd485d77ba7c63bc97e68770d58b2867"
+  },
+  "ram_guard_free_percent_floor": 40,
+  "source_sha256": {
+    "dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_master.sv": "520933e2b42ba6f2e5e58e1c5be3f48088e50823045c9cdba2c4700e30d57061",
+    "dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_checker.sv": "ee3a6f9313dad251568011ac126f30f418de0f2ce15828d0e40dc0f42ffc2c05",
+    "dv/caliptra_bfm/ahb_lite/ahb_lite_caliptra_monitor.sv": "e97eecb2f695ae9af551722318eb46dae5ae9ec11181109ca159178dd36bbf08",
+    "dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_ecc_ahb_bfm.sv": "9688a458bab730e6ed81fa9848f8a38cff2980768fd163c6254f36f8b0058ad7",
+    "dv/caliptra_bfm/ahb_lite/tests/run_caliptra_ecc_ahb_bfm.sh": "6607ea2ec3747ad67be37ab003c089d98cbb088b0b901ddf8916a207ed3d5fa8",
+    "dv/caliptra_bfm/uvm/ahb_lite_caliptra_uvm_pkg.sv": "78b30970d93cb1c3984fbb67868d0c548b07c7c44d5f9eb84bb329c036be5fe4",
+    "dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f": "4e097b2f504c956084f91e94c8e7d8b3c64b55965fcddc929e94e39aee09f1f4",
+    "evidence/caliptra-bfm-ahb-merged-iverilog-20261007/verify-2012.log": "53a53be5a1fd44f485c42f1bff40ea3da3cb59984f428cfb5995e2533571552a",
+    "evidence/caliptra-bfm-ahb-merged-iverilog-20261007/verify-2017.log": "53a53be5a1fd44f485c42f1bff40ea3da3cb59984f428cfb5995e2533571552a",
+    "evidence/caliptra-bfm-ahb-merged-iverilog-20261007/verify-2023.log": "9c924a5838fbe040171780dcf59f724d159769087cac46813fec1886420a6c4a"
+  }
+}

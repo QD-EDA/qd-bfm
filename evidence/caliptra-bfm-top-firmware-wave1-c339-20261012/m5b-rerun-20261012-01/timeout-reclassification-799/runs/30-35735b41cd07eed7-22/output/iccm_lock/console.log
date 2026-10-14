@@ -1,0 +1,11 @@
+0.000 ns - ----------------------------------
+0.000 ns - ICCM Lock Test from VeeR EL2  !!
+0.000 ns - ----------------------------------
+0.000 ns - Copying code from 50023C80 [through 50023DCC] to 40000000
+0.000 ns - First pass through ICCM LOCK test!
+0.000 ns - Test DCCM at addr: 0x500286A4
+0.000 ns - Rd data (0xAAAAAAAA) after DCCM wr matches exp (0xAAAAAAAA)!
+0.000 ns - Comparing first pass of the copy code from 50023C80 [through 50023DCC] to 40000000
+0.000 ns - Copying code from 50023EAC [through 500246A0] to 40000000
+0.000 ns - **** NMI ****
+0.000 ns - At the end of first pass through ICCM LOCK test: resetting the core!

@@ -1,0 +1,5 @@
+QD base commit: 16ae08093aff9e7b7e49f463bd014bad8f9b0a03
+Icarus source commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+memory guard: preflight available 17.75 GiB; process-group cap 0.70 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 13.46 GiB; maximum process group 0.40 GiB

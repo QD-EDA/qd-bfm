@@ -1,0 +1,17 @@
+DAN-DESKTOP queue snapshot at 13:00 MDT, 2026-10-13.
+Host uptime: 1 day, 4 hours, 25 minutes.
+
+Job 799, array throttle 6:
+  799_21 RUNNING 3:35:12; jtag_tap_mbox; wall_s=12600 mcycle=90981.
+  799_22 RUNNING 3:19:53; iccm_lock; wall_s=11700 mcycle=6469.
+  799_23 RUNNING 3:01:49; smoke_test_ecc_keygen; wall_s=10800 mcycle=78835.
+  799_24 RUNNING 2:35:34; smoke_test_ecc_sign; wall_s=9300 mcycle=68128.
+  799_25 RUNNING 0:26:12; smoke_test_ecc_verify; wall_s=1500 mcycle=10638.
+  799_26 RUNNING 0:14:11; smoke_test_ecc_errortrigger2; wall_s=600 mcycle=4152.
+  799_27-42 PENDING at throttle 6.
+
+All six active rows' mcycle values advanced from the 12:49 snapshot. Task 22's
+mcycle had dropped from 72,892 at wall_s=10200 to 2,215 at wall_s=11100, then
+advanced to 6,469 at wall_s=11700; the temporary flat interval ended. No cause
+is inferred. No result JSON or explicit testcase PASS/FAIL marker was found
+for active rows.

@@ -1,0 +1,10 @@
+environment_id=adams-bridge-v2-0-3-ntt_top_masking_tb
+top=ntt_top_masking_tb
+source_repo=adams_bridge_v2.0.3
+filelist=src/ntt_top/config/ntt_top_masking_tb.vf
+runner_exit=1
+compile_exit=8
+sim_exit=NOT_RUN
+pass_markers=
+failure_markers=
+elapsed_seconds=1

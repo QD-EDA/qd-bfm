@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 9795 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_zeroize_crypto --case-yaml smoke_test_zeroize_crypto/smoke_test_zeroize_crypto.yml --output /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/dcd97efbe80e5c76-14/output"
+	User time (seconds): 8045.17
+	System time (seconds): 315.55
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:19:21
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1852380
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1004514
+	Voluntary context switches: 80962585
+	Involuntary context switches: 80965578
+	Swaps: 0
+	File system inputs: 112
+	File system outputs: 777696
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

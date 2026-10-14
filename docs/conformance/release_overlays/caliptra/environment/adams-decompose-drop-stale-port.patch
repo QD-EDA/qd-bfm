@@ -1,0 +1,11 @@
+diff --git a/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv b/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv
+--- a/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv
++++ b/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv
+@@ -72,8 +72,7 @@
+     .z_neq_z(),
+     .w1_o(),
+     .buffer_en(),
+-    .decompose_done(),
+-    .w1_encode_done()
++    .decompose_done()
+ );

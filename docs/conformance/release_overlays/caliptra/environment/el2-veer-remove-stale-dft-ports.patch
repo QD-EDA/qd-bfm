@@ -1,0 +1,9 @@
+diff --git a/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv b/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
+--- a/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
++++ b/src/riscv_core/veer_el2/tb/el2_veer_wrapper_tb.sv
+@@ -733,7 +733,3 @@
+ // remove mems DFT pins for opensource
+-    .dccm_ext_in_pkt        ('0),
+-    .iccm_ext_in_pkt        ('0),
+-    .ic_data_ext_in_pkt     ('0),
+-    .ic_tag_ext_in_pkt      ('0),

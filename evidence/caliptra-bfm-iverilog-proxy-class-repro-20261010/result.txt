@@ -1,0 +1,2 @@
+compile_exit=2
+reproduced: package-qualified parameterized class parse diagnostic

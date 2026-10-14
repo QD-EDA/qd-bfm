@@ -1,0 +1,7 @@
+0.000 ns - ----------------------------
+0.000 ns -  KV PCR Hash Zeroize Test !!
+0.000 ns - ----------------------------
+0.000 ns - SHA512: Set START for gen hash func
+0.000 ns - SHA512 zeroize flow.
+0.000 ns - Zeroize for sha is completed
+0.000 ns - SHA512: Set START for gen hash func

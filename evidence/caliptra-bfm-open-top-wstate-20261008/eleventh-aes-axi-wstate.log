@@ -1,0 +1,199 @@
+CALIPTRA_RESET_TRACE_BOUND
+CALIPTRA_TRACE_BOUND
+jtag0: Failed to bind socket: Operation not permitted (1)
+jtag0: Unable to create TCP server on port 0
+w =  1 n =  1
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+INFO: /private/tmp/qd-bfm-checkpoint.H2Ij8x/caliptra-top-axi-wstate-case11-20261008/caliptra_top_tb_services_icarus.sv:121: No argument provided for CLP_MAX_CYCLES, defaulting to    20000000
+      Time: 0  Scope: caliptra_top_tb.tb_services_i
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 000000000000000000010000
+MBOX pre-load completed
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.entropy_src.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.entropy_src.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/csrng/rtl/csrng_reg_top.sv:2386: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.csrng.u_reg
+
+
+
+
+
+
+
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.entropy_src.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/csrng/rtl/csrng_reg_top.sv:2386: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.csrng.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.entropy_src.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/csrng/rtl/csrng_reg_top.sv:2386: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.csrng.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/csrng/rtl/csrng_reg_top.sv:2386: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.csrng.u_reg
+WARNING: /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: caliptra_top_tb.caliptra_top_dut.entropy_src.u_reg
+CALIPTRA_AXI WSTATE cycle=1 valid=0 ready=0 last=0 pc=00000000
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CALIPTRA_RESET_EDGE state=deassert cycle=21 pending=0 wait=0 start=0
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+CALIPTRA_TRACE cycle=100 retired=0 pc=00000000 insn=00000000 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+CALIPTRA_TRACE cycle=200 retired=7 pc=00000016 insn=0000100f ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=300 retired=46 pc=0000075e insn=00004489 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=400 retired=86 pc=0000e4fe insn=0000433d ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=500 retired=128 pc=0000e520 insn=fed76be3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=600 retired=168 pc=0000e574 insn=00008082 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=700 retired=217 pc=0000025c insn=1f27fc63 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=800 retired=267 pc=0000342a insn=00450793 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=900 retired=322 pc=0000342e insn=fef616e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1000 retired=371 pc=000002e0 insn=00f70963 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1100 retired=422 pc=0000032e insn=000048d4 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1200 retired=484 pc=0000034c insn=0007a803 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1300 retired=525 pc=00000382 insn=00a7f863 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1400 retired=557 pc=0000ccc8 insn=00008309 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1500 retired=587 pc=0000ccee insn=0000431c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1600 retired=609 pc=0000ccfc insn=00f82023 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1700 retired=631 pc=0000ccf8 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_TRACE cycle=1800 retired=650 pc=0000cd00 insn=fea697e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=0 axi_w=0 axi_b=0 axi_r=0
+CALIPTRA_AXI AW count=1 addr=000000000000000100100011010001000000000000000000 cycle=1823 pc=0000ccfc
+CALIPTRA_AXI W count=1 cycle=1824 pc=0000ccfc
+CALIPTRA_AXI WSTATE cycle=1824 valid=1 ready=1 last=0 pc=0000ccfc
+CALIPTRA_AXI W count=2 cycle=1825 pc=0000ccfc
+CALIPTRA_AXI W count=3 cycle=1826 pc=0000ccfc
+CALIPTRA_AXI W count=4 cycle=1827 pc=0000ccfc
+CALIPTRA_AXI W count=5 cycle=1828 pc=0000ccfc
+CALIPTRA_AXI W count=6 cycle=1829 pc=0000cd00
+CALIPTRA_AXI W count=7 cycle=1830 pc=0000cd00
+CALIPTRA_AXI W count=8 cycle=1831 pc=0000cd00
+CALIPTRA_AXI W count=9 cycle=1832 pc=0000cd00
+CALIPTRA_AXI W count=10 cycle=1833 pc=0000cd00
+CALIPTRA_AXI W count=11 cycle=1834 pc=0000cd00
+CALIPTRA_AXI WSTATE cycle=1834 valid=1 ready=1 last=1 pc=0000cd00
+CALIPTRA_AXI WSTATE cycle=1835 valid=0 ready=0 last=0 pc=0000cd00
+CALIPTRA_AXI B count=1 cycle=1836 pc=0000cd00
+CALIPTRA_TRACE cycle=1900 retired=670 pc=0000cc5e insn=0000c591 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2000 retired=714 pc=000003f0 insn=fee792e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2100 retired=758 pc=000003f0 insn=fee792e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2200 retired=811 pc=00003494 insn=f6d42c23 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2300 retired=872 pc=00003574 insn=0007a903 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2400 retired=912 pc=00003936 insn=100117b7 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2500 retired=957 pc=00003628 insn=0000cfd0 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2600 retired=994 pc=0000363a insn=0000df75 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2700 retired=1032 pc=00003e3a insn=91878793 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2800 retired=1060 pc=00003e74 insn=000b2783 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=2900 retired=1085 pc=00003ea8 insn=10011cb7 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=3000 retired=1126 pc=00003ed6 insn=00000a91 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=3100 retired=1154 pc=00003e8e insn=000b2783 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=3200 retired=1195 pc=00003ed8 insn=ff9913e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_TRACE cycle=3300 retired=1244 pc=000041a6 insn=f5c42583 ready_mb=0 reset_n=1 fatal=0 axi_ar=0 axi_aw=1 axi_w=11 axi_b=1 axi_r=0
+CALIPTRA_AXI AR count=1 addr=000000000000000100100011010001000000000000000000 cycle=3394 pc=0000d690
+CALIPTRA_AXI R count=1 cycle=3396 pc=0000d48c
+CALIPTRA_AXI R count=2 cycle=3398 pc=0000d492
+CALIPTRA_AXI R count=3 cycle=3400 pc=0000d496
+CALIPTRA_TRACE cycle=3400 retired=1291 pc=0000d496 insn=00004705 ready_mb=0 reset_n=1 fatal=0 axi_ar=1 axi_aw=1 axi_w=11 axi_b=1 axi_r=3
+CALIPTRA_AXI R count=4 cycle=3402 pc=0000d496
+CALIPTRA_AXI R count=5 cycle=3404 pc=0000d498
+CALIPTRA_AXI R count=6 cycle=3406 pc=0000d49e
+CALIPTRA_AXI R count=7 cycle=3408 pc=0000d4a0
+CALIPTRA_AXI R count=8 cycle=3410 pc=0000d4a4
+CALIPTRA_AXI R count=9 cycle=3412 pc=0000d4a4
+CALIPTRA_AXI R count=10 cycle=3414 pc=0000d4a4
+CALIPTRA_AXI R count=11 cycle=3416 pc=0000d4a4
+CALIPTRA_AXI AW count=2 addr=000000000000000100100011010001100000000000000000 cycle=3488 pc=0000d4aa
+CALIPTRA_AXI W count=12 cycle=3489 pc=0000d4aa
+CALIPTRA_AXI WSTATE cycle=3489 valid=1 ready=1 last=0 pc=0000d4aa
+CALIPTRA_AXI W count=13 cycle=3490 pc=0000d4aa
+CALIPTRA_AXI W count=14 cycle=3491 pc=0000d4aa
+CALIPTRA_AXI W count=15 cycle=3492 pc=0000d4aa
+CALIPTRA_AXI WSTATE cycle=3492 valid=1 ready=1 last=1 pc=0000d4aa
+CALIPTRA_AXI WSTATE cycle=3493 valid=0 ready=0 last=0 pc=0000d4aa
+CALIPTRA_AXI B count=2 cycle=3494 pc=0000d4a4
+CALIPTRA_TRACE cycle=3500 retired=1314 pc=0000d4a4 insn=0000429c ready_mb=0 reset_n=1 fatal=0 axi_ar=1 axi_aw=2 axi_w=15 axi_b=2 axi_r=11
+CALIPTRA_TRACE cycle=3600 retired=1337 pc=0000d4aa insn=fec70de3 ready_mb=0 reset_n=1 fatal=0 axi_ar=1 axi_aw=2 axi_w=15 axi_b=2 axi_r=11
+CALIPTRA_AXI AW count=3 addr=000000000000000100100011010001100000000000010000 cycle=3608 pc=0000d4a4
+CALIPTRA_AXI W count=16 cycle=3609 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3609 valid=1 ready=1 last=0 pc=0000d4a4
+CALIPTRA_AXI W count=17 cycle=3610 pc=0000d4a4
+CALIPTRA_AXI W count=18 cycle=3611 pc=0000d4a4
+CALIPTRA_AXI W count=19 cycle=3612 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3612 valid=1 ready=1 last=1 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3613 valid=0 ready=0 last=0 pc=0000d4a6
+CALIPTRA_AXI B count=3 cycle=3614 pc=0000d4aa
+CALIPTRA_AXI AW count=4 addr=000000000000000100100011010001100000000000100000 cycle=3677 pc=0000d4a4
+CALIPTRA_AXI W count=20 cycle=3678 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3678 valid=1 ready=1 last=0 pc=0000d4a4
+CALIPTRA_AXI W count=21 cycle=3679 pc=0000d4a4
+CALIPTRA_AXI W count=22 cycle=3680 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3680 valid=1 ready=1 last=1 pc=0000d4a4
+CALIPTRA_AXI WSTATE cycle=3681 valid=0 ready=0 last=0 pc=0000d4a4
+CALIPTRA_AXI B count=4 cycle=3682 pc=0000d4a4
+CALIPTRA_TRACE cycle=3700 retired=1358 pc=0000d4aa insn=fec70de3 ready_mb=0 reset_n=1 fatal=0 axi_ar=1 axi_aw=4 axi_w=22 axi_b=4 axi_r=11
+CALIPTRA_TRACE cycle=3800 retired=1383 pc=0000cd2e insn=02f82423 ready_mb=0 reset_n=1 fatal=0 axi_ar=1 axi_aw=4 axi_w=22 axi_b=4 axi_r=11
+CALIPTRA_AXI AR count=2 addr=000000000000000100100011010001100000000000000000 cycle=3815 pc=0000cd4e
+CALIPTRA_AXI R count=12 cycle=3817 pc=0000cd54
+CALIPTRA_AXI R count=13 cycle=3819 pc=0000cd5a
+CALIPTRA_AXI R count=14 cycle=3821 pc=0000cd5a
+CALIPTRA_AXI R count=15 cycle=3823 pc=0000cd5a
+CALIPTRA_AXI R count=16 cycle=3825 pc=0000cd5e
+CALIPTRA_AXI R count=17 cycle=3827 pc=0000cd5e
+CALIPTRA_AXI R count=18 cycle=3829 pc=0000cd5e
+CALIPTRA_AXI R count=19 cycle=3831 pc=0000cd5e
+CALIPTRA_AXI R count=20 cycle=3833 pc=0000cd64
+CALIPTRA_AXI R count=21 cycle=3835 pc=0000cd68
+CALIPTRA_AXI R count=22 cycle=3837 pc=0000cd68
+CALIPTRA_TRACE cycle=3900 retired=1419 pc=0000cd6a insn=00000691 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4000 retired=1445 pc=0000cd70 insn=feb697e3 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4100 retired=1472 pc=0000cd64 insn=00008251 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4200 retired=1498 pc=0000cc6a insn=00008082 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4300 retired=1527 pc=0000421c insn=0000b7f9 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4400 retired=1553 pc=0000420c insn=00d60463 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4500 retired=1579 pc=000041ee insn=00e68b63 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4600 retired=1607 pc=0000421c insn=0000b7f9 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4700 retired=1643 pc=00003fea insn=00f96933 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4800 retired=1681 pc=000040a4 insn=0000dff5 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=4900 retired=1723 pc=000040f8 insn=00004b8d ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=5000 retired=1768 pc=00003b26 insn=100117b7 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+CALIPTRA_TRACE cycle=5100 retired=1809 pc=0000078a insn=00f4fb63 ready_mb=0 reset_n=1 fatal=0 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22
+* TESTCASE PASSED
+
+Finished : minstret = 1815, mcycle = 4985
+See "exec.log" for execution trace with register updates..
+
+/private/tmp/qd-bfm-checkpoint.H2Ij8x/caliptra-top-axi-wstate-case11-20261008/caliptra_top_tb_services_icarus.sv:2445: $finish called at 51240000 (1ps)
+CALIPTRA_TRACE_END cycles=5124 retired=1816 pc=0000304e insn=00008082 axi_ar=2 axi_aw=4 axi_w=22 axi_b=4 axi_r=22

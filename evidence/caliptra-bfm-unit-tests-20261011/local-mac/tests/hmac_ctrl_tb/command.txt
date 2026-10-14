@@ -1,0 +1,3 @@
+cd /tmp/a2-caliptra-unit-20261011/tests/hmac_ctrl_tb
+CALIPTRA_ROOT=/tmp/a2-caliptra-unit-20261011/source/caliptra-rtl CALIPTRA_PRIM_ROOT=/tmp/a2-caliptra-unit-20261011/source/caliptra-rtl/src/caliptra_prim_generic CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic /tmp/a2-caliptra-unit-20261011/toolchain/bin/iverilog -g2017 -gassertions -s hmac_ctrl_tb -f /tmp/a2-caliptra-unit-20261011/source/caliptra-rtl/src/hmac/config/hmac_ctrl_tb.vf -o hmac_ctrl_tb.vvp
+/tmp/a2-caliptra-unit-20261011/toolchain/bin/vvp -n hmac_ctrl_tb.vvp

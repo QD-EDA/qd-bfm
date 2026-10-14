@@ -1,0 +1,4 @@
+adams-bridge-v2-0-3-ntt_mult_reduction_tb
+ntt_mult_reduction_tb
+adams_bridge_v2.0.3
+src/ntt_top/config/ntt_mult_reduction_tb.vf

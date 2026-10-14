@@ -1,0 +1,16 @@
+PATH_SELECTED
+/home/dsell/toolchains/iverilog-c339/openssl/bin/openssl
+DERIVED_ROOT=/home/dsell/toolchains/iverilog-c339/openssl
+OK:/home/dsell/toolchains/iverilog-c339/openssl/lib/libcrypto.so
+OK:/home/dsell/toolchains/iverilog-c339/openssl/include/openssl/evp.h
+OK:/home/dsell/toolchains/iverilog-c339/openssl/include/openssl/opensslconf.h
+openssl_prefix=/home/dsell/toolchains/iverilog-c339/openssl
+source_binary=/usr/bin/openssl
+openssl_version=OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+system_package=libssl-dev:amd64	3.5.5-1ubuntu3.7
+libcrypto_source=/usr/lib/x86_64-linux-gnu/libcrypto.so.3
+include_source=/usr/include/openssl+arch-opensslconf
+1d72cbc5bf62be3f3dbd7626c295b63c5fdc1dd8439f323ac47998d8a062b4c9  /home/dsell/toolchains/iverilog-c339/openssl/bin/openssl
+5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28  /home/dsell/toolchains/iverilog-c339/openssl/lib/libcrypto.so.3
+41b42c68adfd98b9d8a80fb2d78bbdaf1094f43dd02be045c7d8605edf36a706  /home/dsell/toolchains/iverilog-c339/openssl/include/openssl/evp.h
+7f4b522c049d0bd0d651e6f6ebe71d6df0c37231a94e32524da3f4642ebda3be  /home/dsell/toolchains/iverilog-c339/openssl/include/openssl/opensslconf.h

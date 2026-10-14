@@ -1,0 +1,5 @@
+job_id=826
+submitted_at=2026-10-13 04:12 MDT
+array=1-1%1
+resources=1 CPU, 3 GiB/task, 6h10m allocation
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/firmware-compat-rerun-20261013-02

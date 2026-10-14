@@ -1,0 +1,4 @@
+outcome=FAIL
+reason=no_result_json_runner_or_firmware_failure
+runner_exit=1
+result_testname=

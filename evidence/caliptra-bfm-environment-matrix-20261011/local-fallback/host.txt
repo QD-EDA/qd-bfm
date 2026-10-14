@@ -1,0 +1,5 @@
+Host: MacBook Air
+OS: 27.0
+Icarus: Icarus Verilog version 13.0 (devel) ()
+vvp: Icarus Verilog runtime version 13.0 (devel) ()
+Reason: DAN-DESKTOP SSH timed out on 2026-10-11; fallback requested by supervisor.

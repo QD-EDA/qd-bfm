@@ -1,0 +1,7 @@
+# Corrected wave-1 retry
+
+Job 611's 44 rows failed before simulation because the runner inferred `/usr` as the OpenSSL prefix and could not find the Debian multiarch `libcrypto.so`. The protected compatibility prefix `/home/dsell/toolchains/iverilog-c339/openssl` now provides the executable, headers, and `libcrypto.so.3` in the layout the runner expects; exact hashes and path checks are in [`../openssl-prefix-recovery.txt`](../openssl-prefix-recovery.txt).
+
+Slurm job 659 ran the runner's full native-vector preparation with the protected prefix and completed all seven build/check commands successfully. Its output is [`openssl-preflight-659.out`](openssl-preflight-659.out).
+
+Job 660 resubmitted only rows 8–51 at throttle 6, using the protected Icarus c339 binaries and OpenSSL prefix. The source snapshot is QD commit `0e331dec3d83ad70e5e73d8f0198dbdd4a226f74`; the submitted script and selection hashes are recorded in `submission.txt`. Its original submitted script is preserved byte-for-byte by that hash. Tasks 660_11, 660_12, and 660_14 are `PASS`; their raw false `FAIL` wrapper statuses are preserved with the validated verdicts. Task 660_8 is a `FAIL` on the pinned SHA-512 RTL assertion, task 660_9 is a firmware-build `FAIL`, and tasks 660_10, 660_13, and 660_15 timed out after 8,876, 9,467, and 10,091 seconds. Job 660 is complete; its pending rows 16–51 were canceled before execution and resubmitted as job 669 with the corrected result path and dependency `afterany:660`; see [`../resubmission-20261012-05/`](../resubmission-20261012-05/).

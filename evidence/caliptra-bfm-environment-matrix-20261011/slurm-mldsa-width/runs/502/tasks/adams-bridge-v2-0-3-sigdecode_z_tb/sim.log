@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/tasks/adams-bridge-v2-0-3-sigdecode_z_tb/runtime/polyz_unpack.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+Start of init
+
+*** Toggle reset.
+End of reset
+Reading test vectors from hex files
+
+Starting sigdecode_z test
+
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:193: Cannot open input_z.hex for reading
+
+       Time: 30  Scope: sigdecode_z_tb.read_test_vectors
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:195: invalid file descriptor (0x0) given to $feof.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:206: Cannot open output_decoded_z.hex for reading
+
+       Time: 30  Scope: sigdecode_z_tb.read_test_vectors
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:208: invalid file descriptor (0x0) given to $feof.
+Waiting for sigdecode_z to complete
+
+Checking output data
+
+Test completed
+
+Starting sigdecode_z test
+
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:193: Cannot open input_z.hex for reading
+
+       Time: 2315  Scope: sigdecode_z_tb.read_test_vectors
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:195: invalid file descriptor (0x0) given to $feof.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:206: Cannot open output_decoded_z.hex for reading
+
+       Time: 2315  Scope: sigdecode_z_tb.read_test_vectors
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:208: invalid file descriptor (0x0) given to $feof.
+Waiting for sigdecode_z to complete
+
+Checking output data
+
+Test completed
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:249: $finish called at 4605 (1s)

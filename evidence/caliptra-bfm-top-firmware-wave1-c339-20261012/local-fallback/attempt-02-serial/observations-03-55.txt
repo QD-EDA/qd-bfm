@@ -1,0 +1,7 @@
+Local row-4 serial retry snapshot, 2026-10-12 03:55 MDT
+
+- Local VVP PID 29261 remained active; elapsed 1:08:43, 85.0% CPU, RSS 625,312 KiB.
+- `sim.log` remained 45,302 bytes with mtime 02:46:58 MDT; no `result.json` or `exit.txt` existed.
+- The one-second `sample` at 03:55:44 captured the main thread in `schedule_simulate` → `vthread_run` → vector operations (`of_PART_U`, `of_MULI`, `vvp_vector4_t::mul`). The JTAG VPI worker thread was in `server_create` → `__select`.
+- This sample proves VVP was executing simulation code during capture but does not show firmware progress or establish a verdict. The raw sample is stored beside this note.
+- `ask-intern` could not read its API key from DAN-DESKTOP after SSH reset; the sample was read locally. The run remains governed by its 7,431-second timeout and is not a terminal result.

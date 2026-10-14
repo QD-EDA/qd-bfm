@@ -1,0 +1,5 @@
+Slurm array 414 was submitted on DAN-DESKTOP on 2026-10-11 from the fresh run directory /home/dsell/slurm-runs/caliptra-bfm/a2/env-setup-fix-c339-20261011-01.
+
+The three rows were power2round_tb, rej_bounded_tb, and sigencode_z_tb. Each requested 1 CPU and 256 MiB, array throttle 3, 20-minute Slurm time, and a 600-second process-group timeout. Prior c339 peak RSS for comparable compile/simulation was 34 MiB; the request provides substantial headroom for the isolated Python/NumPy setup.
+
+A read-only Python 3.14.4 venv with numpy 2.5.4 was prepared in the run directory. Its bin directory was prepended to PATH so both `python` and `python3` resolve inside the venv. The environment was shared read-only by the three tasks. Source pins: Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, and Icarus `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`.

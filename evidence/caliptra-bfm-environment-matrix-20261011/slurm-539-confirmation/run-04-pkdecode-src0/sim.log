@@ -1,0 +1,23 @@
+Start of init
+
+*** Toggle reset.
+End of reset
+Reading test vectors from hex files
+
+Starting pkdecode test
+
+Waiting for pkdecode to complete
+
+Checking output data
+
+Test completed
+
+Starting pkdecode test
+
+Waiting for pkdecode to complete
+
+Checking output data
+
+Test completed
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/pkdecode-src0-c339-20261011-04/source/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:250: $finish called at 5245 (1s)

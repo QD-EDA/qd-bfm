@@ -1,0 +1,10 @@
+{
+  "change": "After reset, wait for the transaction flag and capture one output record; do not publish a reset-only record.",
+  "filelist": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/evidence/caliptra-bfm-generated-hmac-runtime-20261005/hmac_generated_full.f",
+  "overlay_filelist": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/evidence/caliptra-bfm-generated-hmac-runtime-20261005/reset-event-overlay/hmac_generated_overlay.f",
+  "overlay_sha256": "c2328de8291bb82917bf7cc83f7f2a4c944c35a90067904268bcdce88fb83d22",
+  "overlay_source": "/Users/danielellerbrock/projects/iverilog_uvm/BFM WORK/evidence/caliptra-bfm-generated-hmac-runtime-20261005/reset-event-overlay/HMAC_out_monitor_bfm.sv",
+  "purpose": "Avoid a reset-only HMAC output record shifting the generated monitor scoreboard stream.",
+  "source": "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/hmac/uvmf_2022/uvmf_template_output/verification_ip/interface_packages/HMAC_out_pkg/src/HMAC_out_monitor_bfm.sv",
+  "source_sha256": "ec42c64cbb690a8e7fcc63508d03886c301cc73e56c0c974a78fa2a40bbdbb50"
+}

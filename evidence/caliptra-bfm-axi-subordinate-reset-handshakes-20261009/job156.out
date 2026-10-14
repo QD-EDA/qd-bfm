@@ -1,0 +1,17 @@
+Icarus Verilog version 13.0 (devel) (c339b9f2)
+RESOURCE MaxRSS_kB=17664 CMD=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog -g2012 -s tb_axi4_caliptra_memory_subordinate -o /home/dsell/slurm-runs/caliptra-bfm/codex/axi-subordinate-reset-handshakes-c339b9f-20261009-01/build-subordinate ../axi4_caliptra_checker.sv ../axi4_caliptra_master.sv ../axi4_caliptra_memory_subordinate.sv ../axi4_caliptra_monitor.sv tb_axi4_caliptra_memory_subordinate.sv
+COVERAGE AXI address AW=16 FIXED/INCR/WRAP/reserved/unknown=2/13/1/0/0 lock-clear/set/unknown=13/3/0 AR=13 FIXED/INCR/WRAP/reserved/unknown=2/10/1/0/0 lock-clear/set/unknown=10/3/0
+COVERAGE AXI responses B=16 OKAY/EXOKAY/SLVERR/DECERR/unknown=13/2/0/1/0 R=279 OKAY/EXOKAY/SLVERR/DECERR/unknown=269/4/1/5/0
+COVERAGE AXI W beats=283 WSTRB full/partial/zero/unknown=277/5/1/0 WLAST=16
+COVERAGE AXI VALID/stall cycles AW=18/2 W=303/20 B=16/0 AR=15/2 R=279/0
+COVERAGE AXI R beats=279 RLAST=13
+PASS: AXI memory subordinate bursts through 256 beats, boundary DECERR, FIXED/WRAP, stalls, USER, errors, reset, and exclusive access
+tb_axi4_caliptra_memory_subordinate.sv:480: $finish called at 9640000 (1ps)
+RESOURCE MaxRSS_kB=13992 CMD=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp /home/dsell/slurm-runs/caliptra-bfm/codex/axi-subordinate-reset-handshakes-c339b9f-20261009-01/build-subordinate
+PASS: AXI memory subordinate aborts/reset-clears at AR/R/AW/W/B handshakes and recovers
+tb_axi4_caliptra_memory_subordinate.sv:156: $finish called at 420000 (1ps)
+RESOURCE MaxRSS_kB=14064 CMD=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp /home/dsell/slurm-runs/caliptra-bfm/codex/axi-subordinate-reset-handshakes-c339b9f-20261009-01/build-subordinate +CASE=RESET_HANDSHAKES
+RESOURCE MaxRSS_kB=13020 CMD=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog -g2012 -s tb_axi4_caliptra_memory_queue -o /home/dsell/slurm-runs/caliptra-bfm/codex/axi-subordinate-reset-handshakes-c339b9f-20261009-01/build-queue ../axi4_caliptra_memory_subordinate.sv tb_axi4_caliptra_memory_queue.sv
+PASS: AXI memory subordinate bounded multi-ID read/write queues
+tb_axi4_caliptra_memory_queue.sv:184: $finish called at 306000 (1ps)
+RESOURCE MaxRSS_kB=12212 CMD=/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp /home/dsell/slurm-runs/caliptra-bfm/codex/axi-subordinate-reset-handshakes-c339b9f-20261009-01/build-queue

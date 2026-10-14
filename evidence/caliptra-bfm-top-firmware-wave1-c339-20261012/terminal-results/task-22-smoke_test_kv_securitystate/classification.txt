@@ -1,0 +1,14 @@
+verdict=TIMEOUT
+row=22
+array_task=669_22
+test=smoke_test_kv_securitystate
+per_test_timeout_s=11240
+runner_exit=124
+elapsed=3:07:20
+peak_rss_kib=1852368
+result_json=absent
+testcase_pass_markers=0
+testcase_fail_markers=0
+finished_markers=0
+
+The runner's configured per-test limit expired. The simulator log reached reset assertion/deassertion but emitted no testcase terminal marker or result JSON. This is a terminal TIMEOUT verdict; it does not establish whether the firmware test itself would pass or fail.

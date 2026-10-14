@@ -1,0 +1,5 @@
+Snapshot, 2026-10-12 07:09:56 MDT
+- SSH to DAN-DESKTOP reset at port 22; Slurm remains unavailable.
+- Runner PID 53363 remains active. Compilation completed at about 06:58; pinned VVP PID 53757 has been running for 11m27s at 89.8% CPU and 974,208 KiB RSS.
+- The output contains caliptra_top_tb.vvp (361,146,016 bytes), compile.log (3,874 bytes), and the cptra_ss_test_rom output directory. No structured result is present yet; this is an in-progress run, not a verdict.
+- localrun remains active with the 6,873-second timeout. No second local heavy task was started.

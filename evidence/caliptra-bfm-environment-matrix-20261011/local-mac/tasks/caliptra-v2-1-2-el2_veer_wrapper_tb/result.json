@@ -1,0 +1,14 @@
+{
+  "environment_id": "caliptra-v2-1-2-el2_veer_wrapper_tb",
+  "top": "el2_veer_wrapper_tb",
+  "source_repo": "caliptra_v2.1.2",
+  "filelist": "src/riscv_core/veer_el2/config/el2_veer_wrapper_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/src/riscv_core/veer_el2/tb",
+  "compile_exit": 28,
+  "compile_seconds": 3.24,
+  "sim_exit": null,
+  "sim_seconds": null,
+  "classification": "FAIL",
+  "blocker_class": "simulator",
+  "classification_note": "Icarus cannot elaborate static variable members driven by interface continuous assignments"
+}

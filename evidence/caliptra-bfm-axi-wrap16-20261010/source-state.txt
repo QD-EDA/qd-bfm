@@ -1,0 +1,4 @@
+QD branch base: 04051d8de721cc3b2a61deb1021e2a8dd0dfd0cb
+Icarus source: clean published main c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus HEAD equals local origin/main; HEAD is an ancestor of origin/main.
+Only the listed BFM runner/test inputs were staged in this isolated run directory.

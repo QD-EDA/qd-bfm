@@ -1,0 +1,21 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/mlkem_hybrid_bf_tb.sv:114: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/mlkem_hybrid_bf_tb.sv:194: warning: Static variable initialization requires explicit lifetime in this context.
+/tmp/a2-env-c339/runtime/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/mlkem_karatsuba_tb.sv:119: warning: Static variable initialization requires explicit lifetime in this context.
+        4.39 real         3.57 user         0.21 sys
+           287293440  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               18808  page reclaims
+                 332  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 102  voluntary context switches
+                3279  involuntary context switches
+            27144782  instructions retired
+            14567642  cycles elapsed
+             1409384  peak memory footprint

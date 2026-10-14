@@ -1,0 +1,14 @@
+{
+  "environment_id": "caliptra-v2-1-2-doe_cbc_tb",
+  "top": "doe_cbc_tb",
+  "source_repo": "caliptra_v2.1.2",
+  "filelist": "src/doe/config/doe_cbc_tb.vf",
+  "working_directory": "/tmp/a2-env-c339/runtime/caliptra-rtl/src/doe/tb",
+  "compile_exit": 0,
+  "compile_seconds": 0.41,
+  "sim_exit": -15,
+  "sim_seconds": 841.57,
+  "classification": "BLOCKED",
+  "blocker_class": "setup",
+  "classification_note": "testbench requires hard-coded CBCVarTxt256_clean.txt absent from pinned source; run stopped after 841.57s without a verdict"
+}

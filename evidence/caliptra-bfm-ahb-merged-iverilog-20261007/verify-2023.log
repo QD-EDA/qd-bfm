@@ -1,0 +1,4 @@
+memory guard: preflight 53% free; floor 40%
+PASS: Caliptra ECC RTL AHB write/readback through native manager
+/private/tmp/qd-bfm-checkpoint.H2Ij8x/repo/dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_ecc_ahb_bfm.sv:91: $finish called at 131000 (1ps)
+memory guard: command exited 0; minimum observed free memory 53%

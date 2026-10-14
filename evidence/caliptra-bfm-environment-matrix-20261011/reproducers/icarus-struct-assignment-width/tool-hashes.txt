@@ -1,0 +1,3 @@
+8fe4c77928f9ee6c08d4e403514fba7efb04501c4ce332ddafbbfdc2a41d2441  Icarus iverilog binary
+6944b600e1ec093a9ae7bb91ede10fdda0bc75598cf02262bf6f65dba4a8dfc7  Icarus vvp binary
+098b09b11ba7d3e904ae13d924a9e8dac8ced5c9d7c9beff3b9d36119a417581  Verilator binary

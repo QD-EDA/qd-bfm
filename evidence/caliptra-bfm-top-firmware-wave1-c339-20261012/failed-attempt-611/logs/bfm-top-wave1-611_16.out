@@ -1,0 +1,23 @@
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+array_task_id=16
+test_id=78bfcc1e9aac255e
+matrix_testname=smoke_test_mbox
+case_dir=smoke_test_mbox
+case_yaml=smoke_test_mbox/smoke_test_mbox.yml
+yaml_testname=smoke_test_mbox
+expected_mcycle_estimate=21720
+per_test_timeout_s=10714
+timeout_formula=min(21600,ceil(3*expected_mcycle/7.31+1800))
+selection_basis=static score=209; body_lines=77, loops=11, waits=0, crypto_calls=0
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+outcome=FAIL
+reason=no_result_json_runner_or_firmware_failure
+runner_exit=1
+result_testname=
+	Maximum resident set size (kbytes): 27900

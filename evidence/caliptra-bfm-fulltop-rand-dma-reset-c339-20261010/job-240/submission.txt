@@ -1,0 +1,7 @@
+Job: 240_1
+Purpose: repeat the late full-top reset window at delay 2822 cycles
+Output root: /home/dsell/slurm-runs/caliptra-bfm/codex/bfm-rand-reset-c339-late-20261010-06
+Requested resources: 1 CPU, 3 GB
+Memory basis: prior full-top MaxRSS near 1.77 GiB, plus about 1.23 GiB headroom
+Queue reconciliation: no matching late-window job was live before submission
+Status at capture: RUNNING

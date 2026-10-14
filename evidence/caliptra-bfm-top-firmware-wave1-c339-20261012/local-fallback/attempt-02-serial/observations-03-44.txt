@@ -1,0 +1,6 @@
+Local row-4 serial retry snapshot, 2026-10-12 03:44 MDT
+
+- Local VVP PID 29261 remained active; elapsed 57:31, 85.0% CPU, RSS 625,312 KiB.
+- `sim.log` remained 45,302 bytes with mtime 02:46:58 MDT; no `result.json` or `exit.txt` existed.
+- SSH to DAN-DESKTOP reset at 03:44 MDT. No other local simulation was launched; row 4 remains the single active heavy local job.
+- The run remains governed by the 7,431-second timeout from its 02:45:59 MDT start. This is not a terminal result.

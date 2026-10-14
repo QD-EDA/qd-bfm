@@ -1,0 +1,33 @@
+{
+  "commit": "ca082cd",
+  "case": "smoke_test_dma_aes_gcm_short_1_dword",
+  "firmware_cases": 12,
+  "options": [
+    "--fast-trng",
+    "--fast-boot-data-preload",
+    "--skip-pq-vector-generation",
+    "--quiet-firmware"
+  ],
+  "guard": {
+    "timeout_seconds": 1800,
+    "minimum_free_memory_percent": 68,
+    "floor_percent": 60,
+    "preflight_free_percent": 77
+  },
+  "result": {
+    "exit_code": 124,
+    "classification": "timeout",
+    "last_marker": "CLP: ROM Flow in progress...",
+    "testcase_pass_marker_seen": false,
+    "testcase_fail_marker_seen": false,
+    "simulation_finish_seen": false,
+    "axi_trace_enabled": false,
+    "interpretation": "Inconclusive: stopped in ROM flow. Without AXI tracing, this run does not establish whether DMA traffic occurred."
+  },
+  "artifacts": {
+    "sim_log_bytes": 3634,
+    "sim_log_sha256": "61f8107e1f981c65fd18a9505252a00f5f3c1de60e7996942b03d121b6af1c5e",
+    "firmware_build_log_bytes": 70437,
+    "firmware_build_log_sha256": "1d14738c78796b59bca3ef92ab72b214290b1d77dd7c3cc47214dbb75f778f3c"
+  }
+}

@@ -1,0 +1,12 @@
+QD base commit: 29cc2af7b24c89105c3c54663f3b9e812389ea90
+QD source archive state: clean committed archive plus final source patch
+QD final source patch SHA256 (plain): 079711c1e6c4370dbd9528161b1590477512cf0dfec179317b9fc57f14e9e0ab
+QD final source patch SHA256 (gzip): 4baabd289f8de5279d2f193e6c7f494d1b723900a079d03dda10c180fa08ddf7
+QD pre-fix test patch SHA256 (plain): 74f9ed5ab6dd1d44bfa7a60977b5c5fa169f397cbc70960eb70b16742cd00957
+QD pre-fix test patch SHA256 (gzip): e3544a24f753eddf0d2b52768b863e3572567f71fad38530d412c9c2b9921c99
+QD fixture-failure patch SHA256 (plain): 990381e37208bffe09a384a8b0bfc45463407f3c5f0e7a0b8666bf836b1a2d86
+QD fixture-failure patch SHA256 (gzip): cbb76dd75a3418f3c5c118dec2b1bf26406ef02a6c9d875cb5dd1ffc630dfe6f
+Icarus source commit: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus version: 13.0 (devel), c339b9f2
+Verilator version: 5.032 2025-01-01 rev (Debian 5.032-1)
+Slurm jobs: 199 expected RED, 200 fixture mismatch, 201 final pass

@@ -1,0 +1,29 @@
+--- run-04/pkdecode_tb.sv
++++ run-05/pkdecode_tb.sv
+@@ -215,7 +215,7 @@
+ endtask
+ 
+ task pkdecode_test(input reg [MEM_ADDR_WIDTH-1:0] dest_base_addr, input reg [API_ADDR_WIDTH-1:0] src_base_addr);
+-    int i, j;
++    int i, j, mismatch_count;
+     $display("Starting pkdecode test\n");
+     read_test_vectors(src_base_addr);
+     @(posedge clk_tb);
+@@ -232,11 +232,17 @@
+     read_memory_content(dest_base_addr);
+ 
+     $display("Checking output data\n");
++    mismatch_count = 0;
+     for (i = 0; i < NUM_OF_COEFF; i = i + 1) begin
+         if (actual_output_mem[i] !== expected_output_mem[i]) begin
++            mismatch_count = mismatch_count + 1;
+             $display("Error: Output mismatch at index %0d. Expected: %h, Got: %h", i, expected_output_mem[i], actual_output_mem[i]);
+         end
+     end
++    if (mismatch_count == 0)
++        $display("* TESTCASE PASSED");
++    else
++        $fatal(1, "* TESTCASE FAILED: %0d output mismatches", mismatch_count);
+     $display("Test completed\n");
+ endtask
+ 

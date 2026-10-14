@@ -1,0 +1,5 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:185: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:247: error: Too many arguments (2, expecting 1) in call to task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:248: error: Too many arguments (2, expecting 1) in call to task.
+2 error(s) during elaboration.

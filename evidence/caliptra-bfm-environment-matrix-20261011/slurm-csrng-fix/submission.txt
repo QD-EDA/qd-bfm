@@ -1,0 +1,27 @@
+job_id=469
+run_directory=/home/dsell/slurm-runs/caliptra-bfm/a2/csrng-filelist-c339-20261011-01
+submission_command=sbatch --parsable environment-array.sbatch
+array=0-0%1
+cpus_per_task=1
+memory_per_task=3G
+per_test_timeout_seconds=6900
+result=compile_exit_1; missing include path caliptra_reg_field_defines.svh from src/integration/rtl/caliptra_reg
+
+job_id=470
+run_directory=/home/dsell/slurm-runs/caliptra-bfm/a2/csrng-filelist-c339-20261011-02
+submission_command=sbatch --parsable environment-array-02.sbatch
+log=/home/dsell/slurm-runs/caliptra-bfm/a2/csrng-filelist-c339-20261011-02/logs/slurm-470_0.out
+array=0-0%1
+cpus_per_task=1
+memory_per_task=3G
+per_test_timeout_seconds=6900
+environment_id=caliptra-v2-1-2-csrng_tb
+top=csrng_tb
+source_repo=caliptra_v2.1.2
+filelist=src/csrng/config/csrng_tb_qd02.vf
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=5

@@ -1,0 +1,19 @@
+DAN-DESKTOP queue snapshot at 07:17:57 MDT, 2026-10-13
+Host uptime: 22:42; load average: 9.50, 9.66, 9.71.
+
+Job 799, array throttle 6:
+  799_13 RUNNING 1:24:30; smoke_test_mbox_byte_read; wall_s=4800 mcycle=31980.
+  799_14 RUNNING 1:17:25; smoke_test_dma_aes_gcm_collision_test; wall_s=4500 mcycle=30370.
+  799_15 RUNNING 0:59:53; smoke_test_dma_aes_gcm_short_dword; wall_s=3300 mcycle=22323.
+  799_16 RUNNING 0:44:33; smoke_test_kv_securitystate; wall_s=2400 mcycle=15870.
+  799_17 RUNNING 0:32:31; smoke_test_datavault_lock; wall_s=1800 mcycle=12289.
+  799_18 RUNNING 0:17:12; smoke_test_datavault_mini; wall_s=900 mcycle=6110.
+  799_19-42 PENDING at throttle 6.
+
+All six active simulator heartbeats advanced from the prior check. No testcase
+terminal markers or result JSON are present for these runs.
+
+Overlay job 826_1 remains RUNNING at 3:05:23 elapsed. Its latest heartbeat is
+wall_s=10800 mcycle=7106, advancing from 5,014 at wall 10,500. Earlier the
+mcycle value fell from 66,375 at wall 9,600 to 749 at wall 9,900; the logs do
+not establish why. No terminal marker/result is present.

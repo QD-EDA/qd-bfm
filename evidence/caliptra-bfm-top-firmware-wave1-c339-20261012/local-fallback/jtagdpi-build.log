@@ -1,0 +1,45 @@
+Compiling /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c...
+/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c:14:10: fatal error: 'tcp_server.h' file not found
+   14 | #include "tcp_server.h"
+      |          ^~~~~~~~~~~~~~
+1 error generated.
+/private/tmp/qd-bfm-icarus-c339-build-20261012-02/install/bin/iverilog-vpi: 1 file(s) failed to compile.
+        0.27 real         0.04 user         0.04 sys
+            29507584  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6300  page reclaims
+                 171  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   3  signals received
+                  31  voluntary context switches
+                 127  involuntary context switches
+            23224368  instructions retired
+            12602433  cycles elapsed
+             1704320  peak memory footprint
+Compiling /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c...
+Compiling /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c...
+Making jtagdpi.vpi from  jtagdpi.o tcp_server.o...
+        0.49 real         0.05 user         0.04 sys
+            37519360  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                6035  page reclaims
+                 115  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  29  voluntary context switches
+                 222  involuntary context switches
+            22557182  instructions retired
+            11118303  cycles elapsed
+             1753472  peak memory footprint

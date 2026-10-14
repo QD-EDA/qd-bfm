@@ -1,0 +1,2 @@
+PASS: force/release overrides and restores continuous assignment
+/home/dsell/slurm-runs/caliptra-bfm/a2/minrepro-c339-20261011-01/source/force_release_continuous.sv:20: $finish called at 3000 (1ps)

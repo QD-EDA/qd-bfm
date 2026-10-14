@@ -1,0 +1,4 @@
+iverilog-bin-sha256=737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog
+vvp-bin-sha256=5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a  /home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp
+memory guard: preflight available 22.70 GiB; process-group cap 0.70 GiB; system reserve 5.59 GiB
+memory guard: command exited 0; minimum available 22.33 GiB; maximum process group 0.39 GiB

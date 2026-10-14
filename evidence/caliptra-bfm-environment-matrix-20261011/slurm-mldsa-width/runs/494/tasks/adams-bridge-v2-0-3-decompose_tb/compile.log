@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:178: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56: error: port ``w1_encode_done'' is not a port of dut.
+1 error(s) during elaboration.

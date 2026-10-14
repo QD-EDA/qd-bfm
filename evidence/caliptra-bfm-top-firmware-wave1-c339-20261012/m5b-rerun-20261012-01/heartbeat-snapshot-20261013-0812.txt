@@ -1,0 +1,19 @@
+DAN-DESKTOP queue snapshot at 08:12:27 MDT, 2026-10-13.
+Host uptime: 23:37.
+
+Job 799, array throttle 6:
+  799_13 RUNNING 2:19:00; smoke_test_mbox_byte_read; wall_s=8100 mcycle=55628.
+  799_14 RUNNING 2:11:55; smoke_test_dma_aes_gcm_collision_test; wall_s=7800 mcycle=54123.
+  799_15 RUNNING 1:54:23; smoke_test_dma_aes_gcm_short_dword; wall_s=6600 mcycle=45941.
+  799_16 RUNNING 1:39:03; smoke_test_kv_securitystate; wall_s=5700 mcycle=38836.
+  799_17 RUNNING 1:27:01; smoke_test_datavault_lock; wall_s=5100 mcycle=35590.
+  799_18 RUNNING 1:11:42; smoke_test_datavault_mini; wall_s=4200 mcycle=29324.
+  799_19-42 PENDING at throttle 6.
+
+The six latest heartbeat values were verified directly in each named sim.log.
+They advanced from the prior logged values. No result.json or testcase terminal
+marker was found for the six active rows. The Slurm queue reports them RUNNING.
+
+Overlay job 826_1 was RUNNING at 3:59:53 elapsed. Its sim.log heartbeat was
+wall_s=14100 mcycle=31005, advancing from wall_s=13800 mcycle=28829. No result
+JSON or testcase terminal marker was present.

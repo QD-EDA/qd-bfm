@@ -1,0 +1,26 @@
+Slurm job: 280 (array tasks 280_0 through 280_2)
+Submitted: 2026-10-10 (DAN-DESKTOP)
+Partition: verilog
+Resources: 1 CPU, 3 GiB, 2-hour per-task limit, array concurrency 1
+Per-test timeout: 7000 seconds, TERM then KILL after 30 seconds
+Remote output root: /home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01
+QD snapshot: 72d965adc2d7e9bfdbadaa3348add9781319bd1c
+Icarus: c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Cases: smoke_test_dma; first AES/DMA short case; first rand_test_dma transfer
+All tasks are diagnostic runs. No trace VPI or reset injection is enabled.
+Task 280_0 timed out after 7000 seconds without a testcase result marker;
+the retained final log ends mid-line during flow-status output. Task 280_1
+compiled and began simulation, then was cancelled without a result. Task 280_2
+was cancelled while pending.
+
+Trace follow-up: job 289, 1 CPU, 3 GiB, two-hour limit, 7000-second process
+timeout. It used `--trace-axi` on `smoke_test_dma` with the same pinned source
+and tools, and timed out without a testcase marker. The final trace was cycle
+58,500 in the 512-word random-payload setup loop, before the AHB FIFO transfer.
+See `trace-smoke.sbatch` and `trace-smoke-timeout/`.
+
+Job 301 reran the first AES/DMA vector diagnostic without trace. It exited 0
+with one pass marker, but only AES case 0 ran, so the full suite remains
+unverified. See `aes-first/` and `aes-first.sbatch`.

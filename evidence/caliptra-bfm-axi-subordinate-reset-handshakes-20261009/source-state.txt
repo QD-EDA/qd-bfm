@@ -1,0 +1,3 @@
+base=fbf35950ffb7f0e71b148ff1828e94c7235bf4dd
+branch=codex/caliptra-bfm-stack-20261006
+working tree: staged subordinate reset test and runner; unrelated dirty files omitted

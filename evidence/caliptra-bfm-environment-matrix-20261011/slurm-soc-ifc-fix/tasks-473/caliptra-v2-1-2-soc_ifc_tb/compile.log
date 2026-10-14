@@ -1,0 +1,39 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1086: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1087: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1893: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1893: error: Malformed statement
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1926: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1926: error: Malformed statement
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1992: syntax error
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:1992: error: Malformed statement
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_ifc_tb.sv:1359: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_reg_perm_test.svh:27: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_reg_axi_user_test.svh:272: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_reg_axi_user_test.svh:275: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_reg_test.svh:25: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_cptra_cap_test.svh:25: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/fuse_cptra_cap_test.svh:27: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/ss_strap_reg_test.svh:24: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/single_soc_reg_test.svh:31: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_reset_test.svh:25: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_reset_test.svh:31: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_reset_test.svh:36: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_reset_test.svh:130: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_test.svh:26: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/rvtime_reg_test.svh:28: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/rvtime_reg_test.svh:29: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/rvtime_reg_test.svh:34: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/rvtime_reg_test.svh:35: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/rvtime_reg_test.svh:40: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_intrblk_test.svh:126: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_intrblk_test.svh:133: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_intrblk_test.svh:138: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/soc_reg_intrblk_test.svh:139: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/debug_unlock_prod_test.svh:36: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/debug_unlock_prod_test.svh:37: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/debug_unlock_manuf_test.svh:36: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/debug_unlock_manuf_test.svh:37: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/ss_strap_reg_reset_test.svh:25: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/ss_strap_reg_reset_test.svh:33: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/ss_strap_reg_reset_test.svh:134: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source/src/soc_ifc/tb/ss_soc_dbg_unlock_level_test.svh:31: warning: Static variable initialization requires explicit lifetime in this context.

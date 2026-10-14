@@ -1,0 +1,22 @@
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/caliptra_prim_generic/rtl/caliptra_prim_generic_ram_1p.sv:9: error: Unknown package `caliptra_prim_ram_1p_pkg' in import. Is its source in the compile list?
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/caliptra_prim_generic/rtl/caliptra_prim_generic_ram_1p.sv:25: syntax error
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/caliptra_prim_generic/rtl/caliptra_prim_generic_ram_1p.sv:17: Errors in port declarations.
+/tmp/a2-env-c339/runtime/caliptra-rtl/src/aes/rtl/aes_clp_wrapper.sv:26: Include file caliptra_reg_field_defines.svh not found
+        0.33 real         0.23 user         0.05 sys
+            24559616  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2872  page reclaims
+                 228  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 290  voluntary context switches
+                 703  involuntary context switches
+            29197309  instructions retired
+            12095585  cycles elapsed
+             1458536  peak memory footprint

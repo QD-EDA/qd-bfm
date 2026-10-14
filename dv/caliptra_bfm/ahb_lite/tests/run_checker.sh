@@ -1,0 +1,65 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+set -eu
+
+. "$(dirname "$0")/../../../../scripts/caliptra_bfm_memory_guard.sh"
+
+cd "$(dirname "$0")"
+IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
+VVP_BIN=${VVP_BIN:-vvp}
+SV_EDITION=${SV_EDITION:-2012}
+out=$(mktemp)
+log=$(mktemp)
+trap 'rm -f "$out" "$log"' EXIT
+
+case "$SV_EDITION" in
+  2012|2017|2023) ;;
+  *) echo "SV_EDITION must be 2012, 2017, or 2023" >&2; exit 2 ;;
+esac
+
+"$IVERILOG_BIN" -g"$SV_EDITION" -s tb_ahb_lite_caliptra_checker -o "$out" \
+  ../ahb_lite_caliptra_checker.sv tb_ahb_lite_caliptra_checker.sv
+"$VVP_BIN" "$out" +CASE=GOOD
+"$VVP_BIN" "$out" +CASE=GOOD_IDLE_TO_NONSEQ
+
+for entry in \
+  'BAD_X_HREADY:1' \
+  'BAD_Z_HREADY:1' \
+  'BAD_X_HRESP:1' \
+  'BAD_Z_HRESP:1' \
+  'BAD_X_HSEL:1' \
+  'BAD_Z_HSEL:1' \
+  'BAD_X_HTRANS:1' \
+  'BAD_Z_HTRANS:1' \
+  'BAD_X_HWRITE:1' \
+  'BAD_Z_HWRITE:1' \
+  'BAD_X_HSIZE:1' \
+  'BAD_Z_HSIZE:1' \
+  'BAD_X_HADDR:1' \
+  'BAD_Z_HADDR:1' \
+  'BAD_X_HWDATA:1' \
+  'BAD_Z_HWDATA:1' \
+  'BAD_BUSY:2' \
+  'BAD_SIZE:3' \
+  'BAD_ALIGN:4' \
+  'BAD_ADDR_STABILITY:5' \
+  'BAD_ADDR_COMPLETION:5' \
+  'BAD_WDATA_STABILITY:6' \
+  'BAD_ERROR_SECOND:7' \
+  'BAD_ERROR_SINGLE:8' \
+  'BAD_ORPHAN_SEQ:9' \
+  'BAD_ORPHAN_ERROR:10'; do
+  case_name=${entry%%:*}
+  error_code=${entry#*:}
+  if "$VVP_BIN" "$out" "+CASE=$case_name" >"$log" 2>&1; then
+    printf '%s unexpectedly passed\n' "$case_name" >&2
+    exit 1
+  fi
+  if ! grep -Fq "EXPECTED_CHECKER_REJECTION case=$case_name code=$error_code" "$log"; then
+    cat "$log" >&2
+    printf '%s was not rejected with checker code %s\n' "$case_name" "$error_code" >&2
+    exit 1
+  fi
+done
+
+printf 'PASS: AHB checker rejected all 26 injected protocol violations\n'

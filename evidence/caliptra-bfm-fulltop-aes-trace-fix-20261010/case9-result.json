@@ -1,0 +1,192 @@
+{
+  "test": "smoke_test_dma_aes_gcm_short_1_dword",
+  "passed": true,
+  "caliptra_commit": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "case_yaml_sha256": "37d25ede775580271066061df4eb0dfb3e2eecde39649e26e9220931d55c3837",
+  "bfm_wrapper_sha256": "2a5b59b60371e1508305014fdabcbb217b47e3978c2f84c12ed545ae1c85d400",
+  "aes_pkg_overlay_sha256": "d29c80cd5e51629b25a924e5249f85032c0b42f0f4006c3944906395e98ec158",
+  "trng_duty_cycle": 50,
+  "physical_rng_source_sha256": "85b73db47fdab769e55d8ca58c976a0cad68631d3f3eed0e7d13649c38abf01f",
+  "axi_if_overlay_sha256": "d9173b5d3ecf2bff70412016f752e902f3f6ccf4fdb68ffd58764fb33e34f834",
+  "checker_overlay_sha256": "6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654",
+  "reset_overlay_sha256": "c5b901d338d0ee31feca6ea0cf9dd67f898c9d053e016cf835ab3468a21af3ed",
+  "jtag_overlay_sha256": "c4dbd3f75055982a5b31d05d8ba66039027b48b056e769985722a4db4b02dea6",
+  "pq_vector_source_sha256": "5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343",
+  "services_overlay_sha256": "6fc963fb33ccb7e42e2283bc30cf1909947fb8a630ff4392d8971ed8f56f8c5f",
+  "dma_generator_overlay_sha256": null,
+  "profile_sha256": "51ffbc8c6acf7beff51dc945d0d6a870dad02a118c247bd7506d3177e1d21fc3",
+  "profile_excluded_sources": [
+    "${CALIPTRA_AXI4PC_DIR}/Axi4PC.sv"
+  ],
+  "caliptra_bfm_checker_enabled": true,
+  "compile_command": [
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog",
+    "-g2017",
+    "-gassertions",
+    "-gcommercial-unsafe",
+    "-s",
+    "caliptra_top_tb",
+    "-D",
+    "RV_OPENSOURCE",
+    "-D",
+    "CLP_ASSERT_ON",
+    "-D",
+    "CALIPTRA_INTERNAL_TRNG",
+    "-D",
+    "CALIPTRA_BFM_CHECKER",
+    "-f",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/open_caliptra_top.vf",
+    "-o",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/caliptra_top_tb.vvp"
+  ],
+  "compile_exit": 0,
+  "firmware_command": [
+    "make",
+    "-f",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/tools/scripts/Makefile",
+    "TESTNAME=smoke_test_dma_aes_gcm_short_1_dword",
+    "GCC_PREFIX=riscv-none-elf",
+    "CALIPTRA_INTERNAL_TRNG=1",
+    "PLAYBOOK_RANDOM_SEED=1",
+    "BUILD_CFLAGS=-std=gnu11 -O2 -DCPT_VERBOSITY=ERROR",
+    "TEST_DIR=/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/limited_aes_case_source",
+    "program.hex"
+  ],
+  "firmware_exit": 0,
+  "aes_case_limit": 1,
+  "aes_case_start": 8,
+  "aes_case_limit_source_sha256": "fd40686b6acf22ecb697840a941cac8e1d1e01a7fcf6d57548821643642533c5",
+  "rand_dma_iterations": null,
+  "force_first_rand_dma_reset": false,
+  "rand_dma_reset_delay_cycles": null,
+  "firmware_image_sha256": {
+    "program.hex": "0261eb547ac657d3ff33bd4450264bc6def6f30799387653f927e8119d2de0d5",
+    "dccm.hex": "5bd4b7e9fb2e082c4768509c2ba1058ffc884e3d02359e3145d89ba6ab0887a2",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "simulation_image_sha256": {
+    "program.hex": "a060bbd885b5fd23c71bf47c6a8cbe96e8f157780440d166b0df345a7a8e3037",
+    "dccm.hex": "7c5b879715884781b0bd4c5cf051ccafc65f0c4696ede0de6661584598f9e02f",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "fast_boot_data_preload": {
+    "diagnostic_only": true,
+    "source_lma_start": "0xfd0c",
+    "source_lma_end": "0x13db0",
+    "destination_vma_start": "0x50020000",
+    "destination_offset": "0x20000",
+    "data_bytes": 16548,
+    "data_sha256": "674fdc785e8ee74b73e2dd8900aa40f00609d2a9c5a4f977100311c35ec13ee0",
+    "bss_lma_start": "0x13db0",
+    "bss_lma_end": "0x13e70",
+    "bss_vma_start": "0x500240a4",
+    "bss_bytes": 192,
+    "bss_sha256": "5d89f056865052bcb89c910d2d62872e029fb273c3db03f8968a52a41593c1b5",
+    "branch_pc": "0x46",
+    "original_branch": "63fa6200",
+    "replacement_branch": "6f000004"
+  },
+  "diagnostic_modes": {
+    "fast_trng": true,
+    "fast_boot_data_preload": true,
+    "first_aes_case": false,
+    "aes_case_limit": 1,
+    "aes_case_start": 8,
+    "rand_dma_iterations": null,
+    "force_first_rand_dma_reset": false,
+    "rand_dma_reset_delay_cycles": null,
+    "caliptra_bfm_checker": true,
+    "skip_pq_vector_generation": true,
+    "quiet_firmware": true
+  },
+  "native_vector_build_commands": [
+    [
+      "/usr/bin/cc",
+      "-O2",
+      "-I/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/include",
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/ecc/tb/ecc_secp384r1.c",
+      "-L/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/lib",
+      "-lmbedtls",
+      "-lmbedx509",
+      "-lmbedcrypto",
+      "-o",
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/native_vectors/ecc_secp384r1.exe"
+    ],
+    [
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/bin/python3",
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/source/qd-bfm/dv/caliptra_bfm/native_vectors/stage_sha256_wntz.py",
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-11/source/caliptra-rtl/src/sha256/tb/sha256_wntz_test_gen.py",
+      "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/native_vectors/sha256_wntz_test_gen.py"
+    ]
+  ],
+  "native_vector_tools": {
+    "make": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/bin/make",
+    "openssl": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/bin/openssl",
+    "xxd": "/usr/bin/xxd",
+    "python3.12": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/deps/bin/python3.12",
+    "compiler": "/usr/bin/cc"
+  },
+  "native_vector_sha256": {
+    "ecc_secp384r1.exe": "c01fbf2a6726a33da802d08db9db04dd8962b9ecdf247a0afacbedb622eca1e6",
+    "doe_test_gen.py": "d94bd571dd599a9431398778f195c05fb3a2f3ddb1adcc38925a2c1b3db6bdc0",
+    "sha256_wntz_test_gen.py": "45c8a4f5ac7032c0bdb3b62b3a7b8645bec78b09e028f6bf8ac9cda232b4fce9"
+  },
+  "axi_trace_source_sha256": "cf378ed88ab6c3ec39fd38d3767d64a5598ad05a7afee63e90b5799743e09ae5",
+  "axi_trace_plugin_sha256": "8965d02ebcd9455ec40b42fc57a542a548d92fe103f1656127da45a593d554b5",
+  "axi_trace_compile_command": [
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog-vpi",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/source/qd-bfm/dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c"
+  ],
+  "axi_trace_compile_exit": 0,
+  "sim_command": [
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp",
+    "-d",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-smoke-20261009-10/jtagdpi/jtagdpi.vpi",
+    "-n",
+    "-m",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/trace_vpi/sim-axi-trace-vpi.vpi",
+    "/home/dsell/slurm-runs/caliptra-bfm/codex/caliptra-fw-case9-c339b9f-20261010-01/output/case9-tracefix/caliptra_top_tb.vvp",
+    "+CLP_REGRESSION",
+    "+CLP_DMA_TB_MODE_NOT_EMPTY",
+    "+CLP_SKIP_PQ_VECTOR_GENERATION"
+  ],
+  "simulator_provenance": {
+    "iverilog": {
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/iverilog",
+      "version": "Icarus Verilog version 13.0 (devel) (c339b9f2)",
+      "version_exit_code": 0,
+      "sha256": "737049ca0342dd7e258d0d021f4b3b6aa750dcb6d79a6cd9871988954da898b2"
+    },
+    "vvp": {
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/toolchain/iverilog/bin/vvp",
+      "version": "Icarus Verilog runtime version 13.0 (devel) (c339b9f2)",
+      "version_exit_code": 0,
+      "sha256": "5f0bc4d0b98eb7438c8d0446d62fcf59c68a24e3f9d1041ac69e5d439de1f24a"
+    },
+    "source_checkout": {
+      "root": "/home/dsell/slurm-runs/caliptra-bfm/codex/maxburst-fw-20261009-06/source/iverilog-uvm",
+      "commit": "c339b9f2287a743aeb7ab6de6528e8d34a4dd602",
+      "clean": true,
+      "remote_tracking_refs_containing_head": [
+        "origin",
+        "origin/main"
+      ]
+    }
+  },
+  "sim_exit": 0,
+  "testcase_pass_markers": 1,
+  "testcase_fail_markers": 0,
+  "jtag_server_errors": 0,
+  "jtag_bind_denials": 0,
+  "reset_assert_cycles": [],
+  "outstanding_writes_at_reset": [],
+  "reset_in_flight": false,
+  "bad_diagnostics": 0,
+  "finish": [
+    1721,
+    4649
+  ],
+  "sim_log_sha256": "2df03afea4f9c1b7363c96a67292bcf4b797c027ae6474e4df2313b8f7bb7828"
+}

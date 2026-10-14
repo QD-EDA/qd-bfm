@@ -1,0 +1,31 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+set -eu
+
+. "$(dirname "$0")/../../../../scripts/caliptra_bfm_memory_guard.sh"
+
+cd "$(dirname "$0")"
+
+IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
+VVP_BIN=${VVP_BIN:-vvp}
+
+out=$(mktemp)
+log=$(mktemp)
+trap 'rm -f "$out" "$log"' EXIT
+"$IVERILOG_BIN" -g2012 -s tb_axi4 -o "$out" ../qd_axi4_single_master.sv tb_qd_axi4.sv
+"$VVP_BIN" "$out"
+for case_name in BAD_RID BAD_RLAST; do
+  if "$VVP_BIN" "$out" "+$case_name" > "$log" 2>&1; then
+    printf '%s unexpectedly passed\n' "$case_name" >&2
+    exit 1
+  fi
+  if grep -q '^PASS:' "$log"; then
+    printf '%s emitted a pass banner\n' "$case_name" >&2
+    exit 1
+  fi
+  case "$case_name" in
+    BAD_RID) grep -q 'AXI R ID mismatch' "$log" ;;
+    BAD_RLAST) grep -q 'AXI single-beat read missing RLAST' "$log" ;;
+  esac
+done
+printf 'PASS: bad response ID and missing RLAST rejected\n'

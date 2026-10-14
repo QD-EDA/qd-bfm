@@ -1,0 +1,24 @@
+Command exited with non-zero status 124
+	Command being timed: "timeout --signal=TERM --kill-after=30s 10091 python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source/qd-bfm/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_dma_aes_gcm_non_gcm_en_dec --case-yaml smoke_test_dma_aes_gcm_non_gcm_en_dec/smoke_test_dma_aes_gcm_non_gcm_en_dec.yml --output /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/ea3af7f88b5170c5-15/output"
+	User time (seconds): 25.12
+	System time (seconds): 2.99
+	Percent of CPU this job got: 0%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:48:11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1852356
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 681868
+	Voluntary context switches: 1759
+	Involuntary context switches: 1511
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 777448
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 124

@@ -1,0 +1,7 @@
+Local row-4 serial retry snapshot, 2026-10-12 02:59 MDT
+
+- Case: `smoke_test_dma_aes_gcm_cmd_err`, selection row 4, manifest timeout 7,431 seconds.
+- Started at 02:45:59 MDT with `MAKEFLAGS=-j1`, fresh output, and `/Users/danielellerbrock/codex-supervisor/localrun 7431`.
+- Local VVP PID 29261 was active at about 94% CPU, elapsed 12:21, RSS 974,240 KiB.
+- `sim.log` was 45,302 bytes, last modified 02:46:58 MDT. The latest output consists of generated test-vector material; no PASS, FAIL, TIMEOUT, FATAL, `result.json`, or runner exit was present.
+- This is a running simulation snapshot, not a test verdict. The live run is under `/private/tmp/qd-bfm-localwave1-c339-20261012-01/runs/0004b-smoke_test_dma_aes_gcm_cmd_err/`.

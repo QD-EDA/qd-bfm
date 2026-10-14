@@ -1,0 +1,740 @@
+Analysis of sampling vvp (pid 59171) every 1 millisecond
+Process:         vvp [59171]
+Path:            /private/tmp/*/vvp
+Load Address:    0x102658000
+Identifier:      vvp
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  Python [58511]
+Target Type:     live task
+
+Date/Time:       2026-10-12 06:00:24.459 -0600
+Launch Time:     2026-10-12 04:56:54.740 -0600
+OS Version:      macOS 27.0 (26A428)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         889.9M
+Physical footprint (peak):  1.0G
+Idle exit:                  untracked
+----
+
+Call graph:
+    565 Thread_82589864   DispatchQueue_1: com.apple.main-thread  (serial)
+    + 565 start  (in dyld) + 6688  [0x19b0c7e80]
+    +   565 main  (in vvp) + 1188  [0x102658dbc]  main.cc:220
+    +     565 vvp_run  (in vvp) + 996  [0x10265a004]  lib_main.cc:409
+    +       562 schedule_simulate()  (in vvp) + 2176  [0x1027c6ff8]  schedule.cc:1955
+    +       ! 498 vthread_run(vthread_s*)  (in vvp) + 1588  [0x1026ca580]  vthread.cc:11177
+    +       ! : 60 of_PART_U(vthread_s*, vvp_code_s*)  (in vvp) + 16  [0x1027303c8]  vthread.cc:24991
+    +       ! : | 47 of_PART_base(vthread_s*, vvp_code_s*, bool)  (in vvp) + 164  [0x10273028c]  vthread.cc:24974
+    +       ! : | + 13 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 388  [0x1028c938c]  vpi_priv.cc:79
+    +       ! : | + 12 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 420,456,...  [0x1028c93ac,0x1028c93d0,...]  vpi_priv.cc:80
+    +       ! : | + 8 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 464  [0x1028c93d8]  vpi_priv.cc:82
+    +       ! : | + 7 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 80,72,...  [0x1028c9258,0x1028c9250,...]  vpi_priv.cc:69
+    +       ! : | + 6 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 92  [0x1028c9264]  vpi_priv.cc:68
+    +       ! : | + 1 vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp) + 572  [0x1028c9444]  vpi_priv.cc:0
+    +       ! : | 6 of_PART_base(vthread_s*, vvp_code_s*, bool)  (in vvp) + 88  [0x102730240]  vthread.cc:24970
+    +       ! : | + 6 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : | +   5 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | +   ! 2 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 288  [0x19b2bf928]
+    +       ! : | +   ! 2 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 472,520  [0x19b2b8c24,0x19b2b8c54]
+    +       ! : | +   ! 1 malloc_type_malloc  (in libsystem_malloc.dylib) + 80  [0x19b2a378c]
+    +       ! : | +   1 ???  (in <unknown binary>)  [0x1a2cec4fc]
+    +       ! : | 5 of_PART_base(vthread_s*, vvp_code_s*, bool)  (in vvp) + 116  [0x10273025c]  vthread.cc:24970
+    +       ! : | + 3 _xzm_free_main  (in libsystem_malloc.dylib) + 240,504,...  [0x19b2c0fac,0x19b2c10b4,...]
+    +       ! : | + 2 _free  (in libsystem_malloc.dylib) + 20  [0x19b2c5124]
+    +       ! : | 2 of_PART_base(vthread_s*, vvp_code_s*, bool)  (in vvp) + 188  [0x1027302a4]  vthread.cc:24979
+    +       ! : |   1 part_select_value_(vvp_vector4_t&, unsigned int, long long)  (in vvp) + 156  [0x1027b00a0]  vthread.cc:24962
+    +       ! : |   ! 1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 40  [0x1027ce028]  vvp_net.cc:920
+    +       ! : |   1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 800  [0x1027ce320]  vvp_net.cc:1028
+    +       ! : 41 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 256  [0x10272e684]  vthread.cc:24350
+    +       ! : | 18 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 124  [0x1027e91e8]  vvp_net_sig.cc:3274
+    +       ! : | + 8 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : | + ! 8 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + !   4 malloc_type_malloc  (in libsystem_malloc.dylib) + 44  [0x19b2a3768]
+    +       ! : | + !   2 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 176  [0x19b2bf8b8]
+    +       ! : | + !   2 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 296,520  [0x19b2b8b74,0x19b2b8c54]
+    +       ! : | + 7 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 240,220,...  [0x1027cd670,0x1027cd65c,...]  vvp_net.cc:781
+    +       ! : | + 3 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 152,144  [0x1027cd618,0x1027cd610]  vvp_net.cc:779
+    +       ! : | 13 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 48  [0x1027da8b0]  vvp_net_sig.cc:727
+    +       ! : | + 5 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 464,472,...  [0x1026f9318,0x1026f9320,...]  vthread.cc:12165
+    +       ! : | + 3 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 80  [0x1026f9198]  vthread.cc:12085
+    +       ! : | + 2 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 688  [0x1026f93f8]  vthread.cc:0
+    +       ! : | + 1 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 144  [0x1026f91d8]  vthread.cc:12086
+    +       ! : | + 1 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 224  [0x1026f9228]  vthread.cc:12148
+    +       ! : | + 1 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 484  [0x1026f932c]  vthread.cc:12165
+    +       ! : | +   1 automatic_context_record_(void**)  (in vvp) + 156  [0x1026f9ce8]  vthread.cc:10064
+    +       ! : | 2 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 316,336  [0x1027da9bc,0x1027da9d0]  vvp_net_sig.cc:735
+    +       ! : | 2 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 0  [0x1027e916c]  vvp_net_sig.cc:3273
+    +       ! : | 2 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 108  [0x1027e91d8]  vvp_net_sig.cc:3275
+    +       ! : | 1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 40  [0x1027da8a8]  vvp_net_sig.cc:727
+    +       ! : | 1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 48  [0x1027da8b0]  vvp_net_sig.cc:728
+    +       ! : | 1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 124  [0x1027da8fc]  vvp_net_sig.cc:734
+    +       ! : | 1 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 68  [0x1027e91b0]  vvp_net_sig.cc:3274
+    +       ! : 36 of_VPI_CALL(vthread_s*, vvp_code_s*)  (in vvp) + 532  [0x102769e08]  vthread.cc:32863
+    +       ! : | 27 vpip_execute_vpi_call(vthread_s*, __vpiHandle*)  (in vvp) + 124  [0x1028da588]  vpi_tasks.cc:976
+    +       ! : | + 5 sva_kill_generation_calltf  (in system.vpi) + 92  [0x1037bd564]  sys_sva.c:404
+    +       ! : | + ! 5 vpi_free_object  (in vvp) + 88  [0x1028c9a50]  vpi_priv.cc:384
+    +       ! : | + !   5 iterator_free_object(__vpiHandle*)  (in vvp) + 88  [0x1028c8880]  vpi_iter.cc:37
+    +       ! : | + !     5 _xzm_free_main  (in libsystem_malloc.dylib) + 0  [0x19b2c0ebc]
+    +       ! : | + 4 sva_clock_calltf  (in system.vpi) + 124  [0x1037be0d4]  sys_sva.c:592
+    +       ! : | + ! 4 vpip_assertion_clock  (in vvp) + 128  [0x1028cf820]  vpi_scope.cc:856
+    +       ! : | + 3 sva_enabled_calltf  (in system.vpi) + 48  [0x1037bd39c]  sys_sva.c:359
+    +       ! : | + ! 3 vpi_iterate  (in vvp) + 68  [0x1028cb9c8]  vpi_priv.cc:1450
+    +       ! : | + !   2 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | + !   : 1 __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+    +       ! : | + !   : | 1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 172  [0x19b43f934]
+    +       ! : | + !   : |   1 std::type_info::operator==[abi:nqe220106](std::type_info const&) const  (in libc++abi.dylib) + 64  [0x19b452ea8]
+    +       ! : | + !   : |     1 _platform_strcmp$VARIANT$Base  (in libsystem_platform.dylib) + 28  [0x19b4a910c]
+    +       ! : | + !   : 1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 152  [0x19b43f920]
+    +       ! : | + !   1 operator new(unsigned long)  (in libc++abi.dylib) + 80  [0x19b4543dc]
+    +       ! : | + 3 sva_kill_generation_calltf  (in system.vpi) + 48  [0x1037bd538]  sys_sva.c:391
+    +       ! : | + ! 3 vpi_iterate  (in vvp) + 68  [0x1028cb9c8]  vpi_priv.cc:1450
+    +       ! : | + !   2 vpip_make_iterator(unsigned int, __vpiHandle**, bool)  (in vvp) + 36  [0x1028c88b8]  vpi_iter.cc:53
+    +       ! : | + !   : 2 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + !   :   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 80  [0x19b2bf858]
+    +       ! : | + !   :   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 244  [0x19b2b8b40]
+    +       ! : | + !   1 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | + !     1 __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+    +       ! : | + !       1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 48  [0x19b43f8b8]
+    +       ! : | + 2 sva_cb_active_calltf  (in system.vpi) + 68  [0x1037be130]  sys_sva.c:605
+    +       ! : | + ! 2 vpi_put_value  (in vvp) + 424  [0x1028cb724]  vpi_priv.cc:1332
+    +       ! : | + !   1 sysfunc_vec4::vpi_put_value(t_vpi_value*, int)  (in vvp) + 220  [0x1028d9774]  vpi_tasks.cc:379
+    +       ! : | + !   : 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 0  [0x1026633cc]  vvp_net.h:585
+    +       ! : | + !   1 sysfunc_vec4::vpi_put_value(t_vpi_value*, int)  (in vvp) + 220  [0x1028d9774]  vpi_tasks.cc:379
+    +       ! : | + 2 sva_enabled_calltf  (in system.vpi) + 324  [0x1037bd4b0]  sys_sva.c:378
+    +       ! : | + ! 2 vpi_put_value  (in vvp) + 424  [0x1028cb724]  vpi_priv.cc:1332
+    +       ! : | + !   2 sysfunc_vec4::vpi_put_value(t_vpi_value*, int)  (in vvp) + 220  [0x1028d9774]  vpi_tasks.cc:379
+    +       ! : | + !     1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 68  [0x102663410]  vvp_net.h:611
+    +       ! : | + !     1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 88  [0x102663424]  vvp_net.h:617
+    +       ! : | + 2 sva_kill_generation_calltf  (in system.vpi) + 80  [0x1037bd558]  sys_sva.c:401
+    +       ! : | + ! 2 vpi_get_value  (in vvp) + 64  [0x1028cb44c]  vpi_priv.cc:1138
+    +       ! : | + !   1 vpip_vec4_get_value(vvp_vector4_t const&, unsigned int, bool, t_vpi_value*)  (in vvp) + 1104  [0x1028caca0]  vpi_priv.cc:0
+    +       ! : | + !   1 vpip_vec4_get_value(vvp_vector4_t const&, unsigned int, bool, t_vpi_value*)  (in vvp) + 1076  [0x1028cac84]  vpi_priv.cc:893
+    +       ! : | + 1 isunknown_calltf  (in v2009.vpi) + 112  [0x10370976c]  v2009_bitvec.c:275
+    +       ! : | + ! 1 vpi_get_value  (in vvp) + 64  [0x1028cb44c]  vpi_priv.cc:1138
+    +       ! : | + !   1 __vpiVThrVec4Stack::vpi_get_value(t_vpi_value*)  (in vvp) + 376  [0x1028dc7bc]  vpi_vthr_vector.cc:583
+    +       ! : | + !     1 __vpiVThrVec4Stack::vpi_get_value_vector_(t_vpi_value*, vvp_vector4_t const&)  (in vvp) + 288  [0x1028dd1c0]  vpi_vthr_vector.cc:771
+    +       ! : | + 1 sva_clock_calltf  (in system.vpi) + 48  [0x1037be088]  sys_sva.c:579
+    +       ! : | + ! 1 vpi_iterate  (in vvp) + 68  [0x1028cb9c8]  vpi_priv.cc:1450
+    +       ! : | + !   1 __dynamic_cast  (in libc++abi.dylib) + 96  [0x19b43f5b8]
+    +       ! : | + !     1 std::type_info::operator==[abi:nqe220106](std::type_info const&) const  (in libc++abi.dylib) + 24  [0x19b452e80]
+    +       ! : | + 1 sva_clock_calltf  (in system.vpi) + 60  [0x1037be094]  sys_sva.c:583
+    +       ! : | + ! 1 __dynamic_cast  (in libc++abi.dylib) + 80  [0x19b43f5a8]
+    +       ! : | + 1 sva_enabled_calltf  (in system.vpi) + 108  [0x1037bd3d8]  sys_sva.c:375
+    +       ! : | + ! 1 vpi_handle  (in vvp) + 132  [0x1028c9640]  vpi_priv.cc:0
+    +       ! : | + !   1 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | + !     1 __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+    +       ! : | + !       1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 172  [0x19b43f934]
+    +       ! : | + 1 sva_kill_generation_calltf  (in system.vpi) + 108  [0x1037bd574]  sys_sva.c:407
+    +       ! : | + ! 1 vpi_handle  (in vvp) + 132  [0x1028c9640]  vpi_priv.cc:0
+    +       ! : | + !   1 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | + !     1 __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+    +       ! : | + !       1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 172  [0x19b43f934]
+    +       ! : | + 1 sva_kill_generation_calltf  (in system.vpi) + 300  [0x1037bd634]  sys_sva.c:410
+    +       ! : | +   1 vpi_put_value  (in vvp) + 424  [0x1028cb724]  vpi_priv.cc:1332
+    +       ! : | +     1 sysfunc_vec4::vpi_put_value(t_vpi_value*, int)  (in vvp) + 220  [0x1028d9774]  vpi_tasks.cc:379
+    +       ! : | 2 __dynamic_cast  (in libc++abi.dylib) + 56  [0x19b43f590]
+    +       ! : | + 2 __cxxabiv1::(anonymous namespace)::dyn_cast_get_derived_info(__cxxabiv1::(anonymous namespace)::derived_object_info*, void const*)  (in libc++abi.dylib) + 20,28  [0x19b452a70,0x19b452a78]
+    +       ! : | 2 vpip_execute_vpi_call(vthread_s*, __vpiHandle*)  (in vvp) + 308  [0x1028da640]  vpi_tasks.cc:999
+    +       ! : | + 2 __cxxabiv1::(anonymous namespace)::dyn_cast_slow(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long)  (in libc++abi.dylib) + 64,132  [0x19b452cd8,0x19b452d1c]
+    +       ! : | 1 __cxxabiv1::(anonymous namespace)::dyn_cast_slow(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long)  (in libc++abi.dylib) + 424  [0x19b452e40]
+    +       ! : | 1 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | + 1 __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 152  [0x19b43f920]
+    +       ! : | 1 __dynamic_cast  (in libc++abi.dylib) + 176  [0x19b43f608]
+    +       ! : | 1 vpip_execute_vpi_call(vthread_s*, __vpiHandle*)  (in vvp) + 356  [0x1028da670]  vpi_tasks.cc:1002
+    +       ! : | + 1 __cxxabiv1::__si_class_type_info::search_below_dst(__cxxabiv1::__dynamic_cast_info*, void const*, int, bool) const  (in libc++abi.dylib) + 164  [0x19b43f734]
+    +       ! : | 1 vpip_execute_vpi_call(vthread_s*, __vpiHandle*)  (in vvp) + 404  [0x1028da6a0]  vpi_tasks.cc:1005
+    +       ! : |   1 __dynamic_cast  (in libc++abi.dylib) + 0  [0x19b43f558]
+    +       ! : 25 of_RELEASE_NET(vthread_s*, vvp_code_s*)  (in vvp) + 24  [0x10274e094]  vthread.cc:29405
+    +       ! : | 25 do_release_vec(vthread_s*, vvp_code_s*, bool, long long, unsigned int, bool)  (in vvp) + 292  [0x10274e1c4]  vthread.cc:28912
+    +       ! : |   25 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 316  [0x1027e8d38]  vvp_net_sig.cc:3236
+    +       ! : |     25 vvp_net_t::send_vec4_pv(vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 384  [0x10266f2dc]  vvp_net.h:1814
+    +       ! : |       11 vvp_fun_part_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 80  [0x1026bcc48]  part.cc:95
+    +       ! : |       + 7 vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp) + 112,108  [0x1027cd904,0x1027cd900]  vvp_net.cc:833
+    +       ! : |       + 3 vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp) + 88,84  [0x1027cd8ec,0x1027cd8e8]  vvp_net.cc:831
+    +       ! : |       + 1 vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp) + 60  [0x1027cd8d0]  vvp_net.cc:828
+    +       ! : |       +   1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |       +     1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 832  [0x19b2b8d8c]
+    +       ! : |       5 vvp_fun_part_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 140  [0x1026bcc84]  part.cc:98
+    +       ! : |       + 2 vvp_fun_part_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 112  [0x1026bc968]  part.cc:63
+    +       ! : |       + ! 1 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : |       + ! : 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |       + ! :   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 640  [0x19b2b8ccc]
+    +       ! : |       + ! 1 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 112  [0x1027cd5f0]  vvp_net.cc:779
+    +       ! : |       + 1 vvp_fun_part_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 184  [0x1026bc9b0]  part.cc:63
+    +       ! : |       + ! 1 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 232  [0x1027cd668]  vvp_net.cc:781
+    +       ! : |       + 1 vvp_fun_part_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 296  [0x1026bca20]  part.cc:69
+    +       ! : |       + ! 1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 0  [0x1027ce328]  vvp_net.cc:918
+    +       ! : |       + 1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 800  [0x1027ce320]  vvp_net.cc:1028
+    +       ! : |       5 vvp_fun_part_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 164  [0x1026bcc9c]  part.cc:99
+    +       ! : |       + 4 _xzm_free_main  (in libsystem_malloc.dylib) + 332,892  [0x19b2c1008,0x19b2c1238]
+    +       ! : |       + 1 _free  (in libsystem_malloc.dylib) + 108  [0x19b2c517c]
+    +       ! : |       2 ???  (in <unknown binary>)  [0x1a2cf052c]
+    +       ! : |       1 vvp_fun_part_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 96  [0x1026bcc58]  part.cc:96
+    +       ! : |       + 1 vvp_vector4_t::set_vec(unsigned int, vvp_vector4_t const&)  (in vvp) + 236  [0x1027cea60]  vvp_net.cc:1342
+    +       ! : |       1 vvp_fun_part_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 112  [0x1026bcc68]  part.cc:97
+    +       ! : |         1 vvp_vector4_t::set_vec(unsigned int, vvp_vector4_t const&)  (in vvp) + 216  [0x1027cea4c]  vvp_net.cc:1340
+    +       ! : 22 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 244  [0x102730680]  vthread.cc:25060
+    +       ! : | 7 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 348  [0x1027cf504]  vvp_net.cc:1754
+    +       ! : | + 7 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | +   4 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 260,452,...  [0x19b2b8b50,0x19b2b8c10,...]
+    +       ! : | +   2 malloc_type_malloc  (in libsystem_malloc.dylib) + 0,36  [0x19b2a373c,0x19b2a3760]
+    +       ! : | +   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 72  [0x19b2bf850]
+    +       ! : | 3 _xzm_free_main  (in libsystem_malloc.dylib) + 40,232,...  [0x19b2c0ee4,0x19b2c0fa4,...]
+    +       ! : | 3 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 364  [0x1027cf514]  vvp_net.cc:1756
+    +       ! : | + 3 _platform_memset  (in libsystem_platform.dylib) + 208,188  [0x19b4a7b60,0x19b4a7b4c]
+    +       ! : | 2 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 32  [0x1027cf3c8]  vvp_net.cc:1696
+    +       ! : | 2 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 644  [0x1027cf62c]  vvp_net.cc:1774
+    +       ! : | 1 _free  (in libsystem_malloc.dylib) + 44  [0x19b2c513c]
+    +       ! : | 1 operator delete[](void*)  (in libc++abi.dylib) + 0  [0x19b43f550]
+    +       ! : | 1 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 456  [0x1027cf570]  vvp_net.cc:1759
+    +       ! : | 1 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 500  [0x1027cf59c]  vvp_net.cc:1763
+    +       ! : | 1 vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp) + 524  [0x1027cf5b4]  vvp_net.cc:1764
+    +       ! : 22 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 904,892,...  [0x10273cd9c,0x10273cd90,...]  vthread.cc:27811
+    +       ! : 17 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 108  [0x1027305f8]  vthread.cc:25057
+    +       ! : | 17 vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp) + 60  [0x1027cd8d0]  vvp_net.cc:828
+    +       ! : |   15 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |   + 9 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 96,188,...  [0x19b2b8aac,0x19b2b8b08,...]
+    +       ! : |   + 6 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 44,92,...  [0x19b2bf834,0x19b2bf864,...]
+    +       ! : |   1 ???  (in <unknown binary>)  [0x1a2cec4fc]
+    +       ! : |   1 operator new(unsigned long)  (in libc++abi.dylib) + 0  [0x19b45438c]
+    +       ! : 17 of_STORE_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 980  [0x102767fd4]  vthread.cc:32430
+    +       ! : | 9 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : | + 4 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : | + ! 4 vvp_fun_edge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 416  [0x10289bdb0]  event.cc:836
+    +       ! : | + !   2 vthread_schedule_list(vthread_s*)  (in vvp) + 840  [0x1026f796c]  vthread.cc:11488
+    +       ! : | + !   : 2 schedule_vthread(vthread_s*, unsigned long long, bool)  (in vvp) + 216  [0x1027c4164]  schedule.cc:1047
+    +       ! : | + !   :   2 vthread_mark_scheduled(vthread_s*)  (in vvp) + 72  [0x1026c9d50]  vthread.cc:10673
+    +       ! : | + !   1 vthread_schedule_list(vthread_s*)  (in vvp) + 112  [0x1026f7694]  vthread.cc:11425
+    +       ! : | + !   1 vthread_schedule_list(vthread_s*)  (in vvp) + 84  [0x1026f7678]  vthread.cc:11428
+    +       ! : | + 3 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 408  [0x10289e1ec]  event.cc:1374
+    +       ! : | + ! 2 vthread_schedule_list(vthread_s*)  (in vvp) + 132  [0x1026f76a8]  vthread.cc:11428
+    +       ! : | + ! : 1 std::vector<vthread_s*>::emplace_back<vthread_s* const&>(vthread_s* const&)::'lambda0'()::operator()() const  (in vvp) + 120  [0x1027b4de4]  vector.h:1149
+    +       ! : | + ! : | 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + ! : |   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 832  [0x19b2b8d8c]
+    +       ! : | + ! : 1 std::vector<vthread_s*>::emplace_back<vthread_s* const&>(vthread_s* const&)::'lambda0'()::operator()() const  (in vvp) + 28  [0x1027b4d88]  vector.h:1149
+    +       ! : | + ! 1 vthread_schedule_list(vthread_s*)  (in vvp) + 460  [0x1026f77f0]  vthread.cc:11444
+    +       ! : | + 1 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 56  [0x10289e08c]  event.cc:1362
+    +       ! : | + 1 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 372  [0x10289e1c8]  event.cc:1371
+    +       ! : | +   1 anyedge_vec4_value::recv_vec4(vvp_vector4_t const&, vvp_vector4_t*)  (in vvp) + 64  [0x10289d168]  event.cc:0
+    +       ! : | +     1 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 88  [0x1027cf80c]  vvp_net.cc:1804
+    +       ! : | 4 vvp_fun_signal4_aa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 816  [0x1027da248]  vvp_net_sig.cc:681
+    +       ! : | + 4 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 276  [0x1026639a0]  vvp_net.h:1797
+    +       ! : | +   2 vvp_event_source_end()  (in vvp) + 224  [0x102897fb8]  event.cc:163
+    +       ! : | +   ! 2 schedule_in_nba_update_region()  (in vvp) + 0  [0x1027c5ec4]  schedule.cc:1448
+    +       ! : | +   1 vvp_event_source_end()  (in vvp) + 32  [0x102897ef8]  event.cc:151
+    +       ! : | +   1 vvp_event_source_end()  (in vvp) + 712  [0x1028981a0]  event.cc:166
+    +       ! : | +     1 (anonymous namespace)::flush_event_source_transaction_()  (in vvp) + 4  [0x1028984d4]  event.cc:74
+    +       ! : | 2 vvp_fun_signal4_aa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 76  [0x1027d9f64]  vvp_net_sig.cc:653
+    +       ! : | + 2 recover_automatic_recv_context_(void**, __vpiScope*, char const*)  (in vvp) + 32  [0x1027da344]  vvp_net_sig.cc:117
+    +       ! : | +   1 vthread_recover_context_for_scope(void**, __vpiScope*)  (in vvp) + 156  [0x1026fa028]  vthread.cc:12380
+    +       ! : | +   ! 1 automatic_context_record_(void**)  (in vvp) + 20  [0x1026f9c60]  vthread.cc:10063
+    +       ! : | +   1 vthread_recover_context_for_scope(void**, __vpiScope*)  (in vvp) + 148  [0x1026fa020]  vthread.cc:12380
+    +       ! : | 1 vvp_fun_signal4_aa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 120  [0x1027d9f90]  vvp_net_sig.cc:666
+    +       ! : | 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 84  [0x1026638e0]  vvp_net.h:1787
+    +       ! : |   1 vvp_wire_vec4::filter_vec4(vvp_vector4_t const&, vvp_vector4_t&, unsigned int, unsigned int)  (in vvp) + 1888  [0x1027e8278]  vvp_net_sig.cc:3146
+    +       ! : |     1 vvp_net_fil_t::filter_mask_<vvp_vector4_t>(vvp_vector4_t const&, vvp_vector4_t const&, vvp_vector4_t&, unsigned int)  (in vvp) + 80  [0x1027e83e4]  vvp_net_sig.cc:0
+    +       ! : |       1 vvp_vpi_callback::run_vpi_callbacks_in_boundary()  (in vvp) + 0  [0x1028baae0]  vpi_callback.cc:1196
+    +       ! : 16 of_RELEASE_REG(vthread_s*, vvp_code_s*)  (in vvp) + 24  [0x10274e290]  vthread.cc:29411
+    +       ! : | 13 do_release_vec(vthread_s*, vvp_code_s*, bool, long long, unsigned int, bool)  (in vvp) + 292  [0x10274e1c4]  vthread.cc:28912
+    +       ! : | + 7 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 488  [0x1027e8de4]  vvp_net_sig.cc:3245
+    +       ! : | + ! 7 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 84  [0x1026638e0]  vvp_net.h:1787
+    +       ! : | + !   7 vvp_wire_vec4::filter_vec4(vvp_vector4_t const&, vvp_vector4_t&, unsigned int, unsigned int)  (in vvp) + 380  [0x1027e7c94]  vvp_net_sig.cc:3136
+    +       ! : | + !     5 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 180  [0x1027cf868]  vvp_net.cc:0
+    +       ! : | + !     2 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 168  [0x1027cf85c]  vvp_net.cc:1812
+    +       ! : | + 3 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 80  [0x1027e8c4c]  vvp_net_sig.cc:3228
+    +       ! : | + ! 3 vvp_vector2_t::vvp_vector2_t(vvp_vector2_t::fill_t, unsigned int)  (in vvp) + 100,44  [0x1027cc694,0x1027cc65c]  vvp_net.cc:2478
+    +       ! : | + 1 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 424  [0x1027e8da4]  vvp_net_sig.cc:3242
+    +       ! : | + 1 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 424  [0x1027e8da4]  vvp_net_sig.cc:3243
+    +       ! : | + ! 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 0  [0x1026633cc]  vvp_net.h:585
+    +       ! : | + 1 vvp_wire_vec4::release_pv(vvp_sub_pointer_t<vvp_net_t>, unsigned int, unsigned int, bool)  (in vvp) + 436  [0x1027e8db0]  vvp_net_sig.cc:3244
+    +       ! : | 2 do_release_vec(vthread_s*, vvp_code_s*, bool, long long, unsigned int, bool)  (in vvp) + 72  [0x10274e0e8]  vthread.cc:28878
+    +       ! : | + 2 vpip_force_statement_for(vvp_code_s*)  (in vvp) + 176  [0x1028b9158]  vpi_callback.cc:75
+    +       ! : | 1 do_release_vec(vthread_s*, vvp_code_s*, bool, long long, unsigned int, bool)  (in vvp) + 332  [0x10274e1ec]  vthread.cc:28916
+    +       ! : |   1 vvp_vpi_callback::run_force_callbacks_(int, vvp_vector2_t const*, bool, unsigned int, unsigned int)  (in vvp) + 556  [0x1028bb29c]  vpi_callback.cc:1410
+    +       ! : 15 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 224  [0x102742b40]  vthread.cc:28403
+    +       ! : | 14 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 244  [0x1026c921c]  vthread.cc:525
+    +       ! : | + 13 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : | + ! 13 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + !   5 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 472,96,...  [0x19b2b8c24,0x19b2b8aac,...]
+    +       ! : | + !   4 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 44,72,...  [0x19b2bf834,0x19b2bf850,...]
+    +       ! : | + !   4 malloc_type_malloc  (in libsystem_malloc.dylib) + 84  [0x19b2a3790]
+    +       ! : | + 1 ???  (in <unknown binary>)  [0x1a2cf05cc]
+    +       ! : | 1 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 300  [0x1026c9254]  vthread.cc:525
+    +       ! : |   1 std::vector<vvp_vector4_t>::__emplace_back_slow_path<vvp_vector4_t const&>(vvp_vector4_t const&)  (in vvp) + 156  [0x1026b6a98]  vector.h:1107
+    +       ! : |     1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |       1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 472  [0x19b2b8c24]
+    +       ! : 11 of_IX_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 28  [0x10271393c]  vthread.cc:19655
+    +       ! : | 5 vec4_to_index(vthread_s*, bool)  (in vvp) + 80  [0x1027139a4]  vthread.cc:19592
+    +       ! : | + 4 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 52  [0x1027ce724]  vvp_net.cc:1139
+    +       ! : | + ! 4 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + !   3 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 44,88,...  [0x19b2b8a78,0x19b2b8aa4,...]
+    +       ! : | + !   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 336  [0x19b2bf958]
+    +       ! : | + 1 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 180  [0x1027ce7a4]  vvp_net.cc:1195
+    +       ! : | 2 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 336  [0x1027ce840]  vvp_net.cc:1211
+    +       ! : | 1 _xzm_free_main  (in libsystem_malloc.dylib) + 1080  [0x19b2c12f4]
+    +       ! : | 1 vec4_to_index(vthread_s*, bool)  (in vvp) + 152  [0x1027139ec]  vthread.cc:19593
+    +       ! : | + 1 _xzm_free_main  (in libsystem_malloc.dylib) + 40  [0x19b2c0ee4]
+    +       ! : | 1 vec4_to_index(vthread_s*, bool)  (in vvp) + 320  [0x102713a94]  vthread.cc:19608
+    +       ! : | 1 vec4_to_index(vthread_s*, bool)  (in vvp) + 476  [0x102713b30]  vthread.cc:19645
+    +       ! : |   1 _xzm_free_main  (in libsystem_malloc.dylib) + 24  [0x19b2c0ed4]
+    +       ! : 11 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 268  [0x10273cb20]  vthread.cc:27783
+    +       ! : | 7 std::vector<checked_property_index_dim_t>::resize(unsigned long)  (in vvp) + 124  [0x10273d43c]  vector.h:1363
+    +       ! : | + 7 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | +   3 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 520,268  [0x19b2b8c54,0x19b2b8b58]
+    +       ! : | +   2 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 116,168  [0x19b2bf87c,0x19b2bf8b0]
+    +       ! : | +   2 malloc_type_malloc  (in libsystem_malloc.dylib) + 72,84  [0x19b2a3784,0x19b2a3790]
+    +       ! : | 3 std::vector<checked_property_index_dim_t>::resize(unsigned long)  (in vvp) + 148  [0x10273d454]  vector.h:1364
+    +       ! : | + 3 _platform_memset  (in libsystem_platform.dylib) + 180  [0x19b4a7b44]
+    +       ! : | 1 std::vector<checked_property_index_dim_t>::resize(unsigned long)  (in vvp) + 168  [0x10273d468]  vector.h:1365
+    +       ! : |   1 DYLD-STUB$$memcpy  (in vvp) + 4  [0x1028ef774]
+    +       ! : 9 of_ADD(vthread_s*, vvp_code_s*)  (in vvp) + 76  [0x1026fb2f8]  vthread.cc:12804
+    +       ! : | 8 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : | + 7 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + ! 5 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 16,268,...  [0x19b2b8a5c,0x19b2b8b58,...]
+    +       ! : | + ! 1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 336  [0x19b2bf958]
+    +       ! : | + ! 1 xzm_malloc_zone_malloc_type_malloc_main  (in libsystem_malloc.dylib) + 0  [0x19b2bf314]
+    +       ! : | + 1 operator new(unsigned long)  (in libc++abi.dylib) + 36  [0x19b4543b0]
+    +       ! : | 1 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 232  [0x1027cd668]  vvp_net.cc:781
+    +       ! : 8 of_FORK(vthread_s*, vvp_code_s*)  (in vvp) + 16  [0x102711c68]  vthread.cc:19263
+    +       ! : | 4 do_fork_(vthread_s*, vvp_code_s*, bool)  (in vvp) + 56  [0x102711cac]  vthread.cc:19078
+    +       ! : | + 1 vthread_new_(vvp_code_s*, __vpiScope*, bool)  (in vvp) + 272  [0x1026f4a68]  vthread.cc:10275
+    +       ! : | + ! 1 _platform_memset  (in libsystem_platform.dylib) + 140  [0x19b4a7b1c]
+    +       ! : | + 1 vthread_new_(vvp_code_s*, __vpiScope*, bool)  (in vvp) + 684  [0x1026f4c04]  vthread.cc:10320
+    +       ! : | + 1 vthread_new_(vvp_code_s*, __vpiScope*, bool)  (in vvp) + 1252  [0x1026f4e3c]  vthread.cc:10361
+    +       ! : | + ! 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + !   1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 116  [0x19b2bf87c]
+    +       ! : | + 1 vthread_new_(vvp_code_s*, __vpiScope*, bool)  (in vvp) + 1196  [0x1026f4e04]  vthread.cc:10361
+    +       ! : | 4 do_fork_(vthread_s*, vvp_code_s*, bool)  (in vvp) + 1444  [0x102712218]  vthread.cc:19244
+    +       ! : |   4 vthread_run(vthread_s*)  (in vvp) + 1588  [0x1026ca580]  vthread.cc:11177
+    +       ! : |     1 of_CAST2(vthread_s*, vvp_code_s*)  (in vvp) + 164  [0x10270218c]  vthread.cc:15238
+    +       ! : |     1 of_IX_GETV_S(vthread_s*, vvp_code_s*)  (in vvp) + 104  [0x102713728]  vthread.cc:19573
+    +       ! : |     ! 1 bool vector4_to_value<long long>(vvp_vector4_t const&, long long&, bool, bool)  (in vvp) + 128  [0x1027d0528]  vvp_net.cc:2114
+    +       ! : |     1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 256  [0x10272e684]  vthread.cc:24350
+    +       ! : |     ! 1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 48  [0x1027da8b0]  vvp_net_sig.cc:727
+    +       ! : |     !   1 vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp) + 108  [0x1026f91b4]  vthread.cc:12085
+    +       ! : |     1 of_LOAD_VEC4_PART_U(vthread_s*, vvp_code_s*)  (in vvp) + 16  [0x10272e97c]  vthread.cc:24432
+    +       ! : |       1 of_LOAD_VEC4_PART_base_(vthread_s*, vvp_code_s*, bool)  (in vvp) + 172  [0x10272e8a0]  vthread.cc:24421
+    +       ! : |         1 load_vec4_part_(vthread_s*, vvp_net_t*, unsigned int, long long)  (in vvp) + 384  [0x10272eb2c]  vthread.cc:24391
+    +       ! : |           1 vvp_signal_value::vec4_part_value(vvp_vector4_t&, unsigned int, unsigned int) const  (in vvp) + 60  [0x1027d8e9c]  vvp_net_sig.cc:331
+    +       ! : |             1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 316  [0x1027da9bc]  vvp_net_sig.cc:734
+    +       ! : |               1 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+    +       ! : |                 1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |                   1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 296  [0x19b2b8b74]
+    +       ! : 8 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 456  [0x10273cbdc]  vthread.cc:27793
+    +       ! : | 8 strtoull_l  (in libsystem_c.dylib) + 268,52,...  [0x19b344cf0,0x19b344c18,...]
+    +       ! : 7 of_PAD_U(vthread_s*, vvp_code_s*)  (in vvp) + 60  [0x1027301bc]  vthread.cc:24925
+    +       ! : | 5 vvp_vector4_t::resize(unsigned int, vvp_bit4_t)  (in vvp) + 344  [0x1027ce484]  vvp_net.cc:1078
+    +       ! : | + 4 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | + ! 3 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 520,656,...  [0x19b2b8c54,0x19b2b8cdc,...]
+    +       ! : | + ! 1 xzm_malloc_zone_malloc_type_malloc_main  (in libsystem_malloc.dylib) + 0  [0x19b2bf314]
+    +       ! : | + 1 DYLD-STUB$$operator new[](unsigned long)  (in vvp) + 4  [0x1028ef450]
+    +       ! : | 1 vvp_vector4_t::resize(unsigned int, vvp_bit4_t)  (in vvp) + 24  [0x1027ce344]  vvp_net.cc:1036
+    +       ! : | 1 vvp_vector4_t::resize(unsigned int, vvp_bit4_t)  (in vvp) + 888  [0x1027ce6a4]  vvp_net.cc:1132
+    +       ! : 6 of_CMPINE(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102702f88]  vthread.cc:15454
+    +       ! : 6 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 192  [0x10273cad4]  vthread.cc:27843
+    +       ! : | 4 _xzm_free_main  (in libsystem_malloc.dylib) + 40,112,...  [0x19b2c0ee4,0x19b2c0f2c,...]
+    +       ! : | 1 _free  (in libsystem_malloc.dylib) + 64  [0x19b2c5150]
+    +       ! : | 1 free  (in libsystem_malloc.dylib) + 0  [0x19b2866f0]
+    +       ! : 5 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 236  [0x10272e670]  vthread.cc:24337
+    +       ! : | 4 vvp_wire_base::as_signal_value()  (in vvp) + 0  [0x1027eb0c4]  vvp_net_sig.h:726
+    +       ! : | 1 automatic_signal_base::as_signal_value()  (in vvp) + 0  [0x1027eabfc]  vvp_net_sig.h:0
+    +       ! : 5 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 224  [0x10272e664]  vthread.cc:24337
+    +       ! : 5 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 268  [0x102730698]  vthread.cc:25062
+    +       ! : | 5 _xzm_free_main  (in libsystem_malloc.dylib) + 392,184,...  [0x19b2c1044,0x19b2c0f74,...]
+    +       ! : 5 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 84  [0x10273ca68]  vthread.cc:27775
+    +       ! : | 5 strtoul_l  (in libsystem_c.dylib) + 12,300,...  [0x19b332744,0x19b332864,...]
+    +       ! : 5 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 152  [0x102742af8]  vthread.cc:28400
+    +       ! : | 5 vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp) + 60  [0x1027cd8d0]  vvp_net.cc:828
+    +       ! : |   4 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |   + 4 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 260,276,...  [0x19b2b8b50,0x19b2b8b60,...]
+    +       ! : |   1 operator new[](unsigned long)  (in libc++abi.dylib) + 0  [0x19b4543e4]
+    +       ! : 4 of_ADD(vthread_s*, vvp_code_s*)  (in vvp) + 104  [0x1026fb314]  vthread.cc:12804
+    +       ! : | 2 _xzm_free_main  (in libsystem_malloc.dylib) + 164,392  [0x19b2c0f60,0x19b2c1044]
+    +       ! : | 1 DYLD-STUB$$operator delete[](void*)  (in vvp) + 4  [0x1028ef438]
+    +       ! : | 1 _free  (in libsystem_malloc.dylib) + 20  [0x19b2c5124]
+    +       ! : 4 of_ASSIGN_VEC4_OFF_D(vthread_s*, vvp_code_s*)  (in vvp) + 284  [0x1026fbe20]  vthread.cc:13078
+    +       ! : | 3 schedule_event_(event_s*, unsigned long long, event_queue_e)  (in vvp) + 44,1044  [0x1027c4228,0x1027c4610]  schedule.cc:0
+    +       ! : | 1 schedule_event_(event_s*, unsigned long long, event_queue_e)  (in vvp) + 16  [0x1027c420c]  schedule.cc:887
+    +       ! : 4 of_FORCE_VEC4_OFF(vthread_s*, vvp_code_s*)  (in vvp) + 440  [0x10271178c]  vthread.cc:19011
+    +       ! : | 4 vvp_net_t::force_vec4(vvp_vector4_t const&, vvp_vector2_t const&)  (in vvp) + 48  [0x1027d8fb8]  vvp_net_sig.cc:344
+    +       ! : |   2 vvp_wire_vec4::force_fil_vec4(vvp_vector4_t const&, vvp_vector2_t const&)  (in vvp) + 188  [0x1027e8a08]  vvp_net_sig.cc:3186
+    +       ! : |   + 2 vvp_vector2_t::value(unsigned int) const  (in vvp) + 0  [0x1027cc7c4]  vvp_net.cc:2757
+    +       ! : |   1 vvp_wire_vec4::force_fil_vec4(vvp_vector4_t const&, vvp_vector2_t const&)  (in vvp) + 64  [0x1027e898c]  vvp_net_sig.cc:0
+    +       ! : |   1 vvp_wire_vec4::force_fil_vec4(vvp_vector4_t const&, vvp_vector2_t const&)  (in vvp) + 164  [0x1027e89f0]  vvp_net_sig.cc:3185
+    +       ! : 4 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 160  [0x10272e624]  vthread.cc:24330
+    +       ! : | 2 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 208,252  [0x1026c91f8,0x1026c9224]  vthread.cc:525
+    +       ! : | 1 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 12  [0x1026c9134]  vthread.cc:519
+    +       ! : | 1 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 256  [0x1026c9228]  vthread.cc:526
+    +       ! : 4 of_PART_U(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x1027303b8]  vthread.cc:24990
+    +       ! : 3 do_CMPE(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 592  [0x102702bc0]  vthread.cc:15387
+    +       ! : 3 of_ALLOC(vthread_s*, vvp_code_s*)  (in vvp) + 212  [0x1026fa784]  vthread.cc:12662
+    +       ! : | 3 vthread_alloc_context(__vpiScope*)  (in vvp) + 316  [0x1026fadb0]  vthread.cc:10150
+    +       ! : |   3 std::__hash_table<std::__hash_value_type<void**, automatic_context_record_s>>::__emplace_unique[abi:nqe220106]<std::piecewise_construct_t const&, std::tuple<void** const&>, std::tuple<>>(std::piecewise_construct_t const&, std::tuple<void** const&>&&, std::tuple<>&&)::'lambda'(void** const&, std::piecewise_construct_t const&, std::tuple<void** const&>&&, std::tuple<>&&)::operator()(void** const&, std::piecewise_construct_t const&, std::tuple<void** const&>&&, std::tuple<>&&) const  (in vvp) + 324  [0x1027a969c]  __hash_table:785
+    +       ! : 3 of_CMPIU(vthread_s*, vvp_code_s*)  (in vvp) + 252  [0x1027059f0]  vthread.cc:15946
+    +       ! : | 2 ???  (in <unknown binary>)  [0x1a2cec3d8]
+    +       ! : | 1 do_CMPU(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 100  [0x102705738]  vthread.cc:15890
+    +       ! : |   1 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 52  [0x1027ce724]  vvp_net.cc:1139
+    +       ! : |     1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : |       1 malloc_type_malloc  (in libsystem_malloc.dylib) + 92  [0x19b2a3798]
+    +       ! : 3 of_DISABLE_FLOW(vthread_s*, vvp_code_s*)  (in vvp) + 1224  [0x10270d31c]  vthread.cc:17863
+    +       ! : | 2 __dynamic_cast  (in libc++abi.dylib) + 56  [0x19b43f590]
+    +       ! : | 1 do_disable(vthread_s*, vthread_s*)  (in vvp) + 440  [0x10270ccac]  vthread.cc:17715
+    +       ! : |   1 vthread_cancel_event_wait(vthread_s*)  (in vvp) + 200  [0x1026f5d30]  vthread.cc:10817
+    +       ! : |     1 remove_mutation_waiter_(vthread_s*)  (in vvp) + 272  [0x1027edd08]  vector.h:0
+    +       ! : 3 of_JMP(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102713cb0]  vthread.cc:19693
+    +       ! : 3 of_LOAD_PREPONED(vthread_s*, vvp_code_s*)  (in vvp) + 156  [0x10272edc4]  vthread.cc:24487
+    +       ! : | 3 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 124  [0x1027e91e8]  vvp_net_sig.cc:3274
+    +       ! : |   3 vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 200  [0x1027cd648]  vvp_net.cc:781
+    +       ! : 3 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x10272e584]  vthread.cc:24314
+    +       ! : 3 of_LOAD_VEC4_PARTI(vthread_s*, vvp_code_s*)  (in vvp) + 24  [0x10272e9a0]  vthread.cc:24443
+    +       ! : | 3 load_vec4_part_(vthread_s*, vvp_net_t*, unsigned int, long long)  (in vvp) + 384  [0x10272eb2c]  vthread.cc:24391
+    +       ! : |   2 vvp_wire_vec4::vec4_part_value(vvp_vector4_t&, unsigned int, unsigned int) const  (in vvp) + 84  [0x1027e9360]  vvp_net_sig.cc:3286
+    +       ! : |   + 1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 604  [0x1027ce25c]  vvp_net.cc:0
+    +       ! : |   + 1 vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp) + 16  [0x1027ce010]  vvp_net.cc:918
+    +       ! : |   1 vvp_wire_vec4::vec4_part_value(vvp_vector4_t&, unsigned int, unsigned int) const  (in vvp) + 84  [0x1027e9360]  vvp_net_sig.cc:3286
+    +       ! : 3 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 224  [0x10273066c]  vthread.cc:25058
+    +       ! : | 3 vvp_vector4_t::setarray(unsigned int, unsigned int, unsigned long const*)  (in vvp) + 216,220,...  [0x1027ce91c,0x1027ce920,...]  vvp_net.cc:0
+    +       ! : 3 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 368  [0x10273cb84]  vthread.cc:27792
+    +       ! : | 3 strtoll_l  (in libsystem_c.dylib) + 364  [0x19b3264a8]
+    +       ! : 3 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 560  [0x10273cc44]  vthread.cc:27794
+    +       ! : | 2 strtoull_l  (in libsystem_c.dylib) + 396,492  [0x19b344d70,0x19b344dd0]
+    +       ! : | 1 DYLD-STUB$$strtoull  (in vvp) + 4  [0x1028ef924]
+    +       ! : 3 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 1872,2068  [0x10273d164,0x10273d228]  vthread.cc:27839
+    +       ! : 2 of_ADD(vthread_s*, vvp_code_s*)  (in vvp) + 148  [0x1026fb340]  vthread.cc:12810
+    +       ! : | 1 vvp_vector4_t::add(vvp_vector4_t const&)  (in vvp) + 24  [0x1027cee9c]  vvp_net.cc:1506
+    +       ! : | 1 vvp_vector4_t::add(vvp_vector4_t const&)  (in vvp) + 244  [0x1027cef78]  vvp_net.cc:1540
+    +       ! : 2 of_ADD(vthread_s*, vvp_code_s*)  (in vvp) + 172  [0x1026fb358]  vthread.cc:12813
+    +       ! : | 2 _xzm_free_main  (in libsystem_malloc.dylib) + 120,164  [0x19b2c0f34,0x19b2c0f60]
+    +       ! : 2 of_ASSIGN_VEC4_OFF_D(vthread_s*, vvp_code_s*)  (in vvp) + 160,180  [0x1026fbda4,0x1026fbdb8]  vthread.cc:13072
+    +       ! : 2 of_CMPIE(vthread_s*, vvp_code_s*)  (in vvp) + 116  [0x102702dd0]  vthread.cc:15445
+    +       ! : 2 of_CMPIE(vthread_s*, vvp_code_s*)  (in vvp) + 252  [0x102702e58]  vthread.cc:15447
+    +       ! : | 1 do_CMPE(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 68  [0x1027029b4]  vthread.cc:15355
+    +       ! : | + 1 vvp_vector4_t::has_xz() const  (in vvp) + 40  [0x1027cf9fc]  vvp_net.cc:0
+    +       ! : | 1 do_CMPE(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 560  [0x102702ba0]  vthread.cc:15385
+    +       ! : |   1 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 4  [0x1027cf7b8]  vvp_net.cc:1794
+    +       ! : 2 of_CMPIS(vthread_s*, vvp_code_s*)  (in vvp) + 548  [0x102703800]  vthread.cc:15625
+    +       ! : 2 of_CMPU(vthread_s*, vvp_code_s*)  (in vvp) + 88  [0x102705600]  vthread.cc:15923
+    +       ! : | 1 do_CMPU(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 100  [0x102705738]  vthread.cc:15890
+    +       ! : | + 1 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 52  [0x1027ce724]  vvp_net.cc:1139
+    +       ! : | +   1 operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+    +       ! : | +     1 <deduplicated_symbol>  (in libsystem_malloc.dylib) + 288  [0x19b2bf928]
+    +       ! : | 1 vvp_vector4_t::subarray(unsigned int, unsigned int, bool) const  (in vvp) + 328  [0x1027ce838]  vvp_net.cc:1211
+    +       ! : 2 of_EXEC_UFUNC_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 264  [0x10276ed38]  vthread.cc:34177
+    +       ! : | 1 do_exec_ufunc(vthread_s*, vvp_code_s*, vthread_s*)  (in vvp) + 344  [0x10276eaf4]  vthread.cc:34124
+    +       ! : | + 1 ufunc_core::assign_bits_to_ports(void**)  (in vvp) + 224  [0x1026c5c98]  ufunc.cc:118
+    +       ! : | +   1 __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+    +       ! : | +     1 __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+    +       ! : | +       1 __cxxabiv1::__vmi_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 260  [0x19b43ff28]
+    +       ! : | +         1 __cxxabiv1::__vmi_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 120  [0x19b43fe9c]
+    +       ! : | 1 do_exec_ufunc(vthread_s*, vvp_code_s*, vthread_s*)  (in vvp) + 540  [0x10276ebb8]  vthread.cc:34135
+    +       ! : |   1 vthread_run(vthread_s*)  (in vvp) + 1588  [0x1026ca580]  vthread.cc:11177
+    +       ! : |     1 of_FORK(vthread_s*, vvp_code_s*)  (in vvp) + 16  [0x102711c68]  vthread.cc:19263
+    +       ! : |       1 do_fork_(vthread_s*, vvp_code_s*, bool)  (in vvp) + 1444  [0x102712218]  vthread.cc:19244
+    +       ! : |         1 vthread_run(vthread_s*)  (in vvp) + 1588  [0x1026ca580]  vthread.cc:11177
+    +       ! : |           1 of_CMPIU(vthread_s*, vvp_code_s*)  (in vvp) + 252  [0x1027059f0]  vthread.cc:15946
+    +       ! : |             1 do_CMPU(vthread_s*, vvp_vector4_t const&, vvp_vector4_t const&)  (in vvp) + 0  [0x1027056d4]  vthread.cc:15872
+    +       ! : 2 of_FORCE_VEC4_OFF(vthread_s*, vvp_code_s*)  (in vvp) + 408  [0x10271176c]  vthread.cc:19007
+    +       ! : | 1 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 192  [0x1027e922c]  vvp_net_sig.cc:3279
+    +       ! : | + 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 200  [0x102663494]  vvp_net.h:0
+    +       ! : | 1 vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp) + 232  [0x1027e9254]  vvp_net_sig.cc:3279
+    +       ! : 2 of_JMP0XZ(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102713db0]  vthread.cc:19768
+    +       ! : 2 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 236  [0x10272e670]  vthread.cc:24338
+    +       ! : 2 of_LOAD_VEC4A(vthread_s*, vvp_code_s*)  (in vvp) + 288  [0x10272f318]  vthread.cc:24622
+    +       ! : | 2 __vpiArray::get_word(unsigned int)  (in vvp) + 52  [0x10266a33c]  array.cc:1622
+    +       ! : |   2 __vpiArray::get_word_raw_(unsigned int)  (in vvp) + 312  [0x10266e0b4]  array.cc:1611
+    +       ! : 2 of_NORR(vthread_s*, vvp_code_s*)  (in vvp) + 312  [0x10273b574]  vthread.cc:27091
+    +       ! : | 2 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 12  [0x1026c9134]  vthread.cc:519
+    +       ! : 2 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 204  [0x102742b2c]  vthread.cc:28401
+    +       ! : | 1 vvp_vector4_t::setarray(unsigned int, unsigned int, unsigned long const*)  (in vvp) + 204  [0x1027ce910]  vvp_net.cc:1258
+    +       ! : | 1 vvp_vector4_t::setarray(unsigned int, unsigned int, unsigned long const*)  (in vvp) + 292  [0x1027ce968]  vvp_net.cc:1277
+    +       ! : 2 of_STORE_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102767c00]  vthread.cc:32385
+    +       ! : 2 of_STORE_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 276  [0x102767d14]  vthread.cc:32414
+    +       ! : | 2 resize_rval_vec(vvp_vector4_t&, long long&, unsigned int)  (in vvp) + 36  [0x1026fba68]  vthread.cc:12952
+    +       ! : 2 vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp) + 260,264  [0x1026c922c,0x1026c9230]  vthread.cc:526
+    +       ! : 2 vvp_vector4_t::resize(unsigned int, vvp_bit4_t)  (in vvp) + 896,900  [0x1027ce6ac,0x1027ce6b0]  vvp_net.cc:1132
+    +       ! : 1 ???  (in <unknown binary>)  [0x1a2cec3dc]
+    +       ! : 1 __cxxabiv1::(anonymous namespace)::dyn_cast_to_derived(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, long, bool)  (in libc++abi.dylib) + 348  [0x19b452bdc]
+    +       ! : 1 _xzm_free_main  (in libsystem_malloc.dylib) + 1080  [0x19b2c12f4]
+    +       ! : 1 of_ADDI(vthread_s*, vvp_code_s*)  (in vvp) + 244  [0x1026fb488]  vthread.cc:12833
+    +       ! : | 1 vvp_vector4_t::add(vvp_vector4_t const&)  (in vvp) + 344  [0x1027cefdc]  vvp_net.cc:1514
+    +       ! : 1 of_CLIP_VEC4_DYNAMIC(vthread_s*, vvp_code_s*)  (in vvp) + 256  [0x1027685d4]  vthread.cc:32499
+    +       ! : 1 of_CMPIE(vthread_s*, vvp_code_s*)  (in vvp) + 52  [0x102702d90]  vthread.cc:15439
+    +       ! : 1 of_CMPIE(vthread_s*, vvp_code_s*)  (in vvp) + 228  [0x102702e40]  vthread.cc:15445
+    +       ! : | 1 vvp_vector4_t::setarray(unsigned int, unsigned int, unsigned long const*)  (in vvp) + 56  [0x1027ce87c]  vvp_net.cc:1231
+    +       ! : 1 of_CMPIS(vthread_s*, vvp_code_s*)  (in vvp) + 76  [0x102703628]  vthread.cc:15599
+    +       ! : 1 of_END(vthread_s*, vvp_code_s*)  (in vvp) + 1284  [0x10270f6a4]  vthread.cc:18397
+    +       ! : | 1 vvp_process::signal_waiters_()  (in vvp) + 136  [0x1026c7f64]  vthread.cc:1357
+    +       ! : 1 of_FLAG_SET_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 20  [0x102710da8]  vthread.cc:18810
+    +       ! : 1 of_FLAG_SET_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 160  [0x102710e34]  vthread.cc:18815
+    +       ! : 1 of_FORCE_VEC4_OFF(vthread_s*, vvp_code_s*)  (in vvp) + 312  [0x10271170c]  vthread.cc:18997
+    +       ! : 1 of_IX_GETV_S(vthread_s*, vvp_code_s*)  (in vvp) + 104  [0x102713728]  vthread.cc:19573
+    +       ! : | 1 bool vector4_to_value<long long>(vvp_vector4_t const&, long long&, bool, bool)  (in vvp) + 72  [0x1027d04f0]  vvp_net.cc:2114
+    +       ! : 1 of_IX_LOAD(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102713488]  vthread.cc:19512
+    +       ! : 1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 68  [0x10272e5c8]  vthread.cc:24316
+    +       ! : 1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 188  [0x10272e640]  vthread.cc:24331
+    +       ! : 1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 248  [0x10272e67c]  vthread.cc:24350
+    +       ! : 1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 256  [0x10272e684]  vthread.cc:24353
+    +       ! : 1 of_LOAD_VEC4A(vthread_s*, vvp_code_s*)  (in vvp) + 160  [0x10272f298]  vthread.cc:24604
+    +       ! : 1 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x10273058c]  vthread.cc:25049
+    +       ! : 1 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 188  [0x102730648]  vthread.cc:25058
+    +       ! : 1 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 244  [0x102730680]  vthread.cc:25062
+    +       ! : 1 of_MULI(vthread_s*, vvp_code_s*)  (in vvp) + 280  [0x1027306a4]  vvp_net.h:0
+    +       ! : 1 of_PAD_S(vthread_s*, vvp_code_s*)  (in vvp) + 4  [0x1027300dc]  vthread.cc:24902
+    +       ! : 1 of_PART_U(vthread_s*, vvp_code_s*)  (in vvp) + 20  [0x1027303cc]  vthread.cc:24991
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 64  [0x10273ca54]  vthread.cc:27774
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 388  [0x10273cb98]  vthread.cc:27792
+    +       ! : | 1 __error  (in libsystem_kernel.dylib) + 0  [0x19b459604]
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 476  [0x10273cbf0]  vthread.cc:27793
+    +       ! : | 1 DYLD-STUB$$__error  (in vvp) + 4  [0x1028ef51c]
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 540  [0x10273cc30]  vthread.cc:27794
+    +       ! : | 1 DYLD-STUB$$__error  (in vvp) + 4  [0x1028ef51c]
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 612  [0x10273cc78]  vthread.cc:27797
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 844  [0x10273cd60]  vthread.cc:27830
+    +       ! : 1 of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp) + 184  [0x10273cacc]  vthread.cc:27843
+    +       ! : 1 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102742a60]  vthread.cc:28394
+    +       ! : 1 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 136  [0x102742ae8]  vthread.cc:28400
+    +       ! : 1 of_PUSHI_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 244  [0x102742b54]  vthread.cc:28406
+    +       ! : 1 of_RELEASE_REG_A(vthread_s*, vvp_code_s*)  (in vvp) + 36  [0x10274e330]  vthread.cc:29435
+    +       ! : | 1 vpip_force_statement_for(vvp_code_s*)  (in vvp) + 176  [0x1028b9158]  vpi_callback.cc:75
+    +       ! : 1 of_STORE_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 68  [0x102767c44]  vthread.cc:32388
+    +       ! : | 1 vvp_wire_base::as_signal_value()  (in vvp) + 0  [0x1027eb0c4]  vvp_net_sig.h:726
+    +       ! : 1 of_STORE_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 504  [0x102767df8]  vthread.cc:32425
+    +       ! : | 1 ensure_write_context_(vthread_s*, char const*)  (in vvp) + 84  [0x1026f7014]  vthread.cc:12469
+    +       ! : 1 of_SUBI(vthread_s*, vvp_code_s*)  (in vvp) + 36  [0x102768bd4]  vthread.cc:32570
+    +       ! : 1 of_VPI_CALL(vthread_s*, vvp_code_s*)  (in vvp) + 0  [0x102769bf4]  vthread.cc:32823
+    +       ! : 1 of_VPI_CALL(vthread_s*, vvp_code_s*)  (in vvp) + 532  [0x102769e08]  vthread.cc:32865
+    +       ! : 1 std::vector<checked_property_index_dim_t>::resize(unsigned long)  (in vvp) + 256  [0x10273d4c0]  vector.h:1370
+    +       ! : 1 strtoull_l  (in libsystem_c.dylib) + 568  [0x19b344e1c]
+    +       ! : 1 vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp) + 788  [0x1027dab94]  vvp_net_sig.cc:743
+    +       ! 25 generic_event_s::run_run()  (in vvp) + 52  [0x1027c3f6c]  schedule.cc:574
+    +       ! : 9 vvp_fun_boolean_::run_run()  (in vvp) + 200  [0x1028a9bac]  logic.cc:202
+    +       ! : | 9 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : |   9 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : |     5 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 232  [0x102663974]  vvp_net.h:1782
+    +       ! : |     + 5 vvp_fun_event_or_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 32  [0x1028a09b0]  event.cc:1839
+    +       ! : |     +   3 vthread_schedule_list(vthread_s*)  (in vvp) + 84  [0x1026f7678]  vthread.cc:11428
+    +       ! : |     +   1 vthread_schedule_list(vthread_s*)  (in vvp) + 704  [0x1026f78e4]  vthread.cc:0
+    +       ! : |     +   1 vthread_schedule_list(vthread_s*)  (in vvp) + 56  [0x1026f765c]  vthread.cc:11426
+    +       ! : |     2 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : |     + 1 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 432  [0x10289e204]  event.cc:1378
+    +       ! : |     + 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 232  [0x102663974]  vvp_net.h:1782
+    +       ! : |     +   1 vvp_fun_event_or_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 32  [0x1028a09b0]  event.cc:1839
+    +       ! : |     +     1 vthread_schedule_list(vthread_s*)  (in vvp) + 64  [0x1026f7664]  vthread.cc:11427
+    +       ! : |     1 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 408  [0x10289e1ec]  event.cc:1374
+    +       ! : |     + 1 vthread_schedule_list(vthread_s*)  (in vvp) + 900  [0x1026f79a8]  vthread.cc:11495
+    +       ! : |     +   1 _xzm_free_main  (in libsystem_malloc.dylib) + 232  [0x19b2c0fa4]
+    +       ! : |     1 vvp_fun_edge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 416  [0x10289bdb0]  event.cc:836
+    +       ! : |       1 vthread_schedule_list(vthread_s*)  (in vvp) + 112  [0x1026f7694]  vthread.cc:11425
+    +       ! : 9 vvp_fun_concat8::run_run()  (in vvp) + 104  [0x10267fde8]  concat.cc:196
+    +       ! : | 9 vvp_send_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 76  [0x1027cd21c]  vvp_net.cc:649
+    +       ! : |   7 vvp_fun_buft::recv_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 132  [0x1028aac10]  logic.cc:434
+    +       ! : |   + 7 vvp_send_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 76  [0x1027cd21c]  vvp_net.cc:649
+    +       ! : |   +   7 vvp_net_fun_t::recv_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 36  [0x1027d5d2c]  vvp_net.cc:3424
+    +       ! : |   +     4 reduce4(vvp_vector8_t const&)  (in vvp) + 364  [0x1027d5f00]  vvp_net.cc:3834
+    +       ! : |   +     ! 2 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 12,200  [0x1026633d8,0x102663494]  vvp_net.h:0
+    +       ! : |   +     ! 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 0  [0x1026633cc]  vvp_net.h:585
+    +       ! : |   +     ! 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 172  [0x102663478]  vvp_net.h:594
+    +       ! : |   +     3 reduce4(vvp_vector8_t const&)  (in vvp) + 276,288,...  [0x1027d5ea8,0x1027d5eb4,...]  vvp_net.cc:3834
+    +       ! : |   1 vvp_net_fun_t::recv_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 36  [0x1027d5d2c]  vvp_net.cc:3424
+    +       ! : |   + 1 reduce4(vvp_vector8_t const&)  (in vvp) + 312  [0x1027d5ecc]  vvp_net.cc:3834
+    +       ! : |   1 vvp_net_fun_t::recv_vec8(vvp_sub_pointer_t<vvp_net_t>, vvp_vector8_t const&)  (in vvp) + 88  [0x1027d5d60]  vvp_net.cc:3424
+    +       ! : |     1 _free  (in libsystem_malloc.dylib) + 36  [0x19b2c5134]
+    +       ! : 2 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : | 1 vvp_fun_anyedge_sa::recv_vec4(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, void**)  (in vvp) + 432  [0x10289e204]  event.cc:1377
+    +       ! : | + 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 280  [0x1026639a4]  vvp_net.h:1797
+    +       ! : | 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+    +       ! : |   1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 280  [0x1026639a4]  vvp_net.h:1797
+    +       ! : 1 reactive_resume_event_s::run_run()  (in vvp) + 0  [0x1027b19f8]  vthread.cc:33937
+    +       ! : 1 schedule_event_(event_s*, unsigned long long, event_queue_e)  (in vvp) + 1132  [0x1027c4668]  schedule.cc:1019
+    +       ! : 1 vvp_fun_boolean_::run_run()  (in vvp) + 184  [0x1028a9b9c]  logic.cc:202
+    +       ! : | 1 vvp_fun_or::calculate(vvp_vector4_t const*) const  (in vvp) + 60  [0x1028ac330]  logic.cc:715
+    +       ! : 1 vvp_fun_part_sa::run_run()  (in vvp) + 0  [0x1026bccec]  part.cc:0
+    +       ! : 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 276  [0x1026639a0]  vvp_net.h:1797
+    +       ! :   1 vvp_event_source_end()  (in vvp) + 40  [0x102897f00]  event.cc:152
+    +       ! 13 assign_vector4_event_s::run_run()  (in vvp) + 120  [0x1027c3724]  schedule.cc:242
+    +       ! : 9 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 84  [0x1026638e0]  vvp_net.h:1787
+    +       ! : | 9 vvp_wire_vec4::filter_vec4(vvp_vector4_t const&, vvp_vector4_t&, unsigned int, unsigned int)  (in vvp) + 380  [0x1027e7c94]  vvp_net_sig.cc:3136
+    +       ! : |   5 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 160,168  [0x1027cf854,0x1027cf85c]  vvp_net.cc:1812
+    +       ! : |   3 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 148,144  [0x1027cf848,0x1027cf844]  vvp_net.cc:1810
+    +       ! : |   1 vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp) + 180  [0x1027cf868]  vvp_net.cc:0
+    +       ! : 2 vvp_fun_signal4_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 640  [0x1027d98f4]  vvp_net_sig.cc:462
+    +       ! : | 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 200  [0x102663494]  vvp_net.h:0
+    +       ! : | 1 vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp) + 40  [0x1026633f4]  vvp_net.h:592
+    +       ! : 1 vvp_fun_signal4_sa::recv_vec4_pv(vvp_sub_pointer_t<vvp_net_t>, vvp_vector4_t const&, unsigned int, unsigned int, void**)  (in vvp) + 44  [0x1027d96a0]  vvp_net_sig.cc:454
+    +       ! : 1 vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 276  [0x1026639a0]  vvp_net.h:1797
+    +       ! :   1 vvp_event_source_end()  (in vvp) + 712  [0x1028981a0]  event.cc:166
+    +       ! :     1 (anonymous namespace)::flush_event_source_transaction_()  (in vvp) + 36  [0x1028984f4]  event.cc:75
+    +       ! 7 vthread_run(vthread_s*)  (in vvp) + 1572  [0x1026ca570]  vthread.cc:11176
+    +       ! 4 vthread_run(vthread_s*)  (in vvp) + 1588  [0x1026ca580]  vthread.cc:0
+    +       ! 3 vthread_run(vthread_s*)  (in vvp) + 3536  [0x1026cad1c]  vthread.cc:11355
+    +       ! : 2 vthread_delete(vthread_s*)  (in vvp) + 52  [0x1026f4f9c]  vthread.cc:10549
+    +       ! : 1 vthread_run_unpin_(vthread_s*)  (in vvp) + 0  [0x1026f740c]  vthread.cc:10434
+    +       ! 2 vthread_run(vthread_s*)  (in vvp) + 468  [0x1026ca120]  vthread.cc:11098
+    +       ! 2 vthread_run(vthread_s*)  (in vvp) + 1592,1600  [0x1026ca584,0x1026ca58c]  vthread.cc:11178
+    +       ! 1 __vpiArray::set_word(unsigned int, unsigned int, vvp_vector4_t const&)  (in vvp) + 188  [0x10266aeb8]  array.cc:1477
+    +       ! : 1 vvp_vector4array_sa::get_word(unsigned int) const  (in vvp) + 0  [0x1027d1734]  vvp_net.cc:2354
+    +       ! 1 assign_vector4_event_s::run_run()  (in vvp) + 40  [0x1027c36d4]  schedule.cc:0
+    +       ! 1 of_IX_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 44  [0x10271394c]  vthread.cc:19656
+    +       ! 1 of_JMP0XZ(vthread_s*, vvp_code_s*)  (in vvp) + 80  [0x102713e00]  vthread.cc:19788
+    +       ! 1 of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp) + 296  [0x10272e6ac]  vthread.cc:24353
+    +       ! 1 vthread_run(vthread_s*)  (in vvp) + 52  [0x1026c9f80]  vthread.cc:11064
+    +       ! 1 vthread_run(vthread_s*)  (in vvp) + 1560  [0x1026ca564]  vthread.cc:11175
+    +       ! 1 vthread_run(vthread_s*)  (in vvp) + 3500  [0x1026cacf8]  vthread.cc:11353
+    +       1 assign_vector4_event_s::run_run()  (in vvp) + 136  [0x1027c3734]  schedule.cc:245
+    +       1 schedule_simulate()  (in vvp) + 1436  [0x1027c6d14]  schedule.cc:1776
+    +       1 schedule_simulate()  (in vvp) + 2192  [0x1027c7008]  schedule.cc:1957
+    +         1 assign_vector4_event_s::~assign_vector4_event_s()  (in vvp) + 0  [0x1027c7420]  schedule.cc:215
+    565 Thread_82590348
+      565 thread_start  (in libsystem_pthread.dylib) + 8  [0x19b498cec]
+        565 _pthread_start  (in libsystem_pthread.dylib) + 136  [0x19b49dd00]
+          563 server_create  (in jtagdpi.vpi) + 896  [0x102ee0bb0]  tcp_server.c:345
+          ! 563 __select  (in libsystem_kernel.dylib) + 8  [0x19b463ef0]
+          2 server_create  (in jtagdpi.vpi) + 960  [0x102ee0bf0]  tcp_server.c:354
+            2 __darwin_check_fd_set_overflow  (in libsystem_kernel.dylib) + 0,8  [0x19b4703a0,0x19b4703a8]
+
+Total number in stack (recursive counted multiple, when >=5):
+        19       operator new(unsigned long)  (in libc++abi.dylib) + 52  [0x19b4543c0]
+        16       _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 0  [0x19b2b8a4c]
+        13       _xzm_free_main  (in libsystem_malloc.dylib) + 0  [0x19b2c0ebc]
+        11       <deduplicated_symbol>  (in libsystem_malloc.dylib) + 0  [0x19b2bf808]
+        7       vvp_net_t::send_vec4(vvp_vector4_t const&, void**)  (in vvp) + 344  [0x1026639e4]  vvp_net.h:1791
+        6       __dynamic_cast  (in libc++abi.dylib) + 204  [0x19b43f624]
+        6       _free  (in libsystem_malloc.dylib) + 0  [0x19b2c5110]
+        6       malloc_type_malloc  (in libsystem_malloc.dylib) + 0  [0x19b2a373c]
+        6       vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp) + 52  [0x1027cd5b4]  vvp_net.cc:760
+        5       __cxxabiv1::(anonymous namespace)::dyn_cast_try_downcast(void const*, void const*, __cxxabiv1::__class_type_info const*, __cxxabiv1::__class_type_info const*, long, bool)  (in libc++abi.dylib) + 144  [0x19b452c78]
+        5       __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib) + 0  [0x19b43f888]
+
+Sort by top of stack, same collapsed (when >= 5):
+        __select  (in libsystem_kernel.dylib)        563
+        vpip_vec4_to_int64_saturated(vvp_vector4_t const&, bool, long long&)  (in vvp)        47
+        _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib)        46
+        _xzm_free_main  (in libsystem_malloc.dylib)        33
+        of_PROP_INDEX_CHECK(vthread_s*, vvp_code_s*)  (in vvp)        29
+        <deduplicated_symbol>  (in libsystem_malloc.dylib)        22
+        vthread_run(vthread_s*)  (in vvp)        18
+        vvp_vector4_t::eeq(vvp_vector4_t const&) const  (in vvp)        18
+        vvp_vector4_t::copy_from_big_(vvp_vector4_t const&)  (in vvp)        16
+        of_LOAD_VEC4(vthread_s*, vvp_code_s*)  (in vvp)        15
+        malloc_type_malloc  (in libsystem_malloc.dylib)        14
+        vthread_get_rd_context_item_scoped(unsigned int, __vpiScope*)  (in vvp)        13
+        strtoull_l  (in libsystem_c.dylib)        11
+        vvp_vector4_t::set_bit(unsigned int, vvp_bit4_t)  (in vvp)        11
+        vthread_schedule_list(vthread_s*)  (in vvp)        10
+        vvp_vector4_t::allocate_words_(unsigned long, unsigned long)  (in vvp)        10
+        vthread_s::push_vec4(vvp_vector4_t const&)  (in vvp)        8
+        _free  (in libsystem_malloc.dylib)        7
+        _platform_memset  (in libsystem_platform.dylib)        7
+        vvp_vector4_t::mul(vvp_vector4_t const&)  (in vvp)        7
+        of_CMPINE(vthread_s*, vvp_code_s*)  (in vvp)        6
+        vvp_fun_signal4_aa::vec4_value(vvp_vector4_t&) const  (in vvp)        6
+        vvp_vector4_t::setarray(unsigned int, unsigned int, unsigned long const*)  (in vvp)        6
+        vvp_vector4_t::vvp_vector4_t(vvp_vector4_t const&, unsigned int, unsigned int)  (in vvp)        6
+        vvp_wire_vec4::vec4_value(vvp_vector4_t&) const  (in vvp)        6
+        __cxxabiv1::__si_class_type_info::search_above_dst(__cxxabiv1::__dynamic_cast_info*, void const*, void const*, int, bool) const  (in libc++abi.dylib)        5
+        __dynamic_cast  (in libc++abi.dylib)        5
+        of_PART_U(vthread_s*, vvp_code_s*)  (in vvp)        5
+        schedule_event_(event_s*, unsigned long long, event_queue_e)  (in vvp)        5
+        strtoul_l  (in libsystem_c.dylib)        5
+        vvp_wire_base::as_signal_value()  (in vvp)        5
+
+Binary Images:
+       0x102658000 -        0x1029a30eb +vvp (0) <82CA6160-A853-30BB-A3E7-090D96F00D2C> /tmp/*/vvp
+       0x102ee0000 -        0x102ee1a63 +jtagdpi.vpi (0) <68628D2E-59AE-3B75-9130-EE26862F7B4C> /tmp/*/jtagdpi.vpi
+       0x1031a8000 -        0x1031aa977 +vhdl_sys.vpi (0) <49F67A9D-0374-3795-A6E4-1A72DBC9B9D0> /tmp/*/vhdl_sys.vpi
+       0x1031b8000 -        0x1031b991f +v2005_math.vpi (0) <2EEFA261-AC22-301F-B815-D5497DB300F8> /tmp/*/v2005_math.vpi
+       0x1031cc000 -        0x1031d04c7 +vhdl_textio.vpi (0) <3D9A6ECB-9CD6-3BED-99E3-27452943FA5C> /tmp/*/vhdl_textio.vpi
+       0x1031e0000 -        0x1031e1373 +va_math.vpi (0) <4B49EB1F-F92E-3610-9975-4DFA10842392> /tmp/*/va_math.vpi
+       0x103708000 -        0x10370e723 +v2009.vpi (0) <E5E5F705-549A-360A-B16B-3B984CC53DE6> /tmp/*/v2009.vpi
+       0x1037a8000 -        0x10380a3eb +system.vpi (0) <12CC2138-827A-3BC0-B96A-C6A615CF1280> /tmp/*/system.vpi
+       0x104184000 -        0x104d021fb +libz3.5.1.0.0.dylib (0) <EEC282D4-133C-3CC9-8328-7FEFDC4DD713> /opt/homebrew/*/libz3.5.1.0.0.dylib
+       0x19b014000 -        0x19b0635f7  libobjc.A.dylib (973.1) <C0680DF6-9900-3C29-A071-95A031686EF8> /usr/lib/libobjc.A.dylib
+       0x19b064000 -        0x19b06e23f  libsharedcache.dylib (0) <117C1ED6-AE11-3D9E-B05B-844F35395552> /usr/lib/libsharedcache.dylib
+       0x19b06f000 -        0x19b095d3b  libdyld.dylib (27062) <62863BCA-DD60-3D32-A9DB-89099BA6F3D7> /usr/lib/system/libdyld.dylib
+       0x19b096000 -        0x19b1556e3  dyld (1.0.0 - 27062) <D341DDCB-7969-3A9C-8E03-0CF4751398A9> /usr/lib/dyld
+       0x19b156000 -        0x19b15901f  libsystem_blocks.dylib (98.1) <6F304731-D95D-3501-B4AD-F2934F7F2446> /usr/lib/system/libsystem_blocks.dylib
+       0x19b15a000 -        0x19b1af0df  libxpc.dylib (3298.1.1) <0791121F-B5FC-3F84-BF04-115E86D2D882> /usr/lib/system/libxpc.dylib
+       0x19b1b0000 -        0x19b1cfc13  libsystem_trace.dylib (1966.1.1) <B48A8E3E-A12A-3342-8321-428B555E965E> /usr/lib/system/libsystem_trace.dylib
+       0x19b1d0000 -        0x19b284f27  libcorecrypto.dylib (2109.0.22) <807AA6C9-5D8A-3CA5-B4CE-FACE5296EF6A> /usr/lib/system/libcorecrypto.dylib
+       0x19b285000 -        0x19b2dac5f  libsystem_malloc.dylib (886.0.8) <2339CB57-FE5A-3154-A206-A76059C749EB> /usr/lib/system/libsystem_malloc.dylib
+       0x19b2db000 -        0x19b32119f  libdispatch.dylib (1605.0.2) <022BF08F-0B3A-3225-9E65-16D1553CE90D> /usr/lib/system/libdispatch.dylib
+       0x19b322000 -        0x19b324d2b  libsystem_featureflags.dylib (108) <20C1CAB2-1F13-3426-8146-9CAE9FF2A33D> /usr/lib/system/libsystem_featureflags.dylib
+       0x19b325000 -        0x19b3a7ca3  libsystem_c.dylib (1786.0.3) <FBA7B23E-AA60-3A90-9AA4-A7A2E0AD63EE> /usr/lib/system/libsystem_c.dylib
+       0x19b3a8000 -        0x19b43d033  libc++.1.dylib (2200.27) <1E9BA4AA-B5DA-3CF3-80AC-4B880049573F> /usr/lib/libc++.1.dylib
+       0x19b43e000 -        0x19b457eff  libc++abi.dylib (2200.27) <A21743EE-6E1C-3E74-97EA-7AF793DE4BDF> /usr/lib/libc++abi.dylib
+       0x19b458000 -        0x19b4969ab  libsystem_kernel.dylib (13432.1.9) <F63BF418-8F75-34A4-AAF1-8CAF2B9B6A05> /usr/lib/system/libsystem_kernel.dylib
+       0x19b497000 -        0x19b4a391b  libsystem_pthread.dylib (553.0.1) <5A1828C3-CBC2-3B85-BD07-C8ED10021A41> /usr/lib/system/libsystem_pthread.dylib
+       0x19b4a4000 -        0x19b4ad4f3  libsystem_platform.dylib (402.0.1.0.1) <080E4444-A0FB-3913-9756-4E470015F32F> /usr/lib/system/libsystem_platform.dylib
+       0x19b4ae000 -        0x19b4dc903  libsystem_info.dylib (603) <BC387AEB-1CEF-3513-92D7-D7F913596711> /usr/lib/system/libsystem_info.dylib
+       0x19f606000 -        0x19f60fb13  libsystem_darwin.dylib (1786.0.3) <4E66C888-993C-3E6A-A8DA-A949C01C5B67> /usr/lib/system/libsystem_darwin.dylib
+       0x19fa60000 -        0x19fa71b8b  libsystem_notify.dylib (368) <58FD36D8-37A7-311C-80F2-8E64DD8710CF> /usr/lib/system/libsystem_notify.dylib
+       0x1a1bbd000 -        0x1a1bd7d93  libsystem_networkextension.dylib (2340.1.2) <22E1D190-486F-324F-ABA4-F36AB841BFE9> /usr/lib/system/libsystem_networkextension.dylib
+       0x1a1c65000 -        0x1a1c7c247  libsystem_asl.dylib (409) <B4D449B7-A821-3A9A-8019-E917B291F10A> /usr/lib/system/libsystem_asl.dylib
+       0x1a2c10000 -        0x1a2c10f2f  libobjcMsgSend.dylib (973.1) <41179EDE-DC97-3BBE-8848-6400D12C1436> /usr/lib/objc/libobjcMsgSend.dylib
+       0x1a3d5c000 -        0x1a3d63edf  libsystem_symptoms.dylib (2394.0.4) <60EE7884-9F4E-3184-A6AC-FA40A7A0297D> /usr/lib/system/libsystem_symptoms.dylib
+       0x1a80f4000 -        0x1a812eaeb  libsystem_containermanager.dylib (833.0.8.0.1) <08A57205-555D-3792-8931-9D5B585AF326> /usr/lib/system/libsystem_containermanager.dylib
+       0x1a9747000 -        0x1a974b317  libsystem_configuration.dylib (1446) <F3EB66A7-7A24-3AE5-B6E8-9A37BB00F119> /usr/lib/system/libsystem_configuration.dylib
+       0x1a974c000 -        0x1a9752e03  libsystem_sandbox.dylib (3051.0.52) <1E892B56-092E-3832-BDE3-DCE356D7A4FA> /usr/lib/system/libsystem_sandbox.dylib
+       0x1aac10000 -        0x1aac10f2f  libobjcMsgSend1.dylib (973.1) <B40D9B2A-E1EE-37ED-8004-711A1F263DE1> /usr/lib/objc/libobjcMsgSend1.dylib
+       0x1ab330000 -        0x1ab332f93  libquarantine.dylib (217.0.4) <7FD4AE22-86EF-382B-83F5-ADF9336C1160> /usr/lib/system/libquarantine.dylib
+       0x1aba35000 -        0x1aba4148b  libbz2.1.0.dylib (49) <C53E464D-6E83-37EE-8454-ACC2C20EF446> /usr/lib/libbz2.1.0.dylib
+       0x1aba42000 -        0x1aba481e7  libsystem_coreservices.dylib (203) <57248E07-11A5-3857-918E-4A3A63B69FE8> /usr/lib/system/libsystem_coreservices.dylib
+       0x1abffb000 -        0x1ac009b87  libz.1.dylib (105) <09881E57-159D-3E5F-B9EB-B708249AC31E> /usr/lib/libz.1.dylib
+       0x1ac00a000 -        0x1ac047b27  libsystem_m.dylib (3326.0.1) <A3FB340F-3ED5-30F4-8B64-9D5860F64D35> /usr/lib/system/libsystem_m.dylib
+       0x1ac049000 -        0x1ac04c4f7  libmacho.dylib (27062) <50DEADEC-3E99-3519-AFC3-4A3FEB3F14C3> /usr/lib/system/libmacho.dylib
+       0x1ac066000 -        0x1ac072707  libcommonCrypto.dylib (600041) <41C99F45-C5E6-39DB-B1F2-A1BEA9D242A4> /usr/lib/system/libcommonCrypto.dylib
+       0x1ac073000 -        0x1ac07cc87  libunwind.dylib (2200.5) <3070AB81-B082-39E8-8A00-EF88DDE9AC47> /usr/lib/system/libunwind.dylib
+       0x1ac084000 -        0x1ac08e7eb  libcopyfile.dylib (260.0.3) <72D95AF9-BF5E-3A84-81A6-BCC5BDB99857> /usr/lib/system/libcopyfile.dylib
+       0x1ac08f000 -        0x1ac0928bf  libcompiler_rt.dylib (103.4) <DFB5CE7F-A36E-36AA-BECE-1392D3D43607> /usr/lib/system/libcompiler_rt.dylib
+       0x1ac093000 -        0x1ac098077  libsystem_collections.dylib (1786.0.3) <1E8022D4-5A37-3A7A-8936-603E6FA88358> /usr/lib/system/libsystem_collections.dylib
+       0x1ac099000 -        0x1ac09bf1f  libsystem_secinit.dylib (182) <DE037464-4C5D-3E96-A33F-2A4557CC6A20> /usr/lib/system/libsystem_secinit.dylib
+       0x1ac09c000 -        0x1ac09e97f  libremovefile.dylib (96) <E6E6DFCF-6B2C-3F30-A59D-816CAB1190CE> /usr/lib/system/libremovefile.dylib
+       0x1ac09f000 -        0x1ac09fe27  libkeymgr.dylib (31) <5EC997EF-3ADA-360B-9FCD-5F940C83FA4E> /usr/lib/system/libkeymgr.dylib
+       0x1ac0a0000 -        0x1ac0a8af7  libsystem_dnssd.dylib (3111.0.5.0.1) <DE22096F-1E5B-3D6E-8164-771582DD6391> /usr/lib/system/libsystem_dnssd.dylib
+       0x1ac0a9000 -        0x1ac0adf1b  libcache.dylib (95) <80BAE197-E285-3F6E-A1EE-B77FE37D7E5D> /usr/lib/system/libcache.dylib
+       0x1ac0ae000 -        0x1ac0af8f3  libSystem.B.dylib (1359) <4FDC9AA6-B344-37FE-B8C6-A4C94A038F57> /usr/lib/libSystem.B.dylib
+       0x1b0935000 -        0x1b09471cf  libffi.dylib (40) <CB95FAB9-D085-3080-9FAB-AD37F49EB01D> /usr/lib/libffi.dylib
+       0x1b2c10000 -        0x1b2c10f2f  libobjcMsgSend2.dylib (973.1) <BD27A84B-C9AE-3282-BBEA-3B6119837B5A> /usr/lib/objc/libobjcMsgSend2.dylib
+       0x1bac10000 -        0x1bac10f2f  libobjcMsgSend3.dylib (973.1) <C0860D68-DDFC-3BD7-8B06-DB0645CBBED4> /usr/lib/objc/libobjcMsgSend3.dylib
+       0x1c2c10000 -        0x1c2c10f2f  libobjcMsgSend4.dylib (973.1) <A6153BF5-622B-3B01-81B6-F64A365EF613> /usr/lib/objc/libobjcMsgSend4.dylib
+       0x1cac10000 -        0x1cac10f2f  libobjcMsgSend5.dylib (973.1) <3913A71C-B29A-3AEA-820B-BEC40AC1861A> /usr/lib/objc/libobjcMsgSend5.dylib
+       0x1d0cb6000 -        0x1d0cf277b  libncurses.5.4.dylib (81) <0DF50E07-5220-3B89-BBC1-967D9225A75F> /usr/lib/libncurses.5.4.dylib
+       0x1d2c10000 -        0x1d2c10f2f  libobjcMsgSend6.dylib (973.1) <9BC523A3-E167-3F6C-8CAE-0F3EBA671791> /usr/lib/objc/libobjcMsgSend6.dylib
+       0x1dac10000 -        0x1dac10f2f  libobjcMsgSend7.dylib (973.1) <248B7BCE-5B4C-34C7-A340-43D5228628C5> /usr/lib/objc/libobjcMsgSend7.dylib
+       0x1e2c10000 -        0x1e2c10f2f  libobjcMsgSend8.dylib (973.1) <3E041BAD-A8E8-3069-B741-78CD1A45B176> /usr/lib/objc/libobjcMsgSend8.dylib
+       0x1eac10000 -        0x1eac10f2f  libobjcMsgSend9.dylib (973.1) <34A67969-21A0-39D6-BB81-8FDA5A2409DB> /usr/lib/objc/libobjcMsgSend9.dylib
+       0x1f2c10000 -        0x1f2c10f2f  libobjcMsgSend10.dylib (973.1) <678186C0-8EAD-3B35-8CBB-00285B41E4A0> /usr/lib/objc/libobjcMsgSend10.dylib
+       0x1f972d000 -        0x1f974a987  libedit.3.dylib (65) <9FB32838-0CCE-3870-97EE-B704D6CD28DD> /usr/lib/libedit.3.dylib
+       0x1fac10000 -        0x1fac10f2f  libobjcMsgSend11.dylib (973.1) <E05CB08C-E956-36FA-8967-AE8E346A8D2C> /usr/lib/objc/libobjcMsgSend11.dylib
+       0x222c10000 -        0x222c10f2f  libobjcMsgSend12.dylib (973.1) <10AB03AA-FF1F-3FDC-9DFB-BFC40042C501> /usr/lib/objc/libobjcMsgSend12.dylib
+       0x22ac10000 -        0x22ac10f2f  libobjcMsgSend13.dylib (973.1) <ABF53427-FA6F-3D0D-8F9D-7AD795CA5C92> /usr/lib/objc/libobjcMsgSend13.dylib
+       0x232c10000 -        0x232c10f2f  libobjcMsgSend14.dylib (973.1) <9A844C46-A6DA-34D4-8EBF-2AD775C30684> /usr/lib/objc/libobjcMsgSend14.dylib
+       0x23ac10000 -        0x23ac10f2f  libobjcMsgSend15.dylib (973.1) <7C995666-2B2D-3284-AA0A-EBF7C922838E> /usr/lib/objc/libobjcMsgSend15.dylib
+       0x242c10000 -        0x242c10f2f  libobjcMsgSend16.dylib (973.1) <B6C0E14B-53AE-3E22-9ED5-1729C49F46F2> /usr/lib/objc/libobjcMsgSend16.dylib
+       0x24ac10000 -        0x24ac10f2f  libobjcMsgSend17.dylib (973.1) <07B4CF85-251B-301B-832B-20B315A59E19> /usr/lib/objc/libobjcMsgSend17.dylib
+       0x252c10000 -        0x252c10f2f  libobjcMsgSend18.dylib (973.1) <43E575B7-04DB-3999-A633-1A3B638BA6E3> /usr/lib/objc/libobjcMsgSend18.dylib
+       0x25ac10000 -        0x25ac10f2f  libobjcMsgSend19.dylib (973.1) <736F4D85-76F7-3B28-8D87-C07E8F7A0EF4> /usr/lib/objc/libobjcMsgSend19.dylib
+       0x262c10000 -        0x262c10f2f  libobjcMsgSend20.dylib (973.1) <74E67C8B-6BCA-3184-A18E-A97F370052C6> /usr/lib/objc/libobjcMsgSend20.dylib
+       0x26ac10000 -        0x26ac10f2f  libobjcMsgSend21.dylib (973.1) <CC0D732F-98E7-3888-9E15-70984DA2FB04> /usr/lib/objc/libobjcMsgSend21.dylib
+       0x272c10000 -        0x272c10f2f  libobjcMsgSend22.dylib (973.1) <85A60286-5DE3-32BA-B18C-2A498B065C88> /usr/lib/objc/libobjcMsgSend22.dylib
+       0x27ac10000 -        0x27ac10f2f  libobjcMsgSend23.dylib (973.1) <5452A0D2-6B19-39BE-ADDD-80B7BCDE3A98> /usr/lib/objc/libobjcMsgSend23.dylib
+       0x282c10000 -        0x282c10f2f  libobjcMsgSend24.dylib (973.1) <94BBF2D6-722B-350D-8557-4D25A8E8D53A> /usr/lib/objc/libobjcMsgSend24.dylib
+       0x28ac10000 -        0x28ac10f2f  libobjcMsgSend25.dylib (973.1) <35481387-5A8E-3AE4-86A6-94CEB3CC8726> /usr/lib/objc/libobjcMsgSend25.dylib
+       0x2a2c10000 -        0x2a2c10f2f  libobjcMsgSend26.dylib (973.1) <9E0C8664-E7F4-39D1-AAFC-BD92B255E4E8> /usr/lib/objc/libobjcMsgSend26.dylib
+       0x2aac10000 -        0x2aac10f2f  libobjcMsgSend27.dylib (973.1) <FD424935-55A9-3650-955A-EED3441A1D19> /usr/lib/objc/libobjcMsgSend27.dylib
+       0x2b2c10000 -        0x2b2c10f2f  libobjcMsgSend28.dylib (973.1) <09BA7B97-7DF7-3C7F-932A-B6847662FC49> /usr/lib/objc/libobjcMsgSend28.dylib
+       0x2bac10000 -        0x2bac10f2f  libobjcMsgSend29.dylib (973.1) <36D5BA3F-2139-30B0-8558-556764BE9813> /usr/lib/objc/libobjcMsgSend29.dylib
+       0x2c2c10000 -        0x2c2c10f2f  libobjcMsgSend30.dylib (973.1) <9F05564A-9D12-372C-98FC-E9F0E6BE4F04> /usr/lib/objc/libobjcMsgSend30.dylib
+       0x2c792a000 -        0x2c7930fe5  libRosetta.dylib (385) <E359944B-D230-33F9-A04E-0C3B17C3326E> /usr/lib/libRosetta.dylib
+       0x2c8319000 -        0x2c831c75b  libsystem_darwindirectory.dylib (129.0.1) <61264923-2AA5-3658-B8C4-550C71E9D4B3> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2c831d000 -        0x2c8327d9b  libsystem_eligibility.dylib (446.1.3) <EDDE8E9C-A2CF-3931-BBB3-321CB852EB30> /usr/lib/system/libsystem_eligibility.dylib
+       0x2c8328000 -        0x2c833142b  libsystem_sanitizers.dylib (32) <7138ED99-7AA0-34EA-B35B-20EF6ADB1EED> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2c8332000 -        0x2c8332a13  libsystem_trial.dylib (511) <6AE48824-EC44-3A8C-B501-BE57DBE892E7> /usr/lib/system/libsystem_trial.dylib
+       0x2cac10000 -        0x2cac10f2f  libobjcMsgSend31.dylib (973.1) <0985E20F-78C3-3466-A2B2-DBB95F7104A3> /usr/lib/objc/libobjcMsgSend31.dylib
+       0x2d2c10000 -        0x2d2c10f2f  libobjcMsgSend32.dylib (973.1) <0D309D58-D576-3E5D-AD4B-6D55AB491702> /usr/lib/objc/libobjcMsgSend32.dylib
+       0x2dac10000 -        0x2dac10f2f  libobjcMsgSend33.dylib (973.1) <346E0484-48FA-369B-8A64-93B5F5341CFE> /usr/lib/objc/libobjcMsgSend33.dylib
+       0x2e2c10000 -        0x2e2c10f2f  libobjcMsgSend34.dylib (973.1) <6A31F809-BCBE-3E01-A367-E91FDACCE324> /usr/lib/objc/libobjcMsgSend34.dylib

@@ -1,0 +1,29 @@
+timestamp=2026-10-12T01:26:40-06:00
+host=DAN-DESKTOP
+qd_commit=0e331dec3d83ad70e5e73d8f0198dbdd4a226f74
+runner_sha256=b3a6c532239e0e1b2eb60daa5328e434a4ae2deb6ae9f1f21825c0aecfe0a4c7
+array_script_sha256=a5301e4d4dc5d857eec3adb4e85a9c32604f57c97ab261b1919359bcbfc007d1  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/submit/array.sbatch
+selection_sha256=deb72ae2729b6e963f492a32117b5c834f3e4ee1276795fc2ce17b947fa19289  /home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/selection.tsv
+slurm=slurm-wlm 25.11.2
+PARTITION|AVAIL|TIMELIMIT|NODES|CPUS(A/I/O/T)|GRES|AVAIL_FEATURES
+verilog*|up|infinite|1|6/14/0/20|(null)|(null)
+             JOBID        STATE       TIME                 NAME
+        515_[15%2]      PENDING       0:00        a1-boot-smoke
+               590      RUNNING       8:06 iverilog-main-nightl
+            515_14      RUNNING      45:01        a1-boot-smoke
+            515_13      RUNNING      46:14        a1-boot-smoke
+NodeName=DAN-DESKTOP Arch=x86_64 CoresPerSocket=1 
+   CPUAlloc=6 CPUEfctv=20 CPUTot=20 CPULoad=3.17
+   RealMemory=39101 AllocMem=14336 FreeMem=4797 Sockets=20 Boards=1
+               total        used        free      shared  buff/cache   available
+Mem:            38Gi       7.5Gi       4.7Gi       4.3Gi        31Gi        30Gi
+Swap:          8.0Gi       7.2Gi       850Mi
+RTL=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Icarus Verilog version 13.0 (devel) (c339b9f2)
+
+Icarus=Icarus Verilog version 13.0 (devel) (c339b9f2)
+
+RISC-V_GCC=riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+Python=Python 3.12.15

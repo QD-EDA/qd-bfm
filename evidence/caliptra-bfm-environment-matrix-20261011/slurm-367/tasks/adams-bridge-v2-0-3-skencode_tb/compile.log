@@ -1,0 +1,6 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:187: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:220: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:221: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:29: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skencode_tb'
+1 error(s) during elaboration.

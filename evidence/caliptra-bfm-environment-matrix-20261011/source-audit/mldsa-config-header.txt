@@ -1,0 +1,11 @@
+Pinned source audit: mldsa_config_defines.svh
+
+Adams Bridge revision: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+
+Command: git ls-tree -r --name-only HEAD | rg "(^|/)mldsa_config_defines\.svh$"
+Result: no tracked file.
+
+Command: git grep -n mldsa_config_defines.svh HEAD
+Result: seven tracked references, in abr_sha3/config/abr_sha3_tb.vf, abr_top/tb/abr_top_tb.sv, exp_mask/config/exp_mask_tb.vf, exp_mask/tb/exp_mask_tb.sv, rej_sampler/config/mldsa_rej_sampler_tb.vf, rej_sampler/config/mlkem_rej_sampler_tb.vf, and sample_in_ball/config/sample_in_ball_tb.vf.
+
+All six rows have c339 compile logs reporting this missing path. Because the pinned source revision contains references but no definition, changing include paths cannot resolve the blocker. No replacement header was invented.

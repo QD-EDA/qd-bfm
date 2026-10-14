@@ -1,0 +1,3 @@
+operation 1: pinned KAT matches byte for byte
+operation 2: pinned KAT matches byte for byte
+malformed input: rejected

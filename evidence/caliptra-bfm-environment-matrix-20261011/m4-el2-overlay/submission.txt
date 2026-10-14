@@ -1,0 +1,10 @@
+EL2 overlay reconciliation (2026-10-11):
+
+- Job 570: setup failed because GNU patch stripped CRs from the CRLF patch. Not test evidence.
+- Job 572: corrected CRLF application succeeded and compile showed three additional stale memory DFT port connections, followed by two unconnected wrapper interface ports and 22 c339 elaboration errors.
+- Job 574: fresh-source rerun with the expanded four-port overlay; patch applied and removed all four stale connections. Compile exited 24; simulation did not run. The remaining errors were two unconnected wrapper memory interfaces and 22 static-member/interface-continuous-assignment diagnostics, matching the 22 diagnostics in the pinned-only local compile.
+
+Pinned Caliptra: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Icarus: c339b9f2287a743aeb7ab6de6528e8d34a4dd602.
+Run 574 root: /home/dsell/slurm-runs/caliptra-bfm/a2/m4-env-overlay-c339-20261011-03.
+Evidence: [run-574](run-574/README.md).
