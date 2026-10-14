@@ -278,3 +278,7 @@ Array 955 tasks 1–3 remain RUNNING at wall 15,300 seconds, with mcycles 58,066
 ## Current checkpoint — 12:06 MDT, 2026-10-14
 
 Array 955 tasks 1–3 remain RUNNING at wall 15,900 seconds, with latest mcycles 67, 124,252, and 76,713. Task 1's mcycle dropped from 60,377 at wall 15,600 to 67 at wall 15,900; this is recorded as an observation without an inferred cause. All three VVP processes remain active, and no terminal marker or result is present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1206.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1206.txt).
+
+## Current checkpoint — 12:17 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING at wall 16,500 seconds, with latest mcycles 4,498, 128,609, and 77,913. Task 1 continued advancing after its counter dropped to 67 at wall 15,900. All three VVP processes remain active; no terminal markers or results are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt).

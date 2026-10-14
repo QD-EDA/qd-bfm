@@ -87,3 +87,6 @@ At 11:56 MDT tasks 955_1–3 remain RUNNING at `wall_s=15300`; mcycles are 58,06
 
 
 At 12:06 MDT tasks 955_1–3 remain RUNNING at `wall_s=15900`; latest mcycles are 67, 124,252, and 76,713. Each log has 54 heartbeats, no terminal markers, and no result JSON. All three VVP processes remain active near 100% CPU. Task 1's mcycle dropped from 60,377 at wall 15,600 to 67 at wall 15,900; this observation is recorded without an inferred cause. Task 4 remains PASS. See [`heartbeat-snapshot-20261014-1206.txt`](heartbeat-snapshot-20261014-1206.txt).
+
+
+At 12:17 MDT tasks 955_1–3 remain RUNNING at `wall_s=16500`; latest mcycles are 4,498, 128,609, and 77,913. Each log has 56 heartbeats, no terminal markers, and no result JSON. All three VVP processes remain active near 100% CPU. Task 1 continued from mcycle 67 at wall 15,900 to 4,498 at wall 16,500. Task 4 remains PASS. See [`heartbeat-snapshot-20261014-1217.txt`](heartbeat-snapshot-20261014-1217.txt).
