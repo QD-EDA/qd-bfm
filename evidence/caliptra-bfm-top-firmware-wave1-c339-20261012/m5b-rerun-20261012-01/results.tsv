@@ -34,10 +34,10 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 33	42	smoke_test_kv_rules_ocp_lock	smoke_test_kv_rules_ocp_lock	TERMINAL	PASS	58921	8400	58921	17872	8659	0	29	0	1852432	pass-evidence-799/results.tsv
 34	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	TERMINAL	CANCELLED-FOR-MAINTENANCE	40947	5700	40947	18167			20	0		cancelled-evidence-799/README.md
 35	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	TERMINAL	CANCELLED-FOR-MAINTENANCE	37091	5100	37091	19152			18	0		cancelled-evidence-799/README.md
-36	45	smoke_test_pcr_zeroize	smoke_test_pcr_zeroize	PENDING					20859						heartbeat-snapshot-20261013-1332.txt
-37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
-38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
-39	48	smoke_test_ecc_errortrigger1	smoke_test_ecc_errortrigger1	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
-40	49	smoke_test_ras	smoke_test_ras	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
-41	50	smoke_test_strap	smoke_test_strap	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
-42	51	smoke_test_sha256	smoke_test_sha256	PENDING					21600						heartbeat-snapshot-20261013-1332.txt
+36	45	smoke_test_pcr_zeroize	smoke_test_pcr_zeroize	PENDING					20859						heartbeat-snapshot-20261013-1842.txt
+37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+39	48	smoke_test_ecc_errortrigger1	smoke_test_ecc_errortrigger1	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+40	49	smoke_test_ras	smoke_test_ras	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+41	50	smoke_test_strap	smoke_test_strap	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+42	51	smoke_test_sha256	smoke_test_sha256	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
