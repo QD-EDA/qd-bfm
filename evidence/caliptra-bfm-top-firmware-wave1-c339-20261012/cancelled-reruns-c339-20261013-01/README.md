@@ -57,4 +57,4 @@ Fresh task 895_3 remains RUNNING at `wall_s=17400 mcycle=77252`. Fresh 895_4 pas
 
 ## 2026-10-14 follow-up
 
-Fresh task 895_3 (source row 43, originally array task 799_34) reached its 18,167-second cap and is recorded as TIMEOUT with final heartbeat mcycle 78,485. Its selected evidence is SHA-verified in [`timeout-evidence-895/`](timeout-evidence-895/). The output tree will be removed after the evidence commit. A second clean rerun of all four maintenance-cancelled rows was then submitted as job 936; see [`../cancelled-reruns-c339-20261014-01/README.md`](../cancelled-reruns-c339-20261014-01/README.md).
+Fresh task 895_3 (source row 43, originally array task 799_34) reached its 18,167-second cap and is recorded as TIMEOUT with final heartbeat mcycle 78,485. Its selected evidence is SHA-verified in [`timeout-evidence-895/`](timeout-evidence-895/). The output tree was removed after commit `765958d` (375,777,048 bytes). A second clean rerun of all four maintenance-cancelled rows was then submitted as job 936; see [`../cancelled-reruns-c339-20261014-01/README.md`](../cancelled-reruns-c339-20261014-01/README.md).

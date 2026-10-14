@@ -35,8 +35,8 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 34	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	TERMINAL	CANCELLED-FOR-MAINTENANCE	40947	5700	40947	18167			20	0		cancelled-evidence-799/README.md
 35	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	TERMINAL	CANCELLED-FOR-MAINTENANCE	37091	5100	37091	19152			18	0		cancelled-evidence-799/README.md
 36	45	smoke_test_pcr_zeroize	smoke_test_pcr_zeroize	TERMINAL	FAIL	63065	9600	63065	20859	9656	1	33	0	1852300	failure-evidence-799/README.md
-37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	PENDING			15900	115751	21600						heartbeat-snapshot-20261013-2329.txt
-38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	PENDING			15900	115906	21600						heartbeat-snapshot-20261013-2329.txt
+37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	RUNNING			18900	138820	21600			47	0		heartbeat-snapshot-20261014-0016.txt
+38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	RUNNING			18900	138750	21600			53	0		heartbeat-snapshot-20261014-0016.txt
 39	48	smoke_test_ecc_errortrigger1	smoke_test_ecc_errortrigger1	TERMINAL	FAIL	59872	17100	59872	21600	17821	1	56	0	1852388	failure-evidence-799/README.md
 40	49	smoke_test_ras	smoke_test_ras	TERMINAL	FAIL	N/A		N/A	21600	30.90	1	0	N/A	1852336	../result-task40-smoke-test-ras-fail/README.md
 41	50	smoke_test_strap	smoke_test_strap	TERMINAL	PASS	55683	7800	55683	21600	8047	0	27	0	1852252	pass-evidence-799/results.tsv
