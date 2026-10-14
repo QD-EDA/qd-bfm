@@ -9,3 +9,5 @@ Pinned inputs are unchanged: QD-BFM commit `d1d358e92ea47eacbcdefd58266f75636824
 At 19:41 MDT, fresh tasks 895_1–3 were still RUNNING with advancing mcycle heartbeats at `wall_s=2100` (mcycles 14,820; 14,819; and 14,810). Task 895_4 remained PENDING for resources and had not started simulation. No rerun result was terminal yet; the full queue and all wave-1 heartbeats are recorded in the main wave-1 README snapshot.
 
 At 19:51 MDT, fresh tasks 895_1–3 were still RUNNING, with advancing mcycles at `wall_s=2700` (18,997; 18,996; 18,987). Task 895_4 remained PENDING for resources and had no simulation log yet. No fresh-rerun result was terminal.
+
+At 20:02 MDT, fresh tasks 895_1–3 were still RUNNING, with advancing mcycles at `wall_s=3300` (23,246; 23,245; 23,236). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal.
