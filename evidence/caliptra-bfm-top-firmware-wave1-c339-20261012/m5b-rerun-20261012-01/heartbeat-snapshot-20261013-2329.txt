@@ -1,0 +1,19 @@
+Captured on DAN-DESKTOP at 2026-10-13 23:29 MDT; host uptime 4 hours 30 minutes.
+
+Slurm state:
+- 799_36: terminal FAIL, recorded.
+- 799_37, 799_38, 799_39: RUNNING.
+- 799_40: terminal FAIL, recorded.
+- 799_41, 799_42: terminal PASS, recorded.
+- 895_1, 895_2, 895_3, 895_4: RUNNING.
+
+Latest simulator heartbeats:
+- 799_37 smoke_test_kv_swwe_lock: wall_s=15900 mcycle=115751; log mtime 23:25:11. It continues after subsystem `[SWWE_PASS]` and `[SWWE_WRITABLE_PASS]` checks.
+- 799_38 smoke_test_sha256_wntz: wall_s=15900 mcycle=115906; log mtime 23:25:11.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=15900 mcycle=50759; log mtime 23:25:11.
+- 895_1 smoke_test_ecc_errortrigger4: wall_s=15900 mcycle=53376; log mtime 23:27:35.
+- 895_2 kv_entry_read_err: wall_s=15900 mcycle=115334; log mtime 23:27:35.
+- 895_3 smoke_test_kv_parallel_access: wall_s=15900 mcycle=74264; log mtime 23:27:36.
+- 895_4 smoke_test_ecc_flow2_kv_ocp_progress: wall_s=8100 mcycle=59961; log mtime 23:29:13.
+
+All seven tasks remain RUNNING and their heartbeats advanced since the 23:18 sample. No result JSON or whole-test terminal outcome was present in the active run directories. Host uptime exceeds each active job's elapsed time, and no task meets the 30-minute flat-heartbeat hang rule. No active output tree was ready for cleanup.
