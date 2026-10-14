@@ -66,6 +66,10 @@ This run reached its configured 17,543-second per-test limit without a testcase 
 
 After commit `b134913`, I removed task 955_2's completed output tree. It freed 376,032,275 bytes; `/home/dsell` available space increased by 376,475,648 bytes. The run metadata and shared toolchain remain intact. See [`timeout-evidence-955/task955_2/cleanup-task955_2-20261014.txt`](timeout-evidence-955/task955_2/cleanup-task955_2-20261014.txt).
 
+## Task 3 (955_3 / original 799_34) — TIMEOUT
+
+This rerun reached its configured 18,167-second timeout without a testcase result. The final recognized heartbeat is `wall_s=18000 mcycle=80975`; there are 54 progress heartbeats, no PASS/FAIL marker, and no `result.json`. The raw status is `INFRA_ERROR` / exit 137. The resource log confirms `timeout --signal=INT --kill-after=60s 18167` elapsed exactly 18,167 seconds (5:02:47); peak RSS was 1,852,700 KiB. The job was absent from `squeue` when collected; Slurm accounting is disabled, so its scheduler terminal state is unavailable. Consistent with earlier M6 timeout reclassification, `results.tsv` records TIMEOUT while preserving the raw wrapper status. Selected evidence and remote checksums are under [`timeout-evidence-955/task955_3/`](timeout-evidence-955/task955_3/).
+
 
 At 10:05 MDT tasks 955_1–3 remained RUNNING. Task 1's heartbeat mcycle reset from 59,285 at wall 7,500 to 1,333 at wall 8,100, then advanced to 6,195 at wall 8,700; this is recorded as observed without assigning a cause. Task 2 reached wall 8,400 / mcycle 66,338, and task 3 wall 8,700 / mcycle 63,534. Task 4 remains recorded PASS. See [`heartbeat-snapshot-20261014-1005.txt`](heartbeat-snapshot-20261014-1005.txt).
 

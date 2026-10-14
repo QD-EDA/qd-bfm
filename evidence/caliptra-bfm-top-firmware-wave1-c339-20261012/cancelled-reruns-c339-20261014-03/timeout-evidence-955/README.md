@@ -7,3 +7,5 @@ The unchanged raw `status.txt` says `INFRA_ERROR` / `runner_terminated_by_signal
 The raw status recognizes 55 progress heartbeats. The simulator log has 58 substring matches, of which 55 begin with the heartbeat marker; all agree on the final heartbeat. The selected run metadata, compile and simulator logs, native-vector logs, tool versions, Slurm output, and remote SHA-256 manifest are preserved here. `REMOTE-SHA256SUMS-task955_1.txt` verifies against the archived files.
 
 Task 955_2 / original 799_30 is also recorded as TIMEOUT; its raw evidence and classification details are under [`task955_2/`](task955_2/).
+
+Task 955_3 / original 799_34 (`smoke_test_kv_parallel_access`) reached its 18,167-second per-test cap with final heartbeat `wall_s=18000 mcycle=80975`. The raw wrapper exit is 137, with no testcase marker or result JSON; the resource log records the exact timeout command and elapsed time. Its evidence is SHA-verified under [`task955_3/`](task955_3/).
