@@ -17,3 +17,9 @@ Resource wall time was 2:24:19 (8,659 seconds) and maximum RSS was 1,852,432 KiB
 Array task 799_41 (source row 50) completed PASS. The runner exited 0; `result.json` reports `passed=true`, compile and simulation exit 0, one testcase pass marker, and zero fail markers. The full simulator log contains `* TESTCASE PASSED` and finishes at mcycle 57,180. The final progress heartbeat was `wall_s=7800 mcycle=55683` (27 heartbeats), which is the recorded final heartbeat mcycle. Resource wall time was 2:14:07 (8,047 seconds), with maximum RSS 1,852,252 KiB.
 
 Selected run metadata, result JSON, and logs are under `runs/50-804790f41f3373fe-41/`; the Slurm wrapper log is under `logs/`. All 25 copied files match the remote SHA-256 manifest `REMOTE-SHA256SUMS-task41.txt`. At 21:29 MDT, after the evidence commit and confirming the job had left Slurm, I deleted its remote output tree; this freed 375,633,657 bytes (about 0.350 GiB). The compact status/resource metadata and wrapper log remain in the protected run directory.
+
+## Task 42 — `smoke_test_sha256`
+
+Array task 799_42 (source row 51) completed PASS. The runner exited 0; `result.json` reports `passed=true`, compile and simulation exit 0, one testcase pass marker, and zero fail markers. The full simulator log contains `* TESTCASE PASSED` and finishes at mcycle 61,567. Its last progress heartbeat is `wall_s=8400 mcycle=59985` (29 heartbeats), which is the recorded final heartbeat mcycle. `status.txt` is stale at 28 heartbeats through `wall_s=8100 mcycle=57824`; the full simulator log is authoritative. Resource wall time was 2:24:06 (8,646 seconds), with maximum RSS 1,852,416 KiB.
+
+Selected run metadata, result JSON, and logs are under `runs/51-e0d4538883521cca-42/`; the Slurm wrapper log is under `logs/`. All 25 copied files match the remote SHA-256 manifest `REMOTE-SHA256SUMS-task42.txt`. Cleanup of its remote output tree is pending the evidence commit.
