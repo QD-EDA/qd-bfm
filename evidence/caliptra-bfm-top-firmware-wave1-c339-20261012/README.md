@@ -180,3 +180,7 @@ After commit `6e16604`, I removed the six completed/interrupted output trees and
 ## Current checkpoint — 07:39 MDT, 2026-10-14
 
 Corrected fresh array 955 is running the four rows previously cancelled for maintenance (799_28, 799_30, 799_34, and 799_35), mapped to source rows 37, 39, 43, and 44. All four tasks were RUNNING by 07:39:21, with one CPU and 3 GiB per task, a 6h10m allocation, and array throttle 6. No local duplicate is running. Array 949 exited before test startup because its selection file was staged at the wrong path; its setup-error logs are preserved and it produced no test result. Pinned source/toolchain hashes were re-verified before array 955. See [`cancelled-reruns-c339-20261014-02/`](cancelled-reruns-c339-20261014-02/) and [`cancelled-reruns-c339-20261014-03/`](cancelled-reruns-c339-20261014-03/).
+
+## Current checkpoint — 07:52 MDT, 2026-10-14
+
+Array 955 remains RUNNING on all four reruns. Each simulator has three progress heartbeats through wall 600 seconds; latest mcycles are 4,500, 4,500, 4,512, and 4,512. VVP processes are consuming CPU, but no row has a terminal marker or result JSON. None meets the 30-minute flat-heartbeat hang threshold. Full details are in [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt).

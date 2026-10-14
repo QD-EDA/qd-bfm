@@ -10,3 +10,6 @@ This submission stages `selection.tsv` both at `$ROOT/selection.tsv` (the exact 
 ## Initial submission state
 
 Slurm accepted array 955 at 07:39:17 MDT. At 07:39:21, all four tasks were RUNNING on DAN-DESKTOP, each with one CPU, 3 GiB, and a 6h10m limit; `ArrayTaskThrottle=6`. The 07:39:32 queue/resource snapshot is in [`initial-queue-20261014-0739.txt`](initial-queue-20261014-0739.txt). The four task logs show the expected source-row mappings and pinned QD commit.
+
+
+At the 07:52 MDT check, all four array-955 tasks remained RUNNING. Each simulator emitted three heartbeats through `wall_s=600`; final observed mcycles were 4,500, 4,500, 4,512, and 4,512 for tasks 1–4. VVP processes were using about 99.9% CPU and 1.04 GiB RSS each. No result JSON, status file, or testcase terminal marker exists yet. The 30-minute flat-heartbeat rule is not met; the exact snapshot is [`heartbeat-snapshot-20261014-0752.txt`](heartbeat-snapshot-20261014-0752.txt).

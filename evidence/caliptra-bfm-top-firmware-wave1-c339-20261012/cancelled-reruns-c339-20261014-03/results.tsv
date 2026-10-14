@@ -1,5 +1,5 @@
 array_task	source_row	original_799_task	test	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
-1	37	28	smoke_test_ecc_errortrigger4	RUNNING					17281						initial-queue-20261014-0739.txt
-2	39	30	kv_entry_read_err	RUNNING					17543						initial-queue-20261014-0739.txt
-3	43	34	smoke_test_kv_parallel_access	RUNNING					18167						initial-queue-20261014-0739.txt
-4	44	35	smoke_test_ecc_flow2_kv_ocp_progress	RUNNING					19152						initial-queue-20261014-0739.txt
+1	37	28	smoke_test_ecc_errortrigger4	RUNNING			600	4500	17281			3			heartbeat-snapshot-20261014-0752.txt
+2	39	30	kv_entry_read_err	RUNNING			600	4500	17543			3			heartbeat-snapshot-20261014-0752.txt
+3	43	34	smoke_test_kv_parallel_access	RUNNING			600	4512	18167			3			heartbeat-snapshot-20261014-0752.txt
+4	44	35	smoke_test_ecc_flow2_kv_ocp_progress	RUNNING			600	4512	19152			3			heartbeat-snapshot-20261014-0752.txt
