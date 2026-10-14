@@ -48,3 +48,6 @@ At 09:40 MDT all four tasks remained RUNNING. Tasks 1–3 have 24 heartbeats thr
 ## Task 4 (955_4) — PASS
 
 The fresh rerun of original task 799_35 / source row 44 passed. It has 26 heartbeats and final heartbeat `wall_s=7500 mcycle=59434`; the runner exited 0 after 2:11:49 with 1,852,844 KiB maximum RSS. `result.json` and `sim.log` both confirm one pass marker and zero failures. The selected raw evidence is SHA-verified in [`pass-evidence-955/`](pass-evidence-955/). At the 09:53 MDT checkpoint, tasks 955_1–3 remained RUNNING; their latest heartbeats are recorded in `results.tsv` and [`heartbeat-snapshot-20261014-0953.txt`](heartbeat-snapshot-20261014-0953.txt).
+
+
+After commit `722c0ea`, I removed task 955_4's completed remote output and Python cache trees. Their recorded size was 377,301,648 bytes (about 0.351 GiB). Tasks 955_1–3 remained active, and the protected shared toolchain was untouched. See [`pass-evidence-955/cleanup-task955_4-20261014.txt`](pass-evidence-955/cleanup-task955_4-20261014.txt).
