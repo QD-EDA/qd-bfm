@@ -3,3 +3,4 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 33	42	smoke_test_kv_rules_ocp_lock	smoke_test_kv_rules_ocp_lock	TERMINAL	PASS	58921	8400	58921	17872	8659	0	29	0	1852432	pass-evidence-799/results.tsv
 41	50	smoke_test_strap	smoke_test_strap	TERMINAL	PASS	55683	7800	55683	21600	8047	0	27	0	1852252	pass-evidence-799/results.tsv
 42	51	smoke_test_sha256	smoke_test_sha256	TERMINAL	PASS	59985	8400	59985	21600	8646	0	29	0	1852416	pass-evidence-799/results.tsv
+38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	TERMINAL	PASS	149887	20400	149887	21600	21238	0	58	0	1852356	pass-evidence-799/results.tsv

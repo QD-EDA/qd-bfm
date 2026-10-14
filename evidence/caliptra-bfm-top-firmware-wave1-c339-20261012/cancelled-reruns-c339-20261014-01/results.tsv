@@ -1,5 +1,5 @@
 array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
-1	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	RUNNING			2100	15751	17281			8	0		../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt
-2	39	kv_entry_read_err	kv_entry_read_err	RUNNING			2100	15713	17543			8	0		../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt
-3	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	RUNNING			2100	15739	18167			8	0		../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt
-4	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	RUNNING			2100	15742	19152			8	0		../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt
+1	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	INFRA-INTERRUPTED			4500	34321	17281			16			infra-interruption-evidence-936/README.md
+2	39	kv_entry_read_err	kv_entry_read_err	INFRA-INTERRUPTED			4500	34174	17543			16			infra-interruption-evidence-936/README.md
+3	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	INFRA-INTERRUPTED			4500	34274	18167			16			infra-interruption-evidence-936/README.md
+4	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	INFRA-INTERRUPTED			4500	34266	19152			16			infra-interruption-evidence-936/README.md

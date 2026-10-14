@@ -1,0 +1,11 @@
+captured_at=2026-10-14T07:31:21-06:00
+host=DAN-DESKTOP; uptime=3 minutes; Slurm partition up
+
+Queue:
+767_22 RUNNING 9:15:27, 1 CPU, 10G (unrelated job; left untouched)
+
+Array 799 terminal rows:
+799_37 TIMEOUT, exact cap 21600 s, elapsed 21600 s, last heartbeat wall_s=21300 mcycle=157015, 55 heartbeats, runner exit 137
+799_38 PASS, elapsed 21238 s, last heartbeat wall_s=20400 mcycle=149887, 58 heartbeats, PASS marker, result finish mcycle=155834
+
+Job 936 tasks 1–4 were no longer in Slurm; no VVP/Icarus processes remained. Each partial sim log ended at wall_s=4500, with 16 heartbeats. Empty resource/runner logs and missing status/result files indicate interruption. The four last mcycles are 34321, 34174, 34274, and 34266. `sacct` was unavailable because accounting storage is disabled.

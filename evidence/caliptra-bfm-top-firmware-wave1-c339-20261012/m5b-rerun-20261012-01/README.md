@@ -363,3 +363,8 @@ At 00:39 MDT, tasks 799_37 and 799_38 advanced to wall 20,100 seconds and mcycle
 
 
 At 00:49 MDT, tasks 799_37 and 799_38 were RUNNING at wall 20,700/20,400 seconds with mcycles 152,525/149,887. Fresh job 936 tasks 1–4 advanced to wall 2,100 seconds with mcycles 15,751; 15,713; 15,739; and 15,742. No active row meets the 30-minute flat-heartbeat condition. See [`heartbeat-snapshot-20261014-0049.txt`](heartbeat-snapshot-20261014-0049.txt).
+
+
+## 2026-10-14 host-restart follow-up
+
+At 07:31 MDT, DAN-DESKTOP had rebooted and no longer listed tasks 936_1–4 or 799_37/38. Task 799_37 is **TIMEOUT**: its resource record matches the exact 21,600-second test cap, with last heartbeat mcycle 157,015. Task 799_38 is **PASS**, with final heartbeat mcycle 149,887 and result finish at 155,834. Their output trees await cleanup after commit. Job 936 had only partial logs through wall 4,500 seconds and empty wrapper/resource records; those four attempts are classified `INFRA-INTERRUPTED` and will be freshly resubmitted. See [`heartbeat-snapshot-20261014-0731.txt`](heartbeat-snapshot-20261014-0731.txt) and [`../cancelled-reruns-c339-20261014-01/infra-interruption-evidence-936/README.md`](../cancelled-reruns-c339-20261014-01/infra-interruption-evidence-936/README.md).

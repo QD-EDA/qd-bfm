@@ -168,3 +168,8 @@ All six active simulations advanced. The 799_37/38 runs are at wall 20,100 secon
 ## Current checkpoint — 00:49 MDT, 2026-10-14
 
 All six simulations remain RUNNING. The four fresh job 936 rows are at wall 2,100 seconds; original rows 799_37/38 are at wall 20,700/20,400 seconds. All mcycles advanced since 00:39, with no row meeting the 30-minute flat-heartbeat rule. See the [00:49 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt).
+
+
+## Current checkpoint — 07:33 MDT, 2026-10-14
+
+The older 799 array is terminal: task 799_37 TIMEOUT at the exact 21,600-second cap (last heartbeat mcycle 157,015), and 799_38 PASS (last heartbeat mcycle 149,887). Fresh job 936 was interrupted by a DAN-DESKTOP reboot before any wrapper completion record; its four partial attempts have no result JSON or testcase markers and are not test outcomes. The host is back up, and I’m preparing a new isolated four-row rerun. Evidence and the 07:31 queue snapshot are recorded under the wave-1 run folders.

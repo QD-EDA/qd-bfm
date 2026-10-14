@@ -14,3 +14,8 @@ At 00:39 MDT, tasks 936_1–4 remained RUNNING and advanced from wall 900 to wal
 
 
 At 00:49 MDT, all four job 936 tasks remain RUNNING and have advanced to wall 2,100 seconds. Their latest mcycles are 15,751; 15,713; 15,739; and 15,742; the 00:49 snapshot is [`../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt`](../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt).
+
+
+## Host restart interrupted job 936
+
+DAN-DESKTOP rebooted after the four tasks had stopped writing simulator logs at wall 4,500 seconds. They have no completed wrapper/resource records, result JSON, or testcase markers, so their attempt state is `INFRA-INTERRUPTED`, not a test outcome. The host was available again at 07:31 MDT; selected partial evidence is SHA-verified in [`infra-interruption-evidence-936/`](infra-interruption-evidence-936/). The partial output trees will be removed only after their evidence commit, and the four rows will be submitted in a new isolated array.

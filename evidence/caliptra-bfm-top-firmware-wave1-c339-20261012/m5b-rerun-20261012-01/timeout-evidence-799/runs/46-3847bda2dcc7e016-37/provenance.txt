@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+m5b_index=37
+source_row=46
+test_id=3847bda2dcc7e016
+matrix_testname=smoke_test_kv_swwe_lock
+case_dir=smoke_test_kv_swwe_lock
+case_yaml=smoke_test_kv_swwe_lock/smoke_test_kv_swwe_lock.yml
+yaml_testname=smoke_test_kv_swwe_lock
+expected_mcycle_estimate=50000
+per_test_timeout_s=21600
+selection_basis=static score=583; body_lines=329, loops=19, waits=2, crypto_calls=2
+Icarus_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+Caliptra=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=07ee859ae7a442e38c4a9e0fb86026ccd2b14f67bd416f35c59dae44327210b8
