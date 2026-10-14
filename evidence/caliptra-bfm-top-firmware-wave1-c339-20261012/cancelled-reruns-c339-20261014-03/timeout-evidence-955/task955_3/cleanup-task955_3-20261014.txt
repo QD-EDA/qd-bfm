@@ -1,0 +1,11 @@
+cleanup_time=2026-10-14 12:51 MDT
+job=955_3
+run=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3
+output_bytes_removed=375777048
+run_local_pycache_bytes_removed=0
+total_tree_bytes_removed=375777048
+home_available_before_bytes=866071314432
+home_available_after_bytes=866447532032
+home_available_delta_bytes=376217600
+removed=run/output and any run-local __pycache__ outside output
+retained=run status/resource/provenance metadata; protected shared toolchain

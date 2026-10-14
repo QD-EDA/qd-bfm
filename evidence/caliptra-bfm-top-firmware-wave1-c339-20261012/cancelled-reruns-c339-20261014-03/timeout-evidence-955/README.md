@@ -9,3 +9,5 @@ The raw status recognizes 55 progress heartbeats. The simulator log has 58 subst
 Task 955_2 / original 799_30 is also recorded as TIMEOUT; its raw evidence and classification details are under [`task955_2/`](task955_2/).
 
 Task 955_3 / original 799_34 (`smoke_test_kv_parallel_access`) reached its 18,167-second per-test cap with final heartbeat `wall_s=18000 mcycle=80975`. The raw wrapper exit is 137, with no testcase marker or result JSON; the resource log records the exact timeout command and elapsed time. Its evidence is SHA-verified under [`task955_3/`](task955_3/).
+
+After commit `ed0ce4f`, task 955_3's completed output tree was removed, freeing 375,777,048 bytes; `/home/dsell` available space increased by 376,217,600 bytes. Cleanup details are in [`task955_3/cleanup-task955_3-20261014.txt`](task955_3/cleanup-task955_3-20261014.txt).
