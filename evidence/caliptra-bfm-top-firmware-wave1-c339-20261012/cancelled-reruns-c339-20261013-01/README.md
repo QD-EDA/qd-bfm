@@ -21,3 +21,5 @@ At 20:37 MDT, fresh tasks 895_1–3 remained RUNNING at `wall_s=5700` (40,457; 4
 At 20:49 MDT, fresh tasks 895_1–3 remained RUNNING at `wall_s=6300` (44,801; 44,800; 44,792). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal; see the [20:49 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2049.txt).
 
 At 21:00 MDT, fresh tasks 895_1–3 remained RUNNING at `wall_s=6900` (49,145; 49,144; 49,136). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal; see the [21:00 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2100.txt).
+
+At 21:12 MDT, fresh tasks 895_1–3 remained RUNNING at `wall_s=7800` (55,632; 55,632; 55,623). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal; see the [21:12 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2112.txt).
