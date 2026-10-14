@@ -357,3 +357,6 @@ At 00:17 MDT, task 799_39 (`smoke_test_ecc_errortrigger1`) had completed FAIL on
 
 
 At 00:29 MDT, tasks 799_37 and 799_38 were RUNNING at wall 19,500 seconds with mcycles 143,339 and 143,178. Fresh job 936 tasks 1–4 were also RUNNING; their wall-900 heartbeats advanced to mcycles 6,591, 6,578, 6,587, and 6,589. No active row met the 30-minute flat-heartbeat condition; see [`heartbeat-snapshot-20261014-0029.txt`](heartbeat-snapshot-20261014-0029.txt).
+
+
+At 00:39 MDT, tasks 799_37 and 799_38 advanced to wall 20,100 seconds and mcycles 147,896 and 147,635. Fresh job 936 tasks 1–4 advanced to wall 1,500 seconds and mcycles 11,206, 11,182, 11,197, and 11,202. All six remain RUNNING, with no 30-minute flat interval. See [`heartbeat-snapshot-20261014-0039.txt`](heartbeat-snapshot-20261014-0039.txt).

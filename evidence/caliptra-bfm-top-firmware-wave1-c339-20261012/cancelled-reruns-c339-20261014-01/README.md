@@ -8,3 +8,6 @@ The run requests 1 CPU and 3 GiB per task with a 6h10m allocation and uses the o
 
 
 At 00:29 MDT, all four job 936 tasks remained RUNNING. Each had four heartbeats, most recently at wall 900 seconds, with mcycles 6,591; 6,578; 6,587; and 6,589. No rerun had reached a terminal result. The full six-row queue and current heartbeats are in [`../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0029.txt`](../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0029.txt).
+
+
+At 00:39 MDT, tasks 936_1–4 remained RUNNING and advanced from wall 900 to wall 1,500 seconds. Their mcycles are 11,206; 11,182; 11,197; and 11,202. The latest queue and heartbeat snapshot is [`../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0039.txt`](../m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0039.txt).

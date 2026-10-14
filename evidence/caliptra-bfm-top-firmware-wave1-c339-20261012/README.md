@@ -158,3 +158,8 @@ Fresh array 936 re-runs the four maintenance-cancelled rows at 1 CPU, 3 GiB, 6h1
 ## Current checkpoint — 00:29 MDT, 2026-10-14
 
 All four fresh job 936 reruns remain RUNNING and their mcycles advanced from wall 300 to wall 900. The two remaining original tasks, 799_37 and 799_38, advanced to wall 19,500 and mcycles 143,339 and 143,178. Task 799_39 is recorded FAIL; the prior fresh task 895_3 is recorded TIMEOUT. No active task meets the 30-minute flat-heartbeat rule. See the [00:29 heartbeat snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0029.txt).
+
+
+## Current checkpoint — 00:39 MDT, 2026-10-14
+
+All six active simulations advanced. The 799_37/38 runs are at wall 20,100 seconds; the fresh job 936 reruns are at wall 1,500 seconds. Their latest mcycles and scheduler state are in the [00:39 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0039.txt). No task meets the 30-minute flat-heartbeat rule.
