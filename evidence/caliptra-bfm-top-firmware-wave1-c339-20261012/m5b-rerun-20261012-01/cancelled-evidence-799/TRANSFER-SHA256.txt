@@ -1,0 +1,2 @@
+Remote archive SHA-256 (verified against local copy before extraction):
+5baf78559d54531811efa9c0af4b8a9bba0cdd314b16c082db1c0066c7b338eb  a2-cancelled-799-20261013.tgz
