@@ -136,3 +136,7 @@ The 19:18 Slurm snapshot shows array 799 tasks 36–39, 41, and 42 RUNNING, with
 ## Current checkpoint — 19:29 MDT, 2026-10-13
 
 Array 799 still has tasks 36–39, 41, and 42 RUNNING; fresh array 895 has tasks 1–3 RUNNING and task 4 PENDING for resources. All nine active simulators advanced from wall time 900 to 1,500 seconds and increased mcycle by about 4,300 during the last interval. Host uptime exceeds their elapsed times; no ghost or 30-minute flat-heartbeat task was found. No new terminal results were ready for collection. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1929.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1929.txt).
+
+## Current checkpoint — 19:41 MDT, 2026-10-13
+
+The six remaining 799 tasks and the first three 895 tasks remain RUNNING; 895_4 remains PENDING for resources. Each active simulator advanced since the 19:29 snapshot. The host has been up longer than every active job, and no 30-minute flat-heartbeat case is present. There were no terminal results to collect or clean; see [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1941.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1941.txt).
