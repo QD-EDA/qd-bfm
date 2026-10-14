@@ -127,7 +127,7 @@ After Slurm reopened, array 799 tasks 36–39, 41, and 42 were live; task 40 had
 
 Fresh array 895 was submitted at 19:02 for only the four maintenance-cancelled cases (original array tasks 28, 30, 34, and 35), using the same pinned source/toolchain, 1 CPU and 3 GiB per task, original per-test timeouts, and throttle 6. The initial queue view showed tasks 895_1–3 RUNNING and 895_4 PENDING for resources; the next view still showed the remaining 799 tasks running. No local duplicate was started. See [`cancelled-reruns-c339-20261013-01/`](cancelled-reruns-c339-20261013-01/) for the staged selection, hashes, and submission record.
 
-The main ledger now has 36 terminal rows (26 TIMEOUT, 4 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 2 PASS) and six still pending in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded.
+The main ledger has 39 terminal rows (26 TIMEOUT, 5 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 4 PASS) and three RUNNING in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded; all four fresh runs in array 895 are also RUNNING.
 
 ## Current checkpoint — 19:18 MDT, 2026-10-13
 
@@ -145,6 +145,6 @@ The six remaining 799 tasks and the first three 895 tasks remain RUNNING; 895_4 
 
 Array 799 tasks 36–39, 41, and 42 remain RUNNING. Fresh array 895 tasks 1–3 remain RUNNING, while task 4 is still PENDING for resources. All nine active simulations advanced since the prior checkpoint; none meets the 30-minute flat-heartbeat criterion. No terminal rows were ready for collection or cleanup. The full snapshot is [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt).
 
-## Current checkpoint — 21:57 MDT, 2026-10-13
+## Current checkpoint — 22:10 MDT, 2026-10-13
 
-799_36 failed on `ERR_ECC_PRIVKEY_NOT_STABLE`; 799_41 and 799_42 passed. Their final heartbeats are recorded in the TSV, and all three output trees were removed after evidence was committed, freeing 1,126,991,048 bytes. Tasks 799_37–39 and fresh array 895 tasks 1–4 remain RUNNING. All seven active heartbeats advanced; no testcase marker or result JSON appeared, and no row meets the 30-minute flat-heartbeat rule. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2157.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2157.txt).
+799_36 failed on `ERR_ECC_PRIVKEY_NOT_STABLE`; 799_41 and 799_42 passed. Their final heartbeats are recorded in the TSV, and all three output trees were removed after evidence was committed, freeing 1,126,991,048 bytes. Tasks 799_37–39 and fresh array 895 tasks 1–4 remain RUNNING. All seven active heartbeats advanced; 799_37 emitted subsystem `[SWWE_PASS]` checks but no whole-test result JSON or terminal outcome appeared. No row meets the 30-minute flat-heartbeat rule. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2210.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2210.txt).
