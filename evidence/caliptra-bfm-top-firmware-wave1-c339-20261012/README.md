@@ -128,3 +128,7 @@ After Slurm reopened, array 799 tasks 36–39, 41, and 42 were live; task 40 had
 Fresh array 895 was submitted at 19:02 for only the four maintenance-cancelled cases (original array tasks 28, 30, 34, and 35), using the same pinned source/toolchain, 1 CPU and 3 GiB per task, original per-test timeouts, and throttle 6. The initial queue view showed tasks 895_1–3 RUNNING and 895_4 PENDING for resources; the next view still showed the remaining 799 tasks running. No local duplicate was started. See [`cancelled-reruns-c339-20261013-01/`](cancelled-reruns-c339-20261013-01/) for the staged selection, hashes, and submission record.
 
 The main ledger now has 36 terminal rows (26 TIMEOUT, 4 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 2 PASS) and six still pending in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded.
+
+## Current checkpoint — 19:18 MDT, 2026-10-13
+
+The 19:18 Slurm snapshot shows array 799 tasks 36–39, 41, and 42 RUNNING, with task 40 already recorded as a firmware-build FAIL. Fresh array 895 tasks 1–3 are RUNNING and task 4 is queued for resources. All nine active simulators emitted a heartbeat at wall time 900 seconds; the last simulator-log writes were 19:15 for 799 and 19:17 for 895, so these are early samples and none meets the 30-minute flat-heartbeat hang rule. Per-task mcycles and queue state are in [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1918.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1918.txt).
