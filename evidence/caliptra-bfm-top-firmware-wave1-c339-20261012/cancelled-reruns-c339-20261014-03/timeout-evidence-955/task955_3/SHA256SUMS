@@ -1,5 +1,6 @@
-df6372222141d11846b4dd5cb5e81dc4f37bc8c8f227fbb4a8bdbf3ea064a40f  ./README.md
+18fa0debe15c4ce4e24a38fb4b0b10a509820c7d98ee26c6e97b5a45189da50c  ./README.md
 c6602a3557ce72829ab4646b6b6085d6d8c625ee9cf12136e2e1e0e00e01bfa8  ./REMOTE-SHA256SUMS-task955_3.txt
+51a2662c8e5aa153894083053eaf8fd66acdb43959185f9d63af3bc7ed0759cd  ./cleanup-task955_3-20261014.txt
 1071e3fe66afe46cc53b530fdc5c73f0f0aa95da49e96b57ccf6e82b9bc7c51e  ./logs/bfm-m5b-cancelled-rerun-03-955_3.out
 5924c0f1d504d08f18bc420e2f66c610478d1334973b9fbea1cfddd0bfa62c64  ./runs/43-d39c57745790b3e2-3/iverilog-version.txt
 7eef8e1d66ce40bdc77f1a380f41b719d204dcdd396aadae885b5eac3b97ac1a  ./runs/43-d39c57745790b3e2-3/openssl-binaries.sha256
