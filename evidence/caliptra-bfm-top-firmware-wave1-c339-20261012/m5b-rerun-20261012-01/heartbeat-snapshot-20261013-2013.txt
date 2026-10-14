@@ -1,0 +1,21 @@
+Captured on DAN-DESKTOP at 2026-10-13 20:13 MDT; host uptime 1 hour 15 minutes.
+
+Slurm state:
+- 799_36, 799_37, 799_38, 799_39, 799_41, 799_42: RUNNING.
+- 799_40: terminal firmware-build FAIL, already recorded.
+- 895_1, 895_2, 895_3: RUNNING.
+- 895_4: PENDING (Resources).
+
+Latest simulator heartbeats (all logs advanced from wall_s=3900):
+- 799_36 smoke_test_pcr_zeroize: wall_s=4200 mcycle=29707.
+- 799_37 smoke_test_kv_swwe_lock: wall_s=4200 mcycle=29705.
+- 799_38 smoke_test_sha256_wntz: wall_s=4200 mcycle=29707.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=4200 mcycle=29700.
+- 799_41 smoke_test_strap: wall_s=4200 mcycle=29707.
+- 799_42 smoke_test_sha256: wall_s=4200 mcycle=29698.
+- 895_1 smoke_test_ecc_errortrigger4: wall_s=4200 mcycle=29646.
+- 895_2 kv_entry_read_err: wall_s=4200 mcycle=29645.
+- 895_3 smoke_test_kv_parallel_access: wall_s=4200 mcycle=29636.
+- 895_4 smoke_test_ecc_flow2_kv_ocp_progress: no sim.log yet.
+
+Each of the nine running simulator logs advanced by about 2,129 mcycles from its wall_s=3900 sample. None has a testcase terminal marker or result.json, and no task meets the 30-minute flat-heartbeat hang rule. Host uptime exceeds every active job's elapsed time; no ghosts were found. No terminal result was available for collection or output cleanup.

@@ -11,3 +11,5 @@ At 19:41 MDT, fresh tasks 895_1–3 were still RUNNING with advancing mcycle hea
 At 19:51 MDT, fresh tasks 895_1–3 were still RUNNING, with advancing mcycles at `wall_s=2700` (18,997; 18,996; 18,987). Task 895_4 remained PENDING for resources and had no simulation log yet. No fresh-rerun result was terminal.
 
 At 20:02 MDT, fresh tasks 895_1–3 were still RUNNING, with advancing mcycles at `wall_s=3300` (23,246; 23,245; 23,236). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal.
+
+At 20:13 MDT, fresh tasks 895_1–3 remained RUNNING with advancing heartbeats at `wall_s=4200` (29,646; 29,645; 29,636). Task 895_4 remained PENDING for resources with no simulation log. No fresh rerun result was terminal; see the [20:13 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2013.txt).
