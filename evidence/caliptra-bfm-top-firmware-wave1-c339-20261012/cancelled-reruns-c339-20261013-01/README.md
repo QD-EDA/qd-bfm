@@ -43,3 +43,9 @@ At 23:07 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest hear
 At 23:18 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest heartbeats were `wall_s=15300` (48,803; 110,841; 73,205) for tasks 1–3 and `wall_s=7200 mcycle=53112` for task 4. No result JSON or terminal outcome was present; see the [23:18 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2318.txt).
 
 At 23:29 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest heartbeats were `wall_s=15900` (53,376; 115,334; 74,264) for tasks 1–3 and `wall_s=8100 mcycle=59961` for task 4. No result JSON or terminal outcome was present; see the [23:29 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2329.txt).
+
+## Current rerun checkpoint — 23:40 MDT, 2026-10-13
+
+Fresh task 895_4 (source row 44, formerly 799_35) completed PASS. The full simulator log has 29 heartbeats; its final heartbeat is `wall_s=8400 mcycle=62186`, and the test finishes at mcycle 62,472. `result.json` reports compile, firmware, and simulation exit 0, one testcase pass marker, zero fail markers, and no bad diagnostics. The run-level `status.txt` is stale at 27 heartbeats through `wall_s=8100 mcycle=59961`; the full log is authoritative. Resource wall time was 8,469 seconds, with maximum RSS 1,852,676 KiB. See [`pass-evidence-895/README.md`](pass-evidence-895/README.md) and [`results.tsv`](results.tsv).
+
+Fresh tasks 895_1–3 remain RUNNING at `wall_s=16500` (mcycles 57,861; 119,748; 75,440). No result JSON or whole-test terminal outcome was present for those three tasks. The 23:40 snapshot is [`../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt`](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt).
