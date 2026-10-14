@@ -1,5 +1,5 @@
 array_task	source_row	original_799_task	test	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
 1	37	28	smoke_test_ecc_errortrigger4	TERMINAL	TIMEOUT	9009	17100	9009	17281	17281	137	55	0	1852684	timeout-evidence-955/README.md
-2	39	30	kv_entry_read_err	RUNNING			17400	135271	17543			59			heartbeat-snapshot-20261014-1232.txt
+2	39	30	kv_entry_read_err	TERMINAL	TIMEOUT	135271	17400	135271	17543	17543	137	56	0	1852684	timeout-evidence-955/task955_2/README.md
 3	43	34	smoke_test_kv_parallel_access	RUNNING			17400	79735	18167			59			heartbeat-snapshot-20261014-1232.txt
 4	44	35	smoke_test_ecc_flow2_kv_ocp_progress	TERMINAL	PASS	59434	7500	59434	19152	7909	0	26	0	1852844	pass-evidence-955/README.md

@@ -60,6 +60,11 @@ This run reached its configured 17,281-second per-test limit without a testcase 
 After commit `030e2ac`, I deleted task 955_1's output tree. It freed 375,692,895 bytes of output data; there was no separate run-local Python cache. `/home/dsell` available space increased by 376,139,776 bytes. The run metadata and shared toolchain remain intact; tasks 955_2–3 are unaffected. See [`timeout-evidence-955/cleanup-task955_1-20261014.txt`](timeout-evidence-955/cleanup-task955_1-20261014.txt).
 
 
+## Task 2 (955_2 / original 799_30) — TIMEOUT
+
+This run reached its configured 17,543-second per-test limit without a testcase result. Its last heartbeat is `wall_s=17400 mcycle=135271`; no PASS/FAIL marker or `result.json` exists. The raw wrapper status is `INFRA_ERROR` / exit 137, but the resource log's `timeout --signal=INT --kill-after=60s 17543` command elapsed exactly 17,543 seconds. The ledger therefore records TIMEOUT and preserves the raw status unchanged. Peak RSS was 1,852,684 KiB. Selected logs and provenance are SHA-verified in [`timeout-evidence-955/task955_2/`](timeout-evidence-955/task955_2/).
+
+
 At 10:05 MDT tasks 955_1–3 remained RUNNING. Task 1's heartbeat mcycle reset from 59,285 at wall 7,500 to 1,333 at wall 8,100, then advanced to 6,195 at wall 8,700; this is recorded as observed without assigning a cause. Task 2 reached wall 8,400 / mcycle 66,338, and task 3 wall 8,700 / mcycle 63,534. Task 4 remains recorded PASS. See [`heartbeat-snapshot-20261014-1005.txt`](heartbeat-snapshot-20261014-1005.txt).
 
 
