@@ -7,3 +7,5 @@ The runner exited 0. `output/result.json` reports `passed=true`, compile, firmwa
 The timeout was 19,152 seconds. `resource.log` records 8,469 seconds elapsed (2:21:09), maximum RSS 1,852,676 KiB, and exit status 0. The selected result, simulator and firmware logs, toolchain metadata, resource record, and Slurm wrapper output are under `runs/44-bcb5b29a003aa2a6-4/` and `logs/`.
 
 All 18 selected files match [`REMOTE-SHA256SUMS-task4.txt`](REMOTE-SHA256SUMS-task4.txt). The transferred tar archive SHA-256 was `0b3eb1e95369341826fb36ebd32ac2ca16c7c49284f54d24636e65fbdecf0483`; the result JSON's `sim_log_sha256` matches the copied simulator log.
+
+After commit `b39f737` preserved this evidence, the completed remote `output/` tree was removed at 23:41 MDT, freeing 375,765,215 bytes. The run-level status, resource, provenance, version metadata, and Slurm wrapper log remain on DAN-DESKTOP.

@@ -48,4 +48,6 @@ At 23:29 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest hear
 
 Fresh task 895_4 (source row 44, formerly 799_35) completed PASS. The full simulator log has 29 heartbeats; its final heartbeat is `wall_s=8400 mcycle=62186`, and the test finishes at mcycle 62,472. `result.json` reports compile, firmware, and simulation exit 0, one testcase pass marker, zero fail markers, and no bad diagnostics. The run-level `status.txt` is stale at 27 heartbeats through `wall_s=8100 mcycle=59961`; the full log is authoritative. Resource wall time was 8,469 seconds, with maximum RSS 1,852,676 KiB. See [`pass-evidence-895/README.md`](pass-evidence-895/README.md) and [`results.tsv`](results.tsv).
 
+After the evidence commit, at 23:41 MDT I removed task 895_4's completed `output/` tree. It measured 375,765,215 bytes. The run-level status, resource, provenance, version files, and Slurm wrapper log remain in the run directory.
+
 Fresh tasks 895_1–3 remain RUNNING at `wall_s=16500` (mcycles 57,861; 119,748; 75,440). No result JSON or whole-test terminal outcome was present for those three tasks. The 23:40 snapshot is [`../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt`](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt).
