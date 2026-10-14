@@ -57,3 +57,6 @@ At 10:05 MDT tasks 955_1–3 remained RUNNING. Task 1's heartbeat mcycle reset f
 
 
 At 10:16 MDT tasks 955_1–3 remained RUNNING. All three advanced to `wall_s=9300`; mcycles are 11,003, 73,443, and 64,612, with 30, 30, and 28 heartbeats respectively. Their result/status files remain absent and no terminal markers were found. Task 4 remains recorded PASS. See [`heartbeat-snapshot-20261014-1016.txt`](heartbeat-snapshot-20261014-1016.txt).
+
+
+At 10:30 MDT tasks 955_1–3 remain RUNNING and each advanced to `wall_s=10200`; mcycles are 18,179, 80,516, and 66,228. Each log has 35 heartbeats, no terminal markers, and no result JSON. All three VVP processes are active near 100% CPU. Task 4 remains PASS. See [`heartbeat-snapshot-20261014-1030.txt`](heartbeat-snapshot-20261014-1030.txt).
