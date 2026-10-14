@@ -360,3 +360,6 @@ At 00:29 MDT, tasks 799_37 and 799_38 were RUNNING at wall 19,500 seconds with m
 
 
 At 00:39 MDT, tasks 799_37 and 799_38 advanced to wall 20,100 seconds and mcycles 147,896 and 147,635. Fresh job 936 tasks 1–4 advanced to wall 1,500 seconds and mcycles 11,206, 11,182, 11,197, and 11,202. All six remain RUNNING, with no 30-minute flat interval. See [`heartbeat-snapshot-20261014-0039.txt`](heartbeat-snapshot-20261014-0039.txt).
+
+
+At 00:49 MDT, tasks 799_37 and 799_38 were RUNNING at wall 20,700/20,400 seconds with mcycles 152,525/149,887. Fresh job 936 tasks 1–4 advanced to wall 2,100 seconds with mcycles 15,751; 15,713; 15,739; and 15,742. No active row meets the 30-minute flat-heartbeat condition. See [`heartbeat-snapshot-20261014-0049.txt`](heartbeat-snapshot-20261014-0049.txt).

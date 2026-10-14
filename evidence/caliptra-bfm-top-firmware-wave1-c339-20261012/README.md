@@ -163,3 +163,8 @@ All four fresh job 936 reruns remain RUNNING and their mcycles advanced from wal
 ## Current checkpoint — 00:39 MDT, 2026-10-14
 
 All six active simulations advanced. The 799_37/38 runs are at wall 20,100 seconds; the fresh job 936 reruns are at wall 1,500 seconds. Their latest mcycles and scheduler state are in the [00:39 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0039.txt). No task meets the 30-minute flat-heartbeat rule.
+
+
+## Current checkpoint — 00:49 MDT, 2026-10-14
+
+All six simulations remain RUNNING. The four fresh job 936 rows are at wall 2,100 seconds; original rows 799_37/38 are at wall 20,700/20,400 seconds. All mcycles advanced since 00:39, with no row meeting the 30-minute flat-heartbeat rule. See the [00:49 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt).
