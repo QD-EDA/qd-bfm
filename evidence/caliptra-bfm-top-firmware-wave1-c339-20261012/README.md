@@ -120,3 +120,11 @@ Array task 799_8 (`smoke_test_kv_lock_use_mid_read`) reached its configured time
 ## Current checkpoint — 06:23 MDT, 2026-10-13
 
 Array task 799_9 (`smoke_test_sram_ecc`) reached its configured timeout: 8,876 seconds, exactly matching `/usr/bin/time`'s `2:27:56`, with 1,852,468 KiB peak RSS. Its wrapper reported exit 137 as `INFRA_ERROR`; the corrected result is `TIMEOUT`, last heartbeat `wall_s=8700 mcycle=59294`, and maximum flat interval 0 seconds. Tasks 799_10–15 are RUNNING, 16–42 remain pending at throttle 6, and the three overlay simulations continue with advancing heartbeats. The timeout records are in [`timeout-reclassification-799/`](m5b-rerun-20261012-01/timeout-reclassification-799/), with the live snapshot in [`heartbeat-snapshot-20261013-0623.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-0623.txt).
+
+## Current checkpoint — 19:06 MDT, 2026-10-13
+
+After Slurm reopened, array 799 tasks 36–39, 41, and 42 were live; task 40 had ended before simulation. Task 799_40 (`smoke_test_ras`) is recorded as **FAIL** after a 30.90-second firmware build: the linker could not resolve `service_soc_ifc_notif_intr`, no heartbeat or result JSON was produced, and final mcycle is N/A. Its compiler/resource logs and hashes are in [`result-task40-smoke-test-ras-fail/`](result-task40-smoke-test-ras-fail/); its 373,110,141-byte build output was removed after recording the result.
+
+Fresh array 895 was submitted at 19:02 for only the four maintenance-cancelled cases (original array tasks 28, 30, 34, and 35), using the same pinned source/toolchain, 1 CPU and 3 GiB per task, original per-test timeouts, and throttle 6. The initial queue view showed tasks 895_1–3 RUNNING and 895_4 PENDING for resources; the next view still showed the remaining 799 tasks running. No local duplicate was started. See [`cancelled-reruns-c339-20261013-01/`](cancelled-reruns-c339-20261013-01/) for the staged selection, hashes, and submission record.
+
+The main ledger now has 36 terminal rows (26 TIMEOUT, 4 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 2 PASS) and six still pending in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded.
