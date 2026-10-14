@@ -153,3 +153,8 @@ Array 799 tasks 36–39, 41, and 42 remain RUNNING. Fresh array 895 tasks 1–3 
 ## Current checkpoint — 00:17 MDT, 2026-10-14
 
 Fresh array 936 re-runs the four maintenance-cancelled rows at 1 CPU, 3 GiB, 6h10m, throttle 6. All tasks were RUNNING at first observation: 936_1→source row 37, 936_2→39, 936_3→43, and 936_4→44. The pinned Icarus source and binary were verified. Tasks 799_37 and 799_38 remain RUNNING; their latest heartbeats are wall 18,900 seconds, mcycle 138,820 and 138,750. Task 799_39 is a FAIL at mcycle 59,872 with the ECC private-key stability assertion. Fresh task 895_3 reached its 18,167-second cap and is TIMEOUT at mcycle 78,485. The selected evidence for both terminal tasks was SHA-verified, committed, and their output trees removed, freeing 751,554,560 bytes of filesystem space. No task meets the 30-minute flat-heartbeat rule. See [the 00:16 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0016.txt) and [fresh rerun job 936](cancelled-reruns-c339-20261014-01/README.md).
+
+
+## Current checkpoint — 00:29 MDT, 2026-10-14
+
+All four fresh job 936 reruns remain RUNNING and their mcycles advanced from wall 300 to wall 900. The two remaining original tasks, 799_37 and 799_38, advanced to wall 19,500 and mcycles 143,339 and 143,178. Task 799_39 is recorded FAIL; the prior fresh task 895_3 is recorded TIMEOUT. No active task meets the 30-minute flat-heartbeat rule. See the [00:29 heartbeat snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0029.txt).
