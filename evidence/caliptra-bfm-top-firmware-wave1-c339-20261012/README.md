@@ -234,3 +234,7 @@ The passed task's build/output and Python cache trees were deleted after its evi
 ## Current checkpoint — 10:05 MDT, 2026-10-14
 
 Task 955_4 remains PASS at final heartbeat mcycle 59,434. Tasks 955_1–3 remain RUNNING: task 1 is at wall 8,700 / mcycle 6,195, task 2 at wall 8,400 / mcycle 66,338, and task 3 at wall 8,700 / mcycle 63,534. Task 1's mcycle decreased from 59,285 at wall 7,500 to 1,333 at wall 8,100, then advanced; the log records this without an inferred cause. Snapshot: [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1005.txt`](cancelled-reruns-c339-20261014-1005.txt).
+
+## Current checkpoint — 10:16 MDT, 2026-10-14
+
+Task 955_4 remains PASS at final heartbeat mcycle 59,434. Tasks 955_1–3 remain RUNNING at wall 9,300, with latest mcycles 11,003, 73,443, and 64,612. No terminal result is available for these three. Snapshot: [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1016.txt`](cancelled-reruns-c339-20261014-1016.txt).
