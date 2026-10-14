@@ -31,3 +31,5 @@ At 21:57 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest hear
 At 22:10 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest heartbeats were `wall_s=11100` (17,155; 79,598; 66,017) for tasks 1–3 and `wall_s=3300 mcycle=23768` for task 4. No result JSON or terminal outcome was present; see the [22:10 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2210.txt).
 
 At 22:23 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest heartbeats were `wall_s=12000` (23,759; 86,149; 67,518) for tasks 1–3 and `wall_s=3900 mcycle=28138` for task 4. No result JSON or terminal outcome was present; see the [22:23 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2223.txt).
+
+At 22:35 MDT, all four fresh tasks 895_1–4 remained RUNNING. Their latest heartbeats were `wall_s=12600` (28,282; 90,617; 68,533) for tasks 1–3 and `wall_s=4800 mcycle=34838` for task 4. No result JSON or terminal outcome was present; see the [22:35 full-array snapshot](../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2235.txt).
