@@ -1,5 +1,5 @@
 array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_heartbeat_wall_s	latest_mcycle	timeout_s	elapsed_s	runner_exit	heartbeat_count	max_flat_wall_s	max_rss_kib	evidence
-1	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	PENDING			16500	57861	17281						../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt
-2	39	kv_entry_read_err	kv_entry_read_err	PENDING			16500	119748	17543						../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt
-3	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	PENDING			16500	75440	18167						../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2340.txt
+1	37	smoke_test_ecc_errortrigger4	smoke_test_ecc_errortrigger4	TERMINAL	TIMEOUT	62443	17100	62443	17281	17281	137	58	0	1852804	timeout-evidence-895/README.md
+2	39	kv_entry_read_err	kv_entry_read_err	TERMINAL	TIMEOUT	126506	17400	126506	17543	17543	137	59	0	1852784	timeout-evidence-895/README.md
+3	43	smoke_test_kv_parallel_access	smoke_test_kv_parallel_access	PENDING			17400	77252	18167						../m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2354.txt
 4	44	smoke_test_ecc_flow2_kv_ocp_progress	smoke_test_ecc_flow2_kv_ocp_progress	TERMINAL	PASS	62186	8400	62186	19152	8469	0	29	0	1852676	pass-evidence-895/README.md
