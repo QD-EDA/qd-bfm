@@ -19,3 +19,6 @@ At 08:03 MDT all four array-955 tasks remained RUNNING. Each had five heartbeats
 
 
 At 08:14 MDT, all four tasks were still RUNNING with no result/status file or testcase marker. Their last heartbeat remains `wall_s=1800`, with mcycles 13,882; 13,880; 13,939; and 13,953. The last simulator log write was 07:59:50 MDT, about 14 minutes before this check; each VVP was still using 99.9% CPU at about 1.04 GiB RSS. This is below the 30-minute flat-heartbeat threshold, so no row is classified as a hang. Snapshot: [`heartbeat-snapshot-20261014-0814.txt`](heartbeat-snapshot-20261014-0814.txt).
+
+
+At 08:25 MDT all four tasks remained RUNNING and advanced to `wall_s=2700`. Latest mcycles for tasks 1–4 are 20,838; 20,837; 20,913; and 20,939. Each simulator log has ten heartbeats, the result/status files remain absent, and no testcase terminal marker is present. VVP processes were still near 100% CPU. The exact queue and log snapshot is [`heartbeat-snapshot-20261014-0825.txt`](heartbeat-snapshot-20261014-0825.txt).
