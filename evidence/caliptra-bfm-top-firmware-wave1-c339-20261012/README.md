@@ -196,3 +196,7 @@ Array 955 remains RUNNING on all four rows, but there has been no new heartbeat 
 ## Current checkpoint — 08:25 MDT, 2026-10-14
 
 Array 955 remains RUNNING on all four rows and advanced to wall 2,700 seconds. Latest mcycles are 20,838, 20,837, 20,913, and 20,939; no result JSON or terminal marker exists yet. The heartbeat gap observed at 08:14 resolved, and no row meets the 30-minute hang threshold. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0825.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0825.txt).
+
+## Current checkpoint — 08:36 MDT, 2026-10-14
+
+Array 955 remains active on all four reruns, with heartbeats advanced to wall 3,300 seconds and mcycles 25,630, 25,628, 25,708, and 25,738. No result JSON or terminal testcase marker is present. All four VVPs continue using CPU. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0836.txt`](cancelled-reruns-c339-20261014-0836.txt).
