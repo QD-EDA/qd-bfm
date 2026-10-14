@@ -147,4 +147,4 @@ Array 799 tasks 36–39, 41, and 42 remain RUNNING. Fresh array 895 tasks 1–3 
 
 ## Current checkpoint — 20:13 MDT, 2026-10-13
 
-The six active 799 tasks and the first three fresh 895 reruns are still running; 895_4 remains queued for resources. All nine mcycles advanced since the 20:37 sample, with no terminal result or 30-minute flat-heartbeat case. The host has been up longer than every active job. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2049.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2049.txt).
+The six active 799 tasks and the first three fresh 895 reruns are still running; 895_4 remains queued for resources. All nine mcycles advanced since the 20:49 sample, with no terminal result or 30-minute flat-heartbeat case. The host has been up longer than every active job. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2100.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2100.txt).
