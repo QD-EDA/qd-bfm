@@ -40,5 +40,7 @@ log is `wall_s=9600 mcycle=63065` (33 heartbeats). `status.txt` is stale at
 final heartbeat. Resource wall time was 2:40:56 and maximum RSS was 1,852,300
 KiB. Selected result JSON, status, simulator, firmware, compile, provenance,
 and Slurm logs are under `runs/45-c7d7b277746f7500-36/`; all 25 copied files
-match `REMOTE-SHA256SUMS-task36.txt`. Remote output cleanup is pending the
-evidence commit.
+match `REMOTE-SHA256SUMS-task36.txt`. At 21:44 MDT, after committing the
+evidence and confirming the array task had left Slurm, I deleted its remote
+output tree; this freed 375,719,634 bytes (about 0.350 GiB). Compact status
+and resource metadata and the wrapper log remain in the protected run dir.
