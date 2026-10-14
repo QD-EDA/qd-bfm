@@ -1,0 +1,7 @@
+cleaned_at=2026-10-13T19:06:33-06:00
+host=DAN-DESKTOP
+run=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/49-6dc114367c8b520c-40
+removed=output and pycache after task 799_40 result was committed
+output_bytes_before_removal=373110141
+output_space_decimal_GB=0.373110141
+output_space_GiB=0.3476
