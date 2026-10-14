@@ -140,3 +140,7 @@ Array 799 still has tasks 36–39, 41, and 42 RUNNING; fresh array 895 has tasks
 ## Current checkpoint — 19:41 MDT, 2026-10-13
 
 The six remaining 799 tasks and the first three 895 tasks remain RUNNING; 895_4 remains PENDING for resources. Each active simulator advanced since the 19:29 snapshot. The host has been up longer than every active job, and no 30-minute flat-heartbeat case is present. There were no terminal results to collect or clean; see [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1941.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1941.txt).
+
+## Current checkpoint — 19:51 MDT, 2026-10-13
+
+Array 799 tasks 36–39, 41, and 42 remain RUNNING. Fresh array 895 tasks 1–3 remain RUNNING, while task 4 is still PENDING for resources. All nine active simulations advanced since the prior checkpoint; none meets the 30-minute flat-heartbeat criterion. No terminal rows were ready for collection or cleanup. The full snapshot is [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt).
