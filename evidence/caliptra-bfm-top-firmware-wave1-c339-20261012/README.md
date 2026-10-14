@@ -132,3 +132,7 @@ The main ledger now has 36 terminal rows (26 TIMEOUT, 4 FAIL, 4 CANCELLED-FOR-MA
 ## Current checkpoint — 19:18 MDT, 2026-10-13
 
 The 19:18 Slurm snapshot shows array 799 tasks 36–39, 41, and 42 RUNNING, with task 40 already recorded as a firmware-build FAIL. Fresh array 895 tasks 1–3 are RUNNING and task 4 is queued for resources. All nine active simulators emitted a heartbeat at wall time 900 seconds; the last simulator-log writes were 19:15 for 799 and 19:17 for 895, so these are early samples and none meets the 30-minute flat-heartbeat hang rule. Per-task mcycles and queue state are in [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1918.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1918.txt).
+
+## Current checkpoint — 19:29 MDT, 2026-10-13
+
+Array 799 still has tasks 36–39, 41, and 42 RUNNING; fresh array 895 has tasks 1–3 RUNNING and task 4 PENDING for resources. All nine active simulators advanced from wall time 900 to 1,500 seconds and increased mcycle by about 4,300 during the last interval. Host uptime exceeds their elapsed times; no ghost or 30-minute flat-heartbeat task was found. No new terminal results were ready for collection. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1929.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1929.txt).
