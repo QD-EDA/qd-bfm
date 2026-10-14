@@ -167,3 +167,5 @@ heartbeats; the full simulator log contains 54 samples through
 marker or result JSON. Maximum RSS was 1,852,452 KiB. Its copied run logs and
 provenance are under `runs/34-8edb704b0e17c6c8-25/`, with remote hashes in
 `REMOTE-SHA256SUMS-task25.txt`.
+
+Task 27 (`smoke_test_ecc_errortrigger3`, source row 36) is also reclassified as TIMEOUT. The submitted wrapper left `outcome=INFRA_ERROR` and `reason=runner_terminated_by_signal` because `runner_exit=137`; the raw resource report shows the command was `timeout --signal=INT --kill-after=60s 17149 ...` and its elapsed time was exactly 17,149 seconds. The 3 GiB task peaked at 1,852,520 KiB RSS. The full simulator log has 58 advancing heartbeat records through `wall_s=17100 mcycle=121559`, no terminal testcase marker, and no `result.json`. The status file's heartbeat count is one lower, but its last heartbeat matches the full log. Its copied raw status, resource, simulator, provenance, tool versions, and wrapper log are under `runs/36-37f012b3a23a9e50-27/`; hashes are in `REMOTE-SHA256SUMS-task27.txt`. The original wrapper status is preserved unchanged.

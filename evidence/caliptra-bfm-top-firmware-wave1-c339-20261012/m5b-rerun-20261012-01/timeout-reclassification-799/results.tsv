@@ -24,3 +24,4 @@ array_task	source_row	test	wrapper_outcome	corrected_outcome	runner_exit	timeout
 23	32	smoke_test_ecc_keygen	INFRA_ERROR	TIMEOUT	137	16033	16033	54	15900	115112	0	1852344
 24	33	smoke_test_ecc_sign	INFRA_ERROR	TIMEOUT	137	16033	16033	54	15900	115159	0	1852444
 25	34	smoke_test_ecc_verify	INFRA_ERROR	TIMEOUT	137	16033	16033	53	15900	111247	0	1852452
+27	36	smoke_test_ecc_errortrigger3	INFRA_ERROR	TIMEOUT	137	17149	17149	58	17100	121559	0	1852520
