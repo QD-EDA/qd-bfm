@@ -282,3 +282,7 @@ Array 955 tasks 1–3 remain RUNNING at wall 15,900 seconds, with latest mcycles
 ## Current checkpoint — 12:17 MDT, 2026-10-14
 
 Array 955 tasks 1–3 remain RUNNING at wall 16,500 seconds, with latest mcycles 4,498, 128,609, and 77,913. Task 1 continued advancing after its counter dropped to 67 at wall 15,900. All three VVP processes remain active; no terminal markers or results are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt).
+
+## Current checkpoint — 12:31 MDT, 2026-10-14
+
+Fresh rerun 955_1 (original 799_28) reached its 17,281-second per-test limit without a testcase result; its last heartbeat is mcycle 9,009 at wall 17,100. The raw wrapper status is INFRA_ERROR / exit 137, but the resource log confirms elapsed time exactly matches the configured timeout, so the result ledger records TIMEOUT. Selected evidence is SHA-verified under [`cancelled-reruns-c339-20261014-03/timeout-evidence-955/`](cancelled-reruns-c339-20261014-03/timeout-evidence-955/). Tasks 955_2 and 955_3 remain RUNNING at wall 17,400 with mcycles 135,271 and 79,735. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1232.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1232.txt).
