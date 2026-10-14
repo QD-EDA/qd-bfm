@@ -38,6 +38,6 @@ array_task	source_row	test	case_dir	state	terminal_outcome	final_mcycle	latest_h
 37	46	smoke_test_kv_swwe_lock	smoke_test_kv_swwe_lock	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
 38	47	smoke_test_sha256_wntz	smoke_test_sha256_wntz	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
 39	48	smoke_test_ecc_errortrigger1	smoke_test_ecc_errortrigger1	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
-40	49	smoke_test_ras	smoke_test_ras	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
+40	49	smoke_test_ras	smoke_test_ras	TERMINAL	FAIL	N/A		N/A	21600	30.90	1	0	N/A	1852336	../result-task40-smoke-test-ras-fail/README.md
 41	50	smoke_test_strap	smoke_test_strap	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
 42	51	smoke_test_sha256	smoke_test_sha256	PENDING					21600						heartbeat-snapshot-20261013-1842.txt
