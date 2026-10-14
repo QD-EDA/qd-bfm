@@ -224,3 +224,7 @@ Array 955 remains active on all four rows, now at wall 6,300 seconds with mcycle
 ## Current checkpoint — 09:40 MDT, 2026-10-14
 
 Array 955 remains active. Tasks 1–3 are at wall 6,900 seconds with mcycles 54,491, 54,453, and 54,567; task 4 is at wall 7,200 with mcycle 57,034. No terminal outcomes are available yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0940.txt`](cancelled-reruns-c339-20261014-0940.txt).
+
+## Current checkpoint — 09:53 MDT, 2026-10-14
+
+Fresh rerun 955_4 passed (original 799_35 / source row 44), with final heartbeat mcycle 59,434. The three other reruns remain active: task 1 is at wall 7,500 / mcycle 59,285; task 2 at wall 7,800 / mcycle 61,613; task 3 at wall 7,500 / mcycle 59,366. Evidence for the pass is under [`cancelled-reruns-c339-20261014-03/pass-evidence-955/`](cancelled-reruns-c339-20261014-03/pass-evidence-955/); the full checkpoint is [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0953.txt`](cancelled-reruns-c339-20261014-0953.txt).

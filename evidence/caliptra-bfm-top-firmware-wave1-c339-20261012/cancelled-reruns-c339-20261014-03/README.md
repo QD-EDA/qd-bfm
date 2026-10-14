@@ -43,3 +43,8 @@ At 09:29 MDT all four tasks remained RUNNING with twenty-two heartbeats through 
 
 
 At 09:40 MDT all four tasks remained RUNNING. Tasks 1–3 have 24 heartbeats through `wall_s=6900` (mcycles 54,491; 54,453; 54,567); task 4 has 25 through `wall_s=7200` (mcycle 57,034). No result JSON, status file, or terminal marker exists. VVP processes remain active near 100% CPU. See [`heartbeat-snapshot-20261014-0940.txt`](heartbeat-snapshot-20261014-0940.txt).
+
+
+## Task 4 (955_4) — PASS
+
+The fresh rerun of original task 799_35 / source row 44 passed. It has 26 heartbeats and final heartbeat `wall_s=7500 mcycle=59434`; the runner exited 0 after 2:11:49 with 1,852,844 KiB maximum RSS. `result.json` and `sim.log` both confirm one pass marker and zero failures. The selected raw evidence is SHA-verified in [`pass-evidence-955/`](pass-evidence-955/). At the 09:53 MDT checkpoint, tasks 955_1–3 remained RUNNING; their latest heartbeats are recorded in `results.tsv` and [`heartbeat-snapshot-20261014-0953.txt`](heartbeat-snapshot-20261014-0953.txt).
