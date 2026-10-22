@@ -74,13 +74,15 @@ export CALIPTRA_GCC_PREFIX="$gcc_dir/riscv-none-elf-"
 
 out="$run/results/$test_id"
 mkdir -p "$out"
+preserve_images=()
+[[ $test_id == 1b067d21081b705c ]] && preserve_images=(--keep-firmware-images)
 start=$SECONDS
 set +e
 /usr/bin/time -v -o "$out/task.resource" timeout --signal=TERM --kill-after=30s 14300 \
     "$deps/bin/python3.12" "$source_root/evidence/caliptra-bfm-verilator-m9-20261016/run-verilator-top-case.py" \
     --source "$source_root" --rtl "$rtl" --model "$model" --output "$out/output" \
     --case "$case_dir" --case-yaml "$case_yaml" --timeout "$timeout_s" \
-    --c339-outcome "$last_icarus" --c339-mcycle NA --c339-elapsed NA
+    --c339-outcome "$last_icarus" --c339-mcycle NA --c339-elapsed NA "${preserve_images[@]}"
 runner_exit=$?
 set -e
 elapsed=$((SECONDS - start))
