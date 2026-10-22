@@ -30,9 +30,10 @@ injections must fail without a pass banner. Success prints `PASS` and exits `0`.
 
 ## Caliptra DV runs
 
-Use Icarus for block-level UVM and the full-top reference lane. Point it at a
-UVM-enabled Icarus build and a clean Caliptra RTL checkout, then run a stock
-firmware case:
+Use Icarus for block-level UVM and as the full-top reference lane. Verilator
+5.052 is the default for full-top stock-firmware regressions when the case
+builds. Point Icarus at a UVM-enabled build and a clean Caliptra RTL checkout
+to run a stock-firmware reference case:
 
 ```sh
 export CALIPTRA_RTL=/path/to/clean/caliptra-rtl
@@ -63,11 +64,15 @@ python3 evidence/caliptra-bfm-verilator-m9-20261016/run-verilator-top-case.py \
 | --- | --- | --- |
 | [M9](evidence/caliptra-bfm-verilator-m9-20261016/README.md) | Verilator 5.052; 162 stock-firmware rows | 103 PASS, 43 FAIL, 14 firmware-build failures, 2 TIMEOUT (63.6% PASS); 109 non-firmware rows were out of scope. |
 | [M21 Part B](evidence/caliptra-bfm-m21-20261020/README.md) | Icarus current-main `cc25756d`; 20 selected stock-firmware rows | 11 PASS, 9 TIMEOUT; all 20 reached a terminal outcome. |
+| [M23](evidence/caliptra-bfm-m23-20261022/README.md) | Verilator 5.052; same 20 selected stock-firmware rows | 18 PASS, 1 FAIL, 1 firmware-build failure; all 20 reached a terminal outcome. |
 
-These are different scopes: M21's 20 rows were selected from cases without a
-prior Icarus terminal result, while M9 covers the 162 stock-firmware rows on
-Verilator. Block-level UVM remains on Icarus. The latest full selected-row
-Verilator rerun is being prepared; see [M23 evidence](evidence/caliptra-bfm-m23-20261022/).
+M21's 20 rows were selected from cases without a prior Icarus terminal result,
+while M9 covers the 162 stock-firmware rows on Verilator. M23 reran the M21
+selection under Verilator: eight Icarus TIMEOUTs passed, one timed-out case
+failed, and one Icarus-passing case failed during firmware build. See the
+[M23 case table](evidence/caliptra-bfm-m23-20261022/results.tsv) and
+[E-Verilog waitlist](docs/E-VERILOG-WAITLIST.md). Block-level UVM remains on
+Icarus; Verilator is the default for full-top stock-firmware cases that build.
 
 ### Repository layout
 
