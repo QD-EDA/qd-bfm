@@ -1,0 +1,196 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5582000 - ---------------------------
+5622000 -  DOE Smoke Test With Rand UDS/FE !!
+5675000 - ---------------------------
+5898000 - Rand UDS
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [      60273] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [      60283] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+11608000 - ---------------------------
+11648000 -  DOE Smoke Test With Rand UDS/FE !!
+11701000 - ---------------------------
+11934000 - Waiting for all crypto status ready
+12018000 - ECC is ready
+12041000 - DOE is ready
+12065000 - HMAC is ready
+12092000 - MLDSA is ready
+12119000 - MLKEM is ready
+12146000 - AES is ready
+12166000 - All crypto are ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     122669] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     122679] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+17848000 - ---------------------------
+17888000 -  DOE Smoke Test With Rand UDS/FE !!
+17941000 - ---------------------------
+18175000 - Waiting for all crypto status ready
+18230000 - ECC is ready
+18253000 - DOE is ready
+18277000 - HMAC is ready
+18301000 - MLDSA is ready
+18328000 - MLKEM is ready
+18356000 - AES is ready
+18375000 - All crypto are ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     184591] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     184601] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+24040000 - ---------------------------
+24080000 -  DOE Smoke Test With Rand UDS/FE !!
+24133000 - ---------------------------
+24400000 - 
+24401000 - Parallel Crypto is successfully detected
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     244628] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     244638] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+M12_DOE_FAILURE_SAMPLE time=24464000 prev_cptra_rst_b=1 prev_doe_rst_b=1 prev_clear=1 prev_valid=1 prev_deobf=1 now_cptra_rst_b=1 now_doe_rst_b=1 now_clear=0 now_valid=0 now_deobf=0
+SVA ERROR: DOE STATUS valid bit not set after clear obf secrets cmd
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+30016000 - ---------------------------
+30056000 -  DOE Smoke Test With Rand UDS/FE !!
+30108000 - ---------------------------
+30396000 - Waiting for all crypto status ready
+30451000 - ECC is ready
+30474000 - DOE is ready
+30497000 - HMAC is ready
+30522000 - MLDSA is ready
+30549000 - MLKEM is ready
+30576000 - AES is ready
+30596000 - All crypto are ready
+* TESTCASE PASSED
+
+Finished : minstret = 20434, mcycle = 62260
+See "exec.log" for execution trace with register updates..
+
+- /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

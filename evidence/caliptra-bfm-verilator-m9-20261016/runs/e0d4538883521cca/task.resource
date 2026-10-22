@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 8525 /home/dsell/toolchains/iverilog-c339/deps/bin/python3.12 /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/run-verilator-top-case.py --source /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source --rtl /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl --model /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/model/obj_dir/Vcaliptra_top_tb --output /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/e0d4538883521cca --case smoke_test_sha256 --case-yaml smoke_test_sha256/smoke_test_sha256.yml --timeout 6725 --c339-outcome PASS --c339-mcycle 61567 --c339-elapsed 8646"
+	User time (seconds): 41.01
+	System time (seconds): 1.45
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:42.48
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 55420
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 4
+	Minor (reclaiming a frame) page faults: 211921
+	Voluntary context switches: 377652
+	Involuntary context switches: 377391
+	Swaps: 0
+	File system inputs: 1528
+	File system outputs: 57312
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

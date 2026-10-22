@@ -1,0 +1,10 @@
+environment_id=adams-bridge-v2-0-3-ntt_mult_reduction_tb
+top=ntt_mult_reduction_tb
+source_repo=adams_bridge_v2.0.3
+filelist=src/ntt_top/config/ntt_mult_reduction_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=0

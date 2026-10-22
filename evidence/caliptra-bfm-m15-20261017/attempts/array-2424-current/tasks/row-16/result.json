@@ -1,0 +1,31 @@
+{
+  "cause": "/include/questa_mvc_svapi.svh: No such file or directory",
+  "compile_exit": 1,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-16/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.294,
+  "environment_id": "uvmf-sha512",
+  "filelist": "src/sha512/uvmf_sha512/config/uvmf_sha512.vf",
+  "filelist_sha256_json": "{\"src/sha512/uvmf_sha512/config/uvmf_sha512.vf\":\"023c3d01d61489271d366a6469d622d23018787d44d34a8bedb6a26b718877b0\",\"src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hdl.f\":\"4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d\",\"src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hvl.f\":\"391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 16,
+  "run_plusargs": [
+    "+UVM_TESTNAME=example_derived_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "generated-uvmf",
+  "slurm_array_task_id": "14",
+  "slurm_job_id": "2439",
+  "source_file": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/tests/src/example_derived_test.yml",
+  "source_pin": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "source_repo": "caliptra",
+  "source_yaml_sha256": "9ad7ebdb9b40f360a1ead71786e5aad9c50d09ac7050830510cfaa3c71758e0a",
+  "status": "BLOCKED",
+  "testname": "example_derived_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

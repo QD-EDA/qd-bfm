@@ -1,0 +1,2 @@
+INTERFACE_BRIDGE_PASS
+/home/dsell/slurm-runs/caliptra-bfm/a2/ivl-interface-probe-20261015-03/input/interface-modport-bridge.sv:37: $finish called at 1 (1s)

@@ -1,0 +1,9 @@
+source_snapshot_sha256=be23820858817270195198caf22391f3f5251897e9d59cf4bdc0ea5ae753ff35
+run_sbatch_sha256=a717fe6a1523a37c3db869279ed6c524d6b64c3c7f52e75887986a1c29e55316
+source_files=45
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-row77-gate-20261019-04
+cpus=1
+mem=4G
+walltime=15m
+runner_timeout=600s
+submitted_job=3014

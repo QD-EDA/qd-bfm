@@ -1,0 +1,125 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+6199000 - ============================================================
+6286000 -  KV SWWE Lock Smoke Test
+6322000 -  Tests that KV control registers are locked while busy_o=1
+6406000 - ============================================================
+6677000 - 
+6678000 - ============================================================
+6764000 -  TEST 1: HMAC KV SWWE Lock During Operation
+6827000 - ============================================================
+6919000 - [HMAC] Engine ready
+6956000 - [HMAC] KV ctrl pre-load: WR=0x4A RD_KEY=0x4 RD_BLOCK=0x6
+7304000 - 
+7305000 - [HMAC] === SWWE lock results ===
+7358000 - [SWWE_CHECK] KV_WR_CTRL:    orig=0x4A  attack=0x215  after=0x4A
+7574000 - [SWWE_PASS] KV_WR_CTRL correctly blocked
+7640000 - [SWWE_CHECK] KV_RD_KEY_CTRL:   orig=0x4  attack=0xF  after=0x4
+7854000 - [SWWE_PASS] KV_RD_KEY_CTRL correctly blocked
+7924000 - [SWWE_CHECK] KV_RD_BLOCK_CTRL: orig=0x6  attack=0x11  after=0x6
+8143000 - [SWWE_PASS] KV_RD_BLOCK_CTRL correctly blocked
+8211000 - 
+8212000 - [HMAC] === Verifying registers writable after idle ===
+8294000 - HMAC zeroize flow.
+8334000 - [SWWE_WRITABLE] KV_WR_CTRL (post-idle): attempting write=0x41E
+8489000 - [SWWE_WRITABLE] KV_WR_CTRL (post-idle): readback=0x41E (expected=0x41E)
+8692000 - [SWWE_WRITABLE_PASS] KV_WR_CTRL (post-idle): write correctly accepted
+8823000 - [SWWE_WRITABLE] KV_RD_KEY_CTRL (post-idle): attempting write=0x12
+8985000 - [SWWE_WRITABLE] KV_RD_KEY_CTRL (post-idle): readback=0x12 (expected=0x12)
+9195000 - [SWWE_WRITABLE_PASS] KV_RD_KEY_CTRL (post-idle): write correctly accepted
+9328000 - HMAC zeroize flow.
+9358000 - 
+9359000 - *** TEST 1 PASSED: HMAC KV SWWE Lock ***
+9418000 - 
+9419000 - ============================================================
+9506000 -  TEST 2: ECC KV SWWE Lock During Operation
+9568000 - ============================================================
+9659000 - [ECC] Engine ready
+9694000 - [ECC] KV ctrl pre-load: WR_PKEY=0x206  RD_SEED=0x2
+81644000 - 
+81645000 - [ECC] === SWWE lock results ===
+81696000 - [SWWE_CHECK] KV_WR_PKEY_CTRL: orig=0x206  attack=0x69  after=0x206
+81917000 - [SWWE_PASS] KV_WR_PKEY_CTRL correctly blocked
+81990000 - [SWWE_CHECK] KV_RD_SEED_CTRL: orig=0x2  attack=0x1F  after=0x2
+82199000 - [SWWE_PASS] KV_RD_SEED_CTRL correctly blocked
+82266000 - 
+82267000 - [ECC] === Verifying registers writable after idle ===
+82362000 - [SWWE_WRITABLE] KV_WR_PKEY_CTRL (post-idle): attempting write=0x810
+82522000 - [SWWE_WRITABLE] KV_WR_PKEY_CTRL (post-idle): readback=0x810 (expected=0x810)
+82733000 - [SWWE_WRITABLE_PASS] KV_WR_PKEY_CTRL (post-idle): write correctly accepted
+82866000 - 
+82867000 - *** TEST 2 PASSED: ECC KV SWWE Lock ***
+82926000 - 
+82927000 - ============================================================
+83015000 -  TEST 3: pcr_hash_extend SWWE = 0 (always locked)
+83086000 - ============================================================
+83182000 - [PCR_EXT] HMAC KV_RD_KEY_CTRL before = 0x12
+83299000 - [PCR_EXT] Attempting to set pcr_hash_extend: write=0x52
+83435000 - [PCR_EXT] HMAC KV_RD_KEY_CTRL after = 0x12
+83546000 - [PCR_EXT_PASS] pcr_hash_extend correctly blocked (SWWE=0)
+83639000 - [PCR_EXT] HMAC KV_RD_BLOCK_CTRL: before=0x6, wrote=0x46, after=0x6
+83857000 - [PCR_EXT_PASS] pcr_hash_extend in BLOCK CTRL correctly blocked
+83956000 - [PCR_EXT] ECC KV_RD_SEED_CTRL: before=0x2, wrote=0x42, after=0x2
+84171000 - [PCR_EXT_PASS] pcr_hash_extend in ECC SEED CTRL correctly blocked
+84273000 - [PCR_EXT] AES KV_RD_KEY_CTRL: before=0x0, wrote=0x40, after=0x0
+84477000 - [PCR_EXT_PASS] pcr_hash_extend in AES KEY CTRL correctly blocked
+84569000 - 
+84570000 - *** TEST 3 PASSED: pcr_hash_extend SWWE=0 ***
+84638000 - 
+84640000 - ============================================================
+84726000 -  ALL KV SWWE LOCK TESTS PASSED
+84771000 - ============================================================
+* TESTCASE PASSED
+
+Finished : minstret = 195923, mcycle = 848287
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

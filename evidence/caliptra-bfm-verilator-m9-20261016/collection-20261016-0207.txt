@@ -1,0 +1,14 @@
+# M9 collection checkpoint: 2026-10-16 02:07 MDT
+
+Both task bundles passed their internal `FILE-SHA256SUMS` checks. Their separately copied Slurm resource records and array logs matched the remote SHA-256 values. Both used model SHA-256 `ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de`.
+
+| Task | Test | Verilator result | Final mcycle | Wall seconds | Prior Icarus |
+|---:|---|---|---:|---:|---|
+| 159 | `smoke_test_datavault_reset` | PASS | 89,091 | 308.940 | UNVERIFIED |
+| 160 | `fw_test_lms_n32_w2_h10` | FAIL | NA | 0.843 | UNVERIFIED |
+
+Task 160 repeats the DCCM `$readmem` address-bounds startup failure. Evidence is retained under [`runs/bd3c5aa0d0118708/`](runs/bd3c5aa0d0118708/) and [`runs/29a997acc9f713cc/`](runs/29a997acc9f713cc/).
+
+The refreshed ledger has 156 terminal supported-firmware rows: 102 PASS, 39 FAIL, 14 `FIRMWARE_BUILD_FAIL`, and 1 TIMEOUT; six supported rows remain pending. The terminal pass rate is 102/156 (65.4%); 102/162 supported rows (63.0%) have passed. The 109 non-firmware rows remain `NOT_RUN_NON_FIRMWARE`.
+
+After local verification, the two remote result trees, resource records, and Slurm logs were removed, freeing 117,214 apparent bytes (114.5 KiB). The shared model and remaining active task outputs were left in place.

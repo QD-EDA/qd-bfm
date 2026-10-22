@@ -1,0 +1,1 @@
+TIMEOUT row=51 test=ecc_normal_test: VVP exceeded per-row timeout

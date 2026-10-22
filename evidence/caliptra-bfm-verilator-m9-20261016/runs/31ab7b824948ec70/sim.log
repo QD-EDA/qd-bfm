@@ -1,0 +1,156 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+8379000 - ----------------------------------
+8432000 -  KV Smoke Test With DOE flow    !!
+8483000 - ----------------------------------
+8789000 - 1st FE flow + warm reset
+8835000 - DOE: Init
+8960000 - DOE: Skipping HEK Deobfuscation due to HW_CONFIG
+9037000 - doe_fe kv id = 5
+9105000 - ECC zeroize flow.
+9138000 - HMAC zeroize flow.
+9171000 - SHA512 zeroize flow.
+9208000 - SHA256 zeroize flow.
+9245000 - MLDSA zeroize flow.
+9277000 - Waiting for mldsa status ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [      94272] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+17804000 - ----------------------------------
+17857000 -  KV Smoke Test With DOE flow    !!
+17908000 - ----------------------------------
+18216000 - 2nd FE flow + warm reset
+18261000 - DOE: Init
+18332000 - DOE: Skipping HEK Deobfuscation due to HW_CONFIG
+18408000 - doe_fe kv id = 5
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     184764] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+26854000 - ----------------------------------
+26906000 -  KV Smoke Test With DOE flow    !!
+26958000 - ----------------------------------
+27266000 - 3rd FE flow + Cold reset
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     273037] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     273047] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+35682000 - ----------------------------------
+35734000 -  KV Smoke Test With DOE flow    !!
+35786000 - ----------------------------------
+36094000 - 4th FE flow after cold reset
+36142000 - doe_fe_dest_id = 0x5
+36220000 - DOE: Init
+36345000 - DOE: Skipping HEK Deobfuscation due to HW_CONFIG
+36420000 - doe_fe kv id = 5
+* TESTCASE PASSED
+
+Finished : minstret = 30338, mcycle = 91564
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

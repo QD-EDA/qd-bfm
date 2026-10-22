@@ -1,0 +1,27 @@
+COMPILER /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+Icarus Verilog version 13.0 (devel) ()
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+implicit exit=3
+/tmp/implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/implicit.sv:5: syntax error
+I give up.
+void exit=0
+/tmp/void.sv:10: warning: Static variable initialization requires explicit lifetime in this context.
+COMPILER /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/iverilog
+Icarus Verilog version 13.0 (devel) (9b5fad2af)
+6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288  /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/iverilog
+implicit exit=3
+/tmp/implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/implicit.sv:5: syntax error
+I give up.
+void exit=0
+/tmp/void.sv:10: warning: Static variable initialization requires explicit lifetime in this context.
+COMPILER /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/iverilog
+Icarus Verilog version 13.0 (devel) (ca559fd97)
+c99ee9c08468fb20f7635fb3380adb0d620c9037c19c02236a435a61c7be0130  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/iverilog
+implicit exit=3
+/tmp/implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/implicit.sv:5: syntax error
+I give up.
+void exit=0
+/tmp/void.sv:10: warning: Static variable initialization requires explicit lifetime in this context.

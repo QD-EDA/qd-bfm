@@ -1,0 +1,20 @@
+captured_at=2026-10-14T00:49:01-06:00
+host=DAN-DESKTOP
+
+Slurm queue:
+936_1 RUNNING 00:36:43 limit=06:10:00 cpus=1 mem=3G
+936_2 RUNNING 00:36:43 limit=06:10:00 cpus=1 mem=3G
+936_3 RUNNING 00:36:43 limit=06:10:00 cpus=1 mem=3G
+936_4 RUNNING 00:36:43 limit=06:10:00 cpus=1 mem=3G
+799_37 RUNNING 05:49:43 limit=06:10:00 cpus=1 mem=3G
+799_38 RUNNING 05:49:43 limit=06:10:00 cpus=1 mem=3G
+
+Latest simulator heartbeats:
+799_37 smoke_test_kv_swwe_lock: count=53, wall_s=20700, mcycle=152525
+799_38 smoke_test_sha256_wntz: count=58, wall_s=20400, mcycle=149887
+936_1 smoke_test_ecc_errortrigger4: count=8, wall_s=2100, mcycle=15751
+936_2 kv_entry_read_err: count=8, wall_s=2100, mcycle=15713
+936_3 smoke_test_kv_parallel_access: count=8, wall_s=2100, mcycle=15739
+936_4 smoke_test_ecc_flow2_kv_ocp_progress: count=8, wall_s=2100, mcycle=15742
+
+All six rows are RUNNING. Their mcycles increased; no 30-minute flat-mcycle interval is present.

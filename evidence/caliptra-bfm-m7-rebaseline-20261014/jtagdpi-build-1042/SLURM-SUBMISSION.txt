@@ -1,0 +1,8 @@
+Submitted: 2026-10-14 13:58 MDT
+Slurm job: 1042, COMPLETED, exit 0
+Resources: 1 CPU, 3 GiB, 15-minute limit; measured build elapsed and RSS are in resource.log
+Icarus source: 3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Protected plugin: /home/dsell/toolchains/iverilog-uvm-3335fe7ec1495956c8adc5788e9a53b0f1756ecf/caliptra-jtagdpi/jtagdpi.vpi
+Plugin SHA-256: 5be0c2979d40b377802044dbda068c4b3590416a7f79374ed1d7ef8be1ce396f (verified against the installed file)
+The run directory was removed after logs and provenance were copied and checksum-verified. The plugin and toolchain remain in the protected toolchain directory.

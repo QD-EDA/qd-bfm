@@ -1,0 +1,10 @@
+HEAD=60502cff1c333a04d0f678b9fee0cf1135270305
+worktree=dirty; staged archive derives from verified job-2741 source archive with current runner and test file substituted
+source_archive_sha256=dc4fa8d823fb8596e63bb84183f73676b2fc2845373ed5cc4e3c4651278b5403
+runner_sha256=fd18be0b787a82758f35fe19183daf20e6ca30814a27c21e5a130ee7dcd11a54
+test_file_sha256=82c6e6cf81b3e54cf3e742024253eef84ef04acaf17b3e48f3c02fbecd8ac1ca
+run_script_sha256=369c35da2f30222a3a3b34fe265e774b150333f6b201c398864216cfd3649955
+source_repo=adams-bridge; source_pin=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus source pin=9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Icarus binary SHA256=6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+resource basis=job 2741 peak 767272 KiB x 1.25 = 959090 KiB; request 1250 MiB, 1 CPU, 20 min Slurm cap; row timeout 600 s

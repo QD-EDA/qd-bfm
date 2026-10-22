@@ -1,0 +1,15 @@
+Job: 2251
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m13-csrng-overlay-20261017-01
+Row: caliptra-v2-1-2-csrng_tb / csrng_tb
+Resources: 1 CPU, 3 GiB, 2-hour Slurm allocation; 6900-second total compile+simulation cap
+Pinned-only cause: package ordering and missing caliptra_reg include directory
+Current Icarus main: 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Overlay filelist SHA-256: ff0dbcf62b06eaf7f307697def2c20073f9d6c3551b08b3e8c2b8d3140583c83
+Runner SHA-256: 3e6c39c648880b1f542fe7e0e0ecd255b018271cce1f5e7f6a28c39bee726e6f
+Command: sbatch --parsable run-one-csrng-overlay.sbatch
+Outcome: PASS; compile_exit=0; sim_exit=0; one testcase pass marker; zero failure markers
+Compile: 0.31 s, peak RSS 76980 KiB
+Simulation: 3.73 s, peak RSS 32900 KiB
+Evidence archive SHA-256: 01a4423a2b18e3ad30560328bd42b332ae7381875be17c4e82c26a6b23087d00
+Completed Slurm run directory removed after evidence verification.

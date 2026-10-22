@@ -1,0 +1,15 @@
+Audit scope: all 30 test YAML files in ../timeout-cohort.tsv
+RTL revision: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Result: quoted plusargs occur only in the two AXI error YAML files below.
+
+smoke_test_dma_aes_gcm_rd_enc_axi_err:
+  '+CLP_DMA_TB_MODE_NOT_EMPTY'
+  '+ERR_RESP_START_ADDR=123440000'
+  '+ERR_RESP_END_ADDR=123440000'
+smoke_test_dma_aes_gcm_wr_enc_axi_err:
+  '+CLP_DMA_TB_MODE_NOT_EMPTY'
+  '+ERR_RESP_START_ADDR=123460000'
+  '+ERR_RESP_END_ADDR=123460000'
+
+The other 28 tests do not use quoted plusargs, so only these two c339
+baselines need a corrected rerun for this parser bug.

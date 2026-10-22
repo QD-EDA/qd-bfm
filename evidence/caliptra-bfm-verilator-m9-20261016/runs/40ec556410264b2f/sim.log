@@ -1,0 +1,634 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5513000 - -------------------------------------------
+5577000 -  DV Smoke Test for checking Lock Controls
+5637000 - -------------------------------------------
+5706000 - 
+5708000 - INFO. Using random seed = 17
+5869000 - 
+5872000 - 
+5874000 - ** Working on new Control Group Prefix STICKYDATAVAULTCTRL to Start Locking Data Registers **
+6102000 - 
+6140000 - INFO. handle_2d_locking(). Number of items in datset = 10
+6315000 - 
+6316000 - --next set--
+6354000 - STICKYDATAVAULTCTRL[0] -LOCKS-> STICKY_DATA_VAULT_ENTRY_0[0..11]
+6555000 - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x29CD88B5, read back 0x29CD88B5
+6963000 - ...........
+7192000 - INFO. (Single Write) For addr 0x1001C000 (STICKYDATAVAULTCTRL[0]), attempting to write 0x1, read back 0x1
+7589000 - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x1C3C8954, read back 0x29CD88B5
+7992000 - ...........
+8187000 - checking all dv_reg indices for unlocked registers
+8264000 - -------------------------------
+8318000 -   STICKYDATAVAULTCTRL: 0x0
+8431000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+8557000 -   STICKY_DATA_VAULT_ENTRY_1: 0x0
+8677000 -   STICKY_DATA_VAULT_ENTRY_2: 0x0
+8796000 -   STICKY_DATA_VAULT_ENTRY_3: 0x0
+8912000 -   STICKY_DATA_VAULT_ENTRY_4: 0x0
+9029000 -   STICKY_DATA_VAULT_ENTRY_5: 0x0
+9145000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+9261000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+9377000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+9494000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+9610000 -   DATAVAULTCTRL: 0x0
+9710000 -   DATA_VAULT_ENTRY_0: 0x0
+9816000 -   DATA_VAULT_ENTRY_1: 0x0
+9923000 -   DATA_VAULT_ENTRY_2: 0x0
+10029000 -   DATA_VAULT_ENTRY_3: 0x0
+10136000 -   DATA_VAULT_ENTRY_4: 0x0
+10242000 -   DATA_VAULT_ENTRY_5: 0x0
+10349000 -   DATA_VAULT_ENTRY_6: 0x0
+10455000 -   DATA_VAULT_ENTRY_7: 0x0
+10562000 -   DATA_VAULT_ENTRY_8: 0x0
+10668000 -   DATA_VAULT_ENTRY_9: 0x0
+10775000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+10889000 -   LOCKABLE_SCRATCHREG: 0x0
+10997000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+11118000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+11243000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+11356000 - -------------------------------
+11581000 - INFO. (Single Write) For addr 0x1001C070 (STICKY_DATA_VAULT_ENTRY_1[6]), attempting to write 0x145E6D2D, read back 0x145E6D2D
+12066000 - INFO. (Single Write) For addr 0x1001C09C (STICKY_DATA_VAULT_ENTRY_2[5]), attempting to write 0x9568A97, read back 0x9568A97
+12544000 - INFO. (Single Write) For addr 0x1001C0D0 (STICKY_DATA_VAULT_ENTRY_3[6]), attempting to write 0xBDBA2A0, read back 0xBDBA2A0
+13014000 - INFO. (Single Write) For addr 0x1001C0FC (STICKY_DATA_VAULT_ENTRY_4[5]), attempting to write 0x90A2CA4, read back 0x90A2CA4
+13484000 - INFO. (Single Write) For addr 0x1001C12C (STICKY_DATA_VAULT_ENTRY_5[5]), attempting to write 0x2305FD27, read back 0x2305FD27
+13960000 - INFO. (Single Write) For addr 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6[0]), attempting to write 0x1C85F589, read back 0x1C85F589
+14433000 - INFO. (Single Write) For addr 0x1001C190 (STICKY_DATA_VAULT_ENTRY_7[6]), attempting to write 0x1BD06775, read back 0x1BD06775
+14900000 - INFO. (Single Write) For addr 0x1001C1C8 (STICKY_DATA_VAULT_ENTRY_8[8]), attempting to write 0x110FE840, read back 0x110FE840
+15373000 - INFO. (Single Write) For addr 0x1001C1F8 (STICKY_DATA_VAULT_ENTRY_9[8]), attempting to write 0x40E22CF0, read back 0x40E22CF0
+15868000 - INFO. (Single Write) For addr 0x1001C258 (DATA_VAULT_ENTRY_0[10]), attempting to write 0x3E86E8A6, read back 0x3E86E8A6
+16328000 - INFO. (Single Write) For addr 0x1001C26C (DATA_VAULT_ENTRY_1[3]), attempting to write 0x7C25FFF3, read back 0x7C25FFF3
+16780000 - INFO. (Single Write) For addr 0x1001C2B8 (DATA_VAULT_ENTRY_2[10]), attempting to write 0x23C24F71, read back 0x23C24F71
+17240000 - INFO. (Single Write) For addr 0x1001C2CC (DATA_VAULT_ENTRY_3[3]), attempting to write 0x7EED89E1, read back 0x7EED89E1
+17692000 - INFO. (Single Write) For addr 0x1001C304 (DATA_VAULT_ENTRY_4[5]), attempting to write 0x3F586AFF, read back 0x3F586AFF
+18152000 - INFO. (Single Write) For addr 0x1001C348 (DATA_VAULT_ENTRY_5[10]), attempting to write 0x61DDD9C3, read back 0x61DDD9C3
+18614000 - INFO. (Single Write) For addr 0x1001C364 (DATA_VAULT_ENTRY_6[5]), attempting to write 0x5C7DD9B9, read back 0x5C7DD9B9
+19072000 - INFO. (Single Write) For addr 0x1001C398 (DATA_VAULT_ENTRY_7[6]), attempting to write 0x2404C4, read back 0x2404C4
+19524000 - INFO. (Single Write) For addr 0x1001C3BC (DATA_VAULT_ENTRY_8[3]), attempting to write 0x282141F1, read back 0x282141F1
+19976000 - INFO. (Single Write) For addr 0x1001C3F0 (DATA_VAULT_ENTRY_9[4]), attempting to write 0x74636F3B, read back 0x74636F3B
+20480000 - INFO. (Single Write) For addr 0x1001C45C (LOCKABLE_SCRATCHREG[9]), attempting to write 0x15B65603, read back 0x15B65603
+20951000 - INFO. (Single Write) For addr 0x1001C478 (NONSTICKY_GENERIC_SCRATCHREG[6]), attempting to write 0x45B1B636, read back 0x45B1B636
+21483000 - INFO. (Single Write) For addr 0x1001C4BC (STICKY_LOCKABLE_SCRATCHREG[7]), attempting to write 0x6D8EB947, read back 0x6D8EB947
+21897000 - INFO. (Single Write) For addr 0x1001C000 (STICKYDATAVAULTCTRL[0]), attempting to write 0x0, read back 0x1
+22267000 - 
+22268000 - --next set--
+22305000 - STICKYDATAVAULTCTRL[1] -LOCKS-> STICKY_DATA_VAULT_ENTRY_1[0..11]
+22509000 - INFO. (Group Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x2552A4C8, read back 0x2552A4C8
+22912000 - ...........
+23142000 - INFO. (Single Write) For addr 0x1001C004 (STICKYDATAVAULTCTRL[1]), attempting to write 0x1, read back 0x1
+23532000 - INFO. (Group Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x6BFE87CC, read back 0x2552A4C8
+23933000 - ...........
+24127000 - checking all dv_reg indices for unlocked registers
+24205000 - -------------------------------
+24258000 -   STICKYDATAVAULTCTRL: 0x0
+24370000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+24497000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+24622000 -   STICKY_DATA_VAULT_ENTRY_2: 0x0
+24737000 -   STICKY_DATA_VAULT_ENTRY_3: 0x0
+24852000 -   STICKY_DATA_VAULT_ENTRY_4: 0x0
+24967000 -   STICKY_DATA_VAULT_ENTRY_5: 0x0
+25082000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+25197000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+25312000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+25427000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+25542000 -   DATAVAULTCTRL: 0x0
+25640000 -   DATA_VAULT_ENTRY_0: 0x0
+25746000 -   DATA_VAULT_ENTRY_1: 0x0
+25851000 -   DATA_VAULT_ENTRY_2: 0x0
+25956000 -   DATA_VAULT_ENTRY_3: 0x0
+26061000 -   DATA_VAULT_ENTRY_4: 0x0
+26166000 -   DATA_VAULT_ENTRY_5: 0x0
+26272000 -   DATA_VAULT_ENTRY_6: 0x0
+26377000 -   DATA_VAULT_ENTRY_7: 0x0
+26482000 -   DATA_VAULT_ENTRY_8: 0x0
+26587000 -   DATA_VAULT_ENTRY_9: 0x0
+26692000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+26806000 -   LOCKABLE_SCRATCHREG: 0x0
+26913000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+27032000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+27155000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+27268000 - -------------------------------
+27546000 - INFO. (Single Write) For addr 0x1001C0A8 (STICKY_DATA_VAULT_ENTRY_2[8]), attempting to write 0x3041250F, read back 0x3041250F
+28034000 - INFO. (Single Write) For addr 0x1001C0D0 (STICKY_DATA_VAULT_ENTRY_3[6]), attempting to write 0xC9F7A1F, read back 0xC9F7A1F
+28510000 - INFO. (Single Write) For addr 0x1001C100 (STICKY_DATA_VAULT_ENTRY_4[6]), attempting to write 0x431CF3FD, read back 0x431CF3FD
+28981000 - INFO. (Single Write) For addr 0x1001C144 (STICKY_DATA_VAULT_ENTRY_5[11]), attempting to write 0x330EC70E, read back 0x330EC70E
+29464000 - INFO. (Single Write) For addr 0x1001C150 (STICKY_DATA_VAULT_ENTRY_6[2]), attempting to write 0x45351A5E, read back 0x45351A5E
+29940000 - INFO. (Single Write) For addr 0x1001C190 (STICKY_DATA_VAULT_ENTRY_7[6]), attempting to write 0x351F2E1E, read back 0x351F2E1E
+30413000 - INFO. (Single Write) For addr 0x1001C1D0 (STICKY_DATA_VAULT_ENTRY_8[10]), attempting to write 0xA40BE1B, read back 0xA40BE1B
+30890000 - INFO. (Single Write) For addr 0x1001C1E8 (STICKY_DATA_VAULT_ENTRY_9[4]), attempting to write 0x1E80A613, read back 0x1E80A613
+31395000 - INFO. (Single Write) For addr 0x1001C248 (DATA_VAULT_ENTRY_0[6]), attempting to write 0x55BDB260, read back 0x55BDB260
+31852000 - INFO. (Single Write) For addr 0x1001C28C (DATA_VAULT_ENTRY_1[11]), attempting to write 0x4D8B2FA1, read back 0x4D8B2FA1
+32312000 - INFO. (Single Write) For addr 0x1001C298 (DATA_VAULT_ENTRY_2[2]), attempting to write 0x2567C930, read back 0x2567C930
+32773000 - INFO. (Single Write) For addr 0x1001C2C8 (DATA_VAULT_ENTRY_3[2]), attempting to write 0x28403CEA, read back 0x28403CEA
+33221000 - INFO. (Single Write) For addr 0x1001C2F4 (DATA_VAULT_ENTRY_4[1]), attempting to write 0x282789A1, read back 0x282789A1
+33669000 - INFO. (Single Write) For addr 0x1001C33C (DATA_VAULT_ENTRY_5[7]), attempting to write 0xD54BE6C, read back 0xD54BE6C
+34122000 - INFO. (Single Write) For addr 0x1001C358 (DATA_VAULT_ENTRY_6[2]), attempting to write 0x3FDA80DA, read back 0x3FDA80DA
+34582000 - INFO. (Single Write) For addr 0x1001C388 (DATA_VAULT_ENTRY_7[2]), attempting to write 0x4F155E1B, read back 0x4F155E1B
+35042000 - INFO. (Single Write) For addr 0x1001C3C8 (DATA_VAULT_ENTRY_8[6]), attempting to write 0x46FADE44, read back 0x46FADE44
+35497000 - INFO. (Single Write) For addr 0x1001C3FC (DATA_VAULT_ENTRY_9[7]), attempting to write 0x768D90FC, read back 0x768D90FC
+36008000 - INFO. (Single Write) For addr 0x1001C450 (LOCKABLE_SCRATCHREG[6]), attempting to write 0x6DB7CF4B, read back 0x6DB7CF4B
+36481000 - INFO. (Single Write) For addr 0x1001C47C (NONSTICKY_GENERIC_SCRATCHREG[7]), attempting to write 0x272F4E1E, read back 0x272F4E1E
+37026000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x76A62194, read back 0x76A62194
+37436000 - INFO. (Single Write) For addr 0x1001C004 (STICKYDATAVAULTCTRL[1]), attempting to write 0x0, read back 0x1
+37802000 - 
+37803000 - --next set--
+37840000 - STICKYDATAVAULTCTRL[2] -LOCKS-> STICKY_DATA_VAULT_ENTRY_2[0..11]
+38043000 - INFO. (Group Write) For addr 0x1001C088 (STICKY_DATA_VAULT_ENTRY_2[0]), attempting to write 0x78D7D06A, read back 0x78D7D06A
+38444000 - ...........
+38672000 - INFO. (Single Write) For addr 0x1001C008 (STICKYDATAVAULTCTRL[2]), attempting to write 0x1, read back 0x1
+39065000 - INFO. (Group Write) For addr 0x1001C088 (STICKY_DATA_VAULT_ENTRY_2[0]), attempting to write 0x10233E10, read back 0x78D7D06A
+39464000 - ...........
+39658000 - checking all dv_reg indices for unlocked registers
+39735000 - -------------------------------
+39789000 -   STICKYDATAVAULTCTRL: 0x0
+39901000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+40027000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+40151000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+40272000 -   STICKY_DATA_VAULT_ENTRY_3: 0x0
+40388000 -   STICKY_DATA_VAULT_ENTRY_4: 0x0
+40503000 -   STICKY_DATA_VAULT_ENTRY_5: 0x0
+40618000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+40733000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+40848000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+40963000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+41078000 -   DATAVAULTCTRL: 0x0
+41176000 -   DATA_VAULT_ENTRY_0: 0x0
+41282000 -   DATA_VAULT_ENTRY_1: 0x0
+41387000 -   DATA_VAULT_ENTRY_2: 0x0
+41492000 -   DATA_VAULT_ENTRY_3: 0x0
+41597000 -   DATA_VAULT_ENTRY_4: 0x0
+41702000 -   DATA_VAULT_ENTRY_5: 0x0
+41808000 -   DATA_VAULT_ENTRY_6: 0x0
+41913000 -   DATA_VAULT_ENTRY_7: 0x0
+42018000 -   DATA_VAULT_ENTRY_8: 0x0
+42123000 -   DATA_VAULT_ENTRY_9: 0x0
+42228000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+42342000 -   LOCKABLE_SCRATCHREG: 0x0
+42449000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+42568000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+42691000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+42804000 - -------------------------------
+43134000 - INFO. (Single Write) For addr 0x1001C0C0 (STICKY_DATA_VAULT_ENTRY_3[2]), attempting to write 0x5C1237AC, read back 0x5C1237AC
+43621000 - INFO. (Single Write) For addr 0x1001C114 (STICKY_DATA_VAULT_ENTRY_4[11]), attempting to write 0x44E29982, read back 0x44E29982
+44098000 - INFO. (Single Write) For addr 0x1001C12C (STICKY_DATA_VAULT_ENTRY_5[5]), attempting to write 0xB9EEF55, read back 0xB9EEF55
+44569000 - INFO. (Single Write) For addr 0x1001C170 (STICKY_DATA_VAULT_ENTRY_6[10]), attempting to write 0x5D68ABD5, read back 0x5D68ABD5
+45047000 - INFO. (Single Write) For addr 0x1001C190 (STICKY_DATA_VAULT_ENTRY_7[6]), attempting to write 0xEFD90ED, read back 0xEFD90ED
+45526000 - INFO. (Single Write) For addr 0x1001C1B4 (STICKY_DATA_VAULT_ENTRY_8[3]), attempting to write 0x2E9D9601, read back 0x2E9D9601
+46004000 - INFO. (Single Write) For addr 0x1001C1F4 (STICKY_DATA_VAULT_ENTRY_9[7]), attempting to write 0x36BA2138, read back 0x36BA2138
+46502000 - INFO. (Single Write) For addr 0x1001C238 (DATA_VAULT_ENTRY_0[2]), attempting to write 0x7E5738CF, read back 0x7E5738CF
+46953000 - INFO. (Single Write) For addr 0x1001C274 (DATA_VAULT_ENTRY_1[5]), attempting to write 0x1E408500, read back 0x1E408500
+47400000 - INFO. (Single Write) For addr 0x1001C290 (DATA_VAULT_ENTRY_2[0]), attempting to write 0x3BFF9C08, read back 0x3BFF9C08
+47849000 - INFO. (Single Write) For addr 0x1001C2CC (DATA_VAULT_ENTRY_3[3]), attempting to write 0xD358120, read back 0xD358120
+48299000 - INFO. (Single Write) For addr 0x1001C308 (DATA_VAULT_ENTRY_4[6]), attempting to write 0x6BB45812, read back 0x6BB45812
+48747000 - INFO. (Single Write) For addr 0x1001C344 (DATA_VAULT_ENTRY_5[9]), attempting to write 0x7DB872AF, read back 0x7DB872AF
+49198000 - INFO. (Single Write) For addr 0x1001C37C (DATA_VAULT_ENTRY_6[11]), attempting to write 0xB912800, read back 0xB912800
+49652000 - INFO. (Single Write) For addr 0x1001C390 (DATA_VAULT_ENTRY_7[4]), attempting to write 0x741438C3, read back 0x741438C3
+50107000 - INFO. (Single Write) For addr 0x1001C3B4 (DATA_VAULT_ENTRY_8[1]), attempting to write 0x73885A3B, read back 0x73885A3B
+50560000 - INFO. (Single Write) For addr 0x1001C3F8 (DATA_VAULT_ENTRY_9[6]), attempting to write 0xDDB5DB4, read back 0xDDB5DB4
+51059000 - INFO. (Single Write) For addr 0x1001C448 (LOCKABLE_SCRATCHREG[4]), attempting to write 0x69559C75, read back 0x69559C75
+51525000 - INFO. (Single Write) For addr 0x1001C470 (NONSTICKY_GENERIC_SCRATCHREG[4]), attempting to write 0x372CF4FC, read back 0x372CF4FC
+52062000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x1EB6611F, read back 0x1EB6611F
+52476000 - INFO. (Single Write) For addr 0x1001C008 (STICKYDATAVAULTCTRL[2]), attempting to write 0x0, read back 0x1
+52843000 - 
+52844000 - --next set--
+52881000 - STICKYDATAVAULTCTRL[3] -LOCKS-> STICKY_DATA_VAULT_ENTRY_3[0..11]
+53084000 - INFO. (Group Write) For addr 0x1001C0B8 (STICKY_DATA_VAULT_ENTRY_3[0]), attempting to write 0x66C11F1E, read back 0x66C11F1E
+53488000 - ...........
+53716000 - INFO. (Single Write) For addr 0x1001C00C (STICKYDATAVAULTCTRL[3]), attempting to write 0x1, read back 0x1
+54110000 - INFO. (Group Write) For addr 0x1001C0B8 (STICKY_DATA_VAULT_ENTRY_3[0]), attempting to write 0x369113DF, read back 0x66C11F1E
+54516000 - ...........
+54711000 - checking all dv_reg indices for unlocked registers
+54788000 - -------------------------------
+54842000 -   STICKYDATAVAULTCTRL: 0x0
+54954000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+55081000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+55206000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+55326000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+55447000 -   STICKY_DATA_VAULT_ENTRY_4: 0x0
+55562000 -   STICKY_DATA_VAULT_ENTRY_5: 0x0
+55677000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+55792000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+55907000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+56022000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+56137000 -   DATAVAULTCTRL: 0x0
+56235000 -   DATA_VAULT_ENTRY_0: 0x0
+56340000 -   DATA_VAULT_ENTRY_1: 0x0
+56446000 -   DATA_VAULT_ENTRY_2: 0x0
+56551000 -   DATA_VAULT_ENTRY_3: 0x0
+56656000 -   DATA_VAULT_ENTRY_4: 0x0
+56761000 -   DATA_VAULT_ENTRY_5: 0x0
+56866000 -   DATA_VAULT_ENTRY_6: 0x0
+56972000 -   DATA_VAULT_ENTRY_7: 0x0
+57077000 -   DATA_VAULT_ENTRY_8: 0x0
+57182000 -   DATA_VAULT_ENTRY_9: 0x0
+57287000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+57401000 -   LOCKABLE_SCRATCHREG: 0x0
+57507000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+57627000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+57750000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+57863000 - -------------------------------
+58244000 - INFO. (Single Write) For addr 0x1001C0F0 (STICKY_DATA_VAULT_ENTRY_4[2]), attempting to write 0x4CC06D76, read back 0x4CC06D76
+58731000 - INFO. (Single Write) For addr 0x1001C11C (STICKY_DATA_VAULT_ENTRY_5[1]), attempting to write 0x6C61CD36, read back 0x6C61CD36
+59209000 - INFO. (Single Write) For addr 0x1001C150 (STICKY_DATA_VAULT_ENTRY_6[2]), attempting to write 0x2C10B587, read back 0x2C10B587
+59682000 - INFO. (Single Write) For addr 0x1001C184 (STICKY_DATA_VAULT_ENTRY_7[3]), attempting to write 0x48204C6, read back 0x48204C6
+60150000 - INFO. (Single Write) For addr 0x1001C1C0 (STICKY_DATA_VAULT_ENTRY_8[6]), attempting to write 0x150CAD8B, read back 0x150CAD8B
+60621000 - INFO. (Single Write) For addr 0x1001C1DC (STICKY_DATA_VAULT_ENTRY_9[1]), attempting to write 0x5C816EE1, read back 0x5C816EE1
+61125000 - INFO. (Single Write) For addr 0x1001C234 (DATA_VAULT_ENTRY_0[1]), attempting to write 0x257B6D70, read back 0x257B6D70
+61578000 - INFO. (Single Write) For addr 0x1001C270 (DATA_VAULT_ENTRY_1[4]), attempting to write 0x744E27A5, read back 0x744E27A5
+62026000 - INFO. (Single Write) For addr 0x1001C29C (DATA_VAULT_ENTRY_2[3]), attempting to write 0x30D18CF3, read back 0x30D18CF3
+62477000 - INFO. (Single Write) For addr 0x1001C2DC (DATA_VAULT_ENTRY_3[7]), attempting to write 0x4C3AF172, read back 0x4C3AF172
+62935000 - INFO. (Single Write) For addr 0x1001C30C (DATA_VAULT_ENTRY_4[7]), attempting to write 0x6FD57A2C, read back 0x6FD57A2C
+63390000 - INFO. (Single Write) For addr 0x1001C320 (DATA_VAULT_ENTRY_5[0]), attempting to write 0x6553A9AD, read back 0x6553A9AD
+63850000 - INFO. (Single Write) For addr 0x1001C364 (DATA_VAULT_ENTRY_6[5]), attempting to write 0x6F55A19E, read back 0x6F55A19E
+64304000 - INFO. (Single Write) For addr 0x1001C380 (DATA_VAULT_ENTRY_7[0]), attempting to write 0x65755875, read back 0x65755875
+64756000 - INFO. (Single Write) For addr 0x1001C3D4 (DATA_VAULT_ENTRY_8[9]), attempting to write 0x123EBE0E, read back 0x123EBE0E
+65206000 - INFO. (Single Write) For addr 0x1001C400 (DATA_VAULT_ENTRY_9[8]), attempting to write 0x469E6304, read back 0x469E6304
+65715000 - INFO. (Single Write) For addr 0x1001C450 (LOCKABLE_SCRATCHREG[6]), attempting to write 0x320B6F93, read back 0x320B6F93
+66179000 - INFO. (Single Write) For addr 0x1001C470 (NONSTICKY_GENERIC_SCRATCHREG[4]), attempting to write 0x5367F1F2, read back 0x5367F1F2
+66712000 - INFO. (Single Write) For addr 0x1001C4B8 (STICKY_LOCKABLE_SCRATCHREG[6]), attempting to write 0x3C76A15E, read back 0x3C76A15E
+67120000 - INFO. (Single Write) For addr 0x1001C00C (STICKYDATAVAULTCTRL[3]), attempting to write 0x0, read back 0x1
+67489000 - 
+67490000 - --next set--
+67527000 - STICKYDATAVAULTCTRL[4] -LOCKS-> STICKY_DATA_VAULT_ENTRY_4[0..11]
+67729000 - INFO. (Group Write) For addr 0x1001C0E8 (STICKY_DATA_VAULT_ENTRY_4[0]), attempting to write 0x232C095C, read back 0x232C095C
+68137000 - ...........
+68365000 - INFO. (Single Write) For addr 0x1001C010 (STICKYDATAVAULTCTRL[4]), attempting to write 0x1, read back 0x1
+68756000 - INFO. (Group Write) For addr 0x1001C0E8 (STICKY_DATA_VAULT_ENTRY_4[0]), attempting to write 0x7DDC8769, read back 0x232C095C
+69157000 - ...........
+69352000 - checking all dv_reg indices for unlocked registers
+69429000 - -------------------------------
+69483000 -   STICKYDATAVAULTCTRL: 0x0
+69594000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+69722000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+69846000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+69967000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+70088000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+70208000 -   STICKY_DATA_VAULT_ENTRY_5: 0x0
+70324000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+70439000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+70554000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+70669000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+70784000 -   DATAVAULTCTRL: 0x0
+70883000 -   DATA_VAULT_ENTRY_0: 0x0
+70988000 -   DATA_VAULT_ENTRY_1: 0x0
+71093000 -   DATA_VAULT_ENTRY_2: 0x0
+71198000 -   DATA_VAULT_ENTRY_3: 0x0
+71303000 -   DATA_VAULT_ENTRY_4: 0x0
+71409000 -   DATA_VAULT_ENTRY_5: 0x0
+71514000 -   DATA_VAULT_ENTRY_6: 0x0
+71619000 -   DATA_VAULT_ENTRY_7: 0x0
+71724000 -   DATA_VAULT_ENTRY_8: 0x0
+71829000 -   DATA_VAULT_ENTRY_9: 0x0
+71935000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+72048000 -   LOCKABLE_SCRATCHREG: 0x0
+72155000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+72274000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+72397000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+72510000 - -------------------------------
+72943000 - INFO. (Single Write) For addr 0x1001C120 (STICKY_DATA_VAULT_ENTRY_5[2]), attempting to write 0x7C5450F2, read back 0x7C5450F2
+73426000 - INFO. (Single Write) For addr 0x1001C170 (STICKY_DATA_VAULT_ENTRY_6[10]), attempting to write 0x4B3FA955, read back 0x4B3FA955
+73903000 - INFO. (Single Write) For addr 0x1001C180 (STICKY_DATA_VAULT_ENTRY_7[2]), attempting to write 0x79A3BAC2, read back 0x79A3BAC2
+74378000 - INFO. (Single Write) For addr 0x1001C1B8 (STICKY_DATA_VAULT_ENTRY_8[4]), attempting to write 0x1AC7BA3, read back 0x1AC7BA3
+74851000 - INFO. (Single Write) For addr 0x1001C1EC (STICKY_DATA_VAULT_ENTRY_9[5]), attempting to write 0x3AA6DB54, read back 0x3AA6DB54
+75349000 - INFO. (Single Write) For addr 0x1001C248 (DATA_VAULT_ENTRY_0[6]), attempting to write 0x10ACB98, read back 0x10ACB98
+75798000 - INFO. (Single Write) For addr 0x1001C26C (DATA_VAULT_ENTRY_1[3]), attempting to write 0x56BB49FB, read back 0x56BB49FB
+76257000 - INFO. (Single Write) For addr 0x1001C2B8 (DATA_VAULT_ENTRY_2[10]), attempting to write 0x2529FF81, read back 0x2529FF81
+76718000 - INFO. (Single Write) For addr 0x1001C2C0 (DATA_VAULT_ENTRY_3[0]), attempting to write 0x330D8D4, read back 0x330D8D4
+77164000 - INFO. (Single Write) For addr 0x1001C314 (DATA_VAULT_ENTRY_4[9]), attempting to write 0x1942AFB9, read back 0x1942AFB9
+77616000 - INFO. (Single Write) For addr 0x1001C324 (DATA_VAULT_ENTRY_5[1]), attempting to write 0x2CCACD4F, read back 0x2CCACD4F
+78072000 - INFO. (Single Write) For addr 0x1001C350 (DATA_VAULT_ENTRY_6[0]), attempting to write 0x28DD1DA4, read back 0x28DD1DA4
+78526000 - INFO. (Single Write) For addr 0x1001C388 (DATA_VAULT_ENTRY_7[2]), attempting to write 0xD2FA3EF, read back 0xD2FA3EF
+78974000 - INFO. (Single Write) For addr 0x1001C3DC (DATA_VAULT_ENTRY_8[11]), attempting to write 0x46545C4C, read back 0x46545C4C
+79435000 - INFO. (Single Write) For addr 0x1001C3EC (DATA_VAULT_ENTRY_9[3]), attempting to write 0x7B428626, read back 0x7B428626
+79940000 - INFO. (Single Write) For addr 0x1001C438 (LOCKABLE_SCRATCHREG[0]), attempting to write 0x1C2B49BC, read back 0x1C2B49BC
+80408000 - INFO. (Single Write) For addr 0x1001C464 (NONSTICKY_GENERIC_SCRATCHREG[1]), attempting to write 0x1B8D97C2, read back 0x1B8D97C2
+80944000 - INFO. (Single Write) For addr 0x1001C4B0 (STICKY_LOCKABLE_SCRATCHREG[4]), attempting to write 0x4F5F360E, read back 0x4F5F360E
+81356000 - INFO. (Single Write) For addr 0x1001C010 (STICKYDATAVAULTCTRL[4]), attempting to write 0x0, read back 0x1
+81725000 - 
+81726000 - --next set--
+81763000 - STICKYDATAVAULTCTRL[5] -LOCKS-> STICKY_DATA_VAULT_ENTRY_5[0..11]
+81966000 - INFO. (Group Write) For addr 0x1001C118 (STICKY_DATA_VAULT_ENTRY_5[0]), attempting to write 0x32FEF54F, read back 0x32FEF54F
+82379000 - ...........
+82607000 - INFO. (Single Write) For addr 0x1001C014 (STICKYDATAVAULTCTRL[5]), attempting to write 0x1, read back 0x1
+83004000 - INFO. (Group Write) For addr 0x1001C118 (STICKY_DATA_VAULT_ENTRY_5[0]), attempting to write 0x6B8FC2A0, read back 0x32FEF54F
+83413000 - ...........
+83608000 - checking all dv_reg indices for unlocked registers
+83685000 - -------------------------------
+83739000 -   STICKYDATAVAULTCTRL: 0x0
+83851000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+83978000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+84102000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+84223000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+84344000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+84465000 -   STICKY_DATA_VAULT_ENTRY_5: 0xFFF
+84585000 -   STICKY_DATA_VAULT_ENTRY_6: 0x0
+84701000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+84816000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+84931000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+85046000 -   DATAVAULTCTRL: 0x0
+85145000 -   DATA_VAULT_ENTRY_0: 0x0
+85250000 -   DATA_VAULT_ENTRY_1: 0x0
+85355000 -   DATA_VAULT_ENTRY_2: 0x0
+85460000 -   DATA_VAULT_ENTRY_3: 0x0
+85565000 -   DATA_VAULT_ENTRY_4: 0x0
+85671000 -   DATA_VAULT_ENTRY_5: 0x0
+85776000 -   DATA_VAULT_ENTRY_6: 0x0
+85881000 -   DATA_VAULT_ENTRY_7: 0x0
+85986000 -   DATA_VAULT_ENTRY_8: 0x0
+86091000 -   DATA_VAULT_ENTRY_9: 0x0
+86197000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+86310000 -   LOCKABLE_SCRATCHREG: 0x0
+86417000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+86536000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+86659000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+86772000 - -------------------------------
+87256000 - INFO. (Single Write) For addr 0x1001C158 (STICKY_DATA_VAULT_ENTRY_6[4]), attempting to write 0x42E4C9AB, read back 0x42E4C9AB
+87745000 - INFO. (Single Write) For addr 0x1001C18C (STICKY_DATA_VAULT_ENTRY_7[5]), attempting to write 0x129816F9, read back 0x129816F9
+88223000 - INFO. (Single Write) For addr 0x1001C1B4 (STICKY_DATA_VAULT_ENTRY_8[3]), attempting to write 0x43B7FEC4, read back 0x43B7FEC4
+88692000 - INFO. (Single Write) For addr 0x1001C1E8 (STICKY_DATA_VAULT_ENTRY_9[4]), attempting to write 0x26711B89, read back 0x26711B89
+89187000 - INFO. (Single Write) For addr 0x1001C234 (DATA_VAULT_ENTRY_0[1]), attempting to write 0x64ABC4B8, read back 0x64ABC4B8
+89638000 - INFO. (Single Write) For addr 0x1001C278 (DATA_VAULT_ENTRY_1[6]), attempting to write 0x18552740, read back 0x18552740
+90089000 - INFO. (Single Write) For addr 0x1001C2A0 (DATA_VAULT_ENTRY_2[4]), attempting to write 0x5D80C993, read back 0x5D80C993
+90539000 - INFO. (Single Write) For addr 0x1001C2C8 (DATA_VAULT_ENTRY_3[2]), attempting to write 0x1544523A, read back 0x1544523A
+90988000 - INFO. (Single Write) For addr 0x1001C2F0 (DATA_VAULT_ENTRY_4[0]), attempting to write 0x5189724F, read back 0x5189724F
+91437000 - INFO. (Single Write) For addr 0x1001C320 (DATA_VAULT_ENTRY_5[0]), attempting to write 0x56B7EE62, read back 0x56B7EE62
+91890000 - INFO. (Single Write) For addr 0x1001C364 (DATA_VAULT_ENTRY_6[5]), attempting to write 0x1D041A99, read back 0x1D041A99
+92342000 - INFO. (Single Write) For addr 0x1001C390 (DATA_VAULT_ENTRY_7[4]), attempting to write 0x3D9F4D2C, read back 0x3D9F4D2C
+92789000 - INFO. (Single Write) For addr 0x1001C3C0 (DATA_VAULT_ENTRY_8[4]), attempting to write 0x7C3C631A, read back 0x7C3C631A
+93239000 - INFO. (Single Write) For addr 0x1001C3E4 (DATA_VAULT_ENTRY_9[1]), attempting to write 0x73AE2CE0, read back 0x73AE2CE0
+93743000 - INFO. (Single Write) For addr 0x1001C440 (LOCKABLE_SCRATCHREG[2]), attempting to write 0x1BEA73FA, read back 0x1BEA73FA
+94211000 - INFO. (Single Write) For addr 0x1001C468 (NONSTICKY_GENERIC_SCRATCHREG[2]), attempting to write 0x1B0D3E7A, read back 0x1B0D3E7A
+94750000 - INFO. (Single Write) For addr 0x1001C4B4 (STICKY_LOCKABLE_SCRATCHREG[5]), attempting to write 0x75366D72, read back 0x75366D72
+95158000 - INFO. (Single Write) For addr 0x1001C014 (STICKYDATAVAULTCTRL[5]), attempting to write 0x0, read back 0x1
+95524000 - 
+95525000 - --next set--
+95562000 - STICKYDATAVAULTCTRL[6] -LOCKS-> STICKY_DATA_VAULT_ENTRY_6[0..11]
+95764000 - INFO. (Group Write) For addr 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6[0]), attempting to write 0x12A72261, read back 0x12A72261
+96165000 - ...........
+96393000 - INFO. (Single Write) For addr 0x1001C018 (STICKYDATAVAULTCTRL[6]), attempting to write 0x1, read back 0x1
+96782000 - INFO. (Group Write) For addr 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6[0]), attempting to write 0x68C0C8F1, read back 0x12A72261
+97183000 - ...........
+97377000 - checking all dv_reg indices for unlocked registers
+97454000 - -------------------------------
+97508000 -   STICKYDATAVAULTCTRL: 0x0
+97618000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+97744000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+97869000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+97990000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+98110000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+98231000 -   STICKY_DATA_VAULT_ENTRY_5: 0xFFF
+98352000 -   STICKY_DATA_VAULT_ENTRY_6: 0xFFF
+98473000 -   STICKY_DATA_VAULT_ENTRY_7: 0x0
+98589000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+98704000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+98819000 -   DATAVAULTCTRL: 0x0
+98917000 -   DATA_VAULT_ENTRY_0: 0x0
+99022000 -   DATA_VAULT_ENTRY_1: 0x0
+99127000 -   DATA_VAULT_ENTRY_2: 0x0
+99232000 -   DATA_VAULT_ENTRY_3: 0x0
+99338000 -   DATA_VAULT_ENTRY_4: 0x0
+99443000 -   DATA_VAULT_ENTRY_5: 0x0
+99548000 -   DATA_VAULT_ENTRY_6: 0x0
+99653000 -   DATA_VAULT_ENTRY_7: 0x0
+99758000 -   DATA_VAULT_ENTRY_8: 0x0
+99864000 -   DATA_VAULT_ENTRY_9: 0x0
+99969000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+100082000 -   LOCKABLE_SCRATCHREG: 0x0
+100189000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+100308000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+100432000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+100544000 - -------------------------------
+101080000 - INFO. (Single Write) For addr 0x1001C17C (STICKY_DATA_VAULT_ENTRY_7[1]), attempting to write 0x2FD83AF3, read back 0x2FD83AF3
+101568000 - INFO. (Single Write) For addr 0x1001C1B8 (STICKY_DATA_VAULT_ENTRY_8[4]), attempting to write 0x745C0E15, read back 0x745C0E15
+102046000 - INFO. (Single Write) For addr 0x1001C1E4 (STICKY_DATA_VAULT_ENTRY_9[3]), attempting to write 0x200916D6, read back 0x200916D6
+102539000 - INFO. (Single Write) For addr 0x1001C238 (DATA_VAULT_ENTRY_0[2]), attempting to write 0x60D70C2C, read back 0x60D70C2C
+102992000 - INFO. (Single Write) For addr 0x1001C268 (DATA_VAULT_ENTRY_1[2]), attempting to write 0x2AD0982B, read back 0x2AD0982B
+103443000 - INFO. (Single Write) For addr 0x1001C2A4 (DATA_VAULT_ENTRY_2[5]), attempting to write 0x1EF66D94, read back 0x1EF66D94
+103890000 - INFO. (Single Write) For addr 0x1001C2D8 (DATA_VAULT_ENTRY_3[6]), attempting to write 0x3E54737F, read back 0x3E54737F
+104344000 - INFO. (Single Write) For addr 0x1001C300 (DATA_VAULT_ENTRY_4[4]), attempting to write 0x9D02F54, read back 0x9D02F54
+104791000 - INFO. (Single Write) For addr 0x1001C324 (DATA_VAULT_ENTRY_5[1]), attempting to write 0x3DF4A4C, read back 0x3DF4A4C
+105236000 - INFO. (Single Write) For addr 0x1001C36C (DATA_VAULT_ENTRY_6[7]), attempting to write 0x725B244F, read back 0x725B244F
+105694000 - INFO. (Single Write) For addr 0x1001C3A8 (DATA_VAULT_ENTRY_7[10]), attempting to write 0x711BFCD7, read back 0x711BFCD7
+106147000 - INFO. (Single Write) For addr 0x1001C3D4 (DATA_VAULT_ENTRY_8[9]), attempting to write 0x25773F5F, read back 0x25773F5F
+106604000 - INFO. (Single Write) For addr 0x1001C400 (DATA_VAULT_ENTRY_9[8]), attempting to write 0x7355F3FA, read back 0x7355F3FA
+107107000 - INFO. (Single Write) For addr 0x1001C444 (LOCKABLE_SCRATCHREG[3]), attempting to write 0xB079E3F, read back 0xB079E3F
+107573000 - INFO. (Single Write) For addr 0x1001C478 (NONSTICKY_GENERIC_SCRATCHREG[6]), attempting to write 0x14DA4981, read back 0x14DA4981
+108115000 - INFO. (Single Write) For addr 0x1001C4B0 (STICKY_LOCKABLE_SCRATCHREG[4]), attempting to write 0x79B6F0A6, read back 0x79B6F0A6
+108522000 - INFO. (Single Write) For addr 0x1001C018 (STICKYDATAVAULTCTRL[6]), attempting to write 0x0, read back 0x1
+108890000 - 
+108891000 - --next set--
+108928000 - STICKYDATAVAULTCTRL[7] -LOCKS-> STICKY_DATA_VAULT_ENTRY_7[0..11]
+109130000 - INFO. (Group Write) For addr 0x1001C178 (STICKY_DATA_VAULT_ENTRY_7[0]), attempting to write 0x480D2BC1, read back 0x480D2BC1
+109535000 - ...........
+109763000 - INFO. (Single Write) For addr 0x1001C01C (STICKYDATAVAULTCTRL[7]), attempting to write 0x1, read back 0x1
+110158000 - INFO. (Group Write) For addr 0x1001C178 (STICKY_DATA_VAULT_ENTRY_7[0]), attempting to write 0x5F9FF2D0, read back 0x480D2BC1
+110567000 - ...........
+110761000 - checking all dv_reg indices for unlocked registers
+110838000 - -------------------------------
+110892000 -   STICKYDATAVAULTCTRL: 0x0
+111003000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+111128000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+111253000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+111374000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+111495000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+111615000 -   STICKY_DATA_VAULT_ENTRY_5: 0xFFF
+111736000 -   STICKY_DATA_VAULT_ENTRY_6: 0xFFF
+111857000 -   STICKY_DATA_VAULT_ENTRY_7: 0xFFF
+111977000 -   STICKY_DATA_VAULT_ENTRY_8: 0x0
+112093000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+112208000 -   DATAVAULTCTRL: 0x0
+112307000 -   DATA_VAULT_ENTRY_0: 0x0
+112412000 -   DATA_VAULT_ENTRY_1: 0x0
+112517000 -   DATA_VAULT_ENTRY_2: 0x0
+112622000 -   DATA_VAULT_ENTRY_3: 0x0
+112727000 -   DATA_VAULT_ENTRY_4: 0x0
+112833000 -   DATA_VAULT_ENTRY_5: 0x0
+112938000 -   DATA_VAULT_ENTRY_6: 0x0
+113043000 -   DATA_VAULT_ENTRY_7: 0x0
+113148000 -   DATA_VAULT_ENTRY_8: 0x0
+113253000 -   DATA_VAULT_ENTRY_9: 0x0
+113359000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+113472000 -   LOCKABLE_SCRATCHREG: 0x0
+113579000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+113698000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+113821000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+113934000 - -------------------------------
+114521000 - INFO. (Single Write) For addr 0x1001C1D0 (STICKY_DATA_VAULT_ENTRY_8[10]), attempting to write 0x5FB6AEEE, read back 0x5FB6AEEE
+115014000 - INFO. (Single Write) For addr 0x1001C200 (STICKY_DATA_VAULT_ENTRY_9[10]), attempting to write 0x624F14D5, read back 0x624F14D5
+115528000 - INFO. (Single Write) For addr 0x1001C240 (DATA_VAULT_ENTRY_0[4]), attempting to write 0x3CB6F735, read back 0x3CB6F735
+115982000 - INFO. (Single Write) For addr 0x1001C288 (DATA_VAULT_ENTRY_1[10]), attempting to write 0x1B9387A0, read back 0x1B9387A0
+116435000 - INFO. (Single Write) For addr 0x1001C2B0 (DATA_VAULT_ENTRY_2[8]), attempting to write 0x38E1B8CB, read back 0x38E1B8CB
+116892000 - INFO. (Single Write) For addr 0x1001C2D8 (DATA_VAULT_ENTRY_3[6]), attempting to write 0x7FD3DFFF, read back 0x7FD3DFFF
+117347000 - INFO. (Single Write) For addr 0x1001C2F4 (DATA_VAULT_ENTRY_4[1]), attempting to write 0x3EBA65E9, read back 0x3EBA65E9
+117803000 - INFO. (Single Write) For addr 0x1001C320 (DATA_VAULT_ENTRY_5[0]), attempting to write 0x1D0E4A2F, read back 0x1D0E4A2F
+118258000 - INFO. (Single Write) For addr 0x1001C370 (DATA_VAULT_ENTRY_6[8]), attempting to write 0x61FDEDE8, read back 0x61FDEDE8
+118713000 - INFO. (Single Write) For addr 0x1001C398 (DATA_VAULT_ENTRY_7[6]), attempting to write 0x64F2DD26, read back 0x64F2DD26
+119172000 - INFO. (Single Write) For addr 0x1001C3B0 (DATA_VAULT_ENTRY_8[0]), attempting to write 0x27597C8D, read back 0x27597C8D
+119628000 - INFO. (Single Write) For addr 0x1001C3E8 (DATA_VAULT_ENTRY_9[2]), attempting to write 0x452F8B38, read back 0x452F8B38
+120129000 - INFO. (Single Write) For addr 0x1001C45C (LOCKABLE_SCRATCHREG[9]), attempting to write 0x18530BCA, read back 0x18530BCA
+120602000 - INFO. (Single Write) For addr 0x1001C46C (NONSTICKY_GENERIC_SCRATCHREG[3]), attempting to write 0x27A991C8, read back 0x27A991C8
+121142000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x5DA9CFDA, read back 0x5DA9CFDA
+121556000 - INFO. (Single Write) For addr 0x1001C01C (STICKYDATAVAULTCTRL[7]), attempting to write 0x0, read back 0x1
+121929000 - 
+121930000 - --next set--
+121967000 - STICKYDATAVAULTCTRL[8] -LOCKS-> STICKY_DATA_VAULT_ENTRY_8[0..11]
+122169000 - INFO. (Group Write) For addr 0x1001C1A8 (STICKY_DATA_VAULT_ENTRY_8[0]), attempting to write 0x41A565CA, read back 0x41A565CA
+122582000 - ...........
+122810000 - INFO. (Single Write) For addr 0x1001C020 (STICKYDATAVAULTCTRL[8]), attempting to write 0x1, read back 0x1
+123202000 - INFO. (Group Write) For addr 0x1001C1A8 (STICKY_DATA_VAULT_ENTRY_8[0]), attempting to write 0x57ABDEF0, read back 0x41A565CA
+123609000 - ...........
+123803000 - checking all dv_reg indices for unlocked registers
+123880000 - -------------------------------
+123934000 -   STICKYDATAVAULTCTRL: 0x0
+124044000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+124170000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+124295000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+124415000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+124536000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+124657000 -   STICKY_DATA_VAULT_ENTRY_5: 0xFFF
+124778000 -   STICKY_DATA_VAULT_ENTRY_6: 0xFFF
+124898000 -   STICKY_DATA_VAULT_ENTRY_7: 0xFFF
+125019000 -   STICKY_DATA_VAULT_ENTRY_8: 0xFFF
+125140000 -   STICKY_DATA_VAULT_ENTRY_9: 0x0
+125255000 -   DATAVAULTCTRL: 0x0
+125353000 -   DATA_VAULT_ENTRY_0: 0x0
+125458000 -   DATA_VAULT_ENTRY_1: 0x0
+125563000 -   DATA_VAULT_ENTRY_2: 0x0
+125668000 -   DATA_VAULT_ENTRY_3: 0x0
+125774000 -   DATA_VAULT_ENTRY_4: 0x0
+125879000 -   DATA_VAULT_ENTRY_5: 0x0
+125984000 -   DATA_VAULT_ENTRY_6: 0x0
+126089000 -   DATA_VAULT_ENTRY_7: 0x0
+126194000 -   DATA_VAULT_ENTRY_8: 0x0
+126300000 -   DATA_VAULT_ENTRY_9: 0x0
+126405000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+126518000 -   LOCKABLE_SCRATCHREG: 0x0
+126625000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+126744000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+126868000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+126980000 - -------------------------------
+127619000 - INFO. (Single Write) For addr 0x1001C1FC (STICKY_DATA_VAULT_ENTRY_9[9]), attempting to write 0x29D3BF52, read back 0x29D3BF52
+128141000 - INFO. (Single Write) For addr 0x1001C248 (DATA_VAULT_ENTRY_0[6]), attempting to write 0x3A391400, read back 0x3A391400
+128598000 - INFO. (Single Write) For addr 0x1001C288 (DATA_VAULT_ENTRY_1[10]), attempting to write 0x355A722D, read back 0x355A722D
+129062000 - INFO. (Single Write) For addr 0x1001C294 (DATA_VAULT_ENTRY_2[1]), attempting to write 0x581813E4, read back 0x581813E4
+129511000 - INFO. (Single Write) For addr 0x1001C2C0 (DATA_VAULT_ENTRY_3[0]), attempting to write 0x1FF7DE49, read back 0x1FF7DE49
+129967000 - INFO. (Single Write) For addr 0x1001C2F8 (DATA_VAULT_ENTRY_4[2]), attempting to write 0x59FF0728, read back 0x59FF0728
+130422000 - INFO. (Single Write) For addr 0x1001C338 (DATA_VAULT_ENTRY_5[6]), attempting to write 0x2A0EB8B2, read back 0x2A0EB8B2
+130876000 - INFO. (Single Write) For addr 0x1001C374 (DATA_VAULT_ENTRY_6[9]), attempting to write 0x18E85767, read back 0x18E85767
+131331000 - INFO. (Single Write) For addr 0x1001C394 (DATA_VAULT_ENTRY_7[5]), attempting to write 0x10235F6F, read back 0x10235F6F
+131779000 - INFO. (Single Write) For addr 0x1001C3DC (DATA_VAULT_ENTRY_8[11]), attempting to write 0x68E4143A, read back 0x68E4143A
+132238000 - INFO. (Single Write) For addr 0x1001C3F4 (DATA_VAULT_ENTRY_9[5]), attempting to write 0x65B5CEC1, read back 0x65B5CEC1
+132739000 - INFO. (Single Write) For addr 0x1001C444 (LOCKABLE_SCRATCHREG[3]), attempting to write 0x3F462A5E, read back 0x3F462A5E
+133214000 - INFO. (Single Write) For addr 0x1001C478 (NONSTICKY_GENERIC_SCRATCHREG[6]), attempting to write 0x57BFF33, read back 0x57BFF33
+133752000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x4C88CE84, read back 0x4C88CE84
+134164000 - INFO. (Single Write) For addr 0x1001C020 (STICKYDATAVAULTCTRL[8]), attempting to write 0x0, read back 0x1
+134535000 - 
+134535000 - --next set--
+134573000 - STICKYDATAVAULTCTRL[9] -LOCKS-> STICKY_DATA_VAULT_ENTRY_9[0..11]
+134775000 - INFO. (Group Write) For addr 0x1001C1D8 (STICKY_DATA_VAULT_ENTRY_9[0]), attempting to write 0x5762E8FA, read back 0x5762E8FA
+135185000 - ...........
+135413000 - INFO. (Single Write) For addr 0x1001C024 (STICKYDATAVAULTCTRL[9]), attempting to write 0x1, read back 0x1
+135805000 - INFO. (Group Write) For addr 0x1001C1D8 (STICKY_DATA_VAULT_ENTRY_9[0]), attempting to write 0x6F89CB88, read back 0x5762E8FA
+136212000 - ...........
+136406000 - checking all dv_reg indices for unlocked registers
+136483000 - -------------------------------
+136537000 -   STICKYDATAVAULTCTRL: 0x0
+136647000 -   STICKY_DATA_VAULT_ENTRY_0: 0xFFF
+136773000 -   STICKY_DATA_VAULT_ENTRY_1: 0xFFF
+136898000 -   STICKY_DATA_VAULT_ENTRY_2: 0xFFF
+137019000 -   STICKY_DATA_VAULT_ENTRY_3: 0xFFF
+137139000 -   STICKY_DATA_VAULT_ENTRY_4: 0xFFF
+137260000 -   STICKY_DATA_VAULT_ENTRY_5: 0xFFF
+137381000 -   STICKY_DATA_VAULT_ENTRY_6: 0xFFF
+137501000 -   STICKY_DATA_VAULT_ENTRY_7: 0xFFF
+137622000 -   STICKY_DATA_VAULT_ENTRY_8: 0xFFF
+137743000 -   STICKY_DATA_VAULT_ENTRY_9: 0xFFF
+137863000 -   DATAVAULTCTRL: 0x0
+137962000 -   DATA_VAULT_ENTRY_0: 0x0
+138067000 -   DATA_VAULT_ENTRY_1: 0x0
+138172000 -   DATA_VAULT_ENTRY_2: 0x0
+138277000 -   DATA_VAULT_ENTRY_3: 0x0
+138382000 -   DATA_VAULT_ENTRY_4: 0x0
+138488000 -   DATA_VAULT_ENTRY_5: 0x0
+138593000 -   DATA_VAULT_ENTRY_6: 0x0
+138698000 -   DATA_VAULT_ENTRY_7: 0x0
+138803000 -   DATA_VAULT_ENTRY_8: 0x0
+138908000 -   DATA_VAULT_ENTRY_9: 0x0
+139014000 -   LOCKABLE_SCRATCHREG_CTRL: 0x0
+139127000 -   LOCKABLE_SCRATCHREG: 0x0
+139234000 -   NONSTICKY_GENERIC_SCRATCHREG: 0x0
+139353000 -   STICKY_LOCKABLE_SCRATCHREG_CTRL: 0x0
+139476000 -   STICKY_LOCKABLE_SCRATCHREG: 0x0
+139589000 - -------------------------------
+140304000 - INFO. (Single Write) For addr 0x1001C254 (DATA_VAULT_ENTRY_0[9]), attempting to write 0x31CDEA7E, read back 0x31CDEA7E
+140779000 - INFO. (Single Write) For addr 0x1001C26C (DATA_VAULT_ENTRY_1[3]), attempting to write 0x5A7C0BDC, read back 0x5A7C0BDC
+141238000 - INFO. (Single Write) For addr 0x1001C290 (DATA_VAULT_ENTRY_2[0]), attempting to write 0x7313410B, read back 0x7313410B
+141693000 - INFO. (Single Write) For addr 0x1001C2C8 (DATA_VAULT_ENTRY_3[2]), attempting to write 0x1D8D02E, read back 0x1D8D02E
+142149000 - INFO. (Single Write) For addr 0x1001C318 (DATA_VAULT_ENTRY_4[10]), attempting to write 0x58CE9051, read back 0x58CE9051
+142608000 - INFO. (Single Write) For addr 0x1001C338 (DATA_VAULT_ENTRY_5[6]), attempting to write 0x6AC91297, read back 0x6AC91297
+143059000 - INFO. (Single Write) For addr 0x1001C360 (DATA_VAULT_ENTRY_6[4]), attempting to write 0x5CC453F0, read back 0x5CC453F0
+143509000 - INFO. (Single Write) For addr 0x1001C38C (DATA_VAULT_ENTRY_7[3]), attempting to write 0x60571EFB, read back 0x60571EFB
+143964000 - INFO. (Single Write) For addr 0x1001C3B0 (DATA_VAULT_ENTRY_8[0]), attempting to write 0x228E5C63, read back 0x228E5C63
+144415000 - INFO. (Single Write) For addr 0x1001C40C (DATA_VAULT_ENTRY_9[11]), attempting to write 0x64BE8F8B, read back 0x64BE8F8B
+144928000 - INFO. (Single Write) For addr 0x1001C45C (LOCKABLE_SCRATCHREG[9]), attempting to write 0x66AA2BA2, read back 0x66AA2BA2
+145397000 - INFO. (Single Write) For addr 0x1001C47C (NONSTICKY_GENERIC_SCRATCHREG[7]), attempting to write 0x47E00516, read back 0x47E00516
+145942000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x6D2E9650, read back 0x6D2E9650
+146354000 - INFO. (Single Write) For addr 0x1001C024 (STICKYDATAVAULTCTRL[9]), attempting to write 0x0, read back 0x1
+146730000 - 
+146733000 - 
+146735000 - -- Done w/test; 0 errors found -- 
+* TESTCASE PASSED
+
+Finished : minstret = 435518, mcycle = 1468229
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

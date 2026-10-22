@@ -1,0 +1,1 @@
+BLOCKED row=73 test=ntt_masking_normal_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand "'d0" has indefinite width.

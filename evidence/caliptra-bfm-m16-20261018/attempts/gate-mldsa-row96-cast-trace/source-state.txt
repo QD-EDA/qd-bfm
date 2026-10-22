@@ -1,0 +1,8 @@
+M16 MLDSA row 96 diagnostic gate: predictor cast trace
+
+Branch: codex/caliptra-bfm-stack-20261006
+HEAD: 60502cff1c333a04d0f678b9fee0cf1135270305
+Inputs: Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0; Icarus source 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Purpose: row 96 compiled with the generated 32-bit AHB width but failed at the generated predictor cast. This trace adds a non-functional UVM_INFO with the received type name, cast-to-BFM-alias result, and all expected parameters.
+Scope: temporary generated testbench diagnostic overlay only; no RTL, firmware, or pass criteria changed.
+Unit tests are recorded separately. The staged archive replaces only the runner and runner-test files over the previous row-96 snapshot; all dv/caliptra_bfm source members match the working tree.

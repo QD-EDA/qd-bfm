@@ -1,0 +1,13 @@
+Host: DAN-DESKTOP
+Job ID: 2765
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-ahb-qvip-env-32-20261018-02
+Profile: AHB_PROFILE=32 (Caliptra generated QVIP width)
+Resources: 1 CPU, 1 GiB RAM, 15-minute Slurm limit; per-test 600-second process-group timeout
+Memory basis: previous pinned-Icarus AHB row-6 compile peaked at 592,552 KiB; 1 GiB exceeds 1.25x.
+Command: sbatch --parsable run.sbatch
+Pinned Icarus source: 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+iverilog SHA256: 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+vvp SHA256: c2474d2a745aa7d896885202314a5244ee26af56a32dda59a6c8fbd3ba362e3a
+Repository HEAD at staging: 67b59d36802434ff777a5200dea0bf8373f9cf2e
+Source archive SHA256: 044860ce2efc9f5d94df2c0290c206c1f98639c525ddf5067b2b1a33de0d6d39
+Staged source manifest: source-manifest.sha256 (155 files)

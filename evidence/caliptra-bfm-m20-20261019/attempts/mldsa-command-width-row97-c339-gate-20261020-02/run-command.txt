@@ -1,0 +1,1 @@
+CALIPTRA_ROOT=/private/tmp/m20-caliptra-c339-20261020 /Users/danielellerbrock/codex-supervisor/localrun 2100 /usr/bin/env IVERILOG_BIN=/private/tmp/m20-iverilog-cae035642e056644274a01e98d4422ce286685b4-tool/bin/iverilog VVP_BIN=/private/tmp/m20-iverilog-cae035642e056644274a01e98d4422ce286685b4-tool/bin/vvp /bin/bash run-local.sh

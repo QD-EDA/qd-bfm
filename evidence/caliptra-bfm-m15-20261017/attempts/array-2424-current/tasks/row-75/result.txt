@@ -1,0 +1,5 @@
+row_id=75
+testname=ntt_normal_test
+status=BLOCKED
+cause=simulation ended without a recognized test pass marker
+elapsed_seconds=248.499

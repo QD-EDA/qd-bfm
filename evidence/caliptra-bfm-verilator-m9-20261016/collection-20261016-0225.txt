@@ -1,0 +1,9 @@
+M9 collection checkpoint — 2026-10-16 02:25 MDT
+
+Array task: 1430_75, test `cptra_ss_test_rom`, source matrix id `f1991acb7ebadfe1`.
+Host: DAN-DESKTOP. Pinned Verilator model SHA-256: `ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de`.
+Result: TIMEOUT after 6,873.008 simulation seconds; wrapper elapsed 6,875.428 seconds; exit 124. Firmware build exit was 0. The simulation log ends at `5856000 - Sending payload via AHB i/f`; no pass/fail marker or final mcycle exists.
+Triage: ask-intern found the same last visible operation and no terminal marker. Direct log and result inspection confirmed that summary. This matches the M8 `cptra_ss_test_rom` timeout, but the exact wait inside `soc_ifc_axi_dma_send_ahb_payload` is not shown.
+Evidence: `runs/f1991acb7ebadfe1/`. Bundle manifest passed locally and remotely; separate Slurm log/resource hashes matched. Remote result tree, resource record, and Slurm log were removed after verification, freeing 85,130 bytes.
+
+Ledger summary after `build-ledger.py`: 271 rows; 162 supported firmware rows, 109 non-firmware rows; 158 terminal supported results (103 PASS, 39 FAIL, 14 FIRMWARE_BUILD_FAIL, 2 TIMEOUT), 4 supported rows remain running. Terminal pass rate 65.2%; supported-row pass rate 63.6%.

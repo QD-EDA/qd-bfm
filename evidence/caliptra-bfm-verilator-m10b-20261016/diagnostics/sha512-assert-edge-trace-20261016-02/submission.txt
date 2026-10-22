@@ -1,0 +1,14 @@
+SHA512 edge/control trace diagnostic, attempt 1
+
+Row: array index 91, test ID 7acba2db04d9935d, smoke_test_sha512.
+Pinned c339 outcome: PASS. Overlay outcome: FAIL, ERR_SHA_BLOCK_NOT_STABLE at 6,296,000.
+Pinned Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Pinned SHA512 source SHA-256: 5656d5a09d1570a567bb674b1b419775a83a08b37ee70792d28ab72ae0510d82.
+M10b AXI overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1.
+Diagnostic SHA512 trace overlay SHA-256: c801d44baca98469611af83cbae424668ead4307b0597c7447f573b293062877.
+
+Build job 1949 passed with 4 CPUs and 4 GiB. Simulation job 1950 ran only row 91 with a 600-second cap and reproduced the assertion in 41.716 seconds (peak RSS 55,404 KiB). The diagnostic used an absolute $time output window but emitted no M10_SHA_* lines, so this attempt gives no control-edge evidence.
+
+Archive: trace-run-1950-no-monitor.tar.gz.
+Archive SHA-256: 991d1da94f5bc542ee355110f462ac8349772a07c1b70599398bf26df9705803.
+Per-result FILE-SHA256SUMS passed before archiving. Remote run directory removed after verification, freeing 728,618,081 bytes.

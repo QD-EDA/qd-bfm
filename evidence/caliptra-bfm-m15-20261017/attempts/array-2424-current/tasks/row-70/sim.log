@@ -1,0 +1,26 @@
+sh: 1: python: not found
+Start of init
+
+*** Toggle reset.
+End of reset
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:188: Can't open file coeff_input.hex
+       Time: 20  Scope: power2round_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:191: invalid file descriptor (0x0) given to $feof.
+Read input test vectors from coeff_input.hex
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:207: Can't open file coeff_high.hex
+       Time: 20  Scope: power2round_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:210: invalid file descriptor (0x0) given to $feof.
+Read input test vectors from coeff_high.hex
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:227: Can't open file coeff_low.hex
+       Time: 20  Scope: power2round_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:230: invalid file descriptor (0x0) given to $feof.
+Read input test vectors from coeff_low.hex
+Starting power2round test
+
+Test done
+
+*** All 2048 test cases completed successfully
+* TESTCASE PASSED
+
+*** ecc simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/power2round/tb/power2round_tb.sv:314: $finish called at 5255 (1s)

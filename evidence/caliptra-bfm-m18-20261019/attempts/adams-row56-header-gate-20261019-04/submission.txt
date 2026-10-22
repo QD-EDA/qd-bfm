@@ -1,0 +1,10 @@
+source_snapshot_sha256=8a1d5187955a3fd49b8861010dd6e4e0248e86f614567df049c9fd7585504de3
+run_sbatch_sha256=18277c0ded970154d6895e8874a9a30d9107318210794da7c4db027686ca97e8
+source_files=45
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-row56-header-gate-20261019-04
+row=56
+cpus=1
+mem=4G
+walltime=15m
+runner_timeout=600s
+submitted_job=3022

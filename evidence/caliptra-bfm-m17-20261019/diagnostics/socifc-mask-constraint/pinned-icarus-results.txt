@@ -1,0 +1,9 @@
+Icarus Verilog version 13.0 (devel) (9b5fad2af)
+6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288  /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/iverilog
+method-in-constraint compile_exit=1
+/tmp/method-in-constraint.sv:21: warning: method function 'randomize' is being called as a task.
+/tmp/method-in-constraint.sv:21: error: Function call 'socregs.get_mask' with random-dependent arguments in an inline constraint requires staged evaluation and is not supported.
+1 error(s) during elaboration.
+precomputed-mask compile_exit=0
+/tmp/precomputed-mask.sv:23: warning: method function 'randomize' is being called as a task.
+precomputed-mask sim_exit=0

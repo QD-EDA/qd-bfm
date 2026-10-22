@@ -1,0 +1,17 @@
+row_id=77
+testname=ML_DSA_randomized_key_gen_test
+source_repo=adams-bridge
+source_pin=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+caliptra_pin=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+iverilog_source_pin=82023726be90ab269d6e0ef5e755ebb69e6f648c
+iverilog_sha256=9c34ccc0e24fe17881e0153927d60668ff78afd21a639091087bcc09edca988b
+slurm_cpus=1
+slurm_memory=4G
+slurm_time_limit=00:15:00
+test_timeout=600
+remote_run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-row77-gate-20261019-01
+job_id=dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py: OK
+dv/caliptra_bfm/uvmf_lite/tests/test_run_m15_test.py: OK
+dv/caliptra_bfm/uvm/avery_defines.svh: OK
+evidence/caliptra-bfm-m15-20261017/m15-test-to-environment.tsv: OK
+3000

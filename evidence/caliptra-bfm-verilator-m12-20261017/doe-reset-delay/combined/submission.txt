@@ -1,0 +1,15 @@
+host=DAN-DESKTOP
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-combined-20261017-01
+source_commit=ffc12ab427e961f40354f32a8e7a147e5d4e5764
+source_archive_sha256=c22c9453bd86d012a6c5a7bc199b4c01b2e385a6a06e46010a917835f28dc5cc
+overlay=DOE failure-action trace + one-sampled-clock delay + top-level reset disable guard
+build_job_id=2120
+build_resources=4 CPUs, 4 GiB, 2 hours
+build_submitted=2026-10-17T10:20 MDT
+build_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-combined-20261017-01 && sbatch --parsable build.sbatch
+gate_job_id=2121
+gate_dependency=afterok:2120
+gate_resources=1 CPU, 3 GiB, 600-second outer cap
+gate_row=smoke_test_doe_scan (8f9e58bda7a24230)
+gate_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-combined-20261017-01 && sbatch --parsable --dependency=afterok:2120 run-gate.sbatch
+array_submission=not submitted; wait for one-row firmware result

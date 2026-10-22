@@ -1,0 +1,13 @@
+**Runner Status:**
+* TESTCASE PASSED
+
+**Terminal Findings and Counts:**
+* UVM_ERROR : 1
+* UVM_FATAL : 0
+* [SCBD_AHB] 1
+* UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-pintrace-gate-20261019-01/tasks/row-97/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(207) @ 136775.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Although the verification failure is NOT expected, the second verif result does not match with the successful verif output
+
+**Pin-Trace Coverage:**
+* No explicit mention of M19_AHB_PIN lines occurring.
+* [AHB_COVERAGE] reads=901/4546 writes=3645/4546 sizes(1/2/4/8B)=0/0/4546/0 of 4546 addresses; pending_wait=0/13658 cycles; errors=0/4546 transfers
+* [AHB_COVERAGE] 1

@@ -1,0 +1,122 @@
+hmac_drbg_tb: Running hmac_drbg test = HMAC_DRBG_directed_test
+hmac_drbg_tb: Using HMAC_DRBG test vectors from file specified via plusarg: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac_drbg/tb/test_vectors/hmac_drbg_tb.hex
+   -= Testbench for HMAC DRBG started =-
+    ==============================
+
+*** Toggle reset.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 6b9d3dad2e1b8c1c05b19875b6659f4de23c3b667bf297ba9aa47740787137d896d5724e4c70a825f872c9ea60d2edf5
+*** nonce     : 9a9083505bc92276aec4be312696ef7bf3bf603f4bbd381196a029f340585312313bca4a9b5b890efee42c77b1ee25fe
+*** lfsr_seed : db18774a0c101bf2385528ee94debf6255dc242ac8aea233e5542141acdecfabbf1102f44dc7f66858781ca486eb0227
+The HMAC DRBG core completed the execution
+*** TC 0 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 6b9d3dad2e1b8c1c05b19875b6659f4de23c3b667bf297ba9aa47740787137d896d5724e4c70a825f872c9ea60d2edf5
+*** nonce     : 768412320f7b0aa5812fce428dc4706b3cae50e02a64caa16a782249bfe8efc4b7ef1ccb126255d196047dfedf17a0a9
+*** lfsr_seed : 70c35b5b20fcaa9c3d7387c9f5a4654e25cf79c1ffc25727b8b8149382eacde8aed435368755b7a8574e12cf0ac2145c
+The HMAC DRBG core completed the execution
+*** TC 1 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 14aefb51df578ff3d77662153b10cee5c7930454aae90e1a68c951e7466216deeeab7032856f3e6244194e9be0923be9
+*** nonce     : 31759bd97e875f3559d260bee1c6f9995f330ba2d3dd2d93502e7e696c1900632e22672eb5c83cf761f592aafc0e040a
+*** lfsr_seed : 8e542d583942e9230b600d8a794250f56e5ad2db56a18f1de4621eb07a7883039ff24e496a3c3a44237360c2af13ece6
+The HMAC DRBG core completed the execution
+*** TC 2 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 14f93f145ce951b987cc52cd8ee5b916df9042433e63f5771210b2e596709cfd4a9080ec1e0252f82e08333cbb259f0c
+*** nonce     : 31759bd97e875f3559d260bee1c6f9995f330ba2d3dd2d93502e7e696c1900632e22672eb5c83cf761f592aafc0e040a
+*** lfsr_seed : fa322cc00acf5c2306ea4bae2dfde528ac1103aef0c93a678a63510da1f23083b041dbd8c90c13253374b12d25dc49e8
+The HMAC DRBG core completed the execution
+*** TC 3 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+*** nonce     : ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+*** lfsr_seed : abc01042af3a94ef89f460f3c7011b6d77cbc1b0413b6b14e06bb8d9281d8f76e0dff2de3d5ef1a51074f701fddb3c6e
+The HMAC DRBG core completed the execution
+*** TC 4 successful.
+
+The HMAC DRBG core is triggered...
+*** entropy   : 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+*** nonce     : 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+*** lfsr_seed : 64471b1ac81bde207982b6401c2f58f03880a2f3420f3ab9b48f5c7924dab42e16bec6ff6e082c6d073ae2e30c98adaa
+The HMAC DRBG core completed the execution
+*** TC 5 successful.
+
+HMAC-DRBG failure injection
+*** entropy   : 1e8dcd3d3b23f17606d7cd0d00f3e30189375212b2c2846546df998d06b97b0db1f056638484d609c0895e8112153524
+*** nonce     : e77696ce793069f247ecdb8f8932d612bbd2727772aff7e5d513d2aae2f784c5e33724c67cfde9f9462df78c76d457ed
+*** lfsr_seed : 50aecea7cf0adc9285fdb79f6998998de24235513856eee44e3e0b9a80e6870ab9bb8cebbdbf95f2853110521f2011d2
+The HMAC DRBG core completed the execution
+*** TC 6 successful.
+
+Read test vector with 14 rounds from /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac_drbg/tb/test_vectors/hmac_drbg_tb.hex
+The HMAC DRBG multi rounds is triggered...
+*** entropy   : 1e8dcd3d3b23f17606d7cd0d00f3e30189375212b2c2846546df998d06b97b0db1f056638484d609c0895e8112153524
+*** nonce     : e77696ce793069f247ecdb8f8932d612bbd2727772aff7e5d513d2aae2f784c5e33724c67cfde9f9462df78c76d457ed
+*** lfsr_seed : b0b864a919913dad570813abd6232f16d846867e49a0ad166475659d88626cdb935fe2e84428be378af6b18d2c56a89b
+Received valid flag
+*** TC 7 round #0 successful.
+
+*** lfsr_seed : 2576b9a2dc7627c211780a2d833d5b854ac5e0b4838633e9492499fd1295f82a3717f5eb0165bcf79b33df54eb946195
+Received valid flag
+*** TC 7 round #1 successful.
+
+*** lfsr_seed : 4332e15d6cfad0bada835400c27350d691a9d465b2e8b8016260bc9166a47fa035b3713838debd3a181555d4f4c5fedf
+Received valid flag
+*** TC 7 round #2 successful.
+
+*** lfsr_seed : bfcfa596b860dc4db42d77622749b485bc4d5998d50e1bec9a24546dbcda5f53635c7256935bf44d1ef1a4d82004b29e
+Received valid flag
+*** TC 7 round #3 successful.
+
+*** lfsr_seed : e55026cb9e011fc776c6e12127a659e0dccbc2508f729587b57aeecb66b1aae04e1f763e4a6b1ccd1c99de05a0cebfa8
+Received valid flag
+*** TC 7 round #4 successful.
+
+*** lfsr_seed : 09869d7b8f8c7513cc7e3ad48276699a87c2c29a0608af0778cb743d04aaebacf5b20be09e3cc4bd52901a050359ecd6
+Received valid flag
+*** TC 7 round #5 successful.
+
+*** lfsr_seed : 3d90f68811bb5c513ee0dc58ecc1ba6a81325753c4406141b5b629eede6317ede3c8a0a0736f3ae179b85df435783c2f
+Received valid flag
+*** TC 7 round #6 successful.
+
+*** lfsr_seed : df140ac070225e2a845e3fdb064170f7836d7e53b2c31bea2a1c768308fb8b9284edeef7fdd901d8100a2e8a88b9e436
+Received valid flag
+*** TC 7 round #7 successful.
+
+*** lfsr_seed : 77e8195f19298c821d10180fcf8f8900dec001987c2e5c6f75ff802cf618f7dad97ca78ff48fa5c6e5d92fb29dcf6bc7
+Received valid flag
+*** TC 7 round #8 successful.
+
+*** lfsr_seed : 048b045db3c87d957857cb431fef0e21b1e36b1c88b407770551d90ed14128a1dfd3f679023aab23d04bece8b6802a55
+Received valid flag
+*** TC 7 round #9 successful.
+
+*** lfsr_seed : a9f5f42f2d2e9ffca9cae7aa45fb653e9b7971e46c059299a848a68851b34545bca4f224acce754425b6216a4c8681f5
+Received valid flag
+*** TC 7 round #10 successful.
+
+*** lfsr_seed : 586ec354a7ea434e9e47572cb28ccaa8734202cdcc4b127fbdd28634e294645f755ffcf563d99ea4c7a4404d85c010c5
+Received valid flag
+*** TC 7 round #11 successful.
+
+*** lfsr_seed : cb6862c4b1fb00a1050c6b29acff2c36054444c7e8613e5d90ef1d22882bcbb62535079b50211c3fcfee0d596bbcb755
+Received valid flag
+*** TC 7 round #12 successful.
+
+*** lfsr_seed : a528922b656cdca74d5dfdf8ecd5719d319af00adc028681cd8b45f168f5c2023920b03a0af34d52fad5703f07f2cfcf
+Received valid flag
+*** TC 7 round #13 successful.
+
+HMAC DRBG Zeroize...
+*** All 09 test cases completed successfully
+* TESTCASE PASSED
+
+*** HMAC DRBG simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac_drbg/tb/hmac_drbg_tb.sv:705: $finish called at 52181 (1s)

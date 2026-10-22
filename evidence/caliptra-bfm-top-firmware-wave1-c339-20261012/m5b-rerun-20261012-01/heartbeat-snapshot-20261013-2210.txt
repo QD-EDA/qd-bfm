@@ -1,0 +1,19 @@
+Captured on DAN-DESKTOP at 2026-10-13 22:10 MDT; host uptime 3 hours 12 minutes.
+
+Slurm state:
+- 799_36: terminal FAIL, recorded.
+- 799_37, 799_38, 799_39: RUNNING.
+- 799_40: terminal FAIL, recorded.
+- 799_41, 799_42: terminal PASS, recorded.
+- 895_1, 895_2, 895_3, 895_4: RUNNING.
+
+Latest simulator heartbeats:
+- 799_37 smoke_test_kv_swwe_lock: wall_s=11400 mcycle=82069; log mtime 22:10:11. It emitted `[SWWE_PASS]` checks for KV_WR_CTRL, KV_RD_KEY_CTRL, and KV_RD_BLOCK_CTRL, then continued into HMAC verification.
+- 799_38 smoke_test_sha256_wntz: wall_s=11400 mcycle=82098; log mtime 22:10:11.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=11400 mcycle=16893; log mtime 22:10:11.
+- 895_1 smoke_test_ecc_errortrigger4: wall_s=11100 mcycle=17155; log mtime 22:07:35.
+- 895_2 kv_entry_read_err: wall_s=11100 mcycle=79598; log mtime 22:07:35.
+- 895_3 smoke_test_kv_parallel_access: wall_s=11100 mcycle=66017; log mtime 22:07:36.
+- 895_4 smoke_test_ecc_flow2_kv_ocp_progress: wall_s=3300 mcycle=23768; log mtime 22:09:13.
+
+All seven tasks remain RUNNING and their heartbeats advanced since the 21:57 sample. No result JSON or whole-test terminal outcome was present in the active run outputs. Host uptime exceeds each active job's elapsed time, and no task meets the 30-minute flat-heartbeat hang rule. No active output tree was ready for cleanup.

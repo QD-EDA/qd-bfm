@@ -1,0 +1,13 @@
+host=Mac (local)
+python=3.14.7
+command=~/codex-supervisor/localrun 120 env PYTHONDONTWRITEBYTECODE=1 python3 test_run_m15_test.py
+exit_code=0
+wall_time_seconds=0.16
+peak_rss_bytes=27951104
+result=48 tests passed
+
+................................................
+----------------------------------------------------------------------
+Ran 48 tests in 0.046s
+
+OK

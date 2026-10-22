@@ -1,0 +1,11 @@
+Slurm job: 3270_93
+Submitted UTC: 2026-10-20 00:32
+Host: DAN-DESKTOP (Ubuntu WSL2)
+Test: row 93 ML_DSA_randomized_verif_test
+Resources: 1 CPU, 2 GiB; runner timeout 1,800 seconds; Slurm limit 2,100 seconds
+Source pins: Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus c339 binary SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Preflight: local and remote file hashes passed; source archive checksum and trace self-check passed; protected Caliptra tree pin and clean state passed
+Initial state: PENDING at 20/20 CPUs allocated
+Remote root: /home/dsell/slurm-runs/caliptra-bfm/a2/m20-row93-ctrl-state-trace-20261020-01
+State check at 2026-10-20 00:32:56 UTC: RUNNING, 0:52 elapsed.

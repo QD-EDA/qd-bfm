@@ -1,0 +1,5 @@
+job_id=2347
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m14-compress-main-9b5fad2-20261017-04
+cpus=1
+mem=3G
+per_test_timeout=600s

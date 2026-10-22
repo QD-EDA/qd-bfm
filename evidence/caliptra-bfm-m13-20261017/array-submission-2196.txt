@@ -1,0 +1,12 @@
+Slurm array job: 2196[0-16,18-43]
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01
+Current Icarus main: 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Array rows: 43 (row 17 excluded because gate job 2194[17] already ran it)
+Throttle: 6 concurrent tasks; 1 CPU and 3 GiB per task; 2-hour Slurm limit
+Per-row compile/simulation cap: 6900 seconds
+Task list SHA-256: 6d607f67bb1d428011762fec4c6b1a09a19db9c6f8f0dbbbfcb3029bd12521dc
+Runner SHA-256: 3e38296922031216ec2c56857eb3667dd7a9463e14d16384d896e2f64637f7c5
+Pre-array gate: 2194[17] PASS, 5 tests, 0 errors; current-main compiler build 2192 succeeded.
+Initial snapshot: tasks 1, 5, 6, 7, 8, 9 RUNNING; other selected rows pending or already terminal.
+Submission: sbatch --parsable --array=0-16,18-43%6 environment-array.sbatch

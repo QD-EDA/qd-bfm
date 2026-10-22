@@ -1,0 +1,5 @@
+# M18 KeyVault row 7 refreshed-main gate — BLOCKED
+
+Job 3013 ran `example_derived_test` with Icarus main `cae035642e056644274a01e98d4422ce286685b4`, binary SHA-256 `6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330`, the open-AHB filelist overlay, and the hash-guarded KeyVault sequence-base overlay. It stopped during compilation at generated `kv_rst_configuration.svh:149`: `$psprintf` was called with missing/empty parameters. Compile exit was 30 after 3.199 s; peak RSS was 592,956 KiB. The row never reached simulation, so its factory-sequence behavior is not tested.
+
+The compiler log also records independent generated-source compatibility problems, including dynamic-array slice r-values in `kv_env_configuration.svh` and nested class member paths in generated sequences. These errors do not indicate a source-staging failure; the staged sources and compiler pins passed the run preflight. The raw archive and sidecar are in `raw/`; the archive hash `82f34200e6cfa1e3505679d3cc1f28510ba5cb3daf4f8d23ce128a6f08323a7d` matches the locally archived bytes.

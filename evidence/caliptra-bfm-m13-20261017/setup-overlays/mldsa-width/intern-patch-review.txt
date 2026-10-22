@@ -1,0 +1,11 @@
+The first intern request used the wrong source lines and returned no diff. The
+second request removed `.w1_encode_done()` but left a trailing comma after
+`.decompose_done()`, which would be invalid syntax. I rejected that patch.
+
+After restating the exact port-list contract, the intern returned the correct
+two-line-to-one-line replacement. I verified it against the existing M7
+compatibility patch and the pinned current source excerpt (source SHA
+`faf59075d99baaf2b32e81755324d89722a193177a7cbc51fd3fc037ee387317`). The
+M13 runner asserts that exact old sequence occurs once, changes only that
+sequence in a run-local testbench copy, and records both original and overlay
+hashes. The pinned source tree is untouched.

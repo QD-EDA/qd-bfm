@@ -1,0 +1,10 @@
+job_id=2741
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-row96-alias-20261018-01
+submit_command=sbatch --parsable run.sbatch
+resources=1 CPU, 3 GiB memory, 20 minute Slurm limit; 600 second per-row timeout
+source_archive_sha256=f43b2ef34d3ebe40e06fa89725365b009b67ecbe5303dfce3fc88e1520e6a7b2
+runner_sha256=4904f5d9e90f548ca3fc9f97fea582242d6f48027df84f78373d28fcbc95e6e2
+test_file_sha256=427fd5aa3ea09197409cf8b9552ad01ad96da28ef44388d93462a44df993ded9
+run_script_sha256=ab65ffb311b7f17d4760785d5d3923456cb2a8c464f3430713da99a09762f224
+staging=remote SHA256 verified and archive extracted; pinned toolchain reads from protected shared location
+row=96 ML_DSA_randomized_early_run_test; generated predictor cast changed to the accepted QD-BFM typedef

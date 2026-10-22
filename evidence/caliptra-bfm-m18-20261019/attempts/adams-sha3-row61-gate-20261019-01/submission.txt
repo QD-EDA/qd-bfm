@@ -1,0 +1,11 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-sha3-row61-gate-20261019-01
+Selected row: 58 (invalid for this gate; intended row was 61)
+Resources: 1 CPU/1 GiB, 600-second timeout
+Peak RSS basis: row 58 measured 26,804 KiB on the same runner
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 6f002baf8784326f77919af14b7bbc7c22b13d47d8a2508e094209fef6b14aec
+Run script SHA-256: 6a6cb6c9e44164996d720b851f4e82c48e3e459d913df37747a0cf8a33d524b0
+Slurm job ID: 3064
+Result: INVALID SELECTION; the staged script ran row58 instead of row61

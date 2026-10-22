@@ -1,0 +1,9 @@
+Mon Oct 19 10:15:11 MDT 2026
+JobId=3109 ArrayJobId=3109 ArrayTaskId=77 JobName=m19-row77-extend
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:01 TimeLimit=01:15:00 TimeMin=N/A
+   SubmitTime=2026-10-19T10:15:04 EligibleTime=2026-10-19T10:15:04
+   AccrueTime=2026-10-19T10:15:04

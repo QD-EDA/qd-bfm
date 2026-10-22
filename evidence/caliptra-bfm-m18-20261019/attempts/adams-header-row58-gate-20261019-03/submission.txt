@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-03
+Row: 58 (`sib_rand_test`)
+Resources: 1 CPU, 4 GiB, 600-second per-row runner timeout
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 78c3eae07e1d080ba38f7fc1399d7dc28770df42c3ffebc23a0cfaacafc04e6f
+Run script SHA-256: 7618023010576a10c38308871eb7ae6129655d70a5a5eb1c43f701623c9be602
+Slurm job ID: 3053
+Result: submitted; one-row gate in progress

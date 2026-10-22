@@ -1,0 +1,125 @@
+{
+  "host": "MacBook-Air.local",
+  "case": "smoke_test_doe_scan",
+  "timeout_s": 600,
+  "c339_outcome": "UNVERIFIED",
+  "c339_mcycle": "NA",
+  "c339_elapsed_s": "NA",
+  "model_sha256": "1acdba86496a7b08c64498f9c0da359d1233c77c76b58f90587cc540fec9bfb0",
+  "started_at": "2026-10-17T15:55:29.388782+00:00",
+  "case_yaml": "src/integration/test_suites/smoke_test_doe_scan/smoke_test_doe_scan.yml",
+  "case_yaml_sha256": "bd3eaabaae45f80ed6da5fee85bfafb8abd6c3ba1ac0eacaad596301e60c747e",
+  "seed": "1",
+  "plusargs": [
+    "+RAND_DOE_VALUES"
+  ],
+  "native_vector_commands": [
+    [
+      "/usr/bin/clang",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-I/opt/homebrew/opt/openssl@3/include",
+      "/private/tmp/a2-m12-local-source/dv/caliptra_bfm/native_vectors/native_mlkem.c",
+      "-L/opt/homebrew/opt/openssl@3/lib",
+      "-lcrypto",
+      "-o",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/native_mlkem"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-I/opt/homebrew/opt/mbedtls@3/include",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/ecc/tb/ecc_secp384r1.c",
+      "-L/opt/homebrew/opt/mbedtls@3/lib",
+      "-lmbedtls",
+      "-lmbedx509",
+      "-lmbedcrypto",
+      "-o",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/ecc_secp384r1.exe"
+    ],
+    [
+      "/opt/homebrew/opt/python@3.12/bin/python3.12",
+      "/private/tmp/a2-m12-local-source/dv/caliptra_bfm/native_vectors/stage_mldsa.py",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/Dilithium_ref/dilithium/ref/test/test_dilithium.c",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/dilithium-ref/test/test_dilithium.c"
+    ],
+    [
+      "/usr/bin/make",
+      "-C",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/dilithium-ref",
+      "CC=/usr/bin/clang",
+      "test/test_dilithium5"
+    ],
+    [
+      "/opt/homebrew/opt/python@3.12/bin/python3.12",
+      "/private/tmp/a2-m12-local-source/dv/caliptra_bfm/native_vectors/stage_sha256_wntz.py",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/sha256/tb/sha256_wntz_test_gen.py",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/sha256_wntz_test_gen.py"
+    ],
+    [
+      "/opt/homebrew/opt/python@3.12/bin/python3.12",
+      "/private/tmp/a2-m12-local-source/dv/caliptra_bfm/native_vectors/check_native_mlkem.py",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/native_mlkem"
+    ],
+    [
+      "/opt/homebrew/opt/python@3.12/bin/python3.12",
+      "/private/tmp/a2-m12-local-source/dv/caliptra_bfm/native_vectors/check_native_mldsa.py",
+      "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/submodules/adams-bridge",
+      "/private/tmp/a2-m12-doe-local-01/result-02/.work/native_vectors/dilithium-ref/test/test_dilithium5"
+    ]
+  ],
+  "firmware_command": [
+    "make",
+    "-f",
+    "/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/tools/scripts/Makefile",
+    "TESTNAME=smoke_test_doe_scan",
+    "GCC_PREFIX=riscv-none-elf",
+    "CALIPTRA_INTERNAL_TRNG=1",
+    "PLAYBOOK_RANDOM_SEED=1",
+    "BUILD_CFLAGS=-std=gnu11 -O2",
+    "program.hex"
+  ],
+  "firmware_exit": 0,
+  "firmware_image_sha256": {
+    "program.hex": "11ab855e3b6d8c3a0d0ac46671dc3599e862b186bf41b3fd3d650fa30f81394a",
+    "dccm.hex": "cfacb83ea18ce401cc504683420830063d2d91d08fbf5cbab6be87f0088491dc",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "native_vector_sha256": {
+    "ecc_secp384r1.exe": "0d429f5b731859031bf59689b3995f263a7d5065b854592e16621fd6a7006c1b",
+    "test_dilithium5": "20b7c03487bf3def643ab6b0a685086b8e71032cae3124d3518e954c8c8afd22",
+    "doe_test_gen.py": "d94bd571dd599a9431398778f195c05fb3a2f3ddb1adcc38925a2c1b3db6bdc0",
+    "sha256_wntz_test_gen.py": "45c8a4f5ac7032c0bdb3b62b3a7b8645bec78b09e028f6bf8ac9cda232b4fce9",
+    "smoke_test_mldsa_vector.hex": "b68858c347fe7b12d4f173c2a6d21844aad8d547fc6cd8587091692365cea775",
+    "ml-kem/native_mlkem": "c171a21c860c37889ec12f2437ab2fbe95bcb240a96fca8ea919c56f5ca2d43d",
+    "ml-kem/random_test_ml_kem.py": "fe772557377e9b0c3c44ee487019edae7870cf24f1b4113de0042cb7543af492"
+  },
+  "simulation_command": [
+    "/private/tmp/a2-m12-doe-local-01/model/obj_dir/Vcaliptra_top_tb",
+    "+CLP_REGRESSION",
+    "+RAND_DOE_VALUES"
+  ],
+  "sim_exit": 0,
+  "sim_elapsed_s": 358.43,
+  "sim_scan": {
+    "passed": 1,
+    "failed": 0,
+    "bad": 1,
+    "jtag_errors": 0,
+    "jtag_bind_denials": 0,
+    "finish": [
+      20434,
+      62260
+    ],
+    "reset_assert_cycles": [],
+    "outstanding_writes_at_reset": [],
+    "reset_in_flight": false
+  },
+  "outcome": "FAIL",
+  "elapsed_s": 367.077,
+  "completed_at": "2026-10-17T16:01:36.468252+00:00"
+}

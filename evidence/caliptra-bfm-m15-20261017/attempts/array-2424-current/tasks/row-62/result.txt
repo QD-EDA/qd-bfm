@@ -1,0 +1,5 @@
+row_id=62
+testname=cbd_rand_test
+status=FAIL
+cause=testbench reported a failure or scoreboard mismatch
+elapsed_seconds=0.059

@@ -1,0 +1,8 @@
+**caliptra-v2-1-2-ecc_montgomerymultiplier_tb**
+Invalid Pass. The test failed to read vectors, as indicated by the error: "ERROR: ... Can't open file mm_test_vectors_5_key_16_word_4.hex" and the subsequent line: "Read 0 test vectors from mm_test_vectors_5_key_16_word_4.hex".
+
+**caliptra-v2-1-2-entropy_src_tb**
+Valid Functional Pass. The test completed successfully, as indicated by: "*** All 00 test cases completed successfully."
+
+**adams-bridge-v2-0-3-power2round_tb**
+Invalid Pass. The test failed to read required input vectors, as indicated by the errors: "ERROR: ... Can't open file coeff_input.hex", "ERROR: ... Can't open file coeff_high.hex", and "ERROR: ... Can't open file coeff_low.hex".

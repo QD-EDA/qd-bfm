@@ -1,0 +1,82 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5563000 - ----------------------------------
+5613000 -  Smoke Test With PCR Signing flow !!
+5666000 - ----------------------------------
+5905000 - Inject PRIVKEY into KV slot 7
+5953000 - Inject MSG into SHA512 digest
+6018000 - 
+6019000 - ECC PCR SIGNING
+6053000 - Load SIGN_R data from ECC
+6127000 - Load SIGN_S data from ECC
+6198000 - Inject PRIVKEY into KV slot 7
+6247000 - Inject MSG into SHA512 digest
+6314000 - 
+6315000 - ECC PCR SIGNING
+6352000 - Load SIGN_R data from ECC
+6426000 - 
+6427000 - MLDSA PCR with zeroize
+6462000 - Inject randomized SEED into KV slot and MSG into SHA512 digest
+6556000 - Waiting for mldsa status ready
+6604000 - 
+6605000 - MLDSA PCR SIGNING
+6785000 - Try to Load SIGN data from MLDSA
+6833000 - Inject randomized SEED into KV slot and MSG into SHA512 digest
+6926000 - Waiting for mldsa status ready
+6974000 - 
+6975000 - MLDSA PCR SIGNING
+7155000 - Try to Load SIGN data from MLDSA
+* TESTCASE PASSED
+
+Finished : minstret = 22936, mcycle = 71791
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

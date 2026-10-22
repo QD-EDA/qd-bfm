@@ -1,0 +1,2 @@
+WIDE_AUTO_BINS_OK
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-auto-bins-20261020-02/reproducers/wide_auto_bins.sv:24: $finish called at 0 (1s)

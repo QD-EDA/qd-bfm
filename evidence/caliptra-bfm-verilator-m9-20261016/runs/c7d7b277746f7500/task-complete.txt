@@ -1,0 +1,1 @@
+test_id=c7d7b277746f7500 testname=smoke_test_pcr_zeroize wrapper_exit=0 completed_at=2026-10-15T20:08:06-06:00

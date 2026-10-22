@@ -1,0 +1,1 @@
+test_id=79b6f2f02c78683d testname=smoke_test_mbox_cg wrapper_exit=0 completed_at=2026-10-16T04:54:16-06:00

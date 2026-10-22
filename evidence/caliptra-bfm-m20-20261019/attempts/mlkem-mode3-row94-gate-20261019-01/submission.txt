@@ -1,0 +1,10 @@
+job_id=3265
+array_task=3265_94
+submitted_utc=2026-10-20T00:02:14Z
+host=DAN-DESKTOP
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-mlkem-mode3-row94-gate-20261019-01
+resources=1 CPU, 2 GiB RAM; runner timeout 1800 s; Slurm limit 2100 s
+source_pin=Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+icarus_binary_sha256=6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+preflight=all input/source/toolchain hashes and source pins verified; helper self-check passed
+initial_state=PENDING Priority at 20/20 CPUs allocated; 3255 rows 83/88/98 and sampler trace 3263_97 running

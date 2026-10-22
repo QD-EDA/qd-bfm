@@ -1,0 +1,6 @@
+case=smoke_test_ras
+mode=with-overlay
+yaml=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_ras/smoke_test_ras.yml
+testname=smoke_test_ras
+seed=1
+overlay=/home/dsell/slurm-runs/caliptra-bfm/a2/m7-fw-compat-d1529c9-20261014-03/tasks/3-smoke_test_ras-with-overlay/build/caliptra_firmware_compat.h

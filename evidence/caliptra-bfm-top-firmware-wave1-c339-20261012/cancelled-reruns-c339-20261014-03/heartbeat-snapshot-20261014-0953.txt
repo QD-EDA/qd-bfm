@@ -1,0 +1,42 @@
+2026-10-14 09:53:31 MDT
+HOST_UP_SINCE=2026-10-14 07:28:20
+             JOBID|     STATE|        TIME|NODELIST(REASON)
+             955_3|   RUNNING|     2:14:14|     DAN-DESKTOP
+             955_2|   RUNNING|     2:14:14|     DAN-DESKTOP
+             955_1|   RUNNING|     2:14:14|     DAN-DESKTOP
+--- 37-a79fb02e90b4ffbd-1
+status=not-finished
+result_json=absent
+log_mtime=2026-10-14 09:51:56.616439536 -0600 heartbeat_count=25
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=6900 mcycle=54491
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7500 mcycle=59285
+--- 39-109971edd9458a51-2
+status=not-finished
+result_json=absent
+log_mtime=2026-10-14 09:49:50.018457876 -0600 heartbeat_count=26
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7500 mcycle=59239
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7800 mcycle=61613
+--- 43-d39c57745790b3e2-3
+status=not-finished
+result_json=absent
+log_mtime=2026-10-14 09:53:26.529846525 -0600 heartbeat_count=25
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=6900 mcycle=54567
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7500 mcycle=59366
+--- 44-bcb5b29a003aa2a6-4
+outcome=PASS
+reason=terminal_result_passed
+runner_exit=0
+progress_heartbeat_count=26
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=7500 mcycle=59434
+result_testname=smoke_test_ecc_flow2_kv_ocp_progress
+  "testname": "smoke_test_ecc_flow2_kv_ocp_progress",
+  "passed": true,
+  "sim_exit": 0,
+  "testcase_pass_markers": 1,
+  "testcase_fail_markers": 0,
+log_mtime=2026-10-14 09:51:08.079679815 -0600 heartbeat_count=26
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7200 mcycle=57034
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=7500 mcycle=59434
+* TESTCASE PASSED
+375765109	/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/output
+1536539	/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/pycache

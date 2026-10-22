@@ -1,0 +1,113 @@
+host=DAN-DESKTOP
+date=2026-10-15
+job_1295_state=not-present-in-squeue
+removed=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source bytes=2043922170
+removed=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/stable-fourstate-probe bytes=747082
+total_removed=2044669252 bytes (2.045 GB / 1.904 GiB)
+preserved=/home/dsell/toolchains/verilator-5.052
+preserved_run_logs=build.log,configure.log,install.log,build.resource,host.txt,source.commit,source.status,verilator.sha256,verilator.version,logs/a2-vlt-5.052-1295.out
+
+
+2026-10-15 follow-up cleanup after copying and checking M8 results:
+- Removed finished disposable runs m8-verilator-20261015-01 (174,809 bytes),
+  m8-verilator-top-20261015-05 (761,889,601 bytes), and
+  m8-verilator-pr7176-20261015-01 (1,538,544,788 bytes).
+- Additional removed: 2,300,609,198 bytes (2.301 GB / 2.143 GiB).
+- `df -h /home/dsell` then showed 782 GB free. The protected Verilator
+  toolchains remain; active M8 run 06 and its model remain because array 1326
+  still uses them. No generated build directory exists in the local checkout;
+  local evidence and the code-only graph are retained.
+
+
+2026-10-15 cleanup after archiving invalid array 1326 outputs:
+- Verified the temporary transfer archive against its remote SHA-256,
+  retained 14 result directories and all 20 available task logs, then deleted
+  remote run06/results, the 20 array-1326 resource records, its 20 task logs,
+  and the temporary archive. Kept run06 model/source and unrelated build log.
+- Removed 57,187,723 recorded bytes (about 0.057 GB / 0.053 GiB):
+  result directory 46,259,434 bytes by `du -sb`, resources 19,959 bytes,
+  task logs 1,411 bytes, and transfer archive 10,906,919 bytes.
+- Cumulative recorded cleanup: 4,402,466,173 bytes (about 4.402 GB /
+  4.101 GiB). Host `/home/dsell` free space after cleanup was 839,440,732,160 bytes.
+
+
+2026-10-15 cleanup after setup-error attempts 1353/1354:
+- After preserving setup logs/status/results in commit d116640, removed
+  the completed failed-run roots 07 and 08: 3,496,727 bytes. Neither attempt
+  reached firmware build or simulation.
+- Extracted the verified QD source archive at commit dd6d43d into fresh
+  roots 09 and 10, then removed the temporary remote tar: 15,967,020 bytes.
+- Cumulative recorded remote cleanup: 4,421,929,920 bytes (4.422 GB).
+
+- Staged the verified dd6d43d source snapshot into fresh xsim root 11 and
+  removed its temporary remote tar: 15,967,020 bytes. The source copy remains
+  active until the six-case `--x-sim` assessment is recorded.
+- Cumulative recorded remote cleanup to date: 4,437,896,940 bytes
+  (4.438 GB).
+
+2026-10-15 cleanup after Verilator array 1372 task 13:
+- Copied and verified the row's result, logs, and resource reports; removed its
+  remote result directory (85,279 bytes by `du -sb`) and task resource file
+  (1,442 bytes). Kept the array source/model and Slurm log because other tasks
+  still use the run root.
+- Additional removed: 86,721 bytes; cumulative recorded remote cleanup:
+  4,437,983,661 bytes (4.438 GB).
+
+2026-10-15 cleanup after Verilator array 1372 tasks 7, 16, and 17:
+- Copied and checksum-verified all three terminal results, logs, and resource
+  reports, then removed their remote result directories and task resource files.
+- Removed 299,287 bytes by `du -sb`; cumulative recorded remote cleanup:
+  4,438,282,948 bytes (4.438 GB).
+
+2026-10-15 cleanup after Verilator array 1372 tasks 18, 19, 21, and 22:
+- Copied and checksum-verified all four terminal results, logs, and resource
+  reports, then removed their remote result directories and task resource files.
+- Removed 334,310 bytes by `du -sb`; cumulative recorded remote cleanup:
+  4,438,617,258 bytes (4.439 GB).
+
+2026-10-15 cleanup after Verilator array 1372 tasks 20, 23–27:
+- Copied and checksum-verified all six terminal results, logs, and resource
+  reports, then removed their remote result directories and task resource files.
+- Removed 513,830 bytes by `du -sb`; cumulative recorded remote cleanup:
+  4,439,131,088 bytes (4.439 GB).
+
+2026-10-15 cleanup after Verilator array 1372 task 1:
+- Copied and checksum-verified the timeout result, firmware and simulator logs,
+  resource reports, and Slurm output, then removed its remote result directory,
+  task resource file, and task stdout.
+- Removed 82,362 bytes by `du -sb`; cumulative recorded remote cleanup:
+  4,439,213,450 bytes (4.439 GB).
+
+2026-10-15 cleanup after corrected c339 AXI read task 1373_1:
+- Copied and checksum-verified its provenance, tool versions and hashes,
+  firmware/simulator/vector logs, status, resource report, and Slurm output.
+  Removed the disposable per-task VVP/firmware build tree and task stdout;
+  the shared run10 source and active task 1373_2 remain.
+- Removed 377,253,558 bytes by `du -sb`; cumulative recorded remote cleanup:
+  4,816,467,008 bytes (4.816 GB).
+
+2026-10-15 cleanup after corrected c339 AXI write task 1373_2:
+- Copied and checksum-verified its provenance, tool versions and hashes,
+  simulator/build logs, status, resource report, and Slurm output. After
+  confirming array 1373 had no queued or running tasks, removed run root 10,
+  including disposable build/output trees and its staging source snapshot.
+- Removed 425,432,994 bytes by `du -sb`; cumulative recorded remote cleanup:
+  5,241,900,002 bytes (5.242 GB).
+
+2026-10-15 cleanup after experimental x-sim build job 1377:
+- Copied and checksum-verified the batch script, elaboration/build logs,
+  resource data, tool version, source/filelist provenance, and Slurm output.
+  Canceled dependent pilot job 1378 after Slurm reported
+  `DependencyNeverSatisfied`; it had no test results. After both jobs were
+  terminal, removed run root 11, including the partial model build and staging
+  source snapshot.
+- Removed 48,438,051 bytes by `du -sb`; cumulative recorded remote cleanup:
+  5,290,338,053 bytes (5.290 GB).
+
+2026-10-15 cleanup after Verilator array 1372 task 3:
+- Copied and checksum-verified the final result JSON, simulator and firmware
+  logs, native-vector logs, resource reports, task stdout, runner, and source
+  provenance. With no A2 jobs queued or running, removed run roots 06 and 09,
+  including the stable model build, remaining outputs, and staging source copy.
+- Removed 804,427,815 bytes by `du -sb`; cumulative recorded remote cleanup:
+  6,094,765,868 bytes (6.095 GB).

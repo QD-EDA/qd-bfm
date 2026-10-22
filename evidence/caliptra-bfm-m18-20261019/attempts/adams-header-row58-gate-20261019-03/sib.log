@@ -1,0 +1,1311 @@
+sign: c5dd1ccbd2f2c5dc
+ack - i: c4 j: 68
+sign: 0
+ack - i: c5 j: 5d
+sign: 0
+rej - i: c6 j: c7
+ack - i: c6 j: 01
+sign: 1
+rej - i: c7 j: f1
+rej - i: c7 j: f2
+rej - i: c7 j: cc
+rej - i: c7 j: db
+ack - i: c7 j: 77
+sign: 1
+ack - i: c8 j: 16
+sign: 1
+rej - i: c9 j: f4
+ack - i: c9 j: 08
+sign: 0
+ack - i: ca j: 90
+sign: 1
+ack - i: cb j: 7d
+sign: 1
+ack - i: cc j: 4a
+sign: 1
+rej - i: cd j: ea
+rej - i: cd j: da
+ack - i: cd j: b8
+sign: 0
+rej - i: ce j: ee
+ack - i: ce j: 63
+sign: 1
+ack - i: cf j: 71
+sign: 0
+rej - i: d0 j: db
+ack - i: d0 j: 39
+sign: 0
+ack - i: d1 j: d0
+sign: 0
+ack - i: d2 j: c3
+sign: 1
+ack - i: d3 j: 64
+sign: 1
+ack - i: d4 j: ae
+sign: 0
+ack - i: d5 j: a1
+sign: 1
+ack - i: d6 j: 68
+sign: 0
+rej - i: d7 j: e8
+rej - i: d7 j: f5
+ack - i: d7 j: 10
+sign: 0
+rej - i: d8 j: f9
+rej - i: d8 j: f5
+ack - i: d8 j: 09
+sign: 1
+ack - i: d9 j: 69
+sign: 1
+rej - i: da j: e3
+ack - i: da j: 33
+sign: 1
+rej - i: db j: ef
+ack - i: db j: 4e
+sign: 1
+ack - i: dc j: 4a
+sign: 0
+ack - i: dd j: b4
+sign: 1
+ack - i: de j: 27
+sign: 0
+ack - i: df j: 35
+sign: 0
+rej - i: e0 j: ee
+ack - i: e0 j: 0b
+sign: 1
+ack - i: e1 j: b6
+sign: 0
+ack - i: e2 j: 54
+sign: 1
+ack - i: e3 j: 85
+sign: 1
+rej - i: e4 j: fd
+ack - i: e4 j: 35
+sign: 1
+ack - i: e5 j: 4c
+sign: 1
+rej - i: e6 j: f8
+ack - i: e6 j: bd
+sign: 0
+ack - i: e7 j: e0
+sign: 1
+ack - i: e8 j: 69
+sign: 0
+ack - i: e9 j: 94
+sign: 0
+ack - i: ea j: 10
+sign: 1
+ack - i: eb j: 64
+sign: 1
+ack - i: ec j: e2
+sign: 0
+ack - i: ed j: 0c
+sign: 0
+ack - i: ee j: 27
+sign: 1
+ack - i: ef j: 84
+sign: 1
+ack - i: f0 j: b7
+sign: 1
+ack - i: f1 j: 3c
+sign: 0
+ack - i: f2 j: 20
+sign: 0
+ack - i: f3 j: 83
+sign: 0
+ack - i: f4 j: 47
+sign: 1
+ack - i: f5 j: 2b
+sign: 0
+ack - i: f6 j: 9f
+sign: 1
+ack - i: f7 j: bf
+sign: 1
+ack - i: f8 j: 4c
+sign: 1
+ack - i: f9 j: 5d
+sign: 0
+ack - i: fa j: df
+sign: 1
+ack - i: fb j: 51
+sign: 1
+ack - i: fc j: 3a
+sign: 1
+ack - i: fd j: 2d
+sign: 0
+ack - i: fe j: e6
+sign: 1
+ack - i: ff j: 4f
+sign: 0
+sign: 39afbd14737cab03
+ack - i: c4 j: 03
+sign: 1
+ack - i: c5 j: ba
+sign: 1
+ack - i: c6 j: a7
+sign: 0
+ack - i: c7 j: ad
+sign: 0
+ack - i: c8 j: 29
+sign: 0
+ack - i: c9 j: 72
+sign: 0
+ack - i: ca j: 72
+sign: 0
+ack - i: cb j: 48
+sign: 0
+ack - i: cc j: 83
+sign: 1
+ack - i: cd j: a0
+sign: 1
+ack - i: ce j: 23
+sign: 0
+ack - i: cf j: 86
+sign: 1
+ack - i: d0 j: b6
+sign: 0
+ack - i: d1 j: 5d
+sign: 1
+ack - i: d2 j: 23
+sign: 0
+rej - i: d3 j: f7
+ack - i: d3 j: 88
+sign: 1
+ack - i: d4 j: 83
+sign: 0
+ack - i: d5 j: 0c
+sign: 0
+ack - i: d6 j: 88
+sign: 1
+ack - i: d7 j: 72
+sign: 1
+ack - i: d8 j: cd
+sign: 1
+ack - i: d9 j: 80
+sign: 1
+ack - i: da j: 91
+sign: 1
+ack - i: db j: 97
+sign: 0
+ack - i: dc j: 42
+sign: 1
+rej - i: dd j: e9
+ack - i: dd j: 6b
+sign: 1
+ack - i: de j: 7a
+sign: 0
+ack - i: df j: 81
+sign: 0
+ack - i: e0 j: cb
+sign: 1
+ack - i: e1 j: 08
+sign: 1
+ack - i: e2 j: 7c
+sign: 1
+rej - i: e3 j: fc
+rej - i: e3 j: f8
+ack - i: e3 j: 29
+sign: 0
+rej - i: e4 j: ec
+ack - i: e4 j: bc
+sign: 0
+ack - i: e5 j: 38
+sign: 0
+ack - i: e6 j: 36
+sign: 1
+ack - i: e7 j: cd
+sign: 0
+ack - i: e8 j: e8
+sign: 1
+ack - i: e9 j: 93
+sign: 0
+rej - i: ea j: ee
+ack - i: ea j: 48
+sign: 0
+ack - i: eb j: 2c
+sign: 0
+ack - i: ec j: 70
+sign: 1
+rej - i: ed j: ef
+ack - i: ed j: 32
+sign: 0
+ack - i: ee j: 97
+sign: 1
+ack - i: ef j: d4
+sign: 1
+ack - i: f0 j: 78
+sign: 1
+rej - i: f1 j: f4
+ack - i: f1 j: 3a
+sign: 1
+ack - i: f2 j: 8a
+sign: 0
+ack - i: f3 j: 60
+sign: 1
+ack - i: f4 j: 35
+sign: 1
+ack - i: f5 j: 2d
+sign: 1
+ack - i: f6 j: 9b
+sign: 1
+ack - i: f7 j: 96
+sign: 1
+ack - i: f8 j: 8d
+sign: 0
+ack - i: f9 j: 66
+sign: 1
+ack - i: fa j: 07
+sign: 0
+ack - i: fb j: 03
+sign: 1
+ack - i: fc j: 37
+sign: 1
+ack - i: fd j: 17
+sign: 0
+ack - i: fe j: dc
+sign: 0
+ack - i: ff j: af
+sign: 1
+sign: 50e249c656026d83
+rej - i: c4 j: f1
+ack - i: c4 j: a8
+sign: 1
+rej - i: c5 j: e0
+rej - i: c5 j: dd
+rej - i: c5 j: dd
+ack - i: c5 j: 48
+sign: 1
+rej - i: c6 j: cf
+ack - i: c6 j: 50
+sign: 0
+ack - i: c7 j: 3c
+sign: 0
+rej - i: c8 j: eb
+ack - i: c8 j: ba
+sign: 0
+ack - i: c9 j: 93
+sign: 0
+ack - i: ca j: 8a
+sign: 0
+ack - i: cb j: ac
+sign: 1
+ack - i: cc j: 32
+sign: 1
+ack - i: cd j: 2d
+sign: 0
+ack - i: ce j: a5
+sign: 1
+rej - i: cf j: d7
+ack - i: cf j: 21
+sign: 1
+ack - i: d0 j: 93
+sign: 0
+ack - i: d1 j: 6c
+sign: 1
+ack - i: d2 j: 8e
+sign: 1
+ack - i: d3 j: a7
+sign: 0
+ack - i: d4 j: 9d
+sign: 0
+rej - i: d5 j: df
+ack - i: d5 j: 88
+sign: 1
+ack - i: d6 j: 6c
+sign: 0
+ack - i: d7 j: 8e
+sign: 0
+ack - i: d8 j: 18
+sign: 0
+ack - i: d9 j: 38
+sign: 0
+ack - i: da j: b4
+sign: 0
+ack - i: db j: 5e
+sign: 0
+ack - i: dc j: d2
+sign: 0
+ack - i: dd j: ca
+sign: 1
+rej - i: de j: fb
+ack - i: de j: 54
+sign: 1
+ack - i: df j: 1a
+sign: 0
+ack - i: e0 j: 72
+sign: 1
+ack - i: e1 j: 76
+sign: 0
+ack - i: e2 j: 24
+sign: 1
+ack - i: e3 j: 95
+sign: 0
+ack - i: e4 j: 88
+sign: 0
+ack - i: e5 j: d8
+sign: 1
+ack - i: e6 j: 92
+sign: 1
+ack - i: e7 j: 8a
+sign: 0
+ack - i: e8 j: 8d
+sign: 0
+ack - i: e9 j: 99
+sign: 0
+ack - i: ea j: cf
+sign: 1
+ack - i: eb j: 9e
+sign: 1
+ack - i: ec j: e2
+sign: 1
+rej - i: ed j: f5
+ack - i: ed j: 1a
+sign: 0
+ack - i: ee j: b6
+sign: 0
+ack - i: ef j: a2
+sign: 1
+ack - i: f0 j: 26
+sign: 0
+ack - i: f1 j: eb
+sign: 0
+ack - i: f2 j: 50
+sign: 1
+rej - i: f3 j: fd
+ack - i: f3 j: 91
+sign: 0
+ack - i: f4 j: cb
+sign: 0
+ack - i: f5 j: 37
+sign: 1
+ack - i: f6 j: a9
+sign: 0
+ack - i: f7 j: b4
+sign: 0
+ack - i: f8 j: 3a
+sign: 0
+ack - i: f9 j: 91
+sign: 1
+ack - i: fa j: 61
+sign: 1
+ack - i: fb j: 43
+sign: 1
+ack - i: fc j: fa
+sign: 0
+ack - i: fd j: 61
+sign: 0
+ack - i: fe j: 42
+sign: 0
+ack - i: ff j: cf
+sign: 0
+sign: 93f6e481ed587489
+ack - i: c4 j: af
+sign: 1
+ack - i: c5 j: 04
+sign: 0
+ack - i: c6 j: ac
+sign: 0
+ack - i: c7 j: 27
+sign: 1
+ack - i: c8 j: 6d
+sign: 0
+rej - i: c9 j: d4
+rej - i: c9 j: d5
+rej - i: c9 j: ec
+ack - i: c9 j: 03
+sign: 0
+ack - i: ca j: 75
+sign: 0
+ack - i: cb j: a7
+sign: 1
+ack - i: cc j: ac
+sign: 0
+rej - i: cd j: cf
+ack - i: cd j: 4f
+sign: 0
+ack - i: ce j: ad
+sign: 1
+ack - i: cf j: 4a
+sign: 0
+ack - i: d0 j: 42
+sign: 1
+rej - i: d1 j: f7
+ack - i: d1 j: ac
+sign: 1
+ack - i: d2 j: c9
+sign: 1
+ack - i: d3 j: 12
+sign: 0
+ack - i: d4 j: 6a
+sign: 0
+ack - i: d5 j: 29
+sign: 0
+ack - i: d6 j: c9
+sign: 0
+ack - i: d7 j: 13
+sign: 1
+ack - i: d8 j: d6
+sign: 1
+ack - i: d9 j: 45
+sign: 0
+ack - i: da j: 97
+sign: 1
+ack - i: db j: 2f
+sign: 0
+ack - i: dc j: bc
+sign: 1
+ack - i: dd j: 2e
+sign: 0
+ack - i: de j: 51
+sign: 1
+ack - i: df j: 97
+sign: 1
+ack - i: e0 j: c5
+sign: 0
+rej - i: e1 j: f3
+ack - i: e1 j: a4
+sign: 1
+ack - i: e2 j: a1
+sign: 1
+ack - i: e3 j: 9b
+sign: 1
+ack - i: e4 j: 89
+sign: 1
+ack - i: e5 j: 7e
+sign: 0
+ack - i: e6 j: a3
+sign: 0
+ack - i: e7 j: a5
+sign: 0
+ack - i: e8 j: 18
+sign: 0
+ack - i: e9 j: 55
+sign: 0
+ack - i: ea j: 10
+sign: 0
+ack - i: eb j: 5f
+sign: 1
+ack - i: ec j: 3c
+sign: 0
+ack - i: ed j: 8e
+sign: 0
+ack - i: ee j: 15
+sign: 1
+ack - i: ef j: 0f
+sign: 0
+ack - i: f0 j: ee
+sign: 0
+ack - i: f1 j: a2
+sign: 1
+ack - i: f2 j: 9f
+sign: 1
+ack - i: f3 j: 21
+sign: 1
+ack - i: f4 j: 59
+sign: 0
+ack - i: f5 j: 50
+sign: 1
+ack - i: f6 j: 31
+sign: 1
+ack - i: f7 j: 06
+sign: 0
+ack - i: f8 j: 9a
+sign: 1
+ack - i: f9 j: 27
+sign: 1
+ack - i: fa j: b1
+sign: 1
+ack - i: fb j: 4d
+sign: 1
+ack - i: fc j: 9f
+sign: 1
+ack - i: fd j: 0a
+sign: 1
+ack - i: fe j: 1c
+sign: 0
+ack - i: ff j: 3b
+sign: 0
+sign: bce8bf882b21efc5
+ack - i: c4 j: 53
+sign: 1
+rej - i: c5 j: f0
+ack - i: c5 j: 7b
+sign: 0
+ack - i: c6 j: b1
+sign: 1
+ack - i: c7 j: 60
+sign: 0
+ack - i: c8 j: 57
+sign: 0
+ack - i: c9 j: 9e
+sign: 0
+ack - i: ca j: bc
+sign: 1
+ack - i: cb j: 7e
+sign: 1
+ack - i: cc j: be
+sign: 1
+ack - i: cd j: 28
+sign: 1
+ack - i: ce j: a6
+sign: 1
+ack - i: cf j: c0
+sign: 1
+rej - i: d0 j: e8
+ack - i: d0 j: a6
+sign: 0
+ack - i: d1 j: 89
+sign: 1
+ack - i: d2 j: a0
+sign: 1
+rej - i: d3 j: ea
+rej - i: d3 j: ed
+ack - i: d3 j: 3a
+sign: 1
+rej - i: d4 j: fb
+ack - i: d4 j: 08
+sign: 1
+ack - i: d5 j: 8d
+sign: 0
+ack - i: d6 j: 8f
+sign: 0
+ack - i: d7 j: 02
+sign: 0
+ack - i: d8 j: 50
+sign: 0
+ack - i: d9 j: 30
+sign: 1
+ack - i: da j: 97
+sign: 0
+rej - i: db j: fa
+ack - i: db j: 73
+sign: 0
+ack - i: dc j: 04
+sign: 1
+rej - i: dd j: df
+ack - i: dd j: dd
+sign: 1
+ack - i: de j: 5e
+sign: 0
+ack - i: df j: b8
+sign: 1
+ack - i: e0 j: b6
+sign: 0
+rej - i: e1 j: e3
+ack - i: e1 j: 38
+sign: 1
+ack - i: e2 j: 0d
+sign: 0
+ack - i: e3 j: cc
+sign: 0
+ack - i: e4 j: 0a
+sign: 0
+rej - i: e5 j: fd
+ack - i: e5 j: 49
+sign: 0
+ack - i: e6 j: 90
+sign: 0
+ack - i: e7 j: 7e
+sign: 1
+ack - i: e8 j: 50
+sign: 0
+ack - i: e9 j: c7
+sign: 0
+ack - i: ea j: e9
+sign: 0
+ack - i: eb j: c0
+sign: 1
+rej - i: ec j: f0
+ack - i: ec j: a6
+sign: 1
+ack - i: ed j: 06
+sign: 1
+ack - i: ee j: ac
+sign: 1
+ack - i: ef j: 12
+sign: 1
+ack - i: f0 j: 61
+sign: 1
+ack - i: f1 j: 9c
+sign: 1
+ack - i: f2 j: dc
+sign: 0
+ack - i: f3 j: b9
+sign: 1
+ack - i: f4 j: 09
+sign: 0
+ack - i: f5 j: 84
+sign: 0
+ack - i: f6 j: 20
+sign: 0
+ack - i: f7 j: 3f
+sign: 1
+ack - i: f8 j: 5b
+sign: 0
+ack - i: f9 j: 18
+sign: 1
+ack - i: fa j: 59
+sign: 1
+ack - i: fb j: 07
+sign: 1
+ack - i: fc j: e5
+sign: 0
+ack - i: fd j: 6b
+sign: 0
+ack - i: fe j: 92
+sign: 1
+ack - i: ff j: 29
+sign: 1
+sign: 26f7cf9e7a9c2633
+ack - i: c4 j: 56
+sign: 1
+ack - i: c5 j: 4a
+sign: 1
+ack - i: c6 j: 88
+sign: 0
+ack - i: c7 j: b5
+sign: 0
+ack - i: c8 j: 46
+sign: 1
+ack - i: c9 j: 5f
+sign: 1
+rej - i: ca j: ef
+ack - i: ca j: 11
+sign: 0
+ack - i: cb j: c5
+sign: 0
+ack - i: cc j: c9
+sign: 0
+rej - i: cd j: e8
+rej - i: cd j: f9
+ack - i: cd j: 65
+sign: 1
+rej - i: ce j: f6
+ack - i: ce j: 51
+sign: 1
+ack - i: cf j: 6c
+sign: 0
+ack - i: d0 j: a4
+sign: 0
+ack - i: d1 j: 76
+sign: 1
+ack - i: d2 j: ad
+sign: 0
+ack - i: d3 j: d1
+sign: 0
+ack - i: d4 j: 17
+sign: 0
+rej - i: d5 j: fc
+ack - i: d5 j: 69
+sign: 0
+ack - i: d6 j: 6a
+sign: 1
+ack - i: d7 j: 7d
+sign: 1
+ack - i: d8 j: c3
+sign: 1
+ack - i: d9 j: 70
+sign: 0
+ack - i: da j: 4f
+sign: 0
+ack - i: db j: ba
+sign: 1
+ack - i: dc j: b1
+sign: 0
+rej - i: dd j: e0
+ack - i: dd j: 8b
+sign: 1
+ack - i: de j: 05
+sign: 0
+rej - i: df j: ea
+ack - i: df j: 8a
+sign: 1
+ack - i: e0 j: 20
+sign: 1
+ack - i: e1 j: 00
+sign: 1
+rej - i: e2 j: e6
+ack - i: e2 j: 7b
+sign: 1
+ack - i: e3 j: ca
+sign: 0
+ack - i: e4 j: 96
+sign: 0
+ack - i: e5 j: 5d
+sign: 1
+ack - i: e6 j: d6
+sign: 1
+rej - i: e7 j: f2
+ack - i: e7 j: 70
+sign: 1
+ack - i: e8 j: 53
+sign: 1
+ack - i: e9 j: 2e
+sign: 0
+ack - i: ea j: 22
+sign: 0
+rej - i: eb j: fb
+ack - i: eb j: 73
+sign: 1
+ack - i: ec j: 05
+sign: 1
+ack - i: ed j: 9d
+sign: 1
+ack - i: ee j: 02
+sign: 1
+ack - i: ef j: 4d
+sign: 1
+rej - i: f0 j: f6
+rej - i: f0 j: f7
+ack - i: f0 j: 6c
+sign: 0
+ack - i: f1 j: c0
+sign: 0
+ack - i: f2 j: 14
+sign: 1
+ack - i: f3 j: 4d
+sign: 1
+ack - i: f4 j: 3b
+sign: 1
+ack - i: f5 j: c7
+sign: 1
+ack - i: f6 j: 6c
+sign: 1
+ack - i: f7 j: 11
+sign: 0
+ack - i: f8 j: c8
+sign: 1
+ack - i: f9 j: f1
+sign: 1
+ack - i: fa j: fa
+sign: 1
+ack - i: fb j: cc
+sign: 1
+ack - i: fc j: ac
+sign: 0
+ack - i: fd j: c6
+sign: 1
+ack - i: fe j: d6
+sign: 1
+ack - i: ff j: 4e
+sign: 0
+sign: d68ec088d404b4ac
+ack - i: c4 j: 6f
+sign: 0
+ack - i: c5 j: 37
+sign: 0
+ack - i: c6 j: 80
+sign: 1
+rej - i: c7 j: ca
+ack - i: c7 j: 7d
+sign: 1
+ack - i: c8 j: a6
+sign: 0
+ack - i: c9 j: 2e
+sign: 1
+ack - i: ca j: 96
+sign: 0
+ack - i: cb j: 68
+sign: 1
+ack - i: cc j: 0d
+sign: 0
+ack - i: cd j: 56
+sign: 0
+ack - i: ce j: 4d
+sign: 1
+ack - i: cf j: 3d
+sign: 0
+ack - i: d0 j: 61
+sign: 1
+ack - i: d1 j: 55
+sign: 1
+ack - i: d2 j: bf
+sign: 0
+ack - i: d3 j: c2
+sign: 1
+ack - i: d4 j: d0
+sign: 0
+ack - i: d5 j: b8
+sign: 0
+ack - i: d6 j: 21
+sign: 1
+ack - i: d7 j: 6d
+sign: 0
+ack - i: d8 j: 00
+sign: 0
+ack - i: d9 j: 8f
+sign: 0
+rej - i: da j: dc
+ack - i: da j: 21
+sign: 0
+rej - i: db j: e0
+ack - i: db j: 4e
+sign: 0
+ack - i: dc j: 8c
+sign: 0
+ack - i: dd j: d0
+sign: 0
+ack - i: de j: 66
+sign: 1
+ack - i: df j: 16
+sign: 0
+ack - i: e0 j: 2d
+sign: 1
+rej - i: e1 j: e8
+ack - i: e1 j: 30
+sign: 0
+ack - i: e2 j: cd
+sign: 1
+rej - i: e3 j: ec
+rej - i: e3 j: fc
+ack - i: e3 j: 57
+sign: 1
+ack - i: e4 j: b7
+sign: 0
+ack - i: e5 j: 72
+sign: 0
+ack - i: e6 j: 15
+sign: 0
+ack - i: e7 j: a1
+sign: 1
+ack - i: e8 j: ca
+sign: 0
+ack - i: e9 j: cc
+sign: 0
+ack - i: ea j: dd
+sign: 0
+rej - i: eb j: fc
+ack - i: eb j: a3
+sign: 1
+ack - i: ec j: 13
+sign: 0
+ack - i: ed j: 12
+sign: 0
+ack - i: ee j: 1a
+sign: 0
+ack - i: ef j: cc
+sign: 0
+ack - i: f0 j: a3
+sign: 0
+ack - i: f1 j: 81
+sign: 0
+ack - i: f2 j: 28
+sign: 1
+ack - i: f3 j: cb
+sign: 1
+ack - i: f4 j: 8c
+sign: 0
+ack - i: f5 j: a6
+sign: 1
+ack - i: f6 j: ab
+sign: 1
+ack - i: f7 j: 6f
+sign: 1
+ack - i: f8 j: a0
+sign: 0
+ack - i: f9 j: 25
+sign: 0
+ack - i: fa j: e2
+sign: 0
+ack - i: fb j: 42
+sign: 1
+ack - i: fc j: 57
+sign: 0
+ack - i: fd j: 7e
+sign: 1
+ack - i: fe j: 92
+sign: 1
+ack - i: ff j: d5
+sign: 0
+sign: 4d8af536722b439d
+rej - i: c4 j: ca
+ack - i: c4 j: 1a
+sign: 1
+rej - i: c5 j: e0
+ack - i: c5 j: 53
+sign: 0
+ack - i: c6 j: b6
+sign: 1
+ack - i: c7 j: 83
+sign: 1
+rej - i: c8 j: f5
+ack - i: c8 j: a9
+sign: 1
+ack - i: c9 j: 2c
+sign: 0
+ack - i: ca j: 5f
+sign: 0
+ack - i: cb j: 60
+sign: 1
+rej - i: cc j: d4
+ack - i: cc j: c4
+sign: 1
+rej - i: cd j: d7
+ack - i: cd j: 9e
+sign: 1
+ack - i: ce j: cd
+sign: 0
+ack - i: cf j: 55
+sign: 0
+ack - i: d0 j: 67
+sign: 0
+ack - i: d1 j: 8b
+sign: 0
+rej - i: d2 j: d9
+ack - i: d2 j: 39
+sign: 1
+ack - i: d3 j: 77
+sign: 0
+ack - i: d4 j: 20
+sign: 1
+ack - i: d5 j: 0f
+sign: 1
+ack - i: d6 j: a6
+sign: 0
+ack - i: d7 j: b7
+sign: 1
+ack - i: d8 j: 27
+sign: 0
+ack - i: d9 j: 21
+sign: 1
+rej - i: da j: df
+ack - i: da j: 77
+sign: 0
+ack - i: db j: 05
+sign: 0
+ack - i: dc j: 71
+sign: 0
+ack - i: dd j: 67
+sign: 1
+ack - i: de j: 9b
+sign: 0
+ack - i: df j: 36
+sign: 0
+ack - i: e0 j: 58
+sign: 1
+ack - i: e1 j: 2a
+sign: 1
+ack - i: e2 j: 2a
+sign: 1
+rej - i: e3 j: fc
+ack - i: e3 j: 81
+sign: 0
+ack - i: e4 j: bf
+sign: 0
+rej - i: e5 j: ec
+ack - i: e5 j: 16
+sign: 1
+ack - i: e6 j: 84
+sign: 1
+ack - i: e7 j: b1
+sign: 0
+ack - i: e8 j: 1e
+sign: 1
+ack - i: e9 j: 7a
+sign: 1
+ack - i: ea j: 48
+sign: 0
+ack - i: eb j: dc
+sign: 0
+ack - i: ec j: 35
+sign: 1
+ack - i: ed j: 83
+sign: 0
+ack - i: ee j: e6
+sign: 1
+ack - i: ef j: 71
+sign: 0
+ack - i: f0 j: 0e
+sign: 1
+ack - i: f1 j: d2
+sign: 1
+ack - i: f2 j: 39
+sign: 1
+ack - i: f3 j: 5f
+sign: 1
+ack - i: f4 j: 84
+sign: 0
+ack - i: f5 j: 77
+sign: 1
+rej - i: f6 j: f7
+ack - i: f6 j: 5d
+sign: 0
+ack - i: f7 j: 48
+sign: 1
+ack - i: f8 j: 11
+sign: 0
+ack - i: f9 j: db
+sign: 0
+ack - i: fa j: ac
+sign: 0
+ack - i: fb j: 41
+sign: 1
+ack - i: fc j: 83
+sign: 1
+ack - i: fd j: 69
+sign: 0
+ack - i: fe j: b7
+sign: 1
+ack - i: ff j: 10
+sign: 1
+sign: f9d60680acd6ef23
+rej - i: c4 j: ea
+ack - i: c4 j: c1
+sign: 1
+ack - i: c5 j: 00
+sign: 1
+ack - i: c6 j: 32
+sign: 0
+ack - i: c7 j: 32
+sign: 0
+rej - i: c8 j: e7
+ack - i: c8 j: 18
+sign: 0
+ack - i: c9 j: 9c
+sign: 1
+ack - i: ca j: 79
+sign: 0
+ack - i: cb j: b2
+sign: 0
+ack - i: cc j: 90
+sign: 1
+ack - i: cd j: 4a
+sign: 1
+ack - i: ce j: 30
+sign: 1
+ack - i: cf j: 48
+sign: 1
+ack - i: d0 j: 43
+sign: 0
+ack - i: d1 j: 2e
+sign: 1
+ack - i: d2 j: 10
+sign: 1
+ack - i: d3 j: 54
+sign: 1
+rej - i: d4 j: f8
+ack - i: d4 j: 64
+sign: 0
+ack - i: d5 j: 07
+sign: 1
+rej - i: d6 j: fd
+ack - i: d6 j: a2
+sign: 1
+ack - i: d7 j: 11
+sign: 0
+ack - i: d8 j: 9d
+sign: 1
+ack - i: d9 j: 6a
+sign: 0
+rej - i: da j: f5
+ack - i: da j: a2
+sign: 1
+ack - i: db j: 75
+sign: 1
+ack - i: dc j: 8f
+sign: 0
+ack - i: dd j: 9f
+sign: 0
+ack - i: de j: cc
+sign: 1
+rej - i: df j: e3
+ack - i: df j: 9a
+sign: 1
+ack - i: e0 j: 72
+sign: 0
+ack - i: e1 j: be
+sign: 1
+ack - i: e2 j: 93
+sign: 0
+ack - i: e3 j: aa
+sign: 1
+ack - i: e4 j: 22
+sign: 0
+ack - i: e5 j: 61
+sign: 0
+ack - i: e6 j: 1d
+sign: 0
+ack - i: e7 j: 5a
+sign: 0
+ack - i: e8 j: c9
+sign: 0
+ack - i: e9 j: ce
+sign: 0
+ack - i: ea j: 60
+sign: 0
+rej - i: eb j: f2
+ack - i: eb j: b3
+sign: 1
+ack - i: ec j: dc
+sign: 0
+ack - i: ed j: 67
+sign: 1
+ack - i: ee j: cf
+sign: 1
+ack - i: ef j: e6
+sign: 0
+ack - i: f0 j: 83
+sign: 0
+ack - i: f1 j: 81
+sign: 0
+ack - i: f2 j: 06
+sign: 0
+ack - i: f3 j: b6
+sign: 0
+rej - i: f4 j: fa
+ack - i: f4 j: 61
+sign: 0
+ack - i: f5 j: 6f
+sign: 1
+ack - i: f6 j: 83
+sign: 1
+ack - i: f7 j: 70
+sign: 0
+ack - i: f8 j: 77
+sign: 1
+ack - i: f9 j: cc
+sign: 0
+ack - i: fa j: 03
+sign: 1
+ack - i: fb j: f2
+sign: 1
+ack - i: fc j: 66
+sign: 1
+ack - i: fd j: a4
+sign: 0
+ack - i: fe j: 49
+sign: 0
+ack - i: ff j: 00
+sign: 1
+sign: 914e38a3989c5b92
+rej - i: c4 j: f4
+ack - i: c4 j: 4c
+sign: 0
+rej - i: c5 j: ca
+ack - i: c5 j: 19
+sign: 1
+ack - i: c6 j: 90
+sign: 0
+ack - i: c7 j: 37
+sign: 0
+ack - i: c8 j: 95
+sign: 1
+rej - i: c9 j: d9
+rej - i: c9 j: d9
+ack - i: c9 j: 32
+sign: 0
+ack - i: ca j: a1
+sign: 0
+rej - i: cb j: de
+rej - i: cb j: cc
+rej - i: cb j: cd
+rej - i: cb j: dc
+ack - i: cb j: 83
+sign: 1
+ack - i: cc j: 82
+sign: 1
+ack - i: cd j: 7e
+sign: 1
+rej - i: ce j: f2
+ack - i: ce j: 90
+sign: 0
+ack - i: cf j: 26
+sign: 1
+ack - i: d0 j: 5d
+sign: 1
+ack - i: d1 j: ca
+sign: 0
+ack - i: d2 j: 39
+sign: 1
+ack - i: d3 j: c2
+sign: 0
+ack - i: d4 j: 53
+sign: 0
+ack - i: d5 j: 23
+sign: 0
+ack - i: d6 j: 1e
+sign: 1
+ack - i: d7 j: 23
+sign: 1
+ack - i: d8 j: 26
+sign: 1
+ack - i: d9 j: 1a
+sign: 0
+ack - i: da j: ac
+sign: 0
+ack - i: db j: 67
+sign: 1
+ack - i: dc j: 19
+sign: 0
+rej - i: dd j: ef
+ack - i: dd j: cc
+sign: 0
+ack - i: de j: ab
+sign: 0
+ack - i: df j: 06
+sign: 1
+ack - i: e0 j: 8d
+sign: 1
+ack - i: e1 j: 80
+sign: 0
+ack - i: e2 j: e0
+sign: 0
+ack - i: e3 j: a8
+sign: 1
+ack - i: e4 j: 68
+sign: 1
+ack - i: e5 j: 00
+sign: 1
+ack - i: e6 j: 05
+sign: 0
+ack - i: e7 j: d4
+sign: 0
+ack - i: e8 j: 7e
+sign: 0
+ack - i: e9 j: 41
+sign: 1
+ack - i: ea j: 3b
+sign: 0
+ack - i: eb j: dd
+sign: 1
+ack - i: ec j: 84
+sign: 0
+ack - i: ed j: cb
+sign: 0
+ack - i: ee j: 67
+sign: 0
+ack - i: ef j: c8
+sign: 1
+ack - i: f0 j: 93
+sign: 1
+ack - i: f1 j: 3b
+sign: 1
+ack - i: f2 j: 4a
+sign: 0
+ack - i: f3 j: 78
+sign: 0
+ack - i: f4 j: 80
+sign: 0
+ack - i: f5 j: 64
+sign: 1
+ack - i: f6 j: 03
+sign: 1
+ack - i: f7 j: 2b
+sign: 1
+ack - i: f8 j: 8a
+sign: 0
+ack - i: f9 j: 76
+sign: 0
+ack - i: fa j: 90
+sign: 1
+ack - i: fb j: a2
+sign: 0
+ack - i: fc j: 3f
+sign: 1
+ack - i: fd j: 76
+sign: 0
+ack - i: fe j: 8a
+sign: 0
+ack - i: ff j: e3
+sign: 0

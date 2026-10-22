@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-modport-20261020-01/reproducers/dist_boolean_subject.sv:4: error: dist subject expression requires unsupported IEEE 11.8.2 top-down context propagation; use a typed intermediate expression.
+1 error(s) during elaboration.

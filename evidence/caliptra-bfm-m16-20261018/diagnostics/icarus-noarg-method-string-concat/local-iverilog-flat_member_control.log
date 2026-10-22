@@ -1,0 +1,4 @@
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/flat_member_control.sv:18: warning: Static variable initialization requires explicit lifetime in this context.
+compile_exit=0
+FLAT_MEMBER_CONTROL_OK
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/flat_member_control.sv:22: $finish called at 0 (1s)

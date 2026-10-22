@@ -1,0 +1,12 @@
+host=DAN-DESKTOP
+submitted=2026-10-15
+job_id=1298
+name=a2-vlt-pr7176
+source=Verilator pull request 7176 head
+source_commit=27d3c20afb5cf83a67bcee39b0b783b82282e23e
+target_install=/home/dsell/toolchains/verilator-pr7176-27d3c20
+cpus=4
+memory=8G
+walltime=02:00:00
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-pr7176-20261015-01
+reason=stable 5.052 --fourstate warns unsupported and failed the X-preservation probe

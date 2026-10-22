@@ -1,0 +1,3 @@
+base_runner_sha256=cde90b92ddc9035474db1b1cf3453a44706ce75442110d1ea7248b205fd53f49
+lms_runner_sha256=150c81ea5921d52c8128d1f71858d7192b7df3010d350ac05f2a68181f363b3e
+change=normalize and retain only LMS DCCM load file; record both hashes and pass a testbench plusarg

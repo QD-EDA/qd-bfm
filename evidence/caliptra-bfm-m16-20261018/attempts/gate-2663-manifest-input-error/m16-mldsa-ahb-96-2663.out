@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-open-ahb-20261018-01/source/dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py", line 361, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-open-ahb-20261018-01/source/dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py", line 197, in main
+    "filelist": row["filelist"], "filelist_sha256_json": row["filelist_sha256_json"],
+                                                         ~~~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'filelist_sha256_json'

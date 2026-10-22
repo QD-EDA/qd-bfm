@@ -1,0 +1,4 @@
+variant=loop-auto-task
+version=main
+compile_exit=0
+sim_exit=0

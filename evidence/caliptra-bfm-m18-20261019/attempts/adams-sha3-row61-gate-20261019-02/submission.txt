@@ -1,0 +1,12 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-sha3-row61-gate-20261019-02
+Selected row: 61
+Resources: 1 CPU/1 GiB, 600-second timeout
+Peak RSS basis: row58 measured 26,804 KiB with the same runner
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 6f002baf8784326f77919af14b7bbc7c22b13d47d8a2508e094209fef6b14aec
+Run script SHA-256: be3ca8c1f6eecff9187deda0f55b1ba3af1ff5cbe6e4a0609e931545e7546d71
+Slurm job ID: 3065
+Result: BLOCKED; package import alias was overwritten by the stale-port edit. This gate exposed an overlay composition bug and is superseded by gate 03.
+Raw archive: `job-3065_61.tar.gz`; SHA-256 `f4e5d66a2b598e90d80cde93cf04b3958b1d98af6479be80fbf2b0642b0718d7` (sidecar verified).

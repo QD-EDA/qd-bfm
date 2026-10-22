@@ -1,0 +1,3 @@
+[1000] %Fatal: fourstate-xsim-timescale-probe.sv:7: Assertion failed in fourstate_xsim_timescale_probe: X was not preserved
+%Error: fourstate-xsim-timescale-probe.sv:7: Verilog $stop
+Aborting...

@@ -1,0 +1,7 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:405: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:406: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:407: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:472: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:477: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:478: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:479: warning: Static variable initialization requires explicit lifetime in this context.

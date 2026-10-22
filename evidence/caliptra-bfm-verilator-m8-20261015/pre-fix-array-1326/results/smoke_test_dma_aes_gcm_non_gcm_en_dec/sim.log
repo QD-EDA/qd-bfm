@@ -1,0 +1,312 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+6227000 - ----------------------------------
+6311000 - Smoke Test AXI DMA AES - Multiple Test Cases
+6419000 - ----------------------------------
+6546000 - 
+6548000 - ========================================
+6613000 - Running Test 1 of 10
+6687000 - ========================================
+6782000 - 
+6784000 - ----------------------------------
+6847000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+6927000 - ----------------------------------
+7160000 - Configuring AES for GCM mode
+7763000 - String length is 120.
+8404000 - String length is 120.
+9415000 - Using.. source address as destination address
+9528000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+9753000 - Configuring AES for little endian mode
+9861000 - Write AES CTRL with value 0x481
+9949000 - Load Key data to AES
+10022000 - Write AES IV
+10081000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+10168000 - Wait for INPUT_READY
+10226000 - Write AES AAD Block 0
+10308000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+10395000 - Wait for INPUT_READY
+10454000 - Write AES AAD Block 1
+10535000 - SRC: { 0x1_23440000 } to DST: { 0x1_23440000 }
+10899000 - Read and Compare GCM TAG
+10974000 - AES Operation Complete
+11042000 - Test 1 PASSED
+11092000 - 
+11094000 - ========================================
+11155000 - Running Test 2 of 10
+11229000 - ========================================
+11326000 - 
+11328000 - ----------------------------------
+11390000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+11468000 - ----------------------------------
+11703000 - Configuring AES for GCM mode
+12304000 - String length is 120.
+12958000 - String length is 120.
+13967000 - Using.. source address as destination address
+14080000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+14302000 - Configuring AES for little endian mode
+14410000 - Write AES CTRL with value 0x482
+14499000 - Load Key data to AES
+14573000 - Write AES IV
+14632000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+14719000 - Wait for INPUT_READY
+14779000 - Write AES AAD Block 0
+14864000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+14950000 - Wait for INPUT_READY
+15009000 - Write AES AAD Block 1
+15092000 - SRC: { 0x1_23440000 } to DST: { 0x1_23440000 }
+15483000 - Read and Compare GCM TAG
+15557000 - AES Operation Complete
+15627000 - Test 2 PASSED
+15685000 - 
+15687000 - ========================================
+15748000 - Running Test 3 of 10
+15823000 - ========================================
+15919000 - 
+15921000 - ----------------------------------
+15983000 - AES DMA Encrypt GCM image big endian via AXI DMA
+16055000 - ----------------------------------
+16291000 - Configuring AES for GCM mode
+16903000 - String length is 120.
+17726000 - String length is 120.
+18910000 - Using.. source address as destination address
+19023000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+19248000 - Configuring AES for big endian mode
+19350000 - Write AES CTRL with value 0x481
+19441000 - Load Key data to AES
+19514000 - Write AES IV
+19574000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+19661000 - Wait for INPUT_READY
+19719000 - Write AES AAD Block 0
+19817000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+19904000 - Wait for INPUT_READY
+19963000 - Write AES AAD Block 1
+20058000 - SRC: { 0x1_23440000 } to DST: { 0x1_23440000 }
+20443000 - Read and Compare GCM TAG
+20517000 - AES Operation Complete
+20587000 - Test 3 PASSED
+20642000 - 
+20644000 - ========================================
+20705000 - Running Test 4 of 10
+20780000 - ========================================
+20876000 - 
+20878000 - ----------------------------------
+20940000 - AES DMA Decrypt GCM image big endian via AXI DMA
+21012000 - ----------------------------------
+21247000 - Configuring AES for GCM mode
+21853000 - String length is 120.
+22673000 - String length is 120.
+23855000 - Using.. source address as destination address
+23968000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+24190000 - Configuring AES for big endian mode
+24291000 - Write AES CTRL with value 0x482
+24382000 - Load Key data to AES
+24455000 - Write AES IV
+24515000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+24602000 - Wait for INPUT_READY
+24660000 - Write AES AAD Block 0
+24757000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+24844000 - Wait for INPUT_READY
+24902000 - Write AES AAD Block 1
+24998000 - SRC: { 0x1_23440000 } to DST: { 0x1_23440000 }
+25407000 - Read and Compare GCM TAG
+25481000 - AES Operation Complete
+25551000 - Test 4 PASSED
+25607000 - 
+25609000 - ========================================
+25671000 - Running Test 5 of 10
+25745000 - ========================================
+25842000 - 
+25843000 - ----------------------------------
+25906000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+25985000 - ----------------------------------
+26219000 - Configuring AES for GCM mode
+26826000 - String length is 120.
+27481000 - String length is 120.
+28494000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+28719000 - Configuring AES for little endian mode
+28827000 - Write AES CTRL with value 0x481
+28916000 - Load Key data to AES
+28989000 - Write AES IV
+29049000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+29135000 - Wait for INPUT_READY
+29194000 - Write AES AAD Block 0
+29281000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+29368000 - Wait for INPUT_READY
+29428000 - Write AES AAD Block 1
+29510000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+29882000 - Read and Compare GCM TAG
+29957000 - AES Operation Complete
+30026000 - Test 5 PASSED
+30081000 - 
+30082000 - ========================================
+30144000 - Running Test 6 of 10
+30219000 - ========================================
+30315000 - 
+30317000 - ----------------------------------
+30379000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+30458000 - ----------------------------------
+30691000 - Configuring AES for GCM mode
+31292000 - String length is 120.
+31944000 - String length is 120.
+32956000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+33179000 - Configuring AES for little endian mode
+33287000 - Write AES CTRL with value 0x482
+33376000 - Load Key data to AES
+33449000 - Write AES IV
+33509000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+33595000 - Wait for INPUT_READY
+33653000 - Write AES AAD Block 0
+33736000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+33822000 - Wait for INPUT_READY
+33881000 - Write AES AAD Block 1
+33963000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+34354000 - Read and Compare GCM TAG
+34428000 - AES Operation Complete
+34498000 - Test 6 PASSED
+34553000 - 
+34555000 - ========================================
+34616000 - Running Test 7 of 10
+34691000 - ========================================
+34787000 - 
+34789000 - ----------------------------------
+34851000 - AES DMA Encrypt GCM image big endian via AXI DMA
+34923000 - ----------------------------------
+35156000 - Configuring AES for GCM mode
+35758000 - String length is 120.
+36582000 - String length is 120.
+37765000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+37990000 - Configuring AES for big endian mode
+38091000 - Write AES CTRL with value 0x481
+38180000 - Load Key data to AES
+38253000 - Write AES IV
+38313000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+38399000 - Wait for INPUT_READY
+38457000 - Write AES AAD Block 0
+38556000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+38643000 - Wait for INPUT_READY
+38701000 - Write AES AAD Block 1
+38797000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+39185000 - Read and Compare GCM TAG
+39259000 - AES Operation Complete
+39329000 - Test 7 PASSED
+39384000 - 
+39386000 - ========================================
+39447000 - Running Test 8 of 10
+39522000 - ========================================
+39618000 - 
+39620000 - ----------------------------------
+39682000 - AES DMA Decrypt GCM image big endian via AXI DMA
+39754000 - ----------------------------------
+39989000 - Configuring AES for GCM mode
+40594000 - String length is 120.
+41414000 - String length is 120.
+42596000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+42818000 - Configuring AES for big endian mode
+42919000 - Write AES CTRL with value 0x482
+43009000 - Load Key data to AES
+43081000 - Write AES IV
+43141000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+43227000 - Wait for INPUT_READY
+43285000 - Write AES AAD Block 0
+43383000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+43469000 - Wait for INPUT_READY
+43528000 - Write AES AAD Block 1
+43623000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+44033000 - Read and Compare GCM TAG
+44107000 - AES Operation Complete
+44177000 - Test 8 PASSED
+44233000 - 
+44235000 - ========================================
+44296000 - Running Test 9 of 10
+44371000 - ========================================
+44467000 - 
+44469000 - ----------------------------------
+44531000 - AES DMA Encrypt non-GCM image via AXI DMA (Little Endian)
+44616000 - ----------------------------------
+44850000 - Configuring AES for non-GCM mode
+47860000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+48100000 - Configuring AES for little endian mode
+48208000 - Write AES CTRL with value 0x405
+48295000 - Load Key data to AES
+48368000 - Write AES IV
+48411000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+48799000 - AES Operation Complete
+48868000 - Test 9 PASSED
+48921000 - 
+48922000 - ========================================
+48984000 - Running Test 10 of 10
+49066000 - ========================================
+49163000 - 
+49164000 - ----------------------------------
+49227000 - AES DMA Decrypt non-GCM image via AXI DMA (Little Endian)
+49311000 - ----------------------------------
+49546000 - Configuring AES for non-GCM mode
+52544000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+52781000 - Configuring AES for little endian mode
+52889000 - Write AES CTRL with value 0x406
+52976000 - Load Key data to AES
+53049000 - Write AES IV
+53092000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+53510000 - AES Operation Complete
+53579000 - Test 10 PASSED
+53634000 - 
+53636000 - ========================================
+53734000 - ALL TESTS COMPLETED SUCCESSFULLY!
+53816000 - ========================================
+* TESTCASE PASSED
+
+Finished : minstret = 191326, mcycle = 538874
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

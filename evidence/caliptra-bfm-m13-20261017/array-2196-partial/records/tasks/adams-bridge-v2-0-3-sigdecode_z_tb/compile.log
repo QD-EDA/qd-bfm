@@ -1,0 +1,4 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:185: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:29: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `sigdecode_z_tb'
+1 error(s) during elaboration.

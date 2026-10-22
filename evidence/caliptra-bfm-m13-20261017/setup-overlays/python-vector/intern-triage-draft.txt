@@ -1,0 +1,11 @@
+**Run 1 (Starting with `: xxxxx`)**
+*   **Log Proves:** The log contains numerous errors, specifically "Error: Output mismatch at index [N]. Expected: [Hex], Got: xxxxx," for indices ranging from 1049 to 1791.
+*   **Explicit Testcase Failure Marker:** None.
+*   **Comparison Errors/All-X Output:** Numerous "Error: Output mismatch" messages where the expected value is provided and the actual value is "xxxxx".
+*   **Functional Status:** FAIL
+
+**Run 2 (Starting with `Starting sigencode_z test`)**
+*   **Log Proves:** The log shows the sequence: "Starting sigencode_z test" -> "Waiting for sigencode_z to complete" -> "Checking output data," followed by numerous errors: "Error: Output mismatch at index [N]. Expected: [Hex], Got: xxxxx," for indices ranging from 256 to 1052. The simulation finished with the message: "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:255: $finish called at 765 (1s)".
+*   **Explicit Testcase Failure Marker:** None.
+*   **Comparison Errors/All-X Output:** Numerous "Error: Output mismatch" messages where the expected value is provided and the actual value is "xxxxx".
+*   **Functional Status:** FAIL

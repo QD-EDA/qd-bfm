@@ -1,0 +1,22 @@
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_SIM" not found during command file processing.
+Warning: environment variable "AVERY_SIM" not found during command file processing.
+Warning: environment variable "AVERY_SIM" not found during command file processing.
+Warning: environment variable "AVERY_SIM" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+Warning: environment variable "AVERY_AXI" not found during command file processing.
+/src/avery_pkg.sv: No such file or directory
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/Axi4PC.sv:17: syntax error
+I give up.

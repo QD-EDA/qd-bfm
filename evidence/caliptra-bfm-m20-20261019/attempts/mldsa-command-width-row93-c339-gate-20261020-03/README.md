@@ -1,0 +1,5 @@
+# Row 93 command-width gate — cancelled before verdict
+
+This attempt was intentionally stopped before a row verdict. Its temporary source snapshot contained the predictor command-width overlay but did not yet cover command writes in the driving sequence. During simulation, `signing_input_for_test.hex` began with `00000001`, and the corresponding helper output began with `00` and had the key-generation file shape. The sequence reads that output into `SIG` and then writes `SIG` to the DUT, so this attempt cannot validate a complete fix.
+
+The stopped process had reached `MLDSA_SIGNATURE[732]`; it was not classified PASS, FAIL, or TIMEOUT and is excluded from `m20-results.tsv`. The partial source/log/vector archive is `raw/cancelled-incomplete-sequence-overlay.tar.gz`, SHA-256 `d51678e380a04d60b7212f49bcdf0f93c8b3f99f19ddf30d6826eb59bb8fb07b`. The archive checksum was verified. No RTL or firmware changed. The pinned c339-source-built Icarus and `vvp` hashes are recorded under `../../toolchain-c339-local-20261020/raw/`.

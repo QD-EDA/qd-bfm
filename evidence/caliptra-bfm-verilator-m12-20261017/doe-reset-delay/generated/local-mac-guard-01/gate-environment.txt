@@ -1,0 +1,19 @@
+host=MacBook-Air.local
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+Darwin MacBook-Air.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+qd_bfm_source=ffc12ab427e961f40354f32a8e7a147e5d4e5764
+caliptra_rtl=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Python 3.12.14
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC arm64) 15.2.0
+OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)
+mbedtls@3 3.6.7
+openssl@3 3.6.3
+verilator_version=Verilator 5.052 2026-09-05 rev v5.052
+verilator_model=ed23efd390469bb144a4332977dc4b428b7502a013910112f4092bdf075b5825  /tmp/a2-m12-doe-guard-local-01/model/obj_dir/Vcaliptra_top_tb
+verilator_binary=d16d0081d9b1ecde7095c1a3541f48244aa7412382555fee42d010521f0bf5c4  /tmp/a2-m12-local-tools/verilator-src/bin/verilator_bin
+verilator_build_patch=de9c45bb15ccaead1b511c31c8b64149bf0dff4cb42e6646c7e9a31c9093ff21  /tmp/a2-m12-local-tools/verilator-build-compat.patch
+axi_overlay=d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1  /tmp/a2-m12-doe-guard-local-01/overlay/rtl/src/axi/rtl/axi_if.sv
+doe_guard_overlay=17f505746efd28b74e06d0be3149d6cc167d074da12dbe6dc37ca0437c622157  /tmp/a2-m12-doe-guard-local-01/overlay/asserts/caliptra_top_sva.sv
+cmd=run-verilator-top-case-local.py --case smoke_test_doe_scan --timeout 600

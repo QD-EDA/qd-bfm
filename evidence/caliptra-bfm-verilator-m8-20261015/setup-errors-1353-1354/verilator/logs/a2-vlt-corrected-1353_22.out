@@ -1,0 +1,1 @@
+case=smoke_test_kv_lock_use_mid_read wrapper_exit=1

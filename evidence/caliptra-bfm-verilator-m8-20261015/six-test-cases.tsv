@@ -1,0 +1,6 @@
+0	smoke_test_ecc_flow1_kv_ocp_progress	17740	PASS	60927	8574
+1	smoke_test_kv_rules_ocp_lock	17872	PASS	60518	8659
+2	smoke_test_ecc_flow2_kv_ocp_progress	19152	PASS	62472	8229
+3	smoke_test_sha256_wntz	21600	PASS	155834	21238
+4	smoke_test_strap	21600	PASS	57180	8047
+5	smoke_test_sha256	21600	PASS	61567	8646

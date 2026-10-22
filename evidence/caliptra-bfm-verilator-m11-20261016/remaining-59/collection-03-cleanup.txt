@@ -1,0 +1,8 @@
+Host: DAN-DESKTOP
+Array: 1964
+Archived task: 1964_53, smoke_test_uart (1e057b20d3564828)
+Archive: completed-1964-03.tar.gz
+Archive SHA-256: d5ea1e7c29922707e0755427d38da44290a4ea4e13ea0ab31d07f6c4beef2f7b
+Verified: all 11 files listed in the row's FILE-SHA256SUMS; terminal FIRMWARE_BUILD_FAIL result and firmware.log retained locally.
+Remote cleanup: removed only results/1e057b20d3564828 and resources/1e057b20d3564828-1964-53.resource after the row left squeue and no matching runner remained.
+Bytes freed: 2,071,965

@@ -1,0 +1,3 @@
+Seed parser fix rerun: Slurm job 1493, source commit ccebefb, pinned Verilator model SHA-256 ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de.
+Outcome: PASS. Firmware and simulation exited 0; elapsed 212.477 seconds; final mcycle 370,210. The original array-1430 HARNESS_ERROR is preserved under initial-array-1430/.
+The retry started at 2026-10-16T06:47:57Z and completed at 2026-10-16T06:51:29Z. At that time the M9 array throttle was 3, so the retry remained within the six-task A2 cap.

@@ -1,0 +1,1 @@
+BLOCKED row=72 test=sigdecode_z_normal_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_decode_z/tb/sigdecode_z_tb.sv:29: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `sigdecode_z_tb'

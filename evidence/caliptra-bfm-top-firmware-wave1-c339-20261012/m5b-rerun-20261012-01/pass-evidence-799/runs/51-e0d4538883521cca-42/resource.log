@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=INT --kill-after=60s 21600 python3.12 /home/dsell/toolchains/qd-bfm-d1d358e92ea47eacbcdefd58266f7563682400f3/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py --case smoke_test_sha256 --case-yaml smoke_test_sha256/smoke_test_sha256.yml --output /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/51-e0d4538883521cca-42/output"
+	User time (seconds): 8335.08
+	System time (seconds): 311.25
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:24:06
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1852416
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1013617
+	Voluntary context switches: 83381100
+	Involuntary context switches: 83384946
+	Swaps: 0
+	File system inputs: 40
+	File system outputs: 778200
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

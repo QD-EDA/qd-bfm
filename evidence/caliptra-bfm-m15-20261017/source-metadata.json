@@ -1,0 +1,1534 @@
+{
+  "pins": {
+    "caliptra": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+    "adams-bridge": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0"
+  },
+  "rows": [
+    {
+      "repo": "caliptra",
+      "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_rand_test.yml",
+      "sha256": "a2c852bd11de9ed1537c3a1dadb8ad3d69553b055b1a5bf13d0f839dcfa8ca99",
+      "testname_yaml": "caliptra_top_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "caliptra_top",
+      "hdl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_wdt_test.yml",
+      "sha256": "f0fee3957dac35a279e817d915879f7dafa5b7f5e89b00edd67ce129baf38bde",
+      "testname_yaml": "caliptra_top_wdt_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "caliptra_top",
+      "hdl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_wdt_independent_test.yml",
+      "sha256": "422cc64730c982c4bc30ed6ebfbd3ae82b28bb0c907ffc697526fbe933ee6358",
+      "testname_yaml": "caliptra_top_wdt_independent_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "caliptra_top",
+      "hdl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_cmdline_test.yml",
+      "sha256": "029d460dda9338827fa9691973b222e982dd7d7420dabf295300a99c8952447c",
+      "testname_yaml": "caliptra_top_cmdline_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "caliptra_top",
+      "hdl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_rom_test.yml",
+      "sha256": "5d0a8ce3e8804b4af0ccef87df4cca38728ccbac0c0e1c7545e7194cb6b8ec33",
+      "testname_yaml": "caliptra_top_rom_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "caliptra_top",
+      "hdl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/tests/src/HMAC_otf_reset_test.yml",
+      "sha256": "0c0cf5f3f1466dd3a521ce1d0901187a150c5517e8e8441a5f4eaed089ed9c12",
+      "testname_yaml": "HMAC_otf_reset_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "HMAC",
+      "hdl_filelist": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_lock_test.yml",
+      "sha256": "17c86f0887cfdb3cb3a3ff4ff25ef65a5c932e1a4a8ad34c40cc36352ea2b66f",
+      "testname_yaml": "kv_rand_lock_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "kv",
+      "hdl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/example_derived_test.yml",
+      "sha256": "de231dd9dbd58c9c26a3722017fb1b131091c2b3cf460c2ccee965afc0ae6a14",
+      "testname_yaml": "example_derived_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "kv",
+      "hdl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_wr_rd_test.yml",
+      "sha256": "7999797f958d70e092128bb65778f6e75377d9ba5dad2af1384900cfe4447d9b",
+      "testname_yaml": "kv_rand_wr_rd_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "kv",
+      "hdl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_test.yml",
+      "sha256": "bd69414a9aa08e82430a44c439aaadf42c0d3c08ebdcb816466d1cd0e7851d6d",
+      "testname_yaml": "kv_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "kv",
+      "hdl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/tests/src/kv_rand_debug_test.yml",
+      "sha256": "25d0a2badd3be9e4d776c62f75619a9b814afc8cc2168b8d9211b88eb33c0050",
+      "testname_yaml": "kv_rand_debug_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "kv",
+      "hdl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/hmac/stimulus/tests/directed/hmac_normal_test.yml",
+      "sha256": "082aa2f600b131bd820e83237a96c34a2cb2739a7ac8e4b790a2cf5edec0f22e",
+      "testname_yaml": "hmac_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/uart/stimulus/tests/directed/uart_test.yml",
+      "sha256": "12b82afd4c71fbc8b78363e0979ca32930a1e388c8e3498f8a35adf583c9f552",
+      "testname_yaml": "uart_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/doe/stimulus/tests/directed/doe_cbc_nist_test.yml",
+      "sha256": "2a343ad7c698880be57043b9bb9e9ff98cf6b313c73ec94acab2722abbbbbdc0",
+      "testname_yaml": "doe_cbc_nist_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/entropy_src/stimulus/tests/directed/entropy_src_test.yml",
+      "sha256": "815bac454fda53a142b713652f4a38ad3973483e4f44de25a0b37be873a5b331",
+      "testname_yaml": "entropy_src_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/sha512/stimulus/tests/directed/sha512_normal_test.yml",
+      "sha256": "c3a407115ed3baad3192d8a5d58103370a3197a2fbfb42fa1efa90915053f02f",
+      "testname_yaml": "sha512_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/tests/src/example_derived_test.yml",
+      "sha256": "9ad7ebdb9b40f360a1ead71786e5aad9c50d09ac7050830510cfaa3c71758e0a",
+      "testname_yaml": "example_derived_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "SHA512",
+      "hdl_filelist": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/tests/src/SHA512_random_test.yml",
+      "sha256": "ea6508066dd76efc4a624951d9d1e17869d3c5de681072a1429c87ac8e92c3f9",
+      "testname_yaml": "SHA512_random_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "SHA512",
+      "hdl_filelist": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/sha256/stimulus/tests/random/sha256_random_test.yml",
+      "sha256": "65589e8c7c9ee05636b59d052f5124c919ad15ab653f8cf8a6ccb80ba0a9b5f6",
+      "testname_yaml": "sha256_random_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/sha256/stimulus/tests/directed/sha256_normal_test.yml",
+      "sha256": "8acf2b86f09c714153b27a96e37128576d537840cc2d1554071e547568c3de59",
+      "testname_yaml": "sha256_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/csrng/stimulus/tests/directed/csrng_test.yml",
+      "sha256": "4c31b5c01f348ff9fa784a554ae3d292375dc7d60d0ada237ef22205aac75c73",
+      "testname_yaml": "csrng_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/fuse_reg_prod_test.yml",
+      "sha256": "0af0d1068286d2bd58b344b4cb65912934c5629fbc736d790b09a9a116169233",
+      "testname_yaml": "fuse_reg_prod_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=fuse_reg_prod_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/debug_unlock_manuf_test.yml",
+      "sha256": "d976e7e5e4bc3a3f0ce3251f44f47a92a6c0a430d81e1e84eebab2d5160fd843",
+      "testname_yaml": "debug_unlock_manuf_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=debug_unlock_manuf_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/ss_soc_dbg_unlock_level_test.yml",
+      "sha256": "436e2a623e8bf5f7ad9aab7eb56d58c4f0b8b84d415a468fb85496125f64b3d1",
+      "testname_yaml": "ss_soc_dbg_unlock_level_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=ss_soc_dbg_unlock_level_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/fuse_cptra_cap_test.yml",
+      "sha256": "546175887cc8277741bc0e4180dbcdbefc45e8bbcb72987f18ff45db51f03b54",
+      "testname_yaml": "fuse_cptra_cap_reg_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=fuse_cptra_cap_reg_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_wrmrst_test.yml",
+      "sha256": "a87611d2e133d54a364be39604230019a8b8c1f0409bc91c9e8812c943b97aa2",
+      "testname_yaml": "ss_strap_reg_wrmrst_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=ss_strap_reg_wrmrst_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/fuse_reg_lifecycle_test.yml",
+      "sha256": "6671297e08e71614c10c1ffedc1f26dacdfafd6113bcbad8c6d6aea6ac346a34",
+      "testname_yaml": "fuse_reg_lifecycle_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=fuse_reg_lifecycle_test",
+        "+SECURITY_STATE=RANDOM"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/rvtime_reg_test.yml",
+      "sha256": "482a117bce27f169004fe062807d239f393093ccb355b39372013a258c32a0a3",
+      "testname_yaml": "rvtime_reg_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=rvtime_reg_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_reg_intrblk_test.yml",
+      "sha256": "63a13c34f18e4f5b507ad9f88c2c88d32c537dded44bf087778d8e9443ca8213",
+      "testname_yaml": "soc_reg_intrblk_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=soc_reg_intrblk_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_reg_test.yml",
+      "sha256": "73a91920596c3c216e66753b2252928c527d50a9e9e3c01cf7fe4be77cd19813",
+      "testname_yaml": "soc_reg_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=soc_reg_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/fuse_reg_perm_test.yml",
+      "sha256": "91643957a7e56ef60850cd788c476e745444f7a9e13d47a3946fd0cec34f4371",
+      "testname_yaml": "fuse_reg_perm_test",
+      "seed_yaml": "1692834441",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=fuse_reg_perm_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/sha_acc_intrblk_test.yml",
+      "sha256": "a90a0b1d1b307383a2e49e60909dbd4b1eb1514cee99bcdf91e6a9f1dc3d5891",
+      "testname_yaml": "sha_acc_intrblk_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=sha_acc_intrblk_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/fuse_reg_axi_user_test.yml",
+      "sha256": "204a632a9f32160ba7edf7967afe7a3e9572e71a998d0ad489aa09947a6f18b0",
+      "testname_yaml": "fuse_reg_axi_user_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=fuse_reg_axi_user_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_pwron_test.yml",
+      "sha256": "3fe97f49699d487d9cb906575c9228b39c0a99bb596c51f042e2fe1499123a80",
+      "testname_yaml": "ss_strap_reg_pwron_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=ss_strap_reg_pwron_test",
+        "+SECURITY_STATE=DEBUG_LOCKED_PRODUCTION"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_reg_invalid_test.yml",
+      "sha256": "dabf652db7ebee04a0898044c998ac3962044b8cb438332feb6f49e84e7089aa",
+      "testname_yaml": "soc_reg_invalid_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=soc_reg_invalid_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_reg_pwron_test.yml",
+      "sha256": "dcc908bb5ae50e57cf9e13b6e36861717542ffe5d12b8b670438165b4f0343cb",
+      "testname_yaml": "soc_reg_pwron_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=soc_reg_pwron_test",
+        "+SECURITY_STATE=DEBUG_LOCKED_PRODUCTION"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/debug_unlock_prod_test.yml",
+      "sha256": "29a9fa2ee6d774fc4ab870575af92f41f1a89098a4935770c6cbe2ef85e99978",
+      "testname_yaml": "debug_unlock_prod_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=debug_unlock_prod_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_prod_test.yml",
+      "sha256": "40f9d76775ead89f141cc97ef156569034ecef6f311d572dd9e01166c8dc2907",
+      "testname_yaml": "ss_strap_reg_prod_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=ss_strap_reg_prod_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_ifc_test.yml",
+      "sha256": "9dfe42ebe3781f9888a9247bc5477388e661e4112a778b42216c26de1807f7ce",
+      "testname_yaml": "soc_ifc_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_ifc_axi_sha_acc_dis_tb.yml",
+      "sha256": "d143a99bac807a6b2ec82799074aef21c719021c5840655c7e7f9a2a11979c39",
+      "testname_yaml": "soc_ifc_axi_sha_acc_dis_tb",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/soc_reg_wrmrst_test.yml",
+      "sha256": "53b8425af532a118ee4b95e9e935cafb9027046caad71475f353a5fac46b2b14",
+      "testname_yaml": "soc_reg_wrmrst_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=soc_reg_wrmrst_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/single_socreg_test.yml",
+      "sha256": "bcfdbedbd04504df1467726db452aaae7505271bbf358947610c25f43c74a72f",
+      "testname_yaml": "single_socreg_test",
+      "seed_yaml": "1687838882",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=single_socreg_test",
+        "+SOCREG_METHOD_NAME=AHB.INTR_BRF_NOTIF_INTERNAL_INTR_R",
+        "+SOCREG_WRCOUNT=20"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/stimulus/tests/directed/ss_strap_reg_lifecycle_test.yml",
+      "sha256": "9e54d6fc610b0e92237a8a8ce11d4ab2789f48ecef7eeec4c17d3bd6366ebcb7",
+      "testname_yaml": "ss_strap_reg_lifecycle_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SOC_IFC_TEST=ss_strap_reg_lifecycle_test",
+        "+SECURITY_STATE=RANDOM"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_trng_test.yml",
+      "sha256": "79f860d04fcfb9afb61f8f61733ff6c7668b9e442eb1470749813347bf4a102f",
+      "testname_yaml": "soc_ifc_trng_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "soc_ifc",
+      "hdl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "0b50b769f05ab95d2d338cdf326ddae534554b0b8ecf5de353be41d028991ea6",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_rand_test.yml",
+      "sha256": "36f84746f50ed583800e72508bd21ef7a0e8f4b4d22061d5d1266a8802b13009",
+      "testname_yaml": "soc_ifc_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "soc_ifc",
+      "hdl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "0b50b769f05ab95d2d338cdf326ddae534554b0b8ecf5de353be41d028991ea6",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/tests/src/soc_ifc_cmdline_test.yml",
+      "sha256": "710f252f329373017fad4102eefad1b2dd0475cd4fc548c7327b65fe5f3c34ef",
+      "testname_yaml": "soc_ifc_cmdline_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "soc_ifc",
+      "hdl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "0b50b769f05ab95d2d338cdf326ddae534554b0b8ecf5de353be41d028991ea6",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_wr_rd_test.yml",
+      "sha256": "73ae2c3917bcb1e027c3e777ea7fdd6b09a1cd4d3687575778ff628b8e451230",
+      "testname_yaml": "pv_rand_wr_rd_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "pv",
+      "hdl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_lock_test.yml",
+      "sha256": "5e9f4a1387e82b711bb0aa28174aed935d5414c44ee1040e03ce236a5abb9a4e",
+      "testname_yaml": "pv_rand_lock_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "pv",
+      "hdl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/tests/src/pv_rand_test.yml",
+      "sha256": "f1911bdcfec281178cf12d5a40ab0cffbebb9dcf6b34c319fff415a2478a1d4d",
+      "testname_yaml": "pv_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "pv",
+      "hdl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/ecc/stimulus/tests/directed/ecc_sca_config_test.yml",
+      "sha256": "b35b6fc00ffd65bbb7450753267d2c85ee15a898375bbc608642b6a8cf892fac",
+      "testname_yaml": "ecc_sca_config_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [
+        "+ECC_TEST_VECTOR_FILE=${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex",
+        "+ECC_TEST=ECC_sca_config_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/ecc/stimulus/tests/directed/ecc_otf_reset_test.yml",
+      "sha256": "3ac589b8d14b6d4bcaff439478e8f7a2b95257e97771f0758f55e913f9f7978a",
+      "testname_yaml": "ecc_otf_reset_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [
+        "+ECC_TEST_VECTOR_FILE=${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex",
+        "+ECC_TEST=ECC_otf_reset_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/ecc/stimulus/tests/directed/ecc_normal_test.yml",
+      "sha256": "cc77248380374fd26696f9b2d9d3879b27128ca4adb4a77704cb4454f7f00453",
+      "testname_yaml": "ecc_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [
+        "+ECC_TEST_VECTOR_FILE=${CALIPTRA_ROOT}/src/ecc/tb/test_vectors/ecc_drbg_mbedtls.hex",
+        "+ECC_TEST=ECC_normal_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/hmac_drbg/stimulus/tests/randomized/hmac_drbg_randomized_test.yml",
+      "sha256": "5634846ab592b79d721f18ee9e2249c37c94fd83fea8ee3c2453abef7fb69550",
+      "testname_yaml": "hmac_drbg_randomized_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+HMAC_DRBG_TEST=HMAC_DRBG_randomized_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/hmac_drbg/stimulus/tests/directed/hmac_drbg_directed_test.yml",
+      "sha256": "7579a3e6aefa170a14a89a24bea6cd40a8fc192a3eac4a04b5d7ccda27e83eba",
+      "testname_yaml": "hmac_drbg_directed_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [
+        "+HMAC_DRBG_TEST_VECTOR_FILE=${CALIPTRA_ROOT}/src/hmac_drbg/tb/test_vectors/hmac_drbg_tb.hex",
+        "+HMAC_DRBG_TEST=HMAC_DRBG_directed_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/tests/src/ECC_normal_test.yml",
+      "sha256": "ad79ee925b0bf31a095de76fc344e808ce52d45d5fb52ace4beb0026e0d5ea82",
+      "testname_yaml": "ECC_normal_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "ECC",
+      "hdl_filelist": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "caliptra",
+      "source_file": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/tests/src/ECC_otf_reset_test.yml",
+      "sha256": "df661144a2b9dedaed60d7af5c123b8c054311fe1a6f488eef679859e76d3537",
+      "testname_yaml": "ECC_otf_reset_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "ECC",
+      "hdl_filelist": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/rej_sampler/stimulus/tests/directed/rej_rand_test.yml",
+      "sha256": "ebba63e534c7af017bae172d78f0720fdf458d8f2eaf7f4ae190f24235f8fec3",
+      "testname_yaml": "rej_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sig_encode_z/stimulus/tests/directed/sigencode_z_normal_test.yml",
+      "sha256": "1d5d173f500d6e961a87a38e9de05ecc5d392d32456663298356a34c22d11980",
+      "testname_yaml": "sigencode_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sample_in_ball/stimulus/tests/directed/sib_rand_test.yml",
+      "sha256": "70d34e8ec02c6bbd07e16f09790509463dac839cce47aa3199cf767956fa35c3",
+      "testname_yaml": "sib_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/norm_check/stimulus/tests/directed/norm_check_normal_test.yml",
+      "sha256": "cfe080032190fb7b53b62e9ea5d889c69a13ee7f759d4d4aa0e8eef1c7d38c1b",
+      "testname_yaml": "norm_check_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sk_encode/stimulus/tests/directed/skencode_normal_test.yml",
+      "sha256": "5fb67b344f72b355b928e18e75270a0b594485b65940f3590307a5415f7e8e4f",
+      "testname_yaml": "skencode_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_sha3/stimulus/tests/directed/five_squeeze_test.yml",
+      "sha256": "a94911a9015aa709110453b460b295462808aea695842076525e1b67d8dc9e9c",
+      "testname_yaml": "five_squeeze_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [
+        "+SHA3_TEST=five_squeeze_test"
+      ],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/cbd_sampler/stimulus/tests/directed/cbd_rand_test.yml",
+      "sha256": "fcb003ea56cd955daf732d2cae71c56e3e9a8997ea0bf41414ff3f79a76ce4e9",
+      "testname_yaml": "cbd_rand_test",
+      "seed_yaml": "1 #${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/decompose/stimulus/tests/directed/decompose_normal_test.yml",
+      "sha256": "c082d9498a1cef45c727b213f3cc31feee0348749e94df9ad3ed491f29ef0f14",
+      "testname_yaml": "decompose_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/compress/stimulus/tests/directed/compress_normal_test.yml",
+      "sha256": "10069454ef643cc5ac0d512daea96d8f72af8f9b76d62267be48b8adf9abd7c7",
+      "testname_yaml": "compress_normal_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_sha3/stimulus/tests/directed/abr_sha3_rand_test.yml",
+      "sha256": "1cd13ffb1dbcfac3149fa7217646a944519b56cb64193859b965dd753b272fa8",
+      "testname_yaml": "abr_sha3_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sk_decode/stimulus/tests/directed/skdecode_normal_test.yml",
+      "sha256": "ba3b6b420290faa835707c3f7dac8d6cf06fd41d97b0e1212a0f2fe48bbc15ef",
+      "testname_yaml": "skdecode_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sigdecode_h/stimulus/tests/directed/sigdecode_h_normal_test.yml",
+      "sha256": "7501f831e3f67c78a7f90d656f5a2d6783113bd12b51ab48715621a16be0da17",
+      "testname_yaml": "sigdecode_h_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_libs/stimulus/tests/directed/masking_test.yml",
+      "sha256": "06e9fdf9005915a738ef614ce5004b0e10274c9e71e73901aa60582b7e306893",
+      "testname_yaml": "masking_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/exp_mask/stimulus/tests/directed/exp_rand_test.yml",
+      "sha256": "ebac1eb7d772691e4b867656820519d46ab457625729c329c6cc1b8b7aa76118",
+      "testname_yaml": "exp_rand_test",
+      "seed_yaml": "${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/power2round/stimulus/tests/directed/power2round_normal_test.yml",
+      "sha256": "2857697ac5a896d67fecad523c944345c9f7c1bca0cb44774aa293fc07f8e749",
+      "testname_yaml": "power2round_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/rej_bounded/stimulus/tests/directed/rej_rand_test.yml",
+      "sha256": "e1205331faadfc159736ee347aee191ad360a937fd3ac20715194305bb97b3ba",
+      "testname_yaml": "rej_rand_test",
+      "seed_yaml": "1 #${PLAYBOOK_RANDOM_SEED}",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/sig_decode_z/stimulus/tests/directed/sigdecode_z_normal_test.yml",
+      "sha256": "7d772c0dd889e85411ffb6d009801c5c1695eaad8d5a28e57e4fb962fb0b0c2f",
+      "testname_yaml": "sigdecode_z_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/ntt_top/stimulus/tests/directed/ntt_masking_normal_test.yml",
+      "sha256": "bd3adc861e5465e3d610e87535afb9cfc445ac4adf3725b056f0c2753c42a321",
+      "testname_yaml": "ntt_masking_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/pk_decode/stimulus/tests/directed/pkdecode_normal_test.yml",
+      "sha256": "47b02b2fc6939286d73068b0b0d2914cbb96afdaba804a103c9d9112f4e93e16",
+      "testname_yaml": "pkdecode_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/ntt_top/stimulus/tests/directed/ntt_normal_test.yml",
+      "sha256": "dd7461775dd89940ac00f5e3892ad7c8f1f6dea9c219b3b68f4a413cd386f76d",
+      "testname_yaml": "ntt_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/ntt_top/stimulus/tests/directed/butterfly_normal_test.yml",
+      "sha256": "672aa5cf11e0602f17cfe52982efcab5647bf024c4508705adb6c771f4bafd15",
+      "testname_yaml": "butterfly_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_key_gen_test.yml",
+      "sha256": "757fb33a9cbf664afe814f26acc077f86d8e71b2c16700fe56961c5b5baaffaa",
+      "testname_yaml": "ML_DSA_randomized_key_gen_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_key_gen_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_stream_msg_test.yml",
+      "sha256": "5099d532521d0ba214020d26ba1a125fa452aacebf95d586abc5528467789a63",
+      "testname_yaml": "ML_DSA_randomized_verif_stream_msg_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_verif_stream_msg_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_keygen_KATs_test.yml",
+      "sha256": "441d0acc66b9ec0f0601d03a835f9146a4c3cfcda0a8e761aca6d836b69656b7",
+      "testname_yaml": "ML_KEM_keygen_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_keygen_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_verif_KATs_stream_msg_test.yml",
+      "sha256": "3c31ac2da441652a5589d456a35fb7a8bdd8e60e3f9bb206a46080190b32e818",
+      "testname_yaml": "ML_DSA_verif_KATs_stream_msg_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_verif_KATs_stream_msg_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_keygen_decaps_self_check_test.yml",
+      "sha256": "1651f974a31c86f688b380fd3a1917387c5b0be9dfc03b1cac21f7cb128571ba",
+      "testname_yaml": "ML_KEM_keygen_decaps_self_check_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_keygen_decaps_self_check_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_verif_KATs_test.yml",
+      "sha256": "10de122238b70d24015de59ff2b8b075f10c91b8fe7234ee4c10d83563c87afa",
+      "testname_yaml": "ML_DSA_verif_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_verif_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_all_test.yml",
+      "sha256": "78fb974fd6d4769768e61b9a6f93bc51595e74c1670ac010f415b63a305397ef",
+      "testname_yaml": "ML_KEM_randomized_all_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_all_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_decap_test.yml",
+      "sha256": "eade2beeb70b8b1dd1844c8023e0d5db8076b124f79fab23ea2f7472691fdf21",
+      "testname_yaml": "ML_KEM_randomized_decap_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_decap_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_keygen_decap_test.yml",
+      "sha256": "9ce45e7527555a07f6c54d5ccc43722b632c4caf107798087bffe41189c06652",
+      "testname_yaml": "ML_KEM_randomized_keygen_decap_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_keygen_decap_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_sign_gen_test.yml",
+      "sha256": "3f1347d89e97f7d68da72c76dde643e161e11b6e8007e33555adb0689ebc3eef",
+      "testname_yaml": "ML_DSA_randomized_sign_gen_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_sign_gen_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_zeroize_test.yml",
+      "sha256": "fab730548e0085f6d6d172d04f17fd9164095fb210c38dc4bde2b914b2028823",
+      "testname_yaml": "ML_DSA_randomized_zeroize_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_zeroize_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_encap_input_fail_test.yml",
+      "sha256": "cb513699c6168fd8fcdace0abde4048daeecc0ea7d3392c715ec685605c73e34",
+      "testname_yaml": "ML_KEM_randomized_encap_input_fail_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_encap_input_fail_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_decaps_KATs_test.yml",
+      "sha256": "983e2d61d4a1e11a7e497502a36a4af97c550a082d0818f01fa211a92f69048a",
+      "testname_yaml": "ML_KEM_decaps_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_decaps_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/makehint/stimulus/tests/directed/makehint_normal_test.yml",
+      "sha256": "cfd54824c805245c4791cf8d03a347fb8f96f4d5c195b184abc7999db38c6fca",
+      "testname_yaml": "makehint_normal_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [],
+      "bench": "",
+      "hdl_filelist": "",
+      "hvl_filelist": "",
+      "hdl_filelist_sha256": "",
+      "hvl_filelist_sha256": ""
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/abr_example_test.yml",
+      "sha256": "1ce504dc7944f0000c61aa04318636227f2b64acf08920373bd19a53a206f612",
+      "testname_yaml": "ML_DSA_randomized_key_gen_test",
+      "seed_yaml": "1",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_key_gen_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_fail_test.yml",
+      "sha256": "699b1c3d45e020656a5bcbe23db322a175b0276e4e7bc22b3933d4a769cae89e",
+      "testname_yaml": "ML_DSA_randomized_verif_fail_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_verif_fail_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_test.yml",
+      "sha256": "a8d41e9edf3416d26a7e054c830fcc4af0483c4faccf9bef320304c1097ed235",
+      "testname_yaml": "ML_DSA_randomized_verif_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_verif_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_decap_input_fail_test.yml",
+      "sha256": "a896ff3ca204cb9477052a8bad75fadf5fe7227d2e565d45036316ff68d708e6",
+      "testname_yaml": "ML_KEM_randomized_decap_input_fail_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_decap_input_fail_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_keygen_test.yml",
+      "sha256": "b48996ce00a8444dbbd0b4eb444ec37cdcf7d51b14ad8cb3460676b46ece7ff6",
+      "testname_yaml": "ML_KEM_randomized_keygen_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_keygen_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_early_run_test.yml",
+      "sha256": "1309b6d8131689919873c9864bd5b7604b11bea9ace79ca9ff6c1a51ae2756c0",
+      "testname_yaml": "ML_DSA_randomized_early_run_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_early_run_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_two_verif_on_fail_test.yml",
+      "sha256": "68ba497dbcc707505908f85247c727bfa9d2c1331e5fc581776e60d8d98eed92",
+      "testname_yaml": "ML_DSA_randomized_two_verif_on_fail_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_two_verif_on_fail_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_randomized_encap_test.yml",
+      "sha256": "b466793e595ee75b6399fb9a939525ba7ebc4af0c7647009571fd8cd9e2f75a6",
+      "testname_yaml": "ML_KEM_randomized_encap_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_randomized_encap_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_all_test.yml",
+      "sha256": "df52f093f42c287a9439d2aa5e365470eb2afe04374e4aa5756eec6b484032a4",
+      "testname_yaml": "ML_DSA_randomized_all_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_all_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_overwrite_test.yml",
+      "sha256": "fd7f2034c279be0580df28eba77f5fc9c48300acb3358fb520108b61892d35fa",
+      "testname_yaml": "ML_KEM_overwrite_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_overwrite_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_h_decode_fail_test.yml",
+      "sha256": "b80967ef7dc4cd240c1203ca0430a57ba6fc2d5d3b746bfd1a7ab2ee4f048b7c",
+      "testname_yaml": "ML_DSA_randomized_h_decode_fail_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_h_decode_fail_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_key_gen_and_sign_test.yml",
+      "sha256": "db02a130299eedc0477f6498751f3b8ea0bd9e44fa3cf8f799f7b949789e440d",
+      "testname_yaml": "ML_DSA_randomized_key_gen_and_sign_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_key_gen_and_sign_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_keygen_KATs_test.yml",
+      "sha256": "5f45bb580d2a37085baf9fb2ef30f3bc4dd7a35ef1e7a7cba4713129e9437b4a",
+      "testname_yaml": "ML_DSA_keygen_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_keygen_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_KEM_encaps_KATs_test.yml",
+      "sha256": "5c7b137e21c0eb462884d6c93a6cbe005d8c546594e2de35897ed41fe8c48234",
+      "testname_yaml": "ML_KEM_encaps_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_KEM_encaps_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_KeySign_stream_msg_test.yml",
+      "sha256": "0e3445c5c90695f11d1874dc12d59bbdbd3ac208a5748f9771d347fd525fd9d1",
+      "testname_yaml": "ML_DSA_randomized_KeySign_stream_msg_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_KeySign_stream_msg_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_keygen_signing_KATs_test.yml",
+      "sha256": "26695c13db1724b6b4fa338e4e24d7a10062c0f668d4ecc5a9c68f3674140ced",
+      "testname_yaml": "ML_DSA_keygen_signing_KATs_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_keygen_signing_KATs_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    },
+    {
+      "repo": "adams-bridge",
+      "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_reset_test.yml",
+      "sha256": "bce7127cfbdf9f88b107b3cad9e954529720e8417fd953a6d6c2d23251ad0433",
+      "testname_yaml": "ML_DSA_randomized_reset_test",
+      "seed_yaml": "",
+      "yaml_plusargs": [
+        "+UVM_TESTNAME=ML_DSA_randomized_reset_test"
+      ],
+      "bench": "mldsa",
+      "hdl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+      "hvl_filelist": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+      "hdl_filelist_sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d",
+      "hvl_filelist_sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+    }
+  ]
+}

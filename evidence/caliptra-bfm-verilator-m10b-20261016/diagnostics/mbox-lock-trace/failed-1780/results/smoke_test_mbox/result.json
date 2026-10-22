@@ -1,0 +1,14 @@
+{
+  "host": "DAN-DESKTOP",
+  "case": "smoke_test_mbox",
+  "timeout_s": 6873,
+  "c339_outcome": "PASS",
+  "c339_mcycle": "74924",
+  "c339_elapsed_s": "NA",
+  "model_sha256": "adc9b3eabbb59fef890cfbd6d112487dceba2c3c1135cebd73540f0d6d132aa9",
+  "started_at": "2026-10-16T18:21:35.500151+00:00",
+  "error": "Traceback (most recent call last):\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-02/run-verilator-top-case.py\", line 64, in main\n    gcc_prefix = runner.normalize_gcc_prefix(env[\"CALIPTRA_GCC_PREFIX\"], env)\n                                             ~~~^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'CALIPTRA_GCC_PREFIX'\n",
+  "outcome": "HARNESS_ERROR",
+  "elapsed_s": 0.003,
+  "completed_at": "2026-10-16T18:21:35.502853+00:00"
+}

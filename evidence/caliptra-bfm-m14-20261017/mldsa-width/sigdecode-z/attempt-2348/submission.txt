@@ -1,0 +1,5 @@
+job_id=2348
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m14-width-sigdecode-z-20261017-01
+cpus=1
+mem=3G
+per_test_timeout=600s

@@ -1,0 +1,3 @@
+6a8b4bf72036caa70c5d8899ba8ca58058fcbe56c2003cb52c85b5999f90f0e4  task-complete.txt
+0e0fb204fe7d64f9fb2c4bc2dba984bcd5a8600cf0ad90782fea4a33bc41b455  resource-1430-150.resource
+bb22e7a0534e2c2fa4fe20887ed2e3d5b7f60b450eb7825ffeac69eaefef0ff8  slurm.log

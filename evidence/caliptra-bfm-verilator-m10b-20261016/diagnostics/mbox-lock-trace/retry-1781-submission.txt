@@ -1,0 +1,9 @@
+Job 1781: fresh retry of the MBOX lock-cycle diagnostic on DAN-DESKTOP.
+
+Run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-03`.
+
+Resources: 4 CPUs, 4 GiB, 2-hour job limit; simulation timeout remains 180 seconds. The script exports `CALIPTRA_GCC_PREFIX` and `CALIPTRA_MBEDTLS_ROOT`, matching the working M10b firmware-array environment. It builds pinned Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` with Verilator 5.052, `--assert`, and `CLP_ASSERT_ON`.
+
+The filelist uses logging-only copies of `axi_if.sv` and `mbox_csr.sv`; no handshake, CSR, firmware, or pass behavior is modified. The new run directory has its own source snapshots and staged-input SHA-256 manifest. The diagnostic was submitted after lowering array 1772's throttle from 6 to 5; already-running array elements were left undisturbed.
+
+Diagnostic script SHA-256: `f98c1913f26d7ec712a9ea6fe5ee77e1799fc8df8d9d42cfcfc0f85a6d270a88`.

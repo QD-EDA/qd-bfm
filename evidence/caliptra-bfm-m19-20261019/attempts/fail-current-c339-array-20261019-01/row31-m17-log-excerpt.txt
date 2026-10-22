@@ -1,0 +1,40 @@
+262-TB DEBUG: Init value for SHA_ACC_INTR_BRF_ERROR_INTR_EN_R: 0x00000000
+263-TB DEBUG: Init value for SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R: 0x00000000
+264-TB DEBUG: Init value for SHA_ACC_INTR_BRF_GLOBAL_INTR_EN_R: 0x00000000
+--
+372- 134217728
+373-TB INFO. Updated expected value of CPTRA_FLOW_STATUS = 0x08000000
+374-
+375:1a. Writing over AHB, AXI then reading back over AXI
+376-Address [SHA_ACC_INTR_BRF_ERROR0_INTR_COUNT_INCR_R] = 0x30021a00
+377-Write over AHB: addr = SHA_ACC_INTR_BRF_ERROR0_INTR_COUNT_INCR_R (0x30021a00), data = 0xb9555b15
+378-AXI Write transaction to address 0x30021a00
+--
+463-AXI txn was successful
+464-AXI txn tcheck
+465- Read over AXI: addr = SHA_ACC_INTR_BRF_ERROR_GLOBAL_INTR_R     (0x3002180c), data = 0x00000000
+466:Address [SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R] = 0x30021814
+467:Write over AHB: addr = SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R   (0x30021814), data = 0x9b02a7ea
+468-AXI Write transaction to address 0x30021814
+469-AXI txn was successful
+470-AXI txn tcheck
+471:Write over AXI: addr = SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R   (0x30021814), data = 0x64fd5815
+472-Warning: cannot write to an undefined darray<vector[32]>.
+473-AXI txn was successful
+474-AXI txn tcheck
+475: Read over AXI: addr = SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R   (0x30021814), data = 0x00000000
+476:TB Warning for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). apb_rddata 0x00000000 does not match exp_regval 0x0000000a
+477-Address [SHA_ACC_INTR_BRF_ERROR_INTR_EN_R] = 0x30021804
+478-Write over AHB: addr = SHA_ACC_INTR_BRF_ERROR_INTR_EN_R         (0x30021804), data = 0x0ac30c89
+479-AXI Write transaction to address 0x30021804
+--
+566-AXI txn was successful
+567-AXI txn tcheck
+568- Read over AXI: addr = SHA_ACC_INTR_BRF_NOTIF_INTR_TRIG_R       (0x30021820), data = 0x00000000
+569:Address [SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R] = 0x30021814
+570:Write over AHB: addr = SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R   (0x30021814), data = 0xffffffff
+571-AXI Write transaction to address 0x30021814
+572:TB ERROR aserted for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). Register bit-field(s) mutable over AXI! agg value is 0b1010
+573-Address [SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R] = 0x3002181c
+574-Write over AHB: addr = SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R       (0x3002181c), data = 0xffffffff
+575-AXI txn was successful

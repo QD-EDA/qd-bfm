@@ -1,0 +1,5 @@
+outcome=BUILD_FAIL
+build_exit=2
+seed=1
+primary_diagnostic=undefined reference to `service_soc_ifc_notif_intr'
+	Maximum resident set size (kbytes): 55392

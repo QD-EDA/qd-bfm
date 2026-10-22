@@ -1,0 +1,22 @@
+host=DAN-DESKTOP
+qd_bfm_head=5af1170f86c69122c227ba787afe028a5678b680
+runner_sha256_expected=3fe33d1483519067975d0f5c7ae31371c0c562227f7d75c895b724362fb5ce77
+source-snapshot.tar.gz: OK
+selection.tsv: OK
+array.sbatch: OK
+selected case YAML preflight: 20/20 present and testnames match
+Icarus Verilog version 13.0 (devel) (cc25756d)
+
+Icarus Verilog runtime version 13.0 (devel) (cc25756d)
+
+87bb417df23d260bcfde3fb372b4a80eaad69e4fd2eea1ffb8b0eff10f7af08e  /home/dsell/toolchains/iverilog-uvm-main-cc25756d187314742d347267c2a513b3e640a7fb/bin/iverilog
+dfc193c466a70a0917a16ab4198a111de616657d6004de79456db2a4b603b437  /home/dsell/toolchains/iverilog-uvm-main-cc25756d187314742d347267c2a513b3e640a7fb/bin/vvp
+a8f151a771f135c0c7e01f89a563f7feff836b54cd40a35e80d05bd642bda6e5  /home/dsell/toolchains/iverilog-uvm-main-cc25756d187314742d347267c2a513b3e640a7fb/bin/iverilog-vpi
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+40fb86315ce07c1cc9805e5b7f7bf8b8bed3dcfe7ad52fc4ae73d3cdc524f4d2  /home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/preflight/vpi/sim-axi-trace-vpi.vpi
+Compiling /home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/source/qd-bfm/dv/caliptra_bfm/uvm/tests/sim-axi-trace-vpi.c...
+Making sim-axi-trace-vpi.vpi from  sim-axi-trace-vpi.o...
+CALIPTRA_PROGRESS_BIND_FAIL clk=(nil) mcycle=(nil)
+CALIPTRA_TRACE_BIND_FAIL clk=(nil) valid=(nil) pc=(nil) ready=(nil) arvalid=(nil) arready=(nil) araddr=(nil) awvalid=(nil) awready=(nil) awaddr=(nil) wvalid=(nil) wready=(nil) wlast=(nil)
+M21_VPI_LOAD_SMOKE
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/preflight/vpi/smoke.v:2: $finish called at 0 (1s)

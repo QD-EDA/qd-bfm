@@ -1,0 +1,8 @@
+Slurm job ID: 2713
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row20-csrng-incdir-20261018-01
+Submission: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row20-csrng-incdir-20261018-01/run.sbatch
+Resources: 1 CPU, 3 GiB RAM, 20-minute Slurm wall limit, 600-second per-row timeout.
+Terminal result: PASS with filelist overlay; compile and simulation exit 0, no timeout, runner elapsed 4.06 seconds.
+Staged runner SHA256: 56e277d1d3d5ae7302e0a8a091f9680c05ea27e0ee8e1c511ecdac066ab59f3b
+Staged M15 manifest SHA256: 049ea8f7a78a72b32bdded08b8116f8691ac8ad43a13a7624529ec0398ae61ea
+Batch script SHA256: a6954ac01540c01bdb1bf54b0107acf0ee290ab722363708e67d1ab8df1c3302

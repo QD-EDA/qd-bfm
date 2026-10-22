@@ -1,0 +1,158 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+6115000 - ----------------------------------------------
+6183000 -  HMAC->ML-KEM->AES KV Endianness Smoke Test
+6248000 - ----------------------------------------------
+7548000 - 
+7549000 - --- Phase 1: All-FW reference path ---
+7607000 - Phase 1: HMAC-512 -> tag via FW
+7753000 - Load Key data to HMAC
+7917000 - HMAC flow in progress...
+7984000 - Received HMAC notif/err intr with status = 1/ 0
+8107000 - Load TAG data from HMAC
+8191000 - HMAC zeroize flow.
+8227000 - HMAC tag[0]: 0x5C314DBB
+8319000 - HMAC tag[1]: 0x3AD6ADE
+8406000 - HMAC tag[2]: 0x28E553C4
+8500000 - HMAC tag[3]: 0x8F3D56E2
+8590000 - HMAC tag[4]: 0x56846963
+8681000 - HMAC tag[5]: 0x73B7200C
+8770000 - HMAC tag[6]: 0x945C50DB
+8856000 - HMAC tag[7]: 0xC76ED0E5
+8943000 - HMAC tag[8]: 0x7A9B2F51
+9031000 - HMAC tag[9]: 0xFE4FDF8
+9116000 - HMAC tag[10]: 0xE0329268
+9212000 - HMAC tag[11]: 0xFE10D3D1
+9302000 - HMAC tag[12]: 0x75ABC56E
+9392000 - HMAC tag[13]: 0xB547EBEC
+9478000 - HMAC tag[14]: 0x8AC23033
+9569000 - HMAC tag[15]: 0xEF81CFF8
+9655000 - HMAC tag matches expected reference
+9737000 - Phase 1: ML-KEM keygen (FW seeds)
+9810000 - [MLKEM KeyGen] Waiting for ready
+9895000 - [MLKEM KeyGen] Writing entropy
+9966000 - [MLKEM KeyGen] Sending command
+10017000 - [MLKEM] Waiting for interrupt
+10798000 - Received MLKEM notif/ err intr with status = 1/ 0
+10919000 - [MLKEM KeyGen] Read Encaps Key
+11521000 - [MLKEM KeyGen] Read Decaps Key
+12687000 - [MLKEM] Starting zeroize
+12726000 - [MLKEM] Waiting for ready
+12878000 - Phase 1: ML-KEM encaps (FW) -> shared key
+12953000 - [MLKEM Encaps] Waiting for ready
+13007000 - [MLKEM Encaps] Writing encaps key
+13622000 - [MLKEM Encaps] Writing entropy
+13699000 - [MLKEM Encaps] Sending Command
+13754000 - [MLKEM] Waiting for interrupt
+14675000 - Received MLKEM notif/ err intr with status = 1/ 0
+14800000 - [MLKEM Encaps] Read Ciphertext
+15791000 - [MLKEM Encaps] Read Shared Key
+15865000 - Shared Key[0]: 0x976229B
+15959000 - Shared Key[1]: 0xADE25A1E
+16051000 - Shared Key[2]: 0xD35830DD
+16139000 - Shared Key[3]: 0x6AAD53C4
+16226000 - Shared Key[4]: 0xE60CC741
+16314000 - Shared Key[5]: 0x7EABF30E
+16400000 - Shared Key[6]: 0x2C76AC91
+16488000 - Shared Key[7]: 0x3FAE6A74
+16583000 - Phase 1: Shared key matches expected reference
+16656000 - [MLKEM] Starting zeroize
+16694000 - [MLKEM] Waiting for ready
+16849000 - Phase 1: AES-ECB encrypt (FW key)
+16986000 - Configuring AES for little endian mode
+17055000 - Write AES CTRL with value 0x405
+17147000 - Load Key data to AES
+17208000 - Write AES IV
+17251000 - Write AES Input Data Block 0
+17394000 - Write AES Input Data Block 1
+17537000 - Write AES Input Data Block 2
+17677000 - Write AES Input Data Block 3
+17814000 - AES Operation Complete
+17854000 - Phase 1 PASS: All FW path matches reference
+17919000 - 
+17920000 - --- Phase 2: All-KV path (under test) ---
+17985000 - Phase 2: HMAC-512 -> tag to KV slot 6
+18145000 - Load Key data to HMAC
+18290000 - HMAC flow in progress...
+18355000 - Received HMAC notif/err intr with status = 1/ 0
+18475000 - Load TAG data from HMAC to KV
+18528000 - HMAC zeroize flow.
+18562000 - Phase 2: ML-KEM keygen_decaps (seed from KV slot 6)
+18685000 - Phase 2: ML-KEM keygen_decaps (KV seed -> KV shared key)
+18790000 - [MLKEM KeyGen Decaps] Waiting for ready
+18854000 - [MLKEM KeyGen Decaps] Try to Overwrite seed d
+18936000 - [MLKEM KeyGen Decaps] Try to Overwrite seed z
+19569000 - [MLKEM KeyGen Decaps] Writing entropy
+19673000 - [MLKEM KeyGen Decaps] Sending command
+19734000 - [MLKEM] Waiting for interrupt
+21787000 - Received MLKEM notif/ err intr with status = 1/ 0
+21911000 - [MLKEM KeyGen Decaps] Received expected success for MLKEM sharedkey write from KV
+22035000 - [MLKEM] Starting zeroize
+22074000 - [MLKEM] Waiting for ready
+22231000 - Phase 2: AES-ECB encrypt (key from KV slot 8)
+22397000 - Configuring AES for little endian mode
+22461000 - Reading AES Key from the Key Vault
+22529000 - Write AES CTRL with value 0xC05
+22632000 - Write AES IV
+22674000 - Write AES Input Data Block 0
+22817000 - Write AES Input Data Block 1
+22958000 - Write AES Input Data Block 2
+23096000 - Write AES Input Data Block 3
+23231000 - AES Operation Complete
+23271000 - 
+23272000 - --- PASS: KV path matches FW reference ---
+23336000 - HMAC->KV->ML-KEM(seed)->KV->AES endianness is correct.
+* TESTCASE PASSED
+
+Finished : minstret = 81774, mcycle = 233880
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

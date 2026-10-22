@@ -1,0 +1,5 @@
+row_id=68
+testname=masking_test
+status=BLOCKED
+cause=simulation ended without a recognized test pass marker
+elapsed_seconds=0.032

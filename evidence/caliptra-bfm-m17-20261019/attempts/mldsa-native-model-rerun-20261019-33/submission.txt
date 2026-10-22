@@ -1,0 +1,8 @@
+job_id=2978
+rows=87,102,105
+array_throttle=3
+cpus_per_task=1
+memory=4G
+per_row_timeout=600
+source_snapshot_sha256=ddd3ec97af2005e00508077bc80b7735a2f9c52ed18c741e3f8c2cf5d9c0dec7
+submitted_after_row_78_gate=2977_terminal_TIMEOUT

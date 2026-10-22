@@ -1,0 +1,5 @@
+./five_squeeze_test.svh:63: warning: method function 'pop_front' is being called as a task.
+./five_squeeze_test.svh:118: warning: method function 'pop_front' is being called as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-65/output/overlays/adams-mldsa/tb/src/abr_sha3/tb/abr_sha3_tb.sv:526: warning: method function 'pop_front' is being called as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-65/output/overlays/adams-mldsa/tb/src/abr_sha3/tb/abr_sha3_tb.sv:140: error: port ``done_i'' is not a port of dut.
+1 error(s) during elaboration.

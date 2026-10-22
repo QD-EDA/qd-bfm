@@ -1,0 +1,5 @@
+row_id=52
+testname=hmac_drbg_randomized_test
+status=PASS
+cause=testbench pass marker present; no failure marker or UVM error/fatal
+elapsed_seconds=5.928

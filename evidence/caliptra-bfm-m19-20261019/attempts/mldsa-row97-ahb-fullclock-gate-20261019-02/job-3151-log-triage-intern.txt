@@ -1,0 +1,4 @@
+*   **Pin Records:** The text states: `M19 pin markers: 0`.
+*   **Terminal Result:** The terminal log includes the line: `* TESTCASE PASSED`.
+*   **UVM Counts:** The UVM counts are reported as: `reads=901/4546 writes=3645/4546 sizes(1/2/4/8B)=0/0/4546/0 of 4546 addresses; pending_wait=0/13658 cycles; errors=0/4546 transfers`.
+*   **Filelist Source Line:** The filelist entry is: `258:${ADAMSBRIDGE_ROOT}/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/hdl_top.sv`.

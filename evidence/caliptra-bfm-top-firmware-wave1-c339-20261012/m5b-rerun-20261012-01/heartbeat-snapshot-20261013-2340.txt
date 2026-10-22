@@ -1,0 +1,21 @@
+Captured on DAN-DESKTOP at 2026-10-13 23:40 MDT; host uptime 4 hours 42 minutes.
+
+Slurm state:
+- 799_36: terminal FAIL, recorded.
+- 799_37, 799_38, 799_39: RUNNING.
+- 799_40: terminal FAIL, recorded.
+- 799_41, 799_42: terminal PASS, recorded.
+- 895_1, 895_2, 895_3: RUNNING.
+- 895_4: terminal PASS, recorded in the fresh-rerun ledger.
+
+Latest active simulator heartbeats:
+- 799_37 smoke_test_kv_swwe_lock: wall_s=16500 mcycle=120203; log mtime 23:35:11.
+- 799_38 smoke_test_sha256_wntz: wall_s=16500 mcycle=120360; log mtime 23:35:11.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=16500 mcycle=55212; log mtime 23:35:11.
+- 895_1 smoke_test_ecc_errortrigger4: wall_s=16500 mcycle=57861; log mtime 23:37:35.
+- 895_2 kv_entry_read_err: wall_s=16500 mcycle=119748; log mtime 23:38:55.
+- 895_3 smoke_test_kv_parallel_access: wall_s=16500 mcycle=75440; log mtime 23:37:36.
+
+Completed rerun 895_4 smoke_test_ecc_flow2_kv_ocp_progress: PASS; full sim.log final heartbeat wall_s=8400 mcycle=62186 (29 heartbeats), finish mcycle=62472, elapsed 8469 seconds, peak RSS 1,852,676 KiB. Result JSON and logs are SHA-verified in `cancelled-reruns-c339-20261013-01/pass-evidence-895/`.
+
+All six active simulators advanced since the 23:29 sample. No active row meets the 30-minute flat-heartbeat hang rule. No output tree for the six active runs was ready for cleanup. The completed 895_4 output tree measured 375,765,215 bytes and remains present until this evidence is committed.

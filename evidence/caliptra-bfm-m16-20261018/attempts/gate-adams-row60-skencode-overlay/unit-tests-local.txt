@@ -1,0 +1,8 @@
+command=~/codex-supervisor/localrun 180 python3 -m unittest discover -s dv/caliptra_bfm/uvmf_lite/tests -p test_run_m15_test.py
+host=MacBook-Air.local
+macOS=27.0
+Python 3.14.7
+numpy=not installed in default local Python; this standard-library unit suite does not import NumPy
+result=55 tests passed
+wall_seconds=0.14
+peak_rss_bytes=28033024

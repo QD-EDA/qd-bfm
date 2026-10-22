@@ -1,0 +1,4 @@
+job_id=3281 (task jobs 3281_100, 3282_85)
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-mlkem-mode3-longcap-array-20261020-01
+terminal_state=FAILED before compile, exit 2
+remote_bytes_freed=1462532

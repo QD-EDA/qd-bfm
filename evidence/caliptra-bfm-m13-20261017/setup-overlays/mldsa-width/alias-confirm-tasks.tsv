@@ -1,0 +1,2 @@
+adams-bridge-v2-0-3-norm_check_tb	norm_check_tb	src/norm_check/config/norm_check_tb.vf
+adams-bridge-v2-0-3-skdecode_tb	skdecode_tb	src/sk_decode/config/skdecode_tb.vf

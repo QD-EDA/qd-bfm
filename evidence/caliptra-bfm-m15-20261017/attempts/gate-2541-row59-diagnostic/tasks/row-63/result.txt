@@ -1,0 +1,5 @@
+row_id=63
+testname=decompose_normal_test
+status=BLOCKED
+cause=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/rtl/decompose.sv:36: Include file abr_prim_assert.sv not found
+elapsed_seconds=0.049

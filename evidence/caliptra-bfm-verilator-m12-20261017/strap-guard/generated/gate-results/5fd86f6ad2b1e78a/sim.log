@@ -1,0 +1,65 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE randomized (>0x40, DWORD aligned) to 0x63ec
+STRAP_SS_KEY_RELEASE_BASE_ADDR randomized within AXI SRAM to 0x000000012347bb74
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5083000 - ----------------------------------
+5132000 - Smoke Test AXI DMA AES KV  !!
+5174000 - ----------------------------------
+5400000 - OCP_LOCK_IN_PROGRESS: 0x0
+5495000 - MEK KEY SIZE: 0x63EC
+5577000 - MEK KEY DEST: 0x5000BE08
+5671000 - KV KEY SIZE is not valid: 0x63EC testing the byte count too large err
+5895000 - FW: Arm err command
+5961000 - AXI DMA reports err status for err injection xfer
+* TESTCASE PASSED
+
+Finished : minstret = 19858, mcycle = 60405
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

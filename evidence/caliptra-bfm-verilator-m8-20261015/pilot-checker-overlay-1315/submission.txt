@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+submitted=2026-10-15
+job_id=1315
+name=a2-vlt-top
+array=0-0%1
+cohort=six-test-cases.tsv
+case=smoke_test_ecc_flow1_kv_ocp_progress
+verilator_version=5.052
+model_sha256=b6ee29ade1b17547c4b31692ed9a0b48e22031c4551604fd9dc250a81e01ae79
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-06
+cpus=1
+memory=3G
+sim_timeout_s=17740
+harness_timeout_s=19540
+source_commit=d0d728d7a4aea66ce1962a418d6403d017b72157
+checker_overlay_sha256=6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654

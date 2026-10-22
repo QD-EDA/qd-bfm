@@ -1,0 +1,11 @@
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-03/tasks/row-58/output/overlays/adams-mldsa/tb/src/sample_in_ball/tb/sample_in_ball_tb.sv:44: No argument provided for MAX_CYCLES, defaulting to      200000
+      Time: 0  Scope: sample_in_ball_tb
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-03/tasks/row-58/output/overlays/adams-mldsa/tb/src/sample_in_ball/tb/sample_in_ball_tb.sv:50: No argument provided for VEC_CNT, defaulting to          10
+      Time: 0  Scope: sample_in_ball_tb
+PLAYBOOK_RANDOM_SEED = 
+   -- Testbench for SAMPLE_IN_BALL started --
+*** Toggle reset.
+
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-03/tasks/row-58/output/overlays/adams-mldsa/tb/src/sample_in_ball/tb/sample_in_ball_tb.sv:191: Hit max cycle count (200000) .. stopping
+       Time: 2000005  Scope: sample_in_ball_tb.sys_monitor
+/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-03/tasks/row-58/output/overlays/adams-mldsa/tb/src/sample_in_ball/tb/sample_in_ball_tb.sv:192: $finish called at 2000005 (1s)

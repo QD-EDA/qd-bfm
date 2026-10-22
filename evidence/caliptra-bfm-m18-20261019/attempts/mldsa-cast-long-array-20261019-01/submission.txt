@@ -1,0 +1,14 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-cast-long-array-20261019-01
+Rows: 80,82,86,87,91,92,96,97,99,101,102,103,106
+Throttle: 6 concurrent tasks
+Resources: 1 CPU/2 GiB per task; 3,600-second timeout; 75-minute Slurm wall limit
+Peak RSS basis: row 77 reached 766,196 KiB on the same runner; 2 GiB exceeds 1.25x that peak
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+vvp SHA-256: 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309
+QD source commit: a5b67f7fd3ef7e391f9de0ad89598576a1813e1e
+Source snapshot SHA-256: ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+Run script SHA-256: 6ab1c710a0523d771a2de83b96c6f3298190d8b5ebcf7b23702b89f906497034
+Slurm --test-only: Job 3080 to start at 2026-10-19T05:39:13 on DAN-DESKTOP (not submitted)
+Array job ID: 3081

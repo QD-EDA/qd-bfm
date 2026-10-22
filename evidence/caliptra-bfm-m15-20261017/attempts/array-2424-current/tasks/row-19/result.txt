@@ -1,0 +1,5 @@
+row_id=19
+testname=sha256_normal_test
+status=PASS
+cause=testbench pass marker present; no failure marker or UVM error/fatal
+elapsed_seconds=0.172

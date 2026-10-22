@@ -1,0 +1,19 @@
+Mon Oct 19 10:29:50 MDT 2026
+ 10:29:50 up 5 days,  3:01,  8 users,  load average: 9.21, 9.88, 9.69
+3110_77 RUNNING elapsed=12:59 remaining=1:02:01
+NO_RESULT_JSON
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/sim.log mtime=2026-10-19 10:17:17.733843665 -0600 size=4096
+UVM_WARNING /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/source/dv/caliptra_bfm/uvm/caliptra_ahb_qvip_compat_pkg.sv(300) @ 0.000ns: uvm_test_top.environment.qvip_ahb_lite_slave_subenv [AHB_QVIP_CVG] Internal QVIP covergroups are not recreated; configured burst_transfer_cov still publishes monitored records to the environment coverage consumer
+UVM_WARNING /home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/lib/ivl/uvm/src/seq/uvm_sequence_base.svh(994) @ 0.000ns: reporter@@ML_DSA_randomized_key_gen_sequence [SEQPRTZMB] The parent process that called start() on sequence 'ML_DSA_randomized_key_gen_sequence' was terminated without killing the sequence.  The kill() method is being automatically triggered.
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/hdl_top.sv(82) @ 200.000ns: reporter [HDL_TOP_TB]  waiting for the reset event trigger
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_key_gen_sequence
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/compile.log mtime=2026-10-19 10:17:00.740812680 -0600 size=710
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+iverilog: note: wrote DPI export C stubs to /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/test.dpiexport.c (compile it into your DPI object).
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/runner.log mtime=2026-10-19 10:16:52.101026606 -0600 size=0
+
+    PID    PPID     ELAPSED %CPU   RSS COMMAND         COMMAND
+2114610 2114609       12:49 99.9 378688 vvp            /home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/bin/vvp -n /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/test.vvp +UVM_TESTNAME=ML_DSA_randomized_key_gen_test +ntb_random_seed=1

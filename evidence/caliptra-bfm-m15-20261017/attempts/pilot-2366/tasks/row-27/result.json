@@ -1,0 +1,32 @@
+{
+  "cause": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:116: syntax error",
+  "compile_exit": 2,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-05-pilot/tasks/row-27/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.194,
+  "environment_id": "caliptra-v2-1-2-soc_ifc_tb",
+  "filelist": "src/soc_ifc/config/soc_ifc_tb.vf",
+  "filelist_sha256_json": "{\"src/soc_ifc/config/soc_ifc_tb.vf\":\"3535d6a5824a8a75d12b9e44f605261f2ae34cd3d6dcc94626c49d3f6e701306\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 27,
+  "run_plusargs": [
+    "+SOC_IFC_TEST=rvtime_reg_test",
+    "+UVM_TESTNAME=rvtime_reg_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "7",
+  "slurm_job_id": "2374",
+  "source_file": "src/soc_ifc/stimulus/tests/directed/rvtime_reg_test.yml",
+  "source_pin": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "source_repo": "caliptra",
+  "source_yaml_sha256": "482a117bce27f169004fe062807d239f393093ccb355b39372013a258c32a0a3",
+  "status": "BLOCKED",
+  "testname": "rvtime_reg_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

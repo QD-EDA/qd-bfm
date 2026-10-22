@@ -1,0 +1,91 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5482000 - ----------------------------------
+5532000 -  Caliptra Mbox SRAM DIR Smoke Test!!
+5586000 - ----------------------------------
+5655000 - Writing [0x30040000] to addr [0x30040000]
+5862000 - Writing [0x30044000] to addr [0x30044000]
+6071000 - Writing [0x30048000] to addr [0x30048000]
+6279000 - Writing [0x3004C000] to addr [0x3004C000]
+6492000 - Writing [0x30050000] to addr [0x30050000]
+6701000 - Writing [0x30054000] to addr [0x30054000]
+6909000 - Writing [0x30058000] to addr [0x30058000]
+7118000 - Writing [0x3005C000] to addr [0x3005C000]
+7328000 - Writing [0x30060000] to addr [0x30060000]
+7537000 - Writing [0x30064000] to addr [0x30064000]
+7745000 - Writing [0x30068000] to addr [0x30068000]
+7954000 - Writing [0x3006C000] to addr [0x3006C000]
+8162000 - Writing [0x30070000] to addr [0x30070000]
+8371000 - Writing [0x30074000] to addr [0x30074000]
+8580000 - Writing [0x30078000] to addr [0x30078000]
+8788000 - Writing [0x3007C000] to addr [0x3007C000]
+9000000 - Reading from addr [0x30040000]
+9290000 - Reading from addr [0x30044000]
+9582000 - Reading from addr [0x30048000]
+9874000 - Reading from addr [0x3004C000]
+10163000 - Reading from addr [0x30050000]
+10452000 - Reading from addr [0x30054000]
+10741000 - Reading from addr [0x30058000]
+11030000 - Reading from addr [0x3005C000]
+11319000 - Reading from addr [0x30060000]
+11608000 - Reading from addr [0x30064000]
+11897000 - Reading from addr [0x30068000]
+12186000 - Reading from addr [0x3006C000]
+12475000 - Reading from addr [0x30070000]
+12764000 - Reading from addr [0x30074000]
+13053000 - Reading from addr [0x30078000]
+13342000 - Reading from addr [0x3007C000]
+* TESTCASE PASSED
+
+Finished : minstret = 43382, mcycle = 135980
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

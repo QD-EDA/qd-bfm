@@ -1,0 +1,6 @@
+outcome=PASS
+reason=terminal_result_passed
+runner_exit=0
+progress_heartbeat_count=54
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=19800 mcycle=150623
+result_testname=smoke_test_sha256_wntz

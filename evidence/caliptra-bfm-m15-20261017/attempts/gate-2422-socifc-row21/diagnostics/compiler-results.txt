@@ -1,0 +1,12 @@
+Pinned Icarus 13.0, source 9b5fad2afb4104caa816b257d5bccc40f01b8c66, binary SHA256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288.
+Verilator 5.032.
+
+Command: iverilog -g2017 -tnull -s top implicit.sv
+Exit: 3; diagnostic: lock_fuses doesn't name a type.
+Command: verilator --lint-only --Wno-fatal --top-module top implicit.sv
+Exit: 0 (ignored-return warning only).
+
+Command: iverilog -g2017 -tnull -s top void.sv
+Exit: 0.
+Command: verilator --lint-only --Wno-fatal --top-module top void.sv
+Exit: 0.

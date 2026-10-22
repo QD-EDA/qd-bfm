@@ -1,0 +1,11 @@
+source-snapshot.tar.gz: OK
+m19_trace_runner.py: OK
+run.sbatch: OK
+3154
+array_task=3154_97
+host=DAN-DESKTOP
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02
+resources=1 CPU, 2 GiB RAM, 3600-second runner cap, 4500-second Slurm limit
+source_sha256=ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+trace_runner_sha256=eec538dd9e8bab35f1f4d021eb0c4317757506acd0d3e0595cf7c6ec2105782d
+run_script_sha256=73fe103c270f308b81c861ac9928e6cc9190cf48013e6f7fe59e4c5d3b524b11

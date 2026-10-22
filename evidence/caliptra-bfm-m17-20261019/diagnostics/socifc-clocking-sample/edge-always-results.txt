@@ -1,0 +1,8 @@
+default-clock-always-changed compile_exit=0
+changed at 5
+/tmp/default-clock-always-changed.sv:7: $finish called at 12 (1s)
+default-clock-always-changed sim_exit=0
+no-default-clock-always-changed compile_exit=0
+changed at 5
+/tmp/no-default-clock-always-changed.sv:6: $finish called at 12 (1s)
+no-default-clock-always-changed sim_exit=0

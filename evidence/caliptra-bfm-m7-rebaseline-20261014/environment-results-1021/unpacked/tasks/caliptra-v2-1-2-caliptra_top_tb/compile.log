@@ -1,0 +1,6 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:584: warning: Anachronistic use of named begin/end to surround generate schemes.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:597: warning: Anachronistic use of named begin/end to surround generate schemes.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:610: warning: Anachronistic use of named begin/end to surround generate schemes.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/asserts/caliptra_top_sva.sv:624: warning: Anachronistic use of named begin/end to surround generate schemes.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/Axi4PC.sv:17: syntax error
+I give up.

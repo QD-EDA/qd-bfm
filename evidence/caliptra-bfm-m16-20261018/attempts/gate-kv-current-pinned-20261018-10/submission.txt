@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18 22:49:41 UTC
+Command: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-pinned-20261018-10/run.sbatch
+Job ID: 2822
+Target: generated KeyVault row 6, kv_rand_lock_test, normal runtime with generated transfer typedef overlay.
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap, 600-second per-test timeout.
+Status at submission: queued/running; one other task was running on the host.
+Terminal result: PASS; runner_exit_code=0; UVM_ERROR=0, UVM_FATAL=0; 3170 warnings; testcase marker and `$finish` at 2,254,640,000 (1 ps).
+Wall time: 1:44.10; peak RSS: 630396 KiB. Raw run archive verified locally; remote run directory cleaned afterward.

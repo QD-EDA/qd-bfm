@@ -1,0 +1,19 @@
+# M9 collection checkpoint: 2026-10-16 02:04 MDT
+
+All seven result bundles passed their internal `FILE-SHA256SUMS` checks. The separately copied Slurm resource records and array logs also matched the remote SHA-256 values before cleanup. All runs used model SHA-256 `ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de`.
+
+| Task | Test | Verilator result | Final mcycle | Wall seconds | Prior Icarus |
+|---:|---|---|---:|---:|---|
+| 63 | `smoke_test_mbox` | TIMEOUT | NA | 10,716.633 | PASS |
+| 153 | `smoke_test_dma` | FAIL | NA | 170.010 | UNVERIFIED |
+| 154 | `smoke_test_mlkem` | PASS | 311,514 | 178.197 | UNVERIFIED |
+| 155 | `smoke_test_kv` | PASS | 5,436 | 5.615 | PASS |
+| 156 | `smoke_test_mlkem_errortrigger` | PASS | 133,679 | 290.802 | UNVERIFIED |
+| 157 | `fw_test_lms_n32_w1_h5` | FAIL | NA | 0.841 | UNVERIFIED |
+| 158 | `smoke_test_kv_crypto_flow2` | FIRMWARE_BUILD_FAIL | NA | 0.806 | UNVERIFIED |
+
+The MBOX comparison is recorded in [`disagreements.md`](disagreements.md). Task 153's own test reports failure and reaches the testbench's `$TESTCASE FAILED` assertion; its exact failure condition has not been isolated. Task 157 repeats the DCCM `$readmem` bounds startup failure. Task 158 fails firmware compilation because the pinned test passes a scalar as argument 3 to `mldsa_keygen_flow`, whose pinned header declares that parameter as an array pointer. The four results and all accompanying logs/resources are retained under `runs/<test_id>/`.
+
+The refreshed 271-row ledger has 154 terminal supported-firmware rows: 101 PASS, 38 FAIL, 14 `FIRMWARE_BUILD_FAIL`, and 1 TIMEOUT. Eight supported rows remain pending; 109 non-firmware rows remain `NOT_RUN_NON_FIRMWARE`. The terminal pass rate is 101/154 (65.6%); 101/162 supported rows (62.3%) have passed.
+
+After local verification, remote outputs for tasks 63 and 153–158 were removed: three result trees, three resource records, and three Slurm logs for tasks 63/153/154; four result trees, four resource records, and four Slurm logs for tasks 155–158. This freed 2,625,479 apparent bytes (2.50 MiB). Two unmanifested local `.work` staging trees were also removed after confirming neither was listed in its bundle manifest; that freed 4,087,354 bytes (3.90 MiB). The shared model and active array inputs remain in use.

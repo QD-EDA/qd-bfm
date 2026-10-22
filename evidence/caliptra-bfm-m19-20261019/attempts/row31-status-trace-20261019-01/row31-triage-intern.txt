@@ -1,0 +1,12 @@
+The status was already nonzero before the test writes the internal-status register and before the AXI write starts.
+
+**Quoted Facts:**
+
+*   **M19_STATUS PRE_AHB:** `M19_STATUS PRE_AHB=1010`
+*   **M19_STATUS PRE_AXI:** `M19_STATUS PRE_AXI=1010`
+*   **AXI start:** `AXI Write transaction to address 0x30021814`
+*   **M19_STATUS ASSERT_SAMPLE:** `M19_STATUS ASSERT_SAMPLE=1010`
+*   **error:** `TB ERROR aserted for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). Register bit-field(s) mutable over AXI! agg value is 0b1010`
+
+**Conclusion:**
+The log proves that the status already existed before the AXI write started, as indicated by `M19_STATUS PRE_AXI=1010`.

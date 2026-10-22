@@ -1,0 +1,9 @@
+Slurm array job: 2194[17] (single-row current-main environment gate)
+Submitted: 2026-10-17, DAN-DESKTOP
+Dependency: afterok:2192 (pinned Icarus main build)
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01
+Row 17: adams-bridge-v2-0-3-masking_tb / abr_masked_OR_tb
+Resources: 1 CPU, 3 GiB, 2-hour Slurm cap; per-test timeout 6900 seconds
+Task list SHA-256: 6d607f67bb1d428011762fec4c6b1a09a19db9c6f8f0dbbbfcb3029bd12521dc
+Runner SHA-256: 3e38296922031216ec2c56857eb3667dd7a9463e14d16384d896e2f64637f7c5
+Submission: sbatch --parsable --dependency=afterok:2192 --array=17 environment-array.sbatch

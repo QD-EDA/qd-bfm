@@ -1,0 +1,80 @@
+   -= Testbench for DOE CBC started =-
+    ==============================
+
+*** Toggle reset.
+
+CBC 128 bit key single block tests
+---------------------
+*** TC 1 CBC mode test started.
+*** ENCRYPTION *** 
+*** Single block test processing time = 69 cycles
+*** TC 1 successful.
+
+---------------------
+*** TC 1 CBC mode test started.
+*** DECRYPTION *** 
+*** Single block test processing time = 69 cycles
+*** TC 1 successful.
+
+---------------------
+*** TC 2 CBC mode test started.
+*** ENCRYPTION *** 
+*** Single block test processing time = 69 cycles
+*** TC 2 successful.
+
+---------------------
+*** TC 3 CBC mode test started.
+*** DECRYPTION *** 
+*** Single block test processing time = 69 cycles
+*** TC 3 successful.
+
+---------------------
+---------------------
+*** TC 4 CBC mode DOUBLE BLOCK test started.
+*** ENCRYPTION *** 
+*** TC 4 first block successful.
+
+*** TC 4 second block successful.
+
+---------------------
+*** TC 5 CBC mode DOUBLE BLOCK test started.
+*** DECRYPTION *** 
+*** TC 5 first block successful.
+
+*** TC 5 second block successful.
+
+---------------------
+*** TC 6 CBC mode FOUR BLOCK test started.
+*** ENCRYPTION *** 
+*** TC 6 first block successful.
+
+*** TC 6 second block successful.
+
+*** TC 6 third block successful.
+
+*** TC 6 fourth block successful.
+
+---------------------
+*** TC 7 CBC mode FOUR BLOCK test started.
+*** DECRYPTION *** 
+*** TC 7 first block successful.
+
+*** TC 7 second block successful.
+
+*** TC 7 third block successful.
+
+*** TC 7 fourth block successful.
+
+---------------------
+CBC 256 bit key single block tests
+*** TC 8 CBC mode test started.
+*** ENCRYPTION *** 
+*** Single block test processing time = 93 cycles
+*** TC 8 successful.
+
+---------------------
+*** All 09 test cases completed successfully
+* TESTCASE PASSED
+
+*** DOE simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_core_cbc_tb.sv:668: $finish called at 2142 (1s)

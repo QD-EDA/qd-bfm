@@ -1,0 +1,8 @@
+job_id=3299
+dependency=afterany:3298
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-socifc-wildcard-rest-r2-array-20261020-02
+submitted_utc=2026-10-20T04:52Z
+source_snapshot_sha256=df5136d0934a583137a5f1288ac398d392b3e62535966fb5c6d83e59b7b00899
+run_sbatch_sha256=fff9724ce462b3f4d4ee143b25ab045e34627f626cad1e01c00d1244b621b7be
+run_m15_test_sha256=13f5cd7deeefdffaba6bb19d210557d77a1692152901192d93a27b74f046d81d
+test_run_m15_test_sha256=9ff9c9ba62e42ecb18522f74eb419701d8dd13396985e7f2a5b70ae6f3f28857

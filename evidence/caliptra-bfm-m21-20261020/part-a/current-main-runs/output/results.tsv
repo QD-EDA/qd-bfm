@@ -1,0 +1,14 @@
+test	compile_exit	sim_exit
+dist_boolean_subject	1	NA
+dist_typed_control	0	0
+dynamic_array_slice_class	2	NA
+dynamic_array_slice_class_control	0	0
+interface_port_write	0	0
+narrow_explicit_range_control	0	0
+nested_paren_control	0	0
+noarg_method_string_concat	0	0
+parameterized_config_path	0	0
+psprintf_control	0	0
+psprintf_empty_arg	1	NA
+pv_generic_transfer_repro	0	0
+wide_explicit_range	1	NA

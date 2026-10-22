@@ -61,7 +61,18 @@ FIRMWARE_COMPAT_OVERLAYS = {
     "smoke_test_uart": "caliptra-legacy-uart-qspi-reg-compat.h",
     "smoke_test_qspi": "caliptra-legacy-uart-qspi-reg-compat.h",
     "smoke_test_ecc_errortrigger5": "caliptra-errortrigger5-abr-compat.h",
+    "smoke_test_kv_ecc_flow1": "caliptra-srand-compat.h",
+    "smoke_test_kv_ecc_flow2": "caliptra-srand-compat.h",
+    "smoke_test_ras": "caliptra-ras-isr-compat.h",
 }
+RAS_ISR_HEADER_RELATIVE_PATH = (
+    "src/integration/test_suites/smoke_test_ras/caliptra_isr.h"
+)
+RAS_ISR_HEADER_SHA256 = "dff5bff1a7f28c2bad6cd220c1c0f708f7d1980cab1119ceacca0cd9b859e5a8"
+RAS_ISR_SIGNATURE = b"inline void service_soc_ifc_notif_intr () {"
+RAS_ISR_COMPAT_SIGNATURE = (
+    b"static inline __attribute__((used)) void service_soc_ifc_notif_intr () {"
+)
 FIRMWARE_COMPAT_OVERLAY_DIR = (
     REPO / "docs/conformance/release_overlays/caliptra/environment"
 )
@@ -208,7 +219,7 @@ def prepare_axi_if_overlay(rtl_root, output_path):
         raise ValueError("Icarus AXI interface overlay did not match its recorded hash")
 
 
-def prepare_firmware_compat_overlay(case, output_path):
+def prepare_firmware_compat_overlay(case, output_path, rtl_root=None):
     filename = FIRMWARE_COMPAT_OVERLAYS.get(case)
     if filename is None:
         raise ValueError(f"no firmware compatibility overlay for {case}")
@@ -216,6 +227,21 @@ def prepare_firmware_compat_overlay(case, output_path):
     if not source.is_file():
         raise ValueError(f"firmware compatibility overlay not found: {source}")
     output = Path(output_path)
+    if case == "smoke_test_ras":
+        if rtl_root is None:
+            raise ValueError("RTL root required for smoke_test_ras compatibility overlay")
+        isr_source = Path(rtl_root) / RAS_ISR_HEADER_RELATIVE_PATH
+        if sha256(isr_source) != RAS_ISR_HEADER_SHA256:
+            raise ValueError(f"Caliptra RAS ISR source hash mismatch: {isr_source}")
+        original = isr_source.read_bytes()
+        if original.count(RAS_ISR_SIGNATURE) != 1:
+            raise ValueError("Caliptra RAS ISR source did not have one expected handler")
+        overlay_source = output.parent / "source_overlay" / "caliptra_isr.h"
+        overlay_source.parent.mkdir(parents=True, exist_ok=True)
+        overlay_source.write_bytes(
+            original.replace(RAS_ISR_SIGNATURE, RAS_ISR_COMPAT_SIGNATURE, 1)
+        )
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(source.read_bytes())
     return output
 
@@ -461,14 +487,19 @@ def load_case(rtl_root, name, case_yaml_path=None):
         raise ValueError(f"case YAML not found: {case_yaml}")
     text = case_yaml.read_text()
     testnames = re.findall(r"(?m)^testname:\s*(\S+)\s*$", text)
-    seeds = re.findall(r"(?m)^seed:\s*(\S+)\s*$", text)
+    seeds = re.findall(r"(?m)^seed:\s*([^\s#]+)(?:\s+#.*)?\s*$", text)
     if (len(testnames) != 1 or not re.fullmatch(r"[A-Za-z0-9_]+", testnames[0]) or
             len(seeds) != 1 or (case_yaml_path is None and testnames != [name])):
         raise ValueError(f"unexpected Caliptra case YAML: {case_yaml}")
     seed = "1" if seeds[0] == "${PLAYBOOK_RANDOM_SEED}" else seeds[0]
     if not seed.isdigit():
         raise ValueError(f"case seed must be numeric: {seed}")
-    plusargs = re.findall(r"(?m)^\s*-\s+(\+\S+)\s*$", text)
+    plusargs = [
+        value
+        for _, value in re.findall(
+            r"""(?m)^\s*-\s+(['"]?)(\+\S+?)\1\s*$""", text
+        )
+    ]
     return case_yaml, seed, plusargs, testnames[0]
 
 
@@ -986,7 +1017,7 @@ def main():
     firmware_compat_overlay = None
     if args.firmware_compat_overlay:
         firmware_compat_overlay = prepare_firmware_compat_overlay(
-            args.case, args.output / "caliptra_firmware_compat.h"
+            args.case, args.output / "caliptra_firmware_compat.h", rtl_root=rtl
         )
     profile = args.output / "open_caliptra_top.vf"
     checker_overlay = args.output / "caliptra_top_sva_icarus.sv"

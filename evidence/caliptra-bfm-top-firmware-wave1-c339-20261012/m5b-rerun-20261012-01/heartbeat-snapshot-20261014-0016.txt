@@ -1,0 +1,44 @@
+captured_at=2026-10-14T00:17:06-06:00
+DAN-DESKTOP
+ 00:17:06 up  5:18,  4 users,  load average: 9.64, 7.48, 6.72
+queue:
+             JOBID      STATE         TIME TIME_LIMIT     CPUS MIN_MEMORY NODELIST(REASON)
+               940    RUNNING         1:00      20:00        3         5G DAN-DESKTOP
+             936_1    RUNNING         4:48    6:10:00        1         3G DAN-DESKTOP
+             936_2    RUNNING         4:48    6:10:00        1         3G DAN-DESKTOP
+             936_3    RUNNING         4:48    6:10:00        1         3G DAN-DESKTOP
+             936_4    RUNNING         4:48    6:10:00        1         3G DAN-DESKTOP
+            767_22    RUNNING      2:01:12 2-00:00:00        1        10G DAN-DESKTOP
+            799_37    RUNNING      5:17:48    6:10:00        1         3G DAN-DESKTOP
+            799_38    RUNNING      5:17:48    6:10:00        1         3G DAN-DESKTOP
+--- 799_37 smoke_test_kv_swwe_lock ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:15:11.027739081 -0600
+full_log_heartbeat_count=47
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=18900 mcycle=138820
+--- 799_38 smoke_test_sha256_wntz ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:15:11.107740941 -0600
+full_log_heartbeat_count=53
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=18900 mcycle=138750
+--- 936_1 smoke_test_ecc_errortrigger4 ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:13:13.401009315 -0600
+full_log_heartbeat_count=1
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=0 mcycle=0
+--- 936_2 kv_entry_read_err ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:13:13.533012378 -0600
+full_log_heartbeat_count=1
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=0 mcycle=0
+--- 936_3 smoke_test_kv_parallel_access ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:13:13.681015814 -0600
+full_log_heartbeat_count=1
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=0 mcycle=0
+--- 936_4 smoke_test_ecc_flow2_kv_ocp_progress ---
+status.txt: absent
+sim_log_mtime=2026-10-14 00:13:13.681015814 -0600
+full_log_heartbeat_count=1
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=0 mcycle=0
+terminal tasks: 799_39 FAIL (wall=17100 mcycle=59872); 895_3 TIMEOUT (wall=18000 mcycle=78485).

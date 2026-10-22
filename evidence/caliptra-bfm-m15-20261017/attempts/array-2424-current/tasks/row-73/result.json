@@ -1,0 +1,31 @@
+{
+  "cause": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_top_masking_tb.sv:295: error: Concatenation operand \"'d0\" has indefinite width.",
+  "compile_exit": 8,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-73/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 1.599,
+  "environment_id": "adams-bridge-v2-0-3-ntt_top_masking_tb",
+  "filelist": "src/ntt_top/config/ntt_top_masking_tb.vf",
+  "filelist_sha256_json": "{\"src/ntt_top/config/ntt_top_masking_tb.vf\":\"bfa7b42b166abbc3f560585c028c2a1e04d228aa57fcc10920ea7f21f311b97a\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 73,
+  "run_plusargs": [
+    "+UVM_TESTNAME=ntt_masking_normal_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "70",
+  "slurm_job_id": "2495",
+  "source_file": "src/ntt_top/stimulus/tests/directed/ntt_masking_normal_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "bd3adc861e5465e3d610e87535afb9cfc445ac4adf3725b056f0c2753c42a321",
+  "status": "BLOCKED",
+  "testname": "ntt_masking_normal_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

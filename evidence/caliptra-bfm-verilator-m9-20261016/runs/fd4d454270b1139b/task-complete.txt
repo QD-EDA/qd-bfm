@@ -1,0 +1,1 @@
+test_id=fd4d454270b1139b testname=smoke_test_sha3_regs wrapper_exit=0 completed_at=2026-10-16T00:25:00-06:00

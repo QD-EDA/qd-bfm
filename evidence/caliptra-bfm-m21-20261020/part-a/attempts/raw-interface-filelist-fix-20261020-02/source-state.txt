@@ -1,0 +1,8 @@
+branch codex/caliptra-bfm-stack-20261006
+HEAD 5af1170f86c69122c227ba787afe028a5678b680
+Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus cc25756d187314742d347267c2a513b3e640a7fb
+runner sha256 9a8fd935742b1181b1a58e9c19d6dda988e4a04479709d7feb6f6999ac3a2556
+source snapshot sha256 464ff4649187a285cf24426a501779a36079fea8f97b6d9a1bacce2de4095012
+rows 0-4, 43-48; generated testbench top overlay plus HDL filelist redirection; one CPU, 4 GiB, 3600-second per-row cap.

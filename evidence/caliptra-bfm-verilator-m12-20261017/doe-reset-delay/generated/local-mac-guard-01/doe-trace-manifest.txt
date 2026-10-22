@@ -1,0 +1,3 @@
+checker_source_sha256=6bd2ade137a90c0701aab28951ba6f8918724e0467c21756b0c308e6e9081c89
+doe_trace_overlay_sha256=567e24f26471cfd49a0126f8d3460f97cda7afb1b2c8cdf041313a516ac27170
+instrumentation=print prior-cycle antecedent and DOE status when the DOE assertion fails

@@ -1,0 +1,228 @@
+rv_gcc_version is 15.2.0
+cp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/caliptra_defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/rtl/caliptra_reg/caliptra_reg.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/riscv_hw_if.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_isr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/printf/printf.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-csr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-interrupts.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/veer-csr.h   /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/aes/aes.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/doe/doe.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/ecc/ecc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mldsa/mldsa.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mlkem/mlkem.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/hmac/hmac.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/keyvault/keyvault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/datavault/datavault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha256/sha256.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha512/sha512.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha3/sha3.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/soc_ifc/soc_ifc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_rtl_lib/caliptra_rtl_lib.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/clk_gate/clk_gate.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/wdt/wdt.h /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/957dd42951b28ed5/.work/caliptra_demo
+riscv-none-elf-cpp -I/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/957dd42951b28ed5/.work/caliptra_demo -I/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/crt0.s  > crt0.cpp.s
+riscv-none-elf-as -mabi=ilp32 -march=rv32imc_zicsr_zifencei crt0.cpp.s -o crt0.o
+cp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/caliptra_defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/includes/defines.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/rtl/caliptra_reg/caliptra_reg.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/riscv_hw_if/riscv_hw_if.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_isr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/printf/printf.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-csr.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/riscv-interrupts.h /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_isr/veer-csr.h   /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/aes/aes.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/doe/doe.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/ecc/ecc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mldsa/mldsa.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/mlkem/mlkem.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/hmac/hmac.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/keyvault/keyvault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/datavault/datavault.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha256/sha256.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha512/sha512.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/sha3/sha3.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/soc_ifc/soc_ifc.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/caliptra_rtl_lib/caliptra_rtl_lib.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/clk_gate/clk_gate.h  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/wdt/wdt.h /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/957dd42951b28ed5/.work/caliptra_demo
+riscv-none-elf-gcc -I/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/957dd42951b28ed5/.work/caliptra_demo -g -O3 -DMY_RANDOM_SEED=1 -std=gnu11 -O2 -DCALIPTRA_HWCONFIG_LMS_EN -DCALIPTRA_HW_REV_ID=0x0212 -DCALIPTRA_HWCONFIG_TRNG_EN -DCOMPILER_FLAGS="\"-g -O3 -DMY_RANDOM_SEED=1 -std=gnu11 -O2\"" -mabi=ilp32 -march=rv32imc_zicsr_zifencei -nostdlib -c /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c -o caliptra_demo.o
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:36:22: warning: extra tokens at end of '#ifdef' directive
+   36 | #ifdef CPT_VERBOSITY   
+      |                      ^
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:38:7: warning: extra tokens at end of '#else' directive [-Wendif-labels]
+   38 | #else   
+      |       ^
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c: In function 'idevid':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:131:27: error: 'CLP_KV_REG_PCR_ENTRY_0_0' undeclared (first use in this function); did you mean 'CLP_PV_REG_PCR_ENTRY_0_0'?
+  131 |     reg_ptr = (uint32_t*) CLP_KV_REG_PCR_ENTRY_0_0;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                           CLP_PV_REG_PCR_ENTRY_0_0
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:131:27: note: each undeclared identifier is reported only once for each function it appears in
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:138:18: error: 'CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_KEY_CTRL'?
+  138 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL, HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_RD_KEY_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:138:55: error: 'HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_MASK'?
+  138 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL, HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:139:67: error: 'HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_IS_PCR_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_CTRL_RSVD_MASK'?
+  139 |                                                                   HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_IS_PCR_MASK |
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                   HMAC_REG_HMAC512_KV_RD_KEY_CTRL_RSVD_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:140:75: error: 'HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_DATA_SIZE_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_LOW'?
+  140 |                                                                   (0xB << HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_DATA_SIZE_LOW));
+      |                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                           HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:143:24: error: 'CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_KEY_STATUS'?
+  143 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS) & HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_RD_KEY_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:143:65: error: 'HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_STATUS_VALID_MASK'?
+  143 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS) & HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK) == 0);
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                 HMAC_REG_HMAC512_KV_RD_KEY_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:146:18: error: 'CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL'?
+  146 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL, HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:146:57: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_EN_MASK'?
+  146 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL, HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK |
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                         HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:147:77: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_ENTRY_DATA_SIZE_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_PCR_HASH_EXTEND_LOW'?
+  147 |                                                                     (0xB << HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_ENTRY_DATA_SIZE_LOW));
+      |                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                             HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_PCR_HASH_EXTEND_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:150:24: error: 'CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS'?
+  150 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS) & HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:150:67: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS_VALID_MASK'?
+  150 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS) & HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK) == 0);
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                   HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:153:18: error: 'CLP_HMAC_REG_HMAC384_KV_WR_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_WR_CTRL'?
+  153 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_WR_CTRL, HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_WR_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:153:51: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_EN_MASK'?
+  153 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_WR_CTRL, HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK |
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:154:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK'?
+  154 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:155:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK'?
+  155 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK|
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:156:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_SHA_BLOCK_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK'?
+  156 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_SHA_BLOCK_DEST_VALID_MASK |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:157:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK'?
+  157 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:158:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK'?
+  158 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:159:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_MSG_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK'?
+  159 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_MSG_DEST_VALID_MASK);
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:162:18: error: 'CLP_HMAC_REG_HMAC384_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_CTRL'?
+  162 |     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, HMAC_REG_HMAC384_CTRL_INIT_MASK);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:162:45: error: 'HMAC_REG_HMAC384_CTRL_INIT_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_CTRL_INIT_MASK'?
+  162 |     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, HMAC_REG_HMAC384_CTRL_INIT_MASK);
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                             HMAC_REG_HMAC512_CTRL_INIT_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:165:24: error: 'CLP_HMAC_REG_HMAC384_KV_WR_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_WR_STATUS'?
+  165 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_WR_STATUS) & HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_WR_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:165:61: error: 'HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_STATUS_VALID_MASK'?
+  165 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_WR_STATUS) & HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK) == 0);
+      |                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                             HMAC_REG_HMAC512_KV_WR_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c: In function 'ldevid':
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:209:18: error: 'CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_KEY_CTRL'?
+  209 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL, HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_RD_KEY_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:209:55: error: 'HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_MASK'?
+  209 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL, HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:210:75: error: 'HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_DATA_SIZE_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_LOW'?
+  210 |                                                                   (0xB << HMAC_REG_HMAC384_KV_RD_KEY_CTRL_ENTRY_DATA_SIZE_LOW));
+      |                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                           HMAC_REG_HMAC512_KV_RD_KEY_CTRL_READ_EN_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:213:24: error: 'CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_KEY_STATUS'?
+  213 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS) & HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_RD_KEY_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:213:65: error: 'HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_KEY_STATUS_VALID_MASK'?
+  213 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS) & HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK) == 0);
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                 HMAC_REG_HMAC512_KV_RD_KEY_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:216:18: error: 'CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL'?
+  216 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL, HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:216:57: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_EN_MASK'?
+  216 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL, HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_EN_MASK |
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                         HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:217:77: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_ENTRY_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_ENTRY_LOW'?
+  217 |                                                                     (0x6 << HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_READ_ENTRY_LOW) | /* TODO replace 0x6 with entry indicators */
+      |                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                             HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_READ_ENTRY_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:218:78: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_ENTRY_DATA_SIZE_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_PCR_HASH_EXTEND_LOW'?
+  218 |                                                                     (0x1F << HMAC_REG_HMAC384_KV_RD_BLOCK_CTRL_ENTRY_DATA_SIZE_LOW));
+      |                                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                              HMAC_REG_HMAC512_KV_RD_BLOCK_CTRL_PCR_HASH_EXTEND_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:221:24: error: 'CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS'?
+  221 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS) & HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:221:67: error: 'HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS_VALID_MASK'?
+  221 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS) & HMAC_REG_HMAC384_KV_RD_BLOCK_STATUS_VALID_MASK) == 0);
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                   HMAC_REG_HMAC512_KV_RD_BLOCK_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:224:18: error: 'CLP_HMAC_REG_HMAC384_KV_WR_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_WR_CTRL'?
+  224 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_WR_CTRL, HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK |
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_KV_WR_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:224:51: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_EN_MASK'?
+  224 |     lsu_write_32(CLP_HMAC_REG_HMAC384_KV_WR_CTRL, HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_EN_MASK |
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_EN_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:225:71: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_ENTRY_LOW' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_ENTRY_LOW'?
+  225 |                                                               (0x1 << HMAC_REG_HMAC384_KV_WR_CTRL_WRITE_ENTRY_LOW)  | /* TODO replace 0x1 with entry indicators */
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                       HMAC_REG_HMAC512_KV_WR_CTRL_WRITE_ENTRY_LOW
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:226:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK'?
+  226 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_KEY_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:227:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK'?
+  227 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK|
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:228:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_SHA_BLOCK_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK'?
+  228 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_SHA_BLOCK_DEST_VALID_MASK |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_HMAC_BLOCK_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:229:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK'?
+  229 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_PKEY_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:230:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK'?
+  230 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK  |
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:231:63: error: 'HMAC_REG_HMAC384_KV_WR_CTRL_ECC_MSG_DEST_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK'?
+  231 |                                                               HMAC_REG_HMAC384_KV_WR_CTRL_ECC_MSG_DEST_VALID_MASK);
+      |                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               HMAC_REG_HMAC512_KV_WR_CTRL_ECC_SEED_DEST_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:234:18: error: 'CLP_HMAC_REG_HMAC384_CTRL' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_CTRL'?
+  234 |     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, HMAC_REG_HMAC384_CTRL_INIT_MASK);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  CLP_HMAC_REG_HMAC512_CTRL
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:234:45: error: 'HMAC_REG_HMAC384_CTRL_INIT_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_CTRL_INIT_MASK'?
+  234 |     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, HMAC_REG_HMAC384_CTRL_INIT_MASK);
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                             HMAC_REG_HMAC512_CTRL_INIT_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:237:24: error: 'CLP_HMAC_REG_HMAC384_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_STATUS'?
+  237 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_STATUS) & HMAC_REG_HMAC384_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:237:55: error: 'HMAC_REG_HMAC384_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_STATUS_VALID_MASK'?
+  237 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_STATUS) & HMAC_REG_HMAC384_STATUS_VALID_MASK) == 0);
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       HMAC_REG_HMAC512_STATUS_VALID_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:242:28: error: 'CLP_HMAC_REG_HMAC384_BLOCK_0' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_BLOCK_0'?
+  242 |     reg_ptr = (uint32_t *) CLP_HMAC_REG_HMAC384_BLOCK_0;
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                            CLP_HMAC_REG_HMAC512_BLOCK_0
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:244:35: error: 'CLP_HMAC_REG_HMAC384_BLOCK_31' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_BLOCK_31'?
+  244 |     while (reg_ptr <= (uint32_t*) CLP_HMAC_REG_HMAC384_BLOCK_31) {
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                   CLP_HMAC_REG_HMAC512_BLOCK_31
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:259:45: error: 'HMAC_REG_HMAC384_CTRL_NEXT_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_CTRL_NEXT_MASK'?
+  259 |     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, HMAC_REG_HMAC384_CTRL_NEXT_MASK);
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                             HMAC_REG_HMAC512_CTRL_NEXT_MASK
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:262:24: error: 'CLP_HMAC_REG_HMAC384_KV_WR_STATUS' undeclared (first use in this function); did you mean 'CLP_HMAC_REG_HMAC512_KV_WR_STATUS'?
+  262 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_WR_STATUS) & HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK) == 0);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CLP_HMAC_REG_HMAC512_KV_WR_STATUS
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/caliptra_demo/caliptra_demo.c:262:61: error: 'HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK' undeclared (first use in this function); did you mean 'HMAC_REG_HMAC512_KV_WR_STATUS_VALID_MASK'?
+  262 |     while((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_WR_STATUS) & HMAC_REG_HMAC384_KV_WR_STATUS_VALID_MASK) == 0);
+      |                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                             HMAC_REG_HMAC512_KV_WR_STATUS_VALID_MASK
+make: *** [/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile:365: caliptra_demo.o] Error 1

@@ -1,0 +1,16 @@
+Icarus confirmation
+Host: DAN-DESKTOP (SSH direct; no Slurm allocation)
+Icarus: 13.0 devel, source 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+iverilog SHA256: 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+vvp SHA256: c2474d2a745aa7d896885202314a5244ee26af56a32dda59a6c8fbd3ba362e3a
+UVM: Accellera:1800.2:UVM:2020.3.1 (Icarus bundled UVM)
+Full compile/run output and /usr/bin/time -v resource reports: icarus-exact-source-confirmation.log
+
+Verilator cross-check
+Host: MacBook-Air.local, macOS 27.0 (26A428), Darwin arm64
+Verilator: 5.051 devel, revision v5.050-196-g7dcd4e0b6
+Verilator binary SHA256: 098b09b11ba7d3e904ae13d924a9e8dac8ced5c9d7c9beff3b9d36119a417581
+UVM: Accellera:1800.2:UVM:2020.3.1 at /usr/local/lib/ivl/uvm/src
+Build define: -DUVM_NO_DPI (not exercising UVM DPI)
+Build peak RSS: 1,734,950,912 bytes; run peak RSS: 10,010,624 bytes
+Build/run logs: verilator-5.051-build.log, verilator-5.051-run.log

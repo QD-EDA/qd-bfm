@@ -1,0 +1,1 @@
+BLOCKED row=24 test=fuse_cptra_cap_reg_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:116: syntax error

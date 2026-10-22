@@ -1,0 +1,3 @@
+Host: MacBook-Air.local
+OS: macOS 27.0 (26A428)
+Python: 3.14.7

@@ -1,0 +1,4 @@
+join complete, captured=1
+join complete, captured=1
+MRE_PASS
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-vvp-mre-20261014/source.sv:43: $finish called at 1545 (1s)

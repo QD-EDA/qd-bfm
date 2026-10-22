@@ -1,0 +1,4 @@
+task=1110_1
+output_and_cache_bytes_removed=377229440
+bytes_available_before=842609471488
+bytes_available_after=842987339776

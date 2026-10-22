@@ -1,0 +1,8 @@
+array_job_id=3360
+submitted_at=2026-10-20T08:03:38Z
+rows=16,17,54,55
+qd_bfm_support_commit=01589b77bd606db70a991d4f93e30db9eecd9625
+caliptra_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+iverilog_commit=8c95b5cc10fc83d15b47e0364d2d7b4a2e12cac1
+per_row_runner_timeout_seconds=3600
+array_throttle=2

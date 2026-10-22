@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-minimal-20261020-03/reproducers/dynamic_array_slice_minimal.sv:6: sorry: dynamic-array slice r-values are not yet supported as fixed-size unpacked-array expressions.
+1 error(s) during elaboration.

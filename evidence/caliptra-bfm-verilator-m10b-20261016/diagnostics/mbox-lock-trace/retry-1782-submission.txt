@@ -1,0 +1,9 @@
+Job 1782: fresh, logging-only `smoke_test_mbox` trace on DAN-DESKTOP; submitted at 12:30 MDT and running at the last check.
+
+Run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-04`.
+
+Resources: 4 CPUs, 4 GiB, 2-hour job limit; the diagnostic simulation keeps its 180-second process-group timeout. The model uses pinned Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e` and Verilator 5.052. Assertions are disabled in this diagnostic-only build because the pinned AW handshake assertion stops the simulation before the MBOX transaction; the official assertion-enabled overlay array remains unchanged.
+
+Only logging copies of `axi_if.sv` and `mbox_csr.sv` are used. They do not drive protocol or CSR values. The RTL, BFM timing, firmware, and official pass criteria remain pinned. The independent official array 1772 retains six active elements while its throttle is 5, so no queued overlay row is added until a current element finishes.
+
+Diagnostic script SHA-256: `1a72a4998b36d8dc234bea3489b3e9080d157d7a53434119ebd30696fbd247ef`.

@@ -1,0 +1,13 @@
+Branch codex/caliptra-bfm-stack-20261006
+HEAD 5af1170f86c69122c227ba787afe028a5678b680
+Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus cae035642e056644274a01e98d4422ce286685b4
+A3 source snapshot augmented with the three required native ML-KEM source files omitted from the original snapshot.
+b43496c31315d47389436109b8c85c92514f9f8693c413a6341cb4eeda42d1ec  dv/caliptra_bfm/native_vectors/native_mlkem.c
+ff8fe9e644c8a84fd0941a7d7db3f324cda95e73c2af2c8c9c250ad2221de9cd  dv/caliptra_bfm/native_vectors/check_native_mlkem.py
+fe772557377e9b0c3c44ee487019edae7870cf24f1b4113de0042cb7543af492  dv/caliptra_bfm/native_vectors/random_test_ml_kem.py
+Snapshot sha256 476213b7f92d0ea9d129ca60add3e5dcb8746f9a5432750095ebd4e755384732
+Helper sha256 828cb762010959b12879d7d9d07d455425933b579b65575e2bddb32b18fdefb8
+Original job 3414_100 was terminal BLOCKED before simulation because native_mlkem.c was absent from its source snapshot.
+Corrected row 100 run, 14,400-second VVP cap (4x original 3,600-second cap), one CPU, 8 GiB.

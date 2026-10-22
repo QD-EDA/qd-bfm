@@ -1,0 +1,6 @@
+Removed 94 extracted files (1184888 bytes) only after byte-for-byte SHA-256 matches to members of the verified archive(s) below.
+Preserved 3 unmatched/symlink entries under evidence/caliptra-bfm-m19-20261019/attempts/queue-zeroize-overlay-array-20261019-01/raw/extracted; these were not deleted.
+archive_sha256_ok job-3130_56.tar.gz 89f4e42b9e81f90661ec16cc0a4c2b0c77aa7ba09be373a2b116f1c43b6f79f7
+archive_sha256_ok job-3130_62.tar.gz 9f2840ceac509974534e877a9e4c6398c87534a639dd9d7ca8ce4d526f99288a
+archive_sha256_ok job-3130_69.tar.gz a74d4b5e284b5ed19aac897e4740fba237edcf14975b476f98cb92f66a21cd99
+archive_sha256_ok job-3130_71.tar.gz 0b99bb6014881b9dfd0a63c22e1f83621f4e59c7f4494693ec279d3bcb0aeffa

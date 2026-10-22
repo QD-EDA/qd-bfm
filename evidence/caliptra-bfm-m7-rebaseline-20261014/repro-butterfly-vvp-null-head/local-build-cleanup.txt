@@ -1,0 +1,3 @@
+deleted=evidence/caliptra-bfm-m7-rebaseline-20261014/repro-butterfly-vvp-null-head/loop-probe/build
+files=0
+logical_bytes=0

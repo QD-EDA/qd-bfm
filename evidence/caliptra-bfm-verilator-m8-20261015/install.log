@@ -1,0 +1,120 @@
+------------------------------------------------------------
+making verilator in src
+make -C src 
+make[1]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src'
+make -C obj_dbg -j 1  TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj serial
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make[2]: Nothing to be done for 'serial'.
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make -C obj_dbg       TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+      Compile flags:  g++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Wno-shadow -Wno-unused-parameter -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/home/dsell/toolchains/verilator-5.052/share/verilator"
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj serial_vlcov
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make[2]: Nothing to be done for 'serial_vlcov'.
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+      Compile flags:  g++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Wno-shadow -Wno-unused-parameter -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/home/dsell/toolchains/verilator-5.052/share/verilator"
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_dbg'
+make -C obj_opt -j 1  TGT=../../bin/verilator_bin -f ../Makefile_obj serial
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_opt'
+make[2]: Nothing to be done for 'serial'.
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_opt'
+make -C obj_opt       TGT=../../bin/verilator_bin -f ../Makefile_obj
+make[2]: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_opt'
+      Compile flags:  g++ -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Wno-shadow -Wno-unused-parameter -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/home/dsell/toolchains/verilator-5.052/share/verilator"
+make[2]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src/obj_opt'
+make[1]: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01/source/src'
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/bin
+mkdir /home/dsell/toolchains/verilator-5.052
+mkdir /home/dsell/toolchains/verilator-5.052/share
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/bin
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/bin
+mkdir /home/dsell/toolchains/verilator-5.052/bin
+cd ./bin; \
+for p in verilator verilator_coverage verilator_gantt verilator_profcfunc  ; do \
+	/usr/bin/install -c $p /home/dsell/toolchains/verilator-5.052/bin/$p; \
+done
+perl -p -i -e 'use File::Spec;' \
+           -e' $path = File::Spec->abs2rel("/home/dsell/toolchains/verilator-5.052/share/verilator", "/home/dsell/toolchains/verilator-5.052/bin");' \
+           -e 's/my \$verilator_pkgdatadir_relpath = .*/my \$verilator_pkgdatadir_relpath = "$path";/g' \
+           -- "//home/dsell/toolchains/verilator-5.052/bin/verilator"
+cd bin; \
+for p in verilator_bin verilator_bin_dbg verilator_coverage_bin_dbg  ; do \
+	/usr/bin/install -c $p /home/dsell/toolchains/verilator-5.052/bin/$p; \
+done
+cd ./bin; \
+for p in verilator_ccache_report verilator_includer  ; do \
+	/usr/bin/install -c $p /home/dsell/toolchains/verilator-5.052/share/verilator/bin/$p; \
+done
+REDIR_SCRATCH=$(mktemp redir_XXXXXX); \
+perl -p -e 'use File::Spec;' \
+        -e' $path = File::Spec->abs2rel("/home/dsell/toolchains/verilator-5.052/bin", "/home/dsell/toolchains/verilator-5.052/share/verilator/bin");' \
+        -e 's/RELPATH.*/"$path";/g' -- "./bin/redirect" > $REDIR_SCRATCH; \
+for p in verilator verilator_coverage verilator_gantt verilator_profcfunc  verilator_bin verilator_bin_dbg verilator_coverage_bin_dbg  ; do \
+	/usr/bin/install -c $REDIR_SCRATCH /home/dsell/toolchains/verilator-5.052/share/verilator/bin/$p; \
+done; \
+rm $REDIR_SCRATCH
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/man/man1
+mkdir /home/dsell/toolchains/verilator-5.052/share/man
+mkdir /home/dsell/toolchains/verilator-5.052/share/man/man1
+for p in verilator.1 verilator_coverage.1 verilator_gantt.1 verilator_profcfunc.1 ; do \
+	/usr/bin/install -c -m 644 $p /home/dsell/toolchains/verilator-5.052/share/man/man1/$p; \
+done
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/include/fstcpp
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/include
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/include/fstcpp
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/include/vltstd
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/include/vltstd
+for p in include/verilated_config.h include/verilated.mk  ; do \
+	/usr/bin/install -c -m 644 $p /home/dsell/toolchains/verilator-5.052/share/verilator/$p; \
+done
+cd . \
+; for p in include/*.[chv]* include/*.vlt include/*.sv include/fstcpp/*.[chv]* include/vltstd/*.[chv]*  ; do \
+  /usr/bin/install -c -m 644 $p /home/dsell/toolchains/verilator-5.052/share/verilator/$p; \
+done
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_binary
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_binary
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_c
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_c
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_sc
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_hello_sc
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_tracing_c
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_tracing_c
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_tracing_sc
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_tracing_sc
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_protect_lib
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/make_protect_lib
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_hello_c
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_hello_c
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_hello_sc
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_hello_sc
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_tracing_c
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_tracing_c
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_tracing_sc
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_tracing_sc
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_protect_lib
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/cmake_protect_lib
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/verilator/examples/json_py
+mkdir /home/dsell/toolchains/verilator-5.052/share/verilator/examples/json_py
+cd . \
+; for p in examples/*/*.[chv]* examples/*/CMakeLists.txt examples/*/Makefile* examples/*/vl_*  ; do \
+  /usr/bin/install -c -m 644 $p /home/dsell/toolchains/verilator-5.052/share/verilator/$p; \
+done
+/bin/sh ./src/mkinstalldirs /home/dsell/toolchains/verilator-5.052/share/pkgconfig
+mkdir /home/dsell/toolchains/verilator-5.052/share/pkgconfig
+/usr/bin/install -c -m 644 verilator.pc /home/dsell/toolchains/verilator-5.052/share/pkgconfig
+/usr/bin/install -c -m 644 verilator-config.cmake /home/dsell/toolchains/verilator-5.052/share/verilator
+/usr/bin/install -c -m 644 verilator-config-version.cmake /home/dsell/toolchains/verilator-5.052/share/verilator
+
+Installed binaries to /home/dsell/toolchains/verilator-5.052/bin/verilator
+Installed man to /home/dsell/toolchains/verilator-5.052/share/man/man1
+Installed examples to /home/dsell/toolchains/verilator-5.052/share/verilator/examples
+
+For documentation see 'man verilator' or 'verilator --help'
+For forums and to report bugs see https://verilator.org
+

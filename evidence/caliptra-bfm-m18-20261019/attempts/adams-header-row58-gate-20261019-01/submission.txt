@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Slurm job ID: 3051
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-01
+Row: 58 (`sib_rand_test`)
+Resources: 1 CPU, 4 GiB, 600-second per-row runner timeout
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 109e0fdad561d881c5e11d9253c82a30ce898e54216bf2bc6fe612a1b23060af
+Run script SHA-256: b5cada4665ae015823c871df79fbdb06d87ba47a8378b325f0aadec88e39df4f
+Result: setup-only diagnostic; stopped before compile because no sampler package import exists in the pinned testbench

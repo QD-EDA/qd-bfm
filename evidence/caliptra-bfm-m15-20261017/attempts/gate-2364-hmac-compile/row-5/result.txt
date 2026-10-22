@@ -1,0 +1,5 @@
+row_id=5
+testname=HMAC_otf_reset_test
+status=BLOCKED
+cause=Icarus returned nonzero without a concise diagnostic
+elapsed_seconds=2.09

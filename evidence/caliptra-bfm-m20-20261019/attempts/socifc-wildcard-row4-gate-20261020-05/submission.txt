@@ -1,0 +1,8 @@
+job_id=3308
+dependency=afterany:3304
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-socifc-wildcard-row4-gate-20261020-05
+submitted_utc=2026-10-20T04:57Z
+source_snapshot_sha256=ed2b63872e286974b92834af1f1cf3425c20bad30d52a944f0ee81e596758d64
+run_sbatch_sha256=bd97a1e0a231c559e80c45a3a071514002ba73fd3c1cf0a97857d7a67e3c276a
+run_m15_test_sha256=9144f3557aab4864c311fd1bcf8f9b3d0e0cfab22d6670a840aec0843e3965a8
+test_run_m15_test_sha256=317308619b1ef70f5f28c8902fad37dad523004fa2b45c7de4805d6ed8a7ad86

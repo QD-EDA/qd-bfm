@@ -1,0 +1,52 @@
+2026-10-14 12:33:39 MDT
+HOST_UP_SINCE=2026-10-14 07:28:20
+             JOBID|    STATE|      TIME|NODELIST(REASON)
+             955_3|  RUNNING|   4:54:23|DAN-DESKTOP
+===JOB_955_2
+JobId=957 ArrayJobId=955 ArrayTaskId=2 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-03 UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=COMPLETED Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=04:52:25 TimeLimit=06:10:00 TimeMin=N/A SubmitTime=2026-10-14T07:39:17 EligibleTime=2026-10-14T07:39:17 AccrueTime=2026-10-14T07:39:17 StartTime=2026-10-14T07:39:17 EndTime=2026-10-14T12:31:42 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-14T07:39:17 Scheduler=Main Partition=verilog AllocNode:Sid=localhost:4379 ReqNodeList=(null) ExcNodeList=(null) NodeList=DAN-DESKTOP BatchHost=DAN-DESKTOP NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=1,mem=3G,node=1,billing=1 AllocTRES=cpu=1,mem=3G,node=1,billing=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=1 MinMemoryNode=3G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/submit/array.sbatch SubmitLine=sbatch --parsable array.sbatch WorkDir=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/submit StdErr= StdIn=/dev/null StdOut=/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/logs/bfm-m5b-cancelled-rerun-03-955_2.out TresPerTask=cpu=1
+===STATUS
+outcome=INFRA_ERROR
+reason=runner_terminated_by_signal
+runner_exit=137
+progress_heartbeat_count=56
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=17400 mcycle=135271
+result_testname=
+===RESULT_JSON
+absent
+===RESOURCE
+Command exited with non-zero status 137
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:52:23
+	Maximum resident set size (kbytes): 1852684
+	Exit status: 137
+===HEARTBEATS
+anchored_count=56
+raw_count=59
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=15900 mcycle=124252
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=16200 mcycle=126501
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=16500 mcycle=128609
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=16800 mcycle=130824
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=17100 mcycle=133034
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=17400 mcycle=135271
+terminal_markers=0
+output_bytes=376032275
+===JOB_LOG
+Adams_Bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+runner_sha256=07ee859ae7a442e38c4a9e0fb86026ccd2b14f67bd416f35c59dae44327210b8
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+5d01ec6ee2bbecb7f924e9a6487f09c526dbb54de600c4252f54a632523e25ad  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog-vpi
+d4de3cc503426623bcfc947e0edebd324d39509917fe8d4edd2ef23214047520  /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi
+1d72cbc5bf62be3f3dbd7626c295b63c5fdc1dd8439f323ac47998d8a062b4c9  /home/dsell/toolchains/iverilog-c339/openssl/bin/openssl
+5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28  /home/dsell/toolchains/iverilog-c339/openssl/lib/libcrypto.so
+outcome=INFRA_ERROR
+reason=runner_terminated_by_signal
+runner_exit=137
+progress_heartbeat_count=56
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=17400 mcycle=135271
+result_testname=
+	Maximum resident set size (kbytes): 1852684
+===array_task_3
+status=not-finished
+latest=CALIPTRA_PROGRESS_HEARTBEAT wall_s=17400 mcycle=79735
+markers=0
+   5630 99.9 1037300  04:53:57 /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp -d /home/dsell/toolchains/iverilog-c339/firmware/jtagdpi/jtagdpi.vpi -n -m /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3/output/trace_vpi/sim-axi-trace-vpi.vpi /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3/output/caliptra_top_tb.vvp +CLP_REGRESSION

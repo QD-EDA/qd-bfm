@@ -1,0 +1,7 @@
+array_job=1430
+array_task=29
+test_id=12987024c1223a57
+scheduler_state=not-in-queue; completion marker present
+removed_bytes=85231
+remote_output_tree_removed_after_checksum_verification=true
+resource_bytes_removed=1484

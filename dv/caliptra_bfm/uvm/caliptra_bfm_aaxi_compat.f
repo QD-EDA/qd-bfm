@@ -2,6 +2,7 @@
 dv/caliptra_bfm/uvm/axi4_caliptra_record_if.sv
 dv/caliptra_bfm/uvm/axi4_caliptra_master_cmd_if.sv
 dv/caliptra_bfm/uvm/aaxi_pkg_compat.sv
+dv/caliptra_bfm/uvm/aaxi_generated_namespace_compat.sv
 dv/caliptra_bfm/uvm/aaxi_intf_compat.sv
 dv/caliptra_bfm/uvm/caliptra_aaxi_compat_pkg.sv
 dv/caliptra_bfm/uvm/axi4_caliptra_uvm_pkg.sv

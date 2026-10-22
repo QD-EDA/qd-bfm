@@ -1,0 +1,5 @@
+job_id=3285
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-mldsa-row97-c339-gate-20261020-03
+submitted_utc=2026-10-20T03:36:12Z
+source_snapshot_sha256=352fddead2b8fa45be98b6916b77cccb5f2cc0cc05e0ea5117a30d49fa154ef9
+run_sbatch_sha256=d8d13b100fd9b04a0bf3e754d3fa7a55895bab7baa6e59967a6b6e6f24fd88bd

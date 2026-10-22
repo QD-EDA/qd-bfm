@@ -1,0 +1,5 @@
+row_id=59
+testname=norm_check_normal_test
+status=BLOCKED
+cause=Icarus returned nonzero without a concise diagnostic
+elapsed_seconds=0.019

@@ -1,0 +1,6 @@
+loop-static-init c339 compile=0 sim=134
+loop-static-init main compile=0 sim=134
+loop-auto-task c339 compile=0 sim=0
+loop-auto-task main compile=0 sim=0
+loop-assignment c339 compile=0 sim=134
+loop-assignment main compile=0 sim=134

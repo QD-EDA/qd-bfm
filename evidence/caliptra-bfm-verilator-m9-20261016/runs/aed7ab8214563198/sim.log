@@ -1,0 +1,170 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5493000 - ----------------------------
+5535000 -  Running MLKEM Smoke Test !!
+5576000 - ----------------------------
+5810000 - START TEST 0
+5893000 - [MLKEM KeyGen] Waiting for ready
+5945000 - [MLKEM KeyGen] Try to Overwrite seed d data
+6019000 - [MLKEM KeyGen] Try to Overwrite seed z data
+6100000 - [MLKEM KeyGen] Check that SEED_D api has 0s
+6184000 - [MLKEM KeyGen] Check that SEED_Z api has 0s
+6270000 - [MLKEM KeyGen] Writing entropy
+6341000 - [MLKEM KeyGen] Sending command
+6392000 - [MLKEM] Waiting for interrupt
+7188000 - Received MLKEM notif/ err intr with status = 1/ 0
+7309000 - [MLKEM KeyGen] Read Encaps Key
+7908000 - [MLKEM KeyGen] Check that DK api has 0s
+9875000 - [MLKEM] Starting zeroize
+9912000 - [MLKEM] Waiting for ready
+10076000 - [MLKEM Encaps] Waiting for ready
+10127000 - [MLKEM Encaps] Writing encaps key
+11198000 - [MLKEM Encaps] Try to Overwrite msg
+11270000 - [MLKEM Encaps] Try to Overwrite msg through MLDSA privkey
+11369000 - [MLKEM Encaps] Check that MSG api has 0s
+11449000 - [MLKEM Encaps] Writing entropy
+11520000 - [MLKEM Encaps] Sending Command
+11570000 - [MLKEM] Waiting for interrupt
+12606000 - Received MLKEM notif/ err intr with status = 1/ 0
+12725000 - [MLKEM Encaps] Read Ciphertext
+13331000 - [MLKEM Encaps] Received expected success for MLKEM sharedkey write from KV
+13447000 - [MLKEM] Starting zeroize
+13484000 - [MLKEM] Waiting for ready
+13654000 - [MLKEM KeyGen Decaps] Waiting for ready
+13717000 - [MLKEM KeyGen Decaps] Try to Overwrite seed d
+13797000 - [MLKEM KeyGen Decaps] Try to Overwrite seed z
+14438000 - [MLKEM KeyGen Decaps] Writing entropy
+14520000 - [MLKEM KeyGen Decaps] Sending command
+14579000 - [MLKEM] Waiting for interrupt
+16581000 - Received MLKEM notif/ err intr with status = 1/ 0
+16705000 - [MLKEM KeyGen Decaps] Received expected success for MLKEM sharedkey write from KV
+16831000 - [MLKEM] Starting zeroize
+16868000 - [MLKEM] Waiting for ready
+17028000 - START TEST 1
+17108000 - [MLKEM KeyGen] Waiting for ready
+17160000 - [MLKEM KeyGen] Try to Overwrite seed d data
+17236000 - [MLKEM KeyGen] Try to Overwrite seed z data
+17316000 - [MLKEM KeyGen] Check that SEED_D api has 0s
+17402000 - [MLKEM KeyGen] Check that SEED_Z api has 0s
+17490000 - [MLKEM KeyGen] Writing entropy
+17560000 - [MLKEM KeyGen] Sending command
+17611000 - [MLKEM] Waiting for interrupt
+18407000 - Received MLKEM notif/ err intr with status = 1/ 0
+18525000 - [MLKEM KeyGen] Read Encaps Key
+19123000 - [MLKEM KeyGen] Check that DK api has 0s
+21090000 - [MLKEM] Starting zeroize
+21127000 - [MLKEM] Waiting for ready
+21290000 - [MLKEM Encaps] Waiting for ready
+21342000 - [MLKEM Encaps] Writing encaps key
+22412000 - [MLKEM Encaps] Try to Overwrite msg
+22485000 - [MLKEM Encaps] Try to Overwrite msg through MLDSA privkey
+22584000 - [MLKEM Encaps] Check that MSG api has 0s
+22658000 - [MLKEM Encaps] Writing entropy
+22729000 - [MLKEM Encaps] Sending Command
+22778000 - [MLKEM] Waiting for interrupt
+23814000 - Received MLKEM notif/ err intr with status = 1/ 0
+23933000 - [MLKEM Encaps] Read Ciphertext
+24574000 - [MLKEM Encaps] Received expected success for MLKEM sharedkey write from KV
+24690000 - [MLKEM] Starting zeroize
+24727000 - [MLKEM] Waiting for ready
+24897000 - [MLKEM KeyGen Decaps] Waiting for ready
+24960000 - [MLKEM KeyGen Decaps] Try to Overwrite seed d
+25037000 - [MLKEM KeyGen Decaps] Try to Overwrite seed z
+25680000 - [MLKEM KeyGen Decaps] Writing entropy
+25761000 - [MLKEM KeyGen Decaps] Sending command
+25821000 - [MLKEM] Waiting for interrupt
+27822000 - Received MLKEM notif/ err intr with status = 1/ 0
+27945000 - [MLKEM KeyGen Decaps] Received expected success for MLKEM sharedkey write from KV
+28069000 - [MLKEM] Starting zeroize
+28107000 - [MLKEM] Waiting for ready
+28266000 - START TEST 2
+28346000 - [MLKEM KeyGen] Waiting for ready
+28397000 - [MLKEM KeyGen] Try to Overwrite seed d data
+28473000 - [MLKEM KeyGen] Try to Overwrite seed z data
+28553000 - [MLKEM KeyGen] Check that SEED_D api has 0s
+28640000 - [MLKEM KeyGen] Check that SEED_Z api has 0s
+28727000 - [MLKEM KeyGen] Writing entropy
+28798000 - [MLKEM KeyGen] Sending command
+28848000 - [MLKEM] Waiting for interrupt
+29643000 - Received MLKEM notif/ err intr with status = 1/ 0
+29761000 - [MLKEM KeyGen] Read Encaps Key
+30359000 - [MLKEM KeyGen] Check that DK api has 0s
+32325000 - [MLKEM] Starting zeroize
+32362000 - [MLKEM] Waiting for ready
+32526000 - [MLKEM Encaps] Waiting for ready
+32577000 - [MLKEM Encaps] Writing encaps key
+33647000 - [MLKEM Encaps] Try to Overwrite msg
+33721000 - [MLKEM Encaps] Try to Overwrite msg through MLDSA privkey
+33819000 - [MLKEM Encaps] Check that MSG api has 0s
+33893000 - [MLKEM Encaps] Writing entropy
+33964000 - [MLKEM Encaps] Sending Command
+34013000 - [MLKEM] Waiting for interrupt
+35050000 - Received MLKEM notif/ err intr with status = 1/ 0
+35169000 - [MLKEM Encaps] Read Ciphertext
+35809000 - [MLKEM Encaps] Received expected success for MLKEM sharedkey write from KV
+35925000 - [MLKEM] Starting zeroize
+35963000 - [MLKEM] Waiting for ready
+36133000 - [MLKEM KeyGen Decaps] Waiting for ready
+36195000 - [MLKEM KeyGen Decaps] Try to Overwrite seed d
+36273000 - [MLKEM KeyGen Decaps] Try to Overwrite seed z
+36915000 - [MLKEM KeyGen Decaps] Writing entropy
+36997000 - [MLKEM KeyGen Decaps] Sending command
+37056000 - [MLKEM] Waiting for interrupt
+39058000 - Received MLKEM notif/ err intr with status = 1/ 0
+39180000 - [MLKEM KeyGen Decaps] Received expected success for MLKEM sharedkey write from KV
+39305000 - [MLKEM] Starting zeroize
+39342000 - [MLKEM] Waiting for ready
+* TESTCASE PASSED
+
+Finished : minstret = 114241, mcycle = 394664
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

@@ -1,0 +1,9 @@
+Slurm job: 2715 (`m16-mldsa-ahb-96r1`)
+Host: DAN-DESKTOP, Slurm partition `verilog`
+Submission: 2026-10-18; one row (96), 1 CPU, 3 GiB, 20-minute Slurm cap
+Runner timeout: 600 seconds for this row
+Result: BLOCKED during compile; no VVP simulation
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-row96-qvip-handler-20261018-01
+Slurm output: raw/slurm-2715.out
+Staged inputs: raw/staged-source.tar.gz, SHA256 1936101326db27ca10f306f4d15f56bf61c3a4b087781812902c00cb97c30bf5
+Batch script SHA256: 1a6ac8e34504588390114e13b18e3be898088fa4d62d8cd8d0083cafe8eaf4a0

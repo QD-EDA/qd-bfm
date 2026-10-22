@@ -1,0 +1,37 @@
+{
+  "cause": "testbench reported a failure or scoreboard mismatch",
+  "compile_exit": 0,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-result-pintrace-array-20261019-02/tasks/row-76/output/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.145,
+  "environment_id": "adams-bridge-v2-0-3-butterfly_top_tb",
+  "filelist": "src/ntt_top/config/butterfly_top_tb.vf",
+  "filelist_sha256_json": "{\"src/ntt_top/config/butterfly_top_tb.vf\":\"7ec4c3c885c020442163498172a95034956a9ea21f3ec27b5fbc9b9b953957b5\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (cae03564)",
+  "iverilog_binary_sha256": "6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330",
+  "iverilog_source_pin": "cae035642e056644274a01e98d4422ce286685b4",
+  "overlay_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-result-pintrace-array-20261019-02/tasks/row-76/output/overlays/butterfly_top_tb.manifest.json",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 76,
+  "run_plusargs": [
+    "+UVM_TESTNAME=butterfly_normal_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "sim_exit": 0,
+  "sim_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-result-pintrace-array-20261019-02/tasks/row-76/output/sim.log",
+  "sim_timed_out": false,
+  "slurm_array_task_id": "76",
+  "slurm_job_id": "3141",
+  "source_file": "src/ntt_top/stimulus/tests/directed/butterfly_normal_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "672aa5cf11e0602f17cfe52982efcab5647bf024c4508705adb6c771f4bafd15",
+  "status": "FAIL",
+  "testname": "butterfly_normal_test",
+  "timeout_seconds": 600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (cae03564)"
+}
+
+--- markers ---

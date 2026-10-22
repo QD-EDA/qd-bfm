@@ -1,0 +1,9 @@
+Slurm job ID: 2709
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row20-csrng-filelist-20261018-01
+Submission: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row20-csrng-filelist-20261018-01/run.sbatch
+Resources: 1 CPU, 3 GiB RAM, 20-minute Slurm wall limit, 600-second per-row timeout.
+Queue state at submission check: PENDING (Resources); all 20 CPUs were allocated to other agents.
+Staged runner SHA256: 3fff30c99f28ef0780c0ae3d913e35616a0b68b3b5f931d506a1ae7282f59a44
+Staged M15 manifest SHA256: 049ea8f7a78a72b32bdded08b8116f8691ac8ad43a13a7624529ec0398ae61ea
+Batch script SHA256: 46453aff3ba880cf05acc70fab66a6042bcf4a7a913861957e251f3c72e18f65
+Terminal result: job 2709 completed with row status BLOCKED on the next missing include path. At the later fallback check, both 2709 and 2710 had already left squeue; scancel found no queued/running jobs and canceled nothing.

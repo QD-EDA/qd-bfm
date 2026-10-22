@@ -1,0 +1,14 @@
+job_id=3640
+submitted_at_utc=2026-10-21T05:30:28+00:00
+array=0-19%6
+cpus_per_task=1
+memory_per_task=3G
+array_time_limit=06:10:00
+per_test_time_limit_max_s=21600
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01
+submission_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/submit && sbatch --parsable array.sbatch
+qd_bfm_head=5af1170f86c69122c227ba787afe028a5678b680
+runner_sha256=3fe33d1483519067975d0f5c7ae31371c0c562227f7d75c895b724362fb5ce77
+selection_sha256=ad2d49fa7ed1c7183f2154c39d11e71dc01133ad016b4be664dafd7d9f9ed78c
+array_sbatch_sha256=21741a9ed52be06e81f86e13631f4e5f619762e3dd95b707b06be33602c18932
+preflight=20/20 case YAML/testname checks passed; current-main VVP loaded JTAGDPI and progress VPI plugins

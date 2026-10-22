@@ -1,0 +1,16 @@
+M9 array 1430 final four rows
+Host: DAN-DESKTOP
+Array throttle: 6
+Terminal evidence: per-task task-complete.txt, result.json, sim.log, and resource bundle; each FILE-SHA256SUMS and remote transfer checksum verified locally.
+
+Task  Test name                         Verilator result  Final mcycle  Simulator wall (s)
+128   randomized_pcr_ecc_signing        FAIL              NA            11403.984
+139   smoke_test_kv_parallel_access     FAIL              NA            11135.576
+149   jtag_tap_mbox                     FAIL              NA            11260.991
+152   smoke_test_mbox_cg                FAIL              NA            11279.523
+
+Each simulator log ends at the pinned 20,000,000-cycle guard in caliptra_top_tb_services.sv:2408, before a final mcycle or firmware testcase marker. No row is classified as TIMEOUT or as an infrastructure loss.
+
+The refreshed 271-row ledger contains all 162 M9 firmware rows: 103 PASS, 43 FAIL, 14 FIRMWARE_BUILD_FAIL, and 2 TIMEOUT; zero firmware rows remain pending. All 109 out-of-scope rows remain NOT_RUN_NON_FIRMWARE. The firmware pass rate is 103/162 (63.6%).
+
+The model build, four result trees, four separate resource files, and four Slurm logs were removed from the remote run after evidence verification, freeing 707,886,227 bytes (0.66 GiB). Source and overlay staging were retained for the mailbox diagnostic.

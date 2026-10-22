@@ -1,0 +1,6 @@
+number=670
+url=https://github.com/dsellerbrock/iverilog-uvm/issues/670
+title=from-caliptra-dv: classify trailing empty $psprintf argument
+state=OPEN
+label=from-caliptra-dv
+owner=internal iverilog-uvm; A3 classification/fix

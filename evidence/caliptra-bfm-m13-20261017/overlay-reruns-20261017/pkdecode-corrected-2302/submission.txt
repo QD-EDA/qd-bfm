@@ -1,0 +1,12 @@
+job_id=2302
+array_task_id=0
+submitted_utc=2026-10-17T23:06:29Z
+completed_utc=2026-10-17T23:06:30Z
+host=DAN-DESKTOP
+environment=adams-bridge-v2-0-3-pkdecode_tb
+toolchain=iverilog-uvm 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+rtl=caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; adams-bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+overlay=package width alias; remove stale MEM_ADDR_WIDTH DUT override; set second vector write base to zero
+result=PASS; compile and simulation exit 0; both 2,048-coefficient sections completed with zero mismatches
+source_base_reason=the DUT has no source-base input and reads API address zero; the second test must write its vector at zero
+prior_evidence=evidence/caliptra-bfm-environment-matrix-20261011/slurm-539-confirmation/run-05-pkdecode-passmarker/

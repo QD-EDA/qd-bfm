@@ -1,0 +1,7 @@
+M16 row-96 RAL endianness gate
+
+Repository branch: codex/caliptra-bfm-stack-20261006
+Repository HEAD: 60502cff1c333a04d0f678b9fee0cf1135270305
+The source archive was based on the frozen source archive from gate 2722, then the current working-tree copies of run_m15_test.py and test_run_m15_test.py replaced their staged versions.
+The gate reads pinned Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e and Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0 from protected toolchain storage; Icarus source is 9b5fad2afb4104caa816b257d5bccc40f01b8c66.
+Working tree contains other M16 and unrelated dirty files; only the curated staging archive is sent to Slurm.

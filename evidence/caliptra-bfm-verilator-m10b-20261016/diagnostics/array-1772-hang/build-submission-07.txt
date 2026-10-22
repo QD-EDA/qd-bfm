@@ -1,0 +1,6 @@
+job_id=1811
+host=DAN-DESKTOP
+command=sbatch --parsable build-model-trace-07.sbatch
+candidate_overlay_sha256=e8fec740da3fb9ffcd72fd7eb72c63480d30bd4de531e390772138dcf9ad6d1a
+trace_overlay_sha256=4c54c0366614692d8bfaaa46f07f6015e431fb579b1aecbd0aea18b620e91da1
+scope=single smoke_test_ahb_mux row only; no array submitted

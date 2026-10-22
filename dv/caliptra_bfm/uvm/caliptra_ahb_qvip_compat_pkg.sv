@@ -2,6 +2,12 @@
 // Clean-room lower-bound API for the QVIP AHB types consumed by Caliptra.
 // This is not a copy or implementation of Siemens/Mentor QVIP or UVMF.
 `ifndef CALIPTRA_BFM_EXTERNAL_AHB_QVIP
+package qvip_utils_pkg;
+  // shortcut: MLDSA only declares this optional handle; add catcher behavior if a test constructs it.
+  class qvip_memory_message_handler;
+  endclass
+endpackage
+
 package qvip_ahb_lite_slave_params_pkg;
   `include "uvm_macros.svh"
   import uvm_pkg::*;

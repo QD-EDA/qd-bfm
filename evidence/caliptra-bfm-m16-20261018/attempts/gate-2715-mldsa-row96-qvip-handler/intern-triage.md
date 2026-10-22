@@ -1,0 +1,3 @@
+The intern was asked to summarize `compile.log`. It named the initial `set_inst_name` warning as the first diagnostic and listed the `substr`, nested-property, and dynamic-array-slice errors. Direct inspection of the captured log shows the first warning at `mldsa_reg_model_top_pkg.sv:169`, followed by the first blocking error at `mldsa_env_configuration.svh:92` (`convert2string` in a string concatenation). The intern omitted that error, so its triage is only partially accurate and was not used as the result classifier.
+
+Verified compiler output ends with `12 error(s) during elaboration`; the runner result records compile exit 12 and no simulation log. The complete compile log and result JSON are preserved under `raw/row-96/`.

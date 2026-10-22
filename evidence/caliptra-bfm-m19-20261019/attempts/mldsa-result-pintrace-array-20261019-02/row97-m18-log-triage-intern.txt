@@ -1,0 +1,21 @@
+**Signature Mutation / Failure Injection:**
+*   "720:UVM_INFO ... [REG_WRITE] Failure injected to MLDSA_SIGNATURE[16] written with 8f2b5a6a, instead of 8f3b5a6a"
+*   "2567:UVM_INFO ... [REG_WRITE] MLDSA_SIGNATURE[16] written with 8f3b5a6a"
+
+**Verify-Result Batches (MLDSA_VERIFY_RES):**
+*   In the first batch (starting at 1864), the results are: "1864:UVM_INFO ... [REG_READ] MLDSA_VERIFY_RES[0]: 0" through "1879:UVM_INFO ... [REG_READ] MLDSA_VERIFY_RES[15]: 0".
+*   In the second batch (starting at 3711), the results are: "3711:UVM_INFO ... [REG_READ] MLDSA_VERIFY_RES[0]: 0" through "3727:UVM_INFO ... [REG_READ] MLDSA_VERIFY_RES[15]: 0".
+
+**Testcase Marker:**
+*   "3731:* TESTCASE PASSED"
+
+**UVM Errors/Fatals:**
+*   **UVM Error:** "3726:UVM_ERROR ... [SCBD_AHB] Although the verification failure is NOT expected, the second verif result does not match with the successful verif output"
+*   **UVM Warning:** "1881-UVM_WARNING ... [UVM/FLD/SET/BSY] Setting the value of field "CTRL" while containing register "mldsa_rm.MLDSA_CTRL" is being accessed may result in loss of desired field value."
+*   **UVM Fatal:** "3740:UVM_FATAL : 0"
+
+**Exact Scoreboard Message:**
+*   "3726:UVM_ERROR ... [SCBD_AHB] Although the verification failure is NOT expected, the second verif result does not match with the successful verif output"
+*   "3728:UVM_INFO ... [SCBD_REPORT] Total Matches: 0"
+*   "3729:UVM_INFO ... [SCBD_REPORT] Total Mismatches: 0"
+*   "3730:UVM_INFO ... [SCBD_REPORT] No Predicted Entries to Compare Against: 0"

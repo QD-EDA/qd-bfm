@@ -1,0 +1,31 @@
+{
+  "cause": "/include/questa_mvc_svapi.svh: No such file or directory",
+  "compile_exit": 1,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-0/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.792,
+  "environment_id": "uvmf-caliptra_top",
+  "filelist": "src/integration/uvmf_caliptra_top/config/uvmf_caliptra_top.vf",
+  "filelist_sha256_json": "{\"src/integration/uvmf_caliptra_top/config/uvmf_caliptra_top.vf\":\"4b7fab1081afe5eceb712b9e2ed7d4e268ec3fb620817bd70f0c4e6241681bc8\",\"src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f\":\"4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d\",\"src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f\":\"391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 0,
+  "run_plusargs": [
+    "+UVM_TESTNAME=caliptra_top_rand_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "generated-uvmf",
+  "slurm_array_task_id": "0",
+  "slurm_job_id": "2425",
+  "source_file": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/tests/src/caliptra_top_rand_test.yml",
+  "source_pin": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "source_repo": "caliptra",
+  "source_yaml_sha256": "a2c852bd11de9ed1537c3a1dadb8ad3d69553b055b1a5bf13d0f839dcfa8ca99",
+  "status": "BLOCKED",
+  "testname": "caliptra_top_rand_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

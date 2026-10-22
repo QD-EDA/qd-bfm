@@ -1,0 +1,4 @@
+Total tests: 5, Errors: 0
+PASS
+All tests completed.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_libs/tb/abr_masked_OR_tb.sv:110: $finish called at 120000 (1ps)

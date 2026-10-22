@@ -1,0 +1,8 @@
+job_id=3253
+array_task=43
+submitted_utc=2026-10-19T23:48:44Z
+resources=1 CPU, 4 GiB; runner timeout 1800 s; Slurm limit 2100 s
+terminal_state=FAILED after 1 s, exit 1
+classification=runner setup error before Icarus compile; not a row verdict
+cause=local variable package shadowed the Path package root in prepare_overlay
+archive_sha256=583de4e98940916e5dde3aabc18e0bc6f40c51883a373197d30178464987340b

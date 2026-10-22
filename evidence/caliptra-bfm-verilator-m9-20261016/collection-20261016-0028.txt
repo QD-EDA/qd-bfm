@@ -1,0 +1,17 @@
+Copied 11 terminal bundles from array 1430 and verified their local FILE-SHA256SUMS manifests. Before cleanup, the remote task-complete markers, resource records, and Slurm logs also matched their recorded hashes.
+
+| Task | Test | Result | Bundle |
+|---:|---|---|---|
+| 47 | `infinite_loop` | FAIL, 20M-cycle testbench guard | `runs/7d123347fca44dd0/` |
+| 55 | `smoke_test_mldsa_sign_rnd` | FAIL, 20M-cycle testbench guard | `runs/9dea5b9b42b8176b/` |
+| 64 | `pv_hash_zeroize` | PASS, mcycle 61,838 | `runs/9160c33b030e9483/` |
+| 65 | `smoke_test_kv_mldsa` | PASS, mcycle 199,891 | `runs/9b1f6fbebfa07279/` |
+| 66 | `smoke_test_ecc_flow2_kv_ocp_progress` | PASS, mcycle 62,472 | `runs/bcb5b29a003aa2a6/` |
+| 68 | `smoke_test_doe_rand` | PASS, mcycle 56,787 | `runs/58e2fa25b16ef0e5/` |
+| 69 | `smoke_test_sha3_regs` | PASS, mcycle 61,594 | `runs/fd4d454270b1139b/` |
+| 70 | `smoke_test_hmac` | PASS, mcycle 89,509 | `runs/85961d7795dbded7/` |
+| 71 | `smoke_test_zeroize_crypto` | PASS, mcycle 59,729 | `runs/dcd97efbe80e5c76/` |
+| 72 | `smoke_test_ahb_mux` | PASS, mcycle 3,973 | `runs/cadf43c78de6a454/` |
+| 73 | `fw_test_lms_n32_w1_h20` | FAIL, DCCM `$readmem` bounds at startup | `runs/382735897db9fc23/` |
+
+All were run on DAN-DESKTOP with the pinned Verilator 5.052 model. The remote result trees and their separate resource files and Slurm logs were deleted after hash verification; total bytes freed: 871,850.

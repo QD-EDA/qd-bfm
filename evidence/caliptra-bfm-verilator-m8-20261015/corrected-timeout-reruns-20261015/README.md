@@ -1,0 +1,9 @@
+# Corrected M8 top-level reruns
+
+These fresh runs follow the discovery that the shared runner omitted YAML plusargs wrapped in quotes. The Verilator retry covers the 16 rows from array 1326 that were either unfinished or had an invalid harness result; it uses the corrected runner staged in run 06 and writes only to run 09. The c339 array reruns the two AXI error cases under the same parser fix, so their Icarus baseline classifications can be checked with the intended injections.
+
+The Verilator retry uses the original per-case limits and array task IDs `1,3,7,13,16-27`. The two c339 reference tasks use their original 7,628-second limits, one CPU and 3 GiB each. At submission, DAN-DESKTOP had only about 8.7 GiB free, so each array starts one task at a time: at most two A2 tasks run concurrently. This stays under M8's six-task cap and leaves memory headroom. No local duplicates are running.
+
+An audit of all 30 timeout-cohort YAML files found quoted plusargs only in the two AXI error tests; the exact arguments are in `plusarg-audit.txt`. Array 1373 task 1 reached its 7,628-second cap with a final heartbeat at mcycle 53,626. Its wrapper labels exit 137 as `INFRA_ERROR`, but the resource log records exactly 2:07:08 for the configured timeout command; the row is recorded as TIMEOUT with the raw status retained. See [`results.tsv`](results.tsv) and its checksummed task archive. Its remote build outputs were removed after evidence verification (377,253,558 bytes). Task 2 remains in progress.
+
+`timeout-retry-selection.tsv` and `selection.tsv` preserve the exact row mappings. The full original cohort and case runner are the adjacent M8 files `../timeout-test-cases.tsv` and `../run-verilator-top-case.py`. The Verilator model remains the previously recorded 5.052 model; the c339 binary and Caliptra inputs remain pinned under protected `/home/dsell/toolchains/iverilog-c339/`. The complete QD-BFM source archive hash is in `source-archive.sha256`.

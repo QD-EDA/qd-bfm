@@ -1,0 +1,8 @@
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=1 awready=1 awaddr=30200 prev_awvalid=0 prev_awready=1
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=1 awready=1 awaddr=30200 prev_awvalid=1 prev_awready=1
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=0 awready=0 awaddr=00000 prev_awvalid=1 prev_awready=1
+M10_AW_SAMPLED_DROP time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr.M10_AW_DROP_MATCH past_valid=1 past_ready=0 past_addr=30200 sampled_valid=0 sampled_ready=0 sampled_rst_n=1
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=1 awready=1 awaddr=30204 prev_awvalid=0 prev_awready=1
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=1 awready=1 awaddr=30204 prev_awvalid=1 prev_awready=1
+M10_AW_TRACE time=4000 TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr rst_n=1 awvalid=0 awready=0 awaddr=00000 prev_awvalid=1 prev_awready=1
+[4000] %Fatal: axi_sub_wr.sv:415: Assertion failed in TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr.AXI_SUB_AW_HSHAKE_ERR: [CALIPTRA_ASSERT FAILED] [TOP.caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.i_axi_sub_sif_soc_ifc.i_axi_sub_wr.AXI_SUB_AW_HSHAKE_ERR] AXI_SUB_AW_HSHAKE_ERR (/home/dsell/slurm-runs/caliptra-bfm/a2/m10-verilator-asserts-20261016-02/diagnostics/aw-handshake/overlay/rtl/src/axi/rtl/axi_sub_wr.sv:415)

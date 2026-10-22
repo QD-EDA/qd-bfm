@@ -1,0 +1,3 @@
+checker_source_sha256=6bd2ade137a90c0701aab28951ba6f8918724e0467c21756b0c308e6e9081c89
+checker_overlay_sha256=9c80af9817a1eccc6a54e2888b55a10809c8dd7902e25ef572c777779bd3f3b5
+doe_property_delay=one additional sampled clock after the existing |=>

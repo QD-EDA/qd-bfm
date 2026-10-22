@@ -1,0 +1,19 @@
+Captured on DAN-DESKTOP at 2026-10-13 21:57 MDT; host uptime 2 hours 58 minutes.
+
+Slurm state:
+- 799_36: terminal FAIL, recorded.
+- 799_37, 799_38, 799_39: RUNNING.
+- 799_40: terminal FAIL, recorded.
+- 799_41, 799_42: terminal PASS, recorded.
+- 895_1, 895_2, 895_3, 895_4: RUNNING.
+
+Latest simulator heartbeats:
+- 799_37 smoke_test_kv_swwe_lock: wall_s=10500 mcycle=75326; log mtime 21:56:39.
+- 799_38 smoke_test_sha256_wntz: wall_s=10500 mcycle=75305; log mtime 21:55:11.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=10500 mcycle=10136; log mtime 21:55:11.
+- 895_1 smoke_test_ecc_errortrigger4: wall_s=10200 mcycle=10369; log mtime 21:52:35.
+- 895_2 kv_entry_read_err: wall_s=10200 mcycle=72890; log mtime 21:52:35.
+- 895_3 smoke_test_kv_parallel_access: wall_s=10200 mcycle=64468; log mtime 21:52:36.
+- 895_4 smoke_test_ecc_flow2_kv_ocp_progress: wall_s=2400 mcycle=17162; log mtime 21:54:13.
+
+All seven running simulator logs advanced from the 21:45 samples. None has a testcase PASS/FAIL marker or result.json. The mcycle resets observed earlier in 799_39 and 895_1 have continued increasing. No task meets the 30-minute flat-heartbeat hang rule. Host uptime exceeds every active job's elapsed time; no ghosts or newly completed rows were found. No output tree was ready for cleanup.

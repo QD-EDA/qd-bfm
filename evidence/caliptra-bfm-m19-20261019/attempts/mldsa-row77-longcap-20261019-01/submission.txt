@@ -1,0 +1,14 @@
+Host: DAN-DESKTOP
+Job ID: 3109
+Row: 77
+Runner cap: 3,600 seconds; Slurm limit: 75 minutes
+Resources: 1 CPU, 2 GiB
+Array: single row 77
+Script SHA-256: ff768f27f0dbe95c4967a82b4d47a6da19b8d18b1fe75c1cfeb20cfff0c9db9c
+Source snapshot SHA-256: ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+Icarus source: cae035642e056644274a01e98d4422ce286685b4
+Icarus binary SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+VVP binary SHA-256: 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309
+Caliptra SHA: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge SHA: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+First submission 3109 was invalid due to path mismatch and reused the previous run root. It produced no simulation verdict; see README.md and raw/job-3109_77-staging-error.tar.gz.

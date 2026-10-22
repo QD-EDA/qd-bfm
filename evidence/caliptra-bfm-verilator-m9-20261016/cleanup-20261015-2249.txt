@@ -1,0 +1,1 @@
+Copied and verified array tasks 1430_57 through 1430_61 before cleanup. Their FILE-SHA256SUMS manifests verified locally. Removed each completed results tree and its separate resource sample and Slurm log. Freed 307,137 bytes total.

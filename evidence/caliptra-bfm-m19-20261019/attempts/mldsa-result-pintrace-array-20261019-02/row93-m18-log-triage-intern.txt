@@ -1,0 +1,30 @@
+**Testcase Marker**
+*   `1923-[RNTST] 1`
+
+**AHB Read Mismatches (Actual vs Expected)**
+The following `UVM_ERROR` messages detail AHB read mismatches reported by `[SCBD_AHB]`:
+*   `1866:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000d8} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000d8} {Data: 0xd8e50f1d} {RnW: 0} {Resp: 0}`
+*   `1868:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000dc} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000dc} {Data: 0xee7743c2} {RnW: 0} {Resp: 0}`
+*   `1870:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000e0} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000e0} {Data: 0x47cd0ad2} {RnW: 0} {Resp: 0}`
+*   `1872:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000e4} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000e4} {Data: 0x8718beb6} {RnW: 0} {Resp: 0}`
+*   `1874:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000e8} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000e8} {Data: 0x75d689db} {RnW: 0} {Resp: 0}`
+*   `1876:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000ec} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000ec} {Data: 0x26ef9725} {RnW: 0} {Resp: 0}`
+*   `1878:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000f0} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f0} {Data: 0x5448516c} {RnW: 0} {Resp: 0}`
+*   `1880:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000f4} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f4} {Data: 0x6392c9b1} {RnW: 0} {Resp: 0}`
+*   `1882:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000f8} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f8} {Data: 0x2070322b} {RnW: 0} {Resp: 0}`
+*   `1884:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x000000fc} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000fc} {Data: 0xf7a0abe4} {RnW: 0} {Resp: 0}`
+*   `1886:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x00000100} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000100} {Data: 0xade40673} {RnW: 0} {Resp: 0}`
+*   `1888:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x00000104} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000104} {Data: 0x4eec6c2b} {RnW: 0} {Resp: 0}`
+*   `1890:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x00000108} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000108} {Data: 0x00e1d07d} {RnW: 0} {Resp: 0}`
+*   `1892:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x0000010c} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x0000010c} {Data: 0xecae9faf} {RnW: 0} {Resp: 0}`
+*   `1894:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x00000110} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000110} {Data: 0x46f7acf1} {RnW: 0} {Resp: 0}`
+*   `1896:UVM_ERROR ... [SCBD_AHB] Actual AHB txn with {Address: 0x00000114} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000114} {Data: 0xbc19d1c7} {RnW: 0} {Resp: 0}`
+
+**UVM Errors and Fatals**
+*   `1901:* TESTCASE FAILED`
+*   `1909:UVM_ERROR : 16`
+*   `1910:UVM_FATAL : 0`
+
+**Summary Counts**
+*   `1924:[SCBD_AHB] 16`
+*   `1925-[SCBD_REPORT] 3`

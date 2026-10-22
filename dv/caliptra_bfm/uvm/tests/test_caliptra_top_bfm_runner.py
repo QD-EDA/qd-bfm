@@ -165,6 +165,39 @@ class StockFirmwareCaseTest(unittest.TestCase):
         self.assertEqual(plusargs, ["+CLP_REGRESSION"])
         self.assertEqual(testname, "hello_world_iccm")
 
+    def test_loads_a_seed_with_an_inline_yaml_comment(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case = Path(temp) / "src/integration/test_suites/hello_world_iccm"
+            case.mkdir(parents=True)
+            (case / "hello_world_iccm.yml").write_text(
+                "seed: ${PLAYBOOK_RANDOM_SEED} #1736062140\n"
+                "testname: hello_world_iccm\n"
+            )
+
+            _, seed, _, _ = RUNNER.load_case(temp, "hello_world_iccm")
+
+        self.assertEqual(seed, "1")
+
+    def test_loads_quoted_plusargs_from_upstream_yaml(self):
+        with tempfile.TemporaryDirectory() as temp:
+            case = Path(temp) / "src/integration/test_suites/hello_world_iccm"
+            case.mkdir(parents=True)
+            (case / "hello_world_iccm.yml").write_text(
+                "seed: 1\ntestname: hello_world_iccm\nplusargs:\n"
+                "  - '+CLP_DMA_TB_MODE_NOT_EMPTY'\n"
+                "  - \"+ERR_RESP_START_ADDR=123440000\"\n"
+                "  - +ERR_RESP_END_ADDR=123440000\n"
+                "  - not_a_plusarg\n"
+            )
+
+            _, _, plusargs, _ = RUNNER.load_case(temp, "hello_world_iccm")
+
+        self.assertEqual(plusargs, [
+            "+CLP_DMA_TB_MODE_NOT_EMPTY",
+            "+ERR_RESP_START_ADDR=123440000",
+            "+ERR_RESP_END_ADDR=123440000",
+        ])
+
     def test_loads_the_selected_matrix_yaml_variant(self):
         with tempfile.TemporaryDirectory() as temp:
             case = Path(temp) / "src/integration/test_suites/smoke_test_dma_aes_kv"
@@ -216,12 +249,70 @@ class FirmwareCompatibilityOverlayTest(unittest.TestCase):
         self.assertIn("#define abr_error mldsa_error", header)
         self.assertIn("#define abr_notif mldsa_notif", header)
 
+    def test_srand_cases_share_the_stdlib_declaration_overlay(self):
+        self.assertEqual(
+            RUNNER.FIRMWARE_COMPAT_OVERLAYS["smoke_test_kv_ecc_flow1"],
+            "caliptra-srand-compat.h",
+        )
+        self.assertEqual(
+            RUNNER.FIRMWARE_COMPAT_OVERLAYS["smoke_test_kv_ecc_flow2"],
+            "caliptra-srand-compat.h",
+        )
+
+    def test_ras_overlay_patches_only_the_asm_called_isr_in_a_copy(self):
+        original = (
+            "#ifndef CALIPTRA_ISR_H\n#define CALIPTRA_ISR_H\n"
+            "inline void service_soc_ifc_notif_intr () {\n  handler_body();\n}\n"
+            "#endif\n"
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp)
+            source = rtl / "src/integration/test_suites/smoke_test_ras/caliptra_isr.h"
+            source.parent.mkdir(parents=True)
+            source.write_text(original)
+            output = Path(temp) / "out/caliptra_firmware_compat.h"
+
+            with patch.object(
+                RUNNER, "sha256", return_value=RUNNER.RAS_ISR_HEADER_SHA256,
+            ):
+                result = RUNNER.prepare_firmware_compat_overlay(
+                    "smoke_test_ras", output, rtl_root=rtl,
+                )
+
+            patched = output.parent / "source_overlay/caliptra_isr.h"
+            replacement = (
+                "static inline __attribute__((used)) "
+                "void service_soc_ifc_notif_intr () {"
+            )
+            self.assertEqual(result, output)
+            self.assertIn(replacement, patched.read_text())
+            self.assertEqual(
+                patched.read_text().replace(
+                    replacement, "inline void service_soc_ifc_notif_intr () {",
+                ),
+                original,
+            )
+            self.assertEqual(source.read_text(), original)
+
     def test_copies_only_the_case_specific_compatibility_headers(self):
         overlay_root = RUNNER.REPO / "docs/conformance/release_overlays/caliptra/environment"
         with tempfile.TemporaryDirectory() as temp:
+            rtl = Path(temp) / "rtl"
+            ras_source = rtl / "src/integration/test_suites/smoke_test_ras/caliptra_isr.h"
+            ras_source.parent.mkdir(parents=True)
+            ras_source.write_text(
+                "#ifndef CALIPTRA_ISR_H\n#define CALIPTRA_ISR_H\n"
+                "inline void service_soc_ifc_notif_intr () {\n  handler_body();\n}\n"
+                "#endif\n"
+            )
             for case, filename in RUNNER.FIRMWARE_COMPAT_OVERLAYS.items():
                 output = Path(temp) / f"{case}.h"
-                result = RUNNER.prepare_firmware_compat_overlay(case, output)
+                with patch.object(
+                    RUNNER, "sha256", return_value=RUNNER.RAS_ISR_HEADER_SHA256,
+                ):
+                    result = RUNNER.prepare_firmware_compat_overlay(
+                        case, output, rtl_root=rtl,
+                    )
                 self.assertEqual(result, output)
                 self.assertEqual(
                     output.read_bytes(), (overlay_root / filename).read_bytes()

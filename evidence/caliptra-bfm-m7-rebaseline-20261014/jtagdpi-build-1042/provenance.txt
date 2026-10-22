@@ -1,0 +1,4 @@
+host=DAN-DESKTOP
+slurm_job_id=1042
+iverilog_sha=3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+caliptra_sha=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e

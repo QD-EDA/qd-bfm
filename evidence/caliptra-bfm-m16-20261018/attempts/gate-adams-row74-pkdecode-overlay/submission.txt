@@ -1,0 +1,5 @@
+Slurm job ID: 2774
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row74-pkdecode-overlay-20261018-01
+Submission: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row74-pkdecode-overlay-20261018-01 && sbatch --parsable run.sbatch
+Resources: 1 CPU, 256 MiB RAM, 20-minute Slurm limit, 600-second per-row timeout.
+Result: PASS; compile and simulation exit 0; runner elapsed 0.069 s.

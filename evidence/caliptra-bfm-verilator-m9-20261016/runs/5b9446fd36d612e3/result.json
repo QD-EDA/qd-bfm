@@ -1,0 +1,119 @@
+{
+  "host": "DAN-DESKTOP",
+  "case": "fw_test_lms_n24_w8_h15",
+  "timeout_s": 21600,
+  "c339_outcome": "UNVERIFIED",
+  "c339_mcycle": "NA",
+  "c339_elapsed_s": "NA",
+  "model_sha256": "ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de",
+  "started_at": "2026-10-16T07:12:25.069251+00:00",
+  "case_yaml": "src/integration/test_suites/fw_test_lms_n24_w8_h15/fw_test_lms_n24_w8_h15.yml",
+  "case_yaml_sha256": "0119bb1ef2978879f0d6386da211ebdf2d2acdb1d9ff97bd03a10ecb35f6d2b8",
+  "seed": "1",
+  "plusargs": [],
+  "native_vector_commands": [
+    [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-I/home/dsell/toolchains/iverilog-c339/openssl/include",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/native_vectors/native_mlkem.c",
+      "-L/home/dsell/toolchains/iverilog-c339/openssl/lib",
+      "-lcrypto",
+      "-o",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/native_mlkem"
+    ],
+    [
+      "/usr/bin/cc",
+      "-O2",
+      "-I/home/dsell/toolchains/iverilog-c339/deps/include",
+      "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/ecc/tb/ecc_secp384r1.c",
+      "-L/home/dsell/toolchains/iverilog-c339/deps/lib",
+      "-lmbedtls",
+      "-lmbedx509",
+      "-lmbedcrypto",
+      "-o",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/ecc_secp384r1.exe"
+    ],
+    [
+      "/home/dsell/toolchains/iverilog-c339/deps/bin/python3.12",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/native_vectors/stage_mldsa.py",
+      "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/Dilithium_ref/dilithium/ref/test/test_dilithium.c",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/dilithium-ref/test/test_dilithium.c"
+    ],
+    [
+      "/usr/bin/make",
+      "-C",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/dilithium-ref",
+      "CC=/usr/bin/cc",
+      "test/test_dilithium5"
+    ],
+    [
+      "/home/dsell/toolchains/iverilog-c339/deps/bin/python3.12",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/native_vectors/stage_sha256_wntz.py",
+      "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/sha256/tb/sha256_wntz_test_gen.py",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/sha256_wntz_test_gen.py"
+    ],
+    [
+      "/home/dsell/toolchains/iverilog-c339/deps/bin/python3.12",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/native_vectors/check_native_mlkem.py",
+      "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/native_mlkem"
+    ],
+    [
+      "/home/dsell/toolchains/iverilog-c339/deps/bin/python3.12",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/native_vectors/check_native_mldsa.py",
+      "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge",
+      "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5b9446fd36d612e3/.work/native_vectors/dilithium-ref/test/test_dilithium5"
+    ]
+  ],
+  "firmware_command": [
+    "make",
+    "-f",
+    "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile",
+    "TESTNAME=fw_test_lms_n24_w8_h15",
+    "GCC_PREFIX=riscv-none-elf",
+    "CALIPTRA_INTERNAL_TRNG=1",
+    "PLAYBOOK_RANDOM_SEED=1",
+    "BUILD_CFLAGS=-std=gnu11 -O2",
+    "program.hex"
+  ],
+  "firmware_exit": 0,
+  "firmware_image_sha256": {
+    "program.hex": "370a754dd230fa382dd360d296f75baffac686f1d08cd9c6532a499c62878745",
+    "dccm.hex": "6070bc86fc0c22d5c62cbf808041f8ee499cc2d6f7001b98ff35d1276d0da4cc",
+    "iccm.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mailbox.hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "native_vector_sha256": {
+    "ecc_secp384r1.exe": "e2951be7890d3d3bf8f2251573f64cfef8b9152eb9cbe175b32f2a9d89e0477f",
+    "test_dilithium5": "03f78c7fff4f96a8df380cc4017f3881094253eb47e76876d0361db1f647de4e",
+    "doe_test_gen.py": "d94bd571dd599a9431398778f195c05fb3a2f3ddb1adcc38925a2c1b3db6bdc0",
+    "sha256_wntz_test_gen.py": "45c8a4f5ac7032c0bdb3b62b3a7b8645bec78b09e028f6bf8ac9cda232b4fce9",
+    "smoke_test_mldsa_vector.hex": "b68858c347fe7b12d4f173c2a6d21844aad8d547fc6cd8587091692365cea775",
+    "ml-kem/native_mlkem": "b9d59922fdb2f5e3b59da7bc0619c232c5346d276bf1803ed0b7b773b5d06e20",
+    "ml-kem/random_test_ml_kem.py": "fe772557377e9b0c3c44ee487019edae7870cf24f1b4113de0042cb7543af492"
+  },
+  "simulation_command": [
+    "/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/model/obj_dir/Vcaliptra_top_tb",
+    "+CLP_REGRESSION"
+  ],
+  "sim_exit": 1,
+  "sim_elapsed_s": 0.013,
+  "sim_scan": {
+    "passed": 0,
+    "failed": 0,
+    "bad": 1,
+    "jtag_errors": 0,
+    "jtag_bind_denials": 0,
+    "finish": null,
+    "reset_assert_cycles": [],
+    "outstanding_writes_at_reset": [],
+    "reset_in_flight": false
+  },
+  "outcome": "FAIL",
+  "elapsed_s": 0.828,
+  "completed_at": "2026-10-16T07:12:25.896937+00:00"
+}

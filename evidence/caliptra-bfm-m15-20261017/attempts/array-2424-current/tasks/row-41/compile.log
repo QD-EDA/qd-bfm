@@ -1,0 +1,5 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv:1086: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv:1087: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv:1717: error: lock_fuses doesn't name a type.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv:1717: syntax error
+I give up.

@@ -1,0 +1,1 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-modport-20261020-01/reproducers/noarg_method_string_concat.sv:16: warning: Static variable initialization requires explicit lifetime in this context.

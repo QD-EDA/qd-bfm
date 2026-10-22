@@ -1,0 +1,37 @@
+             JOBID    STATE       TIME TIME_LIMI NODELIST(REASON)
+            1426_4  RUNNING       3:41   6:10:00 DAN-DESKTOP
+            1426_3  RUNNING       3:41   6:10:00 DAN-DESKTOP
+            1426_2  RUNNING       3:41   6:10:00 DAN-DESKTOP
+            1426_1  RUNNING       3:41   6:10:00 DAN-DESKTOP
+JobId=1427 ArrayJobId=1426 ArrayTaskId=1 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:03:41 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53
+JobId=1428 ArrayJobId=1426 ArrayTaskId=2 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:03:41 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53
+JobId=1429 ArrayJobId=1426 ArrayTaskId=3 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:03:41 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53
+JobId=1426 ArrayJobId=1426 ArrayTaskId=4 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:03:41 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53

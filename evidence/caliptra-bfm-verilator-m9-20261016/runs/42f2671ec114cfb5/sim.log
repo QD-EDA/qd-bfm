@@ -1,0 +1,214 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5535000 - ----------------------------------
+5583000 - SRAM ECC Smoke Test!!
+5614000 - ----------------------------------
+SoC: Waiting to see cptra_error_fatal/non_fatal
+
+5965000 - [0]:40
+6029000 - [1]:3F
+6097000 - [2]:3E
+6159000 - [3]:3D
+6249000 - [4]:3C
+6312000 - [5]:3B
+6376000 - [6]:3A
+6440000 - [7]:39
+6505000 - [8]:38
+6571000 - [9]:37
+6636000 - [10]:36
+6712000 - [11]:35
+6785000 - [12]:34
+6859000 - [13]:33
+6932000 - [14]:32
+7005000 - [15]:31
+7078000 - [16]:30
+7179000 - [17]:2F
+7252000 - [18]:2E
+7325000 - [19]:2D
+7398000 - [20]:2C
+7470000 - [21]:2B
+7543000 - [22]:2A
+7616000 - [23]:29
+7689000 - [24]:28
+7762000 - [25]:27
+7835000 - [26]:26
+7908000 - [27]:25
+7981000 - [28]:24
+8054000 - [29]:23
+8127000 - [30]:22
+8228000 - [31]:21
+8329000 - [32]:20
+8429000 - [33]:1F
+8502000 - [34]:1E
+8575000 - [35]:1D
+8648000 - [36]:1C
+8721000 - [37]:1B
+8793000 - [38]:1A
+8866000 - [39]:19
+8939000 - [40]:18
+9012000 - [41]:17
+9113000 - [42]:16
+9186000 - [43]:15
+9259000 - [44]:14
+9332000 - [45]:13
+9433000 - [46]:12
+9506000 - [47]:11
+9579000 - [48]:10
+9652000 - [49]:F
+9726000 - [50]:E
+9798000 - [51]:D
+9871000 - [52]:C
+9943000 - [53]:B
+10016000 - [54]:A
+10089000 - [55]:9
+10165000 - [56]:8
+10240000 - [57]:7
+10314000 - [58]:6
+10388000 - [59]:5
+10490000 - [60]:4
+10563000 - [61]:3
+10637000 - [62]:2
+10739000 - [63]:1
+10960000 - Correctable ECC err count: 9
+11150000 - [0]:40
+11214000 - [1]:3F
+11280000 - [2]:3E
+11345000 - [3]:3D
+11409000 - [4]:3C
+SoC: Observed cptra_error_non_fatal; reading Caliptra register
+
+SoC: Observed cptra_error_non_fatal; writing to clear Caliptra register
+
+11530000 - [5]:7A
+11594000 - [6]:3A
+11658000 - [7]:39
+11723000 - [8]:38
+11790000 - [9]:37
+11857000 - [10]:36
+11929000 - [11]:35
+12002000 - [12]:34
+12075000 - [13]:33
+12148000 - [14]:32
+12221000 - [15]:31
+SoC: Observed cptra_error_non_fatal; reading Caliptra register
+
+SoC: Observed cptra_error_non_fatal; writing to clear Caliptra register
+
+12324000 - [16]:39
+12397000 - [17]:2F
+12470000 - [18]:2E
+12543000 - [19]:2D
+12615000 - [20]:2C
+12688000 - [21]:2B
+12761000 - [22]:2A
+12834000 - [23]:29
+12907000 - [24]:28
+SoC: Observed cptra_error_non_fatal; reading Caliptra register
+
+SoC: Observed cptra_error_non_fatal; writing to clear Caliptra register
+
+13010000 - [25]:100026
+13085000 - [26]:26
+13156000 - [27]:25
+13228000 - [28]:24
+13300000 - [29]:23
+13371000 - [30]:22
+13443000 - [31]:21
+13515000 - [32]:20
+13586000 - [33]:1F
+SoC: Observed cptra_error_non_fatal; reading Caliptra register
+
+SoC: Observed cptra_error_non_fatal; writing to clear Caliptra register
+
+13688000 - [34]:9F
+13760000 - [35]:1D
+13831000 - [36]:1C
+13903000 - [37]:1B
+13974000 - [38]:1A
+14046000 - [39]:19
+14117000 - [40]:18
+14189000 - [41]:17
+14261000 - [42]:16
+SoC: Observed cptra_error_non_fatal; reading Caliptra register
+
+SoC: Observed cptra_error_non_fatal; writing to clear Caliptra register
+
+14362000 - [43]:414
+14435000 - [44]:14
+14506000 - [45]:13
+14578000 - [46]:12
+14650000 - [47]:11
+14721000 - [48]:10
+14793000 - [49]:F
+14866000 - [50]:E
+14938000 - [51]:D
+15009000 - [52]:C
+15081000 - [53]:B
+15152000 - [54]:A
+15223000 - [55]:9
+15297000 - [56]:8
+15371000 - [57]:7
+15444000 - [58]:6
+15516000 - [59]:5
+15589000 - [60]:4
+15661000 - [61]:3
+15734000 - [62]:2
+15806000 - [63]:1
+16026000 - Uncorrectable ECC err count: 5
+16127000 - SHA Accel hw count: 0
+16207000 - SOC_IFC Err hw count: 5
+16296000 - SOC_IFC Notif hw count: 9
+* TESTCASE PASSED
+
+Finished : minstret = 55941, mcycle = 163535
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

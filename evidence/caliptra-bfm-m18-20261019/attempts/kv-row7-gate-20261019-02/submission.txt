@@ -1,0 +1,8 @@
+Host: DAN-DESKTOP
+Job ID: 3013
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-kv-row7-r2-gate-20261019-02
+Target: generated KeyVault row 7, example_derived_test
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Result: BLOCKED during compile; runner exit 0 after recording terminal result
+Raw archive SHA-256: 82f34200e6cfa1e3505679d3cc1f28510ba5cb3daf4f8d23ce128a6f08323a7d

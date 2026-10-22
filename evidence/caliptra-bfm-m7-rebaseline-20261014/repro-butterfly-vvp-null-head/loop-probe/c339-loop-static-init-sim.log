@@ -1,0 +1,1 @@
+vvp: vthread.cc:10734: vthread_s* vthread_add_event_wait(vthread_t, vthread_s**): Assertion `head' failed.

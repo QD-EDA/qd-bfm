@@ -349,3 +349,26 @@ rows had no result JSON or terminal marker. See the
 At 17:20 MDT, task 799_32 (`smoke_test_ecc_flow1_kv_ocp_progress`) completed PASS. Its result JSON reports `passed=true`; the full log has 29 heartbeats through `8400/59912`, one `* TESTCASE PASSED`, no fail marker, and `$finish` at mcycle 60,927. The wrapper status stops at `7800/55508`, so the ledger uses the later full-log heartbeat. Tasks 27, 28, 30, 33, 34, and 35 remained RUNNING; tasks 36–42 were PENDING. Active rows were advancing or had only a recent initial heartbeat, with no 30-minute flat interval. See [the 17:20 snapshot](heartbeat-snapshot-20261013-1720.txt).
 
 At 18:42 MDT, the supervisor cancelled tasks 799_28 and 799_30 for maintenance, after the user had directed cancellation of 799_34 and 799_35. Slurm logs show all four jobs terminated by signal at 18:42:09. They are recorded as `CANCELLED-FOR-MAINTENANCE`, with final heartbeats `16800/56216`, `15000/107664`, `5700/40947`, and `5100/37091`; none is classified as TIMEOUT. Tasks 799_36–42 remain held by `JobHeldUser`. Re-run all eleven rows after the supervisor announces Slurm has reopened. See the [18:42 snapshot](heartbeat-snapshot-20261013-1842.txt) and [cancellation evidence](cancelled-evidence-799/README.md).
+
+
+## 2026-10-14 follow-up
+
+At 00:17 MDT, task 799_39 (`smoke_test_ecc_errortrigger1`) had completed FAIL on `ERR_ECC_PRIVKEY_NOT_STABLE`; task 895_3 had reached its exact per-test timeout. Both logs and resource records are SHA-verified, and their output trees were removed after commit `765958d`, freeing 751,554,560 bytes on the filesystem. Tasks 799_37 and 799_38 remain RUNNING at wall time 18,900 seconds with advancing mcycles 138,820 and 138,750. The four maintenance-cancelled rows were resubmitted in fresh job 936, tasks 1–4; they were all RUNNING at the first snapshot with only their initial wall-zero heartbeat. See [`heartbeat-snapshot-20261014-0016.txt`](heartbeat-snapshot-20261014-0016.txt) and [`../cancelled-reruns-c339-20261014-01/README.md`](../cancelled-reruns-c339-20261014-01/README.md).
+
+
+At 00:29 MDT, tasks 799_37 and 799_38 were RUNNING at wall 19,500 seconds with mcycles 143,339 and 143,178. Fresh job 936 tasks 1–4 were also RUNNING; their wall-900 heartbeats advanced to mcycles 6,591, 6,578, 6,587, and 6,589. No active row met the 30-minute flat-heartbeat condition; see [`heartbeat-snapshot-20261014-0029.txt`](heartbeat-snapshot-20261014-0029.txt).
+
+
+At 00:39 MDT, tasks 799_37 and 799_38 advanced to wall 20,100 seconds and mcycles 147,896 and 147,635. Fresh job 936 tasks 1–4 advanced to wall 1,500 seconds and mcycles 11,206, 11,182, 11,197, and 11,202. All six remain RUNNING, with no 30-minute flat interval. See [`heartbeat-snapshot-20261014-0039.txt`](heartbeat-snapshot-20261014-0039.txt).
+
+
+At 00:49 MDT, tasks 799_37 and 799_38 were RUNNING at wall 20,700/20,400 seconds with mcycles 152,525/149,887. Fresh job 936 tasks 1–4 advanced to wall 2,100 seconds with mcycles 15,751; 15,713; 15,739; and 15,742. No active row meets the 30-minute flat-heartbeat condition. See [`heartbeat-snapshot-20261014-0049.txt`](heartbeat-snapshot-20261014-0049.txt).
+
+
+## 2026-10-14 host-restart follow-up
+
+At 07:31 MDT, DAN-DESKTOP had rebooted and no longer listed tasks 936_1–4 or 799_37/38. Task 799_37 is **TIMEOUT**: its resource record matches the exact 21,600-second test cap, with last heartbeat mcycle 157,015. Task 799_38 is **PASS**, with final heartbeat mcycle 149,887 and result finish at 155,834. After commit `6e16604`, their output trees and run-local caches were removed along with the four partial job-936 outputs. Job 936 had only partial logs through wall 4,500 seconds and empty wrapper/resource records; those four attempts are classified `INFRA-INTERRUPTED`. Array 949 then failed before test startup because `selection.tsv` was staged at the wrong path; corrected array 955 is now running the four rows. See [`../cancelled-reruns-c339-20261014-02/`](../cancelled-reruns-c339-20261014-02/) and [`../cancelled-reruns-c339-20261014-03/`](../cancelled-reruns-c339-20261014-03/). See [`heartbeat-snapshot-20261014-0731.txt`](heartbeat-snapshot-20261014-0731.txt) and [`../cancelled-reruns-c339-20261014-01/infra-interruption-evidence-936/README.md`](../cancelled-reruns-c339-20261014-01/infra-interruption-evidence-936/README.md).
+
+## Fresh reruns for maintenance-cancelled rows — 2026-10-14
+
+Array 955 completed the four fresh reruns of original tasks 799_28, 799_30, 799_34, and 799_35. Tasks 955_1–3 are TIMEOUT with final mcycles 9,009, 135,271, and 80,975; task 955_4 is PASS with final mcycle 59,434. The original array ledger retains the maintenance cancellations as historical outcomes, and the fresh results are recorded separately under [`../cancelled-reruns-c339-20261014-03/`](../cancelled-reruns-c339-20261014-03/).

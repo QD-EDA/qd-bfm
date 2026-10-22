@@ -1,0 +1,10 @@
+job_id=3004
+source_repo=https://github.com/dsellerbrock/iverilog-uvm
+source_branch=main
+source_sha=cae035642e056644274a01e98d4422ce286685b4
+uvm_core_submodule_sha=78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+requested_cpus=2
+requested_memory=4G
+time_limit=01:00:00
+remote_run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-iverilog-main-cae035642e056644274a01e98d4422ce286685b4-20261019-02
+protected_toolchain=/home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4

@@ -1,0 +1,2 @@
+retained_dirs=52 manifest_entries=7249 archive_bytes=6664332
+3b09abca9284c0619a83bef12aa249cea026bf809c3aa71343f157dcd14aa9a6  /tmp/a2-cleanup-retained-20261014.tar.gz

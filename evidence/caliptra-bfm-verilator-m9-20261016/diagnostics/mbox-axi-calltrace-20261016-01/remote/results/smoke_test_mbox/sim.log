@@ -1,0 +1,214 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5540000 - ----------------------------------
+5593000 -  Caliptra Mailbox Smoke Test!!
+5638000 - ----------------------------------
+CLP: Ready for firmware push
+
+SoC: Requesting mailbox lock...M9AXI SINGLE_BEGIN seq=1 addr=00020000
+M9AXI AR_START seq=1 addr=00020000 t=5694000
+M9AXI AR_WAIT seq=1 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=1 addr=00020000 cycles=1
+M9AXI R seq=1 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=1 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=1 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=1 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=2 addr=00020000
+M9AXI AR_START seq=2 addr=00020000 t=5694000
+M9AXI AR_WAIT seq=2 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=2 addr=00020000 cycles=1
+M9AXI R seq=2 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=2 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=2 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=2 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=3 addr=00020000
+M9AXI AR_START seq=3 addr=00020000 t=5695000
+M9AXI AR_WAIT seq=3 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=3 addr=00020000 cycles=1
+M9AXI R seq=3 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=3 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=3 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=3 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=4 addr=00020000
+M9AXI AR_START seq=4 addr=00020000 t=5696000
+M9AXI AR_WAIT seq=4 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=4 addr=00020000 cycles=1
+M9AXI R seq=4 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=4 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=4 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=4 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=5 addr=00020000
+M9AXI AR_START seq=5 addr=00020000 t=5696000
+M9AXI AR_WAIT seq=5 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=5 addr=00020000 cycles=1
+M9AXI R seq=5 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=5 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=5 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=5 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=6 addr=00020000
+M9AXI AR_START seq=6 addr=00020000 t=5697000
+M9AXI AR_WAIT seq=6 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=6 addr=00020000 cycles=1
+M9AXI R seq=6 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=6 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+5697000 - FM9AXI READ_RETURN seq=6 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=6 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=7 addr=00020000
+M9AXI AR_START seq=7 addr=00020000 t=5697000
+M9AXI AR_WAIT seq=7 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=7 addr=00020000 cycles=1
+M9AXI R seq=7 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=7 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=7 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=7 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=8 addr=00020000
+M9AXI AR_START seq=8 addr=00020000 t=5698000
+M9AXI AR_WAIT seq=8 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=8 addr=00020000 cycles=1
+WM9AXI R seq=8 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=8 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=8 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=8 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=9 addr=00020000
+M9AXI AR_START seq=9 addr=00020000 t=5699000
+M9AXI AR_WAIT seq=9 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=9 addr=00020000 cycles=1
+M9AXI R seq=9 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=9 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=9 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=9 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=10 addr=00020000
+M9AXI AR_START seq=10 addr=00020000 t=5699000
+M9AXI AR_WAIT seq=10 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=10 addr=00020000 cycles=1
+:M9AXI R seq=10 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=10 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=10 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=10 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=11 addr=00020000
+M9AXI AR_START seq=11 addr=00020000 t=5700000
+M9AXI AR_WAIT seq=11 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=11 addr=00020000 cycles=1
+M9AXI R seq=11 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=11 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=11 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=11 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=12 addr=00020000
+M9AXI AR_START seq=12 addr=00020000 t=5700000
+M9AXI AR_WAIT seq=12 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=12 addr=00020000 cycles=1
+M9AXI R seq=12 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=12 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=12 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=12 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=13 addr=00020000
+M9AXI AR_START seq=13 addr=00020000 t=5701000
+ M9AXI AR_WAIT seq=13 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=13 addr=00020000 cycles=1
+M9AXI R seq=13 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=13 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=13 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=13 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=14 addr=00020000
+M9AXI AR_START seq=14 addr=00020000 t=5702000
+M9AXI AR_WAIT seq=14 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=14 addr=00020000 cycles=1
+M9AXI R seq=14 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=14 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=14 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=14 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=15 addr=00020000
+M9AXI AR_START seq=15 addr=00020000 t=5702000
+M9AXI AR_WAIT seq=15 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=15 addr=00020000 cycles=1
+WM9AXI R seq=15 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=15 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=15 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=15 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=16 addr=00020000
+M9AXI AR_START seq=16 addr=00020000 t=5703000
+M9AXI AR_WAIT seq=16 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=16 addr=00020000 cycles=1
+M9AXI R seq=16 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=16 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=16 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=16 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=17 addr=00020000
+M9AXI AR_START seq=17 addr=00020000 t=5703000
+M9AXI AR_WAIT seq=17 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=17 addr=00020000 cycles=1
+aM9AXI R seq=17 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=17 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=17 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=17 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=18 addr=00020000
+M9AXI AR_START seq=18 addr=00020000 t=5704000
+M9AXI AR_WAIT seq=18 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=18 addr=00020000 cycles=1
+M9AXI R seq=18 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=18 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=18 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=18 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=19 addr=00020000
+M9AXI AR_START seq=19 addr=00020000 t=5705000
+M9AXI AR_WAIT seq=19 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=19 addr=00020000 cycles=1
+M9AXI R seq=19 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=19 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=19 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=19 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=20 addr=00020000
+M9AXI AR_START seq=20 addr=00020000 t=5705000
+iM9AXI AR_WAIT seq=20 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=20 addr=00020000 cycles=1
+M9AXI R seq=20 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=20 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI READ_RETURN seq=20 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=20 addr=00020000 data=00000001 resp=0 user=00000000
+t

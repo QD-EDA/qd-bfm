@@ -1,0 +1,10 @@
+job_id=3255
+submitted_utc=2026-10-19T23:50:40Z (Slurm SubmitTime 17:50:40 host local)
+array_rows=83,84,85,88,94,98,100
+array_throttle=4; 1 CPU / 2 GiB per task; runner timeout 1800 s; Slurm limit 2100 s
+row95_excluded=true (already PASS_OVERLAY in job 3242)
+source_pin=adams-bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+icarus_source_pin=cae035642e056644274a01e98d4422ce286685b4
+iverilog_sha256=6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+preflight=all six input hashes passed; source/helper staging verified; helper self-check passed
+initial_state=PENDING Priority (host had 18/20 CPUs allocated)

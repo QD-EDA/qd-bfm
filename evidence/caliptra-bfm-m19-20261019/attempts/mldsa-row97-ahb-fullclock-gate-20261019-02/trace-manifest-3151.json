@@ -1,0 +1,12 @@
+{
+  "mode": "ahb",
+  "target": "hdl_top.sv",
+  "files": [
+    {
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-fullclock-gate-20261019-02/tasks/row-97/output/runtime/hdl_top.sv",
+      "source_sha256": "c834ca6607ac93d53bca8a92a9bd52036fa03d3bd43b8a1e9201b827c28c8753",
+      "trace_sha256": "c18b1b5f317966bf34fa671eacd7e2e36288e28a62fb3ce884f04d4a725ff6df"
+    }
+  ],
+  "scope": "testbench observation only; no RTL, firmware, expected values, or pass criteria changed"
+}

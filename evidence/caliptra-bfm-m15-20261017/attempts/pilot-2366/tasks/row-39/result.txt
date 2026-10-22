@@ -1,0 +1,5 @@
+row_id=39
+testname=soc_ifc_axi_sha_acc_dis_tb
+status=PASS
+cause=testbench pass marker present; no failure marker or UVM error/fatal
+elapsed_seconds=1.21

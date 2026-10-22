@@ -1,0 +1,8 @@
+Array task: 1430_57
+Test case: smoke_test_doe_scan
+Outcome: FAIL
+Final mcycle: 62260
+Wall seconds: 183.589
+Prior Icarus: UNVERIFIED
+Evidence: the remote FILE-SHA256SUMS manifest verified locally with shasum -a 256 -c. Supplementary task/resource/Slurm files were copied over SSH before remote cleanup.
+Finding: SVA ERROR: DOE STATUS valid bit not set after clear obf secrets cmd; later pass marker was also present. Prior Icarus UNVERIFIED.

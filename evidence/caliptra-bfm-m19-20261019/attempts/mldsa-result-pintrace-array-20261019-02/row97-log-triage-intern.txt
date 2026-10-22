@@ -1,0 +1,12 @@
+**Testcase Marker(s):**
+*   `* TESTCASE PASSED`
+
+**UVM Error/Fatal Counts:**
+*   UVM_ERROR: 1
+*   UVM_FATAL: 0
+
+**AHB Observed Read Values/Addresses:**
+*   Specific read values/addresses are not present. The AHB coverage report states: `[AHB_COVERAGE] reads=901/4546 writes=3645/4546 sizes(1/2/4/8B)=0/0/4546/0 of 4546 addresses`.
+
+**M19_AHB_PIN Observations:**
+*   Unknown.

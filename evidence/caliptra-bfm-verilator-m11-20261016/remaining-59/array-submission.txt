@@ -1,0 +1,8 @@
+job_id=1964
+run=/home/dsell/slurm-runs/caliptra-bfm/a2/m11-overlay-remaining-59-20261016-01
+selection_sha256=1d1df11b3c7d0279503fa7195c9a39a6f00c0b0e4d3b504425213a1deaf00bf3
+model_sha256=3c4d5541ff5f8e8642d0017a414fcf1b216467703b62aaf98df5d7ffd14efb1f
+overlay_sha256=d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1
+gate_job=1962 PASS mcycle=3973 outer_timeout_s=600
+array=0-58%6, 1 CPU and 3 GiB per row
+submitted_at=2026-10-16T18:41:06-06:00

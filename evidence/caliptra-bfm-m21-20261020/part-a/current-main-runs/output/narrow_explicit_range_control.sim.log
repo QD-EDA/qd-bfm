@@ -1,0 +1,2 @@
+NARROW_EXPLICIT_RANGE_OK
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros/reproducers/narrow_explicit_range_control.sv:9: $finish called at 0 (1s)

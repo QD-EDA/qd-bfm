@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-loop-probe-20261014/source/loop-static-init.sv:11: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-loop-probe-20261014/source/loop-static-init.sv:12: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-loop-probe-20261014/source/loop-static-init.sv:13: warning: Static variable initialization requires explicit lifetime in this context.

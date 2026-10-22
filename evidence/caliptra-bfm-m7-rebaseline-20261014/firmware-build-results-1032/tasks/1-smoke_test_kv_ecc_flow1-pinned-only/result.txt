@@ -1,0 +1,5 @@
+outcome=BUILD_FAIL
+build_exit=2
+seed=1
+primary_diagnostic=error: implicit declaration of function 'srand' [-Wimplicit-function-declaration]
+	Maximum resident set size (kbytes): 31824

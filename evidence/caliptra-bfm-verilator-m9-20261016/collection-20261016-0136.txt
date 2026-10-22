@@ -1,0 +1,31 @@
+At 01:36 MDT, 19 completed rows were copied from array 1430. Each bundle passed its internal FILE-SHA256SUMS check, and the completion marker, resource record, and Slurm log matched the remote hashes before cleanup.
+
+| Task | Test | Verilator result | Final mcycle | Wall seconds | Prior Icarus |
+|---:|---|---|---:|---:|---|
+| 117 | `smoke_test_ecc_errortrigger4` | PASS | 778,992 | 516.075 | UNVERIFIED |
+| 123 | `smoke_test_ecc_sign` | PASS | 797,819 | 453.902 | TIMEOUT |
+| 124 | `smoke_test_wdt_rst` | PASS | 57,852 | 466.833 | UNVERIFIED |
+| 125 | `memCpy_ROM_to_dccm` | PASS | 5,090 | 5.381 | PASS |
+| 126 | `smoke_test_mlkem_kv_ocp_progress` | PASS | 101,393 | 59.458 | UNVERIFIED |
+| 127 | `smoke_test_dma_aes_gcm_collision_test` | PASS | 152,182 | 87.654 | TIMEOUT |
+| 129 | `smoke_test_kv_rules_ocp_lock` | PASS | 60,518 | 36.755 | PASS |
+| 130 | `smoke_test_ras` | FIRMWARE_BUILD_FAIL | NA | 2.462 | UNVERIFIED |
+| 131 | `fw_test_lms_n24_w2_h5` | FAIL | NA | 0.811 | UNVERIFIED |
+| 132 | `fw_test_lms_n32_w4_h15` | FAIL | NA | 0.821 | UNVERIFIED |
+| 133 | `smoke_test_hmac_errortrigger` | FIRMWARE_BUILD_FAIL | NA | 0.795 | UNVERIFIED |
+| 134 | `smoke_test_kv_ecc_flow2` | FIRMWARE_BUILD_FAIL | NA | 0.800 | UNVERIFIED |
+| 135 | `smoke_test_dma_aes_gcm_long` | PASS | 121,086 | 70.624 | UNVERIFIED |
+| 136 | `randomized_pcr_mldsa_signing` | PASS | 252,645 | 145.494 | UNVERIFIED |
+| 137 | `fw_test_lms_n24_w1_h10` | FAIL | NA | 0.821 | UNVERIFIED |
+| 138 | `smoke_test_dma_aes_gcm` | PASS | 92,519 | 54.520 | TIMEOUT |
+| 140 | `smoke_test_doe_kv_ocp_progress` | PASS | 53,552 | 32.847 | PASS |
+| 141 | `smoke_test_sha512` | PASS | 63,435 | 38.122 | PASS |
+| 142 | `fw_test_lms_n24_w1_h15` | FAIL | NA | 0.819 | UNVERIFIED |
+
+The four LMS failures all stop during image loading with `%Error: dccm.hex:1: $readmem file address beyond bounds of array`, bringing the observed set to 30 LMS variants. `smoke_test_ras` fails to link because shared `caliptra_isr.c` references `service_soc_ifc_notif_intr`, while its pinned ISR header provides only an `inline` definition. The two `srand` failures are `smoke_test_hmac_errortrigger` and `smoke_test_kv_ecc_flow2`; GCC rejects the undeclared function in each test source, and neither simulation starts.
+
+The four prior Icarus PASS rows in this batch (`memCpy_ROM_to_dccm`, `smoke_test_kv_rules_ocp_lock`, `smoke_test_doe_kv_ocp_progress`, and `smoke_test_sha512`) also pass on Verilator. The other prior outcomes are `UNVERIFIED` or `TIMEOUT`; none adds a completed-result disagreement.
+
+The refreshed ledger has 135 terminal supported-firmware rows: 88 PASS, 35 FAIL, and 12 `FIRMWARE_BUILD_FAIL`; 27 supported rows remain pending and 109 remain `NOT_RUN_NON_FIRMWARE`. The terminal-row pass rate is 88/135 (65.2%); 88/162 supported rows (54.3%) have passed so far.
+
+The 19 remote result trees, resource records, and Slurm logs were removed after verification, freeing 10,391,892 apparent bytes (9.91 MiB). The pinned model remains for array 1430.

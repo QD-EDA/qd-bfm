@@ -1,0 +1,14 @@
+method-check-return build_exit=0
+1:%Warning-WIDTHEXPAND: /tmp/method-check-return.sv:21:50: Operator AND expects 32 bits on the RHS, but RHS's NEQ generates 1 bits.
+7:%Warning-WIDTHTRUNC: /tmp/method-check-return.sv:21:9: Logical operator LOGNOT expects 1 bit on the LHS, but LHS's METHODCALL 'randomize' generates 32 bits.
+[0] %Fatal: method-check-return.sv:22: Assertion failed in top: constraint not met
+%Error: /tmp/method-check-return.sv:22: Verilog $stop
+Aborting...
+method-check-return sim_exit=134
+precomputed-check-return build_exit=0
+1:%Warning-WIDTHEXPAND: /tmp/precomputed-check-return.sv:23:50: Operator AND expects 32 bits on the RHS, but RHS's NEQ generates 1 bits.
+7:%Warning-WIDTHTRUNC: /tmp/precomputed-check-return.sv:23:9: Logical operator LOGNOT expects 1 bit on the LHS, but LHS's METHODCALL 'randomize' generates 32 bits.
+[0] %Fatal: precomputed-check-return.sv:24: Assertion failed in top: constraint not met
+%Error: /tmp/precomputed-check-return.sv:24: Verilog $stop
+Aborting...
+precomputed-check-return sim_exit=134

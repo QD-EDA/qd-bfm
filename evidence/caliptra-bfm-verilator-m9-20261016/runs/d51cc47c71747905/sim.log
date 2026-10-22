@@ -1,0 +1,112 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5625000 - ----------------------------------
+5678000 -  SHA256 smoke test !!
+5711000 - ----------------------------------
+6010000 - Enable SHA256
+6040000 - SHA256 flow in progress...
+6109000 - Received SHA256 notif intr with status = 1
+6237000 - Load DIGEST data from SHA256
+6308000 - SHA256 zeroize flow.
+6393000 - Enable SHA256
+6423000 - SHA256 flow in progress...
+6491000 - Received SHA256 notif intr with status = 1
+6620000 - Load DIGEST data from SHA256
+6693000 - SHA256 zeroize flow.
+6776000 - Enable SHA256
+6805000 - SHA256 flow in progress...
+7115000 - Received SHA256 notif intr with status = 1
+7242000 - Load DIGEST data from SHA256
+7314000 - SHA256 zeroize flow.
+7401000 - Enable SHA256
+7431000 - SHA256 flow in progress...
+9190000 - Received SHA256 notif intr with status = 1
+9317000 - Load DIGEST data from SHA256
+9389000 - SHA256 zeroize flow.
+9471000 - Enable SHA256
+9501000 - SHA256 flow in progress...
+9569000 - Received SHA256 notif intr with status = 1
+9696000 - Load DIGEST data from SHA256
+9768000 - SHA256 zeroize flow.
+9855000 - Enable SHA256
+9884000 - SHA256 flow in progress...
+9954000 - Received SHA256 notif intr with status = 1
+10080000 - Load DIGEST data from SHA256
+10152000 - SHA256 zeroize flow.
+10237000 - Enable SHA256
+10267000 - SHA256 flow in progress...
+10577000 - Received SHA256 notif intr with status = 1
+10704000 - Load DIGEST data from SHA256
+10776000 - SHA256 zeroize flow.
+10860000 - Enable SHA256
+10890000 - SHA256 flow in progress...
+12649000 - Received SHA256 notif intr with status = 1
+12776000 - Load DIGEST data from SHA256
+12850000 - SHA256 zeroize flow.
+12939000 - Enable SHA256
+13008000 - SHA256 flow in progress...
+13058000 - Received SHA256 err intr with status = 1
+13183000 - SHA256 zeroize flow.
+13272000 - Enable SHA256
+15049000 - SHA256 flow in progress...
+15099000 - Received SHA256 err intr with status = 1
+15223000 - SHA256 zeroize flow.
+15311000 - Enable SHA256
+15380000 - SHA256 flow in progress...
+15427000 - Received SHA256 err intr with status = 1
+15551000 - SHA256 zeroize flow.
+15585000 - Enable SHA256
+* TESTCASE PASSED
+
+Finished : minstret = 49537, mcycle = 155834
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

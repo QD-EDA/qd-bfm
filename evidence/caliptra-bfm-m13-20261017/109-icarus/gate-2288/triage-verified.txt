@@ -1,0 +1,5 @@
+Verified against the preserved runner.log:
+1. HMAC_out_transaction_coverage.svh:17 automatic bins for >64-bit coverpoint are not represented.
+2. HMAC_env_configuration.svh:95 string concatenation receives convert2string method reference.
+3. HMAC_env_sequence_base.svh:59 nested class member path is not supported.
+Compilation stopped before VVP; no test result.

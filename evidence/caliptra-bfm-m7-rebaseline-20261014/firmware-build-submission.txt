@@ -1,0 +1,10 @@
+job_id=1032
+submitted_at=2026-10-14T13:41:13-06:00
+host=DAN-DESKTOP
+array=1-6%2
+resources=1 CPU, 3 GiB per task, 10-minute per-build cap, 30-minute job cap
+qd_sha=d1529c922da402943148a0fb22648f347e30eed9
+rtl_sha=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+firmware_toolchain=riscv-none-elf-gcc 15.2.0 from protected c339 toolchain bundle
+scope=firmware-build-only; each case is built pinned-only and with its opt-in overlay
+reason_for_throttle=1015 has four active A2 simulation tasks; total A2 concurrency capped at six

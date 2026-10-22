@@ -1,0 +1,6 @@
+Input: pinned Adams Bridge mldsa_scoreboard.svh from DAN-DESKTOP toolchain checkout.
+Caliptra pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Command applied the diagnostic wrapper's scoreboard transform to that source and asserted one M16_TYPE_TRACE, six QD transfer declarations, and no remaining parameterized declarations.
+Result: PASS.
+Run script: bash -n passed.

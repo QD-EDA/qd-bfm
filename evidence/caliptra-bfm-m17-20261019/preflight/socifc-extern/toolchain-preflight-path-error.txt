@@ -1,0 +1,12 @@
+TOOLCHAIN=/home/dsell/toolchains/iverilog-c339
+bash: line 1: /home/dsell/toolchains/iverilog-c339/bin/iverilog: No such file or directory
+timeout: failed to execute process: No such file or directory (os error 2)
+COMPILE_EXIT=127
+TOOLCHAIN=/home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile
+c99ee9c08468fb20f7635fb3380adb0d620c9037c19c02236a435a61c7be0130  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/iverilog
+01ab4aec7220761157afa00b19074da9ce6f3f261279fcb39d319865a09056a4  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/vvp
+Icarus Verilog version 13.0 (devel) (ca559fd97)
+/tmp/m17-socifc-extern-implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/m17-socifc-extern-implicit.sv:5: syntax error
+I give up.
+COMPILE_EXIT=3

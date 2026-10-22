@@ -1,0 +1,6 @@
+Rows 7, 9, 10; reuse of the KeyVault generated AHB overlay qualified by M16 rows 6 and 8.
+1 CPU / 4 GiB / 30-minute Slurm cap / 600-second runtime timeout per row; array throttle 3.
+Pinned Icarus source 9b5fad2afb4104caa816b257d5bccc40f01b8c66; binary SHA256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288.
+Firmware source pin 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Source snapshot SHA256 6f3454349f3bf4d87082e4433ace35db1fd23690f9b7393f4640b482710a4808; includes scripts/run_with_memory_pressure_guard.py.
+Submitted as Slurm array job 2878 with `sbatch --parsable run.sbatch`.

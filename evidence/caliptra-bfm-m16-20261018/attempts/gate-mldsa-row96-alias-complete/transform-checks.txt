@@ -1,0 +1,13 @@
+Both transforms were applied to source read from the protected firmware/toolchain checkout on DAN-DESKTOP:
+Caliptra pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+
+Predictor source: mldsa_env_pkg/src/mldsa_predictor.svh
+Command: ssh DAN-DESKTOP 'cat <pinned predictor>' | python3 -c '... fix_mldsa_predictor(source) ...'
+Check: 2 QD-BFM transfer aliases, including the output typedef and local cast target; no declaration remains with the parameterized type.
+Result: PASS.
+
+Scoreboard source: mldsa_env_pkg/src/mldsa_scoreboard.svh
+Command: ssh DAN-DESKTOP 'cat <pinned scoreboard>' | python3 -c '... fix_mldsa_scoreboard(source) ...'
+Check: all 6 QD-BFM transfer aliases, including 3 dynamic queues and 3 scalar locals.
+Result: PASS.

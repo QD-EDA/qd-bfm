@@ -1,0 +1,2 @@
+removed_bytes=2059980 remaining=absent
+resource_bytes_removed=1489

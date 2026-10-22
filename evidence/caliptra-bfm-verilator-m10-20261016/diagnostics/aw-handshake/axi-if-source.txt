@@ -1,0 +1,31 @@
+e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/axi/rtl/axi_if.sv
+   168	
+   169	    // Tasks
+   170	    `ifdef VERILATOR
+   171	        `define EQ__ =
+   172	        `define TIME_ALGN #100ps
+   173	    `else
+   174	        `define EQ__ <=
+   175	        `define TIME_ALGN
+   176	    `endif
+   345	                    output logic [UW-1:0]   resp_user);
+   346	            while(!rst_n) @(posedge clk);
+   347	            do begin
+   348	                `TIME_ALGN
+   349	                awaddr  `EQ__ addr;
+   350	                awburst `EQ__ burst;
+   351	                awsize  `EQ__ size;
+   352	                awlen   `EQ__ len;
+   353	                awuser  `EQ__ user;
+   354	                awid    `EQ__ id;
+   355	                awlock  `EQ__ lock;
+   356	                awvalid `EQ__ 1;
+   357	                @(posedge clk);
+   358	            end while(!awready);
+   359	            `TIME_ALGN
+   360	            awaddr  `EQ__ '0;
+   361	            awburst `EQ__ AXI_BURST_FIXED;
+   362	            awsize  `EQ__ '0;
+   363	            awlen   `EQ__ '0;
+   364	            awuser  `EQ__ '0;
+   365	            awid    `EQ__ '0;

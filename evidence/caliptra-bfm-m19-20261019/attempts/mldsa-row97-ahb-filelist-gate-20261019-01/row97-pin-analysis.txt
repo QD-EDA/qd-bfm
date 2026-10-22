@@ -1,0 +1,9 @@
+Row 97 pin-level result (job 3154_97)
+
+The run compiled and simulated successfully to the testcase finish at 794.798 s, with UVM_ERROR=1 and UVM_FATAL=0. It emitted 27,356 `M19_AHB_PIN` PRE/POST lines (13,678 clock edges) from the instrumented runtime `hdl_top.sv`; the per-run Icarus filelist manifest records one exact source replacement and the before/after filelist hashes.
+
+For both verification batches, all 16 active AHB read transfers at 0xD8..0x114 had HREADYOUT=1, HREADY=1 and HRDATA=0 in both PRE and POST samples. The 32 following `MLDSA_VERIFY_RES[0..15]` register readbacks were all zero. This was parsed and asserted against the archived filtered trace; the intern's corrected triage agrees. Thus the scoreboard is receiving the same zero data present on the AHB pins; the observation does not indicate a BFM monitor/readback mismatch.
+
+The generated checker compares the first deliberately corrupted-signature verification against its saved successful result, then requires the restored-signature second verification to match that saved result. The sole error is at the second batch: the restored-signature output did not match. Classify row97 as a functional ML-DSA result failure at the DUT AHB output, not an Icarus compatibility or AHB monitor defect. This evidence does not isolate the internal crypto/RTL cause.
+
+Filtered inputs: `filtered-verify-read-trace.txt`. Intern's corrected triage: `row97-pin-triage-intern-v2.txt`. The first intern pass was discarded because its address filter had one extra zero; see `first-triage-filter-note.txt`.

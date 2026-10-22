@@ -1,0 +1,65 @@
+   -- Testbench for entropy_src started --
+*** Toggle reset.
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 0  Scope: entropy_src_tb.dut.u_reg
+
+[                4014] write_single_word(addr=0x00000024, word=0x02649999)
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4018  Scope: entropy_src_tb.dut.u_reg
+[                4022] write_single_word(addr=0x00000020, word=0x00000006)
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4026  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4030  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4034  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4034  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 4038  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 6046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 8046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 32046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 34046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 60046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 62046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 64046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 66046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 68046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 70046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 88046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196046  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196054  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196054  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196054  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196058  Scope: entropy_src_tb.dut.u_reg
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/rtl/entropy_src_reg_top.sv:3825: value is unhandled for priority or unique case statement
+         Time: 196058  Scope: entropy_src_tb.dut.u_reg
+*** All 00 test cases completed successfully.
+* TESTCASE PASSED
+   -- Testbench for entropy_src done. --
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/tb/entropy_src_tb.sv:440: $finish called at 200058 (1s)

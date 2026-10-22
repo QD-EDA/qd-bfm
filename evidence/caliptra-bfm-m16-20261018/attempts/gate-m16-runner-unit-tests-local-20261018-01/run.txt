@@ -1,0 +1,8 @@
+Host: MacBook-Air.local, macOS 27.0 (26A428)
+Python: 3.14.7
+Command: ~/codex-supervisor/localrun 180 python3 -m unittest discover -s dv/caliptra_bfm/uvmf_lite/tests -p 'test_run_m15_test.py'
+Result: exit 0; 48 tests passed in 0.043 seconds
+Elapsed: 0.16 seconds
+Peak RSS: 27,590,656 bytes
+Output/resource report: unittest.log
+Scope: runner/classifier/overlay unit tests; this does not qualify a full AHB environment.

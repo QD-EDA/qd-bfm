@@ -1,0 +1,96 @@
+make: Entering directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03/gate-results/8f9e58bda7a24230/.work/native_vectors/dilithium-ref'
+/usr/bin/cc -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls -Wshadow -Wvla -Wpointer-arith -O3 -fomit-frame-pointer -DDILITHIUM_MODE=5 \
+  -o test/test_dilithium5 test/test_dilithium.c randombytes.c sign.c packing.c polyvec.c poly.c ntt.c reduce.c rounding.c fips202.c symmetric-shake.c
+packing.c:101:22: warning: argument 1 of type ‘uint8_t[4928]’ {aka ‘unsigned char[4928]’} with mismatched bound [-Warray-parameter=]
+  101 | void pack_sk(uint8_t sk[CRYPTO_SECRETKEYBYTES+SEEDBYTES],
+      |              ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from packing.c:2:
+packing.h:12:22: note: previously declared as ‘uint8_t[4896]’ {aka ‘unsigned char[4896]’}
+   12 | void pack_sk(uint8_t sk[CRYPTO_SECRETKEYBYTES],
+      |              ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+packing.c:103:28: warning: argument 3 of type ‘const uint8_t[64]’ {aka ‘const unsigned char[64]’} with mismatched bound [-Warray-parameter=]
+  103 |              const uint8_t tr[SEEDBYTES*2],
+      |              ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+packing.h:14:28: note: previously declared as ‘const uint8_t[32]’ {aka ‘const unsigned char[32]’}
+   14 |              const uint8_t tr[SEEDBYTES],
+      |              ~~~~~~~~~~~~~~^~~~~~~~~~~~~
+packing.c:193:24: warning: argument 2 of type ‘uint8_t[64]’ {aka ‘unsigned char[64]’} with mismatched bound [-Warray-parameter=]
+  193 |                uint8_t tr[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~~
+packing.h:28:24: note: previously declared as ‘uint8_t[32]’ {aka ‘unsigned char[32]’}
+   28 |                uint8_t tr[SEEDBYTES],
+      |                ~~~~~~~~^~~~~~~~~~~~~
+packing.c:239:23: warning: argument 1 of type ‘uint8_t[4627]’ {aka ‘unsigned char[4627]’} with mismatched bound [-Warray-parameter=]
+  239 | void pack_sig(uint8_t sig[CRYPTO_BYTES+SEEDBYTES],
+      |               ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+packing.h:21:23: note: previously declared as ‘uint8_t[4595]’ {aka ‘unsigned char[4595]’}
+   21 | void pack_sig(uint8_t sig[CRYPTO_BYTES], const uint8_t c[SEEDBYTES], const polyvecl *z, const polyveck *h);
+      |               ~~~~~~~~^~~~~~~~~~~~~~~~~
+packing.c:240:29: warning: argument 2 of type ‘const uint8_t[64]’ {aka ‘const unsigned char[64]’} with mismatched bound [-Warray-parameter=]
+  240 |               const uint8_t c[SEEDBYTES+SEEDBYTES],
+      |               ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+packing.h:21:56: note: previously declared as ‘const uint8_t[32]’ {aka ‘const unsigned char[32]’}
+   21 | void pack_sig(uint8_t sig[CRYPTO_BYTES], const uint8_t c[SEEDBYTES], const polyvecl *z, const polyveck *h);
+      |                                          ~~~~~~~~~~~~~~^~~~~~~~~~~~
+packing.c:284:24: warning: argument 1 of type ‘uint8_t[64]’ {aka ‘unsigned char[64]’} with mismatched bound [-Warray-parameter=]
+  284 | int unpack_sig(uint8_t c[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~
+packing.h:36:24: note: previously declared as ‘uint8_t[32]’ {aka ‘unsigned char[32]’}
+   36 | int unpack_sig(uint8_t c[SEEDBYTES], polyvecl *z, polyveck *h, const uint8_t sig[CRYPTO_BYTES]);
+      |                ~~~~~~~~^~~~~~~~~~~~
+packing.c: In function ‘pqcrystals_dilithium5_ref_unpack_sk’:
+packing.c:211:11: warning: writing 16 bytes into a region of size 0 [-Wstringop-overflow=]
+  211 |     tr[i] = sk[i];
+      |     ~~~~~~^~~~~~~
+packing.c:193:24: note: at offset 32 into destination object ‘tr’ of size [0, 32]
+  193 |                uint8_t tr[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~~
+packing.c:211:11: warning: writing 16 bytes into a region of size 0 [-Wstringop-overflow=]
+  211 |     tr[i] = sk[i];
+      |     ~~~~~~^~~~~~~
+packing.c:193:24: note: at offset 48 into destination object ‘tr’ of size [0, 32]
+  193 |                uint8_t tr[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~~
+packing.c: In function ‘pqcrystals_dilithium5_ref_pack_sig’:
+packing.c:267:8: warning: array subscript [4619, 4626] is outside array bounds of ‘uint8_t[4595]’ {aka ‘unsigned char[4595]’} [-Warray-bounds=]
+  267 |     sig[OMEGA + i] = k;
+      |     ~~~^~~~~~~~~~~
+packing.c:239:23: note: at offset [4619, 4626] into object ‘sig’ of size [0, 4595]
+  239 | void pack_sig(uint8_t sig[CRYPTO_BYTES+SEEDBYTES],
+      |               ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+packing.c:259:12: warning: ‘__builtin_memset’ forming offset [4595, 4626] is out of the bounds [0, 4595] [-Warray-bounds=]
+  259 |     sig[i] = 0;
+      |     ~~~~~~~^~~
+packing.c: In function ‘pqcrystals_dilithium5_ref_unpack_sig’:
+packing.c:305:11: warning: array subscript [4619, 4626] is outside array bounds of ‘const uint8_t[4595]’ {aka ‘const unsigned char[4595]’} [-Warray-bounds=]
+  305 |     if(sig[OMEGA + i] < k || sig[OMEGA + i] > OMEGA)
+      |        ~~~^~~~~~~~~~~
+packing.c:287:30: note: at offset [4619, 4626] into object ‘sig’ of size [0, 4595]
+  287 |                const uint8_t sig[CRYPTO_BYTES])
+      |                ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+packing.c:308:23: warning: array subscript [4619, 4626] is outside array bounds of ‘const uint8_t[4595]’ {aka ‘const unsigned char[4595]’} [-Warray-bounds=]
+  308 |     for(j = k; j < sig[OMEGA + i]; ++j) {
+      |                    ~~~^~~~~~~~~~~
+packing.c:287:30: note: at offset [4619, 4626] into object ‘sig’ of size [0, 4595]
+  287 |                const uint8_t sig[CRYPTO_BYTES])
+      |                ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+packing.c:292:10: warning: writing 16 bytes into a region of size 0 [-Wstringop-overflow=]
+  292 |     c[i] = sig[i];
+      |     ~~~~~^~~~~~~~
+packing.c:284:24: note: at offset 32 into destination object ‘c’ of size [0, 32]
+  284 | int unpack_sig(uint8_t c[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~
+packing.c:292:10: warning: writing 16 bytes into a region of size 0 [-Wstringop-overflow=]
+  292 |     c[i] = sig[i];
+      |     ~~~~~^~~~~~~~
+packing.c:284:24: note: at offset 48 into destination object ‘c’ of size [0, 32]
+  284 | int unpack_sig(uint8_t c[SEEDBYTES*2],
+      |                ~~~~~~~~^~~~~~~~~~~~~~
+poly.c:493:44: warning: argument 2 of type ‘const uint8_t[64]’ {aka ‘const unsigned char[64]’} with mismatched bound [-Warray-parameter=]
+  493 | void poly_challenge(poly *c, const uint8_t seed[SEEDBYTES*2]) {
+      |                              ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+In file included from poly.c:3:
+poly.h:54:44: note: previously declared as ‘const uint8_t[32]’ {aka ‘const unsigned char[32]’}
+   54 | void poly_challenge(poly *c, const uint8_t seed[SEEDBYTES]);
+      |                              ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+make: Leaving directory '/home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03/gate-results/8f9e58bda7a24230/.work/native_vectors/dilithium-ref'

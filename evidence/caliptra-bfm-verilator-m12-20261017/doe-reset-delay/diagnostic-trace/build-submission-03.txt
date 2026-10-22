@@ -1,0 +1,9 @@
+Slurm job: 2114
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03
+Submitted: 2026-10-17 09:21 MDT
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03 && sbatch --parsable build.sbatch
+Resource request: 4 CPUs, 4 GiB, 2 h; based on diagnostic build 2112 (2,381,560 KiB peak RSS, 4:13.62 wall)
+Inputs: QD-BFM ffc12ab427e961f40354f32a8e7a147e5d4e5764; Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Verilator 5.052
+Trace generator SHA-256: caeb213f94f4a9fb8d74ecf92b8b53ca24a421e1958e0ad9278540d9a3be237f
+Expected prepared checker trace SHA-256: 4e3a62fe81c45f96ce5217b3b722973e03a415de45c81e59ec73f21efd7ad997

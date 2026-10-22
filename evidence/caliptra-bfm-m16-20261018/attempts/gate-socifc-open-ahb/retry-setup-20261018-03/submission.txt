@@ -1,0 +1,7 @@
+Submitted 2026-10-18 to DAN-DESKTOP.
+Slurm job: 2695
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m16-socifc-open-ahb-20261018-03 && sbatch --parsable run.sbatch
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-socifc-open-ahb-20261018-03
+Source snapshot SHA-256: e79ba3c0736cf9f7fea668ee9d253e8755c2db3c6ff8239003abb2c0e0c74113
+Resources: 1 CPU, 5 GiB Slurm memory, 30 min job walltime, 600 s per-test timeout; one-row setup validation.
+Changes in snapshot: omit duplicate MVC stubs only for generated runtime mode; include both required overlay helper directories.

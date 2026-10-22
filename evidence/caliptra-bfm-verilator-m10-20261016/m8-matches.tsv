@@ -1,0 +1,7 @@
+testname	test_id	case_yaml	icarus_c339_mcycle	icarus_c339_wall_s	m8_icarus_wall_s	m8_verilator_mcycle	m8_verilator_wall_s	m8_speedup
+smoke_test_ecc_flow1_kv_ocp_progress	044d2b8bcd486492	src/integration/test_suites/smoke_test_ecc_flow1_kv_ocp_progress/smoke_test_ecc_flow1_kv_ocp_progress.yml	60927	7910	8574	60927	34.925	245.50
+smoke_test_kv_rules_ocp_lock	ac4e209a8a8dca30	src/integration/test_suites/smoke_test_kv_rules_ocp_lock/smoke_test_kv_rules_ocp_lock.yml	60518	7849	8659	60518	39.099	221.46
+smoke_test_ecc_flow2_kv_ocp_progress	bcb5b29a003aa2a6	src/integration/test_suites/smoke_test_ecc_flow2_kv_ocp_progress/smoke_test_ecc_flow2_kv_ocp_progress.yml	62472	8145	8229	62472	40.623	202.57
+smoke_test_sha256_wntz	d51cc47c71747905	src/integration/test_suites/smoke_test_sha256_wntz/smoke_test_sha256_wntz.yml	155834	20534	21238	155834	97.510	217.80
+smoke_test_strap	804790f41f3373fe	src/integration/test_suites/smoke_test_strap/smoke_test_strap.yml	57180	8047	8047	57180	36.134	222.70
+smoke_test_sha256	e0d4538883521cca	src/integration/test_suites/smoke_test_sha256/smoke_test_sha256.yml	61567	8646	8646	61567	38.316	225.65

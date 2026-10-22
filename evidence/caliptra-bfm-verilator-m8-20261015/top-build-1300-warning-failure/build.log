@@ -1,0 +1,26 @@
+rv_gcc_version is 15.2.0
+set -eo pipefail; /home/dsell/toolchains/verilator-5.052/bin/verilator /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-02/overlay/tb/test_caliptra_top_tb.cpp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c --cc -CFLAGS "-std=c++20" \
+  +libext+.v+.sv +define+RV_OPENSOURCE \
+  --timescale 1ns/100ps \
+  --timing \
+  -I/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-02/model \
+  -Wno-WIDTH -Wno-UNOPTFLAT -Wno-LITENDIAN -Wno-CMPCONST -Wno-MULTIDRIVEN -Wno-UNPACKED                 -Wno-LATCH \
+  -f /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-02/overlay/tb/../config/caliptra_top_tb.vf --top-module caliptra_top_tb \
+  -f /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-02/overlay/tb/../config/caliptra_top_tb.vlt \
+  -exe test_caliptra_top_tb.cpp --autoflush  \
+  +define+CALIPTRA_INTERNAL_TRNG +define+CALIPTRA_BFM_CHECKER 2>&1 | tee verilator_build.log
+%Warning-MISINDENT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:1111:35: Misleading indentation
+ 1111 |             unlock_security_state = 1'b0;  
+      |                                   ^
+                    /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:1106:9: ... Expected indentation matching this earlier statement's line:
+ 1106 |         if ($test$plusargs("CALIPTRA_DEBUG_UNLOCKED"))
+      |         ^~
+                    ... For warning description see https://verilator.org/warn/MISINDENT?v=5.052
+                    ... Use "/* verilator lint_off MISINDENT */" and lint_on around source to disable this message.
+%Warning-CASEINCOMPLETE: /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-02/source/dv/caliptra_bfm/axi/axi4_caliptra_checker.sv:217:7: Case values incompletely covered (example pattern 0x0)
+  217 |       case (burst)
+      |       ^~~~
+                         ... For warning description see https://verilator.org/warn/CASEINCOMPLETE?v=5.052
+                         ... Use "/* verilator lint_off CASEINCOMPLETE */" and lint_on around source to disable this message.
+%Error: Exiting due to 2 warning(s)
+make: *** [/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile:270: verilator-build] Error 1

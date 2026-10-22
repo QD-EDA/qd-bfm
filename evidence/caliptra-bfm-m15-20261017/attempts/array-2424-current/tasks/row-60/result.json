@@ -1,0 +1,31 @@
+{
+  "cause": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:29: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skencode_tb'",
+  "compile_exit": 1,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-60/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.027,
+  "environment_id": "adams-bridge-v2-0-3-skencode_tb",
+  "filelist": "src/sk_encode/config/skencode_tb.vf",
+  "filelist_sha256_json": "{\"src/sk_encode/config/skencode_tb.vf\":\"45528b7f68f1311a84c7deb634e8d13d47a95c8c17164e123a0ffffaaabddf87\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 60,
+  "run_plusargs": [
+    "+UVM_TESTNAME=skencode_normal_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "57",
+  "slurm_job_id": "2482",
+  "source_file": "src/sk_encode/stimulus/tests/directed/skencode_normal_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "5fb67b344f72b355b928e18e75270a0b594485b65940f3590307a5415f7e8e4f",
+  "status": "BLOCKED",
+  "testname": "skencode_normal_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

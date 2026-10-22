@@ -1,0 +1,16 @@
+job_id=1809
+host=DAN-DESKTOP
+case=smoke_test_ahb_mux
+test_id=cadf43c78de6a454
+cap=600 seconds
+command=sbatch --parsable run-one-trace-06.sbatch
+model_sha256=bf548868ab517f17a1da69ef152e16fa58bacb919feac0082d9767f03a804b5d
+candidate_overlay_sha256=782c46c617c90111bd3ca91cab2739ca6d548ebfeb1a56d83b4b482ac6ff033f
+trace_overlay_sha256=c2bd16110f07bbb1a94c721da6601e5cbd0cb6831488c816f8dd842aae6c1d61
+array_restarted=false
+wrapper_exit=0
+firmware_outcome=FAIL
+sim_exit=1
+failure=AXI_SUB_B_HSHAKE_ERR at 5 ns after AW/W/B trace
+elapsed_seconds=2.28
+outputs_archive_sha256=91c03be5f9ea3c396ab0a6f0f69bc10acfd6233564bd0825cdd36a10ebc5fd39

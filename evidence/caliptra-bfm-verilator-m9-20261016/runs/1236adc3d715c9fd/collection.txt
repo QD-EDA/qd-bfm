@@ -1,0 +1,8 @@
+Array task: 1430_58
+Test case: smoke_test_mldsa_errortrigger
+Outcome: PASS
+Final mcycle: 118445
+Wall seconds: 227.85
+Prior Icarus: UNVERIFIED
+Evidence: the remote FILE-SHA256SUMS manifest verified locally with shasum -a 256 -c. Supplementary task/resource/Slurm files were copied over SSH before remote cleanup.
+Finding: The matrix label is smoke_test_abr_errortrigger; its selected source YAML and runner result name are smoke_test_mldsa_errortrigger. Prior Icarus UNVERIFIED.

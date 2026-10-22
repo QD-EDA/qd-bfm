@@ -1,0 +1,7 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18T22:25:57Z
+Command: sbatch /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-pinned-20261018-07/run.sbatch
+Job ID: 2806
+Target: generated KeyVault row 6, kv_rand_lock_test
+Terminal runner result: runner_exit_code=1 (runtime UVM_ERROR gate; see raw/job-2806.tar.gz)
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap; process wall 1:43.11, peak RSS 634656 KiB.

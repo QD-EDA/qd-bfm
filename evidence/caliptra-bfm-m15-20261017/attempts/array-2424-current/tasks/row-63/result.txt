@@ -1,0 +1,5 @@
+row_id=63
+testname=decompose_normal_test
+status=BLOCKED
+cause=Icarus returned nonzero without a concise diagnostic
+elapsed_seconds=0.053

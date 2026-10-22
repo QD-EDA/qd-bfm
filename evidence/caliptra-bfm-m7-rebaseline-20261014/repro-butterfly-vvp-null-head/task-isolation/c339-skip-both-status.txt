@@ -1,0 +1,4 @@
+variant=skip-both
+version=c339
+compile_exit=1
+sim_exit=NOT_RUN

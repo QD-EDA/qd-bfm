@@ -1,0 +1,11 @@
+host=DAN-DESKTOP
+script_error_attempt_job=2264
+script_error_run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m13-power2round-overlay-20261017-01
+script_error=wrong Caliptra-vs-Adams filelist root; failed before compilation; raw output preserved beside this file
+
+gate_job=2265
+gate_run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m13-power2round-overlay-20261017-02
+gate_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m13-power2round-overlay-20261017-02 && sbatch --parsable power2round-overlay.sbatch
+resources=1 CPU, 3 GiB, 20-minute Slurm allocation, 600-second compile and simulation caps
+overlay=PATH prepends protected Python 3.14.4 + NumPy 2.5.4 environment
+source=Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0; Icarus 9b5fad2afb4104caa816b257d5bccc40f01b8c66

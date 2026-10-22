@@ -1,0 +1,14 @@
+M10b array 1835 completion and archive verification
+Host: DAN-DESKTOP
+
+Archive 06 SHA-256: cb0534aa56d52f8eb6a88bacacc4989576bbb9f165a4a905e85f7d29b0faf997
+  Index 92, smoke_test_aes_kv_out_rand: overlay PASS, final mcycle 1175214.
+  Result manifest: all 13 archived result files verified.
+
+Archive 07 SHA-256: 8a5915e68319d3d3094b800e11922db80bfbe43060b70ac21dc129b8fbab6670
+  Index 100, smoke_test_mlkem_errortrigger: overlay PASS, final mcycle 133679.
+  Index 101, smoke_test_datavault_reset: overlay PASS, final mcycle 89091.
+
+The aggregation pass verified archive SHA-256 digests for deltas 02 through 07, each completed result directory's FILE-SHA256SUMS, and an exact 103-of-103 ID/index match with the selected run. There are no duplicate test IDs or array indexes.
+
+Final comparison from partial-results.tsv: overlay 84 PASS / 19 FAIL; c339 18 PASS / 25 TIMEOUT / 58 UNVERIFIED / 2 FAIL; 17 measured c339-pass-to-overlay-pass speedups; the 11 shared-pass rows with c339 mcycle data have matching final mcycle values. The only c339 PASS / overlay FAIL disagreement is index 91, smoke_test_sha512, which is undergoing a focused assertion trace.

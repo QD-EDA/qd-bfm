@@ -1,0 +1,10 @@
+job_id=1302
+cpus=4
+memory=12G
+source_commit=d0d728d7a4aea66ce1962a418d6403d017b72157
+verilator_version=5.052
+frontend=success; 813 modules; generated 319.452 MB C++; 87.788 s
+exit_status=2
+peak_rss_kib=2362496
+filelist_overlay_sha256=0d45958466c2777bc7ec4c74edba78336009ca08b42488d40e5390b4945e2fb4
+root_cause=command-line CFLAGS=-std=c++20 overrode upstream Makefile CFLAGS+=TB_DPI_INCS, dropping tcp_server include path; jtagdpi.c could not locate tcp_server.h

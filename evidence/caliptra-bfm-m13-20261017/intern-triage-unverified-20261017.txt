@@ -1,0 +1,23 @@
+**Environment: adams-bridge-v2-0-3-butterfly_top_tb**
+*   **Observed terminal markers:** `*** 10 test cases completed.`, `*** 10 errors detected during testing.`, `* TESTCASE FAILED`, `-- Testbench for CBD_SAMPLER done. --`
+*   **Missing test inputs:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:593: $readmemh: Unable to open kyber_zeta.txt for reading.`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:594: $readmemh: Unable to open kyber_zeta_inv.hex for reading.`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:597: $readmemh: Unable to open kyber_stage0.hex for reading.`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:601: $readmemh: Unable to open kyber_stage0_out.hex for reading.`
+*   **Functional status:** FAIL
+*   **Strongest direct log evidence:** `* TESTCASE FAILED`
+
+**Environment: adams-bridge-v2-0-3-ntt_top_tb**
+*   **Observed terminal markers:** `End of test`, `*** 10 test cases completed.`, `*** 10 errors detected during testing.`
+*   **Missing test inputs:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.`
+*   **Functional status:** FAIL
+*   **Strongest direct log evidence:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.`
+
+**Environment: adams-bridge-v2-0-3-rej_bounded_tb**
+*   **Observed terminal markers:** `*** Toggle reset.`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:180: Hit max cycle count (200000) .. stopping`, `$finish called at 2000005 (1s)`
+*   **Missing test inputs:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:340: Cannot open file exp_results.txt for reading`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:362: Cannot open file input_vectors.txt for reading`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:369: Cannot open file exp_results.txt for reading`
+*   **Functional status:** FAIL
+*   **Strongest direct log evidence:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:180: Hit max cycle count (200000) .. stopping`
+
+**Environment: adams-bridge-v2-0-3-sigencode_z_tb**
+*   **Observed terminal markers:** `Start of init`, `*** Toggle reset.`, `Test completed`, `$finish called at 765 (1s)`
+*   **Missing test inputs:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading`, `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:210: Cannot open output_encoded_z.hex for reading`
+*   **Functional status:** FAIL
+*   **Strongest direct log evidence:** `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading`

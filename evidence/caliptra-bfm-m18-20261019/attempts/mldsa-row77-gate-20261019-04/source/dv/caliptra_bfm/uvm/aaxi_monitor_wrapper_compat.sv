@@ -1,0 +1,212 @@
+// SPDX-License-Identifier: Apache-2.0
+// Clean-room generated-path wrapper: open manager, profile checker, and monitor.
+`ifndef CALIPTRA_BFM_EXTERNAL_AVERY
+module aaxi_monitor_wrapper #(
+  parameter integer ID_WIDTH = aaxi_pkg::AAXI_ID_WIDTH,
+  parameter integer BUS_DATA_WIDTH = aaxi_pkg::AAXI_DATA_WIDTH,
+  parameter [4:0] USER_SUPPORT = 5'b11111,
+  parameter VER = "AXI4",
+  parameter bit INTERNAL_MASTER = 1'b1
+) (aaxi_intf bus);
+  import uvm_pkg::*;
+
+  axi4_caliptra_record_if record_if(bus.ACLK);
+  axi4_caliptra_master_cmd_if cmd_if(bus.ACLK);
+  assign cmd_if.ARESETn = bus.ARESETn;
+
+  axi4_caliptra_checker #(
+    .ADDR_WIDTH(aaxi_pkg::AAXI_ADDR_WIDTH),
+    .DATA_WIDTH(BUS_DATA_WIDTH),
+    .ID_WIDTH(ID_WIDTH),
+    .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
+  ) profile_checker (
+    .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
+    .AWID(bus.AWID), .AWADDR(bus.AWADDR), .AWLEN(bus.AWLEN),
+    .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST), .AWLOCK(bus.AWLOCK),
+    .AWUSER(bus.AWUSER), .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
+    .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
+    .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
+    .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
+    .BVALID(bus.BVALID), .BREADY(bus.BREADY),
+    .ARID(bus.ARID), .ARADDR(bus.ARADDR), .ARLEN(bus.ARLEN),
+    .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST), .ARLOCK(bus.ARLOCK),
+    .ARUSER(bus.ARUSER), .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
+    .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
+    .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
+    .RREADY(bus.RREADY)
+  );
+
+  axi4_caliptra_monitor #(
+    .ADDR_WIDTH(48), .DATA_WIDTH(BUS_DATA_WIDTH),
+    .ID_WIDTH(ID_WIDTH), .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
+  ) channel_monitor (
+    .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
+    .AWID(bus.AWID), .AWADDR(bus.AWADDR[47:0]),
+    .AWLEN(bus.AWLEN), .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST),
+    .AWLOCK(bus.AWLOCK), .AWUSER(bus.AWUSER),
+    .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
+    .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
+    .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
+    .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
+    .BVALID(bus.BVALID), .BREADY(bus.BREADY),
+    .ARID(bus.ARID), .ARADDR(bus.ARADDR[47:0]),
+    .ARLEN(bus.ARLEN), .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST),
+    .ARLOCK(bus.ARLOCK), .ARUSER(bus.ARUSER),
+    .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
+    .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
+    .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
+    .RREADY(bus.RREADY),
+    .aw_fire(record_if.aw_fire), .aw_record(record_if.aw_record),
+    .w_fire(record_if.w_fire), .w_record(record_if.w_record),
+    .b_fire(record_if.b_fire), .b_record(record_if.b_record),
+    .ar_fire(record_if.ar_fire), .ar_record(record_if.ar_record),
+    .r_fire(record_if.r_fire), .r_record(record_if.r_record),
+    .cycle_count(record_if.channel_cycle),
+    .aw_count(record_if.aw_count), .w_count(record_if.w_count),
+    .b_count(record_if.b_count), .ar_count(record_if.ar_count),
+    .r_count(record_if.r_count),
+    .aw_stall_cycles(record_if.aw_stall_cycles),
+    .w_stall_cycles(record_if.w_stall_cycles),
+    .b_stall_cycles(record_if.b_stall_cycles),
+    .ar_stall_cycles(record_if.ar_stall_cycles),
+    .r_stall_cycles(record_if.r_stall_cycles),
+    .aw_valid_cycles(record_if.aw_valid_cycles),
+    .w_valid_cycles(record_if.w_valid_cycles),
+    .b_valid_cycles(record_if.b_valid_cycles),
+    .ar_valid_cycles(record_if.ar_valid_cycles),
+    .r_valid_cycles(record_if.r_valid_cycles),
+    .aw_burst_fixed_count(record_if.aw_burst_fixed_count),
+    .aw_burst_incr_count(record_if.aw_burst_incr_count),
+    .aw_burst_wrap_count(record_if.aw_burst_wrap_count),
+    .aw_burst_reserved_count(record_if.aw_burst_reserved_count),
+    .aw_burst_unknown_count(record_if.aw_burst_unknown_count),
+    .aw_lock_clear_count(record_if.aw_lock_clear_count),
+    .aw_lock_set_count(record_if.aw_lock_set_count),
+    .aw_lock_unknown_count(record_if.aw_lock_unknown_count),
+    .ar_burst_fixed_count(record_if.ar_burst_fixed_count),
+    .ar_burst_incr_count(record_if.ar_burst_incr_count),
+    .ar_burst_wrap_count(record_if.ar_burst_wrap_count),
+    .ar_burst_reserved_count(record_if.ar_burst_reserved_count),
+    .ar_burst_unknown_count(record_if.ar_burst_unknown_count),
+    .ar_lock_clear_count(record_if.ar_lock_clear_count),
+    .ar_lock_set_count(record_if.ar_lock_set_count),
+    .ar_lock_unknown_count(record_if.ar_lock_unknown_count),
+    .b_resp_okay_count(record_if.b_resp_okay_count),
+    .b_resp_exokay_count(record_if.b_resp_exokay_count),
+    .b_resp_slverr_count(record_if.b_resp_slverr_count),
+    .b_resp_decerr_count(record_if.b_resp_decerr_count),
+    .b_resp_unknown_count(record_if.b_resp_unknown_count),
+    .r_resp_okay_count(record_if.r_resp_okay_count),
+    .r_resp_exokay_count(record_if.r_resp_exokay_count),
+    .r_resp_slverr_count(record_if.r_resp_slverr_count),
+    .r_resp_decerr_count(record_if.r_resp_decerr_count),
+    .r_resp_unknown_count(record_if.r_resp_unknown_count),
+    .w_strb_full_count(record_if.w_strb_full_count),
+    .w_strb_partial_count(record_if.w_strb_partial_count),
+    .w_strb_zero_count(record_if.w_strb_zero_count),
+    .w_strb_unknown_count(record_if.w_strb_unknown_count),
+    .w_last_count(record_if.w_last_count), .r_last_count(record_if.r_last_count)
+  );
+
+  assign record_if.ARESETn = bus.ARESETn;
+  axi4_caliptra_transaction_monitor #(
+    .ADDR_WIDTH(48),
+    .DATA_WIDTH(BUS_DATA_WIDTH),
+    .ID_WIDTH(ID_WIDTH),
+    .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
+  ) transaction_monitor (
+    .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
+    .AWID(bus.AWID), .AWADDR(bus.AWADDR[47:0]), .AWLEN(bus.AWLEN),
+    .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST), .AWLOCK(bus.AWLOCK),
+    .AWUSER(bus.AWUSER), .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
+    .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
+    .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
+    .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
+    .BVALID(bus.BVALID), .BREADY(bus.BREADY),
+    .ARID(bus.ARID), .ARADDR(bus.ARADDR[47:0]), .ARLEN(bus.ARLEN),
+    .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST), .ARLOCK(bus.ARLOCK),
+    .ARUSER(bus.ARUSER), .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
+    .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
+    .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
+    .RREADY(bus.RREADY),
+    .cycle_count(), .write_complete(record_if.write_complete),
+    .write_request_complete(record_if.write_request_complete),
+    .write_request_error(record_if.write_request_error),
+    .write_request_status(record_if.write_request_status),
+    .write_request_id(record_if.write_request_id),
+    .write_request_addr(record_if.write_request_addr),
+    .write_request_len(record_if.write_request_len),
+    .write_request_size(record_if.write_request_size),
+    .write_request_burst(record_if.write_request_burst),
+    .write_request_lock(record_if.write_request_lock),
+    .write_request_awuser(record_if.write_request_awuser),
+    .write_request_beat_count(record_if.write_request_beat_count),
+    .write_request_data(record_if.write_request_data),
+    .write_request_strb(record_if.write_request_strb),
+    .write_request_wuser(record_if.write_request_wuser),
+    .write_request_last_mask(record_if.write_request_last_mask),
+    .write_error(record_if.write_error),
+    .write_error_code(record_if.write_error_code),
+    .write_status(record_if.write_status), .write_cycle(),
+    .write_id(record_if.write_id), .write_addr(record_if.write_addr),
+    .write_len(record_if.write_len), .write_size(record_if.write_size),
+    .write_burst(record_if.write_burst), .write_lock(record_if.write_lock),
+    .write_awuser(record_if.write_awuser),
+    .write_beat_count(record_if.write_beat_count),
+    .write_data(record_if.write_data), .write_strb(record_if.write_strb),
+    .write_wuser(record_if.write_wuser),
+    .write_last_mask(record_if.write_last_mask),
+    .write_response_id(record_if.write_response_id),
+    .write_response(record_if.write_response),
+    .write_buser(record_if.write_buser),
+    .read_complete(record_if.read_complete), .read_error(record_if.read_error),
+    .read_error_code(record_if.read_error_code),
+    .read_status(record_if.read_status), .read_cycle(),
+    .read_id(record_if.read_id), .read_addr(record_if.read_addr),
+    .read_len(record_if.read_len), .read_size(record_if.read_size),
+    .read_burst(record_if.read_burst), .read_lock(record_if.read_lock),
+    .read_aruser(record_if.read_aruser),
+    .read_beat_count(record_if.read_beat_count),
+    .read_data(record_if.read_data), .read_resp(record_if.read_resp),
+    .read_ruser(record_if.read_ruser),
+    .read_last_mask(record_if.read_last_mask)
+  );
+
+  generate
+    if (INTERNAL_MASTER) begin : open_master
+      axi4_caliptra_uvm_master_proxy #(
+        .ADDR_WIDTH(aaxi_pkg::AAXI_ADDR_WIDTH),
+        .DATA_WIDTH(BUS_DATA_WIDTH),
+        .ID_WIDTH(ID_WIDTH),
+        .USER_WIDTH(aaxi_pkg::AAXI_AWUSER_WIDTH)
+      ) manager (
+        .cmd_if(cmd_if), .ACLK(bus.ACLK), .ARESETn(bus.ARESETn),
+        .AWID(bus.AWID), .AWADDR(bus.AWADDR), .AWLEN(bus.AWLEN),
+        .AWSIZE(bus.AWSIZE), .AWBURST(bus.AWBURST), .AWLOCK(bus.AWLOCK),
+        .AWUSER(bus.AWUSER), .AWVALID(bus.AWVALID), .AWREADY(bus.AWREADY),
+        .WDATA(bus.WDATA), .WSTRB(bus.WSTRB), .WUSER(bus.WUSER),
+        .WLAST(bus.WLAST), .WVALID(bus.WVALID), .WREADY(bus.WREADY),
+        .BID(bus.BID), .BRESP(bus.BRESP), .BUSER(bus.BUSER),
+        .BVALID(bus.BVALID), .BREADY(bus.BREADY),
+        .ARID(bus.ARID), .ARADDR(bus.ARADDR), .ARLEN(bus.ARLEN),
+        .ARSIZE(bus.ARSIZE), .ARBURST(bus.ARBURST), .ARLOCK(bus.ARLOCK),
+        .ARUSER(bus.ARUSER), .ARVALID(bus.ARVALID), .ARREADY(bus.ARREADY),
+        .RID(bus.RID), .RDATA(bus.RDATA), .RRESP(bus.RRESP),
+        .RUSER(bus.RUSER), .RLAST(bus.RLAST), .RVALID(bus.RVALID),
+        .RREADY(bus.RREADY)
+      );
+
+    end
+  endgenerate
+
+  initial begin
+    uvm_config_db #(virtual aaxi_intf)::set(
+      uvm_root::get(), "*", "ports", bus);
+    uvm_config_db #(virtual axi4_caliptra_record_if)::set(
+      uvm_root::get(), "*", "vif", record_if);
+    if (INTERNAL_MASTER)
+      uvm_config_db #(virtual axi4_caliptra_master_cmd_if)::set(
+        uvm_root::get(), "*", "cmd_vif", cmd_if);
+  end
+endmodule
+`endif

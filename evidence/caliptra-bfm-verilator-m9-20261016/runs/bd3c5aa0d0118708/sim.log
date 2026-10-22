@@ -1,0 +1,200 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+7199000 - ------------------------------------
+7252000 -  DV Smoke Test for Cold/Warm Reset !!
+7308000 - ------------------------------------
+7368000 - 
+7370000 - INFO. Using random seed = 17
+7445000 - 
+7464000 - 
+7466000 - -- Populating write data and expected values into arrays starting w/0x10000001--
+8149000 - 
+8150000 - -- Done with populating data --
+8200000 - 
+8201000 - ** Performing a WRITE to all registers (reporting once per prefix)**
+8297000 - 
+8443000 - 
+8445000 - INFO. For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0), attempting to write 0x100000A1, expected survived value 0x100000A1...........
+8888000 - INFO. For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1), attempting to write 0x10000161, expected survived value 0x10000161...........
+9330000 - INFO. For addr 0x1001C088 (STICKY_DATA_VAULT_ENTRY_2), attempting to write 0x10000221, expected survived value 0x10000221...........
+9768000 - INFO. For addr 0x1001C0B8 (STICKY_DATA_VAULT_ENTRY_3), attempting to write 0x100002E1, expected survived value 0x100002E1...........
+10203000 - INFO. For addr 0x1001C0E8 (STICKY_DATA_VAULT_ENTRY_4), attempting to write 0x100003A1, expected survived value 0x100003A1...........
+10639000 - INFO. For addr 0x1001C118 (STICKY_DATA_VAULT_ENTRY_5), attempting to write 0x10000461, expected survived value 0x10000461...........
+11079000 - INFO. For addr 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6), attempting to write 0x10000521, expected survived value 0x10000521...........
+11517000 - INFO. For addr 0x1001C178 (STICKY_DATA_VAULT_ENTRY_7), attempting to write 0x100005E1, expected survived value 0x100005E1...........
+11951000 - INFO. For addr 0x1001C1A8 (STICKY_DATA_VAULT_ENTRY_8), attempting to write 0x100006A1, expected survived value 0x100006A1...........
+12386000 - INFO. For addr 0x1001C1D8 (STICKY_DATA_VAULT_ENTRY_9), attempting to write 0x10000761, expected survived value 0x10000761...........
+12850000 - INFO. For addr 0x1001C230 (DATA_VAULT_ENTRY_0), attempting to write 0x100008C1, expected survived value 0x100008C1...........
+13253000 - INFO. For addr 0x1001C260 (DATA_VAULT_ENTRY_1), attempting to write 0x10000981, expected survived value 0x10000981...........
+13656000 - INFO. For addr 0x1001C290 (DATA_VAULT_ENTRY_2), attempting to write 0x10000A41, expected survived value 0x10000A41...........
+14057000 - INFO. For addr 0x1001C2C0 (DATA_VAULT_ENTRY_3), attempting to write 0x10000B01, expected survived value 0x10000B01...........
+14455000 - INFO. For addr 0x1001C2F0 (DATA_VAULT_ENTRY_4), attempting to write 0x10000BC1, expected survived value 0x10000BC1...........
+14852000 - INFO. For addr 0x1001C320 (DATA_VAULT_ENTRY_5), attempting to write 0x10000C81, expected survived value 0x10000C81...........
+15253000 - INFO. For addr 0x1001C350 (DATA_VAULT_ENTRY_6), attempting to write 0x10000D41, expected survived value 0x10000D41...........
+15653000 - INFO. For addr 0x1001C380 (DATA_VAULT_ENTRY_7), attempting to write 0x10000E01, expected survived value 0x10000E01...........
+16053000 - INFO. For addr 0x1001C3B0 (DATA_VAULT_ENTRY_8), attempting to write 0x10000EC1, expected survived value 0x10000EC1...........
+16449000 - INFO. For addr 0x1001C3E0 (DATA_VAULT_ENTRY_9), attempting to write 0x10000F81, expected survived value 0x10000F81...........
+16922000 - INFO. For addr 0x1001C438 (LOCKABLE_SCRATCHREG), attempting to write 0x100010E1, expected survived value 0x100010E1.........
+17339000 - INFO. For addr 0x1001C460 (NONSTICKY_GENERIC_SCRATCHREG), attempting to write 0x10001181, expected survived value 0x0.......
+17852000 - INFO. For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG), attempting to write 0x10001281, expected survived value 0x10001281.......
+18261000 - INFO. For addr 0x1001C000 (STICKYDATAVAULTCTRL), attempting to write 0x10000001, expected survived value 0x1.........
+19379000 - INFO. For addr 0x1001C208 (DATAVAULTCTRL), attempting to write 0x10000821, expected survived value 0x0.........
+20333000 - INFO. For addr 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL), attempting to write 0x10001041, expected survived value 0x0.........
+20910000 - INFO. For addr 0x1001C480 (STICKY_LOCKABLE_SCRATCHREG_CTRL), attempting to write 0x10001201, expected survived value 0x1.......
+21345000 - -- Done writing data to registers --
+21399000 - 
+21400000 - -- Issue warm reset --
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     214382] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+28633000 - ** Checking warm reset survived values **
+28704000 - 
+28706000 - -- Populating write data and expected values into arrays starting w/0x10000001--
+29390000 - 
+29391000 - -- Done with populating data --
+29448000 - ................................................................................................................................................................................................................................................................................................................
+31384000 - 
+31385000 - -- All good so far; moving onto next phase-- 
+31462000 - 
+31464000 - -- Populating write data and expected values into arrays starting w/0x20000001--
+32146000 - 
+32147000 - -- Done with populating data --
+32198000 - 
+32198000 - ** Performing a WRITE to all registers (reporting once per prefix)**
+32295000 - 
+32441000 - 
+32443000 - INFO. For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0), attempting to write 0x200000A1, expected survived value 0x200000A1...........
+32890000 - INFO. For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1), attempting to write 0x20000161, expected survived value 0x20000161...........
+33331000 - INFO. For addr 0x1001C088 (STICKY_DATA_VAULT_ENTRY_2), attempting to write 0x20000221, expected survived value 0x20000221...........
+33769000 - INFO. For addr 0x1001C0B8 (STICKY_DATA_VAULT_ENTRY_3), attempting to write 0x200002E1, expected survived value 0x200002E1...........
+34204000 - INFO. For addr 0x1001C0E8 (STICKY_DATA_VAULT_ENTRY_4), attempting to write 0x200003A1, expected survived value 0x200003A1...........
+34640000 - INFO. For addr 0x1001C118 (STICKY_DATA_VAULT_ENTRY_5), attempting to write 0x20000461, expected survived value 0x20000461...........
+35080000 - INFO. For addr 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6), attempting to write 0x20000521, expected survived value 0x20000521...........
+35518000 - INFO. For addr 0x1001C178 (STICKY_DATA_VAULT_ENTRY_7), attempting to write 0x200005E1, expected survived value 0x200005E1...........
+35953000 - INFO. For addr 0x1001C1A8 (STICKY_DATA_VAULT_ENTRY_8), attempting to write 0x200006A1, expected survived value 0x200006A1...........
+36387000 - INFO. For addr 0x1001C1D8 (STICKY_DATA_VAULT_ENTRY_9), attempting to write 0x20000761, expected survived value 0x20000761...........
+36852000 - INFO. For addr 0x1001C230 (DATA_VAULT_ENTRY_0), attempting to write 0x200008C1, expected survived value 0x200008C1...........
+37254000 - INFO. For addr 0x1001C260 (DATA_VAULT_ENTRY_1), attempting to write 0x20000981, expected survived value 0x20000981...........
+37657000 - INFO. For addr 0x1001C290 (DATA_VAULT_ENTRY_2), attempting to write 0x20000A41, expected survived value 0x20000A41...........
+38058000 - INFO. For addr 0x1001C2C0 (DATA_VAULT_ENTRY_3), attempting to write 0x20000B01, expected survived value 0x20000B01...........
+38456000 - INFO. For addr 0x1001C2F0 (DATA_VAULT_ENTRY_4), attempting to write 0x20000BC1, expected survived value 0x20000BC1...........
+38854000 - INFO. For addr 0x1001C320 (DATA_VAULT_ENTRY_5), attempting to write 0x20000C81, expected survived value 0x20000C81...........
+39255000 - INFO. For addr 0x1001C350 (DATA_VAULT_ENTRY_6), attempting to write 0x20000D41, expected survived value 0x20000D41...........
+39654000 - INFO. For addr 0x1001C380 (DATA_VAULT_ENTRY_7), attempting to write 0x20000E01, expected survived value 0x20000E01...........
+40054000 - INFO. For addr 0x1001C3B0 (DATA_VAULT_ENTRY_8), attempting to write 0x20000EC1, expected survived value 0x20000EC1...........
+40450000 - INFO. For addr 0x1001C3E0 (DATA_VAULT_ENTRY_9), attempting to write 0x20000F81, expected survived value 0x20000F81...........
+40924000 - INFO. For addr 0x1001C438 (LOCKABLE_SCRATCHREG), attempting to write 0x200010E1, expected survived value 0x200010E1.........
+41340000 - INFO. For addr 0x1001C460 (NONSTICKY_GENERIC_SCRATCHREG), attempting to write 0x20001181, expected survived value 0x0.......
+41853000 - INFO. For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG), attempting to write 0x20001281, expected survived value 0x20001281.......
+42263000 - INFO. For addr 0x1001C000 (STICKYDATAVAULTCTRL), attempting to write 0x20000001, expected survived value 0x1.........
+43382000 - INFO. For addr 0x1001C208 (DATAVAULTCTRL), attempting to write 0x20000821, expected survived value 0x0.........
+44335000 - INFO. For addr 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL), attempting to write 0x20001041, expected survived value 0x0.........
+44912000 - INFO. For addr 0x1001C480 (STICKY_LOCKABLE_SCRATCHREG_CTRL), attempting to write 0x20001201, expected survived value 0x1.......
+45347000 - -- Done writing data to registers --
+45403000 - 
+45404000 - ** Performing a WRITE to all registers again (reporting once per prefix)**
+45509000 - 
+45513000 - 
+45514000 - -- Issue cold reset --
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     455507] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     455517] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+52747000 - 
+52748000 - ** Checking cold reset values **
+52794000 - 
+52806000 - ................................................................................................................................................................................................................................................................................................................
+54432000 - ** Done w/test; no errors found ** 
+* TESTCASE PASSED
+
+Finished : minstret = 28426, mcycle = 89091
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

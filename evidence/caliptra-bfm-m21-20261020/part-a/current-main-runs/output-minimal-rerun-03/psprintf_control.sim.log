@@ -1,0 +1,2 @@
+The agent at 'agent' uses ifname
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-minimal-20261020-03/reproducers/psprintf_control.sv:4: $finish called at 0 (1s)

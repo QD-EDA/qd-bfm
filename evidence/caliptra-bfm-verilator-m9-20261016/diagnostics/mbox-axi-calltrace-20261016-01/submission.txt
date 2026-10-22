@@ -1,0 +1,10 @@
+Slurm diagnostic job 1617 (`a2-m9-mbox-calltrace`) on DAN-DESKTOP.
+
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m9-mbox-calltrace-20261016-01
+Resources: 4 CPUs, 4 GiB RAM, 20-minute Slurm limit. The build previously peaked at 2,359,816 KiB; the diagnostic test cap is 90 seconds.
+Verilator: pinned shared toolchain `/home/dsell/toolchains/verilator-5.052/bin/verilator`.
+Caliptra RTL: pinned commit `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`.
+QD-BFM source commit: `857ee578b87c0c6d7ed9581914eb04c863bd3940`.
+Staged source archive SHA-256: `afd6b8eff7f8868316904e1944f0b12f49eaf73d06e33934104f51b295768eb1`.
+
+The only model-source changes are read-only trace prints: the first 20 mailbox-lock reads and entry/return markers around `axi_read_single`. The caller, handshake logic, arrays, timing, and test logic are unchanged.

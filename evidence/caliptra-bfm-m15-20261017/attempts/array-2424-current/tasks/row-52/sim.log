@@ -1,0 +1,21 @@
+REF MODEL: Found tb_inputs.hex. Generating the expected outputs...
+hmac_drbg_tb: Running hmac_drbg test = HMAC_DRBG_randomized_test
+   -= Testbench for HMAC DRBG started =-
+    ==============================
+
+*** Toggle reset.
+
+Read test vector with 1 rounds from hmac_drbg_test_vector.hex
+The HMAC DRBG multi rounds is triggered...
+*** entropy   : db18774a0c101bf2385528ee94debf6255dc242ac8aea233e5542141acdecfabbf1102f44dc7f66858781ca486eb0227
+*** nonce     : 70c35b5b20fcaa9c3d7387c9f5a4654e25cf79c1ffc25727b8b8149382eacde8aed435368755b7a8574e12cf0ac2145c
+*** lfsr_seed : 25dc49e88e542d583942e9230b600d8a794250f56e5ad2db56a18f1de4621eb07a7883039ff24e496a3c3a44237360c2
+Received valid flag
+*** TC 0 round #0 successful.
+
+HMAC DRBG Zeroize...
+*** All 02 test cases completed successfully
+* TESTCASE PASSED
+
+*** HMAC DRBG simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac_drbg/tb/hmac_drbg_tb.sv:705: $finish called at 3621 (1s)

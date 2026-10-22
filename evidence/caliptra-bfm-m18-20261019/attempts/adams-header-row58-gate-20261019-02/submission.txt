@@ -1,0 +1,11 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-header-row58-gate-20261019-02
+Row: 58 (`sib_rand_test`)
+Resources: 1 CPU, 4 GiB, 600-second per-row runner timeout
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 7f56cc02876e16c24713d15bfa4a5872c03d05e3575dcae54ea62a06ef7899ed
+Run script SHA-256: 75b776d80853e1f4fc3b32f5ee9f72fcbdc8ab04d0010dde584c70f23ac9251e
+Slurm job ID: 3052
+Slurm job ID: 3052
+Result: compile-only BLOCKED on stale sampler_pkg import; archive and sidecar verified

@@ -1,0 +1,2 @@
+rv_gcc_version is 15.2.0
+make: *** No rule to make target '/home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-01/overlay/tb/test_caliptra_top_tb.cpp', needed by 'verilator-build'.  Stop.

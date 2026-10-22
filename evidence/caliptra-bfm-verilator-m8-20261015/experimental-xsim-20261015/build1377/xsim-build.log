@@ -1,0 +1,65 @@
+rv_gcc_version is 15.2.0
+set -eo pipefail; /home/dsell/toolchains/verilator-pr7176-27d3c20/bin/verilator --x-sim --Wno-fatal /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11/overlay/tb/test_caliptra_top_tb.cpp /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/jtagdpi/jtagdpi.c /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server/tcp_server.c --cc -CFLAGS "-std=c++20 -I/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/jtagdpi -I/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/libs/tcp_server" \
+  +libext+.v+.sv +define+RV_OPENSOURCE \
+  --timescale 1ns/100ps \
+  --timing \
+  -I/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11/model-xsim \
+  -Wno-WIDTH -Wno-UNOPTFLAT -Wno-LITENDIAN -Wno-CMPCONST -Wno-MULTIDRIVEN -Wno-UNPACKED                 -Wno-LATCH \
+  -f /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11/overlay/tb/../config/caliptra_top_tb.vf --top-module caliptra_top_tb \
+  -f /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11/overlay/tb/../config/caliptra_top_tb.vlt \
+  -exe test_caliptra_top_tb.cpp --autoflush  \
+  +define+CALIPTRA_INTERNAL_TRNG +define+CALIPTRA_BFM_CHECKER 2>&1 | tee verilator_build.log
+%Warning-MISINDENT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:1111:35: Misleading indentation
+ 1111 |             unlock_security_state = 1'b0;  
+      |                                   ^
+                    /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:1106:9: ... Expected indentation matching this earlier statement's line:
+ 1106 |         if ($test$plusargs("CALIPTRA_DEBUG_UNLOCKED"))
+      |         ^~
+                    ... For warning description see https://verilator.org/warn/MISINDENT?v=5.045
+                    ... Use "/* verilator lint_off MISINDENT */" and lint_on around source to disable this message.
+%Warning-CASEWITHX: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/rtl/rej_bounded_ctrl.sv:91:30: Use of x/? constant in case statement, (perhaps intended casex/casez)
+   91 |       unique case (rej_buffer[sample])
+      |                              ^
+                    ... For warning description see https://verilator.org/warn/CASEWITHX?v=5.045
+                    ... Use "/* verilator lint_off CASEWITHX */" and lint_on around source to disable this message.
+%Warning-CASEWITHX: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/rtl/cbd_sampler_ctrl.sv:60:31: Use of x/? constant in case statement, (perhaps intended casex/casez)
+   60 |       unique case (sample_data[sample])
+      |                               ^
+%Warning-CASEWITHX: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_encode/rtl/skencode.sv:334:38: Use of x/? constant in case statement, (perhaps intended casex/casez)
+  334 |             unique case(mem_a_rd_data[i])
+      |                                      ^
+%Warning-CASEWITHX: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_encode/rtl/skencode.sv:360:38: Use of x/? constant in case statement, (perhaps intended casex/casez)
+  360 |             unique case(mem_b_rd_data[i])
+      |                                      ^
+%Warning-CASEINCOMPLETE: /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11/source/dv/caliptra_bfm/axi/axi4_caliptra_checker.sv:217:7: Case values incompletely covered (example pattern 0x0)
+  217 |       case (burst)
+      |       ^~~~
+                         ... For warning description see https://verilator.org/warn/CASEINCOMPLETE?v=5.045
+                         ... Use "/* verilator lint_off CASEINCOMPLETE */" and lint_on around source to disable this message.
+%Warning-SIDEEFFECT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2355:103: Expression side effect may be mishandled
+                                                                                                                                       : ... Suggest use a temporary variable in place of this expression
+ 2355 |             force caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.timer1_timeout_period = {32'h0000_0000, $urandom_range(32'h0000_0001,32'h0000_0FFF)};
+      |                                                                                                       ^
+                     ... For warning description see https://verilator.org/warn/SIDEEFFECT?v=5.045
+                     ... Use "/* verilator lint_off SIDEEFFECT */" and lint_on around source to disable this message.
+%Warning-SIDEEFFECT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2355:105: Expression side effect may be mishandled
+                                                                                                                                       : ... Suggest use a temporary variable in place of this expression
+ 2355 |             force caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.timer1_timeout_period = {32'h0000_0000, $urandom_range(32'h0000_0001,32'h0000_0FFF)};
+      |                                                                                                         ^~~~~~~~~~~~~~
+%Warning-SIDEEFFECT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2356:103: Expression side effect may be mishandled
+                                                                                                                                       : ... Suggest use a temporary variable in place of this expression
+ 2356 |             force caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.timer2_timeout_period = {32'h0000_0000, $urandom_range(32'h0000_0001,32'h0000_0FFF)};
+      |                                                                                                       ^
+%Warning-SIDEEFFECT: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2356:105: Expression side effect may be mishandled
+                                                                                                                                       : ... Suggest use a temporary variable in place of this expression
+ 2356 |             force caliptra_top_tb.caliptra_top_dut.soc_ifc_top1.timer2_timeout_period = {32'h0000_0000, $urandom_range(32'h0000_0001,32'h0000_0FFF)};
+      |                                                                                                         ^~~~~~~~~~~~~~
+%Error-UNSUPPORTED: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/caliptra_prim/rtl/caliptra_prim_fifo_sync.sv:135:37: Unsupported: 4-state numbers in this context
+  135 |       assign storage_rdata = storage[fifo_rptr];
+      |                                     ^
+                    ... For error description see https://verilator.org/warn/UNSUPPORTED?v=5.045
+%Error: Internal Error: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/caliptra_prim/rtl/caliptra_prim_fifo_sync.sv:135:37: ../V3Number.cpp:1090: edataWord with 4-state 385'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  135 |       assign storage_rdata = storage[fifo_rptr];
+      |                                     ^
+                        ... This fatal error may be caused by the earlier error(s); resolve those first.
+make: *** [/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile:270: verilator-build] Error 1

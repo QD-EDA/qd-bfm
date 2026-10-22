@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+  18068	      0	  32768	  50836	   c694	/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms32/fw_test_lms32

@@ -1,0 +1,11 @@
+{
+  "base_runner": "dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py",
+  "base_runner_sha256": "2b73eb666e901dfb35db46034c83b227b9161bb85e4eb40401f6f5f2d74a7379",
+  "m21_runner": "evidence/caliptra-bfm-m21-20261020/part-a/runners/run_m15_test_m21.py",
+  "m21_runner_sha256": "d5643e87e3bc98c1e099d381c2b5764dcd7f4acbe44d4bc608282861c9b9ea2b",
+  "iverilog_source_pin": "cc25756d187314742d347267c2a513b3e640a7fb",
+  "iverilog_sha256": "87bb417df23d260bcfde3fb372b4a80eaad69e4fd2eea1ffb8b0eff10f7af08e",
+  "overlay_hook": "after generated testbench staging; rewrites the primary open-MVC filelist entry for hdl_top.sv to compile the per-run top overlay",
+  "scope": "M21 per-run evidence runner; source-preserving raw-interface BFM overlays only",
+  "previous_a2_rerun_runner_sha256": "9a8fd935742b1181b1a58e9c19d6dda988e4a04479709d7feb6f6999ac3a2556"
+}

@@ -1,0 +1,8 @@
+FAIL
+
+**Evidence:**
+*   `OUTPUT_MISMATCH_COUNT 3072`
+*   The log contains multiple instances of errors, such as:
+    *   `Error: Output mismatch at index 256. Expected: 439fa, Got: xxxxx`
+    *   `Error: Output mismatch at index 257. Expected: 35361, Got: xxxxx`
+    *   `Error: Output mismatch at index 1783. Expected: e5b95, Got: xxxxx`

@@ -1,0 +1,23 @@
+................................................
+----------------------------------------------------------------------
+Ran 48 tests in 0.043s
+
+OK
+        0.16 real         0.10 user         0.04 sys
+            27590656  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                4517  page reclaims
+                  64  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  43  voluntary context switches
+                 224  involuntary context switches
+           656147033  instructions retired
+           268087087  cycles elapsed
+            16957968  peak memory footprint

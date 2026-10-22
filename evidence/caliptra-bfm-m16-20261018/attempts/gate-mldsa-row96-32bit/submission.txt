@@ -1,0 +1,10 @@
+job_id=2733
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-row96-32bit-20261018-01
+submit_command=sbatch --parsable run.sbatch
+resources=1 CPU, 3 GiB memory, 20 minute Slurm limit; 600 second per-row timeout
+source_archive_sha256=8f51905476537a298e7fec161de3b9199a153cd55541f22e56da983a9ac53816
+runner_sha256=4ad9cf6c1b29330a397dc000af943e98ba74dcf290b573aab97ba556dd13a69c
+test_file_sha256=cc39de3647daa4b1ad5d12daf30a71d7a49f834a207d9305089cbf30a3e98b97
+run_script_sha256=5415299c4ac93c760b32bb8bbccf3319ed2c2474335a9857120e7f7bdb0fd15a
+staging=remote SHA256 verified and archive extracted; pinned toolchain reads from protected shared location
+row=96 ML_DSA_randomized_early_run_test; fresh one-row gate for 32-bit AHB compile define

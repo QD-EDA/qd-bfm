@@ -1,0 +1,6 @@
+outcome=FAIL
+reason=terminal_result_failed_or_yaml_name_mismatch
+runner_exit=1
+progress_heartbeat_count=29
+last_heartbeat=CALIPTRA_PROGRESS_HEARTBEAT wall_s=9000 mcycle=61392
+result_testname=smoke_test_pcr_zeroize

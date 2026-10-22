@@ -16,3 +16,5 @@ The selected files include each simulator and firmware log, compile log, run pro
 After the cancellations, `squeue` showed only 799_[36-42] pending with reason `JobHeldUser`. Do not release or resubmit those held tasks. Re-run these four cancelled rows with tasks 36–42 after the supervisor announces that Slurm has reopened.
 
 After the archive hash was verified and the outcomes were recorded, the four cancelled run directories were removed from `slurm-runs`. Their measured allocated size was 1,511,620,608 bytes (about 1.41 GiB); `/home/dsell` available space increased by the same amount. Shared toolchains and held-task state were untouched.
+
+The maintenance-cancelled outcomes remain historical. Their fresh rerun results are tracked separately in [`../../cancelled-reruns-c339-20261013-01/README.md`](../../cancelled-reruns-c339-20261013-01/README.md) and its `results.tsv`.

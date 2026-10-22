@@ -1,0 +1,5 @@
+Slurm job ID: 2702
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row72-sigdecode-z-overlay-20261018-01
+Submission: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-row72-sigdecode-z-overlay-20261018-01/run.sbatch
+Resources: 1 CPU, 3 GiB RAM, 20-minute Slurm wall limit, 600-second per-row timeout.
+Result: PASS; compile and simulation exit 0; runner elapsed 0.153 s.

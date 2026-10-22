@@ -1,0 +1,7 @@
+host=DAN-DESKTOP
+job_id=2269
+run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m13-issue539-current-main-20261017-01
+command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m13-issue539-current-main-20261017-01 && sbatch --parsable probe.sbatch
+resources=1 CPU, 3 GiB, 10-minute Slurm allocation, 600-second compile and simulation caps
+source=existing packed-struct assignment-width reproducer; Icarus 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+issue=dsellerbrock/iverilog-uvm#539 (closed; no new issue/comment submitted)

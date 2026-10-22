@@ -1,0 +1,5 @@
+row_id=12
+testname=uart_test
+status=BLOCKED
+cause=upstream UART compile.yml has no Icarus filelist/setup
+elapsed_seconds=0.021

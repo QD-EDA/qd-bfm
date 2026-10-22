@@ -1,0 +1,5 @@
+Slurm job 1780 reruns the logging-only Verilator diagnostic for `smoke_test_mbox` on DAN-DESKTOP using a fresh run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-02`.
+
+Resources: 4 CPUs, 4 GiB, 2-hour job limit; the diagnostic simulation has its own 180-second process-group timeout. The build uses pinned Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, `--assert`, and `CLP_ASSERT_ON`. The filelist replaces only the pinned `axi_if.sv` and `mbox_csr.sv` entries with logging copies; these copies do not drive or alter protocol signals.
+
+The first submission snapshot showed 10 of 20 CPUs idle, with array 1772 using six tasks and A1/A3 using four CPUs combined. The retry script corrects the first attempt's filelist-path assumption. It records the lock field and CPU readback at the clock edge and after NBA updates, and captures the BFM's AXI read response.

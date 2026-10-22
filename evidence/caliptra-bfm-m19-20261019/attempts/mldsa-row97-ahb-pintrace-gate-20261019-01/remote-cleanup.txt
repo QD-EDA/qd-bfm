@@ -1,0 +1,2 @@
+removed_bytes=117421324
+removed_path=/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-pintrace-gate-20261019-01

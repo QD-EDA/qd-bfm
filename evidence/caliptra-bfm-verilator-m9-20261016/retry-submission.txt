@@ -1,0 +1,15 @@
+Slurm job: 1493 (completed PASS; dependency was afterok:1426_1)
+Submitted: 2026-10-15 21:14 MDT
+Host: DAN-DESKTOP
+Run: /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-seed-fix-20261016-01
+Test row: 53 / 758d1f7d83680ac0 / smoke_test_mldsa_keygen_standalone_sign_vfy_rand
+Reason: Original run stopped before firmware build because the pinned YAML has a trailing comment on its seed line; parser fix ccebefb handles it.
+QD-BFM runner source: commit ccebefb, runner SHA-256 3fe33d1483519067975d0f5c7ae31371c0c562227f7d75c895b724362fb5ce77
+Worker SHA-256: cde90b92ddc9035474db1b1cf3453a44706ce75442110d1ea7248b205fd53f49
+Slurm script SHA-256: 3fb3d520ba627b41e78ba0159daf73296cbc4e1ce6159e389fd178201dd0b721
+Model: /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/model/obj_dir/Vcaliptra_top_tb
+Model SHA-256: ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de
+Caliptra RTL SHA: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Resources: 1 CPU, 3 GiB, 7-hour Slurm cap, 21,600-second per-test timeout plus 1,800-second wrapper margin.
+At 22:34 MDT, its dependency was changed from afterok:1430 to afterok:1426_1 so the retry can use the first freed c339 slot without waiting for the entire M9 array. Resources remain within the six-task A2 cap.
+Completed 2026-10-16 00:51 MDT: PASS at mcycle 370,210 in 212.477 seconds. The result is recorded under `runs/758d1f7d83680ac0/`; the original HARNESS_ERROR is preserved in `runs/758d1f7d83680ac0/initial-array-1430/`. The completed remote staging tree was deleted after checksum verification.

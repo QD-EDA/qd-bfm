@@ -1,0 +1,2 @@
+DYNAMIC_ARRAY_CLASS_CONTROL_OK
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros/reproducers/dynamic_array_slice_class_control.sv:38: $finish called at 0 (1s)

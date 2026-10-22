@@ -1,0 +1,1 @@
+/tmp/a2-m18-iverilog-cae035642e056644274a01e98d4422ce286685b4-local-02/tool/bin/vvp -n /Users/danielellerbrock/projects/bfm-work/qd-bfm/evidence/caliptra-bfm-m18-20261019/attempts/compress-row64-diagnostic-local-20261019-01/raw/test.vvp +UVM_TESTNAME=compress_normal_test +ntb_random_seed=1

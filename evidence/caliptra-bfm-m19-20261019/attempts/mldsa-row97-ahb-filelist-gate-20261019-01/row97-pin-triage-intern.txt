@@ -1,0 +1,47 @@
+**Missing Information:**
+The text does not provide the actual `HRDATA` and `HREADY` values at the active transfer edge for the AHB pin reads at addresses 0xD8 through 0x114. The text also does not provide the specific data required to confirm whether the monitor readback matches.
+
+**MLDSA_VERIFY_RES[0..15] REG_READ Values:**
+
+**Verification Batch 1:**
+*   `MLDSA_VERIFY_RES[0]: 0` (at 60755.000ns)
+*   `MLDSA_VERIFY_RES[1]: 0` (at 60785.000ns)
+*   `MLDSA_VERIFY_RES[2]: 0` (at 60815.000ns)
+*   `MLDSA_VERIFY_RES[3]: 0` (at 60845.000ns)
+*   `MLDSA_VERIFY_RES[4]: 0` (at 60875.000ns)
+*   `MLDSA_VERIFY_RES[5]: 0` (at 60905.000ns)
+*   `MLDSA_VERIFY_RES[6]: 0` (at 60935.000ns)
+*   `MLDSA_VERIFY_RES[7]: 0` (at 60965.000ns)
+*   `MLDSA_VERIFY_RES[8]: 0` (at 60995.000ns)
+*   `MLDSA_VERIFY_RES[9]: 0` (at 61025.000ns)
+*   `MLDSA_VERIFY_RES[10]: 0` (at 61055.000ns)
+*   `MLDSA_VERIFY_RES[11]: 0` (at 61085.000ns)
+*   `MLDSA_VERIFY_RES[12]: 0` (at 61115.000ns)
+*   `MLDSA_VERIFY_RES[13]: 0` (at 61145.000ns)
+*   `MLDSA_VERIFY_RES[14]: 0` (at 61175.000ns)
+*   `MLDSA_VERIFY_RES[15]: 0` (at 61205.000ns)
+
+**Verification Batch 2:**
+*   `MLDSA_VERIFY_RES[0]: 0` (at 136325.000ns)
+*   `MLDSA_VERIFY_RES[1]: 0` (at 136355.000ns)
+*   `MLDSA_VERIFY_RES[2]: 0` (at 136385.000ns)
+*   `MLDSA_VERIFY_RES[3]: 0` (at 136415.000ns)
+*   `MLDSA_VERIFY_RES[4]: 0` (at 136445.000ns)
+*   `MLDSA_VERIFY_RES[5]: 0` (at 136475.000ns)
+*   `MLDSA_VERIFY_RES[6]: 0` (at 136505.000ns)
+*   `MLDSA_VERIFY_RES[7]: 0` (at 136535.000ns)
+*   `MLDSA_VERIFY_RES[8]: 0` (at 136565.000ns)
+*   `MLDSA_VERIFY_RES[9]: 0` (at 136595.000ns)
+*   `MLDSA_VERIFY_RES[10]: 0` (at 136625.000ns)
+*   `MLDSA_VERIFY_RES[11]: 0` (at 136655.000ns)
+*   `MLDSA_VERIFY_RES[12]: 0` (at 136685.000ns)
+*   `MLDSA_VERIFY_RES[13]: 0` (at 136715.000ns)
+*   `MLDSA_VERIFY_RES[14]: 0` (at 136745.000ns)
+*   `MLDSA_VERIFY_RES[15]: 0` (at 136775.000ns)
+
+**Terminal UVM Error Count:**
+*   `UVM_ERROR : 1`
+*   `UVM_FATAL : 0`
+
+**Monitor Readback Status:**
+The text reports an error: `[SCBD_AHB] Although the verification failure is NOT expected, the second verif result does not match with the successful verif output` (at 136775.000ns).

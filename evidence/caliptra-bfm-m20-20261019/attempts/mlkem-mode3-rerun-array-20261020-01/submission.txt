@@ -1,0 +1,6 @@
+job_id=3273
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-mlkem-mode3-rerun-array-20261020-01
+scheduler_submit_time=2026-10-19T18:54:53
+scheduler_state=PENDING
+scheduler_reason=Priority
+submitted_script_sha256=4c4d8780f4d5263d75e3aee042109ec1e45e05904e07feeee790246bc26af6c2

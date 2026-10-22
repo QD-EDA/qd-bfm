@@ -1,0 +1,27 @@
+SNAPSHOT 2026-10-15T20:29:08-06:00
+QUEUE
+             JOBID PARTITION                           NAME    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+   1430_[22-161%2]   verilog                  a2-m9-vlt-top  PENDING       0:00   7:00:00      1 (JobArrayTaskLimit)
+           1430_21   verilog                  a2-m9-vlt-top  RUNNING       0:24   7:00:00      1 DAN-DESKTOP
+           1430_20   verilog                  a2-m9-vlt-top  RUNNING       2:53   7:00:00      1 DAN-DESKTOP
+              1454   verilog                    a5-pd-gates  RUNNING       3:02   4:00:00      1 DAN-DESKTOP
+            1426_1   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      29:15   6:10:00      1 DAN-DESKTOP
+            1426_2   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      29:15   6:10:00      1 DAN-DESKTOP
+            1426_3   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      29:15   6:10:00      1 DAN-DESKTOP
+            1426_4   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      29:15   6:10:00      1 DAN-DESKTOP
+M6_HEARTBEATS
+37-a79fb02e90b4ffbd-1 mtime=2026-10-15 20:25:29.085561540 -0600 size=4
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1500 mcycle=11129
+39-109971edd9458a51-2 mtime=2026-10-15 20:25:29.037559124 -0600 size=4
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1500 mcycle=11045
+43-d39c57745790b3e2-3 mtime=2026-10-15 20:25:29.033558921 -0600 size=4
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1500 mcycle=10992
+44-bcb5b29a003aa2a6-4 mtime=2026-10-15 20:25:29.009557714 -0600 size=4
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=1500 mcycle=11080
+M9_COMPLETION_MARKERS
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/31ab7b824948ec70
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/33a3aad04d3bc842
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/4a443149c8e69d57
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/4a74c889d8a8552f
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/78ad1bab537c2ff8
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/ca84d5f757b500b2

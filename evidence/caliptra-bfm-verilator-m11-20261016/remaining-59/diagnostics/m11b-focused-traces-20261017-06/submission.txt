@@ -1,0 +1,10 @@
+job_id=2090
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-06
+script=run-followups-sequential.sbatch
+script_sha256=1d6e1f952e146b139d0dbde1ae075a7c6378ed1ae99dc4d35517c5a0a8beb8a6
+state_at_first_check=RUNNING
+allocated=1 CPU, 3 GiB, 35 minutes
+tests=selection indices 1, 2, 3, sequentially
+per_test_timeout=600 seconds
+model_sha256=fd2ca5f1667e91714481aed96708069f8d1ea2898b417dc05f284be6b75c8d26
+source_commit=1f132e764b6385aeeecd6149703db5ed3eb5c148

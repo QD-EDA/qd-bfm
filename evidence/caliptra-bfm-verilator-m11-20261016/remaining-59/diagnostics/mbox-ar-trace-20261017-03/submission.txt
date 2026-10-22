@@ -1,0 +1,16 @@
+Purpose: single-row assertion-boundary trace for smoke_test_mbox (78bfcc1e9aac255e), c339 PASS / Verilator 5.052 overlay FAIL.
+Remote host: DAN-DESKTOP, WSL2 Linux 6.18.33.1, Slurm 25.11.2.
+Pinned inputs: QD-BFM ffc12ab427e961f40354f32a8e7a147e5d4e5764; Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Verilator 5.052 with --assert and CLP_ASSERT_ON.
+One-row simulation cap: 600 seconds. Build resources: 4 CPUs, 3 GiB, 15 minutes (build v2 measured 2,381,472 KiB peak RSS and 1m32s elapsed).
+
+Slurm job 2053 was submitted at 2026-10-16 23:39 MDT with 4 CPUs, 4 GiB, and a 2-hour limit. It was pending (Priority), so its pending allocation was updated with scontrol to 3 GiB and 15 minutes. At 2026-10-16 23:49 MDT, it remained pending and Slurm projected a 2026-10-17 03:35:46 MDT start. The staged source and build scripts were not changed after submission.
+
+The M11 array task 1964_54 (smoke_test_mbox_cg) remained running separately; this diagnostic does not alter or duplicate that task.
+
+Build job 2053 completed 2026-10-17 00:01:39 MDT with exit 0. Verilator reported `5.052 2026-09-05 rev v5.052`; elapsed build time was 3:46.39, peak RSS 2,381,868 KiB, and diagnostic model SHA-256 is `890b0a6daba16b14c69e8de27948d72c81d47ea9f2723fb577089fe550675bf6`. Assertion flags were `--assert` and `+define+CLP_ASSERT_ON`. The instrumented `axi_if.sv` and `axi_sub_rd.sv` hashes are `bdd55119ee569d9240f35bf0097f0783958652560e03d33364bbb9fdd4e46635` and `8d03a904077df5fc06d35942c613faadf6385cd2a78d224c227327e9d1115532`, respectively.
+
+One-row simulation job 2055 was submitted from this run directory at 2026-10-17 00:06:03 MDT. Its initial 40-minute Slurm limit was shortened to 15 minutes while pending; it started at 00:06:22 with 1 CPU and 3 GiB. The per-test simulation cap is 600 seconds. The separate official M11 task `1964_54` is unchanged.
+
+Job 2055 completed at 00:07:05 MDT: firmware compilation exit 0; simulation exit 1 / outcome FAIL at simulated time 5,718,000, 40.102s simulation and 42.583s total. It reproduced `AXI_SUB_AR_HSHAKE_ERR` at the assertion-owning instance. The trace at cycle 57149 / time 5,717,000 sampled `addr=0x00020000, ARVALID=1, ARREADY=0, rst_n=1`; the post-edge live values were `ARVALID=0, ARREADY=0`, and the fatal was emitted at 5,718,000. Thus the assertion antecedent is confirmed from the exact subordinate interface; the precise cause of the valid drop remains unresolved pending an assertion-action `$sampled` trace. The intern summary overlooked this decisive later line; the claim above was verified against raw `sim.log` lines 357-361.
+
+Raw output was copied to `raw/job-2055/`; every path in the remote `FILE-SHA256SUMS` verified locally. Since jobs 2053 and 2055 were no longer queued/running, the finished remote run tree `/home/dsell/slurm-runs/caliptra-bfm/a2/m11-mbox-ar-trace-20261017-03` was removed after archival. `1964_54` remains untouched and running.

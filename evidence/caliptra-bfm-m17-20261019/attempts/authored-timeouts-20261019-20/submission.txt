@@ -1,0 +1,5 @@
+job_id=2906
+rows: 13,51; array throttle 2
+resources: 1 CPU, 4 GiB per task; 600-second per-row timeout
+source snapshot sha256: 635e8219ba26c4e0e37b3cd76ef151ed8cc7b4f144f46d1189d141af0b76d867
+source extracted once before array submission into read-only shared source tree

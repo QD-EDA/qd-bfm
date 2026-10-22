@@ -1,0 +1,10 @@
+{
+  "source": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/soc_ifc/tb/soc_ifc_tb_pkg.sv",
+  "source_sha256": "72f75561e1b88976ee2fe6f16de9eeac8f1f90bcace7baf7513a67ebe403feed",
+  "overlay": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv",
+  "overlay_sha256": "674122342af9695a429971b23df4842bbc0ab187dbf49ae6314e1b36b15103c2",
+  "filelist": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb.overlay.vf",
+  "filelist_sha256": "25a6f24869bd759c60febbb17ab3f4da6b154556ec0d656090a5409470e907b5",
+  "reason": "add the SystemVerilog assignment-pattern marker to eight string-keyed testbench maps",
+  "scope": "testbench only; no RTL, firmware, or pass criteria changed"
+}

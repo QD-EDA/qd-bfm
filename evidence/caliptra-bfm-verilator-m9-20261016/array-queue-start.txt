@@ -1,0 +1,46 @@
+             JOBID PARTITION                           NAME    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+    1430_[3-161%2]   verilog                  a2-m9-vlt-top  PENDING       0:00   7:00:00      1 (JobArrayTaskLimit)
+            1430_2   verilog                  a2-m9-vlt-top  RUNNING       0:04   7:00:00      1 DAN-DESKTOP
+            1430_0   verilog                  a2-m9-vlt-top  RUNNING       0:07   7:00:00      1 DAN-DESKTOP
+            1426_1   verilog     bfm-m5b-cancelled-rerun-06  RUNNING       1:21   6:10:00      1 DAN-DESKTOP
+            1426_2   verilog     bfm-m5b-cancelled-rerun-06  RUNNING       1:21   6:10:00      1 DAN-DESKTOP
+            1426_3   verilog     bfm-m5b-cancelled-rerun-06  RUNNING       1:21   6:10:00      1 DAN-DESKTOP
+            1426_4   verilog     bfm-m5b-cancelled-rerun-06  RUNNING       1:21   6:10:00      1 DAN-DESKTOP
+              1423   verilog                a5-pd-corpus-cg  RUNNING    1:17:39   6:00:00      1 DAN-DESKTOP
+              1050   verilog                 a1-win98-step2  RUNNING 1-05:04:41 7-00:00:00      1 DAN-DESKTOP
+JobId=1431 ArrayJobId=1430 ArrayTaskId=0 ArrayTaskThrottle=2 JobName=a2-m9-vlt-top
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:07 TimeLimit=07:00:00 TimeMin=N/A
+   SubmitTime=2026-10-15T20:01:07 EligibleTime=2026-10-15T20:01:07
+   AccrueTime=Unknown
+   StartTime=2026-10-15T20:01:07 EndTime=2026-10-16T03:01:07 Deadline=N/A
+JobId=1432 ArrayJobId=1430 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=a2-m9-vlt-top
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:01 TimeLimit=07:00:00 TimeMin=N/A
+   SubmitTime=2026-10-15T20:01:07 EligibleTime=2026-10-15T20:01:07
+   AccrueTime=Unknown
+   StartTime=2026-10-15T20:01:07 EndTime=2026-10-15T20:01:08 Deadline=N/A
+JobId=1427 ArrayJobId=1426 ArrayTaskId=1 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:01:21 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53
+   StartTime=2026-10-15T19:59:53 EndTime=2026-10-16T02:09:53 Deadline=N/A
+JobId=1428 ArrayJobId=1426 ArrayTaskId=2 ArrayTaskThrottle=6 JobName=bfm-m5b-cancelled-rerun-06
+   UserId=dsell(1000) GroupId=dsell(1000) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:01:21 TimeLimit=06:10:00 TimeMin=N/A
+   SubmitTime=2026-10-15T19:59:53 EligibleTime=2026-10-15T19:59:53
+   AccrueTime=2026-10-15T19:59:53
+   StartTime=2026-10-15T19:59:53 EndTime=2026-10-16T02:09:53 Deadline=N/A

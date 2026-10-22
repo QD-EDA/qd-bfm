@@ -1,0 +1,14 @@
+At 01:23 MDT, tasks 1430_118–120 and _122 added four terminal results. All four bundles passed their internal FILE-SHA256SUMS checks; task-complete markers, resource records, and Slurm logs matched the remote hashes before cleanup.
+
+| Task | Test | Verilator result | Final mcycle | Wall seconds | Prior Icarus |
+|---:|---|---|---:|---:|---|
+| 118 | `smoke_test_kv_securitystate` | PASS | 56,459 | 264.743 | TIMEOUT |
+| 119 | `randomized_mldsa_invalid_verify` | PASS | 153,488 | 88.998 | UNVERIFIED |
+| 120 | `fw_test_lms_n32_w2_h5` | FAIL | NA | 0.836 | UNVERIFIED |
+| 122 | `pv_hash_reset` | FIRMWARE_BUILD_FAIL | NA | 0.816 | UNVERIFIED |
+
+The LMS case repeats the DCCM `$readmem` address-bounds failure. `pv_hash_reset` fails firmware compilation because the pinned C source requests `CLP_SHA512_REG_SHA512_GEN_PCR_HASH_NONCE`, while the generated header exposes the `_0`-suffixed symbol; simulation does not start. None of the four has a completed Icarus PASS/FAIL result to compare.
+
+The refreshed table has 116 terminal supported-firmware rows: 76 PASS, 32 FAIL, and 10 `FIRMWARE_BUILD_FAIL`; 46 supported rows remain pending. The terminal-row pass rate is 76/116 (65.5%); 76/162 supported rows (46.9%) have passed. The 109 non-firmware rows remain `NOT_RUN_NON_FIRMWARE`.
+
+After verification, the four remote result trees, resource records, and Slurm logs were removed; 2,252,715 apparent bytes (2.15 MiB) were freed. The shared pinned model remains for array 1430.

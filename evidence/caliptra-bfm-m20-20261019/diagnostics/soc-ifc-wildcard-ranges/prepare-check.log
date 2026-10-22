@@ -1,0 +1,21 @@
+Caliptra pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+overlay filelist SHA-256: 9099aaa37ea9b49df9e02336f2dfc1175d3c0268966fe435f7d808e84e209e8b
+source and wrapper hashes verified; all targeted wildcard bins replaced
+        0.14 real         0.09 user         0.03 sys
+            31817728  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                4342  page reclaims
+                  54  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   9  voluntary context switches
+                 146  involuntary context switches
+           598591099  instructions retired
+           255978944  cycles elapsed
+            21250528  peak memory footprint

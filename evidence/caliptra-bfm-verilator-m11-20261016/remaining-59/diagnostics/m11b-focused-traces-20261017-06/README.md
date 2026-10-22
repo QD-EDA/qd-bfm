@@ -1,0 +1,15 @@
+# M11b focused follow-up traces
+
+This fresh run uses the model built by job 2086 after the ECC gate produced a terminal assertion result and focused trace. The model is Verilator 5.052 with `--assert`, `CLP_ASSERT_ON`, the official M10b AXI overlay, and M11b trace instrumentation; SHA-256 `fd2ca5f1667e91714481aed96708069f8d1ea2898b417dc05f284be6b75c8d26`. QD source commit: `1f132e764b6385aeeecd6149703db5ed3eb5c148`.
+
+Indices 1–3 ran sequentially in Slurm job 2090 (1 CPU, 3 GiB, 35-minute allocation); each wrapper enforced its own 600-second simulation cap. All three wrappers exited 0 after recording terminal simulation results. The per-row `FILE-SHA256SUMS` manifests validate, and the LMS runner retained `dccm.hex`.
+
+## Results
+
+- **DMA/AES error sync — FAIL.** `smoke_test_dma_aes_gcm_wr_enc_axi_err` (`2ed04fcd9fe06e81`) failed `AXI_DMA_AES_FSM_ERR_SYNC` at 9,163,000 ps after 64.556 seconds of simulation (67.203 seconds overall). At the failing edge, DMA changed from `DMA_WAIT_DATA` to `DMA_ERROR` while AES was `AES_IDLE`; `axi_error=1`, `aes_error=0`, and the other recorded error flags were zero. The trace shows AES completing `AES_DONE` → `AES_IDLE` at 9,162,000 ps while DMA remained in `DMA_WAIT_DATA`. This records the mismatch; whether the property should require `AES_ERROR` for an AXI-only error remains a maintainer question. See [the raw result](raw/job-2090/results/2ed04fcd9fe06e81/sim.log).
+- **MLKEM key-vault check — FAIL.** `smoke_test_mlkem_locked_api` (`ab4697d02ef4acc9`) failed at 12,012,000 ps / cycle 120116: slot 2, dword 0, byte 0 was `0x29`, expected `0x00`. The last tracked slot-2 write was at cycle 53597 with dword `0x00000000`; firmware had logged an expected-success message before the later byte check. This sharpens the monitor/data-mapping question but does not identify which write or mapping produced the mismatch. See [the raw result](raw/job-2090/results/ab4697d02ef4acc9/sim.log).
+- **LMS DCCM bounds — FAIL.** `fw_test_lms32` (`8c392993b1af6e0c`) stopped at time 0 with `$readmem file address beyond bounds of array`. The retained `dccm.hex` is 5,177 bytes / 107 lines and begins with address directive `@FFFFFFFFB0003FF0`. The preloader reports a 256-KiB DCCM (`0x50000000`–`0x5003ffff`), a 32,768-entry 64-bit array (last legal index 32767), and `readmemh_end_index=262143`; Verilator reports the failure on `dccm.hex:1`. The evidence points to an address/index-unit mismatch, but does not identify which generator or loader should remap the file address. See [the retained image and raw result](raw/job-2090/results/8c392993b1af6e0c/).
+
+Job 2090 used the model hash and pinned source listed above. All three raw result directories pass their checksum manifests. The ECC gate remains documented separately in [job 2086](../m11b-focused-traces-20261017-05/raw/gate-2086/README.md).
+
+After copying and verifying the results, removed this run's remote staged source, overlay, and model build directories. This freed 23,445,504 bytes; the remote logs, resources, result JSON, and simulation outputs remain. Shared toolchains were untouched.

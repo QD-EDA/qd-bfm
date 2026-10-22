@@ -1,0 +1,9 @@
+2026-10-16 07:20 MDT — M9 closeout cleanup
+
+Verified diagnostic job 1614 was no longer in squeue and had no running simulation process. Copied the trace, diagnostic interface source and patch, build/resource records, tool versions, wrapper exit, and run scripts into diagnostics/mbox-axi-trace-20261016-01/remote/. Every transferred file in REMOTE-SHA256SUMS passed local SHA-256 verification.
+
+Removed only these completed A2 run directories:
+- /home/dsell/slurm-runs/caliptra-bfm/a2/m9-mbox-axi-trace-20261016-01: 717,420,599 bytes
+- /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01: 2,003,566 bytes
+
+Freed 719,424,165 bytes (0.67 GiB). No shared inputs under /home/dsell/toolchains were changed. With cleanup-20261016-final4.txt, the two final M9 cleanups freed 1,427,310,392 bytes (1.33 GiB).

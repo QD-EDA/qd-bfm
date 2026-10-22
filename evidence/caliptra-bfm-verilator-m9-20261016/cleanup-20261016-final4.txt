@@ -1,0 +1,14 @@
+707542264	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/model
+84857	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/5ba3459d20156034
+85172	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/d39c57745790b3e2
+83563	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/3439695c6637d6f2
+84049	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/79b6f2f02c78683d
+1479	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/resources/5ba3459d20156034-1430-128.resource
+1487	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/resources/d39c57745790b3e2-1430-139.resource
+1440	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/resources/3439695c6637d6f2-1430-149.resource
+1454	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/resources/79b6f2f02c78683d-1430-152.resource
+124	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/logs/a2-m9-vlt-top-1430_128.out
+119	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/logs/a2-m9-vlt-top-1430_139.out
+103	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/logs/a2-m9-vlt-top-1430_149.out
+116	/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/logs/a2-m9-vlt-top-1430_152.out
+FREED_BYTES=707886227

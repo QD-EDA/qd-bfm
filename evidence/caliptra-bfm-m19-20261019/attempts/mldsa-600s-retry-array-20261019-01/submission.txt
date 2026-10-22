@@ -1,0 +1,13 @@
+Host: DAN-DESKTOP
+Rows: 77,78,105
+Throttle: 2 concurrent tasks
+Resources: 1 CPU, 2 GiB per task; 3,600-second runner cap; 75-minute Slurm limit
+Peak RSS basis: prior 600-second runs reached 766,528 KiB maximum across these rows; 2 GiB exceeds 1.25x the observed peak
+Icarus source pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+vvp SHA-256: 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309
+Adams Bridge pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+QD runner snapshot: commit a5b67f7fd3ef7e391f9de0ad89598576a1813e1e
+Source snapshot SHA-256: ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+Timeout: 3,600 seconds per test
+Array job ID: 3100

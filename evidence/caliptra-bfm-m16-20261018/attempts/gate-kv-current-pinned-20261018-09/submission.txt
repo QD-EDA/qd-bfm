@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18 22:46:02 UTC
+Command: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-pinned-20261018-09/run.sbatch
+Job ID: 2820
+Target: generated KeyVault row 6, kv_rand_lock_test, normal runtime overlay path.
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap, 600-second per-test timeout.
+Status at submission: RUNNING after submission; cluster queue had one other task running.
+Terminal result: runner_exit_code=1; 1 UVM_ERROR (`OBJ/COPY`), 1 UVM_FATAL (`SCBD_AHB`), `$finish` at 3025 ns.
+Wall time: 10.38 s; peak RSS: 634764 KiB. Raw run archive verified locally; remote run directory cleaned afterward.

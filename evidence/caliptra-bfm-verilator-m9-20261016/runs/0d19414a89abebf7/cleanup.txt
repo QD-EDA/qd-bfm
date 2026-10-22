@@ -1,0 +1,7 @@
+array_job=1430
+array_task=7
+test_id=0d19414a89abebf7
+scheduler_state=COMPLETED
+removed_bytes=83792
+remote_output_tree_removed_after_checksum_verification=true
+resource_bytes_removed=1436

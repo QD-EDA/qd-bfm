@@ -1,0 +1,6 @@
+*   **Classification:** The event is classified by the text as: `[ 735] Not enough valid samples in the queue`.
+*   **PRE Checker Edge Values:** At the error's PRE checker edge (`t=735`), the values are: `M19_QTRACE PRE t=735 valid=1 zeroize=0 count=256 queue=0`.
+*   **Zeroize Rise:** Zeroize rises at `t=735`, as shown by the transition: `M19_QTRACE POST t=735 valid=0 zeroize=1 count=0 queue=0`.
+*   **Distinction:**
+    *   The condition related to a lack of samples while the queue is empty is indicated by: `[ 735] Not enough valid samples in the queue`.
+    *   The state where zeroize is already high while the queue is empty is shown by: `M19_QTRACE PRE t=745 valid=0 zeroize=1 count=0 queue=0`.

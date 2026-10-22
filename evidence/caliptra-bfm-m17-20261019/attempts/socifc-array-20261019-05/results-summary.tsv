@@ -1,0 +1,21 @@
+22	debug_unlock_manuf_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	1.965
+23	ss_soc_dbg_unlock_level_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	1.312
+24	fuse_cptra_cap_reg_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	2.214
+25	ss_strap_reg_wrmrst_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	3.865
+26	fuse_reg_lifecycle_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	19.504
+27	rvtime_reg_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	1.867
+28	soc_reg_intrblk_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	4.113
+29	soc_reg_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	10.535
+30	fuse_reg_perm_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	28.774
+31	sha_acc_intrblk_test	FAIL	TB ERROR: SHA_ACC_BRF_ERROR_INTERNAL_INTR_R mutable over AXI; aggregate 0b1010	2.217
+32	fuse_reg_axi_user_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	17.844
+33	ss_strap_reg_pwron_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	2.112
+34	soc_reg_invalid_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	12.233
+35	soc_reg_pwron_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	9.429
+36	debug_unlock_prod_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	2.014
+37	ss_strap_reg_prod_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	5.772
+38	soc_ifc_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	1.817
+40	soc_reg_wrmrst_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	20.499
+41	single_socreg_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	1.657
+42	ss_strap_reg_lifecycle_test	PASS	testbench pass marker present; no failure marker or UVM error/fatal	5.828
+COUNTS	{"FAIL": 1, "PASS": 19}

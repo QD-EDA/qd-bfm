@@ -1,0 +1,1 @@
+test_id=78ad1bab537c2ff8 testname=smoke_test_ecc_errortrigger2 wrapper_exit=0 completed_at=2026-10-15T20:17:08-06:00

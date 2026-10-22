@@ -1,0 +1,31 @@
+test	c339_outcome	c339_mcycle	c339_wall_s	verilator2_outcome	verilator2_mcycle	verilator2_wall_s	speedup_x	evidence
+c_intr_handler	TIMEOUT (progress unknown)	NA	10813	PASS	176911	105.412	PENDING	array1326 valid PASS
+cptra_ss_test_rom	TIMEOUT (progress unknown)	NA	6873	TIMEOUT	NA	6875.337	PENDING	array1372 task1; checksummed evidence in verilator-timeout-tasks1372/task1_cptra_ss_test_rom/
+iccm_lock	TIMEOUT (progress unknown)	NA	15639	PASS	76153	91.952	PENDING	array1326 valid PASS
+jtag_tap_mbox	TIMEOUT (progress unknown)	NA	15212	FAIL (max cycle count)	NA	11181.286	NA	array1372 task3 failed at testbench cycle 20000000; mcycle unavailable; checksummed evidence in verilator-timeout-tasks1372/task3_jtag_tap_mbox/
+kv_entry_read_err	TIMEOUT	132232	17543	PASS	183279	112.4	PENDING	array1326 valid PASS
+smoke_test_aes_gcm	TIMEOUT (progress unknown)	NA	13210	PASS	155487	88.676	PENDING	array1326 valid PASS
+smoke_test_datavault_basic	TIMEOUT (progress unknown)	NA	7333	PASS	299659	174.427	PENDING	array1326 valid PASS
+smoke_test_datavault_lock	TIMEOUT (progress unknown)	NA	11601	PASS	1468229	839.031	PENDING	array1372 task7; checksummed evidence in verilator-timeout-tasks1372/task7_smoke_test_datavault_lock/
+smoke_test_datavault_mini	TIMEOUT (progress unknown)	NA	12257	PASS	361262	215.465	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm	TIMEOUT (progress unknown)	NA	7004	PASS	92519	55.345	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_cmd_err	TIMEOUT (progress unknown)	NA	7431	PASS	105111	66.094	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_collision_test	TIMEOUT (progress unknown)	NA	11010	PASS	152182	98.54	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_non_gcm_en_dec	TIMEOUT (progress unknown)	NA	10091	PASS	538874	350.763	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_rd_enc_axi_err	TIMEOUT (progress)	53626	7628	PASS	107887	63.408	PENDING	array1373 task1 timed out after quoted-plusarg fix; last c339 heartbeat mcycle=53626; raw status INFRA_ERROR/137 in corrected-timeout-reruns-20261015/task1373_1_smoke_test_dma_aes_gcm_rd_enc_axi_err/; Verilator evidence in verilator-timeout-task1372_13/
+smoke_test_dma_aes_gcm_short_1_dword	TIMEOUT (progress unknown)	NA	13341	PASS	409682	266.958	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_short_dword	TIMEOUT (progress unknown)	NA	11240	PASS	186702	117.121	PENDING	array1326 valid PASS
+smoke_test_dma_aes_gcm_wr_enc_axi_err	TIMEOUT (progress)	55863	7628	PASS	107835	62.735	PENDING	array1373 task2 reached corrected 7628s cap; raw status INFRA_ERROR/137; latest heartbeat mcycle=55863 in corrected-timeout-reruns-20261015/task1373_2_smoke_test_dma_aes_gcm_wr_enc_axi_err/; Verilator evidence in verilator-timeout-tasks1372/task16_smoke_test_dma_aes_gcm_wr_enc_axi_err/
+smoke_test_ecc_errortrigger3	TIMEOUT	121559	17149	PASS	64349	964.21	PENDING	array1372 task17; checksummed evidence in verilator-timeout-tasks1372/task17_smoke_test_ecc_errortrigger3/
+smoke_test_ecc_keygen	TIMEOUT (progress unknown)	NA	16033	PASS	783243	466.747	PENDING	array1372 task18; checksummed evidence in verilator-timeout-tasks1372/task18_smoke_test_ecc_keygen/
+smoke_test_ecc_sign	TIMEOUT (progress unknown)	NA	16033	PASS	797819	464.9	PENDING	array1372 task19; checksummed evidence in verilator-timeout-tasks1372/task19_smoke_test_ecc_sign/
+smoke_test_ecc_verify	TIMEOUT (progress unknown)	NA	16033	PASS	1023648	582.416	PENDING	array1372 task20; checksummed evidence in verilator-timeout-tasks1372/task20_smoke_test_ecc_verify/
+smoke_test_hek_flow	TIMEOUT (progress unknown)	NA	9467	PASS	69132	39.415	PENDING	array1372 task21; checksummed evidence in verilator-timeout-tasks1372/task21_smoke_test_hek_flow/
+smoke_test_kv_lock_use_mid_read	TIMEOUT (progress unknown)	NA	7956	FAIL	69079	39.22	PENDING	array1372 task22; checksummed evidence in verilator-timeout-tasks1372/task22_smoke_test_kv_lock_use_mid_read/
+smoke_test_kv_securitystate	TIMEOUT (progress unknown)	NA	11240	PASS	56459	264.354	PENDING	array1372 task23; checksummed evidence in verilator-timeout-tasks1372/task23_smoke_test_kv_securitystate/
+smoke_test_kv_swwe_lock	TIMEOUT	157015	21600	PASS	848287	483.585	PENDING	array1372 task24; checksummed evidence in verilator-timeout-tasks1372/task24_smoke_test_kv_swwe_lock/
+smoke_test_kv_write_scan_mode	TIMEOUT (progress unknown)	NA	6775	PASS	62847	35.867	PENDING	array1372 task25; checksummed evidence in verilator-timeout-tasks1372/task25_smoke_test_kv_write_scan_mode/
+smoke_test_mbox_byte_read	TIMEOUT (progress unknown)	NA	10846	PASS	135980	77.108	PENDING	array1372 task26; checksummed evidence in verilator-timeout-tasks1372/task26_smoke_test_mbox_byte_read/
+smoke_test_sha256	PASS	61567	8646	PASS	61567	38.316	225.65	six-comparison array1316
+smoke_test_sram_ecc	TIMEOUT (progress unknown)	NA	8876	PASS	163535	92.525	PENDING	array1372 task27; checksummed evidence in verilator-timeout-tasks1372/task27_smoke_test_sram_ecc/
+smoke_test_strap	PASS	57180	8047	PASS	57180	36.134	222.70	six-comparison array1316

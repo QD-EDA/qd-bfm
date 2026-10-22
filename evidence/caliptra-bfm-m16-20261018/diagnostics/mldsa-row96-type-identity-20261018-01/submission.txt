@@ -1,0 +1,12 @@
+job_id=2755
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-row96-type-trace-20261018-01
+submit_command=sbatch --parsable run.sbatch
+row=96 ML_DSA_randomized_early_run_test; one-row runtime type identity diagnostic at the expected scoreboard cast
+source_archive_sha256=9268ac76d72eefc0ebb1229732205ffc2cd6ed54fd1e5a0031795245c4b47a56
+diagnostic_wrapper_sha256=4b708df42e9bb77cd8edfb18115cc8eedaacb51f5da18bc17ff24bdbb3745cf0
+run_script_sha256=db9c204b796bfaa1bfa2ace51f489e860befccdb5ea05d75ac30796cb3a8e699
+resources=1 CPU, 1250 MiB, 20-minute Slurm cap; 600-second row timeout
+memory_basis=job 2750 measured peak 766208 KiB x 1.25 = 957760 KiB; request rounded to 1250 MiB
+source_pin=adams-bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0; Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus=9b5fad2afb4104caa816b257d5bccc40f01b8c66; binary SHA256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+staging=archive, wrapper, and run script hashes checked remotely; runner/test hashes and toolchain pins confirmed remotely

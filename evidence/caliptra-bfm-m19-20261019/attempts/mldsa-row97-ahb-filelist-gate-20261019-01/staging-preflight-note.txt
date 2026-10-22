@@ -1,0 +1,1 @@
+Staging preflight rejected the initial submission: the checksum manifest used workspace-relative names. No sbatch was issued. The unused staged tree was discarded and a fresh run root is used.

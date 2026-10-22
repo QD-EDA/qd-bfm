@@ -1,0 +1,2 @@
+Copied and checksum-verified 21 completed array-1430 result bundles before cleanup. Removed only those result trees, their separate resource records, and Slurm logs after confirming none of the selected array indices was RUNNING.
+Freed: 5,253,409 apparent bytes (5.01 MiB). The shared pinned model was retained for active tasks.

@@ -1,0 +1,17 @@
+task_id	source_row	original_799_task	test	c339_outcome	c339_mcycle	c339_mcycle_source	c339_elapsed_s	c339_cycles_per_s	new_outcome	new_mcycle	new_mcycle_source	new_elapsed_s	new_cycles_per_s	cycles_per_s_ratio	timeout_s	runner_exit	heartbeat_count	last_heartbeat_wall_s	last_heartbeat_mcycle	max_rss_kib	evidence
+5	50	41	smoke_test_strap	PASS	57180	finish	8047	7.106	PASS	57180	finish	7384	7.744	1.0898	21600	0	25	7200	56005	1852424	top-level-task1043_5/README.md
+1	41	32	smoke_test_ecc_flow1_kv_ocp_progress	PASS	60927	finish	8574	7.106	PASS	60927	finish	7910	7.703	1.0840	17740	0	26	7500	58198	1852492	top-level-task1043_1/README.md
+2	42	33	smoke_test_kv_rules_ocp_lock	PASS	60518	finish	8659	6.989	PASS	60518	finish	7849	7.710	1.1032	17872	0	26	7500	58212	1852560	top-level-task1043_2/README.md
+3	44	35	smoke_test_ecc_flow2_kv_ocp_progress	PASS	62472	finish	8229	7.592	PASS	62472	finish	8145	7.670	1.0103	19152	0	26	7800	60200	1852500	top-level-task1043_3/README.md
+6	51	42	smoke_test_sha256	PASS	61567	finish	8646	7.121	PASS	61567	finish	8033	7.664	1.0763	21600	0	25	7500	57938	1852572	top-level-task1043_6/README.md
+4	47	38	smoke_test_sha256_wntz	PASS	155834	finish	21238	7.338	PASS	155834	finish	20534	7.589	1.0342	21600	0	54	19800	150623	1852624	top-level-task1043_4/README.md
+10	33	24	smoke_test_ecc_sign	TIMEOUT	115159	latest-heartbeat	16033	7.183	TIMEOUT	118808	latest-heartbeat	16033	7.410	1.0316	16033	137	52	15900	118808	1852592	top-level-task1043_10/README.md
+11	32	23	smoke_test_ecc_keygen	TIMEOUT	115112	latest-heartbeat	16033	7.180	TIMEOUT	119398	latest-heartbeat	16033	7.447	1.0372	16033	137	52	15900	119398	1852536	top-level-task1043_11/README.md
+9	36	27	smoke_test_ecc_errortrigger3	TIMEOUT	121559	latest-heartbeat	17149	7.088	TIMEOUT	126965	latest-heartbeat	17149	7.404	1.0446	17149	137	56	17100	126965	1852648	top-level-task1043_9/README.md
+8	39	30	kv_entry_read_err	TIMEOUT	132232	latest-heartbeat	17543	7.538	TIMEOUT	128141	latest-heartbeat	17543	7.304	0.9690	17543	137	57	17400	128141	1852664	top-level-task1043_8/README.md
+7	46	37	smoke_test_kv_swwe_lock	TIMEOUT	157015	latest-heartbeat	21600	7.269	TIMEOUT	159527	latest-heartbeat	21600	7.386	1.0161	21600	137	58	21300	159527	1852544	top-level-task1043_7/README.md
+12	34	25	smoke_test_ecc_verify	TIMEOUT	111247	latest-heartbeat	16033	6.939	TIMEOUT	116527	latest-heartbeat	16033	7.268	1.0474	16033	137	53	15900	116527	1852596	top-level-task1043_12/README.md
+14	26	20	smoke_test_dma_aes_gcm_short_1_dword	TIMEOUT	93689	latest-heartbeat	13341	7.023	TIMEOUT	85169	latest-heartbeat	13341	6.384	0.9090	13341	137	33	11700	85169	1852708	top-level-task1043_14/README.md
+16	24	18	smoke_test_datavault_mini	TIMEOUT	85975	latest-heartbeat	12257	7.014	TIMEOUT	81008	latest-heartbeat	12257	6.609	0.9423	12257	137	29	11100	81008	1852768	top-level-task1043_16/README.md
+15	25	19	smoke_test_aes_gcm	TIMEOUT	91549	latest-heartbeat	13210	6.930	TIMEOUT	95376	latest-heartbeat	13210	7.220	1.0418	13210	137	40	12900	95376	1852428	top-level-task1043_15/README.md
+13	29	21	jtag_tap_mbox	TIMEOUT	108152	latest-heartbeat	15212	7.110	TIMEOUT	110636	latest-heartbeat	15212	7.273	1.0229	15212	137	49	15000	110636	1852692	top-level-task1043_13/README.md

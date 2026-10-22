@@ -1,0 +1,3 @@
+2026-10-15 14:41 MDT: raised array 1372 (Verilator) ArrayTaskThrottle from 1 to 4 and array 1373 (corrected c339 baselines) from 1 to 2. This keeps at most six A2 tasks across both arrays. Basis: host snapshot showed 13/20 CPUs idle and 27,811 MiB available; each task remains 1 CPU / 3 GiB. Slurm confirmed 1372_3 started; 1372_1 and 1373_1 remained RUNNING, with 1373_2 pending.
+
+Commands: `scontrol update ArrayTaskThrottle=4 JobId=1372`; `scontrol update ArrayTaskThrottle=2 JobId=1373`.

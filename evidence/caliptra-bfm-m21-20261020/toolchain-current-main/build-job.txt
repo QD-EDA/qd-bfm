@@ -1,0 +1,12 @@
+job_id=3387
+source_repository=https://github.com/dsellerbrock/iverilog-uvm.git
+source_commit=cc25756d187314742d347267c2a513b3e640a7fb
+remote_run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01
+install_prefix=/home/dsell/toolchains/iverilog-uvm-main-cc25756d187314742d347267c2a513b3e640a7fb
+resources=2 CPUs, 8 GiB, 01:00:00 Slurm limit
+status=COMPLETED
+iverilog_sha256=87bb417df23d260bcfde3fb372b4a80eaad69e4fd2eea1ffb8b0eff10f7af08e
+vvp_sha256=dfc193c466a70a0917a16ab4198a111de616657d6004de79456db2a4b603b437
+manifest_sha256=ea636dd25c418bbaf19bf459c102e4aa5745b503356b8221a3d558e9dba6df07
+build_log_sha256=53f9a78a661dbf2594ca1224c58591dda1c30e99a8ee33907a45834a980a10e5
+terminal_queue_log_check=2026-10-20; job 3387 absent from squeue; build manifest present

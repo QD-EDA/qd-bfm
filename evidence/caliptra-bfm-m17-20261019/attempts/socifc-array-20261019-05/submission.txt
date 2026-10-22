@@ -1,0 +1,5 @@
+Rows: 22-38,40-42 (20 remaining SoC-IFC tests; row 21 passed in job 2849).
+Array throttle: 6. Per task: 1 CPU, 5 GiB, 65-minute Slurm cap, 3600-second harness cap.
+Toolchain: Icarus source 9b5fad2afb4104caa816b257d5bccc40f01b8c66, binary sha256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288.
+Firmware source pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Slurm run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m17-socifc-array-20261019-05.

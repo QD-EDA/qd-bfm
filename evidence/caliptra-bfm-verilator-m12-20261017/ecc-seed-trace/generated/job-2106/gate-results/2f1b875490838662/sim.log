@@ -1,0 +1,64 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5574000 - ----------------------------------
+5627000 -  Running ECC Smoke Test !!
+5667000 - ----------------------------------
+6041000 - 
+6042000 - ECC KEYGEN
+6086000 - ECC flow in progress...
+77922000 - Received ECC notif/ err intr with status = 1/ 0
+78093000 - Load PRIVKEY data from ECC
+78167000 - Load PUBKEY_X data from ECC
+78245000 - Load PUBKEY_Y data from ECC
+78325000 - ECC zeroize flow.
+M12_ECC_SEED_CONTROL time=78353000 zeroize=1 present_reset=0 kv_read_fail=0 write_en=0 offset=0 data=00000000 ready=1 hwclr=1 seed=8fa8541c82a392ca74f23ed1dbfd73541c5966391b97ea73d744b0e34b9df59ed0158063e39c09a5a055371edf7a5441
+M12_ECC_SEED_CHANGE time=78353000 previous=8fa8541c82a392ca74f23ed1dbfd73541c5966391b97ea73d744b0e34b9df59ed0158063e39c09a5a055371edf7a5441 current=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 ready=0 zeroize_hist=01000 present_reset_hist=00000 read_fail_hist=00000 hwclr_hist=01000 write_en_hist=00000 offset=0 data=00000000 next0=00000000 swwe0=0 we0=0
+[78353000] %Error: ecc_dsa_ctrl.sv:1040: Assertion failed in TOP.caliptra_top_tb.caliptra_top_dut.ecc_top1.ecc_dsa_ctrl_i.M12_ECC_SEED_STABILITY_TRACE: 78353000: (/home/dsell/slurm-runs/caliptra-bfm/a2/m12-ecc-seed-trace-20261017-01/overlay/rtl/src/ecc/rtl/ecc_dsa_ctrl.sv:1040) [TOP.caliptra_top_tb.caliptra_top_dut.ecc_top1.ecc_dsa_ctrl_i.M12_ECC_SEED_STABILITY_TRACE] [CALIPTRA_ASSERT FAILED] ERR_ECC_SEED_NOT_STABLE
+%Error: /home/dsell/slurm-runs/caliptra-bfm/a2/m12-ecc-seed-trace-20261017-01/overlay/rtl/src/ecc/rtl/ecc_dsa_ctrl.sv:1040: Verilog $stop
+Aborting...

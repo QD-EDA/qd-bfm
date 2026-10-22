@@ -1,0 +1,10 @@
+2026-10-16 00:28 MDT
+
+Array 1426, the fresh rerun of original tasks 799_28, 799_30, 799_34, and 799_35, is running at throttle 6.
+
+1426_1 / source row 37 / `smoke_test_ecc_errortrigger4`: RUNNING, wall_s=15,900, mcycle=48,990.
+1426_2 / source row 39 / `kv_entry_read_err`: RUNNING, wall_s=15,900, mcycle=111,436.
+1426_3 / source row 43 / `smoke_test_kv_parallel_access`: RUNNING, wall_s=15,900, mcycle=74,005.
+1426_4 / source row 44 / `smoke_test_ecc_flow2_kv_ocp_progress`: PASS, wall_s=8,951, final mcycle=62,472; output copied, verified, and removed remotely.
+
+M9 array 1430 has tasks 63, 67, and 75 RUNNING. All six A2 simulation slots are occupied; parser retry 1493 remains dependency-held on 1426_1.

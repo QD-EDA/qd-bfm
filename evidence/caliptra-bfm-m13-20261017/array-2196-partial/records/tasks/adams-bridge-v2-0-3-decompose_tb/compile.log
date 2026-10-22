@@ -1,0 +1,11 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:178: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:49: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `decompose_tb'
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:49: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `decompose_tb'
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56: error: port ``w1_encode_done'' is not a port of dut.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56: warning: Port 6 (src_base_addr) of module decompose expects 14 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56:        : Padding 13 high bits of the port.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56: warning: Port 7 (dest_base_addr) of module decompose expects 14 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56:        : Padding 13 high bits of the port.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56: warning: Port 8 (hint_src_base_addr) of module decompose expects 14 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/tb/decompose_tb.sv:56:        : Padding 13 high bits of the port.
+3 error(s) during elaboration.

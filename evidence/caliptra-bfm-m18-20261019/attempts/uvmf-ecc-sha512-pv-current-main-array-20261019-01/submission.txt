@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Array job ID: 3043
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-uvmf-ecc-sha512-pv-current-main-20261019-01
+Rows: 16–17, 46–48, 54–55
+Throttle: 4 concurrent tasks, 1 CPU/4 GiB each
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source archive SHA-256: 109e0fdad561d881c5e11d9253c82a30ce898e54216bf2bc6fe612a1b23060af
+Run script SHA-256: 291ef54165cdbb772b60ebc0ec3ba18a005310f8ceaa5d6aaad0ed3a2b0df343
+Result: complete; seven compile-only BLOCKED results archived and verified

@@ -1,0 +1,6 @@
+outcome=PASS
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=4

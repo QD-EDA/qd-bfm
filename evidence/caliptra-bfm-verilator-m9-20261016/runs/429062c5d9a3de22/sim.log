@@ -1,0 +1,87 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5587000 - ---------------------------
+5628000 -  TRNG Smoke Test 
+5656000 - ---------------------------
+5704000 - Internal TRNG is enabled, running TRNG smoke test
+5779000 - Enabling entropy_src
+5813000 - Enabling csrng
+5838000 -   - Waiting for boot done...
+5885000 -   - Polling addr=200030D0 until it reads back 20000...
+10620000 - 
+10621000 - Entropy Source Seed Test
+10659000 - Instantiate Command
+10691000 -   - Waiting for csrng to generate bits ...
+10757000 -   - Polling addr=20002030 until it reads back 1...
+10953000 - 
+10954000 - TRNG Smoke Test
+10979000 - Uninitiate Command
+11012000 -   - Polling addr=2000202C until it reads back 6...
+11229000 - Initiate Command - Writing 48B of seed
+11299000 -   - Polling addr=2000202C until it reads back 6...
+11514000 - Generate Command - 512b
+11554000 -   - Polling addr=20002030 until it reads back 1...
+11777000 -   - Polling addr=20002030 until it reads back 1...
+12006000 -   - Polling addr=20002030 until it reads back 1...
+12238000 -   - Polling addr=20002030 until it reads back 1...
+12469000 -   - Polling addr=2000202C until it reads back 6...
+12687000 - Generate Command - 512b
+12728000 -   - Polling addr=20002030 until it reads back 1...
+12951000 -   - Polling addr=20002030 until it reads back 1...
+13180000 -   - Polling addr=20002030 until it reads back 1...
+13411000 -   - Polling addr=20002030 until it reads back 1...
+13641000 -   - Polling addr=2000202C until it reads back 6...
+* TESTCASE PASSED
+
+Finished : minstret = 34230, mcycle = 138353
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

@@ -1,0 +1,8 @@
+Slurm job: 1814 (afterok dependency on build job 1813)
+Host: DAN-DESKTOP
+Run: /home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-08
+Command: sbatch --dependency=afterok:1813 run-one-overlay-08.sbatch
+Row: cadf43c78de6a454 smoke_test_ahb_mux (selection row 50)
+Outer wall cap: 600 s; requested resources: 1 CPU, 3 GiB
+Expected uninstrumented overlay SHA-256: e8fec740da3fb9ffcd72fd7eb72c63480d30bd4de531e390772138dcf9ad6d1a
+Result: PASS; mcycle=3973; sim_elapsed_s=2.712; total_elapsed_s=4.877; sim_exit=0

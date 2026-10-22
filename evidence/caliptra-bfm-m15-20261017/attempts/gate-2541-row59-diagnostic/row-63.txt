@@ -1,0 +1,3 @@
+Row 63 (`decompose_normal_test`) gate: Slurm job 2546, DAN-DESKTOP, pinned Icarus 13.0 source `9b5fad2afb4104caa816b257d5bccc40f01b8c66`, binary SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`. Runner SHA256 `7fe5d2ce648f06598aa33939e9edd3372cb95f6408e0e01145141d996029d9e0`.
+
+Result: BLOCKED at compile, exit 1, 0.049 seconds: `decompose.sv:36: Include file abr_prim_assert.sv not found`. No simulation ran. The exact command, compile log, resource record, result, job log, script, and source snapshots are preserved under `tasks/row-63/` and `logs/`.

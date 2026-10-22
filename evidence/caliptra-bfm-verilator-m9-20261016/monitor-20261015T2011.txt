@@ -1,0 +1,49 @@
+---QUEUE---
+             JOBID PARTITION                           NAME    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+   1430_[16-161%2]   verilog                  a2-m9-vlt-top  PENDING       0:00   7:00:00      1 (JobArrayTaskLimit)
+           1430_15   verilog                  a2-m9-vlt-top  RUNNING       1:10   7:00:00      1 DAN-DESKTOP
+           1430_12   verilog                  a2-m9-vlt-top  RUNNING       6:51   7:00:00      1 DAN-DESKTOP
+            1426_1   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      15:10   6:10:00      1 DAN-DESKTOP
+            1426_2   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      15:10   6:10:00      1 DAN-DESKTOP
+            1426_3   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      15:10   6:10:00      1 DAN-DESKTOP
+            1426_4   verilog     bfm-m5b-cancelled-rerun-06  RUNNING      15:10   6:10:00      1 DAN-DESKTOP
+              1050   verilog                 a1-win98-step2  RUNNING 1-05:18:30 7-00:00:00      1 DAN-DESKTOP
+---M6-RESULTS---
+TASK 37-a79fb02e90b4ffbd-1
+-rw-rw-r-- 1 dsell dsell 49K Oct 15 20:10 /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261015-01/runs/37-a79fb02e90b4ffbd-1/output/smoke_test_ecc_errortrigger4/sim.log
+CLP: ROM Flow in progress...
+
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2134
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4376
+TASK 39-109971edd9458a51-2
+-rw-rw-r-- 1 dsell dsell 49K Oct 15 20:10 /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261015-01/runs/39-109971edd9458a51-2/output/kv_entry_read_err/sim.log
+CLP: ROM Flow in progress...
+
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2119
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4342
+TASK 43-d39c57745790b3e2-3
+-rw-rw-r-- 1 dsell dsell 49K Oct 15 20:10 /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261015-01/runs/43-d39c57745790b3e2-3/output/smoke_test_kv_parallel_access/sim.log
+CLP: ROM Flow in progress...
+
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2108
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4317
+TASK 44-bcb5b29a003aa2a6-4
+-rw-rw-r-- 1 dsell dsell 49K Oct 15 20:10 /home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261015-01/runs/44-bcb5b29a003aa2a6-4/output/smoke_test_ecc_flow2_kv_ocp_progress/sim.log
+CLP: ROM Flow in progress...
+
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=300 mcycle=2119
+CALIPTRA_PROGRESS_HEARTBEAT wall_s=600 mcycle=4351
+---M9-COMPLETED-MARKERS---
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/0d19414a89abebf7
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/109971edd9458a51
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/2ed04fcd9fe06e81
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/32fd8dbe1f783dd4
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/40a2264a41561d60
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/8c392993b1af6e0c
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/bc3ce0773f27b4b2
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/c4e8f85716a36bd8
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/c7d7b277746f7500
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/d5801d4d386e15a5
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/da473415de9c302e
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/e5e18eb8f20efc5f
+/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/ec7bc649d6f7cd68

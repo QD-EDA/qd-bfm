@@ -1,0 +1,9 @@
+Job 1784: fresh logging-only `smoke_test_mbox` edge trace on DAN-DESKTOP.
+
+Run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-05`.
+
+Resources: 4 CPUs, 4 GiB, 2-hour Slurm limit; the simulation retains its 180-second process-group cap. Pinned Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`; Verilator 5.052; assertions disabled so the known pinned AW monitor does not stop the diagnostic before MBOX.
+
+The AXI logger records `rvalid/rready/rdata/rresp` at every negedge, at posedge active-region entry, and with `$strobe` after updates while the first lock read is active. The existing lock CSR logger records pre/post field and readback values. An assert-based self-check confirms the AXI `get_read_beat` task body is byte-for-byte unchanged; only an independent monitor was added. The diagnostic does not modify the protocol or produce an official test result.
+
+Local source hashes: AXI edge trace `de3542f4c1a2c6fad3cd9391bf3c02e54ca3e18dfc0af8bcb5a37c50e0d3b9c4`; batch script `cffd89407a767d005571c73ec95746271cc95f8314b7a00a0aa17bc4744c1858`; MBOX trace `936f55acf6a86132aa1cf9a52e0d26d63c889f137693aa966847b152d695170f`.

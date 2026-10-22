@@ -1,0 +1,13 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01
+Rows: 61, 65, 69
+Throttle: 2 concurrent tasks
+Resources: 1 CPU/2 GiB per task; 600-second timeout
+Peak RSS basis: ML-DSA row 77 measured 766,196 KiB with the same runner
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 78c3eae07e1d080ba38f7fc1399d7dc28770df42c3ffebc23a0cfaacafc04e6f
+Run script SHA-256: 5152a8786e67ccbfaecdefdf82b334e564113696a236c85a2710b482498eff02
+Array job ID: 3061
+Array job ID: 3061
+Result: complete; rows 61/65 BLOCKED at stale done_i port, row 69 FAIL on 10 invalid sample-queue checks

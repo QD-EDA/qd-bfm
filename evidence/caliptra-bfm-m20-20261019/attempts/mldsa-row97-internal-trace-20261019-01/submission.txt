@@ -1,0 +1,8 @@
+job=3228
+array_task=3228_97
+host=DAN-DESKTOP
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-row97-internal-trace-20261019-01
+resources=1 CPU, 2 GiB RAM, 1800-second runner cap, 2100-second Slurm limit
+source_snapshot_sha256=ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+internal_trace_runner_sha256=ddc6aa64be617687726ff626f0eda01fa29a3e36e66046c49ebbbe462f10d6e8
+run_script_sha256=251a17234c3aab20886c663c686a1e6ce429e654d2625f2dc78778a4d574e24a

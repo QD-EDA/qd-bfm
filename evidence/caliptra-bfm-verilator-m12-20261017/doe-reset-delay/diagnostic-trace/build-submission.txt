@@ -1,0 +1,5 @@
+Slurm job: 2110
+Host: DAN-DESKTOP
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-01 && sbatch build.sbatch
+Submitted: 2026-10-17 08:44 MDT
+Resource request: 4 CPUs, 4 GiB, 2 h

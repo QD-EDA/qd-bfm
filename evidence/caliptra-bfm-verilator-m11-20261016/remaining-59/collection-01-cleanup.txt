@@ -1,0 +1,4 @@
+archived_rows=47
+cleaned_terminal_rows=47 cleaned_files=2069 cleaned_bytes=34335288
+active_array_tasks=1964_12,1964_16,1964_23,1964_42,1964_49,1964_52,1964_53,1964_54,1964_55,1964_56,1964_57,1964_58
+removed_temporary_archive=yes

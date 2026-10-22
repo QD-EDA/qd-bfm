@@ -1,0 +1,99 @@
+M19_AHB_PIN PRE t=60740.000ns sel=1 trans=2 addr=000000d8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60740.000ns sel=1 trans=2 addr=000000d8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60755.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[0]: 0
+M19_AHB_PIN PRE t=60770.000ns sel=1 trans=2 addr=000000dc write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60770.000ns sel=1 trans=2 addr=000000dc write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60785.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[1]: 0
+M19_AHB_PIN PRE t=60800.000ns sel=1 trans=2 addr=000000e0 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60800.000ns sel=1 trans=2 addr=000000e0 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60815.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[2]: 0
+M19_AHB_PIN PRE t=60830.000ns sel=1 trans=2 addr=000000e4 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60830.000ns sel=1 trans=2 addr=000000e4 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60845.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[3]: 0
+M19_AHB_PIN PRE t=60860.000ns sel=1 trans=2 addr=000000e8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60860.000ns sel=1 trans=2 addr=000000e8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60875.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[4]: 0
+M19_AHB_PIN PRE t=60890.000ns sel=1 trans=2 addr=000000ec write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60890.000ns sel=1 trans=2 addr=000000ec write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60905.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[5]: 0
+M19_AHB_PIN PRE t=60920.000ns sel=1 trans=2 addr=000000f0 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60920.000ns sel=1 trans=2 addr=000000f0 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60935.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[6]: 0
+M19_AHB_PIN PRE t=60950.000ns sel=1 trans=2 addr=000000f4 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60950.000ns sel=1 trans=2 addr=000000f4 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60965.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[7]: 0
+M19_AHB_PIN PRE t=60980.000ns sel=1 trans=2 addr=000000f8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=60980.000ns sel=1 trans=2 addr=000000f8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 60995.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[8]: 0
+M19_AHB_PIN PRE t=61010.000ns sel=1 trans=2 addr=000000fc write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61010.000ns sel=1 trans=2 addr=000000fc write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61025.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[9]: 0
+M19_AHB_PIN PRE t=61040.000ns sel=1 trans=2 addr=00000100 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61040.000ns sel=1 trans=2 addr=00000100 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61055.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[10]: 0
+M19_AHB_PIN PRE t=61070.000ns sel=1 trans=2 addr=00000104 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61070.000ns sel=1 trans=2 addr=00000104 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61085.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[11]: 0
+M19_AHB_PIN PRE t=61100.000ns sel=1 trans=2 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61100.000ns sel=1 trans=2 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61115.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[12]: 0
+M19_AHB_PIN PRE t=61130.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61130.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61145.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[13]: 0
+M19_AHB_PIN PRE t=61160.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61160.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61175.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[14]: 0
+M19_AHB_PIN PRE t=61190.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=61190.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(280) @ 61205.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[15]: 0
+M19_AHB_PIN PRE t=136310.000ns sel=1 trans=2 addr=000000d8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136310.000ns sel=1 trans=2 addr=000000d8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136325.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[0]: 0
+M19_AHB_PIN PRE t=136340.000ns sel=1 trans=2 addr=000000dc write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136340.000ns sel=1 trans=2 addr=000000dc write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136355.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[1]: 0
+M19_AHB_PIN PRE t=136370.000ns sel=1 trans=2 addr=000000e0 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136370.000ns sel=1 trans=2 addr=000000e0 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136385.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[2]: 0
+M19_AHB_PIN PRE t=136400.000ns sel=1 trans=2 addr=000000e4 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136400.000ns sel=1 trans=2 addr=000000e4 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136415.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[3]: 0
+M19_AHB_PIN PRE t=136430.000ns sel=1 trans=2 addr=000000e8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136430.000ns sel=1 trans=2 addr=000000e8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136445.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[4]: 0
+M19_AHB_PIN PRE t=136460.000ns sel=1 trans=2 addr=000000ec write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136460.000ns sel=1 trans=2 addr=000000ec write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136475.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[5]: 0
+M19_AHB_PIN PRE t=136490.000ns sel=1 trans=2 addr=000000f0 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136490.000ns sel=1 trans=2 addr=000000f0 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136505.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[6]: 0
+M19_AHB_PIN PRE t=136520.000ns sel=1 trans=2 addr=000000f4 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136520.000ns sel=1 trans=2 addr=000000f4 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136535.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[7]: 0
+M19_AHB_PIN PRE t=136550.000ns sel=1 trans=2 addr=000000f8 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136550.000ns sel=1 trans=2 addr=000000f8 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136565.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[8]: 0
+M19_AHB_PIN PRE t=136580.000ns sel=1 trans=2 addr=000000fc write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136580.000ns sel=1 trans=2 addr=000000fc write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136595.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[9]: 0
+M19_AHB_PIN PRE t=136610.000ns sel=1 trans=2 addr=00000100 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136610.000ns sel=1 trans=2 addr=00000100 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136625.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[10]: 0
+M19_AHB_PIN PRE t=136640.000ns sel=1 trans=2 addr=00000104 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136640.000ns sel=1 trans=2 addr=00000104 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136655.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[11]: 0
+M19_AHB_PIN PRE t=136670.000ns sel=1 trans=2 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136670.000ns sel=1 trans=2 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136685.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[12]: 0
+M19_AHB_PIN PRE t=136700.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136700.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136715.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[13]: 0
+M19_AHB_PIN PRE t=136730.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136730.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136745.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[14]: 0
+M19_AHB_PIN PRE t=136760.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+M19_AHB_PIN POST t=136760.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136775.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[15]: 0
+* TESTCASE PASSED
+UVM_ERROR :    1
+UVM_FATAL :    0

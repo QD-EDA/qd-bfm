@@ -1,0 +1,14 @@
+   -= Testbench for mm started =-
+    ==============================
+
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:279: Can't open file mm_test_vectors_5_key_16_word_4.hex
+       Time: 0  Scope: ecc_montgomerymultiplier_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:280: invalid file descriptor (0x0) given to $feof.
+Read 0 test vectors from mm_test_vectors_5_key_16_word_4.hex
+*** Toggle reset.
+
+*** All 00 test cases completed successfully
+* TESTCASE PASSED
+
+*** mm simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:334: $finish called at 4 (1s)

@@ -1,0 +1,8 @@
+Array task: 1430_59
+Test case: pv_hash_and_sign
+Outcome: PASS
+Final mcycle: 920789
+Wall seconds: 567.047
+Prior Icarus: UNVERIFIED
+Evidence: the remote FILE-SHA256SUMS manifest verified locally with shasum -a 256 -c. Supplementary task/resource/Slurm files were copied over SSH before remote cleanup.
+Finding: Prior Icarus UNVERIFIED.

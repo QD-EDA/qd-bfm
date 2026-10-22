@@ -1,0 +1,18 @@
+rv_gcc_version is 15.2.0
+Building program.hex from fw_test_lms_n32_w1_h15 using Crypto Test rules for pre-compiled RUST executables
+riscv-none-elf-objcopy -O verilog -R .data -R .rodata -R .bss -R .sbss -R .iccm -R .dccm -R .eh_frame --pad-to 0x18000 --gap-fill 0xFF --no-change-warnings /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 program.hex
+riscv-none-elf-objcopy -O verilog -j .data -j .rodata -j .bss -j .sbss -j .dccm \
+		      --change-section-lma       .data-0x50000000 \
+		      --change-section-lma     .rodata-0x50000000 \
+		      --change-section-lma        .bss-0x50000000 \
+		      --change-section-lma       .sbss-0x50000000 \
+		      --change-section-lma       .dccm-0x50000000 \
+		      --pad-to 0x40000 \
+		      --no-change-warnings \
+		      /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 dccm.hex
+riscv-none-elf-objcopy -O verilog -j .iccm                       --change-section-address .iccm=0 --pad-to 0x40000 --no-change-warnings /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 iccm.hex
+riscv-none-elf-objcopy -O verilog -j .mailbox --gap-fill 0x0     --change-section-address .mailbox=0 --pad-to 0x40000 --no-change-warnings /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 mailbox.hex
+riscv-none-elf-objdump -S  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 > fw_test_lms_n32_w1_h15.dis
+riscv-none-elf-size        /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15 | tee fw_test_lms_n32_w1_h15.size
+   text	   data	    bss	    dec	    hex	filename
+  30356	      0	  32768	  63124	   f694	/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/fw_test_lms_n32_w1_h15/fw_test_lms_n32_w1_h15

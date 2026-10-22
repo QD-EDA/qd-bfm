@@ -1,0 +1,8 @@
+M16 MLDSA row 96 one-row gate: per-environment 32-bit AHB define
+
+Branch: codex/caliptra-bfm-stack-20261006
+HEAD: 60502cff1c333a04d0f678b9fee0cf1135270305
+Source inputs: Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0; Icarus source 9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Purpose: row 96 previously reached the MLDSA predictor and fatally rejected the AHB transfer class. The pinned generated environment declares a 32-bit AHB data width; its per-row Icarus command now enables CALIPTRA_BFM_AHB_32BIT. Gate 2733 showed Icarus does not accept -D inside this filelist, so the define is passed on the command line.
+Scope: testbench, BFM compile setup, filelist and setup only; no RTL, firmware, or pass criteria changed.
+The frozen archive starts from the previous row-96 staged source and replaces only run_m15_test.py and its unit-test file with the current working-tree versions. All dv/caliptra_bfm source members were checked byte-for-byte against the working tree; generated Python caches were excluded.

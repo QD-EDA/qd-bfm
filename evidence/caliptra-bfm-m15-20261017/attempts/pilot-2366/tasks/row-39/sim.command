@@ -1,0 +1,1 @@
+["/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/vvp", "-n", "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-05-pilot/tasks/row-39/test.vvp", "+UVM_TESTNAME=soc_ifc_axi_sha_acc_dis_tb", "+ntb_random_seed=1"]

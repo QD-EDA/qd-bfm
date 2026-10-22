@@ -1,0 +1,12 @@
+result=PASS
+environment_id=caliptra-v2-1-2-ecc_montgomerymultiplier_tb
+top=ecc_montgomerymultiplier_tb
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+mismatches=0
+completed_sections=0
+vector_summary=Read 5 test vectors from mm_test_vectors_5_key_16_word_4.hex;
+elapsed_seconds=0

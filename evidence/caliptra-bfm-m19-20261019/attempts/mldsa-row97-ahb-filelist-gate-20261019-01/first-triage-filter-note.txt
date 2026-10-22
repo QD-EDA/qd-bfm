@@ -1,0 +1,1 @@
+The first intern filter missed AHB pin lines because its address strings had one extra zero; it only received sequence readbacks and terminal counts. No conclusion was adopted from that triage.

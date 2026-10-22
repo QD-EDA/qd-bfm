@@ -1,0 +1,5 @@
+job_id=2085
+state_before_cancel=PENDING
+cancelled_at=2026-10-17T02:56:52-06:00
+reason=superseded before start by more robust exact-predicate diagnostic traces in run 05
+remote run 04 removed after pending job 2085 cancellation; no result data existed.

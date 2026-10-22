@@ -1,0 +1,14 @@
+Slurm job: 3263_97
+Host: DAN-DESKTOP (Ubuntu WSL2)
+Test: row 97 ML_DSA_randomized_two_verif_on_fail_test
+Resources: 1 CPU, 2 GiB; runner timeout 1800 seconds; Slurm limit 2100 seconds
+Result: FAIL; compile/simulation exit 0; 803.537 seconds; 1 UVM_ERROR; 0 UVM_FATAL
+Peak simulation RSS: 443696 KiB
+Adams Bridge source pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Caliptra source pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus: 13.0 devel (cae03564), binary SHA-256 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+VVP: 13.0 devel (cae03564), binary SHA-256 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309
+Trace runner SHA-256: ef6b32b072d6ba169199a73ca0261827d520fa48c1284725e6c094f13c05bfbc
+Source snapshot SHA-256: ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+Archive SHA-256: dce66346df8e9b785864217f302700103a3f00695a35340ceec727670d2de273 (matches remote sidecar)
+Trace-only overlay source hashes: abr_ctrl.sv 4c6dde9371e21fa2eabb6ddb1619ccc565947a298413948c27c5db6dd61dbaf0; abr_sampler_top.sv 4380a15e28e557cc2b6831fc2e2e4e5406c84be0e9dabc91a4686cedb232f61d

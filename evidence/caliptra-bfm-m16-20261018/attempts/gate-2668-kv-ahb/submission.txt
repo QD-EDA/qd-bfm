@@ -1,0 +1,7 @@
+Job ID: 2667
+Host: DAN-DESKTOP
+Submitted: 2026-10-18
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-open-ahb-20261018-01
+Row: 6 (uvmf-kv / kv_rand_lock_test)
+Resources: 1 CPU, 3 GiB, Slurm cap 20 minutes, row timeout 600 seconds
+Staged source archive SHA256: b187bf109effb0fa9b4570bf3096bed8ccfc878ef5d47903505a35b867de8837

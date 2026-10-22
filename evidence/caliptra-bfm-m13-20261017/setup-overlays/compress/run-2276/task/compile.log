@@ -1,0 +1,3 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/compress/tb/compress_tb.sv:43: error: port ``mem_wr_req'' is not a port of dut.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/compress/tb/compress_tb.sv:43: error: port ``mem_wr_data'' is not a port of dut.
+2 error(s) during elaboration.

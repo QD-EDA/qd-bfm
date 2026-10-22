@@ -17,6 +17,8 @@ does not edit the pinned RTL or the testcase source.
 |---|---|---|
 | `caliptra-legacy-uart-qspi-reg-compat.h` | `smoke_test_uart`, `smoke_test_qspi` | Restores only register identifiers referenced by these stale tests, using definitions from generated-header blob `87ba5382a7b237a6f5b15105aed52fa672c82206` at Caliptra parent `2bcf063ceb5c06fb4d4af6089a0d437ed4c5ee66`, immediately before upstream removal commit `26cda9bd019248a0516427facb2602a9274f1d17`. |
 | `caliptra-errortrigger5-abr-compat.h` | `smoke_test_ecc_errortrigger5` | Supplies the two no-op ABR ISR hooks missing from errortrigger5 and maps the shared MLDSA helper's stale `abr_*` status names to errortrigger5's current `mldsa_*` fields. |
+| `caliptra-srand-compat.h` | `smoke_test_kv_ecc_flow1`, `smoke_test_kv_ecc_flow2` | Includes the standard C declaration for `srand`, which these pinned tests call without including `<stdlib.h>`. |
+| `caliptra-ras-isr-compat.h` | `smoke_test_ras` | Force-includes a run-local copy of the pinned RAS ISR header with only `service_soc_ifc_notif_intr` changed to `static inline __attribute__((used))`, ensuring the symbol exists for the ISR's inline-assembly call. Source header SHA-256: `dff5bff1a7f28c2bad6cd220c1c0f708f7d1980cab1119ceacca0cd9b859e5a8`. |
 
 The pinned RTL no longer integrates UART or QSPI. Their old enable bits also
 overlap current hardware-config fields, so restoring the old definitions allows
@@ -24,7 +26,11 @@ the test to build but does not make either peripheral available or validate its
 old register map against this RTL. Preserve any runtime FAIL or TIMEOUT as-is.
 The errortrigger5 YAML still names itself errortrigger4; the runner records both
 the case directory (`test`) and YAML name (`testname`) so this source mismatch
-stays visible. No test logic or result checks are changed by these overlays.
+stays visible. The two KV ECC flow tests use `srand` but omit its declaration.
+The RAS ISR handler is called from inline assembly, so its C `inline` definition
+did not produce the linkable symbol required by that call. Its overlay changes
+only the function storage/emission attributes in a run-local copy. No test logic
+or result checks are changed by these overlays.
 
 | Patch | One-line justification | Environment row(s) | Evidence |
 |---|---|---|---|
@@ -51,8 +57,8 @@ assignment-pattern patch then the function-return-type patch.
 ## Causes not suitable for a compatibility patch
 
 - Caliptra `caliptra_top_ss_mode_tb` and `caliptra_top_trng_tb`: `axi_if.rst_mgr()` is compiled for the shared interface type and writes fields that those tops continuously drive; removing it globally would break the separate BFM reset-manager instance, while splitting the interface changes its type contract. The c339 compile also reaches the `caliptra_top_tb.sv:138` clock-generator diagnostic tracked by #545. A reducer from the actual source now reproduces c339 rejection and Verilator 5.032 acceptance; the previously claimed bit-versus-logic difference remains unconfirmed. The full-top compile is still blocked by the independent mixed-driver diagnostics. Evidence: `evidence/caliptra-bfm-environment-matrix-20261011/slurm-vip-adapter/`.
-- Adams tests referencing absent `mldsa_config_defines.svh`: the pinned source archive contains no definition or authoritative replacement, so synthesizing the missing configuration macros would invent upstream configuration. Rows: `abr_sha3_tb`, `abr_top_tb`, `exp_mask_tb`, `mldsa_rej_sampler_tb`, `mlkem_rej_sampler_tb`, `sample_in_ball_tb`.
-- Adams `compress_tb`: after its filelist package omission is fixed, its testbench still expects the removed direct-memory write interface while pinned `compress_top` exposes an API read/write bus; adapting the test requires rewriting stimulus and checks, not a semantics-preserving port overlay.
+- Adams legacy `mldsa_*` filelists: pinned commit `0a45a69535b0443ee7a66532303bd9857abd6686` removed the old hierarchy while adding its `abr_*` successor, including `abr_config_defines.svh`. The M18 overlay hash-guards that pinned successor and maps stale package imports; it synthesizes no macro values. Rows 58, 61, and 65 compile but hit the benches’ existing 200,000-cycle caps without testcase verdicts; row 69 fails its authored sample-queue checks. Other legacy benches outside those rows still need independent evidence before qualification.
+- Adams `compress_tb`: the M18 filelist and testbench overlays connect the pinned API read/write bus, source the existing coefficient vector by address, and compare the compressed output against the existing `coeff_exp` formula. Row 64 passes all three modes on refreshed Icarus; the overlay changes no expected values or pass/fail markers.
 - Caliptra `el2_veer_wrapper_tb`: after removing four stale memory DFT pin connections, its testbench still leaves the wrapper memory-export interfaces uninstantiated; the same compile also hits 22 c339 errors resolving static members through interface continuous assignments, already present in the pinned-only compile. Supplying memory interface models changes the testbench behavior; the simulator elaboration limitation cannot be fixed in this QD overlay. Evidence: `evidence/caliptra-bfm-environment-matrix-20261011/m4-el2-overlay/README.md`.
 - Caliptra `doe_cbc_tb` and Adams `ntt_top_tb`: the pinned inputs are respectively absent and undersized (64 words for a 16,384-word request); there is no pinned expected data from which an overlay can reconstruct valid vectors.
 - Caliptra `soc_ifc_tb`: after the two syntax patches above, compilation reaches unsupported random-constraint translation and `$ivl_clocking_sample`, followed by c339 exit 139; completing that repair requires Icarus changes, which are out of scope.

@@ -1,0 +1,38 @@
+COMPILER=c339
+Icarus Verilog version 13.0 (devel) ()
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+method-in-constraint compile_exit=1
+/tmp/method-in-constraint.sv:17: warning: method function 'randomize' is being called as a task.
+/tmp/method-in-constraint.sv:17: error: constraint `(wrtrans.data)&((get_mask(rname))!=('sd0))' could not be translated and the randomize call cannot be compiled.
+1 error(s) during elaboration.
+precomputed-mask compile_exit=0
+/tmp/precomputed-mask.sv:19: warning: method function 'randomize' is being called as a task.
+precomputed-mask sim_exit=0
+COMPILER=pinned-9b5fad
+Icarus Verilog version 13.0 (devel) (9b5fad2af)
+6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288  /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/iverilog
+method-in-constraint compile_exit=1
+/tmp/method-in-constraint.sv:17: warning: method function 'randomize' is being called as a task.
+/tmp/method-in-constraint.sv:17: error: constraint `(wrtrans.data)&((get_mask(rname))!=('sd0))' could not be translated and the randomize call cannot be compiled.
+1 error(s) during elaboration.
+precomputed-mask compile_exit=0
+/tmp/precomputed-mask.sv:19: warning: method function 'randomize' is being called as a task.
+precomputed-mask sim_exit=0
+COMPILER=current-main
+Icarus Verilog version 13.0 (devel) (ca559fd97)
+c99ee9c08468fb20f7635fb3380adb0d620c9037c19c02236a435a61c7be0130  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/iverilog
+method-in-constraint compile_exit=1
+/tmp/method-in-constraint.sv:17: warning: method function 'randomize' is being called as a task.
+/tmp/method-in-constraint.sv:17: error: constraint `(wrtrans.data)&((get_mask(rname))!=('sd0))' could not be translated and the randomize call cannot be compiled.
+1 error(s) during elaboration.
+precomputed-mask compile_exit=0
+/tmp/precomputed-mask.sv:19: warning: method function 'randomize' is being called as a task.
+precomputed-mask sim_exit=0
+VERILATOR
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+method-in-constraint lint_exit=1
+1:%Warning-WIDTHEXPAND: /tmp/method-in-constraint.sv:17:45: Operator AND expects 32 bits on the RHS, but RHS's NEQ generates 1 bits.
+7:%Error: Internal Error: /tmp/method-in-constraint.sv:17:56: ../V3Scope.cpp:68: Can't locate package scope
+precomputed-mask lint_exit=0
+1:%Warning-WIDTHEXPAND: /tmp/precomputed-mask.sv:19:45: Operator AND expects 32 bits on the RHS, but RHS's NEQ generates 1 bits.
+7:%Warning-IGNOREDRETURN: /tmp/precomputed-mask.sv:19:13: Ignoring return value of non-void function (IEEE 1800-2023 13.4.1)
