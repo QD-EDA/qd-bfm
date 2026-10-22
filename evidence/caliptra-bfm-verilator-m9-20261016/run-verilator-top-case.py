@@ -24,6 +24,7 @@ def main():
     parser.add_argument("--c339-outcome", required=True)
     parser.add_argument("--c339-mcycle", required=True)
     parser.add_argument("--c339-elapsed", required=True)
+    parser.add_argument("--keep-firmware-images", action="store_true")
     args = parser.parse_args()
 
     source = args.source.resolve()
@@ -98,6 +99,11 @@ def main():
             result["firmware_image_sha256"] = {
                 name: runner.sha256(test_output / name) for name in images
             }
+            if args.keep_firmware_images:
+                image_output = output / "firmware-images"
+                image_output.mkdir()
+                for name in images:
+                    shutil.copy2(test_output / name, image_output / name)
             result["native_vector_sha256"] = runner.stage_native_vectors(
                 test_output, vector_files, vector_hashes, vector_tools, env
             )
