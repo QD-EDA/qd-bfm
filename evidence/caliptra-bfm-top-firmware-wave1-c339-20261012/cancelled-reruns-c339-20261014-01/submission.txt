@@ -1,0 +1,14 @@
+job_id=936
+job_name=bfm-m5b-cancelled-rerun
+array=1-4%6
+requested=1 CPU, 3 GiB per task, 6h10m allocation, max 6 tasks
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+iverilog_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+iverilog_binary_sha256=683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb
+caliptra_rtl=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+selection_rows=4
+submitted_at=2026-10-14T00:12:18-06:00
+host=DAN-DESKTOP
+slurm_version=25.11.2
+linux_kernel=6.18.33.1-microsoft-standard-WSL2 x86_64

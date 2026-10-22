@@ -1,0 +1,10 @@
+04bdd64a60fa9b6a009b647f6b7ae3017685392b1651737892193952bc44be02  ./task/result.txt
+d5305abf4de4bb294cede151d56e97baf5b0232ce09418463bb047e77c3a332a  ./task/tool-binaries.sha256
+e2ace496da2b9020dc68a952ddb1f8ae17e6cd4cb15eaec8a41bfa133f2153d8  ./task/source-revisions.txt
+c0656d94f742dd7f56b57ec980fe45a7801dda823660bce713bf63ec0e78ef89  ./task/runtime/compress_tb.sv
+fb5395480864f1a6677f82beaa8dad86872e832e03a3f8cad8be1c64eeffa68f  ./task/filelist.sha256
+d546a5345e9207864cdb67cf2fd17df07bfc5c86646e2b193a66609d8cace8e4  ./task/vvp-version.txt
+332f6a0fce10b5d42c58347870a36932928b0215eb3c85e49c354868a0adbb34  ./task/compile.resource
+a97b4246fed28870667d8dac1231ee2d7c9508ac850d88bfb3c34684acc99551  ./task/compile.log
+88c11ff061d1e107ecbc5eb077caa81375c4e32458f0cd7cb14fdbb7b63dce2c  ./task/iverilog-version.txt
+04bdd64a60fa9b6a009b647f6b7ae3017685392b1651737892193952bc44be02  ./slurm-2276.out

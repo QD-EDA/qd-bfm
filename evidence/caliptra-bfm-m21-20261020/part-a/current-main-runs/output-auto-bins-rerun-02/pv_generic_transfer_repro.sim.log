@@ -1,0 +1,2 @@
+PV_WRITE 00001000 0000000000001234
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-auto-bins-20261020-02/reproducers/pv_generic_transfer_repro.sv:61: $finish called at 0 (1s)

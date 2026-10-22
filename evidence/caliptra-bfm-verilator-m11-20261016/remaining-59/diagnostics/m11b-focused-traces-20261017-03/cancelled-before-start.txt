@@ -1,0 +1,3 @@
+job_id=2084
+state_before_cancel=PENDING
+reason=superseded before start; rebuild and ECC gate combined to stay within the six-task allowance

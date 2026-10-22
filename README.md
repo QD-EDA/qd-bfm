@@ -1,10 +1,21 @@
 # QD-BFM
 
-`qd_axi4_single_master.sv` is a small AXI4 manager BFM for bounded, directed, single-beat and FIXED-burst reads and writes. It targets the inbound SoC AXI subordinate interface in Caliptra RTL v2.1.2: `caliptra_top.sv` ports `s_axi_w_if` and `s_axi_r_if` (`axi_if.w_sub` / `axi_if.r_sub`), declared in `caliptra-rtl/src/axi/rtl/axi_if.sv`. That interface's widths come from integration parameters; the BFM defaults are `AW=32`, `DW=32`, `IW=8`, `TIMEOUT=16`.
+QD-BFM is an open-source Caliptra verification stack built around reusable AXI4
+and AHB-Lite bus functional models. The root `qd_axi4_single_master.sv` remains
+a small directed AXI manager for bounded single-beat and FIXED-burst traffic.
+The broader stack in [`dv/caliptra_bfm`](dv/caliptra_bfm/README.md) adds
+Caliptra-profile managers, checkers, monitors, SRAM/FIFO/DMA targets, recovery
+models, mailbox and PCRVault paths, native UVM agents, and a bounded clean-room
+UVMF compatibility layer. The AXI manager targets Caliptra's inbound SoC
+subordinate (`s_axi_w_if` / `s_axi_r_if`); its defaults are `AW=32`, `DW=32`,
+`IW=8`, and `TIMEOUT=16`.
 
-It is a directed-test helper, not UVMF/QVIP/Avery verification, Caliptra DV qualification, or AXI protocol signoff. It does not implement INCR/WRAP bursts, multiple outstanding transactions, lock signaling, or coverage. The default local test uses an independent tiny memory target and does not compile or modify Caliptra. An optional real-interface adapter pilot is described below.
+The stack supplies open-tool components and bounded regressions; it is not a
+full Caliptra DV qualification, commercial QVIP/Avery implementation, or AXI
+protocol signoff. Scope and known limits are recorded in the component and
+evidence READMEs.
 
-## Requirements and quick start
+## Quick start: standalone AXI BFM
 
 Install Icarus Verilog (`iverilog` and `vvp`), then run:
 
@@ -12,7 +23,61 @@ Install Icarus Verilog (`iverilog` and `vvp`), then run:
 ./run.sh
 ```
 
-The script compiles the BFM and local testbench, then runs the passing write/read, request-stall, error-response, and address-timeout cases. It also injects a bad read response ID and missing `RLAST`, requires each run to fail, and rejects any pass banner from those negative runs. Success prints `PASS` and exits `0`; a compile, simulation, or expectation failure exits nonzero.
+The script compiles the BFM and local testbenches with Icarus, then checks
+read/write, stalls, error responses, timeouts, reset recovery, X/Z handling,
+response stability, USER propagation, and FIXED bursts. Negative protocol
+injections must fail without a pass banner. Success prints `PASS` and exits `0`.
+
+## Caliptra DV runs
+
+Use Icarus for block-level UVM and the full-top reference lane. Point it at a
+UVM-enabled Icarus build and a clean Caliptra RTL checkout, then run a stock
+firmware case:
+
+```sh
+export CALIPTRA_RTL=/path/to/clean/caliptra-rtl
+export IVERILOG_BIN=/path/to/iverilog
+export VVP_BIN=/path/to/vvp
+sh dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.sh \
+  --case smoke_test_dma --output /tmp/qd-bfm-icarus-smoke_test_dma
+```
+
+For the full-top stock-firmware Verilator lane, use Verilator 5.052 with the
+pinned Caliptra v2.1.2 RTL, RISC-V GCC, and the Caliptra build dependencies.
+The build-time `axi_if.sv` overlay changes only BFM sampling/drives. The
+[`M9 build recipe`](evidence/caliptra-bfm-verilator-m9-20261016/build-model.sbatch)
+and [`filelist generator`](evidence/caliptra-bfm-verilator-m9-20261016/prepare-verilator-filelist.py)
+show the pinned model setup. After building `Vcaliptra_top_tb`, run one case:
+
+```sh
+python3 evidence/caliptra-bfm-verilator-m9-20261016/run-verilator-top-case.py \
+  --source "$PWD" --rtl "$CALIPTRA_RTL" --model /path/to/Vcaliptra_top_tb \
+  --output /tmp/qd-bfm-verilator-smoke_test_ahb_mux \
+  --case smoke_test_ahb_mux --timeout 600 \
+  --c339-outcome UNVERIFIED --c339-mcycle NA --c339-elapsed NA
+```
+
+### Current results matrix
+
+| Run | Simulator and scope | Results |
+| --- | --- | --- |
+| [M9](evidence/caliptra-bfm-verilator-m9-20261016/README.md) | Verilator 5.052; 162 stock-firmware rows | 103 PASS, 43 FAIL, 14 firmware-build failures, 2 TIMEOUT (63.6% PASS); 109 non-firmware rows were out of scope. |
+| [M21 Part B](evidence/caliptra-bfm-m21-20261020/README.md) | Icarus current-main `cc25756d`; 20 selected stock-firmware rows | 11 PASS, 9 TIMEOUT; all 20 reached a terminal outcome. |
+
+These are different scopes: M21's 20 rows were selected from cases without a
+prior Icarus terminal result, while M9 covers the 162 stock-firmware rows on
+Verilator. Block-level UVM remains on Icarus. The latest full selected-row
+Verilator rerun is being prepared; see [M23 evidence](evidence/caliptra-bfm-m23-20261022/).
+
+### Repository layout
+
+- `qd_axi4_single_master.sv`, `tb_*.sv`, and `run.sh`: standalone AXI BFM and smoke suite.
+- `dv/caliptra_bfm/`: reusable AXI/AHB-Lite components, Caliptra integrations, and UVM/UVMF-lite tests.
+- `evidence/caliptra-bfm-*/`: run summaries, result matrices, tool/source pins, and limitations.
+- `docs/conformance/`: pinned-source overlays and conformance notes; `ci/`: reproducible checks.
+
+The retained evidence summaries intentionally omit large raw run trees and
+compiled simulator outputs from this source snapshot.
 
 ## Using the BFM
 

@@ -1,0 +1,9 @@
+job=3233
+array_task=3233_43
+host=DAN-DESKTOP
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-socifc-row43-overlay-gate-20261019-01
+resources=1 CPU, 2 GiB RAM, 1800-second runner cap, 2100-second Slurm limit
+cluster_before_submit=9 of 20 CPUs allocated, 11 idle; 3226 and 3228_97 were already running
+source_snapshot_sha256=ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+overlay_runner_sha256=d54232aa8d30ca02f363e9853ee1c6e1cc5d7d70f4c6c1b13cf2f29bae55296d
+run_script_sha256=5712e2b81e5ac0da0a1e3cb75cb19cdb098095bec3e1679d22e5e217509a2512

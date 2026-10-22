@@ -1,0 +1,50 @@
+**AHB Read Analysis (Batch 1)**
+
+| Address | Index | HRDATA (PRE/POST) | HREADY (PRE/POST) | MLDSA\_VERIFY\_RES[i] | Agreement |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 0xD8 | 0 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xDC | 1 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE0 | 2 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE4 | 3 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE8 | 4 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xEC | 5 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF0 | 6 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF4 | 7 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF8 | 8 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xFC | 9 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x100 | 10 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x104 | 11 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x108 | 12 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x10C | 13 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x110 | 14 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x114 | 15 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+
+**AHB Read Analysis (Batch 2)**
+
+| Address | Index | HRDATA (PRE/POST) | HREADY (PRE/POST) | MLDSA\_VERIFY\_RES[i] | Agreement |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 0xD8 | 0 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xDC | 1 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE0 | 2 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE4 | 3 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xE8 | 4 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xEC | 5 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF0 | 6 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF4 | 7 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xF8 | 8 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0xFC | 9 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x100 | 10 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x104 | 11 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x108 | 12 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x10C | 13 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x110 | 14 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+| 0x114 | 15 | 00000000 / 00000000 | 1 / 1 | 0 | Agree |
+
+**Summary**
+
+*   **Agreement:** The sampled AHB pins agree with the logged readback for all transfers.
+*   **Zero Check:** Both batches are all zero.
+*   **Gaps:** There are no address/index gaps between the observed transfers (0xD8 through 0x114).
+*   **UVM Counts:**
+    *   `UVM_ERROR`: 1
+    *   `UVM_FATAL`: 0

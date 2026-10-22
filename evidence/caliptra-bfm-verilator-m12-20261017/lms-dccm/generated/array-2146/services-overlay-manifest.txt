@@ -1,0 +1,3 @@
+services_source_sha256=5a048411bf1dcae2cda6406a6d32afba0dc9f9ef447c301875f7b6c7e1939343
+services_overlay_sha256=2eb6b5aa502050a657265c51af189c0e96e69c87f40db06c2619393d394c56b0
+change=Verilator can load normalized byte image into 1D scratch then copy into the existing 64-bit-word preloader

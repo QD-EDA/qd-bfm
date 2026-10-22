@@ -1,0 +1,7 @@
+# Collection 04 cleanup
+
+- Recorded on DAN-DESKTOP at 2026-10-16 22:55 MDT.
+- Archived and verified nine terminal rows from array 1964 in `completed-1964-04.tar.gz`; archive SHA-256: `c86ecb4741b4b1b030f2d4ce909c3bf5d1b165823f00af691b41feb43463df81`.
+- Verified all 115 row-manifest entries against the archive and confirmed all nine result JSON files use model SHA-256 `3c4d5541ff5f8e8642d0017a414fcf1b216467703b62aaf98df5d7ffd14efb1f`.
+- Removed the finished result trees for array indices 12, 16, 42, 49, 52, 55, 56, 57, and 58, freeing 2,617,690 bytes.
+- Kept active task `1964_54` and the shared model, build, source, and toolchain inputs untouched.

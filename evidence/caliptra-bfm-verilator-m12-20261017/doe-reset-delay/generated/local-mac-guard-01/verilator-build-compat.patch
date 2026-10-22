@@ -1,0 +1,13 @@
+diff --git a/src/V3PreLex.h b/src/V3PreLex.h
+index e7fcaeb..91b35ec 100644
+--- a/src/V3PreLex.h
++++ b/src/V3PreLex.h
+@@ -115,7 +115,7 @@ extern char* yyourtext();
+ extern size_t yyourleng();
+ extern void yyourtext(const char* textp, size_t size);  // Must call with static
+ 
+-YY_BUFFER_STATE yy_create_buffer(FILE* file, int size);
++YY_BUFFER_STATE yy_create_buffer(FILE* file, size_t size);
+ void yy_switch_to_buffer(YY_BUFFER_STATE new_buffer);
+ void yy_delete_buffer(YY_BUFFER_STATE b);
+ int yylex_destroy();

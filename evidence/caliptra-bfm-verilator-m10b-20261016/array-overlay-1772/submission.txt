@@ -1,0 +1,11 @@
+Slurm job 1772: assertion-enabled Verilator 5.052 overlay rerun of the 103 M9 PASS rows.
+
+Host: DAN-DESKTOP. Partition snapshot at submission: one verilog node, 20 CPUs total, 4 allocated and 16 idle; the only prior jobs were A1 1463 (1 CPU) and A3 1770 (3 CPUs).
+
+Build job 1771 completed successfully first: 4 CPUs, 4 GiB, 3m34s wall, 2,381,396 KiB peak RSS, exit 0. Model SHA-256: b3da64350e5986318a9f1f07b3ebd0ecdc95812bca5e0ec2eea46aa52f9c7d45. The model uses `--assert` and `+define+CLP_ASSERT_ON`, with the AW sampling overlay SHA-256 `124682b20a50437964957eb2c12955893b739b4d5fdbf80ebd8b10c2055d59d4`.
+
+Array: indices 0–102, throttle 6; each task requests 1 CPU and 3 GiB, runs its selected per-test timeout plus 1,800 seconds, and uses the separate run directory `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-02`. The exact 6 M8 test/YAML rows are included in these 103 unique rows.
+
+Submission command: `sbatch --parsable --array=0-102%6 --chdir=/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-02 --output=/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-02/logs/%x-%A_%a.out --export=ALL,RUN_DIR=/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-02 run-overlay-array.sbatch`.
+
+The throttle was temporarily reduced to 5 while diagnostic job 1784 ran and restored to 6 after that diagnostic completed. All six already-running array elements were left untouched.

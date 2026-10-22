@@ -1,0 +1,5 @@
+# Gate 2746 — row 96 complete predictor and scoreboard type overlays
+
+This fresh row-96 gate updates the MLDSA predictor overlay to convert both generated parameterized transfer declarations: its outgoing transaction typedef and its local cast target. The scoreboard overlay converts all six declarations (three queues and three scalar locals). Changes remain in the generated testbench overlay; no RTL, firmware, or pass criteria changed.
+
+Before submission, the runner unit suite passed (48 tests), and both transforms passed directly on the pinned predictor and scoreboard source: two predictor declarations and six scoreboard declarations. Job 2750 **compiled and ran but failed** at 425 ns on the scoreboard expected-analysis cast (one UVM_FATAL, zero UVM_ERROR, no testcase pass marker). The result, simulation log, manifests, and resources are preserved under `raw/job-2750/`; its remote run tree was cleaned. A temporary runtime type/factory-wrapper diagnostic follows in `diagnostics/mldsa-row96-type-identity-20261018-01/`.

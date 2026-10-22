@@ -1,0 +1,1 @@
+test_id=42f2671ec114cfb5 testname=smoke_test_sram_ecc wrapper_exit=0 completed_at=2026-10-16T00:57:08-06:00

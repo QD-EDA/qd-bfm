@@ -1,0 +1,1 @@
+Not produced: logging diagnostic hit its outer 180 s cap; wrapper_exit=124.

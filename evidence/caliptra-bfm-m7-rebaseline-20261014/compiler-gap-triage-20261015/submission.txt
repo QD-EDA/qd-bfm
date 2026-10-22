@@ -1,0 +1,9 @@
+host=DAN-DESKTOP
+job_id=1323
+submitted=2026-10-15
+job_name=a2-ivl-interface-mre
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/ivl-interface-probe-20261015-01
+source=interface-variable-assign.sv
+source_sha256=81103941f43178315218db0d564657fedb5057ac10d51aa5966ef958aa6d01cd
+toolchains=Icarus current main 3335fe7, Icarus c339, Verilator 5.052
+limits=1 CPU, 3 GiB, 15 min job; 30 s Icarus compile caps, 300 s Verilator build cap, 10 s simulation caps

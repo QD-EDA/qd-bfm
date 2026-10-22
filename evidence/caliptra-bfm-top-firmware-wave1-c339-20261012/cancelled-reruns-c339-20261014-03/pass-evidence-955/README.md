@@ -1,0 +1,10 @@
+# Array 955 task 4 pass evidence
+
+Fresh array task 955_4 reran original array-799 maintenance cancellation 799_35 (source row 44), `smoke_test_ecc_flow2_kv_ocp_progress`. The run completed on DAN-DESKTOP under Slurm 25.11.2 with the pinned QD-BFM commit `d1d358e92ea47eacbcdefd58266f7563682400f3`, Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, and Icarus c339 source `c339b9f2287a743aeb7ab6de6528e8d34a4dd602`. The `iverilog` and `vvp` binary SHA-256 values are `683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb` and `ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f`.
+
+The wrapper status is `PASS` with runner exit 0. `result.json` reports `passed=true`, matching test name, compile/firmware/simulator exits 0, one testcase pass marker, and zero fail markers. `sim.log` contains one `* TESTCASE PASSED` marker and no failure marker. Its final progress heartbeat is `wall_s=7500 mcycle=59434` across 26 heartbeats; no adjacent heartbeat repeats mcycle. `/usr/bin/time` measured 2:11:49 elapsed wall time and 1,852,844 KiB maximum RSS.
+
+Selected run provenance, status, resource/version records, result JSON, simulator/firmware/compile logs, and the Slurm wrapper log are copied under [`runs/44-bcb5b29a003aa2a6-4/`](runs/44-bcb5b29a003aa2a6-4/) and [`logs/`](logs/). All copied files match the remote checksums in [`REMOTE-SHA256SUMS-task955_4.txt`](REMOTE-SHA256SUMS-task955_4.txt). The original full run stayed at `/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/` until this evidence was recorded.
+
+
+After evidence commit `722c0ea`, I removed this completed task's remote `output/` tree (375,765,109 bytes) and run-local `pycache/` (1,536,539 bytes), freeing 377,301,648 bytes total (about 0.351 GiB). Cleanup was limited to task 955_4; the other three active runs and the shared toolchain were untouched. The cleanup record is [`cleanup-task955_4-20261014.txt`](cleanup-task955_4-20261014.txt).

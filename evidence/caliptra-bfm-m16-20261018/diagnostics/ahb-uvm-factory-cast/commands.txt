@@ -1,0 +1,9 @@
+Icarus pinned main and control (DAN-DESKTOP)
+iverilog -uvm -g2017 -s tb -o repro.vvp ahb_uvm_factory_cast.sv
+vvp -n repro.vvp
+iverilog -uvm -g2017 -s tb -o control.vvp ahb_uvm_factory_cast_control.sv
+vvp -n control.vvp
+
+Verilator main (MacBook-Air.local; UVM_NO_DPI skips unrelated DPI helper linking)
+~/codex-supervisor/localrun 300 verilator --binary --timing -j 3 -Wno-fatal -DUVM_NO_DPI --top-module tb --Mdir /tmp/a2-m16-uvm-cast-verilator-20261018-07 -I/usr/local/lib/ivl/uvm/src /usr/local/lib/ivl/uvm/src/uvm_pkg.sv evidence/caliptra-bfm-m16-20261018/diagnostics/ahb-uvm-factory-cast/ahb_uvm_factory_cast.sv
+~/codex-supervisor/localrun 60 /tmp/a2-m16-uvm-cast-verilator-20261018-07/Vtb

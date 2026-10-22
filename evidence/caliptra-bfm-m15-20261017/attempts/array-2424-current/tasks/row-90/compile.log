@@ -1,0 +1,5 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `makehint_tb'
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: error: Cast size expression must be constant and greater than zero.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: internal error: Found a zero width constant!
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/makehint/tb/makehint_tb.sv:66: internal error: Port expression too complicated for elaboration.
+2 error(s) during elaboration.

@@ -1,0 +1,7 @@
+# SoC-IFC row 43 overlay gate, retry 10
+
+Retry 9 still hit Icarus's unsupported automatic bins for coverpoints wider than 64 bits, then reached the 4 GiB memory cap before simulation. This retry projects only the wide transaction-coverage values into small summaries: the key keeps zero/other/all-ones categories, entropy and UDS retain their single any-value bins, and the eight generic-input byte bins remain overlapping per-lane nonzero categories. Existing per-bit covergroups remain unchanged.
+
+The transform has a source-shape self-check and changes only the per-run testbench coverage overlay. No RTL, firmware, stimulus, expected values, assertions, or pass criteria change. One-row gate: row 43. Resources: 1 CPU / 6 GiB (5.24 GiB is 1.25x the prior 4,194,344 KiB cap); runner timeout 1,800 seconds; Slurm limit 2,100 seconds.
+
+Terminal result: BLOCKED before simulation. Job 3267_43 compile exited 137 after 77.57 seconds; peak RSS was 6,288,236 KiB, and the compile log ends in `Killed`, so the 6 GiB memory cap was reached. The result JSON's unsupported constant-evaluator warning for `legal_word_aligned_val_00` is not the terminal reason; Icarus drops that bin. Archive `raw/job-3267_43.tar.gz` SHA-256 is `ef451697ba6060f5f86a7002e592c601fa2835ca911cb654e210bcada0a73663`, matched against the remote sidecar. Next attempt: retry the same overlay at 8 GiB after current jobs finish and capacity is rechecked.

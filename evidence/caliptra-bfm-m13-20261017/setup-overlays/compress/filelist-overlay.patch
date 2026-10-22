@@ -1,0 +1,10 @@
+--- src/compress/config/compress_tb.vf
++++ setup-overlays/compress/compress_tb_qd.vf
+@@ -5,6 +5,7 @@
+ +incdir+${ADAMSBRIDGE_ROOT}/src/compress/tb
+ ${ADAMSBRIDGE_ROOT}/src/abr_top/rtl/abr_config_defines.svh
+ ${ADAMSBRIDGE_ROOT}/src/abr_top/rtl/abr_params_pkg.sv
++${ADAMSBRIDGE_ROOT}/src/ntt_top/rtl/ntt_defines_pkg.sv
+ ${ADAMSBRIDGE_ROOT}/src/abr_top/rtl/abr_reg_pkg.sv
+ ${ADAMSBRIDGE_ROOT}/src/abr_libs/rtl/abr_sva.svh
+ ${ADAMSBRIDGE_ROOT}/src/abr_libs/rtl/abr_macros.svh

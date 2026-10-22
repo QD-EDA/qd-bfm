@@ -1,0 +1,9 @@
+job_id=2084
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-03
+source_commit=1f132e764b6385aeeecd6149703db5ed3eb5c148
+requested=4 CPUs, 4 GiB, 2 h
+e353105fa0f5c143d9b3408782575071fc73cf403f91a0c2b7b6c615e511e8df  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-03/build.sbatch
+e72c0f1c9960ef0b1b66532e9113caa0b892f1f89451f2fa5b3472206a58e4e7  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-03/prepare_m11b_traces.py
+d61a925814fb1e09862bc18776e066c5d5cb3c134a2f79c675010931f7a0e8e8  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-03/run-gate.sbatch
+fea67d6750db0bf399c99bd2ab0b6002dbc0b497d25449f706a1ab3306c7b56a  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-03/run-followups.sbatch
+aa6be2b378cdd4a6a7b89ae71645dbbbd1c4a8c9b325e2cf34298ba2326490eb  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-03/run-selection.tsv

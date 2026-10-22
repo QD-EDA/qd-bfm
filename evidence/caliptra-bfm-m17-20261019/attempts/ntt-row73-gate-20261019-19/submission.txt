@@ -1,0 +1,4 @@
+job_id=2908
+row: 73; single-row gate
+resources: 1 CPU, 4 GiB; timeout 600 seconds
+source snapshot sha256: 635e8219ba26c4e0e37b3cd76ef151ed8cc7b4f144f46d1189d141af0b76d867

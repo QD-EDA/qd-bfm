@@ -1,0 +1,9 @@
+Row 93 pin-level result (job 3157_93)
+
+The run compiled and simulated to its terminal FAIL in 1,560.735 s, with UVM_ERROR=16/UVM_FATAL=0. It emitted 46,436 PRE/POST lines from the instrumented runtime `hdl_top.sv`; the per-run manifest records exactly one Icarus filelist source replacement and the original/rewritten filelist hashes.
+
+For each of the 16 active AHB reads at 0xd8..0x114, HREADYOUT=1 and HREADY=1, and HRDATA=0 in both PRE and POST samples. The sequence reads all 16 MLDSA_VERIFY_RES words as zero, while the scoreboard's expected data is nonzero for every word. The raw pins therefore agree with the sequence monitor readback; both disagree with the expected result. A parser assertion checked all 16 addresses, both edge samples, HREADY values, actual values, monitor values, and expected values.
+
+Classify row93 as a functional ML-DSA result failure at the DUT AHB output, not an AHB monitor/BFM readback defect or Icarus compatibility mismatch. This run does not isolate the internal crypto/RTL cause.
+
+Filtered source: `filtered-verify-read-trace.txt`; intern triage: `row93-pin-triage-intern.txt`. Full archive SHA-256: `8eb47addb8acfc4a510939ea81ccc17fd031390d1cfd1e376c16d3418926988e`. The terminal Slurm run tree was removed after verification, freeing 121,779,059 bytes.

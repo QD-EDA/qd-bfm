@@ -1,0 +1,49 @@
+total 11M
+-rw-rw-r-- 1 dsell dsell 11M Oct 19 13:03 job-3157_93.tar.gz
+-rw-rw-r-- 1 dsell dsell 168 Oct 19 13:03 job-3157_93.tar.gz.sha256
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/raw/job-3157_93.tar.gz: OK
+8eb47addb8acfc4a510939ea81ccc17fd031390d1cfd1e376c16d3418926988e  /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/raw/job-3157_93.tar.gz
+{
+  "mode": "ahb",
+  "target": "hdl_top.sv",
+  "files": [
+    {
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/runtime/hdl_top.sv",
+      "source_sha256": "c834ca6607ac93d53bca8a92a9bd52036fa03d3bd43b8a1e9201b827c28c8753",
+      "trace_sha256": "c18b1b5f317966bf34fa671eacd7e2e36288e28a62fb3ce884f04d4a725ff6df"
+    }
+  ],
+  "filelist": {
+    "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa-ahb-open-mvc-icarus.vf",
+    "source_sha256": "fab706bcc93a880fcae30faf3de90e6ca5be7ad2d8ae1615125f50bdec16e773",
+    "trace_sha256": "4c6cb31f1a53c2b58e158b2668fffd191dc26a4fd9f92e1870abcd7dc03f83f4",
+    "replaced_entries": 1,
+    "runtime_entry": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/runtime/hdl_top.sv"
+  },
+  "scope": "testbench observation only; no RTL, firmware, expected values, or pass criteria changed"
+}
+48253:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 231875.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[5]: 0
+48260:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 231905.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x000000f0} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f0} {Data: 0x5448516c} {RnW: 0} {Resp: 0}
+48261:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 231905.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[6]: 0
+48268:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 231935.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x000000f4} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f4} {Data: 0x6392c9b1} {RnW: 0} {Resp: 0}
+48269:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 231935.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[7]: 0
+48276:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 231965.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x000000f8} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000f8} {Data: 0x2070322b} {RnW: 0} {Resp: 0}
+48277:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 231965.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[8]: 0
+48284:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 231995.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x000000fc} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x000000fc} {Data: 0xf7a0abe4} {RnW: 0} {Resp: 0}
+48285:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 231995.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[9]: 0
+48292:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232025.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x00000100} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000100} {Data: 0xade40673} {RnW: 0} {Resp: 0}
+48293:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232025.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[10]: 0
+48300:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232055.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x00000104} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000104} {Data: 0x4eec6c2b} {RnW: 0} {Resp: 0}
+48301:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232055.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[11]: 0
+48308:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232085.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x00000108} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000108} {Data: 0x00e1d07d} {RnW: 0} {Resp: 0}
+48309:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232085.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[12]: 0
+48316:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232115.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x0000010c} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x0000010c} {Data: 0xecae9faf} {RnW: 0} {Resp: 0}
+48317:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232115.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[13]: 0
+48324:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232145.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x00000110} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000110} {Data: 0x46f7acf1} {RnW: 0} {Resp: 0}
+48325:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232145.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[14]: 0
+48332:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row93-ahb-filelist-gate-20261019-01/tasks/row-93/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(220) @ 232175.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Actual AHB txn with {Address: 0x00000114} {Data: 0x00000000} {RnW: 0} {Resp: 0} does not match expected: {Address: 0x00000114} {Data: 0xbc19d1c7} {RnW: 0} {Resp: 0}
+48333:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_verif_sequence.svh(297) @ 232175.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[15]: 0
+48337:* TESTCASE FAILED
+48345:UVM_ERROR :   16
+48346:UVM_FATAL :    0
+48360:[SCBD_AHB]    16

@@ -1,0 +1,12 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-row93-longgate-20261019-01
+Row: 93
+Resources: 1 CPU/2 GiB; 3,600-second test timeout; 75-minute Slurm wall limit
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 78c3eae07e1d080ba38f7fc1399d7dc28770df42c3ffebc23a0cfaacafc04e6f
+Run script SHA-256: 5ff7d6595a0ad0cb34bb27340dd00611ce30d3caff99cde7880bf5326cfe6c39
+Slurm job ID: 3076
+Result: INVALID RUN PATH; Slurm could not chdir, so the simulator never started.
+Scheduler log SHA-256: `148827b3f93c3374e27c512f827bf68428eb19a911a706302d3ce362ab4f88b4` (`invalid-3076/m18-mldsa-row93-long-3076_93.out`)
+Job metadata SHA-256: `9ffaff338d8b3fe95da1f5e9280dc0b5b894e4d68b6e48ae5d2eee69ec37119c` (`invalid-3076/job-meta.txt`)

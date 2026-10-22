@@ -1,0 +1,24 @@
+Captured on DAN-DESKTOP at 2026-10-13 23:54 MDT; host uptime 4 hours 56 minutes.
+
+Slurm state:
+- 799_36: terminal FAIL, recorded.
+- 799_37, 799_38, 799_39: RUNNING.
+- 799_40: terminal FAIL, recorded.
+- 799_41, 799_42: terminal PASS, recorded.
+- 895_1, 895_2: terminal TIMEOUT, recorded in the fresh-rerun ledger.
+- 895_3: RUNNING.
+- 895_4: terminal PASS, recorded in the fresh-rerun ledger.
+
+Latest active simulator heartbeats:
+- 799_37 smoke_test_kv_swwe_lock: wall_s=17400 mcycle=127067; log mtime 23:50:11.
+- 799_38 smoke_test_sha256_wntz: wall_s=17400 mcycle=127205; log mtime 23:52:56.
+- 799_39 smoke_test_ecc_errortrigger1: wall_s=17400 mcycle=62084; log mtime 23:53:03.
+- 895_3 smoke_test_kv_parallel_access: wall_s=17400 mcycle=77252; log mtime 23:52:36.
+
+Fresh timeout results:
+- 895_1 smoke_test_ecc_errortrigger4: configured timeout and elapsed time 17,281 seconds; exit 137; full-log final heartbeat wall_s=17100 mcycle=62443 (58 heartbeats); no result JSON or testcase marker.
+- 895_2 kv_entry_read_err: configured timeout and elapsed time 17,543 seconds; exit 137; full-log final heartbeat wall_s=17400 mcycle=126506 (59 heartbeats); no result JSON or testcase marker.
+
+Fresh 895_4 smoke_test_ecc_flow2_kv_ocp_progress passed. Its final heartbeat is wall_s=8400 mcycle=62186; evidence is SHA-verified under `cancelled-reruns-c339-20261013-01/pass-evidence-895/`.
+
+All four active simulators advanced since the 23:40 sample. No active task meets the 30-minute flat-heartbeat hang rule. The 895_1 and 895_2 output trees measured 375,692,902 and 375,902,554 bytes and remain present until their timeout evidence is committed.

@@ -1,0 +1,11 @@
+environment_id=caliptra-v2-1-2-doe_cbc_tb
+array_task=2196_1
+status=BLOCKED_SETUP
+firmware_result=NONE
+elapsed_before_cancel=1:17:59
+cancelled_by=A2 after preserving partial output
+reason=The pinned DOE CBC testbench opens CBCVarTxt256_clean.txt at a hard-coded path under /home/t-stevenlian; that file is absent from the pinned source tree and staged runtime. With no file-open check, the test continued looping on invalid input, so no valid firmware result was possible.
+evidence=partial-2196_1.tgz
+evidence_sha256=e582c625d11e062c96f56695322e5ab121c7d01cab11f3647b3db8095748e575
+pre_cancel_state=pre-cancel-state.txt
+cancel_state=cancel-state.txt

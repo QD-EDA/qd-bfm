@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 600s make -f /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/tools/scripts/Makefile TESTNAME=smoke_test_ras GCC_PREFIX=riscv-none-elf CALIPTRA_INTERNAL_TRNG=1 PLAYBOOK_RANDOM_SEED=1 BUILD_CFLAGS=-std=gnu11 -O2 -include /home/dsell/slurm-runs/caliptra-bfm/a2/m7-fw-compat-d1529c9-20261014-02/tasks/6-smoke_test_ras-with-overlay/build/caliptra_firmware_compat.h program.hex"
+	User time (seconds): 1.89
+	System time (seconds): 0.27
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.17
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 55896
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 152992
+	Voluntary context switches: 327
+	Involuntary context switches: 135
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 57064
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

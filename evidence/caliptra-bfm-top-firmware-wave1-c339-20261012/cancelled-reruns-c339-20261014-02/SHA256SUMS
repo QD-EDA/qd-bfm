@@ -1,0 +1,10 @@
+c6355b7bdc132109c4e337d7daa2d397030b485219a3610b2caff5920d20fe40  ./README.md
+a34256c1816e2b02592e811eacee6ff6723bbbbe652e57d2a44034d6a69e545a  ./array.sbatch
+a1cd089449de6c98c2e7ce009d546df092df366bc0e16183d2078ade257ed356  ./results.tsv
+6eea2d16861e11a80d7d2f2cbf7ebf3164fce3adb8404f8f8ce4fc5c16d9edec  ./selection.tsv
+5e7b2c13cce74c4099d623a45a8af3f7fdda7addf7e0d89c49132ca51793ea57  ./setup-error-949/README.md
+72ddc2a37ccfd6564b830f1bfad57328873cc9bd06840ca895598788f628e6a6  ./setup-error-949/logs/bfm-m5b-cancelled-rerun-02-949_1.out
+72ddc2a37ccfd6564b830f1bfad57328873cc9bd06840ca895598788f628e6a6  ./setup-error-949/logs/bfm-m5b-cancelled-rerun-02-949_2.out
+72ddc2a37ccfd6564b830f1bfad57328873cc9bd06840ca895598788f628e6a6  ./setup-error-949/logs/bfm-m5b-cancelled-rerun-02-949_3.out
+72ddc2a37ccfd6564b830f1bfad57328873cc9bd06840ca895598788f628e6a6  ./setup-error-949/logs/bfm-m5b-cancelled-rerun-02-949_4.out
+bafcc4db79da035103bc52ead7986270858dcef59b591da666b19708335d1910  ./submission.txt

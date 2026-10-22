@@ -1,0 +1,28 @@
+host=DAN-DESKTOP
+source_commit=dd6d43d5416006a9e77f2458e8df2a5a754f86c7
+source_archive_sha256=9be42c12ba1f791e4769e0dfb6dc42ef1f5cdc61773774544d65a8850ccee53e
+runner_sha256=22420e3a99b181ec730b45bd388febde22f401478b85c85bbd84cff2d6f35584
+experimental_verilator=/home/dsell/toolchains/verilator-pr7176-27d3c20/bin/verilator
+
+build_job=1377
+command=sbatch --parsable --dependency=afterany:1372:1373 build-qd-bfm-top-xsim.sbatch
+resources=4 CPU, 8 GiB, 2 hours
+
+pilot_job=1378
+command=sbatch --parsable --dependency=afterok:1377 --array=0-5%2 --export=ALL,COHORT=xsim-pilot-cohort.tsv run-verilator-top-xsim-pilot.sbatch
+rows=0-5 (six Icarus-PASS comparisons), 120-second simulator cap per case
+resources=1 CPU, 3 GiB, 45 minutes per task; throttle 2
+run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-11
+dependency=wait for arrays 1372/1373 to terminate, then build; run six cases only if build succeeds
+
+2026-10-15 17:18 MDT scheduling update:
+- Array 1373 had completed; array 1372 had only task 3 running. DAN-DESKTOP
+  reported 18/20 CPUs free, 28 GiB available memory, and 7 GiB Slurm memory
+  allocated. The x-sim build needs 4 CPUs and 8 GiB, so it fit while the
+  remaining 1-CPU/3-GiB Verilator case continued.
+- Updated pending job 1377's dependency to `afterany:1373`; Slurm resolved the
+  completed dependency and started job 1377. Its exact run11 script is archived
+  as `build1377/build-qd-bfm-top-xsim.sbatch` (SHA-256
+  `1b0ec7dd450f345f051f8a9332bed90df88998726c938c21c2af7c2585fff9cb`).
+- Job 1377 failed during model elaboration. Pilot job 1378 then showed
+  `DependencyNeverSatisfied` and was canceled at 17:25 MDT; no pilot case ran.

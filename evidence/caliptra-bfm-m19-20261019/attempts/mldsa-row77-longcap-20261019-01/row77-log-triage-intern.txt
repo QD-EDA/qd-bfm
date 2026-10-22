@@ -1,0 +1,9 @@
+**Terminal Verdict Marker:**
+`1917:* TESTCASE PASSED`
+
+**UVM Error/Fatal Counts:**
+*   UVM Error: `1925:UVM_ERROR : 0`
+*   UVM Fatal: `1926:UVM_FATAL : 0`
+
+**Finish Evidence:**
+`1945:/home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 293955000 (1ps)`

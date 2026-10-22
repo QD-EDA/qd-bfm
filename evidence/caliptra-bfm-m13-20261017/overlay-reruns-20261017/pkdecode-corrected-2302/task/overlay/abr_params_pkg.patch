@@ -1,0 +1,10 @@
+--- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/rtl/abr_params_pkg.sv	2026-10-12 09:22:43.176563720 -0600
++++ /home/dsell/slurm-runs/caliptra-bfm/a2/m13b-pkdecode-corrected-retry-20261017-01/tasks/adams-bridge-v2-0-3-pkdecode_tb/overlay/abr_params_pkg.sv	2026-10-17 17:06:30.062204916 -0600
+@@ -82,6 +82,7 @@
+   
+   parameter ABR_MEM_MAX_DEPTH = ABR_MEM_INST2_DEPTH;
+   parameter ABR_MEM_ADDR_WIDTH = $clog2(ABR_MEM_MAX_DEPTH) + 3; //+ 3 bits for bank selection
++  parameter MLDSA_MEM_ADDR_WIDTH = ABR_MEM_ADDR_WIDTH;
+   
+   typedef enum logic [2:0] {
+     MLDSA_NONE        = 3'b000,

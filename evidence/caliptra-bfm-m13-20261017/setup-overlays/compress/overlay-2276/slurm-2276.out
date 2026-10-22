@@ -1,0 +1,6 @@
+outcome=COMPILE_FAIL
+compile_exit=2
+sim_exit=NOT_RUN
+pass_markers=
+failure_markers=
+elapsed_seconds=0

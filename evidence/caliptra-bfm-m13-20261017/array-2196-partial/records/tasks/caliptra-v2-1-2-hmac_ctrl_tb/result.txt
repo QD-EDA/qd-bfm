@@ -1,0 +1,10 @@
+environment_id=caliptra-v2-1-2-hmac_ctrl_tb
+top=hmac_ctrl_tb
+source_repo=caliptra_v2.1.2
+filelist=src/hmac/config/hmac_ctrl_tb.vf
+runner_exit=0
+compile_exit=0
+sim_exit=0
+pass_markers=1
+failure_markers=0
+elapsed_seconds=16

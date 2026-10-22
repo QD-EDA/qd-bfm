@@ -1,0 +1,925 @@
+Start of init
+End of init
+*** Toggle reset.
+End of reset
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:593: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:593: $readmemh: Unable to open kyber_zeta.txt for reading.
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:594: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:594: $readmemh: Unable to open kyber_zeta_inv.hex for reading.
+Zeta values are 000000, 000000, 000000, ...
+Zeta inv values are 000000, 000000, 000000, ...
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:597: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:597: $readmemh: Unable to open kyber_stage0.hex for reading.
+in_val = 000000, 000000, 000000, ...
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:601: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:601: $readmemh: Unable to open kyber_stage0_out.hex for reading.
+out_val = 000000, 000000, 000000, ...
+Stage           2 and           3
+
+In for loop, j =           0 at time                   35, ready = 0
+
+operation = NTT 0, 1, 2, 3
+In for loop, j =           1 at time                   35, ready = 0
+
+operation = NTT 4, 5, 6, 7
+In for loop, j =           2 at time                   45, ready = 0
+
+operation = NTT 8, 9, 10, 11
+In for loop, j =           3 at time                   55, ready = 0
+
+operation = NTT 12, 13, 14, 15
+In for loop, j =           4 at time                   65, ready = 0
+
+operation = NTT 16, 17, 18, 19
+In for loop, j =           5 at time                   75, ready = 0
+
+operation = NTT 20, 21, 22, 23
+In for loop, j =           6 at time                   85, ready = 0
+
+operation = NTT 24, 25, 26, 27
+In for loop, j =           7 at time                   95, ready = 0
+
+operation = NTT 28, 29, 30, 31
+Capturing result 000000, j =           7, test_cnt =           0
+out observed is now xxxxxx at location         -16
+In for loop, j =           8 at time                  105, ready = 1
+
+operation = NTT 32, 33, 34, 35
+Capturing result 000000, j =           8, test_cnt =           1
+out observed is now xxxxxx at location         -12
+In for loop, j =           9 at time                  115, ready = 1
+
+operation = NTT 36, 37, 38, 39
+Capturing result 000000, j =           9, test_cnt =           2
+out observed is now xxxxxx at location          -8
+In for loop, j =          10 at time                  125, ready = 1
+
+operation = NTT 40, 41, 42, 43
+Capturing result 000000, j =          10, test_cnt =           3
+out observed is now xxxxxx at location          -4
+In for loop, j =          11 at time                  135, ready = 1
+
+operation = NTT 44, 45, 46, 47
+Capturing result 000000, j =          11, test_cnt =           4
+out observed is now 000000 at location           0
+In for loop, j =          12 at time                  145, ready = 1
+
+operation = NTT 48, 49, 50, 51
+Capturing result 000000, j =          12, test_cnt =           5
+out observed is now 000000 at location           4
+In for loop, j =          13 at time                  155, ready = 1
+
+operation = NTT 52, 53, 54, 55
+Capturing result 000000, j =          13, test_cnt =           6
+out observed is now 000000 at location           8
+In for loop, j =          14 at time                  165, ready = 1
+
+operation = NTT 56, 57, 58, 59
+Capturing result 000000, j =          14, test_cnt =           7
+out observed is now 000000 at location          12
+In for loop, j =          15 at time                  175, ready = 1
+
+operation = NTT 60, 61, 62, 63
+Capturing result 000000, j =          15, test_cnt =           8
+out observed is now 000000 at location          16
+In for loop, j =          16 at time                  185, ready = 1
+
+operation = NTT 64, 65, 66, 67
+Capturing result 000000, j =          16, test_cnt =           9
+out observed is now 000000 at location          20
+In for loop, j =          17 at time                  195, ready = 1
+
+operation = NTT 68, 69, 70, 71
+Capturing result 000000, j =          17, test_cnt =          10
+out observed is now 000000 at location          24
+In for loop, j =          18 at time                  205, ready = 1
+
+operation = NTT 72, 73, 74, 75
+Capturing result 000000, j =          18, test_cnt =          11
+out observed is now 000000 at location          28
+In for loop, j =          19 at time                  215, ready = 1
+
+operation = NTT 76, 77, 78, 79
+Capturing result 000000, j =          19, test_cnt =          12
+out observed is now 000000 at location          32
+In for loop, j =          20 at time                  225, ready = 1
+
+operation = NTT 80, 81, 82, 83
+Capturing result 000000, j =          20, test_cnt =          13
+out observed is now 000000 at location          36
+In for loop, j =          21 at time                  235, ready = 1
+
+operation = NTT 84, 85, 86, 87
+Capturing result 000000, j =          21, test_cnt =          14
+out observed is now 000000 at location          40
+In for loop, j =          22 at time                  245, ready = 1
+
+operation = NTT 88, 89, 90, 91
+Capturing result 000000, j =          22, test_cnt =          15
+out observed is now 000000 at location          44
+In for loop, j =          23 at time                  255, ready = 1
+
+operation = NTT 92, 93, 94, 95
+Capturing result 000000, j =          23, test_cnt =          16
+out observed is now 000000 at location          48
+In for loop, j =          24 at time                  265, ready = 1
+
+operation = NTT 96, 97, 98, 99
+Capturing result 000000, j =          24, test_cnt =          17
+out observed is now 000000 at location          52
+In for loop, j =          25 at time                  275, ready = 1
+
+operation = NTT 100, 101, 102, 103
+Capturing result 000000, j =          25, test_cnt =          18
+out observed is now 000000 at location          56
+In for loop, j =          26 at time                  285, ready = 1
+
+operation = NTT 104, 105, 106, 107
+Capturing result 000000, j =          26, test_cnt =          19
+out observed is now 000000 at location          60
+In for loop, j =          27 at time                  295, ready = 1
+
+operation = NTT 108, 109, 110, 111
+Capturing result 000000, j =          27, test_cnt =          20
+out observed is now 000000 at location          64
+In for loop, j =          28 at time                  305, ready = 1
+
+operation = NTT 112, 113, 114, 115
+Capturing result 000000, j =          28, test_cnt =          21
+out observed is now 000000 at location          68
+In for loop, j =          29 at time                  315, ready = 1
+
+operation = NTT 116, 117, 118, 119
+Capturing result 000000, j =          29, test_cnt =          22
+out observed is now 000000 at location          72
+In for loop, j =          30 at time                  325, ready = 1
+
+operation = NTT 120, 121, 122, 123
+Capturing result 000000, j =          30, test_cnt =          23
+out observed is now 000000 at location          76
+In for loop, j =          31 at time                  335, ready = 1
+
+operation = NTT 124, 125, 126, 127
+Capturing result 000000, j =          31, test_cnt =          24
+out observed is now 000000 at location          80
+In for loop, j =          32 at time                  345, ready = 1
+
+operation = NTT 128, 129, 130, 131
+Capturing result 000000, j =          32, test_cnt =          25
+out observed is now 000000 at location          84
+In for loop, j =          33 at time                  355, ready = 1
+
+operation = NTT 132, 133, 134, 135
+Capturing result 000000, j =          33, test_cnt =          26
+out observed is now 000000 at location          88
+In for loop, j =          34 at time                  365, ready = 1
+
+operation = NTT 136, 137, 138, 139
+Capturing result 000000, j =          34, test_cnt =          27
+out observed is now 000000 at location          92
+In for loop, j =          35 at time                  375, ready = 1
+
+operation = NTT 140, 141, 142, 143
+Capturing result 000000, j =          35, test_cnt =          28
+out observed is now 000000 at location          96
+In for loop, j =          36 at time                  385, ready = 1
+
+operation = NTT 144, 145, 146, 147
+Capturing result 000000, j =          36, test_cnt =          29
+out observed is now 000000 at location         100
+In for loop, j =          37 at time                  395, ready = 1
+
+operation = NTT 148, 149, 150, 151
+Capturing result 000000, j =          37, test_cnt =          30
+out observed is now 000000 at location         104
+In for loop, j =          38 at time                  405, ready = 1
+
+operation = NTT 152, 153, 154, 155
+Capturing result 000000, j =          38, test_cnt =          31
+out observed is now 000000 at location         108
+In for loop, j =          39 at time                  415, ready = 1
+
+operation = NTT 156, 157, 158, 159
+Capturing result 000000, j =          39, test_cnt =          32
+out observed is now 000000 at location         112
+In for loop, j =          40 at time                  425, ready = 1
+
+operation = NTT 160, 161, 162, 163
+Capturing result 000000, j =          40, test_cnt =          33
+out observed is now 000000 at location         116
+In for loop, j =          41 at time                  435, ready = 1
+
+operation = NTT 164, 165, 166, 167
+Capturing result 000000, j =          41, test_cnt =          34
+out observed is now 000000 at location         120
+In for loop, j =          42 at time                  445, ready = 1
+
+operation = NTT 168, 169, 170, 171
+Capturing result 000000, j =          42, test_cnt =          35
+out observed is now 000000 at location         124
+In for loop, j =          43 at time                  455, ready = 1
+
+operation = NTT 172, 173, 174, 175
+Capturing result 000000, j =          43, test_cnt =          36
+out observed is now 000000 at location         128
+In for loop, j =          44 at time                  465, ready = 1
+
+operation = NTT 176, 177, 178, 179
+Capturing result 000000, j =          44, test_cnt =          37
+out observed is now 000000 at location         132
+In for loop, j =          45 at time                  475, ready = 1
+
+operation = NTT 180, 181, 182, 183
+Capturing result 000000, j =          45, test_cnt =          38
+out observed is now 000000 at location         136
+In for loop, j =          46 at time                  485, ready = 1
+
+operation = NTT 184, 185, 186, 187
+Capturing result 000000, j =          46, test_cnt =          39
+out observed is now 000000 at location         140
+In for loop, j =          47 at time                  495, ready = 1
+
+operation = NTT 188, 189, 190, 191
+Capturing result 000000, j =          47, test_cnt =          40
+out observed is now 000000 at location         144
+In for loop, j =          48 at time                  505, ready = 1
+
+operation = NTT 192, 193, 194, 195
+Capturing result 000000, j =          48, test_cnt =          41
+out observed is now 000000 at location         148
+In for loop, j =          49 at time                  515, ready = 1
+
+operation = NTT 196, 197, 198, 199
+Capturing result 000000, j =          49, test_cnt =          42
+out observed is now 000000 at location         152
+In for loop, j =          50 at time                  525, ready = 1
+
+operation = NTT 200, 201, 202, 203
+Capturing result 000000, j =          50, test_cnt =          43
+out observed is now 000000 at location         156
+In for loop, j =          51 at time                  535, ready = 1
+
+operation = NTT 204, 205, 206, 207
+Capturing result 000000, j =          51, test_cnt =          44
+out observed is now 000000 at location         160
+In for loop, j =          52 at time                  545, ready = 1
+
+operation = NTT 208, 209, 210, 211
+Capturing result 000000, j =          52, test_cnt =          45
+out observed is now 000000 at location         164
+In for loop, j =          53 at time                  555, ready = 1
+
+operation = NTT 212, 213, 214, 215
+Capturing result 000000, j =          53, test_cnt =          46
+out observed is now 000000 at location         168
+In for loop, j =          54 at time                  565, ready = 1
+
+operation = NTT 216, 217, 218, 219
+Capturing result 000000, j =          54, test_cnt =          47
+out observed is now 000000 at location         172
+In for loop, j =          55 at time                  575, ready = 1
+
+operation = NTT 220, 221, 222, 223
+Capturing result 000000, j =          55, test_cnt =          48
+out observed is now 000000 at location         176
+In for loop, j =          56 at time                  585, ready = 1
+
+operation = NTT 224, 225, 226, 227
+Capturing result 000000, j =          56, test_cnt =          49
+out observed is now 000000 at location         180
+In for loop, j =          57 at time                  595, ready = 1
+
+operation = NTT 228, 229, 230, 231
+Capturing result 000000, j =          57, test_cnt =          50
+out observed is now 000000 at location         184
+In for loop, j =          58 at time                  605, ready = 1
+
+operation = NTT 232, 233, 234, 235
+Capturing result 000000, j =          58, test_cnt =          51
+out observed is now 000000 at location         188
+In for loop, j =          59 at time                  615, ready = 1
+
+operation = NTT 236, 237, 238, 239
+Capturing result 000000, j =          59, test_cnt =          52
+out observed is now 000000 at location         192
+In for loop, j =          60 at time                  625, ready = 1
+
+operation = NTT 240, 241, 242, 243
+Capturing result 000000, j =          60, test_cnt =          53
+out observed is now 000000 at location         196
+In for loop, j =          61 at time                  635, ready = 1
+
+operation = NTT 244, 245, 246, 247
+Capturing result 000000, j =          61, test_cnt =          54
+out observed is now 000000 at location         200
+In for loop, j =          62 at time                  645, ready = 1
+
+operation = NTT 248, 249, 250, 251
+Capturing result 000000, j =          62, test_cnt =          55
+out observed is now 000000 at location         204
+In for loop, j =          63 at time                  655, ready = 1
+
+operation = NTT 252, 253, 254, 255
+Capturing result 000000, j =          63, test_cnt =          56
+out observed is now 000000 at location         208
+In for loop, j =           0 at time                  665, ready = 1
+
+operation = NTT 0, 1, 2, 3
+Capturing result 000000, j =          64, test_cnt =          57
+out observed is now 000000 at location         212
+In for loop, j =           1 at time                  675, ready = 1
+
+operation = NTT 4, 5, 6, 7
+Capturing result 000000, j =          65, test_cnt =          58
+out observed is now 000000 at location         216
+In for loop, j =           2 at time                  685, ready = 1
+
+operation = NTT 8, 9, 10, 11
+Capturing result 000000, j =          66, test_cnt =          59
+out observed is now 000000 at location         220
+In for loop, j =           3 at time                  695, ready = 1
+
+operation = NTT 12, 13, 14, 15
+Capturing result 000000, j =          67, test_cnt =          60
+out observed is now 000000 at location         224
+In for loop, j =           4 at time                  705, ready = 1
+
+operation = NTT 16, 17, 18, 19
+Capturing result 000000, j =          68, test_cnt =          61
+out observed is now 000000 at location         228
+In for loop, j =           5 at time                  715, ready = 1
+
+operation = NTT 20, 21, 22, 23
+Capturing result 000000, j =          69, test_cnt =          62
+out observed is now 000000 at location         232
+In for loop, j =           6 at time                  725, ready = 1
+
+operation = NTT 24, 25, 26, 27
+Capturing result 000000, j =          70, test_cnt =          63
+out observed is now 000000 at location         236
+In for loop, j =           7 at time                  735, ready = 1
+
+operation = NTT 28, 29, 30, 31
+Capturing result 000000, j =          71, test_cnt =          64
+out observed is now 000000 at location         240
+In for loop, j =           8 at time                  745, ready = 1
+
+operation = NTT 32, 33, 34, 35
+Capturing result 000000, j =          72, test_cnt =          65
+out observed is now 000000 at location         244
+In for loop, j =           9 at time                  755, ready = 1
+
+operation = NTT 36, 37, 38, 39
+Capturing result 000000, j =          73, test_cnt =          66
+out observed is now 000000 at location         248
+In for loop, j =          10 at time                  765, ready = 1
+
+operation = NTT 40, 41, 42, 43
+Capturing result 000000, j =          74, test_cnt =          67
+out observed is now 000000 at location         252
+In for loop, j =          11 at time                  775, ready = 1
+
+operation = NTT 44, 45, 46, 47
+In for loop, j =          12 at time                  785, ready = 1
+
+operation = NTT 48, 49, 50, 51
+In for loop, j =          13 at time                  795, ready = 1
+
+operation = NTT 52, 53, 54, 55
+In for loop, j =          14 at time                  805, ready = 1
+
+operation = NTT 56, 57, 58, 59
+In for loop, j =          15 at time                  815, ready = 1
+
+operation = NTT 60, 61, 62, 63
+In for loop, j =          16 at time                  825, ready = 1
+
+operation = NTT 64, 65, 66, 67
+In for loop, j =          17 at time                  835, ready = 1
+
+operation = NTT 68, 69, 70, 71
+In for loop, j =          18 at time                  845, ready = 1
+
+operation = NTT 72, 73, 74, 75
+In for loop, j =          19 at time                  855, ready = 1
+
+operation = NTT 76, 77, 78, 79
+In for loop, j =          20 at time                  865, ready = 1
+
+operation = NTT 80, 81, 82, 83
+In for loop, j =          21 at time                  875, ready = 1
+
+operation = NTT 84, 85, 86, 87
+In for loop, j =          22 at time                  885, ready = 1
+
+operation = NTT 88, 89, 90, 91
+In for loop, j =          23 at time                  895, ready = 1
+
+operation = NTT 92, 93, 94, 95
+In for loop, j =          24 at time                  905, ready = 1
+
+operation = NTT 96, 97, 98, 99
+In for loop, j =          25 at time                  915, ready = 1
+
+operation = NTT 100, 101, 102, 103
+In for loop, j =          26 at time                  925, ready = 1
+
+operation = NTT 104, 105, 106, 107
+In for loop, j =          27 at time                  935, ready = 1
+
+operation = NTT 108, 109, 110, 111
+In for loop, j =          28 at time                  945, ready = 1
+
+operation = NTT 112, 113, 114, 115
+In for loop, j =          29 at time                  955, ready = 1
+
+operation = NTT 116, 117, 118, 119
+In for loop, j =          30 at time                  965, ready = 1
+
+operation = NTT 120, 121, 122, 123
+In for loop, j =          31 at time                  975, ready = 1
+
+operation = NTT 124, 125, 126, 127
+In for loop, j =          32 at time                  985, ready = 1
+
+operation = NTT 128, 129, 130, 131
+In for loop, j =          33 at time                  995, ready = 1
+
+operation = NTT 132, 133, 134, 135
+In for loop, j =          34 at time                 1005, ready = 1
+
+operation = NTT 136, 137, 138, 139
+In for loop, j =          35 at time                 1015, ready = 1
+
+operation = NTT 140, 141, 142, 143
+In for loop, j =          36 at time                 1025, ready = 1
+
+operation = NTT 144, 145, 146, 147
+In for loop, j =          37 at time                 1035, ready = 1
+
+operation = NTT 148, 149, 150, 151
+In for loop, j =          38 at time                 1045, ready = 1
+
+operation = NTT 152, 153, 154, 155
+In for loop, j =          39 at time                 1055, ready = 1
+
+operation = NTT 156, 157, 158, 159
+In for loop, j =          40 at time                 1065, ready = 1
+
+operation = NTT 160, 161, 162, 163
+In for loop, j =          41 at time                 1075, ready = 1
+
+operation = NTT 164, 165, 166, 167
+In for loop, j =          42 at time                 1085, ready = 1
+
+operation = NTT 168, 169, 170, 171
+In for loop, j =          43 at time                 1095, ready = 1
+
+operation = NTT 172, 173, 174, 175
+In for loop, j =          44 at time                 1105, ready = 1
+
+operation = NTT 176, 177, 178, 179
+In for loop, j =          45 at time                 1115, ready = 1
+
+operation = NTT 180, 181, 182, 183
+In for loop, j =          46 at time                 1125, ready = 1
+
+operation = NTT 184, 185, 186, 187
+In for loop, j =          47 at time                 1135, ready = 1
+
+operation = NTT 188, 189, 190, 191
+In for loop, j =          48 at time                 1145, ready = 1
+
+operation = NTT 192, 193, 194, 195
+In for loop, j =          49 at time                 1155, ready = 1
+
+operation = NTT 196, 197, 198, 199
+In for loop, j =          50 at time                 1165, ready = 1
+
+operation = NTT 200, 201, 202, 203
+In for loop, j =          51 at time                 1175, ready = 1
+
+operation = NTT 204, 205, 206, 207
+In for loop, j =          52 at time                 1185, ready = 1
+
+operation = NTT 208, 209, 210, 211
+In for loop, j =          53 at time                 1195, ready = 1
+
+operation = NTT 212, 213, 214, 215
+In for loop, j =          54 at time                 1205, ready = 1
+
+operation = NTT 216, 217, 218, 219
+In for loop, j =          55 at time                 1215, ready = 1
+
+operation = NTT 220, 221, 222, 223
+In for loop, j =          56 at time                 1225, ready = 1
+
+operation = NTT 224, 225, 226, 227
+In for loop, j =          57 at time                 1235, ready = 1
+
+operation = NTT 228, 229, 230, 231
+In for loop, j =          58 at time                 1245, ready = 1
+
+operation = NTT 232, 233, 234, 235
+In for loop, j =          59 at time                 1255, ready = 1
+
+operation = NTT 236, 237, 238, 239
+In for loop, j =          60 at time                 1265, ready = 1
+
+operation = NTT 240, 241, 242, 243
+In for loop, j =          61 at time                 1275, ready = 1
+
+operation = NTT 244, 245, 246, 247
+In for loop, j =          62 at time                 1285, ready = 1
+
+operation = NTT 248, 249, 250, 251
+In for loop, j =          63 at time                 1295, ready = 1
+
+operation = NTT 252, 253, 254, 255
+In for loop, j =           0 at time                 1305, ready = 1
+
+operation = NTT 0, 1, 2, 3
+In for loop, j =           1 at time                 1315, ready = 1
+
+operation = NTT 4, 5, 6, 7
+In for loop, j =           2 at time                 1325, ready = 1
+
+operation = NTT 8, 9, 10, 11
+In for loop, j =           3 at time                 1335, ready = 1
+
+operation = NTT 12, 13, 14, 15
+In for loop, j =           4 at time                 1345, ready = 1
+
+operation = NTT 16, 17, 18, 19
+In for loop, j =           5 at time                 1355, ready = 1
+
+operation = NTT 20, 21, 22, 23
+In for loop, j =           6 at time                 1365, ready = 1
+
+operation = NTT 24, 25, 26, 27
+In for loop, j =           7 at time                 1375, ready = 1
+
+operation = NTT 28, 29, 30, 31
+In for loop, j =           8 at time                 1385, ready = 1
+
+operation = NTT 32, 33, 34, 35
+In for loop, j =           9 at time                 1395, ready = 1
+
+operation = NTT 36, 37, 38, 39
+In for loop, j =          10 at time                 1405, ready = 1
+
+operation = NTT 40, 41, 42, 43
+In for loop, j =          11 at time                 1415, ready = 1
+
+operation = NTT 44, 45, 46, 47
+In for loop, j =          12 at time                 1425, ready = 1
+
+operation = NTT 48, 49, 50, 51
+In for loop, j =          13 at time                 1435, ready = 1
+
+operation = NTT 52, 53, 54, 55
+In for loop, j =          14 at time                 1445, ready = 1
+
+operation = NTT 56, 57, 58, 59
+In for loop, j =          15 at time                 1455, ready = 1
+
+operation = NTT 60, 61, 62, 63
+In for loop, j =          16 at time                 1465, ready = 1
+
+operation = NTT 64, 65, 66, 67
+In for loop, j =          17 at time                 1475, ready = 1
+
+operation = NTT 68, 69, 70, 71
+In for loop, j =          18 at time                 1485, ready = 1
+
+operation = NTT 72, 73, 74, 75
+In for loop, j =          19 at time                 1495, ready = 1
+
+operation = NTT 76, 77, 78, 79
+In for loop, j =          20 at time                 1505, ready = 1
+
+operation = NTT 80, 81, 82, 83
+In for loop, j =          21 at time                 1515, ready = 1
+
+operation = NTT 84, 85, 86, 87
+In for loop, j =          22 at time                 1525, ready = 1
+
+operation = NTT 88, 89, 90, 91
+In for loop, j =          23 at time                 1535, ready = 1
+
+operation = NTT 92, 93, 94, 95
+In for loop, j =          24 at time                 1545, ready = 1
+
+operation = NTT 96, 97, 98, 99
+In for loop, j =          25 at time                 1555, ready = 1
+
+operation = NTT 100, 101, 102, 103
+In for loop, j =          26 at time                 1565, ready = 1
+
+operation = NTT 104, 105, 106, 107
+In for loop, j =          27 at time                 1575, ready = 1
+
+operation = NTT 108, 109, 110, 111
+In for loop, j =          28 at time                 1585, ready = 1
+
+operation = NTT 112, 113, 114, 115
+In for loop, j =          29 at time                 1595, ready = 1
+
+operation = NTT 116, 117, 118, 119
+In for loop, j =          30 at time                 1605, ready = 1
+
+operation = NTT 120, 121, 122, 123
+In for loop, j =          31 at time                 1615, ready = 1
+
+operation = NTT 124, 125, 126, 127
+In for loop, j =          32 at time                 1625, ready = 1
+
+operation = NTT 128, 129, 130, 131
+In for loop, j =          33 at time                 1635, ready = 1
+
+operation = NTT 132, 133, 134, 135
+In for loop, j =          34 at time                 1645, ready = 1
+
+operation = NTT 136, 137, 138, 139
+In for loop, j =          35 at time                 1655, ready = 1
+
+operation = NTT 140, 141, 142, 143
+In for loop, j =          36 at time                 1665, ready = 1
+
+operation = NTT 144, 145, 146, 147
+In for loop, j =          37 at time                 1675, ready = 1
+
+operation = NTT 148, 149, 150, 151
+In for loop, j =          38 at time                 1685, ready = 1
+
+operation = NTT 152, 153, 154, 155
+In for loop, j =          39 at time                 1695, ready = 1
+
+operation = NTT 156, 157, 158, 159
+In for loop, j =          40 at time                 1705, ready = 1
+
+operation = NTT 160, 161, 162, 163
+In for loop, j =          41 at time                 1715, ready = 1
+
+operation = NTT 164, 165, 166, 167
+In for loop, j =          42 at time                 1725, ready = 1
+
+operation = NTT 168, 169, 170, 171
+In for loop, j =          43 at time                 1735, ready = 1
+
+operation = NTT 172, 173, 174, 175
+In for loop, j =          44 at time                 1745, ready = 1
+
+operation = NTT 176, 177, 178, 179
+In for loop, j =          45 at time                 1755, ready = 1
+
+operation = NTT 180, 181, 182, 183
+In for loop, j =          46 at time                 1765, ready = 1
+
+operation = NTT 184, 185, 186, 187
+In for loop, j =          47 at time                 1775, ready = 1
+
+operation = NTT 188, 189, 190, 191
+In for loop, j =          48 at time                 1785, ready = 1
+
+operation = NTT 192, 193, 194, 195
+In for loop, j =          49 at time                 1795, ready = 1
+
+operation = NTT 196, 197, 198, 199
+In for loop, j =          50 at time                 1805, ready = 1
+
+operation = NTT 200, 201, 202, 203
+In for loop, j =          51 at time                 1815, ready = 1
+
+operation = NTT 204, 205, 206, 207
+In for loop, j =          52 at time                 1825, ready = 1
+
+operation = NTT 208, 209, 210, 211
+In for loop, j =          53 at time                 1835, ready = 1
+
+operation = NTT 212, 213, 214, 215
+In for loop, j =          54 at time                 1845, ready = 1
+
+operation = NTT 216, 217, 218, 219
+In for loop, j =          55 at time                 1855, ready = 1
+
+operation = NTT 220, 221, 222, 223
+In for loop, j =          56 at time                 1865, ready = 1
+
+operation = NTT 224, 225, 226, 227
+In for loop, j =          57 at time                 1875, ready = 1
+
+operation = NTT 228, 229, 230, 231
+In for loop, j =          58 at time                 1885, ready = 1
+
+operation = NTT 232, 233, 234, 235
+In for loop, j =          59 at time                 1895, ready = 1
+
+operation = NTT 236, 237, 238, 239
+In for loop, j =          60 at time                 1905, ready = 1
+
+operation = NTT 240, 241, 242, 243
+In for loop, j =          61 at time                 1915, ready = 1
+
+operation = NTT 244, 245, 246, 247
+In for loop, j =          62 at time                 1925, ready = 1
+
+operation = NTT 248, 249, 250, 251
+In for loop, j =          63 at time                 1935, ready = 1
+
+operation = NTT 252, 253, 254, 255
+In for loop, j =           0 at time                 1945, ready = 1
+
+operation = NTT 0, 1, 2, 3
+In for loop, j =           1 at time                 1955, ready = 1
+
+operation = NTT 4, 5, 6, 7
+In for loop, j =           2 at time                 1965, ready = 1
+
+operation = NTT 8, 9, 10, 11
+In for loop, j =           3 at time                 1975, ready = 1
+
+operation = NTT 12, 13, 14, 15
+In for loop, j =           4 at time                 1985, ready = 1
+
+operation = NTT 16, 17, 18, 19
+In for loop, j =           5 at time                 1995, ready = 1
+
+operation = NTT 20, 21, 22, 23
+In for loop, j =           6 at time                 2005, ready = 1
+
+operation = NTT 24, 25, 26, 27
+In for loop, j =           7 at time                 2015, ready = 1
+
+operation = NTT 28, 29, 30, 31
+In for loop, j =           8 at time                 2025, ready = 1
+
+operation = NTT 32, 33, 34, 35
+In for loop, j =           9 at time                 2035, ready = 1
+
+operation = NTT 36, 37, 38, 39
+In for loop, j =          10 at time                 2045, ready = 1
+
+operation = NTT 40, 41, 42, 43
+In for loop, j =          11 at time                 2055, ready = 1
+
+operation = NTT 44, 45, 46, 47
+In for loop, j =          12 at time                 2065, ready = 1
+
+operation = NTT 48, 49, 50, 51
+In for loop, j =          13 at time                 2075, ready = 1
+
+operation = NTT 52, 53, 54, 55
+In for loop, j =          14 at time                 2085, ready = 1
+
+operation = NTT 56, 57, 58, 59
+In for loop, j =          15 at time                 2095, ready = 1
+
+operation = NTT 60, 61, 62, 63
+In for loop, j =          16 at time                 2105, ready = 1
+
+operation = NTT 64, 65, 66, 67
+In for loop, j =          17 at time                 2115, ready = 1
+
+operation = NTT 68, 69, 70, 71
+In for loop, j =          18 at time                 2125, ready = 1
+
+operation = NTT 72, 73, 74, 75
+In for loop, j =          19 at time                 2135, ready = 1
+
+operation = NTT 76, 77, 78, 79
+In for loop, j =          20 at time                 2145, ready = 1
+
+operation = NTT 80, 81, 82, 83
+In for loop, j =          21 at time                 2155, ready = 1
+
+operation = NTT 84, 85, 86, 87
+In for loop, j =          22 at time                 2165, ready = 1
+
+operation = NTT 88, 89, 90, 91
+In for loop, j =          23 at time                 2175, ready = 1
+
+operation = NTT 92, 93, 94, 95
+In for loop, j =          24 at time                 2185, ready = 1
+
+operation = NTT 96, 97, 98, 99
+In for loop, j =          25 at time                 2195, ready = 1
+
+operation = NTT 100, 101, 102, 103
+In for loop, j =          26 at time                 2205, ready = 1
+
+operation = NTT 104, 105, 106, 107
+In for loop, j =          27 at time                 2215, ready = 1
+
+operation = NTT 108, 109, 110, 111
+In for loop, j =          28 at time                 2225, ready = 1
+
+operation = NTT 112, 113, 114, 115
+In for loop, j =          29 at time                 2235, ready = 1
+
+operation = NTT 116, 117, 118, 119
+In for loop, j =          30 at time                 2245, ready = 1
+
+operation = NTT 120, 121, 122, 123
+In for loop, j =          31 at time                 2255, ready = 1
+
+operation = NTT 124, 125, 126, 127
+In for loop, j =          32 at time                 2265, ready = 1
+
+operation = NTT 128, 129, 130, 131
+In for loop, j =          33 at time                 2275, ready = 1
+
+operation = NTT 132, 133, 134, 135
+In for loop, j =          34 at time                 2285, ready = 1
+
+operation = NTT 136, 137, 138, 139
+In for loop, j =          35 at time                 2295, ready = 1
+
+operation = NTT 140, 141, 142, 143
+In for loop, j =          36 at time                 2305, ready = 1
+
+operation = NTT 144, 145, 146, 147
+In for loop, j =          37 at time                 2315, ready = 1
+
+operation = NTT 148, 149, 150, 151
+In for loop, j =          38 at time                 2325, ready = 1
+
+operation = NTT 152, 153, 154, 155
+In for loop, j =          39 at time                 2335, ready = 1
+
+operation = NTT 156, 157, 158, 159
+In for loop, j =          40 at time                 2345, ready = 1
+
+operation = NTT 160, 161, 162, 163
+In for loop, j =          41 at time                 2355, ready = 1
+
+operation = NTT 164, 165, 166, 167
+In for loop, j =          42 at time                 2365, ready = 1
+
+operation = NTT 168, 169, 170, 171
+In for loop, j =          43 at time                 2375, ready = 1
+
+operation = NTT 172, 173, 174, 175
+In for loop, j =          44 at time                 2385, ready = 1
+
+operation = NTT 176, 177, 178, 179
+In for loop, j =          45 at time                 2395, ready = 1
+
+operation = NTT 180, 181, 182, 183
+In for loop, j =          46 at time                 2405, ready = 1
+
+operation = NTT 184, 185, 186, 187
+In for loop, j =          47 at time                 2415, ready = 1
+
+operation = NTT 188, 189, 190, 191
+In for loop, j =          48 at time                 2425, ready = 1
+
+operation = NTT 192, 193, 194, 195
+In for loop, j =          49 at time                 2435, ready = 1
+
+operation = NTT 196, 197, 198, 199
+In for loop, j =          50 at time                 2445, ready = 1
+
+operation = NTT 200, 201, 202, 203
+In for loop, j =          51 at time                 2455, ready = 1
+
+operation = NTT 204, 205, 206, 207
+In for loop, j =          52 at time                 2465, ready = 1
+
+operation = NTT 208, 209, 210, 211
+In for loop, j =          53 at time                 2475, ready = 1
+
+operation = NTT 212, 213, 214, 215
+In for loop, j =          54 at time                 2485, ready = 1
+
+operation = NTT 216, 217, 218, 219
+In for loop, j =          55 at time                 2495, ready = 1
+
+operation = NTT 220, 221, 222, 223
+In for loop, j =          56 at time                 2505, ready = 1
+
+operation = NTT 224, 225, 226, 227
+In for loop, j =          57 at time                 2515, ready = 1
+
+operation = NTT 228, 229, 230, 231
+In for loop, j =          58 at time                 2525, ready = 1
+
+operation = NTT 232, 233, 234, 235
+In for loop, j =          59 at time                 2535, ready = 1
+
+operation = NTT 236, 237, 238, 239
+In for loop, j =          60 at time                 2545, ready = 1
+
+operation = NTT 240, 241, 242, 243
+In for loop, j =          61 at time                 2555, ready = 1
+
+operation = NTT 244, 245, 246, 247
+In for loop, j =          62 at time                 2565, ready = 1
+
+operation = NTT 248, 249, 250, 251
+In for loop, j =          63 at time                 2575, ready = 1
+
+operation = NTT 252, 253, 254, 255
+NTT operation success
+
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-intt.sv:621: $finish called at 2695 (1s)

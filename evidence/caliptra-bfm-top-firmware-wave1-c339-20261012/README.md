@@ -127,7 +127,7 @@ After Slurm reopened, array 799 tasks 36–39, 41, and 42 were live; task 40 had
 
 Fresh array 895 was submitted at 19:02 for only the four maintenance-cancelled cases (original array tasks 28, 30, 34, and 35), using the same pinned source/toolchain, 1 CPU and 3 GiB per task, original per-test timeouts, and throttle 6. The initial queue view showed tasks 895_1–3 RUNNING and 895_4 PENDING for resources; the next view still showed the remaining 799 tasks running. No local duplicate was started. See [`cancelled-reruns-c339-20261013-01/`](cancelled-reruns-c339-20261013-01/) for the staged selection, hashes, and submission record.
 
-The main ledger now has 36 terminal rows (26 TIMEOUT, 4 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 2 PASS) and six still pending in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded.
+The main ledger has 39 terminal rows (26 TIMEOUT, 5 FAIL, 4 CANCELLED-FOR-MAINTENANCE, 4 PASS) and three RUNNING in array 799. The cancellation rows retain their historical status until the fresh runs finish and are recorded; all four fresh runs in array 895 are also RUNNING.
 
 ## Current checkpoint — 19:18 MDT, 2026-10-13
 
@@ -145,6 +145,166 @@ The six remaining 799 tasks and the first three 895 tasks remain RUNNING; 895_4 
 
 Array 799 tasks 36–39, 41, and 42 remain RUNNING. Fresh array 895 tasks 1–3 remain RUNNING, while task 4 is still PENDING for resources. All nine active simulations advanced since the prior checkpoint; none meets the 30-minute flat-heartbeat criterion. No terminal rows were ready for collection or cleanup. The full snapshot is [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-1951.txt).
 
-## Current checkpoint — 20:13 MDT, 2026-10-13
+## Current checkpoint — 23:55 MDT, 2026-10-13
 
-The six active 799 tasks and the first three fresh 895 reruns are still running; 895_4 remains queued for resources. All nine mcycles advanced since the 20:26 sample, with no terminal result or 30-minute flat-heartbeat case. The host has been up longer than every active job. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2037.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2037.txt).
+799_36 failed on `ERR_ECC_PRIVKEY_NOT_STABLE`; 799_41 and 799_42 passed. Their final heartbeats are recorded in the TSV, and those three output trees were removed after evidence was committed, freeing 1,126,991,048 bytes. Tasks 799_37–39 remain RUNNING. Fresh 895_4 (source row 44, previously cancelled as 799_35) passed with final heartbeat mcycle 62,186, and its output tree was removed after commit. Fresh 895_1 and 895_2 reached their per-test timeouts with final heartbeat mcycles 62,443 and 126,506; their logs and wrapper metadata are SHA-verified under [`cancelled-reruns-c339-20261013-01/timeout-evidence-895/`](cancelled-reruns-c339-20261013-01/timeout-evidence-895/). Their output trees were removed after commit, freeing 751,595,456 bytes. Fresh 895_3 remains RUNNING. All four active heartbeats advanced, and none meets the 30-minute flat-heartbeat rule. See [`m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2354.txt`](m5b-rerun-20261012-01/heartbeat-snapshot-20261013-2354.txt).
+
+
+## Current checkpoint — 00:17 MDT, 2026-10-14
+
+Fresh array 936 re-runs the four maintenance-cancelled rows at 1 CPU, 3 GiB, 6h10m, throttle 6. All tasks were RUNNING at first observation: 936_1→source row 37, 936_2→39, 936_3→43, and 936_4→44. The pinned Icarus source and binary were verified. Tasks 799_37 and 799_38 remain RUNNING; their latest heartbeats are wall 18,900 seconds, mcycle 138,820 and 138,750. Task 799_39 is a FAIL at mcycle 59,872 with the ECC private-key stability assertion. Fresh task 895_3 reached its 18,167-second cap and is TIMEOUT at mcycle 78,485. The selected evidence for both terminal tasks was SHA-verified, committed, and their output trees removed, freeing 751,554,560 bytes of filesystem space. No task meets the 30-minute flat-heartbeat rule. See [the 00:16 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0016.txt) and [fresh rerun job 936](cancelled-reruns-c339-20261014-01/README.md).
+
+
+## Current checkpoint — 00:29 MDT, 2026-10-14
+
+All four fresh job 936 reruns remain RUNNING and their mcycles advanced from wall 300 to wall 900. The two remaining original tasks, 799_37 and 799_38, advanced to wall 19,500 and mcycles 143,339 and 143,178. Task 799_39 is recorded FAIL; the prior fresh task 895_3 is recorded TIMEOUT. No active task meets the 30-minute flat-heartbeat rule. See the [00:29 heartbeat snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0029.txt).
+
+
+## Current checkpoint — 00:39 MDT, 2026-10-14
+
+All six active simulations advanced. The 799_37/38 runs are at wall 20,100 seconds; the fresh job 936 reruns are at wall 1,500 seconds. Their latest mcycles and scheduler state are in the [00:39 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0039.txt). No task meets the 30-minute flat-heartbeat rule.
+
+
+## Current checkpoint — 00:49 MDT, 2026-10-14
+
+All six simulations remain RUNNING. The four fresh job 936 rows are at wall 2,100 seconds; original rows 799_37/38 are at wall 20,700/20,400 seconds. All mcycles advanced since 00:39, with no row meeting the 30-minute flat-heartbeat rule. See the [00:49 snapshot](m5b-rerun-20261012-01/heartbeat-snapshot-20261014-0049.txt).
+
+
+## Current checkpoint — 07:33 MDT, 2026-10-14
+
+The older 799 array is terminal: task 799_37 TIMEOUT at the exact 21,600-second cap (last heartbeat mcycle 157,015), and 799_38 PASS (last heartbeat mcycle 149,887). Fresh job 936 was interrupted by a DAN-DESKTOP reboot before any wrapper completion record; its four partial attempts have no result JSON or testcase markers and are not test outcomes. The host is back up, and I’m preparing a new isolated four-row rerun. Evidence and the 07:31 queue snapshot are recorded under the wave-1 run folders.
+
+
+After commit `6e16604`, I removed the six completed/interrupted output trees and their run-local caches from DAN-DESKTOP. Their combined allocated tree size was 2,263,652,833 bytes; `/home/dsell` available space increased by 2,267,467,776 bytes. Shared toolchains and the unrelated queued work were untouched.
+
+## Current checkpoint — 07:39 MDT, 2026-10-14
+
+Corrected fresh array 955 is running the four rows previously cancelled for maintenance (799_28, 799_30, 799_34, and 799_35), mapped to source rows 37, 39, 43, and 44. All four tasks were RUNNING by 07:39:21, with one CPU and 3 GiB per task, a 6h10m allocation, and array throttle 6. No local duplicate is running. Array 949 exited before test startup because its selection file was staged at the wrong path; its setup-error logs are preserved and it produced no test result. Pinned source/toolchain hashes were re-verified before array 955. See [`cancelled-reruns-c339-20261014-02/`](cancelled-reruns-c339-20261014-02/) and [`cancelled-reruns-c339-20261014-03/`](cancelled-reruns-c339-20261014-03/).
+
+## Current checkpoint — 07:52 MDT, 2026-10-14
+
+Array 955 remains RUNNING on all four reruns. Each simulator has three progress heartbeats through wall 600 seconds; latest mcycles are 4,500, 4,500, 4,512, and 4,512. VVP processes are consuming CPU, but no row has a terminal marker or result JSON. None meets the 30-minute flat-heartbeat hang threshold. Full details are in [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0752.txt).
+
+## Current checkpoint — 08:03 MDT, 2026-10-14
+
+Array 955 remains active on all four rows. Latest heartbeats are at wall 1,200 seconds with mcycles 9,185, 9,185, 9,231, and 9,238. VVP is using CPU; no terminal result has appeared, and the latest heartbeat was only about 3.5 minutes old. No row meets the 30-minute hang threshold. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0803.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0803.txt).
+
+## Current checkpoint — 08:14 MDT, 2026-10-14
+
+Array 955 remains RUNNING on all four rows, but there has been no new heartbeat since `wall_s=1800` (last log write 07:59:50 MDT). Latest mcycles are 13,882, 13,880, 13,939, and 13,953. Each VVP still uses 99.9% CPU, and the no-progress interval is about 14 minutes, below the 30-minute hang rule. No terminal result is available. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0814.txt`](cancelled-reruns-c339-20261014-0814.txt).
+
+## Current checkpoint — 08:25 MDT, 2026-10-14
+
+Array 955 remains RUNNING on all four rows and advanced to wall 2,700 seconds. Latest mcycles are 20,838, 20,837, 20,913, and 20,939; no result JSON or terminal marker exists yet. The heartbeat gap observed at 08:14 resolved, and no row meets the 30-minute hang threshold. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0825.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0825.txt).
+
+## Current checkpoint — 08:36 MDT, 2026-10-14
+
+Array 955 remains active on all four reruns, with heartbeats advanced to wall 3,300 seconds and mcycles 25,630, 25,628, 25,708, and 25,738. No result JSON or terminal testcase marker is present. All four VVPs continue using CPU. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0836.txt`](cancelled-reruns-c339-20261014-0836.txt).
+
+## Current checkpoint — 08:46 MDT, 2026-10-14
+
+Array 955 remains RUNNING on all four rows, now at wall 3,900 seconds. Latest mcycles are 30,335, 30,319, 30,412, and 30,446. Heartbeats continue to advance; no terminal result has appeared. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0846.txt`](cancelled-reruns-c339-20261014-0846.txt).
+
+## Current checkpoint — 08:57 MDT, 2026-10-14
+
+All four array-955 rows remain RUNNING, now at wall 4,500 seconds with mcycles 35,184, 35,164, 35,259, and 35,299. No terminal results have appeared yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0857.txt`](cancelled-reruns-c339-20261014-0857.txt).
+
+## Current checkpoint — 09:08 MDT, 2026-10-14
+
+Array 955 remains active on all four rows, with latest heartbeats at wall 5,100 seconds and mcycles 39,977, 39,950, 40,054, and 40,094. No testcase result is available yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0908.txt`](cancelled-reruns-c339-20261014-0908.txt).
+
+## Current checkpoint — 09:19 MDT, 2026-10-14
+
+All four array-955 rows remain RUNNING, now at wall 5,700 seconds and mcycles 44,777, 44,743, 44,851, and 44,897. No terminal outcome is available yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0919.txt`](cancelled-reruns-c339-20261014-0919.txt).
+
+## Current checkpoint — 09:29 MDT, 2026-10-14
+
+Array 955 remains active on all four rows, now at wall 6,300 seconds with mcycles 49,641, 49,602, 49,715, and 49,764. No test outcome has appeared yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0929.txt`](cancelled-reruns-c339-20261014-0929.txt).
+
+## Current checkpoint — 09:40 MDT, 2026-10-14
+
+Array 955 remains active. Tasks 1–3 are at wall 6,900 seconds with mcycles 54,491, 54,453, and 54,567; task 4 is at wall 7,200 with mcycle 57,034. No terminal outcomes are available yet. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0940.txt`](cancelled-reruns-c339-20261014-0940.txt).
+
+## Current checkpoint — 09:53 MDT, 2026-10-14
+
+Fresh rerun 955_4 passed (original 799_35 / source row 44), with final heartbeat mcycle 59,434. The three other reruns remain active: task 1 is at wall 7,500 / mcycle 59,285; task 2 at wall 7,800 / mcycle 61,613; task 3 at wall 7,500 / mcycle 59,366. Evidence for the pass is under [`cancelled-reruns-c339-20261014-03/pass-evidence-955/`](cancelled-reruns-c339-20261014-03/pass-evidence-955/); the full checkpoint is [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-0953.txt`](cancelled-reruns-c339-20261014-0953.txt).
+
+The passed task's build/output and Python cache trees were deleted after its evidence commit, removing 377,301,648 bytes (about 0.351 GiB); tasks 955_1–3 remained active. Cleanup record: [`cancelled-reruns-c339-20261014-03/pass-evidence-955/cleanup-task955_4-20261014.txt`](cancelled-reruns-c339-20261014-03/pass-evidence-955/cleanup-task955_4-20261014.txt).
+
+## Current checkpoint — 10:05 MDT, 2026-10-14
+
+Task 955_4 remains PASS at final heartbeat mcycle 59,434. Tasks 955_1–3 remain RUNNING: task 1 is at wall 8,700 / mcycle 6,195, task 2 at wall 8,400 / mcycle 66,338, and task 3 at wall 8,700 / mcycle 63,534. Task 1's mcycle decreased from 59,285 at wall 7,500 to 1,333 at wall 8,100, then advanced; the log records this without an inferred cause. Snapshot: [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1005.txt`](cancelled-reruns-c339-20261014-1005.txt).
+
+## Current checkpoint — 10:16 MDT, 2026-10-14
+
+Task 955_4 remains PASS at final heartbeat mcycle 59,434. Tasks 955_1–3 remain RUNNING at wall 9,300, with latest mcycles 11,003, 73,443, and 64,612. No terminal result is available for these three. Snapshot: [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1016.txt`](cancelled-reruns-c339-20261014-1016.txt).
+
+## Current checkpoint — 10:30 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 10,200 seconds, with mcycles 18,179, 80,516, and 66,228. The three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1030.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1030.txt).
+
+## Current checkpoint — 10:41 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 10,800 seconds, with mcycles 22,846, 85,119, and 67,291. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1040.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1040.txt).
+
+## Current checkpoint — 10:51 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 11,400 seconds, with mcycles 27,564, 89,767, and 68,364. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1051.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1051.txt).
+
+## Current checkpoint — 11:02 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 12,000 seconds, with mcycles 32,304, 94,428, and 69,438. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1101.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1101.txt).
+
+## Current checkpoint — 11:13 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 12,600 seconds, with mcycles 37,023, 99,066, and 70,511. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1112.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1112.txt).
+
+## Current checkpoint — 11:23 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 13,200 seconds, with mcycles 41,829, 103,783, and 71,589. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1123.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1123.txt).
+
+## Current checkpoint — 11:34 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 13,800 seconds, with mcycles 46,499, 108,373, and 72,657. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1133.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1133.txt).
+
+## Current checkpoint — 11:45 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING and advanced to wall 14,700 seconds, with mcycles 53,459, 115,190, and 74,272. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1145.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1145.txt).
+
+## Current checkpoint — 11:56 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING at wall 15,300 seconds, with mcycles 58,066, 119,704, and 75,490. All three VVP processes remain active; no result/status files or terminal markers are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1155.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1155.txt).
+
+## Current checkpoint — 12:06 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING at wall 15,900 seconds, with latest mcycles 67, 124,252, and 76,713. Task 1's mcycle dropped from 60,377 at wall 15,600 to 67 at wall 15,900; this is recorded as an observation without an inferred cause. All three VVP processes remain active, and no terminal marker or result is present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1206.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1206.txt).
+
+## Current checkpoint — 12:17 MDT, 2026-10-14
+
+Array 955 tasks 1–3 remain RUNNING at wall 16,500 seconds, with latest mcycles 4,498, 128,609, and 77,913. Task 1 continued advancing after its counter dropped to 67 at wall 15,900. All three VVP processes remain active; no terminal markers or results are present. Task 4 remains PASS at final mcycle 59,434. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1217.txt).
+
+## Current checkpoint — 12:31 MDT, 2026-10-14
+
+Fresh rerun 955_1 (original 799_28) reached its 17,281-second per-test limit without a testcase result; its last heartbeat is mcycle 9,009 at wall 17,100. The raw wrapper status is INFRA_ERROR / exit 137, but the resource log confirms elapsed time exactly matches the configured timeout, so the result ledger records TIMEOUT. Selected evidence is SHA-verified under [`cancelled-reruns-c339-20261014-03/timeout-evidence-955/`](cancelled-reruns-c339-20261014-03/timeout-evidence-955/). Tasks 955_2 and 955_3 remain RUNNING at wall 17,400 with mcycles 135,271 and 79,735. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1232.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1232.txt).
+
+After recording that result, I removed task 955_1's completed output tree. This freed 375,692,895 bytes; `/home/dsell` available space increased by 376,139,776 bytes. Cleanup details are in [`cancelled-reruns-c339-20261014-03/timeout-evidence-955/cleanup-task955_1-20261014.txt`](cancelled-reruns-c339-20261014-03/timeout-evidence-955/cleanup-task955_1-20261014.txt).
+
+## Current checkpoint — 12:33 MDT, 2026-10-14
+
+Fresh rerun 955_2 (original 799_30) also reached its 17,543-second per-test limit without a testcase result; its last heartbeat is mcycle 135,271 at wall 17,400. Its raw status is INFRA_ERROR / exit 137, but the resource log confirms elapsed time exactly matches the configured timeout, so the result ledger records TIMEOUT. Evidence is preserved and SHA-verified under [`cancelled-reruns-c339-20261014-03/timeout-evidence-955/task955_2/`](cancelled-reruns-c339-20261014-03/timeout-evidence-955/task955_2/). Task 955_3 remained RUNNING at wall 17,400 / mcycle 79,735 at 12:35 MDT. See [`cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1235.txt`](cancelled-reruns-c339-20261014-03/heartbeat-snapshot-20261014-1235.txt).
+
+After commit `b134913`, task 955_2's completed output tree was removed, freeing 376,032,275 bytes; `/home/dsell` available space increased by 376,475,648 bytes. Cleanup details are in [`cancelled-reruns-c339-20261014-03/timeout-evidence-955/task955_2/cleanup-task955_2-20261014.txt`](cancelled-reruns-c339-20261014-03/timeout-evidence-955/task955_2/cleanup-task955_2-20261014.txt).
+
+## Fresh maintenance reruns complete — 12:49 MDT, 2026-10-14
+
+Fresh array 955 has terminal evidence for all four maintenance-cancelled rows: task 955_1 / original 799_28 TIMEOUT at mcycle 9,009; 955_2 / 799_30 TIMEOUT at 135,271; 955_3 / 799_34 TIMEOUT at 80,975; and 955_4 / 799_35 PASS at 59,434. For 955_3, the raw wrapper status is INFRA_ERROR / exit 137, while the resource log shows the configured 18,167-second cap elapsed exactly and no testcase result exists; the ledger therefore records TIMEOUT. Its selected logs match the remote SHA-256 manifest. After commit `ed0ce4f`, the 955_3 output tree was removed, freeing 375,777,048 bytes; `/home/dsell` available space increased by 376,217,600 bytes. Results and raw evidence are in [`cancelled-reruns-c339-20261014-03/`](cancelled-reruns-c339-20261014-03/).
+
+## Additional post-reopen reruns queued — 19:13 MDT, 2026-10-14
+
+After the later cancellation, a new fresh array 1110 was submitted for the
+same four source rows (37, 39, 43, and 44; original tasks 799_28, 799_30,
+799_34, and 799_35). It uses the same pinned inputs, c339 Icarus, 1 CPU, 3 GiB,
+6h10m cap, and array throttle 6. It is pending `afterany:1043`, keeping it clear
+of the current-main M7 comparison wave. The submission, selection, runner, and
+collector are recorded under
+[`cancelled-reruns-c339-20261014-05/`](cancelled-reruns-c339-20261014-05/).

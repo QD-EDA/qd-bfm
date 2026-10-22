@@ -1,0 +1,1 @@
+test_id=804790f41f3373fe testname=smoke_test_strap wrapper_exit=0 completed_at=2026-10-15T20:45:34-06:00

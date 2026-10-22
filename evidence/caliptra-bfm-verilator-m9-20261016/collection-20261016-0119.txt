@@ -1,0 +1,33 @@
+At 01:19 MDT, 21 completed rows were copied from array 1430. Every bundle passed its internal FILE-SHA256SUMS check, and the local completion marker, resource record, and Slurm log hashes matched DAN-DESKTOP before cleanup.
+
+| Task | Test | Verilator result | Final mcycle | Wall seconds | Prior Icarus |
+|---:|---|---|---:|---:|---|
+| 93 | `smoke_test_dma_aes_kv` | PASS | 60,133 | 35.902 | UNVERIFIED |
+| 94 | `smoke_test_dma_aes_gcm_short_dword` | PASS | 186,702 | 106.829 | TIMEOUT |
+| 95 | `smoke_test_mldsa_externalmu` | PASS | 332,565 | 190.765 | UNVERIFIED |
+| 96 | `smoke_test_iccm_reset` | PASS | 60,795 | 140.379 | UNVERIFIED |
+| 97 | `fw_test_lms_n24_w2_h10` | FAIL | NA | 0.839 | UNVERIFIED |
+| 98 | `smoke_test_trng` | PASS | 138,353 | 80.617 | UNVERIFIED |
+| 99 | `fw_test_lms_n24_w8_h15` | FAIL | NA | 0.828 | UNVERIFIED |
+| 100 | `smoke_test_mldsa_keygen_sign_vfy_rand` | PASS | 256,866 | 146.982 | UNVERIFIED |
+| 101 | `fw_test_lms_n32_w8_h5` | FAIL | NA | 0.819 | UNVERIFIED |
+| 102 | `fw_test_lms24` | FAIL | NA | 0.824 | UNVERIFIED |
+| 103 | `smoke_test_veer` | PASS | 7,355 | 6.695 | PASS |
+| 104 | `smoke_test_sha_accel` | PASS | 19,949 | 13.725 | UNVERIFIED |
+| 105 | `fw_test_lms_n24_w4_h5` | FAIL | NA | 0.814 | UNVERIFIED |
+| 106 | `fw_test_lms_n24_w4_h20` | FAIL | NA | 0.807 | UNVERIFIED |
+| 108 | `smoke_test_qspi` | FIRMWARE_BUILD_FAIL | NA | 1.061 | FAIL |
+| 109 | `fw_test_lms_n32_w8_h10` | FAIL | NA | 0.809 | UNVERIFIED |
+| 111 | `smoke_test_mlkem_shared_key` | PASS | 212,767 | 121.995 | UNVERIFIED |
+| 113 | `fw_test_lms_n24_w2_h20` | FAIL | NA | 0.820 | UNVERIFIED |
+| 114 | `memCpy_dccm_to_iccm` | PASS | 5,090 | 5.372 | PASS |
+| 115 | `iccm_lock` | PASS | 76,153 | 88.895 | TIMEOUT |
+| 116 | `smoke_test_mlkem_all_zero_seed` | FIRMWARE_BUILD_FAIL | NA | 0.792 | UNVERIFIED |
+
+The eight LMS failures all abort at startup with `%Error: dccm.hex:1: $readmem file address beyond bounds of array`; none reaches a final mcycle. `smoke_test_qspi` repeats the pinned source/generated-header mismatch: C references QSPI register macros absent from `caliptra_reg.h`, so simulation never begins. `smoke_test_mlkem_all_zero_seed` calls `mlkem_encaps_check` with six arguments while the pinned helper declaration accepts five; firmware compilation stops before simulation.
+
+The only Icarus comparison in this batch with a completed non-timeout outcome mismatch is task 108: Icarus labels the firmware compilation failure `FAIL`, while Verilator labels it `FIRMWARE_BUILD_FAIL`. Both logs show the same missing QSPI symbols and neither reaches simulation. Tasks 103 and 114 pass on both tools; the other prior outcomes are `UNVERIFIED` or `TIMEOUT`.
+
+The refreshed 271-row ledger has 112 terminal supported-firmware rows: 74 PASS, 30 FAIL, and 8 FIRMWARE_BUILD_FAIL; 50 supported rows remain pending and 109 rows remain `NOT_RUN_NON_FIRMWARE`. The terminal-row pass rate is 74/112 (66.1%); 74/162 supported rows (45.7%) have passed so far.
+
+After verification, the 21 remote result trees, their resource records, and Slurm logs were removed; 5,253,409 apparent bytes (5.01 MiB) were freed. The shared pinned Verilator model remains because array 1430 is active.

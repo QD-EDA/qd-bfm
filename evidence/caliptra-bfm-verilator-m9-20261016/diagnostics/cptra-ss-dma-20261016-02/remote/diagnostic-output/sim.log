@@ -1,0 +1,68 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5548000 - ----------------------------------
+5597000 - Smoke Test AXI DMA  !!
+5629000 - ----------------------------------
+5856000 - Sending payload via AHB i/f
+M9DMA t=5906000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=0 full=0 data=abadface swmod=1
+M9DMA t=5933000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=1 full=0 data=ba5eba11 swmod=1
+M9DMA t=5936000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=2 full=0 data=cafebabe swmod=1
+M9DMA t=5939000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=3 full=0 data=deadbeef swmod=1
+M9DMA t=5941000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=4 full=0 data=ebbf1000 swmod=1
+M9DMA t=5944000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=5 full=0 data=fadefee1 swmod=1
+M9DMA t=5947000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=6 full=0 data=12344321 swmod=1
+M9DMA t=5950000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=7 full=0 data=a5a5a5a5 swmod=1
+M9DMA t=5953000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=8 full=0 data=14351375 swmod=1
+M9DMA t=5956000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=9 full=0 data=8afdbe82 swmod=1
+M9DMA t=5959000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=10 full=0 data=afb832ba swmod=1
+M9DMA t=5961000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=11 full=0 data=8843151a swmod=1
+M9DMA t=5964000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=12 full=0 data=bad831b1 swmod=1
+M9DMA t=5967000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=13 full=0 data=f831ba83 swmod=1
+M9DMA t=5970000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=14 full=0 data=ad813451 swmod=1
+M9DMA t=5973000 dv=1 write=1 hold=0 wr_stall=0 fifo_valid=1 fifo_ready=1 depth=15 full=0 data=67120ad3 swmod=1

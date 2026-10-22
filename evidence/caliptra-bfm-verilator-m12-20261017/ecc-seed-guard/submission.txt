@@ -1,0 +1,14 @@
+DAN-DESKTOP Slurm submission
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m12-ecc-seed-guard-20261017-01
+Source: ffc12ab427e961f40354f32a8e7a147e5d4e5764; source archive SHA-256 verified against sibling strap-guard archive
+Build: job 2129 afterok:2125, 4 CPUs / 4 GiB / 2 h
+One-row gate: job 2130 afterok:2129, 1 CPU / 3 GiB / 5 h 30 min scheduler limit; per-test 16,033 s plus 1,800 s outer margin
+Gate row: 2f1b875490838662 / smoke_test_ecc_keygen
+Gate 2130 result: PASS, mcycle 783243, sim_scan.bad=0; evidence archive `generated/gate-2130/evidence.tar.gz` SHA-256 `5245afe10722ae322b9d36515c70dcdb945134c6299e4942f8b533e218bf919a`.
+Attempt 2141: launcher failed before simulation because the old run directory contained a stale M10b array script; no result was produced.
+Fresh run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m12-ecc-seed-guard-20261017-02`; the model and overlays were copied and their hashes verified against the passing gate.
+Remaining affected row: job 2144, array index 0 only / smoke_test_kv_swwe_lock, 1 task at 1 CPU and 3 GiB; the gate row at run-selection index 1 is excluded. It runs alongside LMS array 2146 at a five-task throttle, keeping A2 to at most six concurrent tests.
+array_script_sha256=292be58a9afbb2f35f13f46e4d7cacd3e72e40c86c6545df3f5c1b84fd115d6f
+array_state=COMPLETED; job=2144_0; exit=0:0
+array_result=PASS smoke_test_kv_swwe_lock; mcycle=848287; sim_scan.bad=0; simulation=607.318s; total=610.509s
+array_evidence=generated/array-2144/evidence.tar.gz; sha256=see evidence.tar.gz.sha256

@@ -1,0 +1,19 @@
+Icarus: Icarus Verilog version 13.0 (devel) (cae03564)
+VVP: Icarus Verilog runtime version 13.0 (devel) (cae03564)
+6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330  /home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/bin/iverilog
+case0=00
+case1=00
+case2=00
+case3=00
+case4=01
+case5=02
+Verilator: Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: end at 0s; walltime 0.001 s; speed 0.000 s/s
+- Verilator: cpu 0.001 s on 1 threads; alloced 153 MB
+case0=00
+case1=01
+case2=02
+case3=00
+case4=01
+case5=02

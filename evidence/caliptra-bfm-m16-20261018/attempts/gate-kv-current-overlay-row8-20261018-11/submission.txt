@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18 22:56:43 UTC
+Command: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-overlay-row8-20261018-11/run.sbatch
+Job ID: 2824
+Target: generated KeyVault row 8, kv_rand_wr_rd_test, four-beat burst-smoke no-regression gate.
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap, 600-second per-test timeout.
+Status at submission: one other task was running on the host.
+Terminal result: PASS; runner_exit_code=0; 409 AHB scoreboard matches; four-beat prediction PASS; UVM_ERROR=0, UVM_FATAL=0, 89 warnings; `$finish` at 409070000 (1 ps).
+Wall time: 36.58 s; peak RSS: 630600 KiB. Raw run archive verified locally; remote run directory cleaned afterward.

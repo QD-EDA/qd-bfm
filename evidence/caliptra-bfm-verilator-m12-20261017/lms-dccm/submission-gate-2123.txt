@@ -1,0 +1,7 @@
+DAN-DESKTOP Slurm row-only gate
+Job: 2123_0
+Script: lms-dccm/run-overlay-array.sbatch with command-line --array=0 override
+Row: 8c392993b1af6e0c / fw_test_lms32
+Original per-test timeout: 21,600 s; outer timeout: 23,400 s
+Model: build 2118, source ffc12ab427e961f40354f32a8e7a147e5d4e5764, Verilator 5.052 with assertions and M10b AXI overlay
+This is the full-timeout one-row gate; do not launch the remaining 33 rows until a firmware result is recorded.

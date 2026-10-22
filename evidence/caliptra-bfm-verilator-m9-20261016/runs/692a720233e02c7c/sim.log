@@ -1,0 +1,85 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+4957000 - -----------------------------------
+5008000 -  Running SHA3 in ExternalMu test !!
+5061000 - -----------------------------------
+7283000 - Processing external mu test from ACVP with index 241
+13365000 - External mu: Check pre-computed value with SHA3 engine successful!
+15449000 - Processing external mu test from ACVP with index 242
+20872000 - External mu: Check pre-computed value with SHA3 engine successful!
+22957000 - Processing external mu test from ACVP with index 243
+31298000 - External mu: Check pre-computed value with SHA3 engine successful!
+33381000 - Processing external mu test from ACVP with index 244
+40487000 - External mu: Check pre-computed value with SHA3 engine successful!
+42569000 - Processing external mu test from ACVP with index 245
+44958000 - External mu: Check pre-computed value with SHA3 engine successful!
+47041000 - Processing external mu test from ACVP with index 246
+49453000 - External mu: Check pre-computed value with SHA3 engine successful!
+51536000 - Processing external mu test from ACVP with index 247
+54298000 - External mu: Check pre-computed value with SHA3 engine successful!
+56381000 - Processing external mu test from ACVP with index 248
+58914000 - External mu: Check pre-computed value with SHA3 engine successful!
+60997000 - Processing external mu test from ACVP with index 249
+67345000 - External mu: Check pre-computed value with SHA3 engine successful!
+69428000 - Processing external mu test from ACVP with index 250
+75948000 - External mu: Check pre-computed value with SHA3 engine successful!
+78031000 - Processing external mu test from ACVP with index 251
+81593000 - External mu: Check pre-computed value with SHA3 engine successful!
+83676000 - Processing external mu test from ACVP with index 252
+89882000 - External mu: Check pre-computed value with SHA3 engine successful!
+91965000 - Processing external mu test from ACVP with index 253
+99811000 - External mu: Check pre-computed value with SHA3 engine successful!
+* TESTCASE PASSED
+
+Finished : minstret = 257023, mcycle = 998845
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

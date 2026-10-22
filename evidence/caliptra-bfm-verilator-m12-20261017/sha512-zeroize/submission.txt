@@ -1,0 +1,8 @@
+DAN-DESKTOP Slurm submission
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m12-sha512-zeroize-20261017-01
+Source: ffc12ab427e961f40354f32a8e7a147e5d4e5764, archive SHA-256 c22c9453bd86d012a6c5a7bc199b4c01b2e385a6a06e46010a917835f28dc5cc
+Build: job 2125, 4 CPUs / 4 GiB / 2 h
+One-row gate: job 2126 afterok:2125, 1 CPU / 3 GiB / 4 h scheduler limit; per-test 9,335 s plus 1,800 s outer margin
+No affected-row array submitted.
+Remaining-row array: job 2136, indices 1-3 at %3, 1 CPU / 3 GiB per task / 7 h scheduler limit; gate index 0 is not rerun.
+Array 2136 results: `smoke_test_sha512_restore` PASS at mcycle 73221; `pv_hash_and_sign` and `pv_hash_zeroize` FAIL at ERR_SHA_BLOCK_NOT_STABLE. Evidence archive `generated/array-2136/evidence.tar.gz` SHA-256 `7f67ee66f04b65e0243e1d1b75cd84e3fbfbde13bcd040273d64f249e829cc85`.

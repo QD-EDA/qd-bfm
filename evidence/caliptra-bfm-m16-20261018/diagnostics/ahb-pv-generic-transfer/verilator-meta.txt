@@ -1,0 +1,9 @@
+MacBook-Air.local
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A428
+/Users/danielellerbrock/oss-cad-suite/bin/verilator
+Verilator 5.051 devel rev v5.050-196-g7dcd4e0b6 (mod)
+098b09b11ba7d3e904ae13d924a9e8dac8ced5c9d7c9beff3b9d36119a417581  /Users/danielellerbrock/oss-cad-suite/bin/verilator
+Build: ~/codex-supervisor/localrun 120 verilator --binary --timing --Mdir /tmp/m16-ahb-pv-generic-type-repro-20261018/obj_dir --top-module pv_generic_transfer_repro evidence/caliptra-bfm-m16-20261018/diagnostics/ahb-pv-generic-transfer/pv_generic_transfer_repro.sv
+Run: ~/codex-supervisor/localrun 30 /tmp/m16-ahb-pv-generic-type-repro-20261018/obj_dir/Vpv_generic_transfer_repro

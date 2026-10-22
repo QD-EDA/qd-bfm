@@ -1,0 +1,7 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:405: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:406: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:407: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:472: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:477: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:478: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-ntt.sv:479: warning: Static variable initialization requires explicit lifetime in this context.

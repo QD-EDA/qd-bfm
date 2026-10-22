@@ -1,0 +1,11 @@
+job_id=3258
+array_task=43
+submitted_utc=2026-10-19T23:51:25Z (Slurm SubmitTime 17:51:25 host local)
+source_pin=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge_pin=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+icarus_source_pin=cae035642e056644274a01e98d4422ce286685b4
+iverilog_sha256=6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+resources=1 CPU, 4 GiB; runner timeout 1800 s; Slurm limit 2100 s
+input_manifest=input-sha256.txt (all hashes and source snapshot verified before submit)
+self_check=passed
+initial_state=PENDING Priority while array 3255 was running at throttle 4

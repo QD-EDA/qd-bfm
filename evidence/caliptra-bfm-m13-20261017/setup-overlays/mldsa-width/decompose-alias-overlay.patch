@@ -1,0 +1,6 @@
+--- a/src/decompose/tb/decompose_tb.sv
++++ b/src/decompose/tb/decompose_tb.sv
+@@ -73,2 +73,1 @@
+-    .decompose_done(),
+-    .w1_encode_done()
++    .decompose_done()

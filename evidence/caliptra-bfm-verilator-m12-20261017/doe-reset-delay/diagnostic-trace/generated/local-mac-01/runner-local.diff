@@ -1,0 +1,21 @@
+--- /tmp/a2-m12-local-source/evidence/caliptra-bfm-verilator-m10b-20261016/run-verilator-top-case.py
++++ /tmp/a2-m12-doe-local-01/run-verilator-top-case-local.py
+@@ -107,11 +107,13 @@
+             sim_resource = output / "sim.resource"
+             sim_started = time.monotonic()
+             with sim_log.open("wb") as log:
+-                sim_exit = subprocess.run([
+-                    "/usr/bin/time", "-v", "-o", str(sim_resource),
+-                    "timeout", "--signal=TERM", "--kill-after=30s", str(args.timeout),
+-                    *sim_command,
+-                ], cwd=test_output, env=env, stdout=log, stderr=subprocess.STDOUT).returncode
++                sim_exit = subprocess.run(
++                    sim_command, cwd=test_output, env=env, stdout=log,
++                    stderr=subprocess.STDOUT
++                ).returncode
++            sim_resource.write_text(
++                "Per-test timeout enforced by localrun wrapper; see task.resource.\n"
++            )
+             sim_elapsed = time.monotonic() - sim_started
+             scan = runner.scan_sim_log(sim_log)
+             result["sim_exit"] = sim_exit

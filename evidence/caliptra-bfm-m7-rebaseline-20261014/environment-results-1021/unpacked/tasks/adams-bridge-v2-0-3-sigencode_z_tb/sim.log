@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/home/dsell/slurm-runs/caliptra-bfm/a2/m7-env-3335fe7-20261014/tasks/adams-bridge-v2-0-3-sigencode_z_tb/runtime/polyz_pack.py", line 15, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+Start of init
+
+*** Toggle reset.
+End of reset
+Reading test vectors from hex files
+
+Starting sigencode_z test
+
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading
+
+       Time: 30  Scope: sigencode_z_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:199: invalid file descriptor (0x0) given to $feof.
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:210: Cannot open output_encoded_z.hex for reading
+
+       Time: 30  Scope: sigencode_z_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:212: invalid file descriptor (0x0) given to $feof.
+Waiting for sigencode_z to complete
+
+Checking output data
+
+Test completed
+
+Starting sigencode_z test
+
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading
+
+       Time: 395  Scope: sigencode_z_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:199: invalid file descriptor (0x0) given to $feof.
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:210: Cannot open output_encoded_z.hex for reading
+
+       Time: 395  Scope: sigencode_z_tb.read_test_vectors
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:212: invalid file descriptor (0x0) given to $feof.
+Waiting for sigencode_z to complete
+
+Checking output data
+
+Test completed
+
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:255: $finish called at 765 (1s)

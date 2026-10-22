@@ -1,0 +1,20 @@
+job_id=1019
+submitted_at=2026-10-14T13:21:29-06:00
+queue:
+1019 PENDING 0:00 2:00:00 (None) bfm-m7-iverilog-main
+954 RUNNING 0:11 1:30:00 DAN-DESKTOP a1-stale-classify
+1015_1 RUNNING 3:53 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_2 RUNNING 3:53 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_3 RUNNING 3:53 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_4 RUNNING 3:53 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1012 RUNNING 14:18 4:00:00 DAN-DESKTOP a5-wp0-full-430d-r2
+resources:
+verilog* up 1 9/11/0/20
+free_memory:
+               total        used        free      shared  buff/cache   available
+Mem:            38Gi         9Gi       5.3Gi       4.3Gi        27Gi        28Gi
+Swap:          8.0Gi       7.2Gi       852Mi
+main_sha=3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+source=https://github.com/dsellerbrock/iverilog-uvm.git
+toolchain_path=/home/dsell/toolchains/iverilog-uvm-3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+requested=1 CPU, 3 GiB, 2h

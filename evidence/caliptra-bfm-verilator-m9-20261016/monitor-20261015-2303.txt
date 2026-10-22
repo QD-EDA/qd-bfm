@@ -1,0 +1,16 @@
+2026-10-15 23:04:43 MDT
+             JOBID      STATE       TIME                           NAME               NODELIST(REASON)
+   1430_[64-161%3]    PENDING       0:00                  a2-m9-vlt-top            (JobArrayTaskLimit)
+              1493    PENDING       0:00                 a2-m9-seed-fix                   (Dependency)
+           1430_63    RUNNING      12:59                  a2-m9-vlt-top                    DAN-DESKTOP
+              1500    RUNNING      30:12               a3-t2-598-resume                    DAN-DESKTOP
+              1497    RUNNING      41:25              a5-pd-final-gates                    DAN-DESKTOP
+           1430_55    RUNNING    1:58:11                  a2-m9-vlt-top                    DAN-DESKTOP
+           1430_47    RUNNING    2:03:56                  a2-m9-vlt-top                    DAN-DESKTOP
+              1463    RUNNING    2:27:27            a1-win98-trace-200m                    DAN-DESKTOP
+            1426_1    RUNNING    3:04:50     bfm-m5b-cancelled-rerun-06                    DAN-DESKTOP
+            1426_2    RUNNING    3:04:50     bfm-m5b-cancelled-rerun-06                    DAN-DESKTOP
+            1426_3    RUNNING    3:04:50     bfm-m5b-cancelled-rerun-06                    DAN-DESKTOP
+smoke_test_ecc_errortrigger4: CALIPTRA_PROGRESS_HEARTBEAT wall_s=10800 mcycle=12249
+kv_entry_read_err: CALIPTRA_PROGRESS_HEARTBEAT wall_s=10800 mcycle=74942
+smoke_test_kv_parallel_access: CALIPTRA_PROGRESS_HEARTBEAT wall_s=10800 mcycle=65152

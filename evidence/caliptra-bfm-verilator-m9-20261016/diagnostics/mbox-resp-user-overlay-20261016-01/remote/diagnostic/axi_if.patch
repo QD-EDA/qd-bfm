@@ -1,0 +1,10 @@
+--- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/axi/rtl/axi_if.sv	2026-10-12 09:22:40.460322174 -0600
++++ /home/dsell/slurm-runs/caliptra-bfm/a2/m9-mbox-resp-user-overlay-20261016-01/diagnostic/axi_if.sv	2026-10-16 02:19:55.077514117 -0600
+@@ -261,6 +261,7 @@
+             arlock  `EQ__ '0;
+             arvalid `EQ__ '0;
+             data = new[len+1];
++            resp_user = new[len+1];
+             resp = new[len+1];
+             for (int beat=0; beat <= len; beat++) begin
+                 get_read_beat(beat_data, beat_user, beat_resp);

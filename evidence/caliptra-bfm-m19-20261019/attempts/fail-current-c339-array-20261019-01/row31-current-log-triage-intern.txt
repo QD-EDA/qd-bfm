@@ -1,0 +1,41 @@
+**Chronological Order and Fact Extraction**
+
+The events occur in the following sequence:
+
+1.  **Write 1:**
+    *   Address: `0x3002181c` (`SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R`)
+    *   Data: `0x5925a7c5`
+    *   Transaction: `AXI Write transaction to address 0x3002181c`
+    *   Result: `AXI txn was successful`
+
+2.  **Write 2 (The 0xA Trigger Write):**
+    *   Address: `0x3002181c` (`SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R`)
+    *   Data: `0xa6da583a`
+    *   Transaction: `AXI txn was successful`
+    *   Warning: `Warning: cannot write to an undefined darray<vector[32]>.`
+
+3.  **Status Read and Assertion:**
+    *   Address: `0x3002181c` (`SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R`)
+    *   Read Value: `0x00000000`
+    *   Expected Value: `0x00000005`
+    *   Status: `TB Warning for addr 0x3002181c (SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R). apb_rddata 0x00000000 does not match exp_regval 0x00000005`
+
+4.  **Write 3 (Internal Register Write):**
+    *   Address: `0x30021814` (`SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R`)
+    *   Data: `0xffffffff`
+    *   Transaction: `AXI Write transaction to address 0x30021814`
+    *   Error: `TB ERROR aserted for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). Register bit-field(s) mutable over AXI! agg value is 0b1010`
+
+5.  **Write 4 (Final Trigger Write):**
+    *   Address: `0x3002181c` (`SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R`)
+    *   Data: `0xffffffff`
+    *   Transaction: `AXI txn was successful`
+
+**Conclusion on Chronology:**
+The `0xA` trigger write (`data = 0xa6da583a` at address `0x3002181c`) precedes the later status assertion (`apb_rddata 0x00000000 does not match exp_regval 0x00000005` at address `0x3002181c`).
+
+**Bench Self-Contamination Hypothesis**
+
+The excerpts do not prove a bench self-contamination hypothesis.
+
+The excerpts do not prove the hypothesis.

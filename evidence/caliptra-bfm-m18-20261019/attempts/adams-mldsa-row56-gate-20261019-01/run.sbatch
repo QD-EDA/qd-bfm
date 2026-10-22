@@ -1,0 +1,46 @@
+#!/bin/bash
+#SBATCH --job-name=m18-mldsa-config-row56
+#SBATCH --partition=verilog
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --time=00:15:00
+#SBATCH --chdir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-config-row56-gate-20261019-01/source
+#SBATCH --output=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-config-row56-gate-20261019-01/logs/%x-%j.out
+set -euo pipefail
+
+RUN=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-config-row56-gate-20261019-01
+SOURCE="$RUN/source"
+CALIPTRA_ROOT=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl
+ADAMSBRIDGE_ROOT="$CALIPTRA_ROOT/submodules/adams-bridge"
+IVL=/home/dsell/toolchains/iverilog-uvm-m18-main-82023726be90ab269d6e0ef5e755ebb69e6f648c/bin/iverilog
+VVP=/home/dsell/toolchains/iverilog-uvm-m18-main-82023726be90ab269d6e0ef5e755ebb69e6f648c/bin/vvp
+OUT="$RUN/tasks/row-56/output"
+mkdir -p "$OUT" "$RUN/raw"
+test "$(git -C "$CALIPTRA_ROOT" rev-parse HEAD)" = 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+test -z "$(git -C "$CALIPTRA_ROOT" status --porcelain --untracked-files=normal)"
+test "$(git -C "$ADAMSBRIDGE_ROOT" rev-parse HEAD)" = b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+test -z "$(git -C "$ADAMSBRIDGE_ROOT" status --porcelain --untracked-files=normal)"
+test "$(sha256sum "$IVL" | cut -d' ' -f1)" = 9c34ccc0e24fe17881e0153927d60668ff78afd21a639091087bcc09edca988b
+test "$(sha256sum "$VVP" | cut -d' ' -f1)" = ab0c3ae4e0e2b31e0d6ed978dca9fc58198a46333ee63afa7af77c474ce41dbf
+{
+  hostname
+  date -u +%FT%TZ
+  uname -a
+  python3 --version
+  git -C "$CALIPTRA_ROOT" rev-parse HEAD
+  git -C "$ADAMSBRIDGE_ROOT" rev-parse HEAD
+  git -C "$CALIPTRA_ROOT" status --porcelain --untracked-files=normal
+  "$IVL" -V 2>&1 | sed -n '1p'
+  "$VVP" -V 2>&1 | sed -n '1p'
+  sha256sum "$IVL" "$VVP" "$RUN/source-snapshot.tar.gz" "$SOURCE/dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py"
+} > "$RUN/tasks/row-56/job-meta.txt"
+set +e
+/usr/bin/time -v -o "$RUN/tasks/row-56/runner.resource" env CALIPTRA_ROOT="$CALIPTRA_ROOT" IVERILOG_BIN="$IVL" VVP_BIN="$VVP" python3 "$SOURCE/dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py" --repo-root "$SOURCE" --manifest "$SOURCE/evidence/caliptra-bfm-m15-20261017/m15-test-to-environment.tsv" --row-id 56 --output-dir "$OUT" --timeout 600 > "$RUN/tasks/row-56/runner.log" 2>&1
+RC=$?
+printf 'runner_exit=%s\n' "$RC" >> "$RUN/tasks/row-56/job-meta.txt"
+set -e
+tar -C "$RUN" -czf "$RUN/raw/job-${SLURM_JOB_ID}.tar.gz" tasks logs
+sha256sum "$RUN/raw/job-${SLURM_JOB_ID}.tar.gz" > "$RUN/raw/job-${SLURM_JOB_ID}.tar.gz.sha256"
+exit "$RC"

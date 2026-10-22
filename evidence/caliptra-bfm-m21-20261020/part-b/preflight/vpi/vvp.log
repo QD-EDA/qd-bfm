@@ -1,0 +1,4 @@
+CALIPTRA_PROGRESS_BIND_FAIL clk=(nil) mcycle=(nil)
+CALIPTRA_TRACE_BIND_FAIL clk=(nil) valid=(nil) pc=(nil) ready=(nil) arvalid=(nil) arready=(nil) araddr=(nil) awvalid=(nil) awready=(nil) awaddr=(nil) wvalid=(nil) wready=(nil) wlast=(nil)
+M21_VPI_LOAD_SMOKE
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/preflight/vpi/smoke.v:2: $finish called at 0 (1s)

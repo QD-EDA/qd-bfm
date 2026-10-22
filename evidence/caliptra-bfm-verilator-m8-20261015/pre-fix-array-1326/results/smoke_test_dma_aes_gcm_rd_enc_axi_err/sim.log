@@ -1,0 +1,70 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5772000 - ----------------------------------
+5821000 - Smoke Test AXI DMA AES  !!
+5859000 - ----------------------------------
+AXI Err Injection Disabled
+7986000 - Sending image payload via AHB i/f to AXI SRAM
+AXI Err Injection Enabled
+8114000 - Trying the AES GCM Operation.. Err Inj ON
+8216000 - Configuring AES for little endian mode
+8286000 - Write AES CTRL with value 0x481
+8386000 - Load Key data to AES
+8447000 - Write AES IV
+8494000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+8587000 - Wait for INPUT_READY
+8627000 - Write AES AAD Block 0
+8706000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+8799000 - Wait for INPUT_READY
+8838000 - Write AES AAD Block 1
+8918000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+9170000 - AXI DMA did not report err status for xfer that would require DMA Flush
+[9271000] %Error: caliptra_top_tb_services.sv:2452: Assertion failed in TOP.caliptra_top_tb.tb_services_i: * TESTCASE FAILED
+%Error: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2452: Verilog $stop
+Aborting...

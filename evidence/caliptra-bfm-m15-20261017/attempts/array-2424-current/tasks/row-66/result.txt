@@ -1,0 +1,5 @@
+row_id=66
+testname=skdecode_normal_test
+status=BLOCKED
+cause=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:50: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skdecode_tb'
+elapsed_seconds=0.05

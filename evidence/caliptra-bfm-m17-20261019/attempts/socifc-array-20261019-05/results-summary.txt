@@ -1,0 +1,22 @@
+22\tdebug_unlock_manuf_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t1.965
+23\tss_soc_dbg_unlock_level_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t1.312
+24\tfuse_cptra_cap_reg_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t2.214
+25\tss_strap_reg_wrmrst_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t3.865
+26\tfuse_reg_lifecycle_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t19.504
+27\trvtime_reg_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t1.867
+28\tsoc_reg_intrblk_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t4.113
+29\tsoc_reg_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t10.535
+30\tfuse_reg_perm_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t28.774
+31\tsha_acc_intrblk_test\tFAIL\ttestbench reported a failure or scoreboard mismatch\t2.217
+32\tfuse_reg_axi_user_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t17.844
+33\tss_strap_reg_pwron_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t2.112
+34\tsoc_reg_invalid_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t12.233
+35\tsoc_reg_pwron_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t9.429
+36\tdebug_unlock_prod_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t2.014
+37\tss_strap_reg_prod_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t5.772
+38\tsoc_ifc_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t1.817
+40\tsoc_reg_wrmrst_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t20.499
+41\tsingle_socreg_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t1.657
+42\tss_strap_reg_lifecycle_test\tPASS\ttestbench pass marker present; no failure marker or UVM error/fatal\t5.828
+COUNTS {'PASS': 19, 'FAIL': 1}
+dc1d7ac7a50775c9838c2eb99d8ce9d5b35354459a0f64b7fee3e5ab43d9d6b4  /home/dsell/slurm-runs/caliptra-bfm/a2/m17-socifc-array-20261019-05/raw/job-2853.tar.gz

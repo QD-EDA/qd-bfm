@@ -1,0 +1,10 @@
+scheduler_job=1426_4
+state=COMPLETED
+exit_code=0:0
+test=smoke_test_ecc_flow2_kv_ocp_progress
+outcome=PASS
+final_mcycle=62472
+minstret=20230
+wall_s=8951
+wall_hms=2:29:11
+max_rss_kib=1852708

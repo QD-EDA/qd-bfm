@@ -1,0 +1,7 @@
+# KeyVault nested class-property triage
+
+The KeyVault row 6 compile log reports `sorry: Nested member path not yet supported for class properties` and unknown-task errors on calls such as `configuration.kv_hmac_write_agent_config.wait_for_num_clocks(100)`.
+
+The reduced source in `nested_class_property_repro.sv` models that two-level configuration handle and task call. It compiles and runs on both the pinned Icarus 13.0 devel binary (Slurm job 2710; binary SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`) and Verilator 5.051 devel on the Mac, printing `NESTED_CLASS_PROPERTY_OK` and reaching `$finish`. This unparameterized generic form does **not** reproduce the row 6 diagnostic. A second reduced case, `parameterized_config_path.sv`, adds the relevant type-parameterized base property: pinned Icarus rejects `configuration.kv_hmac_write_agent_config.sequencer` with the same `Nested member path` diagnostic, while Verilator 5.032 passes. Its concrete-cast alias control passes on both. This isolates the parameterized-base context and is filed for A3 as internal [issue #672](https://github.com/dsellerbrock/iverilog-uvm/issues/672), label `from-caliptra-dv`; full job evidence is in `raw/parameterized-job-2797.tar.gz`.
+
+The pinned compile/run, source, compiler metadata, and resource logs are in `raw/capture.tar.gz` (SHA256 `b0fcbd34a4781e340ada16c51db58c061f5f784f17577689818befb9f8b2b3bd`). Local Verilator commands and logs are in `verilator-meta.txt`, `verilator-build.log`, and `verilator-run.log`.

@@ -1,0 +1,8 @@
+DAN-DESKTOP
+2026-10-19T17:09:56Z
+             JOBID      STATE                           NAME         TIME
+              2610    RUNNING          a1-smc-fix-win98-cont   1-07:26:30
+1597692	/home/dsell/slurm-runs/caliptra-bfm/a2/m19-queue-trace-array-20261019-01
+1540535	/home/dsell/slurm-runs/caliptra-bfm/a2/m19-queue-trace-array-20261019-02
+REMOVED /home/dsell/slurm-runs/caliptra-bfm/a2/m19-queue-trace-array-20261019-01
+REMOVED /home/dsell/slurm-runs/caliptra-bfm/a2/m19-queue-trace-array-20261019-02

@@ -1,0 +1,1 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/entropy_src/tb/entropy_src_tb.sv:386: warning: method function 'pop_front' is being called as a task.

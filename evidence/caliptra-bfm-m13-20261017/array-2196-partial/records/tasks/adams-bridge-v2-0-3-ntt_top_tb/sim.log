@@ -1,0 +1,115 @@
+In ram, initing mem_tb
+
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+In ram, initing mem_tb
+
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+In ram, initing mem_tb
+
+WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.
+Start of init
+
+End of init
+
+*** Toggle reset.
+End of reset
+Starting init mem
+
+Starting ntt test
+
+NTT operation
+
+Waiting for ntt_done
+
+Received ntt_done
+
+INTT operation
+
+Waiting for intt_done
+
+Received intt_done
+
+PWM operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM operation 1 acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWA operation 1
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWS operation 1
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM + sampler operation 1 no acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+PWM + sampler operation 2 with acc
+
+Waiting for pwo_done
+
+Received pwo_done
+
+INTT operation
+
+Waiting for intt_done
+
+Received intt_done
+
+End of test
+
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_top_tb.sv:921: $finish called at 51525 (1s)

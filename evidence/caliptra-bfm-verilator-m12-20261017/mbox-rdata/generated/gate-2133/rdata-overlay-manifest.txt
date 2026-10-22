@@ -1,0 +1,3 @@
+base_overlay_sha256=d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1
+rdata_overlay_sha256=87cbd4cab95047e619a9a96c8927baf471c7ea910ac95730d891a2bf81b5684d
+change=Verilator samples accepted R-channel values with #1step; Icarus macros retain live edge sampling

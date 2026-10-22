@@ -1,0 +1,7 @@
+Slurm job 1779 is a failed diagnostic-script attempt. It exited at the filelist self-check before Verilator compilation or simulation; details and verified logs are in [`failed-1779/`](failed-1779/).
+
+Run directory: `/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-mbox-lock-trace-20261016-01`. Resources: 4 CPUs, 4 GiB, 2-hour job limit. The model build was configured with pinned Caliptra RTL and `--assert`/`CLP_ASSERT_ON`; the diagnostic simulation would have had a separate 180-second process-group timeout. The only failure was the script's mistaken AXI filelist expectation; no simulation outcome was produced.
+
+This diagnostic substitutes only logging copies of `axi_if.sv` and `mbox_csr.sv`; it does not change the lock read, AXI handshake, firmware, or pass criteria. The `axi_if` logging copy is based on pinned source SHA-256 `e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c`, and the `mbox_csr` overlay is generated only from pinned source SHA-256 `453c4b3500fc19bf5d206413efc41db2caca9129405cbec248508ad6e71fcc4e`.
+
+`diagnose-mbox-lock.sbatch` records the pre-edge and post-NBA mailbox lock field/readback at every `MBOX_LOCK` CSR read, plus the existing AXI address/response and BFM-return trace. The expected observation is not assumed; the logs will decide whether the divergence is a scheduling race or a stable RTL readback behavior.

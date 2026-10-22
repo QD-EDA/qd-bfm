@@ -1,0 +1,4 @@
+Intern review proposed 1792 mismatches; direct grep and Python parsing verified 1790 exact mismatch lines.
+The first Test completed section had zero mismatches. The second had 1790, starting at index 256 and ending at index 2047.
+The pinned testbench writes the second input vector at source base 0x20, but the pinned DUT has no source-base input and reads from API address zero. Existing M7 evidence (run-05-pkdecode-passmarker/README.md and applied-source/pkdecode_tb.sv) records the same cause and source-base-zero correction.
+This is a testbench/input-address issue, not evidence of an Icarus defect.

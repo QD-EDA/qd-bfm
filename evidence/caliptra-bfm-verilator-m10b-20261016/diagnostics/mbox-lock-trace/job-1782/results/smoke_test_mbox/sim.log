@@ -1,0 +1,452 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5540000 - ----------------------------------
+5593000 -  Caliptra Mailbox Smoke Test!!
+5638000 - ----------------------------------
+CLP: Ready for firmware push
+
+SoC: Requesting mailbox lock...M9AXI SINGLE_BEGIN seq=1 addr=00020000
+M9AXI AR_START seq=1 addr=00020000 t=5694000
+M9AXI AR_WAIT seq=1 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=1 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56915 time=5694000 req=1 ack=1 value=0 next=1 load=1 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_POST cycle=56915 time=5694000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=1 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=1 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56918 time=5694000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56918 time=5694000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=1 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=1 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=2 addr=00020000
+M9AXI AR_START seq=2 addr=00020000 t=5694000
+M9AXI AR_WAIT seq=2 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=2 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56921 time=5695000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56921 time=5695000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=2 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=2 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56924 time=5695000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56924 time=5695000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=2 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=2 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=3 addr=00020000
+M9AXI AR_START seq=3 addr=00020000 t=5695000
+M9AXI AR_WAIT seq=3 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=3 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56927 time=5695000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56927 time=5695000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=3 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=3 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56930 time=5695000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56930 time=5695000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=3 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=3 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=4 addr=00020000
+M9AXI AR_START seq=4 addr=00020000 t=5696000
+M9AXI AR_WAIT seq=4 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=4 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56933 time=5696000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56933 time=5696000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=4 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=4 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56936 time=5696000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56936 time=5696000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=4 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=4 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=5 addr=00020000
+M9AXI AR_START seq=5 addr=00020000 t=5696000
+M9AXI AR_WAIT seq=5 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=5 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56939 time=5696000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56939 time=5696000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=5 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=5 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56942 time=5697000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56942 time=5697000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=5 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=5 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=6 addr=00020000
+M9AXI AR_START seq=6 addr=00020000 t=5697000
+M9AXI AR_WAIT seq=6 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=6 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56945 time=5697000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56945 time=5697000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=6 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=6 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56948 time=5697000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56948 time=5697000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+5697000 - FM9AXI READ_RETURN seq=6 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=6 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=7 addr=00020000
+M9AXI AR_START seq=7 addr=00020000 t=5697000
+M9AXI AR_WAIT seq=7 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=7 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56951 time=5698000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56951 time=5698000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=7 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=7 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56954 time=5698000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56954 time=5698000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=7 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=7 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=8 addr=00020000
+M9AXI AR_START seq=8 addr=00020000 t=5698000
+M9AXI AR_WAIT seq=8 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=8 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56957 time=5698000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56957 time=5698000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+WM9AXI R seq=8 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=8 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56960 time=5698000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56960 time=5698000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=8 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=8 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=9 addr=00020000
+M9AXI AR_START seq=9 addr=00020000 t=5699000
+M9AXI AR_WAIT seq=9 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=9 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56963 time=5699000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56963 time=5699000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=9 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=9 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56966 time=5699000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56966 time=5699000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=9 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=9 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=10 addr=00020000
+M9AXI AR_START seq=10 addr=00020000 t=5699000
+M9AXI AR_WAIT seq=10 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=10 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56969 time=5699000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56969 time=5699000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+:M9AXI R seq=10 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=10 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56972 time=5700000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56972 time=5700000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=10 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=10 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=11 addr=00020000
+M9AXI AR_START seq=11 addr=00020000 t=5700000
+M9AXI AR_WAIT seq=11 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=11 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56975 time=5700000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56975 time=5700000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=11 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=11 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56978 time=5700000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56978 time=5700000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=11 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=11 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=12 addr=00020000
+M9AXI AR_START seq=12 addr=00020000 t=5700000
+M9AXI AR_WAIT seq=12 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=12 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56981 time=5701000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56981 time=5701000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=12 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=12 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56984 time=5701000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56984 time=5701000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=12 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=12 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=13 addr=00020000
+M9AXI AR_START seq=13 addr=00020000 t=5701000
+ M9AXI AR_WAIT seq=13 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=13 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56987 time=5701000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56987 time=5701000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=13 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=13 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56990 time=5701000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56990 time=5701000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=13 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=13 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=14 addr=00020000
+M9AXI AR_START seq=14 addr=00020000 t=5702000
+M9AXI AR_WAIT seq=14 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=14 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56993 time=5702000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56993 time=5702000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=14 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=14 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=56996 time=5702000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56996 time=5702000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=14 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=14 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=15 addr=00020000
+M9AXI AR_START seq=15 addr=00020000 t=5702000
+M9AXI AR_WAIT seq=15 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=15 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=56999 time=5702000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=56999 time=5702000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+WM9AXI R seq=15 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=15 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57002 time=5703000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57002 time=5703000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=15 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=15 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=16 addr=00020000
+M9AXI AR_START seq=16 addr=00020000 t=5703000
+M9AXI AR_WAIT seq=16 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=16 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=57005 time=5703000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57005 time=5703000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=16 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=16 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57008 time=5703000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57008 time=5703000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=16 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=16 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=17 addr=00020000
+M9AXI AR_START seq=17 addr=00020000 t=5703000
+M9AXI AR_WAIT seq=17 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=17 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=57011 time=5704000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57011 time=5704000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+aM9AXI R seq=17 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=17 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57014 time=5704000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57014 time=5704000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=17 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=17 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=18 addr=00020000
+M9AXI AR_START seq=18 addr=00020000 t=5704000
+M9AXI AR_WAIT seq=18 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=18 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=57017 time=5704000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57017 time=5704000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=18 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=18 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57020 time=5704000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57020 time=5704000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=18 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=18 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=19 addr=00020000
+M9AXI AR_START seq=19 addr=00020000 t=5705000
+M9AXI AR_WAIT seq=19 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=19 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=57023 time=5705000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57023 time=5705000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=19 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=19 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57026 time=5705000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57026 time=5705000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=19 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=19 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_BEGIN seq=20 addr=00020000
+M9AXI AR_START seq=20 addr=00020000 t=5705000
+iM9AXI AR_WAIT seq=20 addr=00020000 cycles=1 arvalid=1 arready=1
+M9AXI AR_ACCEPT seq=20 addr=00020000 cycles=1
+M10B_MBOX_LOCK_PRE cycle=57029 time=5705000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57029 time=5705000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI R seq=20 addr=00020000 cycles=1 rvalid=1 rready=1 rdata=00000001 rresp=0 ruser=00000000
+M9AXI R_ACCEPT seq=20 addr=00020000 cycles=1 rdata=00000001 rresp=0 ruser=00000000
+M10B_MBOX_LOCK_PRE cycle=57032 time=5706000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57032 time=5706000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M9AXI READ_RETURN seq=20 addr=00020000 data=00000001 resp=0 user=00000000
+M9AXI SINGLE_RETURN seq=20 addr=00020000 data=00000001 resp=0 user=00000000
+M10B_MBOX_LOCK_PRE cycle=57035 time=5706000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57035 time=5706000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57038 time=5706000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57038 time=5706000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57041 time=5707000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57041 time=5707000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+tM10B_MBOX_LOCK_PRE cycle=57044 time=5707000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57044 time=5707000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57047 time=5707000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57047 time=5707000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57050 time=5707000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57050 time=5707000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57053 time=5708000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57053 time=5708000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57056 time=5708000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57056 time=5708000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57059 time=5708000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57059 time=5708000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57062 time=5709000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57062 time=5709000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57065 time=5709000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57065 time=5709000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57068 time=5709000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57068 time=5709000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+
+M10B_MBOX_LOCK_PRE cycle=57071 time=5710000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57071 time=5710000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57074 time=5710000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57074 time=5710000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57077 time=5710000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57077 time=5710000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57080 time=5710000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57080 time=5710000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57083 time=5711000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57083 time=5711000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57086 time=5711000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57086 time=5711000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57089 time=5711000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57089 time=5711000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57092 time=5712000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57092 time=5712000 req=1 ack=1 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57095 time=5712000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57095 time=5712000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57098 time=5712000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57098 time=5712000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57101 time=5713000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57101 time=5713000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57104 time=5713000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57104 time=5713000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57107 time=5713000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57107 time=5713000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57110 time=5713000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57110 time=5713000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57113 time=5714000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57113 time=5714000 req=1 ack=1 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57116 time=5714000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57116 time=5714000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57119 time=5714000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57119 time=5714000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57122 time=5715000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57122 time=5715000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57125 time=5715000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57125 time=5715000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57128 time=5715000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57128 time=5715000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57131 time=5716000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57131 time=5716000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57134 time=5716000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57134 time=5716000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57137 time=5716000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57137 time=5716000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57141 time=5717000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57141 time=5717000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57144 time=5717000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57144 time=5717000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57147 time=5717000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57147 time=5717000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57150 time=5717000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57150 time=5717000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57153 time=5718000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57153 time=5718000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57156 time=5718000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57156 time=5718000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57159 time=5718000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57159 time=5718000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57162 time=5719000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57162 time=5719000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57165 time=5719000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57165 time=5719000 req=1 ack=1 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57168 time=5719000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57168 time=5719000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57171 time=5720000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57171 time=5720000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57174 time=5720000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57174 time=5720000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57177 time=5720000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57177 time=5720000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57180 time=5720000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57180 time=5720000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57183 time=5721000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57183 time=5721000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57186 time=5721000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57186 time=5721000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57189 time=5721000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57189 time=5721000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57192 time=5722000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57192 time=5722000 req=1 ack=1 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57195 time=5722000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57195 time=5722000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57198 time=5722000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57198 time=5722000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57201 time=5723000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57201 time=5723000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57204 time=5723000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57204 time=5723000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57207 time=5723000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57207 time=5723000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57210 time=5723000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57210 time=5723000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57213 time=5724000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57213 time=5724000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57216 time=5724000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57216 time=5724000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57219 time=5724000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57219 time=5724000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57222 time=5725000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57222 time=5725000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57225 time=5725000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57225 time=5725000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57228 time=5725000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57228 time=5725000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57231 time=5726000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57231 time=5726000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57234 time=5726000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57234 time=5726000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57237 time=5726000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57237 time=5726000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57240 time=5726000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57240 time=5726000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57243 time=5727000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57243 time=5727000 req=1 ack=1 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57246 time=5727000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57246 time=5727000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57249 time=5727000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57249 time=5727000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57252 time=5728000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57252 time=5728000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57255 time=5728000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57255 time=5728000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57258 time=5728000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57258 time=5728000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57261 time=5729000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57261 time=5729000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57264 time=5729000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57264 time=5729000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57267 time=5729000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57267 time=5729000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000
+M10B_MBOX_LOCK_PRE cycle=57271 time=5730000 req=1 ack=1 value=1 next=1 load=1 readback=00000001 rd_data=00000001
+M10B_MBOX_LOCK_POST cycle=57271 time=5730000 req=0 ack=0 value=1 next=1 load=0 readback=00000000 rd_data=00000000

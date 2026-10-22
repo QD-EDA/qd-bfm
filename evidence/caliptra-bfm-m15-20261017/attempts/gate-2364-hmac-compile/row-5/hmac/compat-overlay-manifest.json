@@ -1,0 +1,23 @@
+[
+  {
+    "source": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac/uvmf_2022/uvmf_template_output/verification_ip/interface_packages/HMAC_out_pkg/src/HMAC_out_transaction_coverage.svh",
+    "source_sha256": "b54c5d26a1f97eb4fbd9c3648c1a46b971c3b2cbdd8e5f5a9bb1d77b5c2ebbb0",
+    "overlay": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-03-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_out_pkg/src/HMAC_out_transaction_coverage.svh",
+    "overlay_sha256": "71d88fcffce47c2da1d62058c3c28aa3627c7867e03ff5e872bf70cf3e24d696",
+    "change": "Icarus-only testbench compatibility; no RTL, firmware, or pass criteria changed."
+  },
+  {
+    "source": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac/uvmf_2022/uvmf_template_output/verification_ip/environment_packages/HMAC_env_pkg/src/HMAC_env_configuration.svh",
+    "source_sha256": "99de7feaf5d50dd77354111b16eafb063343ae6c7e005066654e38ae90858e1d",
+    "overlay": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-03-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_env_configuration.svh",
+    "overlay_sha256": "955f8ded5e18c3c932cd950dd360d1401e503be61d3dcb322b9e39c0549e3567",
+    "change": "Icarus-only testbench compatibility; no RTL, firmware, or pass criteria changed."
+  },
+  {
+    "source": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/hmac/uvmf_2022/uvmf_template_output/verification_ip/environment_packages/HMAC_env_pkg/src/HMAC_env_sequence_base.svh",
+    "source_sha256": "8addb7a926397c55e0c1784120cf2c301a61809d90b4352d8c8227676ca8feeb",
+    "overlay": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-03-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_env_sequence_base.svh",
+    "overlay_sha256": "8fdd035a410d56bd03682ef5e8e2a6c1b3b9e1b9bc698715667de284994754dd",
+    "change": "Icarus-only testbench compatibility; no RTL, firmware, or pass criteria changed."
+  }
+]

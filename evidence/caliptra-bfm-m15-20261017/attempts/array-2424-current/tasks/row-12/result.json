@@ -1,0 +1,28 @@
+{
+  "cause": "upstream UART compile.yml has no Icarus filelist/setup",
+  "elapsed_seconds": 0.021,
+  "environment_id": "caliptra-uart",
+  "filelist": "src/uart/config/compile.yml",
+  "filelist_sha256_json": "{\"src/uart/config/compile.yml\":\"8798f84b1a5ba7d29ae3a89acb94d0d048d5ff9a9652062ccd097e6343c22d60\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 12,
+  "run_plusargs": [
+    "+UVM_TESTNAME=uart_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "compile-yaml-unresolved",
+  "slurm_array_task_id": "10",
+  "slurm_job_id": "2435",
+  "source_file": "src/uart/stimulus/tests/directed/uart_test.yml",
+  "source_pin": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "source_repo": "caliptra",
+  "source_yaml_sha256": "12b82afd4c71fbc8b78363e0979ca32930a1e388c8e3498f8a35adf583c9f552",
+  "status": "BLOCKED",
+  "testname": "uart_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

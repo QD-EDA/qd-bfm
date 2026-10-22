@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-sha3-row61-gate-20261019-03
+Selected row: 61
+Resources: 1 CPU/1 GiB, 600-second timeout
+Peak RSS basis: row58 measured 26,804 KiB with the same runner
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: b97f73385daaff0e89ee4359722bb900a582d88aaa3b65bcd353690d93b7a3d9
+Run script SHA-256: c8c948d5bae7861a6a4c04afead1aa3a017f967956ed9cf5c2cc7babc5c845a5
+Slurm job ID: 3066

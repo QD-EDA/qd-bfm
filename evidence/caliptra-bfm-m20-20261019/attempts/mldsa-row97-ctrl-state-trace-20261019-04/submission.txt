@@ -1,0 +1,10 @@
+Slurm job: 3268_97
+Submitted: 2026-10-19T18:19:18 cluster time (2026-10-20T00:19:23Z queue check)
+Host: DAN-DESKTOP (Ubuntu WSL2)
+Test: row 97 ML_DSA_randomized_two_verif_on_fail_test
+Resources: 1 CPU, 2 GiB; runner timeout 1800 seconds; Slurm limit 2100 seconds
+Initial state: PENDING (Priority)
+Adams Bridge source pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Caliptra source pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus: 13.0 devel (cae03564), binary SHA-256 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+VVP: 13.0 devel (cae03564), binary SHA-256 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309

@@ -1,0 +1,12 @@
+job_id=2192
+submitted=2026-10-17T14:06:26-06:00
+host=DAN-DESKTOP
+state_at_check=RUNNING (0:23 elapsed)
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m13-iverilog-main-9b5fad2-20261017-01
+protected_toolchain=/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66
+source_repo=https://github.com/dsellerbrock/iverilog-uvm.git
+source_sha=9b5fad2afb4104caa816b257d5bccc40f01b8c66
+build_script_sha256=ddeb8cfafe5504eb51a649f1e888eea00fa2b87f8bfb4fbfa3ce6909c439811c
+resources=1 CPU, 3 GiB RAM, 2-hour Slurm cap; based on M7 current-main build (1 CPU, 3 GiB, 6:52 wall, 1,753,332 KiB peak RSS)
+command=ssh DAN-DESKTOP 'cd /home/dsell/slurm-runs/caliptra-bfm/a2/m13-iverilog-main-9b5fad2-20261017-01 && sbatch --parsable build-current-main.sbatch'
+build_script=evidence/caliptra-bfm-m13-20261017/build-current-main.sbatch

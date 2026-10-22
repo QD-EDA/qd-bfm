@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Slurm job: 1834 (one-row firmware probe)
+Command: sbatch run-one.sbatch
+Test: smoke_test_ahb_mux (cadf43c78de6a454), selection index 50
+Slurm allocation: 1 CPU, 3 GiB, 12 min job limit
+Wrapper cap: 600 s
+Pinned Icarus outcome: PASS
+Overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1
+Model SHA-256: 2fd1bdfde761a04ea5905384badcb3a927677545e383368a42c77f978d6659a3
+Assertions: model built with Verilator 5.052, --assert, and CLP_ASSERT_ON

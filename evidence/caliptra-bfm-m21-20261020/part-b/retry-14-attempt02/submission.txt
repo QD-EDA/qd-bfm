@@ -1,0 +1,9 @@
+job_id=3786
+retry_attempt=02
+supersedes_job=3734; failed before firmware runner invocation due unset SLURM_ARRAY_JOB_ID
+run_directory=/home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/retry-14-attempt02/run-1b067d21081b705c-job3786
+selection_path=../retry-14/selection.tsv
+selection_sha256=a549839694fc938c16c42eb9569270d141e3b37c73c9ed598d236ab74838139b
+script_sha256=90479b71fd0c19093d4adf604e1a6071bc7ff97487cf86947d257f33de45a322
+resources=1 CPU, 3 GiB, 06:10:00 outer limit, 21600 s per-test timeout
+log=/home/dsell/slurm-runs/caliptra-bfm/a2/m21-part-b-20261020-01/logs/m21-row14-rerun-3786.out

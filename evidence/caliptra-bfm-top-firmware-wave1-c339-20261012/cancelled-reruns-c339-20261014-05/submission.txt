@@ -1,0 +1,17 @@
+host=DAN-DESKTOP
+job_id=1110
+submitted_at=2026-10-14T19:13:09-06:00
+job_name=bfm-m5b-post-reopen-rerun-05
+dependency=afterany:1043
+array=1-4%6
+state_at_submission=PENDING (unfulfilled dependency)
+requested=1 CPU, 3 GiB per task, 6h10m allocation, max 6 tasks
+source_rows=37,39,43,44
+original_tasks=799_28,799_30,799_34,799_35
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+iverilog_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+iverilog_binary_sha256=683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb
+vvp_binary_sha256=ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f
+caliptra_rtl=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+previous_fresh_array=1015 (results retained separately)

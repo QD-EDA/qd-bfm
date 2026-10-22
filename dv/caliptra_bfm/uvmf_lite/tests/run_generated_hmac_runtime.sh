@@ -12,6 +12,11 @@ test_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
 caliptra_root=${CALIPTRA_ROOT:-"$repo_root/../caliptra-rtl"}
 iverilog_bin=${IVERILOG_BIN:-iverilog}
 vvp_bin=${VVP_BIN:-vvp}
+hmac_testname=${CALIPTRA_BFM_HMAC_TESTNAME:-HMAC_random_test}
+case "$hmac_testname" in
+  HMAC_random_test|HMAC_otf_reset_test) ;;
+  *) echo "Unsupported generated HMAC test: $hmac_testname" >&2; exit 2 ;;
+esac
 expected_caliptra_commit=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
 expected_test_gen_sha=ea91ed5f5b481e69c8840e3b4f3ac8bfeed37ab0552d070f9ddf7e0d3501399b
 
@@ -24,10 +29,17 @@ if [ -n "$(git -C "$caliptra_root" status --porcelain --untracked-files=normal)"
   exit 2
 fi
 
-tmpdir=$(mktemp -d)
-trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
+if [ -n "${CALIPTRA_BFM_HMAC_RUN_DIR:-}" ]; then
+  tmpdir=$CALIPTRA_BFM_HMAC_RUN_DIR
+  mkdir -p "$tmpdir"
+else
+  tmpdir=$(mktemp -d)
+  trap 'rm -rf "$tmpdir"' EXIT HUP INT TERM
+fi
 python3 - "$repo_root" "$caliptra_root" "$tmpdir" "$expected_test_gen_sha" <<'PY'
 import hashlib
+import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -41,6 +53,9 @@ bench = uvmf / "project_benches/HMAC/tb"
 in_pkg = uvmf / "verification_ip/interface_packages/HMAC_in_pkg"
 out_pkg = uvmf / "verification_ip/interface_packages/HMAC_out_pkg"
 env_pkg = uvmf / "verification_ip/environment_packages/HMAC_env_pkg"
+overlay = tmp / "compat-overlay"
+overlay_out_pkg = overlay / "HMAC_out_pkg"
+overlay_env_pkg = overlay / "HMAC_env_pkg"
 
 test_gen = hmac_root / "tb/test_gen.py"
 source = test_gen.read_bytes()
@@ -62,6 +77,59 @@ text = source.decode()
 if text.count(old) != 2:
     raise SystemExit("test_gen.py parser differs from the reviewed source")
 (tmp / "test_gen.py").write_text(text.replace(old, new))
+
+compatibility = [
+    (
+        out_pkg / "src/HMAC_out_transaction_coverage.svh",
+        "b54c5d26a1f97eb4fbd9c3648c1a46b971c3b2cbdd8e5f5a9bb1d77b5c2ebbb0",
+        "result: coverpoint coverage_trans.result;",
+        "result: coverpoint 1'b0;",
+    ),
+    (
+        env_pkg / "src/HMAC_env_configuration.svh",
+        "99de7feaf5d50dd77354111b16eafb063343ae6c7e005066654e38ae90858e1d",
+        "HMAC_in_agent_config.convert2string,\n     \"\\n\", HMAC_out_agent_config.convert2string",
+        "HMAC_in_agent_config.convert2string(),\n     \"\\n\", HMAC_out_agent_config.convert2string()",
+    ),
+    (
+        env_pkg / "src/HMAC_env_sequence_base.svh",
+        "8addb7a926397c55e0c1784120cf2c301a61809d90b4352d8c8227676ca8feeb",
+        """  virtual task body();
+
+    if ( configuration.HMAC_in_agent_config.sequencer != null )
+       repeat (10) HMAC_in_agent_rand_seq.start(configuration.HMAC_in_agent_config.sequencer);
+
+
+  endtask""",
+        """  virtual task body();
+    HMAC_env_configuration hmac_env_config;
+    HMAC_in_configuration hmac_in_config;
+    hmac_env_config = configuration;
+    hmac_in_config = hmac_env_config.HMAC_in_agent_config;
+    if (hmac_in_config.sequencer != null)
+      repeat (10) HMAC_in_agent_rand_seq.start(hmac_in_config.sequencer);
+  endtask""",
+    ),
+]
+shutil.copytree(out_pkg, overlay_out_pkg)
+shutil.copytree(env_pkg, overlay_env_pkg)
+overlay_records = []
+for source, expected, old_text, new_text in compatibility:
+    original = source.read_bytes()
+    actual = hashlib.sha256(original).hexdigest()
+    if actual != expected:
+        raise SystemExit(f"Refusing unreviewed HMAC source {source}: {actual}")
+    if original.decode().count(old_text) != 1:
+        raise SystemExit(f"HMAC source anchor changed: {source}")
+    relative = source.relative_to(source.parents[1])
+    target = (overlay_out_pkg if source.is_relative_to(out_pkg) else overlay_env_pkg) / relative
+    target.write_text(original.decode().replace(old_text, new_text, 1))
+    overlay_records.append({
+        "source": str(source), "source_sha256": actual,
+        "overlay": str(target), "overlay_sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+        "change": "Icarus-only testbench compatibility; no RTL, firmware, or pass criteria changed.",
+    })
+(tmp / "compat-overlay-manifest.json").write_text(json.dumps(overlay_records, indent=2) + "\n")
 
 hdl = bench / "testbench/hdl_top.sv"
 (tmp / "hdl_top_timescale_overlay.sv").write_text(
@@ -85,8 +153,8 @@ rtl_sources = [line for line in vf.splitlines() if line and not line.startswith(
 incdirs += [
     f"+incdir+{repo / 'dv/caliptra_bfm/uvmf_lite'}",
     f"+incdir+{in_pkg}", f"+incdir+{in_pkg / 'src'}",
-    f"+incdir+{out_pkg}", f"+incdir+{out_pkg / 'src'}",
-    f"+incdir+{env_pkg}", f"+incdir+{bench / 'parameters'}",
+    f"+incdir+{overlay_out_pkg}", f"+incdir+{overlay_out_pkg / 'src'}",
+    f"+incdir+{overlay_env_pkg}", f"+incdir+{bench / 'parameters'}",
     f"+incdir+{bench / 'sequences'}", f"+incdir+{bench / 'tests'}",
     f"+incdir+{bench / 'testbench'}",
 ]
@@ -96,10 +164,10 @@ generated_sources = [
     in_pkg / "HMAC_in_pkg_hdl.sv", in_pkg / "HMAC_in_pkg.sv",
     in_pkg / "src/HMAC_in_driver_bfm.sv", in_pkg / "src/HMAC_in_if.sv",
     in_pkg / "src/HMAC_in_monitor_bfm.sv",
-    out_pkg / "HMAC_out_pkg_hdl.sv", out_pkg / "HMAC_out_pkg.sv",
-    out_pkg / "src/HMAC_out_driver_bfm.sv", out_pkg / "src/HMAC_out_if.sv",
+    overlay_out_pkg / "HMAC_out_pkg_hdl.sv", overlay_out_pkg / "HMAC_out_pkg.sv",
+    overlay_out_pkg / "src/HMAC_out_driver_bfm.sv", overlay_out_pkg / "src/HMAC_out_if.sv",
     out_pkg / "src/HMAC_out_monitor_bfm.sv",
-    env_pkg / "HMAC_env_pkg.sv", bench / "parameters/HMAC_parameters_pkg.sv",
+    overlay_env_pkg / "HMAC_env_pkg.sv", bench / "parameters/HMAC_parameters_pkg.sv",
     bench / "sequences/HMAC_sequences_pkg.sv", bench / "tests/HMAC_tests_pkg.sv",
     tmp / "hdl_top_timescale_overlay.sv", bench / "testbench/hvl_top.sv",
     tmp / "hmac_generated_top.sv",
@@ -112,7 +180,8 @@ PY
 python3 "$repo_root/docs/conformance/release_overlays/caliptra/hmac_out_monitor_reset_event_overlay.py" \
   --caliptra-root "$caliptra_root" \
   --filelist "$tmpdir/hmac_generated_full.f" \
-  --output-dir "$tmpdir/monitor-overlay"
+  --output-dir "$tmpdir/monitor-overlay" \
+  --manifest "$tmpdir/monitor-overlay-manifest.json"
 
 image="$tmpdir/hmac-generated.vvp"
 compile_log="$tmpdir/compile.log"
@@ -129,21 +198,23 @@ ln -s "$(command -v python3)" "$tmpdir/run/bin/python"
 cp "$tmpdir/test_gen.py" "$tmpdir/run/test_gen.py"
 run_log="$tmpdir/run.log"
 if ! (cd "$tmpdir/run" && PATH="$tmpdir/run/bin:$PATH" \
-      "$vvp_bin" "$image" +UVM_TESTNAME=HMAC_random_test \
+      "$vvp_bin" "$image" "+UVM_TESTNAME=$hmac_testname" \
+      "+ntb_random_seed=${CALIPTRA_BFM_HMAC_SEED:-1}" \
       +UVM_VERBOSITY=UVM_NONE +UVM_NO_RELNOTES) >"$run_log" 2>&1; then
   cat "$run_log" >&2
   echo "Generated HMAC runtime failed." >&2
   exit 1
 fi
 
-if [ "$(grep -Fc '**HMAC_predictor** t.op=' "$run_log" || true)" -ne 17 ] ||
-   ! grep -Fq '* TESTCASE PASSED' "$run_log" ||
-   ! grep -Fq 'UVM_WARNING :    0' "$run_log" ||
+if ! grep -Fq '* TESTCASE PASSED' "$run_log" ||
    ! grep -Fq 'UVM_ERROR :    0' "$run_log" ||
    ! grep -Fq 'UVM_FATAL :    0' "$run_log" ||
-   grep -Eq 'UVMF_SB_(MISMATCH|LEFTOVER)' "$run_log"; then
+   grep -Eq 'UVMF_SB_(MISMATCH|LEFTOVER)|\* TESTCASE FAILED' "$run_log" ||
+   { [ "$hmac_testname" = HMAC_random_test ] &&
+     { [ "$(grep -Fc '**HMAC_predictor** t.op=' "$run_log" || true)" -ne 17 ] ||
+       ! grep -Fq 'UVM_WARNING :    0' "$run_log"; }; }; then
   cat "$run_log" >&2
-  echo "Generated HMAC scoreboard did not pass all 17 transactions." >&2
+  echo "Generated HMAC test $hmac_testname did not satisfy its pass checks." >&2
   exit 1
 fi
 
@@ -153,6 +224,8 @@ case "$simulator_id" in
   *-dirty*) echo "DIAGNOSTIC: dirty Icarus build; this run is not qualification evidence." ;;
   *) echo "Check that this Icarus revision is clean and published before treating this as qualification evidence." ;;
 esac
-echo "HMAC predictor transactions: 17; scoreboard mismatches/leftovers: 0"
+if [ "$hmac_testname" = HMAC_random_test ]; then
+  echo "HMAC predictor transactions: 17; scoreboard mismatches/leftovers: 0"
+fi
 grep -E 'UVM_WARNING :|UVM_ERROR :|UVM_FATAL :' "$run_log"
-echo "PASS: generated HMAC runtime matched 17 transactions."
+echo "PASS: generated HMAC test $hmac_testname completed with zero UVM errors/fatals."

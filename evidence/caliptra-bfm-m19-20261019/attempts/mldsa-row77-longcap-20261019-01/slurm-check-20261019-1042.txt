@@ -1,0 +1,17 @@
+Mon Oct 19 10:42:07 MDT 2026
+ 10:42:07 up 5 days,  3:13,  8 users,  load average: 11.48, 9.96, 9.62
+3110_77 RUNNING elapsed=25:16 remaining=49:44
+NO_RESULT_JSON
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/sim.log mtime=2026-10-19 10:39:32.944374757 -0600 size=565248
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_key_gen_sequence.svh(109) @ 230315.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_PRIVKEY_OUT[1208]: b78282b5
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_key_gen_sequence.svh(109) @ 230355.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_PRIVKEY_OUT[1209]: d7ac9780
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_key_gen_sequence.svh(109) @ 230395.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_PRIVKEY_OUT[1210]: 2357116
+UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_key_gen_sequence.svh(109) @ 230435.000n
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/compile.log mtime=2026-10-19 10:17:00.740812680 -0600 size=710
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+iverilog: note: wrote DPI export C stubs to /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/test.dpiexport.c (compile it into your DPI object).
+
+    PID    PPID     ELAPSED %CPU   RSS COMMAND         COMMAND
+2114610 2114609       25:06 99.9 380704 vvp            /home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/bin/vvp -n /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row77-longcap-20261019-01/tasks/row-77/output/test.vvp +UVM_TESTNAME=ML_DSA_randomized_key_gen_test +ntb_random_seed=1

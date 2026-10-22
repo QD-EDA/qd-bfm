@@ -1,0 +1,127 @@
+HEAD 8e1448efba79249a2d5327dd7b2d77e4f989d647
+Dirty status follows:
+ M dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py
+ M dv/caliptra_bfm/uvmf_lite/tests/test_run_m15_test.py
+ M evidence/caliptra-bfm-m7-rebaseline-20261014/README.md
+ M evidence/caliptra-bfm-m7-rebaseline-20261014/environment-comparison.tsv
+ M evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/run_soc_ifc_env_compile.py
+ M evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/cancelled-reruns-c339-20261015-01/README.md
+ M evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/cancelled-reruns-c339-20261015-01/results.tsv
+ M evidence/caliptra-bfm-verilator-m9-20261016/README.md
+ M evidence/caliptra-bfm-verilator-m9-20261016/disagreements.md
+ M evidence/caliptra-bfm-verilator-m9-20261016/root-causes.md
+?? dv/caliptra_bfm/uvmf_lite/tests/__pycache__/
+?? evidence/caliptra-bfm-m15-20261017/attempts/gate-2363-staging-error/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2663-manifest-input-error/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2664-mldsa-qvip-utils/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2665-mldsa-unsupported/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2668-kv-ahb/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2669-socifc-ahb/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2670-pv-ahb/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2715-mldsa-row96-qvip-handler/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2719-mldsa-row96-icarus-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2720-mldsa-row96-runner-fix/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-2722-mldsa-row96-model-and-fatal-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row57-classifier/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row57-numpy/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row59-classifier/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row59-include-path/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row59-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row63-includes/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row63-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row66-skdecode-bport-fix/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row66-skdecode-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row67-sigdecode-h-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row68-reclassification/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row71-python-alias/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-adams-row72-sigdecode-z-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-csrng-row20-filelist/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-32bit/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-alias-both/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-alias-complete/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-alias/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-cast-trace/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-mldsa-row96-ral-endian/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-ntt-row75-vectors/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-ntt-row76-classification/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-ntt-row76-overlay/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-ntt-row76-vectors/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-sha512-row17-open-mvc-20261018-01/
+?? evidence/caliptra-bfm-m16-20261018/attempts/gate-socifc-open-ahb/
+?? evidence/caliptra-bfm-m16-20261018/attempts/removed-build-artifacts.sha256
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/ahb-pv-generic-transfer/
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/iverilog-parameterized-class-cast/
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/iverilog-wildcard-transition-bin/
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/kv-nested-class-property/
+?? evidence/caliptra-bfm-m16-20261018/diagnostics/mldsa-row96-type-identity-20261018-01/
+?? evidence/caliptra-bfm-m16-20261018/local-python-numpy.md
+?? evidence/caliptra-bfm-m16-20261018/mvc-inventory.md
+?? evidence/caliptra-bfm-m7-rebaseline-20261014/repro-butterfly-vvp-null-head/post-m6-dcbce66-20261016/
+?? evidence/caliptra-bfm-m7-rebaseline-20261014/repro-butterfly-vvp-null-head/post-main-631b7a869-20261016/
+?? evidence/caliptra-bfm-soc-ifc-hostpkgs-20261004/__pycache__/
+?? evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/cancelled-reruns-c339-20261015-01/task-1426_1/
+?? evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/cancelled-reruns-c339-20261015-01/task-1426_2/
+?? evidence/caliptra-bfm-top-firmware-wave1-c339-20261012/cancelled-reruns-c339-20261015-01/task-1426_3/
+?? evidence/caliptra-bfm-verilator-m10-20261016/array-diagnostic-target-signals-1751.tar.gz
+?? evidence/caliptra-bfm-verilator-m10-20261016/array-diagnostic-target-signals-1751.tar.gz.sha256
+?? evidence/caliptra-bfm-verilator-m10-20261016/build-failure-1625.filelist-manifest.txt
+?? evidence/caliptra-bfm-verilator-m10-20261016/build-failure-1625.log
+?? evidence/caliptra-bfm-verilator-m10-20261016/build-failure-1625.resource
+?? evidence/caliptra-bfm-verilator-m10-20261016/build-failure-1625.sbatch.log
+?? evidence/caliptra-bfm-verilator-m10-20261016/eventually-sequence-probe.sv
+?? evidence/caliptra-bfm-verilator-m10-20261016/eventually-sequence-probe/
+?? evidence/caliptra-bfm-verilator-m10-20261016/input-manifest.txt
+?? evidence/caliptra-bfm-verilator-m10-20261016/run-eventually-probe.sbatch
+?? evidence/caliptra-bfm-verilator-m10-20261016/submission.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-01/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/prepare-verilator-filelist.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/raw/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/run-selection.tsv
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/run-verilator-top-case.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/run.sbatch
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/source-files.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-02/submission.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/prepare-verilator-filelist.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/build.log
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/build.resource
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/diagnostic-output/.work/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/diagnostic-output/sim.resource
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/diagnostic-output/toolchain-preflight.log
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/diagnostic-runner.log
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/diagnostic.resource
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/filelist-manifest.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/logs/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/model.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/overlay.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/overlay/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/prepare-verilator-filelist.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/run-selection.tsv
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/run-verilator-top-case.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/run.sbatch
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/source-files.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/raw/verilator.version
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/run-selection.tsv
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/run-verilator-top-case.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/run.sbatch
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/source-files.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-03/submission.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/prepare-verilator-filelist.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/build.log
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/diagnostic-output/firmware.log
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/filelist-manifest.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/model.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/overlay.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/source-files.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/raw/verilator.version
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/run-selection.tsv
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/run-verilator-top-case.py
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/run.sbatch
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/source-files.sha256
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/cptra-ss-dma-axi-20261016-04/submission.txt
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/generated-uvmf-hmac-20261016-01/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/generated-uvmf-hmac-20261016-02/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/generated-uvmf-hmac-20261016-03/
+?? evidence/caliptra-bfm-verilator-m9-20261016/diagnostics/generated-uvmf-hmac-20261016-04/
+?? graphify-out/
+?? tasks/

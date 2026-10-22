@@ -2,6 +2,10 @@
 // Clean-room lower-bound types for the AHB fields consumed by Caliptra UVMF.
 // Exclude these fallback packages when compiling with licensed MVC/QVIP.
 `ifndef CALIPTRA_BFM_EXTERNAL_MVC
+// Generated Caliptra projects import this namespace but do not use its symbols.
+package QUESTA_MVC;
+endpackage
+
 package mvc_pkg;
   import uvm_pkg::*;
   `include "uvm_macros.svh"

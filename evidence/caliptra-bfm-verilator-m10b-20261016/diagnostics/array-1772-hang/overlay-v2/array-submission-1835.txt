@@ -1,0 +1,11 @@
+Slurm job array: 1835[0-102]
+Host: DAN-DESKTOP
+Run: /home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-09
+Command: sbatch --export=ALL,RUN_DIR=/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-09 run-array.sbatch
+Throttle: 6 concurrent tasks; each task requests 1 CPU and 3 GiB; Slurm time limit 7 h.
+Per-row wrapper timeout: row-specific c339 timeout plus 1800 s.
+Selection SHA-256: f453af6eab41fba6cff9caf43449899ce4696a732f5fc03be6d919403e26eba0
+Overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1
+Built model SHA-256: 2fd1bdfde761a04ea5905384badcb3a927677545e383368a42c77f978d6659a3
+Pre-array gate: job 1834 `smoke_test_ahb_mux` PASS; mcycle=3973; 600 s outer cap; 5.08 s wrapper elapsed.
+Initial queue snapshot: tasks 0-5 RUNNING on DAN-DESKTOP; tasks 6-102 pending at the array's %6 throttle.

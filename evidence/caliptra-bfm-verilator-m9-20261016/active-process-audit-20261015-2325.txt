@@ -1,0 +1,1 @@
+At 23:25 MDT, no new M9 result had appeared. The active Verilator processes for 1430_47, 1430_55, and 1430_63 each consumed about 99.9% CPU. Their sim.log files had not advanced recently, but processes were running; 1430_47 is the expected infinite_loop timeout, 1430_55 is MLDSA signing, and 1430_63 is smoke_test_mbox. No job was interrupted.

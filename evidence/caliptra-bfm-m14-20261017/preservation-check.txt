@@ -1,0 +1,10 @@
+M13-to-M14 block-level row preservation check
+Rows: 44 (unique environment IDs: 44)
+M13 current-main-plus-overlays PASS: 19
+M14 current-main-plus-overlays PASS: 22
+Lost previous PASS rows: none
+New PASS rows: adams-bridge-v2-0-3-compress_tb, adams-bridge-v2-0-3-sigdecode_z_tb, adams-bridge-v2-0-3-skencode_tb
+M14 current-main pinned-only counts: BLOCKED=30, FAIL=1, PASS=11, TIMEOUT=2
+M14 current-main plus overlays counts: BLOCKED=17, FAIL=2, PASS=22, TIMEOUT=3
+Existing 19 PASS rows were carried forward unchanged from M13; they were not rerun in M14. M14 added only row-local testbench/filelist/setup overlays for the three listed rows; pinned RTL, firmware, and simulator were unchanged.
+Assertions: 44 unique rows; exact 3-row PASS delta; no prior PASS lost; expected pinned-only and overlay totals; all new PASS evidence files exist.

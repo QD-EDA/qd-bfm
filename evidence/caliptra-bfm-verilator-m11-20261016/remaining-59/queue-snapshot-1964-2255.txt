@@ -1,0 +1,17 @@
+# Queue snapshot: array 1964
+
+Captured on DAN-DESKTOP at 2026-10-16 22:55 MDT.
+
+```text
+JOBID               STATE      TIME         NAME                               NODELIST(REASON)
+2026                PENDING    0:00         a1-speed-native                    (Dependency)
+2025                PENDING    0:00         a1-speed-t4                        (Dependency)
+2024                PENDING    0:00         a1-speed-t2                        (Dependency)
+2035                RUNNING   2:53         a1-checkpoint-build                 DAN-DESKTOP
+2034                RUNNING   2:56         a1-interop-p1-lockstep               DAN-DESKTOP
+2023                RUNNING  35:48         a1-speed-case                       DAN-DESKTOP
+2022                RUNNING  1:13:10       a1-win98-trace-215m-wide             DAN-DESKTOP
+1964_54             RUNNING   2:20:05       a2-m11-rem59-run                    DAN-DESKTOP
+```
+
+Array 1772 has no live tasks. Array 1964 has only task 54 active and no queued rows.

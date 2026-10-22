@@ -1,0 +1,10 @@
+Host: DAN-DESKTOP
+Array job ID: 3028
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-top-aaxi-current-main-array-20261019-31
+Rows: 1–4 and 43–45 (row 0 is the current-main gate)
+Throttle: 4 concurrent tasks, 1 CPU/4 GiB each
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source archive SHA-256: 1f920533b1d4385de8c205e7011cfc576aab0ed5dd2fc94700e9ec2b89ca26d1
+Run script SHA-256: 0d41d618b8b5529513d61ef87cf76acd3c6e671018281d58d89c314a92b477a4
+Result: running

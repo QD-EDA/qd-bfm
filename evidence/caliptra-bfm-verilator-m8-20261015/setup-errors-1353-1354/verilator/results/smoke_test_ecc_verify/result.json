@@ -1,0 +1,18 @@
+{
+  "host": "DAN-DESKTOP",
+  "case": "smoke_test_ecc_verify",
+  "timeout_s": 16033,
+  "c339_outcome": "TIMEOUT_PROGRESS_UNKNOWN",
+  "c339_mcycle": "NA",
+  "c339_elapsed_s": "16033",
+  "model_sha256": "b6ee29ade1b17547c4b31692ed9a0b48e22031c4551604fd9dc250a81e01ae79",
+  "started_at": "2026-10-15T20:27:16.115194+00:00",
+  "case_yaml": "src/integration/test_suites/smoke_test_ecc_verify/smoke_test_ecc_verify.yml",
+  "case_yaml_sha256": "b6a37f6a0d86581be93a31dcba59be4ba9e08eb2cce60e2958447b9db45964a1",
+  "seed": "1",
+  "plusargs": [],
+  "error": "Traceback (most recent call last):\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-07/run-verilator-top-case.py\", line 75, in main\n    vector_files, vector_hashes, vector_commands, vector_tools = runner.prepare_native_vectors(\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-07/source/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py\", line 823, in prepare_native_vectors\n    raise RuntimeError(f\"missing native vector inputs: {missing}\")\nRuntimeError: missing native vector inputs: ['stage_sha256_wntz.py', 'native_mlkem.c', 'random_test_ml_kem.py', 'stage_mldsa.py', 'check_native_mlkem.py', 'check_native_mldsa.py']\n",
+  "outcome": "HARNESS_ERROR",
+  "elapsed_s": 0.008,
+  "completed_at": "2026-10-15T20:27:16.122978+00:00"
+}

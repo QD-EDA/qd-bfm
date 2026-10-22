@@ -1,0 +1,7 @@
+host=DAN-DESKTOP
+verilator=Verilator 5.052 2026-09-05 rev v5.052
+compile_command=/home/dsell/toolchains/verilator-5.052/bin/verilator --binary --timing --fourstate --Wno-fatal --top-module fourstate_stable_probe --Mdir obj_dir fourstate-stable-probe.sv
+compile_exit=0
+run_command=./obj_dir/Vfourstate_stable_probe
+run_exit=1
+result=FAIL; runtime assertion reported X was not preserved

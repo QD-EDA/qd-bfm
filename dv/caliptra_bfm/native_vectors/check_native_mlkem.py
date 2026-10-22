@@ -43,6 +43,22 @@ with tempfile.TemporaryDirectory() as directory:
         assert output.read_text().splitlines() == [operation, *expected_lines]
         print(f"operation {operation}: pinned KAT matches byte for byte")
 
+    source.write_text("\n".join(("1", keygen["seed_z"], keygen["seed_d"], "")))
+    subprocess.run([helper, "1", "-i", source, "-o", output], check=True)
+    generated_key = output.read_text().splitlines()
+    roundtrip_ek, roundtrip_dk = generated_key[3:5]
+
+    source.write_text("\n".join(("2", encap["msg"], roundtrip_ek, "")))
+    subprocess.run([helper, "2", "-i", source, "-o", output], check=True)
+    generated_encap = output.read_text().splitlines()
+    roundtrip_secret, roundtrip_ct = generated_encap[3:5]
+
+    source.write_text("\n".join(("3", roundtrip_dk, roundtrip_ct, "")))
+    decap = subprocess.run([helper, "3", "-i", source, "-o", output], capture_output=True)
+    assert decap.returncode == 0, decap.stderr.decode(errors="replace")
+    assert output.read_text().splitlines() == ["3", roundtrip_dk, roundtrip_ct, roundtrip_secret]
+    print("operation 3: decapsulation round-trip matches the generated shared secret")
+
     source.write_text("1\n" + "Z" * 64 + "\n" + keygen["seed_d"] + "\n")
     failed = subprocess.run([helper, "1", "-i", source, "-o", output], capture_output=True)
     assert failed.returncode != 0 and b"invalid hex" in failed.stderr

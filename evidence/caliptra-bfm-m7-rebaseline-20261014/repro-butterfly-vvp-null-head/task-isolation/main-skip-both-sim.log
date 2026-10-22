@@ -1,0 +1,17 @@
+Start of init
+End of init
+*** Toggle reset.
+End of reset
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:593: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:593: $readmemh: Unable to open kyber_zeta.txt for reading.
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:594: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:594: $readmemh: Unable to open kyber_zeta_inv.hex for reading.
+Zeta values are 000000, 000000, 000000, ...
+Zeta inv values are 000000, 000000, 000000, ...
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:597: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:597: $readmemh: Unable to open kyber_stage0.hex for reading.
+in_val = 000000, 000000, 000000, ...
+WARNING: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:601: $readmemh: The behaviour for reg[...] mem[N:0]; $readmemh("...", mem); changed in the 1364-2005 standard. To avoid ambiguity, use mem[0:N] or explicit range parameters $readmemh("...", mem, start, stop);. Defaulting to 1364-2005 behavior.
+ERROR: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:601: $readmemh: Unable to open kyber_stage0_out.hex for reading.
+out_val = 000000, 000000, 000000, ...
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-task-isolation-20261014/source/skip-both.sv:621: $finish called at 135 (1s)

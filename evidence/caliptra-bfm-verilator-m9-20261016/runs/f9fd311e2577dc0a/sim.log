@@ -1,0 +1,257 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5570000 - ----------------------------------
+5620000 -  KV Smoke Test With hmac384 flow !!
+5671000 - ----------------------------------
+6058000 - Try to Overwrite Key data in HMAC384
+6140000 - Try to Overwrite Block data in HMAC
+6281000 - HMAC flow in progress...
+6346000 - Received HMAC notif/err intr with status = 1/ 0
+6465000 - Load TAG data from HMAC to KV
+6518000 - HMAC zeroize flow.
+6548000 - ----------------------------------
+6599000 -  KV Smoke Test With hmac512 flow !!
+6650000 - ----------------------------------
+6732000 - START TEST 0
+6855000 - Key KV ID: 23, KV Intf: 1
+6951000 - Block KV ID: 23, KV Intf: 0
+7046000 - Tag KV ID: 23, KV Intf: 0
+7227000 - Try to Overwrite Key data in HMAC512
+7397000 - HMAC flow in progress...
+7462000 - Received HMAC notif/err intr with status = 1/ 0
+7582000 - Load TAG data from HMAC
+7654000 - HMAC zeroize flow.
+7688000 - START TEST 1
+7812000 - Key KV ID: 23, KV Intf: 0
+7901000 - Block KV ID: 23, KV Intf: 1
+7992000 - Tag KV ID: 23, KV Intf: 0
+8175000 - Load Key data to HMAC
+8239000 - Try to Overwrite Block data in HMAC
+8378000 - HMAC flow in progress...
+8444000 - Received HMAC notif/err intr with status = 1/ 0
+8564000 - Load TAG data from HMAC
+8640000 - HMAC zeroize flow.
+8673000 - START TEST 2
+8793000 - Key KV ID: 23, KV Intf: 1
+8881000 - Block KV ID: 23, KV Intf: 0
+8973000 - Tag KV ID: 23, KV Intf: 1
+9156000 - Try to Overwrite Key data in HMAC512
+9327000 - HMAC flow in progress...
+9394000 - Received HMAC notif/err intr with status = 1/ 0
+9516000 - Load TAG data from HMAC to KV
+9569000 - HMAC zeroize flow.
+9603000 - START TEST 3
+9728000 - Key KV ID: 19, KV Intf: 1
+9816000 - Block KV ID: 18, KV Intf: 1
+9907000 - Tag KV ID: 13, KV Intf: 1
+10091000 - Try to Overwrite Key data in HMAC512
+10178000 - Try to Overwrite Block data in HMAC
+10318000 - HMAC flow in progress...
+10384000 - Received HMAC notif/err intr with status = 1/ 0
+10503000 - Load TAG data from HMAC to KV
+10555000 - HMAC zeroize flow.
+10589000 - START TEST 4
+10716000 - Key KV ID: 19, KV Intf: 0
+10807000 - Block KV ID: 23, KV Intf: 0
+10899000 - Tag KV ID: 17, KV Intf: 0
+11081000 - Load Key data to HMAC
+11225000 - HMAC flow in progress...
+11291000 - Received HMAC notif/err intr with status = 1/ 0
+11411000 - Load TAG data from HMAC
+11484000 - HMAC zeroize flow.
+11518000 - START TEST 5
+11645000 - Key KV ID: 8, KV Intf: 0
+11727000 - Block KV ID: 10, KV Intf: 0
+11818000 - Tag KV ID: 14, KV Intf: 0
+12000000 - Load Key data to HMAC
+12144000 - HMAC flow in progress...
+12210000 - Received HMAC notif/err intr with status = 1/ 0
+12331000 - Load TAG data from HMAC
+12404000 - HMAC zeroize flow.
+12437000 - START TEST 6
+12561000 - Key KV ID: 17, KV Intf: 1
+12649000 - Block KV ID: 19, KV Intf: 0
+12741000 - Tag KV ID: 15, KV Intf: 1
+12924000 - Try to Overwrite Key data in HMAC512
+13095000 - HMAC flow in progress...
+13160000 - Received HMAC notif/err intr with status = 1/ 0
+13283000 - Load TAG data from HMAC to KV
+13335000 - HMAC zeroize flow.
+13368000 - START TEST 7
+13494000 - Key KV ID: 21, KV Intf: 1
+13585000 - Block KV ID: 21, KV Intf: 0
+13676000 - Tag KV ID: 3, KV Intf: 1
+13855000 - Try to Overwrite Key data in HMAC512
+14025000 - HMAC flow in progress...
+14091000 - Received HMAC notif/err intr with status = 1/ 0
+14212000 - Load TAG data from HMAC to KV
+14264000 - HMAC zeroize flow.
+14297000 - START TEST 8
+14427000 - Key KV ID: 12, KV Intf: 1
+14520000 - Block KV ID: 12, KV Intf: 1
+14611000 - Tag KV ID: 4, KV Intf: 0
+14789000 - Try to Overwrite Key data in HMAC512
+14877000 - Try to Overwrite Block data in HMAC
+15015000 - HMAC flow in progress...
+15081000 - Received HMAC notif/err intr with status = 1/ 0
+15202000 - Load TAG data from HMAC
+15275000 - HMAC zeroize flow.
+15308000 - START TEST 9
+15436000 - Key KV ID: 19, KV Intf: 0
+15526000 - Block KV ID: 5, KV Intf: 1
+15611000 - Tag KV ID: 0, KV Intf: 0
+15786000 - Load Key data to HMAC
+15849000 - Try to Overwrite Block data in HMAC
+15988000 - HMAC flow in progress...
+16053000 - Received HMAC notif/err intr with status = 1/ 0
+16173000 - Load TAG data from HMAC
+16245000 - HMAC zeroize flow.
+16279000 - START TEST 10
+16410000 - Key KV ID: 0, KV Intf: 1
+16494000 - Block KV ID: 4, KV Intf: 0
+16579000 - Tag KV ID: 13, KV Intf: 0
+16762000 - Try to Overwrite Key data in HMAC512
+16931000 - HMAC flow in progress...
+16997000 - Received HMAC notif/err intr with status = 1/ 0
+17118000 - Load TAG data from HMAC
+17190000 - HMAC zeroize flow.
+17223000 - START TEST 11
+17355000 - Key KV ID: 6, KV Intf: 0
+17440000 - Block KV ID: 16, KV Intf: 1
+17531000 - Tag KV ID: 4, KV Intf: 0
+17708000 - Load Key data to HMAC
+17770000 - Try to Overwrite Block data in HMAC
+17909000 - HMAC flow in progress...
+17974000 - Received HMAC notif/err intr with status = 1/ 0
+18095000 - Load TAG data from HMAC
+18168000 - HMAC zeroize flow.
+18202000 - START TEST 12
+18333000 - Key KV ID: 22, KV Intf: 1
+18424000 - Block KV ID: 7, KV Intf: 1
+18510000 - Tag KV ID: 5, KV Intf: 0
+18688000 - Try to Overwrite Key data in HMAC512
+18776000 - Try to Overwrite Block data in HMAC
+18914000 - HMAC flow in progress...
+18980000 - Received HMAC notif/err intr with status = 1/ 0
+19099000 - Load TAG data from HMAC
+19172000 - HMAC zeroize flow.
+19206000 - START TEST 13
+19338000 - Key KV ID: 6, KV Intf: 0
+19420000 - Block KV ID: 20, KV Intf: 0
+19512000 - Tag KV ID: 15, KV Intf: 0
+19694000 - Load Key data to HMAC
+19838000 - HMAC flow in progress...
+19903000 - Received HMAC notif/err intr with status = 1/ 0
+20024000 - Load TAG data from HMAC
+20097000 - HMAC zeroize flow.
+20131000 - START TEST 14
+20262000 - Key KV ID: 17, KV Intf: 1
+20351000 - Block KV ID: 8, KV Intf: 1
+20438000 - Tag KV ID: 23, KV Intf: 1
+20621000 - Try to Overwrite Key data in HMAC512
+20709000 - Try to Overwrite Block data in HMAC
+20849000 - HMAC flow in progress...
+20914000 - Received HMAC notif/err intr with status = 1/ 0
+21035000 - Load TAG data from HMAC to KV
+21087000 - HMAC zeroize flow.
+21121000 - START TEST 15
+21252000 - Key KV ID: 0, KV Intf: 1
+21338000 - Block KV ID: 3, KV Intf: 0
+21425000 - Tag KV ID: 0, KV Intf: 1
+21602000 - Try to Overwrite Key data in HMAC512
+21773000 - HMAC flow in progress...
+21840000 - Received HMAC notif/err intr with status = 1/ 0
+21960000 - Load TAG data from HMAC to KV
+22012000 - HMAC zeroize flow.
+22046000 - START TEST 16
+22179000 - Key KV ID: 4, KV Intf: 1
+22265000 - Block KV ID: 16, KV Intf: 0
+22356000 - Tag KV ID: 19, KV Intf: 0
+22540000 - Try to Overwrite Key data in HMAC512
+22709000 - HMAC flow in progress...
+22774000 - Received HMAC notif/err intr with status = 1/ 0
+22896000 - Load TAG data from HMAC
+22969000 - HMAC zeroize flow.
+23003000 - START TEST 17
+23134000 - Key KV ID: 18, KV Intf: 1
+23225000 - Block KV ID: 16, KV Intf: 1
+23317000 - Tag KV ID: 5, KV Intf: 0
+23495000 - Try to Overwrite Key data in HMAC512
+23583000 - Try to Overwrite Block data in HMAC
+23721000 - HMAC flow in progress...
+23787000 - Received HMAC notif/err intr with status = 1/ 0
+23908000 - Load TAG data from HMAC
+23981000 - HMAC zeroize flow.
+24014000 - START TEST 18
+24145000 - Key KV ID: 9, KV Intf: 1
+24230000 - Block KV ID: 17, KV Intf: 1
+24322000 - Tag KV ID: 16, KV Intf: 0
+24505000 - Try to Overwrite Key data in HMAC512
+24592000 - Try to Overwrite Block data in HMAC
+24731000 - HMAC flow in progress...
+24797000 - Received HMAC notif/err intr with status = 1/ 0
+24917000 - Load TAG data from HMAC
+24990000 - HMAC zeroize flow.
+25024000 - START TEST 19
+25156000 - Key KV ID: 15, KV Intf: 0
+25246000 - Block KV ID: 18, KV Intf: 0
+25338000 - Tag KV ID: 13, KV Intf: 0
+25521000 - Load Key data to HMAC
+25665000 - HMAC flow in progress...
+25731000 - Received HMAC notif/err intr with status = 1/ 0
+25852000 - Load TAG data from HMAC
+25924000 - HMAC zeroize flow.
+* TESTCASE PASSED
+
+Finished : minstret = 94125, mcycle = 259299
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

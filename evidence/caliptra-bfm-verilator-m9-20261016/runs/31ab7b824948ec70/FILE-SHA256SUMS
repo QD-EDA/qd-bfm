@@ -1,0 +1,13 @@
+0e5defed44dc287eabdf9605d1a2e8932ab63e08261ac8b9a2ea9126a873c2d1  ./firmware.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./native-vector-logs/step_0.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./native-vector-logs/step_1.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./native-vector-logs/step_2.log
+2035e520f7c65c683a72a08b1d5a8f7cd8df98f6503fa788ed5e466a849f88b1  ./native-vector-logs/step_3.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./native-vector-logs/step_4.log
+6546cdfea2badbb3d1ab1217e57abee05e05918e04e26ff6d56045dd66cd0a7e  ./native-vector-logs/step_5.log
+43869e5899c58b5420e27153c94b8ccf941245be1ff4fc1514023d23cd3ab343  ./native-vector-logs/step_6.log
+deef98fd1aec5f202ed93e7000967be805ff14aec0897bd2a040f2f03787c9be  ./result.json
+eba7c682e6f3f55e5de94ea7c5dc9be22bf7b3e600188b55ec4bd66ba9ac4b28  ./sim.log
+7fb20dd2a90e7330541f0156d2589f0bb8369658c81fbf9821b1075219094223  ./sim.resource
+ba8ed64c033dbc5e485fcfe0091f31e0ba19d857ce3a6f78cbcb6dd24bb133d5  ./task.resource
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./toolchain-preflight.log

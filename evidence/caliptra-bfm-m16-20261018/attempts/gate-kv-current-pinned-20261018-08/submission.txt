@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18T22:34:39Z
+Command: sbatch /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-pinned-20261018-08/run.sbatch
+Job ID: 2812
+Target: generated KeyVault row 6, kv_rand_lock_test with +KV_AHB_TRACE diagnostic samples.
+Terminal runner result: runner_exit_code=1; 1,076 UVM errors, 0 fatals; `$finish` at 2,254,640,000 (1 ps).
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap, 600-second simulator timeout.
+Runtime wall: 1:46.64; peak RSS: 634792 KiB.
+The remote run directory was absent at collection time, so raw job logs were unavailable for archiving. The trace finding is summarized in README.md from the completed-job output; no raw archive checksum is claimed.

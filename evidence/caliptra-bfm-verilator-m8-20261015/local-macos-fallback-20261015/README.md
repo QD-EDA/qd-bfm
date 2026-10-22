@@ -1,0 +1,5 @@
+# macOS fallback toolchain attempt
+
+When Slurm reached its 37.9 GiB allocation limit, I tried to prepare a local Verilator 5.052 build so a pending M8 row could run on the Mac. The source was pinned to `ea338be98e1e838d3518809ce8899f85a009963c`; host was `MacBook-Air.local`, macOS 27.0, arm64, Apple clang 21.0.3, Bison 3.8.2. The local `verilator` on PATH was 5.051-devel and was not used.
+
+Command: `localrun 3600 /bin/zsh -c 'set -e; export PATH=/opt/homebrew/opt/bison/bin:/opt/homebrew/bin:$PATH; cd /tmp/a2-m8-localrun-20261015/verilator-src; autoconf; ./configure --prefix=/tmp/a2-m8-localrun-20261015/verilator-install; make -j3; make install'`. The source build failed with make exit 2 after 290.66 seconds; peak RSS was 690,978,816 bytes. The log records a missing `verilator_gantt.1` command (exit 127) and unresolved `V3PreLex_create_buffer(__sFILE*, int)` at link. No local model or simulation was produced, and no local result is counted. Raw log SHA-256: `651009a94bd246fa5024f5ef3f53f860551469645d30f700b62352f3e32ad866`.

@@ -1,0 +1,36 @@
+0.000 ns - ============================================================
+0.000 ns -  KV SWWE Lock Smoke Test
+0.000 ns -  Tests that KV control registers are locked while busy_o=1
+0.000 ns - ============================================================
+0.000 ns - 
+0.000 ns - ============================================================
+0.000 ns -  TEST 1: HMAC KV SWWE Lock During Operation
+0.000 ns - ============================================================
+0.000 ns - [HMAC] Engine ready
+0.000 ns - [HMAC] KV ctrl pre-load: WR=0x4A RD_KEY=0x4 RD_BLOCK=0x6
+0.000 ns - 
+0.000 ns - [HMAC] === SWWE lock results ===
+0.000 ns - [SWWE_CHECK] KV_WR_CTRL:    orig=0x4A  attack=0x215  after=0x4A
+0.000 ns - [SWWE_PASS] KV_WR_CTRL correctly blocked
+0.000 ns - [SWWE_CHECK] KV_RD_KEY_CTRL:   orig=0x4  attack=0xF  after=0x4
+0.000 ns - [SWWE_PASS] KV_RD_KEY_CTRL correctly blocked
+0.000 ns - [SWWE_CHECK] KV_RD_BLOCK_CTRL: orig=0x6  attack=0x11  after=0x6
+0.000 ns - [SWWE_PASS] KV_RD_BLOCK_CTRL correctly blocked
+0.000 ns - 
+0.000 ns - [HMAC] === Verifying registers writable after idle ===
+0.000 ns - HMAC zeroize flow.
+0.000 ns - [SWWE_WRITABLE] KV_WR_CTRL (post-idle): attempting write=0x41E
+0.000 ns - [SWWE_WRITABLE] KV_WR_CTRL (post-idle): readback=0x41E (expected=0x41E)
+0.000 ns - [SWWE_WRITABLE_PASS] KV_WR_CTRL (post-idle): write correctly accepted
+0.000 ns - [SWWE_WRITABLE] KV_RD_KEY_CTRL (post-idle): attempting write=0x12
+0.000 ns - [SWWE_WRITABLE] KV_RD_KEY_CTRL (post-idle): readback=0x12 (expected=0x12)
+0.000 ns - [SWWE_WRITABLE_PASS] KV_RD_KEY_CTRL (post-idle): write correctly accepted
+0.000 ns - HMAC zeroize flow.
+0.000 ns - 
+0.000 ns - *** TEST 1 PASSED: HMAC KV SWWE Lock ***
+0.000 ns - 
+0.000 ns - ============================================================
+0.000 ns -  TEST 2: ECC KV SWWE Lock During Operation
+0.000 ns - ============================================================
+0.000 ns - [ECC] Engine ready
+0.000 ns - [ECC] KV ctrl pre-load: WR_PKEY=0x206  RD_SEED=0x2

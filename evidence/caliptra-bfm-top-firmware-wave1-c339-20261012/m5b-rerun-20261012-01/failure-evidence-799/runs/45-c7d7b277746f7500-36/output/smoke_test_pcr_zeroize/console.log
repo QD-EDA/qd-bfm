@@ -1,0 +1,13 @@
+0.000 ns - ----------------------------------
+0.000 ns -  Smoke Test With PCR Signing flow !!
+0.000 ns - ----------------------------------
+0.000 ns - Inject PRIVKEY into KV slot 7
+0.000 ns - Inject MSG into SHA512 digest
+0.000 ns - 
+0.000 ns - ECC PCR SIGNING
+0.000 ns - Load SIGN_R data from ECC
+0.000 ns - Load SIGN_S data from ECC
+0.000 ns - Inject PRIVKEY into KV slot 7
+0.000 ns - Inject MSG into SHA512 digest
+0.000 ns - 
+0.000 ns - ECC PCR SIGNING

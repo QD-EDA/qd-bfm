@@ -1,0 +1,5 @@
+row_id=13
+testname=doe_cbc_nist_test
+status=TIMEOUT
+cause=VVP exceeded per-row timeout
+elapsed_seconds=3599.152

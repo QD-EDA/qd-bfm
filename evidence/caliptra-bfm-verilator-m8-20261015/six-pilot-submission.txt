@@ -1,0 +1,12 @@
+host=DAN-DESKTOP
+submitted=2026-10-15
+job_id=1309
+name=a2-vlt-six-pilot
+array=0-0%1
+cohort=six-test-cases.tsv
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-05
+test=smoke_test_ecc_flow1_kv_ocp_progress
+timeout_s=17740
+cpus=1
+memory=3G
+purpose=validate the Verilator case harness and record comparison row 0

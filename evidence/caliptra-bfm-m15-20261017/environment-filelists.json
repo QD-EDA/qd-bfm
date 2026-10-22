@@ -1,0 +1,338 @@
+[
+  {
+    "repo": "caliptra",
+    "path": "src/integration/uvmf_caliptra_top/config/uvmf_caliptra_top.vf",
+    "exists": true,
+    "sha256": "4b7fab1081afe5eceb712b9e2ed7d4e268ec3fb620817bd70f0c4e6241681bc8"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/integration/uvmf_caliptra_top/uvmf_template_output/project_benches/caliptra_top/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/hmac/uvmf_2022/config/uvmf_hmac.vf",
+    "exists": true,
+    "sha256": "1430d44bcdd8871a2e68b18b767d01586ebc72a356a098f4421d34becae06419"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/hmac/uvmf_2022/uvmf_template_output/project_benches/HMAC/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/keyvault/uvmf_kv/config/uvmf_kv.vf",
+    "exists": true,
+    "sha256": "8b6954a0995ee6752c019af82c144b4223a175ac3d4333f067f7097dfac6824c"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/keyvault/uvmf_kv/uvmf_template_output/project_benches/kv/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/hmac/config/hmac_ctrl_tb.vf",
+    "exists": true,
+    "sha256": "e54231cbedefd6c327e7f770fdfe60fffe8c70a788dce2ec4fa485fd10721dda"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/uart/config/compile.yml",
+    "exists": true,
+    "sha256": "8798f84b1a5ba7d29ae3a89acb94d0d048d5ff9a9652062ccd097e6343c22d60"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/doe/config/doe_cbc_tb.vf",
+    "exists": true,
+    "sha256": "6d1f49187b8bcf3b3e9343e63fc2c35dfe1964423e8493aee62ccbbac9ee31f4"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/entropy_src/config/entropy_src_tb.vf",
+    "exists": true,
+    "sha256": "6f3b18d20ec43fee4ec19db2bd04fd78944b2da60a207885c04980d55d870027"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/sha512/config/sha512_ctrl_32bit_tb.vf",
+    "exists": true,
+    "sha256": "faf773b5e79b9f589430ac17a5117d94d86173223841f406f148a645ed23b0d0"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/sha512/uvmf_sha512/config/uvmf_sha512.vf",
+    "exists": true,
+    "sha256": "023c3d01d61489271d366a6469d622d23018787d44d34a8bedb6a26b718877b0"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/sha512/uvmf_sha512/uvmf_template_output/project_benches/SHA512/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/sha256/config/sha256_ctrl_tb.vf",
+    "exists": true,
+    "sha256": "4adf1198fe9810abc59b3e354a48f7d6f746f8f5e4dbb94ee2993105281e858b"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/csrng/config/csrng_tb.vf",
+    "exists": true,
+    "sha256": "78614e6aa69492f44feadd10d8f2243e88e1143bf0cb08ac9dbbc965b9236bc6"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/soc_ifc/config/soc_ifc_tb.vf",
+    "exists": true,
+    "sha256": "3535d6a5824a8a75d12b9e44f605261f2ae34cd3d6dcc94626c49d3f6e701306"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/soc_ifc/config/soc_ifc_axi_sha_acc_dis_tb.vf",
+    "exists": true,
+    "sha256": "b5c01040fcfb0921df2b71d9132368965bd318d8975ccfdca222f95b40ce9cc8"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/soc_ifc/uvmf_soc_ifc/config/uvmf_soc_ifc.vf",
+    "exists": true,
+    "sha256": "aeab61874c87d3990cac53221a756d38a4cb9979f37dd2819b031ea1984af28a"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "0b50b769f05ab95d2d338cdf326ddae534554b0b8ecf5de353be41d028991ea6"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/soc_ifc/uvmf_soc_ifc/uvmf_template_output/project_benches/soc_ifc/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/pcrvault/uvmf_pv/config/uvmf_pv.vf",
+    "exists": true,
+    "sha256": "6a0cab81fb1dffdd4ac222e5342f29ccc5613d3c534c8bbe38a90d9444379495"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/pcrvault/uvmf_pv/uvmf_template_output/project_benches/pv/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/ecc/config/ecc_top_tb.vf",
+    "exists": true,
+    "sha256": "eccce574f370586a370de4cd4b35b49f12f47d8932480107f133f6f5b026fc76"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/hmac_drbg/config/hmac_drbg_tb.vf",
+    "exists": true,
+    "sha256": "7acc19bfa5490af3ad69fbaa7144a3f4eae352116888473532f578fca8e50b99"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/ecc/uvmf_ecc/config/uvmf_ecc.vf",
+    "exists": true,
+    "sha256": "c84735dd070ef5997cc0901ef57269ca4313fa4129ee679819dcf801445bb8e1"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "caliptra",
+    "path": "src/ecc/uvmf_ecc/uvmf_template_output/project_benches/ECC/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/rej_sampler/config/mldsa_rej_sampler_tb.vf",
+    "exists": true,
+    "sha256": "0bf869979f1c1348bceb71256d70a0cb73abba83dac07e12708709f6894a443e"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sig_encode_z/config/sigencode_z_tb.vf",
+    "exists": true,
+    "sha256": "a217014fca2d780b1859bd7ec6f4be5b720d010b0a9173c3da3936a5bb5f8748"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sample_in_ball/config/sample_in_ball_tb.vf",
+    "exists": true,
+    "sha256": "6dd2e009d763ec820c6ebbb504f4891d23526b1d60732a39a9793a8f0303024a"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/norm_check/config/norm_check_tb.vf",
+    "exists": true,
+    "sha256": "ed3141e976430858402047463540e90bb7e9611ab5dd2b782de71fb931387852"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sk_encode/config/skencode_tb.vf",
+    "exists": true,
+    "sha256": "45528b7f68f1311a84c7deb634e8d13d47a95c8c17164e123a0ffffaaabddf87"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/abr_sha3/config/abr_sha3_tb.vf",
+    "exists": true,
+    "sha256": "170ec3c67aefa3b11bc1e6d16abb1867cd462872326c1ee744169af9820f2c53"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/cbd_sampler/config/cbd_sampler_tb.vf",
+    "exists": true,
+    "sha256": "0c15107e54c0c44ab31b08785ac25ac03205d4fe65299b253034156c40c01875"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/decompose/config/decompose_tb.vf",
+    "exists": true,
+    "sha256": "f6765508bcc14e5c98d4a20d100e9d56293206410666fd8d9f3dffddef4df8dc"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/compress/config/compress_tb.vf",
+    "exists": true,
+    "sha256": "220822ea8e9c03ffdf3bd01567ea6192ab8c3a3b1f6df04fa328082f8f3fa16c"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sk_decode/config/skdecode_tb.vf",
+    "exists": true,
+    "sha256": "5154b326f474e58703523c250cfd997b11edb29153b1839ff9671fc7592f67b1"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sigdecode_h/config/sigdecode_h_tb.vf",
+    "exists": true,
+    "sha256": "5ec16337df23efc5625af62cf466fab0d85eb4f16ae7909c3594e18b06bfa3a3"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/abr_libs/config/masking_tb.vf",
+    "exists": true,
+    "sha256": "4b2ed8db94f0760141616e485ab03257775cb6d28ace9b42a3546d0e4f79dbb9"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/exp_mask/config/exp_mask_tb.vf",
+    "exists": true,
+    "sha256": "3c054b051f2b165483fbe2480fb789896d6911eacff3589906d67c20bc2016a7"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/power2round/config/power2round_tb.vf",
+    "exists": true,
+    "sha256": "124f3be49833cbfa80704d37337900f013a66b6ffdf8afc2e303526fa5c50f51"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/rej_bounded/config/rej_bounded_tb.vf",
+    "exists": true,
+    "sha256": "00afea8fb3645e82b0ce3472c9d8ae45e214b43f4e66d68000522c1689d79753"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/sig_decode_z/config/sigdecode_z_tb.vf",
+    "exists": true,
+    "sha256": "343542e71a3dee1407daac37f46b7f6a53a957473fde972df48188cab54fe11c"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/ntt_top/config/ntt_top_masking_tb.vf",
+    "exists": true,
+    "sha256": "bfa7b42b166abbc3f560585c028c2a1e04d228aa57fcc10920ea7f21f311b97a"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/pk_decode/config/pkdecode_tb.vf",
+    "exists": true,
+    "sha256": "9df1a5c701cbfd0aab2946c7aa10779b204755890cbff543346c2a2e70cb7827"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/ntt_top/config/ntt_top_tb.vf",
+    "exists": true,
+    "sha256": "78dfcb30cec74796efea8b868c04698bfda6a211ec70df0abfb2838342d46dd2"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/ntt_top/config/butterfly_top_tb.vf",
+    "exists": true,
+    "sha256": "7ec4c3c885c020442163498172a95034956a9ea21f3ec27b5fbc9b9b953957b5"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/abr_top/uvmf/config/uvmf_mldsa.vf",
+    "exists": true,
+    "sha256": "1d41a076526a375a8e9752a5cbf04bb8cbc8f1e31f974055735d782213f46f8a"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f",
+    "exists": true,
+    "sha256": "4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f",
+    "exists": true,
+    "sha256": "391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527"
+  },
+  {
+    "repo": "adams-bridge",
+    "path": "src/makehint/config/makehint_tb.vf",
+    "exists": true,
+    "sha256": "db17da9f6a96a58772806cb485eefd5ae326841dc4d9b888abd7ab544b3100a8"
+  }
+]

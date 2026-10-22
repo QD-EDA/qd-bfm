@@ -1,0 +1,96 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5018000 - ---------------------------
+5058000 -  KV PCR Hash Extend Test !!
+5098000 - ---------------------------
+5144000 - PV: prog kv read ctrl in SHA to do hash extend
+5219000 - KV: checking for errors
+5274000 - KV: Writing SHA Block with known answer
+5352000 - KV: Padding extended hash value
+5407000 - KV: polling for sha ready
+5457000 - SHA512: Set mode: 0x2 and init with last
+5558000 - KV: polling for sha valid
+5602000 - KV: polling for kv valid
+5645000 - KV: checking for errors
+5720000 - KV: polling for kv ready
+5764000 - PV: prog kv read ctrl in SHA to do hash extend
+5833000 - KV: polling for kv valid
+5876000 - KV: checking for errors
+5933000 - KV: Writing SHA Block with known answer
+6011000 - KV: Padding extended hash value
+6065000 - KV: polling for sha ready
+6115000 - SHA512: Set mode: 0x2 and init with last
+6211000 - KV: polling for sha valid
+6254000 - KV: polling for kv valid
+6297000 - KV: checking for errors
+6389000 - KV: Writing SHA Block with known answer
+6465000 - KV: Padding extended hash value
+6522000 - KV: polling for sha ready
+6571000 - SHA512: Set mode: 0x2 and init with last
+6665000 - KV: polling for sha valid
+6766000 - SHA512: Set START for gen hash func
+6979000 - ECC: Inject PRIVKEY into KV slot 7
+7030000 - MLDSA: Inject SEED into KV slot 8
+7079000 - ECC/MLDSA: Inject PCR into msg_reg
+7136000 - ECC: Running PCR Sign Function
+7181000 - ECC: Polling for PCR Sign to be complete
+80639000 - MLDSA: Running PCR Sign Function
+80687000 - MLDSA: Polling for PCR Sign to be complete
+88556000 - Load SIGN data from MLDSA
+91953000 - ----------------------------------
+92003000 -  KV PCR Hash Extend Test Complete!
+92053000 - ----------------------------------
+* TESTCASE PASSED
+
+Finished : minstret = 210955, mcycle = 920789
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

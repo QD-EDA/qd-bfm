@@ -1,0 +1,1 @@
+BLOCKED row=6 test=kv_rand_lock_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_rst_pkg/src/kv_rst_configuration.svh:149: error: The function $psprintf has been called with missing/empty parameters.

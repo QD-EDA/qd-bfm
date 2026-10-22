@@ -1,0 +1,11 @@
+2026-10-14 09:54:28 MDT
+verified_task=955_4_PASS
+375765109	/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/output
+1536539	/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/44-bcb5b29a003aa2a6-4/pycache
+cleanup=complete
+             JOBID|     STATE|        TIME|NODELIST(REASON)
+             955_3|   RUNNING|     2:15:11|     DAN-DESKTOP
+             955_2|   RUNNING|     2:15:11|     DAN-DESKTOP
+             955_1|   RUNNING|     2:15:11|     DAN-DESKTOP
+Filesystem         1B-blocks         Used    Available Use% Mounted on
+/dev/sdd       1081101176832 146179661824 879929159680  15% /

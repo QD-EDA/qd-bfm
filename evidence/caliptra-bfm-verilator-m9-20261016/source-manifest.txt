@@ -1,0 +1,4 @@
+QD-BFM source commit: 41fe54a891e8cde20b6ef8df4a2745cc4cb7cddd
+Source paths archived: dv/caliptra_bfm/
+Tracked working-tree status at archive: clean
+archive sha256: ff8e4c0835d75ab90d47602e0ba4a7fe4819c134f03481938ea568749b048dfe

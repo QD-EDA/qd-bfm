@@ -1,0 +1,5 @@
+job_id=3276
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-socifc-wildcard-row4-gate-20261020-01
+terminal_state=COMPLETED, result=BLOCKED
+archive_sha256=2968a2c3781e8cdaec6742e36ce622289c1e0af6b7e84bc73863b5da5c645fc8
+remote_bytes_freed=1614140

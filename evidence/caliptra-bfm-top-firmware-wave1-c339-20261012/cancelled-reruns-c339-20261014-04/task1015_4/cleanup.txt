@@ -1,0 +1,6 @@
+task=1015_4
+remote_output_removed=true
+output_and_cache_bytes_removed=377301701
+bytes_available_before=not_recorded
+bytes_available_after=not_recorded
+note=the first collector removed the output tree; a redundant collector then observed it absent and appended an identical TSV row, which was removed

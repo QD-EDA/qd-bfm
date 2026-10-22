@@ -1,0 +1,3 @@
+Removed 16 extracted files (407931 bytes) only after byte-for-byte SHA-256 matches to members of the verified archive(s) below.
+Preserved 0 unmatched/symlink entries under evidence/caliptra-bfm-m19-20261019/attempts/row57-current-c339-numpy-20261019-01/raw/extracted; these were not deleted.
+archive_sha256_ok job-3137_57.tar.gz 59c979f959c443afcf0065fc21bd5f776062f58f31098e02ae03506db17c2991

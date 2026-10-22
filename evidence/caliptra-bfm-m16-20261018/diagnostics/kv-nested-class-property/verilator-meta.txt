@@ -1,0 +1,7 @@
+Host: MacBook-Air.local, macOS 27.0
+Verilator: 5.051 devel rev v5.050-196-g7dcd4e0b6
+Binary SHA256: 098b09b11ba7d3e904ae13d924a9e8dac8ced5c9d7c9beff3b9d36119a417581
+Reproducer SHA256: f9d63964e8369c4da7a3fe8fdb6b6338600044e048e9408bf3fc9f645e476552
+Build: ~/codex-supervisor/localrun 120 verilator --binary --timing --Mdir /tmp/m16-kv-nested-property-repro-20261018-a2/obj_dir --top-module tb evidence/caliptra-bfm-m16-20261018/diagnostics/kv-nested-class-property/nested_class_property_repro.sv
+Run: ~/codex-supervisor/localrun 30 /tmp/m16-kv-nested-property-repro-20261018-a2/obj_dir/Vtb
+Result: PASS; output included NESTED_CLASS_PROPERTY_OK and $finish.

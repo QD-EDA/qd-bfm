@@ -1,0 +1,16 @@
+host=DAN-DESKTOP
+slurm_job_id=1042
+iverilog_sha=3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+caliptra_sha=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Compiling jtagdpi.c...
+Compiling tcp_server.c...
+tcp_server.c: In function ‘tcp_server_create’:
+tcp_server.c:409:5: warning: pointer ‘ctx’ used after ‘free’ [-Wuse-after-free]
+  409 |     free(ctx);
+      |     ^~~~~~~~~
+In function ‘ctx_free’,
+    inlined from ‘tcp_server_create’ at tcp_server.c:408:5:
+tcp_server.c:298:3: note: call to ‘free’ here
+  298 |   free(ctx);
+      |   ^~~~~~~~~
+Making jtagdpi.vpi from  jtagdpi.o tcp_server.o...

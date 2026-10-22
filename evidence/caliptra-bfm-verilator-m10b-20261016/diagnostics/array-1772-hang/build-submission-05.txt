@@ -1,0 +1,6 @@
+PARTITION|CPUS(A/I/O/T)
+verilog*|2/18/0/20
+             JOBID        STATE                                NAME
+              1794      RUNNING           a5-caliptra-throughput-r2
+              1463      RUNNING                 a1-win98-trace-200m
+1803

@@ -1,0 +1,12 @@
+job_id=2997
+row_id=0
+testname=caliptra_top_rand_test
+source_repo=caliptra
+source_pin=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+iverilog_source_pin=82023726be90ab269d6e0ef5e755ebb69e6f648c
+iverilog_sha256=9c34ccc0e24fe17881e0153927d60668ff78afd21a639091087bcc09edca988b
+slurm_cpus=1
+slurm_memory=4G
+slurm_time_limit=00:15:00
+test_timeout=600
+remote_run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-aaxi-row0-gate-20261019-01

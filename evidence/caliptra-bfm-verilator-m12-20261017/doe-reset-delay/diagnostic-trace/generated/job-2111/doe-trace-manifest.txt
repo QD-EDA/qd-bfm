@@ -1,0 +1,3 @@
+checker_source_sha256=6bd2ade137a90c0701aab28951ba6f8918724e0467c21756b0c308e6e9081c89
+doe_trace_overlay_sha256=55d0b9686d640a3a0b09fa58a8014e60a7e2def3a00c5dad8578352b66d9245a
+instrumentation=first six posedge samples after DOE reset release

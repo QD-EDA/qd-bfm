@@ -1,0 +1,5 @@
+row_id=64
+testname=compress_normal_test
+status=BLOCKED
+cause=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/barrett_reduction/rtl/masked_barrett_if_cond.sv:23: error: Unknown package `ntt_defines_pkg' in import. Is its source in the compile list?
+elapsed_seconds=0.033

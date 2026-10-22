@@ -1,0 +1,14 @@
+Mon Oct 19 10:19:13 MDT 2026
+49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+FILE=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_sampler/tb/mldsa_rej_sampler_tb.sv
+2a1918c47ecec628fda79aeb848ae051b4c4c4ae3ee93ef388be8cbc2acc9aed  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_sampler/tb/mldsa_rej_sampler_tb.sv
+QUEUE_TRACE_ANCHORS_OK
+FILE=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/tb/cbd_sampler_tb.sv
+39410f9389c8b2020a22f38c6083e0675656ca74a1a0d0f3b26d457af7eac086  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/tb/cbd_sampler_tb.sv
+QUEUE_TRACE_ANCHORS_OK
+FILE=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/exp_mask/tb/exp_mask_tb.sv
+7f486029b224011bbb790c625d8ee584527aba45dccc2ae5626cc1c70b6c9f06  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/exp_mask/tb/exp_mask_tb.sv
+QUEUE_TRACE_ANCHORS_OK
+FILE=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv
+d52b09045f5d28d91445f00a5ce35683b5219e9e089eb959b6ce0f974d0b9546  /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv
+QUEUE_TRACE_ANCHORS_OK

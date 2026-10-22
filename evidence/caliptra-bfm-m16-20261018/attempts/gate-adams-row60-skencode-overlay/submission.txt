@@ -1,0 +1,10 @@
+job_id=2782
+host=DAN-DESKTOP
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-row60-skencode-overlay-20261018-01
+row_id=60
+task_count=1
+cpus=1
+memory=256M
+slurm_time=20m
+per_row_timeout=600s
+basis=prior same-row compile and simulation RSS 13,884 KiB and 12,300 KiB; the prior run's Python runner peaked near 25 MiB, so 256 MiB exceeds 1.25x measured peak

@@ -1,0 +1,8 @@
+Host: DAN-DESKTOP
+Array: 1964
+Archived task: 1964_23, cptra_ss_test_rom (f1991acb7ebadfe1)
+Archive: completed-1964-02.tar.gz
+Archive SHA-256: 8bdec74c4d389bc1aa0ef1734c984da64f9b1f1587810b4c5834e66c5721b0ff
+Verified: all 13 files listed in the row's FILE-SHA256SUMS; terminal TIMEOUT result and sim.log retained locally.
+Remote cleanup: removed only results/f1991acb7ebadfe1 and resources/f1991acb7ebadfe1-1964-23.resource after the row left squeue and no matching runner remained.
+Bytes freed: 85,518

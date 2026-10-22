@@ -1,0 +1,6 @@
+Host: MacBook-Air.local
+macOS: 27.0 (26A428), arm64
+Python: Python 3.14.7
+Command: ~/codex-supervisor/localrun 180 python3 -m unittest discover -s dv/caliptra_bfm/uvmf_lite/tests -p 'test_run_m15_test.py'
+Result: 52 tests passed.
+Wall time: 0.15 s; peak RSS 31,457,280 bytes.

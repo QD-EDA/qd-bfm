@@ -1,0 +1,10 @@
+Submitted: 2026-10-14 13:53 MDT
+Slurm array: 1038 (task job IDs 1039, 1040, 1038_3), throttle 2
+Tasks: smoke_test_kv_ecc_flow1, smoke_test_kv_ecc_flow2, smoke_test_ras; all with the build-only compatibility overlay
+Resources: 1 CPU, 3 GiB, 30-minute Slurm limit per task; 600-second per-build timeout
+Pinned RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+QD runner commit: d1529c922da402943148a0fb22648f347e30eed9
+Remote run root: /home/dsell/slurm-runs/caliptra-bfm/a2/m7-fw-compat-d1529c9-20261014-03
+Slurm state: all three tasks COMPLETED. Each result file records BUILD_PASS/build_exit=0; each build generated a nonempty program.hex plus all three auxiliary image files. The auxiliary iccm.hex and mailbox.hex are zero bytes, which matches the runner's checks (regular files required; only program.hex must be nonempty). SHA-256 manifests for copied tasks and Slurm logs match.
+
+The preceding array 1032's result checker required every image to be nonempty, stricter than the runner, and marked the overlay builds BUILD_FAIL despite make exit 0 and “Completed building”. Its full raw logs/results are retained under ../firmware-build-results-1032/. Array 1038 used the corrected runner-compatible check and recorded image hashes before deleting generated build trees.

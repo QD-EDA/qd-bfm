@@ -1,0 +1,20 @@
+0.000 ns - ----------------------------------------
+0.000 ns -  Running ECC Smoke Test error_trigger !!
+0.000 ns - ----------------------------------------
+0.000 ns - 
+0.000 ns -  TEST OUT OF RANGE PRIVEKEY ZERO
+0.000 ns - 
+0.000 ns - ECC SIGNING
+0.000 ns - ECC flow in progress...
+0.000 ns - Received ECC notif/ err intr with status = 0/ 1
+0.000 ns - ECC zeroize flow.
+0.000 ns - ----------------------------------------
+0.000 ns -  Running ECC Smoke Test error_trigger !!
+0.000 ns - ----------------------------------------
+0.000 ns - 
+0.000 ns -  TEST OUT OF RANGE PRIVEKEY GREATER q
+0.000 ns - 
+0.000 ns - ECC SIGNING
+0.000 ns - ECC flow in progress...
+0.000 ns - Received ECC notif/ err intr with status = 0/ 1
+0.000 ns - ECC zeroize flow.

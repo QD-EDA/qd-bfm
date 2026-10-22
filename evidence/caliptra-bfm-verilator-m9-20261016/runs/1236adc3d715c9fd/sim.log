@@ -1,0 +1,178 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+4970000 - ------------------------------------------
+5031000 -  Running MLDSA Smoke Test error_trigger !!
+5093000 - ------------------------------------------
+6744000 - Waiting for mldsa status ready
+6793000 - 
+6794000 -  TEST INVALID s1/s2
+6861000 - inject invalid coefficeint [5] to index number 82D!
+7012000 - Writing privkey
+8754000 - 
+8755000 - MLDSA SIGNING
+8779000 - MLDSA flow in progress...
+8846000 - Received MLDSA notif/ err intr with status = 0/ 1
+8973000 - MLDSA zeroize flow.
+9004000 - Waiting for mldsa status ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [      91553] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+14123000 - ------------------------------------------
+14185000 -  Running MLDSA Smoke Test error_trigger !!
+14246000 - ------------------------------------------
+15899000 - Waiting for mldsa status ready
+15947000 - 
+15948000 -  TEST PCR WITH INVALID KEYGEN COMMAND
+16003000 - MLDSA: Inject SEED into KV slot 8
+16053000 - MLDSA: Inject PCR into msg_reg
+16103000 - 
+16104000 - MLDSA PCR KEYGEN
+16152000 - MLDSA flow in progress...
+16200000 - Received MLDSA notif/ err intr with status = 0/ 1
+16329000 - MLDSA zeroize flow.
+16359000 - Waiting for mldsa status ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     165108] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+21479000 - ------------------------------------------
+21540000 -  Running MLDSA Smoke Test error_trigger !!
+21601000 - ------------------------------------------
+23255000 - Waiting for mldsa status ready
+23304000 - 
+23305000 -  TEST PCR WITH INVALID VERIFY COMMAND
+23361000 - MLDSA: Inject SEED into KV slot 8
+23410000 - MLDSA: Inject PCR into msg_reg
+23459000 - 
+23460000 - MLDSA PCR VERIFY
+23508000 - MLDSA flow in progress...
+23556000 - Received MLDSA notif/ err intr with status = 0/ 1
+23685000 - MLDSA zeroize flow.
+23715000 - Waiting for mldsa status ready
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     238664] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+28835000 - ------------------------------------------
+28896000 -  Running MLDSA Smoke Test error_trigger !!
+28957000 - ------------------------------------------
+30610000 - Waiting for mldsa status ready
+30660000 - 
+30661000 -  TEST INVALID HINT
+30710000 - inject invalid coefficeint [1] to index number 2!
+33420000 - 
+33421000 - MLDSA VERIFYING
+33449000 - MLDSA flow in progress...
+35355000 - Received MLDSA notif/ err intr with status = 1/ 0
+35478000 - Load VERIFY_RES data from MLDSA
+35554000 - MLDSA zeroize flow.
+35584000 - Waiting for mldsa status ready
+* TESTCASE PASSED
+
+Finished : minstret = 43860, mcycle = 118445
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

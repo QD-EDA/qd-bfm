@@ -1,0 +1,419 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5659000 - ---------------------------
+5699000 -  WDT Smoke Test with reset !!
+5744000 - ---------------------------
+5790000 - Cascaded mode
+5818000 - Stall until timer1 times out
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [      58706] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+11527000 - ---------------------------
+11568000 -  WDT Smoke Test with reset !!
+11612000 - ---------------------------
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     117236] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     117246] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+17381000 - ---------------------------
+17422000 -  WDT Smoke Test with reset !!
+17466000 - ---------------------------
+17519000 - Enabling both timers in independent mode
+17583000 - Independent mode - both timers enabled - warm rst
+17654000 - Stall until timer1 times out
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     177075] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+23364000 - ---------------------------
+23405000 -  WDT Smoke Test with reset !!
+23449000 - ---------------------------
+23504000 - Enabling both timers in independent mode
+23569000 - Independent mode - both timers enabled - cold rst
+23640000 - Stall until timer1 times out
+23688000 - Stall until timer2 times out
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     237362] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     237372] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+29394000 - ---------------------------
+29434000 -  WDT Smoke Test with reset !!
+29479000 - ---------------------------
+29535000 - Cascaded mode with timer2 timeout - NMI - cold rst
+29617000 - Stall until ti**** Entering NMI Handler ****
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     296856] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     296866] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+35343000 - ---------------------------
+35384000 -  WDT Smoke Test with reset !!
+35428000 - ---------------------------
+35482000 - Independent mode - timer2 enabled, timer1 disabled - warm rst
+35575000 - Stall until timer2 times out
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     356282] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+41285000 - ---------------------------
+41325000 -  WDT Smoke Test with reset !!
+41370000 - ---------------------------
+41422000 - Independent mode - timer2 enabled, timer1 disabled - cold rst
+41519000 - Enabling only timer2 in independent mode
+41581000 - Stall until timer2 times out
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     416356] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     416366] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+47293000 - ---------------------------
+47334000 -  WDT Smoke Test with reset !!
+47378000 - ---------------------------
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     474344] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+53091000 - ---------------------------
+53132000 -  WDT Smoke Test with reset !!
+53176000 - ---------------------------
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     532324] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     532334] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+58890000 - ---------------------------
+58931000 -  WDT Smoke Test with reset !!
+58975000 - ---------------------------
+59030000 - Enabling both timers in independent mode
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     590942] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+64751000 - ---------------------------
+64791000 -  WDT Smoke Test with reset !!
+64836000 - ---------------------------
+64891000 - Enabling both timers in independent mode
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     649553] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     649563] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+70613000 - ---------------------------
+70654000 -  WDT Smoke Test with reset !!
+70698000 - ---------------------------
+70757000 - Enabling only timer2 in independent mode
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     708209] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+76478000 - ---------------------------
+76518000 -  WDT Smoke Test with reset !!
+76563000 - ---------------------------
+76624000 - Enabling only timer2 in independent mode
+CLP: Observed cptra_rst_b assertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [     766883] deassert_hard_rst_flag[1]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     766893] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+82346000 - ---------------------------
+82387000 -  WDT Smoke Test with reset !!
+82431000 - ---------------------------
+82483000 - End of test
+* TESTCASE PASSED
+
+Finished : minstret = 19093, mcycle = 57852
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

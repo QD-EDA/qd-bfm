@@ -1,0 +1,37 @@
+host=DAN-DESKTOP
+Unable to get version from "/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/lib/ivl/ivl -V -C"/tmp/ivrlh53a9d0a4" -C"/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/lib/ivl/vvp.conf""
+iverilog=Icarus Verilog version 13.0 (devel) (9b5fad2af)
+iverilog_sha256=6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)
+
+Copyright (c) 2001-2026 Stephen Williams (steve@icarus.com)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+vvp=
+vvp_sha256=c2474d2a745aa7d896885202314a5244ee26af56a32dda59a6c8fbd3ba362e3a
+narrow_compile_exit=0
+narrow_run_exit=0
+wide_compile_exit=1
+wide_run_exit=99
+narrow_auto_bins_control.sv:9: warning: Unable to bind wire/reg/memory `coverage_trans.result' in `narrow_auto_bins_control' (compile-progress: unresolved reference).
+narrow_auto_bins_control.sv:22: sorry: coverpoint 1 of covergroup '__covgrp_wide_result_coverage_result_cg_t' cannot be evaluated at this sample() site; it samples constant 0.
+NARROW_AUTO_BINS_OK
+narrow_auto_bins_control.sv:24: $finish called at 0 (1s)
+wide_auto_bins.sv:5: error: automatic bins for a coverpoint wider than 64 bits are not represented.
+wide_auto_bins.sv:9: warning: Unable to bind wire/reg/memory `coverage_trans.result' in `wide_auto_bins' (compile-progress: unresolved reference).
+wide_auto_bins.sv:22: sorry: coverpoint 1 of covergroup '__covgrp_wide_result_coverage_result_cg_t' cannot be evaluated at this sample() site; it samples constant 0.
+1 error(s) during elaboration.
+MINIMAL_REPRO_CONFIRMED

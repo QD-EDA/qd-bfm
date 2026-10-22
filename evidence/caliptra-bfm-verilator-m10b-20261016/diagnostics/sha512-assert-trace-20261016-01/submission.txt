@@ -1,0 +1,12 @@
+SHA512 assertion trace diagnostic
+
+Row: array index 91, test ID 7acba2db04d9935d, smoke_test_sha512.
+Pinned c339 outcome: PASS. Prior v2 Verilator outcome: FAIL at 6.296 us, ERR_SHA_BLOCK_NOT_STABLE.
+Pinned Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Pinned SHA512 source SHA-256: 5656d5a09d1570a567bb674b1b419775a83a08b37ee70792d28ab72ae0510d82.
+M10b AXI overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1.
+
+Build job 1944: one assertion-enabled trace model, 4 CPUs, 4 GiB, 2-hour scheduler limit. It completed successfully; model SHA-256 is 353c5073ea991c8753e5e2b8dea03822048caf470e35f294aa3d231e86699b42.
+Simulation job 1946: only the selected firmware row, 1 CPU, 3 GiB, 15-minute scheduler limit. The wrapper applies a 600-second TERM/KILL cap to the run.
+
+The only source delta is a bounded read-only monitor appended after the existing assertion. It records each block_reg transition during reset_n && !ready_reg, including zeroize_reg, software and gen-hash write enables/offsets, kv_read_data_present_reset, and old/new block values. Assertions and firmware/pass classification are unchanged.

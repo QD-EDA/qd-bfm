@@ -1,0 +1,1 @@
+test_id=692a720233e02c7c testname=smoke_test_sha3_externalmu wrapper_exit=0 completed_at=2026-10-16T01:22:22-06:00

@@ -1,0 +1,9 @@
+host=DAN-DESKTOP
+slurm_job_id=1037
+array_task_id=5
+case=smoke_test_ras
+mode=pinned-only
+rtl_sha=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+qd_sha=d1529c922da402943148a0fb22648f347e30eed9
+riscv_gcc=15.2.0
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0

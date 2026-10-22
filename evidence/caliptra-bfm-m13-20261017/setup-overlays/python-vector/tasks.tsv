@@ -1,0 +1,2 @@
+adams-bridge-v2-0-3-rej_bounded_tb	rej_bounded_tb	src/rej_bounded/config/rej_bounded_tb.vf	src/rej_bounded/tb	input_vectors.txt,exp_results.txt
+adams-bridge-v2-0-3-sigencode_z_tb	sigencode_z_tb	src/sig_encode_z/config/sigencode_z_tb.vf	src/sig_encode_z/tb	input_z.hex,output_encoded_z.hex

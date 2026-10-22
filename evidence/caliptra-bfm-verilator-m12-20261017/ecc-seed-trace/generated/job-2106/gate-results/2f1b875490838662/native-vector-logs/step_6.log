@@ -1,0 +1,3 @@
+keygen: pinned KAT1 matches byte for byte 457d848995a9fbe2c1ffce2ca1622f21b4ce31e2dd6e5b8bbeb568c597b1e0a2
+testbench keygen/sign/verify protocol: result 0
+tampered signature: rejected

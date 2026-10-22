@@ -1,0 +1,6 @@
+job_id=3288
+dependency=afterany:3286
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-adams-cyclecap-plusarg-array-20261020-01
+submitted_utc=2026-10-20T03:40:14Z
+source_snapshot_sha256=0237a23e43cba95e136fc20410faf997784cf163f449840dddddc7b3241efaab
+run_sbatch_sha256=f0280629108ec7c4e2adf15b624f2b20a2e2b4353ada9d2cdcbc74488e5a4bb6

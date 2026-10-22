@@ -1,0 +1,13 @@
+# M16 authored row 60: SKEncode
+
+**PASS with a testbench/filelist overlay**, Slurm job 2782 on DAN-DESKTOP. The current runner compiled and ran the pinned SKEncode top successfully: compile exit 0, simulation exit 0, and 0.112 seconds elapsed. The run completed three output comparisons with no mismatch messages, passed the existing expected-error check, and reached `$finish`. All four runtime vectors were present.
+
+The overlay is hash-guarded against pinned `skencode_tb.sv` SHA256 `91fbec03b602723fb2469653b7d7d307fe3613986873d607b592f5eebdeeb019`. It uses `ABR_MEM_ADDR_WIDTH`, removes the testbench's stale output-port binding, and reads the existing `dut.error_flag` for the negative-case check. Its SHA256 is `ace3e5c948dd7f9831a084fb753a3bbcb99995fcb46cc7d22be500c046339542`, matching the previously reviewed M14 testbench-only change. The pinned filelist hash is `45528b7f68f1311a84c7deb634e8d13d47a95c8c17164e123a0ffffaaabddf87`.
+
+No RTL, firmware, transaction checks, or pass criteria changed. The M15 pinned-only result (job 2482) was **BLOCKED** at the undefined `MLDSA_MEM_ADDR_WIDTH`; it used the same Adams Bridge pin, test YAML, filelist hash, and pinned Icarus binary as this M16 gate. M16 reran the overlay path only. Earlier M14 attempt 2352 used a width workaround but still failed compile on the stale `skencode_error` port; attempt 2355 passed with the testbench-only overlay. The handwritten top runs its built-in comparison and negative-case sequence; the YAML selector does not parameterize those cases.
+
+Pins: Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`; Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`; Icarus source `9b5fad2afb4104caa816b257d5bccc40f01b8c66`; Icarus binary SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`. The job used Python 3.14.4 and NumPy 2.5.4.
+
+The focused local unit suite passed 55 tests under Python 3.14.7 (0.14 seconds, 28,033,024-byte peak RSS); NumPy is not needed by that standard-library-only suite. The runner gate requested one CPU, 256 MiB, a 20-minute Slurm cap, and a 600-second per-row timeout. Its measured peak RSS was 25,204 KiB for the runner, 13,972 KiB for compile, and 12,324 KiB for simulation; 256 MiB is above 1.25 times the runner peak.
+
+Raw run logs, result JSON, overlay manifest, vectors, versions, and resource reports are in [`raw/capture.tar.gz`](raw/capture.tar.gz), SHA256 `56a2f09cebcbfbc4a9bfa36ed634e4cc24a9b436c25631944274f5d84931063d`. The remote hash matched the local capture before cleanup. The remote run tree and temporary capture staging freed 374,155 bytes (about 0.00035 GiB). Staged runner, unit test, manifest, submission script, local source-state, and unit-test record are preserved beside the capture.

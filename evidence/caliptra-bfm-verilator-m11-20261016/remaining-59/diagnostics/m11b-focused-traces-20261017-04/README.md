@@ -1,0 +1,9 @@
+# M11b ECC trace retry
+
+Gate 2082 reached `ERR_ECC_SEED_NOT_STABLE` at 78,353,000 ps but did not emit the separate diagnostic trace. The original diagnostic used an inverted-stability antecedent; the retry instead keeps the exact `$stable(seed_reg)` assertion predicate and places the trace in that assertion's failure action. This preserves the original disable condition and unknown-value semantics, then reports sampled values and clear causes before the existing `CALIPTRA_ASSERT_ERROR`.
+
+This fresh run uses QD source commit `1f132e764b6385aeeecd6149703db5ed3eb5c148`, pinned Caliptra RTL `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Verilator 5.052, the official M10b AXI overlay, `--assert`, and `CLP_ASSERT_ON`. One 4-CPU/4-GiB allocation builds the model and then runs only the `smoke_test_ecc_keygen` gate. The simulator and its outer process guard are each capped at 600 seconds. Rows 1–3 remain gated until this row has a terminal result and usable trace.
+
+Job 2085 combined the rebuild and ECC gate in one allocation to stay within the six-task cap, but was canceled while still pending and before start. Review found that the separate DMA/AES and MLKEM trace assertions also used predicates that could differ from the original checks on unknown values. Run 05 replaces each original Verilator diagnostic assertion with the same predicate and places its trace in that check's failure action.
+
+Job 2085's batch script requested 2 hours initially; `scontrol update` reduced the scheduler limit to 20 minutes because the measured build plus gate took about 13 minutes. At the 2026-10-17 02:50 MDT check, Slurm estimated a 2026-10-18 13:43 MDT start despite 6 idle CPUs. The Mac fallback preflight found Verilator 5.051 devel and no `riscv-none-elf-gcc`, so it cannot provide this goal's pinned 5.052 firmware evidence. The cancellation record is beside this README.

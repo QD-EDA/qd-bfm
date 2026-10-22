@@ -1,0 +1,12 @@
+job_id=1300
+job_name=a2-vlt-qd-top
+cpus=4
+memory=12G
+source_commit=d0d728d7a4aea66ce1962a418d6403d017b72157
+riscv_gcc_prefix=riscv-none-elf
+riscv_gcc_version=15.2.0
+riscv_gcc_sha256=f0aeb21d7c8aeac5dbbccbcdc2b3c80ecff615a1d7f7f3db3b507836b1c1c398
+filelist_overlay_sha256=7572ccc4dcab77978567e4fcca0df326f766e2bbac1c7e780b1940590772a5c0
+exit_status=2
+peak_rss_kib=2362516
+root_cause=Verilator treated two existing warnings as fatal; no model executable was built

@@ -1,0 +1,10 @@
+Slurm job: 3271_43
+Submitted UTC: 2026-10-20 00:32
+Host: DAN-DESKTOP (Ubuntu WSL2)
+Test: row 43 soc_ifc_trng_test
+Resources: 1 CPU, 8 GiB; runner timeout 1,800 seconds; Slurm limit 2,100 seconds
+Source pin: Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus c339 binary SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Preflight: input/source/toolchain hashes passed; overlay self-check passed; protected Caliptra tree pin and clean state passed
+Initial state: PENDING at 20/20 CPUs allocated
+Remote root: /home/dsell/slurm-runs/caliptra-bfm/a2/m20-socifc-row43-overlay-gate-20261020-11

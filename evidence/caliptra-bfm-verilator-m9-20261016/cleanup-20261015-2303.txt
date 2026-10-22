@@ -1,0 +1,3 @@
+Copied and verified array task 1430_62 evidence before cleanup.
+Removed its remote result tree, separate resource sample, and Slurm log after matching SHA-256 hashes.
+Freed: 88,698 bytes (86.62 KiB).

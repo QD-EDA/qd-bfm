@@ -1,0 +1,6 @@
+Rows 7, 9, 10; KeyVault generated AHB overlay used for M16 rows 6 and 8.
+1 CPU / 4 GiB / 30-minute Slurm cap / 600-second runtime timeout per row; array throttle 3.
+Pinned Icarus source 9b5fad2afb4104caa816b257d5bccc40f01b8c66, binary sha256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288.
+Firmware source pin 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Slurm run dir /home/dsell/slurm-runs/caliptra-bfm/a2/m17-kv-array-20261019-06.
+Submitted with `sbatch --parsable run.sbatch`; job 2874. All three array tasks exited during runner setup because the staged source snapshot omitted `scripts/run_with_memory_pressure_guard.py`; raw logs are archived at `raw/job-2874.tar.gz`.

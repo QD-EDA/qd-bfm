@@ -1,0 +1,9 @@
+# M16 row 76 hash-guarded testbench overlay gate
+
+Job 2677 ran row 76 (`butterfly_normal_test`) with the existing `test_vectors/` contents copied into the runtime directory and one testbench correction: the pinned bench loads `kyber_stage0_out.hex` into `in_val`; the overlay loads that same existing expected-output vector into `out_val`, which is the array used by the existing NTT comparison. The pinned testbench source SHA256 is `53c38240f13e9f353f5ae4a028d6087aa7aa15ba3fd2eb557a7505db7a899366`; the generated source/filelist overlay manifest records the source and overlay hashes. No RTL, firmware, input vector, comparison, or pass criterion changed.
+
+The run still reached explicit functional failures and is recorded as **FAIL**, not PASS. The log reports `Test failed at NTT operation` with `out_observed[0] = 000595` versus `out_val[0] = 000815`, then `Test failed at INTT operation` with its debug line showing `out_observed[0] = 000000` versus `out_val[0] = 000815`. The pinned 256-word vectors were loaded, though Icarus warned that they do not fill the testbench's 1021-entry arrays. The overlay fixes the wrong destination but does not resolve the remaining functional mismatch; no further testbench edits are included in this gate.
+
+Compile and simulation exited 0 in 0.145 seconds on DAN-DESKTOP with Icarus source pin `9b5fad2afb4104caa816b257d5bccc40f01b8c66` and binary SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`. Adams Bridge and YAML pins match the pinned-only gate above. Resources were one CPU, 3 GiB, and a 600-second row cap.
+
+The preserved `raw/` directory contains the run result, compile/simulation logs, generated one-line overlay and manifest, filelist overlay, runtime/vector copies and hashes, resource records, job metadata, and submit script. The 1,779,645-byte Slurm run tree was removed after capture and hash verification.

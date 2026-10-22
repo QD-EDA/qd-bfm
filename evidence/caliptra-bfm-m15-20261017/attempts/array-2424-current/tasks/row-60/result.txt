@@ -1,0 +1,5 @@
+row_id=60
+testname=skencode_normal_test
+status=BLOCKED
+cause=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_encode/tb/skencode_tb.sv:29: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skencode_tb'
+elapsed_seconds=0.027

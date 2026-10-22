@@ -1,0 +1,171 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+5164000 - ----------------------------------
+5213000 - Smoke Test AXI DMA  !!
+5245000 - ----------------------------------
+5461000 - FW: Arm err command
+5531000 - AXI DMA reports err status for err injection xfer
+5654000 - FW: Arm err command
+5724000 - AXI DMA reports err status for err injection xfer
+5847000 - FW: Arm err command
+5917000 - AXI DMA reports err status for err injection xfer
+6037000 - FW: Arm err command
+6107000 - AXI DMA reports err status for err injection xfer
+6236000 - FW: Arm err command
+6306000 - AXI DMA reports err status for err injection xfer
+6434000 - FW: Arm err command
+6504000 - AXI DMA reports err status for err injection xfer
+6635000 - FW: Arm err command
+6705000 - AXI DMA reports err status for err injection xfer
+6827000 - FW: Arm err command
+6897000 - AXI DMA reports err status for err injection xfer
+7022000 - FW: Arm err command
+7093000 - AXI DMA reports err status for err injection xfer
+7229000 - FW: Arm err command
+7299000 - AXI DMA reports err status for err injection xfer
+7418000 - FW: Arm err command
+7488000 - AXI DMA reports err status for err injection xfer
+7622000 - FW: Arm err command
+7692000 - AXI DMA reports err status for err injection xfer
+7810000 - Sending payload via AHB i/f
+7961000 - Writing payload to Mailbox via Direct Mode
+8054000 - Sending payload from Mailbox
+8154000 - Sending fixed payload via AHB i/f
+8302000 - Moving payload at SRAM via axi-to-axi xfer
+8447000 - Reading payload via AHB i/f
+8635000 - Reading payload to Mailbox
+8733000 - Reading payload from Mailbox via Direct Mode
+8873000 - Sending fixed payload to FIFO via AHB i/f
+9032000 - Reading fixed payload from FIFO via AHB i/f
+9245000 - Enable FIFO to auto-write
+9288000 - Reading rand payload to Mailbox
+9490000 - Disable FIFO to auto-write
+9538000 - Set FIFO to auto-read
+9576000 - Sending payload from Mailbox
+9769000 - Disable FIFO to auto-read
+9819000 - Set FIFO to auto-read
+10446000 - ....
+14494000 - Sending large rand payload to FIFO via AHB i/f
+16047000 - Disable FIFO to auto-read
+16094000 - Enable FIFO to auto-write
+16138000 - Reading large payload from FIFO via AHB i/f
+18392000 - Disable FIFO to auto-write
+18441000 - Reading FIFO payload to Mailbox with block_size feature
+18537000 - Enable FIFO to auto-write and enable recovery-mode emulation
+19672000 - Disable FIFO to auto-write
+19726000 - Enable FIFO to auto-write and enable recovery-mode emulation
+19813000 - Reading FIFO payload to Mailbox with block_size feature
+20881000 - Disable FIFO to auto-write
+20938000 - Moving payload within SRAM via axi-to-axi xfer
+21092000 - Moving payload at SRAM via axi-to-axi xfer; R/W non-determinism is expected!
+21314000 - Enable FIFO to auto-write
+21359000 - Request random reset and read large payload from FIFO to Mailbox
+CLP: Observed cptra_rst_b assertion
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [     214554] deassert_rst_flag[1]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+26618000 - ----------------------------------
+26666000 - Smoke Test AXI DMA  !!
+26699000 - ----------------------------------
+26914000 - FW: Arm err command
+26984000 - AXI DMA reports err status for err injection xfer
+27107000 - FW: Arm err command
+27177000 - AXI DMA reports err status for err injection xfer
+27300000 - FW: Arm err command
+27371000 - AXI DMA reports err status for err injection xfer
+27490000 - FW: Arm err command
+27560000 - AXI DMA reports err status for err injection xfer
+27690000 - FW: Arm err command
+27760000 - AXI DMA reports err status for err injection xfer
+27888000 - FW: Arm err command
+27958000 - AXI DMA reports err status for err injection xfer
+28088000 - FW: Arm err command
+28159000 - AXI DMA reports err status for err injection xfer
+28280000 - FW: Arm err command
+28350000 - AXI DMA reports err status for err injection xfer
+28476000 - FW: Arm err command
+28546000 - AXI DMA reports err status for err injection xfer
+28682000 - FW: Arm err command
+28752000 - AXI DMA reports err status for err injection xfer
+28871000 - FW: Arm err command
+28942000 - AXI DMA reports err status for err injection xfer
+29075000 - FW: Arm err command
+29146000 - AXI DMA reports err status for err injection xfer
+29258000 - Observed reset! Running some short DMA tests for life
+29334000 - Sending payload via AHB i/f
+29470000 - Moving payload at SRAM via axi-to-axi xfer
+29586000 - Reading payload via AHB i/f
+29777000 - smoke_test_dma failed!
+[29812000] %Error: caliptra_top_tb_services.sv:2452: Assertion failed in TOP.caliptra_top_tb.tb_services_i: * TESTCASE FAILED
+%Error: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2452: Verilog $stop
+Aborting...

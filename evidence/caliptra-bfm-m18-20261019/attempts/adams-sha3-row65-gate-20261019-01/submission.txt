@@ -1,0 +1,12 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-sha3-row65-gate-20261019-01
+Selected row: 65
+Resources: 1 CPU/1 GiB, 600-second timeout
+Peak RSS basis: row58 measured 26,804 KiB with the same runner
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: b97f73385daaff0e89ee4359722bb900a582d88aaa3b65bcd353690d93b7a3d9
+Run script SHA-256: 84fb9342695b4490bfb39db413916dd0864022000d5c3df70d6240a157bd3748
+Slurm job ID: 3067
+Result: BLOCKED; compile succeeds, then the existing 200,000-cycle cap stops simulation without a testcase verdict.
+Raw archive: `job-3067_65.tar.gz`; SHA-256 `a83543e1b13c16b6d047377195e2b8a521cbcc5be89861828ba879aa34648475` (sidecar verified).

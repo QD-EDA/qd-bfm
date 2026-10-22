@@ -1,0 +1,11 @@
+# Row 57 explicit mismatch classification gate
+
+Job 2680 reran row 57 (`sigencode_normal_test`) after the runner learned to classify the testbench's explicit output mismatch line as `FAIL`. The unit test proved that this exact diagnostic becomes `FAIL` while a generic “mismatch” message remains `BLOCKED`; the fresh row gate recorded `FAIL`.
+
+The gate used DAN-DESKTOP, one CPU, 3 GiB, a 600-second per-row timeout, Python 3.14.4, NumPy 2.5.4, and pinned Icarus commit `9b5fad2afb4104caa816b257d5bccc40f01b8c66` with binary SHA256 `6cd9749c...`. The compiler exited 0; simulation exited 0 without timeout in 0.06 seconds. Runner wall time was 0.22 seconds with 38,956 KiB peak RSS. The exact NumPy wheel is in `inputs/` (SHA256 `d549420b...`). The runner and mapping snapshot hashes are in `raw/job-meta.txt`.
+
+The log records 3,072 mismatches: two checks, each failing at indices 256–1791 (1,536 values). The testbench sets `NUM_OF_COEFF = MLDSA_N * MLDSA_L` and compares all 1,792 coefficients. The pinned RTL sets `THE_LAST_ADDR = (MLDSA_N / 4) - 1`, so this top-level processes one 256-coefficient polynomial per transaction. The 256-value matching prefix followed by untouched `x` values is consistent with that scope mismatch. This is a testbench/top-level coverage mismatch, not evidence of an Icarus defect. The captured RTL hash is `6bf75b7377778cc8f578d751f129122256c18b35468ceba66b55f693922c3a85`.
+
+No overlay was added: a valid correction must retain checks for all seven polynomials, and a full-coverage testbench iteration change has not been implemented. The exact randomized input and expected-output vectors from this run are preserved under `raw/tasks/row-57/runtime/`; the Python helper does not seed NumPy, so later runs can generate different vectors. The intern triage was checked: its 1,537-error count was incorrect; the captured log contains 3,072 mismatch lines.
+
+All files copied from the run directory were verified against `raw/SHA256SUMS.remote.txt`. The VVP was removed from the local evidence after its hash was verified; the raw checksum list retains that hash. Both completed Slurm run directories were deleted after capture, freeing 156,545,024 allocated bytes (about 149 MiB).

@@ -1,0 +1,23 @@
+PV_WRITE 00001000 0000000000001234
+- evidence/caliptra-bfm-m16-20261018/diagnostics/ahb-pv-generic-transfer/pv_generic_transfer_repro.sv:61: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.051 devel
+- Verilator: $finish at 0s; walltime 0.000 s; speed 0.000 s/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+        0.21 real         0.00 user         0.00 sys
+             1900544  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 290  page reclaims
+                   1  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                   9  involuntary context switches
+            18096407  instructions retired
+             9552958  cycles elapsed
+             1261928  peak memory footprint

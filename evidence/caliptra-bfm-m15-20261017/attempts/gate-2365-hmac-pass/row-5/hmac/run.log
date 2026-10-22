@@ -1,0 +1,78 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:128:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:129:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:132:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:133:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:153:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:154:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157: Warning: Calling system function $fgets() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:157:          The functions return value will be ignored.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158: Warning: Calling system function $sscanf() as a task.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_predictor.svh:158:          The functions return value will be ignored.
+UVM_INFO /home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261017-04-hmac-gate/tasks/row-5/hmac/compat-overlay/HMAC_env_pkg/src/HMAC_env_configuration.svh(61) @ 0.000ns: reporter [COVERAGE_MODEL_REVIEW] A covergroup has been constructed which may need review because of either generation or re-generation with merging.  Please note that configuration variables added as a result of re-generation and merging are not automatically added to the covergroup.  Remove this message after the covergroup has been reviewed. Demoted to UVM_INFO
+* TESTCASE PASSED
+UVM_INFO /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/lib/ivl/uvm/src/base/uvm_report_server.svh(1009) @ 20330.000ns: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    1
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[COVERAGE_MODEL_REVIEW]     1
+
+/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/lib/ivl/uvm/src/base/uvm_root.svh:633: $finish called at 20330000 (1ps)

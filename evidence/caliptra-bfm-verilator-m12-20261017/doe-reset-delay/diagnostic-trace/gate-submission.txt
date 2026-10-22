@@ -1,0 +1,7 @@
+Slurm job: 2111
+Host: DAN-DESKTOP
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-01 && sbatch run-gate.sbatch
+Submitted: 2026-10-17 08:55 MDT
+Resource request: 1 CPU, 3 GiB, 12 min; per-test outer cap 600 s
+Build dependency: job 2110 completed successfully
+Trace overlay SHA-256: 55d0b9686d640a3a0b09fa58a8014e60a7e2def3a00c5dad8578352b66d9245a

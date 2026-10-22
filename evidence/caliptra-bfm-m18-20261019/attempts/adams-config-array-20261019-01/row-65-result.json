@@ -1,0 +1,32 @@
+{
+  "adams_mldsa_config_overlay_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-65/output/overlays/mldsa-config-abr-open.json",
+  "cause": "/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-65/output/overlays/adams-mldsa/tb/src/abr_sha3/tb/abr_sha3_tb.sv:140: error: port ``done_i'' is not a port of dut.",
+  "compile_exit": 1,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-65/output/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.083,
+  "environment_id": "adams-bridge-v2-0-3-abr_sha3_tb",
+  "filelist": "src/abr_sha3/config/abr_sha3_tb.vf",
+  "filelist_sha256_json": "{\"src/abr_sha3/config/abr_sha3_tb.vf\":\"170ec3c67aefa3b11bc1e6d16abb1867cd462872326c1ee744169af9820f2c53\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (cae03564)",
+  "iverilog_binary_sha256": "6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330",
+  "iverilog_source_pin": "cae035642e056644274a01e98d4422ce286685b4",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 65,
+  "run_plusargs": [
+    "+UVM_TESTNAME=abr_sha3_rand_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "65",
+  "slurm_job_id": "3063",
+  "source_file": "src/abr_sha3/stimulus/tests/directed/abr_sha3_rand_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "1cd13ffb1dbcfac3149fa7217646a944519b56cb64193859b965dd753b272fa8",
+  "status": "BLOCKED",
+  "testname": "abr_sha3_rand_test",
+  "timeout_seconds": 600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (cae03564)"
+}

@@ -1,0 +1,7 @@
+job_id=2740
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-param-cast-repro-20261018-01
+submit_command=sbatch --parsable run.sbatch
+resources=1 CPU, 1 GiB memory, 10 minute Slurm limit
+source_sha256=c46225346fa4990fcd22bf888c083d02e4d025db3eea844730713dd906e62aa0
+run_script_sha256=b70748cfbed6dbca181d4fe6d4d5ec4d94d31fb1870874306339ad5efe01b2d2
+pinned_iverilog_source=9b5fad2afb4104caa816b257d5bccc40f01b8c66

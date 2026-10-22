@@ -1,0 +1,20 @@
+{
+  "host": "DAN-DESKTOP",
+  "case": "smoke_test_ecc_flow1_kv_ocp_progress",
+  "timeout_s": 17740,
+  "c339_outcome": "PASS",
+  "c339_mcycle": "60927",
+  "c339_elapsed_s": "8574",
+  "model_sha256": "bd47c872d13d07ca1966a5bd6badb10120f470ab467fcb1fa9f0a55b378cd2f3",
+  "started_at": "2026-10-15T19:31:29.147440+00:00",
+  "case_yaml": "src/integration/test_suites/smoke_test_ecc_flow1_kv_ocp_progress/smoke_test_ecc_flow1_kv_ocp_progress.yml",
+  "case_yaml_sha256": "2ac1906ee58dfd3486afc8fcf3488815973875710617a7b41c50b7095762be41",
+  "seed": "1",
+  "plusargs": [
+    "+CLP_OCP_LOCK_EN"
+  ],
+  "error": "Traceback (most recent call last):\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-05/run-verilator-top-case.py\", line 75, in main\n    vector_files, vector_hashes, vector_commands, vector_tools = runner.prepare_native_vectors(\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-05/source/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py\", line 818, in prepare_native_vectors\n    raise RuntimeError(f\"missing native vector inputs: {missing}\")\nRuntimeError: missing native vector inputs: ['openssl_libcrypto']\n",
+  "outcome": "HARNESS_ERROR",
+  "elapsed_s": 0.024,
+  "completed_at": "2026-10-15T19:31:29.171409+00:00"
+}

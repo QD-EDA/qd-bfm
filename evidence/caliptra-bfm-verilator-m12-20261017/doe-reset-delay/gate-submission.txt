@@ -1,0 +1,6 @@
+Slurm job: 2109
+Host: DAN-DESKTOP
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-reset-delay-20261017-01 && sbatch run-gate.sbatch
+Submitted: 2026-10-17 08:30 MDT
+Resource request: 1 CPU, 3 GiB, 12 min; per-test outer cap 600 s
+Build dependency: job 2108 completed successfully

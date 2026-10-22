@@ -1,0 +1,4 @@
+host=DAN-DESKTOP
+slurm_job_id=1104
+Linux DAN-DESKTOP 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun  5 01:12:21 UTC 2026 x86_64 GNU/Linux
+2026-10-14T18:37:09-06:00

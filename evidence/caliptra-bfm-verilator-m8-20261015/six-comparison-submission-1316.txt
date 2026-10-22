@@ -1,0 +1,14 @@
+host=DAN-DESKTOP
+submitted=2026-10-15
+job_id=1316
+name=a2-vlt-top
+array=1-5%4
+cohort=six-test-cases.tsv
+completed_pilot=1315_0 (index 0)
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-06
+cpus=1 per task
+memory=3G per task
+time_limit=07:00:00; per-test timeout comes from cohort plus 1800s harness margin
+model_sha256=b6ee29ade1b17547c4b31692ed9a0b48e22031c4551604fd9dc250a81e01ae79
+source_commit=d0d728d7a4aea66ce1962a418d6403d017b72157
+checker_overlay_sha256=6e67d67966b030931ec222aacfd0863086c7d35b5e916acd5f358a90ed538654

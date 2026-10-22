@@ -1,0 +1,8 @@
+2026-10-16 07:33 MDT — M9 mailbox call-trace cleanup
+
+Verified job 1617 had left squeue and its Verilator process had exited with the 90-second diagnostic cap. Copied the trace, instrumented interface, model/build/resource records, source archive, tool versions, run scripts, and checksums into diagnostics/mbox-axi-calltrace-20261016-01/remote/. Every transferred file in REMOTE-SHA256SUMS passed local SHA-256 verification.
+
+Removed the completed A2 run directory:
+- /home/dsell/slurm-runs/caliptra-bfm/a2/m9-mbox-calltrace-20261016-01: 719,361,899 bytes
+
+Freed 719,361,899 bytes (0.67 GiB). No shared inputs under /home/dsell/toolchains were changed. Together with cleanup-20261016-final4.txt and cleanup-20261016-mbox.txt, these three final M9 cleanups freed 2,146,672,291 bytes (2.00 GiB).

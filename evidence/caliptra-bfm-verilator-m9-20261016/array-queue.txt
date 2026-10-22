@@ -1,0 +1,7 @@
+             JOBID    STATE       TIME TIME_LIMI NODELIST(REASON)
+    1430_[0-161%2]  PENDING       0:00   7:00:00 (None)
+             JOBID    STATE       TIME NODELIST(REASON)
+            1426_4  RUNNING       1:14 DAN-DESKTOP
+            1426_3  RUNNING       1:14 DAN-DESKTOP
+            1426_2  RUNNING       1:14 DAN-DESKTOP
+            1426_1  RUNNING       1:14 DAN-DESKTOP

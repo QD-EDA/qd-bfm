@@ -1,0 +1,114 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+9676000 - ----------------------------
+9719000 -  Running MLKEM Smoke Test !!
+9762000 - ----------------------------
+10013000 - [MLKEM KeyGen] Waiting for ready
+10096000 - [MLKEM KeyGen] Writing entropy
+10183000 - [MLKEM KeyGen] Sending command
+10234000 - [MLKEM] Waiting for interrupt
+11013000 - Received MLKEM notif/ err intr with status = 1/ 0
+11138000 - [MLKEM KeyGen] Checking encaps key
+11753000 - [MLKEM KeyGen] Checking decaps key
+13716000 - [MLKEM] Starting zeroize
+13754000 - [MLKEM] Waiting for ready
+13917000 - [MLKEM Encaps] Waiting for ready
+13969000 - [MLKEM Encaps] Writing encaps key
+14593000 - [MLKEM Encaps] Writing entropy
+14665000 - [MLKEM Encaps] Sending command
+14715000 - [MLKEM] Waiting for interrupt
+15635000 - Received MLKEM notif/ err intr with status = 1/ 0
+15763000 - [MLKEM Encaps] Check Ciphertext
+16760000 - [MLKEM Encaps] Check Shared Key
+16834000 - [MLKEM] Starting zeroize
+16872000 - [MLKEM] Waiting for ready
+17030000 - [MLKEM Decaps] Waiting for ready
+17084000 - [MLKEM Decaps] Writing decaps key
+18797000 - [MLKEM Decaps] Writing entropy
+18867000 - [MLKEM Decaps] Sending command
+18916000 - [MLKEM] Waiting for interrupt
+20259000 - Received MLKEM notif/ err intr with status = 1/ 0
+20383000 - [MLKEM Decaps] Check Shared Key
+20457000 - [MLKEM] Starting zeroize
+20496000 - [MLKEM] Waiting for ready
+20665000 - [MLKEM KeyGen] Waiting for ready
+20748000 - [MLKEM KeyGen] Writing entropy
+20839000 - [MLKEM KeyGen] Sending command
+20890000 - [MLKEM] Waiting for interrupt
+21668000 - Received MLKEM notif/ err intr with status = 1/ 0
+21792000 - [MLKEM KeyGen] Read Encaps Key
+22392000 - [MLKEM KeyGen] Read Decaps Key
+24503000 - [MLKEM] Starting zeroize
+24542000 - [MLKEM] Waiting for ready
+24704000 - [MLKEM Encaps] Waiting for ready
+24758000 - [MLKEM Encaps] Writing encaps key
+25374000 - [MLKEM Encaps] Writing entropy
+25462000 - [MLKEM Encaps] Sending Command
+25514000 - [MLKEM] Waiting for interrupt
+26433000 - Received MLKEM notif/ err intr with status = 1/ 0
+26556000 - [MLKEM Encaps] Read Ciphertext
+27663000 - [MLKEM Encaps] Read Shared Key
+27736000 - [MLKEM] Starting zeroize
+27774000 - [MLKEM] Waiting for ready
+27942000 - [MLKEM KeyGen Decaps] Waiting for ready
+28583000 - [MLKEM KeyGen Decaps] Writing entropy
+28666000 - [MLKEM KeyGen Decaps] Sending command
+28726000 - [MLKEM] Waiting for interrupt
+30778000 - Received MLKEM notif/ err intr with status = 1/ 0
+30904000 - [MLKEM KeyGen Decaps] Check Shared Key
+30990000 - [MLKEM] Starting zeroize
+31028000 - [MLKEM] Waiting for ready
+* TESTCASE PASSED
+
+Finished : minstret = 104663, mcycle = 311514
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

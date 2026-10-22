@@ -1,0 +1,8 @@
+Removed 45 extracted files (47006515 bytes) only after byte-for-byte SHA-256 matches to members of the verified archive(s) below.
+Preserved 42 unmatched/symlink entries under evidence/caliptra-bfm-m19-20261019/attempts/fail-current-c339-array-20261019-01/raw/extracted; these were not deleted.
+archive_sha256_ok job-3114_31.tar.gz fcb9e9339e89e6b2e160aa3733a1372f40157db393a524d2cfe1394efe2daadd
+archive_sha256_ok job-3114_56.tar.gz 73c68d5c324fef708d22467994fa728706f233d152140b3a14eeed10ca223053
+archive_sha256_ok job-3114_57.tar.gz f6be17c654f5195c9b02ea6fb77a64b39092d1232b241d3b7255fe5e52c62e07
+archive_sha256_ok job-3114_62.tar.gz faa1aee2d4741ede907ef758724b2f14b50cd3da7e3128caeb1181186ec84967
+archive_sha256_ok job-3114_69.tar.gz 9dc2824cdd7e51dd13b27b5975d2981b3acb13d0caa3366d6660d2b56bb6c1f2
+archive_sha256_ok job-3114_71.tar.gz 6b8661abd1e7c24fbccc01faa4ef2aa5f9c8538bd50dd03ed4d89d7a18e53487

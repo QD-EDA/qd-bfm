@@ -1,0 +1,6 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 4 (cptra_obf_key) of module doe_ctrl expects 256 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 255 high bits of the port.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 5 (obf_field_entropy) of module doe_ctrl expects 256 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 255 high bits of the port.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129: warning: Port 6 (obf_uds_seed) of module doe_ctrl expects 512 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/doe/tb/doe_cbc_tb.sv:129:        : Padding 511 high bits of the port.

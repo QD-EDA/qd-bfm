@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-mldsa-row93-longgate-20261019-02
+Row: 93
+Resources: 1 CPU/2 GiB; 3,600-second test timeout; 75-minute Slurm wall limit
+Icarus pin: cae035642e056644274a01e98d4422ce286685b4
+iverilog SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+Source snapshot SHA-256: 78c3eae07e1d080ba38f7fc1399d7dc28770df42c3ffebc23a0cfaacafc04e6f
+Run script SHA-256: ced677a87dafb22b98278c86b33f93528c98e1ba928ce1d7228e65e477184f08
+Slurm job ID: 3078

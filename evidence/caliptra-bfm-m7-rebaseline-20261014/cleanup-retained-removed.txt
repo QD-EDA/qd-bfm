@@ -1,0 +1,3 @@
+retained_dirs_removed 52 logical_bytes 48981728 free_before 868697206784
+temporary_archive_removed
+868784074752

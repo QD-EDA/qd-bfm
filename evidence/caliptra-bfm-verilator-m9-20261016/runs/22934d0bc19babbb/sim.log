@@ -1,0 +1,74 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5564000 - ----------------------------
+5607000 -  Running MLKEM Smoke Test !!
+5648000 - ----------------------------
+5841000 - OCP_LOCK_MODE_EN: 0x0
+5940000 - [MLKEM KeyGen] Waiting for ready
+5991000 - [MLKEM KeyGen] Try to Overwrite seed d data
+6068000 - [MLKEM KeyGen] Try to Overwrite seed z data
+6147000 - [MLKEM KeyGen] Check that SEED_D api has 0s
+6232000 - [MLKEM KeyGen] Check that SEED_Z api has 0s
+6318000 - [MLKEM KeyGen] Writing entropy
+6388000 - [MLKEM KeyGen] Sending command
+6439000 - [MLKEM] Waiting for interrupt
+7235000 - Received MLKEM notif/ err intr with status = 1/ 0
+7354000 - [MLKEM KeyGen] Read Encaps Key
+7953000 - [MLKEM KeyGen] Check that DK api has 0s
+9920000 - [MLKEM] Starting zeroize
+9958000 - [MLKEM] Waiting for ready
+10110000 - This test is supported only in SS_MODE
+* TESTCASE PASSED
+
+Finished : minstret = 33063, mcycle = 101393
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

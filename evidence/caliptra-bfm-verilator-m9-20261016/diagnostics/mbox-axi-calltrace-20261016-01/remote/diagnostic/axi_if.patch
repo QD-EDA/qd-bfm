@@ -1,0 +1,119 @@
+--- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/axi/rtl/axi_if.sv	2026-10-12 09:22:40.460322174 -0600
++++ /home/dsell/slurm-runs/caliptra-bfm/a2/m9-mbox-calltrace-20261016-01/diagnostic/axi_if.sv	2026-10-16 07:29:50.045038759 -0600
+@@ -39,6 +39,7 @@
+     logic                          rlast;
+     logic                          rvalid;
+     logic                          rready;
++    int unsigned                   m9_trace_mbox_read_count = 0;
+ 
+     // AXI AW
+     logic [AW-1:0]                 awaddr;
+@@ -208,14 +209,28 @@
+         endtask
+ 
+         // TODO: handle IDs?
+-        task get_read_beat(output logic [DW-1:0] data,
++        task get_read_beat(input logic trace_mbox_read,
++                        input int unsigned trace_seq,
++                        input logic [AW-1:0] trace_addr,
++                        output logic [DW-1:0] data,
+                         output logic [UW-1:0] user,
+                         output axi_resp_e     resp);
++            int unsigned trace_cycles;
++            trace_cycles = 0;
+             `TIME_ALGN
+             rready `EQ__ 1;
+-            do
++            do begin
+                 @(posedge clk);
+-            while (!rvalid);
++                if (trace_mbox_read) begin
++                    trace_cycles++;
++                    if (trace_cycles <= 3 || rvalid || (trace_cycles % 1000000) == 0)
++                        $display("M9AXI R seq=%0d addr=%08x cycles=%0d rvalid=%0b rready=%0b rdata=%08x rresp=%0h ruser=%08x",
++                                 trace_seq, trace_addr, trace_cycles, rvalid, rready, rdata, rresp, ruser);
++                end
++            end while (!rvalid);
++            if (trace_mbox_read)
++                $display("M9AXI R_ACCEPT seq=%0d addr=%08x cycles=%0d rdata=%08x rresp=%0h ruser=%08x",
++                         trace_seq, trace_addr, trace_cycles, rdata, rresp, ruser);
+             data   `EQ__ rdata;
+             user   `EQ__ ruser;
+             resp   `EQ__ axi_resp_e'(rresp);
+@@ -238,6 +253,18 @@
+             axi_resp_e     beat_resp;
+             logic [UW-1:0] beat_user;
+             logic [DW-1:0] beat_data;
++            bit trace_this_read;
++            int unsigned trace_ar_cycles;
++            trace_this_read = 0;
++            trace_ar_cycles = 0;
++            if (addr == AW'(32'h30020000)) begin
++                m9_trace_mbox_read_count++;
++                trace_this_read = (m9_trace_mbox_read_count <= 20 ||
++                                   (m9_trace_mbox_read_count % 1000) == 0);
++                if (trace_this_read)
++                    $display("M9AXI AR_START seq=%0d addr=%08x t=%0t",
++                             m9_trace_mbox_read_count, addr, $time);
++            end
+             while(!rst_n) @(posedge clk);
+             do begin
+                 `TIME_ALGN
+@@ -250,7 +277,16 @@
+                 arlock  `EQ__ lock;
+                 arvalid `EQ__ 1;
+                 @(posedge clk);
++                if (trace_this_read) begin
++                    trace_ar_cycles++;
++                    if (trace_ar_cycles <= 3 || arready || (trace_ar_cycles % 1000000) == 0)
++                        $display("M9AXI AR_WAIT seq=%0d addr=%08x cycles=%0d arvalid=%0b arready=%0b",
++                                 m9_trace_mbox_read_count, addr, trace_ar_cycles, arvalid, arready);
++                end
+             end while(!arready);
++            if (trace_this_read)
++                $display("M9AXI AR_ACCEPT seq=%0d addr=%08x cycles=%0d",
++                         m9_trace_mbox_read_count, addr, trace_ar_cycles);
+             `TIME_ALGN
+             araddr  `EQ__ '0;
+             arburst `EQ__ AXI_BURST_FIXED;
+@@ -263,11 +299,15 @@
+             data = new[len+1];
+             resp = new[len+1];
+             for (int beat=0; beat <= len; beat++) begin
+-                get_read_beat(beat_data, beat_user, beat_resp);
++                get_read_beat(trace_this_read, m9_trace_mbox_read_count, addr,
++                              beat_data, beat_user, beat_resp);
+                 data[beat]      = beat_data;
+                 resp_user[beat] = beat_user;
+                 resp[beat]      = beat_resp;
+             end
++            if (trace_this_read)
++                $display("M9AXI READ_RETURN seq=%0d addr=%08x data=%08x resp=%0h user=%08x",
++                         m9_trace_mbox_read_count, addr, data[0], resp[0], resp_user[0]);
+         endtask
+ 
+         task axi_read_single(input  logic [AW-1:0] addr,
+@@ -280,6 +320,13 @@
+             automatic axi_resp_e     burst_resp[];
+             automatic logic [UW-1:0] burst_ruser[];
+             automatic logic [DW-1:0] burst_data[];
++            automatic bit trace_single;
++            automatic int unsigned trace_seq;
++            trace_seq = m9_trace_mbox_read_count + 1;
++            trace_single = addr == AW'(32'h30020000) &&
++                           (trace_seq <= 20 || (trace_seq % 1000) == 0);
++            if (trace_single)
++                $display("M9AXI SINGLE_BEGIN seq=%0d addr=%08x", trace_seq, addr);
+             axi_read(.addr     (addr       ),
+                     .user     (user       ),
+                     .id       (id         ),
+@@ -290,6 +337,9 @@
+             data      = burst_data[0];
+             resp_user = burst_ruser[0];
+             resp      = burst_resp[0];
++            if (trace_single)
++                $display("M9AXI SINGLE_RETURN seq=%0d addr=%08x data=%08x resp=%0h user=%08x",
++                         trace_seq, addr, data, resp, resp_user);
+         endtask
+ 
+         task send_write_beat(input logic last,

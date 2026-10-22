@@ -1,0 +1,47 @@
+Mon Oct 19 10:02:16 MDT 2026
+ 10:02:16 up 5 days,  2:33,  7 users,  load average: 9.00, 9.14, 9.55
+3100_105 RUNNING elapsed=53:31 remaining=21:29
+ROW=78
+{
+  "cause": "VVP exceeded per-row timeout",
+  "compile_exit": 0,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/tasks/row-78/output/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 3599.719,
+  "environment_id": "uvmf-mldsa",
+  "filelist": "src/abr_top/uvmf/config/uvmf_mldsa.vf",
+  "filelist_sha256_json": "{\"src/abr_top/uvmf/config/uvmf_mldsa.vf\":\"1d41a076526a375a8e9752a5cbf04bb8cbc8f1e31f974055735d782213f46f8a\",\"src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hdl.f\":\"4780af52b545535d3d202426a79a0f3712699e55d984c0b0c9764b23ba6a609d\",\"src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/testbench/top_filelist_hvl.f\":\"391f3e3b29333f0b36c627298d34a5451b00d0486b78805a6412bd55528f0527\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (cae03564)",
+  "iverilog_binary_sha256": "6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330",
+  "iverilog_source_pin": "cae035642e056644274a01e98d4422ce286685b4",
+  "mldsa_icarus_overlay_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/tasks/row-78/output/overlays/mldsa-icarus-compat.json",
+  "mldsa_native_model_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/tasks/row-78/output/overlays/mldsa-native-model.json",
+  "overlay_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/tasks/row-78/output/overlays/mldsa-ahb-open-mvc.json",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 78,
+  "run_plusargs": [
+    "+UVM_TESTNAME=ML_DSA_randomized_verif_stream_msg_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "generated-uvmf",
+  "sim_exit": 124,
+  "sim_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/tasks/row-78/output/sim.log",
+  "sim_timed_out": true,
+  "slurm_array_task_id": "78",
+  "slurm_job_id": "3102",
+  "source_file": "src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/tests/src/ML_DSA_randomized_verif_stream_msg_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "5099d532521d0ba214020d26ba1a125fa452aacebf95d586abc5528467789a63",
+  "status": "TIMEOUT",
+  "testname": "ML_DSA_randomized_verif_stream_msg_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (cae03564)"
+}
+sim.log mtime=2026-10-19 09:52:54.016716389 -0600 size=627982
+de7bf04e78d878ab7f2d0c49ec25d17e79371e8a63fa0a0b24c8a067b488126f  /home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/raw/job-3100_78.tar.gz
+b4524a25446ba3aebd825b4f33a1b18198e5ae08edb067b43e738ece732b093f  /home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-600s-retry-20261019-01/raw/job-3100_78.tar.gz.sha256
+ROW=105
+NO_RESULT_JSON
+sim.log mtime=2026-10-19 09:29:39.826290009 -0600 size=493040

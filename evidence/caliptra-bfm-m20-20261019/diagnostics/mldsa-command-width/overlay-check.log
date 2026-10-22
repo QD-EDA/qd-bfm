@@ -1,0 +1,23 @@
+ML_DSA_randomized_verif_sequence.svh: source=cf63ffac725c0cc5f48a85d3ee68dadea3738aff48df97b4c12fae6e9e111c14 overlay=c9da953e49ccf9327bfcbc0f7279e9b322c3850365a1735589a1863ff3a4941f commands=("3'd1",)
+ML_DSA_randomized_two_verif_on_fail_sequence.svh: source=4f91d054d849c2aec83af1090eec603e631caace4c002d16009df53cb1757b75 overlay=be999cae46f46ddea1828db4fbefc673649c0a56f8901db69827533f726ecf99 commands=("3'd1", "3'd2")
+Adams Bridge pin: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+overlay filelist SHA-256: e5458572bd7a8581eb7ca528a8c9f90d2e68e9e9cf5a0d26c103cc729ea16b01
+predictor and driving-sequence overlays prepared and verified
+        0.10 real         0.05 user         0.02 sys
+            22921216  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3609  page reclaims
+                  51  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   3  voluntary context switches
+                 135  involuntary context switches
+           402844037  instructions retired
+           168264212  cycles elapsed
+            12485136  peak memory footprint

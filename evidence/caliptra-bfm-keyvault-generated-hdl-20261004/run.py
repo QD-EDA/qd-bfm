@@ -150,6 +150,7 @@ def main() -> int:
     )
     runtime_edition = "2023" if runtime_2023 else "2017"
     diagnostic = sys.argv[1:] == ["--diagnose"]
+    test_name = os.environ.get("CALIPTRA_UVM_TESTNAME", "kv_rand_wr_rd_test")
     if sys.argv[1:] not in (
         [], ["--runtime"], ["--runtime-2023"], ["--diagnose"],
         ["--runtime-ahb-burst-smoke"],
@@ -201,16 +202,6 @@ def main() -> int:
         external_stubs = temporary_root / "external_package_stubs.sv"
         external_stubs.write_text(
             """package rw_txn_pkg;
-endpackage
-package QUESTA_MVC;
-endpackage
-package qvip_utils_pkg;
-  import uvm_pkg::*;
-  class qvip_memory_message_handler extends uvm_object;
-    function new(string name = "qvip_memory_message_handler");
-      super.new(name);
-    endfunction
-  endclass
 endpackage
 """,
             encoding="utf-8",
@@ -297,7 +288,7 @@ endpackage
             runtime_verbosity = os.environ.get(
                 "CALIPTRA_UVM_VERBOSITY", "UVM_MEDIUM" if burst_smoke else "UVM_NONE"
             )
-            runtime_args = [vvp, str(image), "+UVM_TESTNAME=kv_rand_wr_rd_test",
+            runtime_args = [vvp, str(image), f"+UVM_TESTNAME={test_name}",
                             f"+UVM_VERBOSITY={runtime_verbosity}",
                             "+UVM_NO_RELNOTES",
                             *( ["+KV_PIN_TRACE"] if diagnostic else []),
@@ -363,7 +354,7 @@ endpackage
                 ))
             ):
                 failure_summary = [
-                    "FAIL: actual generated KeyVault kv_rand_wr_rd_test did not pass runtime gates.",
+                    f"FAIL: actual generated KeyVault {test_name} did not pass runtime gates.",
                     *runtime_summary(runtime_output, include_ahb_match_count=burst_smoke),
                 ]
                 output_log.write_text(
@@ -371,12 +362,12 @@ endpackage
                     encoding="utf-8",
                 )
                 print("\n".join(failure_summary), file=sys.stderr)
-                raise SystemExit("Generated KeyVault kv_rand_wr_rd_test did not pass runtime gates.")
+                raise SystemExit(f"Generated KeyVault {test_name} did not pass runtime gates.")
             runtime_warning_count = sum(
                 line.startswith("UVM_WARNING /") for line in runtime_output.splitlines()
             )
             run_lines.append(
-                "PASS: actual generated KeyVault kv_rand_wr_rd_test ran with open AHB replacement "
+                f"PASS: actual generated KeyVault {test_name} ran with open AHB replacement "
                 f"under IEEE {runtime_edition} ({runtime_warning_count} runtime warnings)."
             )
             run_lines.extend(runtime_summary(runtime_output, include_ahb_match_count=burst_smoke))

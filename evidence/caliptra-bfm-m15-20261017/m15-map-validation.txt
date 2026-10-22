@@ -1,0 +1,7 @@
+Validation: Python standard-library CSV/JSON assertions over m15-test-to-environment.tsv
+Result: PASS
+- 108 unique (source_repo, source_file, testname) rows
+- 51 generated-UVMF + 57 authored-stimulus
+- every row has a pinned source, YAML hash, environment, filelist hash, and +UVM_TESTNAME selector
+- all 56 referenced .vf/HDL/HVL filelists were read from the protected pinned checkouts and hashed
+- the UART row is explicitly classified compile-yaml-unresolved; its mapped compile.yml is not an Icarus .vf

@@ -1,0 +1,9 @@
+**Message Mutation (MLDSA_MSG):**
+*   **Condition:** `fail_register == 1` and `i == fail_index`
+*   **Changed Expression and Index:** `error_injection_word ^= (1 << fail_bit);` at index `i`
+*   **Comparison:** The provided code snippet does not show a comparison between the two results; it logs the failure using `uvm_info` and `uvm_error`.
+
+**Signature Mutation (MLDSA_SIGNATURE):**
+*   **Condition:** `fail_register == 2` and `i == fail_index`
+*   **Changed Expression and Index:** `error_injection_word ^= (1 << fail_bit);` at index `i`
+*   **Comparison:** The provided code snippet does not show a comparison between the two results; it logs the failure using `uvm_info` and `uvm_error`.

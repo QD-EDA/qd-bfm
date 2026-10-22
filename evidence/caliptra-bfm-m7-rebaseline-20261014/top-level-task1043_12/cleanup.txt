@@ -1,0 +1,4 @@
+task=1043_12
+run_tree_bytes_removed=377208567
+bytes_available_before=851779907584
+bytes_available_after=852157792256

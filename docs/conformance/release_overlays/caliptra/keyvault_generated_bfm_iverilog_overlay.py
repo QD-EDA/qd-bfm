@@ -52,8 +52,26 @@ EXPECTED = {
         "413d01f2490c4d93463d885646d2ad01bee4ff57d08c9382649fced59c6eb54c",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_sequence.svh":
         "49ea430a7dee3a12d17f51ec036d53aedb4f162aad334cf2bc6c3d2453cc6ff6",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_warm_rst_sequence.svh":
+        "ed9b7d98da159ca762fee5305b617493afe9492c6056606bbc7dca6867cd6a59",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_cold_rst_sequence.svh":
+        "9278d22ea1f5c99543be2c9fe84a2007e4bf01d3297269ff7b4fd8a0e90a2a2b",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_core_rst_sequence.svh":
+        "977272a412cbf679458d36068097de048256adffd6a01010ee47d7fc71b5273a",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_rst_sequence.svh":
         "45169b8a87aa60ddcf4c311ec6716d82618b00111b51ef1e115b073764e94742",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_sequence.svh":
+        "602711bc9d995dd5a927877c7aaf006f23baaea9aa20f9b1ad91379ccd4fd118",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_key_wr_rd_basic_sequence.svh":
+        "a9f3d0ccfe1ff7ecdeadddad6c586541b469c158386d7f16092131ea49dda397",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_env_debug_on_sequence.svh":
+        "db5a53d9a19a813f01000b37eda07df0d1869990bc9f42756e00ec6b711bdc6e",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_env_debug_off_sequence.svh":
+        "73f20c45585a0e145677d901a51ef8d013026e567f4bb035cc8b27c596594121",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_env_scan_on_sequence.svh":
+        "a3d593a4e11372c72898845ed21bf6535d57de7fb71143f7645f8bab207c1b61",
+    "verification_ip/environment_packages/kv_env_pkg/src/kv_env_scan_off_sequence.svh":
+        "dcc7251ae975620c389db26bc16c3464e99219938ea229d492ec6a5c062a7640",
     "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh":
         "c66ed34b23f39a96ffa8597e8250eddfc0519e6fa7ab7dc1199e53e680331b74",
 }
@@ -124,13 +142,12 @@ def main() -> int:
             f"driver modports; found {initiator_count} and {responder_count}"
         )
     text = text.replace(".initiator_port", "")
-    if ahb_burst_smoke:
-        text = replace_once(
-            text,
-            "    assign uvm_test_top_environment_qvip_ahb_lite_slave_subenv_qvip_hdl.ahb_lite_slave_0_HSEL      = 1'b0;\n",
-            "    // The open active manager drives HSEL from HTRANS.\n",
-            relative,
-        )
+    text = replace_once(
+        text,
+        "    assign uvm_test_top_environment_qvip_ahb_lite_slave_subenv_qvip_hdl.ahb_lite_slave_0_HSEL      = 1'b0;\n",
+        "    // The open active manager drives HSEL from HTRANS.\n",
+        relative,
+    )
     if diagnostic:
         text = replace_once(
             text,
@@ -243,37 +260,49 @@ def main() -> int:
         '    qvip_ahb_lite_slave_subenv_interface_activity[0] = interface_activity[0];',
         relative,
     )
-    if ahb_burst_smoke:
-        text = use_generated_transfer_alias(text, relative)
+    text, count = re.subn(
+        r"(\b[A-Za-z_]\w*\.convert2string)(?!\s*\()",
+        r"\1()",
+        text,
+    )
+    if count == 0 or re.search(r"\b[A-Za-z_]\w*\.convert2string(?!\s*\()", text):
+        raise SystemExit(f"expected unparenthesized generated convert2string calls in {relative}")
+    text = use_generated_transfer_alias(text, relative)
     write_overlay(overlay_root, text, "src/kv_env_configuration.svh")
 
-    if ahb_burst_smoke:
-        for filename in ("kv_environment.svh", "kv_scoreboard.svh"):
-            relative = f"verification_ip/environment_packages/kv_env_pkg/src/{filename}"
-            text = use_generated_transfer_alias(read_pinned(source_root, relative), relative)
-            write_overlay(overlay_root, text, "src/" + filename)
+    for filename in ("kv_environment.svh", "kv_scoreboard.svh"):
+        relative = f"verification_ip/environment_packages/kv_env_pkg/src/{filename}"
+        text = use_generated_transfer_alias(read_pinned(source_root, relative), relative)
+        write_overlay(overlay_root, text, "src/" + filename)
 
     sequence_sources = (
         "verification_ip/environment_packages/kv_env_pkg/src/kv_env_sequence_base.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_rst_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_cold_rst_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_key_wr_rd_basic_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_warm_rst_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_cold_rst_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_core_rst_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_env_debug_on_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_env_debug_off_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_env_scan_on_sequence.svh",
+        "verification_ip/environment_packages/kv_env_pkg/src/kv_env_scan_off_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_cold_rst_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_core_rst_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_lock_clear_rst_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_lock_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_sequence.svh",
         "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_debug_warm_rst_sequence.svh",
-        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_lock_sequence.svh",
-        "verification_ip/environment_packages/kv_env_pkg/src/kv_wr_rd_rst_sequence.svh",
     )
     for relative in sequence_sources:
         text = read_pinned(source_root, relative)
-        text, count = re.subn(
-            r"configuration(\.[A-Za-z0-9_]+_agent_config\s*\.wait_for_num_clocks\s*\()",
-            r"kv_cfg\1",
-            text,
-        )
+        text, count = re.subn(r"\bconfiguration(?=\.)", "kv_cfg", text)
         if count == 0:
-            raise SystemExit(f"expected generated clock-wait calls in {relative}")
+            raise SystemExit(f"expected generated configuration member accesses in {relative}")
+        if re.search(r"\bconfiguration(?=\.)", text):
+            raise SystemExit(f"unrewritten generated configuration member access in {relative}")
         if relative.endswith("/kv_env_sequence_base.svh"):
             text = replace_once(
                 text,
@@ -290,9 +319,9 @@ def main() -> int:
             )
         write_overlay(overlay_root, text, "src/" + Path(relative).name)
 
+    relative = "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh"
+    text = read_pinned(source_root, relative)
     if ahb_burst_smoke:
-        relative = "verification_ip/environment_packages/kv_env_pkg/src/kv_ahb_sequence.svh"
-        text = read_pinned(source_root, relative)
         text = replace_once(
             text,
             "        reg [KV_DATA_W-1:0] wr_data, rd_data;\n",
@@ -329,19 +358,21 @@ def main() -> int:
             "    endtask\n\n\nendclass",
             relative,
         )
-        write_overlay(overlay_root, text, "src/kv_ahb_sequence.svh")
+    text, count = re.subn(r"\bconfiguration(?=\.)", "kv_cfg", text)
+    if count == 0 or re.search(r"\bconfiguration(?=\.)", text):
+        raise SystemExit(f"expected generated configuration member accesses in {relative}")
+    write_overlay(overlay_root, text, "src/kv_ahb_sequence.svh")
 
     relative = "verification_ip/environment_packages/kv_env_pkg/src/kv_predictor.svh"
     text = read_pinned(source_root, relative)
     text = replace_once(text, "  CONFIG_T configuration;", "  kv_env_configuration configuration;", relative)
-    if ahb_burst_smoke:
-        text = use_generated_transfer_alias(text, relative)
-        text = replace_once(
-            text,
-            'kv_sb_ahb_ap_output_transaction = kv_sb_ahb_ap_output_transaction_t::type_id::create("kv_sb_ahb_ap_output_transaction");',
-            'kv_sb_ahb_ap_output_transaction = new("kv_sb_ahb_ap_output_transaction");',
-            relative,
-        )
+    text = use_generated_transfer_alias(text, relative)
+    text = replace_once(
+        text,
+        'kv_sb_ahb_ap_output_transaction = kv_sb_ahb_ap_output_transaction_t::type_id::create("kv_sb_ahb_ap_output_transaction");',
+        'kv_sb_ahb_ap_output_transaction = new("kv_sb_ahb_ap_output_transaction");',
+        relative,
+    )
     if not re.search(
         r"configuration\.[A-Za-z0-9_]+_agent_config\s*\.wait_for_num_clocks\s*\(",
         text,

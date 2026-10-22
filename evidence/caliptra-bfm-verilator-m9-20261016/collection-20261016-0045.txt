@@ -1,0 +1,11 @@
+Copied five terminal bundles from array 1430. Each internal FILE-SHA256SUMS manifest verified locally; the external task-complete marker, resource file, and Slurm log hashes were compared between DAN-DESKTOP and the local copy.
+
+| Task | Test | Result | Bundle |
+|---:|---|---|---|
+| 67 | `smoke_test_kv_crypto_flow` | PASS, mcycle 1,815,416 | `runs/24a2dc21e831afbd/` |
+| 74 | `smoke_test_mlkem_kv` | PASS, mcycle 394,664 | `runs/aed7ab8214563198/` |
+| 76 | `smoke_test_dma_aes_gcm_rd_enc_axi_err` | PASS, mcycle 107,887 | `runs/b72c5535dc1dc634/` |
+| 77 | `fw_test_lms_n32_w8_h15` | FAIL, DCCM `$readmem` bounds at startup | `runs/5b0c6004da878938/` |
+| 78 | `smoke_test_dma_aes_gcm_non_gcm_en_dec` | PASS, mcycle 538,874 | `runs/ea3af7f88b5170c5/` |
+
+All five ran on DAN-DESKTOP with the pinned Verilator 5.052 model. The remote result trees and their separate resource files and Slurm logs were deleted after hash verification; total bytes freed: 389,499.

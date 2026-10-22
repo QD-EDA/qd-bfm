@@ -1,0 +1,54 @@
+total 11M
+-rw-rw-r-- 1 dsell dsell 11M Oct 19 12:43 job-3154_97.tar.gz
+-rw-rw-r-- 1 dsell dsell 168 Oct 19 12:43 job-3154_97.tar.gz.sha256
+/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/raw/job-3154_97.tar.gz: OK
+42718028825c11bc01e1d6fbfdeced293a83facfa6c6fb21bdef80122898de2b  /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/raw/job-3154_97.tar.gz
+{
+  "mode": "ahb",
+  "target": "hdl_top.sv",
+  "files": [
+    {
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/tasks/row-97/output/runtime/hdl_top.sv",
+      "source_sha256": "c834ca6607ac93d53bca8a92a9bd52036fa03d3bd43b8a1e9201b827c28c8753",
+      "trace_sha256": "c18b1b5f317966bf34fa671eacd7e2e36288e28a62fb3ce884f04d4a725ff6df"
+    }
+  ],
+  "filelist": {
+    "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/tasks/row-97/output/overlays/mldsa-ahb-open-mvc-icarus.vf",
+    "source_sha256": "096e50480b65209dac3fd6f28a23aeda58a9fd78327756292ec6dee661af5a0d",
+    "trace_sha256": "b21ea81bdcad236464a438f797f186fc5f02c38f10479243a9f7cb299cbae6c4",
+    "replaced_entries": 1,
+    "runtime_entry": "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/tasks/row-97/output/runtime/hdl_top.sv"
+  },
+  "scope": "testbench observation only; no RTL, firmware, expected values, or pass criteria changed"
+}
+31058:M19_AHB_PIN POST t=136670.000ns sel=1 trans=2 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+31059:M19_AHB_PIN PRE t=136680.000ns sel=0 trans=0 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+31060:M19_AHB_PIN POST t=136680.000ns sel=0 trans=0 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+31061:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136685.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[12]: 0
+31062:M19_AHB_PIN PRE t=136690.000ns sel=0 trans=0 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+31063:M19_AHB_PIN POST t=136690.000ns sel=0 trans=0 addr=00000108 write=0 readyin=1 readyout=1 hrdata=00000000
+31064:M19_AHB_PIN PRE t=136700.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31065:M19_AHB_PIN POST t=136700.000ns sel=1 trans=2 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31066:M19_AHB_PIN PRE t=136710.000ns sel=0 trans=0 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31067:M19_AHB_PIN POST t=136710.000ns sel=0 trans=0 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31068:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136715.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[13]: 0
+31069:M19_AHB_PIN PRE t=136720.000ns sel=0 trans=0 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31070:M19_AHB_PIN POST t=136720.000ns sel=0 trans=0 addr=0000010c write=0 readyin=1 readyout=1 hrdata=00000000
+31071:M19_AHB_PIN PRE t=136730.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31072:M19_AHB_PIN POST t=136730.000ns sel=1 trans=2 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31073:M19_AHB_PIN PRE t=136740.000ns sel=0 trans=0 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31074:M19_AHB_PIN POST t=136740.000ns sel=0 trans=0 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31075:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136745.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[14]: 0
+31076:M19_AHB_PIN PRE t=136750.000ns sel=0 trans=0 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31077:M19_AHB_PIN POST t=136750.000ns sel=0 trans=0 addr=00000110 write=0 readyin=1 readyout=1 hrdata=00000000
+31078:M19_AHB_PIN PRE t=136760.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+31079:M19_AHB_PIN POST t=136760.000ns sel=1 trans=2 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+31080:M19_AHB_PIN PRE t=136770.000ns sel=0 trans=0 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+31081:M19_AHB_PIN POST t=136770.000ns sel=0 trans=0 addr=00000114 write=0 readyin=1 readyout=1 hrdata=00000000
+31082:UVM_ERROR /home/dsell/slurm-runs/caliptra-bfm/a2/m19-row97-ahb-filelist-gate-20261019-02/tasks/row-97/output/overlays/mldsa_icarus/mldsa_env_pkg/src/mldsa_scoreboard.svh(207) @ 136775.000ns: uvm_test_top.environment.mldsa_sb [SCBD_AHB] Although the verification failure is NOT expected, the second verif result does not match with the successful verif output
+31083:UVM_INFO /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/abr_top/uvmf/uvmf_template_output/project_benches/mldsa/tb/sequences/src/ML_DSA_randomized_two_verif_on_fail_sequence.svh(361) @ 136775.000ns: reporter@@top_level_sequence [REG_READ] MLDSA_VERIFY_RES[15]: 0
+31087:* TESTCASE PASSED
+31095:UVM_ERROR :    1
+31096:UVM_FATAL :    0
+31110:[SCBD_AHB]     1

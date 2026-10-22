@@ -1,0 +1,9 @@
+# Row 63 overlay gate (job 2689)
+
+**PASS** for `decompose_normal_test` on DAN-DESKTOP, using Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0` and pinned Icarus source `9b5fad2afb4104caa816b257d5bccc40f01b8c66` (binary SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`). Python was 3.14.4. Compile and simulation both exited 0 without timeout; runner wall time was 0.415 s and peak RSS 23,872 KiB. The per-row timeout was 600 s; Slurm requested one CPU and 3 GiB.
+
+The log shows both `Decompose success` and `Decompose + usehint success`, with no `ERROR:` line. The testbench overlay uses the package-exported `ABR_MEM_ADDR_WIDTH` and removes the obsolete `w1_encode_done` port connection. Setup adds the two pinned assertion include directories. The manifest limits scope to testbench and filelist; no RTL, firmware, or pass criteria changed. Unit tests cover the exact source edits, source-shape guards, both success markers, incomplete output, and error/failure overrides; the full runner suite passed (28 tests).
+
+Pinned-only row63 remained **BLOCKED**: the original M15 attempt stopped on missing assertion include paths, and setup-only job 2688 then exposed the undefined testbench width and stale DUT port. With the testbench/filelist/setup overlay, this gate is PASS. Overlay source SHA256: `b4a71911b7bd00331da97d822dab2c00a56fd15adb0937a0357de7385b69a3de`; overlay filelist SHA256: `f9287b3e61e435d0fdfacf11857cb6489b6c54ae48ad0e98a25d634e96ea0849`; compiled VVP SHA256: `7fffadc45c27bf907d2b9ff08c886055019554e054d9fa702b2aa68c896da7ba`.
+
+`raw/run.sbatch`, the source and test snapshots, overlay manifest, logs, commands, resources, and result are preserved. `raw/SHA256SUMS.remote.txt` verifies every captured remote file. The remote run tree was removed after evidence capture (486,490 bytes reported by `du -sb`).

@@ -1,0 +1,12 @@
+result=BLOCKED_COMPILE
+environment_id=adams-bridge-v2-0-3-pkdecode_tb
+top=pkdecode_tb
+runner_exit=1
+compile_exit=1
+sim_exit=NOT_RUN
+pass_markers=
+failure_markers=
+mismatches=
+completed_sections=
+vector_summary=
+elapsed_seconds=0

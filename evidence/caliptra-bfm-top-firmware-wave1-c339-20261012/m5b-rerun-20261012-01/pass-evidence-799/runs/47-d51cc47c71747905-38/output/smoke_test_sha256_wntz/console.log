@@ -1,0 +1,56 @@
+0.000 ns - ----------------------------------
+0.000 ns -  SHA256 smoke test !!
+0.000 ns - ----------------------------------
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 notif intr with status = 1
+0.000 ns - Load DIGEST data from SHA256
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 err intr with status = 1
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 err intr with status = 1
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256
+0.000 ns - SHA256 flow in progress...
+0.000 ns - Received SHA256 err intr with status = 1
+0.000 ns - SHA256 zeroize flow.
+0.000 ns - Enable SHA256

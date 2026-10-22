@@ -1,0 +1,61 @@
+**Scoreboard Mismatch Count and Counts:**
+*   The exact scoreboard mismatch count is 16, as indicated by `UVM_ERROR : 16` and `[SCBD_AHB] 16`.
+*   The terminal status markers are: `* TESTCASE FAILED`, `UVM_ERROR : 16`, and `UVM_FATAL : 0`.
+
+**Addresses/Expected/Actual Values (Mismatches):**
+The following mismatches were reported by `mldsa_scoreboard.svh(220)`:
+*   **Address: 0x000000d8**
+    *   Actual: `{Address: 0x000000d8} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000d8} {Data: 0xd8e50f1d} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000dc**
+    *   Actual: `{Address: 0x000000dc} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000dc} {Data: 0xee7743c2} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000e0**
+    *   Actual: `{Address: 0x000000e0} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000e0} {Data: 0x47cd0ad2} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000e4**
+    *   Actual: `{Address: 0x000000e4} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000e4} {Data: 0x8718beb6} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000e8**
+    *   Actual: `{Address: 0x000000e8} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000e8} {Data: 0x75d689db} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000ec**
+    *   Actual: `{Address: 0x000000ec} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000ec} {Data: 0x26ef9725} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000f0**
+    *   Actual: `{Address: 0x000000f0} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000f0} {Data: 0x5448516c} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000f4**
+    *   Actual: `{Address: 0x000000f4} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000f4} {Data: 0x6392c9b1} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000f8**
+    *   Actual: `{Address: 0x000000f8} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000f8} {Data: 0x2070322b} {RnW: 0} {Resp: 0}`
+*   **Address: 0x000000fc**
+    *   Actual: `{Address: 0x000000fc} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x000000fc} {Data: 0xf7a0abe4} {RnW: 0} {Resp: 0}`
+*   **Address: 0x00000100**
+    *   Actual: `{Address: 0x00000100} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x00000100} {Data: 0xade40673} {RnW: 0} {Resp: 0}`
+*   **Address: 0x00000104**
+    *   Actual: `{Address: 0x00000104} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x00000104} {Data: 0x4eec6c2b} {RnW: 0} {Resp: 0}`
+*   **Address: 0x00000108**
+    *   Actual: `{Address: 0x00000108} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x00000108} {Data: 0x00e1d07d} {RnW: 0} {Resp: 0}`
+*   **Address: 0x0000010c**
+    *   Actual: `{Address: 0x0000010c} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x0000010c} {Data: 0xecae9faf} {RnW: 0} {Resp: 0}`
+*   **Address: 0x00000110**
+    *   Actual: `{Address: 0x00000110} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x00000110} {Data: 0x46f7acf1} {RnW: 0} {Resp: 0}`
+*   **Address: 0x00000114**
+    *   Actual: `{Address: 0x00000114} {Data: 0x00000000} {RnW: 0} {Resp: 0}`
+    *   Expected: `{Address: 0x00000114} {Data: 0xbc19d1c7} {RnW: 0} {Resp: 0}`
+
+**UVM Counts:**
+*   `UVM_ERROR`: 16
+*   `UVM_FATAL`: 0
+
+**M19_AHB_PIN Trace Data:**
+*   The text does not contain information confirming whether M19_AHB_PIN trace data is present.

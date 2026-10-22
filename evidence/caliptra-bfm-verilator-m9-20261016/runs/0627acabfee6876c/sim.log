@@ -1,0 +1,100 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+5732000 - ----------------------------------
+5780000 - Smoke Test AXI DMA AES  !!
+5818000 - ----------------------------------
+6535000 - Tag address: 0x50020108
+6610000 - Tag: 
+6646000 - Sending image payload via AHB i/f to AXI SRAM
+6777000 - Configuring AES for little endian mode
+6848000 - Write AES CTRL with value 0x481
+6938000 - Load Key data to AES
+6992000 - Write AES IV
+7042000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+7128000 - Wait for INPUT_READY
+7168000 - Write AES AAD Block 0
+7250000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+7335000 - Wait for INPUT_READY
+7376000 - Write AES AAD Block 1
+7457000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+7766000 - Read and Compare GCM TAG
+7817000 - AES Operation Complete
+7858000 - AES collision err injection enabled
+7909000 - Executing AES flow with collision err injection enabled
+8028000 - Configuring AES for little endian mode
+8099000 - Write AES CTRL with value 0x481
+8190000 - Load Key data to AES
+8244000 - Write AES IV
+8293000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+8378000 - Wait for INPUT_READY
+8418000 - Write AES AAD Block 0
+8498000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+8582000 - Wait for INPUT_READY
+8622000 - Write AES AAD Block 1
+8705000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+8888000 - Injecting AES collision err
+14637000 - ----------------------------------
+14686000 - Smoke Test AXI DMA AES  !!
+14723000 - ----------------------------------
+14785000 - mcause=0xF0000001 indicates that test hit an exception
+14906000 - NMI Occurred!DMA Detected: AXI DMA Err Status=0x2
+15049000 - NMI Detected: AXI DMA CIF Err Status=0x80 matches expected value
+15188000 - CIF Err Interrupt cleared
+15225000 - Test Passed!
+* TESTCASE PASSED
+
+Finished : minstret = 20935, mcycle = 152182
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

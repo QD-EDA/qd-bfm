@@ -1,0 +1,5 @@
+# Verilator PR #7176 `--x-sim` runtime probe
+
+The scalar test has an explicit `1ns/1ps` timescale, assigns X, waits `#1`, checks that X remains, then calls `$finish`. On PR head `27d3c20afb5cf83a67bcee39b0b783b82282e23e`, compile succeeded in 0.634 s. With `--x-sim --timing`, the simulation produced no output and hit its 20-second timeout (`sim_exit=124`). The same source without `--x-sim` advanced through the delay and reached the expected X-loss assertion (`sim_exit=1`); see [`../pr7176-xsim-control/`](../pr7176-xsim-control/).
+
+The generated `--x-sim` C++ contains `0x18446744073709551613ULL` as both the step and loop bound in `trigger_anySet__act`, while the 2-state control uses `1U`. The compiler warns that the `--x-sim` literal is too large for its type. This points to a scheduler trigger-scan loop that does not terminate; the 2-state control's equivalent loop exits. I infer this is the cause of the hang from the generated code and the matched runtime control. The evidence and checksums are retained here; the probe is not a full Caliptra run.

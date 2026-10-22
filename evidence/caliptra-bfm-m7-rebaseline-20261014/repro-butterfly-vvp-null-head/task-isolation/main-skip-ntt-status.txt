@@ -1,0 +1,4 @@
+variant=skip-ntt
+version=main
+compile_exit=0
+sim_exit=134

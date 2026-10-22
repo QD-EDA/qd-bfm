@@ -1,0 +1,11 @@
+M9 collection checkpoint — 2026-10-16 02:10 MDT
+
+Array task: 1430_161, test `smoke_test_mldsa_edge`, source matrix id `05d76a415cc4f1ef`.
+Host: DAN-DESKTOP. Pinned Verilator model SHA-256: `ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de`.
+Result: PASS, final mcycle 388027, simulation 219.608 s, wrapper elapsed 222.017 s.
+Evidence: `runs/05d76a415cc4f1ef/`; bundle `FILE-SHA256SUMS` passed locally and remotely. The separately copied Slurm output and resource record hashes matched their remote copies. The intern's log summary was checked against `firmware.log` and `sim.log`: build completed, `* TESTCASE PASSED` is present, and the reported MLDSA trace markers are present.
+Remote cleanup: removed this completed result tree, its resource record, and its Slurm output after verification; 86,465 bytes freed. Shared model and active task outputs were left in place.
+
+Array state at collection: throttle 6; tasks 1430_75, _128, _139, _149, and _152 were running. No pending job, including a seed-fix retry, was listed for the user. The earlier seed-fix retry 1493 is recorded as completed in the M9 README.
+
+Ledger summary after `build-ledger.py`: 271 rows; 162 supported firmware rows, 109 non-firmware rows; 157 terminal supported results (103 PASS, 39 FAIL, 14 FIRMWARE_BUILD_FAIL, 1 TIMEOUT), 5 supported rows remain running. Terminal pass rate 65.6%; supported-row pass rate 63.6%.

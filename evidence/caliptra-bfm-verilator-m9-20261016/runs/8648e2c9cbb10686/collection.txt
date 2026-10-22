@@ -1,0 +1,7 @@
+Array task: 1430_62
+Test: smoke_test_kv_uds_reset
+Outcome: PASS
+Final mcycle: 56,383
+Wall seconds: 215.221
+Prior Icarus: UNVERIFIED
+The remote FILE-SHA256SUMS manifest verified locally. SHA-256 values for the separate resource sample, task-complete.txt, and Slurm log also matched before cleanup.

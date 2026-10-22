@@ -1,0 +1,7 @@
+# Row 93 combined command-width overlay: pinned c339 Slurm gate
+
+This reruns row 93 with the combined predictor and sequence command-width overlay from source snapshot SHA-256 `352fddead2b8fa45be98b6916b77cccb5f2cc0cc05e0ea5117a30d49fa154ef9`. The prior local c339 attempt compiled and generated correctly shaped signature input, but reached its 1,800-second cap at the next sequence status-poll stage; the log cannot distinguish a stuck read from an unasserted VALID bit. This retry changes only the wall-clock cap to 3,600 seconds; it changes no model or testbench source beyond the existing per-run overlay.
+
+Resources: 1 CPU, 2 GiB memory, 90-minute Slurm limit, 3,600-second per-row runner timeout. The memory request is 1.25x the measured local peak RSS (751,828,992 bytes). Pinned inputs are Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, Icarus `iverilog` SHA-256 `6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330`, and `vvp` SHA-256 `979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309`.
+
+Job 3280 completed `PASS` in 1,470.209 seconds with compile and simulation exit 0, a testcase pass marker, and no failure marker or UVM error/fatal. The exact-pin Icarus binary hashes match the recorded M20 pin. Archive `raw/job-3280-93.tar.gz`, SHA-256 `1f2c491594dc4e8740b57dbed7a4e4f47f65c7b82027243a17fa6bbe9f62cb34`, was copied locally and verified against the remote sidecar. The row now qualifies as `PASS_OVERLAY`.

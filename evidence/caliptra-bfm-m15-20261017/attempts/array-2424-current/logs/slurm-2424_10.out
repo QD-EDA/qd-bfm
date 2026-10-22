@@ -1,0 +1,1 @@
+BLOCKED row=12 test=uart_test: upstream UART compile.yml has no Icarus filelist/setup

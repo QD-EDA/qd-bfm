@@ -1,0 +1,8 @@
+Host: DAN-DESKTOP
+Slurm array/task: 3100_77
+Row: 77, ML_DSA_randomized_key_gen_test
+Pinned Icarus source: cae035642e056644274a01e98d4422ce286685b4
+Test cap: 3,600 seconds; Slurm allocation: 1 CPU, 2 GiB
+Observation: after 15:07 wall time, sim.log was still 4,096 bytes and ended at the 200 ns reset-event message. VVP PID 2066096 had used 99.9% CPU for 14:59. This is a zero-time livelock signature; waiting for the 3,600-second cap cannot advance simulation time.
+Action: archived the task directory and SHA-256 before cancelling only this hung array element. This diagnostic snapshot is not a test verdict. A fresh, targeted diagnostic is still required before M19 classification is final.
+Remote archive SHA-256 matched local SHA-256: 7b1c2a53df769037499ded93a11a7ed1fc834a58c1475a39ef3b727c855bda95.

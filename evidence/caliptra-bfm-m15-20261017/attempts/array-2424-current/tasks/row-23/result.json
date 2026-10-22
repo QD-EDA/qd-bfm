@@ -1,0 +1,33 @@
+{
+  "cause": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-23/overlays/soc_ifc_tb_pkg.sv:1717: error: lock_fuses doesn't name a type.",
+  "compile_exit": 3,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-23/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.193,
+  "environment_id": "caliptra-v2-1-2-soc_ifc_tb",
+  "filelist": "src/soc_ifc/config/soc_ifc_tb.vf",
+  "filelist_sha256_json": "{\"src/soc_ifc/config/soc_ifc_tb.vf\":\"3535d6a5824a8a75d12b9e44f605261f2ae34cd3d6dcc94626c49d3f6e701306\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "overlay_manifest": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-23/overlays/manifest.json",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 23,
+  "run_plusargs": [
+    "+SOC_IFC_TEST=ss_soc_dbg_unlock_level_test",
+    "+UVM_TESTNAME=ss_soc_dbg_unlock_level_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "21",
+  "slurm_job_id": "2446",
+  "source_file": "src/soc_ifc/stimulus/tests/directed/ss_soc_dbg_unlock_level_test.yml",
+  "source_pin": "49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e",
+  "source_repo": "caliptra",
+  "source_yaml_sha256": "436e2a623e8bf5f7ad9aab7eb56d58c4f0b8b84d415a468fb85496125f64b3d1",
+  "status": "BLOCKED",
+  "testname": "ss_soc_dbg_unlock_level_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

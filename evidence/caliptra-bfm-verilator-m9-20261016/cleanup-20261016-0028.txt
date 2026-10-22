@@ -1,0 +1,3 @@
+Copied and checksum-verified 11 terminal result bundles from array 1430 before cleanup.
+Removed their remote result trees, separate resource files, and Slurm logs after matching recorded SHA-256 hashes.
+Freed: 871,850 bytes.

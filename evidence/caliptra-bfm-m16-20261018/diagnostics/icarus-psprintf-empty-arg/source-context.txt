@@ -1,0 +1,10 @@
+Caliptra RTL pin: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+File: src/keyvault/uvmf_kv/uvmf_template_output/verification_ip/interface_packages/kv_rst_pkg/src/kv_rst_configuration.svh
+SHA256: 9d1682590cb85410b67cefe0df3f66f6ca31304f03a1458d283df99411c3a2a6
+
+Pinned source lines:
+142  `uvm_info("CFG",
+143            $psprintf("The agent at '%s' is using interface named %s has the following parameters: ", agent_path, interface_name, ),
+144            UVM_DEBUG)
+
+The full KeyVault compile log reports the `$psprintf` empty-parameter error at line 149; the source call is at lines 142–144.

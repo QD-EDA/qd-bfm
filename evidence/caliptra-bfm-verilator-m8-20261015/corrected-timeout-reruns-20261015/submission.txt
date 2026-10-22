@@ -1,0 +1,27 @@
+host=DAN-DESKTOP
+submitted_at=2026-10-15 14:31 MDT
+source_commit=dd6d43d5416006a9e77f2458e8df2a5a754f86c7
+source_archive_sha256=e57fcd82c2bbcec82b89665531e693dfbb54abc3c31dd00be0e982a1175de958
+runner_sha256=22420e3a99b181ec730b45bd388febde22f401478b85c85bbd84cff2d6f35584
+model_sha256=b6ee29ade1b17547c4b31692ed9a0b48e22031c4551604fd9dc250a81e01ae79
+verilator=5.052 2026-09-05 rev v5.052
+iverilog=13.0 devel; pinned c339 source c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+
+array=1372
+rows=1,3,7,13,16-27
+throttle=1
+resources=1 CPU, 3 GiB, 7 hours per task
+command=sbatch --parsable --array="1,3,7,13,16-27%1" --export=ALL,COHORT=timeout-test-cases.tsv run-verilator-top-array.sbatch
+run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-09
+model_input=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-06/model/obj_dir/Vcaliptra_top_tb
+
+array=1373
+rows=1-2 (two corrected c339 baseline runs)
+throttle=1
+resources=1 CPU, 3 GiB, 3 hours per task; per-test timeout 7,628 seconds
+command=sbatch --parsable --array="1-2%1" run-c339-quoted-axi-array.sbatch
+run_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-10
+
+resource_snapshot=13/20 CPUs idle; RealMemory=39101 MiB; AllocMem=20480 MiB; FreeMem=7591 MiB
+initial_state=at 14:31 MDT, task 1372_1 (Verilator) and task 1373_1 (c339) RUNNING; all remaining tasks PENDING at ArrayTaskLimit
+max_concurrent_a2_tasks=2

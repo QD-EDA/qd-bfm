@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-auto-bins-20261020-02/reproducers/interface_modport_actual.sv:6: error: cannot write to 'ready' through modport 'initiator_port' of interface 'response_if' — it is an input in that modport (IEEE 1800-2017 25.5).
+1 error(s) during elaboration.

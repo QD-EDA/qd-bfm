@@ -1,0 +1,8 @@
+branch codex/caliptra-bfm-stack-20261006
+HEAD 5af1170f86c69122c227ba787afe028a5678b680
+Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Icarus cc25756d187314742d347267c2a513b3e640a7fb
+runner sha256 d5643e87e3bc98c1e099d381c2b5764dcd7f4acbe44d4bc608282861c9b9ea2b
+source snapshot sha256 019934ebefffcf6292618e144715cf919ac0ec119c4e7992a0650b5b419fb30a
+rows 0-4, 43-48, 54-55; primary open-MVC filelist redirects generated hdl_top.sv to the per-run overlay; one CPU, 4 GiB, 3600-second per-row cap, concurrency 3.

@@ -1,0 +1,12 @@
+job_id=1807
+host=DAN-DESKTOP
+command=sbatch --parsable build-model-trace-06.sbatch
+state=COMPLETED
+exit_code=0:0
+elapsed=00:03:09
+cpus=4
+memory=4G
+peak_rss_kib=2381168
+model_sha256=bf548868ab517f17a1da69ef152e16fa58bacb919feac0082d9767f03a804b5d
+candidate_overlay_sha256=782c46c617c90111bd3ca91cab2739ca6d548ebfeb1a56d83b4b482ac6ff033f
+trace_overlay_sha256=c2bd16110f07bbb1a94c721da6601e5cbd0cb6831488c816f8dd842aae6c1d61

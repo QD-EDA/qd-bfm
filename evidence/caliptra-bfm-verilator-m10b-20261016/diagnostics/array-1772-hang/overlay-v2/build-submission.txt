@@ -1,0 +1,9 @@
+Host: DAN-DESKTOP
+Slurm job: 1833 (build, running at capture)
+Command: sbatch build.sbatch
+Allocation: 4 CPUs, 4 GiB, 2 h limit
+Pinned Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Pinned axi_if.sv SHA-256: e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c
+Generated overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1
+Verilator expected: 5.052
+Assertions: --assert and CLP_ASSERT_ON enabled by build script

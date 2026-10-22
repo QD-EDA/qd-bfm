@@ -1,0 +1,8 @@
+Array task: 1430_60
+Test case: fw_test_lms_n24_w8_h5
+Outcome: FAIL
+Final mcycle: NA
+Wall seconds: 0.87
+Prior Icarus: UNVERIFIED
+Evidence: the remote FILE-SHA256SUMS manifest verified locally with shasum -a 256 -c. Supplementary task/resource/Slurm files were copied over SSH before remote cleanup.
+Finding: Model stopped at startup with dccm.hex $readmem address beyond array bounds. Prior Icarus UNVERIFIED.

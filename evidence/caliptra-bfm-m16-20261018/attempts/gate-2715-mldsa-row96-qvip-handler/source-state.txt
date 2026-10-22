@@ -1,0 +1,6 @@
+Local repo branch: codex/caliptra-bfm-stack-20261006
+Local HEAD: 60502cff1c333a04d0f678b9fee0cf1135270305
+The staged input was a working-tree snapshot, not a clean git archive. The exact staged files are preserved in raw/staged-source.tar.gz and identified by its SHA256 in submission.txt.
+Relevant staged source hashes recorded on DAN-DESKTOP in raw/job-meta.txt:
+- run_m15_test.py: 56e277d1d3d5ae7302e0a8a091f9680c05ea27e0ee8e1c511ecdac066ab59f3b
+- caliptra_ahb_qvip_compat_pkg.sv: f36c15487b29decebab9330bb122459fe1b8a22956707dcfe5335b07e7ea4dee

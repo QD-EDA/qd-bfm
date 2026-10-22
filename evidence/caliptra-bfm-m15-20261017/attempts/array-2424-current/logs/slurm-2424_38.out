@@ -1,0 +1,1 @@
+BLOCKED row=41 test=single_socreg_test: /home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-41/overlays/soc_ifc_tb_pkg.sv:1717: error: lock_fuses doesn't name a type.

@@ -1,0 +1,7 @@
+Submitted to DAN-DESKTOP Slurm: job 2770
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-sha512-row17-open-mvc-20261018-01
+Row: 17, SHA512_random_test, source pin Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Resources: 1 CPU, 2 GiB RAM, 15-minute Slurm limit; runner timeout 600 seconds.
+Basis: prior SHA512 row compile used 60,376 KiB, and the complete AHB integration's measured peak was 0.36 GiB; 2 GiB leaves margin for this full UVM environment.
+Queue check at submission: 14/20 CPUs allocated, 6 idle; three running jobs and one pending task. This submission adds one 1-CPU task.
+Overlay is generated testbench/filelist/BFM setup only; no RTL, firmware, or pass criteria changes.

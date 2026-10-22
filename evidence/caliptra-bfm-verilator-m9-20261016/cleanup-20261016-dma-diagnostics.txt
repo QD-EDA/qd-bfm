@@ -1,0 +1,13 @@
+# DMA diagnostic cleanup, 2026-10-16
+
+Completed output trees were archived and their SHA-256 checksums verified locally before deletion. The shared `/home/dsell/toolchains` tree was untouched.
+
+- Diagnostic 02: removed the completed run tree (711,080,140 bytes), its transfer archive (466,036 bytes), and checksum file (111 bytes): 711,546,287 bytes total.
+- Diagnostic 03: after canceling job 1766 for an invalid STATUS0 address filter, archived the partial log and build metadata, verified the archive checksum, then removed the build tree (717,405,830 bytes), partial transfer archive (1,857,842 bytes), and checksum file (121 bytes): 719,263,793 bytes total. No test result was recorded.
+- Remote total freed this pass: 1,430,810,080 bytes (about 1.33 GiB). Previous recorded cleanup was 5,084,107,928 bytes; cumulative recorded cleanup is 6,514,918,008 bytes (about 6.07 GiB), before diagnostic 04.
+- Local cleanup: removed duplicate extracted source under diagnostic 02 (`du -sk` reported 1,904 KiB) and two verified `/tmp` input staging archives (334,056 and 326,320 bytes).
+- Diagnostic 04 (job 1769): after the remote archive SHA-256 matched the local copy and its bundled source manifest passed verification, removed the completed run tree, freeing 714,153,984 bytes (about 0.665 GiB). The tree was absent from `squeue` and had no `Vcaliptra_top_tb` process.
+- Cumulative recorded remote cleanup is now 7,229,071,992 bytes (about 6.73 GiB).
+- Local cleanup: after all three DMA diagnostics' source manifests verified identically, removed the expanded source copies from diagnostics 03 and 04. This freed 3,579,904 allocated bytes; diagnostic 02's archive contains the canonical snapshot, and diagnostic 04's archive also contains a full source copy.
+- Local cleanup: after verifying diagnostic 02's archived source manifest and matching the arbiter snapshot to git commit `c25f3e750ce090cd7f0b4ed63f86a6a5f22e879c`, removed those expanded copies too. This freed another 3,579,904 allocated bytes; across all four expanded copies, local cleanup freed 7,159,808 allocated bytes.
+- Local cleanup: after the original diagnostic 01 manifest passed and the new archive was verified byte-for-byte, removed its expanded logs and source copies; the compressed archive retains the original inputs and outputs.

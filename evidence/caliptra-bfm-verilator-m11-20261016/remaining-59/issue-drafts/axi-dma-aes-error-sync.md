@@ -1,0 +1,7 @@
+# Draft: AXI-error tests violate the DMA/AES error-state assertion
+
+**Status:** Local review draft only; not posted. The focused trace confirms the assertion sampled DMA in `DMA_ERROR` while AES was already `AES_IDLE`; whether that state is valid for this AXI-only error remains a maintainer question.
+
+The focused Verilator 5.052 run with the official M10b overlay and assertions used `smoke_test_dma_aes_gcm_wr_enc_axi_err` (`2ed04fcd9fe06e81`) and failed `AXI_DMA_AES_FSM_ERR_SYNC` at 9,163,000 ps. At that edge the trace records DMA `DMA_WAIT_DATA` → `DMA_ERROR`, AES `AES_IDLE`, `aes_mode=1`, `axi_error=1`, `aes_error=0`, and no command-parse, mailbox-lock, or key-vault error. 1,000 ps earlier, AES transitioned `AES_DONE` → `AES_IDLE` while DMA remained in `DMA_WAIT_DATA`. Enum names are from the pinned `axi_dma_ctrl.sv` declaration. The result and full state history are in [job 2090](../diagnostics/m11b-focused-traces-20261017-06/raw/job-2090/results/2ed04fcd9fe06e81/sim.log); the runner recorded `FAIL`, exit 1, after 64.556 seconds of simulation.
+
+The earlier array 1835 rows show the same assertion in both write-error and read-error tests; the c339 comparison was not conclusive. The focused trace is consistent with an AXI error arriving after AES completed, rather than showing AES stuck outside its error state. Should the assertion require `AES_ERROR` only for AES-originated errors, or should the DMA error path also force AES into `AES_ERROR` after AES has completed? No RTL or assertion was changed.

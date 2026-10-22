@@ -1,0 +1,3 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-auto-bins-20261020-02/reproducers/psprintf_empty_arg.sv:3: error: The function $psprintf has been called with missing/empty parameters.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m21-iverilog-main-cc25756d-20261020-01/part-a/current-main-repros-auto-bins-20261020-02/reproducers/psprintf_empty_arg.sv:3:      : Verilog doesn't allow passing empty parameters to functions.
+1 error(s) during elaboration.

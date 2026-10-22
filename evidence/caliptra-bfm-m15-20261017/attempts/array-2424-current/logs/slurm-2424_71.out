@@ -1,0 +1,1 @@
+BLOCKED row=74 test=pkdecode_normal_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:60: error: parameter `MEM_ADDR_WIDTH` not found in `pkdecode_tb.dut`.

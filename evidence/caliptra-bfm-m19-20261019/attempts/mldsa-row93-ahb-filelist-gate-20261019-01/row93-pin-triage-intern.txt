@@ -1,0 +1,29 @@
+**Summary of Facts**
+
+**General Counts:**
+*   UVM Error count: 16
+*   UVM Fatal count: 0
+
+**Address-Specific Analysis (0xD8 through 0x114):**
+
+| Address | Raw Pin HRDATA | MLDSA_VERIFY_RES | Scoreboard Expected Value | Raw Pins vs Monitor Agreement | Zero vs Nonzero Expected |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **0xD8** | `00000000` | `0` | `0xd8e50f1d` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xDC** | `00000000` | `0` | `0xee7743c2` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xE0** | `00000000` | `0` | `0x47cd0ad2` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xE4** | `00000000` | `0` | `0x8718beb6` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xE8** | `00000000` | `0` | `0x75d689db` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xEC** | `00000000` | `0` | `0x26ef9725` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xF0** | `00000000` | `0` | `0x5448516c` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xF4** | `00000000` | `0` | `0x6392c9b1` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xF8** | `00000000` | `0` | `0x2070322b` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0xFC** | `00000000` | `0` | `0xf7a0abe4` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x100** | `00000000` | `0` | `0xade40673` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x104** | `00000000` | `0` | `0x4eec6c2b` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x108** | `00000000` | `0` | `0x00e1d07d` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x10C** | `00000000` | `0` | `0xecae9faf` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x110** | `00000000` | `0` | `0x46f7acf1` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+| **0x114** | `00000000` | `0` | `0xbc19d1c7` | Raw pins do not agree with expected value. | Raw pin is zero; expected value is nonzero. |
+
+**Gaps:**
+No gaps were explicitly mentioned in the provided text.

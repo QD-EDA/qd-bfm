@@ -1,0 +1,15 @@
+**Error/Mismatch Summary:**
+
+The following test failures were recorded:
+
+1.  **First Mismatch (NTT operation):**
+    *   `Test failed at NTT operation`
+    *   `NTT: U20_out = xxxxxx, out_observed[0] = 000595, out_val[0] = 000815`
+
+2.  **Second Mismatch (INTT operation):**
+    *   `Test failed at INTT operation`
+    *   `INTT: U20_out = 000013, out_observed[0] = 000000, out_val[0] = 000815`
+
+**Final Testcase Marker:**
+
+*   `/home/dsell/slurm-runs/caliptra-bfm/a2/m19-mldsa-result-pintrace-array-20261019-02/tasks/row-76/output/overlays/butterfly_top_tb.sv:621: $finish called at 3445 (1s)`

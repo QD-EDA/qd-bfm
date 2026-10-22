@@ -1,0 +1,1 @@
+PASS row=53 test=hmac_drbg_directed_test: testbench pass marker present; no failure marker or UVM error/fatal

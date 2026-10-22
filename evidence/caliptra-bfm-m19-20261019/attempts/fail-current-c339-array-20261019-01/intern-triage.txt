@@ -1,0 +1,132 @@
+===== ROW 31 =====
+Based on the text provided, the specific information requested for rows 56, 62, 69, 71, and 57 is not present.
+
+Regarding row 31, the log shows several errors and warnings, but does not contain a direct statement determining whether "the observed interrupt error bits are caused by an AXI write or arise from the test/RTL state."
+
+The following facts are present in the log:
+
+**Test Execution and Errors:**
+*   The test case failed: `* TESTCASE FAILED`
+*   The simulation finished: `*** 'sha_acc_intrblk_test' test simulation done. ***`
+*   A specific error was asserted: `TB ERROR aserted for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). Register bit-field(s) mutable over AXI! agg value is 0b1010`
+*   Warnings related to register reads not matching expected values were logged:
+    *   `TB Warning for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). apb_rddata 0x00000000 does not match exp_regval 0x0000000a`
+    *   `TB Warning for addr 0x3002181c (SHA_ACC_INTR_BRF_ERROR_INTR_TRIG_R). apb_rddata 0x00000000 does not match exp_regval 0x00000005`
+*   Multiple AXI write transactions were successful: `AXI txn was successful` (e.g., `AXI Write transaction to address 0x300300b0`).
+*   Warnings regarding undefined darrays were logged during AXI writes: `Warning: cannot write to an undefined darray<vector[32]>.`
+
+===== ROW 56 =====
+Based on the provided text, the following facts can be extracted:
+
+**General Log Information:**
+*   The log indicates default values were used for test parameters:
+    *   `INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m19-fail-current-c339-array-20261019-01/tasks/row-56/output/overlays/adams-mldsa/tb/src/rej_sampler/tb/mldsa_rej_sampler_tb.sv:55: No argument provided for MAX_CYCLES, defaulting to 200000`
+    *   `INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m19-fail-current-c339-array-20261019-01/tasks/row-56/output/overlays/adams-mldsa/tb/src/rej_sampler/tb/mldsa_rej_sampler_tb.sv:61: No argument provided for VEC_CNT, defaulting to 10`
+*   The testbench started and completed:
+    *   `-- Testbench for REJ_SAMPLER started --`
+    *   `*** 10 test cases completed.`
+    *   `*** 10 errors detected during testing.`
+    *   `* TESTCASE FAILED`
+    *   `-- Testbench for REJ_SAMPLER done. --`
+
+**Row 56 Specifics:**
+*   The log shows multiple instances of queue underflow:
+    *   `[ 725] Not enough valid samples in the queue`
+    *   `[ 1425] Not enough valid samples in the queue`
+    *   `[ 2125] Not enough valid samples in the queue`
+    *   `[ 2825] Not enough valid samples in the queue`
+    *   `[ 3525] Not enough valid samples in the queue`
+    *   `[ 4225] Not enough valid samples in the queue`
+    *   `[ 4925] Not enough valid samples in the queue`
+    *   `[ 5625] Not enough valid samples in the queue`
+    *   `[ 6325] Not enough valid samples in the queue`
+    *   `[ 7025] Not enough valid samples in the queue`
+*   The test finished at a specific time:
+    *   `/home/dsell/slurm-runs/caliptra-bfm/a2/m19-fail-current-c339-array-20261019-01/tasks/row-56/output/overlays/adams-mldsa/tb/src/rej_sampler/tb/mldsa_rej_sampler_tb.sv:433: $finish called at 7045 (1s)`
+
+***
+*Note: The provided text does not contain any information regarding rows 31, 57, 62, 69, or 71, nor does it contain the queue trace details required to determine the cause of underflow for row 56.*
+
+===== ROW 57 =====
+The provided text is a simulation log and does not contain the specific queue traces, interrupt error bit details, or setup/runtime cause information for rows 31, 56, 62, 69, 71, or 57.
+
+The facts present in the log are:
+
+*   A Python error occurred: `ModuleNotFoundError: No module named 'numpy'`
+*   The simulation encountered file opening errors:
+    *   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading`
+    *   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:210: Cannot open output_encoded_z.hex for reading`
+*   Warnings regarding file descriptors were issued:
+    *   `WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:199: invalid file descriptor (0x0) given to $feof.`
+    *   `WARNING: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:212: invalid file descriptor (0x0) given to $feof.`
+*   The simulation completed: `Test completed` and `$finish called at 765 (1s)`.
+
+===== ROW 62 =====
+Based on the provided text, the specific information requested for triage and analysis is not present.
+
+**Triage current pinned-c339 row 62 log:**
+The log contains comparison results for line 625:
+*   `[                  625] Actual:   001, Expected: 001`
+*   `[                  625] Actual:   000, Expected: 000`
+*   `[                  625] Actual:   000, Expected: 000`
+*   `[                  625] Actual:   002, Expected: 002`
+
+**For row 31, determine whether the observed interrupt error bits are caused by an AXI write or arise from the test/RTL state:**
+The log does not contain any information regarding "row 31" or "interrupt error bits."
+
+**For rows 56, 62, 69, 71, use the queue trace to say whether underflow follows zeroize/flush or an extra valid sample:**
+The log does not contain queue trace information for rows 56, 62, 69, or 71. The log does contain instances of queue underflow at other lines:
+*   `[                 695] Not enough valid samples in the queue`
+*   `[                1365] Not enough valid samples in the queue`
+*   `[                2035] Not enough valid samples in the queue`
+*   `[                3375] Not enough valid samples in the queue`
+*   `[                4045] Not enough valid samples in the queue`
+*   `[                6055] Not enough valid samples in the queue`
+*   `[                6725] Not enough valid samples in the queue`
+
+**For row 57, report setup/runtime cause only:**
+The log does not contain information regarding "row 57" or its setup/runtime cause.
+
+===== ROW 69 =====
+Based on the provided text, the following facts can be extracted:
+
+**Row 69 Log Triage:**
+*   The log indicates that for row 69, "No argument provided for MAX_CYCLES, defaulting to 200000."
+*   The log indicates that for row 69, "No argument provided for VEC_CNT, defaulting to 10."
+*   The testing process resulted in "10 errors detected during testing."
+*   The test case failed, as indicated by "* TESTCASE FAILED."
+*   The simulation finished with the line: "/home/dsell/slurm-runs/caliptra-bfm/a2/m19-fail-current-c339-array-20261019-01/tasks/row-69/output/overlays/adams-mldsa/tb/src/exp_mask/tb/exp_mask_tb.sv:425: $finish called at 7145 (1s)."
+
+***
+
+*Note: The text does not contain direct evidence regarding rows 31, 56, 62, 57, or the specific queue trace details required to determine the cause of underflow for rows 56, 62, 69, or 71.*
+
+===== ROW 71 =====
+Based on the text provided, the following facts can be extracted:
+
+**Triage of Specific Rows and Data:**
+
+*   **Row 71 Log:** No log entry for row 71 is present in the provided text.
+*   **Row 31:** No information regarding row 31, interrupt error bits, AXI write, or test/RTL state is present in the provided text.
+*   **Rows 56, 62, 69, 71 (Queue Trace/Underflow):**
+    *   For row 56, the log states: `INFO: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:56: No argument provided for MAX_CYCLES, defaulting to 200000`.
+    *   For row 62, the log states: `INFO: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:62: No argument provided for VEC_CNT, defaulting to 10`.
+    *   No queue trace information for rows 69 or 71 is present.
+*   **Row 57:** No log entry for row 57 is present in the provided text.
+
+**General Log Summary:**
+
+*   The testbench for REJ\_BOUNDED started with the message: `-- Testbench for REJ_BOUNDED started --`.
+*   The testbench completed with the message: `-- Testbench for REJ_BOUNDED done. --`.
+*   The testing results were: `*** 10 test cases completed.` and `*** 07 errors detected during testing.`
+*   The testcase failed, indicated by: `* TESTCASE FAILED`.
+*   The simulation finished at time 6845: `/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:433: $finish called at 6845 (1s)`.
+*   Multiple instances of queue underflow were logged:
+    *   `[ 705] Not enough valid samples in the queue`
+    *   `[ 1385] Not enough valid samples in the queue`
+    *   `[ 2065] Not enough valid samples in the queue`
+    *   `[ 4785] Not enough valid samples in the queue`
+    *   `[ 5465] Not enough valid samples in the queue`
+    *   `[ 6145] Not enough valid samples in the queue`
+    *   `[ 6825] Not enough valid samples in the queue`
+

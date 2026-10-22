@@ -1,0 +1,6 @@
+case=smoke_test_kv_ecc_flow2
+mode=with-overlay
+yaml=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_kv_ecc_flow2/smoke_test_kv_ecc_flow2.yml
+testname=smoke_test_kv_ecc_flow2
+seed=1
+overlay=/home/dsell/slurm-runs/caliptra-bfm/a2/m7-fw-compat-d1529c9-20261014/tasks/4-smoke_test_kv_ecc_flow2-with-overlay/build/caliptra_firmware_compat.h

@@ -1,0 +1,5 @@
+PR head: 27d3c20afb5cf83a67bcee39b0b783b82282e23e
+Slurm job: 1303, 1 CPU, 2 GiB, 5-minute cap
+Compile: --x-sim --timing --binary --Wno-fatal; exit 0 in 0.634 s; peak RSS 181788 KiB
+Runtime: timeout 20 s; exit 124; sim.log empty; no terminal pass marker
+Probe uses explicit `timescale 1ns/1ps` and should finish after #1 unless the runtime scheduler stalls.

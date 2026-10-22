@@ -1,0 +1,12 @@
+HEAD=60502cff1c333a04d0f678b9fee0cf1135270305
+worktree=dirty; staged from verified job-2745 source archive with current runner and tests substituted
+source_archive_sha256=9268ac76d72eefc0ebb1229732205ffc2cd6ed54fd1e5a0031795245c4b47a56
+runner_sha256=34575850412adef0715fc58964558209377b3ac669428ed96a90fd17d261c360
+test_file_sha256=dfd26a4ee43b13e9042eda54d6e3f3dd1053d82610db1575afdb136146d5eee5
+run_script_sha256=76d317d2fa199a40659a6c1afee61dc5fdc251bd0747cf129bc613a795602703
+source_repo=adams-bridge; source_pin=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Caliptra pin=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus source pin=9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Icarus binary SHA256=6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+resource basis=prior gate peak 767272 KiB x 1.25 = 959090 KiB; request 1250 MiB, 1 CPU, 20 min Slurm cap; row timeout 600 s
+verified_bfm_files=153

@@ -1,0 +1,11 @@
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+default-clocking-changed build_exit=1
+1:%Error: /tmp/default-clocking-changed.sv:10:21: Internal: Unknown node type reached emitter: STABLE
+4:%Error: Exiting due to 1 error(s)
+default-clock-always-changed build_exit=0
+changed at 5
+- /tmp/default-clock-always-changed.sv:7: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.032 2025-01-01
+- Verilator: $finish at 15ps; walltime 0.000 s; speed 12.261 ns/s
+- Verilator: cpu 0.001 s on 1 threads; alloced 153 MB
+default-clock-always-changed sim_exit=0

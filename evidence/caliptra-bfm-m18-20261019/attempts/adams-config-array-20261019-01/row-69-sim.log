@@ -1,0 +1,23 @@
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-69/output/overlays/adams-mldsa/tb/src/exp_mask/tb/exp_mask_tb.sv:46: No argument provided for MAX_CYCLES, defaulting to      200000
+      Time: 0  Scope: exp_mask_tb
+INFO: /home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-69/output/overlays/adams-mldsa/tb/src/exp_mask/tb/exp_mask_tb.sv:52: No argument provided for VEC_CNT, defaulting to          10
+      Time: 0  Scope: exp_mask_tb
+PLAYBOOK_RANDOM_SEED = 
+   -- Testbench for EXP_MASK started --
+*** Toggle reset.
+
+[                 735] Not enough valid samples in the queue
+[                1445] Not enough valid samples in the queue
+[                2155] Not enough valid samples in the queue
+[                2865] Not enough valid samples in the queue
+[                3575] Not enough valid samples in the queue
+[                4285] Not enough valid samples in the queue
+[                4995] Not enough valid samples in the queue
+[                5705] Not enough valid samples in the queue
+[                6415] Not enough valid samples in the queue
+[                7125] Not enough valid samples in the queue
+*** 10 test cases completed.
+*** 10 errors detected during testing.
+* TESTCASE FAILED
+   -- Testbench for EXP_MASK done. --
+/home/dsell/slurm-runs/caliptra-bfm/a2/m18-adams-config-array-20261019-01/tasks/row-69/output/overlays/adams-mldsa/tb/src/exp_mask/tb/exp_mask_tb.sv:425: $finish called at 7145 (1s)

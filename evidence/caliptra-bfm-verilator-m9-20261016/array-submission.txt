@@ -1,0 +1,10 @@
+host=DAN-DESKTOP
+submitted_at=2026-10-15T20:01:07-0600
+job_id=1430
+array=0-161%2
+dependency=afterok:1424
+resources=1 CPU, 3 GiB per task, 7h allocation
+remote_run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01
+run_count=162 stock-firmware YAML rows
+reason_for_throttle=keep A2 total at six concurrent tasks while four cancellation reruns in array 1426 run
+model_sha256=ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de

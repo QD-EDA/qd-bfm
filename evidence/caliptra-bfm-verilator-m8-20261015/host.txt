@@ -1,0 +1,6 @@
+host=DAN-DESKTOP
+2026-10-15T12:50:46-06:00
+gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  176G  781G  19% /

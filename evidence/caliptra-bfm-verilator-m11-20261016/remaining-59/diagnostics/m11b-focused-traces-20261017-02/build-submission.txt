@@ -1,0 +1,7 @@
+Host: DAN-DESKTOP
+Job: 2079 (build, model with diagnostic-only M11b trace instrumentation)
+Resources: 4 CPUs, 4 GiB, 2 h build cap; based on the prior 2.38 GiB model-build peak.
+Pinned RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+QD source: 1f132e764b6385aeeecd6149703db5ed3eb5c148
+Remote run: /home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-02
+Submission: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-02 && sbatch --parsable build.sbatch

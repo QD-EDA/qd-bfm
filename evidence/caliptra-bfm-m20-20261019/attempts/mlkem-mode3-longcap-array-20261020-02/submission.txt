@@ -1,0 +1,6 @@
+job_id=3283
+remote_root=/home/dsell/slurm-runs/caliptra-bfm/a2/m20-mlkem-mode3-longcap-array-20261020-02
+scheduler_submit_time_utc=2026-10-20T02:56:33Z
+submitted_script_sha256=001c945968e02374267c114a6048ed72dc3305cd6fbf10fb32454ddc3e3a69e4
+source_snapshot_sha256=ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+staged_input_sha256_manifest_verified=true

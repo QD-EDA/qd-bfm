@@ -1,0 +1,1 @@
+["/home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/iverilog", "-g2017", "-gassertions", "-s", "soc_ifc_tb", "-f", "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-21/overlays/soc_ifc_tb.overlay.vf", "-o", "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-21/test.vvp"]

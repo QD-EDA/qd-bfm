@@ -1,0 +1,84 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5780000 - ----------------------------------
+5830000 -  HMAC384 smoke test !!
+5863000 - ----------------------------------
+6176000 - Load Key data to HMAC
+6302000 - HMAC flow in progress...
+6371000 - Received HMAC notif/err intr with status = 1/ 0
+6537000 - Load TAG data from HMAC
+6610000 - HMAC zeroize flow.
+6642000 - ----------------------------------
+6692000 -  HMAC512 smoke test !!
+6725000 - ----------------------------------
+6882000 - Load Key data to HMAC
+7013000 - HMAC flow in progress...
+7081000 - Received HMAC notif/err intr with status = 1/ 0
+7251000 - Load TAG data from HMAC
+7343000 - HMAC zeroize flow.
+7486000 - Load Key data to HMAC
+7625000 - HMAC flow in progress...
+7694000 - Received HMAC notif/err intr with status = 1/ 0
+7860000 - Load TAG data from HMAC
+7950000 - HMAC zeroize flow.
+8089000 - Load Key data to HMAC
+8220000 - HMAC flow in progress...
+8290000 - Received HMAC notif/err intr with status = 1/ 0
+8575000 - Load Key data to HMAC
+8708000 - HMAC flow in progress...
+8779000 - Received HMAC notif/err intr with status = 1/ 0
+8948000 - HMAC zeroize flow.
+* TESTCASE PASSED
+
+Finished : minstret = 30381, mcycle = 89509
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

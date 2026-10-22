@@ -1,0 +1,60 @@
+job_id=1021
+dependency=afterany:1015,afterok:1019
+submitted_at=2026-10-14T13:24:16-06:00
+queue:
+1021_0 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_1 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_2 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_3 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_4 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_5 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_6 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_7 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_8 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_9 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_10 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_11 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_12 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_13 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_14 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_15 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_16 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_17 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_18 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_19 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_20 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_21 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_22 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_23 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_24 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_25 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_26 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_27 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_28 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_29 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_30 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_31 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_32 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_33 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_34 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_35 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_36 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_37 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_38 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_39 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_40 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_41 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_42 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1021_43 PENDING 0:00 2:00:00 (None) bfm-m7-env-main
+1020 RUNNING 2:24 1:00:00 DAN-DESKTOP a3-439-t0t1c
+1019 RUNNING 2:47 2:00:00 DAN-DESKTOP bfm-m7-iverilog-main
+954 RUNNING 2:58 1:30:00 DAN-DESKTOP a1-stale-classify
+1015_1 RUNNING 6:40 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_2 RUNNING 6:40 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_3 RUNNING 6:40 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1015_4 RUNNING 6:40 6:10:00 DAN-DESKTOP bfm-m5b-cancelled-rerun-04
+1012 RUNNING 17:05 4:00:00 DAN-DESKTOP a5-wp0-full-430d-r2
+staged_rows=44
+pin=3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+array=0-43%6
+requested=1 CPU, 3 GiB each, 2h cap

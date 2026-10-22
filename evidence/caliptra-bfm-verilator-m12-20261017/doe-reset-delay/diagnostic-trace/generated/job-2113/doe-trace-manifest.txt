@@ -1,0 +1,3 @@
+checker_source_sha256=6bd2ade137a90c0701aab28951ba6f8918724e0467c21756b0c308e6e9081c89
+doe_trace_overlay_sha256=687e7cdcd24cadfecd5a3cf0475d8c0fc856ea0c5179cc77a5a562c3e9d02210
+instrumentation=first six posedge samples after CPTRA_TOP_PATH.cptra_rst_b rises

@@ -1,0 +1,9 @@
+Slurm job: 2115
+Host: DAN-DESKTOP
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-doe-status-trace-20261017-03 && sbatch --parsable run-gate.sbatch
+Submitted: 2026-10-17 09:27 MDT
+Build dependency: job 2114 completed successfully
+Resource request: 1 CPU, 3 GiB, 12 min; per-test outer timeout 600 s
+Row: smoke_test_doe_scan (8f9e58bda7a24230), pinned M11 per-test timeout 21,600 s
+Checker trace SHA-256: 4e3a62fe81c45f96ce5217b3b722973e03a415de45c81e59ec73f21efd7ad997

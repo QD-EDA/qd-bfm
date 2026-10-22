@@ -1,0 +1,39 @@
+job_id=2118
+submitted=2026-10-17T10:10:00-06:00
+host=DAN-DESKTOP
+script=build.sbatch
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m12-lms-dccm-20261017-01
+state_at_record=RUNNING
+resources=4 CPUs, 4 GiB memory
+source_commit=ffc12ab427e961f40354f32a8e7a147e5d4e5764
+source_archive_sha256=c22c9453bd86d012a6c5a7bc199b4c01b2e385a6a06e46010a917835f28dc5cc
+command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-lms-dccm-20261017-01 && sbatch --parsable build.sbatch
+gate_job_id=2119
+gate_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m12-lms-dccm-20261017-01 && sbatch --parsable --dependency=afterok:2118 run-gate.sbatch
+gate_state=dependency on build job 2118
+gate_scope=one row, fw_test_lms32, outer timeout 600 seconds
+array_script_sha256=6db53b5075cf44d2662d9b8fd8be772059c5c7d6e77b2b00620d7795a113f679
+array_script_staged=true
+array_submission=not submitted; wait for one-row firmware result
+build_state=COMPLETED
+build_completed=2026-10-17T10:14:01-06:00
+build_elapsed=4:03.82
+build_peak_rss_kib=2381176
+build_exit_status=0
+model_sha256=70828122d3afb0a3a55ef786d08ca4ae106213b11b7e23f8d807c333f087c313
+model_bytes=726340839
+gate_state_at_2026-10-17T10:15-06:00=RUNNING
+full_gate_job=2123_0
+full_gate_result=PASS; mcycle=2675745; sim_scan.bad=0; simulation=1833.89s; total=1834.716s
+full_gate_evidence=generated/gate-2123/evidence.tar.gz; sha256=50299be2a745343a900ca2a420675992734e648fee382ada2bcefd86d9a12f81
+array_run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m12-lms-dccm-20261017-02
+array_job=2146; selection_indices=1-33; initial_throttle=5; current_throttle=6; cpus_per_task=1; memory_per_task=3G; scheduler_limit=7h
+array_script_sha256=15a98379980d1571f453c8fb4a8b449751b5880f7559713a7f626eabbb23ade9
+array_reason_for_throttle=ECC remaining-row job 2144 shares the six-task A2 cap
+array_gate_row=fw_test_lms32 index 0 excluded; firmware PASS already recorded
+checkpoint_completed=33/33; all PASS; IDs=e5e18eb8f20efc5f,bc3ce0773f27b4b2,32fd8dbe1f783dd4,415642c79c0b7644,f740e445978756c4,2f208e5a8bd69c61,34c7f9d19c8079cd,cdfafa2fe78a1b8f,1dd7e7b6a72b9fa9,4eb08645576768aa,3a5ea4e3a4522cbd,c68ca7ca8bdee9eb,3e372ffbd571a6c7,382735897db9fc23,5b0c6004da878938,f357834a5cc31406,d9d8c4e06a47cf5c,865fa7ef18ae19cf,5b9446fd36d612e3,42ee901b77bb2871,6e0f9924e43386cd,f1de3422b40f8fa8,52db40b9b86d1f5b,fc1a36f2d1524343,7fd0f83fb5074d59,363ea4266c0a87aa,bce6c86a752d75fe,d52c84ca080b3037,22ba61d343ff96c2,73de10235f92435f,c0866089be6265aa,bc539264d9dd07ff,29a997acc9f713cc
+checkpoint_evidence=generated/array-2146/evidence.tar.gz; sha256=aa15f8ad2b20ada794a997851e0e8b1820bedae6000d2cf06613ba2ebb50e328; all 33 row manifests and 33 wrapper logs verified locally
+throttle_update=raised to 6 after ECC job 2144 completed; cluster snapshot showed 14/20 CPUs allocated and 6 idle; no row duplicated
+array_state=all 33 selected task wrappers wrote exit 0 and terminal PASS results; scheduler final state unavailable after Slurm expired the completed job metadata
+array_evidence_archive=generated/array-2146/evidence.tar.gz; sha256=aa15f8ad2b20ada794a997851e0e8b1820bedae6000d2cf06613ba2ebb50e328
+remote_run_tree=deleted after evidence verification; measured size before cleanup=25M

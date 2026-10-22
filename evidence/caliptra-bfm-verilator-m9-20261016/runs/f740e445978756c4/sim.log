@@ -1,0 +1,5 @@
+
+VerilatorTB: Start of sim
+
+%Error: dccm.hex:1: $readmem file address beyond bounds of array
+Aborting...

@@ -1,0 +1,14 @@
+job_id=1806
+host=DAN-DESKTOP
+case=smoke_test_ahb_mux
+test_id=cadf43c78de6a454
+cap=600 seconds
+model_sha256=5e54117d60230e48aab9e49b5d4f1b443d4fc1c2af1b0351f1efd35e6d2b4938
+trace_overlay_sha256=4d06cc296a15920453d77b1cd4a163ac4e9499ce4326e452e8c2636749f8fec5
+command=sbatch --parsable run-one-trace-05.sbatch
+wrapper_exit=0
+firmware_outcome=FAIL
+sim_exit=1
+failure=AXI_SUB_W_HSHAKE_ERR at 5 ns after first-fuse AW/W/B event trace
+elapsed_seconds=2.31
+outputs_archive_sha256=772043d08ec6bec3ac0889a3a411e2979f103da7808c0cb11e2122bb30607cba

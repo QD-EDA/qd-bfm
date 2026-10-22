@@ -1,0 +1,10 @@
+environment_id=caliptra-v2-1-2-soc_ifc_tb
+top=soc_ifc_tb
+source_repo=caliptra_v2.1.2
+filelist=src/soc_ifc/config/soc_ifc_tb.vf
+runner_exit=2
+compile_exit=2
+sim_exit=NOT_RUN
+pass_markers=
+failure_markers=
+elapsed_seconds=0

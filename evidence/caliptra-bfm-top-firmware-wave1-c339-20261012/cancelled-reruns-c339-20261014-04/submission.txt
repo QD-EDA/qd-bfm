@@ -1,0 +1,34 @@
+job_id=1015
+submitted_at=2026-10-14T13:17:36-06:00
+queue:
+1015_1 PENDING 0:00 6:10:00 (None) bfm-m5b-cancelled-rerun-04
+1015_2 PENDING 0:00 6:10:00 (None) bfm-m5b-cancelled-rerun-04
+1015_3 PENDING 0:00 6:10:00 (None) bfm-m5b-cancelled-rerun-04
+1015_4 PENDING 0:00 6:10:00 (None) bfm-m5b-cancelled-rerun-04
+array:
+ArrayTaskId=1-4%6
+ArrayTaskThrottle=6
+JobState=PENDING
+TimeLimit=06:10:00
+NumCPUs=1
+MinMemoryNode=3G
+space:
+/dev/sdd       1007G  149G  808G  16% /
+host=DAN-DESKTOP
+qd_commit=d1d358e92ea47eacbcdefd58266f7563682400f3
+iverilog_source=c339b9f2287a743aeb7ab6de6528e8d34a4dd602
+iverilog_binary_sha256=683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb
+vvp_binary_sha256=ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f
+caliptra_rtl=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+adams_bridge=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+array=1-4%6
+requested=1 CPU, 3 GiB per task, 6h10m allocation, max 6 tasks
+
+first_running_snapshot_at=2026-10-14T13:17:54-06:00
+host=DAN-DESKTOP
+1015_1=RUNNING
+1015_2=RUNNING
+1015_3=RUNNING
+1015_4=RUNNING
+ArrayTaskThrottle=6
+requested_tasks=1 CPU, 3 GiB each

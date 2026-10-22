@@ -1,0 +1,6 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-18T22:15:55Z
+Command: sbatch /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-current-pinned-20261018-05/run.sbatch
+Job ID: 2802
+Terminal runner result: runner_exit_code=0 (captured in raw/job-2802.tar.gz)
+Resources: 1 CPU, 4 GiB requested, 30-minute Slurm cap; process wall 34.82 s, peak RSS 630756 KiB.

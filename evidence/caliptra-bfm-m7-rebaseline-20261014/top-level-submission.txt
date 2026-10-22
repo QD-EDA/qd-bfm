@@ -1,0 +1,8 @@
+Submitted: 2026-10-14 14:00 MDT
+Slurm array: 1043, tasks 1-16, throttle 6; 1 CPU and 3 GiB per task; 6h10m cap per task
+Dependency: afterany:1021 (the 44-row environment array; continue after any terminal outcome)
+State at submission check: PENDING (dependency)
+Pinned simulator: iverilog-uvm 3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+Caliptra RTL: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Adams Bridge: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+JTAG DPI plugin: /home/dsell/toolchains/iverilog-uvm-3335fe7ec1495956c8adc5788e9a53b0f1756ecf/caliptra-jtagdpi/jtagdpi.vpi, SHA-256 5be0c2979d40b377802044dbda068c4b3590416a7f79374ed1d7ef8be1ce396f
+Selection: six prior c339 PASS cases plus ten TIMEOUT cases with the highest prior final heartbeat mcycle; each keeps its original per-test cap. See top-level-selection.tsv.

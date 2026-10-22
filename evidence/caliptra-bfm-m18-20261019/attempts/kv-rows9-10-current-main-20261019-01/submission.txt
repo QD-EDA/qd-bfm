@@ -1,0 +1,11 @@
+source_snapshot_sha256=be23820858817270195198caf22391f3f5251897e9d59cf4bdc0ea5ae753ff35
+run_sbatch_sha256=e117d1a8293fede3ce3510f0d389d0ddfcd54580927eb8f95fddecd65ab4088b
+source_files=45
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m18-kv-rows9-10-current-main-20261019-01
+array_rows=9,10
+cpus_per_task=1
+mem_per_task=4G
+array_throttle=2
+walltime=15m
+runner_timeout=600s
+submitted_array_job=3016

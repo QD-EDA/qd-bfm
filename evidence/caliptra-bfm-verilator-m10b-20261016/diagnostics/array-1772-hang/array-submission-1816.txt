@@ -1,0 +1,11 @@
+Slurm job array: 1816[0-102]
+Host: DAN-DESKTOP
+Run: /home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-08
+Command: sbatch --export=ALL,RUN_DIR=/home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-08 run-overlay-array-08.sbatch
+Throttle: 6 concurrent tasks; each task requests 1 CPU and 3 GiB; Slurm time limit 7 h.
+Per-row wrapper timeout: row-specific c339 timeout plus 1800 s.
+Selection SHA-256: f453af6eab41fba6cff9caf43449899ce4696a732f5fc03be6d919403e26eba0
+Uninstrumented overlay SHA-256: e8fec740da3fb9ffcd72fd7eb72c63480d30bd4de531e390772138dcf9ad6d1a
+Built model SHA-256: 430fcb1ee9fea6f76ce3efc7c8fe7efa3150d7d338315858776c7836e1baf7e0
+Pre-array sanity: row cadf43c78de6a454 smoke_test_ahb_mux PASS, mcycle=3973.
+Array stopped at 15:24 MDT after 10 terminal rows (5 PASS, 5 FAIL); six running rows were canceled for overlay revision and 87 queued rows never started. These are not TIMEOUT results. Partial evidence is in array-1816-partial/; the final array will use a corrected overlay after another passing one-row pilot.

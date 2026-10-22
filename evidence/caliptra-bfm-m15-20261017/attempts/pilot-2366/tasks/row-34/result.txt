@@ -1,0 +1,5 @@
+row_id=34
+testname=soc_reg_invalid_test
+status=BLOCKED
+cause=/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/soc_ifc/tb/soc_ifc_tb_pkg.sv:116: syntax error
+elapsed_seconds=0.195

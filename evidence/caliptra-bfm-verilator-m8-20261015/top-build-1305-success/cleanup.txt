@@ -1,0 +1,1 @@
+2026-10-15T13:23:20-06:00 DAN-DESKTOP: removed completed run tree /home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-top-20261015-04 after copying and hash-verifying all retained logs and build metadata. Removed 749,529,358 bytes (~714.8 MiB). Protected toolchain inputs were not touched.

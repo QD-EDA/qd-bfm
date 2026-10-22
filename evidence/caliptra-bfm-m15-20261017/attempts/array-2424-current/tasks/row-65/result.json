@@ -1,0 +1,31 @@
+{
+  "cause": "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/mldsa_top/rtl/mldsa_config_defines.svh: No such file or directory",
+  "compile_exit": 1,
+  "compile_log": "/home/dsell/slurm-runs/caliptra-bfm/a2/m15-20261018-full-rows-01/tasks/row-65/compile.log",
+  "compile_timed_out": false,
+  "elapsed_seconds": 0.019,
+  "environment_id": "adams-bridge-v2-0-3-abr_sha3_tb",
+  "filelist": "src/abr_sha3/config/abr_sha3_tb.vf",
+  "filelist_sha256_json": "{\"src/abr_sha3/config/abr_sha3_tb.vf\":\"170ec3c67aefa3b11bc1e6d16abb1867cd462872326c1ee744169af9820f2c53\"}",
+  "host": "DAN-DESKTOP",
+  "iverilog": "Icarus Verilog version 13.0 (devel) (9b5fad2af)",
+  "iverilog_binary_sha256": "6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288",
+  "iverilog_source_pin": "9b5fad2afb4104caa816b257d5bccc40f01b8c66",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "row_id": 65,
+  "run_plusargs": [
+    "+UVM_TESTNAME=abr_sha3_rand_test",
+    "+ntb_random_seed=1"
+  ],
+  "runner_profile": "m7-component",
+  "slurm_array_task_id": "62",
+  "slurm_job_id": "2487",
+  "source_file": "src/abr_sha3/stimulus/tests/directed/abr_sha3_rand_test.yml",
+  "source_pin": "b77e3d899e828d626cfc2a0d26a6b5704cc121e0",
+  "source_repo": "adams-bridge",
+  "source_yaml_sha256": "1cd13ffb1dbcfac3149fa7217646a944519b56cb64193859b965dd753b272fa8",
+  "status": "BLOCKED",
+  "testname": "abr_sha3_rand_test",
+  "timeout_seconds": 3600,
+  "vvp": "Icarus Verilog runtime version 13.0 (devel) (9b5fad2af)"
+}

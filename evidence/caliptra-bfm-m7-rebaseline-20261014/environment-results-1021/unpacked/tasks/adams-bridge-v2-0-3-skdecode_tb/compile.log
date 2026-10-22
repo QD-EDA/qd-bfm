@@ -1,0 +1,8 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:50: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skdecode_tb'
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:86: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `skdecode_tb'
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:86: error: Cast size expression must be constant and greater than zero.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:86: internal error: Found a zero width constant!
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:86: internal error: Port expression too complicated for elaboration.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:81: warning: Port 6 (dest_base_addr) of module skdecode_top expects 14 bit(s), given 1.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sk_decode/tb/skdecode_tb.sv:81:        : Padding 13 high bits of the port.
+3 error(s) during elaboration.

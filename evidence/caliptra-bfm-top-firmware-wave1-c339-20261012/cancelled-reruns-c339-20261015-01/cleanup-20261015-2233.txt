@@ -1,0 +1,6 @@
+2026-10-15T22:33 MDT
+Removed only the completed task-1426_4 run tree after the local result bundle and checksums were verified.
+Remote run tree: 377,310,349 bytes
+Remote Slurm output log: 1,743 bytes
+Total freed: 377,312,092 bytes (359.78 MiB)
+No shared toolchain or active run directory was removed.

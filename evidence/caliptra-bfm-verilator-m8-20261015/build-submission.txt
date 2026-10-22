@@ -1,0 +1,11 @@
+host=DAN-DESKTOP
+submitted=2026-10-15
+job_id=1295
+name=a2-vlt-5.052
+source_tag=v5.052
+source_commit=ea338be98e1e838d3518809ce8899f85a009963c
+target_install=/home/dsell/toolchains/verilator-5.052
+cpus=4
+memory=8G
+walltime=02:00:00
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m8-verilator-20261015-01

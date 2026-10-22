@@ -1,0 +1,7 @@
+Job ID: 2670
+Host: DAN-DESKTOP
+Submitted: 2026-10-18
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-pv-open-ahb-20261018-01
+Row: 46 (uvmf-pv / pv_rand_wr_rd_test)
+Resources: 1 CPU, 3 GiB, Slurm cap 20 minutes, row timeout 600 seconds
+Staged source archive SHA256: 137891799072c9eb02e208d0ebe01079ac5d6e5cfc757b22113f1bb8d2a9d6e5

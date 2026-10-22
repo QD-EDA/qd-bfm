@@ -1,0 +1,10 @@
+job_id=1299
+job_name=a2-vlt-qd-top
+cpus=4
+memory=12G
+source_commit=d0d728d7a4aea66ce1962a418d6403d017b72157
+source_status=clean snapshot (no in-tree Git metadata)
+exit_status=2
+elapsed=0.00s
+peak_rss_kib=7736
+root_cause=upstream Makefile defaulted to absent riscv64-unknown-elf-gcc; protected riscv-none-elf-gcc path/prefix was not supplied

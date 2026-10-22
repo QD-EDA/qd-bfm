@@ -1,0 +1,7 @@
+job_id=2977
+row_id=78
+array_throttle=1
+cpus_per_task=1
+memory=4G
+per_row_timeout=600
+source_snapshot_sha256=ddd3ec97af2005e00508077bc80b7735a2f9c52ed18c741e3f8c2cf5d9c0dec7

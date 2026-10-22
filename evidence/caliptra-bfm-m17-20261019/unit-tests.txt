@@ -1,0 +1,6 @@
+Command: /usr/bin/time -l python3 -m unittest discover -s dv/caliptra_bfm/uvmf_lite/tests -p 'test_run_m15_test.py'
+Result: exit 0; 71 tests passed in 0.20 s wall time.
+Python: 3.14.7.
+Peak RSS: 30,834,688 bytes.
+Review mutation check: An inverted ML-DSA native-model selector was caught by its focused test in an isolated temporary copy.
+Host: Darwin MacBook-Air.local 27.0.0, arm64; 2026-10-19.

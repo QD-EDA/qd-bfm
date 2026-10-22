@@ -1,0 +1,474 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+6491000 - ----------------------------------
+6539000 - Smoke Test AXI DMA AES - Variable Length Test Cases
+6612000 - ----------------------------------
+6715000 - 
+6718000 - ========================================
+6782000 - Running Test 1 of 12
+6856000 - ========================================
+6925000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+7084000 - Random length: 1 dwords (4 bytes)
+7235000 - 
+7237000 - ----------------------------------
+7300000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+7431000 - ----------------------------------
+7487000 - Configuring AES for GCM mode
+7536000 - Using test vector 0 for 1 dwords (4 bytes)
+7692000 - Plaintext length: 1 dwords (4 bytes)
+7800000 - Ciphertext length: 1 dwords (4 bytes)
+7910000 - Key bytes: 32: 
+7969000 - Key DWORD: 8: 
+8023000 - Key LEN: 4: 
+8074000 - AAD bytes: 20: 
+8130000 - AAD DWORD: 5: 
+8211000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+8346000 - Configuring AES for little endian mode
+8415000 - Write AES CTRL with value 0x481
+8507000 - Load Key data to AES
+8568000 - Write AES IV
+8615000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+8707000 - Wait for INPUT_READY
+8747000 - Write AES AAD Block 0
+8829000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+8919000 - Wait for INPUT_READY
+8959000 - Write AES AAD Block 1
+9040000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+9304000 - Read and Compare GCM TAG
+9358000 - AES Operation Complete
+9405000 - Test 1 PASSED
+9461000 - 
+9462000 - ========================================
+9524000 - Running Test 2 of 12
+9598000 - ========================================
+9667000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+9828000 - Random length: 2 dwords (8 bytes)
+9982000 - 
+9983000 - ----------------------------------
+10046000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+10177000 - ----------------------------------
+10233000 - Configuring AES for GCM mode
+10281000 - Using test vector 1 for 2 dwords (8 bytes)
+10438000 - Plaintext length: 2 dwords (8 bytes)
+10544000 - Ciphertext length: 2 dwords (8 bytes)
+10653000 - Key bytes: 32: 
+10712000 - Key DWORD: 8: 
+10767000 - Key LEN: 4: 
+10817000 - AAD bytes: 20: 
+10873000 - AAD DWORD: 5: 
+10960000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+11097000 - Configuring AES for little endian mode
+11168000 - Write AES CTRL with value 0x481
+11264000 - Load Key data to AES
+11325000 - Write AES IV
+11372000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+11462000 - Wait for INPUT_READY
+11502000 - Write AES AAD Block 0
+11583000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+11676000 - Wait for INPUT_READY
+11714000 - Write AES AAD Block 1
+11794000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+12064000 - Read and Compare GCM TAG
+12120000 - AES Operation Complete
+12168000 - Test 2 PASSED
+12221000 - 
+12225000 - ========================================
+12286000 - Running Test 3 of 12
+12360000 - ========================================
+12429000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+12590000 - Random length: 3 dwords (12 bytes)
+12746000 - 
+12749000 - ----------------------------------
+12812000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+12943000 - ----------------------------------
+12999000 - Configuring AES for GCM mode
+13047000 - Using test vector 2 for 3 dwords (12 bytes)
+13208000 - Plaintext length: 3 dwords (12 bytes)
+13320000 - Ciphertext length: 3 dwords (12 bytes)
+13431000 - Key bytes: 32: 
+13490000 - Key DWORD: 8: 
+13544000 - Key LEN: 4: 
+13595000 - AAD bytes: 20: 
+13651000 - AAD DWORD: 5: 
+13739000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+13875000 - Configuring AES for little endian mode
+13946000 - Write AES CTRL with value 0x482
+14042000 - Load Key data to AES
+14103000 - Write AES IV
+14151000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+14240000 - Wait for INPUT_READY
+14279000 - Write AES AAD Block 0
+14361000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+14454000 - Wait for INPUT_READY
+14492000 - Write AES AAD Block 1
+14572000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+14851000 - Read and Compare GCM TAG
+14906000 - AES Operation Complete
+14954000 - Test 3 PASSED
+15006000 - 
+15008000 - ========================================
+15069000 - Running Test 4 of 12
+15143000 - ========================================
+15212000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+15373000 - Random length: 4 dwords (16 bytes)
+15527000 - 
+15528000 - ----------------------------------
+15590000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+15721000 - ----------------------------------
+15777000 - Configuring AES for GCM mode
+15826000 - Using test vector 3 for 4 dwords (16 bytes)
+15991000 - Plaintext length: 4 dwords (16 bytes)
+16101000 - Ciphertext length: 4 dwords (16 bytes)
+16214000 - Key bytes: 32: 
+16273000 - Key DWORD: 8: 
+16328000 - Key LEN: 4: 
+16377000 - AAD bytes: 20: 
+16433000 - AAD DWORD: 5: 
+16521000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+16669000 - Configuring AES for little endian mode
+16740000 - Write AES CTRL with value 0x481
+16836000 - Load Key data to AES
+16897000 - Write AES IV
+16945000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+17035000 - Wait for INPUT_READY
+17073000 - Write AES AAD Block 0
+17155000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+17248000 - Wait for INPUT_READY
+17286000 - Write AES AAD Block 1
+17366000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+17649000 - Read and Compare GCM TAG
+17704000 - AES Operation Complete
+17752000 - Test 4 PASSED
+17805000 - 
+17808000 - ========================================
+17870000 - Running Test 5 of 12
+17944000 - ========================================
+18013000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+18174000 - Random length: 5 dwords (20 bytes)
+18329000 - 
+18330000 - ----------------------------------
+18392000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+18523000 - ----------------------------------
+18579000 - Configuring AES for GCM mode
+18628000 - Using test vector 4 for 5 dwords (20 bytes)
+18796000 - Plaintext length: 5 dwords (20 bytes)
+18907000 - Ciphertext length: 5 dwords (20 bytes)
+19019000 - Key bytes: 32: 
+19078000 - Key DWORD: 8: 
+19132000 - Key LEN: 4: 
+19183000 - AAD bytes: 20: 
+19239000 - AAD DWORD: 5: 
+19328000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+19479000 - Configuring AES for little endian mode
+19550000 - Write AES CTRL with value 0x481
+19646000 - Load Key data to AES
+19707000 - Write AES IV
+19755000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+19846000 - Wait for INPUT_READY
+19885000 - Write AES AAD Block 0
+19967000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+20059000 - Wait for INPUT_READY
+20098000 - Write AES AAD Block 1
+20177000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+20478000 - Read and Compare GCM TAG
+20533000 - AES Operation Complete
+20581000 - Test 5 PASSED
+20634000 - 
+20637000 - ========================================
+20698000 - Running Test 6 of 12
+20772000 - ========================================
+20842000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+21002000 - Random length: 6 dwords (24 bytes)
+21157000 - 
+21159000 - ----------------------------------
+21221000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+21352000 - ----------------------------------
+21408000 - Configuring AES for GCM mode
+21456000 - Using test vector 5 for 6 dwords (24 bytes)
+21626000 - Plaintext length: 6 dwords (24 bytes)
+21737000 - Ciphertext length: 6 dwords (24 bytes)
+21850000 - Key bytes: 32: 
+21908000 - Key DWORD: 8: 
+21963000 - Key LEN: 4: 
+22014000 - AAD bytes: 20: 
+22070000 - AAD DWORD: 5: 
+22158000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+22312000 - Configuring AES for little endian mode
+22382000 - Write AES CTRL with value 0x482
+22479000 - Load Key data to AES
+22539000 - Write AES IV
+22587000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+22678000 - Wait for INPUT_READY
+22717000 - Write AES AAD Block 0
+22799000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+22892000 - Wait for INPUT_READY
+22930000 - Write AES AAD Block 1
+23010000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+23323000 - Read and Compare GCM TAG
+23378000 - AES Operation Complete
+23426000 - Test 6 PASSED
+23478000 - 
+23479000 - ========================================
+23541000 - Running Test 7 of 12
+23614000 - ========================================
+23684000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+23844000 - Random length: 7 dwords (28 bytes)
+23998000 - 
+24000000 - ----------------------------------
+24062000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+24193000 - ----------------------------------
+24249000 - Configuring AES for GCM mode
+24297000 - Using test vector 6 for 7 dwords (28 bytes)
+24468000 - Plaintext length: 7 dwords (28 bytes)
+24580000 - Ciphertext length: 7 dwords (28 bytes)
+24692000 - Key bytes: 32: 
+24750000 - Key DWORD: 8: 
+24805000 - Key LEN: 4: 
+24855000 - AAD bytes: 20: 
+24911000 - AAD DWORD: 5: 
+24998000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+25154000 - Configuring AES for little endian mode
+25225000 - Write AES CTRL with value 0x482
+25321000 - Load Key data to AES
+25382000 - Write AES IV
+25430000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+25521000 - Wait for INPUT_READY
+25560000 - Write AES AAD Block 0
+25641000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+25734000 - Wait for INPUT_READY
+25772000 - Write AES AAD Block 1
+25852000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+26172000 - Read and Compare GCM TAG
+26228000 - AES Operation Complete
+26276000 - Test 7 PASSED
+26327000 - 
+26329000 - ========================================
+26390000 - Running Test 8 of 12
+26464000 - ========================================
+26533000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+26694000 - Random length: 8 dwords (32 bytes)
+26848000 - 
+26849000 - ----------------------------------
+26911000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+27042000 - ----------------------------------
+27098000 - Configuring AES for GCM mode
+27146000 - Using test vector 7 for 8 dwords (32 bytes)
+27323000 - Plaintext length: 8 dwords (32 bytes)
+27433000 - Ciphertext length: 8 dwords (32 bytes)
+27546000 - Key bytes: 32: 
+27605000 - Key DWORD: 8: 
+27660000 - Key LEN: 4: 
+27709000 - AAD bytes: 20: 
+27765000 - AAD DWORD: 5: 
+27853000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+28011000 - Configuring AES for little endian mode
+28081000 - Write AES CTRL with value 0x482
+28178000 - Load Key data to AES
+28238000 - Write AES IV
+28286000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+28377000 - Wait for INPUT_READY
+28416000 - Write AES AAD Block 0
+28497000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+28590000 - Wait for INPUT_READY
+28629000 - Write AES AAD Block 1
+28708000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+29033000 - Read and Compare GCM TAG
+29088000 - AES Operation Complete
+29136000 - Test 8 PASSED
+29188000 - 
+29189000 - ========================================
+29251000 - Running Test 9 of 12
+29324000 - ========================================
+29393000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+29554000 - Random length: 9 dwords (36 bytes)
+29708000 - 
+29710000 - ----------------------------------
+29772000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+29903000 - ----------------------------------
+29959000 - Configuring AES for GCM mode
+30007000 - Using test vector 8 for 9 dwords (36 bytes)
+30183000 - Plaintext length: 9 dwords (36 bytes)
+30295000 - Ciphertext length: 9 dwords (36 bytes)
+30407000 - Key bytes: 32: 
+30465000 - Key DWORD: 8: 
+30520000 - Key LEN: 4: 
+30569000 - AAD bytes: 20: 
+30625000 - AAD DWORD: 5: 
+30713000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+30876000 - Configuring AES for little endian mode
+30946000 - Write AES CTRL with value 0x481
+31043000 - Load Key data to AES
+31103000 - Write AES IV
+31151000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+31242000 - Wait for INPUT_READY
+31281000 - Write AES AAD Block 0
+31362000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+31455000 - Wait for INPUT_READY
+31494000 - Write AES AAD Block 1
+31573000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+31902000 - Read and Compare GCM TAG
+31958000 - AES Operation Complete
+32005000 - Test 9 PASSED
+32059000 - 
+32062000 - ========================================
+32123000 - Running Test 10 of 12
+32201000 - ========================================
+32270000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+32431000 - Random length: 10 dwords (40 bytes)
+32588000 - 
+32590000 - ----------------------------------
+32652000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+32783000 - ----------------------------------
+32839000 - Configuring AES for GCM mode
+32887000 - Using test vector 9 for 10 dwords (40 bytes)
+33069000 - Plaintext length: 10 dwords (40 bytes)
+33182000 - Ciphertext length: 10 dwords (40 bytes)
+33298000 - Key bytes: 32: 
+33356000 - Key DWORD: 8: 
+33411000 - Key LEN: 4: 
+33461000 - AAD bytes: 20: 
+33517000 - AAD DWORD: 5: 
+33604000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+33770000 - Configuring AES for little endian mode
+33840000 - Write AES CTRL with value 0x481
+33937000 - Load Key data to AES
+33997000 - Write AES IV
+34045000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+34136000 - Wait for INPUT_READY
+34175000 - Write AES AAD Block 0
+34256000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+34349000 - Wait for INPUT_READY
+34388000 - Write AES AAD Block 1
+34467000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+34802000 - Read and Compare GCM TAG
+34857000 - AES Operation Complete
+34905000 - Test 10 PASSED
+34962000 - 
+34965000 - ========================================
+35026000 - Running Test 11 of 12
+35104000 - ========================================
+35173000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+35334000 - Random length: 11 dwords (44 bytes)
+35492000 - 
+35493000 - ----------------------------------
+35555000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+35686000 - ----------------------------------
+35742000 - Configuring AES for GCM mode
+35790000 - Using test vector 10 for 11 dwords (44 bytes)
+35978000 - Plaintext length: 11 dwords (44 bytes)
+36092000 - Ciphertext length: 11 dwords (44 bytes)
+36206000 - Key bytes: 32: 
+36265000 - Key DWORD: 8: 
+36320000 - Key LEN: 4: 
+36369000 - AAD bytes: 20: 
+36425000 - AAD DWORD: 5: 
+36513000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+36680000 - Configuring AES for little endian mode
+36751000 - Write AES CTRL with value 0x482
+36847000 - Load Key data to AES
+36908000 - Write AES IV
+36956000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+37047000 - Wait for INPUT_READY
+37085000 - Write AES AAD Block 0
+37167000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+37260000 - Wait for INPUT_READY
+37298000 - Write AES AAD Block 1
+37378000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+37735000 - Read and Compare GCM TAG
+37790000 - AES Operation Complete
+37838000 - Test 11 PASSED
+37895000 - 
+37896000 - ========================================
+37958000 - Running Test 12 of 12
+38035000 - ========================================
+38104000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+38265000 - Random length: 12 dwords (48 bytes)
+38422000 - 
+38424000 - ----------------------------------
+38486000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+38617000 - ----------------------------------
+38673000 - Configuring AES for GCM mode
+38721000 - Using test vector 11 for 12 dwords (48 bytes)
+38911000 - Plaintext length: 12 dwords (48 bytes)
+39023000 - Ciphertext length: 12 dwords (48 bytes)
+39139000 - Key bytes: 32: 
+39198000 - Key DWORD: 8: 
+39253000 - Key LEN: 4: 
+39302000 - AAD bytes: 20: 
+39358000 - AAD DWORD: 5: 
+39446000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+39616000 - Configuring AES for little endian mode
+39686000 - Write AES CTRL with value 0x482
+39783000 - Load Key data to AES
+39844000 - Write AES IV
+39891000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+39982000 - Wait for INPUT_READY
+40021000 - Write AES AAD Block 0
+40102000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+40195000 - Wait for INPUT_READY
+40234000 - Write AES AAD Block 1
+40313000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+40674000 - Read and Compare GCM TAG
+40729000 - AES Operation Complete
+40777000 - Test 12 PASSED
+40831000 - 
+40832000 - ========================================
+40889000 - ALL TESTS COMPLETED SUCCESSFULLY!
+40937000 - ========================================
+* TESTCASE PASSED
+
+Finished : minstret = 137868, mcycle = 409682
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

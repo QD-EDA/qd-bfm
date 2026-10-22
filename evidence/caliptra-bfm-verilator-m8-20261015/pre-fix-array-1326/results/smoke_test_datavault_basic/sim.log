@@ -1,0 +1,154 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5581000 - --------------------------------------
+5638000 -  DV Smoke Test With Basic Read/Write!!
+5693000 - --------------------------------------
+5755000 - 
+5758000 - INFO. Using random seed = 17
+5862000 - 
+5863000 - ** Phase 1. Basic random writes and reads **
+5929000 - 
+5930000 - -- Performing WR followed by RD to data (non-control) registers only; printing once per prefix --
+6067000 - 
+6178000 - INFO. Writing to addr group starting w/ 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0..11]), reporting only for index 0
+6515000 - INFO. For addr 0x1001C028, attempting to write 0x5D713702, read back 0x5D713702
+6802000 - ...........
+7043000 - INFO. Writing to addr group starting w/ 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0..11]), reporting only for index 0
+7380000 - INFO. For addr 0x1001C058, attempting to write 0x3360B3EA, read back 0x3360B3EA
+7654000 - ...........
+7893000 - INFO. Writing to addr group starting w/ 0x1001C088 (STICKY_DATA_VAULT_ENTRY_2[0..11]), reporting only for index 0
+8228000 - INFO. For addr 0x1001C088, attempting to write 0x1EE6D2C6, read back 0x1EE6D2C6
+8504000 - ...........
+8742000 - INFO. Writing to addr group starting w/ 0x1001C0B8 (STICKY_DATA_VAULT_ENTRY_3[0..11]), reporting only for index 0
+9075000 - INFO. For addr 0x1001C0B8, attempting to write 0x90A2CA4, read back 0x90A2CA4
+9347000 - ...........
+9588000 - INFO. Writing to addr group starting w/ 0x1001C0E8 (STICKY_DATA_VAULT_ENTRY_4[0..11]), reporting only for index 0
+9923000 - INFO. For addr 0x1001C0E8, attempting to write 0x3E86E8A6, read back 0x3E86E8A6
+10200000 - ...........
+10440000 - INFO. Writing to addr group starting w/ 0x1001C118 (STICKY_DATA_VAULT_ENTRY_5[0..11]), reporting only for index 0
+10780000 - INFO. For addr 0x1001C118, attempting to write 0x5C7DD9B9, read back 0x5C7DD9B9
+11057000 - ...........
+11298000 - INFO. Writing to addr group starting w/ 0x1001C148 (STICKY_DATA_VAULT_ENTRY_6[0..11]), reporting only for index 0
+11638000 - INFO. For addr 0x1001C148, attempting to write 0x6D8EB947, read back 0x6D8EB947
+11921000 - ...........
+12161000 - INFO. Writing to addr group starting w/ 0x1001C178 (STICKY_DATA_VAULT_ENTRY_7[0..11]), reporting only for index 0
+12498000 - INFO. For addr 0x1001C178, attempting to write 0x64B86037, read back 0x64B86037
+12773000 - ...........
+13011000 - INFO. Writing to addr group starting w/ 0x1001C1A8 (STICKY_DATA_VAULT_ENTRY_8[0..11]), reporting only for index 0
+13346000 - INFO. For addr 0x1001C1A8, attempting to write 0x6B0F4FC1, read back 0x6B0F4FC1
+13620000 - ...........
+13860000 - INFO. Writing to addr group starting w/ 0x1001C1D8 (STICKY_DATA_VAULT_ENTRY_9[0..11]), reporting only for index 0
+14195000 - INFO. For addr 0x1001C1D8, attempting to write 0x351F2E1E, read back 0x351F2E1E
+14471000 - ...........
+14735000 - INFO. Writing to addr group starting w/ 0x1001C230 (DATA_VAULT_ENTRY_0[0..11]), reporting only for index 0
+15066000 - INFO. For addr 0x1001C230, attempting to write 0x28403CEA, read back 0x28403CEA
+15346000 - ...........
+15573000 - INFO. Writing to addr group starting w/ 0x1001C260 (DATA_VAULT_ENTRY_1[0..11]), reporting only for index 0
+15900000 - INFO. For addr 0x1001C260, attempting to write 0x768D90FC, read back 0x768D90FC
+16170000 - ...........
+16398000 - INFO. Writing to addr group starting w/ 0x1001C290 (DATA_VAULT_ENTRY_2[0..11]), reporting only for index 0
+16726000 - INFO. For addr 0x1001C290, attempting to write 0xFD42A0F, read back 0xFD42A0F
+16998000 - ...........
+17227000 - INFO. Writing to addr group starting w/ 0x1001C2C0 (DATA_VAULT_ENTRY_3[0..11]), reporting only for index 0
+17557000 - INFO. For addr 0x1001C2C0, attempting to write 0x7A75CCAF, read back 0x7A75CCAF
+17843000 - ...........
+18074000 - INFO. Writing to addr group starting w/ 0x1001C2F0 (DATA_VAULT_ENTRY_4[0..11]), reporting only for index 0
+18402000 - INFO. For addr 0x1001C2F0, attempting to write 0xB9EEF55, read back 0xB9EEF55
+18679000 - ...........
+18907000 - INFO. Writing to addr group starting w/ 0x1001C320 (DATA_VAULT_ENTRY_5[0..11]), reporting only for index 0
+19236000 - INFO. For addr 0x1001C320, attempting to write 0x1E408500, read back 0x1E408500
+19516000 - ...........
+19747000 - INFO. Writing to addr group starting w/ 0x1001C350 (DATA_VAULT_ENTRY_6[0..11]), reporting only for index 0
+20071000 - INFO. For addr 0x1001C350, attempting to write 0x741438C3, read back 0x741438C3
+20346000 - ...........
+20574000 - INFO. Writing to addr group starting w/ 0x1001C380 (DATA_VAULT_ENTRY_7[0..11]), reporting only for index 0
+20900000 - INFO. For addr 0x1001C380, attempting to write 0x709DAF77, read back 0x709DAF77
+21176000 - ...........
+21403000 - INFO. Writing to addr group starting w/ 0x1001C3B0 (DATA_VAULT_ENTRY_8[0..11]), reporting only for index 0
+21730000 - INFO. For addr 0x1001C3B0, attempting to write 0x14FCEBBE, read back 0x14FCEBBE
+22003000 - ...........
+22231000 - INFO. Writing to addr group starting w/ 0x1001C3E0 (DATA_VAULT_ENTRY_9[0..11]), reporting only for index 0
+22559000 - INFO. For addr 0x1001C3E0, attempting to write 0x4CC06D76, read back 0x4CC06D76
+22838000 - ...........
+23118000 - INFO. Writing to addr group starting w/ 0x1001C438 (LOCKABLE_SCRATCHREG[0..9]), reporting only for index 0
+23446000 - INFO. For addr 0x1001C438, attempting to write 0x257B6D70, read back 0x257B6D70
+23720000 - .........
+23930000 - INFO. Writing to addr group starting w/ 0x1001C460 (NONSTICKY_GENERIC_SCRATCHREG[0..7]), reporting only for index 0
+24271000 - INFO. For addr 0x1001C460, attempting to write 0x6553A9AD, read back 0x6553A9AD
+24541000 - .......
+24777000 - INFO. Writing to addr group starting w/ 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0..7]), reporting only for index 0
+25109000 - INFO. For addr 0x1001C4A0, attempting to write 0x469E6304, read back 0x469E6304
+25384000 - .......
+25495000 - 
+25496000 - 
+25498000 - -- Performing WR followed by RD to control (non-data) registers only; printing once per prefix --
+25635000 - 
+25695000 - INFO. Writing to addr group starting w/ 0x1001C000 (STICKYDATAVAULTCTRL[0..9]), reporting only for index 0
+26018000 - INFO. For addr 0x1001C000, attempting to write 0xBC1CCA4, read back 0x0
+26280000 - .........
+26978000 - INFO. Writing to addr group starting w/ 0x1001C208 (DATAVAULTCTRL[0..9]), reporting only for index 0
+27293000 - INFO. For addr 0x1001C208, attempting to write 0x355ECE02, read back 0x0
+27562000 - .........
+28174000 - INFO. Writing to addr group starting w/ 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL[0..9]), reporting only for index 0
+28504000 - INFO. For addr 0x1001C410, attempting to write 0x987967B, read back 0x1
+28771000 - .........
+29084000 - INFO. Writing to addr group starting w/ 0x1001C480 (STICKY_LOCKABLE_SCRATCHREG_CTRL[0..7]), reporting only for index 0
+29426000 - INFO. For addr 0x1001C480, attempting to write 0x1AC7BA3, read back 0x1
+29698000 - .......
+29871000 - 
+29873000 - 
+29876000 - -- Done w/test; 0 errors found -- 
+* TESTCASE PASSED
+
+Finished : minstret = 90697, mcycle = 299659
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

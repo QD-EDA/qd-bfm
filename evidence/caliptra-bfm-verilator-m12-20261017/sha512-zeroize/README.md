@@ -1,0 +1,9 @@
+# M12 SHA512 ZEROIZE assertion guard
+
+The M11 table has four `ERR_SHA_BLOCK_NOT_STABLE` failures. The archived trace for `smoke_test_sha512` confirms that software ZEROIZE asserts the SHA block hardware-clear input while `ready_reg` falls, then the block is intentionally cleared. The pinned assertion disables only for reset or `ready_reg`, so it checks stability on the clear transition. The trace and source explanation are in the [root-cause record](../../caliptra-bfm-verilator-m10b-20261016/diagnostics/sha512-assert-edge-trace-20261016-03/root-cause.md); only this one row has a focused trace.
+
+The build-time candidate changes only the `ERR_SHA_BLOCK_NOT_STABLE` disable condition, adding `zeroize_reg` and its previous sampled value. That exempts the ZEROIZE clear edge and the following sampled update; other block-stability checks remain active. The generator pins the SHA512 source hash, requires one exact assertion match, verifies that reversing the change reproduces the source byte-for-byte, and replaces only the SHA512 filelist entry. Functional RTL, firmware, and pass criteria remain unchanged.
+
+The four affected rows are in `affected-selection.tsv`. Build job 2125 completed; one-row gate 2126 passed `smoke_test_sha512` at mcycle 63,435 with `sim_scan.bad=0`. Array 2136 completed the other three rows: `smoke_test_sha512_restore` PASS at mcycle 73,221, while `pv_hash_and_sign` and `pv_hash_zeroize` FAIL at `ERR_SHA_BLOCK_NOT_STABLE`. The latter two have no independent ZEROIZE traces, so the gate result does not justify suppressing their assertions. Checksummed run evidence is in `generated/array-2136/`.
+
+The build and gate scripts are `build.sbatch` and `run-gate.sbatch`. Both passed `bash -n`; the generator passed `py_compile`. The build pins the source hash, SHA overlay path and hash, AXI overlay hash, and assertion-enabled Verilator flags.

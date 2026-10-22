@@ -1,0 +1,4 @@
+PASS: 108 unique rows; M18 {'BLOCKED': 31, 'PASS': 49, 'TIMEOUT': 19, 'FAIL': 9} ; M19 {'BLOCKED': 31, 'PASS': 50, 'TIMEOUT': 18, 'FAIL': 5, 'PASS_OVERLAY': 4}
+PASS: README root-cause tables cover 31 BLOCKED and 19 inherited TIMEOUT rows exactly once.
+PASS: all M19 rows have class/evidence; 110 evidence paths resolve; 84 archive references across 54 unique archives have valid SHA-256 sidecars; 82 archive members exist.
+Cleanup: 177 byte-identical extracted duplicates (48,873,668 bytes) removed only after verification against 12 sidecar-verified archives; unmatched/symlink entries were kept.

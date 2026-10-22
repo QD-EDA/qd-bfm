@@ -1,0 +1,5 @@
+Host: MacBook-Air.local (Darwin 27.0.0, arm64)
+Python: 3.14.7
+Command: ~/codex-supervisor/localrun 120 sh -c 'python3 -m unittest discover -s dv/caliptra_bfm/uvmf_lite/tests -p test_run_m15_test.py && python3 -m py_compile dv/caliptra_bfm/uvmf_lite/tests/run_m15_test.py dv/caliptra_bfm/uvmf_lite/tests/test_run_m15_test.py'
+Result: exit 0; 46 tests passed; py_compile passed; git diff --check passed.
+Wall time: 0.36 s; peak RSS 27,377,664 bytes.

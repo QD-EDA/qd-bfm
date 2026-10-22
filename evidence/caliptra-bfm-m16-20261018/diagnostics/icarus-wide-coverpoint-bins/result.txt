@@ -1,0 +1,4 @@
+narrow_compile_exit=0
+narrow_run_exit=0
+wide_compile_exit=1
+wide_run_exit=99

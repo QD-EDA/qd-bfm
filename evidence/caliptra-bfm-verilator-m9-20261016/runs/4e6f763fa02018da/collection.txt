@@ -1,0 +1,6 @@
+Array task: 1430_56
+Test: smoke_test_hw_config
+Remote result: /home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/results/4e6f763fa02018da
+Remote state: terminal FIRMWARE_BUILD_FAIL; wrapper completed at 2026-10-15 22:31 MDT.
+The remote FILE-SHA256SUMS manifest verifies locally. Matching remote/local SHA-256 values: resource `c94187ee06365272d5baf891acff9fc92482bb52b3e1c37716db15b3b317aa33`, task-complete `91211a6151e8803bb86d2c0d2882719981b41c3721a42499101119e00f741408`, Slurm log `a18e7246b2b1d535216a2a28a5d7648a63ce15fbc11a471282812a805751c0e7`.
+The intern helper identified the linker symbol correctly but incorrectly said the handler was absent. Verification found the inline definition in the pinned smoke_test_hw_config/caliptra_isr.h; nm showed an unresolved reference in the shared caliptra_isr.o, and the linker failed before simulation.

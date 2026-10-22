@@ -1,0 +1,296 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+6403000 - 
+6405000 - Using random seed = 1
+6475000 - 
+6487000 - ----------------------------------
+6538000 -  Run HMAC 384 to generate a key in KV !!
+6598000 - ----------------------------------
+6991000 - Load Key data to HMAC
+7119000 - HMAC flow in progress...
+7187000 - Received HMAC notif/err intr with status = 1/ 0
+7353000 - Load TAG data from HMAC
+7426000 - HMAC zeroize flow.
+7572000 - Try to Overwrite Key data in HMAC384
+7725000 - HMAC flow in progress...
+7794000 - Received HMAC notif/err intr with status = 1/ 0
+7958000 - Load TAG data from HMAC to KV
+8011000 - HMAC zeroize flow.
+8041000 - ----------------------------------
+8092000 -  Reseed AES entropy interface 
+8137000 - ----------------------------------
+8193000 - ----------------------------------
+8243000 -  Run AES using key in KV
+8279000 - ----------------------------------
+8663000 - Key Stored in KV ID 5
+9856000 - Test Case 1 - ECB
+10730000 - Configuring AES for little endian mode
+10791000 - Reading AES Key from the Key Vault
+10860000 - Write AES CTRL with value 0xC05
+10984000 - Write AES IV
+11027000 - Write AES Input Data Block 0
+11189000 - Write AES Input Data Block 1
+11356000 - Write AES Input Data Block 2
+11527000 - Write AES Input Data Block 3
+11695000 - Write AES Input Data Block 4
+11856000 - AES Operation Complete
+11926000 - Configuring AES for little endian mode
+11988000 - Reading AES Key from the Key Vault
+12056000 - Write AES CTRL with value 0xC06
+12179000 - Write AES IV
+12223000 - Write AES Input Data Block 0
+12395000 - Write AES Input Data Block 1
+12559000 - Write AES Input Data Block 2
+12723000 - Write AES Input Data Block 3
+12889000 - Write AES Input Data Block 4
+13046000 - AES Operation Complete
+13084000 - Test Case 2 - CBC
+13985000 - Configuring AES for little endian mode
+14047000 - Reading AES Key from the Key Vault
+14116000 - Write AES CTRL with value 0xC09
+14242000 - Write AES IV
+14285000 - Write AES Input Data Block 0
+14449000 - Write AES Input Data Block 1
+14614000 - Write AES Input Data Block 2
+14782000 - Write AES Input Data Block 3
+14950000 - Write AES Input Data Block 4
+15110000 - AES Operation Complete
+15182000 - Configuring AES for little endian mode
+15243000 - Reading AES Key from the Key Vault
+15313000 - Write AES CTRL with value 0xC0A
+15437000 - Write AES IV
+15480000 - Write AES Input Data Block 0
+15651000 - Write AES Input Data Block 1
+15817000 - Write AES Input Data Block 2
+15981000 - Write AES Input Data Block 3
+16147000 - Write AES Input Data Block 4
+16304000 - AES Operation Complete
+17148000 - Test Case 3 - CFB
+18036000 - Configuring AES for little endian mode
+18097000 - Reading AES Key from the Key Vault
+18166000 - Write AES CTRL with value 0xC11
+18292000 - Write AES IV
+18335000 - Write AES Input Data Block 0
+18499000 - Write AES Input Data Block 1
+18664000 - Write AES Input Data Block 2
+18830000 - Write AES Input Data Block 3
+18999000 - Write AES Input Data Block 4
+19167000 - Write AES Input Data Block 5
+19334000 - AES Operation Complete
+19407000 - Configuring AES for little endian mode
+19469000 - Reading AES Key from the Key Vault
+19537000 - Write AES CTRL with value 0xC12
+19663000 - Write AES IV
+19707000 - Write AES Input Data Block 0
+19873000 - Write AES Input Data Block 1
+20040000 - Write AES Input Data Block 2
+20207000 - Write AES Input Data Block 3
+20374000 - Write AES Input Data Block 4
+20541000 - Write AES Input Data Block 5
+20710000 - AES Operation Complete
+20750000 - Test Case 4 - OFB
+21629000 - Configuring AES for little endian mode
+21691000 - Reading AES Key from the Key Vault
+21759000 - Write AES CTRL with value 0xC21
+21886000 - Write AES IV
+21929000 - Write AES Input Data Block 0
+22096000 - Write AES Input Data Block 1
+22263000 - Write AES Input Data Block 2
+22431000 - Write AES Input Data Block 3
+22599000 - Write AES Input Data Block 4
+22768000 - Write AES Input Data Block 5
+22936000 - AES Operation Complete
+23010000 - Configuring AES for little endian mode
+23072000 - Reading AES Key from the Key Vault
+23140000 - Write AES CTRL with value 0xC22
+23266000 - Write AES IV
+23310000 - Write AES Input Data Block 0
+23476000 - Write AES Input Data Block 1
+23642000 - Write AES Input Data Block 2
+23809000 - Write AES Input Data Block 3
+23976000 - Write AES Input Data Block 4
+24143000 - Write AES Input Data Block 5
+24308000 - AES Operation Complete
+24346000 - Test Case 5 - CTR
+25231000 - Configuring AES for little endian mode
+25292000 - Reading AES Key from the Key Vault
+25360000 - Write AES CTRL with value 0xC41
+25487000 - Write AES IV
+25530000 - Write AES Input Data Block 0
+25697000 - Write AES Input Data Block 1
+25862000 - Write AES Input Data Block 2
+26030000 - Write AES Input Data Block 3
+26198000 - Write AES Input Data Block 4
+26367000 - Write AES Input Data Block 5
+26535000 - AES Operation Complete
+26605000 - Configuring AES for little endian mode
+26667000 - Reading AES Key from the Key Vault
+26735000 - Write AES CTRL with value 0xC42
+26862000 - Write AES IV
+26905000 - Write AES Input Data Block 0
+27071000 - Write AES Input Data Block 1
+27237000 - Write AES Input Data Block 2
+27404000 - Write AES Input Data Block 3
+27571000 - Write AES Input Data Block 4
+27738000 - Write AES Input Data Block 5
+27903000 - AES Operation Complete
+27941000 - Test Case 6 - GCM 256
+29943000 - Configuring AES for little endian mode
+30005000 - Reading AES Key from the Key Vault
+30073000 - Write AES CTRL with value 0xC81
+30203000 - Write AES IV
+30254000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+30376000 - Wait for INPUT_READY
+30415000 - Write AES AAD Block 0
+30508000 - Wait for INPUT_READY
+30548000 - Write AES AAD Block 1
+30641000 - Wait for INPUT_READY
+30680000 - Write AES AAD Block 2
+30772000 - Wait for INPUT_READY
+30811000 - Write AES AAD Block 3
+30903000 - Wait for INPUT_READY
+30943000 - Write AES AAD Block 4
+31046000 - Write GCM_AAD Phase, NUM_BYTES 0xF
+31170000 - Wait for INPUT_READY
+31209000 - Write AES AAD Block 5
+31326000 - Write AES Input Data Block 0
+31495000 - Write AES Input Data Block 1
+31665000 - Write AES Input Data Block 2
+31835000 - Write AES Input Data Block 3
+32003000 - Write AES Input Data Block 4
+32177000 - Write AES Input Data Block 5
+32367000 - Read and Compare GCM TAG
+32417000 - AES Operation Complete
+32491000 - Configuring AES for little endian mode
+32553000 - Reading AES Key from the Key Vault
+32621000 - Write AES CTRL with value 0xC82
+32751000 - Write AES IV
+32802000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+32926000 - Wait for INPUT_READY
+32966000 - Write AES AAD Block 0
+33058000 - Wait for INPUT_READY
+33098000 - Write AES AAD Block 1
+33191000 - Wait for INPUT_READY
+33230000 - Write AES AAD Block 2
+33322000 - Wait for INPUT_READY
+33362000 - Write AES AAD Block 3
+33453000 - Wait for INPUT_READY
+33493000 - Write AES AAD Block 4
+33598000 - Write GCM_AAD Phase, NUM_BYTES 0xF
+33720000 - Wait for INPUT_READY
+33760000 - Write AES AAD Block 5
+33875000 - Write AES Input Data Block 0
+34045000 - Write AES Input Data Block 1
+34213000 - Write AES Input Data Block 2
+34381000 - Write AES Input Data Block 3
+34549000 - Write AES Input Data Block 4
+34723000 - Write AES Input Data Block 5
+34914000 - Read and Compare GCM TAG
+34966000 - AES Operation Complete
+35005000 - Test Case 7 - GCM 128
+36205000 - Configuring AES for little endian mode
+36267000 - Reading AES Key from the Key Vault
+36335000 - Write AES CTRL with value 0x981
+36467000 - Write AES IV
+36515000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+36638000 - Wait for INPUT_READY
+36678000 - Write AES AAD Block 0
+36772000 - Wait for INPUT_READY
+36812000 - Write AES AAD Block 1
+36905000 - Wait for INPUT_READY
+36944000 - Write AES AAD Block 2
+37036000 - Wait for INPUT_READY
+37076000 - Write AES AAD Block 3
+37167000 - Wait for INPUT_READY
+37207000 - Write AES AAD Block 4
+37310000 - Write GCM_AAD Phase, NUM_BYTES 0xF
+37433000 - Wait for INPUT_READY
+37472000 - Write AES AAD Block 5
+37588000 - Write AES Input Data Block 0
+37760000 - Write AES Input Data Block 1
+37928000 - Write AES Input Data Block 2
+38094000 - Write AES Input Data Block 3
+38259000 - Write AES Input Data Block 4
+38430000 - Write AES Input Data Block 5
+38620000 - Read and Compare GCM TAG
+38670000 - AES Operation Complete
+38746000 - Configuring AES for little endian mode
+38807000 - Reading AES Key from the Key Vault
+38876000 - Write AES CTRL with value 0x982
+39007000 - Write AES IV
+39055000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+39176000 - Wait for INPUT_READY
+39216000 - Write AES AAD Block 0
+39309000 - Wait for INPUT_READY
+39348000 - Write AES AAD Block 1
+39441000 - Wait for INPUT_READY
+39481000 - Write AES AAD Block 2
+39572000 - Wait for INPUT_READY
+39612000 - Write AES AAD Block 3
+39704000 - Wait for INPUT_READY
+39743000 - Write AES AAD Block 4
+39846000 - Write GCM_AAD Phase, NUM_BYTES 0xF
+39968000 - Wait for INPUT_READY
+40007000 - Write AES AAD Block 5
+40123000 - Write AES Input Data Block 0
+40289000 - Write AES Input Data Block 1
+40458000 - Write AES Input Data Block 2
+40625000 - Write AES Input Data Block 3
+40792000 - Write AES Input Data Block 4
+40965000 - Write AES Input Data Block 5
+41154000 - Read and Compare GCM TAG
+41203000 - AES Operation Complete
+* TESTCASE PASSED
+
+Finished : minstret = 137981, mcycle = 412154
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

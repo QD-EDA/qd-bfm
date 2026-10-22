@@ -1,0 +1,178 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Breakpoint not set; skipping BOOTFSM_GO step
+
+CLP: ROM Flow in progress...
+
+5718000 - -------------------------------------------------------------------
+5816000 -  Datavault (Mini) Smoke Test for checking Lock & Basic Controls
+5908000 - -------------------------------------------------------------------
+6013000 - 
+6016000 - INFO. Using random seed = 17
+6179000 - 
+6182000 - 
+6185000 - ** Working on new Control Group Prefix LOCKABLE_SCRATCHREG_CTRL to Start Locking Data Registers **
+6433000 - 
+6460000 - INFO. handle_1d_locking(). Number of items in datset = 2
+6635000 - 
+6636000 - --next set--
+6673000 - LOCKABLE_SCRATCHREG_CTRL[0] -LOCKS-> LOCKABLE_SCRATCHREG[0]
+6849000 - INFO. (Single Write) For addr 0x1001C438 (LOCKABLE_SCRATCHREG[0]), attempting to write 0x4742F8A9, read back 0x4742F8A9
+7249000 - INFO. (Single Write) For addr 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL[0]), attempting to write 0x1, read back 0x1
+7637000 - INFO. (Single Write) For addr 0x1001C438 (LOCKABLE_SCRATCHREG[0]), attempting to write 0x29CD88B5, read back 0x4742F8A9
+8026000 - checking all dv_reg indices for unlocked registers
+8225000 - INFO. (Single Write) For addr 0x1001C030 (STICKY_DATA_VAULT_ENTRY_0[2]), attempting to write 0x2A06FFCB, read back 0x2A06FFCB
+8697000 - INFO. (Single Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x73A43A90, read back 0x73A43A90
+9194000 - INFO. (Single Write) For addr 0x1001C238 (DATA_VAULT_ENTRY_0[2]), attempting to write 0x6F199842, read back 0x6F199842
+9643000 - INFO. (Single Write) For addr 0x1001C268 (DATA_VAULT_ENTRY_1[2]), attempting to write 0x2CF61749, read back 0x2CF61749
+10157000 - INFO. (Single Write) For addr 0x1001C43C (LOCKABLE_SCRATCHREG[1]), attempting to write 0x8E9298D, read back 0x8E9298D
+10672000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x448C532, read back 0x448C532
+11084000 - INFO. (Single Write) For addr 0x1001C410 (LOCKABLE_SCRATCHREG_CTRL[0]), attempting to write 0x0, read back 0x1
+11449000 - 
+11450000 - --next set--
+11487000 - LOCKABLE_SCRATCHREG_CTRL[1] -LOCKS-> LOCKABLE_SCRATCHREG[1]
+11661000 - INFO. (Single Write) For addr 0x1001C43C (LOCKABLE_SCRATCHREG[1]), attempting to write 0x70389260, read back 0x70389260
+12054000 - INFO. (Single Write) For addr 0x1001C414 (LOCKABLE_SCRATCHREG_CTRL[1]), attempting to write 0x1, read back 0x1
+12438000 - INFO. (Single Write) For addr 0x1001C43C (LOCKABLE_SCRATCHREG[1]), attempting to write 0x5AA2F440, read back 0x70389260
+12827000 - checking all dv_reg indices for unlocked registers
+13026000 - INFO. (Single Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x382AC149, read back 0x382AC149
+13499000 - INFO. (Single Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x1EE6D2C6, read back 0x1EE6D2C6
+13992000 - INFO. (Single Write) For addr 0x1001C230 (DATA_VAULT_ENTRY_0[0]), attempting to write 0xA98C781, read back 0xA98C781
+14443000 - INFO. (Single Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x29C75761, read back 0x29C75761
+15054000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x145E6D2D, read back 0x145E6D2D
+15456000 - INFO. (Single Write) For addr 0x1001C414 (LOCKABLE_SCRATCHREG_CTRL[1]), attempting to write 0x0, read back 0x1
+15831000 - 
+15833000 - 
+15836000 - ** Working on new Control Group Prefix STICKYDATAVAULTCTRL to Start Locking Data Registers **
+16073000 - 
+16101000 - INFO. handle_2d_locking(). Number of items in datset = 2
+16283000 - 
+16284000 - --next set--
+16321000 - STICKYDATAVAULTCTRL[0] -LOCKS-> STICKY_DATA_VAULT_ENTRY_0[0..2]
+16507000 - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0x321BC819, read back 0x321BC819
+16913000 - ..
+16959000 - INFO. (Single Write) For addr 0x1001C000 (STICKYDATAVAULTCTRL[0]), attempting to write 0x1, read back 0x1
+17342000 - INFO. (Group Write) For addr 0x1001C028 (STICKY_DATA_VAULT_ENTRY_0[0]), attempting to write 0xBDBA2A0, read back 0x321BC819
+17740000 - ..
+17779000 - checking all dv_reg indices for unlocked registers
+18029000 - INFO. (Single Write) For addr 0x1001C060 (STICKY_DATA_VAULT_ENTRY_1[2]), attempting to write 0x2305FD27, read back 0x2305FD27
+18524000 - INFO. (Single Write) For addr 0x1001C230 (DATA_VAULT_ENTRY_0[0]), attempting to write 0x1C85F589, read back 0x1C85F589
+18976000 - INFO. (Single Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x1BD06775, read back 0x1BD06775
+19583000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x110FE840, read back 0x110FE840
+19997000 - INFO. (Single Write) For addr 0x1001C000 (STICKYDATAVAULTCTRL[0]), attempting to write 0x0, read back 0x1
+20354000 - 
+20355000 - --next set--
+20392000 - STICKYDATAVAULTCTRL[1] -LOCKS-> STICKY_DATA_VAULT_ENTRY_1[0..2]
+20581000 - INFO. (Group Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x706FC94, read back 0x706FC94
+20982000 - ..
+21029000 - INFO. (Single Write) For addr 0x1001C004 (STICKYDATAVAULTCTRL[1]), attempting to write 0x1, read back 0x1
+21417000 - INFO. (Group Write) For addr 0x1001C058 (STICKY_DATA_VAULT_ENTRY_1[0]), attempting to write 0x3E86E8A6, read back 0x706FC94
+21818000 - ..
+21855000 - checking all dv_reg indices for unlocked registers
+22177000 - INFO. (Single Write) For addr 0x1001C234 (DATA_VAULT_ENTRY_0[1]), attempting to write 0x23C24F71, read back 0x23C24F71
+22633000 - INFO. (Single Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x7EED89E1, read back 0x7EED89E1
+23247000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x3F586AFF, read back 0x3F586AFF
+23659000 - INFO. (Single Write) For addr 0x1001C004 (STICKYDATAVAULTCTRL[1]), attempting to write 0x0, read back 0x1
+24031000 - 
+24034000 - 
+24036000 - ** Working on new Control Group Prefix DATAVAULTCTRL to Start Locking Data Registers **
+24265000 - 
+24292000 - INFO. handle_2d_locking(). Number of items in datset = 2
+24474000 - 
+24475000 - --next set--
+24512000 - DATAVAULTCTRL[0] -LOCKS-> DATA_VAULT_ENTRY_0[0..2]
+24680000 - INFO. (Group Write) For addr 0x1001C230 (DATA_VAULT_ENTRY_0[0]), attempting to write 0x3BF4CBB6, read back 0x3BF4CBB6
+25075000 - ..
+25122000 - INFO. (Single Write) For addr 0x1001C208 (DATAVAULTCTRL[0]), attempting to write 0x1, read back 0x1
+25502000 - INFO. (Group Write) For addr 0x1001C230 (DATA_VAULT_ENTRY_0[0]), attempting to write 0x5C7DD9B9, read back 0x3BF4CBB6
+25895000 - ..
+25933000 - checking all dv_reg indices for unlocked registers
+26292000 - INFO. (Single Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x282141F1, read back 0x282141F1
+26908000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x74636F3B, read back 0x74636F3B
+27315000 - INFO. (Single Write) For addr 0x1001C208 (DATAVAULTCTRL[0]), attempting to write 0x0, read back 0x1
+27661000 - 
+27662000 - --next set--
+27699000 - DATAVAULTCTRL[1] -LOCKS-> DATA_VAULT_ENTRY_1[0..2]
+27867000 - INFO. (Group Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x31ED3F2D, read back 0x31ED3F2D
+28262000 - ..
+28309000 - INFO. (Single Write) For addr 0x1001C20C (DATAVAULTCTRL[1]), attempting to write 0x1, read back 0x1
+28689000 - INFO. (Group Write) For addr 0x1001C260 (DATA_VAULT_ENTRY_1[0]), attempting to write 0x45B1B636, read back 0x31ED3F2D
+29086000 - ..
+29123000 - checking all dv_reg indices for unlocked registers
+29679000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x51425552, read back 0x51425552
+30091000 - INFO. (Single Write) For addr 0x1001C20C (DATAVAULTCTRL[1]), attempting to write 0x0, read back 0x1
+30452000 - 
+30455000 - 
+30458000 - ** Working on new Control Group Prefix STICKY_LOCKABLE_SCRATCHREGCTRL to Start Locking Data Registers **
+30710000 - 
+30739000 - INFO. handle_1d_locking(). Number of items in datset = 2
+30918000 - 
+30919000 - --next set--
+30956000 - STICKY_LOCKABLE_SCRATCHREGCTRL[0] -LOCKS-> STICKY_LOCKABLE_SCRATCHREG[0]
+31148000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x6A683292, read back 0x6A683292
+31554000 - INFO. (Single Write) For addr 0x1001C480 (STICKY_LOCKABLE_SCRATCHREGCTRL[0]), attempting to write 0x1, read back 0x1
+31945000 - INFO. (Single Write) For addr 0x1001C4A0 (STICKY_LOCKABLE_SCRATCHREG[0]), attempting to write 0x6E0E8D75, read back 0x6A683292
+32343000 - checking all dv_reg indices for unlocked registers
+32910000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x1C330131, read back 0x1C330131
+33315000 - INFO. (Single Write) For addr 0x1001C480 (STICKY_LOCKABLE_SCRATCHREGCTRL[0]), attempting to write 0x0, read back 0x1
+33682000 - 
+33683000 - --next set--
+33720000 - STICKY_LOCKABLE_SCRATCHREGCTRL[1] -LOCKS-> STICKY_LOCKABLE_SCRATCHREG[1]
+33912000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x3AC42F62, read back 0x3AC42F62
+34313000 - INFO. (Single Write) For addr 0x1001C484 (STICKY_LOCKABLE_SCRATCHREGCTRL[1]), attempting to write 0x1, read back 0x1
+34708000 - INFO. (Single Write) For addr 0x1001C4A4 (STICKY_LOCKABLE_SCRATCHREG[1]), attempting to write 0x2F475269, read back 0x3AC42F62
+35111000 - checking all dv_reg indices for unlocked registers
+35653000 - INFO. (Single Write) For addr 0x1001C484 (STICKY_LOCKABLE_SCRATCHREGCTRL[1]), attempting to write 0x0, read back 0x1
+36034000 - 
+36037000 - 
+36040000 - -- Done w/test; 0 errors found -- 
+* TESTCASE PASSED
+
+Finished : minstret = 110386, mcycle = 361262
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

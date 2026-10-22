@@ -1,0 +1,2 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/decompose/rtl/decompose.sv:36: Include file abr_prim_assert.sv not found
+Preprocessor failed with 1 errors.

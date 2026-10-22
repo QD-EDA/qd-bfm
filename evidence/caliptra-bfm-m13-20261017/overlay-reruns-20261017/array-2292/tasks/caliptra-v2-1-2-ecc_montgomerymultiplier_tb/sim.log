@@ -1,0 +1,51 @@
+   -= Testbench for mm started =-
+    ==============================
+
+Read 5 test vectors from mm_test_vectors_5_key_16_word_4.hex
+*** Toggle reset.
+
+*** TC 0 mm test started.
+Computing product of:
+0x13
+0xd79
+mod 0xfffb
+
+*** TC 0 successful.
+
+*** TC 1 mm test started.
+Computing product of:
+0x15
+0xff
+mod 0xfff1
+
+*** TC 1 successful.
+
+*** TC 2 mm test started.
+Computing product of:
+0x26
+0xe509
+mod 0xfffb
+
+*** TC 2 successful.
+
+*** TC 3 mm test started.
+Computing product of:
+0xc15f
+0x5445
+mod 0xfff1
+
+*** TC 3 successful.
+
+*** TC 4 mm test started.
+Computing product of:
+0xbfff
+0x2fff
+mod 0xfff1
+
+*** TC 4 successful.
+
+*** All 05 test cases completed successfully
+* TESTCASE PASSED
+
+*** mm simulation done. ***
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/ecc/tb/ecc_montgomerymultiplier_tb.sv:334: $finish called at 174 (1s)

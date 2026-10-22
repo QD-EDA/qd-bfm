@@ -1,0 +1,9 @@
+host=DAN-DESKTOP
+2026-10-17T15:36:25-06:00
+2196_1 RUNNING 1:17:59 1
+hardcoded_vector_exists=no
+staged_matching_vectors=available_related_vectors=sim_log=2026-10-17 14:18:27.235054381 -0600 bytes=6588
+result_exists=no
+vvp_process=1862089  0.0    01:17:58 /usr/bin/time -v -o /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01/tasks/caliptra-v2-1-2-doe_cbc_tb/sim.resource timeout --signal=TERM --kill-after=30s 6900s /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/vvp -n /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01/tasks/caliptra-v2-1-2-doe_cbc_tb/doe_cbc_tb.vvp
+1862090  0.0    01:17:58 timeout --signal=TERM --kill-after=30s 6900s /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/vvp -n /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01/tasks/caliptra-v2-1-2-doe_cbc_tb/doe_cbc_tb.vvp
+1862092 99.9    01:17:58 /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/bin/vvp -n /home/dsell/slurm-runs/caliptra-bfm/a2/m13-env-main-9b5fad2-20261017-01/tasks/caliptra-v2-1-2-doe_cbc_tb/doe_cbc_tb.vvp

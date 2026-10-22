@@ -1,0 +1,1 @@
+PASS: runpy hook rewrote the compile filelist to a hash-guarded trace copy; queue displays and strobe-safe settled depth were written.

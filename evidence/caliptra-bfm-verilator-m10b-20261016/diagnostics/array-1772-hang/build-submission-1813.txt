@@ -1,0 +1,9 @@
+Slurm job: 1813
+Host: DAN-DESKTOP
+Run: /home/dsell/slurm-runs/caliptra-bfm/a2/m10b-axi-if-overlay-20261016-08
+Command: sbatch build-model-overlay-08.sbatch
+Purpose: build the uninstrumented AW/W/B overlay for a single-row sanity run and the M10b firmware array.
+Requested resources: 4 CPUs, 4 GiB, 2 h
+Pinned axi_if.sv SHA-256: e03bd7a7654eb9c31bd532861b94d59c876810aa9798f9f67f7df2a5a3f5495c
+Expected uninstrumented overlay SHA-256: e8fec740da3fb9ffcd72fd7eb72c63480d30bd4de531e390772138dcf9ad6d1a
+Selection: 103 firmware rows (includes all six M8 cases; no UVMF/authored rows)

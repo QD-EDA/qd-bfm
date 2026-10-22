@@ -1,0 +1,162 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+6091000 - ----------------------------------
+6139000 - Smoke Test AXI DMA AES - Variable Length Test Cases
+6212000 - ----------------------------------
+6283000 - 
+6285000 - ========================================
+6351000 - Running Test 1 of 3
+6421000 - ========================================
+6494000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+6655000 - Random length: 8 dwords (32 bytes)
+6817000 - 
+6819000 - ----------------------------------
+6882000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+7013000 - ----------------------------------
+7070000 - Configuring AES for GCM mode
+7119000 - Using test vector 7 for 8 dwords (32 bytes)
+7753000 - String length is 64.
+8096000 - String length is 64.
+8841000 - Plaintext: d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a72
+9036000 - Ciphertext: 522dc1f099567d07f47f37a32a84427d643a8cdcbfe5c0c97598a2bd2555d1aa
+9233000 - Tag: cf9bffa9bd334d8240c868342b36b506
+9354000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+9518000 - Configuring AES for little endian mode
+9588000 - Write AES CTRL with value 0x481
+9681000 - Load Key data to AES
+9742000 - Write AES IV
+9790000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+9885000 - Wait for INPUT_READY
+9924000 - Write AES AAD Block 0
+10013000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+10106000 - Wait for INPUT_READY
+10145000 - Write AES AAD Block 1
+10232000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+10559000 - Read and Compare GCM TAG
+10610000 - AES Operation Complete
+10656000 - Test 1 PASSED
+10715000 - 
+10719000 - ========================================
+10780000 - Running Test 2 of 3
+10854000 - ========================================
+10929000 - Test: AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+11088000 - Random length: 2 dwords (8 bytes)
+11249000 - 
+11253000 - ----------------------------------
+11317000 - AXI DMA Encrypt GCM image via AXI DMA (Little Endian)
+11448000 - ----------------------------------
+11504000 - Configuring AES for GCM mode
+11552000 - Using test vector 1 for 2 dwords (8 bytes)
+12174000 - String length is 16.
+12332000 - String length is 16.
+12912000 - Plaintext: d9313225f88406e5
+12991000 - Ciphertext: 522dc1f099567d07
+13073000 - Tag: 414ec2648b29e3dbc203cd1adce7da60
+13194000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+13344000 - Configuring AES for little endian mode
+13413000 - Write AES CTRL with value 0x481
+13507000 - Load Key data to AES
+13567000 - Write AES IV
+13615000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+13711000 - Wait for INPUT_READY
+13750000 - Write AES AAD Block 0
+13839000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+13933000 - Wait for INPUT_READY
+13972000 - Write AES AAD Block 1
+14060000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+14347000 - Read and Compare GCM TAG
+14400000 - AES Operation Complete
+14447000 - Test 2 PASSED
+14504000 - 
+14508000 - ========================================
+14570000 - Running Test 3 of 3
+14642000 - ========================================
+14717000 - Test: AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+14878000 - Random length: 4 dwords (16 bytes)
+15042000 - 
+15045000 - ----------------------------------
+15108000 - AXI DMA Decrypt GCM image via AXI DMA (Little Endian)
+15238000 - ----------------------------------
+15296000 - Configuring AES for GCM mode
+15344000 - Using test vector 3 for 4 dwords (16 bytes)
+15977000 - String length is 32.
+16206000 - String length is 32.
+16845000 - Plaintext: d9313225f88406e5a55909c5aff5269a
+16963000 - Ciphertext: 522dc1f099567d07f47f37a32a84427d
+17084000 - Tag: 5b1cf91b45c59ca2e025e6bec8b6a6ea
+17203000 - Sending image payload via AHB i/f to AXI SRAM AES GCM
+17358000 - Configuring AES for little endian mode
+17428000 - Write AES CTRL with value 0x482
+17525000 - Load Key data to AES
+17585000 - Write AES IV
+17633000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+17731000 - Wait for INPUT_READY
+17770000 - Write AES AAD Block 0
+17860000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+17954000 - Wait for INPUT_READY
+17993000 - Write AES AAD Block 1
+18083000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+18382000 - Read and Compare GCM TAG
+18433000 - AES Operation Complete
+18480000 - Test 3 PASSED
+18533000 - 
+18534000 - ========================================
+18591000 - ALL TESTS COMPLETED SUCCESSFULLY!
+18639000 - ========================================
+* TESTCASE PASSED
+
+Finished : minstret = 61910, mcycle = 186702
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

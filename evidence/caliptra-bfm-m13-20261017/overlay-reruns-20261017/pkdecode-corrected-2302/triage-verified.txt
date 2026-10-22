@@ -1,0 +1,3 @@
+Verified directly from result.txt and sim.log: compiler exit 0, VVP exit 0, two "Test completed" sections, zero output-mismatch lines.
+The testbench emits no explicit pass marker; PASS is based on both complete comparisons and zero mismatch lines.
+The source-base correction is the already documented run-local M7 correction; no simulator issue is indicated.

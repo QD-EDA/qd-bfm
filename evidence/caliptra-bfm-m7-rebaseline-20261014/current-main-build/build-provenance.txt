@@ -1,0 +1,20 @@
+host=DAN-DESKTOP
+started=2026-10-14T13:21:30-06:00
+slurm_job_id=1019
+main_sha=3335fe7ec1495956c8adc5788e9a53b0f1756ecf
+Linux DAN-DESKTOP 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun  5 01:12:21 UTC 2026 x86_64 GNU/Linux
+git version 2.53.0
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+bison (GNU Bison) 3.8.2
+flex 2.6.4
+GNU gperf 3.3
+#define Z3_MAJOR_VERSION   4
+#define Z3_MINOR_VERSION   13
+#define Z3_FULL_VERSION    "4.13.3.0"
+eff8f0f91482d0809aae7aa0ed54cb52ff5ee9b5fe1ed1d2bfa9153c4a2fcfaf  /usr/lib/x86_64-linux-gnu/libz3.so
+1a0dc86f787f73e025a6e521056360afcbe70f2a82cd808132fefc2b4ee95daa  /usr/lib/x86_64-linux-gnu/libffi.so
+## HEAD (no branch)
+78c06547a2a0a29b3dc9dcafae62b75b2ff61544
+finished=2026-10-14T13:28:21-06:00
+exit_code=0
+status=BUILT

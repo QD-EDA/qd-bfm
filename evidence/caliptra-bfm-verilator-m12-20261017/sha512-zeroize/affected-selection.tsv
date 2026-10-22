@@ -1,0 +1,5 @@
+array_index	test_id	testname	case_dir	case_yaml	timeout_s	timeout_basis	c339_outcome	c339_mcycle	c339_elapsed
+0	7acba2db04d9935d	smoke_test_sha512	smoke_test_sha512	smoke_test_sha512/smoke_test_sha512.yml	9335	existing pinned selection	PASS	NA	NA
+1	6ace31cd75b8b396	smoke_test_sha512_restore	smoke_test_sha512_restore	smoke_test_sha512_restore/smoke_test_sha512_restore.yml	21600	21600s maximum from wave-1 policy	UNVERIFIED	NA	NA
+2	87f9e17bcb4bc8d7	pv_hash_and_sign	pv_hash_and_sign	pv_hash_and_sign/pv_hash_and_sign.yml	21600	21600s maximum from wave-1 policy	UNVERIFIED	NA	NA
+3	9160c33b030e9483	pv_hash_zeroize	pv_hash_zeroize	pv_hash_zeroize/pv_hash_zeroize.yml	8153	existing pinned selection	FAIL	NA	NA

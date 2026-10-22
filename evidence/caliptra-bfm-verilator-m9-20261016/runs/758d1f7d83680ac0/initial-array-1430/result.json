@@ -1,0 +1,14 @@
+{
+  "host": "DAN-DESKTOP",
+  "case": "smoke_test_mldsa_keygen_standalone_sign_vfy_rand",
+  "timeout_s": 21600,
+  "c339_outcome": "UNVERIFIED",
+  "c339_mcycle": "NA",
+  "c339_elapsed_s": "NA",
+  "model_sha256": "ce2d0e5012cfbedb46c01a24acf948fae4f0948b140e482348407677bf9b79de",
+  "started_at": "2026-10-16T03:06:27.082214+00:00",
+  "error": "Traceback (most recent call last):\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/run-verilator-top-case.py\", line 66, in main\n    case_yaml, seed, plusargs, yaml_testname = runner.load_case(rtl, args.case, args.case_yaml)\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/dsell/slurm-runs/caliptra-bfm/a2/m9-verilator-top-20261016-01/source/dv/caliptra_bfm/uvm/tests/run_caliptra_top_firmware_bfm.py\", line 493, in load_case\n    raise ValueError(f\"unexpected Caliptra case YAML: {case_yaml}\")\nValueError: unexpected Caliptra case YAML: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/test_suites/smoke_test_mldsa_keygen_standalone_sign_vfy_rand/smoke_test_mldsa_keygen_standalone_sign_vfy_rand.yml\n",
+  "outcome": "HARNESS_ERROR",
+  "elapsed_s": 0.009,
+  "completed_at": "2026-10-16T03:06:27.091627+00:00"
+}

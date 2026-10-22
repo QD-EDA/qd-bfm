@@ -1,0 +1,9 @@
+Row 97 test-sequence cross-check
+
+Pinned Adams Bridge source file SHA-256: 4f91d054d849c2aec83af1090eec603e631caace4c002d16009df53cb1757b75.
+
+The row 97 log (job 3147) says `Failing register: 2, bit: 20` and `Failing index: 16` at 400 ns. At 20,855 ns it writes `MLDSA_SIGNATURE[16]` as 8f2b5a6a instead of 8f3b5a6a; the XOR difference is 0x00100000 (bit 20). After zeroization, the second run writes the original 8f3b5a6a at 96,425 ns. This corrects the inherited bit-0 note.
+
+The generated scoreboard overlay `mldsa_scoreboard.svh` at lines 190–207 counts matches against the successful verification output: it errors if all 16 first-run words match, and at 32 total reads it errors unless the total match count is exactly 16. Job 3147 emitted one `[SCBD_AHB]` error at the second verification, UVM_ERROR=1/UVM_FATAL=0. The sequence/log alone do not tell whether the result words were wrong at the raw AHB pins or sampled incorrectly; the full-clock pin trace is still required.
+
+Sources: `sequence-source-excerpt-before-second-verif.txt`, `sequence-source-excerpt.txt`, `sequence-mutation-triage-intern.txt`, and complete task archive `raw/job-3147_97.tar.gz` (SHA-256 41a3a69ea351800f55f8fc79e7c55803ea402d85ad3f730c7d0e8a668c61f841). The source excerpts and intern summaries were checked against the exact log and archived overlay.

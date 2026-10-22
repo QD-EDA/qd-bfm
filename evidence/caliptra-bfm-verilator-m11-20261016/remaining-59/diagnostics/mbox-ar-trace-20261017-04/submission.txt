@@ -1,0 +1,16 @@
+Purpose: focused assertion action `$sampled` trace for `smoke_test_mbox` after v3 confirmed `ARVALID=1, ARREADY=0` followed by `ARVALID=0` at the assertion-owning `axi_sub_rd` instance.
+Remote host: DAN-DESKTOP, Slurm 25.11.2; verified at submission planning time with 27 GiB available memory and 12/20 CPUs idle. Existing M11 row `1964_54` remains untouched.
+Pinned inputs: QD-BFM ffc12ab427e961f40354f32a8e7a147e5d4e5764; Caliptra RTL 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e; Verilator 5.052 with `--assert` and `+define+CLP_ASSERT_ON`.
+One-row simulation cap: 600 seconds. Build request: 4 CPUs, 3 GiB, 15 minutes, based on job 2053's 2,381,868 KiB peak RSS / 3:46 elapsed. Row request: 1 CPU, 3 GiB, 15 minutes; v3 completed in 42.583 seconds.
+
+The diagnostic `axi_sub_rd.sv` hash after adding the `$sampled` assertion action is `414196cfe25f3b9b666fc32cb330a1190aabd95c86479d70d4b2e08863ba31eb`; base overlaid source hash is `ca1ff54e75b93f7147364c91bd2f5cca6966a16147908c440309254a5c9d4a6c`. The source overlay changes only the diagnostic copy. The same 600-second one-row selection is archived in `run-selection.tsv`.
+
+Job IDs, build outcome, row result, output hashes, and cleanup details will be appended after completion.
+
+Slurm build job 2060 submitted at 2026-10-17 00:21 MDT: 4 CPUs, 3 GiB, 15-minute limit. v3 peak RSS was 2,381,868 KiB and elapsed 3:46. Staged source is copied from the read-only M11 array snapshot; helper/source hashes were verified.
+The staging shell accidentally executed the build script directly before submission; its isolated process group was terminated within 30 seconds, no simulation ran, and partial build products were removed. This is not a test result.
+Build job 2060 completed 2026-10-17 00:23:09 MDT, exit 0, 1:46.38 elapsed, 2,381,684 KiB peak RSS; model SHA-256 14ab5f899e2686a459fdbf470f18e5a3b10a4e22b7c00d53c39548add620422b.
+One-row `$sampled` trace simulation job 2064 submitted 2026-10-17 00:35 MDT, 1 CPU/3 GiB/15-minute Slurm limit; per-test cap 600 s.
+
+Job 2064 completed at 2026-10-17 00:36 MDT. Firmware build exit 0; simulation exit 1 at `AXI_SUB_AR_HSHAKE_ERR` after 39.547 simulation seconds (41.970 seconds total). The 600-second cap was not reached. At the assertion action's failure edge, `$sampled` printed `arvalid=0 arready=1 rst_n=1`; the assertion-instance monitor captured the preceding mailbox-lock request at cycle 57149/time 5,717,000 with `ARVALID=1 ARREADY=0`, followed by post-edge `ARVALID=0 ARREADY=0`. The diagnostic does not identify why the BFM withdrew ARVALID. Raw output was copied locally and passed its checksum manifest; see `README.md`.
+The completed remote run directory was removed after verification (727,940,700 bytes of run data); the shared `/home/dsell/toolchains` location was untouched.

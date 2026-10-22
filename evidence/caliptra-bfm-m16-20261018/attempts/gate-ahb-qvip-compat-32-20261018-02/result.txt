@@ -1,0 +1,9 @@
+Classification: PASS
+Slurm job: 2765
+Compile and simulation command exited 0.
+Required explicit markers observed:
+- PASS: AHB MVC copy/compare profile width=32
+- PASS: generated-name AHB QVIP streams and full/partial-error RAL burst prediction
+UVM report: 0 errors, 0 fatals; one warning that internal QVIP covergroups are not recreated.
+Simulation finished at 490000 (1ps); memory guard reports process-group peak 0.36 GiB.
+Scheduler accounting state unavailable because sacct storage is disabled; the terminal log is the result evidence.

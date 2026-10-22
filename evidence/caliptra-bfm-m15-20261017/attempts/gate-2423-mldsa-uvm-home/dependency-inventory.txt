@@ -1,0 +1,15 @@
+Protected toolchain search performed on DAN-DESKTOP for:
+- uvmf_base_pkg.sv
+- questa_mvc_svapi.svh
+- mgc_apb3_v1_0_pkg.sv
+- qvip_utils_pkg.sv
+
+Only matches were QD-BFM copies of dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv. No Questa MVC include or package file and no full UVMF base package files were found under /home/dsell/toolchains.
+
+The mapped generated-UVMF .vf files also reference these external roots (confirmed across the pinned Caliptra and Adams Bridge filelists):
+- ${UVM_HOME}/src/uvm_pkg.sv
+- ${QUESTA_MVC_HOME}/include/questa_mvc_svapi.svh and multiple Questa MVC packages/modules
+- ${UVMF_HOME}/uvmf_base_pkg and common UVMF packages/modules
+- ${AVERY_AXI} and ${AVERY_SIM} for the applicable Caliptra environments
+
+The runner now points UVM_HOME at /home/dsell/toolchains/iverilog-uvm-9b5fad2afb4104caa816b257d5bccc40f01b8c66/install/lib/ivl/uvm. The remaining variables are unset and their dependency trees are absent.

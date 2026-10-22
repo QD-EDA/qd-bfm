@@ -1,0 +1,15 @@
+Host: DAN-DESKTOP
+Submitted: 2026-10-19 10:16:51 MDT
+Job ID: 3110
+Row: 77 only
+Status at 10:16:55 MDT: RUNNING; WorkDir and output path checked against the dedicated m19-row77-longcap-20261019-01 root.
+Runner cap: 3,600 seconds; Slurm limit: 75 minutes
+Resources: 1 CPU, 2 GiB
+Corrected script SHA-256: 0d7d8dedb1e0315f0b6bdcc138f5d47585c02f970f314b21cb041634cd9b4f73
+Source snapshot SHA-256: ce5ba73163820aea5c9c065f81bbd5758365f8fb0d78c5a2ca9949f300c2c284
+Icarus source: cae035642e056644274a01e98d4422ce286685b4
+Icarus binary SHA-256: 6f64b9987e04069dde9904cd1f0790d3430e34dbebb7908db159e6ec5290e330
+VVP binary SHA-256: 979d745f46bf952c86b1f09255e2256a6eec2bbef15b5c11634c8b4c95013309
+Caliptra SHA: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Adams Bridge SHA: b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Initial queue/workdir/compile snapshot: slurm-status-3110-initial.txt

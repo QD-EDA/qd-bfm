@@ -1,0 +1,1589 @@
+{
+  "active_jobs_excluded": [
+    [
+      "bfm-m7-top-main",
+      "PENDING"
+    ],
+    [
+      "bfm-m7-env-main",
+      "RUNNING"
+    ],
+    [
+      "bfm-m7-env-main",
+      "RUNNING"
+    ],
+    [
+      "bfm-m7-env-main",
+      "RUNNING"
+    ],
+    [
+      "bfm-m7-env-main",
+      "RUNNING"
+    ],
+    [
+      "a1-win98-step2",
+      "RUNNING"
+    ]
+  ],
+  "source_snapshots_removed": 39,
+  "outputs_removed": 154,
+  "build_dirs_removed": 5,
+  "pycache_dirs_removed": 42,
+  "logical_bytes_removed": 7456611400,
+  "a2_allocated_before_bytes": 7174848512,
+  "a2_allocated_after_bytes": 1754193920,
+  "a2_allocated_reduction_bytes": 5420654592,
+  "filesystem_free_before_bytes": 863276556288,
+  "filesystem_free_after_bytes": 868697210880,
+  "filesystem_free_increase_bytes": 5420654592,
+  "preserved_output_text_bytes": 18138853,
+  "actions": [
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/output",
+      "bytes": 148802,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/output",
+      "bytes": 337640,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-244/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/output",
+      "bytes": 223083,
+      "text_evidence_bytes_kept": 223083,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-2/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-2/output",
+      "bytes": 222939,
+      "text_evidence_bytes_kept": 222939,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-1/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-3/output",
+      "bytes": 222795,
+      "text_evidence_bytes_kept": 222795,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-3/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-243/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/runs/smoke_test_dma_aes_gcm_short_1_dword/output",
+      "bytes": 375064228,
+      "text_evidence_bytes_kept": 106112,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/output",
+      "bytes": 148802,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/output",
+      "bytes": 337640,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-244/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/output",
+      "bytes": 223083,
+      "text_evidence_bytes_kept": 223083,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-2/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-2/output",
+      "bytes": 222939,
+      "text_evidence_bytes_kept": 222939,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-1/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-3/output",
+      "bytes": 222795,
+      "text_evidence_bytes_kept": 222795,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-3/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-243/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/runs/smoke_test_dma/output",
+      "bytes": 376409969,
+      "text_evidence_bytes_kept": 170106,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/output",
+      "bytes": 148802,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/output",
+      "bytes": 337640,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-244/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/output",
+      "bytes": 223083,
+      "text_evidence_bytes_kept": 223083,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-2/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-2/output",
+      "bytes": 222939,
+      "text_evidence_bytes_kept": 222939,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-1/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-3/output",
+      "bytes": 222795,
+      "text_evidence_bytes_kept": 222795,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-3/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-243/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/runs/smoke_test_dma/output",
+      "bytes": 376679593,
+      "text_evidence_bytes_kept": 337256,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/firmware-compat-rerun-20261013-01/runs/27-9f91b0f948764f74-2/output",
+      "bytes": 73644100,
+      "text_evidence_bytes_kept": 172274,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/firmware-compat-rerun-20261013-01/runs/9-1e057b20d3564828-1/output",
+      "bytes": 73534083,
+      "text_evidence_bytes_kept": 172179,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/memCpy_dccm_to_iccm/output",
+      "bytes": 7864605,
+      "text_evidence_bytes_kept": 177253,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/memCpy_ROM_to_dccm/output",
+      "bytes": 7864318,
+      "text_evidence_bytes_kept": 177069,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_veer/output",
+      "bytes": 7863864,
+      "text_evidence_bytes_kept": 176785,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_ahb_mux/output",
+      "bytes": 7876467,
+      "text_evidence_bytes_kept": 177365,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_doe_rand/output",
+      "bytes": 7907238,
+      "text_evidence_bytes_kept": 181716,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_hw_config/output",
+      "bytes": 5001370,
+      "text_evidence_bytes_kept": 99032,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_sha256_wntz_rand/output",
+      "bytes": 7900046,
+      "text_evidence_bytes_kept": 183482,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_strap/output",
+      "bytes": 7887374,
+      "text_evidence_bytes_kept": 170677,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/smoke_test_sha256/output",
+      "bytes": 7891037,
+      "text_evidence_bytes_kept": 170153,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/runs/hello_world_iccm/output",
+      "bytes": 7867681,
+      "text_evidence_bytes_kept": 177005,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/2ed04fcd9fe06e81-6/output",
+      "bytes": 7963700,
+      "text_evidence_bytes_kept": 170825,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/5623a0f9b5e00f77-7/output",
+      "bytes": 7839677,
+      "text_evidence_bytes_kept": 170749,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/runs/b72c5535dc1dc634-5/output",
+      "bytes": 7963703,
+      "text_evidence_bytes_kept": 170825,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/c4e8f85716a36bd8-3/output",
+      "bytes": 7930001,
+      "text_evidence_bytes_kept": 170149,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/f1991acb7ebadfe1-1/output",
+      "bytes": 7936696,
+      "text_evidence_bytes_kept": 169438,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/runs/db58d7495957ab2d-2/output",
+      "bytes": 7954242,
+      "text_evidence_bytes_kept": 169700,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/3847bda2dcc7e016-46/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/32a51e049923c576-17/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/b65eaf52203ca1c3-38/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/8edb704b0e17c6c8-34/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/78bfcc1e9aac255e-16/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/e0d4538883521cca-51/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/d39c57745790b3e2-43/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/ea3af7f88b5170c5-15/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/78ad1bab537c2ff8-35/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/c7d7b277746f7500-45/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/3439695c6637d6f2-29/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/2f1b875490838662-32/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/dcd97efbe80e5c76-14/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/ca84d5f757b500b2-26/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/d732d22bcd20abb2-13/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/42f2671ec114cfb5-10/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/33a3aad04d3bc842-48/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/2092a5bfea85bd9a-11/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/ac4e209a8a8dca30-42/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/6bccff716e6bcab5-25/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/c95f8624d4cb7fe0-21/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/0627acabfee6876c-20/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/483ee327507dab77-24/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/9160c33b030e9483-8/output",
+      "bytes": 261543,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/109971edd9458a51-39/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/6dc114367c8b520c-49/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/4e0dd412c82b419a-18/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/804790f41f3373fe-50/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/40a2264a41561d60-19/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/4ca47c7da4afd810-28/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/eaeb97287ce63194-31/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/ba452156bdfcaf3a-33/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/1e057b20d3564828-9/output",
+      "bytes": 261543,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/7acba2db04d9935d-12/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/35735b41cd07eed7-30/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/37f012b3a23a9e50-36/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/bcb5b29a003aa2a6-44/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/044d2b8bcd486492-41/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/871bf14a358781fb-22/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/9f91b0f948764f74-27/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/244a281ff42ebdc1-40/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/d51cc47c71747905-47/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/a79fb02e90b4ffbd-37/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/runs/40ec556410264b2f-23/output",
+      "bytes": 261549,
+      "text_evidence_bytes_kept": 0,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/ea3af7f88b5170c5-15/output",
+      "bytes": 73503445,
+      "text_evidence_bytes_kept": 155353,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/dcd97efbe80e5c76-14/output",
+      "bytes": 73388075,
+      "text_evidence_bytes_kept": 165081,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/d732d22bcd20abb2-13/output",
+      "bytes": 73393341,
+      "text_evidence_bytes_kept": 154038,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/42f2671ec114cfb5-10/output",
+      "bytes": 73401243,
+      "text_evidence_bytes_kept": 153840,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/2092a5bfea85bd9a-11/output",
+      "bytes": 73353594,
+      "text_evidence_bytes_kept": 160732,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/9160c33b030e9483-8/output",
+      "bytes": 73403662,
+      "text_evidence_bytes_kept": 164604,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/1e057b20d3564828-9/output",
+      "bytes": 2309055,
+      "text_evidence_bytes_kept": 28987,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/runs/7acba2db04d9935d-12/output",
+      "bytes": 73385508,
+      "text_evidence_bytes_kept": 164808,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/32a51e049923c576-17/output",
+      "bytes": 73477225,
+      "text_evidence_bytes_kept": 150116,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/8edb704b0e17c6c8-34/output",
+      "bytes": 73390646,
+      "text_evidence_bytes_kept": 149640,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/78bfcc1e9aac255e-16/output",
+      "bytes": 73431566,
+      "text_evidence_bytes_kept": 165588,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/78ad1bab537c2ff8-35/output",
+      "bytes": 73435738,
+      "text_evidence_bytes_kept": 165649,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/3439695c6637d6f2-29/output",
+      "bytes": 73452337,
+      "text_evidence_bytes_kept": 149128,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/2f1b875490838662-32/output",
+      "bytes": 73396133,
+      "text_evidence_bytes_kept": 149637,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ca84d5f757b500b2-26/output",
+      "bytes": 73472966,
+      "text_evidence_bytes_kept": 156247,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/6bccff716e6bcab5-25/output",
+      "bytes": 73472971,
+      "text_evidence_bytes_kept": 153982,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/c95f8624d4cb7fe0-21/output",
+      "bytes": 73470290,
+      "text_evidence_bytes_kept": 155370,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/0627acabfee6876c-20/output",
+      "bytes": 73467958,
+      "text_evidence_bytes_kept": 155701,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/483ee327507dab77-24/output",
+      "bytes": 73480643,
+      "text_evidence_bytes_kept": 155036,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4e0dd412c82b419a-18/output",
+      "bytes": 73830497,
+      "text_evidence_bytes_kept": 165651,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40a2264a41561d60-19/output",
+      "bytes": 73405412,
+      "text_evidence_bytes_kept": 154670,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/4ca47c7da4afd810-28/output",
+      "bytes": 73959688,
+      "text_evidence_bytes_kept": 165608,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/eaeb97287ce63194-31/output",
+      "bytes": 2345987,
+      "text_evidence_bytes_kept": 28308,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/ba452156bdfcaf3a-33/output",
+      "bytes": 73390304,
+      "text_evidence_bytes_kept": 149488,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/35735b41cd07eed7-30/output",
+      "bytes": 73509998,
+      "text_evidence_bytes_kept": 153380,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/871bf14a358781fb-22/output",
+      "bytes": 73385116,
+      "text_evidence_bytes_kept": 154140,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/9f91b0f948764f74-27/output",
+      "bytes": 2315728,
+      "text_evidence_bytes_kept": 35840,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/runs/40ec556410264b2f-23/output",
+      "bytes": 73478932,
+      "text_evidence_bytes_kept": 154956,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-heartbeat-smoke-c339-20261012-01/run/output",
+      "bytes": 73458781,
+      "text_evidence_bytes_kept": 160941,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/41-044d2b8bcd486492-32/output",
+      "bytes": 73593153,
+      "text_evidence_bytes_kept": 168449,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/42-ac4e209a8a8dca30-33/output",
+      "bytes": 70938610,
+      "text_evidence_bytes_kept": 167791,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/4-c88b4de9c260074a-5/output",
+      "bytes": 73535763,
+      "text_evidence_bytes_kept": 155377,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/0-66a04bb4080f0165-1/output",
+      "bytes": 73504357,
+      "text_evidence_bytes_kept": 155196,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/36-37f012b3a23a9e50-27/output",
+      "bytes": 70908718,
+      "text_evidence_bytes_kept": 157656,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/3-c4e8f85716a36bd8-4/output",
+      "bytes": 73508278,
+      "text_evidence_bytes_kept": 155226,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/5-b72c5535dc1dc634-6/output",
+      "bytes": 73542077,
+      "text_evidence_bytes_kept": 155955,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/1-f1991acb7ebadfe1-2/output",
+      "bytes": 73514907,
+      "text_evidence_bytes_kept": 154409,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/2-db58d7495957ab2d-3/output",
+      "bytes": 73532502,
+      "text_evidence_bytes_kept": 154724,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-current-20261010/output",
+      "bytes": 148802,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-one-20261010/output",
+      "bytes": 337640,
+      "text_evidence_bytes_kept": 66301,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-244/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/output",
+      "bytes": 223083,
+      "text_evidence_bytes_kept": 223083,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-2/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-2/output",
+      "bytes": 222939,
+      "text_evidence_bytes_kept": 222939,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-1/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-3/output",
+      "bytes": 222795,
+      "text_evidence_bytes_kept": 222795,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-3/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-243/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": true
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-244/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-1/output",
+      "bytes": 223083,
+      "text_evidence_bytes_kept": 223083,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-2/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-2/output",
+      "bytes": 222939,
+      "text_evidence_bytes_kept": 222939,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-1/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/trace-3/output",
+      "bytes": 222795,
+      "text_evidence_bytes_kept": 222795,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-242/completed-runs/no-trace-3/output",
+      "bytes": 143387,
+      "text_evidence_bytes_kept": 143387,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-fulltop-rand-dma-reset-c339-20261010/job-243/window-2822/output",
+      "bytes": 260866,
+      "text_evidence_bytes_kept": 260866,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-dv-smoke-20261010/aes-first/output",
+      "bytes": 17894,
+      "text_evidence_bytes_kept": 17894,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-dv-smoke-20261010/task-0-smoke-timeout/output",
+      "bytes": 24418,
+      "text_evidence_bytes_kept": 24418,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "output",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/source/qd-bfm/evidence/caliptra-bfm-dv-smoke-20261010/trace-smoke-timeout/output",
+      "bytes": 191131,
+      "text_evidence_bytes_kept": 191131,
+      "under_staging_snapshot": false
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/compress-filelist-c339-20261011-01/source",
+      "bytes": 115307533,
+      "metadata_bytes_kept": 1004610
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/csrng-filelist-c339-20261011-01/source",
+      "bytes": 115320710,
+      "metadata_bytes_kept": 1017787
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/csrng-filelist-c339-20261011-02/source",
+      "bytes": 115320770,
+      "metadata_bytes_kept": 1017847
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/source",
+      "bytes": 12922987,
+      "metadata_bytes_kept": 283644
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/source",
+      "bytes": 12922987,
+      "metadata_bytes_kept": 283644
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/source",
+      "bytes": 12922987,
+      "metadata_bytes_kept": 283644
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-01/source",
+      "bytes": 115308640,
+      "metadata_bytes_kept": 1005980
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-02/source",
+      "bytes": 115306829,
+      "metadata_bytes_kept": 1003906
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-03/source",
+      "bytes": 115304752,
+      "metadata_bytes_kept": 1001830
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-matrix-c339-20261011-04/source",
+      "bytes": 115304847,
+      "metadata_bytes_kept": 1001925
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-c339-20261011-01/source",
+      "bytes": 115304779,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-02/source",
+      "bytes": 115304779,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-alias-matrix-c339-20261011-03/source",
+      "bytes": 115304779,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-python-c339-20261011-01/source",
+      "bytes": 115304717,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-tbcompat-c339-20261011-01/source",
+      "bytes": 115304717,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-mldsa-width-c339-20261011-01/source",
+      "bytes": 115304724,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-setup-fix-c339-20261011-01/source",
+      "bytes": 115304803,
+      "metadata_bytes_kept": 1001881
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-01/source",
+      "bytes": 115304679,
+      "metadata_bytes_kept": 1001757
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-shared-incpaths-c339-20261011-02/source",
+      "bytes": 115304679,
+      "metadata_bytes_kept": 1001757
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-topfix-c339-20261011-01/source",
+      "bytes": 115304724,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/issue539-pkdecode-c339-20261011-01/source",
+      "bytes": 115304784,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/issue539-pkdecode-c339-20261011-02/source",
+      "bytes": 115304784,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-env-overlay-c339-20261011-02/source",
+      "bytes": 115306794,
+      "metadata_bytes_kept": 1003906
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-env-overlay-c339-20261011-03/source",
+      "bytes": 115348164,
+      "metadata_bytes_kept": 1003906
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m4-top-sample-c339-20261011-01/source",
+      "bytes": 1411075,
+      "metadata_bytes_kept": 0
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-01/source",
+      "bytes": 106,
+      "metadata_bytes_kept": 65
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-02/source",
+      "bytes": 106,
+      "metadata_bytes_kept": 65
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-03/source",
+      "bytes": 106,
+      "metadata_bytes_kept": 65
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-04/source",
+      "bytes": 106,
+      "metadata_bytes_kept": 65
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5-top-wave1-c339-20261012-05/source",
+      "bytes": 328,
+      "metadata_bytes_kept": 65
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/pkdecode-passmarker-c339-20261011-05/source",
+      "bytes": 115305028,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/pkdecode-src0-c339-20261011-04/source",
+      "bytes": 115304783,
+      "metadata_bytes_kept": 1001801
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/source",
+      "bytes": 12922987,
+      "metadata_bytes_kept": 283644
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/source",
+      "bytes": 115304837,
+      "metadata_bytes_kept": 1001859
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-01/source",
+      "bytes": 115307519,
+      "metadata_bytes_kept": 1004595
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-02/source",
+      "bytes": 115307528,
+      "metadata_bytes_kept": 1004595
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-03/source",
+      "bytes": 115307548,
+      "metadata_bytes_kept": 1004595
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/soc-ifc-syntax-c339-20261011-04/source",
+      "bytes": 115307553,
+      "metadata_bytes_kept": 1004595
+    },
+    {
+      "kind": "source_snapshot",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/vip-adapter-c339-20261011-01/source",
+      "bytes": 115419031,
+      "metadata_bytes_kept": 1090135
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-aes-first-20261010-01/runs/smoke_test_dma_aes_gcm_short_1_dword/pycache",
+      "bytes": 1481354
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/runs/smoke_test_dma/pycache",
+      "bytes": 1553293
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-20261010-01/runs/smoke_test_dma_aes_gcm_short_1_dword/pycache",
+      "bytes": 1481350
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/dv-smoke-trace-20261010-02/runs/smoke_test_dma/pycache",
+      "bytes": 1553299
+    },
+    {
+      "kind": "build",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/env-setup-fix-c339-20261011-01/python-env/lib/python3.14/site-packages/pip/_internal/operations/build",
+      "bytes": 43014
+    },
+    {
+      "kind": "build",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/issue545-caliptra-clock-c339-vlt-20261012-01/build",
+      "bytes": 567246
+    },
+    {
+      "kind": "build",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/issue545-caliptra-clock-c339-vlt-rerun-20261013-01/build",
+      "bytes": 567502
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01/runs/44-bcb5b29a003aa2a6-4/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01/runs/43-d39c57745790b3e2-3/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01/runs/39-109971edd9458a51-2/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261013-01/runs/37-a79fb02e90b4ffbd-1/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/43-d39c57745790b3e2-3/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/39-109971edd9458a51-2/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-cancelled-reruns-c339-20261014-03/runs/37-a79fb02e90b4ffbd-1/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/41-044d2b8bcd486492-32/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/21-c95f8624d4cb7fe0-15/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/10-42f2671ec114cfb5-9/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/34-8edb704b0e17c6c8-25/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/17-32a51e049923c576-12/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/4-c88b4de9c260074a-5/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/51-e0d4538883521cca-42/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/35-78ad1bab537c2ff8-26/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/0-66a04bb4080f0165-1/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/45-c7d7b277746f7500-36/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/15-ea3af7f88b5170c5-11/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/19-40a2264a41561d60-13/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/6-2ed04fcd9fe06e81-7/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/40-244a281ff42ebdc1-31/pycache",
+      "bytes": 1498382
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/3-c4e8f85716a36bd8-4/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/38-b65eaf52203ca1c3-29/pycache",
+      "bytes": 1498382
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/5-b72c5535dc1dc634-6/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/7-5623a0f9b5e00f77-8/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/23-40ec556410264b2f-17/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/29-3439695c6637d6f2-21/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/1-f1991acb7ebadfe1-2/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/50-804790f41f3373fe-41/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/48-33a3aad04d3bc842-39/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/2-db58d7495957ab2d-3/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/32-2f1b875490838662-23/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/22-871bf14a358781fb-16/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/33-ba452156bdfcaf3a-24/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/30-35735b41cd07eed7-22/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/m5b-rerun-c339-20261012-01/runs/20-0627acabfee6876c-14/pycache",
+      "bytes": 1536539
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/runs/keyvault/pycache",
+      "bytes": 1281383
+    },
+    {
+      "kind": "pycache",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/proxy-uvmf-c339-20261010-01/runs/pcrvault/pycache",
+      "bytes": 1267165
+    },
+    {
+      "kind": "build",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/sharedfix-rerun-c339-20261011-01/python-env/lib/python3.14/site-packages/pip/_internal/operations/build",
+      "bytes": 43014
+    },
+    {
+      "kind": "build",
+      "path": "/home/dsell/slurm-runs/caliptra-bfm/a2/unit-unit-20261011-01/build",
+      "bytes": 0
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+job_id=1107
+array=1107_[1-3%2]
+source_qd_sha=d1529c922da402943148a0fb22648f347e30eed9
+firmware_rtl_sha=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+toolchain=/home/dsell/toolchains/iverilog-c339
+compiler=xPack GNU RISC-V Embedded GCC 15.2.0
+mode=pinned-only
+resources=1 CPU, 3 GiB/task, 30-minute task cap, array throttle 2
+submit_command=cd /home/dsell/slurm-runs/caliptra-bfm/a2/m7-fw-pinned-d1529c9-20261014 && sbatch --parsable submit/firmware-build-pinned-only.sbatch
+comparison_overlay_array=1038 (all three BUILD_PASS)

@@ -1,0 +1,6 @@
+skip-intt c339 compile=1 sim=NOT_RUN
+skip-intt main compile=0 sim=0
+skip-ntt c339 compile=1 sim=NOT_RUN
+skip-ntt main compile=0 sim=134
+skip-both c339 compile=1 sim=NOT_RUN
+skip-both main compile=0 sim=0

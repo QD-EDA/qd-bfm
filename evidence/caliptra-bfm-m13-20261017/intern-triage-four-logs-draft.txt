@@ -1,0 +1,40 @@
+**adams-bridge-v2-0-3-butterfly_top_tb**
+Classification: BLOCKED/setup
+Decisive Facts:
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:593: $readmemh: Unable to open kyber_zeta.txt for reading.`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:594: $readmemh: Unable to open kyber_zeta_inv.hex for reading.`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:597: $readmemh: Unable to open kyber_stage0.hex for reading.`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:601: $readmemh: Unable to open kyber_stage0_out.hex for reading.`
+*   `NTT operation success`
+*   `INTT operation success`
+*   `/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/butterfly_top_tb.sv:621: $finish called at 3445 (1s)`
+
+**adams-bridge-v2-0-3-ntt_top_tb**
+Classification: BLOCKED/setup
+Decisive Facts:
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_ram_tdp_file.sv:60: $readmemh: Unable to open ntt_unmasked_input.hex for reading.`
+*   `NTT operation`
+*   `Received ntt_done`
+*   `INTT operation`
+*   `Received intt_done`
+*   `PWM operation 1 no acc`
+*   `PWM operation 1 acc`
+*   `/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/ntt_top/tb/ntt_top_tb.sv:921: $finish called at 51525 (1s)`
+
+**adams-bridge-v2-0-3-rej_bounded_tb**
+Classification: BLOCKED/setup
+Decisive Facts:
+*   `sh: 1: python: not found`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:340: Cannot open file exp_results.txt for reading`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:362: Cannot open file input_vectors.txt for reading`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:369: Cannot open file exp_results.txt for reading`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:180: Hit max cycle count (200000) .. stopping`
+*   `/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/rej_bounded/tb/rej_bounded_tb.sv:181: $finish called at 2000005 (1s)`
+
+**adams-bridge-v2-0-3-sigencode_z_tb**
+Classification: BLOCKED/setup
+Decisive Facts:
+*   `ModuleNotFoundError: No module named 'numpy'`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:197: Cannot open input_z.hex for reading`
+*   `ERROR: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:210: Cannot open output_encoded_z.hex for reading`
+*   `/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sig_encode_z/tb/sigencode_z_tb.sv:255: $finish called at 765 (1s)`

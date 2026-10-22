@@ -1,0 +1,1 @@
+PASS row=5 test=HMAC_otf_reset_test: testbench pass marker present; no failure marker or UVM error/fatal

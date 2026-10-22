@@ -1,0 +1,81 @@
+    output_file = "./verif_failure_input_test.hex";
+    fd = $fopen(output_file, "w");
+    if (fd == 0) begin
+      $display("ERROR: Failed to open file: %s", output_file);
+      return;
+    end
+    $fwrite(fd, "%02X\n", 2); // Signature generation cmd
+    write_file_without_newline(fd, 1157, SIG);
+    $fwrite(fd, "%02X%02X%02X", SIG[1156][7:0],SIG[1156][15:8],SIG[1156][23:16]);
+    write_file(fd, 16, MSG); // Write 64-byte message to the file
+    write_file(fd, 648, PK); // Write 2592-byte Public Key to the file
+    $fclose(fd);
+
+    // Writing MLDSA_MSG register
+    foreach (reg_model.MLDSA_MSG[i]) begin
+      if (fail_register == 1 && i == fail_index) begin
+        error_injection_word = MSG[i];
+        error_injection_word ^= (1 << fail_bit); // Flip the selected bit
+        reg_model.MLDSA_MSG[i].write(status, error_injection_word, UVM_FRONTDOOR, reg_model.default_map, this);
+        if (status != UVM_IS_OK) begin
+          `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_MSG[%0d]", i));
+        end else begin
+          `uvm_info("REG_WRITE", $sformatf("Failure injected to MLDSA_MSG[%0d] written with %0h, instead of %0h", i, error_injection_word, MSG[i]), UVM_LOW);
+        end
+      end
+      else begin
+        reg_model.MLDSA_MSG[i].write(status, MSG[i], UVM_FRONTDOOR, reg_model.default_map, this);
+        if (status != UVM_IS_OK) begin
+          `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_MSG[%0d]", i));
+        end else begin
+          `uvm_info("REG_WRITE", $sformatf("MLDSA_MSG[%0d] written with %0h", i, MSG[i]), UVM_LOW);
+        end
+      end
+    end
+
+    // Writing the SIGNATURE into the MLDSA_SIGNATURE register array
+    for (int i = 0; i < reg_model.MLDSA_SIGNATURE.m_mem.get_size(); i++) begin
+      if (fail_register == 2 && i == fail_index) begin
+        error_injection_word = SIG[i];
+        if (fail_index == 1156 && i == fail_index) begin
+          fail_bit = fail_bit % 24;
+          `uvm_info("FAIL_TEST_SEQ", $sformatf("For this D-WORD register: %0d, bit: %0d", fail_register, fail_bit), UVM_LOW);
+        end
+        error_injection_word ^= (1 << fail_bit); // Flip the selected bit
+        reg_model.MLDSA_SIGNATURE.m_mem.write(status, i, error_injection_word, UVM_FRONTDOOR, reg_model.default_map, this);
+        if (status != UVM_IS_OK) begin
+            `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_SIGNATURE[%0d]", i));
+        end else begin
+          `uvm_info("REG_WRITE", $sformatf("Failure injected to MLDSA_SIGNATURE[%0d] written with %0h, instead of %0h", i, error_injection_word, SIG[i]), UVM_LOW);
+        end
+      end
+      else begin
+        reg_model.MLDSA_SIGNATURE.m_mem.write(status, i, SIG[i], UVM_FRONTDOOR, reg_model.default_map, this);
+        if (status != UVM_IS_OK) begin
+            `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_SIGNATURE[%0d]", i));
+        end else begin
+            `uvm_info("REG_WRITE", $sformatf("MLDSA_SIGNATURE[%0d] written with %0h", i, SIG[i]), UVM_LOW);
+        end
+      end
+    end
+
+    if (fail_register == 0) begin
+      error_injection_word = PK[fail_index];
+      error_injection_word ^= (1 << fail_bit); // Flip the selected bit  
+      reg_model.MLDSA_PUBKEY.m_mem.write(status, fail_index, error_injection_word, UVM_FRONTDOOR, reg_model.default_map, this);
+      if (status != UVM_IS_OK) begin
+          `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_PUBKEY[%0d]", fail_index));
+      end else begin
+        `uvm_info("REG_WRITE", $sformatf("Failure injected to MLDSA_PUBKEY[%0d] written with %0h, instead of %0h", fail_index, error_injection_word, PK[fail_index]), UVM_LOW);
+      end
+    end
+
+//=========================================================
+
+
+
+    data = 'h0000_0003; // verify signature
+    reg_model.MLDSA_CTRL.write(status, data, UVM_FRONTDOOR, reg_model.default_map, this);
+    if (status != UVM_IS_OK) begin
+      `uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_CTRL"));
+    end else begin

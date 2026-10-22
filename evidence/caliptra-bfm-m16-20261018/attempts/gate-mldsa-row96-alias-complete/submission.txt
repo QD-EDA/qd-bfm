@@ -1,0 +1,13 @@
+job_id=2750
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m16-mldsa-row96-alias-complete-20261018-01
+submit_command=sbatch --parsable run.sbatch
+row=96 ML_DSA_randomized_early_run_test; predictor typedef/local cast type plus all six scoreboard transfer declarations use QD-BFM MVC transfer type
+source_archive_sha256=9268ac76d72eefc0ebb1229732205ffc2cd6ed54fd1e5a0031795245c4b47a56
+runner_sha256=34575850412adef0715fc58964558209377b3ac669428ed96a90fd17d261c360
+test_file_sha256=dfd26a4ee43b13e9042eda54d6e3f3dd1053d82610db1575afdb136146d5eee5
+run_script_sha256=76d317d2fa199a40659a6c1afee61dc5fdc251bd0747cf129bc613a795602703
+resources=1 CPU, 1250 MiB memory, 20-minute Slurm cap; 600-second per-row timeout
+memory_basis=job 2741 measured peak 767272 KiB x 1.25 = 959090 KiB; request rounded to 1250 MiB
+source_pin=adams-bridge b77e3d899e828d626cfc2a0d26a6b5704cc121e0; Caliptra 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus=9b5fad2afb4104caa816b257d5bccc40f01b8c66; binary SHA256 6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+staging=archive SHA256 checked remotely before extraction; current runner/test hashes confirmed remotely; all 153 archived BFM files match worktree

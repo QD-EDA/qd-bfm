@@ -1,0 +1,5 @@
+**First Explicit Failure:**
+"TB ERROR aserted for addr 0x30021814 (SHA_ACC_INTR_BRF_ERROR_INTERNAL_INTR_R). Register bit-field(s) mutable over AXI! agg value is 0b1010"
+
+**Evidence Path:**
+`/home/dsell/slurm-runs/caliptra-bfm/a2/m17-socifc-array-20261019-05/tasks/row-31/sim.log`

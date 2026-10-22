@@ -1,0 +1,5 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:187: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:60: error: parameter `MEM_ADDR_WIDTH` not found in `pkdecode_tb.dut`.
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv:28: error: Unable to bind parameter `MLDSA_MEM_ADDR_WIDTH' in `pkdecode_tb'
+2 error(s) during elaboration.

@@ -1,0 +1,20 @@
+--- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/pk_decode/tb/pkdecode_tb.sv	2026-10-12 09:22:43.197572436 -0600
++++ /home/dsell/slurm-runs/caliptra-bfm/a2/m13b-pkdecode-corrected-retry-20261017-01/tasks/adams-bridge-v2-0-3-pkdecode_tb/overlay/pkdecode_tb.sv	2026-10-17 17:06:30.075750072 -0600
+@@ -57,7 +57,7 @@
+ 
+ // Instantiate the Device Under Test (DUT)
+ pkdecode #(
+-    .MEM_ADDR_WIDTH(MEM_ADDR_WIDTH),
++    
+     .MLDSA_K(MLDSA_K),
+     .MLDSA_N(256),
+     .REG_SIZE(REG_SIZE),
+@@ -247,7 +247,7 @@
+     reset_dut();
+     $display("Reading test vectors from hex files\n");
+     pkdecode_test('h0, 'h0);
+-    pkdecode_test('h40, 'h20);
++    pkdecode_test('h40, 'h0);
+     $finish;
+ end
+ 

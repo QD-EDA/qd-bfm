@@ -1,0 +1,22 @@
+**Expected Outcome of the First Verification:**
+The first verification is marked by the comment: `// VERIFIACTION FAILURE TEST IS DONE`. The outcome is reported by reading the `MLDSA_VERIFY_RES` register array:
+`foreach (reg_model.MLDSA_VERIFY_RES[i]) begin ... reg_model.MLDSA_VERIFY_RES[i].read(status, data, UVM_FRONTDOOR, reg_model.default_map, this); ... end`
+
+**Expected Outcome of the Second Verification:**
+The second verification is initiated by writing `data = 'h0000_0003; // verify singature` to `MLDSA_CTRL`. The outcome is reported by reading the `MLDSA_VERIFY_RES` register array:
+`foreach (reg_model.MLDSA_VERIFY_RES[i]) begin ... reg_model.MLDSA_VERIFY_RES[i].read(status, data, UVM_FRONTDOOR, reg_model.default_map, this); ... end`
+
+**Modification of MLDSA_SIGNATURE:**
+The `MLDSA_SIGNATURE` register array is modified by writing values from the `SIG` array:
+`for (int i = 0; i < reg_model.MLDSA_SIGNATURE.m_mem.get_size(); i++) begin reg_model.MLDSA_SIGNATURE.m_mem.write(status, i, SIG[i], UVM_FRONTDOOR, reg_model.default_map, this); ... end`
+
+**Values Enqueued/Compared:**
+*   **MLDSA_PUBKEY:** Values from the `PK` array are written to `reg_model.MLDSA_PUBKEY.m_mem`.
+*   **MLDSA_MSG:** Values from the `MSG` array are written to `reg_model.MLDSA_MSG[i]`.
+*   **MLDSA_SIGNATURE:** Values from the `SIG` array are written to `reg_model.MLDSA_SIGNATURE.m_mem`.
+*   **MLDSA_CTRL (Second Verification):** The value `'h0000_0003` is written to `reg_model.MLDSA_CTRL` to "verify singature."
+
+**Explicit Pass/Fail Marker:**
+The status of reads and writes is checked against `UVM_IS_OK`. A failure is explicitly marked by:
+*   `if (status != UVM_IS_OK) begin \`uvm_error("REG_READ", $sformatf("Failed to read MLDSA_VERIFY_RES[%0d]", i)); \end`
+*   `if (status != UVM_IS_OK) begin \`uvm_error("REG_WRITE", $sformatf("Failed to write MLDSA_SIGNATURE[%0d]", i)); \end`

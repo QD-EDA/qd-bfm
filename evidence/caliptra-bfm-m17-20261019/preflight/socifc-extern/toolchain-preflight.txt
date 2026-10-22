@@ -1,0 +1,16 @@
+TOOLCHAIN=/home/dsell/toolchains/iverilog-c339/iverilog
+683c94313f596bba25aa4e6de37efb4e68bb5dadc37394a91a2a0e6078ac26cb  /home/dsell/toolchains/iverilog-c339/iverilog/bin/iverilog
+ac6cd60d97ccf128118166f10855ca75d9271a561b440d30eb010404705be60f  /home/dsell/toolchains/iverilog-c339/iverilog/bin/vvp
+Icarus Verilog version 13.0 (devel) ()
+/tmp/m17-socifc-extern-implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/m17-socifc-extern-implicit.sv:5: syntax error
+I give up.
+COMPILE_EXIT=3
+TOOLCHAIN=/home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile
+c99ee9c08468fb20f7635fb3380adb0d620c9037c19c02236a435a61c7be0130  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/iverilog
+01ab4aec7220761157afa00b19074da9ce6f3f261279fcb39d319865a09056a4  /home/dsell/toolchains/iverilog-uvm-ca559fd97b19bd6a56cc10f0faf8583b4077975f-m3-profile/bin/vvp
+Icarus Verilog version 13.0 (devel) (ca559fd97)
+/tmp/m17-socifc-extern-implicit.sv:5: error: lock_fuses doesn't name a type.
+/tmp/m17-socifc-extern-implicit.sv:5: syntax error
+I give up.
+COMPILE_EXIT=3

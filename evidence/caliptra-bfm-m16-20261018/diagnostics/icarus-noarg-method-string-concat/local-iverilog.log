@@ -1,0 +1,5 @@
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/noarg_method_string_concat.sv:16: warning: Static variable initialization requires explicit lifetime in this context.
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/noarg_method_string_concat.sv:11: sorry: Nested member path not yet supported for class properties.
+exit=0
+FATAL: evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/noarg_method_string_concat.sv:18: unexpected string result
+       Time: 0  Scope: noarg_method_string_concat.$unm_blk_1

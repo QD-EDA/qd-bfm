@@ -1,0 +1,5 @@
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/nested_paren_control.sv:16: warning: Static variable initialization requires explicit lifetime in this context.
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/nested_paren_control.sv:11: Error: child is not a method of class env_config.
+evidence/caliptra-bfm-m16-20261018/diagnostics/icarus-noarg-method-string-concat/nested_paren_control.sv:11: error: Object nested_paren_control.env_config.this has no method "child.convert2string(...)".
+2 error(s) during elaboration.
+compile_exit=2

@@ -1,0 +1,4 @@
+repo_commit=a50b2c64e8e6e3a7f022841e1aeff0b13f2a87ff
+repo_dirty=true
+caliptra_rtl=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+iverilog_source=9b5fad2afb4104caa816b257d5bccc40f01b8c66

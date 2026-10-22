@@ -1,0 +1,2 @@
+MRE_PASS
+/home/dsell/slurm-runs/caliptra-bfm/a2/m7-butterfly-loop-probe-20261014/source/loop-auto-task.sv:35: $finish called at 755 (1s)

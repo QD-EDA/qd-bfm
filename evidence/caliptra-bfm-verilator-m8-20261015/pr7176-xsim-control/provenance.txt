@@ -1,0 +1,4 @@
+PR head: 27d3c20afb5cf83a67bcee39b0b783b82282e23e
+Slurm job: 1304, 1 CPU, 2 GiB, 5-minute cap
+Compile: --timing --binary --Wno-fatal without --x-sim; exit 0
+Runtime: exit 1 at the assertion because the 2-state mode did not preserve X; simulation reached the check after #1 and exited normally.

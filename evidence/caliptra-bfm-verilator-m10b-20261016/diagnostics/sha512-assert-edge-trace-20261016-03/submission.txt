@@ -1,0 +1,18 @@
+SHA512 block-clear edge trace diagnostic, attempt 2
+
+Row: array index 91, test ID 7acba2db04d9935d, smoke_test_sha512.
+Pinned c339 outcome: PASS. The previous overlay outcome was FAIL at 6,296,000 on ERR_SHA_BLOCK_NOT_STABLE.
+Pinned Caliptra RTL commit: 49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e.
+Pinned SHA512 source SHA-256: 5656d5a09d1570a567bb674b1b419775a83a08b37ee70792d28ab72ae0510d82.
+M10b AXI overlay SHA-256: d387d149e6956d5e19b7fc6c1f86c31b115f60b743439a37f1040fd2300968b1.
+Diagnostic SHA512 trace overlay SHA-256: f0c23bfddf20aada206cc0afbbaa59864e85164d9c3bc7b6277acf5aeee56938.
+
+The diagnostic arms on zeroize_reg and logs at most 64 subsequent posedges, 32 block changes, and control transitions. There are no time-range comparisons. Firmware, assertion, pass classifier, and operational RTL remain unchanged.
+
+Testbench source commit: cc257387205f8410a1806f161afcadcd2c4a360a. The transferred dv/caliptra_bfm snapshot is recorded by source-snapshot.sha256 and source-snapshot.txt.
+
+Build job 1953 passed with 4 CPUs and 4 GiB; wall time 3:28.27, peak RSS 2,381,480 KiB. Model SHA-256: 5b5ed06f7a20145713eb95808bb976274e99c33d5f34a7b0709328aa4d22431c.
+
+Simulation job 1954 ran only row 91 with 1 CPU, 3 GiB, and a 600-second wrapper cap. It reproduced ERR_SHA_BLOCK_NOT_STABLE after 40.00 seconds of simulation (42.196 seconds total runner time, 27,868 KiB peak RSS). The trace shows software ZEROIZE asserting hwclr, followed by a legitimate block clear as ready_reg drops; see root-cause.md.
+
+The result archive is trace-run-1954-sha512-zeroize.tar.gz with SHA-256 f7a1caf35bd44fec135effc588fc87cec28c122a98f0929ab18935b18931b3c0. Result-file checksums passed before archiving, as did the local archive and source-snapshot checks. The remote run directory was removed after archival, freeing 729,172,675 bytes.

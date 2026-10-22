@@ -1,0 +1,9 @@
+job_id=2086
+run_dir=/home/dsell/slurm-runs/caliptra-bfm/a2/m11b-focused-traces-20261017-05
+source_commit=1f132e764b6385aeeecd6149703db5ed3eb5c148
+requested=2 CPUs, 4 GiB, 25 min; build then one 600 s ECC gate
+5e6509e79e3299d6406a5e943323e6005e1fb03ec7c6f5e35449bb500a4623c3  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-05/build-and-gate.sbatch
+6b42cc0219e8e306b896135137f2478ef53f490329cc52444c29091e9a6d1217  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-05/build.sbatch
+9c15d0734ded1335dfbb6e2dc6bdd25a1001522135e3c3b8a5e7fee2b56d1399  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-05/prepare_m11b_traces.py
+b43224ee2cc7b7a01748dda2403a5d5a0123741cbb093491c53d3cb2bc48d3ba  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-05/run-gate.sbatch
+aa6be2b378cdd4a6a7b89ae71645dbbbd1c4a8c9b325e2cf34298ba2326490eb  evidence/caliptra-bfm-verilator-m11-20261016/remaining-59/diagnostics/m11b-focused-traces-20261017-05/run-selection.tsv

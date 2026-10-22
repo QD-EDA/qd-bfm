@@ -1,0 +1,72 @@
+Icarus: Icarus Verilog version 13.0 (devel) (cae03564)
+00000000
+00000001
+00000002
+00
+01
+02
+00000001
+00000002
+01
+02
+case0=00
+case1=00
+case2=00
+case3=00
+case4=01
+case5=02
+case6=00
+case7=00
+case8=01
+case9=02
+Verilator: Verilator 5.051 devel rev v5.050-196-g7dcd4e0b6 (mod)
+g++ -Os  -I.  -MMD -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments  -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare  -Wno-tautological-compare -Wno-uninitialized -Wno-unnecessary-virtual-specifier -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -c -o verilated.o /Users/danielellerbrock/oss-cad-suite/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments  -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare  -Wno-tautological-compare -Wno-uninitialized -Wno-unnecessary-virtual-specifier -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -c -o verilated_threads.o /Users/danielellerbrock/oss-cad-suite/share/verilator/include/verilated_threads.cpp
+python3 /Users/danielellerbrock/oss-cad-suite/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vcommand_width.cpp Vcommand_width___024root__0.cpp Vcommand_width__main.cpp Vcommand_width___024root__Slow.cpp Vcommand_width___024root__0__Slow.cpp Vcommand_width__Syms__Slow.cpp > Vcommand_width__ALL.cpp
+g++ -Os  -I.  -MMD -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include -I/Users/danielellerbrock/oss-cad-suite/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments  -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare  -Wno-tautological-compare -Wno-uninitialized -Wno-unnecessary-virtual-specifier -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -c -o Vcommand_width__ALL.o Vcommand_width__ALL.cpp
+g++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv,-U,_vlog_startup_routines   verilated.o verilated_threads.o Vcommand_width__ALL.a    -pthread -lpthread   -o Vcommand_width
+rm Vcommand_width__ALL.verilator_deplist.tmp
+- V e r i l a t i o n   R e p o r t: Verilator 5.051 devel rev v5.050-196-g7dcd4e0b6 (mod)
+- Verilator: Built from 0.034 MB sources in 2 modules, into 0.014 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 5.303 s (elab=0.007, cvt=0.012, bld=5.272); cpu 0.016 s on 1 threads; allocated 10.656 MB
+- S i m u l a t i o n   R e p o r t: Verilator 5.051 devel
+- Verilator: end at 0s; walltime 0.000 s; speed 0.000 s/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+00
+01
+02
+00
+01
+02
+01
+02
+01
+02
+case0=00
+case1=01
+case2=02
+case3=00
+case4=01
+case5=02
+case6=01
+case7=02
+case8=01
+case9=02
+        6.25 real         4.56 user         0.56 sys
+           226754560  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               73434  page reclaims
+                1558  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                  12  signals received
+                 903  voluntary context switches
+                5050  involuntary context switches
+            38954538  instructions retired
+            27857207  cycles elapsed
+             1556864  peak memory footprint

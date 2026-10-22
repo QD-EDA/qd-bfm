@@ -1,0 +1,1 @@
+/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/cbd_sampler/tb/cbd_sampler_tb.sv:260: warning: method function 'pop_front' is being called as a task.

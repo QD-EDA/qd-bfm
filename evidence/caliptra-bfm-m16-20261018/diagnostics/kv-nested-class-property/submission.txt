@@ -1,0 +1,6 @@
+Slurm job ID: 2710
+Remote run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-nested-class-property-20261018-01
+Submission: sbatch --parsable /home/dsell/slurm-runs/caliptra-bfm/a2/m16-kv-nested-class-property-20261018-01/run.sbatch
+Resources: 1 CPU, 1 GiB RAM, 5-minute Slurm wall limit, 60-second compile timeout, 30-second run timeout.
+Local cross-check: Verilator 5.051 devel on MacBook-Air.local compiled and ran the same source, printed NESTED_CLASS_PROPERTY_OK, and exited after $finish.
+Terminal result: Icarus compile_exit=0 and run_exit=0; printed NESTED_CLASS_PROPERTY_OK. This generic reduced pattern does not reproduce the KeyVault row-6 diagnostic; no simulator issue was filed.

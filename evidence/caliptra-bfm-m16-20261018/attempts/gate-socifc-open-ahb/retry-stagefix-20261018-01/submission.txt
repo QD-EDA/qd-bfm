@@ -1,0 +1,6 @@
+Submitted 2026-10-18 to DAN-DESKTOP.
+Slurm job: 2692
+Command: cd /home/dsell/slurm-runs/caliptra-bfm/a2/m16-socifc-open-ahb-20261018-02 && sbatch --parsable run.sbatch
+Run directory: /home/dsell/slurm-runs/caliptra-bfm/a2/m16-socifc-open-ahb-20261018-02
+Source snapshot SHA-256: 750166742900f16fe14b87f6a61d2e2684eeaaee449806cb664110693d1025cf
+Resources: 1 CPU, 5 GiB Slurm memory, 30 min job walltime, 600 s per-test timeout; M16 one-row gate.

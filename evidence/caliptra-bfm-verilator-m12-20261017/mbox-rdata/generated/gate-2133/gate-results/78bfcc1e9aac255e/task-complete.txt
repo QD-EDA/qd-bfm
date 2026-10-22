@@ -1,0 +1,1 @@
+test_id=78bfcc1e9aac255e testname=smoke_test_mbox wrapper_exit=0 outer_timeout_s=12514 completed_at=2026-10-17T10:52:57-06:00

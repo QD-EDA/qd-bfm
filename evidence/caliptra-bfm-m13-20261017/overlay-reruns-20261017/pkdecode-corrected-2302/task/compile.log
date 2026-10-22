@@ -1,0 +1,2 @@
+/home/dsell/slurm-runs/caliptra-bfm/a2/m13b-pkdecode-corrected-retry-20261017-01/tasks/adams-bridge-v2-0-3-pkdecode_tb/overlay/pkdecode_tb.sv:186: warning: Static variable initialization requires explicit lifetime in this context.
+/home/dsell/slurm-runs/caliptra-bfm/a2/m13b-pkdecode-corrected-retry-20261017-01/tasks/adams-bridge-v2-0-3-pkdecode_tb/overlay/pkdecode_tb.sv:187: warning: Static variable initialization requires explicit lifetime in this context.

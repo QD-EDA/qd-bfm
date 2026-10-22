@@ -1,0 +1,1 @@
+BLOCKED row=58 test=sib_rand_test: /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/submodules/adams-bridge/src/sample_in_ball/tb/sample_in_ball_tb.sv:25: error: Unknown package `sampler_pkg' in import. Is its source in the compile list?

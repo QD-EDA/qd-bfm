@@ -1,0 +1,12 @@
+result=TIMEOUT
+environment_id=caliptra-v2-1-2-ecc_top_tb
+top=ecc_top_tb
+runner_exit=1
+compile_exit=0
+sim_exit=124
+pass_markers=0
+failure_markers=0
+mismatches=0
+completed_sections=0
+vector_summary=
+elapsed_seconds=6900

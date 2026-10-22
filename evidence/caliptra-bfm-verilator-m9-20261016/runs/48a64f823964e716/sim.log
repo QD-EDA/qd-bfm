@@ -1,0 +1,94 @@
+
+VerilatorTB: Start of sim
+
+DCCM pre-load from 50000000 to 5003ffff
+DCCM pre-load completed
+ICCM pre-load from 40000000 to 4003ffff
+ICCM pre-load completed
+MBOX pre-load from 00000000 to 00010000
+MBOX pre-load completed
+
+JTAG: Virtual JTAG interface jtag0 is listening on port 0. Use
+OpenOCD and the following configuration to connect:
+  interface remote_bitbang
+  remote_bitbang_host localhost
+  remote_bitbang_port 0
+STRAP_SS_KEY_RELEASE_KEY_SIZE set to default value 0x0040
+STRAP_SS_KEY_RELEASE_BASE_ADDR set to default value 0x0000000123440000
+
+
+
+
+
+
+
+CLP: Waiting for cptra_rst_b deassertion
+
+SoC: Asserting cptra_pwrgood and breakpoint. cycleCnt [         15] deassert_hard_rst_flag[0]
+
+SoC: De-Asserting cptra_rst_b. cycleCnt [         20] deassert_rst_flag[0]
+
+CLP: Observed cptra_rst_b deassertion
+
+CLP: Ready for fuse download
+
+SoC: Writing obfuscated UDS to fuse bank
+
+SoC: Writing obfuscated Field Entropy to fuse bank
+
+SoC: Writing obfuscated HEK seed to fuse bank
+
+SoC: Writing SOC Stepping ID to fuse bank
+
+SoC: Writing fuse done register
+
+SoC: Polling Flow Status...
+  >>> SoC: Ready for Fuses deasserted after polling           1 times
+
+SoC: Writing BootGo register
+
+CLP: ROM Flow in progress...
+
+6203000 - ----------------------------------
+6252000 - Smoke Test AXI DMA AES  !!
+6289000 - ----------------------------------
+7115000 - Tag address: 0x50020108
+7187000 - Tag: 
+7225000 - Sending image payload via AHB i/f to AXI SRAM
+7357000 - Configuring AES for little endian mode
+7426000 - Write AES CTRL with value 0x481
+7522000 - Load Key data to AES
+7582000 - Write AES IV
+7630000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+7718000 - Wait for INPUT_READY
+7758000 - Write AES AAD Block 0
+7840000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+7925000 - Wait for INPUT_READY
+7967000 - Write AES AAD Block 1
+8043000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+8353000 - Read and Compare GCM TAG
+8408000 - AES Operation Complete
+8459000 - Sending image payload via AHB i/f to AXI SRAM
+9100000 - Executing AES flow for long string test
+9190000 - Configuring AES for little endian mode
+9258000 - Write AES CTRL with value 0x481
+9353000 - Load Key data to AES
+9414000 - Write AES IV
+9463000 - Write GCM_AAD Phase, NUM_BYTES 0x10
+9553000 - Wait for INPUT_READY
+9594000 - Write AES AAD Block 0
+9677000 - Write GCM_AAD Phase, NUM_BYTES 0x4
+9764000 - Wait for INPUT_READY
+9805000 - Write AES AAD Block 1
+9883000 - SRC: { 0x1_23440000 } to DST: { 0x1_23460000 }
+12013000 - Read and Compare GCM TAG
+12070000 - AES Operation Complete
+12110000 - AES flow complete
+* TESTCASE PASSED
+
+Finished : minstret = 37206, mcycle = 121086
+See "exec.log" for execution trace with register updates..
+
+- /home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl/src/integration/tb/caliptra_top_tb_services.sv:2445: Verilog $finish
+
+VerilatorTB: End of sim

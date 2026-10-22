@@ -1,0 +1,11 @@
+# Row 66 skdecode negative-case overlay (job 2698)
+
+**PASS with overlay** for Adams Bridge `skdecode_normal_test` (row 66, seed 1) on DAN-DESKTOP. The pinned inputs are Caliptra `49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`, Adams Bridge `b77e3d899e828d626cfc2a0d26a6b5704cc121e0`, and Icarus source `9b5fad2afb4104caa816b257d5bccc40f01b8c66` (Icarus 13.0 devel; compiler SHA256 `6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288`). Python was 3.14.4. Compile and simulation exited 0 without timeout; runner time was 0.22 s with 24,276 KiB peak RSS. Slurm requested 1 CPU / 3 GiB; the row timeout was 600 s.
+
+The log shows all normal s1/s2/t0 checks passing, then `invalid s1 is detected at 121!`, `*** All test cases completed successfully.`, and `* TESTCASE PASSED`. This addresses the odd-address false failure from the first width-only gate: the testbench injects invalid data on keymem A for an even selected address and now also injects it on keymem B for an odd selected address. The overlay also maps the two undefined `MLDSA_MEM_ADDR_WIDTH` testbench references to package-exported `ABR_MEM_ADDR_WIDTH`. No RTL, firmware, or pass criteria changed.
+
+The generated overlay SHA256 is `f51a39cbeb552480581928f9fd6847dd38be624dcae6c000f82217857315055a`; filelist overlay SHA256 is `4f328fa9cd1e920c7a06c52de254e440f9efae876022d42ccd918f235a39a9fa`; compiled VVP SHA256 is `da5aa9c0bc0fcfa1066d07bd91b719b8ce5769285323072ad1eb2d5404c2d98e`. The original testbench SHA256 is `f1a7866df738fa78eea4922ca2b11b992b7fd892f4c4f89db78b49e7af12c2ff`; the pinned filelist SHA256 is `5154b326f474e58703523c250cfd997b11edb29153b1839ff9671fc7592f67b1`.
+
+Pinned-only remains **BLOCKED** by the undefined testbench width identifier. The first width-only overlay gate is retained under `gate-adams-row66-skdecode-overlay/`; it correctly failed when the test selected odd address 121, revealing the bench's A-only negative-case injection. The historical c339 run happened to select even address 108 and passed, so it did not expose this gap and is not current-pin evidence.
+
+The complete Slurm capture is `raw/capture.tar.gz` (SHA256 `a54180bd82cf8ced2cc4f2c379d8048d997079f877bdb403e5eb1a48e776abc3`). Extracted-file hashes are in `raw/SHA256SUMS.local.txt`. The remote run tree occupied 483,907 bytes and was removed after capture.

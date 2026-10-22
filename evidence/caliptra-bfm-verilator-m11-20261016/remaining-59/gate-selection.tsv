@@ -1,0 +1,2 @@
+array_index	test_id	testname	case_dir	case_yaml	timeout_s	timeout_basis	c339_outcome	c339_mcycle	c339_wall_s
+0	cadf43c78de6a454	smoke_test_ahb_mux	smoke_test_ahb_mux	smoke_test_ahb_mux/smoke_test_ahb_mux.yml	5084	existing pinned selection	PASS	3973	NA

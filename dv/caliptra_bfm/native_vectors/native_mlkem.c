@@ -1,5 +1,5 @@
 /* Local replacement for Caliptra's unavailable random_test_ml_kem.py.
- * Implements only the pinned testbench's keygen (1) and encap (2) file protocol.
+ * Implements the pinned testbench's keygen (1), encap (2), and decap (3) file protocol.
  * OpenSSL 3.5+ provides the FIPS 203 deterministic inputs used here.
  */
 #include <openssl/core_names.h>
@@ -119,11 +119,35 @@ static void encap(FILE *input, FILE *output)
     EVP_PKEY_CTX_free(import);
 }
 
+static void decap(FILE *input, FILE *output)
+{
+    unsigned char dk[DK_SIZE], ct[CT_SIZE], secret[SEED_SIZE];
+    size_t secret_size = sizeof secret;
+    read_hex(input, dk, sizeof dk);
+    read_hex(input, ct, sizeof ct);
+
+    EVP_PKEY *key = EVP_PKEY_new_raw_private_key_ex(NULL, "ML-KEM-1024", NULL, dk, sizeof dk);
+    if (!key) fail("decapsulation key rejected");
+    EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new_from_pkey(NULL, key, NULL);
+    if (!ctx || EVP_PKEY_decapsulate_init(ctx, NULL) <= 0)
+        fail("decapsulation init failed");
+    if (EVP_PKEY_decapsulate(ctx, secret, &secret_size, ct, sizeof ct) <= 0 ||
+        secret_size != SEED_SIZE)
+        fail("decapsulation failed");
+
+    fputs("3\n", output);
+    write_hex(output, dk, sizeof dk);
+    write_hex(output, ct, sizeof ct);
+    write_hex(output, secret, sizeof secret);
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(key);
+}
+
 int main(int argc, char **argv)
 {
-    if (argc != 6 || (strcmp(argv[1], "1") && strcmp(argv[1], "2")) ||
+    if (argc != 6 || (strcmp(argv[1], "1") && strcmp(argv[1], "2") && strcmp(argv[1], "3")) ||
         strcmp(argv[2], "-i") || strcmp(argv[4], "-o"))
-        fail("expected: native_mlkem {1|2} -i INPUT -o OUTPUT");
+        fail("expected: native_mlkem {1|2|3} -i INPUT -o OUTPUT");
     FILE *input = fopen(argv[3], "r");
     if (!input) fail("cannot open input");
     char opcode[16];
@@ -135,7 +159,8 @@ int main(int argc, char **argv)
     FILE *output = fopen(argv[5], "w");
     if (!output) fail("cannot open output");
     if (argv[1][0] == '1') keygen(input, output);
-    else encap(input, output);
+    else if (argv[1][0] == '2') encap(input, output);
+    else decap(input, output);
     if (fclose(output) != 0) fail("output close failed");
     if (fclose(input) != 0) fail("input close failed");
     return 0;

@@ -1,0 +1,10 @@
+HEAD=60502cff1c333a04d0f678b9fee0cf1135270305
+worktree=dirty; staged source archive is the checksum-verified runner/test snapshot used by job 2750
+source_archive_sha256=9268ac76d72eefc0ebb1229732205ffc2cd6ed54fd1e5a0031795245c4b47a56
+diagnostic_wrapper_sha256=4b708df42e9bb77cd8edfb18115cc8eedaacb51f5da18bc17ff24bdbb3745cf0
+run_script_sha256=db9c204b796bfaa1bfa2ace51f489e860befccdb5ea05d75ac30796cb3a8e699
+source_repo=adams-bridge; source_pin=b77e3d899e828d626cfc2a0d26a6b5704cc121e0
+Caliptra pin=49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e
+Icarus source pin=9b5fad2afb4104caa816b257d5bccc40f01b8c66
+Icarus binary SHA256=6cd9749cb1e981820f64fdc737ae458bf6c46e3fcad8927afaf92649ee9a3288
+resources=1 CPU, 1250 MiB, 20-minute Slurm cap, 600-second row timeout; memory basis job 2750 peak 766208 KiB x 1.25 = 957760 KiB
