@@ -1,0 +1,7 @@
+57fd86ffc1f658737f42bc42bdb94771b85158230c35c15ee5cbefdc32366979  build.resource  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  exit.code  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+84d95a9f3ef0c7bd45b20eb7cd948a51a964a18e80629a0270b1e8247e1c3ed6  filelist-manifest.txt  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+d1e85e366861478d1400184a5c2bf99f4ac5661eb63a28c21dcf07e945801b2a  model.bytes  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+0ac473a803472bc0a6cffa4ba5df95aaabecf167f9f67a8c24df1f83485972f7  model.sha256  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+611305ec5364dea63a74151983c342deddf491e8ab5f20c8f70725ca5160ea70  time.txt  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted
+110d748d8e6eca23b22ad7bf766d1d1fcf69c45731c3260fc80857cdd2d62576  verilator.version  # 2026-10-22 10:19:08 Slurm job 4023 model-build summary; raw compiler log omitted

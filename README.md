@@ -62,17 +62,27 @@ python3 evidence/caliptra-bfm-verilator-m9-20261016/run-verilator-top-case.py \
 
 | Run | Simulator and scope | Results |
 | --- | --- | --- |
+| [M24 full census](evidence/caliptra-bfm-m24-20261022/README.md) | Verilator 5.052; 162 stock-firmware rows run, 109 census rows waitlisted | 103 PASS, 44 FAIL, 14 firmware-build failures, 1 TIMEOUT; per-row causes and wall times are recorded. |
 | [M9](evidence/caliptra-bfm-verilator-m9-20261016/README.md) | Verilator 5.052; 162 stock-firmware rows | 103 PASS, 43 FAIL, 14 firmware-build failures, 2 TIMEOUT (63.6% PASS); 109 non-firmware rows were out of scope. |
 | [M21 Part B](evidence/caliptra-bfm-m21-20261020/README.md) | Icarus current-main `cc25756d`; 20 selected stock-firmware rows | 11 PASS, 9 TIMEOUT; all 20 reached a terminal outcome. |
 | [M23](evidence/caliptra-bfm-m23-20261022/README.md) | Verilator 5.052; same 20 selected stock-firmware rows | 18 PASS, 1 FAIL, 1 firmware-build failure; all 20 reached a terminal outcome. |
 
-M21's 20 rows were selected from cases without a prior Icarus terminal result,
-while M9 covers the 162 stock-firmware rows on Verilator. M23 reran the M21
-selection under Verilator: eight Icarus TIMEOUTs passed, one timed-out case
-failed, and one Icarus-passing case failed during firmware build. See the
-[M23 case table](evidence/caliptra-bfm-m23-20261022/results.tsv) and
-[E-Verilog waitlist](docs/E-VERILOG-WAITLIST.md). Block-level UVM remains on
-Icarus; Verilator is the default for full-top stock-firmware cases that build.
+M24 ran the same 162 stock-firmware rows as M9 and recorded all 271 census
+rows; 109 authored-stimulus and generated-UVMF benches remain waitlisted because
+they have no stock-firmware full-top launch path. M24's PASS count matches M9;
+one M9 timeout, `smoke_test_mbox`, now reaches the 20-million-cycle guard and
+is a terminal FAIL, while `cptra_ss_test_rom` still times out. The summed
+per-case time is 99,356.264 s in M24 versus 105,804.838 s in M9 (6.09% lower;
+these are case-time sums, not array elapsed times).
+
+M21's 20 rows were selected from cases without a prior Icarus terminal result.
+M23 reran that selection under Verilator: eight Icarus TIMEOUTs passed, one
+timed-out case failed, and one Icarus-passing case failed during firmware
+build. M24 fixes that row 144 case-directory mapping, so
+`smoke_test_sha3_interrupts` now passes. `smoke_test_doe_scan` remains a
+terminal DOE status-valid SVA failure on Verilator. See the [M23 case table](evidence/caliptra-bfm-m23-20261022/results.tsv)
+and [E-Verilog waitlist](docs/E-VERILOG-WAITLIST.md). Block-level UVM remains
+on Icarus; Verilator is the default for full-top stock-firmware cases that build.
 
 ### Repository layout
 
