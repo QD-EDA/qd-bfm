@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 module ecc_generated_full_probe;
   hdl_top hdl();
   hvl_top hvl();

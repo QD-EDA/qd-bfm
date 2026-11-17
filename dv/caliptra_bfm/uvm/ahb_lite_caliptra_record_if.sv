@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // AHB-Lite completed transfer records consumed by the UVM monitor adapter.
 interface ahb_lite_caliptra_record_if(input wire HCLK);
   wire HRESETn;

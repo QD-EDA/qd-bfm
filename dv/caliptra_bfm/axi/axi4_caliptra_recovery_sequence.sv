@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Selects the DMA block size and recovery threshold for each recovery test.
 module axi4_caliptra_recovery_sequence #(
   parameter integer DATA_WIDTH = 32,

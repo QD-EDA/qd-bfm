@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Drop-in replacement for Caliptra's testbench AXI complex. Compile this file
 // in place of caliptra_top_tb_axi_complex.sv when attaching the open BFM.
 `include "config_defines.svh"

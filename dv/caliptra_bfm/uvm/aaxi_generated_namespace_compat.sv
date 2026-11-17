@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // The pinned generated source imports these namespaces. Only observed names
 // needed by the SoC-IFC environment are defined; these are not replacements
 // for the Avery xactor, test, or PLL packages.

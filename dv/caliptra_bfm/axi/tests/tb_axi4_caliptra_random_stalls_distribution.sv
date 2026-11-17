@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 module tb_axi4_caliptra_random_stalls_distribution;
   reg ACLK = 0;
   reg ARESETn = 0;

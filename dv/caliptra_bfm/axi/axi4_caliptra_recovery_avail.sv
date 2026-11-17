@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Models Caliptra's recovery_data_avail policy over a FIFO endpoint's events.
 module axi4_caliptra_recovery_avail #(
   // 0 selects by plusarg or uniform random choice; 1/2/3 select a fixed mode.

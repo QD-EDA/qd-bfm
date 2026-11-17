@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded request/response mailboxes for the UVM driver and AXI task proxy.
 interface axi4_caliptra_master_cmd_if(input wire ACLK);
   parameter integer COMMAND_SLOTS = 4;

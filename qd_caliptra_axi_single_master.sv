@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Caliptra v2.1.2 axi_if adapter. Call driver.write_one / driver.read_one.
 // Both interfaces and the BFM must share clk/rst_n and identical AW/DW/IW/UW.
 // This adapter must be the only manager of wr/rd: do not also call axi_if's

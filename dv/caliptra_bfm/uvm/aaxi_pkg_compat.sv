@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Caliptra-profile constants observed in generated SoC-IFC consumers.
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
 package aaxi_pkg;

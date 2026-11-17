@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Lower-bound signal interface matching the AXI channels wired by Caliptra's
 // generated SoC-IFC hdl_top.sv.
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY

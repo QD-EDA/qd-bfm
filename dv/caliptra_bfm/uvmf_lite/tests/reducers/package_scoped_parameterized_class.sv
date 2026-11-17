@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 package proxy_types_pkg;
   class proxy #(parameter int WIDTH = 32);
     function new();

@@ -10,6 +10,9 @@ IVERILOG_BIN=${IVERILOG_BIN:-iverilog}
 VVP_BIN=${VVP_BIN:-vvp}
 SV_EDITION=${SV_EDITION:-2017}
 tmpdir=$(mktemp -d)
+# Command file, not a positional source: options after the first source are
+# read as files by getopt on macOS. Lists the QD timescale prelude first.
+printf '%s\n' "$repo_root/dv/caliptra_bfm/qd_timescale.sv" > "$tmpdir/qd_timescale.f"
 out="$tmpdir/caliptra_hmac_ahb_uvm_bfm.vvp"
 filelist="$tmpdir/hmac_ctrl_uvm_bfm.vf"
 log="$tmpdir/caliptra_hmac_ahb_uvm_bfm.log"
@@ -38,6 +41,7 @@ CALIPTRA_ROOT="$caliptra_root" \
 CALIPTRA_PRIM_ROOT="$caliptra_root/src/caliptra_prim_generic" \
 CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
   "$IVERILOG_BIN" -uvm -g"$SV_EDITION" -s tb_caliptra_hmac_ahb_uvm_bfm -o "$out" \
+  -f "$tmpdir/qd_timescale.f" \
   -f "$filelist" \
   -f dv/caliptra_bfm/uvm/caliptra_bfm_uvm.f \
   dv/caliptra_bfm/ahb_lite/tests/tb_caliptra_hmac_ahb_uvm_bfm.sv

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 module tb_axi4 #(parameter RESPONSE_DELAY=0);
   logic clk=0, rst_n=0;
   always #5 clk=~clk;

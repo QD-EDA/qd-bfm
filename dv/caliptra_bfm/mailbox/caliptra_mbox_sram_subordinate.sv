@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded synchronous model for Caliptra's 32-bit + ECC mailbox SRAM port.
 module caliptra_mbox_sram_subordinate #(
   parameter integer DEPTH_WORDS = soc_ifc_pkg::CPTRA_MBOX_DEPTH,

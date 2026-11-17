@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Typed manager adapter for Caliptra's axi_if and the task-based manager.
 module axi4_caliptra_master_if_manager #(
   parameter integer ADDR_WIDTH = 19,

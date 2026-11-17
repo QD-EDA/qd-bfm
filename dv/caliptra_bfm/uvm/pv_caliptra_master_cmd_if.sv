@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Request/response boundary between UVM sequences and the PCRVault task BFM.
 interface pv_caliptra_master_cmd_if #(
   parameter integer ENTRY_WIDTH = 5,

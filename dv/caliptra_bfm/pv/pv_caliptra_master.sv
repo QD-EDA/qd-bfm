@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Transaction-level driver for Caliptra's PCRVault client pins.
 //
 // pv_read is a combinational lookup request. pv_write.write_en commits one

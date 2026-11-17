@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded completed-transaction records for the Caliptra AXI profile.
 // Beat zero occupies the least-significant packed output slice.
 module axi4_caliptra_transaction_monitor #(

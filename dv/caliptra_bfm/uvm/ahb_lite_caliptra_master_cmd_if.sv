@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Request/response mailbox between UVM and the AHB-Lite module task manager.
 interface ahb_lite_caliptra_master_cmd_if(input wire HCLK);
   localparam integer MAX_BURST_BEATS = 256;

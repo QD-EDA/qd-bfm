@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room HDL-side UVMF types required by generated BFM interfaces.
 `ifndef CALIPTRA_BFM_EXTERNAL_UVMF
 package uvmf_base_pkg_hdl;

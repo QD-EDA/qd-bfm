@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Reuse the independent target and transaction sequence; corrupt only its pins.
 module tb_four_state;
   tb_axi4 test();

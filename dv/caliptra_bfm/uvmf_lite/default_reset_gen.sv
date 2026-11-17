@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Open reset helper required by Caliptra-generated UVMF HDL tops.
 `ifndef CALIPTRA_BFM_EXTERNAL_UVMF
 module default_reset_gen(

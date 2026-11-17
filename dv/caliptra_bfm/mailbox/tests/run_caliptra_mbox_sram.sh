@@ -19,6 +19,7 @@ cd "$repo_root"
   -I"$CALIPTRA_RTL/src/libs/rtl" \
   -I"$CALIPTRA_RTL/src/soc_ifc/rtl" \
   -s tb_caliptra_mbox_sram_subordinate -o "$out" \
+  dv/caliptra_bfm/qd_timescale.sv \
   "$CALIPTRA_RTL/src/soc_ifc/rtl/soc_ifc_pkg.sv" \
   dv/caliptra_bfm/mailbox/caliptra_mbox_sram_subordinate.sv \
   dv/caliptra_bfm/mailbox/tests/tb_caliptra_mbox_sram_subordinate.sv

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Caliptra DMA SRAM/FIFO map composed from the bounded endpoint models.
 module axi4_caliptra_dma_subordinate #(
   parameter integer ADDR_WIDTH = 48,

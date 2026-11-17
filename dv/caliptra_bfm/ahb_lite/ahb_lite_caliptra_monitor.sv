@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Reconstructs completed AHB-Lite transfers from the address/data pipeline.
 module ahb_lite_caliptra_monitor #(
   parameter integer ADDR_WIDTH = 32,

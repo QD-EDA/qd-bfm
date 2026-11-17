@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Caliptra AHB-Lite profile checks on a selected 64-bit responder path.
 module ahb_lite_caliptra_checker #(
   parameter integer ADDR_WIDTH = 32,

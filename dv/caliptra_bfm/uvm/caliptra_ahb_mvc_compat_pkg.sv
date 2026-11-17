@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room lower-bound types for the AHB fields consumed by Caliptra UVMF.
 // Exclude these fallback packages when compiling with licensed MVC/QVIP.
 `ifndef CALIPTRA_BFM_EXTERNAL_MVC

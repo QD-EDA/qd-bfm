@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 module qd_axi4_single_master #(
   parameter AW = 32, DW = 32, IW = 8, TIMEOUT = 16
 ) (

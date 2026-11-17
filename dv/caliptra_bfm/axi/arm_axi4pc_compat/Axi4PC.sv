@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 `default_nettype none
 
 // Narrow adapter for Caliptra's fixed ARM Axi4PC instantiation. It preserves

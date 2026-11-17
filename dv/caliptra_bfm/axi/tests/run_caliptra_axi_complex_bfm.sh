@@ -25,6 +25,7 @@ cd "$repo_root"
   -I"$CALIPTRA_RTL/src/axi/rtl" \
   -I"$CALIPTRA_RTL/src/soc_ifc/rtl" \
   -s tb_caliptra_top_tb_axi_complex_bfm -o "$out" \
+  dv/caliptra_bfm/qd_timescale.sv \
   "$CALIPTRA_RTL/src/axi/rtl/axi_pkg.sv" \
   "$CALIPTRA_RTL/src/axi/rtl/axi_if.sv" \
   "$CALIPTRA_RTL/src/soc_ifc/rtl/soc_ifc_pkg.sv" \

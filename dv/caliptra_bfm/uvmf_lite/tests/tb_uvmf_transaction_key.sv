@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 `include "uvm_macros.svh"
 package uvmf_transaction_key_test_pkg;
   import uvm_pkg::*;

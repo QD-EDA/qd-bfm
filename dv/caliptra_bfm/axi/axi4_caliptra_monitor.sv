@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Emits one-cycle records for each accepted AXI channel beat.
 module axi4_caliptra_monitor #(
   parameter integer ADDR_WIDTH = 19,
