@@ -62,58 +62,58 @@ module tb_ahb_lite_caliptra_uvm_agent;
       super.new(name, parent);
     endfunction
 
-    function void write(ahb_lite_caliptra_transaction item);
-      if (item.protocol_error)
+    function void write(ahb_lite_caliptra_transaction t);
+      if (t.protocol_error)
         `uvm_fatal("AHB_MON_PROTOCOL", "Monitor marked a legal transfer as malformed")
-      if (item.error) begin
+      if (t.error) begin
         error_count++;
-        if (item.address == 32'h10000) begin
-          if (!(item.trans inside {2'b10, 2'b11}))
-            `uvm_fatal("AHB_MON_ERROR", $sformatf("Unexpected burst ERROR record: %s", item.convert2string()))
+        if (t.address == 32'h10000) begin
+          if (!(t.trans inside {2'b10, 2'b11}))
+            `uvm_fatal("AHB_MON_ERROR", $sformatf("Unexpected burst ERROR record: %s", t.convert2string()))
           error_burst_beats++;
-        end else if (item.write || !(item.address inside {32'h20, 32'h40}) ||
-                     item.trans != 2'b10) begin
-          `uvm_fatal("AHB_MON_ERROR", $sformatf("Unexpected ERROR record: %s", item.convert2string()))
+        end else if (t.write || !(t.address inside {32'h20, 32'h40}) ||
+                     t.trans != 2'b10) begin
+          `uvm_fatal("AHB_MON_ERROR", $sformatf("Unexpected ERROR record: %s", t.convert2string()))
         end
-      end else if (item.address == 32'h40) begin
-        if (item.size != 2 || item.data[31:0] != 32'h89ab_cdef)
-          `uvm_fatal("AHB_MON_RAL", $sformatf("Bad 32-bit RAL record: %s", item.convert2string()))
-        if (item.write) write_count++;
+      end else if (t.address == 32'h40) begin
+        if (t.size != 2 || t.data[31:0] != 32'h89ab_cdef)
+          `uvm_fatal("AHB_MON_RAL", $sformatf("Bad 32-bit RAL record: %s", t.convert2string()))
+        if (t.write) write_count++;
         else read_count++;
-      end else if (item.address inside {32'h80, 32'h88, 32'h90, 32'h98}) begin
-        if (item.size != 3 ||
-            ((item.address == 32'h80) && item.trans != 2'b10) ||
-            ((item.address != 32'h80) && item.trans != 2'b11))
-          `uvm_fatal("AHB_MON_BURST", $sformatf("Bad burst address record: %s", item.convert2string()))
-        case (item.address)
-          32'h80: if (item.data != 64'h0102_0304_0506_0708) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 0")
-          32'h88: if (item.data != 64'h1112_1314_1516_1718) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 1")
-          32'h90: if (item.data != 64'h2122_2324_2526_2728) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 2")
-          32'h98: if (item.data != 64'h3132_3334_3536_3738) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 3")
+      end else if (t.address inside {32'h80, 32'h88, 32'h90, 32'h98}) begin
+        if (t.size != 3 ||
+            ((t.address == 32'h80) && t.trans != 2'b10) ||
+            ((t.address != 32'h80) && t.trans != 2'b11))
+          `uvm_fatal("AHB_MON_BURST", $sformatf("Bad burst address record: %s", t.convert2string()))
+        case (t.address)
+          32'h80: if (t.data != 64'h0102_0304_0506_0708) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 0")
+          32'h88: if (t.data != 64'h1112_1314_1516_1718) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 1")
+          32'h90: if (t.data != 64'h2122_2324_2526_2728) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 2")
+          32'h98: if (t.data != 64'h3132_3334_3536_3738) `uvm_fatal("AHB_MON_BURST_DATA", "Bad beat 3")
         endcase
-        if (item.write) begin
+        if (t.write) begin
           write_count++;
           burst_write_beats++;
         end else begin
           read_count++;
           burst_read_beats++;
         end
-      end else if (item.address == 32'hfff8) begin
-        if (!item.write || item.size != 3 || item.trans != 2'b10 ||
-            item.data != 64'h4142_4344_4546_4748)
-          `uvm_fatal("AHB_MON_PARTIAL_BURST", $sformatf("Bad successful beat before burst ERROR: %s", item.convert2string()))
+      end else if (t.address == 32'hfff8) begin
+        if (!t.write || t.size != 3 || t.trans != 2'b10 ||
+            t.data != 64'h4142_4344_4546_4748)
+          `uvm_fatal("AHB_MON_PARTIAL_BURST", $sformatf("Bad successful beat before burst ERROR: %s", t.convert2string()))
         write_count++;
         partial_burst_write_beats++;
-      end else if (item.write) begin
+      end else if (t.write) begin
         write_count++;
-        if (item.address != 32'h20 || item.size != 3 ||
-            item.data != 64'h1122_3344_5566_7788)
-          `uvm_fatal("AHB_MON_WRITE", $sformatf("Bad write record: %s", item.convert2string()))
+        if (t.address != 32'h20 || t.size != 3 ||
+            t.data != 64'h1122_3344_5566_7788)
+          `uvm_fatal("AHB_MON_WRITE", $sformatf("Bad write record: %s", t.convert2string()))
       end else begin
         read_count++;
-        if (item.address != 32'h20 || item.size != 3 ||
-            item.data != 64'h1122_3344_5566_7788)
-          `uvm_fatal("AHB_MON_READ", $sformatf("Bad read record: %s", item.convert2string()))
+        if (t.address != 32'h20 || t.size != 3 ||
+            t.data != 64'h1122_3344_5566_7788)
+          `uvm_fatal("AHB_MON_READ", $sformatf("Bad read record: %s", t.convert2string()))
       end
       -> received;
     endfunction
@@ -136,9 +136,9 @@ module tb_ahb_lite_caliptra_uvm_agent;
       super.new(name, parent);
     endfunction
 
-    function void write(mvc_sequence_item_base base_item);
-      if (!$cast(last_item, base_item))
-        `uvm_fatal("AHB_MVC_CAST", $sformatf("Keyed AHB port published %s, expected ahb_master_burst_transfer #(1,1,1,32,64,64)", base_item.get_type_name()))
+    function void write(mvc_sequence_item_base t);
+      if (!$cast(last_item, t))
+        `uvm_fatal("AHB_MVC_CAST", $sformatf("Keyed AHB port published %s, expected ahb_master_burst_transfer #(1,1,1,32,64,64)", t.get_type_name()))
       if (last_item.data.size() < 1 || last_item.data.size() > AHB_MVC_MAX_BURST_BEATS ||
           last_item.resp.size() != last_item.data.size())
         `uvm_fatal("AHB_MVC_SHAPE", $sformatf("Bad keyed AHB transfer: %s", last_item.convert2string()))

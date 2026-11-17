@@ -134,30 +134,30 @@ module tb_caliptra_axi_mgr_uvm_bfm;
       super.new(name, parent);
     endfunction
 
-    function void write(axi4_caliptra_transaction item);
-      if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h200 || item.id != 0 ||
-          item.len != 1 || item.size != 2 || item.burst != AXI_BURST_INCR ||
-          item.protocol_error)
-        `uvm_fatal("AXI_MGR_RECORD", $sformatf("Bad actual-manager transaction: %s", item.convert2string()))
+    function void write(axi4_caliptra_transaction t);
+      if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h200 || t.id != 0 ||
+          t.len != 1 || t.size != 2 || t.burst != AXI_BURST_INCR ||
+          t.protocol_error)
+        `uvm_fatal("AXI_MGR_RECORD", $sformatf("Bad actual-manager transaction: %s", t.convert2string()))
 
-      if (item.is_write()) begin
-        if (item.lock || item.awuser != AXUSER || item.buser != AXUSER ||
-            item.resp != AXI_RESP_OKAY || item.beatQ.size() != 2 ||
-            item.beatQ[0] != 32'hb10c_0000 || item.beatQ[1] != 32'hb10c_0001 ||
-            item.strbQ.size() != 2 || item.strbQ[0] != 4'hf || item.strbQ[1] != 4'hf ||
-            item.beat_userQ.size() != 2 || item.beat_userQ[0] != AXUSER ||
-            item.beat_userQ[1] != AXUSER || item.lastQ.size() != 2 ||
-            item.lastQ[0] != 0 || item.lastQ[1] != 1)
+      if (t.is_write()) begin
+        if (t.lock || t.awuser != AXUSER || t.buser != AXUSER ||
+            t.resp != AXI_RESP_OKAY || t.beatQ.size() != 2 ||
+            t.beatQ[0] != 32'hb10c_0000 || t.beatQ[1] != 32'hb10c_0001 ||
+            t.strbQ.size() != 2 || t.strbQ[0] != 4'hf || t.strbQ[1] != 4'hf ||
+            t.beat_userQ.size() != 2 || t.beat_userQ[0] != AXUSER ||
+            t.beat_userQ[1] != AXUSER || t.lastQ.size() != 2 ||
+            t.lastQ[0] != 0 || t.lastQ[1] != 1)
           `uvm_fatal("AXI_MGR_WRITE", "Monitor did not capture the real manager's complete write")
         write_count++;
-      end else if (item.is_read()) begin
-        if (item.lock || item.aruser != AXUSER || item.resp != AXI_RESP_OKAY ||
-            item.beatQ.size() != 2 || item.beatQ[0] != 32'hb10c_0000 ||
-            item.beatQ[1] != 32'hb10c_0001 || item.respQ.size() != 2 ||
-            item.respQ[0] != AXI_RESP_OKAY || item.respQ[1] != AXI_RESP_OKAY ||
-            item.beat_userQ.size() != 2 || item.beat_userQ[0] != AXUSER ||
-            item.beat_userQ[1] != AXUSER || item.lastQ.size() != 2 ||
-            item.lastQ[0] != 0 || item.lastQ[1] != 1)
+      end else if (t.is_read()) begin
+        if (t.lock || t.aruser != AXUSER || t.resp != AXI_RESP_OKAY ||
+            t.beatQ.size() != 2 || t.beatQ[0] != 32'hb10c_0000 ||
+            t.beatQ[1] != 32'hb10c_0001 || t.respQ.size() != 2 ||
+            t.respQ[0] != AXI_RESP_OKAY || t.respQ[1] != AXI_RESP_OKAY ||
+            t.beat_userQ.size() != 2 || t.beat_userQ[0] != AXUSER ||
+            t.beat_userQ[1] != AXUSER || t.lastQ.size() != 2 ||
+            t.lastQ[0] != 0 || t.lastQ[1] != 1)
           `uvm_fatal("AXI_MGR_READ", "Monitor did not capture the real manager's complete read")
         read_count++;
       end else begin

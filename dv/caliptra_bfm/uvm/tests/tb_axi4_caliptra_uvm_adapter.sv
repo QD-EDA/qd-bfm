@@ -184,32 +184,32 @@ module tb_axi4_caliptra_uvm_adapter;
       read_count = 0;
     endfunction
 
-    function void write(axi4_caliptra_transaction item);
+    function void write(axi4_caliptra_transaction t);
       axi4_caliptra_transaction copied;
       string summary;
       copied = axi4_caliptra_transaction::type_id::create("copied_item");
-      copied.copy(item);
-      if (!copied.compare(item)) $fatal(1, "UVM transaction copy/compare failed");
-      summary = item.sprint();
-      if (summary.len() == 0 || item.convert2string().len() == 0)
+      copied.copy(t);
+      if (!copied.compare(t)) $fatal(1, "UVM transaction copy/compare failed");
+      summary = t.sprint();
+      if (summary.len() == 0 || t.convert2string().len() == 0)
         $fatal(1, "UVM transaction print method returned no text");
 
-      if (item.is_write()) begin
+      if (t.is_write()) begin
         write_count++;
-        if (item.addr != 48'h1234 || item.id != 8'h31 ||
-            item.data != 32'ha5a5_5a5a || item.beatQ.size() != 1 ||
-            item.beatQ[0] != 32'ha5a5_5a5a || item.strbQ[0] != 4'h5 ||
-            item.awuser != 32'h1122_3344 || item.buser != 32'hdead_beef ||
-            item.resp != 2'b00 || item.protocol_error)
-          $fatal(1, "UVM write transaction fields mismatch: %s", item.convert2string());
-      end else if (item.is_read()) begin
+        if (t.addr != 48'h1234 || t.id != 8'h31 ||
+            t.data != 32'ha5a5_5a5a || t.beatQ.size() != 1 ||
+            t.beatQ[0] != 32'ha5a5_5a5a || t.strbQ[0] != 4'h5 ||
+            t.awuser != 32'h1122_3344 || t.buser != 32'hdead_beef ||
+            t.resp != 2'b00 || t.protocol_error)
+          $fatal(1, "UVM write transaction fields mismatch: %s", t.convert2string());
+      end else if (t.is_read()) begin
         read_count++;
-        if (item.addr != 48'h5678 || item.id != 8'h42 ||
-            item.data != 32'hface_1234 || item.beatQ.size() != 1 ||
-            item.beatQ[0] != 32'hface_1234 || item.aruser != 32'h89ab_cdef ||
-            item.resp != 2'b10 || item.respQ[0] != 2'b10 ||
-            item.beat_userQ[0] != 32'h1357_9bdf || item.protocol_error)
-          $fatal(1, "UVM read transaction fields mismatch: %s", item.convert2string());
+        if (t.addr != 48'h5678 || t.id != 8'h42 ||
+            t.data != 32'hface_1234 || t.beatQ.size() != 1 ||
+            t.beatQ[0] != 32'hface_1234 || t.aruser != 32'h89ab_cdef ||
+            t.resp != 2'b10 || t.respQ[0] != 2'b10 ||
+            t.beat_userQ[0] != 32'h1357_9bdf || t.protocol_error)
+          $fatal(1, "UVM read transaction fields mismatch: %s", t.convert2string());
       end else begin
         $fatal(1, "UVM adapter published unknown transaction kind");
       end
@@ -228,44 +228,44 @@ module tb_axi4_caliptra_uvm_adapter;
       foreach (channel_count[i]) channel_count[i] = 0;
     endfunction
 
-    function void write(axi4_caliptra_channel_transaction item);
+    function void write(axi4_caliptra_channel_transaction t);
       axi4_caliptra_channel_transaction copied;
       copied = axi4_caliptra_channel_transaction::type_id::create("copied_channel_item");
-      copied.copy(item);
-      if (!copied.compare(item) || item.cycle == 0)
-        $fatal(1, "AXI channel copy/compare/cycle check failed: %s", item.convert2string());
+      copied.copy(t);
+      if (!copied.compare(t) || t.cycle == 0)
+        $fatal(1, "AXI channel copy/compare/cycle check failed: %s", t.convert2string());
 
-      case (item.channel)
+      case (t.channel)
         AXI4_CHANNEL_AW: begin
-          if (item.id != 8'h31 || item.addr != 48'h1234 || item.len != 0 ||
-              item.size != 2 || item.burst != 1 || !item.lock ||
-              item.user != 32'h1122_3344)
-            $fatal(1, "AXI AW item mismatch: %s", item.convert2string());
+          if (t.id != 8'h31 || t.addr != 48'h1234 || t.len != 0 ||
+              t.size != 2 || t.burst != 1 || !t.lock ||
+              t.user != 32'h1122_3344)
+            $fatal(1, "AXI AW item mismatch: %s", t.convert2string());
         end
         AXI4_CHANNEL_W: begin
-          if (item.data != 32'ha5a5_5a5a || item.strb != 4'h5 ||
-              item.user != 32'h5566_7788 || !item.last)
-            $fatal(1, "AXI W item mismatch: %s", item.convert2string());
+          if (t.data != 32'ha5a5_5a5a || t.strb != 4'h5 ||
+              t.user != 32'h5566_7788 || !t.last)
+            $fatal(1, "AXI W item mismatch: %s", t.convert2string());
         end
         AXI4_CHANNEL_B: begin
-          if (item.id != 8'h31 || item.response != 0 ||
-              item.user != 32'hdead_beef)
-            $fatal(1, "AXI B item mismatch: %s", item.convert2string());
+          if (t.id != 8'h31 || t.response != 0 ||
+              t.user != 32'hdead_beef)
+            $fatal(1, "AXI B item mismatch: %s", t.convert2string());
         end
         AXI4_CHANNEL_AR: begin
-          if (item.id != 8'h42 || item.addr != 48'h5678 || item.len != 0 ||
-              item.size != 2 || item.burst != 1 || item.lock ||
-              item.user != 32'h89ab_cdef)
-            $fatal(1, "AXI AR item mismatch: %s", item.convert2string());
+          if (t.id != 8'h42 || t.addr != 48'h5678 || t.len != 0 ||
+              t.size != 2 || t.burst != 1 || t.lock ||
+              t.user != 32'h89ab_cdef)
+            $fatal(1, "AXI AR item mismatch: %s", t.convert2string());
         end
         AXI4_CHANNEL_R: begin
-          if (item.id != 8'h42 || item.data != 32'hface_1234 ||
-              item.response != 2'b10 || item.user != 32'h1357_9bdf || !item.last)
-            $fatal(1, "AXI R item mismatch: %s", item.convert2string());
+          if (t.id != 8'h42 || t.data != 32'hface_1234 ||
+              t.response != 2'b10 || t.user != 32'h1357_9bdf || !t.last)
+            $fatal(1, "AXI R item mismatch: %s", t.convert2string());
         end
-        default: $fatal(1, "Unknown AXI channel item: %s", item.convert2string());
+        default: $fatal(1, "Unknown AXI channel item: %s", t.convert2string());
       endcase
-      channel_count[item.channel]++;
+      channel_count[t.channel]++;
       -> received;
     endfunction
   endclass

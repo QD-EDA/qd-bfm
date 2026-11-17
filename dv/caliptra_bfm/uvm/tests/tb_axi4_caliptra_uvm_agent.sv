@@ -245,33 +245,33 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       super.new(name, parent);
     endfunction
 
-    function void write(axi4_caliptra_transaction item);
-      if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
-        if (item.is_write()) begin
-          if (item.id != 8'h60 || item.lock || item.awuser != 32'hcafe_0001 ||
-              item.buser != 32'hcafe_0001 || item.len != 8'hff ||
-              item.beatQ.size() != 256 || item.strbQ.size() != 256 ||
-              item.beat_userQ.size() != 256 || item.lastQ.size() != 256 ||
-              item.resp != 2'b00 || item.protocol_error)
+    function void write(axi4_caliptra_transaction t);
+      if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
+        if (t.is_write()) begin
+          if (t.id != 8'h60 || t.lock || t.awuser != 32'hcafe_0001 ||
+              t.buser != 32'hcafe_0001 || t.len != 8'hff ||
+              t.beatQ.size() != 256 || t.strbQ.size() != 256 ||
+              t.beat_userQ.size() != 256 || t.lastQ.size() != 256 ||
+              t.resp != 2'b00 || t.protocol_error)
             `uvm_fatal("AXI_FULL_WRITE_MON", "Malformed 256-beat write analysis record")
           for (int beat = 0; beat < 256; beat++) begin
-            if (item.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
-                item.strbQ[beat] != 4'hf ||
-                item.beat_userQ[beat] != (32'hb055_0000 | beat) ||
-                item.lastQ[beat] != (beat == 255))
+            if (t.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
+                t.strbQ[beat] != 4'hf ||
+                t.beat_userQ[beat] != (32'hb055_0000 | beat) ||
+                t.lastQ[beat] != (beat == 255))
               `uvm_fatal("AXI_FULL_WRITE_MON", $sformatf("Bad write record at beat %0d", beat))
           end
           full_range_write_count++;
-        end else if (item.is_read()) begin
-          if (item.id != 8'h61 || item.lock || item.aruser != 32'hcaf0_0002 ||
-              item.len != 8'hff || item.beatQ.size() != 256 ||
-              item.respQ.size() != 256 || item.beat_userQ.size() != 256 ||
-              item.lastQ.size() != 256 || item.protocol_error)
+        end else if (t.is_read()) begin
+          if (t.id != 8'h61 || t.lock || t.aruser != 32'hcaf0_0002 ||
+              t.len != 8'hff || t.beatQ.size() != 256 ||
+              t.respQ.size() != 256 || t.beat_userQ.size() != 256 ||
+              t.lastQ.size() != 256 || t.protocol_error)
             `uvm_fatal("AXI_FULL_READ_MON", "Malformed 256-beat read analysis record")
           for (int beat = 0; beat < 256; beat++) begin
-            if (item.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
-                item.beat_userQ[beat] != 32'hcaf0_0002 ||
-                item.respQ[beat] != 2'b00 || item.lastQ[beat] != (beat == 255))
+            if (t.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
+                t.beat_userQ[beat] != 32'hcaf0_0002 ||
+                t.respQ[beat] != 2'b00 || t.lastQ[beat] != (beat == 255))
               `uvm_fatal("AXI_FULL_READ_MON", $sformatf("Bad read record at beat %0d", beat))
           end
           full_range_read_count++;
@@ -280,29 +280,29 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         return;
       end
 
-      if (item.addr == CALIPTRA_DMA_FIFO_BASE) begin
-        if (item.is_write()) begin
+      if (t.addr == CALIPTRA_DMA_FIFO_BASE) begin
+        if (t.is_write()) begin
           fifo_write_count++;
-          if (item.id != 8'h51 || item.lock || item.awuser != 32'h5a5a_0001 ||
-              item.buser != 32'h5a5a_0001 || item.len != 1 ||
-              item.burst != 2'b00 || item.beatQ.size() != 2 ||
-              item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002 ||
-              item.strbQ[0] != 4'hf || item.strbQ[1] != 4'hf ||
-              item.beat_userQ[0] != 32'h5a5a_1001 ||
-              item.beat_userQ[1] != 32'h5a5a_1002 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 ||
-              item.resp != 2'b00 || item.protocol_error)
-            `uvm_fatal("AXI_FIFO_WRITE_MON", $sformatf("Bad FIFO write record: %s", item.convert2string()))
-        end else if (item.is_read()) begin
+          if (t.id != 8'h51 || t.lock || t.awuser != 32'h5a5a_0001 ||
+              t.buser != 32'h5a5a_0001 || t.len != 1 ||
+              t.burst != 2'b00 || t.beatQ.size() != 2 ||
+              t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002 ||
+              t.strbQ[0] != 4'hf || t.strbQ[1] != 4'hf ||
+              t.beat_userQ[0] != 32'h5a5a_1001 ||
+              t.beat_userQ[1] != 32'h5a5a_1002 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 ||
+              t.resp != 2'b00 || t.protocol_error)
+            `uvm_fatal("AXI_FIFO_WRITE_MON", $sformatf("Bad FIFO write record: %s", t.convert2string()))
+        end else if (t.is_read()) begin
           fifo_read_count++;
-          if (item.id != 8'h52 || item.lock || item.aruser != 32'ha5a5_0002 ||
-              item.len != 1 || item.burst != 2'b00 || item.beatQ.size() != 2 ||
-              item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002 ||
-              item.beat_userQ[0] != 32'ha5a5_0002 ||
-              item.beat_userQ[1] != 32'ha5a5_0002 ||
-              item.respQ[0] != 2'b00 || item.respQ[1] != 2'b00 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 || item.protocol_error)
-            `uvm_fatal("AXI_FIFO_READ_MON", $sformatf("Bad FIFO read record: %s", item.convert2string()))
+          if (t.id != 8'h52 || t.lock || t.aruser != 32'ha5a5_0002 ||
+              t.len != 1 || t.burst != 2'b00 || t.beatQ.size() != 2 ||
+              t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002 ||
+              t.beat_userQ[0] != 32'ha5a5_0002 ||
+              t.beat_userQ[1] != 32'ha5a5_0002 ||
+              t.respQ[0] != 2'b00 || t.respQ[1] != 2'b00 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 || t.protocol_error)
+            `uvm_fatal("AXI_FIFO_READ_MON", $sformatf("Bad FIFO read record: %s", t.convert2string()))
         end else begin
           `uvm_fatal("AXI_FIFO_KIND", "Unknown FIFO transaction kind")
         end
@@ -310,28 +310,28 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         return;
       end
 
-      if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
-        if (item.is_write()) begin
-          if (item.id != 0 || item.lock || item.awuser != 32'hcafe_0123 ||
-              item.buser != 32'hcafe_0123 || item.len != 0 || item.beatQ.size() != 1 ||
-              item.beatQ[0] != 32'h7654_3210 || item.strbQ[0] != 4'hf ||
-              item.beat_userQ[0] != 0 || item.lastQ[0] != 1 ||
-              item.resp != 2'b00 || item.protocol_error)
+      if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
+        if (t.is_write()) begin
+          if (t.id != 0 || t.lock || t.awuser != 32'hcafe_0123 ||
+              t.buser != 32'hcafe_0123 || t.len != 0 || t.beatQ.size() != 1 ||
+              t.beatQ[0] != 32'h7654_3210 || t.strbQ[0] != 4'hf ||
+              t.beat_userQ[0] != 0 || t.lastQ[0] != 1 ||
+              t.resp != 2'b00 || t.protocol_error)
             `uvm_fatal("AXI_RAL_WRITE_MON", "Malformed RAL frontdoor write record")
           ral_write_count++;
-        end else if (item.is_read()) begin
-          if (item.id != 0 || item.lock || item.aruser != 32'hcafe_0123 ||
-              item.response_id != 0 ||
-              item.len != 0 || item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-              item.protocol_error)
+        end else if (t.is_read()) begin
+          if (t.id != 0 || t.lock || t.aruser != 32'hcafe_0123 ||
+              t.response_id != 0 ||
+              t.len != 0 || t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+              t.protocol_error)
             `uvm_fatal("AXI_RAL_READ_MON", "Malformed RAL frontdoor read record")
           ral_read_count++;
-          if (item.respQ[0] == 2'b10) begin
-            if (item.resp != 2'b10)
+          if (t.respQ[0] == 2'b10) begin
+            if (t.resp != 2'b10)
               `uvm_fatal("AXI_RAL_READ_MON", "SLVERR was not preserved in the RAL read record")
             ral_error_read_count++;
-          end else if (item.respQ[0] != 2'b00 || item.beatQ[0] != 32'h7654_3210 ||
-                       item.beat_userQ[0] != 32'hcafe_0123 || item.lastQ[0] != 1) begin
+          end else if (t.respQ[0] != 2'b00 || t.beatQ[0] != 32'h7654_3210 ||
+                       t.beat_userQ[0] != 32'hcafe_0123 || t.lastQ[0] != 1) begin
             `uvm_fatal("AXI_RAL_READ_MON", "Unexpected successful RAL read data or response")
           end
         end else begin
@@ -341,63 +341,63 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         return;
       end
 
-      if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
-        if (item.is_write()) begin
-          if (item.id == 8'h71) begin
-            if (!item.lock || item.awuser != 32'h71a0_0001 || item.buser != 32'h71a0_0001 ||
-                item.len != 0 || item.beatQ.size() != 1 || item.beatQ[0] != 32'hc0de_6001 ||
-                item.strbQ[0] != 4'hf || item.beat_userQ[0] != 0 || item.lastQ[0] != 1 ||
-                item.resp != 2'b01 || item.protocol_error)
+      if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
+        if (t.is_write()) begin
+          if (t.id == 8'h71) begin
+            if (!t.lock || t.awuser != 32'h71a0_0001 || t.buser != 32'h71a0_0001 ||
+                t.len != 0 || t.beatQ.size() != 1 || t.beatQ[0] != 32'hc0de_6001 ||
+                t.strbQ[0] != 4'hf || t.beat_userQ[0] != 0 || t.lastQ[0] != 1 ||
+                t.resp != 2'b01 || t.protocol_error)
               `uvm_fatal("AXI_EXCL_WRITE", "Malformed successful exclusive write record")
             exclusive_write_count++;
-          end else if (item.id == 8'h74) begin
-            if (item.lock || item.awuser != 32'h74a0_0004 || item.buser != 32'h74a0_0004 ||
-                item.len != 0 || item.beatQ.size() != 1 || item.beatQ[0] != 32'hc0de_6002 ||
-                item.strbQ[0] != 4'hf || item.beat_userQ[0] != 0 || item.lastQ[0] != 1 ||
-                item.resp != 2'b00 || item.protocol_error)
+          end else if (t.id == 8'h74) begin
+            if (t.lock || t.awuser != 32'h74a0_0004 || t.buser != 32'h74a0_0004 ||
+                t.len != 0 || t.beatQ.size() != 1 || t.beatQ[0] != 32'hc0de_6002 ||
+                t.strbQ[0] != 4'hf || t.beat_userQ[0] != 0 || t.lastQ[0] != 1 ||
+                t.resp != 2'b00 || t.protocol_error)
               `uvm_fatal("AXI_EXCL_INVALIDATE_WRITE", "Malformed reservation-invalidating write")
             reservation_invalidating_write_count++;
-          end else if (item.id == 8'h73) begin
-            if (!item.lock || item.awuser != 32'h73a0_0003 || item.buser != 32'h73a0_0003 ||
-                item.len != 0 || item.beatQ.size() != 1 || item.beatQ[0] != 32'hc0de_6003 ||
-                item.strbQ[0] != 4'hf || item.beat_userQ[0] != 0 || item.lastQ[0] != 1 ||
-                item.resp != 2'b00 || item.protocol_error)
+          end else if (t.id == 8'h73) begin
+            if (!t.lock || t.awuser != 32'h73a0_0003 || t.buser != 32'h73a0_0003 ||
+                t.len != 0 || t.beatQ.size() != 1 || t.beatQ[0] != 32'hc0de_6003 ||
+                t.strbQ[0] != 4'hf || t.beat_userQ[0] != 0 || t.lastQ[0] != 1 ||
+                t.resp != 2'b00 || t.protocol_error)
               `uvm_fatal("AXI_EXCL_FAILED_WRITE", "Invalidated exclusive write did not return OKAY")
             failed_exclusive_write_count++;
           end else begin
             `uvm_fatal("AXI_EXCL_WRITE_ID", "Unexpected write ID at exclusive test address")
           end
-        end else if (item.is_read()) begin
-          if (item.id == 8'h71) begin
-            if (!item.lock || item.aruser != 32'h71a0_0001 || item.len != 0 ||
-                item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-                item.beatQ[0] != 0 || item.respQ[0] != 2'b01 ||
-                item.beat_userQ[0] != 32'h71a0_0001 || item.lastQ[0] != 1 ||
-                item.protocol_error)
+        end else if (t.is_read()) begin
+          if (t.id == 8'h71) begin
+            if (!t.lock || t.aruser != 32'h71a0_0001 || t.len != 0 ||
+                t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+                t.beatQ[0] != 0 || t.respQ[0] != 2'b01 ||
+                t.beat_userQ[0] != 32'h71a0_0001 || t.lastQ[0] != 1 ||
+                t.protocol_error)
               `uvm_fatal("AXI_EXCL_READ", "Malformed exclusive read record")
             exclusive_read_count++;
-          end else if (item.id == 8'h72) begin
-            if (item.lock || item.aruser != 32'h72a0_0002 || item.len != 0 ||
-                item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-                item.beatQ[0] != 32'hc0de_6001 || item.respQ[0] != 2'b00 ||
-                item.beat_userQ[0] != 32'h72a0_0002 || item.lastQ[0] != 1 ||
-                item.protocol_error)
+          end else if (t.id == 8'h72) begin
+            if (t.lock || t.aruser != 32'h72a0_0002 || t.len != 0 ||
+                t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+                t.beatQ[0] != 32'hc0de_6001 || t.respQ[0] != 2'b00 ||
+                t.beat_userQ[0] != 32'h72a0_0002 || t.lastQ[0] != 1 ||
+                t.protocol_error)
               `uvm_fatal("AXI_EXCL_READBACK", "Exclusive write data did not read back")
             exclusive_readback_count++;
-          end else if (item.id == 8'h73) begin
-            if (!item.lock || item.aruser != 32'h73a0_0003 || item.len != 0 ||
-                item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-                item.beatQ[0] != 32'hc0de_6001 || item.respQ[0] != 2'b01 ||
-                item.beat_userQ[0] != 32'h73a0_0003 || item.lastQ[0] != 1 ||
-                item.protocol_error)
+          end else if (t.id == 8'h73) begin
+            if (!t.lock || t.aruser != 32'h73a0_0003 || t.len != 0 ||
+                t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+                t.beatQ[0] != 32'hc0de_6001 || t.respQ[0] != 2'b01 ||
+                t.beat_userQ[0] != 32'h73a0_0003 || t.lastQ[0] != 1 ||
+                t.protocol_error)
               `uvm_fatal("AXI_EXCL_INVALIDATE_READ", "Malformed second exclusive read record")
             invalidated_exclusive_read_count++;
-          end else if (item.id == 8'h75) begin
-            if (item.lock || item.aruser != 32'h75a0_0005 || item.len != 0 ||
-                item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-                item.beatQ[0] != 32'hc0de_6002 || item.respQ[0] != 2'b00 ||
-                item.beat_userQ[0] != 32'h75a0_0005 || item.lastQ[0] != 1 ||
-                item.protocol_error)
+          end else if (t.id == 8'h75) begin
+            if (t.lock || t.aruser != 32'h75a0_0005 || t.len != 0 ||
+                t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+                t.beatQ[0] != 32'hc0de_6002 || t.respQ[0] != 2'b00 ||
+                t.beat_userQ[0] != 32'h75a0_0005 || t.lastQ[0] != 1 ||
+                t.protocol_error)
               `uvm_fatal("AXI_EXCL_FAILED_READBACK", "Failed exclusive write changed memory")
             invalidated_exclusive_readback_count++;
           end else begin
@@ -410,37 +410,37 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
         return;
       end
 
-      if (item.is_write()) begin
+      if (t.is_write()) begin
         write_count++;
-        if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.id != 8'h31 || item.lock ||
-            item.awuser != 32'h1122_3344 || item.buser != 32'h1122_3344 ||
-            item.len != 1 || item.beatQ.size() != 2 ||
-            item.beatQ[0] != 32'ha5a5_5a5a || item.beatQ[1] != 32'h1357_9bdf ||
-            item.strbQ[0] != 4'hf || item.strbQ[1] != 4'hf ||
-            item.beat_userQ[0] != 32'h5566_7788 ||
-            item.beat_userQ[1] != 32'h1020_3040 ||
-            item.lastQ[0] != 0 || item.lastQ[1] != 1 ||
-            item.resp != 2'b00 || item.protocol_error)
-          `uvm_fatal("AXI_WRITE_MON", $sformatf("Bad write record: %s", item.convert2string()))
-      end else if (item.is_read()) begin
-        if (item.id == 8'h43) begin
+        if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.id != 8'h31 || t.lock ||
+            t.awuser != 32'h1122_3344 || t.buser != 32'h1122_3344 ||
+            t.len != 1 || t.beatQ.size() != 2 ||
+            t.beatQ[0] != 32'ha5a5_5a5a || t.beatQ[1] != 32'h1357_9bdf ||
+            t.strbQ[0] != 4'hf || t.strbQ[1] != 4'hf ||
+            t.beat_userQ[0] != 32'h5566_7788 ||
+            t.beat_userQ[1] != 32'h1020_3040 ||
+            t.lastQ[0] != 0 || t.lastQ[1] != 1 ||
+            t.resp != 2'b00 || t.protocol_error)
+          `uvm_fatal("AXI_WRITE_MON", $sformatf("Bad write record: %s", t.convert2string()))
+      end else if (t.is_read()) begin
+        if (t.id == 8'h43) begin
           error_read_count++;
-          if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.lock || item.aruser != 32'hface_cafe ||
-              item.len != 0 || item.beatQ.size() != 1 ||
-              item.respQ[0] != 2'b10 || item.protocol_error)
-            `uvm_fatal("AXI_READ_ERR_MON", $sformatf("Bad SLVERR read record: %s", item.convert2string()))
+          if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.lock || t.aruser != 32'hface_cafe ||
+              t.len != 0 || t.beatQ.size() != 1 ||
+              t.respQ[0] != 2'b10 || t.protocol_error)
+            `uvm_fatal("AXI_READ_ERR_MON", $sformatf("Bad SLVERR read record: %s", t.convert2string()))
         end else begin
           read_count++;
-          if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.id != 8'h42 || item.lock ||
-              item.aruser != 32'h89ab_cdef || item.len != 1 || item.beatQ.size() != 2 ||
-              item.beatQ[0] != 32'ha5a5_5a5a ||
-              item.beatQ[1] != 32'h1357_9bdf ||
-              item.beat_userQ[0] != 32'h89ab_cdef ||
-              item.beat_userQ[1] != 32'h89ab_cdef ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 ||
-              item.respQ[0] != 2'b00 || item.respQ[1] != 2'b00 ||
-              item.protocol_error)
-            `uvm_fatal("AXI_READ_MON", $sformatf("Bad read record: %s", item.convert2string()))
+          if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.id != 8'h42 || t.lock ||
+              t.aruser != 32'h89ab_cdef || t.len != 1 || t.beatQ.size() != 2 ||
+              t.beatQ[0] != 32'ha5a5_5a5a ||
+              t.beatQ[1] != 32'h1357_9bdf ||
+              t.beat_userQ[0] != 32'h89ab_cdef ||
+              t.beat_userQ[1] != 32'h89ab_cdef ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 ||
+              t.respQ[0] != 2'b00 || t.respQ[1] != 2'b00 ||
+              t.protocol_error)
+            `uvm_fatal("AXI_READ_MON", $sformatf("Bad read record: %s", t.convert2string()))
         end
       end else begin
         `uvm_fatal("AXI_KIND", "Unknown transaction kind")
@@ -459,10 +459,10 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       foreach (channel_count[i]) channel_count[i] = 0;
     endfunction
 
-    function void write(axi4_caliptra_channel_transaction item);
-      if (item.channel inside {AXI4_CHANNEL_AW, AXI4_CHANNEL_W, AXI4_CHANNEL_B,
+    function void write(axi4_caliptra_channel_transaction t);
+      if (t.channel inside {AXI4_CHANNEL_AW, AXI4_CHANNEL_W, AXI4_CHANNEL_B,
                                AXI4_CHANNEL_AR, AXI4_CHANNEL_R})
-        channel_count[item.channel]++;
+        channel_count[t.channel]++;
       else
         `uvm_fatal("AXI_CHANNEL_KIND", "Unknown AXI channel item")
     endfunction
@@ -489,180 +489,180 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       super.new(name, parent);
     endfunction
 
-    function void write(aaxi_master_tr item);
+    function void write(aaxi_master_tr t);
       aaxi_master_tr copy_item;
       string diff;
       string trace;
 
-      if (previous_item == item)
+      if (previous_item == t)
         `uvm_fatal("AAXI_ALIAS", "Projected AXI stream reused the previous transaction handle")
-      copy_item = item.copy();
+      copy_item = t.copy();
       if (copy_item == null)
         `uvm_fatal("AAXI_COPY", "Projected transaction copy returned null")
-      if (copy_item == item)
+      if (copy_item == t)
         `uvm_fatal("AAXI_COPY", "Projected transaction copy reused the source handle")
-      if (!item.compare(copy_item, diff, item.kind))
+      if (!t.compare(copy_item, diff, t.kind))
         `uvm_fatal("AAXI_COPY", $sformatf("Projected transaction copy/compare failed: %s source_kind=%0d copy_kind=%0d requested_kind=%0d",
-                                           diff, item.kind, copy_item.kind, item.kind))
-      copy_item.kind = (item.kind == AAXI_WRITE) ? AAXI_READ : AAXI_WRITE;
+                                           diff, t.kind, copy_item.kind, t.kind))
+      copy_item.kind = (t.kind == AAXI_WRITE) ? AAXI_READ : AAXI_WRITE;
       diff = "";
-      if (item.compare(copy_item, diff, item.kind) || diff != "kind")
+      if (t.compare(copy_item, diff, t.kind) || diff != "kind")
         `uvm_fatal("AAXI_COMPARE", "Projected transaction compare missed a kind mismatch or modified the source")
-      trace = item.sprint(UVM_LOW, "aaxi");
+      trace = t.sprint(UVM_LOW, "aaxi");
       if (trace == "")
         `uvm_fatal("AAXI_SPRINT", "Projected transaction sprint returned an empty string")
-      previous_item = item;
+      previous_item = t;
 
-      if (item.is_write()) begin
-        if (item.addr == CALIPTRA_DMA_FIFO_BASE) begin
-          if (item.id != 8'h51 || item.lock || item.awuser != 32'h5a5a_0001 ||
-              item.buser != 32'h5a5a_0001 || item.len != 1 || item.burst != 2'b00 ||
-              item.beatQ.size() != 2 || item.strbQ.size() != 2 ||
-              item.beat_userQ.size() != 2 || item.lastQ.size() != 2 ||
-              item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002 ||
-              item.strbQ[0] != 4'hf || item.strbQ[1] != 4'hf ||
-              item.beat_userQ[0] != 32'h5a5a_1001 || item.beat_userQ[1] != 32'h5a5a_1002 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 || item.resp != 2'b00 ||
-              item.protocol_error)
-            `uvm_fatal("AAXI_FIFO_WRITE", $sformatf("Bad projected FIFO write: %s", item.convert2string()))
+      if (t.is_write()) begin
+        if (t.addr == CALIPTRA_DMA_FIFO_BASE) begin
+          if (t.id != 8'h51 || t.lock || t.awuser != 32'h5a5a_0001 ||
+              t.buser != 32'h5a5a_0001 || t.len != 1 || t.burst != 2'b00 ||
+              t.beatQ.size() != 2 || t.strbQ.size() != 2 ||
+              t.beat_userQ.size() != 2 || t.lastQ.size() != 2 ||
+              t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002 ||
+              t.strbQ[0] != 4'hf || t.strbQ[1] != 4'hf ||
+              t.beat_userQ[0] != 32'h5a5a_1001 || t.beat_userQ[1] != 32'h5a5a_1002 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 || t.resp != 2'b00 ||
+              t.protocol_error)
+            `uvm_fatal("AAXI_FIFO_WRITE", $sformatf("Bad projected FIFO write: %s", t.convert2string()))
           fifo_write_count++;
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
-          if (item.id != 0 || item.lock || item.awuser != 32'hcafe_0123 ||
-              item.buser != 32'hcafe_0123 || item.len != 0 || item.beatQ.size() != 1 ||
-              item.beatQ[0] != 32'h7654_3210 || item.strbQ[0] != 4'hf ||
-              item.beat_userQ[0] != 0 || item.lastQ[0] != 1 ||
-              item.resp != 2'b00 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
+          if (t.id != 0 || t.lock || t.awuser != 32'hcafe_0123 ||
+              t.buser != 32'hcafe_0123 || t.len != 0 || t.beatQ.size() != 1 ||
+              t.beatQ[0] != 32'h7654_3210 || t.strbQ[0] != 4'hf ||
+              t.beat_userQ[0] != 0 || t.lastQ[0] != 1 ||
+              t.resp != 2'b00 || t.protocol_error)
             `uvm_fatal("AAXI_RAL_WRITE", "Malformed projected RAL write")
           ral_write_count++;
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
-          if (item.id != 8'h60 || item.lock || item.awuser != 32'hcafe_0001 ||
-              item.buser != 32'hcafe_0001 || item.len != 8'hff ||
-              item.beatQ.size() != 256 || item.strbQ.size() != 256 ||
-              item.beat_userQ.size() != 256 || item.lastQ.size() != 256 ||
-              item.resp != 2'b00 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
+          if (t.id != 8'h60 || t.lock || t.awuser != 32'hcafe_0001 ||
+              t.buser != 32'hcafe_0001 || t.len != 8'hff ||
+              t.beatQ.size() != 256 || t.strbQ.size() != 256 ||
+              t.beat_userQ.size() != 256 || t.lastQ.size() != 256 ||
+              t.resp != 2'b00 || t.protocol_error)
             `uvm_fatal("AAXI_FULL_WRITE", "Malformed projected 256-beat write")
           for (int beat = 0; beat < 256; beat++) begin
-            if (item.beatQ[beat] != (32'hd00d_0000 ^ beat) || item.strbQ[beat] != 4'hf ||
-                item.beat_userQ[beat] != (32'hb055_0000 | beat) ||
-                item.lastQ[beat] != (beat == 255))
+            if (t.beatQ[beat] != (32'hd00d_0000 ^ beat) || t.strbQ[beat] != 4'hf ||
+                t.beat_userQ[beat] != (32'hb055_0000 | beat) ||
+                t.lastQ[beat] != (beat == 255))
               `uvm_fatal("AAXI_FULL_WRITE", $sformatf("Bad projected write beat %0d", beat))
           end
           full_range_write_count++;
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
-          if (item.len != 0 || item.beatQ.size() != 1 || item.strbQ.size() != 1 ||
-              item.beat_userQ.size() != 1 || item.lastQ.size() != 1 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
+          if (t.len != 0 || t.beatQ.size() != 1 || t.strbQ.size() != 1 ||
+              t.beat_userQ.size() != 1 || t.lastQ.size() != 1 || t.protocol_error)
             `uvm_fatal("AAXI_EXCL_WRITE", "Malformed projected exclusive test write")
-          if (item.id == 8'h71) begin
-            if (!item.lock || item.awuser != 32'h71a0_0001 || item.buser != 32'h71a0_0001 ||
-                item.beatQ[0] != 32'hc0de_6001 || item.strbQ[0] != 4'hf ||
-                item.beat_userQ[0] != 0 || item.lastQ[0] != 1 || item.resp != 2'b01)
+          if (t.id == 8'h71) begin
+            if (!t.lock || t.awuser != 32'h71a0_0001 || t.buser != 32'h71a0_0001 ||
+                t.beatQ[0] != 32'hc0de_6001 || t.strbQ[0] != 4'hf ||
+                t.beat_userQ[0] != 0 || t.lastQ[0] != 1 || t.resp != 2'b01)
               `uvm_fatal("AAXI_EXCL_WRITE", "Malformed projected successful exclusive write")
-          end else if (item.id == 8'h74) begin
-            if (item.lock || item.awuser != 32'h74a0_0004 || item.buser != 32'h74a0_0004 ||
-                item.beatQ[0] != 32'hc0de_6002 || item.strbQ[0] != 4'hf ||
-                item.beat_userQ[0] != 0 || item.lastQ[0] != 1 || item.resp != 2'b00)
+          end else if (t.id == 8'h74) begin
+            if (t.lock || t.awuser != 32'h74a0_0004 || t.buser != 32'h74a0_0004 ||
+                t.beatQ[0] != 32'hc0de_6002 || t.strbQ[0] != 4'hf ||
+                t.beat_userQ[0] != 0 || t.lastQ[0] != 1 || t.resp != 2'b00)
               `uvm_fatal("AAXI_EXCL_INVALIDATE_WRITE", "Malformed reservation-invalidating write")
-          end else if (item.id == 8'h73) begin
-            if (!item.lock || item.awuser != 32'h73a0_0003 || item.buser != 32'h73a0_0003 ||
-                item.beatQ[0] != 32'hc0de_6003 || item.strbQ[0] != 4'hf ||
-                item.beat_userQ[0] != 0 || item.lastQ[0] != 1 || item.resp != 2'b00)
+          end else if (t.id == 8'h73) begin
+            if (!t.lock || t.awuser != 32'h73a0_0003 || t.buser != 32'h73a0_0003 ||
+                t.beatQ[0] != 32'hc0de_6003 || t.strbQ[0] != 4'hf ||
+                t.beat_userQ[0] != 0 || t.lastQ[0] != 1 || t.resp != 2'b00)
               `uvm_fatal("AAXI_EXCL_FAILED_WRITE", "Invalidated projected exclusive write did not return OKAY")
           end else begin
             `uvm_fatal("AAXI_EXCL_WRITE_ID", "Unexpected projected write ID at exclusive test address")
           end
         end else begin
-          if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.id != 8'h31 || item.lock ||
-              item.awuser != 32'h1122_3344 || item.buser != 32'h1122_3344 ||
-              item.len != 1 || item.beatQ.size() != 2 || item.strbQ.size() != 2 ||
-              item.beat_userQ.size() != 2 || item.lastQ.size() != 2 ||
-              item.beatQ[0] != 32'ha5a5_5a5a || item.beatQ[1] != 32'h1357_9bdf ||
-              item.strbQ[0] != 4'hf || item.strbQ[1] != 4'hf ||
-              item.beat_userQ[0] != 32'h5566_7788 || item.beat_userQ[1] != 32'h1020_3040 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 || item.resp != 2'b00 ||
-              item.protocol_error)
-            `uvm_fatal("AAXI_WRITE", $sformatf("Bad projected write: %s", item.convert2string()))
+          if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.id != 8'h31 || t.lock ||
+              t.awuser != 32'h1122_3344 || t.buser != 32'h1122_3344 ||
+              t.len != 1 || t.beatQ.size() != 2 || t.strbQ.size() != 2 ||
+              t.beat_userQ.size() != 2 || t.lastQ.size() != 2 ||
+              t.beatQ[0] != 32'ha5a5_5a5a || t.beatQ[1] != 32'h1357_9bdf ||
+              t.strbQ[0] != 4'hf || t.strbQ[1] != 4'hf ||
+              t.beat_userQ[0] != 32'h5566_7788 || t.beat_userQ[1] != 32'h1020_3040 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 || t.resp != 2'b00 ||
+              t.protocol_error)
+            `uvm_fatal("AAXI_WRITE", $sformatf("Bad projected write: %s", t.convert2string()))
           write_count++;
         end
-      end else if (item.is_read()) begin
-        if (item.addr == CALIPTRA_DMA_FIFO_BASE) begin
-          if (item.id != 8'h52 || item.lock || item.aruser != 32'ha5a5_0002 || item.len != 1 ||
-              item.burst != 2'b00 || item.beatQ.size() != 2 || item.respQ.size() != 2 ||
-              item.beat_userQ.size() != 2 || item.lastQ.size() != 2 ||
-              item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002 ||
-              item.beat_userQ[0] != 32'ha5a5_0002 || item.beat_userQ[1] != 32'ha5a5_0002 ||
-              item.respQ[0] != 2'b00 || item.respQ[1] != 2'b00 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 || item.protocol_error)
-            `uvm_fatal("AAXI_FIFO_READ", $sformatf("Bad projected FIFO read: %s", item.convert2string()))
+      end else if (t.is_read()) begin
+        if (t.addr == CALIPTRA_DMA_FIFO_BASE) begin
+          if (t.id != 8'h52 || t.lock || t.aruser != 32'ha5a5_0002 || t.len != 1 ||
+              t.burst != 2'b00 || t.beatQ.size() != 2 || t.respQ.size() != 2 ||
+              t.beat_userQ.size() != 2 || t.lastQ.size() != 2 ||
+              t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002 ||
+              t.beat_userQ[0] != 32'ha5a5_0002 || t.beat_userQ[1] != 32'ha5a5_0002 ||
+              t.respQ[0] != 2'b00 || t.respQ[1] != 2'b00 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 || t.protocol_error)
+            `uvm_fatal("AAXI_FIFO_READ", $sformatf("Bad projected FIFO read: %s", t.convert2string()))
           fifo_read_count++;
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
-          if (item.id != 8'h61 || item.lock || item.aruser != 32'hcaf0_0002 || item.len != 8'hff ||
-              item.beatQ.size() != 256 || item.respQ.size() != 256 ||
-              item.beat_userQ.size() != 256 || item.lastQ.size() != 256 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h1000) begin
+          if (t.id != 8'h61 || t.lock || t.aruser != 32'hcaf0_0002 || t.len != 8'hff ||
+              t.beatQ.size() != 256 || t.respQ.size() != 256 ||
+              t.beat_userQ.size() != 256 || t.lastQ.size() != 256 || t.protocol_error)
             `uvm_fatal("AAXI_FULL_READ", "Malformed projected 256-beat read")
           for (int beat = 0; beat < 256; beat++) begin
-            if (item.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
-                item.beat_userQ[beat] != 32'hcaf0_0002 || item.respQ[beat] != 2'b00 ||
-                item.lastQ[beat] != (beat == 255))
+            if (t.beatQ[beat] != (32'hd00d_0000 ^ beat) ||
+                t.beat_userQ[beat] != 32'hcaf0_0002 || t.respQ[beat] != 2'b00 ||
+                t.lastQ[beat] != (beat == 255))
               `uvm_fatal("AAXI_FULL_READ", $sformatf("Bad projected read beat %0d", beat))
           end
           full_range_read_count++;
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
-          if (item.id != 0 || item.lock || item.aruser != 32'hcafe_0123 ||
-              item.response_id != 0 || item.len != 0 ||
-              item.beatQ.size() != 1 || item.respQ.size() != 1 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h40) begin
+          if (t.id != 0 || t.lock || t.aruser != 32'hcafe_0123 ||
+              t.response_id != 0 || t.len != 0 ||
+              t.beatQ.size() != 1 || t.respQ.size() != 1 || t.protocol_error)
             `uvm_fatal("AAXI_RAL_READ", "Malformed projected RAL read")
           ral_read_count++;
-          if (item.respQ[0] == 2'b10) begin
-            if (item.resp != 2'b10)
+          if (t.respQ[0] == 2'b10) begin
+            if (t.resp != 2'b10)
               `uvm_fatal("AAXI_RAL_READ", "Projected RAL SLVERR response was not preserved")
             ral_error_read_count++;
-          end else if (item.respQ[0] != 2'b00 || item.beatQ[0] != 32'h7654_3210 ||
-                       item.beat_userQ[0] != 32'hcafe_0123 || item.lastQ[0] != 1) begin
+          end else if (t.respQ[0] != 2'b00 || t.beatQ[0] != 32'h7654_3210 ||
+                       t.beat_userQ[0] != 32'hcafe_0123 || t.lastQ[0] != 1) begin
             `uvm_fatal("AAXI_RAL_READ", "Projected RAL read data or response mismatch")
           end
-        end else if (item.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
-          if (item.len != 0 || item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-              item.beat_userQ.size() != 1 || item.lastQ.size() != 1 || item.protocol_error)
+        end else if (t.addr == CALIPTRA_DMA_SRAM_BASE + 48'h60) begin
+          if (t.len != 0 || t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+              t.beat_userQ.size() != 1 || t.lastQ.size() != 1 || t.protocol_error)
             `uvm_fatal("AAXI_EXCL_READ", "Malformed projected exclusive access record")
-          if (item.id == 8'h71) begin
-            if (!item.lock || item.aruser != 32'h71a0_0001 || item.beatQ[0] != 0 ||
-                item.respQ[0] != 2'b01 || item.resp != 2'b01 ||
-                item.beat_userQ[0] != 32'h71a0_0001 || item.lastQ[0] != 1)
+          if (t.id == 8'h71) begin
+            if (!t.lock || t.aruser != 32'h71a0_0001 || t.beatQ[0] != 0 ||
+                t.respQ[0] != 2'b01 || t.resp != 2'b01 ||
+                t.beat_userQ[0] != 32'h71a0_0001 || t.lastQ[0] != 1)
               `uvm_fatal("AAXI_EXCL_READ", "Malformed projected exclusive read")
-          end else if (item.id == 8'h72) begin
-            if (item.lock || item.aruser != 32'h72a0_0002 ||
-                item.beatQ[0] != 32'hc0de_6001 || item.respQ[0] != 2'b00 ||
-                item.beat_userQ[0] != 32'h72a0_0002 || item.lastQ[0] != 1)
+          end else if (t.id == 8'h72) begin
+            if (t.lock || t.aruser != 32'h72a0_0002 ||
+                t.beatQ[0] != 32'hc0de_6001 || t.respQ[0] != 2'b00 ||
+                t.beat_userQ[0] != 32'h72a0_0002 || t.lastQ[0] != 1)
               `uvm_fatal("AAXI_EXCL_READBACK", "Projected exclusive write data did not read back")
-          end else if (item.id == 8'h73) begin
-            if (!item.lock || item.aruser != 32'h73a0_0003 ||
-                item.beatQ[0] != 32'hc0de_6001 || item.respQ[0] != 2'b01 ||
-                item.resp != 2'b01 || item.beat_userQ[0] != 32'h73a0_0003 ||
-                item.lastQ[0] != 1)
+          end else if (t.id == 8'h73) begin
+            if (!t.lock || t.aruser != 32'h73a0_0003 ||
+                t.beatQ[0] != 32'hc0de_6001 || t.respQ[0] != 2'b01 ||
+                t.resp != 2'b01 || t.beat_userQ[0] != 32'h73a0_0003 ||
+                t.lastQ[0] != 1)
               `uvm_fatal("AAXI_EXCL_INVALIDATE_READ", "Malformed second projected exclusive read")
-          end else if (item.id == 8'h75) begin
-            if (item.lock || item.aruser != 32'h75a0_0005 ||
-                item.beatQ[0] != 32'hc0de_6002 || item.respQ[0] != 2'b00 ||
-                item.beat_userQ[0] != 32'h75a0_0005 || item.lastQ[0] != 1)
+          end else if (t.id == 8'h75) begin
+            if (t.lock || t.aruser != 32'h75a0_0005 ||
+                t.beatQ[0] != 32'hc0de_6002 || t.respQ[0] != 2'b00 ||
+                t.beat_userQ[0] != 32'h75a0_0005 || t.lastQ[0] != 1)
               `uvm_fatal("AAXI_EXCL_FAILED_READBACK", "Failed projected exclusive write changed memory")
           end else begin
             `uvm_fatal("AAXI_EXCL_ID", "Unexpected projected read ID at exclusive test address")
           end
-        end else if (item.id == 8'h43) begin
-          if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.lock || item.aruser != 32'hface_cafe ||
-              item.len != 0 || item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-              item.respQ[0] != 2'b10 || item.resp != 2'b10 || item.protocol_error)
-            `uvm_fatal("AAXI_READ_ERR", $sformatf("Bad projected SLVERR read: %s", item.convert2string()))
+        end else if (t.id == 8'h43) begin
+          if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.lock || t.aruser != 32'hface_cafe ||
+              t.len != 0 || t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+              t.respQ[0] != 2'b10 || t.resp != 2'b10 || t.protocol_error)
+            `uvm_fatal("AAXI_READ_ERR", $sformatf("Bad projected SLVERR read: %s", t.convert2string()))
           error_read_count++;
         end else begin
-          if (item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || item.id != 8'h42 || item.lock ||
-              item.aruser != 32'h89ab_cdef || item.len != 1 || item.beatQ.size() != 2 ||
-              item.respQ.size() != 2 || item.beat_userQ.size() != 2 || item.lastQ.size() != 2 ||
-              item.beatQ[0] != 32'ha5a5_5a5a || item.beatQ[1] != 32'h1357_9bdf ||
-              item.beat_userQ[0] != 32'h89ab_cdef || item.beat_userQ[1] != 32'h89ab_cdef ||
-              item.respQ[0] != 2'b00 || item.respQ[1] != 2'b00 ||
-              item.lastQ[0] != 0 || item.lastQ[1] != 1 || item.protocol_error)
-            `uvm_fatal("AAXI_READ", $sformatf("Bad projected read: %s", item.convert2string()))
+          if (t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 || t.id != 8'h42 || t.lock ||
+              t.aruser != 32'h89ab_cdef || t.len != 1 || t.beatQ.size() != 2 ||
+              t.respQ.size() != 2 || t.beat_userQ.size() != 2 || t.lastQ.size() != 2 ||
+              t.beatQ[0] != 32'ha5a5_5a5a || t.beatQ[1] != 32'h1357_9bdf ||
+              t.beat_userQ[0] != 32'h89ab_cdef || t.beat_userQ[1] != 32'h89ab_cdef ||
+              t.respQ[0] != 2'b00 || t.respQ[1] != 2'b00 ||
+              t.lastQ[0] != 0 || t.lastQ[1] != 1 || t.protocol_error)
+            `uvm_fatal("AAXI_READ", $sformatf("Bad projected read: %s", t.convert2string()))
           read_count++;
         end
       end else begin
@@ -872,7 +872,7 @@ module tb_axi4_caliptra_uvm_agent #(parameter integer USE_DMA_TARGET = 0);
       super.new(name, parent);
     endfunction
 
-    function void write(uvm_reg_item item);
+    function void write(uvm_reg_item t);
       observed_count++;
     endfunction
   endclass
