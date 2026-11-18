@@ -181,6 +181,7 @@ module tb_caliptra_top_tb_axi_complex_bfm;
       if (!m_axi_if.bvalid || m_axi_if.bresp != 2'b10 ||
           m_axi_if.bid != 5'h0b || m_axi_if.buser != 32'h8765_4321)
         $fatal(1, "Two-beat error B response mismatch");
+      resp = m_axi_if.bresp;
       @(negedge core_clk);
       repeat (3) begin
         @(posedge core_clk);
