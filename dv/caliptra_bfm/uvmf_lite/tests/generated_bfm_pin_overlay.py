@@ -16,8 +16,8 @@ def flatten_bfm(source, bus_type, bus_source):
     drives = dict.fromkeys(re.findall(r"(?m)^\s*assign bus\.(\w+) =", source))
     if not reads or not drives.keys() <= reads.keys() or not reads.keys() <= widths.keys():
         raise ValueError(f"unexpected pin assignments for {bus_type}")
-    ports = [("input", "pin_" + name, name) for name in reads]
-    ports += [("output", "drive_" + name, name) for name in drives]
+    ports = [("input", "qd_pin_" + name, name) for name in reads]
+    ports += [("output", "qd_drive_" + name, name) for name in drives]
     declarations = ",\n".join(
         "  " + " ".join(filter(None, (direction, "wire", widths[name], port)))
         for direction, port, name in ports
@@ -26,11 +26,20 @@ def flatten_bfm(source, bus_type, bus_source):
                             f"(\n{declarations}\n);", source)
     if count != 1:
         raise ValueError(f"expected one {bus_type} interface port")
-    source = re.sub(r"(?m)^(\s*assign )bus\.(\w+)( =)", r"\g<1>drive_\2\3", source)
-    source = re.sub(r"(= )bus\.(\w+)(;)", r"\g<1>pin_\2\3", source)
+    source = re.sub(r"(?m)^(\s*assign )bus\.(\w+)( =)", r"\g<1>qd_drive_\2\3", source)
+    source = re.sub(r"(= )bus\.(\w+)(;)", r"\g<1>qd_pin_\2\3", source)
     if re.search(r"\bbus\.", re.sub(r"(?m)//[^\n]*", "", source)):
         raise ValueError(f"unhandled bus reference in {bus_type}")
     return source, ports
+
+
+def modport_inputs(bus_source, modport):
+    if modport is None:
+        return set()
+    match = re.search(rf"\bmodport\s+{modport}\s*\((.*?)\);", bus_source, re.S)
+    if match is None:
+        raise ValueError(f"modport {modport} not found")
+    return set(re.findall(r"\binput\s+(\w+)", match.group(1)))
 
 
 def stage_bfms(caliptra, kind, output, top, overrides=()):
@@ -58,13 +67,12 @@ def stage_bfms(caliptra, kind, output, top, overrides=()):
 
             def connect(match):
                 instance, bus, modport = match.groups()
+                read_only = modport_inputs(bus_source, modport)
                 pins = []
                 for direction, port, signal in ports:
-                    # The initiator reads the AHB response. The responder drive
-                    # remains available for a BFM connected in responder mode.
-                    active = not (bfm == "ECC_in_driver_bfm" and direction == "output"
-                                  and modport == "initiator_port"
-                                  and signal in {"hrdata", "hreadyout"})
+                    # The generated hdl_top selects a modport that makes this
+                    # signal an input, so its drive pin stays unconnected.
+                    active = not (direction == "output" and signal in read_only)
                     pins.append(f".{port}({bus + '.' + signal if active else ''})")
                 return f"{bfm} {instance}(\n    " + ",\n    ".join(pins) + "\n  );"
 
