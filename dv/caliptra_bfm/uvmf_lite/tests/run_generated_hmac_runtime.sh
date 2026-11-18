@@ -183,10 +183,25 @@ python3 "$repo_root/docs/conformance/release_overlays/caliptra/hmac_out_monitor_
   --output-dir "$tmpdir/monitor-overlay" \
   --manifest "$tmpdir/monitor-overlay-manifest.json"
 
+python3 - "$repo_root" "$caliptra_root" "$tmpdir" <<'PY_PINS'
+import sys
+from pathlib import Path
+
+repo, caliptra, tmp = map(Path, sys.argv[1:])
+sys.path.insert(0, str(repo / "dv/caliptra_bfm/uvmf_lite/tests"))
+from generated_bfm_pin_overlay import rewrite_filelist, stage_bfms
+
+paths = stage_bfms(caliptra, "HMAC", tmp / "pins", tmp / "hdl_top_timescale_overlay.sv",
+                   [tmp / "monitor-overlay/HMAC_out_monitor_bfm.sv"])
+filelist = tmp / "monitor-overlay/hmac_generated_overlay.f"
+(tmp / "hmac_generated_pins.f").write_text(rewrite_filelist(filelist.read_text(), paths))
+PY_PINS
+
 image="$tmpdir/hmac-generated.vvp"
 compile_log="$tmpdir/compile.log"
 if ! "$iverilog_bin" -uvm -g2017 -s hmac_generated_top \
-     -f "$tmpdir/monitor-overlay/hmac_generated_overlay.f" \
+     "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
+     -f "$tmpdir/hmac_generated_pins.f" \
      -o "$image" >"$compile_log" 2>&1; then
   cat "$compile_log" >&2
   echo "Generated HMAC runtime did not compile." >&2

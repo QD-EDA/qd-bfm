@@ -3,8 +3,8 @@
 `include "uvm_macros.svh"
 
 interface uvmf_lite_toy_dut_if(input logic clk);
-  logic request_valid = 0;
-  integer request_value = 0;
+  wire request_valid;
+  wire signed [31:0] request_value;
   logic response_valid;
   integer response_value;
 endinterface
@@ -21,7 +21,13 @@ module uvmf_lite_toy_dut(
   end
 endmodule
 
-interface uvmf_lite_driver_bfm_if(uvmf_lite_toy_dut_if bus);
+interface uvmf_lite_driver_bfm_if(
+  input logic clk,
+  output logic request_valid = 0,
+  output integer request_value = 0,
+  input logic response_valid,
+  input integer response_value
+);
   import uvm_pkg::*;
   uvm_object proxy;
   int access_count;
@@ -29,17 +35,22 @@ interface uvmf_lite_driver_bfm_if(uvmf_lite_toy_dut_if bus);
   task access(inout int value);
     if (proxy == null) $fatal(1, "driver proxy was not installed");
     access_count++;
-    @(negedge bus.clk);
-    bus.request_value = value;
-    bus.request_valid = 1;
-    do @(posedge bus.clk); while (!bus.response_valid);
-    value = bus.response_value;
-    @(negedge bus.clk);
-    bus.request_valid = 0;
+    @(negedge clk);
+    request_value = value;
+    request_valid = 1;
+    do @(posedge clk); while (!response_valid);
+    value = response_value;
+    @(negedge clk);
+    request_valid = 0;
   endtask
 endinterface
 
-interface uvmf_lite_monitor_bfm_if(uvmf_lite_toy_dut_if bus);
+interface uvmf_lite_monitor_bfm_if(
+  input logic clk, request_valid,
+  input integer request_value,
+  input logic response_valid,
+  input integer response_value
+);
   import uvm_pkg::*;
   uvm_object proxy;
   int start_count;
@@ -50,13 +61,13 @@ interface uvmf_lite_monitor_bfm_if(uvmf_lite_toy_dut_if bus);
   endtask
 
   task wait_for_response(output int value);
-    do @(posedge bus.clk); while (!bus.response_valid);
-    value = bus.response_value;
+    do @(posedge clk); while (!response_valid);
+    value = response_value;
   endtask
 
   task wait_for_request(output int value);
-    do @(posedge bus.clk); while (!bus.request_valid);
-    value = bus.request_value;
+    do @(posedge clk); while (!request_valid);
+    value = request_value;
   endtask
 endinterface
 
@@ -529,9 +540,15 @@ module tb_uvmf_agent;
   logic clk = 0;
   always #5 clk = ~clk;
   uvmf_lite_toy_dut_if toy_bus(clk);
-  uvmf_lite_driver_bfm_if input_driver_bfm(toy_bus);
-  uvmf_lite_monitor_bfm_if input_monitor_bfm(toy_bus);
-  uvmf_lite_monitor_bfm_if output_monitor_bfm(toy_bus);
+  uvmf_lite_driver_bfm_if input_driver_bfm(
+    clk, toy_bus.request_valid, toy_bus.request_value,
+    toy_bus.response_valid, toy_bus.response_value);
+  uvmf_lite_monitor_bfm_if input_monitor_bfm(
+    clk, toy_bus.request_valid, toy_bus.request_value,
+    toy_bus.response_valid, toy_bus.response_value);
+  uvmf_lite_monitor_bfm_if output_monitor_bfm(
+    clk, toy_bus.request_valid, toy_bus.request_value,
+    toy_bus.response_valid, toy_bus.response_value);
 
   uvmf_lite_toy_dut dut(
     .request_valid(toy_bus.request_valid),

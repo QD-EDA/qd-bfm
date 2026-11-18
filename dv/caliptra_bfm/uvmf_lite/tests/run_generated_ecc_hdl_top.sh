@@ -34,24 +34,7 @@ if [ "$actual_hdl_sha" != "$expected_hdl_top_sha" ]; then
   echo "Generated hdl_top.sv hash changed: $actual_hdl_sha" >&2
   exit 2
 fi
-for selector in \
-  'ECC_in_agent_bus.monitor_port' \
-  'ECC_out_agent_bus.monitor_port' \
-  'ECC_in_agent_bus.initiator_port'; do
-  if [ "$(grep -Fc "$selector" "$hdl_src")" -ne 1 ]; then
-    echo "Expected exactly one generated hdl_top connection using $selector" >&2
-    exit 2
-  fi
-done
-
-{
-  printf '`timescale 1ns/1ps\n'
-  sed \
-    -e 's/ECC_in_agent_bus\.monitor_port/ECC_in_agent_bus/g' \
-    -e 's/ECC_out_agent_bus\.monitor_port/ECC_out_agent_bus/g' \
-    -e 's/ECC_in_agent_bus\.initiator_port/ECC_in_agent_bus/g' \
-    "$hdl_src"
-} > "$tmpdir/hdl_top_icarus.sv"
+python3 "$repo_root/dv/caliptra_bfm/uvmf_lite/tests/generated_bfm_pin_overlay.py" ECC "$caliptra_root" "$tmpdir/pins" "$hdl_src"
 
 for edition in 2017 2023; do
   original_log="$tmpdir/original-$edition.log"
@@ -94,6 +77,7 @@ for edition in 2017 2023; do
        CALIPTRA_PRIM_ROOT="$caliptra_root/src/caliptra_prim_generic" \
        CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
        "$iverilog_bin" -uvm -g"$edition" -s actual_ecc_generated_hdl_elab_probe \
+         "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
          -f "$ecc_root/config/ecc_top.vf" \
          -I"$in_pkg" -I"$out_pkg" -I"$env_pkg" \
          -I"$bench/parameters" -I"$bench/sequences" -I"$bench/tests" \
@@ -101,21 +85,21 @@ for edition in 2017 2023; do
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv" \
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv" \
          "$in_pkg/ECC_in_pkg_hdl.sv" "$in_pkg/ECC_in_pkg.sv" \
-         "$in_pkg/src/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
-         "$in_pkg/src/ECC_in_monitor_bfm.sv" \
+         "$tmpdir/pins/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
+         "$tmpdir/pins/ECC_in_monitor_bfm.sv" \
          "$out_pkg/ECC_out_pkg_hdl.sv" "$out_pkg/ECC_out_pkg.sv" \
-         "$out_pkg/src/ECC_out_driver_bfm.sv" "$out_pkg/src/ECC_out_if.sv" \
-         "$out_pkg/src/ECC_out_monitor_bfm.sv" \
+         "$tmpdir/pins/ECC_out_driver_bfm.sv" "$out_pkg/src/ECC_out_if.sv" \
+         "$tmpdir/pins/ECC_out_monitor_bfm.sv" \
          "$env_pkg/ECC_env_pkg.sv" "$bench/parameters/ECC_parameters_pkg.sv" \
          "$bench/sequences/ECC_sequences_pkg.sv" "$bench/tests/ECC_tests_pkg.sv" \
          "$caliptra_root/src/ecc/coverage/ecc_top_cov_bind.sv" \
-         "$tmpdir/hdl_top_icarus.sv" "$hdl_probe" > "$overlay_log" 2>&1; then
+         "$tmpdir/pins/hdl_top.sv" "$hdl_probe" > "$overlay_log" 2>&1; then
     cat "$overlay_log" >&2
     echo "Generated ECC hdl_top overlay failed under IEEE $edition." >&2
     exit 1
   fi
 
   warning_count=$(grep -c 'warning:' "$overlay_log" || true)
-  echo "PASS: actual ECC RTL and generated UVMF hdl_top elaborate with three modport selectors removed and a 1ns/1ps timescale under IEEE $edition ($warning_count compile-progress warnings)."
+  echo "PASS: actual ECC RTL and generated UVMF hdl_top elaborate with scalar BFM ports under IEEE $edition ($warning_count compile-progress warnings)."
   echo "REPRODUCED: unmodified hdl_top has exactly two initiator_port direction errors under IEEE $edition."
 done
