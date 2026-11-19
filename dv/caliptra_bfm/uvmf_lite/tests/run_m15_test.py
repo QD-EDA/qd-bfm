@@ -1629,10 +1629,14 @@ def root_for(repo_name: str, caliptra: Path) -> Path:
     return caliptra if repo_name == "caliptra" else caliptra / "submodules/adams-bridge"
 
 
+class ConfigurationError(RuntimeError):
+    """The run cannot start, so a job array must not count this row as finished."""
+
+
 def required_environment(name: str, description: str) -> str:
     value = os.environ.get(name)
     if not value:
-        raise RuntimeError(f"set {name} to {description}")
+        raise ConfigurationError(f"set {name} to {description}")
     return value
 
 
@@ -1656,10 +1660,12 @@ GENERATED_BFM_PIN_ENVIRONMENTS = (
 )
 
 
-def prepare_generated_bfm_pins(filelist: Path, repo: Path, env: dict[str, str], output: Path) -> Path:
+def prepare_generated_bfm_pins(
+    filelist: Path, repo: Path, env: dict[str, str], output: Path, companions: tuple[Path, ...] = ()
+) -> Path:
     from generated_bfm_pin_overlay import stage_filelist
 
-    staged = stage_filelist(filelist, output / "pins", env)
+    staged = stage_filelist(filelist, output / "pins", env, companions)
     staged.write_text(str(repo / "dv/caliptra_bfm/qd_timescale.sv") + "\n" + staged.read_text())
     return staged
 
@@ -1700,8 +1706,10 @@ def main() -> int:
         "slurm_array_task_id": os.environ.get("SLURM_ARRAY_TASK_ID", "local"),
         "timeout_seconds": args.timeout,
     }
+    configuration_error = False
     try:
         caliptra = Path(required_environment("CALIPTRA_ROOT", "the pinned Caliptra checkout")).resolve()
+        iverilog = Path(required_environment("IVERILOG_BIN", "the pinned iverilog binary")).resolve()
         root = root_for(row["source_repo"], caliptra)
         expected_pin = CALIPTRA_PIN if row["source_repo"] == "caliptra" else ADAMS_BRIDGE_PIN
         actual_pin = run_git(root, "rev-parse", "HEAD")
@@ -1716,7 +1724,6 @@ def main() -> int:
             if sha256(root / relative) != expected:
                 raise RuntimeError(f"filelist hash mismatch: {relative}")
 
-        iverilog = Path(required_environment("IVERILOG_BIN", "the pinned iverilog binary")).resolve()
         vvp = Path(os.environ.get("VVP_BIN", str(iverilog.with_name("vvp")))).resolve()
         if sha256(iverilog) != IVERILOG_SHA256:
             raise RuntimeError(f"Icarus binary hash mismatch: {sha256(iverilog)}")
@@ -2178,7 +2185,10 @@ def main() -> int:
                     wrapper = output / "m15_uvmf_top.sv"
                     wrapper.write_text("module m15_uvmf_top; hdl_top hdl(); hvl_top hvl(); endmodule\n")
                     if row["environment_id"] in GENERATED_BFM_PIN_ENVIRONMENTS:
-                        filelist = prepare_generated_bfm_pins(filelist, repo, env, output)
+                        filelist = prepare_generated_bfm_pins(
+                            filelist, repo, env, output,
+                            (root / row["hdl_filelist"], root / row["hvl_filelist"]),
+                        )
                     command = [str(iverilog), "-uvm", "-g2017", "-gassertions", "-s", "m15_uvmf_top", "-f", str(filelist)]
                     if row["environment_id"] == "uvmf-mldsa":
                         command.insert(1, "-DCALIPTRA_BFM_AHB_32BIT")
@@ -2220,6 +2230,9 @@ def main() -> int:
                         result.update(status=status, cause=cause)
                     result["sim_log"] = str(output / "sim.log")
                 result["compile_log"] = str(output / "compile.log")
+    except ConfigurationError as error:
+        configuration_error = True
+        result.update(status="BLOCKED", cause=str(error))
     except (OSError, RuntimeError, ValueError, subprocess.CalledProcessError) as error:
         result.update(status="BLOCKED", cause=str(error))
 
@@ -2229,7 +2242,7 @@ def main() -> int:
         f"row_id={result['row_id']}\ntestname={result['testname']}\nstatus={result['status']}\ncause={result['cause']}\nelapsed_seconds={result['elapsed_seconds']}\n"
     )
     print(f"{result['status']} row={args.row_id} test={row['testname']}: {result['cause']}")
-    return 0
+    return 2 if configuration_error else 0
 
 
 if __name__ == "__main__":

@@ -72,6 +72,11 @@ def stage_sources(bfms, top, output):
             connect, top_source,
         )
         connections += count
+        # A BFM may be listed but never instantiated; every instance must be rewired.
+        code = re.sub(r"//[^\n]*|/\*.*?\*/", "", top_source, flags=re.S)
+        code = re.sub(rf"\bvirtual\s+{bfm}\b", "", code)
+        if len(re.findall(rf"\b{bfm}\b", code)) != count:
+            raise ValueError(f"{bfm}: not every instance in {top.name} was rewired")
     paths[top.name] = output / top.name
     paths[top.name].write_text(top_source)
     return paths, connections
@@ -96,28 +101,63 @@ def stage_bfms(caliptra, kind, output, top, overrides=()):
     return paths
 
 
-def stage_filelist(filelist, output, variables):
-    """Stage every generated BFM named by filelist and return the rewritten list."""
-    text = filelist.read_text()
-    sources = {}
+def expand_entry(entry, variables):
+    def value(match):
+        name = match.group(1) or match.group(2)
+        if name not in variables:
+            raise ValueError(f"unresolved filelist variable {name} in {entry}")
+        return variables[name]
+    return re.sub(r"\$\{(\w+)\}|\$(\w+)", value, entry)
+
+
+def filelist_entries(text):
     for line in text.splitlines():
-        entry = line.strip()
-        for name, value in variables.items():
-            entry = entry.replace(f"${{{name}}}", value)
-        if entry.endswith(".sv"):
-            sources[Path(entry).name] = Path(entry)
+        entry = line.split("//", 1)[0].strip()
+        if entry:
+            yield entry
+
+
+def filelist_sources(text, variables):
+    paths = (Path(expand_entry(entry, variables)) for entry in filelist_entries(text)
+             if entry.endswith(".sv") and not entry.startswith("+"))
+    return {path.name: path for path in paths}
+
+
+def stage_filelist(filelist, output, variables, companions=()):
+    """Stage every generated BFM in filelist and companions; return the rewritten list."""
+    text = filelist.read_text().rstrip("\n") + "\n"
+    sources = filelist_sources(text, variables)
+    for companion in companions:
+        extra = companion.read_text()
+        missing = filelist_sources(extra, variables).keys() - sources.keys()
+        if missing:
+            listed = set(filelist_entries(text))
+            for entry in filelist_entries(extra):
+                is_source = entry.endswith(".sv") and not entry.startswith("+")
+                if entry not in listed and (not is_source or
+                                            Path(expand_entry(entry, variables)).name in missing):
+                    text += entry + "\n"
+            sources = {**filelist_sources(extra, variables), **sources}
+    if "hdl_top.sv" not in sources:
+        raise ValueError(f"hdl_top.sv is not listed by {filelist}")
     bfms = {}
     for name, path in sources.items():
         match = re.fullmatch(r"(\w+)_(?:driver|monitor)_bfm\.sv", name)
         if match:
-            bfms[name[:-3]] = (path, sources[f"{match.group(1)}_if.sv"])
-    if not bfms or "hdl_top.sv" not in sources:
-        raise ValueError(f"no generated BFMs and hdl_top.sv in {filelist}")
-    paths, connections = stage_sources(bfms, sources["hdl_top.sv"], output)
-    if not connections:
-        raise ValueError(f"no generated BFM instances rewired in {filelist}")
+            bus = f"{match.group(1)}_if.sv"
+            if bus not in sources:
+                raise ValueError(f"{name} needs {bus}, which is not listed by {filelist}")
+            bfms[name[:-3]] = (path, sources[bus])
+        elif name.endswith("_bfm.sv") and re.search(r"\(\s*\w+_if\s+bus\s*\)\s*;", path.read_text()):
+            raise ValueError(f"{name} has an interface port but cannot be staged")
+    if not bfms:
+        raise ValueError(f"no generated BFMs are listed by {filelist}")
+    paths, _ = stage_sources(bfms, sources["hdl_top.sv"], output)
     staged = output / "generated_bfm_pins.vf"
     staged.write_text(rewrite_filelist(text, paths))
+    for name, path in filelist_sources(staged.read_text(), variables).items():
+        if name in paths and path != paths[name]:
+            raise ValueError(f"{name} would compile from its unstaged source {path}")
     return staged
 
 

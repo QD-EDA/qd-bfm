@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -792,53 +793,139 @@ class GeneratedBfmPinOverlayTest(unittest.TestCase):
 
 
 class GeneratedBfmFilelistStagingTest(unittest.TestCase):
+    NAMES = ("X_if.sv", "X_driver_bfm.sv", "X_monitor_bfm.sv", "hdl_top.sv")
+    TOP = (
+        "module hdl_top;\n  X_if x_bus(.clk(clk));\n"
+        "  X_monitor_bfm x_mon(x_bus.monitor_port);\n"
+        "  X_driver_bfm #(.W(8)) x_drv(x_bus.initiator_port);\nendmodule\n"
+    )
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.base = Path(temporary.name)
+        self.root = self.base / "source"
+        self.root.mkdir()
+        self.output = self.base / "pins"
+        (self.root / "X_if.sv").write_text(
+            "interface X_if #(int W = 8) (\n"
+            "  input tri clk,\n  inout tri [W-1:0] data,\n  inout tri [1:0] resp\n);\n"
+            "modport monitor_port (input clk, input data, input resp);\n"
+            "modport initiator_port (input clk, output data, input resp);\n"
+            "endinterface\n"
+        )
+        (self.root / "X_driver_bfm.sv").write_text(
+            "interface X_driver_bfm #(int W = 8)\n  (X_if bus);\n"
+            "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\n"
+            "  assign bus.data = data_o;\n  assign bus.resp = resp_o;\nendinterface\n"
+        )
+        (self.root / "X_monitor_bfm.sv").write_text(
+            "interface X_monitor_bfm #(int W = 8)\n  (X_if bus);\n"
+            "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\nendinterface\n"
+        )
+        (self.root / "hdl_top.sv").write_text(self.TOP)
+
+    def filelist(self, names=NAMES, name="env.vf"):
+        path = self.base / name
+        path.write_text("+incdir+${ROOT}\n" + "".join(f"${{ROOT}}/{item}\n" for item in names))
+        return path
+
+    def stage(self, filelist=None, companions=()):
+        return stage_filelist(filelist or self.filelist(), self.output, {"ROOT": str(self.root)}, companions)
+
     def test_stage_filelist_flattens_bfms_and_rewires_hdl_top(self):
+        staged = self.stage().read_text()
+        top = (self.output / "hdl_top.sv").read_text()
+        driver = (self.output / "X_driver_bfm.sv").read_text()
+
+        self.assertIn("${ROOT}/X_if.sv", staged)
+        self.assertIn(str(self.output / "X_driver_bfm.sv"), staged)
+        self.assertIn(str(self.output / "hdl_top.sv"), staged)
+        self.assertNotIn("X_if bus", driver)
+        self.assertIn("X_driver_bfm #(.W(8)) x_drv(", top)
+        self.assertIn(".qd_drive_data(x_bus.data)", top)
+        self.assertIn(".qd_drive_resp()", top)
+        self.assertNotIn("initiator_port", top)
+
+    def test_unresolved_variable_is_rejected(self):
+        filelist = self.base / "env.vf"
+        filelist.write_text("${MISSING_ROOT}/X_if.sv\n")
+        with self.assertRaisesRegex(ValueError, "MISSING_ROOT"):
+            self.stage(filelist)
+
+    def test_missing_hdl_top_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "hdl_top.sv"):
+            self.stage(self.filelist(self.NAMES[:3]))
+
+    def test_missing_bus_interface_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "X_if.sv"):
+            self.stage(self.filelist(self.NAMES[1:]))
+
+    def test_partly_rewired_top_is_rejected(self):
+        (self.root / "hdl_top.sv").write_text(self.TOP.replace(
+            "endmodule", "  X_driver_bfm x_array[1:0](x_bus.initiator_port);\nendmodule"))
+        with self.assertRaisesRegex(ValueError, "X_driver_bfm: not every instance"):
+            self.stage()
+
+    def test_listed_bfm_without_an_instance_is_still_staged(self):
+        (self.root / "hdl_top.sv").write_text(
+            "module hdl_top;\n  X_if x_bus(.clk(clk));\n  X_monitor_bfm x_mon(x_bus.monitor_port);\nendmodule\n")
+        self.assertIn(str(self.output / "X_driver_bfm.sv"), self.stage().read_text())
+
+    def test_companion_filelist_sources_are_staged(self):
+        companion = self.filelist(("X_monitor_bfm.sv", "hdl_top.sv"), "hdl.f")
+        staged = self.stage(self.filelist(self.NAMES[:2]), (companion,)).read_text()
+        self.assertIn(str(self.output / "X_monitor_bfm.sv"), staged)
+        self.assertIn(str(self.output / "hdl_top.sv"), staged)
+        self.assertNotIn("${ROOT}/X_monitor_bfm.sv", staged)
+
+    def test_interface_port_bfm_that_cannot_be_staged_is_rejected(self):
+        (self.root / "other_bfm.sv").write_text("interface other_bfm (X_if bus);\nendinterface\n")
+        with self.assertRaisesRegex(ValueError, "other_bfm.sv"):
+            self.stage(self.filelist(self.NAMES + ("other_bfm.sv",)))
+
+    def test_timescale_prelude_is_first(self):
+        repo = self.base / "repo"
+        staged = run_m15_test.prepare_generated_bfm_pins(
+            self.filelist(), repo, {"ROOT": str(self.root)}, self.base)
+        self.assertEqual(staged.read_text().splitlines()[0],
+                         str(repo / "dv/caliptra_bfm/qd_timescale.sv"))
+
+
+class M15ConfigurationExitTest(unittest.TestCase):
+    def run_row(self, **variables):
+        columns = (
+            "row_id", "testname", "source_repo", "source_file", "source_pin", "source_yaml_sha256",
+            "environment_id", "runner_profile", "filelist", "filelist_sha256_json", "run_plusargs_json",
+        )
+        values = dict.fromkeys(columns, "x")
+        values.update(row_id="1", source_repo="caliptra", filelist_sha256_json="{}", run_plusargs_json="[]")
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary) / "source"
-            root.mkdir()
-            (root / "X_if.sv").write_text(
-                "interface X_if #(int W = 8) (\n"
-                "  input tri clk,\n  inout tri [W-1:0] data,\n  inout tri [1:0] resp\n);\n"
-                "modport monitor_port (input clk, input data, input resp);\n"
-                "modport initiator_port (input clk, output data, input resp);\n"
-                "endinterface\n"
+            manifest = Path(temporary) / "manifest.tsv"
+            manifest.write_text("\t".join(columns) + "\n" + "\t".join(values[c] for c in columns) + "\n")
+            environment = {k: v for k, v in os.environ.items() if k not in ("CALIPTRA_ROOT", "IVERILOG_BIN")}
+            completed = subprocess.run(
+                [sys.executable, str(Path(run_m15_test.__file__)), "--manifest", str(manifest),
+                 "--row-id", "1", "--output-dir", str(Path(temporary) / "out")],
+                env={**environment, **variables}, capture_output=True, text=True,
             )
-            (root / "X_driver_bfm.sv").write_text(
-                "interface X_driver_bfm #(int W = 8)\n  (X_if bus);\n"
-                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\n"
-                "  assign bus.data = data_o;\n  assign bus.resp = resp_o;\nendinterface\n"
-            )
-            (root / "X_monitor_bfm.sv").write_text(
-                "interface X_monitor_bfm #(int W = 8)\n  (X_if bus);\n"
-                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\nendinterface\n"
-            )
-            (root / "hdl_top.sv").write_text(
-                "module hdl_top;\n  X_if x_bus(.clk(clk));\n"
-                "  X_monitor_bfm x_mon(x_bus.monitor_port);\n"
-                "  X_driver_bfm #(.W(8)) x_drv(x_bus.initiator_port);\nendmodule\n"
-            )
-            names = ("X_if.sv", "X_driver_bfm.sv", "X_monitor_bfm.sv", "hdl_top.sv")
-            filelist = Path(temporary) / "env.vf"
-            filelist.write_text("+incdir+${ROOT}\n" + "".join(f"${{ROOT}}/{name}\n" for name in names))
-            output = Path(temporary) / "pins"
+            return completed.returncode, json.loads((Path(temporary) / "out/result.json").read_text())
 
-            staged = stage_filelist(filelist, output, {"ROOT": str(root)}).read_text()
-            top = (output / "hdl_top.sv").read_text()
-            driver = (output / "X_driver_bfm.sv").read_text()
+    def test_missing_caliptra_root_exits_nonzero(self):
+        code, result = self.run_row(IVERILOG_BIN="/missing/iverilog")
+        self.assertEqual(code, 2)
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertIn("CALIPTRA_ROOT", result["cause"])
 
-            self.assertIn("${ROOT}/X_if.sv", staged)
-            self.assertIn(str(output / "X_driver_bfm.sv"), staged)
-            self.assertIn(str(output / "hdl_top.sv"), staged)
-            self.assertNotIn("X_if bus", driver)
-            self.assertIn("X_driver_bfm #(.W(8)) x_drv(", top)
-            self.assertIn(".qd_drive_data(x_bus.data)", top)
-            self.assertIn(".qd_drive_resp()", top)
-            self.assertNotIn("initiator_port", top)
+    def test_missing_iverilog_bin_exits_nonzero(self):
+        code, result = self.run_row(CALIPTRA_ROOT="/missing/caliptra")
+        self.assertEqual(code, 2)
+        self.assertIn("IVERILOG_BIN", result["cause"])
 
-    def test_required_environment_names_the_missing_variable(self):
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaisesRegex(RuntimeError, "set CALIPTRA_ROOT to the pinned checkout"):
-                run_m15_test.required_environment("CALIPTRA_ROOT", "the pinned checkout")
+    def test_blocked_row_with_complete_configuration_still_exits_zero(self):
+        code, result = self.run_row(CALIPTRA_ROOT="/missing/caliptra", IVERILOG_BIN="/missing/iverilog")
+        self.assertEqual(code, 0)
+        self.assertEqual(result["status"], "BLOCKED")
 
 
 class KeyVaultGeneratedBfmOverlayTest(unittest.TestCase):
