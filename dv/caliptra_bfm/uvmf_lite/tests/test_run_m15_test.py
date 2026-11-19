@@ -9,7 +9,7 @@ from pathlib import Path
 
 import run_m15_test
 
-from generated_bfm_pin_overlay import modport_inputs
+from generated_bfm_pin_overlay import modport_inputs, stage_filelist
 from run_m15_test import (
     classify,
     classify_pkdecode,
@@ -789,6 +789,56 @@ class GeneratedBfmPinOverlayTest(unittest.TestCase):
         self.assertEqual(modport_inputs(bus, None), set())
         with self.assertRaises(ValueError):
             modport_inputs(bus, "monitor_port")
+
+
+class GeneratedBfmFilelistStagingTest(unittest.TestCase):
+    def test_stage_filelist_flattens_bfms_and_rewires_hdl_top(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "source"
+            root.mkdir()
+            (root / "X_if.sv").write_text(
+                "interface X_if #(int W = 8) (\n"
+                "  input tri clk,\n  inout tri [W-1:0] data,\n  inout tri [1:0] resp\n);\n"
+                "modport monitor_port (input clk, input data, input resp);\n"
+                "modport initiator_port (input clk, output data, input resp);\n"
+                "endinterface\n"
+            )
+            (root / "X_driver_bfm.sv").write_text(
+                "interface X_driver_bfm #(int W = 8)\n  (X_if bus);\n"
+                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\n"
+                "  assign bus.data = data_o;\n  assign bus.resp = resp_o;\nendinterface\n"
+            )
+            (root / "X_monitor_bfm.sv").write_text(
+                "interface X_monitor_bfm #(int W = 8)\n  (X_if bus);\n"
+                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n  assign resp_i = bus.resp;\nendinterface\n"
+            )
+            (root / "hdl_top.sv").write_text(
+                "module hdl_top;\n  X_if x_bus(.clk(clk));\n"
+                "  X_monitor_bfm x_mon(x_bus.monitor_port);\n"
+                "  X_driver_bfm #(.W(8)) x_drv(x_bus.initiator_port);\nendmodule\n"
+            )
+            names = ("X_if.sv", "X_driver_bfm.sv", "X_monitor_bfm.sv", "hdl_top.sv")
+            filelist = Path(temporary) / "env.vf"
+            filelist.write_text("+incdir+${ROOT}\n" + "".join(f"${{ROOT}}/{name}\n" for name in names))
+            output = Path(temporary) / "pins"
+
+            staged = stage_filelist(filelist, output, {"ROOT": str(root)}).read_text()
+            top = (output / "hdl_top.sv").read_text()
+            driver = (output / "X_driver_bfm.sv").read_text()
+
+            self.assertIn("${ROOT}/X_if.sv", staged)
+            self.assertIn(str(output / "X_driver_bfm.sv"), staged)
+            self.assertIn(str(output / "hdl_top.sv"), staged)
+            self.assertNotIn("X_if bus", driver)
+            self.assertIn("X_driver_bfm #(.W(8)) x_drv(", top)
+            self.assertIn(".qd_drive_data(x_bus.data)", top)
+            self.assertIn(".qd_drive_resp()", top)
+            self.assertNotIn("initiator_port", top)
+
+    def test_required_environment_names_the_missing_variable(self):
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "set CALIPTRA_ROOT to the pinned checkout"):
+                run_m15_test.required_environment("CALIPTRA_ROOT", "the pinned checkout")
 
 
 class KeyVaultGeneratedBfmOverlayTest(unittest.TestCase):

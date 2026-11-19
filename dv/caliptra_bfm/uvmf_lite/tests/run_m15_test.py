@@ -1629,6 +1629,13 @@ def root_for(repo_name: str, caliptra: Path) -> Path:
     return caliptra if repo_name == "caliptra" else caliptra / "submodules/adams-bridge"
 
 
+def required_environment(name: str, description: str) -> str:
+    value = os.environ.get(name)
+    if not value:
+        raise RuntimeError(f"set {name} to {description}")
+    return value
+
+
 def find_top(root: Path, top: str) -> Path | None:
     matches = list(root.glob(f"src/**/tb/{top}.sv"))
     return matches[0] if len(matches) == 1 else None
@@ -1642,6 +1649,19 @@ def needs_m16_open_mvc_filelist(row: dict[str, str]) -> bool:
 
 def needs_mldsa_reference_model(row: dict[str, str]) -> bool:
     return row["environment_id"] == "uvmf-mldsa" and row["testname"].startswith("ML_DSA_")
+
+
+GENERATED_BFM_PIN_ENVIRONMENTS = (
+    "uvmf-caliptra_top", "uvmf-ecc", "uvmf-kv", "uvmf-pv", "uvmf-sha512", "uvmf-soc_ifc"
+)
+
+
+def prepare_generated_bfm_pins(filelist: Path, repo: Path, env: dict[str, str], output: Path) -> Path:
+    from generated_bfm_pin_overlay import stage_filelist
+
+    staged = stage_filelist(filelist, output / "pins", env)
+    staged.write_text(str(repo / "dv/caliptra_bfm/qd_timescale.sv") + "\n" + staged.read_text())
+    return staged
 
 
 def should_drop_axi4pc_stub(environment_id: str) -> bool:
@@ -1681,7 +1701,7 @@ def main() -> int:
         "timeout_seconds": args.timeout,
     }
     try:
-        caliptra = Path(os.environ.get("CALIPTRA_ROOT", "/home/dsell/toolchains/iverilog-c339/firmware/caliptra-rtl")).resolve()
+        caliptra = Path(required_environment("CALIPTRA_ROOT", "the pinned Caliptra checkout")).resolve()
         root = root_for(row["source_repo"], caliptra)
         expected_pin = CALIPTRA_PIN if row["source_repo"] == "caliptra" else ADAMS_BRIDGE_PIN
         actual_pin = run_git(root, "rev-parse", "HEAD")
@@ -1696,7 +1716,7 @@ def main() -> int:
             if sha256(root / relative) != expected:
                 raise RuntimeError(f"filelist hash mismatch: {relative}")
 
-        iverilog = Path(os.environ.get("IVERILOG_BIN", "/home/dsell/toolchains/iverilog-uvm-m18-main-cae035642e056644274a01e98d4422ce286685b4/bin/iverilog")).resolve()
+        iverilog = Path(required_environment("IVERILOG_BIN", "the pinned iverilog binary")).resolve()
         vvp = Path(os.environ.get("VVP_BIN", str(iverilog.with_name("vvp")))).resolve()
         if sha256(iverilog) != IVERILOG_SHA256:
             raise RuntimeError(f"Icarus binary hash mismatch: {sha256(iverilog)}")
@@ -2157,15 +2177,8 @@ def main() -> int:
                     env["UVMF_PROJECT_DIR"] = str(project)
                     wrapper = output / "m15_uvmf_top.sv"
                     wrapper.write_text("module m15_uvmf_top; hdl_top hdl(); hvl_top hvl(); endmodule\n")
-                    if row["environment_id"] == "uvmf-ecc":
-                        from generated_bfm_pin_overlay import rewrite_filelist, stage_bfms
-
-                        paths = stage_bfms(caliptra, "ECC", output / "pins",
-                                           project / "tb/testbench/hdl_top.sv")
-                        pin_filelist = output / "pins/ecc.vf"
-                        pin_filelist.write_text(str(repo / "dv/caliptra_bfm/qd_timescale.sv") + "\n" +
-                                                rewrite_filelist(filelist.read_text(), paths))
-                        filelist = pin_filelist
+                    if row["environment_id"] in GENERATED_BFM_PIN_ENVIRONMENTS:
+                        filelist = prepare_generated_bfm_pins(filelist, repo, env, output)
                     command = [str(iverilog), "-uvm", "-g2017", "-gassertions", "-s", "m15_uvmf_top", "-f", str(filelist)]
                     if row["environment_id"] == "uvmf-mldsa":
                         command.insert(1, "-DCALIPTRA_BFM_AHB_32BIT")
