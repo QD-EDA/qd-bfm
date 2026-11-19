@@ -269,6 +269,8 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
   final begin
     automatic bit predictor_disconnected;
     automatic logic [31:0] expected_transfers, expected_last_data;
+    $display("ECC_AHB_MONITOR: addresses=%0d transfers=%0d last_data=%08h",
+             address_count, transfer_count, transfer_data);
     if (checker_error !== 1'b0 || checker_error_count !== 0 ||
         monitor_protocol_error !== 1'b0 || monitor_protocol_error_count !== 0)
       $fatal(1, "Caliptra ECC AHB UVM checker/monitor reported a protocol error");

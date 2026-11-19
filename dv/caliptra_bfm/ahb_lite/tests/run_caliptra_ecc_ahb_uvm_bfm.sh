@@ -38,6 +38,10 @@ if grep -Eq '^UVM_(ERROR|FATAL) :[[:space:]]*[1-9]' "$log"; then
   echo "Caliptra ECC AHB UVM BFM smoke reported UVM errors or fatals" >&2
   exit 1
 fi
+if ! grep -Fxq 'ECC_AHB_MONITOR: addresses=4 transfers=4 last_data=00000000' "$log"; then
+  echo "Caliptra ECC AHB UVM monitor did not report four transfers ending in a read of 0" >&2
+  exit 1
+fi
 
 if "$VVP_BIN" "$out" +AHB_NO_RAL_PREDICTOR >"$mutation_log" 2>&1; then
   mutation_status=0
@@ -50,6 +54,13 @@ if [ "$mutation_fatals" -ne 1 ] ||
    ! grep -Eq '^UVM_FATAL :[[:space:]]*1$' "$mutation_log" ||
    ! grep -Eq '^UVM_ERROR :[[:space:]]*0$' "$mutation_log"; then
   echo "Predictor-disconnect mutation did not produce exactly the expected UVM_FATAL" >&2
+  exit 1
+fi
+# vvp's exit status is ignored above, so a final-block $fatal must fail here.
+if ! grep -Fxq 'ECC_AHB_MONITOR: addresses=2 transfers=2 last_data=00000001' "$mutation_log" ||
+   grep -Fq 'Caliptra ECC AHB UVM checker/monitor reported a protocol error' "$mutation_log" ||
+   grep -Fq 'Caliptra ECC AHB UVM monitor did not report the expected clean transfers' "$mutation_log"; then
+  echo "Predictor-disconnect mutation did not stop after two clean transfers" >&2
   exit 1
 fi
 echo "PASS: predictor disconnect was detected (vvp exit $mutation_status)"
