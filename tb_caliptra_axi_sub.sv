@@ -29,10 +29,16 @@ module tb_caliptra_axi_sub #(parameter RESPONSE_DELAY=0);
   logic [31:0] expected_aw_user=0, expected_ar_user=0, expected_w_user=0;
   logic [3:0] expected_strb;
   logic [7:0] expected_id;
-  always @(negedge clk) begin
-    if (!rst_n || !dv) begin hld=1; hold_cycles=0; end
-    else if (hold_cycles<2) begin hld=1; hold_cycles++; end
-    else hld=0;
+  // Hold each transfer for two cycles. dv used to be sampled at the negedge, but
+  // the driver raises wvalid with a blocking assignment at that same negedge and
+  // dv follows wvalid combinationally. IEEE 1800-2023 4.7 leaves the order of
+  // those two processes open, so a write held for two or three cycles depending
+  // on the simulator. At the posedge dv is stable, and the nonblocking update
+  // reaches the subordinate from the next posedge.
+  always @(posedge clk) begin
+    if (!rst_n || !dv) begin hld <= 1; hold_cycles <= 0; end
+    else if (hold_cycles < 1) begin hld <= 1; hold_cycles <= hold_cycles + 1; end
+    else hld <= 0;
   end
   always @(posedge clk) begin
     if (rst_n && rd.rvalid && !rd.rready) r_stalled++;
