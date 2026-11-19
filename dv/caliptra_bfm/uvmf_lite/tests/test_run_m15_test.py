@@ -10,7 +10,7 @@ from pathlib import Path
 
 import run_m15_test
 
-from generated_bfm_pin_overlay import modport_inputs, stage_filelist
+from generated_bfm_pin_overlay import modport_inputs, rewrite_filelist, stage_bfms, stage_filelist
 from run_m15_test import (
     classify,
     classify_pkdecode,
@@ -884,12 +884,114 @@ class GeneratedBfmFilelistStagingTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "other_bfm.sv"):
             self.stage(self.filelist(self.NAMES + ("other_bfm.sv",)))
 
+    def test_companion_options_come_with_its_sources(self):
+        companion = self.base / "hdl.f"
+        companion.write_text("+incdir+${ROOT}/hdl_include\n${ROOT}/X_monitor_bfm.sv\n${ROOT}/hdl_top.sv\n")
+        staged = self.stage(self.filelist(self.NAMES[:2]), (companion,)).read_text()
+        self.assertIn("+incdir+${ROOT}/hdl_include", staged)
+        self.assertIn(str(self.output / "X_monitor_bfm.sv"), staged)
+
+    def test_companion_that_adds_no_source_is_not_appended(self):
+        companion = self.base / "hvl.f"
+        companion.write_text("+incdir+${ROOT}/hvl_include\n${ROOT}/hdl_top.sv\n")
+        self.assertNotIn("hvl_include", self.stage(companions=(companion,)).read_text())
+
+    def test_bfm_behind_nested_filelist_is_rejected(self):
+        nested = self.base / "nested.f"
+        nested.write_text("${ROOT}/X_monitor_bfm.sv\n")
+        filelist = self.filelist(("X_if.sv", "X_driver_bfm.sv", "hdl_top.sv"))
+        filelist.write_text(filelist.read_text() + f"-f {nested}\n")
+        (self.root / "hdl_top.sv").write_text(
+            "module hdl_top;\n  X_if x_bus(.clk(clk));\n  X_driver_bfm x_drv(x_bus.initiator_port);\nendmodule\n")
+        with self.assertRaisesRegex(ValueError, "X_monitor_bfm.sv is listed through nested filelist"):
+            self.stage(filelist)
+
+    def test_nested_filelist_without_bfms_is_kept(self):
+        nested = self.base / "rtl.f"
+        nested.write_text("${ROOT}/rtl.sv\n")
+        filelist = self.filelist()
+        filelist.write_text(filelist.read_text() + f"-f {nested}\n")
+        self.assertIn(f"-f {nested}", self.stage(filelist).read_text())
+
     def test_timescale_prelude_is_first(self):
         repo = self.base / "repo"
         staged = run_m15_test.prepare_generated_bfm_pins(
             self.filelist(), repo, {"ROOT": str(self.root)}, self.base)
         self.assertEqual(staged.read_text().splitlines()[0],
                          str(repo / "dv/caliptra_bfm/qd_timescale.sv"))
+
+
+class GeneratedHmacRuntimeStagingTest(unittest.TestCase):
+    """The calls run_generated_hmac_runtime.sh makes: stage_bfms, then rewrite_filelist."""
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.base = Path(temporary.name)
+        self.caliptra = self.base / "caliptra"
+        packages = self.caliptra / "src/hmac/uvmf_2022/uvmf_template_output/verification_ip/interface_packages"
+        for direction in ("in", "out"):
+            prefix = f"HMAC_{direction}"
+            source = packages / f"{prefix}_pkg/src"
+            source.mkdir(parents=True)
+            (source / f"{prefix}_if.sv").write_text(
+                f"interface {prefix}_if (\n  input tri clk,\n  inout tri [31:0] data\n);\n"
+                "modport monitor_port (input clk, input data);\n"
+                "modport initiator_port (input clk, output data);\nendinterface\n"
+            )
+            (source / f"{prefix}_driver_bfm.sv").write_text(
+                f"interface {prefix}_driver_bfm\n  ({prefix}_if bus);\n"
+                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\n"
+                "  assign bus.data = data_o;\nendinterface\n"
+            )
+            (source / f"{prefix}_monitor_bfm.sv").write_text(
+                f"interface {prefix}_monitor_bfm\n  ({prefix}_if bus);\n"
+                "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\nendinterface\n"
+            )
+        self.override = self.base / "monitor-overlay/HMAC_out_monitor_bfm.sv"
+        self.override.parent.mkdir()
+        self.override.write_text(
+            "// overlay copy\ninterface HMAC_out_monitor_bfm\n  (HMAC_out_if bus);\n"
+            "  assign clk_i = bus.clk;\n  assign data_i = bus.data;\nendinterface\n"
+        )
+        self.top = self.base / "hdl_top_timescale_overlay.sv"
+        self.top.write_text(
+            "module hdl_top;\n  HMAC_in_if in_bus(.clk(clk));\n  HMAC_out_if out_bus(.clk(clk));\n"
+            "  HMAC_in_monitor_bfm in_mon(in_bus.monitor_port);\n"
+            "  HMAC_out_monitor_bfm out_mon(out_bus.monitor_port);\n"
+            "  HMAC_in_driver_bfm in_drv(in_bus.initiator_port);\nendmodule\n"
+        )
+        self.output = self.base / "pins"
+
+    def overlay_filelist(self, extra=""):
+        source = self.caliptra / "src/hmac/uvmf_2022/uvmf_template_output/verification_ip/interface_packages"
+        return "".join(
+            f"{source}/HMAC_{d}_pkg/src/HMAC_{d}_{r}_bfm.sv\n" for d in ("in", "out") for r in ("driver", "monitor")
+        ).replace(f"{source}/HMAC_out_pkg/src/HMAC_out_monitor_bfm.sv", str(self.override)) + f"{self.top}\n" + extra
+
+    def test_runtime_stages_every_bfm_and_uses_the_monitor_overlay(self):
+        paths = stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
+        staged = rewrite_filelist(self.overlay_filelist(), paths)
+        self.assertEqual(sorted(paths), sorted(
+            [f"HMAC_{d}_{r}_bfm.sv" for d in ("in", "out") for r in ("driver", "monitor")]
+            + ["hdl_top_timescale_overlay.sv"]))
+        for path in paths.values():
+            self.assertIn(f"{path}\n", staged)
+        self.assertIn("// overlay copy", (self.output / "HMAC_out_monitor_bfm.sv").read_text())
+        top = (self.output / "hdl_top_timescale_overlay.sv").read_text()
+        self.assertIn(".qd_drive_data(in_bus.data)", top)
+        self.assertNotIn("_port)", top)
+
+    def test_runtime_rejects_a_bfm_line_it_cannot_rewrite(self):
+        paths = stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
+        with self.assertRaisesRegex(ValueError, "HMAC_in_driver_bfm.sv would compile from its unstaged source"):
+            rewrite_filelist(self.overlay_filelist().replace("HMAC_in_driver_bfm.sv\n", "HMAC_in_driver_bfm.sv // note\n", 1), paths)
+
+    def test_runtime_rejects_a_partly_rewired_top(self):
+        self.top.write_text(self.top.read_text().replace(
+            "endmodule", "  HMAC_in_driver_bfm in_array[1:0](in_bus.initiator_port);\nendmodule"))
+        with self.assertRaisesRegex(ValueError, "HMAC_in_driver_bfm: not every instance"):
+            stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
 
 
 class M15ConfigurationExitTest(unittest.TestCase):

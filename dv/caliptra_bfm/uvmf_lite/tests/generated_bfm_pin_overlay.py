@@ -123,6 +123,29 @@ def filelist_sources(text, variables):
     return {path.name: path for path in paths}
 
 
+def nested_filelists(text, variables):
+    for entry in filelist_entries(text):
+        match = re.fullmatch(r"-[fF]\s*(\S+)", entry)
+        if match:
+            yield Path(expand_entry(match.group(1), variables))
+
+
+def reject_nested_bfms(text, variables, seen=()):
+    """Raise if a nested -f lists a *_bfm.sv: staging rewrites only the top-level list."""
+    for nested in nested_filelists(text, variables):
+        if nested in seen:
+            continue
+        try:
+            nested_text = nested.read_text()
+        except OSError as error:
+            raise ValueError(f"cannot read nested filelist {nested}: {error}") from error
+        for name in filelist_sources(nested_text, variables):
+            if name.endswith("_bfm.sv"):
+                raise ValueError(f"{name} is listed through nested filelist {nested}; "
+                                 "list it directly so it can be staged")
+        reject_nested_bfms(nested_text, variables, (*seen, nested))
+
+
 def stage_filelist(filelist, output, variables, companions=()):
     """Stage every generated BFM in filelist and companions; return the rewritten list."""
     text = filelist.read_text().rstrip("\n") + "\n"
@@ -152,21 +175,27 @@ def stage_filelist(filelist, output, variables, companions=()):
             raise ValueError(f"{name} has an interface port but cannot be staged")
     if not bfms:
         raise ValueError(f"no generated BFMs are listed by {filelist}")
+    reject_nested_bfms(text, variables)
     paths, _ = stage_sources(bfms, sources["hdl_top.sv"], output)
     staged = output / "generated_bfm_pins.vf"
-    staged.write_text(rewrite_filelist(text, paths))
-    for name, path in filelist_sources(staged.read_text(), variables).items():
-        if name in paths and path != paths[name]:
-            raise ValueError(f"{name} would compile from its unstaged source {path}")
+    staged.write_text(rewrite_filelist(text, paths, variables))
     return staged
 
 
-def rewrite_filelist(text, paths):
-    return "".join(
+def rewrite_filelist(text, paths, variables=None):
+    """Point every staged source in text at its staged copy, and check that none is missed."""
+    rewritten = "".join(
         f"{paths[Path(line.strip()).name]}\n"
         if Path(line.strip()).name in paths else line
         for line in text.splitlines(keepends=True)
     )
+    for entry in filelist_entries(rewritten):
+        if entry.endswith(".sv") and not entry.startswith("+"):
+            path = Path(expand_entry(entry, variables or {}))
+            if path.name in paths and path != paths[path.name]:
+                raise ValueError(f"{path.name} would compile from its unstaged source {path}")
+    reject_nested_bfms(rewritten, variables or {})
+    return rewritten
 
 
 if __name__ == "__main__":
