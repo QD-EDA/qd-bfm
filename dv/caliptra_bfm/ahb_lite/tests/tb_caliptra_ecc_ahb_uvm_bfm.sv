@@ -48,6 +48,18 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
     .error_code(checker_error_code), .error_count(checker_error_count)
   );
 
+  ahb_lite_caliptra_monitor #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) monitor (
+    .HCLK(HCLK), .HRESETn(HRESETn), .HADDR(HADDR), .HWDATA(HWDATA),
+    .HSEL(HSEL), .HWRITE(HWRITE), .HTRANS(HTRANS), .HSIZE(HSIZE),
+    .HREADY(HREADY), .HRESP(HRESP), .HRDATA(HRDATA),
+    .address_count(address_count), .transfer_count(transfer_count),
+    .transfer_fire(transfer_fire), .transfer_addr(transfer_addr),
+    .transfer_write(transfer_write), .transfer_size(), .transfer_data(transfer_data),
+    .transfer_error(transfer_error), .protocol_error(monitor_protocol_error),
+    .protocol_error_count(monitor_protocol_error_count),
+    .address_fire(), .transfer_trans(), .transfer_protocol_error(), .cycle_count()
+  );
+
   ahb_lite_caliptra_pin_monitor_adapter #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) monitor_adapter (
     .HCLK(HCLK), .HRESETn(HRESETn), .HADDR(HADDR), .HWDATA(HWDATA),
     .HSEL(HSEL), .HWRITE(HWRITE), .HTRANS(HTRANS), .HSIZE(HSIZE),
@@ -255,13 +267,18 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
   end
 
   final begin
-    if (checker_error || checker_error_count != 0 || monitor_protocol_error ||
-        monitor_protocol_error_count != 0 || address_count != 4 || transfer_count != 4 ||
-        transfer_write || transfer_error || transfer_addr != 32'h0000_0804 ||
-        transfer_data != 32'h1)
-      $fatal(1, "Caliptra ECC AHB UVM checker/monitor did not report two clean transfers");
-    if (!$test$plusargs("AHB_NO_RAL_PREDICTOR"))
+    if (checker_error !== 1'b0 || checker_error_count !== 0 ||
+        monitor_protocol_error !== 1'b0 || monitor_protocol_error_count !== 0)
+      $fatal(1, "Caliptra ECC AHB UVM checker/monitor reported a protocol error");
+    // The predictor-disconnect mutation stops after the first write/read pair.
+    if (!$test$plusargs("AHB_NO_RAL_PREDICTOR")) begin
+      // Sequence write/read of 1, then RAL write/read of 0: the last transfer reads 0.
+      if (address_count !== 4 || transfer_count !== 4 || transfer_write !== 1'b0 ||
+          transfer_error !== 1'b0 || transfer_addr !== 32'h0000_0804 ||
+          transfer_data !== 32'h0)
+        $fatal(1, "Caliptra ECC AHB UVM monitor did not report four clean transfers");
       $display("PASS: Caliptra ECC RTL AHB write/readback through native UVM agent");
+    end
     $finish;
   end
 
