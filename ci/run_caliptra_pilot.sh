@@ -27,7 +27,11 @@ dpkg-query -W > "$work/evidence/packages.txt"
 git rev-parse HEAD > "$work/evidence/qd-bfm-revision.txt"
 (
   cd "$work/iverilog"
-  # The pinned Icarus release includes its generated configure script.
+  # The pinned Icarus release includes its generated configure script. A fresh
+  # checkout leaves file mtimes in arbitrary order, and its Makefile reruns a
+  # literal autoconf (AUTOCONF=: has no effect) when configure.ac or aclocal.m4
+  # looks newer, rewriting the tracked configure. Make configure the newest.
+  touch configure
   ./configure --prefix="$work/prefix"
   make -j2
   make install
@@ -36,6 +40,7 @@ git rev-parse HEAD > "$work/evidence/qd-bfm-revision.txt"
 (
   cd "$work/verilator"
   unset VERILATOR_ROOT
+  # Verilator does not track configure; autoconf here makes it newer than configure.ac.
   autoconf
   ./configure --prefix="$work/prefix"
   make -j2
