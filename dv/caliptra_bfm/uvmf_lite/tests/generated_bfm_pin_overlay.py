@@ -117,9 +117,13 @@ def filelist_entries(text):
             yield entry
 
 
+def is_source_entry(entry):
+    return entry.endswith(".sv") and not entry.startswith(("+", "-"))
+
+
 def filelist_sources(text, variables):
     paths = (Path(expand_entry(entry, variables)) for entry in filelist_entries(text)
-             if entry.endswith(".sv") and not entry.startswith("+"))
+             if is_source_entry(entry))
     return {path.name: path for path in paths}
 
 
@@ -156,8 +160,7 @@ def stage_filelist(filelist, output, variables, companions=()):
         if missing:
             listed = set(filelist_entries(text))
             for entry in filelist_entries(extra):
-                is_source = entry.endswith(".sv") and not entry.startswith("+")
-                if entry not in listed and (not is_source or
+                if entry not in listed and (not is_source_entry(entry) or
                                             Path(expand_entry(entry, variables)).name in missing):
                     text += entry + "\n"
             sources = {**filelist_sources(extra, variables), **sources}
@@ -175,23 +178,27 @@ def stage_filelist(filelist, output, variables, companions=()):
             raise ValueError(f"{name} has an interface port but cannot be staged")
     if not bfms:
         raise ValueError(f"no generated BFMs are listed by {filelist}")
-    reject_nested_bfms(text, variables)
     paths, _ = stage_sources(bfms, sources["hdl_top.sv"], output)
     staged = output / "generated_bfm_pins.vf"
     staged.write_text(rewrite_filelist(text, paths, variables))
     return staged
 
 
+def rewrite_line(line, paths):
+    code, comment, rest = line.rstrip("\n").partition("//")
+    entry = code.strip()
+    if not (is_source_entry(entry) and Path(entry).name in paths):
+        return line
+    return f"{paths[Path(entry).name]}{' ' + comment + rest if comment else ''}\n"
+
+
 def rewrite_filelist(text, paths, variables=None):
     """Point every staged source in text at its staged copy, and check that none is missed."""
-    rewritten = "".join(
-        f"{paths[Path(line.strip()).name]}\n"
-        if Path(line.strip()).name in paths else line
-        for line in text.splitlines(keepends=True)
-    )
+    rewritten = "".join(rewrite_line(line, paths) for line in text.splitlines(keepends=True))
     for entry in filelist_entries(rewritten):
-        if entry.endswith(".sv") and not entry.startswith("+"):
-            path = Path(expand_entry(entry, variables or {}))
+        token = entry.split()[-1]  # also the file in option forms such as -v FILE
+        if token.endswith(".sv"):
+            path = Path(expand_entry(token, variables or {}))
             if path.name in paths and path != paths[path.name]:
                 raise ValueError(f"{path.name} would compile from its unstaged source {path}")
     reject_nested_bfms(rewritten, variables or {})

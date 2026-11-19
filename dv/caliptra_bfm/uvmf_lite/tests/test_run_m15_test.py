@@ -906,6 +906,22 @@ class GeneratedBfmFilelistStagingTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "X_monitor_bfm.sv is listed through nested filelist"):
             self.stage(filelist)
 
+    def test_bfm_line_with_a_trailing_comment_is_rewritten(self):
+        filelist = self.base / "env.vf"
+        filelist.write_text("".join(
+            f"${{ROOT}}/{name} // generated\n" if name == "X_driver_bfm.sv" else f"${{ROOT}}/{name}\n"
+            for name in self.NAMES))
+        staged = self.stage(filelist).read_text()
+        self.assertIn(f"{self.output / 'X_driver_bfm.sv'} // generated\n", staged)
+
+    def test_nested_filelist_cycle_is_followed_once(self):
+        first, second = self.base / "first.f", self.base / "second.f"
+        first.write_text(f"${{ROOT}}/rtl.sv\n-f {second}\n")
+        second.write_text(f"-f {first}\n")
+        filelist = self.filelist()
+        filelist.write_text(filelist.read_text() + f"-f {first}\n")
+        self.assertIn(f"-f {first}", self.stage(filelist).read_text())
+
     def test_nested_filelist_without_bfms_is_kept(self):
         nested = self.base / "rtl.f"
         nested.write_text("${ROOT}/rtl.sv\n")
@@ -982,10 +998,23 @@ class GeneratedHmacRuntimeStagingTest(unittest.TestCase):
         self.assertIn(".qd_drive_data(in_bus.data)", top)
         self.assertNotIn("_port)", top)
 
-    def test_runtime_rejects_a_bfm_line_it_cannot_rewrite(self):
+    def test_runtime_rewrites_a_bfm_line_with_a_trailing_comment(self):
         paths = stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
+        filelist = self.overlay_filelist().replace("HMAC_in_driver_bfm.sv\n", "HMAC_in_driver_bfm.sv // note\n", 1)
+        self.assertIn(f"{paths['HMAC_in_driver_bfm.sv']} // note\n", rewrite_filelist(filelist, paths))
+
+    def test_runtime_rejects_a_bfm_given_as_a_library_file(self):
+        paths = stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
+        filelist = self.overlay_filelist() + "-v " + self.overlay_filelist().splitlines()[0] + "\n"
         with self.assertRaisesRegex(ValueError, "HMAC_in_driver_bfm.sv would compile from its unstaged source"):
-            rewrite_filelist(self.overlay_filelist().replace("HMAC_in_driver_bfm.sv\n", "HMAC_in_driver_bfm.sv // note\n", 1), paths)
+            rewrite_filelist(filelist, paths)
+
+    def test_runtime_rejects_a_bfm_behind_a_nested_filelist(self):
+        paths = stage_bfms(self.caliptra, "HMAC", self.output, self.top, [self.override])
+        nested = self.base / "nested.f"
+        nested.write_text(self.overlay_filelist().splitlines()[0] + "\n")
+        with self.assertRaisesRegex(ValueError, "HMAC_in_driver_bfm.sv is listed through nested filelist"):
+            rewrite_filelist(self.overlay_filelist() + f"-f {nested}\n", paths)
 
     def test_runtime_rejects_a_partly_rewired_top(self):
         self.top.write_text(self.top.read_text().replace(
