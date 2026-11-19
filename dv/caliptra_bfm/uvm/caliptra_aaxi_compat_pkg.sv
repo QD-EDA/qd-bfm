@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room lower-bound aaxi_master_tr surface observed in Caliptra consumers.
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
 package aaxi_uvm_pkg;

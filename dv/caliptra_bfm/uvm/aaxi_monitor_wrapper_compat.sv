@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room generated-path wrapper: open manager, profile checker, and monitor.
 `ifndef CALIPTRA_BFM_EXTERNAL_AVERY
 module aaxi_monitor_wrapper #(

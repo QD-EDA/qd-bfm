@@ -193,38 +193,38 @@ module tb_caliptra_aaxi_compat;
       foreach (channel_count[i]) channel_count[i] = 0;
     endfunction
 
-    function void write(axi4_caliptra_channel_transaction item);
-      if (item.cycle == 0)
+    function void write(axi4_caliptra_channel_transaction t);
+      if (t.cycle == 0)
         `uvm_fatal("AAXI_CHANNEL", "Channel item has no cycle stamp")
-      case (item.channel)
+      case (t.channel)
         AXI4_CHANNEL_AW: begin
-          if (item.id != 8'h31 || item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
-              item.user != 32'h1122_3344 || item.len != 0 || item.size != 2 ||
-              item.burst != 1)
-            `uvm_fatal("AAXI_AW", $sformatf("Unexpected AW item: %s", item.convert2string()))
+          if (t.id != 8'h31 || t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
+              t.user != 32'h1122_3344 || t.len != 0 || t.size != 2 ||
+              t.burst != 1)
+            `uvm_fatal("AAXI_AW", $sformatf("Unexpected AW item: %s", t.convert2string()))
         end
         AXI4_CHANNEL_W: begin
-          if (item.data != 32'ha55a_c33c || item.strb != 4'hf || !item.last)
-            `uvm_fatal("AAXI_W", $sformatf("Unexpected W item: %s", item.convert2string()))
+          if (t.data != 32'ha55a_c33c || t.strb != 4'hf || !t.last)
+            `uvm_fatal("AAXI_W", $sformatf("Unexpected W item: %s", t.convert2string()))
         end
         AXI4_CHANNEL_B: begin
-          if (item.id != 8'h31 || item.response != 0)
-            `uvm_fatal("AAXI_B", $sformatf("Unexpected B item: %s", item.convert2string()))
+          if (t.id != 8'h31 || t.response != 0)
+            `uvm_fatal("AAXI_B", $sformatf("Unexpected B item: %s", t.convert2string()))
         end
         AXI4_CHANNEL_AR: begin
-          if (item.id != 8'h31 || item.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
-              item.user != 32'h5566_7788 || item.len != 0 || item.size != 2 ||
-              item.burst != 1)
-            `uvm_fatal("AAXI_AR", $sformatf("Unexpected AR item: %s", item.convert2string()))
+          if (t.id != 8'h31 || t.addr != CALIPTRA_DMA_SRAM_BASE + 48'h20 ||
+              t.user != 32'h5566_7788 || t.len != 0 || t.size != 2 ||
+              t.burst != 1)
+            `uvm_fatal("AAXI_AR", $sformatf("Unexpected AR item: %s", t.convert2string()))
         end
         AXI4_CHANNEL_R: begin
-          if (item.id != 8'h31 || item.data != 32'ha55a_c33c || item.response != 0 ||
-              !item.last)
-            `uvm_fatal("AAXI_R", $sformatf("Unexpected R item: %s", item.convert2string()))
+          if (t.id != 8'h31 || t.data != 32'ha55a_c33c || t.response != 0 ||
+              !t.last)
+            `uvm_fatal("AAXI_R", $sformatf("Unexpected R item: %s", t.convert2string()))
         end
         default: `uvm_fatal("AAXI_CHANNEL", "Unknown AXI channel item")
       endcase
-      channel_count[item.channel]++;
+      channel_count[t.channel]++;
     endfunction
   endclass
 

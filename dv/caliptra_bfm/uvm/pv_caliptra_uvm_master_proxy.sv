@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bridges UVM commands to the standalone task-based PCRVault client BFM.
 module pv_caliptra_uvm_master_proxy (
   pv_caliptra_master_cmd_if cmd_if,

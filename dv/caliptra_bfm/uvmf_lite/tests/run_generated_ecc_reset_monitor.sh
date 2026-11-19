@@ -94,18 +94,14 @@ if [ "$probe" != reset ]; then
     exit 1
   fi
 fi
-{
-  printf '`timescale 1ns/1ps\n'
-  sed \
-    -e 's/ECC_in_agent_bus\.monitor_port/ECC_in_agent_bus/g' \
-    -e 's/ECC_out_agent_bus\.monitor_port/ECC_out_agent_bus/g' \
-    -e 's/ECC_in_agent_bus\.initiator_port/ECC_in_agent_bus/g' \
-    "$hdl_src"
-} > "$tmpdir/hdl_top_icarus.sv"
+printf '%s\n' "$repo_root/dv/caliptra_bfm/qd_timescale.sv" > "$tmpdir/qd_timescale.f"
+python3 "$repo_root/dv/caliptra_bfm/uvmf_lite/tests/generated_bfm_pin_overlay.py" ECC "$caliptra_root" "$tmpdir/pins" "$hdl_src" \
+  "$tmpdir/monitors/ECC_in_driver_bfm.sv" "$tmpdir/monitors/ECC_in_monitor_bfm.sv" \
+  "$tmpdir/monitors/ECC_out_monitor_bfm.sv"
 if [ "$probe" != reset ]; then
   sed "s/\.cptra_pwrgood    (),/.cptra_pwrgood    (1'b1),/" \
-    "$tmpdir/hdl_top_icarus.sv" > "$tmpdir/hdl_top_key_sign.sv"
-  mv "$tmpdir/hdl_top_key_sign.sv" "$tmpdir/hdl_top_icarus.sv"
+    "$tmpdir/pins/hdl_top.sv" > "$tmpdir/hdl_top_key_sign.sv"
+  mv "$tmpdir/hdl_top_key_sign.sv" "$tmpdir/pins/hdl_top.sv"
 fi
 
 for edition in 2017 2023; do
@@ -122,23 +118,23 @@ for edition in 2017 2023; do
        CALIPTRA_PRIM_ROOT="$caliptra_root/src/caliptra_prim_generic" \
        CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
        "$iverilog_bin" -uvm -g"$edition" -s ecc_generated_full_probe \
-         -f "$ecc_root/config/ecc_top.vf" \
+         -f "$tmpdir/qd_timescale.f" -f "$ecc_root/config/ecc_top.vf" \
          -I"$in_pkg" -I"$out_pkg" -I"$env_pkg" \
          -I"$bench/parameters" -I"$bench/sequences" -I"$bench/tests" \
          -o "$image" \
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv" \
          "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv" \
          "$in_pkg/ECC_in_pkg_hdl.sv" "$in_pkg/ECC_in_pkg.sv" \
-         "$tmpdir/monitors/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
-         "$tmpdir/monitors/ECC_in_monitor_bfm.sv" \
+         "$tmpdir/pins/ECC_in_driver_bfm.sv" "$in_pkg/src/ECC_in_if.sv" \
+         "$tmpdir/pins/ECC_in_monitor_bfm.sv" \
          "$out_pkg/ECC_out_pkg_hdl.sv" "$out_pkg/ECC_out_pkg.sv" \
-         "$out_pkg/src/ECC_out_driver_bfm.sv" "$out_pkg/src/ECC_out_if.sv" \
-         "$tmpdir/monitors/ECC_out_monitor_bfm.sv" \
+         "$tmpdir/pins/ECC_out_driver_bfm.sv" "$out_pkg/src/ECC_out_if.sv" \
+         "$tmpdir/pins/ECC_out_monitor_bfm.sv" \
          "$env_pkg/ECC_env_pkg.sv" "$bench/parameters/ECC_parameters_pkg.sv" \
          "$bench/sequences/ECC_sequences_pkg.sv" "$bench/tests/ECC_tests_pkg.sv" \
          "$test_dir/tb_generated_ecc_reset_probe_pkg.sv" \
          "$caliptra_root/src/ecc/coverage/ecc_top_cov_bind.sv" \
-         "$tmpdir/hdl_top_icarus.sv" "$bench/testbench/hvl_top.sv" \
+         "$tmpdir/pins/hdl_top.sv" "$bench/testbench/hvl_top.sv" \
          "$test_dir/tb_generated_ecc_full_probe.sv" > "$compile_log" 2>&1; then
     cat "$compile_log" >&2
     echo "Generated ECC reset-monitor probe did not compile under IEEE $edition." >&2

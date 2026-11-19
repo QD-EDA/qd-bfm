@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Independent AXI channel backpressure with Caliptra's weighted delay profile.
 module axi4_caliptra_random_stalls #(
   parameter integer CHANNELS = 10

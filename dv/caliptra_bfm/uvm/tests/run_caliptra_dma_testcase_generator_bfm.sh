@@ -33,6 +33,7 @@ python3 docs/conformance/release_overlays/caliptra/dma_testcase_generator_overla
   -I"$CALIPTRA_RTL/src/integration/rtl/caliptra_reg" \
   -I"$CALIPTRA_RTL/src/integration/tb" \
   -s tb_caliptra_dma_testcase_generator_bfm -o "$out" \
+  dv/caliptra_bfm/qd_timescale.sv \
   "$CALIPTRA_RTL/src/caliptra_prim/rtl/caliptra_prim_util_pkg.sv" \
   "$CALIPTRA_RTL/src/axi/rtl/axi_pkg.sv" \
   "$CALIPTRA_RTL/src/soc_ifc/rtl/soc_ifc_pkg.sv" \

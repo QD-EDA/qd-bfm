@@ -74,9 +74,9 @@ module tb_ahb_qvip_compat_env;
       super.new(name, parent);
     endfunction
 
-    function void write(mvc_sequence_item_base base_item);
-      if (!$cast(last_item, base_item))
-        `uvm_fatal("AHB_QVIP_SINK_TYPE", $sformatf("Got %s instead of the Caliptra AHB item", base_item.get_type_name()))
+    function void write(mvc_sequence_item_base t);
+      if (!$cast(last_item, t))
+        `uvm_fatal("AHB_QVIP_SINK_TYPE", $sformatf("Got %s instead of the Caliptra AHB item", t.get_type_name()))
       if (last_item.data.size() < 1 || last_item.data.size() > AHB_MVC_MAX_BURST_BEATS ||
           last_item.resp.size() != last_item.data.size())
         `uvm_fatal("AHB_QVIP_SINK_ITEM", $sformatf("Unexpected AHB stream item: %s", last_item.convert2string()))

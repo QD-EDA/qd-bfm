@@ -189,8 +189,10 @@ BFM writes `hrdata` and `hreadyout` through inputs of
 `ECC_in_if.initiator_port`. The hash-checked
 `tests/run_generated_ecc_hdl_top.sh` confirms those errors on the untouched
 source, then elaborates the actual ECC RTL and generated UVMF packages from a
-temporary copy with the three generated modport selectors removed and an
-explicit `1ns/1ps` timescale. Both IEEE editions pass; the pinned checkout is
+temporary copy made by `tests/generated_bfm_pin_overlay.py`. The copy gives each
+BFM scalar signal ports, so it is legal as a virtual interface (IEEE 1800-2023
+25.9), and leaves a drive pin open where the selected modport makes that signal
+an input. Both IEEE editions pass; the pinned checkout is
 unchanged. This makes the generated top compile path repeatable without
 claiming that the generated source compiles unchanged. The companion
 `tests/run_generated_ecc_reset_monitor.sh` runs the actual generated ECC

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Connects the standalone Caliptra DMA target to Caliptra's axi_if interface.
 module axi4_caliptra_dma_if_subordinate #(
   parameter integer ADDR_WIDTH = 48,

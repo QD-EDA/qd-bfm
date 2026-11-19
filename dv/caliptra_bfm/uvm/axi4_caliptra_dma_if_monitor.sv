@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Connects Caliptra's axi_if DMA pins to the native UVM record adapter.
 module axi4_caliptra_dma_if_monitor (
   input wire ACLK,

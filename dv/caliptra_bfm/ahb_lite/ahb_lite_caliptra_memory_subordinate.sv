@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded byte-addressable AHB-Lite memory target for a single selected window.
 module ahb_lite_caliptra_memory_subordinate #(
   parameter integer ADDR_WIDTH = 32,

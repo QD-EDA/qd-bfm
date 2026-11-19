@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Serialized directed AHB-Lite manager for Caliptra's 64-bit internal bus.
 // HWDATA/HRDATA are raw bus lanes; the caller performs byte-lane formatting.
 module ahb_lite_caliptra_master #(

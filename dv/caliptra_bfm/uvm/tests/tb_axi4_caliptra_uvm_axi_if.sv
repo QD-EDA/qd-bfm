@@ -78,65 +78,65 @@ module tb_axi4_caliptra_uvm_axi_if;
       super.new(name, parent);
     endfunction
 
-    function void write(axi4_caliptra_transaction item);
-      if (item.protocol_error)
-        `uvm_fatal("AXI_IF_MONITOR", $sformatf("Monitor flagged protocol error: %s", item.convert2string()))
+    function void write(axi4_caliptra_transaction t);
+      if (t.protocol_error)
+        `uvm_fatal("AXI_IF_MONITOR", $sformatf("Monitor flagged protocol error: %s", t.convert2string()))
 
-      case (item.addr)
+      case (t.addr)
         CALIPTRA_DMA_SRAM_BASE + 48'h20: begin
-          if (item.is_write()) begin
-            if (item.id != 8'h31 || item.lock || item.awuser != 32'h1122_3344 ||
-                item.beatQ.size() != 2 || item.beatQ[0] != 32'ha5a5_5a5a ||
-                item.beatQ[1] != 32'h1357_9bdf || item.resp != 0)
+          if (t.is_write()) begin
+            if (t.id != 8'h31 || t.lock || t.awuser != 32'h1122_3344 ||
+                t.beatQ.size() != 2 || t.beatQ[0] != 32'ha5a5_5a5a ||
+                t.beatQ[1] != 32'h1357_9bdf || t.resp != 0)
               `uvm_fatal("AXI_IF_SRAM_WRITE", "Unexpected UVM monitor record for SRAM write")
             sram_write_count++;
-          end else if (item.is_read()) begin
-            if (item.id == 8'h43) begin
-              if (item.aruser != 32'hface_cafe || item.len != 0 ||
-                  item.beatQ.size() != 1 || item.respQ.size() != 1 ||
-                  item.resp != 2'b10 || item.respQ[0] != 2'b10)
+          end else if (t.is_read()) begin
+            if (t.id == 8'h43) begin
+              if (t.aruser != 32'hface_cafe || t.len != 0 ||
+                  t.beatQ.size() != 1 || t.respQ.size() != 1 ||
+                  t.resp != 2'b10 || t.respQ[0] != 2'b10)
                 `uvm_fatal("AXI_IF_SRAM_SLVERR", "Unexpected UVM monitor record for injected SLVERR read")
               error_read_count++;
             end else begin
-              if (item.id != 8'h42 || item.aruser != 32'h89ab_cdef ||
-                  item.beatQ.size() != 2 || item.beatQ[0] != 32'ha5a5_5a5a ||
-                  item.beatQ[1] != 32'h1357_9bdf || item.respQ.size() != 2 ||
-                  item.respQ[0] != 0 || item.respQ[1] != 0)
+              if (t.id != 8'h42 || t.aruser != 32'h89ab_cdef ||
+                  t.beatQ.size() != 2 || t.beatQ[0] != 32'ha5a5_5a5a ||
+                  t.beatQ[1] != 32'h1357_9bdf || t.respQ.size() != 2 ||
+                  t.respQ[0] != 0 || t.respQ[1] != 0)
                 `uvm_fatal("AXI_IF_SRAM_READ", "Unexpected UVM monitor record for SRAM read")
               sram_read_count++;
             end
           end
         end
         CALIPTRA_DMA_FIFO_BASE: begin
-          if (item.is_write()) begin
-            if (item.id != 8'h51 || item.beatQ.size() != 2 ||
-                item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002)
+          if (t.is_write()) begin
+            if (t.id != 8'h51 || t.beatQ.size() != 2 ||
+                t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002)
               `uvm_fatal("AXI_IF_FIFO_WRITE", "Unexpected UVM monitor record for FIFO write")
             fifo_write_count++;
-          end else if (item.is_read()) begin
-            if (item.id != 8'h52 || item.beatQ.size() != 2 ||
-                item.beatQ[0] != 32'hc001_0001 || item.beatQ[1] != 32'hc001_0002)
+          end else if (t.is_read()) begin
+            if (t.id != 8'h52 || t.beatQ.size() != 2 ||
+                t.beatQ[0] != 32'hc001_0001 || t.beatQ[1] != 32'hc001_0002)
               `uvm_fatal("AXI_IF_FIFO_READ", "Unexpected UVM monitor record for FIFO read")
             fifo_read_count++;
           end
         end
         CALIPTRA_DMA_SRAM_BASE + 48'h1000: begin
-          if (item.is_write()) begin
-            if (item.id != 8'h60 || item.len != 8'hff || item.beatQ.size() != 256 ||
-                item.beatQ[255] != (32'hd00d_0000 ^ 255) || item.lastQ.size() != 256 ||
-                !item.lastQ[255] || item.resp != 0)
+          if (t.is_write()) begin
+            if (t.id != 8'h60 || t.len != 8'hff || t.beatQ.size() != 256 ||
+                t.beatQ[255] != (32'hd00d_0000 ^ 255) || t.lastQ.size() != 256 ||
+                !t.lastQ[255] || t.resp != 0)
               `uvm_fatal("AXI_IF_LONG_WRITE", "Unexpected UVM monitor record for 256-beat write")
             long_write_count++;
-          end else if (item.is_read()) begin
-            if (item.id != 8'h61 || item.len != 8'hff || item.beatQ.size() != 256 ||
-                item.beatQ[255] != (32'hd00d_0000 ^ 255) || item.respQ.size() != 256 ||
-                item.respQ[255] != 0 || item.lastQ.size() != 256 || !item.lastQ[255])
+          end else if (t.is_read()) begin
+            if (t.id != 8'h61 || t.len != 8'hff || t.beatQ.size() != 256 ||
+                t.beatQ[255] != (32'hd00d_0000 ^ 255) || t.respQ.size() != 256 ||
+                t.respQ[255] != 0 || t.lastQ.size() != 256 || !t.lastQ[255])
               `uvm_fatal("AXI_IF_LONG_READ", "Unexpected UVM monitor record for 256-beat read")
             long_read_count++;
           end
         end
         default:
-          `uvm_fatal("AXI_IF_ADDR", $sformatf("Unexpected completed address %012h", item.addr))
+          `uvm_fatal("AXI_IF_ADDR", $sformatf("Unexpected completed address %012h", t.addr))
       endcase
       -> received;
     endfunction

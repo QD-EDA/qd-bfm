@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // A task-based AXI4 manager with bounded concurrent reads and writes.
 module axi4_caliptra_master #(
   parameter integer ADDR_WIDTH = 19,

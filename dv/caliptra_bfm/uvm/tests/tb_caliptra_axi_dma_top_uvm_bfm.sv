@@ -428,7 +428,7 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       return expected_payload[index];
     endfunction
 
-    function void write(axi4_caliptra_transaction item);
+    function void write(axi4_caliptra_transaction t);
       int beats;
       int beat;
       int expected_beats;
@@ -438,13 +438,13 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
       int debug_payload_match;
       logic [1:0] expected_resp;
       expected_resp = expect_error ? AXI_RESP_SLVERR : AXI_RESP_OKAY;
-      if (item.id != 0 || item.size != 2 || item.lock || item.protocol_error)
-        `uvm_fatal("DMA_TOP_RECORD", $sformatf("Bad DMA AXI transaction: %s", item.convert2string()))
-      beats = item.len + 1;
+      if (t.id != 0 || t.size != 2 || t.lock || t.protocol_error)
+        `uvm_fatal("DMA_TOP_RECORD", $sformatf("Bad DMA AXI transaction: %s", t.convert2string()))
+      beats = t.len + 1;
       if (beats > MAX_BURST_WORDS)
-        `uvm_fatal("DMA_TOP_BURST_SIZE", $sformatf("DMA burst exceeds 64 beats: %s", item.convert2string()))
+        `uvm_fatal("DMA_TOP_BURST_SIZE", $sformatf("DMA burst exceeds 64 beats: %s", t.convert2string()))
 
-      if (item.is_read()) begin
+      if (t.is_read()) begin
         expected_beats = active_word_count - read_word_offset;
         if (expect_fifo_recovery || expect_fifo_source) begin
           if (expect_fifo_recovery) begin
@@ -453,86 +453,86 @@ module tb_caliptra_axi_dma_top_uvm_bfm;
           end else if (expected_beats > MAX_FIXED_BURST_WORDS) begin
             expected_beats = MAX_FIXED_BURST_WORDS;
           end
-          if (item.burst != AXI_BURST_FIXED || item.addr != SRC_ADDR)
-            `uvm_fatal("DMA_TOP_FIFO_READ_PROFILE", $sformatf("DMA FIFO read was not a fixed stream burst: %s", item.convert2string()))
+          if (t.burst != AXI_BURST_FIXED || t.addr != SRC_ADDR)
+            `uvm_fatal("DMA_TOP_FIFO_READ_PROFILE", $sformatf("DMA FIFO read was not a fixed stream burst: %s", t.convert2string()))
         end else if (active_use_rd_fixed) begin
           if (expected_beats > MAX_FIXED_BURST_WORDS)
             expected_beats = MAX_FIXED_BURST_WORDS;
-          if (item.burst != AXI_BURST_FIXED || item.addr != SRC_ADDR)
-            `uvm_fatal("DMA_TOP_FIXED_READ_PROFILE", $sformatf("DMA fixed SRAM read profile mismatch: %s", item.convert2string()))
+          if (t.burst != AXI_BURST_FIXED || t.addr != SRC_ADDR)
+            `uvm_fatal("DMA_TOP_FIXED_READ_PROFILE", $sformatf("DMA fixed SRAM read profile mismatch: %s", t.convert2string()))
         end else begin
-          boundary_beats = MAX_BURST_WORDS - int'(item.addr[7:2]);
+          boundary_beats = MAX_BURST_WORDS - int'(t.addr[7:2]);
           if (expected_beats > boundary_beats) expected_beats = boundary_beats;
-          if (item.burst != AXI_BURST_INCR ||
-              item.addr != SRC_ADDR + 48'(read_word_offset * 4))
-            `uvm_fatal("DMA_TOP_READ_PROFILE", $sformatf("DMA SRAM read address/burst mismatch: %s", item.convert2string()))
+          if (t.burst != AXI_BURST_INCR ||
+              t.addr != SRC_ADDR + 48'(read_word_offset * 4))
+            `uvm_fatal("DMA_TOP_READ_PROFILE", $sformatf("DMA SRAM read address/burst mismatch: %s", t.convert2string()))
         end
-        if (item.aruser != AXUSER || item.resp != expected_resp ||
+        if (t.aruser != AXUSER || t.resp != expected_resp ||
             beats != expected_beats ||
-            item.beatQ.size() != beats || item.beat_userQ.size() != beats ||
-            item.respQ.size() != beats || item.lastQ.size() != beats)
-          `uvm_fatal("DMA_TOP_READ", $sformatf("DMA source read mismatch: %s", item.convert2string()))
+            t.beatQ.size() != beats || t.beat_userQ.size() != beats ||
+            t.respQ.size() != beats || t.lastQ.size() != beats)
+          `uvm_fatal("DMA_TOP_READ", $sformatf("DMA source read mismatch: %s", t.convert2string()))
         if (expect_fifo_source && auto_fifo_source_pop_count < read_word_offset + beats)
           `uvm_fatal("DMA_TOP_FIFO_SOURCE_ORDER", "FIFO target popped data before source capture completed")
         for (beat = 0; beat < beats; beat++) begin
           expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
                                 0 : read_word_offset + beat;
-          if ((expect_fifo_source && (^item.beatQ[beat] === 1'bx)) ||
+          if ((expect_fifo_source && (^t.beatQ[beat] === 1'bx)) ||
               (!expect_fifo_recovery &&
-               item.beatQ[beat] != source_word(expected_word_index)) ||
-              item.beat_userQ[beat] != AXUSER || item.respQ[beat] != expected_resp ||
-              item.lastQ[beat] != (beat == beats - 1))
+               t.beatQ[beat] != source_word(expected_word_index)) ||
+              t.beat_userQ[beat] != AXUSER || t.respQ[beat] != expected_resp ||
+              t.lastQ[beat] != (beat == beats - 1))
             `uvm_fatal("DMA_TOP_READ_BEAT", $sformatf(
               "DMA read beat %0d mismatch in burst %0d addr=%012h word=%0d expected=%08h got=%08h user=%08h resp=%b last=%b",
-              beat, read_count, item.addr, read_word_offset + beat,
-              source_word(expected_word_index), item.beatQ[beat],
-              item.beat_userQ[beat], item.respQ[beat], item.lastQ[beat]))
+              beat, read_count, t.addr, read_word_offset + beat,
+              source_word(expected_word_index), t.beatQ[beat],
+              t.beat_userQ[beat], t.respQ[beat], t.lastQ[beat]))
           if (expect_fifo_recovery)
-            expected_payload[read_word_offset + beat] = item.beatQ[beat];
+            expected_payload[read_word_offset + beat] = t.beatQ[beat];
         end
         read_word_offset += beats;
         read_count++;
-      end else if (item.is_write()) begin
-        boundary_beats = MAX_BURST_WORDS - int'(item.addr[7:2]);
+      end else if (t.is_write()) begin
+        boundary_beats = MAX_BURST_WORDS - int'(t.addr[7:2]);
         expected_beats = active_word_count - write_word_offset;
         if (expect_fifo_write || active_use_wr_fixed) begin
           if (expected_beats > MAX_FIXED_BURST_WORDS)
             expected_beats = MAX_FIXED_BURST_WORDS;
-          if (item.addr != DST_ADDR || item.burst != AXI_BURST_FIXED)
-            `uvm_fatal("DMA_TOP_FIXED_WRITE_PROFILE", $sformatf("DMA fixed write profile mismatch: %s", item.convert2string()))
+          if (t.addr != DST_ADDR || t.burst != AXI_BURST_FIXED)
+            `uvm_fatal("DMA_TOP_FIXED_WRITE_PROFILE", $sformatf("DMA fixed write profile mismatch: %s", t.convert2string()))
         end else begin
           if (expected_beats > boundary_beats) expected_beats = boundary_beats;
-          if (item.addr != DST_ADDR + 48'(write_word_offset * 4) ||
-              item.burst != AXI_BURST_INCR)
-            `uvm_fatal("DMA_TOP_WRITE_PROFILE", $sformatf("DMA SRAM write address/burst mismatch: %s", item.convert2string()))
+          if (t.addr != DST_ADDR + 48'(write_word_offset * 4) ||
+              t.burst != AXI_BURST_INCR)
+            `uvm_fatal("DMA_TOP_WRITE_PROFILE", $sformatf("DMA SRAM write address/burst mismatch: %s", t.convert2string()))
         end
         if (expect_fifo_recovery) begin
           if (expected_beats > recovery_write_burst_words)
             expected_beats = recovery_write_burst_words;
         end
-        if (item.awuser != AXUSER ||
-            item.buser != AXUSER || item.resp != expected_resp ||
+        if (t.awuser != AXUSER ||
+            t.buser != AXUSER || t.resp != expected_resp ||
             beats != expected_beats ||
-            item.beatQ.size() != beats || item.strbQ.size() != beats ||
-            item.beat_userQ.size() != beats || item.lastQ.size() != beats)
-          `uvm_fatal("DMA_TOP_WRITE", $sformatf("DMA destination write mismatch: %s", item.convert2string()))
+            t.beatQ.size() != beats || t.strbQ.size() != beats ||
+            t.beat_userQ.size() != beats || t.lastQ.size() != beats)
+          `uvm_fatal("DMA_TOP_WRITE", $sformatf("DMA destination write mismatch: %s", t.convert2string()))
         for (beat = 0; beat < beats; beat++) begin
           expected_word_index = (active_use_rd_fixed && !active_src_is_fifo) ?
                                 0 : write_word_offset + beat;
-          if (item.beatQ[beat] != source_word(expected_word_index) ||
-              item.strbQ[beat] != 4'hf || item.beat_userQ[beat] != AXUSER ||
-              item.lastQ[beat] != (beat == beats - 1)) begin
+          if (t.beatQ[beat] != source_word(expected_word_index) ||
+              t.strbQ[beat] != 4'hf || t.beat_userQ[beat] != AXUSER ||
+              t.lastQ[beat] != (beat == beats - 1)) begin
             debug_payload_match = -1;
             for (debug_candidate_word = 0; debug_candidate_word < active_word_count;
                  debug_candidate_word++)
-              if (source_word(debug_candidate_word) === item.beatQ[beat])
+              if (source_word(debug_candidate_word) === t.beatQ[beat])
                 debug_payload_match = debug_candidate_word;
             `uvm_fatal("DMA_TOP_WRITE_BEAT", $sformatf(
               "DMA write word %0d beat %0d burst %0d addr=%012h expected=%08h got=%08h payload_match=%0d reads=%0d/%0d strb=%h user=%08h last=%0b",
-              write_word_offset + beat, beat, write_count, item.addr,
-              source_word(expected_word_index), item.beatQ[beat],
+              write_word_offset + beat, beat, write_count, t.addr,
+              source_word(expected_word_index), t.beatQ[beat],
               debug_payload_match, read_count, read_word_offset,
-              item.strbQ[beat], item.beat_userQ[beat], item.lastQ[beat]))
+              t.strbQ[beat], t.beat_userQ[beat], t.lastQ[beat]))
           end
         end
         write_word_offset += beats;

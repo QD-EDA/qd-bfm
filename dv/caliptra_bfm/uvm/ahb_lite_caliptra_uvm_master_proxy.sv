@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bridges UVM commands to the standalone task-based AHB-Lite manager.
 module ahb_lite_caliptra_uvm_master_proxy #(
   parameter integer ADDR_WIDTH = 32,

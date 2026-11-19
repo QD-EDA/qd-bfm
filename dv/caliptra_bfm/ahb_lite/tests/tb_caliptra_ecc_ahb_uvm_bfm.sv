@@ -76,13 +76,13 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
       super.new(name, parent);
     endfunction
 
-    function void write(ahb_lite_caliptra_transaction item);
-      if (item.protocol_error || item.error)
-        `uvm_fatal("ECC_AHB_MON", $sformatf("Unexpected AHB response: %s", item.convert2string()))
-      if (item.address != 32'h0000_0804 || item.trans != 2'b10 || item.size != 2 ||
-          item.data[31:0] != expected_data || item.data[63:32] != 0)
-        `uvm_fatal("ECC_AHB_RECORD", $sformatf("Unexpected ECC CSR record: %s", item.convert2string()))
-      if (item.write)
+    function void write(ahb_lite_caliptra_transaction t);
+      if (t.protocol_error || t.error)
+        `uvm_fatal("ECC_AHB_MON", $sformatf("Unexpected AHB response: %s", t.convert2string()))
+      if (t.address != 32'h0000_0804 || t.trans != 2'b10 || t.size != 2 ||
+          t.data[31:0] != expected_data || t.data[63:32] != 0)
+        `uvm_fatal("ECC_AHB_RECORD", $sformatf("Unexpected ECC CSR record: %s", t.convert2string()))
+      if (t.write)
         write_count++;
       else
         read_count++;

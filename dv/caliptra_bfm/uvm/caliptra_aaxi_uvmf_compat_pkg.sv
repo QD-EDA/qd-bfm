@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room lower-bound component hierarchy used by Caliptra SoC-IFC.
 `include "uvm_macros.svh"
 

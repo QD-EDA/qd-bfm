@@ -63,21 +63,21 @@ module tb_ahb_lite_caliptra_native_ral;
       super.new(name, parent);
     endfunction
 
-    function void write(ahb_lite_caliptra_transaction item);
+    function void write(ahb_lite_caliptra_transaction t);
       transfer_count++;
-      if (item.protocol_error)
+      if (t.protocol_error)
         `uvm_fatal("AHB_NATIVE_RAL_MON", "Monitor marked legal native RAL traffic malformed")
-      if (item.error) begin
+      if (t.error) begin
         error_count++;
-        if (item.address != BYTE_ADDRESS || item.write || item.size != 0)
+        if (t.address != BYTE_ADDRESS || t.write || t.size != 0)
           `uvm_fatal("AHB_NATIVE_RAL_ERROR", "Unexpected AHB error transfer")
-      end else if (item.write) begin
+      end else if (t.write) begin
         write_count++;
-        if (item.address == BYTE_ADDRESS &&
-            (item.size != 0 || item.data[BYTE_ADDRESS*8 +: 8] != 8'h5a))
+        if (t.address == BYTE_ADDRESS &&
+            (t.size != 0 || t.data[BYTE_ADDRESS*8 +: 8] != 8'h5a))
           `uvm_fatal("AHB_NATIVE_RAL_BYTE", "Byte write did not use the highest bus lane")
-        if (item.address == HALFWORD_ADDRESS &&
-            (item.size != 1 || item.data[HALFWORD_ADDRESS*8 +: 16] != 16'hcafe))
+        if (t.address == HALFWORD_ADDRESS &&
+            (t.size != 1 || t.data[HALFWORD_ADDRESS*8 +: 16] != 16'hcafe))
           `uvm_fatal("AHB_NATIVE_RAL_HALF", "Halfword write did not use the top two bus lanes")
       end else begin
         read_count++;

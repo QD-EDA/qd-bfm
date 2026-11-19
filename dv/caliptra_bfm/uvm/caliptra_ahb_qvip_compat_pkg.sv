@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Clean-room lower-bound API for the QVIP AHB types consumed by Caliptra.
 // This is not a copy or implementation of Siemens/Mentor QVIP or UVMF.
 `ifndef CALIPTRA_BFM_EXTERNAL_AHB_QVIP

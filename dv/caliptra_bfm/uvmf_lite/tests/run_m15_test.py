@@ -2157,6 +2157,15 @@ def main() -> int:
                     env["UVMF_PROJECT_DIR"] = str(project)
                     wrapper = output / "m15_uvmf_top.sv"
                     wrapper.write_text("module m15_uvmf_top; hdl_top hdl(); hvl_top hvl(); endmodule\n")
+                    if row["environment_id"] == "uvmf-ecc":
+                        from generated_bfm_pin_overlay import rewrite_filelist, stage_bfms
+
+                        paths = stage_bfms(caliptra, "ECC", output / "pins",
+                                           project / "tb/testbench/hdl_top.sv")
+                        pin_filelist = output / "pins/ecc.vf"
+                        pin_filelist.write_text(str(repo / "dv/caliptra_bfm/qd_timescale.sv") + "\n" +
+                                                rewrite_filelist(filelist.read_text(), paths))
+                        filelist = pin_filelist
                     command = [str(iverilog), "-uvm", "-g2017", "-gassertions", "-s", "m15_uvmf_top", "-f", str(filelist)]
                     if row["environment_id"] == "uvmf-mldsa":
                         command.insert(1, "-DCALIPTRA_BFM_AHB_32BIT")
@@ -2198,7 +2207,7 @@ def main() -> int:
                         result.update(status=status, cause=cause)
                     result["sim_log"] = str(output / "sim.log")
                 result["compile_log"] = str(output / "compile.log")
-    except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+    except (OSError, RuntimeError, ValueError, subprocess.CalledProcessError) as error:
         result.update(status="BLOCKED", cause=str(error))
 
     result["elapsed_seconds"] = round(time.monotonic() - started, 3)

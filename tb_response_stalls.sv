@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 module tb_response_stalls;
   tb_axi4 #(.RESPONSE_DELAY(3)) base();
   reg [8*16-1:0] field;

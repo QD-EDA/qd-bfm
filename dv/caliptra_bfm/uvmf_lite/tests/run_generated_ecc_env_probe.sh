@@ -48,20 +48,23 @@ module actual_ecc_bfm_elab_top;
 endmodule
 EOF
 
+python3 "$repo_root/dv/caliptra_bfm/uvmf_lite/tests/generated_bfm_pin_overlay.py" ECC "$caliptra_root" "$tmpdir/pins" "$tmpdir/top.sv"
+
 for edition in 2017 2023; do
   log="$tmpdir/ecc_actual_packages_$edition.log"
   set +e
   "$IVERILOG_BIN" -uvm -g"$edition" -tnull -s actual_ecc_bfm_elab_top \
     -I"$in_pkg" -I"$out_pkg" -I"$env_pkg" \
     -I"$bench_root/parameters" -I"$bench_root/sequences" -I"$bench_root/tests" \
+    "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
     "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg_hdl.sv" \
     "$repo_root/dv/caliptra_bfm/uvmf_lite/uvmf_base_pkg.sv" \
     "$in_pkg/ECC_in_pkg_hdl.sv" "$in_pkg/ECC_in_pkg.sv" \
-    "$in_driver_bfm" "$in_if" "$in_monitor_bfm" \
+    "$tmpdir/pins/ECC_in_driver_bfm.sv" "$in_if" "$tmpdir/pins/ECC_in_monitor_bfm.sv" \
     "$out_pkg/ECC_out_pkg_hdl.sv" "$out_pkg/ECC_out_pkg.sv" \
-    "$out_driver_bfm" "$out_if" "$out_monitor_bfm" \
+    "$tmpdir/pins/ECC_out_driver_bfm.sv" "$out_if" "$tmpdir/pins/ECC_out_monitor_bfm.sv" \
     "$env_pkg/ECC_env_pkg.sv" "$parameters_pkg" "$sequences_pkg" "$tests_pkg" \
-    "$tmpdir/top.sv" >"$log" 2>&1
+    "$tmpdir/pins/top.sv" >"$log" 2>&1
   status=$?
   set -e
 

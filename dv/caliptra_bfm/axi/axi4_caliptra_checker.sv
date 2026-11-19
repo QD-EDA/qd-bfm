@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Caliptra's AXI interface omits CACHE, PROT, QOS, and REGION. Track queued
 // same-ID requests in response order, bounded by QUEUE_DEPTH.
 module axi4_caliptra_checker #(

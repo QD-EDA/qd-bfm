@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded fixed-burst AXI FIFO endpoint for Caliptra-style stream windows.
 module axi4_caliptra_fifo_subordinate #(
   parameter integer ADDR_WIDTH = 48,

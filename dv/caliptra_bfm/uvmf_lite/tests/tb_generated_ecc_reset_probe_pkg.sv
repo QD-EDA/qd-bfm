@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 package ecc_reset_probe_pkg;
   import uvm_pkg::*;
   import ECC_in_pkg::*;

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bounded AXI memory target with queued requests in each direction.
 module axi4_caliptra_memory_subordinate #(
   parameter integer ADDR_WIDTH = 19,

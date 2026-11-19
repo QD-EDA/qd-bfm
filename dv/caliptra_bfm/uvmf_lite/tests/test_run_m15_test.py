@@ -9,6 +9,7 @@ from pathlib import Path
 
 import run_m15_test
 
+from generated_bfm_pin_overlay import modport_inputs
 from run_m15_test import (
     classify,
     classify_pkdecode,
@@ -775,6 +776,19 @@ class KeyVaultFactorySequenceOverlayTest(unittest.TestCase):
             self.assertEqual(overlay.read_text(), "class example_derived_test_sequence extends kv_bench_sequence_base;\n")
             self.assertEqual(overlay_filelist.read_text().splitlines()[0], f"+incdir+{output / 'overlays/kv-factory'}")
             self.assertEqual(json.loads(manifest.read_text())["scope"], "testbench and filelist only; no RTL, firmware, or pass criteria changed")
+
+
+class GeneratedBfmPinOverlayTest(unittest.TestCase):
+    def test_modport_inputs_are_read_from_the_selected_modport(self):
+        bus = """
+        modport initiator_port (input clk, output haddr, input hrdata);
+        modport responder_port (input clk, input haddr, output hrdata);
+        """
+        self.assertEqual(modport_inputs(bus, "initiator_port"), {"clk", "hrdata"})
+        self.assertEqual(modport_inputs(bus, "responder_port"), {"clk", "haddr"})
+        self.assertEqual(modport_inputs(bus, None), set())
+        with self.assertRaises(ValueError):
+            modport_inputs(bus, "monitor_port")
 
 
 class KeyVaultGeneratedBfmOverlayTest(unittest.TestCase):

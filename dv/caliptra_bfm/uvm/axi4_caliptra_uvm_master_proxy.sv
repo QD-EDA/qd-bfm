@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Bridges bounded UVM command slots to the task-based pin-level AXI manager.
 module axi4_caliptra_uvm_master_proxy #(
   parameter integer ADDR_WIDTH = 48,

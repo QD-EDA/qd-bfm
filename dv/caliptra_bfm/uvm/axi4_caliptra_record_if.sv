@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Record-level boundary between the pin monitor and the UVM analysis adapter.
 // The AXI protocol monitor drives these fields; UVM samples them on ACLK's
 // falling edge after the monitor's nonblocking updates have settled.

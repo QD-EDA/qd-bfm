@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+`timescale 1ns/1ps
 // Connects Caliptra/QVIP-shaped AHB-Lite pins to the native UVM record interface.
 module ahb_lite_caliptra_pin_monitor_adapter #(
   parameter integer ADDR_WIDTH = 32,
