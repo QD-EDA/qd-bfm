@@ -197,11 +197,11 @@ filelist = tmp / "monitor-overlay/hmac_generated_overlay.f"
 (tmp / "hmac_generated_pins.f").write_text(rewrite_filelist(filelist.read_text(), paths))
 PY_PINS
 
+printf '%s\n' "$repo_root/dv/caliptra_bfm/qd_timescale.sv" > "$tmpdir/qd_timescale.f"
 image="$tmpdir/hmac-generated.vvp"
 compile_log="$tmpdir/compile.log"
 if ! "$iverilog_bin" -uvm -g2017 -s hmac_generated_top \
-     "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
-     -f "$tmpdir/hmac_generated_pins.f" \
+     -f "$tmpdir/qd_timescale.f" -f "$tmpdir/hmac_generated_pins.f" \
      -o "$image" >"$compile_log" 2>&1; then
   cat "$compile_log" >&2
   echo "Generated HMAC runtime did not compile." >&2

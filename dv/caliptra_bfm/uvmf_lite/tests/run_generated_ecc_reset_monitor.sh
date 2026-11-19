@@ -94,6 +94,7 @@ if [ "$probe" != reset ]; then
     exit 1
   fi
 fi
+printf '%s\n' "$repo_root/dv/caliptra_bfm/qd_timescale.sv" > "$tmpdir/qd_timescale.f"
 python3 "$repo_root/dv/caliptra_bfm/uvmf_lite/tests/generated_bfm_pin_overlay.py" ECC "$caliptra_root" "$tmpdir/pins" "$hdl_src" \
   "$tmpdir/monitors/ECC_in_driver_bfm.sv" "$tmpdir/monitors/ECC_in_monitor_bfm.sv" \
   "$tmpdir/monitors/ECC_out_monitor_bfm.sv"
@@ -117,8 +118,7 @@ for edition in 2017 2023; do
        CALIPTRA_PRIM_ROOT="$caliptra_root/src/caliptra_prim_generic" \
        CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
        "$iverilog_bin" -uvm -g"$edition" -s ecc_generated_full_probe \
-         "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
-         -f "$ecc_root/config/ecc_top.vf" \
+         -f "$tmpdir/qd_timescale.f" -f "$ecc_root/config/ecc_top.vf" \
          -I"$in_pkg" -I"$out_pkg" -I"$env_pkg" \
          -I"$bench/parameters" -I"$bench/sequences" -I"$bench/tests" \
          -o "$image" \

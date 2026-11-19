@@ -34,6 +34,7 @@ if [ "$actual_hdl_sha" != "$expected_hdl_top_sha" ]; then
   echo "Generated hdl_top.sv hash changed: $actual_hdl_sha" >&2
   exit 2
 fi
+printf '%s\n' "$repo_root/dv/caliptra_bfm/qd_timescale.sv" > "$tmpdir/qd_timescale.f"
 python3 "$repo_root/dv/caliptra_bfm/uvmf_lite/tests/generated_bfm_pin_overlay.py" ECC "$caliptra_root" "$tmpdir/pins" "$hdl_src"
 
 for edition in 2017 2023; do
@@ -77,8 +78,7 @@ for edition in 2017 2023; do
        CALIPTRA_PRIM_ROOT="$caliptra_root/src/caliptra_prim_generic" \
        CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
        "$iverilog_bin" -uvm -g"$edition" -s actual_ecc_generated_hdl_elab_probe \
-         "$repo_root/dv/caliptra_bfm/qd_timescale.sv" \
-         -f "$ecc_root/config/ecc_top.vf" \
+         -f "$tmpdir/qd_timescale.f" -f "$ecc_root/config/ecc_top.vf" \
          -I"$in_pkg" -I"$out_pkg" -I"$env_pkg" \
          -I"$bench/parameters" -I"$bench/sequences" -I"$bench/tests" \
          -o "$image" \
