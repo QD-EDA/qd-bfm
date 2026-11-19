@@ -446,9 +446,9 @@ This document is not a conformance status source and does not change any
 matrix entry.
 
 **Evidence basis update (2026-10-03).** The read-only pinned Caliptra checkout
-is present at `/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl`;
+is present at `$CALIPTRA_ROOT`;
 the local QD-BFM checkout is present at
-`/Users/danielellerbrock/projects/quick-and-dirty-eda/qd-bfm`. The focused
+`$QD_BFM_ROOT`. The focused
 consumer findings and source/license provenance are recorded in
 [`caliptra_bfm_research_2026-10-03.md`](caliptra_bfm_research_2026-10-03.md).
 The Phase 0 source census is in
@@ -1182,7 +1182,7 @@ native checker enabled. This diagnostic vector used fast TRNG, `.data`/`.bss`
 preload, and PQ-vector suppression; the 12-case batch remains open. See the
 [`case 6 current-main evidence`](../../evidence/caliptra-bfm-fulltop-aes-case6-main-0d8815f-20261009/README.md).
 
-**2026-10-09 Slurm workflow discovery:** `DAN-DESKTOP` is reachable through
+**2026-10-09 Slurm workflow discovery:** A private Slurm host is reachable through
 the configured SSH alias and exposes the `verilog` partition. Its current
 checkout has stock Icarus 12.0, no QD or Caliptra source tree, and no `make` or
 RISC-V firmware compiler. The current Caliptra BFM wrapper also exits 78 on
@@ -1274,7 +1274,7 @@ through its own blocker, not this list.
 ## 9. Open questions for the owner
 
 1. The pinned checkout is at
-   `/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl`; the read-only
+   `$CALIPTRA_ROOT`; the read-only
    Phase 0 consumer inventory is recorded in
    `docs/conformance/caliptra_bfm_phase0_inventory_2026-10-03.md` and its
    machine-readable manifest.

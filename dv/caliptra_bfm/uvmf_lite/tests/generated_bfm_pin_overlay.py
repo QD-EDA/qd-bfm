@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Stage scalar-pin ECC/HMAC BFMs for use as IEEE 1800 virtual interfaces."""
+"""Stage scalar-pin generated UVMF BFMs for use as IEEE 1800 virtual interfaces."""
 
 import re
 import sys
@@ -42,50 +42,123 @@ def modport_inputs(bus_source, modport):
     return set(re.findall(r"\binput\s+(\w+)", match.group(1)))
 
 
+def stage_sources(bfms, top, output):
+    """Flatten {bfm_name: (bfm_path, bus_path)} and rewire their instances in top."""
+    output.mkdir(parents=True, exist_ok=True)
+    top_source = top.read_text()
+    connections = 0
+    paths = {}
+    for bfm, (bfm_path, bus_path) in bfms.items():
+        bus_type = re.sub(r"_(?:driver|monitor)_bfm$", "_if", bfm)
+        bus_source = bus_path.read_text()
+        content, ports = flatten_bfm(bfm_path.read_text(), bus_type, bus_source)
+        paths[f"{bfm}.sv"] = output / f"{bfm}.sv"
+        paths[f"{bfm}.sv"].write_text(content)
+
+        def connect(match):
+            parameters, instance, bus, modport = match.groups()
+            read_only = modport_inputs(bus_source, modport)
+            pins = []
+            for direction, port, signal in ports:
+                # The generated hdl_top selects a modport that makes this
+                # signal an input, so its drive pin stays unconnected.
+                active = not (direction == "output" and signal in read_only)
+                pins.append(f".{port}({bus + '.' + signal if active else ''})")
+            head = " ".join(filter(None, (bfm, parameters, instance)))
+            return f"{head}(\n    " + ",\n    ".join(pins) + "\n  );"
+
+        top_source, count = re.subn(
+            rf"\b{bfm}\s*(#\s*\((?:[^()]|\([^()]*\))*\))?\s+(\w+)\s*\(\s*(\w+)(?:\.(\w+))?\s*\)\s*;",
+            connect, top_source,
+        )
+        connections += count
+        # A BFM may be listed but never instantiated; every instance must be rewired.
+        code = re.sub(r"//[^\n]*|/\*.*?\*/", "", top_source, flags=re.S)
+        code = re.sub(rf"\bvirtual\s+{bfm}\b", "", code)
+        if len(re.findall(rf"\b{bfm}\b", code)) != count:
+            raise ValueError(f"{bfm}: not every instance in {top.name} was rewired")
+    paths[top.name] = output / top.name
+    paths[top.name].write_text(top_source)
+    return paths, connections
+
+
 def stage_bfms(caliptra, kind, output, top, overrides=()):
     area = {"ECC": "ecc/uvmf_ecc", "HMAC": "hmac/uvmf_2022"}[kind]
     packages = caliptra / "src" / area / "uvmf_template_output/verification_ip/interface_packages"
     if output.resolve().is_relative_to(caliptra.resolve()):
         raise ValueError("overlay must be outside the Caliptra checkout")
-    output.mkdir(parents=True, exist_ok=True)
     sources = {path.name: path for path in overrides}
-    top_source = top.read_text()
-    connections = 0
-    paths = {}
+    bfms = {}
     for direction in ("in", "out"):
-        prefix = f"{kind}_{direction}"
-        package = packages / f"{prefix}_pkg/src"
-        bus_type = f"{prefix}_if"
-        bus_source = (package / f"{bus_type}.sv").read_text()
+        package = packages / f"{kind}_{direction}_pkg/src"
         for role in ("driver", "monitor"):
-            bfm = f"{prefix}_{role}_bfm"
-            name = f"{bfm}.sv"
-            content, ports = flatten_bfm(sources.get(name, package / name).read_text(),
-                                         bus_type, bus_source)
-            paths[name] = output / name
-            paths[name].write_text(content)
-
-            def connect(match):
-                instance, bus, modport = match.groups()
-                read_only = modport_inputs(bus_source, modport)
-                pins = []
-                for direction, port, signal in ports:
-                    # The generated hdl_top selects a modport that makes this
-                    # signal an input, so its drive pin stays unconnected.
-                    active = not (direction == "output" and signal in read_only)
-                    pins.append(f".{port}({bus + '.' + signal if active else ''})")
-                return f"{bfm} {instance}(\n    " + ",\n    ".join(pins) + "\n  );"
-
-            top_source, count = re.subn(
-                rf"\b{bfm}\s+(\w+)\(\s*(\w+)(?:\.(\w+))?\s*\);",
-                connect, top_source,
-            )
-            connections += count
+            bfm = f"{kind}_{direction}_{role}_bfm"
+            bfms[bfm] = (sources.get(f"{bfm}.sv", package / f"{bfm}.sv"),
+                         package / f"{kind}_{direction}_if.sv")
+    paths, connections = stage_sources(bfms, top, output)
     if connections not in (3, 4):
         raise ValueError(f"expected three generated or four probe BFM instances, got {connections}")
-    paths[top.name] = output / top.name
-    paths[top.name].write_text(top_source)
     return paths
+
+
+def expand_entry(entry, variables):
+    def value(match):
+        name = match.group(1) or match.group(2)
+        if name not in variables:
+            raise ValueError(f"unresolved filelist variable {name} in {entry}")
+        return variables[name]
+    return re.sub(r"\$\{(\w+)\}|\$(\w+)", value, entry)
+
+
+def filelist_entries(text):
+    for line in text.splitlines():
+        entry = line.split("//", 1)[0].strip()
+        if entry:
+            yield entry
+
+
+def filelist_sources(text, variables):
+    paths = (Path(expand_entry(entry, variables)) for entry in filelist_entries(text)
+             if entry.endswith(".sv") and not entry.startswith("+"))
+    return {path.name: path for path in paths}
+
+
+def stage_filelist(filelist, output, variables, companions=()):
+    """Stage every generated BFM in filelist and companions; return the rewritten list."""
+    text = filelist.read_text().rstrip("\n") + "\n"
+    sources = filelist_sources(text, variables)
+    for companion in companions:
+        extra = companion.read_text()
+        missing = filelist_sources(extra, variables).keys() - sources.keys()
+        if missing:
+            listed = set(filelist_entries(text))
+            for entry in filelist_entries(extra):
+                is_source = entry.endswith(".sv") and not entry.startswith("+")
+                if entry not in listed and (not is_source or
+                                            Path(expand_entry(entry, variables)).name in missing):
+                    text += entry + "\n"
+            sources = {**filelist_sources(extra, variables), **sources}
+    if "hdl_top.sv" not in sources:
+        raise ValueError(f"hdl_top.sv is not listed by {filelist}")
+    bfms = {}
+    for name, path in sources.items():
+        match = re.fullmatch(r"(\w+)_(?:driver|monitor)_bfm\.sv", name)
+        if match:
+            bus = f"{match.group(1)}_if.sv"
+            if bus not in sources:
+                raise ValueError(f"{name} needs {bus}, which is not listed by {filelist}")
+            bfms[name[:-3]] = (path, sources[bus])
+        elif name.endswith("_bfm.sv") and re.search(r"\(\s*\w+_if\s+bus\s*\)\s*;", path.read_text()):
+            raise ValueError(f"{name} has an interface port but cannot be staged")
+    if not bfms:
+        raise ValueError(f"no generated BFMs are listed by {filelist}")
+    paths, _ = stage_sources(bfms, sources["hdl_top.sv"], output)
+    staged = output / "generated_bfm_pins.vf"
+    staged.write_text(rewrite_filelist(text, paths))
+    for name, path in filelist_sources(staged.read_text(), variables).items():
+        if name in paths and path != paths[name]:
+            raise ValueError(f"{name} would compile from its unstaged source {path}")
+    return staged
 
 
 def rewrite_filelist(text, paths):

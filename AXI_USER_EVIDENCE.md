@@ -23,7 +23,7 @@ Host: macOS arm64. Icarus/vvp 13.0 stable (`v13_0`), Verilator 5.050
 
 ```sh
 ./run.sh
-python3 run_caliptra_subordinate.py /Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl /tmp/qd-axi-user-caliptra-pilot-positional
+python3 run_caliptra_subordinate.py /path/to/caliptra-rtl /tmp/qd-axi-user-caliptra-pilot-positional
 /tmp/qd-axi-user-caliptra-pilot-positional/obj-upstream-default/Vtb_caliptra_axi_sub +USER
 /tmp/qd-axi-user-caliptra-pilot-positional/obj-upstream-default/Vtb_caliptra_axi_sub +USER +BAD_USER
 ```
@@ -49,8 +49,8 @@ interface width warnings and five `eventually` assertion build errors. It exits
 The named upstream `soc_ifc_axi_sha_acc_dis_tb.vf` lint attempt uses:
 
 ```sh
-CALIPTRA_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl \
-CALIPTRA_PRIM_ROOT=/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl/src/caliptra_prim_generic \
+CALIPTRA_ROOT=/path/to/caliptra-rtl \
+CALIPTRA_PRIM_ROOT=/path/to/caliptra-rtl/src/caliptra_prim_generic \
 CALIPTRA_PRIM_MODULE_PREFIX=caliptra_prim_generic \
 verilator --lint-only --timing -Wno-fatal --top-module soc_ifc_axi_sha_acc_dis_tb \
   -f src/soc_ifc/config/soc_ifc_axi_sha_acc_dis_tb.vf

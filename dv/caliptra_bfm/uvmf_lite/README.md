@@ -192,7 +192,8 @@ source, then elaborates the actual ECC RTL and generated UVMF packages from a
 temporary copy made by `tests/generated_bfm_pin_overlay.py`. The copy gives each
 BFM scalar signal ports, so it is legal as a virtual interface (IEEE 1800-2023
 25.9), and leaves a drive pin open where the selected modport makes that signal
-an input. Both IEEE editions pass; the pinned checkout is
+an input. `tests/run_m15_test.py` applies the same staging to the KeyVault,
+PCRVault, SHA-512, SoC-IFC and caliptra_top environments. Both IEEE editions pass; the pinned checkout is
 unchanged. This makes the generated top compile path repeatable without
 claiming that the generated source compiles unchanged. The companion
 `tests/run_generated_ecc_reset_monitor.sh` runs the actual generated ECC
