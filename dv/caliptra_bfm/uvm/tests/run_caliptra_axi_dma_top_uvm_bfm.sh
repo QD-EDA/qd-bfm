@@ -408,7 +408,7 @@ if [ "$fixed_sram_modes_only" -eq 1 ]; then
     run_case "fixed-sram-mode-${case_index}" +GENERATED_CASE +CALIPTRA_BFM_DUT_REPLAY \
       "+CALIPTRA_BFM_DUT_REPLAY_INDEX=$case_index" \
       +CPTRA_RAND_TEST_DMA +NUM_ITERATIONS=32 +CPTRA_VERBOSITY=0
-    if ! grep -Fq "fixed_read=$fixed_read fixed_write=$fixed_write inject_rand_delays=0" "$log" ||
+    if ! grep -Fq "fixed_read=$fixed_read fixed_write=$fixed_write inject_rst=0 inject_rand_delays=0" "$log" ||
        ! grep -Fq "PASS: generated DCCM record index=$case_index route=2 replayed through axi_dma_top" "$log"; then
       echo "Generated SRAM fixed-burst profile $case_index did not complete through the DMA DUT" >&2
       exit 1
@@ -635,26 +635,26 @@ while [ "$case_index" -lt 29 ]; do
       exit 1
     fi
   elif [ "$case_index" -eq 25 ]; then
-    if ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rand_delays=1' "$log" ||
+    if ! grep -Fq 'dst_fifo=1 fixed_read=0 fixed_write=1 inject_rst=0 inject_rand_delays=1' "$log" ||
        ! grep -Fq 'PASS: generated DCCM record index=25 route=2 replayed through axi_dma_top' "$log" ||
        ! grep -Fq 'INFO: randomized AXI target stalls observed' "$log"; then
       echo "Generated SRAM-to-FIFO profile did not exercise fixed writes and randomized stalls" >&2
       exit 1
     fi
   elif [ "$case_index" -eq 26 ]; then
-    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=64' "$log" ||
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rst=0 inject_rand_delays=0 block_bytes=64' "$log" ||
        ! grep -Fq 'INFO: Caliptra DCCM case type=2 words=65' "$log"; then
       echo "Generated FIFO recovery record did not supply a supported block-size profile" >&2
       exit 1
     fi
   elif [ "$case_index" -eq 27 ]; then
-    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=128' "$log" ||
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rst=0 inject_rand_delays=0 block_bytes=128' "$log" ||
        ! grep -Fq 'INFO: Caliptra DCCM case type=3 words=65' "$log"; then
       echo "Generated AXI2MBOX recovery record did not supply the expected profile" >&2
       exit 1
     fi
   elif [ "$case_index" -eq 28 ]; then
-    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rand_delays=0 block_bytes=128' "$log" ||
+    if ! grep -Fq 'src_fifo=1 dst_fifo=0 fixed_read=1 fixed_write=0 inject_rst=0 inject_rand_delays=0 block_bytes=128' "$log" ||
        ! grep -Fq 'INFO: Caliptra DCCM case type=4 words=65' "$log"; then
       echo "Generated AXI2AHB recovery record did not supply the expected profile" >&2
       exit 1
