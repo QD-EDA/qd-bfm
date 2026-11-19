@@ -267,18 +267,22 @@ module tb_caliptra_ecc_ahb_uvm_bfm;
   end
 
   final begin
+    automatic bit predictor_disconnected;
+    automatic logic [31:0] expected_transfers, expected_last_data;
     if (checker_error !== 1'b0 || checker_error_count !== 0 ||
         monitor_protocol_error !== 1'b0 || monitor_protocol_error_count !== 0)
       $fatal(1, "Caliptra ECC AHB UVM checker/monitor reported a protocol error");
-    // The predictor-disconnect mutation stops after the first write/read pair.
-    if (!$test$plusargs("AHB_NO_RAL_PREDICTOR")) begin
-      // Sequence write/read of 1, then RAL write/read of 0: the last transfer reads 0.
-      if (address_count !== 4 || transfer_count !== 4 || transfer_write !== 1'b0 ||
-          transfer_error !== 1'b0 || transfer_addr !== 32'h0000_0804 ||
-          transfer_data !== 32'h0)
-        $fatal(1, "Caliptra ECC AHB UVM monitor did not report four clean transfers");
+    // Sequence write/read of 1, then RAL write/read of 0. The predictor-disconnect
+    // mutation stops after the first pair, so its last transfer reads 1.
+    predictor_disconnected = $test$plusargs("AHB_NO_RAL_PREDICTOR");
+    expected_transfers = predictor_disconnected ? 2 : 4;
+    expected_last_data = predictor_disconnected ? 32'h1 : 32'h0;
+    if (address_count !== expected_transfers || transfer_count !== expected_transfers ||
+        transfer_write !== 1'b0 || transfer_error !== 1'b0 ||
+        transfer_addr !== 32'h0000_0804 || transfer_data !== expected_last_data)
+      $fatal(1, "Caliptra ECC AHB UVM monitor did not report the expected clean transfers");
+    if (!predictor_disconnected)
       $display("PASS: Caliptra ECC RTL AHB write/readback through native UVM agent");
-    end
     $finish;
   end
 
