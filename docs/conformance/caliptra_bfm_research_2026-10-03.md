@@ -3,7 +3,7 @@
 ## What the pinned environment uses
 
 The local Caliptra checkout is present at
-`/Users/danielellerbrock/projects/iverilog_uvm/caliptra-rtl`, pinned to v2.1.2
+`$CALIPTRA_ROOT`, pinned to v2.1.2
 (`49370266d12cb0c4a8f71b3a0ff7e54ba7d4866e`) with Adams Bridge v2.0.3
 (`b77e3d899e828d626cfc2a0d26a6b5704cc121e0`). It was inspected read-only.
 
